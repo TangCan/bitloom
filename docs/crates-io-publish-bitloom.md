@@ -28,23 +28,10 @@
 
 ## Trusted Publishing + release-plz (Story 12.3)
 
-### A. crates.io (human, once)
+- [x] crates.io Trusted Publishing linked to `TangCan/bitloom` + `.github/workflows/release-plz.yml` (2026-08-19)
+- [x] Workflow live: `workflow_dispatch` + push to `main`/`master`; uses OIDC (`id-token: write`), no long-lived registry token
 
-1. Open https://crates.io/crates/bitloom/settings → **Trusted Publishing**
-2. Add GitHub Actions publisher:
-   - Repository: `TangCan/bitloom`
-   - Workflow: `.github/workflows/release-plz.yml` (or the filename you enable)
-   - Environment: optional
-3. Optionally enable **Trusted Publishing Only** after first OIDC publish succeeds
+### Verify
 
-### B. GitHub
-
-1. Ensure this git remote points at `https://github.com/TangCan/bitloom.git` and Actions are enabled
-2. Push `master` / tags so the workflow file is on the default branch
-3. After Trusted Publishing is saved on crates.io, uncomment the live `release-plz` job in `.github/workflows/release-plz.yml` (see comments in that file)
-
-### C. Verify
-
-- Dispatch `release-plz` workflow manually once; confirm it can obtain an ephemeral crates.io token via OIDC (or open a release PR without long-lived `CARGO_REGISTRY_TOKEN`)
-
-See closeout research: `_agile-output/planning-artifacts/research/technical-rhdl-clean-product-closeout-and-crates-i-2026-08-19/research.md` (package name = `bitloom`).
+- Actions → **release-plz** → Run workflow, or push to `main`
+- Prefer `release-pr` first; switch action `command` to `release` when ready for direct publish
