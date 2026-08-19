@@ -1,0 +1,23 @@
+[package]
+name = "bitloom"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Bitloom CLI (crates.io: bitloom; cargo subcommand binary cargo-bitloom). Unrelated to samitbasu/rhdl."
+publish = true
+authors = ["Bitloom contributors"]
+readme = "../../README.md"
+keywords = ["hdl", "rtl", "fpga", "verilog", "bitloom"]
+categories = ["compilers", "development-tools"]
+repository = "https://github.com/TangCan/bitloom"
+homepage = "https://github.com/TangCan/bitloom"
+documentation = "https://docs.rs/bitloom"
+
+[[bin]]
+name = "cargo-bitloom"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+sha2 = "0.10"

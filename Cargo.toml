@@ -1,0 +1,54 @@
+[workspace]
+resolver = "2"
+members = [
+  "crates/rhdl-hir",
+  "crates/rhdl-builder",
+  "crates/rhdl-macro",
+  "crates/rhdl-prelude",
+  "crates/rhdl-vlog",
+  "crates/rhdl-sim",
+  "crates/rhdl-firrtl",
+  "crates/bitloom",
+  "crates/rhdl-cabi",
+  "crates/rhdl-hls",
+  "crates/rhdl-formal",
+  "crates/rhdl-float",
+  "crates/rhdl-viz",
+  "examples/counter_ports",
+  "examples/wide_adder",
+  "examples/fifo_skel",
+  "examples/mixed_both",
+  "examples/ip_box",
+]
+default-members = [
+  "crates/rhdl-hir",
+  "crates/rhdl-builder",
+  "crates/rhdl-macro",
+  "crates/rhdl-prelude",
+  "crates/rhdl-vlog",
+  "crates/rhdl-sim",
+  "crates/rhdl-firrtl",
+]
+
+[workspace.package]
+edition = "2024"
+rust-version = "1.97.1"
+license = "MIT OR Apache-2.0"
+version = "0.1.1"
+
+[workspace.dependencies]
+rhdl-hir = { path = "crates/rhdl-hir" }
+rhdl-builder = { path = "crates/rhdl-builder" }
+rhdl-macro = { path = "crates/rhdl-macro" }
+rhdl-prelude = { path = "crates/rhdl-prelude" }
+rhdl-vlog = { path = "crates/rhdl-vlog" }
+rhdl-sim = { path = "crates/rhdl-sim" }
+rhdl-cabi = { path = "crates/rhdl-cabi" }
+rhdl-hls = { path = "crates/rhdl-hls" }
+rhdl-formal = { path = "crates/rhdl-formal" }
+rhdl-float = { path = "crates/rhdl-float" }
+rhdl-viz = { path = "crates/rhdl-viz" }
+rhdl-firrtl = { path = "crates/rhdl-firrtl" }
+proc-macro2 = "1"
+quote = "1"
+syn = { version = "2", features = ["full"] }

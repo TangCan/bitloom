@@ -1,0 +1,13 @@
+[package]
+name = "rhdl-prelude"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+description = "Design-crate surface for RHDL (AD-2 / AD-6)"
+
+[dependencies]
+rhdl-builder = { workspace = true }
+rhdl-macro = { workspace = true }
+rhdl-hir = { workspace = true }

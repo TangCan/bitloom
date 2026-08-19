@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>RHDL 架构走读 — 实现者</title>
+<style>
+:root {
+  --bg:#f7f7f5; --fg:#1a1a1a; --card:#fff; --accent:#2c5f8a; --muted:#5c5c5c;
+  --border:#e2e2de; --ok:#1b7a4e; --no:#a33; --later:#8a6d1b;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#12141a; --fg:#e8e8e6; --card:#1c1f28; --accent:#6db3e8; --muted:#a0a0a0;
+    --border:#2a2e3a; --ok:#5ec98a; --no:#e07070; --later:#d4b44a;
+  }
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  font: 17px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg); color: var(--fg);
+  display: flex; flex-direction: column;
+}
+header {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  padding: .7rem 1.25rem; border-bottom: 1px solid var(--border); background: var(--card);
+}
+header h1 { margin: 0; font-size: 1rem; font-weight: 650; }
+header .meta { color: var(--muted); font-size: .82rem; }
+#deck { flex: 1; overflow: auto; padding: 1.25rem clamp(1rem, 4vw, 2rem) 5rem; }
+.slide {
+  display: none; max-width: 48rem; margin: 0 auto;
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.4rem 1.55rem 1.6rem;
+}
+.slide.on { display: block; }
+.slide h2 { margin: 0 0 .85rem; font-size: 1.35rem; }
+.slide p { margin: 0 0 .75rem; }
+.slide ul, .slide ol { margin: 0 0 .75rem; padding-left: 1.2rem; }
+.slide li { margin: 0 0 .35rem; }
+.lede { font-size: 1.12rem; }
+.kicker { color: var(--muted); font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 .35rem; }
+code, kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
+.ok { color: var(--ok); font-weight: 650; }
+.no { color: var(--no); font-weight: 650; }
+.later { color: var(--later); font-weight: 650; }
+svg.flow { width: 100%; height: auto; margin: .4rem 0 1rem; }
+svg.flow text { font: 12px/1.2 system-ui, sans-serif; fill: var(--fg); }
+svg.flow .box { fill: var(--card); stroke: var(--accent); stroke-width: 1.4; }
+svg.flow .arr { stroke: var(--accent); fill: none; stroke-width: 1.6; marker-end: url(#arrow); }
+svg.flow .dash { stroke-dasharray: 5 4; }
+svg.flow .label { fill: var(--muted); font-size: 11px; }
+table.tight { width: 100%; border-collapse: collapse; font-size: .92rem; }
+table.tight th, table.tight td { text-align: left; padding: .4rem .45rem; border-top: 1px solid var(--border); vertical-align: top; }
+table.tight th { color: var(--muted); font-weight: 600; }
+footer.nav {
+  position: sticky; bottom: 0; display: flex; align-items: center; justify-content: space-between;
+  gap: .75rem; padding: .65rem 1.25rem; border-top: 1px solid var(--border); background: var(--card);
+}
+footer.nav button {
+  background: var(--accent); color: #fff; border: 0; border-radius: 8px;
+  padding: .45rem .9rem; font: inherit; cursor: pointer;
+}
+footer.nav button[disabled] { opacity: .35; cursor: default; }
+#dots { color: var(--muted); font-size: .88rem; }
+a { color: var(--accent); }
+.cite { font-size: .85rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>RHDL 架构走读</h1>
+  <div class="meta">给实现 epic 的人 · 2026-08-19 更新 · 规则以脊柱为准，本页只讲解</div>
+</header>
+
+<div id="deck">
+
+<section class="slide on" data-title="先记住一件事">
+  <p class="kicker">1 / 11</p>
+  <h2>设计是生成器，不是 rustc 里抽出的网表</h2>
+  <p class="lede"><code>cargo rhdl build</code> 跑用户的 Rust、得到冻结电路图、再降后端。过程宏只是 builder 的语法糖。</p>
+  <ul>
+    <li>用户 crate 只依赖 <code>rhdl-prelude</code>。发布名是 <code>rhdl-rs</code>，仓库可以仍叫 rhdl。</li>
+    <li>crates.io 上的 <code>rhdl</code> / <code>rhdl-bits</code> 是别人的。文档必须声明与 <code>samitbasu/rhdl</code> 无关。</li>
+    <li>本页是走读。可执行规则在 <a href="ARCHITECTURE-SPINE.md"><code>ARCHITECTURE-SPINE.md</code></a> 的 <strong>AD-1…AD-26</strong>。</li>
+    <li>阶段一合同 = SPEC；阶段二需求 = 阶段二 PRD；脊柱管不变量。</li>
+  </ul>
+</section>
+
+<section class="slide" data-title="一次 build">
+  <p class="kicker">2 / 11</p>
+  <h2>一次 build 怎么走</h2>
+  <p>CLI 写一个 host crate（在 <code>target/</code>），同时链上设计 crate 和后端。冻结图在同一进程里交给 emit。阶段一不把 HIR 序列化成另一套 CLI 协议。</p>
+  <svg class="flow" viewBox="0 0 720 168" role="img" aria-label="设计 crate 经 host 得到 FrozenHir，再出 Verilog 与 tick">
+    <defs>
+      <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="currentColor"/>
+      </marker>
+    </defs>
+    <rect class="box" x="8" y="48" width="128" height="52" rx="8"/>
+    <text x="72" y="72" text-anchor="middle">设计 crate</text>
+    <text class="label" x="72" y="90" text-anchor="middle">#[rhdl::top]</text>
+    <path class="arr" d="M140 74 H190"/>
+    <rect class="box" x="194" y="48" width="128" height="52" rx="8"/>
+    <text x="258" y="72" text-anchor="middle">host crate</text>
+    <text class="label" x="258" y="90" text-anchor="middle">CLI 生成</text>
+    <path class="arr" d="M326 74 H376"/>
+    <rect class="box" x="380" y="48" width="128" height="52" rx="8"/>
+    <text x="444" y="72" text-anchor="middle">FrozenHir</text>
+    <text class="label" x="444" y="90" text-anchor="middle">唯一电路</text>
+    <path class="arr" d="M512 60 H562"/>
+    <path class="arr" d="M512 88 H562"/>
+    <rect class="box" x="566" y="18" width="140" height="44" rx="8"/>
+    <text x="636" y="44" text-anchor="middle">abi.v</text>
+    <rect class="box" x="566" y="86" width="140" height="44" rx="8"/>
+    <text x="636" y="112" text-anchor="middle">tick + VCD</text>
+    <text class="label" x="360" y="156" text-anchor="middle">.fir / firtool 是阶段二，虚线，不覆盖 .v</text>
+  </svg>
+  <p class="cite">AD-14 宿主 · AD-19 入口 · AD-8 阶段一产物只有 .v</p>
+</section>
+
+<section class="slide" data-title="依赖">
+  <p class="kicker">3 / 11</p>
+  <h2>依赖只准向下</h2>
+  <p>后端 = <code>rhdl-vlog</code>、<code>rhdl-firrtl</code>、<code>rhdl-sim</code>。宏只准打到 builder，不准写 HIR 节点。</p>
+  <table class="tight">
+    <tr><th>谁</th><th>可以依赖</th><th>不可以</th></tr>
+    <tr><td>设计 crate</td><td>prelude；测试可再加 sim</td><td>CLI、hir、vlog、firrtl</td></tr>
+    <tr><td>prelude / macro</td><td>builder</td><td>任何后端、hir（macro）</td></tr>
+    <tr><td>builder</td><td>hir</td><td>后端</td></tr>
+    <tr><td>三个后端</td><td>hir</td><td>彼此、prelude</td></tr>
+    <tr><td>CLI</td><td>三个后端</td><td>—</td></tr>
+  </table>
+  <p class="cite">AD-6。prelude 再导出 <code>FrozenHir</code> / <code>Diagnostics</code>，所以设计 crate 不必直接依赖 hir。</p>
+</section>
+
+<section class="slide" data-title="电路图">
+  <p class="kicker">4 / 11</p>
+  <h2>电路只有一张图</h2>
+  <ul>
+    <li>FrozenHir 是 FIRRTL 6 可逆子集的<strong>层次 AST</strong>（模块、实例、Connect、寄存器）。展平只许发生在后端私有视图。</li>
+    <li>未冻结图出不了 <code>rhdl-hir</code>。<code>elaborate</code> 和 <code>import</code> 都返回 <code>Result&lt;FrozenHir, Diagnostics&gt;</code>。freeze 是私有末步。</li>
+    <li>builder 是对着这张图的会话，不是第二张可变网表。宏展开到 builder。</li>
+    <li>HIR 的出生只有两处：用户的 <code>Elaboratable::elaborate()</code>，以及 FIRRTL 导入。两边走同一 freeze。</li>
+  </ul>
+  <p class="cite">AD-12 模式 · AD-7 可变性 · AD-13 所有者 · AD-1 出生路径</p>
+</section>
+
+<section class="slide" data-title="阶段一语言">
+  <p class="kicker">5 / 11</p>
+  <h2>阶段一：写出来的电路长什么样</h2>
+  <ul>
+    <li>每个模块一个显式 <code>Clock</code>、一个同步高有效 <code>Reset</code>。<code>tick</code> 就是这个时钟的一个上升沿。Verilog 是 <code>always @(posedge clock)</code>。emit 不得发明端口。</li>
+    <li><code>#[combinational]</code> / <code>#[sequential]</code> 必须写。不完整组合赋值是错，没有隐式 latch。</li>
+    <li>端口是 <code>Input&lt;T&gt;</code> / <code>Output&lt;T&gt;</code>。表面算术严格同位宽；要变宽就写 pad/trunc。FIRRTL 的 n+1 只能从这些节点来。</li>
+    <li>周期精确路径没有堆、线程、默认浮点。<code>#[functional_state]</code> 进不了 HIR。</li>
+    <li>freeze 拒绝多驱动、宽/向不匹配、未驱动输入（除非标明悬空）。所有权可以引导 API，不是证明。</li>
+  </ul>
+  <p class="cite">AD-15 · AD-18 · AD-4 · AD-16（freeze 分配 abi_name，文件是 abi.v）</p>
+</section>
+
+<section class="slide" data-title="仿真与互转">
+  <p class="kicker">6 / 11</p>
+  <h2>两套仿真；互转是文本不是 Scala</h2>
+  <ul>
+    <li>周期精确：从 FrozenHir <code>tick</code>，同一套 API dump VCD。</li>
+    <li>功能视图：手写 <code>#[functional_model]</code>，普通 Rust。禁止从 HIR 生成 TLM。</li>
+    <li>对照只比 <code>PortValues</code>（按端口名和运行时宽度）。<code>Bits&lt;W&gt;</code> 是门面，降到运行时宽度。</li>
+    <li>与 Chisel 的契约是 FrozenHir ↔ <code>FIRRTL version 6.0.0</code> 文本。不维护 Scala，不指望 Chisel 读 .fir。</li>
+    <li>导入先把 last-connect 收成唯一驱动。往返要保住层次、端口、实例图、运算和寄存器；注释可以丢。</li>
+    <li>阶段一 <code>rhdl-firrtl</code> 可以有解析/AST，不能写用户面向的 .fir，也不能调 firtool。</li>
+  </ul>
+  <p class="cite">AD-5 · AD-17 · AD-3 · AD-8</p>
+</section>
+
+<section class="slide" data-title="钉死">
+  <p class="kicker">7 / 11</p>
+  <h2>本机 CLI，版本钉死</h2>
+  <table class="tight">
+    <tr><th>钉什么</th><th>值</th></tr>
+    <tr><td>rustc MSRV / edition</td><td>1.97.1 / 2024</td></tr>
+    <tr><td>FIRRTL 语言</td><td>spec 6.0.0</td></tr>
+    <tr><td>firtool</td><td>1.155.0（Chisel 7.14.0 配对）</td></tr>
+    <tr><td>下载资产</td><td><code>firrtl-bin-linux-x64.tar.gz</code>，校验同 tag 的 .sha256</td></tr>
+    <tr><td>阶段一宿主</td><td>linux-x64；缓存后离线</td></tr>
+    <tr><td>日志</td><td>tracing 0.1.44</td></tr>
+  </table>
+  <p>只有 CLI 下载和调用 firtool。不要信 PATH。覆盖用 <code>RHDL_FIRTOOL_PATH</code>。Yosys / Verilator 可选，不是阶段一必装。无云端控制面。</p>
+  <p class="cite">AD-9 · AD-11 · AD-10（用户错误走 Diagnostic，禁止 panic）</p>
+</section>
+
+<section class="slide" data-title="阶段二">
+  <p class="kicker">8 / 11</p>
+  <h2>阶段二已经定下的不变式</h2>
+  <ul>
+    <li><strong>表面加厚（AD-20）：</strong> if/match、同位宽运算、pad/trunc、同步 Reg 复位语义；<code>Bundle</code>/<code>Vec</code> 仍禁止静默可用。</li>
+    <li><strong>Mem（AD-21）：</strong> 表面用 CHIRRTL 友好名（<code>Mem</code>/<code>SyncReadMem</code>）；降级/互转锚规范 <code>mem</code>；跨时钟存储只能经命名 CDC FIFO。</li>
+    <li><strong>多时钟（AD-22）：</strong> Clash 式 phantom 域（可改 ASSUMPTION）；非法跨域 freeze 失败；默认模块仍是 AD-15 单时钟。</li>
+    <li><strong>复位/使能（AD-23）、FST（AD-24）、HLS 外挂（AD-25）、合同海拔（AD-26）。</strong></li>
+  </ul>
+  <p class="cite">对应阶段二 PRD：FR22 → FR26 → FR23…；交付顺序不要颠倒。</p>
+</section>
+
+<section class="slide" data-title="先别做">
+  <p class="kicker">9 / 11</p>
+  <h2>现在不要做的事</h2>
+  <p>这些不是「没写所以自由发挥」。做了就是第二个工具链。</p>
+  <ul>
+    <li><span class="later">产品已有 FR、脊柱未钉实现形状：</span>bridge/形式等价/C ABI/覆盖率、IP/LSP、Analog、CLI 其余动词。</li>
+    <li><span class="no">不要做：</span>从 HIR 生成 TLM；自研 HLS 调度；用所有权当多驱动证明；Chisel Scala 当互转契约；未配对就钉 firtool-1.156.0；发布 <code>rhdl</code>/<code>rhdl-bits</code>。</li>
+    <li><span class="no">不要做：</span>在 AD-22 未修订前另起一套 CDC 检查并与 phantom 并存。</li>
+  </ul>
+</section>
+
+<section class="slide" data-title="CDC 假设">
+  <p class="kicker">10 / 11</p>
+  <h2>CDC 选型已确认</h2>
+  <p class="lede">AD-22 采用 <span class="ok">Clash 式 phantom 域</span>（用户 2026-08-19 确认）。若改 Spinal 图检查或纯库级，必须修订 AD-22。</p>
+  <table class="tight">
+    <tr><th>选项</th><th>一句话</th></tr>
+    <tr><td>Phantom（当前）</td><td>类型拦住误跨域；实现相对轻</td></tr>
+    <tr><td>ClockDomain 图</td><td>编译期图分析；更重</td></tr>
+    <tr><td>仅库级 FIFO</td><td>最快；无语言门控</td></tr>
+  </table>
+</section>
+
+<section class="slide" data-title="开工">
+  <p class="kicker">11 / 11</p>
+  <h2>开工时引用 AD，不要发明第二套规则</h2>
+  <p>阶段二建议顺序（与 PRD P0→P1 对齐）：</p>
+  <ol>
+    <li>README + firtool 钉死实现（AD-9 / AD-26 / NFR3）</li>
+    <li>表面加厚（AD-20 / FR22）</li>
+    <li>Mem（AD-21 / FR26）</li>
+    <li>多时钟 + CDC（AD-22 / FR23）— 先确认或推翻 ASSUMPTION</li>
+    <li>异步复位 / enable、可选 FST、外挂 HLS</li>
+  </ol>
+  <p>下一步：<code>bmad-create-epics-and-stories</code> 按阶段二 PRD 拆 epic；<strong>AD 编号不要改</strong>。</p>
+</section>
+
+</div>
+
+<footer class="nav">
+  <button type="button" id="prev" disabled>上一页</button>
+  <span id="dots"></span>
+  <button type="button" id="next">下一页</button>
+</footer>
+
+<script>
+(function () {
+  const slides = [...document.querySelectorAll(".slide")];
+  let i = 0;
+  const prev = document.getElementById("prev");
+  const next = document.getElementById("next");
+  const dots = document.getElementById("dots");
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle("on", k === i));
+    prev.disabled = i === 0;
+    next.disabled = i === slides.length - 1;
+    const t = slides[i].getAttribute("data-title");
+    dots.textContent = (i + 1) + " / " + slides.length + " · " + t + " · ← →";
+  }
+  prev.onclick = () => show(i - 1);
+  next.onclick = () => show(i + 1);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") { e.preventDefault(); show(i + 1); }
+    if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); show(i - 1); }
+    if (e.key === "Home") { e.preventDefault(); show(0); }
+    if (e.key === "End") { e.preventDefault(); show(slides.length - 1); }
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>

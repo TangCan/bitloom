@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>RHDL 技术调研简报</title>
+<style>
+:root { --bg:#f7f7f5; --fg:#1a1a1a; --card:#fff; --accent:#2c5f8a; --muted:#5c5c5c; --border:#e2e2de;
+  --verified:#1b7a4e; --medium:#8a6d1b; --unverified:#6b2d8a; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#12141a; --fg:#e8e8e6; --card:#1c1f28; --accent:#6db3e8; --muted:#a0a0a0; --border:#2a2e3a; }
+}
+* { box-sizing:border-box; }
+body { margin:0; font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif; background:var(--bg); color:var(--fg); }
+header { padding:1.5rem clamp(1rem,4vw,2.5rem); border-bottom:1px solid var(--border); background:var(--card); }
+header h1 { margin:0 0 .4rem; font-size:1.45rem; }
+.meta { color:var(--muted); font-size:.9rem; display:flex; flex-wrap:wrap; gap:.75rem 1.25rem; }
+main { max-width:52rem; margin:0 auto; padding:1.25rem clamp(1rem,4vw,1.5rem) 3rem; }
+nav.toc { position:sticky; top:0; z-index:2; background:var(--bg); padding:.75rem 0; border-bottom:1px solid var(--border); margin:0 0 1.25rem; font-size:.9rem; }
+nav.toc a { color:var(--accent); margin-right:.9rem; text-decoration:none; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:1.1rem 1.25rem; margin:0 0 1.1rem; }
+.card h2 { margin-top:0; font-size:1.15rem; }
+.badge { display:inline-block; font-size:.72rem; font-weight:700; padding:.12rem .45rem; border-radius:999px; border:1px solid currentColor; margin-left:.35rem; }
+.badge.verified { color:var(--verified); }
+.badge.unverified { color:var(--unverified); }
+a { color:var(--accent); }
+table.sources { width:100%; border-collapse:collapse; font-size:.85rem; }
+table.sources td { border-top:1px solid var(--border); padding:.45rem .4rem; vertical-align:top; }
+details { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:.6rem 1rem; margin:1rem 0; }
+ul,ol { padding-left:1.2rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>technical research：RHDL Rust eDSL 实现架构</h1>
+  <div class="meta">
+    <span>类型 technical</span>
+    <span>预设 deep · 校验 normal</span>
+    <span>日期 2026-08-18</span>
+    <span>声明 verified 3 / unverified 8</span>
+  </div>
+  <p style="margin:.8rem 0 0;color:var(--muted);font-size:.92rem">决策：把 Rust 嵌入式 RTL HDL（过程宏→HIR→Verilog/FIRRTL，含 Chisel 互转与多视图）落到 2026 年可执行实现方案。</p>
+</header>
+<main>
+<nav class="toc">
+  <a href="#exec">摘要</a>
+  <a href="#rec">建议</a>
+  <a href="#dims">维度</a>
+  <a href="#open">未决</a>
+  <a href="#sources">来源</a>
+  <a href="#stale">过期图</a>
+</nav>
+<section class="card" id="exec">
+  <h2>执行摘要</h2>
+  <p><strong>现在该做的事：</strong>按 Chisel 式分阶段展开 + 自有 HIR；阶段一直接出可综合 Verilog；阶段二再出 FIRRTL 6.0 子集并钉死 <code>firtool-1.155.0</code>。与 Chisel 改为<strong>单向导出 + 有损导入</strong>。多视图用<strong>两套模型</strong>。不要在 crates.io 发布名 <code>rhdl</code>。<span class="badge verified">verified</span></p>
+  <ul>
+    <li>Chisel 7.14.0 → firtool-1.155.0；不能把 .fir 解析回 Circuit（#4899）。</li>
+    <li><code>samitbasu/rhdl</code> 走 RHIF→Verilog，无 FIRRTL；crates.io <code>rhdl</code> 0.1.0 是 3 行占位包。</li>
+    <li>双视图产业实践是两套源或 TLM↔管脚桥；XLS 仍 experimental。</li>
+  </ul>
+</section>
+<section class="card" id="rec">
+  <h2>实现方案要点</h2>
+  <ol>
+    <li>前端宏<strong>记录</strong> HIR，不把任意 Rust 子集翻译成字符串 Verilog。</li>
+    <li>阶段一：HIR→Yosys 友好 Verilog + 原生 tick 仿真 + 唯一驱动检查。</li>
+    <li>阶段二：FIRRTL 6.0 子集导出 + 托管 firtool-1.155.0。</li>
+    <li>互转：导出一级；不做 Chisel 源码往返。</li>
+    <li>多视图：functional_model 走普通 rustc；一致性用随机比对。</li>
+    <li>发布换 crate 名，并文档声明与同名项目的关系。</li>
+  </ol>
+</section>
+<section class="card" id="dims">
+  <h2>维度结论（压缩）</h2>
+  <p>Rust eDSL 未收敛；Verilog 是跨 HDL 交换物；生产模式=宿主展开+硬件编译器；无生产级 ownership 防多驱动；CDC 用 Clash 式 phantom；不要从同一 IR 生成 TLM。</p>
+</section>
+<section class="card" id="open">
+  <h2>未决 / 过期</h2>
+  <p>商标与抢名；仿真基准缺失。前瞻最早复查：<strong>2026-09-01</strong>（firtool 钉死）。</p>
+</section>
+<details id="sources" open>
+  <summary><strong>来源附录</strong></summary>
+  <table class="sources"><tbody><tr id="src-1"><td>[1]</td><td>crates.io `rhdl` 0.1.0 为 3 行占位包</td><td><a href="https://crates.io/crates/rhdl" target="_blank" rel="noopener">crates.io</a></td><td>2023-09-02</td><td>2026-08-18</td><td>high</td></tr><tr id="src-2"><td>[2]</td><td>samitbasu/rhdl 未归档；pushed_at 2026-04-21</td><td><a href="https://api.github.com/repos/samitbasu/rhdl" target="_blank" rel="noopener">GitHub API</a></td><td>2026-04-21</td><td>2026-08-18</td><td>high</td></tr><tr id="src-3"><td>[3]</td><td>RHIF→Verilog；宏限制；仿真自述</td><td><a href="https://raw.githubusercontent.com/samitbasu/rhdl/main/README.md" target="_blank" rel="noopener">README</a></td><td>2026-02</td><td>2026-08-18</td><td>high</td></tr><tr id="src-4"><td>[4]</td><td>rust-hdl 0.46.0（2023-07-02）</td><td><a href="https://crates.io/crates/rust-hdl" target="_blank" rel="noopener">crates.io</a></td><td>2023-07-02</td><td>2026-08-18</td><td>high</td></tr><tr id="src-5"><td>[5]</td><td>rust-hdl #29 宏 panic 仍开</td><td><a href="https://github.com/samitbasu/rust-hdl/issues/29" target="_blank" rel="noopener">GitHub</a></td><td>2023-07-22</td><td>2026-08-18</td><td>high</td></tr><tr id="src-6"><td>[6]</td><td>rust-hdl #47 Signed 仿真溢出</td><td><a href="https://github.com/samitbasu/rust-hdl/issues/47" target="_blank" rel="noopener">GitHub</a></td><td>2025-04-26</td><td>2026-08-18</td><td>high</td></tr><tr id="src-7"><td>[7]</td><td>kaze crates.io 0.1.19</td><td><a href="https://crates.io/crates/kaze" target="_blank" rel="noopener">crates.io</a></td><td>2021-03-14</td><td>2026-08-18</td><td>high</td></tr><tr id="src-8"><td>[8]</td><td>crates.io rhdl 0.1.0 体积/行数；kaze archived</td><td><a href="https://crates.io/api/v1/crates/rhdl/0.1.0" target="_blank" rel="noopener">crates.io API</a></td><td>2023-09-02</td><td>2026-08-18</td><td>high</td></tr><tr id="src-9"><td>[9]</td><td>Veryl 仓库活跃</td><td><a href="https://api.github.com/repos/veryl-lang/veryl" target="_blank" rel="noopener">GitHub</a></td><td>2026-08-18</td><td>2026-08-18</td><td>high</td></tr><tr id="src-10"><td>[10]</td><td>Veryl v0.20.2</td><td><a href="https://github.com/veryl-lang/veryl/releases/tag/v0.20.2" target="_blank" rel="noopener">GitHub Releases</a></td><td>2026-07-01</td><td>2026-08-18</td><td>medium</td></tr><tr id="src-11"><td>[11]</td><td>Spade GitHub mirror</td><td><a href="https://api.github.com/repos/spade-lang/spade" target="_blank" rel="noopener">GitHub</a></td><td>2026-08-18</td><td>2026-08-18</td><td>high</td></tr><tr id="src-12"><td>[12]</td><td>Spade WIP（Hackaday）</td><td><a href="https://hackaday.com/2025/04/13/the-spade-hardware-description-language/" target="_blank" rel="noopener">Hackaday</a></td><td>2025-04-13</td><td>2026-08-18</td><td>medium</td></tr><tr id="src-13"><td>[13]</td><td>Cement pushed_at 2025-01-16</td><td><a href="https://api.github.com/repos/pku-liang/Cement" target="_blank" rel="noopener">GitHub API</a></td><td>2025-01-16</td><td>2026-08-18</td><td>high</td></tr><tr id="src-14"><td>[14]</td><td>Cement FIRRTL + firtool-1.86.0</td><td><a href="https://raw.githubusercontent.com/pku-liang/Cement/cmt2/README.md" target="_blank" rel="noopener">README</a></td><td>2025-01</td><td>2026-08-18</td><td>high</td></tr><tr id="src-15"><td>[15]</td><td>cmtrs 0.1.2</td><td><a href="https://crates.io/api/v1/crates/cmtrs" target="_blank" rel="noopener">crates.io API</a></td><td>2025-01-09</td><td>2026-08-18</td><td>high</td></tr><tr id="src-16"><td>[16]</td><td>firtool-1.155.0</td><td><a href="https://github.com/llvm/circt/releases/tag/firtool-1.155.0" target="_blank" rel="noopener">CIRCT</a></td><td>2026-08-11</td><td>2026-08-18</td><td>high</td></tr><tr id="src-17"><td>[17]</td><td>Chisel 7.14.0 配对 firtool 1.155.0</td><td><a href="https://github.com/chipsalliance/chisel/releases/tag/v7.14.0" target="_blank" rel="noopener">Chisel</a></td><td>2026-08-13</td><td>2026-08-18</td><td>high</td></tr><tr id="src-18"><td>[18]</td><td>`etc/circt.json` 钉死 firtool-1.155.0</td><td><a href="https://raw.githubusercontent.com/chipsalliance/chisel/v7.14.0/etc/circt.json" target="_blank" rel="noopener">raw</a></td><td>2026-08-13</td><td>2026-08-18</td><td>high</td></tr><tr id="src-19"><td>[19]</td><td>FIRRTL dialect rationale；CHIRRTL；命名</td><td><a href="https://circt.llvm.org/docs/Dialects/FIRRTL/RationaleFIRRTL/" target="_blank" rel="noopener">CIRCT</a></td><td>living</td><td>2026-08-18</td><td>high</td></tr><tr id="src-20"><td>[20]</td><td>Scala FIRRTL 仓库归档</td><td><a href="https://github.com/chipsalliance/firrtl" target="_blank" rel="noopener">GitHub</a></td><td>2024-08-20</td><td>2026-08-18</td><td>high</td></tr><tr id="src-21"><td>[21]</td><td>firrtl-spec v6.0.0</td><td><a href="https://github.com/chipsalliance/firrtl-spec/releases/tag/v6.0.0" target="_blank" rel="noopener">GitHub</a></td><td>2026-05-12</td><td>2026-08-18</td><td>high</td></tr><tr id="src-22"><td>[22]</td><td>FIRRTL ABI</td><td><a href="https://raw.githubusercontent.com/chipsalliance/firrtl-spec/v6.0.0/abi.md" target="_blank" rel="noopener">abi.md</a></td><td>2026-05-12</td><td>2026-08-18</td><td>high</td></tr><tr id="src-23"><td>[23]</td><td>Chisel 版本与 firtool 覆盖示例</td><td><a href="https://www.chisel-lang.org/docs/appendix/versioning" target="_blank" rel="noopener">chisel-lang.org</a></td><td>living</td><td>2026-08-18</td><td>high</td></tr><tr id="src-24"><td>[24]</td><td>无 `.fir` 回解析</td><td><a href="https://github.com/chipsalliance/chisel/issues/4899" target="_blank" rel="noopener">chisel#4899</a></td><td>2025-04-22</td><td>2026-08-18</td><td>high</td></tr><tr id="src-25"><td>[25]</td><td>firtool SV lowering-options</td><td><a href="https://circt.llvm.org/docs/VerilogGeneration/" target="_blank" rel="noopener">CIRCT</a></td><td>living</td><td>2026-08-18</td><td>high</td></tr><tr id="src-26"><td>[26]</td><td>Clash 1.10.0</td><td><a href="https://github.com/clash-lang/clash-compiler/releases/tag/v1.10.0" target="_blank" rel="noopener">GitHub</a></td><td>2026-04-23</td><td>2026-08-18</td><td>high</td></tr><tr id="src-27"><td>[27]</td><td>SpinalHDL Verilog 后端</td><td><a href="https://spinalhdl.github.io/SpinalDoc-RTD/master/SpinalHDL/Other%20language%20features/vhdl_generation.html" target="_blank" rel="noopener">SpinalDoc</a></td><td>living</td><td>2026-08-18</td><td>high</td></tr><tr id="src-28"><td>[28]</td><td>Amaranth NIR/RTLIL</td><td><a href="https://amaranth-lang.org/play/" target="_blank" rel="noopener">Amaranth</a></td><td>living</td><td>2026-08-18</td><td>medium</td></tr><tr id="src-29"><td>[29]</td><td>CirQTS 线性网表过严</td><td><a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ECOOP.2023.8" target="_blank" rel="noopener">LIPIcs</a></td><td>2023</td><td>2026-08-18</td><td>high</td></tr><tr id="src-30"><td>[30]</td><td>Clash typed domains</td><td><a href="https://hackage.haskell.org/package/clash-prelude" target="_blank" rel="noopener">Hackage</a></td><td>1.8.5 docs</td><td>2026-08-18</td><td>high</td></tr><tr id="src-31"><td>[31]</td><td>Chisel withClock 非类型化 CDC</td><td><a href="https://www.chisel-lang.org/docs/explanations/multi-clock" target="_blank" rel="noopener">chisel-lang.org</a></td><td>living</td><td>2026-08-18</td><td>high</td></tr><tr id="src-32"><td>[32]</td><td>LATTE’25 RHDL：RHIF→Verilog</td><td><a href="https://capra.cs.cornell.edu/latte25/paper/2.pdf" target="_blank" rel="noopener">PDF</a></td><td>2025-03-30</td><td>2026-08-18</td><td>high</td></tr><tr id="src-33"><td>[33]</td><td>LATTE’25 cmt2 过程宏→FIRRTL</td><td><a href="https://capra.cs.cornell.edu/latte25/paper/1.pdf" target="_blank" rel="noopener">PDF</a></td><td>2025-03-30</td><td>2026-08-18</td><td>high</td></tr><tr id="src-34"><td>[34]</td><td>Cement2 FPGA 数字；firtool-1.108.0</td><td><a href="https://arxiv.org/html/2511.15073v1" target="_blank" rel="noopener">arXiv</a></td><td>2025-11</td><td>2026-08-18</td><td>high</td></tr><tr id="src-35"><td>[35]</td><td>MINRES RHDL RISC-V，无面积数字</td><td><a href="https://www.minres.com/pipelined-riscv-in-rhdl/" target="_blank" rel="noopener">MINRES</a></td><td>undated</td><td>2026-08-18</td><td>high</td></tr><tr id="src-36"><td>[36]</td><td>XLS experimental；JIT+Verilog</td><td><a href="https://google.github.io/xls/" target="_blank" rel="noopener">XLS</a></td><td>living</td><td>2026-08-18</td><td>high</td></tr><tr id="src-37"><td>[37]</td><td>XLS Z3 为 IR function；proc 另工具</td><td><a href="https://google.github.io/xls/tools/" target="_blank" rel="noopener">XLS tools</a></td><td>living</td><td>2026-08-18</td><td>high</td></tr><tr id="src-38"><td>[38]</td><td>Verilator 5.050</td><td><a href="https://verilator.org/guide/latest/changes.html" target="_blank" rel="noopener">Veripool</a></td><td>2026-07-01</td><td>2026-08-18</td><td>high</td></tr><tr id="src-39"><td>[39]</td><td>Yosys 0.68</td><td><a href="https://github.com/YosysHQ/yosys/releases/tag/v0.68" target="_blank" rel="noopener">GitHub</a></td><td>2026-08-05</td><td>2026-08-18</td><td>high</td></tr><tr id="src-40"><td>[40]</td><td>SystemC TLM / IEEE 1666-2023</td><td><a href="https://systemc.org/overview/systemc-tlm/" target="_blank" rel="noopener">systemc.org</a></td><td>2023</td><td>2026-08-18</td><td>high</td></tr><tr id="src-41"><td>[41]</td><td>TLM↔RTL 桥</td><td><a href="https://github.com/xilinx/libsystemctlm-soc" target="_blank" rel="noopener">libsystemctlm-soc</a></td><td>living</td><td>2026-08-18</td><td>high</td></tr><tr id="src-42"><td>[42]</td><td>ChiselSim 非 golden 生成</td><td><a href="https://www.chisel-lang.org/docs/explanations/testing" target="_blank" rel="noopener">Chisel testing</a></td><td>living</td><td>2026-08-18</td><td>high</td></tr><tr id="src-43"><td>[43]</td><td>essent 停在 FIRRTL 1.6.1</td><td><a href="https://github.com/ucsc-vama/essent/issues/24" target="_blank" rel="noopener">GitHub</a></td><td>2026-07-22</td><td>2026-08-18</td><td>high</td></tr><tr id="src-44"><td>[44]</td><td>firtool-resolver / FNDDS</td><td><a href="https://raw.githubusercontent.com/chipsalliance/firtool-resolver/main/README.md" target="_blank" rel="noopener">README</a></td><td>living</td><td>2026-08-18</td><td>high</td></tr><tr id="src-45"><td>[45]</td><td>Maven llvm-firtool 1.155.0</td><td><a href="https://repo1.maven.org/maven2/org/chipsalliance/llvm-firtool/1.155.0/" target="_blank" rel="noopener">Maven</a></td><td>2026-08-11</td><td>2026-08-18</td><td>high</td></tr><tr id="src-46"><td>[46]</td><td>rust-analyzer 过程宏架构</td><td><a href="https://blog.jetbrains.com/rust/2026/05/29/how-rust-ides-understand-code/" target="_blank" rel="noopener">JetBrains</a></td><td>2026-05-29</td><td>2026-08-18</td><td>high</td></tr><tr id="src-47"><td>[47]</td><td>下游 path 依赖 RHDL</td><td><a href="https://github.com/zebreus/a5-1-rhdl" target="_blank" rel="noopener">GitHub</a></td><td>undated</td><td>2026-08-18</td><td>medium</td></tr><tr id="src-48"><td>[48]</td><td>VHDL-LS/rust_hdl 名称碰撞</td><td><a href="https://github.com/VHDL-LS/rust_hdl/releases" target="_blank" rel="noopener">GitHub</a></td><td>2025-03-22</td><td>2026-08-18</td><td>high</td></tr><tr id="src-49"><td>[49]</td><td>Hardcaml elaboration 多驱动检查</td><td><a href="https://ocamlstreet.gitbook.io/hardcaml-wiki/hardcaml/arxiv-paper" target="_blank" rel="noopener">wiki</a></td><td>living</td><td>2026-08-18</td><td>medium</td></tr><tr id="src-50"><td>[50]</td><td>Codasip IA/CA 双模型</td><td><a href="https://dvcon-proceedings.org/wp-content/uploads/uvm-based-verification-of-a-risc-v-processor-core-using-a-golden-predictor-model-and-a-configuration-layer.pdf" target="_blank" rel="noopener">DVCon PDF</a></td><td>undated</td><td>2026-08-18</td><td>medium</td></tr><tr id="src-51"><td>[51]</td><td>yupferris/kaze archived=true</td><td><a href="https://api.github.com/repos/yupferris/kaze" target="_blank" rel="noopener">GitHub API</a></td><td>2023-11-15</td><td>2026-08-18</td><td>high</td></tr><tr id="src-52"><td>[52]</td><td>workspace Cargo.toml 成员</td><td><a href="https://raw.githubusercontent.com/samitbasu/rhdl/main/Cargo.toml" target="_blank" rel="noopener">raw</a></td><td>2026-02-03</td><td>2026-08-18</td><td>high</td></tr><tr id="src-56"><td>[56]</td><td>Dynamatic MLIR-HLS 悔点</td><td><a href="https://arxiv.org/html/2603.19856v1" target="_blank" rel="noopener">arXiv</a></td><td>2026</td><td>2026-08-18</td><td>high</td></tr></tbody></table>
+</details>
+<section class="card" id="stale">
+  <h2>过期图</h2>
+  <p>version/compat 窗使历史 pub 显示 stale；本轮已再验。下一步 Refresh：最新 Chisel <code>etc/circt.json</code>。</p>
+</section>
+<p style="color:var(--muted);font-size:.85rem">完整论述见同目录 research.md。</p>
+</main>
+</body>
+</html>

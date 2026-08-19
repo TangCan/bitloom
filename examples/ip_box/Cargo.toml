@@ -1,0 +1,11 @@
+[package]
+name = "ip_box"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+rhdl-prelude = { workspace = true }
+fifo_skel = { path = "../fifo_skel" }

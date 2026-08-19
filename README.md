@@ -1,0 +1,81 @@
+# Bitloom
+
+Rust 嵌入式 RTL HDL：设计是**可执行生成器**。`cargo bitloom build` 在本机 elaborate 得到冻结电路图（`FrozenHir`），再降到 Yosys 友好的 Verilog，并可在 `cargo test` 里做周期精确 `tick`。
+
+## 身份与发布（请先读）
+
+**本仓库与 [samitbasu/rhdl](https://github.com/samitbasu/rhdl) 无关。** 那是另一个独立项目。
+
+| | 本项目 |
+|---|---|
+| Git 仓库名 | 可以叫 `rhdl` |
+| 公开产品名 | **Bitloom** |
+| crates.io **发布名** | **`bitloom`**（CLI 二进制 `cargo-bitloom` → `cargo bitloom`） |
+| **禁止**发布 | `rhdl`、`rhdl-bits`（名称已被占用或保留） |
+
+文档、徽章与发布说明不得暗示本工具链以 crates.io 包名 `rhdl` 发布。
+
+## 快速开始
+
+- **工具链：** `rust-toolchain.toml` 钉死 **rustc 1.97.1** / edition 2024
+- **测试：** `just test`（或 `cargo test --workspace`）
+- **构建示例 Verilog：**
+
+```bash
+cargo run -p bitloom -- build --package counter_ports --out-dir /tmp/rhdl-out --manifest-dir .
+```
+
+设计 crate 应只依赖 `rhdl-prelude`；详见 `AGENTS.md` 与架构脊柱。
+
+## 文档在哪
+
+| 文档 | 路径 |
+|------|------|
+| 阶段一产品合同 | `_agile-output/specs/spec-rhdl/SPEC.md` |
+| 阶段二需求（FR21–FR40） | `_agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md` |
+| 架构脊柱（AD-1…AD-26） | `_agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md` |
+| Epic / Story | `_agile-output/planning-artifacts/epics.md` |
+| Sprint 状态 | `_agile-output/implementation-artifacts/sprint-status.yaml` |
+| HIR→源码再生（仅调试） | [`docs/hir-to-source-debug-only.md`](docs/hir-to-source-debug-only.md) |
+| 手写 bridge / abstraction / both | [`docs/fr29-bridge-abstraction-both.md`](docs/fr29-bridge-abstraction-both.md) |
+| 双视图等价检查 | [`docs/fr30-dual-view-equiv.md`](docs/fr30-dual-view-equiv.md) |
+| 可选 FST | [`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md) |
+| tick 引擎 | [`docs/fr32-tick-engines.md`](docs/fr32-tick-engines.md) |
+| C ABI cdylib | [`docs/fr33-c-abi.md`](docs/fr33-c-abi.md) |
+| 仿真覆盖率 | [`docs/fr34-sim-coverage.md`](docs/fr34-sim-coverage.md) |
+| Chisel 尽力生成 | [`docs/fr28-chisel-best-effort.md`](docs/fr28-chisel-best-effort.md) |
+| HLS（Bambu） | [`docs/fr35-hls.md`](docs/fr35-hls.md) |
+| Formal/SVA | [`docs/fr39-formal-sva.md`](docs/fr39-formal-sva.md) |
+| Analog/InOut | [`docs/fr27-analog-inout.md`](docs/fr27-analog-inout.md) |
+| rhdl-float | [`docs/fr36-rhdl-float.md`](docs/fr36-rhdl-float.md) |
+| IP / 黑盒 | [`docs/fr37-ip-box.md`](docs/fr37-ip-box.md) |
+| HIR HTML / LSP | [`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md) |
+| 额外 CLI | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) |
+| 多平台 firtool | [`docs/nfr11-firtool-platforms.md`](docs/nfr11-firtool-platforms.md) |
+| MSRV 1.97.1 (NFR13) | [`docs/nfr13-msrv-1.97.1.md`](docs/nfr13-msrv-1.97.1.md) |
+
+## firtool（NFR3）
+
+默认**不信任** `PATH` 上的 firtool。CLI 钉死 **firtool-1.155.0**（`firrtl-bin-linux-x64.tar.gz` + `.sha256`）：
+
+```bash
+cargo run -p bitloom -- firtool info
+cargo run -p bitloom -- firtool ensure   # 下载/校验/缓存并打印二进制路径
+```
+
+覆盖：`RHDL_FIRTOOL_PATH` 指向含 `firtool` 的目录；缓存根可用 `RHDL_FIRTOOL_CACHE`。
+
+工具链 crate：MIT OR Apache-2.0（见各 crate 的 `Cargo.toml`）。
+
+## 状态与 deferred（诚实声明）
+
+当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC 等阶段二能力（见 `epics.md`）。
+
+**明确 deferred / 未承诺为产品完整面：**
+
+- 完整 LSP hover/goto（FR38 部分）
+- 部分 CLI 动词（`check` / `import` / `visualize` / `wave` / `doc` / `build-sim`）
+- 自研 HLS 调度器（永不；仅外挂）
+- crates.io 名 `rhdl` / `rhdl-bits`（禁止）
+
+详见 [`docs/semver-0x-policy.md`](docs/semver-0x-policy.md) 与 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。

@@ -1,0 +1,13 @@
+[package]
+name = "mixed_both"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+rhdl-prelude = { workspace = true }
+
+[dev-dependencies]
+rhdl-sim = { workspace = true }

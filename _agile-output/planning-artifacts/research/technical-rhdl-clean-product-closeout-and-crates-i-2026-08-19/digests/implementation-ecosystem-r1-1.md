@@ -1,0 +1,36 @@
+## Findings
+
+| claim | source URL | publisher | pub_date | accessed | confidence | class |
+|---|---|---|---|---|---|---|
+| Pre-publish: account + verified email + `cargo login`; names are first-come-first-served and permanent once taken; required metadata includes `description` and `license`/`license-file` (SPDX); recommend `cargo publish --dry-run` / `cargo package`, inspect `target/package` `.crate` (10MB limit) and `cargo package --list`; new versions need SemVer bump; each release should have changelog + git tag; manage owners via `cargo owner`; yank does not delete code | https://doc.rust-lang.org/cargo/reference/publishing.html | Rust / Cargo Book | living doc (stable cargo reference) | 2026-08-19 | high | ops |
+| Required publish fields emphasized for users: unique `name`, SemVer `version`, short `description`, SPDX `license` (or `license-file`); republish = bump version + `cargo publish` | https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html | Rust Book | living doc | 2026-08-19 | high | pattern |
+| Maintainer metadata checklist pattern: fill `repository`, `readme`, `keywords`, `categories`, optional `documentation`/`homepage`; API Guidelines C-METADATA lists authors/description/license/repository/keywords/categories; C-RELNOTES = release notes + break callouts + VCS tags | https://rust-lang.github.io/api-guidelines/documentation.html | Rust API Guidelines | living doc | 2026-08-19 | high | pattern |
+| docs.rs auto-builds published crates; customize with `[package.metadata.docs.rs]` (`features`, `all-features`, `targets`, `rustdoc-args`, etc.); crate owners can trigger docs.rs rebuilds from crates.io without a new publish | https://docs.rs/about/metadata ; https://blog.rust-lang.org/2025/07/11/crates-io-development-update-2025-07/ | docs.rs / Rust Blog (crates.io team) | metadata: living; blog: 2025-07-11 | 2026-08-19 | high | ops |
+| Trusted Publishing (OIDC): configure trusted GitHub (later GitLab.com) workflow on crates.io; first publish must be manual API token; CI uses `rust-lang/crates-io-auth-action` + `permissions: id-token: write`; short-lived token (~30 min); optional GitHub environment | https://crates.io/docs/trusted-publishing ; https://blog.rust-lang.org/2025/07/11/crates-io-development-update-2025-07/ ; https://rust-lang.github.io/rfcs/3691-trusted-publishing-cratesio.html | crates.io / Rust Blog / RFC 3691 | GHA announce 2025-07-11; RFC accepted earlier | 2026-08-19 | high | policy |
+| 2026 trusted-publishing hardening: GitLab.com supported; optional **Trusted Publishing Only** (disables legacy API-token publish); **`pull_request_target` and `workflow_run` blocked** for trusted publish | https://blog.rust-lang.org/2026/01/21/crates-io-development-update/ | Rust Blog (crates.io team) | 2026-01-21 | 2026-08-19 | high | policy |
+| crates.io policy (naming / abuse / takeover): FCFS names; no team-mediated ownership transfer without current owner; contact owner for takeover; transferring to a malicious owner risks users; prohibits prolonged name-squatting / crates without genuine purpose; team may delete policy-violating crates (sometimes without notice in squatting attacks); limited owner self-delete (e.g. &lt;72h or low download / no dependents constraints—confirm exact thresholds on live page) | https://crates.io/policies | crates.io | living policy | 2026-08-19 | medium | policy |
+| Yank = exceptional (bad publish / SemVer break / unusable); **not** for secret wipe; for vulns, RustSec is usually less disruptive than yank; yanked versions stay downloadable but aren’t selected for new resolves; crates.io Security tab surfaces RustSec advisories | https://doc.rust-lang.org/cargo/commands/cargo-yank.html ; https://rustsec.org/ ; https://blog.rust-lang.org/2026/01/21/crates-io-development-update/ | Cargo Book / RustSec / Rust Blog | yank: living; Security tab: 2026-01-21 | 2026-08-19 | high | ops |
+| Post-publish burden (6–12 mo, maintainer reality): immutable versions → SemVer/version churn; MSRV/`rust-version` bumps force coordinated republish; dep advisories via RustSec + `cargo audit` (downstream + your deps); owner/token hygiene or migrate to trustpub-only; docs.rs failures need rebuild or fix+republish; yank only when needed; README alerts (`[!NOTE]`/`[!WARNING]`) render on crates.io (useful for maturity caveats) | synthesis of Cargo publishing + yank + RustSec + Jul 2025 / Jan 2026 blogs | multiple (see above) | 2025–2026 | 2026-08-19 | medium | ops |
+| Honest “deferred features” without false completeness: ship `0.x` if API unstable; crate-level docs + README status/limitations; Cargo features for optional unfinished surface; changelog “Unreleased”/roadmap separate from released notes; break callouts per C-RELNOTES; use crates.io README alerts for caveats; don’t oversell `categories`/description; avoid docs that imply shipped APIs for stubbed paths (`doc(hidden)` / don’t document vapor) | https://rust-lang.github.io/api-guidelines/documentation.html ; https://blog.rust-lang.org/2025/07/11/crates-io-development-update-2025-07/ | API Guidelines / crates.io README alerts | living / 2025-07-11 | 2026-08-19 | medium | pattern |
+
+**Concrete pre-publish checklist (maintainer pattern, distilled):**
+1. Name availability + intentional CLI/crate split (`rhdl-rs` vs reserved names).
+2. `Cargo.toml`: description, license, repository, readme, keywords (≤5), categories (from crates.io list), authors, `rust-version` if you commit MSRV.
+3. `cargo package --list` / size check; `cargo publish --dry-run` (or `cargo package`).
+4. Local `cargo test` / `cargo doc`; verify `[package.metadata.docs.rs]` if non-default features/targets matter.
+5. Owners plan (`cargo owner` users/teams); prefer short-lived auth after first manual publish → Trusted Publishing (+ optional trustpub-only).
+6. Changelog + annotated git tag; README honesty (status, non-goals, deferred).
+
+## Leads
+
+- Wire release CI to tag-push + Trusted Publishing; enable **Trusted Publishing Only** after first successful OIDC publish.
+- Monitor crates.io **Security** tab + run `cargo audit` in CI; prefer RustSec advisory process over yank for vulns.
+- Use README `[!WARNING]` / status section + `0.x` SemVer to mark maturity debt without implying feature-complete.
+- Track crates.io delete/squatting thresholds and any 2026+ cooldown/`pubtime` Cargo behavior if dependency freshness policy matters.
+
+## Gaps
+
+- Full live text of https://crates.io/policies and https://crates.io/docs/trusted-publishing could not be re-fetched here (HTTP 403 / prior timeout); policy bullets above rely on search snippets + official Rust blogs—**re-read policies page before legal/compliance decisions**.
+- No single official “6–12 month ops” guide; post-publish burden is inferred from Cargo permanence/yank + RustSec + trustpub maintenance.
+- Ecosystem naming-conflict remediation beyond FCFS + owner contact is intentionally limited; no crates.io mediation path without owner consent.
+- “Deferred features” honesty is community pattern (API Guidelines / SemVer / README), not a crates.io rule.

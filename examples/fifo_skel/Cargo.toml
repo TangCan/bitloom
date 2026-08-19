@@ -1,0 +1,16 @@
+[package]
+name = "fifo_skel"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+rhdl-prelude = { workspace = true }
+
+[dev-dependencies]
+rhdl-hir = { workspace = true }
+rhdl-sim = { workspace = true }
+rhdl-vlog = { workspace = true }
+

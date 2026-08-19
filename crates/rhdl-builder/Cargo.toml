@@ -1,0 +1,11 @@
+[package]
+name = "rhdl-builder"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+description = "Runtime elaboration session over RHDL HIR"
+
+[dependencies]
+rhdl-hir = { workspace = true }

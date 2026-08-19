@@ -1,0 +1,10 @@
+[package]
+name = "rhdl-float"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Synthesizable float helpers with documented rounding (FR36)"
+publish = false
+
+[dependencies]

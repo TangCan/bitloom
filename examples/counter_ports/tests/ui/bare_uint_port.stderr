@@ -1,0 +1,15 @@
+error[E0277]: the trait bound `rhdl_prelude::UInt<8>: PortField` is not satisfied
+ --> tests/ui/bare_uint_port.rs:4:1
+  |
+4 | #[module]
+  | ^^^^^^^^^ the trait `PortField` is not implemented for `rhdl_prelude::UInt<8>`
+  |
+help: the following other types implement trait `PortField`
+ --> $WORKSPACE/crates/rhdl-prelude/src/lib.rs
+  |
+  | impl<T: AsGround> PortField for Input<T> {
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `rhdl_prelude::Input<T>`
+...
+  | impl<T: AsGround> PortField for Output<T> {
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `rhdl_prelude::Output<T>`
+  = note: this error originates in the attribute macro `module` (in Nightly builds, run with -Z macro-backtrace for more info)

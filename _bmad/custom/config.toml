@@ -1,0 +1,14 @@
+# Team BMAD overrides (installer never regenerates this file).
+#
+# rhdl is a BMM software project that also has GDS skills installed.
+# Both modules historically pointed `implementation_artifacts` at the same
+# directory, which made `render_skill.py` report "ambiguous config value".
+# `_bmad/scripts/render_skill.py` now accepts identical multi-module values.
+# Keep these paths aligned with `_bmad/config.toml` unless you intentionally
+# split game vs software artifact trees (different values still error).
+
+[modules.bmm]
+implementation_artifacts = "{project-root}/_agile-output/implementation-artifacts"
+
+[modules.gds]
+implementation_artifacts = "{project-root}/_agile-output/implementation-artifacts"

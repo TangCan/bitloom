@@ -1,0 +1,5 @@
+error: hardware processes must use #[combinational] or #[sequential]; bare #[process] is forbidden
+ --> tests/ui/unmarked_process.rs:4:4
+  |
+4 | fn unmarked_hw() {}
+  |    ^^^^^^^^^^^

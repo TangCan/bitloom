@@ -1,0 +1,13 @@
+[package]
+name = "counter_ports"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+rhdl-prelude = { workspace = true }
+
+[dev-dependencies]
+trybuild = "1"

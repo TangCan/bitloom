@@ -1,0 +1,264 @@
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created, ready for development
+#   - in-progress: Developer actively working on implementation
+#   - review: Implementation complete, ready for review
+#   - done: Story completed
+
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+
+# Action Item Status:
+#   - open: Committed during a retrospective, not yet addressed
+#   - in-progress: Actively being worked on
+#   - done: Completed
+
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when its first story starts (via build's sprint sync)
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates the next story after the previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+# - Retrospective appends its action items to action_items; the status view surfaces open ones
+generated: 08-18-2026 18:28
+last_updated: 08-19-2026 17:40
+project: rhdl
+project_key: NOKEY
+tracking_system: file-system
+story_location: 
+  /home/richard/richard/2026/2026/rhdl/_agile-output/implementation-artifacts
+development_status:
+  epic-1: done
+  1-1-声明带方向端口的模块并-elaborate: done
+  1-2-强制-comb-seq-拦住隐式-latch: done
+  1-3-显式时钟复位与严格同位宽: done
+  1-4-freeze-拦住多驱动与不可综合构造: done
+  1-5-从-frozenhir-发出-yosys-友好-verilog: done
+  1-6-rhdl-top-与本机-cargo-rhdl-build: done
+  epic-1-retrospective: done
+
+  epic-2: done
+  2-1-const-泛型多宽度实例化: done
+  2-2-层次实例化与端口连接: done
+  2-3-连接完整性-宽-向与未驱动: done
+  epic-2-retrospective: done
+
+  epic-3: done
+  3-1-cargo-test-里-elaborate-再-tick: done
+  3-2-从-tick-路径-dump-vcd: done
+  3-3-手写功能模型与-portvalues-对照: done
+  epic-3-retrospective: done
+
+  epic-4: done
+  4-1-从-frozenhir-导出-firrtl-6-文本: done
+  4-2-导入-firrtl-并完成可逆子集往返: done
+  epic-4-retrospective: done
+
+  epic-5: done
+  5-1-公开-readme-免责与发布名: done
+  5-2-cli-钉死下载并校验-firtool: done
+  5-3-文档化-hir-源码仅为调试: done
+  epic-5-retrospective: done
+
+  epic-6: done
+  6-1-分支与同位宽运算表面: done
+  6-2-同步-reg-复位语义: done
+  6-3-计数器与-fifo-形黄金-fixture: done
+  epic-6-retrospective: done
+
+  epic-7: done
+  7-1-chirrtl-友好名-mem-syncreadmem: done
+  7-2-phantom-域与语言级-cdc: done
+  7-3-异步复位: done
+  7-4-时钟门控与使能: done
+  epic-7-retrospective: done
+
+  epic-8: done
+  8-1-手写-bridge-abstraction-mixed-both: done
+  8-2-双视图形式等价: done
+  8-3-可选-fst-波形: done
+  8-4-解释器与编译-tick-引擎: done
+  8-5-c-abi-cdylib-仿真: done
+  8-6-仿真覆盖率: done
+  epic-8-retrospective: done
+
+  epic-9: done
+  9-1-firrtl-chisel-尽力生成器: done
+  9-2-可选-hls-外挂: done
+  9-3-formal-sva-导出: done
+  epic-9-retrospective: done
+
+  epic-10: done
+  10-1-顶层-analog-inout-三态: done
+  10-2-可综合浮点-rhdl-float: done
+  10-3-ip-产品箱与黑盒封装: done
+  10-4-hir-可视化-lsp-与-html-文档: done
+  10-5-额外-cli-动词: done
+  10-6-多平台-firtool-资产: done
+  10-7-msrv-钉为-1-97-1: done
+  epic-10-retrospective: done
+
+  epic-11: done
+  11-1-修订-ad-2-发布身份为-bitloom: done
+  11-2-对外包名与-cli-品牌改为-bitloom: done
+  11-3-readme-与公开文档-bitloom-身份: done
+  epic-11-retrospective: done
+
+  epic-12: done
+  12-1-发布成熟度合同: done
+  12-2-首次手动发布-bitloom: done
+  12-3-trusted-publishing-与后续自动化: done
+  epic-12-retrospective: done
+action_items:
+  - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
+    epic: 1
+    action: "补全 rhdl-vlog 表达式降级并增加真实数据通路黄金 .v/快照"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-1-retro-2026-08-18.md"
+  - id: "epic-1-retro-item-2-接通-cargo-rhdl-build-到设计-crate-rhdl-top-h"
+    epic: 1
+    action: "接通 cargo rhdl build 到设计 crate / #[rhdl::top] host（替换 DemoTop）"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-1-retro-2026-08-18.md"
+  - id: "epic-1-retro-item-3-消除-bmm-gds-implementation_artifacts-路径歧义"
+    epic: 1
+    action: "消除 bmm/gds implementation_artifacts 路径歧义"
+    owner: "Richard"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-1-retro-2026-08-18.md"
+  - id: "epic-2-retro-item-4-恢复一-story-一提交纪律-含-loop-自动化"
+    epic: 2
+    action: "恢复一 story 一提交纪律（含 loop 自动化）"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-2-retro-2026-08-18.md"
+  - id: "epic-2-retro-item-5-实例连接-父网类型不可解析时发出诊断"
+    epic: 2
+    action: "实例连接：父网类型不可解析时发出诊断"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-2-retro-2026-08-18.md"
+  - id: "epic-2-retro-item-6-增加仅依赖-rhdl-prelude-的-const-w-设计示例"
+    epic: 2
+    action: "增加仅依赖 rhdl-prelude 的 const W 设计示例"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-2-retro-2026-08-18.md"
+  - id: "epic-3-retro-item-7-将-tick-改为基于-frozenhir-的通用周期步进"
+    epic: 3
+    action: "将 tick 改为基于 FrozenHir 的通用周期步进"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-3-retro-2026-08-18.md"
+  - id: "epic-3-retro-item-8-为非计数器模块增加至少一条-tick-黄金测试"
+    epic: 3
+    action: "为非计数器模块增加至少一条 tick 黄金测试"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-3-retro-2026-08-18.md"
+  - id: "epic-4-retro-item-9-加深-firrtl-可逆子集往返断言-层次-实例-reg-运算"
+    epic: 4
+    action: "加深 FIRRTL 可逆子集往返断言（层次/实例/reg/运算）"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-4-retro-2026-08-18.md"
+  - id: "epic-4-retro-item-10-可选-对导出-fir-跑-pinned-firtool-1-155-0-smok"
+    epic: 4
+    action: "可选：对导出 .fir 跑 pinned firtool-1.155.0 smoke"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-4-retro-2026-08-18.md"
+  - id: "epic-5-retro-item-11-恢复一-story-一提交纪律于后续-epic-合入"
+    epic: 5
+    action: "恢复一 story 一提交纪律于后续 epic 合入"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-5-retro-2026-08-19.md"
+  - id: "epic-6-retro-item-12-为-fifo_skel-补至少一条-elaborate-tick-黄金向量并-c"
+    epic: 6
+    action: "为 fifo_skel 补至少一条 elaborate→tick 黄金向量并 cargo rhdl build smoke"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-6-retro-2026-08-19.md"
+  - id: "epic-6-retro-item-13-后续-epic-避免整-epic-单提交"
+    epic: 6
+    action: "后续 epic 避免整 epic 单提交"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-6-retro-2026-08-19.md"
+  - id: "epic-7-retro-item-14-增加-syncreadmem-读延迟-1-的-tick-黄金测试"
+    epic: 7
+    action: "增加 SyncReadMem 读延迟=1 的 tick 黄金测试"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-7-retro-2026-08-19.md"
+  - id: "epic-7-retro-item-15-将-async-reset-emit-改为边沿敏感复位形并补-tick-置位-释"
+    epic: 7
+    action: "将 async reset emit 改为边沿敏感复位形并补 tick 置位/释放黄金"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-7-retro-2026-08-19.md"
+  - id: "epic-7-retro-item-16-增加-enable-恒-1-与无门控对照的-tick-emit-测试"
+    epic: 7
+    action: "增加 enable 恒 1 与无门控对照的 tick/emit 测试"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-7-retro-2026-08-19.md"
+  - id: "epic-9-retro-item-17-为-emit_chisel-增加生成文本黄金与结构化失败断言"
+    epic: 9
+    action: "为 emit_chisel 增加生成文本黄金与结构化失败断言"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-9-retro-2026-08-19.md"
+  - id: "epic-9-retro-item-18-为-cargo-rhdl-hls-增加找不到-bambu-时的-cli-smok"
+    epic: 9
+    action: "为 cargo rhdl hls 增加找不到 bambu 时的 CLI smoke"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-9-retro-2026-08-19.md"
+  - id: "epic-10-retro-item-19-补齐-fr38-层次图与最小-lsp-或下调-ac"
+    epic: 10
+    action: "补齐 FR38 层次图与最小 LSP 或下调 AC"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-10-retro-2026-08-19.md"
+  - id: "epic-10-retro-item-20-对齐-story-10-5-cli-动词与-epics-prd"
+    epic: 10
+    action: "对齐 Story 10.5 CLI 动词与 epics/PRD"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-10-retro-2026-08-19.md"
+  - id: "epic-10-retro-item-21-rustc-1-98-0-发布后执行-nfr13-升级清单"
+    epic: 10
+    action: "rustc≥1.98.0 发布后执行 NFR13 升级清单"
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-10-retro-2026-08-19.md"
+  - id: "epic-11-retro-item-22-为-bitloom-补齐-repository-及可选-homepage-doc"
+    epic: 11
+    action: "为 bitloom 补齐 repository（及可选 homepage/documentation）并在下一 patch 发布"
+    owner: "Dev / Richard"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-11-retro-2026-08-19.md"
+  - id: "epic-12-retro-item-23-启用-crates-io-trusted-publishing-oidc-并接通"
+    epic: 12
+    action: "启用 crates.io Trusted Publishing（OIDC）并接通 release-plz"
+    owner: "Dev / Richard"
+    status: in-progress
+    ref: "_agile-output/implementation-artifacts/epic-12-retro-2026-08-19.md"
+  - id: "epic-12-retro-item-24-为-bitloom-写入-repository-可选-homepage-并发-0"
+    epic: 12
+    action: "为 bitloom 写入 repository（+ 可选 homepage）并发 0.1.1 元数据补丁"
+    owner: "Dev / Richard"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-12-retro-2026-08-19.md"

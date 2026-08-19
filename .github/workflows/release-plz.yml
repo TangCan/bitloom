@@ -1,0 +1,56 @@
+# release-plz — Bitloom subsequent publishes
+#
+# Prerequisites (human):
+# 1. Push this repo to https://github.com/TangCan/bitloom
+# 2. crates.io → bitloom → Trusted Publishing → GitHub Actions:
+#    owner/repo = TangCan/bitloom
+#    workflow filename = release-plz.yml
+# 3. Then set `RELEASE_PLZ_LIVE=true` below (or uncomment the live job) and
+#    enable `on.push` to master/main if desired.
+#
+# Until Trusted Publishing is configured, this workflow only runs a readiness check.
+
+name: release-plz
+
+on:
+  workflow_dispatch:
+  # Uncomment after Trusted Publishing is linked:
+  # push:
+  #   branches: [master, main]
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Publish contract present
+        run: |
+          test -f docs/crates-io-publish-bitloom.md
+          test -f docs/semver-0x-policy.md
+          grep -q 'repository = "https://github.com/TangCan/bitloom"' crates/bitloom/Cargo.toml
+          echo "Ready for Trusted Publishing → TangCan/bitloom + this workflow file."
+
+  # Live job — enable after crates.io Trusted Publishing points at this workflow.
+  # release-plz-release:
+  #   needs: readiness
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: dtolnay/rust-toolchain@master
+  #       with:
+  #         toolchain: "1.97.1"
+  #     - uses: MarcoIeni/release-plz-action@v0.5
+  #       with:
+  #         command: release
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         # With Trusted Publishing, omit CARGO_REGISTRY_TOKEN — OIDC issues a short-lived token.

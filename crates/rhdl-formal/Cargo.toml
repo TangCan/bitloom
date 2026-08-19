@@ -1,0 +1,14 @@
+[package]
+name = "rhdl-formal"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Formal / SVA export (FR39)"
+publish = false
+
+[dependencies]
+rhdl-hir = { workspace = true }
+
+[dev-dependencies]
+rhdl-builder = { workspace = true }

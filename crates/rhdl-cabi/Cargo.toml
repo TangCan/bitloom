@@ -1,0 +1,16 @@
+[package]
+name = "rhdl-cabi"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "C ABI cdylib for tick + handwritten abstraction (FR33)"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+rhdl-builder = { workspace = true }
+rhdl-hir = { workspace = true }
+rhdl-sim = { workspace = true }

@@ -1,0 +1,14 @@
+[package]
+name = "rhdl-firrtl"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+description = "FrozenHir ↔ FIRRTL 6.0.0 text"
+
+[dependencies]
+rhdl-hir = { workspace = true }
+
+[dev-dependencies]
+rhdl-builder = { workspace = true }

@@ -1,0 +1,8 @@
+[package]
+name = "rhdl-hls"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Optional Bambu HLS front-end (AD-25); no in-crate scheduling"
+publish = false
