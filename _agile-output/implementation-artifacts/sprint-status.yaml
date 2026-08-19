@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-19-2026 17:40
+last_updated: 08-19-2026 17:50
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -254,7 +254,7 @@ action_items:
     epic: 12
     action: "启用 crates.io Trusted Publishing（OIDC）并接通 release-plz"
     owner: "Dev / Richard"
-    status: in-progress
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-12-retro-2026-08-19.md"
   - id: "epic-12-retro-item-24-为-bitloom-写入-repository-可选-homepage-并发-0"
     epic: 12
