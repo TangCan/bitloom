@@ -147,7 +147,7 @@ development_status:
 
   epic-17: in-progress
   17-1-流水语言表面可行性闸门: done
-  17-2-取指策略钉死: backlog
+  17-2-取指策略钉死: done
   17-3-冻结用户态立即数与符号扩展: backlog
   17-4-五级流水-转发-分支-flush: backlog
   17-5-load-use-停顿-atdd-验证阶梯: backlog

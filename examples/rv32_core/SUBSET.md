@@ -1,4 +1,4 @@
-# Episode I ISA subset (Stories 15.2–15.3 + action follow-ups)
+# Episode I / II ISA subset (Stories 15.2–15.3 + Epic 17 fetch lock)
 
 Public brand: **Bitloom**. Unrelated to `samitbasu/rhdl`.
 
@@ -8,14 +8,36 @@ Public brand: **Bitloom**. Unrelated to `samitbasu/rhdl`.
 |-------|--------|
 | `ADDI` | I-imm zero-extended (tests use non-negative) |
 | `ADD` | R-type, funct3/funct7 = 0 |
-| `BEQ` | B-imm bit-field decode (positive offsets; sign-extend deferred) |
+| `BEQ` | B-imm bit-field decode (positive offsets; sign-extend deferred to 17.3) |
 | `LW` | Word load from DMEM[ea[3:0]] (async Mem) |
 | `SW` | Word store gated by `assign_mem_write_en(..., is_sw)`; ea=`0x100` → LED MMIO |
 
-Architectural regs: `x0`=0, `x1`–`x4`. Harness presents `instr` each cycle.
+Architectural regs: `x0`=0, `x1`–`x4`.
+
+## Fetch strategy (FR69 / Story 17.2) — LOCKED
+
+**Chosen: (b) harness `instr` port** — the design exposes a 32-bit input `instr`; the test/tutorial harness presents the instruction word each cycle. This continues Episode I and is the **sole** Episode II first-cut fetch contract through Stories 17.3–17.5.
+
+**Do not silently mix** with **(a)** on-chip `SyncReadMem` instruction memory in IF. A design must pick one semantic; dual paths without an explicit story/SUBSET change are a contract violation.
+
+### CPI / teaching implications (b)
+
+- IF does **not** model on-chip IMEM or SyncReadMem read latency=1; CPI teaching for fetch is “instr arrives from the harness,” not “PC indexes IMEM then data appears next cycle.”
+- Golden `tick` tests remain responsible for driving `instr` in lockstep with the PC / pipeline stage they intend to exercise (same pattern as Episode I).
+- Tutorials must state that instruction bytes come from the harness/`instr` port, not from an internal ROM, until a later story flips this section.
+
+### Deferred on-chip I-fetch (a) — when allowed
+
+On-chip SyncReadMem I-fetch (AD-21) is **deferred**, not rejected. Surface proof already exists in `examples/rv32_feasibility` (Story 15.1). Adopt (a) only via a dedicated later story that:
+
+1. Replaces or clearly supersedes this SUBSET section (still **one** strategy — no silent dual semantics).
+2. Documents IF ports / init (address from PC, SyncReadMem depth/width, reset/init contents, read-enable if any) for the pipeline package.
+3. Updates harness/tests so they no longer pretend `instr` is the architectural fetch path.
+
+Until then, 17.4–17.5 must obey **(b)**.
 
 ## Deferred (documented, not silent)
 
-- **SyncReadMem instruction fetch** — Episode II / later; Episode I keeps harness `instr` (tutorial Ch.1).
-- **B-imm sign-extend** — negative offsets not required by current goldens.
-- No CSR/ECALL/EBREAK/FENCE, no MMU/Linux/pipeline.
+- **SyncReadMem instruction fetch** — see Fetch strategy above; optional/later story after hazard lands.
+- **B-imm sign-extend** — negative offsets not required by current goldens (Story 17.3).
+- No CSR/ECALL/EBREAK/FENCE, no MMU/Linux; classic 5-stage pipeline is Epic 17.4+ (not this file’s “implemented” table until delivered).

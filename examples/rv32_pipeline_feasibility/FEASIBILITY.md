@@ -30,7 +30,7 @@
 |----|------|
 | Flush bubble（注入 NOP） | 与 hold 同属 `assign_mux`+常量；17.4 实现即可，本闸门不强制单独测例 |
 | 完整 IF/ID/EX/MEM/WB 命名与 hazard 单元 | **17.4 / 17.5** |
-| 取指 SyncReadMem vs harness | **17.2**（可引用 15.1 SyncReadMem PASS） |
+| 取指 SyncReadMem vs harness | **17.2 DONE → (b) harness `instr`**；片上 SyncReadMem I-fetch 延期（见 `examples/rv32_core/SUBSET.md`；15.1 仍为表面证明） |
 | ISA / B-imm 符号扩展 | **17.3**（仍单周期） |
 | CSR / trap | Epic 18；NFR32 |
 
