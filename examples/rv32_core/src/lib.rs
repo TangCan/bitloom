@@ -45,10 +45,13 @@ impl Elaboratable for EpisodeICore {
             ("c15", 32),
             ("c20", 32),
             ("c25", 32),
+            ("c11", 32),
+            ("c31", 32),
             ("mask7", 32),
             ("mask5", 32),
             ("mask3", 32),
             ("mask4", 32),
+            ("mask6", 32),
             ("mask12", 32),
             ("op_addi", 32),
             ("op_op", 32),
@@ -100,8 +103,19 @@ impl Elaboratable for EpisodeICore {
             "imm_off",
             "ea",
             "dmem_idx",
-            "wr_addr",
-            "wr_data",
+            "b_s31",
+            "imm_b12",
+            "imm_b12_s",
+            "imm_b11",
+            "imm_b11_s",
+            "imm_b10_5",
+            "imm_b10_5_s",
+            "sh8",
+            "imm_b4_1",
+            "imm_b4_1_s",
+            "imm_b_a",
+            "imm_b_b",
+            "imm_b",
             "imm_s_hi",
             "imm_s_lo",
             "imm_s_hi_s",
@@ -131,10 +145,13 @@ impl Elaboratable for EpisodeICore {
         s.assign_lit("c15", 15, Span::default());
         s.assign_lit("c20", 20, Span::default());
         s.assign_lit("c25", 25, Span::default());
+        s.assign_lit("c11", 11, Span::default());
+        s.assign_lit("c31", 31, Span::default());
         s.assign_lit("mask7", 0x7f, Span::default());
         s.assign_lit("mask5", 0x1f, Span::default());
         s.assign_lit("mask3", 0x7, Span::default());
         s.assign_lit("mask4", 0xf, Span::default());
+        s.assign_lit("mask6", 0x3f, Span::default());
         s.assign_lit("mask12", 0xfff, Span::default());
         s.assign_lit("op_addi", 0b0010011, Span::default());
         s.assign_lit("op_op", 0b0110011, Span::default());
@@ -224,11 +241,22 @@ impl Elaboratable for EpisodeICore {
         );
         s.assign_mux("next_led", "is_sw", "next_led_mmio", "led", Span::default());
 
-        s.assign_mux("wr_addr", "is_sw", "dmem_idx", "c15", Span::default());
-        s.assign_mux("wr_data", "is_sw", "rs2_data", "c0", Span::default());
-
         s.assign_add("pc_plus4", "pc", "c4", Span::default());
-        s.assign_add("branch_tgt", "pc", "c8", Span::default());
+        // B-type imm (positive offsets): {instr[31],instr[7],instr[30:25],instr[11:8],0}
+        s.assign_shr("b_s31", "instr", "c31", Span::default());
+        s.assign_and("imm_b12", "b_s31", "c1", Span::default());
+        s.assign_shl("imm_b12_s", "imm_b12", "c12", Span::default());
+        s.assign_and("imm_b11", "sh7", "c1", Span::default());
+        s.assign_shl("imm_b11_s", "imm_b11", "c11", Span::default());
+        s.assign_and("imm_b10_5", "sh25", "mask6", Span::default());
+        s.assign_shl("imm_b10_5_s", "imm_b10_5", "c5", Span::default());
+        s.assign_shr("sh8", "instr", "c8", Span::default());
+        s.assign_and("imm_b4_1", "sh8", "mask4", Span::default());
+        s.assign_shl("imm_b4_1_s", "imm_b4_1", "c1", Span::default());
+        s.assign_or("imm_b_a", "imm_b12_s", "imm_b11_s", Span::default());
+        s.assign_or("imm_b_b", "imm_b_a", "imm_b10_5_s", Span::default());
+        s.assign_or("imm_b", "imm_b_b", "imm_b4_1_s", Span::default());
+        s.assign_add("branch_tgt", "pc", "imm_b", Span::default());
         s.assign_eq("eq_rs", "rs1_data", "rs2_data", Span::default());
         s.assign_and("take_br", "is_beq", "eq_rs", Span::default());
         s.assign_mux(
@@ -254,7 +282,7 @@ impl Elaboratable for EpisodeICore {
         s.assign_reg_d_from("x3", "next_x3", Span::default());
         s.assign_reg_d_from("x4", "next_x4", Span::default());
         s.assign_reg_d_from("led", "next_led", Span::default());
-        s.assign_mem_write("dmem", "wr_addr", "wr_data", Span::default());
+        s.assign_mem_write_en("dmem", "dmem_idx", "rs2_data", "is_sw", Span::default());
         s.assign_reg_d_mem_read("load_q", "dmem", "dmem_idx", Span::default());
         s.end_process();
 

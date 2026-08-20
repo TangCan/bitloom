@@ -53,7 +53,26 @@ cargo run -p bitloom -- build --package counter_ports --out-dir /tmp/bitloom-out
 cargo add bitloom-sim --dev
 ```
 
-在 `cargo test` 里 `use bitloom_sim::Sim;` 对 `FrozenHir` 做周期步进。勿把 sim 放进 `[dependencies]`。
+```rust
+#[cfg(test)]
+mod sim {
+    use bitloom_hir::PortValues;
+    use bitloom_prelude::Elaboratable;
+    use bitloom_sim::Sim;
+    use super::MyTop; // your Elaboratable type
+
+    #[test]
+    fn tick_once() {
+        let mut sim = Sim::new(MyTop::elaborate().unwrap());
+        let mut pv = PortValues::default();
+        pv.set("rst", 0);
+        sim.set_inputs(pv);
+        sim.tick();
+    }
+}
+```
+
+勿把 sim 放进 `[dependencies]`。
 
 ## 文档在哪
 

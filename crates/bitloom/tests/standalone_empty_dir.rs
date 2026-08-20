@@ -1,4 +1,7 @@
 //! ATDD Story 13.5: empty-dir install→new→build→.v without cloning the monorepo.
+//!
+//! Wall-clock: keep under CI `timeout-minutes: 25` (Epic 13 retro action). Prefer
+//! absolute `--out-dir` and avoid extra registry round-trips when possible.
 
 use std::fs;
 use std::path::PathBuf;
@@ -55,7 +58,7 @@ fn empty_dir_new_then_build_emits_verilog() {
     )
     .expect("host Cargo.toml");
     assert!(
-        !host_toml.contains("crates/rhdl-vlog"),
+        !host_toml.contains("crates/rhdl-vlog") && !host_toml.contains("crates/bitloom-vlog"),
         "standalone host must not path-depend monorepo:\n{host_toml}"
     );
     assert!(

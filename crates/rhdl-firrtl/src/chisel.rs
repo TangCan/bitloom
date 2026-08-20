@@ -158,9 +158,13 @@ fn emit_module(m: &Module) -> String {
                                 emit_expr(m, &a.expr)
                             ));
                         }
-                        (AssignTarget::MemWrite { mem, addr }, ProcessKind::Sequential) => {
+                        (AssignTarget::MemWrite { mem, addr, we }, ProcessKind::Sequential) => {
+                            let gate = we
+                                .as_ref()
+                                .map(|e| format!(" if {}", ref_name(m, e)))
+                                .unwrap_or_default();
                             body.push_str(&format!(
-                                "  // mem write {mem}({}) := {}\n",
+                                "  // mem write{gate} {mem}({}) := {}\n",
                                 ref_name(m, addr),
                                 emit_expr(m, &a.expr)
                             ));

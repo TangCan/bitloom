@@ -401,9 +401,14 @@ impl Sim {
                                 }
                             }
                         }
-                        AssignTarget::MemWrite { mem, addr } => {
+                        AssignTarget::MemWrite { mem, addr, we } => {
                             if reset {
                                 continue;
+                            }
+                            if let Some(en) = we {
+                                if self.lookup(en) == 0 {
+                                    continue;
+                                }
                             }
                             let a_idx = self.lookup(addr) as usize;
                             let data = self.eval(&a.expr);

@@ -31,3 +31,21 @@ cargo run -p bitloom -- build --package rv32_core --manifest-dir . --out-dir /tm
 ## 仿真合同
 
 周期精确仿真在 `cargo test` 里：`bitloom_sim::Sim` + `tick`（`bitloom-sim` 仅 `[dev-dependencies]`）。
+
+```bash
+cargo add bitloom-sim --dev
+```
+
+```rust
+use bitloom_hir::PortValues;
+use bitloom_prelude::Elaboratable;
+use bitloom_sim::Sim;
+
+let mut sim = Sim::new(MyTop::elaborate().unwrap());
+let mut pv = PortValues::default();
+pv.set("rst", 0);
+sim.set_inputs(pv);
+sim.tick();
+```
+
+完整示例见仓库根 README「可选：独立仿真」。

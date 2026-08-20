@@ -5,7 +5,7 @@ error[E0277]: the trait bound `bitloom_prelude::UInt<8>: PortField` is not satis
   | ^^^^^^^^^ the trait `PortField` is not implemented for `bitloom_prelude::UInt<8>`
   |
 help: the following other types implement trait `PortField`
- --> $WORKSPACE/crates/rhdl-prelude/src/lib.rs
+ --> $WORKSPACE/crates/bitloom-prelude/src/lib.rs
   |
   | impl<T: AsGround> PortField for Input<T> {
   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `bitloom_prelude::Input<T>`

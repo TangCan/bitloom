@@ -211,11 +211,14 @@ fn emit_module(m: &bitloom_hir::Module) -> String {
                             out.push_str("    end\n");
                         }
                         for a in &mem_writes {
-                            if let AssignTarget::MemWrite { mem, addr } = &a.target {
-                                out.push_str(&format!(
-                                    "    {mem}[{addr}] <= {};\n",
-                                    emit_expr(&a.expr)
-                                ));
+                            if let AssignTarget::MemWrite { mem, addr, we } = &a.target {
+                                let rhs = emit_expr(&a.expr);
+                                match we {
+                                    Some(en) => out.push_str(&format!(
+                                        "    if ({en}) {mem}[{addr}] <= {rhs};\n"
+                                    )),
+                                    None => out.push_str(&format!("    {mem}[{addr}] <= {rhs};\n")),
+                                }
                             }
                         }
                         out.push_str("  end\n");

@@ -9,7 +9,7 @@ fn bitloom_sim_package_publishable_name() {
         .join("../..")
         .canonicalize()
         .expect("workspace");
-    let toml = fs::read_to_string(root.join("crates/rhdl-sim/Cargo.toml")).expect("sim toml");
+    let toml = fs::read_to_string(root.join("crates/bitloom-sim/Cargo.toml")).expect("sim toml");
     assert!(
         toml.contains("name = \"bitloom-sim\""),
         "publish name must be bitloom-sim:\n{toml}"

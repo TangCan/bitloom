@@ -936,7 +936,7 @@ impl ElaborateSession {
         self.assign_reg_d_expr(name, Some(from.into()), span);
     }
 
-    /// Sequential SyncReadMem / Mem write: `mem[addr] <= data`.
+    /// Sequential SyncReadMem / Mem write: `mem[addr] <= data` (always enabled).
     pub fn assign_mem_write(
         &mut self,
         mem: impl Into<String>,
@@ -944,14 +944,34 @@ impl ElaborateSession {
         data: impl Into<String>,
         span: Span,
     ) {
-        let mem = mem.into();
-        let addr = addr.into();
-        let data = data.into();
+        self.assign_mem_write_inner(mem.into(), addr.into(), data.into(), None, span);
+    }
+
+    /// Sequential mem write gated by `we` (`we != 0`).
+    pub fn assign_mem_write_en(
+        &mut self,
+        mem: impl Into<String>,
+        addr: impl Into<String>,
+        data: impl Into<String>,
+        we: impl Into<String>,
+        span: Span,
+    ) {
+        self.assign_mem_write_inner(mem.into(), addr.into(), data.into(), Some(we.into()), span);
+    }
+
+    fn assign_mem_write_inner(
+        &mut self,
+        mem: String,
+        addr: String,
+        data: String,
+        we: Option<String>,
+        span: Span,
+    ) {
         match &self.process {
             Some(ProcessState::Sequential { .. }) => {
                 if let Some(ProcessState::Sequential { assigns, .. }) = self.process.as_mut() {
                     assigns.push(Assign {
-                        target: AssignTarget::MemWrite { mem, addr },
+                        target: AssignTarget::MemWrite { mem, addr, we },
                         expr: AssignExpr::Ref(data),
                         span,
                     });

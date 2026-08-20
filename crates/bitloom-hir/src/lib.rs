@@ -102,7 +102,12 @@ pub enum AssignTarget {
     /// Sequential next-state: `Reg.d`.
     RegD(String),
     /// Sequential memory write: `mem[addr] <= data` (addr is a net/reg name).
-    MemWrite { mem: String, addr: String },
+    /// When `we` is `Some`, write only if that signal is non-zero.
+    MemWrite {
+        mem: String,
+        addr: String,
+        we: Option<String>,
+    },
 }
 
 /// RHS of an assignment (phase-1 subset for emit + tick).
@@ -439,7 +444,10 @@ fn validate_unique_drivers(m: &Module, diags: &mut Diagnostics) {
                 let key = match &a.target {
                     AssignTarget::Net(n) => n.clone(),
                     AssignTarget::RegD(n) => format!("{n}.d"),
-                    AssignTarget::MemWrite { mem, addr } => format!("{mem}[{addr}]"),
+                    AssignTarget::MemWrite { mem, addr, we } => match we {
+                        Some(en) => format!("{mem}[{addr}] (we={en})"),
+                        None => format!("{mem}[{addr}]"),
+                    },
                 };
                 if seen_in_process.insert(key.clone()) {
                     drivers.entry(key).or_default().push(a.span);

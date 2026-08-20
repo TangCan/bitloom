@@ -1,12 +1,12 @@
 [workspace]
 resolver = "2"
 members = [
-  "crates/rhdl-hir",
-  "crates/rhdl-builder",
-  "crates/rhdl-macro",
-  "crates/rhdl-prelude",
-  "crates/rhdl-vlog",
-  "crates/rhdl-sim",
+  "crates/bitloom-hir",
+  "crates/bitloom-builder",
+  "crates/bitloom-macro",
+  "crates/bitloom-prelude",
+  "crates/bitloom-vlog",
+  "crates/bitloom-sim",
   "crates/rhdl-firrtl",
   "crates/bitloom",
   "crates/rhdl-cabi",
@@ -23,12 +23,12 @@ members = [
   "examples/rv32_core",
 ]
 default-members = [
-  "crates/rhdl-hir",
-  "crates/rhdl-builder",
-  "crates/rhdl-macro",
-  "crates/rhdl-prelude",
-  "crates/rhdl-vlog",
-  "crates/rhdl-sim",
+  "crates/bitloom-hir",
+  "crates/bitloom-builder",
+  "crates/bitloom-macro",
+  "crates/bitloom-prelude",
+  "crates/bitloom-vlog",
+  "crates/bitloom-sim",
   "crates/rhdl-firrtl",
 ]
 
@@ -39,12 +39,12 @@ license = "MIT OR Apache-2.0"
 version = "0.1.2"
 
 [workspace.dependencies]
-bitloom-hir = { path = "crates/rhdl-hir", version = "0.1.2" }
-bitloom-builder = { path = "crates/rhdl-builder", version = "0.1.2" }
-bitloom-macro = { path = "crates/rhdl-macro", version = "0.1.2" }
-bitloom-prelude = { path = "crates/rhdl-prelude", version = "0.1.2" }
-bitloom-vlog = { path = "crates/rhdl-vlog", version = "0.1.2" }
-bitloom-sim = { path = "crates/rhdl-sim", version = "0.1.2" }
+bitloom-hir = { path = "crates/bitloom-hir", version = "0.1.2" }
+bitloom-builder = { path = "crates/bitloom-builder", version = "0.1.2" }
+bitloom-macro = { path = "crates/bitloom-macro", version = "0.1.2" }
+bitloom-prelude = { path = "crates/bitloom-prelude", version = "0.1.2" }
+bitloom-vlog = { path = "crates/bitloom-vlog", version = "0.1.2" }
+bitloom-sim = { path = "crates/bitloom-sim", version = "0.1.2" }
 rhdl-cabi = { path = "crates/rhdl-cabi" }
 rhdl-hls = { path = "crates/rhdl-hls" }
 rhdl-formal = { path = "crates/rhdl-formal" }

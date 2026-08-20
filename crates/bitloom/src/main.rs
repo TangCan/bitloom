@@ -127,15 +127,15 @@ fn resolve_package_dir(manifest_dir: &Path, package: &str) -> Result<PathBuf, St
 
 fn use_dev_path_backends(workspace: &Path) -> bool {
     // Monorepo checkout: path backends avoid duplicate bitloom-hir (path design + registry vlog).
-    // True standalone (no crates/rhdl-vlog): use crates.io versions matching this CLI.
+    // True standalone (no crates/bitloom-vlog): use crates.io versions matching this CLI.
     // Override: BITLOOM_FORCE_REGISTRY=1 always uses crates.io; BITLOOM_DEV_PATH=1 forces path.
     if std::env::var_os("BITLOOM_FORCE_REGISTRY").is_some() {
         return false;
     }
     if std::env::var_os("BITLOOM_DEV_PATH").is_some() {
-        return workspace.join("crates/rhdl-vlog/Cargo.toml").is_file();
+        return workspace.join("crates/bitloom-vlog/Cargo.toml").is_file();
     }
-    workspace.join("crates/rhdl-vlog/Cargo.toml").is_file()
+    workspace.join("crates/bitloom-vlog/Cargo.toml").is_file()
 }
 
 fn build_host_cargo(workspace: &Path, package: &str, pkg_path: &Path) -> String {
@@ -145,8 +145,8 @@ fn build_host_cargo(workspace: &Path, package: &str, pkg_path: &Path) -> String 
             r#"bitloom-vlog = {{ path = "{vlog}" }}
 bitloom-hir = {{ path = "{hir}" }}
 "#,
-            vlog = workspace.join("crates/rhdl-vlog").display(),
-            hir = workspace.join("crates/rhdl-hir").display(),
+            vlog = workspace.join("crates/bitloom-vlog").display(),
+            hir = workspace.join("crates/bitloom-hir").display(),
         )
     } else {
         format!(
@@ -381,7 +381,7 @@ mod tests {
             "expected version-pinned bitloom-vlog, got:\n{toml}"
         );
         assert!(
-            !toml.contains("crates/rhdl-vlog"),
+            !toml.contains("crates/rhdl-vlog") && !toml.contains("crates/bitloom-vlog"),
             "must not path-depend monorepo vlog outside monorepo"
         );
     }

@@ -109,9 +109,10 @@ fn emit_module(m: &Module) -> String {
                         (AssignTarget::RegD(n), ProcessKind::Sequential) => {
                             out.push_str(&format!("    {n} <= {}\n", emit_expr(&a.expr)));
                         }
-                        (AssignTarget::MemWrite { mem, addr }, ProcessKind::Sequential) => {
+                        (AssignTarget::MemWrite { mem, addr, we }, ProcessKind::Sequential) => {
+                            let gate = we.as_ref().map(|e| format!(" if {e}")).unwrap_or_default();
                             out.push_str(&format!(
-                                "    ; mem write {mem}[{addr}] <= {}\n",
+                                "    ; mem write{gate} {mem}[{addr}] <= {}\n",
                                 emit_expr(&a.expr)
                             ));
                         }
