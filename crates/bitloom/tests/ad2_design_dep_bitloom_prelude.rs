@@ -11,7 +11,7 @@ fn workspace_root() -> PathBuf {
 }
 
 #[test]
-fn ad2_and_ad6_require_bitloom_prelude_not_bitloom_prelude() {
+fn ad2_and_ad6_require_bitloom_prelude_not_rhdl_prelude() {
     let spine = workspace_root().join(
         "_agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md",
     );

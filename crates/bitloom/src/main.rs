@@ -5,9 +5,12 @@ mod hls;
 
 use std::fs;
 use std::path::{Path, PathBuf};
-use std::process::Command;
+use std::process::{Command, Stdio};
 
 use clap::{Parser, Subcommand};
+use serde::Deserialize;
+
+const BITLOOM_BACKEND_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[derive(Parser)]
 #[command(
@@ -56,40 +59,111 @@ enum FirtoolCmd {
     Info,
 }
 
-fn package_path(workspace: &Path, package: &str) -> PathBuf {
-    let candidates = [
-        workspace.join("examples").join(package),
-        workspace.join("crates").join(package),
-        workspace.join(package),
-    ];
-    candidates
-        .into_iter()
-        .find(|p| p.join("Cargo.toml").exists())
-        .unwrap_or_else(|| workspace.join("examples").join(package))
+#[derive(Debug, Deserialize)]
+struct Metadata {
+    packages: Vec<MetaPackage>,
 }
 
-fn build_host_cargo(workspace: &Path, package: &str) -> String {
-    let pkg_path = package_path(workspace, package);
+#[derive(Debug, Deserialize)]
+struct MetaPackage {
+    name: String,
+    manifest_path: String,
+}
+
+/// Resolve package directory via `cargo metadata` (FR51).
+fn resolve_package_dir(manifest_dir: &Path, package: &str) -> Result<PathBuf, String> {
+    let manifest = if manifest_dir.join("Cargo.toml").is_file() {
+        manifest_dir.join("Cargo.toml")
+    } else {
+        return Err(format!(
+            "no Cargo.toml under {} — pass --manifest-dir to a Cargo workspace/package root",
+            manifest_dir.display()
+        ));
+    };
+    let output = Command::new("cargo")
+        .arg("metadata")
+        .arg("--no-deps")
+        .arg("--format-version")
+        .arg("1")
+        .arg("--manifest-path")
+        .arg(&manifest)
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .output()
+        .map_err(|e| format!("spawn cargo metadata: {e}"))?;
+    if !output.status.success() {
+        return Err(format!(
+            "cargo metadata failed: {}",
+            String::from_utf8_lossy(&output.stderr)
+        ));
+    }
+    let meta: Metadata =
+        serde_json::from_slice(&output.stdout).map_err(|e| format!("parse cargo metadata: {e}"))?;
+    let pkg = meta
+        .packages
+        .into_iter()
+        .find(|p| p.name == package)
+        .ok_or_else(|| {
+            format!(
+                "package `{package}` not found in cargo metadata for {} \
+                 (use a package name from that workspace, not only examples/<name>)",
+                manifest.display()
+            )
+        })?;
+    let manifest_path = PathBuf::from(pkg.manifest_path);
+    Ok(manifest_path
+        .parent()
+        .ok_or_else(|| "package manifest has no parent".to_string())?
+        .to_path_buf())
+}
+
+fn use_dev_path_backends(workspace: &Path) -> bool {
+    // Monorepo checkout: path backends avoid duplicate bitloom-hir (path design + registry vlog).
+    // True standalone (no crates/rhdl-vlog): use crates.io versions matching this CLI.
+    // Override: BITLOOM_FORCE_REGISTRY=1 always uses crates.io; BITLOOM_DEV_PATH=1 forces path.
+    if std::env::var_os("BITLOOM_FORCE_REGISTRY").is_some() {
+        return false;
+    }
+    if std::env::var_os("BITLOOM_DEV_PATH").is_some() {
+        return workspace.join("crates/rhdl-vlog/Cargo.toml").is_file();
+    }
+    workspace.join("crates/rhdl-vlog/Cargo.toml").is_file()
+}
+
+fn build_host_cargo(workspace: &Path, package: &str, pkg_path: &Path) -> String {
     let crate_name = package.replace('-', "_");
+    let backends = if use_dev_path_backends(workspace) {
+        format!(
+            r#"bitloom-vlog = {{ path = "{vlog}" }}
+bitloom-hir = {{ path = "{hir}" }}
+"#,
+            vlog = workspace.join("crates/rhdl-vlog").display(),
+            hir = workspace.join("crates/rhdl-hir").display(),
+        )
+    } else {
+        format!(
+            r#"bitloom-vlog = "{ver}"
+bitloom-hir = "{ver}"
+"#,
+            ver = BITLOOM_BACKEND_VERSION,
+        )
+    };
     format!(
         r#"[package]
-name = "rhdl-host-shim"
+name = "bitloom-host-shim"
 version = "0.0.0"
 edition = "2024"
 publish = false
 
-# Keep this shim out of the parent rhdl workspace.
+# Keep this shim out of the parent workspace.
 [workspace]
 
 [dependencies]
 {crate_name} = {{ path = "{pkg}" }}
-bitloom-vlog = {{ path = "{vlog}" }}
-bitloom-hir = {{ path = "{hir}" }}
-"#,
+{backends}"#,
         crate_name = crate_name,
         pkg = pkg_path.display(),
-        vlog = workspace.join("crates/rhdl-vlog").display(),
-        hir = workspace.join("crates/rhdl-hir").display(),
+        backends = backends,
     )
 }
 
@@ -129,6 +203,13 @@ fn main() {
             manifest_dir,
         } => {
             let workspace = fs::canonicalize(&manifest_dir).unwrap_or(manifest_dir);
+            let pkg_path = match resolve_package_dir(&workspace, &package) {
+                Ok(p) => p,
+                Err(e) => {
+                    eprintln!("error: {e}");
+                    std::process::exit(1);
+                }
+            };
             let host_dir = workspace.join("target/rhdl-host").join(&package);
             fs::create_dir_all(host_dir.join("src")).expect("host dir");
             let abs_out = if out_dir.is_absolute() {
@@ -137,11 +218,8 @@ fn main() {
                 workspace.join(out_dir)
             };
             fs::create_dir_all(&abs_out).expect("out_dir");
-            fs::write(
-                host_dir.join("Cargo.toml"),
-                build_host_cargo(&workspace, &package),
-            )
-            .expect("host Cargo.toml");
+            let host_toml = build_host_cargo(&workspace, &package, &pkg_path);
+            fs::write(host_dir.join("Cargo.toml"), &host_toml).expect("host Cargo.toml");
             fs::write(
                 host_dir.join("src/main.rs"),
                 build_host_main(&package, &abs_out),
@@ -197,5 +275,26 @@ fn main() {
                 }
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::path::Path;
+
+    #[test]
+    fn host_cargo_uses_registry_backends_outside_monorepo() {
+        let ws = Path::new("/tmp/fake-ws-no-toolchain");
+        let pkg = Path::new("/tmp/fake-ws-no-toolchain/my_design");
+        let toml = build_host_cargo(ws, "my_design", pkg);
+        assert!(
+            toml.contains(&format!("bitloom-vlog = \"{BITLOOM_BACKEND_VERSION}\"")),
+            "expected version-pinned bitloom-vlog, got:\n{toml}"
+        );
+        assert!(
+            !toml.contains("crates/rhdl-vlog"),
+            "must not path-depend monorepo vlog outside monorepo"
+        );
     }
 }
