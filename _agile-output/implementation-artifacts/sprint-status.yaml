@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-20-2026 17:27
+last_updated: 08-20-2026 18:25
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -125,25 +125,25 @@ development_status:
   13-4-cargo-bitloom-new-脚手架: done
   13-5-空目录真独立-atdd: done
   13-6-readme-真独立主路径与发布运维收口: done
-  epic-13-retrospective: optional
+  epic-13-retrospective: done
 
   epic-14: done
   14-1-发布-bitloom-sim-供独立-tick: done
-  epic-14-retrospective: optional
+  epic-14-retrospective: done
 
   epic-15: done
   15-1-语言表面可行性闸门: done
   15-2-episode-i-核-译码-alu-寄存器与-tick: done
   15-3-访存-mmio-与-emit-v: done
   15-4-子集完整声明与可选合规门禁: done
-  epic-15-retrospective: optional
+  epic-15-retrospective: done
 
   epic-16: done
   16-1-教程骨架与真独立跟练入口: done
   16-2-递进教程正文-blink-asm-c: done
   16-3-episode-ii-大纲-延期声明: done
   16-4-readme-入口-延伸阅读与范围声明: done
-  epic-16-retrospective: optional
+  epic-16-retrospective: done
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1
@@ -289,3 +289,45 @@ action_items:
     owner: "Dev / Richard"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-12-retro-2026-08-19.md"
+  - id: "epic-13-retro-item-25-清理工作区目录名-rhdl-与包名-bitloom-对齐-可选卫生"
+    epic: 13
+    action: "清理工作区目录名 rhdl-* 与包名 bitloom-* 对齐（可选卫生）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-13-retro-2026-08-20.md"
+  - id: "epic-13-retro-item-26-空目录-atdd-在-ci-中保持稳定墙钟预算"
+    epic: 13
+    action: "空目录 ATDD 在 CI 中保持稳定墙钟预算"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-13-retro-2026-08-20.md"
+  - id: "epic-14-retro-item-27-公开文档补充-cargo-add-bitloom-sim-dev-后最小-sim"
+    epic: 14
+    action: "公开文档补充 cargo add bitloom-sim --dev 后最小 Sim::tick 示例"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-14-retro-2026-08-20.md"
+  - id: "epic-15-retro-item-28-为-mem-写增加顺序条件-we-门控-去掉-dmem-停车写"
+    epic: 15
+    action: "为 mem 写增加顺序条件/we 门控，去掉 DMEM 停车写"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-15-retro-2026-08-20.md"
+  - id: "epic-15-retro-item-29-可选-片上-syncreadmem-取指与完整-b-imm"
+    epic: 15
+    action: "可选：片上 SyncReadMem 取指与完整 B-imm"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-15-retro-2026-08-20.md"
+  - id: "epic-16-retro-item-30-chapter-0-readme-增加-bitloom-sim-三行仿真示例-与"
+    epic: 16
+    action: "Chapter 0/README 增加 bitloom-sim 三行仿真示例（与 Epic 14 合并）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-16-retro-2026-08-20.md"
+  - id: "epic-16-retro-item-31-可选-为教程-ch-4-6-增加-vcd-截图或-femtorv-对照表"
+    epic: 16
+    action: "可选：为教程 Ch.4–6 增加 VCD 截图或 FemtoRV 对照表"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-16-retro-2026-08-20.md"
