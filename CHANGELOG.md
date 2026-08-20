@@ -8,6 +8,19 @@ with Cargo's **0.x** compatibility rules (leftmost non-zero component is the pub
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-08-20
+
+### Added
+
+- True-standalone path: `cargo install bitloom` → `cargo bitloom new` → `cargo bitloom build` without cloning the monorepo
+- Host shim resolves `--package` via `cargo metadata` and pins `bitloom-vlog` / `bitloom-hir` from crates.io outside the monorepo
+- MVP library family on crates.io: `bitloom-{hir,builder,macro,prelude,vlog}` (lockstep 0.1.2)
+- Optional `bitloom-sim` 0.1.2 for `cargo add bitloom-sim --dev` cycle-accurate tick
+
+### Changed
+
+- Design crates depend on **`bitloom-prelude`** (not CLI `bitloom`); README quick start is install-first
+
 ## [0.1.1] - 2026-08-19
 
 ### Added
