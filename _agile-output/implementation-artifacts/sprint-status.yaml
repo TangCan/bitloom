@@ -135,10 +135,10 @@ development_status:
   15-1-语言表面可行性闸门: done
   15-2-episode-i-核-译码-alu-寄存器与-tick: done
   15-3-访存-mmio-与-emit-v: done
-  15-4-子集完整声明与可选合规门禁: backlog
+  15-4-子集完整声明与可选合规门禁: done
   epic-15-retrospective: optional
 
-  epic-16: backlog
+  epic-16: in-progress
   16-1-教程骨架与真独立跟练入口: backlog
   16-2-递进教程正文-blink-asm-c: backlog
   16-3-episode-ii-大纲-延期声明: backlog
