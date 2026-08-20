@@ -397,4 +397,24 @@ mod tests {
         assert!(v.contains("always @(posedge clk)"));
         assert!(!v.trim().is_empty());
     }
+
+    /// Story 15.4 (a): minimal subset filter — not full DV (see COMPLIANCE.md).
+    #[test]
+    fn subset_minimal_filter_program() {
+        let mut sim = Sim::new(EpisodeICore::elaborate().unwrap());
+        let mut pv = PortValues::default();
+        pv.set("rst", 1);
+        pv.set("instr", 0);
+        sim.set_inputs(pv);
+        sim.tick();
+
+        tick_instr(&mut sim, enc_addi(1, 0, 0x100));
+        tick_instr(&mut sim, enc_addi(1, 0, 0x100));
+        tick_instr(&mut sim, enc_addi(2, 0, 0x3C));
+        tick_instr(&mut sim, enc_addi(2, 0, 0x3C));
+        tick_instr(&mut sim, enc_sw(1, 2, 0));
+        tick_instr(&mut sim, enc_sw(1, 2, 0));
+        assert_eq!(sim.ports().get("led_out"), Some(0x3C));
+        assert_eq!(sim.ports().get("x1_out"), Some(0x100));
+    }
 }
