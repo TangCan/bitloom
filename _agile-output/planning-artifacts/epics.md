@@ -16,22 +16,27 @@ stepsCompleted:
   - step-02-design-epics-phase-4
   - step-03-create-stories-phase-4
   - step-04-final-validation-phase-4
+  - step-01-validate-prerequisites-phase-5
+  - step-02-design-epics-phase-5
+  - step-03-create-stories-phase-5
+  - step-04-final-validation-phase-5
 status: complete
 phase1Status: complete
 phase2Status: complete
 phase3Status: complete
 phase4Status: complete
+phase5Status: complete
 phase3Scope: Bitloom rename + maturity closeout + crates.io publish
 phase4Scope: True standalone after cargo install (bitloom-* publish graph)
+phase5Scope: Teaching RV32 example core + step-by-step tutorial (Bitloom)
 inputDocuments:
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md
   - _agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
-  - _agile-output/planning-artifacts/research/technical-cargo-bitloom-standalone-usage-after-ins-2026-08-20/research.md
-  - _agile-output/planning-artifacts/research/technical-rhdl-rename-alternatives-product-naming-2026-08-19/research.md
+  - _agile-output/planning-artifacts/research/technical-riscv-32-cpu-example-and-step-by-step-tu-2026-08-20/research.md
   - AGENTS.md
-excludedFromPhase4Rewrite:
-  - Phase 1–3 epics/stories (Epic 1–12 retained as historical complete)
+excludedFromPhase5Rewrite:
+  - Phase 1–4 epics/stories (Epic 1–14 retained as historical complete)
 uxDesign: none
 ---
 
@@ -41,7 +46,7 @@ uxDesign: none
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。**阶段四：** `cargo install bitloom` 后真独立（不 clone 工具链 monorepo）— 需求源为 standalone research + AD-2/6/14 修订。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。**阶段五：** 教学向 **RV32 示例核 + step-by-step 教程**（主需求源：RV32 technical research；继承 AD / 真独立合同）。无 UX。
 
 ## Requirements Inventory
 
@@ -1147,3 +1152,190 @@ So that 仿真也不必 clone 工具链仓库。
 **Then** 独立设计 crate 可仅用 crates.io 依赖运行至少一条 tick（或 VCD）测试夹具（FR55）
 **And** 设计 `[dependencies]` 仍不得加入 sim（仅 dev-dependencies，继承 AD-6）
 **And** README 增加可选「独立仿真」小节
+
+---
+
+# Phase 5 — Teaching RV32 example + step-by-step tutorial
+
+> 范围确认（2026-08-20）：**Phase 5** — 追加 Epic 15+；不重写 Epic 1–14。  
+> 输入：PRD/addendum（约束继承）、ARCHITECTURE-SPINE（AD-1/2/5/6/14/15/19/20…）、RV32 technical research（主需求源）、AGENTS.md。无 UX。  
+> 非目标（Episode I）：完整 SoC、MMU、Linux 可启动、以 VexRiscv/SERV 为第一课 fork。
+
+## Phase 5 Requirements Inventory
+
+### Functional Requirements
+
+FR56: 仓库提供**自写**教学向 RV32 示例核（Episode I）：裁剪 **RV32I**（可无 CSR / ECALL / EBREAK / FENCE）；微架构为**单周期或多周期 FSM**（非位串行 SERV、非 Linux 向 Softcore 作为第一交付）；含简单指令/数据存储器（哈佛或统一）与最小 MMIO（如 LED/UART 形）。明确不做 MMU / Linux。  
+FR57: 提供 **FemtoRV 合同式** step-by-step 教程：每步只改一件事；路径覆盖 blink/ROM → decoder → 寄存器/控制 → ALU → load/store → MMIO → 手写 asm / GNU C 可跑；**流水线（及 CSR/trap）为 Episode II**，不得塞进 Episode I 必做路径。  
+FR58: 教程/示例的章节验收分层：默认 DoD 为 Bitloom 路径上的 `elaborate` +（dev）`bitloom-sim` **`tick`**（或等价断言）；仅在「宣称 ISA 子集完整」的章节才允许引入 **riscv-tests 或 RISCOF/`riscv-arch-test` 子集**作为额外门禁（该门禁是最小过滤器，非完整 DV）；可选 RVFI/`riscv-formal` 仅作进阶/对照，非 Episode I 必做。  
+FR59: 打包形态为 monorepo **`examples/`**（如 `examples/rv32_*`）+ **`docs/tutorials/rv32-…`** 编号章节；教程脊柱对齐已发布的 `cargo bitloom`（`new`/`build`）与 `cargo add bitloom-sim --dev`；设计 crate `[dependencies]` 仅 **`bitloom-prelude`**；文档须说明早期章节如何在真独立路径下跟练（不得把 clone monorepo 写成唯一入口）。  
+FR60: 在实现 Episode I 核之前完成**语言表面可行性闸门**：证明现行 Bitloom 宏/HIR/`tick` 合同足以表达该核所需的控制/存储端口（若缺口，先立语言/HIR 故事，不得静默缩小核范围却宣称「RV32 示例」）。  
+FR61: 教程含**延伸阅读（非 fork）**：Harris DDCA Ch.7 / FemtoRV `FROM_BLINKER_TO_RISCV`；对照 PicoRV32/SERV；明确避免把 VexiiRiscv Linux 教程当作第一路径。  
+FR62: README / 教程首页声明本示例的教学范围与非目标（无 SoC/MMU/Linux；Bitloom 品牌；与 `samitbasu/rhdl` 无关）。
+
+### NonFunctional Requirements
+
+NFR23: 继承 MSRV **rustc 1.97.1** / edition 2024；示例与教程 CI/`just test`（或等价）在该工具链上可跑（继承 NFR13/NFR20）。  
+NFR24: 遵守 AD-2/6：示例设计依赖仅为 `bitloom-prelude`；仿真仅 `[dev-dependencies]` 的 `bitloom-sim`；不得依赖 CLI 包 `bitloom` 作 library；emit 仍走 AD-14 host shim。  
+NFR25: 教程主路径使用 Bitloom **`cargo`/`tick` 合同**，不以 Make/SBT/PlatformIO 作为学生必装主流程（可文档化为可选外部对照）。  
+NFR26: 合规门禁若启用，文档必须写明 RISCOF/arch-test 为**最小过滤器**，不得宣称等价于完整设计验证。  
+NFR27: 文档与示例持续声明与 `samitbasu/rhdl` 无关，公开名 **Bitloom** / `bitloom-*`；消歧 `bitbloom`（继承 NFR21）。
+
+### Additional Requirements (Architecture / Research)
+
+- 继承 AD-1（先 elaborate 再 tick）、AD-5（周期精确仅 FrozenHir）、AD-15（默认单时钟 + 同步复位，除非故事显式扩展）、AD-19（`rhdl_elaborate` / 现行入口约定）、AD-20（阶段二表面：分支/同位宽/复位语义）。
+- 若示例需要同步读存储器，对齐 AD-21（`Mem`/`SyncReadMem` 表面）；不得引入未立项的 Bundle/Vec 可综合路径。
+- Research R1–R5：自写核 + FemtoRV 教程合同 + 分层验收 + `examples/`+`docs/tutorials` 打包 + 延伸阅读清单。
+- Open question 跟踪：语言表面能否表达多周期 FSM（→ FR60）；教学用 arch-test 子集 CI 墙钟（可后置 story）。
+- 无 UX / 无 UI；无新 starter template（沿用 `cargo bitloom new`）。
+
+### UX Design Requirements
+
+无 UI。无 UX-DR。
+
+### Phase 5 FR Coverage Map
+
+FR56: Epic 15 — Episode I 教学 RV32 核（裁剪 ISA、单/多周期、存储+MMIO）  
+FR57: Epic 16 — FemtoRV 合同式 step-by-step 教程（流水/CSR 为 Episode II，非本 epic 必做）  
+FR58: Epic 15 — 核级 DoD（elaborate + tick；可选合规）；Epic 16.2 — 教程章节级 DoD  
+FR59: Epic 16 — `examples/` + `docs/tutorials/rv32-…` 打包与真独立跟练入口  
+FR60: Epic 15 — 语言表面可行性闸门（先于或紧挨首个核实现）  
+FR61: Epic 16 — 延伸阅读清单（Harris/FemtoRV；对照 Pico/SERV）  
+FR62: Epic 16 — README/教程首页范围与非目标声明  
+
+### Phase 5 NFR notes
+
+NFR23–NFR27 → Epic 15–16（MSRV、AD-2/6/14、cargo/`tick` 主路径、合规门表述、品牌免责）
+
+## Phase 5 Epic List
+
+### Epic 15: 能跑的教学 RV32（Episode I）
+学习者与维护者拥有一个**自写**的 Episode I 核：裁剪 RV32I、单周期或多周期 FSM、简单存储与 MMIO；可在 Bitloom 上 `elaborate`、用 `bitloom-sim` `tick`，并用 `cargo bitloom build` 出 `.v`。实现前通过语言表面可行性闸门。不含流水线/CSR/MMU/Linux。  
+**FRs covered:** FR56, FR58, FR60（NFR23–NFR24, NFR26 按故事）  
+**Depends on:** Epic 13–14（真独立 prelude / CLI / sim 已可用）
+
+### Epic 16: Step-by-step 教程与公开入口
+学习者可按编号章节（一步一变）从 blink/ROM 跟到 asm/C；文档落在 `docs/tutorials/rv32-…`，示例在 `examples/rv32_*`；主路径对齐 `cargo bitloom` + `bitloom-sim --dev`；含延伸阅读与范围/非目标声明。流水线章节仅作 Episode II 大纲或明确延期。  
+**FRs covered:** FR57, FR59, FR61, FR62（NFR23, NFR25, NFR27）  
+**Depends on:** Epic 15（至少有一个可引用的 Episode I 核 / 脚手架路径）
+
+## Epic 15: 能跑的教学 RV32（Episode I）
+
+学习者与维护者拥有一个**自写**的 Episode I 核：裁剪 RV32I、单周期或多周期 FSM、简单存储与 MMIO；可在 Bitloom 上 `elaborate`、用 `bitloom-sim` `tick`，并用 `cargo bitloom build` 出 `.v`。实现前通过语言表面可行性闸门。不含流水线/CSR/MMU/Linux。  
+**FRs covered:** FR56, FR58, FR60（NFR23–NFR24, NFR26 按故事）  
+**Depends on:** Epic 13–14。
+
+### Story 15.1: 语言表面可行性闸门
+
+As a 实现者,
+I want 在写完整 RV32 核之前证明 Bitloom 表面能表达 Episode I 所需控制与存储端口,
+So that 不会在实现中途才发现语言缺口。
+
+**Acceptance Criteria:**
+
+**Given** ARCHITECTURE-SPINE AD-18/20/21 与现行 `bitloom-prelude` 宏表面
+**When** 用最小 spike（可在 `examples/` 或测试夹具）表达：多周期/FSM 控制（或已选定的单周期等价）、指令/数据存储端口、同步复位时序
+**Then** spike 能 `elaborate` 且至少一条 `bitloom-sim` `tick`（或文档化的等价）通过（FR60）
+**And** 若缺口存在：开出明确语言/HIR 后续故事或缩小范围的书面决议，**禁止**在未记录的情况下宣称 FR56 已满足
+**And** 设计依赖仍仅为 `bitloom-prelude`（NFR24）
+
+### Story 15.2: Episode I 核 — 译码/ALU/寄存器与 tick
+
+As a 学习者/维护者,
+I want 一个裁剪 RV32I 的 Episode I 核能执行 ALU/分支类指令并在 `cargo test` 里 tick 对齐黄金值,
+So that 教学核在仿真路径上「真的在跑」。
+
+**Acceptance Criteria:**
+
+**Given** Story 15.1 闸门已通过（或书面接受单周期路径）
+**When** 在 `examples/rv32_*`（或约定名）实现 Episode I 核：无 CSR/ECALL/EBREAK/FENCE；单周期或多周期 FSM；文档化指令子集（至少覆盖若干 R/I 与控制流；`lw`/`sw` 可延后到 15.3）（FR56）
+**Then** `cargo test` 中至少两条路径：`elaborate` 成功；`bitloom-sim` `tick` 与黄金 `PortValues`/寄存器可见效果一致（FR58）
+**And** `[dependencies]` 仅 `bitloom-prelude`；`bitloom-sim` 仅在 `[dev-dependencies]`（NFR24）
+**And** 明确非目标：无 MMU/Linux/流水线（FR56）
+
+### Story 15.3: 访存、MMIO 与 emit `.v`
+
+As a 学习者,
+I want 核支持 load/store 与最小 MMIO，并能 `cargo bitloom build` 出 Yosys 友好 `.v`,
+So that 教程后半段与真独立 emit 路径打通。
+
+**Acceptance Criteria:**
+
+**Given** Story 15.2 的核与 tick 夹具存在
+**When** 增加简单存储（哈佛或统一）与最小 MMIO（如 LED/状态寄存器形）；补 load/store（及必要的访存 tick 测试）（FR56）
+**Then** `cargo bitloom build --package <rv32_example> …` 产出非空 `.v`（Yosys 友好子集）（FR58）
+**And** 至少一条 tick/测试覆盖 MMIO 或 mem 可见副作用
+**And** 仍无 CSR/trap/MMU/Linux
+
+### Story 15.4: 子集完整声明与可选合规门禁
+
+As a 维护者,
+I want 在宣称「子集完整」时挂上最小合规过滤器并写清其含义,
+So that 教学完整与完整 DV 不被混淆。
+
+**Acceptance Criteria:**
+
+**Given** Story 15.2–15.3 已文档化指令子集
+**When** 增加「子集完整」检查：或 (a) 仓库内黄金程序集 + tick/emit 门禁，或 (b) 可选 `riscv-tests` / RISCOF 子集 CI job（可 `ignore`/nightly）（FR58）
+**Then** 文档写明该门禁是**最小过滤器**，非完整 DV（NFR26）
+**And** 未启用 (b) 时不得在 README 宣称已通过 arch-test
+**And** RVFI/`riscv-formal` 若出现仅为可选进阶，非本 story 必做
+
+## Epic 16: Step-by-step 教程与公开入口
+
+学习者可按编号章节（一步一变）从 blink/ROM 跟到 asm/C；文档落在 `docs/tutorials/rv32-…`，示例在 `examples/rv32_*`；主路径对齐 `cargo bitloom` + `bitloom-sim --dev`；含延伸阅读与范围/非目标声明。流水线章节仅作 Episode II 大纲或明确延期。  
+**FRs covered:** FR57, FR59, FR61, FR62（NFR23, NFR25, NFR27）  
+**Depends on:** Epic 15。
+
+### Story 16.1: 教程骨架与真独立跟练入口
+
+As a 新学习者,
+I want 有编号教程目录与「如何跟练」的第 0 章,
+So that 不必猜路径或只能 clone monorepo。
+
+**Acceptance Criteria:**
+
+**Given** Epic 15 至少提供可引用的 `examples/rv32_*`（或文档化占位名）
+**When** 创建 `docs/tutorials/rv32-…/`（或等价）含索引 + Chapter 0：工具链（MSRV 1.97.1）、`cargo install bitloom` / workspace `cargo bitloom`、`bitloom-sim --dev`、指向示例包（FR59, NFR23, NFR25）
+**Then** Chapter 0 说明真独立路径与贡献者 monorepo 路径的差异，**不得**把 clone 写成唯一入口（FR59）
+**And** 索引列出后续章节与每章 DoD（elaborate / tick / build 之一）
+
+### Story 16.2: 递进教程正文（blink → asm/C）
+
+As a 学习者,
+I want 按 FemtoRV 合同一步一变跟到能跑 asm/C,
+So that 每步都有可验证结果。
+
+**Acceptance Criteria:**
+
+**Given** Story 16.1 骨架存在，且 Epic 15 核可 tick/build
+**When** 编写编号章节覆盖：blink/ROM 概念 → decoder → 寄存器/控制 → ALU → load/store → MMIO → 手写 asm 与 GNU C（可简化工具链步骤）（FR57）
+**Then** 每章只引入一类变化，并写明该章验收（测试名或命令）（FR57）
+**And** 主命令为 Bitloom `cargo`/`tick`/`build`，不以 Make/SBT 为必装（NFR25）
+**And** 流水线与 CSR **不**作为这些章节的必做内容（FR57）
+
+### Story 16.3: Episode II 大纲（延期声明）
+
+As a 学习者,
+I want 看到流水线/CSR 被明确标为 Episode II,
+So that 不会误以为 Episode I 未完成。
+
+**Acceptance Criteria:**
+
+**Given** Story 16.2 正文存在
+**When** 增加 Episode II 大纲页（或 README 小节）：主题含流水 hazard / 可选 Zicsr·M-trap；状态为 **延期/大纲**（FR57）
+**Then** 不要求本阶段实现流水核或 CSR
+**And** 指向 Harris/FemtoRV Episode II 类外部阅读（可与 16.4 交叉链接）
+
+### Story 16.4: README 入口、延伸阅读与范围声明
+
+As a 仓库访客,
+I want README/教程首页写清范围、非目标与延伸阅读,
+So that 不会误走 Linux Softcore 或混淆品牌。
+
+**Acceptance Criteria:**
+
+**Given** Story 16.1–16.3 文档就位
+**When** 更新 README（及教程首页）：链到 `docs/tutorials/rv32-…`；声明教学范围与非目标（无 SoC/MMU/Linux）（FR62）
+**And** 延伸阅读：Harris DDCA Ch.7、FemtoRV `FROM_BLINKER_TO_RISCV`；对照 PicoRV32/SERV；**避免** Vexii Linux 作第一路径（FR61）
+**Then** 持续声明 Bitloom / 与 `samitbasu/rhdl` 无关（NFR27）
