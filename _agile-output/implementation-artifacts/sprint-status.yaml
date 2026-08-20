@@ -122,8 +122,8 @@ development_status:
   13-1-修订-ad-2-6-为-bitloom-prelude: done
   13-2-发布-mvp-bitloom-库族: done
   13-3-host-shim-使用-registry-后端并解析用户包: done
-  13-4-cargo-bitloom-new-脚手架: backlog
-  13-5-空目录真独立-atdd: backlog
+  13-4-cargo-bitloom-new-脚手架: done
+  13-5-空目录真独立-atdd: done
   13-6-readme-真独立主路径与发布运维收口: backlog
   epic-13-retrospective: optional
 

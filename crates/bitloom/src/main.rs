@@ -316,7 +316,7 @@ fn main() {
             Ok(dir) => {
                 println!("created {}", dir.display());
                 println!(
-                    "next: cargo bitloom build --package {name} --manifest-dir {name} --out-dir {name}/out"
+                    "next: cargo bitloom build --package {name} --manifest-dir {name} --out-dir out"
                 );
             }
             Err(e) => {
