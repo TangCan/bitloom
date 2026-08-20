@@ -118,7 +118,7 @@ development_status:
   12-3-trusted-publishing-与后续自动化: done
   epic-12-retrospective: done
 
-  epic-13: in-progress
+  epic-13: done
   13-1-修订-ad-2-6-为-bitloom-prelude: done
   13-2-发布-mvp-bitloom-库族: done
   13-3-host-shim-使用-registry-后端并解析用户包: done
