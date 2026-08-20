@@ -35,6 +35,14 @@ enum Commands {
         #[arg(long, default_value = ".")]
         manifest_dir: PathBuf,
     },
+    /// Scaffold a minimal design crate depending only on `bitloom-prelude`.
+    New {
+        /// Package / directory name (e.g. `blink`).
+        name: String,
+        /// Parent directory for the new crate (default: `.`).
+        #[arg(long, default_value = ".")]
+        path: PathBuf,
+    },
     /// Manage the pinned CIRCT firtool binary (AD-9 / NFR3).
     Firtool {
         #[command(subcommand)]
@@ -187,6 +195,74 @@ fn build_host_main(package: &str, out_dir: &Path) -> String {
     )
 }
 
+fn scaffold_new(name: &str, parent: &Path) -> Result<PathBuf, String> {
+    if name.is_empty()
+        || !name
+            .chars()
+            .all(|c| c.is_ascii_alphanumeric() || c == '_' || c == '-')
+    {
+        return Err("name must be non-empty ASCII alphanumeric / _ / -".into());
+    }
+    let dir = parent.join(name);
+    if dir.exists() {
+        return Err(format!("{} already exists", dir.display()));
+    }
+    fs::create_dir_all(dir.join("src")).map_err(|e| e.to_string())?;
+    let cargo_toml = format!(
+        r#"[package]
+name = "{name}"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.97.1"
+publish = false
+
+[dependencies]
+bitloom-prelude = "{ver}"
+"#,
+        name = name,
+        ver = BITLOOM_BACKEND_VERSION,
+    );
+    let struct_name = {
+        let mut s = String::new();
+        for p in name.split(|c| c == '-' || c == '_') {
+            if p.is_empty() {
+                continue;
+            }
+            let mut ch = p.chars();
+            if let Some(f) = ch.next() {
+                s.push(f.to_ascii_uppercase());
+                s.extend(ch);
+            }
+        }
+        if s.is_empty() { "Design".into() } else { s }
+    };
+    let lib_rs = format!(
+        r#"//! Bitloom design crate (scaffolded by `cargo bitloom new`).
+
+use bitloom_prelude::rhdl::module;
+use bitloom_prelude::{{Clock, Elaboratable, Input, Output, Reset, UInt}};
+
+#[module]
+pub struct {struct_name} {{
+    pub clk: Input<Clock>,
+    pub rst: Input<Reset>,
+    pub data_in: Input<UInt<8>>,
+    pub data_out: Output<UInt<8>>,
+}}
+
+/// Entry for `cargo bitloom build --package {name}`.
+pub fn rhdl_elaborate() -> Result<bitloom_prelude::FrozenHir, bitloom_prelude::Diagnostics> {{
+    {struct_name}::elaborate()
+}}
+"#,
+        struct_name = struct_name,
+        name = name,
+    );
+    fs::write(dir.join("Cargo.toml"), cargo_toml).map_err(|e| e.to_string())?;
+    fs::write(dir.join("src/lib.rs"), lib_rs).map_err(|e| e.to_string())?;
+    Ok(dir)
+}
+
 fn main() {
     let mut args: Vec<String> = std::env::args().collect();
     if matches!(
@@ -236,6 +312,18 @@ fn main() {
                 std::process::exit(status.code().unwrap_or(1));
             }
         }
+        Commands::New { name, path } => match scaffold_new(&name, &path) {
+            Ok(dir) => {
+                println!("created {}", dir.display());
+                println!(
+                    "next: cargo bitloom build --package {name} --manifest-dir {name} --out-dir {name}/out"
+                );
+            }
+            Err(e) => {
+                eprintln!("error: {e}");
+                std::process::exit(1);
+            }
+        },
         Commands::Firtool { cmd } => match cmd {
             FirtoolCmd::Info => {
                 println!("version={}", firtool::FIRTOOL_VERSION);
