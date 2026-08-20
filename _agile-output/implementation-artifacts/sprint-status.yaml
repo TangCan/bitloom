@@ -127,8 +127,8 @@ development_status:
   13-6-readme-真独立主路径与发布运维收口: done
   epic-13-retrospective: optional
 
-  epic-14: backlog
-  14-1-发布-bitloom-sim-供独立-tick: backlog
+  epic-14: done
+  14-1-发布-bitloom-sim-供独立-tick: done
   epic-14-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"

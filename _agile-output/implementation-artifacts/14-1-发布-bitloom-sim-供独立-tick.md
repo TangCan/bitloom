@@ -1,6 +1,6 @@
 # Story 14.1: 发布 bitloom-sim 供独立 tick
 
-Status: in-progress
+Status: done
 
 ## Story
 
@@ -17,5 +17,5 @@ So that 仿真也不必 clone 工具链仓库。
 - [x] Package rename `bitloom-sim`, `publish = true`, registry `bitloom-hir`
 - [x] Update Rust paths / workspace deps; design deps stay prelude-only
 - [x] README optional独立仿真小节
-- [ ] `cargo publish -p bitloom-sim` (0.1.2)
+- [x] `cargo publish -p bitloom-sim` → **0.1.2** on crates.io (2026-08-20)
 - [x] ATDD + `just test`
