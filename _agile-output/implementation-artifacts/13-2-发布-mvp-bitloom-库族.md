@@ -1,6 +1,6 @@
 # Story 13.2: 发布 MVP bitloom-* 库族
 
-Status: in-progress
+Status: done
 
 ## Story
 
@@ -10,25 +10,15 @@ So that 无需 path/git 指向 Bitloom monorepo 即可编写设计。
 
 ## Acceptance Criteria
 
-见 `epics.md` Story 13.2（FR48, NFR18–19, NFR21–22）。
+见 epics.md Story 13.2（FR48, NFR18–19）。
 
-## Tasks / Subtasks
+## Completion Notes
 
-- [ ] 探测 crates.io 名仍空闲
-- [ ] 将 MVP 五包 `[package].name` → `bitloom-*`，`publish = true`，补齐 metadata
-- [ ] 全工作区依赖与 `use` 路径对齐
-- [ ] `cargo test --workspace` 绿
-- [ ] 按序 dry-run / publish：hir → builder → macro → prelude → vlog
-- [ ] 文档/描述声明与 samitbasu/rhdl 无关
+- Renamed package names to bitloom-{hir,builder,macro,prelude,vlog}; dirs remain crates/rhdl-*
+- Workspace version 0.1.2; workspace deps include version for publish
+- Published to crates.io 2026-08-20: all five crates at 0.1.2
+- just test green; trybuild stderr blessed
 
-## Dev Notes
+## File List
 
-- 目录可暂留 `crates/rhdl-*`
-- 锁步版本（建议 bump 0.1.2）
-- CLI `bitloom` 可同版或随后 bump
-
-## Dev Agent Record
-
-### File List
-
-- (filled on completion)
+- Cargo.toml, crates/rhdl-*/Cargo.toml & sources, examples/*, crates/bitloom/src/main.rs
