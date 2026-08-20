@@ -20,6 +20,7 @@ members = [
   "examples/mixed_both",
   "examples/ip_box",
   "examples/rv32_feasibility",
+  "examples/rv32_pipeline_feasibility",
   "examples/rv32_core",
 ]
 default-members = [

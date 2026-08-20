@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-20-2026 18:32
+last_updated: 08-20-2026 20:20
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -144,6 +144,21 @@ development_status:
   16-3-episode-ii-大纲-延期声明: done
   16-4-readme-入口-延伸阅读与范围声明: done
   epic-16-retrospective: done
+
+  epic-17: in-progress
+  17-1-流水语言表面可行性闸门: done
+  17-2-取指策略钉死: backlog
+  17-3-冻结用户态立即数与符号扩展: backlog
+  17-4-五级流水-转发-分支-flush: backlog
+  17-5-load-use-停顿-atdd-验证阶梯: backlog
+  epic-17-retrospective: optional
+
+  epic-18: backlog
+  18-1-episode-ii-教程骨架与索引: backlog
+  18-2-递进教程正文-isa-流水-hazard: backlog
+  18-3-可选-zicsr-m-mode-trap-教学最小集: backlog
+  18-4-更新大纲-readme-范围与品牌: backlog
+  epic-18-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1

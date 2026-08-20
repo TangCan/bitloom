@@ -20,23 +20,32 @@ stepsCompleted:
   - step-02-design-epics-phase-5
   - step-03-create-stories-phase-5
   - step-04-final-validation-phase-5
+  - step-01-validate-prerequisites-phase-6
+  - step-02-design-epics-phase-6
+  - step-03-create-stories-phase-6
+  - step-04-final-validation-phase-6
 status: complete
 phase1Status: complete
 phase2Status: complete
 phase3Status: complete
 phase4Status: complete
 phase5Status: complete
+phase6Status: complete
 phase3Scope: Bitloom rename + maturity closeout + crates.io publish
 phase4Scope: True standalone after cargo install (bitloom-* publish graph)
 phase5Scope: Teaching RV32 example core + step-by-step tutorial (Bitloom)
+phase6Scope: Episode II — full user RV32I immediates → classic 5-stage+hazards → optional Zicsr/M-trap
 inputDocuments:
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md
   - _agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
-  - _agile-output/planning-artifacts/research/technical-riscv-32-cpu-example-and-step-by-step-tu-2026-08-20/research.md
+  - _agile-output/planning-artifacts/research/technical-rv32-episode-ii-pipeline-zicsr-full-rv32-2026-08-20/research.md
+  - docs/tutorials/rv32-episode-i/99-episode-ii-outline.md
+  - examples/rv32_core/SUBSET.md
+  - examples/rv32_core/COMPLIANCE.md
   - AGENTS.md
-excludedFromPhase5Rewrite:
-  - Phase 1–4 epics/stories (Epic 1–14 retained as historical complete)
+excludedFromPhase6Rewrite:
+  - Phase 1–5 epics/stories (Epic 1–16 retained as historical complete)
 uxDesign: none
 ---
 
@@ -1339,3 +1348,228 @@ So that 不会误走 Linux Softcore 或混淆品牌。
 **When** 更新 README（及教程首页）：链到 `docs/tutorials/rv32-…`；声明教学范围与非目标（无 SoC/MMU/Linux）（FR62）
 **And** 延伸阅读：Harris DDCA Ch.7、FemtoRV `FROM_BLINKER_TO_RISCV`；对照 PicoRV32/SERV；**避免** Vexii Linux 作第一路径（FR61）
 **Then** 持续声明 Bitloom / 与 `samitbasu/rhdl` 无关（NFR27）
+
+---
+
+# Phase 6 — Episode II（完整 RV32I → 流水+hazard → 可选 Zicsr/M-trap）
+
+> 范围确认（2026-08-20）：**Phase 6** — 追加 Epic 17+；**不重写** Epic 1–16。  
+> 输入：ARCHITECTURE-SPINE（AD 约束）、Episode II technical research（主需求源）、`99-episode-ii-outline.md`、`examples/rv32_core` 现状（SUBSET/COMPLIANCE）、PRD/addendum（继承品牌/MSRV）、AGENTS.md。无 UX。  
+> 实现顺序（研究 R1）：**ISA 冻结 → 5 级+转发/load-use/分支 flush →（可选）精简 M-CSR/trap**。禁止特权与第一次 hazard 同里程碑。  
+> 非目标：MMU/Linux、动态分支预测、以 VexRiscv/PicoRV32 自定义 IRQ 为教学模板、宣称完整 Privileged / arch-test 等价完整 DV。
+
+## Phase 6 Requirements Inventory
+
+### Functional Requirements
+
+FR63: 在 Episode I 核（`examples/rv32_core` 或其继承包）上**冻结完整用户态 RV32I 立即数与符号扩展**：实现 I/S/B/U/J 立即数字段重建；**符号位取自指令字 bit31**；B-imm 重建为 `{bit31, bit7, bits30:25, bits11:8, 0}`（bit0 隐式 0，禁止对已拼字段再盲目 `<<1`）；负向分支/立即数有黄金测试；load 路径含字节/半字符号扩展（至少覆盖 RV32I 所需 LB/LH/LBU/LHU 或书面冻结子集并写进 SUBSET）。在引入流水线之前完成 ISA 冻结，避免与 hazard 联调混淆。  
+FR64: 实现**经典 5 级流水** IF→ID→EX→MEM→WB（级间 pipeline register）；**ALU RAW 转发**（至少 EX/MEM→EX 与 MEM/WB→EX）；**load-use 必须停顿**（冻结 PC/IF-ID、向 ID/EX 插入 bubble，再转发）；控制冒险采用 **predict-not-taken + taken 时 flush**（动态 BTB 非本阶段必做）。Hazard 行为须有**独立 ATDD**（尤其 load-use）。  
+FR65: **可选**教学向 **Zicsr + M-mode trap**：最小 CSR 集 `mstatus`/`mtvec`/`mepc`/`mcause`/`mscratch`（开中断时再加 `mie`/`mip`；`mtval` 可后补）+ `mret`；trap 入口写 mepc/mcause/mstatus 并跳 mtvec；**写影响中断使能的 CSR 后必须 flush/串行化**（禁止 interrupt skid）；**禁止**以 PicoRV32 自定义 IRQ 为标准模板。默认目标为「能教 / 能跑 mret」，**除非故事显式声明**，不得宣称 Privileged / arch-test M-mode 合规。CSR 不得阻塞 FR64 的流水 DoD。  
+FR66: Episode II **验证阶梯**：定向 asm/`tick` 黄金 →（可选）`riscv-tests` **`rv32ui`**；更新 `SUBSET.md` / `COMPLIANCE.md`；RISCOF/arch-test 若出现仍为**最小过滤器**非完整 DV；不得把 arch-test 绿当作「流水+中断正确」。RVFI/`riscv-formal` 仅可选进阶。  
+FR67: 提供 Episode II **FemtoRV/Harris 合同式**教程章节（或在 `docs/tutorials/rv32-episode-i/` 旁新建 episode-ii 目录）：路径覆盖 ISA/立即数 → 五级插入 → 转发 → load-use → 分支 flush →（可选）CSR/trap；每步一变；更新原 `99-episode-ii-outline.md` 从「延期」改为指向实现/教程状态。  
+FR68: 在实现五级流水之前完成**语言表面可行性闸门**：证明现行 Bitloom builder/HIR/`tick` 足以表达级间寄存器与组合转发 mux（及所需 Mem/SyncReadMem）；若缺口，先立语言/HIR 故事，不得静默缩小「经典 5 级」定义却宣称已交付。  
+FR69: **取指策略书面钉死**：要么在 IF 引入片上 `SyncReadMem` 指令存储器（对齐 AD-21），要么继续 harness/`instr` 口并在 SUBSET/教程中明确限制；不得静默混用两种语义。  
+FR70: README / Episode II 教程首页声明范围与非目标（无 cache/MMU/Linux/动态预测；VexRiscv 仅对照；Bitloom 品牌；与 `samitbasu/rhdl` 无关）；继承 Episode I 免责。
+
+### NonFunctional Requirements
+
+NFR28: 继承 MSRV **rustc 1.97.1** / edition 2024；示例与教程在该工具链上可 `just test`（或等价）回归（继承 NFR13/NFR20/NFR23）。  
+NFR29: 遵守 AD-2/6：设计依赖仅为 `bitloom-prelude`；仿真仅 `[dev-dependencies]` 的 `bitloom-sim`；不得依赖 CLI 包 `bitloom` 作 library。  
+NFR30: 教程/核主路径使用 Bitloom **`cargo`/`tick`/`build` 合同**，不以 Make/SBT 为学生必装主流程。  
+NFR31: 合规文档必须区分「教学能跑 / 定向+`rv32ui`」与「Privileged/arch-test 合规」；启用过滤器时沿用 NFR26 表述（最小过滤器，非完整 DV）。  
+NFR32: **CSR/trap（FR65）为可选里程碑**；流水线（FR64）的完成定义不得依赖 CSR 故事交付。  
+NFR33: 文档与示例持续声明与 `samitbasu/rhdl` 无关，公开名 **Bitloom** / `bitloom-*`（继承 NFR21/NFR27）。
+
+### Additional Requirements (Architecture / Research)
+
+- 继承 AD-1（先 elaborate 再 tick）、AD-5（周期精确仅 FrozenHir）、AD-15（默认单时钟 + 同步复位）、AD-14（emit host shim）、AD-19/AD-20（入口与阶段二表面语义）。
+- 片上同步读存储器须对齐 AD-21（`Mem`/`SyncReadMem`）；禁止未立项 Bundle/Vec 可综合路径。
+- 不得另立第二套 HIR 或在 rustc 编译期抽网表（AD-1/7/12）。
+- Research R1–R5：ISA 冻结 → hazard 单元（含 load-use ATDD）→ 可选精简 M-CSR + flush → 验证阶梯；VexRiscv 仅对照。
+- Open questions 跟踪进故事：分支比较在 ID vs EX；「能教」vs arch-test 合规范围（默认能教）；语言表面缺口（→ FR68）。
+- 无 UX / 无新 starter template（沿用 `cargo bitloom new`）。
+- Phase 1–5 FR1–FR62 / NFR1–NFR27 仍有效；本清单为 Phase 6 交付范围。
+
+### UX Design Requirements
+
+无 UI。无 UX-DR。
+
+### Phase 6 FR Coverage Map
+
+FR63: Epic 17 — 冻结用户态 RV32I 立即数/符号扩展（流水前置）  
+FR64: Epic 17 — 经典 5 级 + 转发 / load-use 停顿 / 分支 flush  
+FR65: Epic 18 — 可选 Zicsr + M-mode trap（不阻塞 Epic 17 DoD）  
+FR66: Epic 17 — 核级验证阶梯（定向 → 可选 `rv32ui`）；Epic 18 — 教程/COMPLIANCE 措辞对齐  
+FR67: Epic 18 — Episode II 教程章节 + 更新 `99` 大纲状态  
+FR68: Epic 17 — 流水语言表面可行性闸门（先于或紧挨五级实现）  
+FR69: Epic 17 — 取指策略钉死（SyncReadMem IF 或 harness）  
+FR70: Epic 18 — 范围/非目标/品牌声明  
+
+### Phase 6 NFR notes
+
+NFR28–NFR31、NFR33 → Epic 17–18（MSRV、prelude、cargo/`tick`、合规措辞、品牌）  
+NFR32 → Epic 18（CSR 可选；不得阻塞 Epic 17 流水完成定义）
+
+## Phase 6 Epic List
+
+### Epic 17: Episode II 教学核（ISA 冻结 → 5 级 + hazard）
+
+学习者/贡献者得到可 `elaborate`/`tick`/`build` 的 Episode II 核：先在单周期（或等价）路径上冻结完整用户态立即数与符号扩展，再交付经典 IF/ID/EX/MEM/WB、转发、load-use 停顿与分支 flush；语言表面闸门与取指策略在实现前钉死；验证以定向测试为主、可选 `rv32ui`。  
+**FRs covered:** FR63, FR64, FR66, FR68, FR69（NFR28–NFR31, NFR33）  
+**Depends on:** Epic 15（`examples/rv32_core` 基线）。不依赖 Epic 18。  
+**Rationale:** ISA 与流水同改 `rv32_core`（及语言闸门），合并为一 epic、故事内有序交付，避免同文件多 epic 翻炒；CSR 故意不放入本 epic，以满足 NFR32。
+
+### Epic 18: Episode II 教程与可选特权
+
+学习者可按编号章节从「立即数/ISA」跟到「流水+hazard」，并可选择跟练精简 M-CSR/`mret`；`99-episode-ii-outline` 反映实现状态；文档写清非目标与合规边界。CSR 故事失败或延期不得回溯判定 Epic 17 未完成。  
+**FRs covered:** FR65, FR67, FR70（及 FR66 文档侧；NFR28–NFR33）  
+**Depends on:** Epic 17（至少 ISA 冻结 + 流水 hazard 可引用）。  
+**Rationale:** 教程与可选特权是独立用户价值；与核实现风险边界分离（研究 R1 / NFR32）。
+
+## Epic 17: Episode II 教学核（ISA 冻结 → 5 级 + hazard）
+
+学习者/贡献者得到可 `elaborate`/`tick`/`build` 的 Episode II 核：先冻结用户态立即数与符号扩展，再交付经典五级流水与 hazard；语言表面与取指策略先钉死。  
+**FRs covered:** FR63, FR64, FR66, FR68, FR69（NFR28–NFR31, NFR33）  
+**Depends on:** Epic 15。
+
+### Story 17.1: 流水语言表面可行性闸门
+
+As a Bitloom 贡献者,
+I want 在改核之前证明 builder/HIR/`tick` 能表达级间寄存器与组合转发 mux,
+So that 不会静默缩小「经典 5 级」定义。
+
+**Acceptance Criteria:**
+
+**Given** Episode I `examples/rv32_core`（或继承包）与 ARCHITECTURE-SPINE
+**When** 完成可行性笔记/最小 proof（可在 `examples/` 或 `docs/`）：展示如何用现有表面表达至少两级 pipeline register 与一个转发 mux（或明确缺口清单）（FR68）
+**Then** 若表面足够：书面结论「可继续 17.4」并链到证明物
+**And** 若有缺口：开语言/HIR 子任务或 blocker 描述，**禁止**在未记录缺口时宣称已交付经典 5 级（FR68）
+**And** 设计依赖仍仅为 `bitloom-prelude`（NFR29）
+
+### Story 17.2: 取指策略钉死
+
+As a 核维护者,
+I want 书面决定 IF 用片上 SyncReadMem 还是继续 harness `instr` 口,
+So that 流水语义不会两种取指混用。
+
+**Acceptance Criteria:**
+
+**Given** Story 17.1 结论可用（或缺口已记录且本故事不依赖未交付表面）
+**When** 在 `SUBSET.md`（或 Episode II 等价文档）写入**唯一**取指策略：**(a)** IF 使用 `SyncReadMem` 指令存储器（对齐 AD-21），或 **(b)** 继续外供/`instr` harness，并写明对教程/测试的限制（FR69）
+**Then** 文档明确「不得静默混用」两种语义
+**And** 若选 (a)：列出后续 17.4 必须接入的端口/初始化约定；若选 (b)：说明 CPI/教学含义与延期片上 I-fetch 的条件
+**And** 不要求本故事实现完整五级流水（仅决策 + 文档，可选最小脚手架）
+
+### Story 17.3: 冻结用户态立即数与符号扩展
+
+As a 教学核维护者,
+I want 在引入流水前完成 I/S/B/U/J 立即数重建与符号扩展（含正确 B-imm 与负向测例）,
+So that hazard 调试不会和 imm bug 缠在一起。
+
+**Acceptance Criteria:**
+
+**Given** Story 17.1–17.2 完成；现有 `examples/rv32_core`（或继承包）可 tick
+**When** 实现译码侧统一 `imm`：I/S/B/U/J 字段重建；符号位取自指令字 bit31；B-imm 为 `{bit31, bit7, bits30:25, bits11:8, 0}`（禁止对已拼字段再盲目 `<<1`）（FR63）
+**Then** 负向立即数/负向 BEQ（或等价）有黄金 `tick` 测试通过
+**And** load 路径含字节/半字符号扩展，或在 `SUBSET.md` **书面冻结**未实现的 LB/LH/… 并说明理由（FR63）
+**And** 更新 `SUBSET.md`：移除「B-imm sign-extend deferred」类过时表述（或改为已实现）
+**And** 本故事**不**引入五级流水寄存器（仍单周期/边沿提交语义）
+**And** `cargo test`（包内）与 `cargo bitloom build` 在相关包上通过（NFR28, NFR30）
+
+### Story 17.4: 五级流水 + 转发 + 分支 flush
+
+As a 学习者/贡献者,
+I want 经典 IF/ID/EX/MEM/WB、ALU 转发与 predict-not-taken 分支冲刷,
+So that 能演示数据/控制冒险的主干行为。
+
+**Acceptance Criteria:**
+
+**Given** Story 17.1 判定表面足够（或缺口已关闭）；17.2 取指策略已钉死；17.3 ISA 已冻结
+**When** 实现五级 pipeline register，以及至少 EX/MEM→EX 与 MEM/WB→EX 转发；分支采用 predict-not-taken，taken 时 flush 错误路径并改 PC（FR64）
+**Then** 定向黄金测试覆盖：无 hazard 的正确执行；至少一处 ALU→ALU RAW 靠转发通过（不停顿或仅文档化的最小气泡）
+**And** 至少一处 taken 分支证明错误路径指令未提交（flush）
+**And** 取指行为遵守 17.2 所选策略（FR69）
+**And** 本故事**不要求**完成 load-use 停顿（留给 17.5）；**不**实现 CSR/trap（NFR32）
+**And** `elaborate` + `tick` 测试与 `cargo bitloom build` 通过（NFR28–NFR30）
+**And** 设计依赖仅为 `bitloom-prelude`（NFR29）
+
+### Story 17.5: Load-use 停顿 ATDD + 验证阶梯
+
+As a 核维护者,
+I want 独立的 load-use 停顿测试，并写清 Episode II 核的验证阶梯,
+So that 缺停顿时转发不会静默算出错值，且不夸大合规。
+
+**Acceptance Criteria:**
+
+**Given** Story 17.4 五级 + 转发已可 tick
+**When** 实现 load-use 检测：冻结 PC/IF-ID、向 ID/EX 插入 bubble，随后 MEM→EX 转发（FR64）
+**Then** 存在**独立命名**的 ATDD/`tick` 测试：load 后紧跟依赖该结果的指令，在错误实现（无停顿）下会失败、在正确实现下通过
+**And** 更新 `COMPLIANCE.md`（或等价）：验证阶梯 = 定向 →（可选）`riscv-tests` `rv32ui`；写明未启用项；**不得**宣称 arch-test 等价完整 DV（FR66, NFR31）
+**And** 若接入 `rv32ui`：文档化如何运行；未接入则明确标为可选/延期且不影响本 story Done
+**And** 仍**不**实现 CSR/trap（NFR32）
+**And** 相关 `cargo test` / `cargo bitloom build` 通过（NFR28, NFR30）
+
+## Epic 18: Episode II 教程与可选特权
+
+学习者可按编号章节从「立即数/ISA」跟到「流水+hazard」，并可选择跟练精简 M-CSR/`mret`；大纲与 README 反映实现状态与非目标。CSR 延期不得判定 Epic 17 未完成。  
+**FRs covered:** FR65, FR67, FR70（FR66 文档侧；NFR28–NFR33）  
+**Depends on:** Epic 17。
+
+### Story 18.1: Episode II 教程骨架与索引
+
+As a 学习者,
+I want 有独立的 Episode II 教程目录与章节索引（含每章 DoD）,
+So that 能从 Episode I 继续跟练而不猜路径。
+
+**Acceptance Criteria:**
+
+**Given** Epic 17 至少提供可引用的核/包路径（或文档化占位名）
+**When** 创建 `docs/tutorials/rv32-episode-ii/`（或等价）含 README/索引：工具链（MSRV 1.97.1）、`cargo bitloom` / `bitloom-sim --dev`、指向 Episode II 示例包（FR67, NFR28, NFR30）
+**Then** 索引列出拟议章节：ISA/立即数 → 五级插入 → 转发 → load-use → 分支 flush →（可选）CSR/trap，并标明每章验收类型（elaborate / tick / build）
+**And** 说明真独立跟练 vs monorepo 贡献者路径差异，**不得**把 clone 写成唯一入口
+**And** 链回 Episode I 教程；声明 CSR 章为可选（NFR32）
+**And** Bitloom / 与 `samitbasu/rhdl` 无关（NFR33）
+
+### Story 18.2: 递进教程正文（ISA → 流水 + hazard）
+
+As a 学习者,
+I want 按一步一变的章节从立即数跟到 load-use/分支 flush,
+So that 每步都有可验证结果。
+
+**Acceptance Criteria:**
+
+**Given** Story 18.1 骨架存在，且 Epic 17 核能力可引用（ISA 冻结 + 五级 + hazard）
+**When** 编写编号章节覆盖：立即数/符号扩展 → 五级插入 → 转发 → load-use → 分支 flush（FR67）
+**Then** 每章只引入一类变化，并写明该章验收（测试名或命令）（FR67）
+**And** 主命令为 Bitloom `cargo`/`tick`/`build`，不以 Make/SBT 为必装（NFR30）
+**And** **CSR/trap 不**作为这些章节的必做内容（NFR32）
+**And** 合规措辞与 Epic 17 `COMPLIANCE` 一致：定向/`rv32ui` ≠ 完整 DV（FR66, NFR31）
+
+### Story 18.3: 可选 Zicsr + M-mode trap（教学最小集）
+
+As a 进阶学习者,
+I want 可选章实现精简 M-CSR 与 `mret`（含 CSR 写后 flush）,
+So that 能理解 trap 入口/出口，且不把 PicoRV32 自定义 IRQ 当标准。
+
+**Acceptance Criteria:**
+
+**Given** Story 18.2 流水章节存在；Epic 17 流水核可扩展或有文档化分支包
+**When** 交付可选实现 + 教程章：CSR 最小集 `mstatus`/`mtvec`/`mepc`/`mcause`/`mscratch`（开中断时再加 `mie`/`mip`；`mtval` 可后补）+ `mret`；trap 写 mepc/mcause/mstatus 并跳 mtvec（FR65）
+**Then** 写影响中断使能的 CSR 后必须 flush/串行化（文档 + 至少一则防 skid 测试或明确手工检查步骤）（FR65）
+**And** 明确**禁止**以 PicoRV32 自定义 IRQ 为模板；默认目标为「能教 / 能跑 mret」，**除非另文声明**不得宣称 Privileged/arch-test 合规（FR65, NFR31）
+**And** 本故事失败或标延期**不得**回溯判定 Epic 17 / 18.2 未完成（NFR32）
+**And** 设计依赖仅为 `bitloom-prelude`（NFR29）
+
+### Story 18.4: 更新大纲 + README 范围与品牌
+
+As a 仓库访客,
+I want `99-episode-ii-outline` 与 README/教程首页反映 Episode II 真实状态与非目标,
+So that 不会再把流水/CSR 当成「纯延期空大纲」，也不会误走 Linux Softcore。
+
+**Acceptance Criteria:**
+
+**Given** Story 18.1–18.2 文档就位（18.3 可完成或标可选/延期）
+**When** 更新 `docs/tutorials/rv32-episode-i/99-episode-ii-outline.md`：从「未实现/延期」改为指向 `rv32-episode-ii` 实现/教程状态与章节链接（FR67）
+**And** 更新 README 与 Episode II 教程首页：范围与非目标（无 cache/MMU/Linux/动态预测；VexRiscv 仅对照）（FR70）
+**Then** 持续声明 Bitloom / 与 `samitbasu/rhdl` 无关（NFR33）
+**And** 写明 CSR 章可选；Epic 17 完成不依赖 18.3（NFR32）
