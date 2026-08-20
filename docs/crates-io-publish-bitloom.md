@@ -35,3 +35,23 @@
 
 - Actions → **release-plz** → Run workflow, or push to `main`
 - Prefer `release-pr` first; switch action `command` to `release` when ready for direct publish
+
+## MVP library family (Story 13.2 / NFR22)
+
+Published crates (lockstep with CLI when possible):
+
+| crates.io name | role |
+|---|---|
+| `bitloom` | CLI (`cargo-bitloom`) |
+| `bitloom-prelude` | design `[dependencies]` only |
+| `bitloom-hir` / `bitloom-builder` / `bitloom-macro` | transitive via prelude |
+| `bitloom-vlog` | host emit backend |
+
+**Manual lockstep (when release-plz does not yet cover every crate):**
+
+1. Bump workspace `version` once.
+2. Dry-run then publish deps first: `bitloom-hir` → `bitloom-builder` → `bitloom-macro` → `bitloom-prelude` → `bitloom-vlog` → `bitloom`.
+3. Ensure crates.io Trusted Publishing (or API token) is configured for **each** published package name, not only `bitloom`.
+4. Never publish `rhdl` / `rhdl-bits` / user-facing `rhdl-prelude`.
+
+`bitloom-sim` (optional Epic 14) follows the same lockstep when enabled.

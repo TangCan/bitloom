@@ -15,17 +15,29 @@ Rust 嵌入式 RTL HDL：设计是**可执行生成器**。`cargo bitloom build`
 
 文档、徽章与发布说明不得暗示本工具链以 crates.io 包名 `rhdl` 发布。
 
-## 快速开始
-
-- **工具链：** `rust-toolchain.toml` 钉死 **rustc 1.97.1** / edition 2024
-- **测试：** `just test`（或 `cargo test --workspace`）
-- **构建示例 Verilog：**
+## 快速开始（真独立；不必 clone）
 
 ```bash
-cargo run -p bitloom -- build --package counter_ports --out-dir /tmp/rhdl-out --manifest-dir .
+rustup toolchain install 1.97.1
+cargo install bitloom
+cargo bitloom new blink
+cargo bitloom build --package blink --manifest-dir blink --out-dir out
 ```
 
-设计 crate 应只依赖 `rhdl-prelude`；详见 `AGENTS.md` 与架构脊柱。
+设计 crate 只依赖 **`bitloom-prelude`**（不要把 CLI 包 `bitloom` 加进 `[dependencies]`）。与 **bitbloom** 等无关拼写无关；与 [samitbasu/rhdl](https://github.com/samitbasu/rhdl) 无关。
+
+- **工具链：** `rust-toolchain.toml` 钉死 **rustc 1.97.1** / edition 2024
+- **测试（贡献者）：** `just test`（或 `cargo test --workspace`）
+
+### 贡献者：在 monorepo 里跑示例
+
+```bash
+git clone https://github.com/TangCan/bitloom.git
+cd bitloom
+cargo run -p bitloom -- build --package counter_ports --out-dir /tmp/bitloom-out --manifest-dir .
+```
+
+多包发布与 Trusted Publishing：见 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。
 
 ## 文档在哪
 
