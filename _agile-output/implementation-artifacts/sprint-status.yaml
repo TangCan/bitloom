@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-19-2026 17:50
+last_updated: 08-20-2026 14:50
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -117,6 +117,19 @@ development_status:
   12-2-首次手动发布-bitloom: done
   12-3-trusted-publishing-与后续自动化: done
   epic-12-retrospective: done
+
+  epic-13: backlog
+  13-1-修订-ad-2-6-为-bitloom-prelude: backlog
+  13-2-发布-mvp-bitloom-库族: backlog
+  13-3-host-shim-使用-registry-后端并解析用户包: backlog
+  13-4-cargo-bitloom-new-脚手架: backlog
+  13-5-空目录真独立-atdd: backlog
+  13-6-readme-真独立主路径与发布运维收口: backlog
+  epic-13-retrospective: optional
+
+  epic-14: backlog
+  14-1-发布-bitloom-sim-供独立-tick: backlog
+  epic-14-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1

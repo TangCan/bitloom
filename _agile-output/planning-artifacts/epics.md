@@ -12,22 +12,27 @@ stepsCompleted:
   - step-02-design-epics-phase-3
   - step-03-create-stories-phase-3
   - step-04-final-validation-phase-3
+  - step-01-validate-prerequisites-phase-4
+  - step-02-design-epics-phase-4
+  - step-03-create-stories-phase-4
+  - step-04-final-validation-phase-4
 status: complete
 phase1Status: complete
 phase2Status: complete
 phase3Status: complete
+phase4Status: complete
 phase3Scope: Bitloom rename + maturity closeout + crates.io publish
+phase4Scope: True standalone after cargo install (bitloom-* publish graph)
 inputDocuments:
-  - _agile-output/specs/spec-rhdl/SPEC.md
-  - _agile-output/specs/spec-rhdl/language-surface.md
-  - _agile-output/specs/spec-rhdl/later-product.md
-  - _agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md
-  - _agile-output/planning-artifacts/research/technical-rhdl-phase-two-later-product-fr21-nfr3-l-2026-08-19/research.md
+  - _agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
+  - _agile-output/planning-artifacts/research/technical-cargo-bitloom-standalone-usage-after-ins-2026-08-20/research.md
   - _agile-output/planning-artifacts/research/technical-rhdl-rename-alternatives-product-naming-2026-08-19/research.md
-  - _agile-output/planning-artifacts/research/technical-rhdl-clean-product-closeout-and-crates-i-2026-08-19/research.md
   - AGENTS.md
+excludedFromPhase4Rewrite:
+  - Phase 1–3 epics/stories (Epic 1–12 retained as historical complete)
+uxDesign: none
 ---
 
 # rhdl - Epic Breakdown
@@ -36,7 +41,7 @@ inputDocuments:
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。无 UX。`later-product.md` 仍为索引。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。**阶段四：** `cargo install bitloom` 后真独立（不 clone 工具链 monorepo）— 需求源为 standalone research + AD-2/6/14 修订。无 UX。
 
 ## Requirements Inventory
 
@@ -964,3 +969,181 @@ So that 后续发版不必长期持有 crates.io token。
 **Then** 文档化：后续版本如何经 CI 发 registry；cargo-dist 不替代 registry 发布（FR46）
 **And** 至少有一次 dry-run/文档化演练证明工作流可触发（不要求本 story 内再发第二个正式版本）
 
+---
+
+# Phase 4 — True standalone (Bitloom after `cargo install`)
+
+> 范围确认（2026-08-20）：**B** — 追加 Epic 13+；不重写 Epic 1–12。  
+> 输入：PRD/addendum（约束继承）、ARCHITECTURE-SPINE（AD-2/6/14）、standalone research（主需求源）、naming research、AGENTS.md。无 UX。
+
+## Phase 4 Requirements Inventory
+
+### Functional Requirements
+
+FR47: 设计者在**不 clone** Bitloom 工具链仓库的前提下，仅依赖 crates.io 上的公开库（用户面：`bitloom-prelude`）编写设计 crate，并能 elaborate。  
+FR48: 将语言/emit 最小发布面以 **`bitloom-*`** 包名发布到 crates.io（MVP：`bitloom-hir`、`bitloom-builder`、`bitloom-macro`、`bitloom-prelude`、`bitloom-vlog`）；禁止以 `rhdl-prelude` 等 `rhdl-*` 作为对外用户依赖名；继续禁止 `rhdl` / `rhdl-bits` / `rhdl-rs`。  
+FR49: 修订 AD-2（及 AD-6 中设计依赖表述）：设计 crate `[dependencies]` 唯一允许 **`bitloom-prelude`**；设计不得依赖 CLI 包 `bitloom`；可选 `[dev-dependencies]` 后续波次的 `bitloom-sim`。  
+FR50: `cargo bitloom build` 的 host/shim **不得** path 依赖工具链 monorepo 的 hir/vlog；须依赖与 CLI **同版本钉死** 的已发布 `bitloom-vlog`（及传递的 `bitloom-hir`）；仍遵守 AD-14（进程内 elaborate+emit，不以 FrozenHir 文件协议替代）。  
+FR51: `cargo bitloom build --package` 通过用户 `--manifest-dir` 工作区的 Cargo 元数据解析设计包（不假定仅 `examples/<name>`）。  
+FR52: 提供 `cargo bitloom new <name>`（或等价脚手架），生成只依赖 `bitloom-prelude` 的最小设计 crate + elaborate 入口。  
+FR53: 存在可自动化的真独立验收：空目录 + 已安装 CLI → `new` → `build` → 产出 `.v`，全程无 clone 工具链仓库。  
+FR54: README / crates.io README 以真独立路径为主 onboarding；clone monorepo 降为贡献者/工具链开发文档；诚实区分「今日过渡」与「已达成」。  
+FR55: （可选第二波，可另 epic）发布 `bitloom-sim`，允许用户设计 crate 以 dev-dependency 做 `tick`/VCD，仍不要求 clone monorepo。
+
+### NonFunctional Requirements
+
+NFR18: 发布前再探测 `bitloom-*` MVP 名在 crates.io 仍可用；若被抢注须改前缀策略并更新 AD，不得静默改用 `rhdl-*` 用户面。  
+NFR19: MVP 库与 CLI **锁步同版本**发布（bindgen 风格）；已发布 crate 的 `Cargo.toml` 不得含指向 monorepo 的 `path`/`git` 用户依赖。  
+NFR20: 真独立流程 MSRV 仍为 **rustc 1.97.1** / edition 2024（继承 NFR13）。  
+NFR21: 文档与帮助文本持续声明与 `samitbasu/rhdl` 无关，并消歧易混淆的 `bitbloom`。  
+NFR22: Trusted Publishing / release-plz 扩展覆盖新发布的 `bitloom-*` 库（或文档化等价多包发布流程）。
+
+### Additional Requirements (Architecture / Research)
+
+- 保留 AD-14 host shim 模式；后端依赖改为 registry 版本，不改为设计依赖 CLI（拒 AD-2/6 违规方案）。
+- 拒阶段一 FrozenHir 序列化 CLI 协议。
+- git 依赖脚手架仅允许作**显式过渡**，不得标为真独立 DoD。
+- 目录名可暂留 `crates/rhdl-*`，但 `[package].name` 对外必须是 `bitloom-*`（实现偏好，故事中二选一写清）。
+- 继承阶段三：CLI 包 `bitloom` 已发布；库此前 `publish = false`。
+
+### UX Design Requirements
+
+无 UI。无 UX-DR。
+
+### Phase 4 FR Coverage Map
+
+FR47: Epic 13 — 不 clone 即可用公开库编写并 elaborate  
+FR48: Epic 13 — 发布 MVP `bitloom-*` 库族  
+FR49: Epic 13 — 修订 AD-2/6 为 `bitloom-prelude`  
+FR50: Epic 13 — host shim 使用 registry `bitloom-vlog`（AD-14）  
+FR51: Epic 13 — `--package` 经用户 workspace metadata 解析  
+FR52: Epic 13 — `cargo bitloom new`  
+FR53: Epic 13 — 空目录 ATDD：install → new → build → `.v`  
+FR54: Epic 13 — README 真独立为主路径  
+FR55: Epic 14 — （可选）发布 `bitloom-sim` 供独立 tick
+
+### Phase 4 NFR notes
+
+NFR18, NFR19 → Epic 13（名称探测 + 锁步发布）  
+NFR20, NFR21, NFR22 → Epic 13（MSRV、免责、Trusted Publishing 扩包）  
+Epic 14 继承 NFR18–20 若发布 sim
+
+## Phase 4 Epic List
+
+### Epic 13: 装完就能写电路并出 Verilog
+终端用户在 `cargo install bitloom` 之后，无需 clone 工具链仓库，即可 `new` 设计、依赖 `bitloom-prelude`、用 `cargo bitloom build` 得到 `.v`；公开 AD 与 README 与该路径一致。
+**FRs covered:** FR47, FR48, FR49, FR50, FR51, FR52, FR53, FR54（NFR18–NFR22）
+**Depends on:** Epic 11–12（Bitloom CLI 已上架）。本 epic 内库发布先于 CLI 真独立改造。
+
+### Epic 14: 不 clone 也能 tick（可选第二波）
+用户在独立设计 crate 上以 `bitloom-sim` 为 dev-dependency 做周期精确仿真 / VCD，仍不要求 clone monorepo。
+**FRs covered:** FR55
+**Depends on:** Epic 13（`bitloom-hir` / prelude 已发布且版本可对齐）
+
+
+## Epic 13: 装完就能写电路并出 Verilog
+
+终端用户在 `cargo install bitloom` 之后，无需 clone 工具链仓库，即可 `new` 设计、依赖 `bitloom-prelude`、用 `cargo bitloom build` 得到 `.v`；公开 AD 与 README 与该路径一致。  
+**FRs covered:** FR47, FR48, FR49, FR50, FR51, FR52, FR53, FR54（NFR18–NFR22）  
+**Depends on:** Epic 11–12。
+
+### Story 13.1: 修订 AD-2/6 为 bitloom-prelude
+
+As a 架构与实现者,
+I want AD-2/AD-6 明确设计 crate 只依赖 `bitloom-prelude`,
+So that 真独立发布不会再把用户面钉在 `rhdl-prelude` 或 CLI 包上。
+
+**Acceptance Criteria:**
+
+**Given** ARCHITECTURE-SPINE 中 AD-2 仍写设计依赖 `rhdl-prelude`，且 AD-6 图/规则使用 `rhdl-*` 名
+**When** 修订 AD-2 与 AD-6（含依赖图标签）并标注决议日期
+**Then** 规则写明：设计 crate `[dependencies]` 唯一允许 **`bitloom-prelude`**；设计不得依赖 CLI 包 `bitloom`；继续禁止发布/暗示 `rhdl` / `rhdl-bits` / `rhdl-rs`；内部目录可暂留 `rhdl-*` 但对外 `[package].name` 走 `bitloom-*`（FR49）
+**And** `AGENTS.md` / 策略块与修订后的 AD 一致（NFR21）
+
+### Story 13.2: 发布 MVP bitloom-* 库族
+
+As a 终端设计者,
+I want 在 crates.io 上 `cargo add bitloom-prelude`,
+So that 无需 path/git 指向 Bitloom monorepo 即可编写设计。
+
+**Acceptance Criteria:**
+
+**Given** Story 13.1 已锁定对外名，且发布前再探测 `bitloom-{hir,builder,macro,prelude,vlog}` 仍可用（NFR18）
+**When** 将 MVP 五包的 `[package].name` 设为对应 `bitloom-*`，`publish = true`，去掉已发布清单中的 monorepo `path`/`git` 用户依赖，按锁步版本执行 dry-run 后发布（NFR19）
+**Then** crates.io 上可解析到同版本的 `bitloom-prelude`（传递依赖 builder/macro/hir）与 `bitloom-vlog`；文档/描述声明与 `samitbasu/rhdl` 无关（FR48, NFR21）
+**And** 未纳入 MVP 的库可保持 `publish = false`；禁止发布 `rhdl` / `rhdl-bits`
+**And** Trusted Publishing / release-plz（或文档等价流程）覆盖新包或写明多包发布步骤（NFR22 起步）
+
+### Story 13.3: Host shim 使用 registry 后端并解析用户包
+
+As a 本机用户,
+I want `cargo bitloom build` 对**我的** Cargo 工作区生效且不 path 依赖工具链仓库,
+So that 安装的 CLI 能真正驱动已发布的 emit 栈。
+
+**Acceptance Criteria:**
+
+**Given** Story 13.2 已发布同版本 `bitloom-vlog` / `bitloom-hir`
+**When** 改写 `build` 生成的 host/shim：依赖改为 crates.io（或与 CLI 同版本钉死）的 `bitloom-vlog`（及 hir），并用 `cargo metadata`（或等价）在 `--manifest-dir` 解析 `--package`，不再假定仅 `examples/<name>`
+**Then** host 遵守 AD-14（进程内 elaborate+emit；不以 FrozenHir 文件协议替代）（FR50, FR51）
+**And** 在仅含用户设计 crate + `bitloom-prelude` 的临时工作区上，`build` 不再因缺少 monorepo `crates/rhdl-vlog` path 而失败
+**And** 若仍检测到「仅有旧 path 布局且库未发布」的贡献者场景，错误信息须可读（可选）
+
+### Story 13.4: cargo bitloom new 脚手架
+
+As a 新用户,
+I want `cargo bitloom new <name>` 生成最小设计 crate,
+So that 不必手写 Cargo.toml 与 elaborate 入口。
+
+**Acceptance Criteria:**
+
+**Given** Story 13.2 的 `bitloom-prelude` 已可 `cargo add`
+**When** 实现 `cargo bitloom new <name>`（可用内置模板；可选 cargo-generate，非必须）
+**Then** 生成的包：`[dependencies]` 仅含 `bitloom-prelude`（版本与当前 CLI 文档一致）；含 `#[module]`（或现行宏表面）示例与可发现的 elaborate 入口（与 AD-19 / 现有 `rhdl_elaborate` 约定对齐或文档化迁移）（FR52）
+**And** 生成物不依赖 CLI 包 `bitloom` 作为 library
+**And** `--help` 描述该子命令
+
+### Story 13.5: 空目录真独立 ATDD
+
+As a 维护者,
+I want 自动化验收「install → new → build → .v」无需 clone,
+So that 回归不会再把 monorepo 绑回主路径。
+
+**Acceptance Criteria:**
+
+**Given** Story 13.3–13.4 已落地，且测试环境可用 MSRV **1.97.1**（NFR20）
+**When** 在空临时目录运行（或 CI 等价）：使用已安装/刚构建的 `cargo-bitloom`，执行 `new` 与 `build --package … --manifest-dir . --out-dir …`
+**Then** 产出非空 Yosys 友好 `.v`；全过程**不** `git clone` TangCan/bitloom（FR47, FR53）
+**And** 该验收作为工作区测试或 `just`/CI job 固定下来；失败信息指向真独立合同
+
+### Story 13.6: README 真独立主路径与发布运维收口
+
+As a 仓库/crates.io 访客,
+I want 快速开始以真独立路径为主,
+So that 不会误以为必须 clone 才能出 Verilog。
+
+**Acceptance Criteria:**
+
+**Given** Story 13.5 验收已绿
+**When** 更新 README 与 crates.io 挂载 README：主路径为 install → new → build；clone 降为贡献者章节；消歧 `bitbloom` / samitbasu/rhdl（FR54, NFR21）
+**And** 文档化多包锁步发布与 Trusted Publishing 覆盖 `bitloom-*`（或显式手册步骤）（NFR22）
+**Then** 公开文档不再把 `cargo run -p bitloom -- build --manifest-dir .`（monorepo）写成唯一快速开始
+
+## Epic 14: 不 clone 也能 tick（可选第二波）
+
+用户在独立设计 crate 上以 `bitloom-sim` 为 dev-dependency 做周期精确仿真 / VCD，仍不要求 clone monorepo。  
+**FRs covered:** FR55  
+**Depends on:** Epic 13。
+
+### Story 14.1: 发布 bitloom-sim 供独立 tick
+
+As a 设计者,
+I want `cargo add bitloom-sim --dev` 后在 `cargo test` 里 `tick`,
+So that 仿真也不必 clone 工具链仓库。
+
+**Acceptance Criteria:**
+
+**Given** Epic 13 已发布可对齐版本的 `bitloom-hir` / `bitloom-prelude`
+**When** 将 sim 包以 `bitloom-sim` 发布（`publish = true`），依赖 registry 上的 hir；更新 AD-6 后端集合命名若需要
+**Then** 独立设计 crate 可仅用 crates.io 依赖运行至少一条 tick（或 VCD）测试夹具（FR55）
+**And** 设计 `[dependencies]` 仍不得加入 sim（仅 dev-dependencies，继承 AD-6）
+**And** README 增加可选「独立仿真」小节
