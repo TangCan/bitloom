@@ -39,11 +39,18 @@ cargo run -p bitloom -- build --package counter_ports --out-dir /tmp/bitloom-out
 
 多包发布与 Trusted Publishing：见 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。
 
-## 教学 RV32（Episode I）
+## 教学 RV32
 
-逐步教程：[`docs/tutorials/rv32-episode-i/`](docs/tutorials/rv32-episode-i/README.md)。示例核：`examples/rv32_core`（裁剪 RV32I；无 SoC/MMU/Linux；无流水线/CSR）。
+公开产品名 **Bitloom**。与 [samitbasu/rhdl](https://github.com/samitbasu/rhdl) 无关。
 
-延伸阅读：Harris DDCA Ch.7；FemtoRV `FROM_BLINKER_TO_RISCV`；对照 PicoRV32/SERV。**不要**以 VexRiscv Linux 教程为第一路径。子集合规是**最小过滤器**（见 `examples/rv32_core/COMPLIANCE.md`），未宣称 arch-test。
+| 集 | 教程 | 示例核 | 范围摘要 |
+|----|------|--------|----------|
+| **Episode I** | [`docs/tutorials/rv32-episode-i/`](docs/tutorials/rv32-episode-i/README.md) | `examples/rv32_core` | 裁剪 RV32I 单周期；无 SoC/MMU/Linux |
+| **Episode II** | [`docs/tutorials/rv32-episode-ii/`](docs/tutorials/rv32-episode-ii/README.md) | `examples/rv32_pipe` | 立即数冻结 → 五级 + 转发 + load-use + 分支 flush；**可选 CSR 延期**（NFR32） |
+
+**非目标（两集共用）：** cache / MMU / Linux Softcore；动态分支预测；完整 Privileged / arch-test。VexRiscv **仅对照**，不作第一路径。CSR/trap **不**阻塞 Epic 17 流水完成定义。
+
+延伸阅读：Harris DDCA Ch.7；FemtoRV `FROM_BLINKER_TO_RISCV`；对照 PicoRV32/SERV。子集合规是**最小过滤器**（见 `examples/rv32_core/COMPLIANCE.md`），未宣称 arch-test。
 
 ### 可选：独立仿真（`bitloom-sim`）
 

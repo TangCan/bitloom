@@ -153,11 +153,11 @@ development_status:
   17-5-load-use-停顿-atdd-验证阶梯: done
   epic-17-retrospective: optional
 
-  epic-18: backlog
-  18-1-episode-ii-教程骨架与索引: backlog
-  18-2-递进教程正文-isa-流水-hazard: backlog
-  18-3-可选-zicsr-m-mode-trap-教学最小集: backlog
-  18-4-更新大纲-readme-范围与品牌: backlog
+  epic-18: done
+  18-1-episode-ii-教程骨架与索引: done
+  18-2-递进教程正文-isa-流水-hazard: done
+  18-3-可选-zicsr-m-mode-trap-教学最小集: done
+  18-4-更新大纲-readme-范围与品牌: done
   epic-18-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"

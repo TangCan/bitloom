@@ -19,6 +19,7 @@
 - 测试名 `subset_minimal_filter_program` 将 ADDI→SW→LED 串成一条可回归路径
 - Episode II 流水（17.4–17.5）另包 `examples/rv32_pipe`：五级 + 转发 + load-use stall + 分支 flush；`cargo test -p rv32_pipe` / `cargo bitloom build --package rv32_pipe`；见该包 `PIPE.md`（取指仍为 harness `instr`；无 CSR）
 - Load-use 独立 ATDD：`tick_load_use_stall_atdd_golden`（无停顿会失败）
+- 可选 Zicsr/M-trap（Epic 18.3 / NFR32）：**延期**；教程 stub [`docs/tutorials/rv32-episode-ii/06-csr-m-trap-deferred.md`](../../docs/tutorials/rv32-episode-ii/06-csr-m-trap-deferred.md)；**无** CSR 门禁；不回溯 Epic 17
 
 ## 未启用 (b)
 

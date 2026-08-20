@@ -5,7 +5,7 @@
 ## 范围与非目标
 
 - **范围：** 裁剪 RV32I 教学核（`examples/rv32_core`）+ 本目录逐步教程。
-- **非目标：** 无 SoC / MMU / Linux；无流水线 / CSR（见 [Episode II 大纲](./99-episode-ii-outline.md)）。
+- **非目标：** 无 SoC / MMU / Linux；流水线 / 可选 CSR 见 [Episode II](../rv32-episode-ii/README.md)（大纲：[99](./99-episode-ii-outline.md)）。
 
 ## 章节索引
 
@@ -20,7 +20,7 @@
 | [06](./06-load-store-mmio.md) | 访存与 MMIO | `tick_sw_mmio_led_golden` |
 | [对照](./femtorv-compare.md) | FemtoRV Ch.4–6 对照表 | 阅读 |
 | [07](./07-asm-and-c.md) | 手写 asm / C（简化） | 编码助手 + 外部汇编对照 |
-| [99](./99-episode-ii-outline.md) | Episode II 大纲（延期） | 仅阅读 |
+| [99](./99-episode-ii-outline.md) | Episode II 入口 | 指向已实现教程 / 延期 CSR |
 
 ## 延伸阅读
 

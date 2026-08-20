@@ -17,7 +17,7 @@
 | Load-use（17.5） | ID/EX 为 LW 且 IF/ID 源匹配 → 冻结 PC/IF-ID、向 ID/EX 插 bubble；随后 MEM/WB→EX 转发 |
 | 分支 | predict-not-taken；taken 时 flush IF/ID 与 ID/EX（NOP/bubble）并 redirect PC |
 | 子集 | 同 Episode I（ADDI/ADD/BEQ/LW/SW，x1–x4） |
-| 非目标 | **无** CSR/trap |
+| 非目标 | **无** CSR/trap（可选 Zicsr/M-trap：**延期**；见教程 [Ch.06](../../docs/tutorials/rv32-episode-ii/06-csr-m-trap-deferred.md)；NFR32 — 不阻塞 Epic 17） |
 
 ## 仿真时序（`bitloom-sim`）
 

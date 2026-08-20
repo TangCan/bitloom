@@ -45,3 +45,4 @@ Until then, 17.4–17.5 must obey **(b)**.
 - **LUI / AUIPC / JAL / JALR** and remaining RV32I ops — U/J imm rebuilt in decode; execute paths not wired yet.
 - No CSR/ECALL/EBREAK/FENCE, no MMU/Linux.
 - Classic 5-stage + forward + load-use stall + branch flush lives in **`examples/rv32_pipe`** (Stories 17.4–17.5 / `PIPE.md`); this package stays Episode I single-cycle.
+- **Optional Zicsr + M-mode trap (FR65 / NFR32):** **deferred** — teaching stub only in [`docs/tutorials/rv32-episode-ii/06-csr-m-trap-deferred.md`](../../docs/tutorials/rv32-episode-ii/06-csr-m-trap-deferred.md). Does **not** block Epic 17 Done.
