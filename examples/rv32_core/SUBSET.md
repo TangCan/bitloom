@@ -44,4 +44,4 @@ Until then, 17.4–17.5 must obey **(b)**.
 - **LB / LH / LBU / LHU / SB / SH** — byte/half load-store and load sign-/zero-extend are **out of subset**. DMEM is word-addressed (`ea[3:0]` → 16×32); teaching path stays `LW`/`SW` only so imm/sign-extend freeze (17.3) is not entangled with sub-word align/mux. A later story may add them with explicit SUBSET rows.
 - **LUI / AUIPC / JAL / JALR** and remaining RV32I ops — U/J imm rebuilt in decode; execute paths not wired yet.
 - No CSR/ECALL/EBREAK/FENCE, no MMU/Linux.
-- Classic 5-stage + forward + branch flush lives in **`examples/rv32_pipe`** (Story 17.4 / `PIPE.md`); this package stays Episode I single-cycle. Load-use stall is Story 17.5.
+- Classic 5-stage + forward + load-use stall + branch flush lives in **`examples/rv32_pipe`** (Stories 17.4–17.5 / `PIPE.md`); this package stays Episode I single-cycle.

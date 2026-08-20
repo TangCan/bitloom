@@ -11,3 +11,11 @@
 - source_spec: `_agile-output/implementation-artifacts/17-4-五级流水-转发-分支-flush.md`
   summary: ADDI/BEQ/LW/SW 判定仍为 opcode-only（无 funct3），非子集编码可能被误认
   evidence: 与 `rv32_core` Episode I 译码合同一致；教学子集假定合法编码
+
+- source_spec: `_agile-output/implementation-artifacts/17-5-load-use-停顿-atdd-验证阶梯.md`
+  summary: Load-use ATDD 仅覆盖 rs1 消费者（ADDI）；未单独测 ADD/BEQ/SW 的 rs2 依赖路径
+  evidence: 评审；硬件已对 use_rs2 门控，但无第二黄金
+
+- source_spec: `_agile-output/implementation-artifacts/17-5-load-use-停顿-atdd-验证阶梯.md`
+  summary: ATDD 不断言 stall 周期数 / PC 冻结拍，只断言最终 RF
+  evidence: 无停顿时 x4=1 已证明依赖 stall；更强观测可后补

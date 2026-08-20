@@ -1,12 +1,12 @@
-//! Episode II 五级流水教学核（Story 17.4 / FR64）。
+//! Episode II 五级流水教学核（Story 17.4–17.5 / FR64）。
 //!
-//! IF/ID/EX/MEM/WB + EX/MEM→EX 与 MEM/WB→EX 转发 + predict-not-taken 分支 flush。
-//! 取指合同 (b) harness `instr`；无 load-use stall；无 CSR。
+//! IF/ID/EX/MEM/WB + EX/MEM→EX 与 MEM/WB→EX 转发 + load-use stall + predict-not-taken 分支 flush。
+//! 取指合同 (b) harness `instr`；无 CSR。
 //! 设计依赖仅 `bitloom-prelude`。公开品牌 Bitloom；与 `samitbasu/rhdl` 无关。
 
 use bitloom_prelude::{Diagnostics, Elaboratable, ElaborateSession, FrozenHir, GroundType, Span};
 
-/// 经典五级流水 + ALU 转发 + 分支冲刷。
+/// 经典五级流水 + ALU 转发 + load-use 停顿 + 分支冲刷。
 pub struct EpisodeIIPipe;
 
 impl Elaboratable for EpisodeIIPipe {
@@ -182,7 +182,10 @@ impl Elaboratable for EpisodeIIPipe {
             "branch_tgt_raw",
             "branch_tgt",
             "next_pc_br",
+            "next_pc_stall",
             "next_pc",
+            "if_id_pc_adv",
+            "if_id_instr_adv",
             "if_id_pc_n",
             "if_id_instr_n",
             "id_ex_pc_n",
@@ -247,6 +250,22 @@ impl Elaboratable for EpisodeIIPipe {
             "rs2_4",
             "bfalse",
             "do_flush",
+            "do_stall",
+            "id_ex_kill",
+            "iex_rd1",
+            "iex_rd2",
+            "iex_rd3",
+            "iex_rd4",
+            "iex_rd_nz",
+            "iex_rd_nz_a",
+            "iex_rd_nz_b",
+            "stall_rs1",
+            "stall_rs2",
+            "stall_rs2_u",
+            "use_rs2",
+            "use_rs2_a",
+            "stall_rs",
+            "stall_rs_a",
             "id_ex_is_addi_n",
             "id_ex_is_add_n",
             "id_ex_is_beq_n",
@@ -539,6 +558,25 @@ impl Elaboratable for EpisodeIIPipe {
         s.assign_and("take_br", "id_ex_is_beq", "eq_rs", Span::default());
         s.assign_net("do_flush", "take_br", Span::default());
 
+        // Load-use: LW in EX, consumer in ID uses same rd → stall PC/IF-ID, bubble ID/EX.
+        s.assign_eq("iex_rd1", "id_ex_rd", "c1", Span::default());
+        s.assign_eq("iex_rd2", "id_ex_rd", "c2", Span::default());
+        s.assign_eq("iex_rd3", "id_ex_rd", "c3", Span::default());
+        s.assign_eq("iex_rd4", "id_ex_rd", "c4", Span::default());
+        s.assign_or("iex_rd_nz_a", "iex_rd1", "iex_rd2", Span::default());
+        s.assign_or("iex_rd_nz_b", "iex_rd3", "iex_rd4", Span::default());
+        s.assign_or("iex_rd_nz", "iex_rd_nz_a", "iex_rd_nz_b", Span::default());
+        s.assign_eq("stall_rs1", "id_ex_rd", "rs1", Span::default());
+        s.assign_eq("stall_rs2", "id_ex_rd", "rs2", Span::default());
+        // I-type imm[4:0] aliases rs2 字段；仅对真实使用 rs2 的指令门控。
+        s.assign_or("use_rs2_a", "is_add", "is_beq", Span::default());
+        s.assign_or("use_rs2", "use_rs2_a", "is_sw", Span::default());
+        s.assign_and("stall_rs2_u", "stall_rs2", "use_rs2", Span::default());
+        s.assign_or("stall_rs_a", "stall_rs1", "stall_rs2_u", Span::default());
+        s.assign_and("stall_rs", "stall_rs_a", "iex_rd_nz", Span::default());
+        s.assign_and("do_stall", "id_ex_is_lw", "stall_rs", Span::default());
+        s.assign_or("id_ex_kill", "do_flush", "do_stall", Span::default());
+
         s.assign_add("branch_tgt_raw", "id_ex_pc", "id_ex_imm", Span::default());
         s.assign_and("branch_tgt", "branch_tgt_raw", "mask32", Span::default());
         s.assign_add("pc_plus4_raw", "pc", "c4", Span::default());
@@ -550,64 +588,104 @@ impl Elaboratable for EpisodeIIPipe {
             "pc_plus4",
             Span::default(),
         );
+        // Stall holds architectural PC (mux hold — not module-level en).
+        s.assign_mux(
+            "next_pc_stall",
+            "do_stall",
+            "pc",
+            "next_pc_br",
+            Span::default(),
+        );
         // Hold PC at 0 while rst is observed in comb (helps post-reset arming).
-        s.assign_mux("next_pc", "rst", "c0", "next_pc_br", Span::default());
+        s.assign_mux("next_pc", "rst", "c0", "next_pc_stall", Span::default());
 
-        // IF/ID next (bubble on flush)
-        s.assign_mux("if_id_pc_n", "do_flush", "c0", "pc_f", Span::default());
-        s.assign_mux("if_id_instr_n", "do_flush", "c0", "instr", Span::default());
+        // IF/ID: flush→bubble; else stall→hold; else advance from pc_f/instr.
+        s.assign_mux(
+            "if_id_pc_adv",
+            "do_stall",
+            "if_id_pc",
+            "pc_f",
+            Span::default(),
+        );
+        s.assign_mux(
+            "if_id_instr_adv",
+            "do_stall",
+            "if_id_instr",
+            "instr",
+            Span::default(),
+        );
+        s.assign_mux(
+            "if_id_pc_n",
+            "do_flush",
+            "c0",
+            "if_id_pc_adv",
+            Span::default(),
+        );
+        s.assign_mux(
+            "if_id_instr_n",
+            "do_flush",
+            "c0",
+            "if_id_instr_adv",
+            Span::default(),
+        );
 
-        // ID/EX next (bubble on flush)
-        s.assign_mux("id_ex_pc_n", "do_flush", "c0", "if_id_pc", Span::default());
+        // ID/EX: bubble on flush or load-use stall.
+        s.assign_mux(
+            "id_ex_pc_n",
+            "id_ex_kill",
+            "c0",
+            "if_id_pc",
+            Span::default(),
+        );
         s.assign_mux(
             "id_ex_rs1_data_n",
-            "do_flush",
+            "id_ex_kill",
             "c0",
             "rs1_data",
             Span::default(),
         );
         s.assign_mux(
             "id_ex_rs2_data_n",
-            "do_flush",
+            "id_ex_kill",
             "c0",
             "rs2_data",
             Span::default(),
         );
-        s.assign_mux("id_ex_imm_n", "do_flush", "c0", "imm", Span::default());
-        s.assign_mux("id_ex_rd_n", "do_flush", "c0", "rd", Span::default());
-        s.assign_mux("id_ex_rs1_n", "do_flush", "c0", "rs1", Span::default());
-        s.assign_mux("id_ex_rs2_n", "do_flush", "c0", "rs2", Span::default());
+        s.assign_mux("id_ex_imm_n", "id_ex_kill", "c0", "imm", Span::default());
+        s.assign_mux("id_ex_rd_n", "id_ex_kill", "c0", "rd", Span::default());
+        s.assign_mux("id_ex_rs1_n", "id_ex_kill", "c0", "rs1", Span::default());
+        s.assign_mux("id_ex_rs2_n", "id_ex_kill", "c0", "rs2", Span::default());
         s.assign_mux(
             "id_ex_is_addi_n",
-            "do_flush",
+            "id_ex_kill",
             "bfalse",
             "is_addi",
             Span::default(),
         );
         s.assign_mux(
             "id_ex_is_add_n",
-            "do_flush",
+            "id_ex_kill",
             "bfalse",
             "is_add",
             Span::default(),
         );
         s.assign_mux(
             "id_ex_is_beq_n",
-            "do_flush",
+            "id_ex_kill",
             "bfalse",
             "is_beq",
             Span::default(),
         );
         s.assign_mux(
             "id_ex_is_lw_n",
-            "do_flush",
+            "id_ex_kill",
             "bfalse",
             "is_lw",
             Span::default(),
         );
         s.assign_mux(
             "id_ex_is_sw_n",
-            "do_flush",
+            "id_ex_kill",
             "bfalse",
             "is_sw",
             Span::default(),
@@ -623,7 +701,7 @@ impl Elaboratable for EpisodeIIPipe {
         s.assign_net("ex_mem_is_lw_n", "id_ex_is_lw", Span::default());
         s.assign_net("ex_mem_is_sw_n", "id_ex_is_sw", Span::default());
 
-        // MEM/WB next (LW uses load_q from prior MEM read — Episode I style; golden 17.4 不测 load)
+        // MEM/WB next（LW：load_q 在 MEM 拍 seq 写入后，下一拍经 MEM/WB→EX 转发）
         s.assign_mux(
             "mem_wb_data_n",
             "ex_mem_is_lw",
@@ -761,6 +839,22 @@ pub fn enc_beq(rs1: u32, rs2: u32, offset: i32) -> u64 {
     )
 }
 
+/// Encode `SW rs2, imm(rs1)`（S-type store，12-bit signed imm）。
+pub fn enc_sw(rs1: u32, rs2: u32, imm: i32) -> u64 {
+    let imm = (imm as u32) & 0xfff;
+    let imm_11_5 = (imm >> 5) & 0x7f;
+    let imm_4_0 = imm & 0x1f;
+    u64::from(
+        (imm_11_5 << 25) | (rs2 << 20) | (rs1 << 15) | (0b010 << 12) | (imm_4_0 << 7) | 0b0100011,
+    )
+}
+
+/// Encode `LW rd, imm(rs1)`（I-type load，12-bit signed imm）。
+pub fn enc_lw(rd: u32, rs1: u32, imm: i32) -> u64 {
+    let imm = (imm as u32) & 0xfff;
+    u64::from((imm << 20) | (rs1 << 15) | (0b010 << 12) | (rd << 7) | 0b0000011)
+}
+
 #[cfg(test)]
 mod tests {
     use std::collections::HashMap;
@@ -895,6 +989,37 @@ mod tests {
         assert!(
             pc >= 16,
             "PC should have redirected to taken-path (>=16), got {pc}"
+        );
+    }
+
+    /// Load-use ATDD：`LW` 后紧跟依赖该 rd 的 `ADDI`。
+    /// 无停顿时 EX 见陈旧 RF（转发被 `em_not_lw` 挡住）→ x4 错；正确 stall + MEM/WB→EX 则 x4=43。
+    #[test]
+    fn tick_load_use_stall_atdd_golden() {
+        let mut sim = reset_sim();
+        let mut rom = HashMap::new();
+        // 0: x1=0; 4: x2=42; 8: SW x2,0(x1); 12: LW x3,0(x1); 16: ADDI x4,x3,1 → 43
+        rom.insert(0, enc_addi(1, 0, 0));
+        rom.insert(4, enc_addi(2, 0, 42));
+        rom.insert(8, enc_sw(1, 2, 0));
+        rom.insert(12, enc_lw(3, 1, 0));
+        rom.insert(16, enc_addi(4, 3, 1));
+
+        tick_with(&mut sim, enc_addi(1, 0, 0));
+        for _ in 0..36 {
+            rom_tick(&mut sim, &rom);
+        }
+        assert_eq!(sim.ports().get("x1_out"), Some(0));
+        assert_eq!(sim.ports().get("x2_out"), Some(42));
+        assert_eq!(
+            sim.ports().get("x3_out"),
+            Some(42),
+            "LW must write 42 to x3"
+        );
+        assert_eq!(
+            sim.ports().get("x4_out"),
+            Some(43),
+            "load-use ADDI must see forwarded load data after stall"
         );
     }
 
