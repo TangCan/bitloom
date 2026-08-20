@@ -1,4 +1,4 @@
-# Episode I / II ISA subset (Stories 15.2–15.3 + Epic 17 fetch lock)
+# Episode I / II ISA subset (Stories 15.2–15.3 + Epic 17)
 
 Public brand: **Bitloom**. Unrelated to `samitbasu/rhdl`.
 
@@ -6,11 +6,13 @@ Public brand: **Bitloom**. Unrelated to `samitbasu/rhdl`.
 
 | Instr | Notes |
 |-------|--------|
-| `ADDI` | I-imm zero-extended (tests use non-negative) |
+| `ADDI` | I-imm **sign-extended** from instr bit31 (Story 17.3) |
 | `ADD` | R-type, funct3/funct7 = 0 |
-| `BEQ` | B-imm bit-field decode (positive offsets; sign-extend deferred to 17.3) |
-| `LW` | Word load from DMEM[ea[3:0]] (async Mem) |
-| `SW` | Word store gated by `assign_mem_write_en(..., is_sw)`; ea=`0x100` → LED MMIO |
+| `BEQ` | B-imm `{31,7,30:25,11:8,0}` then sign-extend from bit12 (=instr[31]); positive and negative offsets |
+| `LW` | Word load from DMEM[ea[3:0]] (async Mem); I-imm sign-extended |
+| `SW` | Word store gated by `assign_mem_write_en(..., is_sw)`; ea=`0x100` → LED MMIO; S-imm sign-extended |
+
+Decode also rebuilds **U-imm** (`{instr[31:12],12'b0}`) and **J-imm** (`{31,19:12,20,30:21,0}` + sext) into a unified `imm` bus for future LUI/AUIPC/JAL — those opcodes are **not** executed in this subset yet.
 
 Architectural regs: `x0`=0, `x1`–`x4`.
 
@@ -39,5 +41,6 @@ Until then, 17.4–17.5 must obey **(b)**.
 ## Deferred (documented, not silent)
 
 - **SyncReadMem instruction fetch** — see Fetch strategy above; optional/later story after hazard lands.
-- **B-imm sign-extend** — negative offsets not required by current goldens (Story 17.3).
+- **LB / LH / LBU / LHU / SB / SH** — byte/half load-store and load sign-/zero-extend are **out of subset**. DMEM is word-addressed (`ea[3:0]` → 16×32); teaching path stays `LW`/`SW` only so imm/sign-extend freeze (17.3) is not entangled with sub-word align/mux. A later story may add them with explicit SUBSET rows.
+- **LUI / AUIPC / JAL / JALR** and remaining RV32I ops — U/J imm rebuilt in decode; execute paths not wired yet.
 - No CSR/ECALL/EBREAK/FENCE, no MMU/Linux; classic 5-stage pipeline is Epic 17.4+ (not this file’s “implemented” table until delivered).
