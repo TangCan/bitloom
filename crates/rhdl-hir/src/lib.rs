@@ -116,6 +116,18 @@ pub enum AssignExpr {
     Inc(String),
     /// Same-width binary add of two refs.
     Add(String, String),
+    /// Same-width binary subtract of two refs.
+    Sub(String, String),
+    /// Bitwise AND of two refs.
+    And(String, String),
+    /// Bitwise OR of two refs.
+    Or(String, String),
+    /// Bitwise XOR of two refs.
+    Xor(String, String),
+    /// Logical left shift: `a << (b & 63)`.
+    Shl(String, String),
+    /// Logical right shift: `a >> (b & 63)`.
+    Shr(String, String),
     /// Equality compare of two refs → 0/1 (Bool).
     Eq(String, String),
     /// 2:1 mux: `sel != 0 ? t : f`.

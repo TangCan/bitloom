@@ -133,7 +133,7 @@ development_status:
 
   epic-15: in-progress
   15-1-语言表面可行性闸门: done
-  15-2-episode-i-核-译码-alu-寄存器与-tick: backlog
+  15-2-episode-i-核-译码-alu-寄存器与-tick: done
   15-3-访存-mmio-与-emit-v: backlog
   15-4-子集完整声明与可选合规门禁: backlog
   epic-15-retrospective: optional

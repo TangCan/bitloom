@@ -681,6 +681,72 @@ impl ElaborateSession {
         );
     }
 
+    /// Combinational `dst = lhs - rhs`.
+    pub fn assign_sub(
+        &mut self,
+        dst: impl Into<String>,
+        lhs: impl Into<String>,
+        rhs: impl Into<String>,
+        span: Span,
+    ) {
+        self.push_comb_net_expr(dst.into(), AssignExpr::Sub(lhs.into(), rhs.into()), span);
+    }
+
+    /// Combinational `dst = lhs & rhs`.
+    pub fn assign_and(
+        &mut self,
+        dst: impl Into<String>,
+        lhs: impl Into<String>,
+        rhs: impl Into<String>,
+        span: Span,
+    ) {
+        self.push_comb_net_expr(dst.into(), AssignExpr::And(lhs.into(), rhs.into()), span);
+    }
+
+    /// Combinational `dst = lhs | rhs`.
+    pub fn assign_or(
+        &mut self,
+        dst: impl Into<String>,
+        lhs: impl Into<String>,
+        rhs: impl Into<String>,
+        span: Span,
+    ) {
+        self.push_comb_net_expr(dst.into(), AssignExpr::Or(lhs.into(), rhs.into()), span);
+    }
+
+    /// Combinational `dst = lhs ^ rhs`.
+    pub fn assign_xor(
+        &mut self,
+        dst: impl Into<String>,
+        lhs: impl Into<String>,
+        rhs: impl Into<String>,
+        span: Span,
+    ) {
+        self.push_comb_net_expr(dst.into(), AssignExpr::Xor(lhs.into(), rhs.into()), span);
+    }
+
+    /// Combinational `dst = lhs << (rhs & 63)`.
+    pub fn assign_shl(
+        &mut self,
+        dst: impl Into<String>,
+        lhs: impl Into<String>,
+        rhs: impl Into<String>,
+        span: Span,
+    ) {
+        self.push_comb_net_expr(dst.into(), AssignExpr::Shl(lhs.into(), rhs.into()), span);
+    }
+
+    /// Combinational `dst = lhs >> (rhs & 63)` (logical).
+    pub fn assign_shr(
+        &mut self,
+        dst: impl Into<String>,
+        lhs: impl Into<String>,
+        rhs: impl Into<String>,
+        span: Span,
+    ) {
+        self.push_comb_net_expr(dst.into(), AssignExpr::Shr(lhs.into(), rhs.into()), span);
+    }
+
     fn push_comb_net_expr(&mut self, dst: String, expr: AssignExpr, span: Span) {
         let kind = self.signals.get(&dst).copied();
         let process_kind = match &self.process {
