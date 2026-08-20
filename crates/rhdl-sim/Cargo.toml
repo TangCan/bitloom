@@ -1,11 +1,18 @@
 [package]
-name = "rhdl-sim"
+name = "bitloom-sim"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-publish = false
-description = "Cycle-accurate tick and VCD from FrozenHir"
+publish = true
+description = "Cycle-accurate tick and VCD from FrozenHir (Bitloom). Unrelated to samitbasu/rhdl."
+authors = ["Bitloom contributors"]
+repository = "https://github.com/TangCan/bitloom"
+homepage = "https://github.com/TangCan/bitloom"
+documentation = "https://docs.rs/bitloom-sim"
+readme = "../../README.md"
+keywords = ["hdl", "rtl", "simulation", "vcd", "bitloom"]
+categories = ["simulation", "compilers"]
 
 [dependencies]
 bitloom-hir = { workspace = true }

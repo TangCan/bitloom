@@ -48,7 +48,7 @@ enum Commands {
         #[command(subcommand)]
         cmd: FirtoolCmd,
     },
-    /// List `rhdl-sim` tick engines (FR32). Simulation itself lives in tests / rhdl-sim.
+    /// List `bitloom-sim` tick engines (FR32). Simulation itself lives in tests / bitloom-sim.
     SimEngines,
     /// Optional HLS front-end status / run (FR35 / AD-25). Default: unsupported.
     Hls {
@@ -351,7 +351,7 @@ fn main() {
         Commands::SimEngines => {
             println!("interpreter  # default: walk FrozenHir AST each tick");
             println!("compiled     # linearized assign schedule compiled at Sim construction");
-            println!("select=rhdl_sim::Sim::with_engine(hir, TickEngine::from_name(..))");
+            println!("select=bitloom_sim::Sim::with_engine(hir, TickEngine::from_name(..))");
         }
         Commands::Hls { function, out_dir } => {
             println!("backend={}", hls::HLS_BACKEND);

@@ -33,8 +33,8 @@ pub fn rhdl_elaborate() -> Result<FrozenHir, Diagnostics> {
 mod tests {
     use bitloom_hir::PortValues;
     use bitloom_prelude::Elaboratable;
+    use bitloom_sim::Sim;
     use bitloom_vlog::emit;
-    use rhdl_sim::Sim;
 
     use super::*;
 

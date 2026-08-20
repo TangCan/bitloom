@@ -10,4 +10,4 @@ publish = false
 bitloom-prelude = { workspace = true }
 
 [dev-dependencies]
-rhdl-sim = { workspace = true }
+bitloom-sim = { workspace = true }

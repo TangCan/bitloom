@@ -11,6 +11,5 @@ bitloom-prelude = { workspace = true }
 
 [dev-dependencies]
 bitloom-hir = { workspace = true }
-rhdl-sim = { workspace = true }
+bitloom-sim = { workspace = true }
 bitloom-vlog = { workspace = true }
-

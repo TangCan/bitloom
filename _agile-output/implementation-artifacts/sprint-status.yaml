@@ -124,7 +124,7 @@ development_status:
   13-3-host-shim-使用-registry-后端并解析用户包: done
   13-4-cargo-bitloom-new-脚手架: done
   13-5-空目录真独立-atdd: done
-  13-6-readme-真独立主路径与发布运维收口: backlog
+  13-6-readme-真独立主路径与发布运维收口: done
   epic-13-retrospective: optional
 
   epic-14: backlog

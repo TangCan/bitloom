@@ -42,7 +42,7 @@ bitloom-builder = { path = "crates/rhdl-builder", version = "0.1.2" }
 bitloom-macro = { path = "crates/rhdl-macro", version = "0.1.2" }
 bitloom-prelude = { path = "crates/rhdl-prelude", version = "0.1.2" }
 bitloom-vlog = { path = "crates/rhdl-vlog", version = "0.1.2" }
-rhdl-sim = { path = "crates/rhdl-sim" }
+bitloom-sim = { path = "crates/rhdl-sim", version = "0.1.2" }
 rhdl-cabi = { path = "crates/rhdl-cabi" }
 rhdl-hls = { path = "crates/rhdl-hls" }
 rhdl-formal = { path = "crates/rhdl-formal" }

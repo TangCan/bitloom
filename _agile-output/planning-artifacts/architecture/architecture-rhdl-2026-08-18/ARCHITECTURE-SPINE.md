@@ -69,7 +69,7 @@ rhdl-builder / rhdl-macro / **bitloom-prelude**（对外名；目录可暂 `rhdl
 
 - **Binds:** all crates
 - **Prevents:** 设计 crate 或宏依赖后端；两个后端互相依赖；宏直接写 HIR；`tick` 与「不得依赖后端」互相否决
-- **Rule:** **后端** = `{rhdl-vlog, rhdl-firrtl, rhdl-sim}`。依赖方向如下。箭头表示「允许依赖」。
+- **Rule:** **后端** = `{bitloom-vlog, bitloom-firrtl, bitloom-sim}`（目录可仍为 `rhdl-*`）。依赖方向如下。箭头表示「允许依赖」。
 
 ```mermaid
 flowchart TB

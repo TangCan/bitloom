@@ -88,7 +88,7 @@ mod tests {
     use super::*;
     use bitloom_prelude::Elaboratable;
     use bitloom_prelude::PortValues;
-    use rhdl_sim::{AbstractionView, Sim, check_mixed_both};
+    use bitloom_sim::{AbstractionView, Sim, check_mixed_both};
 
     impl AbstractionView for CounterAbs {
         fn cycle(&mut self, inputs: &PortValues) -> PortValues {

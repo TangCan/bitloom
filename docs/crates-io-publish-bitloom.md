@@ -54,4 +54,4 @@ Published crates (lockstep with CLI when possible):
 3. Ensure crates.io Trusted Publishing (or API token) is configured for **each** published package name, not only `bitloom`.
 4. Never publish `rhdl` / `rhdl-bits` / user-facing `rhdl-prelude`.
 
-`bitloom-sim` (optional Epic 14) follows the same lockstep when enabled.
+`bitloom-sim` (optional Epic 14) follows the same lockstep when enabled. Publish order after `bitloom-hir`: `bitloom-sim` (depends only on hir).

@@ -802,7 +802,7 @@ mod tests {
         sim.tick();
         sim.tick();
         let report = sim.coverage_report();
-        assert!(report.starts_with("# rhdl-sim coverage v1"));
+        assert!(report.starts_with("# bitloom-sim coverage v1"));
         let (hits, misses) = parse_report(&report);
         assert!(
             hits.iter().any(|h| h == "data_out" || h == "count"),

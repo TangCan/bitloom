@@ -13,4 +13,4 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 bitloom-builder = { workspace = true }
 bitloom-hir = { workspace = true }
-rhdl-sim = { workspace = true }
+bitloom-sim = { workspace = true }

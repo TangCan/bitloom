@@ -39,6 +39,16 @@ cargo run -p bitloom -- build --package counter_ports --out-dir /tmp/bitloom-out
 
 多包发布与 Trusted Publishing：见 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。
 
+### 可选：独立仿真（`bitloom-sim`）
+
+设计 crate 的 `[dependencies]` 仍只有 `bitloom-prelude`。需要 `tick` / VCD 时：
+
+```bash
+cargo add bitloom-sim --dev
+```
+
+在 `cargo test` 里 `use bitloom_sim::Sim;` 对 `FrozenHir` 做周期步进。勿把 sim 放进 `[dependencies]`。
+
 ## 文档在哪
 
 | 文档 | 路径 |

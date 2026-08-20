@@ -30,9 +30,9 @@ impl Coverage {
         self.seen.difference(&self.toggled).map(|s| s.as_str())
     }
 
-    /// Stable line-oriented report (`# rhdl-sim coverage v1`).
+    /// Stable line-oriented report (`# bitloom-sim coverage v1`).
     pub fn report(&self) -> String {
-        let mut out = String::from("# rhdl-sim coverage v1\n");
+        let mut out = String::from("# bitloom-sim coverage v1\n");
         for n in self.hits() {
             out.push_str(&format!("hit {n}\n"));
         }

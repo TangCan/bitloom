@@ -3,7 +3,7 @@
 After `tick`, `Sim::coverage_report()` emits a stable, parseable text:
 
 ```
-# rhdl-sim coverage v1
+# bitloom-sim coverage v1
 hit data_out
 hit count
 miss data_in

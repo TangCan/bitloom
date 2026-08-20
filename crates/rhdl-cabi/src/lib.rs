@@ -5,7 +5,7 @@ use std::ffi::c_char;
 
 use bitloom_builder::{ElaborateSession, GroundType, Span};
 use bitloom_hir::{FrozenHir, PortValues};
-use rhdl_sim::Sim;
+use bitloom_sim::Sim;
 
 pub struct Handle {
     sim: Sim,
