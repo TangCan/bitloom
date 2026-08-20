@@ -3,8 +3,10 @@
 
 - **Public product name: Bitloom**
 - crates.io package + CLI binary: **`bitloom`**
+- Design crates depend only on **`bitloom-prelude`** (never on the CLI package)
 - Never publish `rhdl` / `rhdl-bits`; do not use `rhdl-rs` as the publish name
 - Naming research: `_agile-output/planning-artifacts/research/technical-rhdl-rename-alternatives-product-naming-2026-08-19/research.md`
+- Standalone path: `_agile-output/planning-artifacts/research/technical-cargo-bitloom-standalone-usage-after-ins-2026-08-20/research.md`
 
 <!-- bmad:context -->
 <!-- Verified 2026-08-18 against 7fe8d78. Managed by bmad-project-context; edits inside this block are replaced on refresh. Keep anything you want preserved outside the markers. -->
@@ -15,7 +17,7 @@ Rust 嵌入式 RTL HDL：设计是生成器，冻结 HIR 后再降后端。需�
 
 ## Policy
 
-- 禁止向 crates.io 发布名 `rhdl` 或 `rhdl-bits`；发布名与 CLI 用 **`bitloom`**（不用 `rhdl-rs`）。文档须声明与 `samitbasu/rhdl` 无关。
+- 禁止向 crates.io 发布名 `rhdl` 或 `rhdl-bits`；发布名与 CLI 用 **`bitloom`**（不用 `rhdl-rs`）。设计 crate 只依赖 **`bitloom-prelude`**。文档须声明与 `samitbasu/rhdl` 无关。
 
 ## Where things are
 

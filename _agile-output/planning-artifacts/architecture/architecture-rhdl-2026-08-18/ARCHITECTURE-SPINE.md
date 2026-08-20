@@ -28,7 +28,7 @@ companions:
 bitloom (CLI)        → 生成 host crate、调后端、拉 firtool
 rhdl-vlog / rhdl-firrtl / rhdl-sim  → 纯函数：&FrozenHir → Artifact
 rhdl-hir             → 电路图与检查（唯一所有者）
-rhdl-builder / rhdl-macro / rhdl-prelude  → 设计 crate 只依赖 prelude
+rhdl-builder / rhdl-macro / **bitloom-prelude**（对外名；目录可暂 `rhdl-prelude/`）  → 设计 crate 只依赖 prelude
 ```
 
 ## Invariants & Rules
@@ -43,8 +43,9 @@ rhdl-builder / rhdl-macro / rhdl-prelude  → 设计 crate 只依赖 prelude
 
 - **Binds:** all crates, docs, CI
 - **Prevents:** 向 crates.io 发布已被占用的名字 `rhdl` 或 `rhdl-bits`；文档把 samitbasu/rhdl 当成本仓库；设计 crate 依赖 CLI 当库
-- **Rule:** Git 仓库可叫 `rhdl`。crates.io 发布名是 **`bitloom`**（公开 CLI / 伞形包；二进制名可同为 `bitloom`，实现见 Epic 11.2）。内部包可用 `rhdl-*`，但新对外名发布前必须查 crates.io；**禁止** `rhdl` 与 `rhdl-bits`（已被 samitbasu 占用）。**不得**以 `rhdl-rs` 为发布名。设计 crate 只依赖 **`rhdl-prelude`**。文档首页必须声明与 `samitbasu/rhdl` 无关。公开产品品牌为 **Bitloom**（2026-08-19 命名锁定）。
+- **Rule:** Git 仓库可叫 `rhdl`。crates.io 发布名是 **`bitloom`**（公开 CLI；二进制 `cargo-bitloom`，实现见 Epic 11.2）。内部包目录可用 `rhdl-*`，但**对外** `[package].name` 须为 **`bitloom-*`**（发布前查 crates.io）；**禁止** `rhdl` 与 `rhdl-bits`（已被 samitbasu 占用）。**不得**以 `rhdl-rs` 为发布名。设计 crate `[dependencies]` 只依赖 **`bitloom-prelude`**（不得依赖 CLI 包 `bitloom`）。文档首页必须声明与 `samitbasu/rhdl` 无关。公开产品品牌为 **Bitloom**（2026-08-19 命名锁定）。
 - **Revised:** 2026-08-19 — 发布身份由 `rhdl-rs` 改为 `bitloom`（FR43 / Story 11.1）。
+- **Revised:** 2026-08-20 — 设计依赖由 `rhdl-prelude` 改为对外名 **`bitloom-prelude`**（FR49 / Story 13.1）；Cargo 包改名见 Epic 13.2。
 
 ### AD-3 — HIR ↔ FIRRTL 文本双向 [ADOPTED]
 
@@ -73,13 +74,13 @@ rhdl-builder / rhdl-macro / rhdl-prelude  → 设计 crate 只依赖 prelude
 ```mermaid
 flowchart TB
   CLI[bitloom CLI]
-  VLOG[rhdl-vlog]
-  FIR[rhdl-firrtl]
-  SIM[rhdl-sim]
-  HIR[rhdl-hir]
-  PRE[rhdl-prelude]
-  BLD[rhdl-builder]
-  MAC[rhdl-macro]
+  VLOG[bitloom-vlog]
+  FIR[bitloom-firrtl]
+  SIM[bitloom-sim]
+  HIR[bitloom-hir]
+  PRE[bitloom-prelude]
+  BLD[bitloom-builder]
+  MAC[bitloom-macro]
   DES[design crate]
 
   CLI --> VLOG
@@ -95,7 +96,8 @@ flowchart TB
   DES --> PRE
 ```
 
-设计 crate `[dependencies]` 只能是 `rhdl-prelude`。`[dev-dependencies]` 可额外只加 `rhdl-sim`。prelude 不得依赖任何后端。`rhdl-macro` 只准依赖 `rhdl-builder`（或零依赖、展开为 builder 路径），禁止依赖 `rhdl-hir` 或后端。设计 crate 不得依赖 CLI。宏不得依赖 vlog/firrtl/sim。
+设计 crate `[dependencies]` 只能是 `bitloom-prelude`。`[dev-dependencies]` 可额外只加 `bitloom-sim`（发布后；Epic 14）。prelude 不得依赖任何后端。`bitloom-macro` 只准依赖 `bitloom-builder`（或零依赖、展开为 builder 路径），禁止依赖 `bitloom-hir` 或后端。设计 crate 不得依赖 CLI。宏不得依赖 vlog/firrtl/sim。  
+（工作区目录可暂为 `crates/rhdl-*`，直至 Story 13.2 将 `[package].name` 改为 `bitloom-*`。）
 
 ### AD-7 — HIR 所有权与可变性 [ADOPTED]
 
@@ -223,7 +225,7 @@ flowchart TB
 
 | Concern | Convention |
 | --- | --- |
-| 包名 | 发布 CLI **`bitloom`**；内部 `rhdl-hir`、`rhdl-vlog`、`rhdl-firrtl`、`rhdl-sim`、`rhdl-prelude`、`rhdl-builder`、`rhdl-macro`（内部名可暂留） |
+| 包名 | 发布 CLI **`bitloom`**；对外库 **`bitloom-hir`**、**`bitloom-vlog`**、**`bitloom-firrtl`**、**`bitloom-sim`**、**`bitloom-prelude`**、**`bitloom-builder`**、**`bitloom-macro`**（目录可暂 `rhdl-*` 直至 13.2） |
 | 文件 | 阶段一 `<abi_name>.v`；阶段二另加 `<abi_name>.fir` 与 `<abi_name>.firtool.v` |
 | HIR 标识 | 稳定字符串模块名；私有模块 mangling 发生在 freeze（FIRRTL ABI） |
 | 错误 | 结构化码 `rhdl::E0xxx`；英文码 + 中文说明 |
@@ -254,7 +256,7 @@ rhdl/
     rhdl-hir/        # FrozenHir AST；freeze；Artifact；PortValues；Diagnostics
     rhdl-builder/    # 运行时会话 API（&mut 未冻结 HIR）
     rhdl-macro/      # 语法糖 → builder；#[rhdl::top] / comb·seq / functional_model
-    rhdl-prelude/    # 设计 crate 唯一依赖；再导出 FrozenHir
+    rhdl-prelude/    # 对外包名 bitloom-prelude；设计 crate 唯一依赖；再导出 FrozenHir
     rhdl-vlog/       # FrozenHir → .v
     rhdl-firrtl/     # FrozenHir ↔ .fir（阶段一：解析/AST）
     rhdl-sim/        # FrozenHir → tick + VCD
