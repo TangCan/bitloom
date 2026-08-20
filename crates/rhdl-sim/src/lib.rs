@@ -195,6 +195,14 @@ impl Sim {
             AssignExpr::Lit(v) => *v,
             AssignExpr::Inc(n) => self.lookup(n).wrapping_add(1),
             AssignExpr::Add(a, b) => self.lookup(a).wrapping_add(self.lookup(b)),
+            AssignExpr::Eq(a, b) => u64::from(self.lookup(a) == self.lookup(b)),
+            AssignExpr::Mux { sel, t, f } => {
+                if self.lookup(sel) != 0 {
+                    self.lookup(t)
+                } else {
+                    self.lookup(f)
+                }
+            }
             AssignExpr::MemRead { mem, addr } => {
                 let a = self.lookup(addr) as usize;
                 self.mems

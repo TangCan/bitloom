@@ -1,0 +1,15 @@
+[package]
+name = "rv32_feasibility"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+bitloom-prelude = { workspace = true }
+
+[dev-dependencies]
+bitloom-hir = { workspace = true }
+bitloom-sim = { workspace = true }
+bitloom-vlog = { workspace = true }

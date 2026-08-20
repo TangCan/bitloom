@@ -97,6 +97,13 @@ fn emit_expr(m: &Module, expr: &AssignExpr) -> String {
         AssignExpr::Lit(v) => format!("{v}.U"),
         AssignExpr::Inc(n) => format!("{} + 1.U", ref_name(m, n)),
         AssignExpr::Add(a, b) => format!("{} + {}", ref_name(m, a), ref_name(m, b)),
+        AssignExpr::Eq(a, b) => format!("{} === {}", ref_name(m, a), ref_name(m, b)),
+        AssignExpr::Mux { sel, t, f } => format!(
+            "Mux({}, {}, {})",
+            ref_name(m, sel),
+            ref_name(m, t),
+            ref_name(m, f)
+        ),
         AssignExpr::MemRead { mem, addr } => format!("{mem}({})", ref_name(m, addr)),
     }
 }

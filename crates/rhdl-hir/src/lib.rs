@@ -116,6 +116,10 @@ pub enum AssignExpr {
     Inc(String),
     /// Same-width binary add of two refs.
     Add(String, String),
+    /// Equality compare of two refs → 0/1 (Bool).
+    Eq(String, String),
+    /// 2:1 mux: `sel != 0 ? t : f`.
+    Mux { sel: String, t: String, f: String },
     /// Memory read `mem[addr]` (SyncReadMem: one-cycle latency when assigned in seq).
     MemRead { mem: String, addr: String },
 }

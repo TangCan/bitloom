@@ -19,6 +19,7 @@ members = [
   "examples/fifo_skel",
   "examples/mixed_both",
   "examples/ip_box",
+  "examples/rv32_feasibility",
 ]
 default-members = [
   "crates/rhdl-hir",

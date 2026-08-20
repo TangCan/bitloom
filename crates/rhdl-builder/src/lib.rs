@@ -645,6 +645,116 @@ impl ElaborateSession {
         }
     }
 
+    /// Combinational assign `dst = lit`.
+    pub fn assign_lit(&mut self, dst: impl Into<String>, lit: u64, span: Span) {
+        self.push_comb_net_expr(dst.into(), AssignExpr::Lit(lit), span);
+    }
+
+    /// Combinational assign `dst = (lhs == rhs)` (0/1).
+    pub fn assign_eq(
+        &mut self,
+        dst: impl Into<String>,
+        lhs: impl Into<String>,
+        rhs: impl Into<String>,
+        span: Span,
+    ) {
+        self.push_comb_net_expr(dst.into(), AssignExpr::Eq(lhs.into(), rhs.into()), span);
+    }
+
+    /// Combinational assign `dst = sel ? t : f` (`sel != 0` is true).
+    pub fn assign_mux(
+        &mut self,
+        dst: impl Into<String>,
+        sel: impl Into<String>,
+        t: impl Into<String>,
+        f: impl Into<String>,
+        span: Span,
+    ) {
+        self.push_comb_net_expr(
+            dst.into(),
+            AssignExpr::Mux {
+                sel: sel.into(),
+                t: t.into(),
+                f: f.into(),
+            },
+            span,
+        );
+    }
+
+    fn push_comb_net_expr(&mut self, dst: String, expr: AssignExpr, span: Span) {
+        let kind = self.signals.get(&dst).copied();
+        let process_kind = match &self.process {
+            Some(ProcessState::Combinational { .. }) => Some(ProcessKind::Combinational),
+            Some(ProcessState::Sequential { .. }) => Some(ProcessKind::Sequential),
+            None => None,
+        };
+        match process_kind {
+            Some(ProcessKind::Combinational) => {
+                match kind {
+                    Some(SignalKind::Wire | SignalKind::Output) => {}
+                    Some(SignalKind::Reg) => {
+                        self.push_err(Diagnostic {
+                            span,
+                            code: "rhdl::E0111".into(),
+                            en: format!("combinational process must not drive Reg '{dst}'"),
+                            zh: format!("组合过程不能驱动寄存器 '{dst}'"),
+                        });
+                        return;
+                    }
+                    Some(SignalKind::Input) => {
+                        self.push_err(Diagnostic {
+                            span,
+                            code: "rhdl::E0112".into(),
+                            en: format!("cannot assign to input port '{dst}'"),
+                            zh: format!("不能给输入端口 '{dst}' 赋值"),
+                        });
+                        return;
+                    }
+                    None => {
+                        self.push_err(Diagnostic {
+                            span,
+                            code: "rhdl::E0113".into(),
+                            en: format!("unknown signal '{dst}'"),
+                            zh: format!("未知信号 '{dst}'"),
+                        });
+                        return;
+                    }
+                }
+                if let Some(ProcessState::Combinational {
+                    assigns,
+                    path_assigned,
+                    ..
+                }) = self.process.as_mut()
+                {
+                    assigns.push(Assign {
+                        target: AssignTarget::Net(dst.clone()),
+                        expr,
+                        span,
+                    });
+                    if let Some(path) = path_assigned.last_mut() {
+                        path.insert(dst);
+                    }
+                }
+            }
+            Some(ProcessKind::Sequential) => {
+                self.push_err(Diagnostic {
+                    span,
+                    code: "rhdl::E0114".into(),
+                    en: format!("sequential process must not drive combinational net '{dst}'"),
+                    zh: format!("时序过程不能驱动组合网 '{dst}'"),
+                });
+            }
+            None => {
+                self.push_err(Diagnostic {
+                    span,
+                    code: "rhdl::E0103".into(),
+                    en: "assignment outside a marked combinational/sequential process".into(),
+                    zh: "在未标注的 comb/seq 过程外赋值".into(),
+                });
+            }
+        }
+    }
+
     /// Assign a combinational net / output / wire from `from`.
     pub fn assign_net(&mut self, name: impl Into<String>, from: impl Into<String>, span: Span) {
         let name = name.into();

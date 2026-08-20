@@ -42,6 +42,8 @@ fn emit_expr(expr: &AssignExpr) -> String {
         AssignExpr::Lit(v) => format!("UInt({v})"),
         AssignExpr::Inc(n) => format!("add({n}, UInt(1))"),
         AssignExpr::Add(a, b) => format!("add({a}, {b})"),
+        AssignExpr::Eq(a, b) => format!("eq({a}, {b})"),
+        AssignExpr::Mux { sel, t, f } => format!("mux({sel}, {t}, {f})"),
         AssignExpr::MemRead { mem, addr } => format!("{mem}[{addr}]"),
     }
 }

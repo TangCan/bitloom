@@ -38,6 +38,8 @@ fn emit_expr(expr: &AssignExpr) -> String {
         AssignExpr::Lit(v) => format!("{v}"),
         AssignExpr::Inc(n) => format!("{n} + 1"),
         AssignExpr::Add(a, b) => format!("{a} + {b}"),
+        AssignExpr::Eq(a, b) => format!("({a} == {b})"),
+        AssignExpr::Mux { sel, t, f } => format!("({sel} ? {t} : {f})"),
         AssignExpr::MemRead { mem, addr } => format!("{mem}[{addr}]"),
     }
 }

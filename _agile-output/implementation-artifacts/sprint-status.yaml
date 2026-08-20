@@ -131,8 +131,8 @@ development_status:
   14-1-发布-bitloom-sim-供独立-tick: done
   epic-14-retrospective: optional
 
-  epic-15: backlog
-  15-1-语言表面可行性闸门: backlog
+  epic-15: in-progress
+  15-1-语言表面可行性闸门: done
   15-2-episode-i-核-译码-alu-寄存器与-tick: backlog
   15-3-访存-mmio-与-emit-v: backlog
   15-4-子集完整声明与可选合规门禁: backlog
