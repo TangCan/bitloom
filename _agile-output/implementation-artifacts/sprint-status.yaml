@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-20-2026 20:40
+last_updated: 08-20-2026 21:04
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -149,7 +149,7 @@ development_status:
   17-1-流水语言表面可行性闸门: done
   17-2-取指策略钉死: done
   17-3-冻结用户态立即数与符号扩展: done
-  17-4-五级流水-转发-分支-flush: backlog
+  17-4-五级流水-转发-分支-flush: done
   17-5-load-use-停顿-atdd-验证阶梯: backlog
   epic-17-retrospective: optional
 

@@ -7,6 +7,7 @@
 - 文档化子集：`examples/rv32_core/SUBSET.md`（含 Story 17.2 取指合同：**harness `instr`**，不得静默混用片上 SyncReadMem I-fetch；Story 17.3 已冻结 I/S/B/U/J 符号扩展与负向 BEQ；LB/LH 书面延期）
 - 仓库内黄金程序 + `cargo test -p rv32_core`（含 ALU/负向立即数/正负 BEQ/MMIO tick）与 `cargo bitloom build --package rv32_core`
 - 测试名 `subset_minimal_filter_program` 将 ADDI→SW→LED 串成一条可回归路径
+- Episode II 流水（17.4）另包 `examples/rv32_pipe`：`cargo test -p rv32_pipe` / `cargo bitloom build --package rv32_pipe`；见该包 `PIPE.md`（取指仍为 harness `instr`；无 load-use / 无 CSR）
 
 ## 未启用 (b)
 
