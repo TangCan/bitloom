@@ -8,7 +8,7 @@ description = "Formal / SVA export (FR39)"
 publish = false
 
 [dependencies]
-rhdl-hir = { workspace = true }
+bitloom-hir = { workspace = true }
 
 [dev-dependencies]
-rhdl-builder = { workspace = true }
+bitloom-builder = { workspace = true }

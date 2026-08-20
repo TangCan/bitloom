@@ -5,9 +5,9 @@ use std::fs::File;
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 
-use rhdl_hir::{AssignExpr, AssignTarget, FrozenHir, GroundType, PortValues, ProcessKind, Stmt};
+use bitloom_hir::{AssignExpr, AssignTarget, FrozenHir, GroundType, PortValues, ProcessKind, Stmt};
 
-pub use rhdl_hir::PortValues as Values;
+pub use bitloom_hir::PortValues as Values;
 
 mod coverage;
 pub use coverage::{Coverage, parse_report};
@@ -254,7 +254,7 @@ impl Sim {
         }
     }
 
-    fn reset_active(&self, m: &rhdl_hir::Module) -> bool {
+    fn reset_active(&self, m: &bitloom_hir::Module) -> bool {
         let rst = m
             .ports
             .iter()
@@ -477,7 +477,7 @@ pub fn check_mixed_both<A: AbstractionView>(
 
 #[cfg(test)]
 mod tests {
-    use rhdl_builder::{ElaborateSession, GroundType, Span};
+    use bitloom_builder::{ElaborateSession, GroundType, Span};
 
     use super::*;
 

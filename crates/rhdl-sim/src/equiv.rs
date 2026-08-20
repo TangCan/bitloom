@@ -1,6 +1,6 @@
 //! Dual-view equivalence: handwritten functional vs cycle-accurate `tick` (FR30).
 
-use rhdl_hir::{FrozenHir, PortValues};
+use bitloom_hir::{FrozenHir, PortValues};
 
 use crate::{AbstractionView, PortMismatch, Sim, check_mixed_both};
 

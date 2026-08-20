@@ -1,6 +1,6 @@
 //! FR29 mixed-`both` fixture: RTL `tick` vs handwritten abstraction, compared on `PortValues`.
 
-use rhdl_prelude::{
+use bitloom_prelude::{
     Diagnostics, Elaboratable, ElaborateSession, FrozenHir, GroundType, HostView, Span, ViewKind,
     rhdl,
 };
@@ -35,7 +35,7 @@ pub struct CounterAbs {
 }
 
 impl CounterAbs {
-    pub fn cycle(&mut self, inputs: &rhdl_prelude::PortValues) -> rhdl_prelude::PortValues {
+    pub fn cycle(&mut self, inputs: &bitloom_prelude::PortValues) -> bitloom_prelude::PortValues {
         if inputs.get("rst").unwrap_or(0) != 0 {
             self.count = 0;
         } else {
@@ -52,7 +52,7 @@ impl CounterAbs {
 pub struct CounterBridge;
 
 impl CounterBridge {
-    pub fn to_pins(inputs: &rhdl_prelude::PortValues) -> rhdl_prelude::PortValues {
+    pub fn to_pins(inputs: &bitloom_prelude::PortValues) -> bitloom_prelude::PortValues {
         inputs.clone()
     }
 }
@@ -86,8 +86,8 @@ const _: () = {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rhdl_prelude::Elaboratable;
-    use rhdl_prelude::PortValues;
+    use bitloom_prelude::Elaboratable;
+    use bitloom_prelude::PortValues;
     use rhdl_sim::{AbstractionView, Sim, check_mixed_both};
 
     impl AbstractionView for CounterAbs {

@@ -1,4 +1,4 @@
-//! Proc macros expand only to `rhdl_builder` / prelude paths (AD-6). Never depend on rhdl-hir.
+//! Proc macros expand only to `bitloom_builder` / prelude paths (AD-6). Never depend on rhdl-hir.
 
 use proc_macro::TokenStream;
 use quote::quote;
@@ -37,13 +37,13 @@ pub fn module(_attr: TokenStream, item: TokenStream) -> TokenStream {
         quote! {
             {
                 type __PortTy = #ty;
-                let (__dir, __gt) = <__PortTy as ::rhdl_prelude::PortField>::describe();
+                let (__dir, __gt) = <__PortTy as ::bitloom_prelude::PortField>::describe();
                 match __dir {
-                    ::rhdl_prelude::PortDir::Input => {
-                        __session.add_input(#name_str, __gt, ::rhdl_prelude::Span::default());
+                    ::bitloom_prelude::PortDir::Input => {
+                        __session.add_input(#name_str, __gt, ::bitloom_prelude::Span::default());
                     }
-                    ::rhdl_prelude::PortDir::Output => {
-                        __session.add_output(#name_str, __gt, ::rhdl_prelude::Span::default());
+                    ::bitloom_prelude::PortDir::Output => {
+                        __session.add_output(#name_str, __gt, ::bitloom_prelude::Span::default());
                     }
                 }
             }
@@ -55,13 +55,13 @@ pub fn module(_attr: TokenStream, item: TokenStream) -> TokenStream {
             #(#field_defs),*
         }
 
-        impl ::rhdl_prelude::Elaboratable for #name {
+        impl ::bitloom_prelude::Elaboratable for #name {
             fn elaborate() -> ::core::result::Result<
-                ::rhdl_prelude::FrozenHir,
-                ::rhdl_prelude::Diagnostics,
+                ::bitloom_prelude::FrozenHir,
+                ::bitloom_prelude::Diagnostics,
             > {
-                let mut __session = ::rhdl_prelude::ElaborateSession::new(#mod_name);
-                __session.begin_module(#mod_name, ::rhdl_prelude::Span::default());
+                let mut __session = ::bitloom_prelude::ElaborateSession::new(#mod_name);
+                __session.begin_module(#mod_name, ::bitloom_prelude::Span::default());
                 #(#port_stmts)*
                 __session.end_module();
                 __session.finish()
@@ -84,7 +84,7 @@ pub fn combinational(_attr: TokenStream, item: TokenStream) -> TokenStream {
         #vis #sig {
             // Marker retained so unmarked hardware fns are distinguishable.
             const _: () = ();
-            let __rhdl_process_kind = ::rhdl_prelude::ProcessKindMark::Combinational;
+            let __rhdl_process_kind = ::bitloom_prelude::ProcessKindMark::Combinational;
             let _ = __rhdl_process_kind;
             #block
         }
@@ -103,7 +103,7 @@ pub fn sequential(_attr: TokenStream, item: TokenStream) -> TokenStream {
         #(#attrs)*
         #vis #sig {
             const _: () = ();
-            let __rhdl_process_kind = ::rhdl_prelude::ProcessKindMark::Sequential;
+            let __rhdl_process_kind = ::bitloom_prelude::ProcessKindMark::Sequential;
             let _ = __rhdl_process_kind;
             #block
         }
@@ -159,7 +159,7 @@ pub fn hls(_attr: TokenStream, item: TokenStream) -> TokenStream {
         #(#attrs)*
         #vis #sig {
             const _: () = ();
-            let __rhdl_hls = ::rhdl_prelude::HlsMark;
+            let __rhdl_hls = ::bitloom_prelude::HlsMark;
             let _ = __rhdl_hls;
             #block
         }
@@ -173,8 +173,8 @@ fn host_only_view(item: TokenStream, kind: &str) -> TokenStream {
     TokenStream::from(quote! {
         #input
 
-        impl ::rhdl_prelude::HostView for #name {
-            const KIND: ::rhdl_prelude::ViewKind = ::rhdl_prelude::ViewKind::#kind_ident;
+        impl ::bitloom_prelude::HostView for #name {
+            const KIND: ::bitloom_prelude::ViewKind = ::bitloom_prelude::ViewKind::#kind_ident;
         }
         // Host-only; never participates in freeze/HIR. No HIR→TLM lowering.
     })

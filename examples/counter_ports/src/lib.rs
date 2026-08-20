@@ -1,7 +1,7 @@
 //! Example design crate: depends only on `rhdl-prelude`.
 
-use rhdl_prelude::rhdl::module;
-use rhdl_prelude::{Clock, Elaboratable, Input, Output, Reset, UInt};
+use bitloom_prelude::rhdl::module;
+use bitloom_prelude::{Clock, Elaboratable, Input, Output, Reset, UInt};
 
 #[module]
 pub struct CounterPorts {
@@ -12,14 +12,14 @@ pub struct CounterPorts {
 }
 
 /// Host entry for `cargo rhdl build --package counter_ports`.
-pub fn rhdl_elaborate() -> Result<rhdl_prelude::FrozenHir, rhdl_prelude::Diagnostics> {
+pub fn rhdl_elaborate() -> Result<bitloom_prelude::FrozenHir, bitloom_prelude::Diagnostics> {
     CounterPorts::elaborate()
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rhdl_prelude::{Elaboratable, GroundType, PortDirection};
+    use bitloom_prelude::{Elaboratable, GroundType, PortDirection};
 
     #[test]
     fn elaborate_yields_frozen_hir_with_directed_ports() {

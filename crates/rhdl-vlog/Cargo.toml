@@ -1,14 +1,18 @@
 [package]
-name = "rhdl-vlog"
+name = "bitloom-vlog"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-publish = false
+publish = true
 description = "FrozenHir → Yosys-friendly Verilog (.v)"
+authors = ["Bitloom contributors"]
+repository = "https://github.com/TangCan/bitloom"
+homepage = "https://github.com/TangCan/bitloom"
+documentation = "https://docs.rs/bitloom-vlog"
 
 [dependencies]
-rhdl-hir = { workspace = true }
+bitloom-hir = { workspace = true }
 
 [dev-dependencies]
-rhdl-builder = { workspace = true }
+bitloom-builder = { workspace = true }

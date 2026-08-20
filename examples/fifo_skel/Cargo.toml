@@ -7,10 +7,10 @@ license.workspace = true
 publish = false
 
 [dependencies]
-rhdl-prelude = { workspace = true }
+bitloom-prelude = { workspace = true }
 
 [dev-dependencies]
-rhdl-hir = { workspace = true }
+bitloom-hir = { workspace = true }
 rhdl-sim = { workspace = true }
-rhdl-vlog = { workspace = true }
+bitloom-vlog = { workspace = true }
 

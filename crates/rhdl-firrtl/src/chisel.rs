@@ -1,6 +1,6 @@
 //! Best-effort FrozenHir → Chisel Scala (FR28). Not a round-trip contract (AD-3).
 
-use rhdl_hir::{
+use bitloom_hir::{
     Artifact, AssignExpr, AssignTarget, EmittedFile, FrozenHir, GroundType, Module, PortDirection,
     ProcessKind, Stmt,
 };

@@ -1,11 +1,11 @@
 //! Design-facing surface. Designs depend only on this crate.
 
-pub use rhdl_builder::{Elaboratable, ElaborateSession};
-pub use rhdl_hir::{Diagnostics, FrozenHir, GroundType, PortDirection, PortValues, Span};
+pub use bitloom_builder::{Elaboratable, ElaborateSession};
+pub use bitloom_hir::{Diagnostics, FrozenHir, GroundType, PortDirection, PortValues, Span};
 
 /// Re-export attributes via this crate's `rhdl` facade.
 pub mod rhdl {
-    pub use rhdl_macro::{
+    pub use bitloom_macro::{
         abstraction, both, bridge, combinational, functional_model, hls, module, process,
         sequential, top,
     };

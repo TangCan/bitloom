@@ -2,12 +2,12 @@
 
 use std::collections::{HashMap, HashSet};
 
-use rhdl_hir::{
+use bitloom_hir::{
     Assign, AssignExpr, AssignTarget, BuilderOwnedHir, Module, Port, PortDirection, Process,
     ProcessKind, Stmt,
 };
 
-pub use rhdl_hir::{
+pub use bitloom_hir::{
     Diagnostic, Diagnostics, Diagnostics as HirDiagnostics, FrozenHir, FrozenHir as Frozen,
     GroundType, SignalKind, Span,
 };
@@ -352,7 +352,7 @@ impl ElaborateSession {
         }
         let dest = dest.into();
         self.declare_wire(dest, GroundType::UInt { width: to_width }, span);
-        let _ = rhdl_hir::Expr::Pad {
+        let _ = bitloom_hir::Expr::Pad {
             from_width: from,
             to_width,
             span,
@@ -387,7 +387,7 @@ impl ElaborateSession {
         }
         let dest = dest.into();
         self.declare_wire(dest, GroundType::UInt { width: to_width }, span);
-        let _ = rhdl_hir::Expr::Trunc {
+        let _ = bitloom_hir::Expr::Trunc {
             from_width: from,
             to_width,
             span,
@@ -940,7 +940,7 @@ impl ElaborateSession {
         if !self.errors.is_empty() {
             return Err(self.errors);
         }
-        rhdl_hir::seal_from_builder(self.hir)
+        bitloom_hir::seal_from_builder(self.hir)
     }
 
     /// Record a synthesizable-path violation (heap, threads, f64, …) as a structured diagnostic.
@@ -964,7 +964,7 @@ impl ElaborateSession {
         params: Vec<(String, u32)>,
         span: Span,
     ) {
-        use rhdl_hir::{Instance, PortConnect};
+        use bitloom_hir::{Instance, PortConnect};
         let connects = connects
             .into_iter()
             .map(|(child_port, parent_net)| PortConnect {
@@ -991,7 +991,7 @@ impl ElaborateSession {
         child_port: impl Into<String>,
         span: Span,
     ) {
-        use rhdl_hir::PortConnect;
+        use bitloom_hir::PortConnect;
         if let Some(m) = self.current.as_mut() {
             for stmt in &mut m.body {
                 if let Stmt::Instance(inst) = stmt {
@@ -1195,7 +1195,7 @@ mod tests {
 
     #[test]
     fn parameterized_widths_w8_and_w16() {
-        fn elaborate_w(w: u32) -> rhdl_hir::FrozenHir {
+        fn elaborate_w(w: u32) -> bitloom_hir::FrozenHir {
             let mut s = ElaborateSession::new("t");
             s.begin_module(format!("Add{w}"), Span::default());
             s.add_input("clk", GroundType::Clock, Span::default());
@@ -1256,7 +1256,7 @@ mod tests {
         assert_eq!(frozen.circuit().modules.len(), 2);
         assert!(frozen.circuit().modules[1].body.iter().any(|st| matches!(
             st,
-            rhdl_hir::Stmt::Instance(i) if i.name == "u0" && i.module == "Child"
+            bitloom_hir::Stmt::Instance(i) if i.name == "u0" && i.module == "Child"
         )));
     }
 
@@ -1304,7 +1304,7 @@ mod tests {
         let frozen = s.finish().unwrap();
         assert!(frozen.circuit().modules[0].body.iter().any(|st| matches!(
             st,
-            rhdl_hir::Stmt::MemDecl {
+            bitloom_hir::Stmt::MemDecl {
                 sync_read: true,
                 ..
             }
@@ -1335,7 +1335,7 @@ mod tests {
         let frozen = s.finish().unwrap();
         assert!(frozen.circuit().modules[0].body.iter().any(|st| matches!(
             st,
-            rhdl_hir::Stmt::RegDecl {
+            bitloom_hir::Stmt::RegDecl {
                 async_reset: true,
                 has_enable: true,
                 ..

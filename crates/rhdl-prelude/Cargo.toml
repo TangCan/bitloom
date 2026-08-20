@@ -1,13 +1,17 @@
 [package]
-name = "rhdl-prelude"
+name = "bitloom-prelude"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-publish = false
-description = "Design-crate surface for RHDL (AD-2 / AD-6)"
+publish = true
+description = "Design-crate surface for Bitloom (AD-2 / AD-6)"
+authors = ["Bitloom contributors"]
+repository = "https://github.com/TangCan/bitloom"
+homepage = "https://github.com/TangCan/bitloom"
+documentation = "https://docs.rs/bitloom-prelude"
 
 [dependencies]
-rhdl-builder = { workspace = true }
-rhdl-macro = { workspace = true }
-rhdl-hir = { workspace = true }
+bitloom-builder = { workspace = true }
+bitloom-macro = { workspace = true }
+bitloom-hir = { workspace = true }

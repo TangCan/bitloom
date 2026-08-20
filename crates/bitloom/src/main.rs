@@ -83,8 +83,8 @@ publish = false
 
 [dependencies]
 {crate_name} = {{ path = "{pkg}" }}
-rhdl-vlog = {{ path = "{vlog}" }}
-rhdl-hir = {{ path = "{hir}" }}
+bitloom-vlog = {{ path = "{vlog}" }}
+bitloom-hir = {{ path = "{hir}" }}
 "#,
         crate_name = crate_name,
         pkg = pkg_path.display(),
@@ -98,7 +98,7 @@ fn build_host_main(package: &str, out_dir: &Path) -> String {
     format!(
         r#"fn main() {{
     let frozen = {crate_name}::rhdl_elaborate().expect("rhdl_elaborate");
-    let art = rhdl_vlog::emit(&frozen);
+    let art = bitloom_vlog::emit(&frozen);
     let out_dir = std::path::PathBuf::from({out_dir:?});
     std::fs::create_dir_all(&out_dir).expect("out_dir");
     for f in &art.files {{

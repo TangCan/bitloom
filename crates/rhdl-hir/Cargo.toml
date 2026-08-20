@@ -1,10 +1,14 @@
 [package]
-name = "rhdl-hir"
+name = "bitloom-hir"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-publish = false
-description = "FrozenHir AST and diagnostics for RHDL"
+publish = true
+description = "FrozenHir AST and diagnostics for Bitloom"
+authors = ["Bitloom contributors"]
+repository = "https://github.com/TangCan/bitloom"
+homepage = "https://github.com/TangCan/bitloom"
+documentation = "https://docs.rs/bitloom-hir"
 
 [dependencies]

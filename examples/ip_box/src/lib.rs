@@ -1,6 +1,6 @@
 //! Tree IP (fifo_skel) + external black-box wrapper stub (FR37).
 
-use rhdl_prelude::{Diagnostics, Elaboratable, ElaborateSession, FrozenHir, GroundType, Span};
+use bitloom_prelude::{Diagnostics, Elaboratable, ElaborateSession, FrozenHir, GroundType, Span};
 
 /// In-tree IP re-export.
 pub use fifo_skel::SkidFifo;
@@ -29,7 +29,7 @@ pub fn vendor_blackbox_v() -> &'static str {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rhdl_prelude::Elaboratable;
+    use bitloom_prelude::Elaboratable;
 
     #[test]
     fn tree_ip_and_blackbox() {

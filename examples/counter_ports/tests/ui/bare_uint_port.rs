@@ -1,5 +1,5 @@
-use rhdl_prelude::rhdl::module;
-use rhdl_prelude::UInt;
+use bitloom_prelude::rhdl::module;
+use bitloom_prelude::UInt;
 
 #[module]
 struct Bad {

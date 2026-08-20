@@ -1,6 +1,6 @@
 //! Yosys-friendly Verilog emitter (AD-8, AD-16).
 
-use rhdl_hir::{
+use bitloom_hir::{
     Artifact, AssignExpr, AssignTarget, EmittedFile, FrozenHir, GroundType, PortDirection,
     ProcessKind, Stmt,
 };
@@ -42,7 +42,7 @@ fn emit_expr(expr: &AssignExpr) -> String {
     }
 }
 
-fn reg_flags<'a>(m: &'a rhdl_hir::Module, name: &str) -> (bool, bool) {
+fn reg_flags<'a>(m: &'a bitloom_hir::Module, name: &str) -> (bool, bool) {
     for stmt in &m.body {
         if let Stmt::RegDecl {
             name: n,
@@ -59,7 +59,7 @@ fn reg_flags<'a>(m: &'a rhdl_hir::Module, name: &str) -> (bool, bool) {
     (false, false)
 }
 
-fn emit_module(m: &rhdl_hir::Module) -> String {
+fn emit_module(m: &bitloom_hir::Module) -> String {
     let mut out = String::new();
     out.push_str(&format!("module {} (\n", m.name));
     let ports: Vec<String> = m
@@ -234,7 +234,7 @@ fn emit_module(m: &rhdl_hir::Module) -> String {
 
 #[cfg(test)]
 mod tests {
-    use rhdl_builder::{ElaborateSession, GroundType, Span};
+    use bitloom_builder::{ElaborateSession, GroundType, Span};
 
     use super::*;
 

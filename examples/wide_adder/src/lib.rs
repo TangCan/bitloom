@@ -1,6 +1,6 @@
 //! Const-generic width example — depends only on `rhdl-prelude`.
 
-use rhdl_prelude::{Diagnostics, Elaboratable, ElaborateSession, FrozenHir, GroundType, Span};
+use bitloom_prelude::{Diagnostics, Elaboratable, ElaborateSession, FrozenHir, GroundType, Span};
 
 /// Parameterized adder shell elaborated at W=8 and W=16 from the same source pattern.
 pub struct WideAdder<const W: u32>;
@@ -30,7 +30,7 @@ pub fn rhdl_elaborate() -> Result<FrozenHir, Diagnostics> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rhdl_prelude::GroundType;
+    use bitloom_prelude::GroundType;
 
     #[test]
     fn w8_and_w16_port_widths() {

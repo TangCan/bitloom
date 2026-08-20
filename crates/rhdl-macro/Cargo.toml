@@ -1,11 +1,15 @@
 [package]
-name = "rhdl-macro"
+name = "bitloom-macro"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-publish = false
-description = "RHDL proc-macro sugar → builder paths only"
+publish = true
+description = "Bitloom proc-macro sugar → builder paths only"
+authors = ["Bitloom contributors"]
+repository = "https://github.com/TangCan/bitloom"
+homepage = "https://github.com/TangCan/bitloom"
+documentation = "https://docs.rs/bitloom-macro"
 
 [lib]
 proc-macro = true

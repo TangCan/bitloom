@@ -1,6 +1,6 @@
 //! Single-clock FIFO-shaped fixture for FR22 (depth-1 skid buffer style).
 
-use rhdl_prelude::{Diagnostics, Elaboratable, ElaborateSession, FrozenHir, GroundType, Span};
+use bitloom_prelude::{Diagnostics, Elaboratable, ElaborateSession, FrozenHir, GroundType, Span};
 
 /// Depth-1 registered skid: holds last `data_in` when not reset.
 pub struct SkidFifo;
@@ -31,10 +31,10 @@ pub fn rhdl_elaborate() -> Result<FrozenHir, Diagnostics> {
 
 #[cfg(test)]
 mod tests {
-    use rhdl_hir::PortValues;
-    use rhdl_prelude::Elaboratable;
+    use bitloom_hir::PortValues;
+    use bitloom_prelude::Elaboratable;
+    use bitloom_vlog::emit;
     use rhdl_sim::Sim;
-    use rhdl_vlog::emit;
 
     use super::*;
 

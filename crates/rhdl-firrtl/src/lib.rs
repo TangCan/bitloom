@@ -1,6 +1,6 @@
 //! FIRRTL 6.0.0 text import/export (AD-3, AD-8). No firtool invocation.
 
-use rhdl_hir::{
+use bitloom_hir::{
     Artifact, Assign, AssignExpr, AssignTarget, EmittedFile, FrozenHir, GroundType, Instance,
     Module, Port, PortConnect, PortDirection, Process, ProcessKind, Stmt,
 };
@@ -128,18 +128,18 @@ fn emit_module(m: &Module) -> String {
 }
 
 /// Import a FIRRTL 6 subset into FrozenHir via the same private freeze path.
-pub fn import(text: &str) -> Result<FrozenHir, rhdl_hir::Diagnostics> {
+pub fn import(text: &str) -> Result<FrozenHir, bitloom_hir::Diagnostics> {
     if !text.contains("FIRRTL version 6.0.0") {
-        return Err(rhdl_hir::Diagnostics(vec![rhdl_hir::Diagnostic {
-            span: rhdl_hir::Span::default(),
+        return Err(bitloom_hir::Diagnostics(vec![bitloom_hir::Diagnostic {
+            span: bitloom_hir::Span::default(),
             code: "rhdl::E0401".into(),
             en: "FIRRTL import requires 'FIRRTL version 6.0.0' header".into(),
             zh: "FIRRTL 导入需要 'FIRRTL version 6.0.0' 头".into(),
         }]));
     }
     if text.contains("Analog") || text.contains("assert") || text.contains("chirrtl") {
-        return Err(rhdl_hir::Diagnostics(vec![rhdl_hir::Diagnostic {
-            span: rhdl_hir::Span::default(),
+        return Err(bitloom_hir::Diagnostics(vec![bitloom_hir::Diagnostic {
+            span: bitloom_hir::Span::default(),
             code: "rhdl::E0402".into(),
             en: "import rejects Analog/InOut, properties, and CHIRRTL mem".into(),
             zh: "导入拒绝 Analog/InOut、property 与 CHIRRTL mem".into(),
@@ -157,14 +157,14 @@ pub fn import(text: &str) -> Result<FrozenHir, rhdl_hir::Diagnostics> {
             m.body.push(Stmt::Process(Process {
                 kind: ProcessKind::Combinational,
                 assigns: std::mem::take(comb),
-                span: rhdl_hir::Span::default(),
+                span: bitloom_hir::Span::default(),
             }));
         }
         if !seq.is_empty() {
             m.body.push(Stmt::Process(Process {
                 kind: ProcessKind::Sequential,
                 assigns: std::mem::take(seq),
-                span: rhdl_hir::Span::default(),
+                span: bitloom_hir::Span::default(),
             }));
         }
     };
@@ -183,7 +183,7 @@ pub fn import(text: &str) -> Result<FrozenHir, rhdl_hir::Diagnostics> {
                 name,
                 ports: Vec::new(),
                 body: Vec::new(),
-                span: rhdl_hir::Span::default(),
+                span: bitloom_hir::Span::default(),
             });
         } else if let Some(m) = current.as_mut() {
             if let Some(rest) = line.strip_prefix("input ") {
@@ -192,7 +192,7 @@ pub fn import(text: &str) -> Result<FrozenHir, rhdl_hir::Diagnostics> {
                         name: name.trim().to_string(),
                         direction: PortDirection::Input,
                         ty: parse_ty(ty.trim()),
-                        span: rhdl_hir::Span::default(),
+                        span: bitloom_hir::Span::default(),
                     });
                 }
             } else if let Some(rest) = line.strip_prefix("output ") {
@@ -201,7 +201,7 @@ pub fn import(text: &str) -> Result<FrozenHir, rhdl_hir::Diagnostics> {
                         name: name.trim().to_string(),
                         direction: PortDirection::Output,
                         ty: parse_ty(ty.trim()),
-                        span: rhdl_hir::Span::default(),
+                        span: bitloom_hir::Span::default(),
                     });
                 }
             } else if let Some(rest) = line.strip_prefix("wire ") {
@@ -209,7 +209,7 @@ pub fn import(text: &str) -> Result<FrozenHir, rhdl_hir::Diagnostics> {
                     m.body.push(Stmt::WireDecl {
                         name: name.trim().to_string(),
                         ty: parse_ty(ty.trim()),
-                        span: rhdl_hir::Span::default(),
+                        span: bitloom_hir::Span::default(),
                     });
                 }
             } else if let Some(rest) = line.strip_prefix("reg ") {
@@ -227,7 +227,7 @@ pub fn import(text: &str) -> Result<FrozenHir, rhdl_hir::Diagnostics> {
                             reset: "rst".into(),
                             async_reset: false,
                             has_enable: false,
-                            span: rhdl_hir::Span::default(),
+                            span: bitloom_hir::Span::default(),
                         });
                     }
                 }
@@ -239,7 +239,7 @@ pub fn import(text: &str) -> Result<FrozenHir, rhdl_hir::Diagnostics> {
                         module: rest.trim().to_string(),
                         connects: Vec::new(),
                         params: Vec::new(),
-                        span: rhdl_hir::Span::default(),
+                        span: bitloom_hir::Span::default(),
                     }));
                 }
             } else if line.contains(" <= ") {
@@ -256,7 +256,7 @@ pub fn import(text: &str) -> Result<FrozenHir, rhdl_hir::Diagnostics> {
                         i.connects.push(PortConnect {
                             child_port: port.to_string(),
                             parent_net: rhs.to_string(),
-                            span: rhdl_hir::Span::default(),
+                            span: bitloom_hir::Span::default(),
                             dangling: false,
                         });
                     }
@@ -273,7 +273,7 @@ pub fn import(text: &str) -> Result<FrozenHir, rhdl_hir::Diagnostics> {
                             AssignTarget::Net(lhs.to_string())
                         },
                         expr,
-                        span: rhdl_hir::Span::default(),
+                        span: bitloom_hir::Span::default(),
                     };
                     if is_reg {
                         seq_assigns.push(a);
@@ -289,11 +289,11 @@ pub fn import(text: &str) -> Result<FrozenHir, rhdl_hir::Diagnostics> {
         modules.push(m);
     }
 
-    let mut owned = rhdl_hir::BuilderOwnedHir::new(circuit_name);
+    let mut owned = bitloom_hir::BuilderOwnedHir::new(circuit_name);
     for m in modules {
         owned.add_module(m);
     }
-    rhdl_hir::seal_from_builder(owned)
+    bitloom_hir::seal_from_builder(owned)
 }
 
 fn parse_expr(s: &str) -> AssignExpr {
@@ -342,7 +342,7 @@ fn parse_ty(s: &str) -> GroundType {
 
 #[cfg(test)]
 mod tests {
-    use rhdl_builder::{ElaborateSession, GroundType, Span};
+    use bitloom_builder::{ElaborateSession, GroundType, Span};
 
     use super::*;
 

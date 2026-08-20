@@ -1,6 +1,6 @@
 //! Formal / SVA export from FrozenHir (FR39).
 
-use rhdl_hir::{Artifact, EmittedFile, FrozenHir, GroundType};
+use bitloom_hir::{Artifact, EmittedFile, FrozenHir, GroundType};
 
 /// Exported assertion attached to a module (host / test fixture).
 #[derive(Debug, Clone)]
@@ -60,7 +60,7 @@ pub fn check_sva_text(sv: &str) -> Result<(), String> {
 
 #[cfg(test)]
 mod tests {
-    use rhdl_builder::{ElaborateSession, GroundType, Span};
+    use bitloom_builder::{ElaborateSession, GroundType, Span};
 
     use super::*;
 

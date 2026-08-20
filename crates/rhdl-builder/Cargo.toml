@@ -1,11 +1,15 @@
 [package]
-name = "rhdl-builder"
+name = "bitloom-builder"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-publish = false
-description = "Runtime elaboration session over RHDL HIR"
+publish = true
+description = "Runtime elaboration session over Bitloom HIR"
+authors = ["Bitloom contributors"]
+repository = "https://github.com/TangCan/bitloom"
+homepage = "https://github.com/TangCan/bitloom"
+documentation = "https://docs.rs/bitloom-builder"
 
 [dependencies]
-rhdl-hir = { workspace = true }
+bitloom-hir = { workspace = true }

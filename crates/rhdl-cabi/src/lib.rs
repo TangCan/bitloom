@@ -3,8 +3,8 @@
 use std::ffi::CStr;
 use std::ffi::c_char;
 
-use rhdl_builder::{ElaborateSession, GroundType, Span};
-use rhdl_hir::{FrozenHir, PortValues};
+use bitloom_builder::{ElaborateSession, GroundType, Span};
+use bitloom_hir::{FrozenHir, PortValues};
 use rhdl_sim::Sim;
 
 pub struct Handle {

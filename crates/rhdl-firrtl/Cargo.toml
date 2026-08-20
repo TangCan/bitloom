@@ -8,7 +8,7 @@ publish = false
 description = "FrozenHir ↔ FIRRTL 6.0.0 text"
 
 [dependencies]
-rhdl-hir = { workspace = true }
+bitloom-hir = { workspace = true }
 
 [dev-dependencies]
-rhdl-builder = { workspace = true }
+bitloom-builder = { workspace = true }

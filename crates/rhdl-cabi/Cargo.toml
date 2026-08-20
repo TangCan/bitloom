@@ -11,6 +11,6 @@ publish = false
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-rhdl-builder = { workspace = true }
-rhdl-hir = { workspace = true }
+bitloom-builder = { workspace = true }
+bitloom-hir = { workspace = true }
 rhdl-sim = { workspace = true }

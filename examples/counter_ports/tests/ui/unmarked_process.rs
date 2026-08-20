@@ -1,4 +1,4 @@
-use rhdl_prelude::rhdl::process;
+use bitloom_prelude::rhdl::process;
 
 #[process]
 fn unmarked_hw() {}

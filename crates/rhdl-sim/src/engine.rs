@@ -1,6 +1,6 @@
 //! Tick engines: AST interpreter vs a compiled assign schedule (FR32).
 
-use rhdl_hir::{AssignExpr, AssignTarget, FrozenHir, ProcessKind, Stmt};
+use bitloom_hir::{AssignExpr, AssignTarget, FrozenHir, ProcessKind, Stmt};
 
 /// Select how `Sim::tick` evaluates FrozenHir.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]

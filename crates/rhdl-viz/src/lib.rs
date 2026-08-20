@@ -3,7 +3,7 @@
 //! Delivers: module/port HTML + instance hierarchy list.
 //! LSP hover/goto: deferred (no language-server binary in this phase).
 
-use rhdl_hir::{FrozenHir, Stmt};
+use bitloom_hir::{FrozenHir, Stmt};
 
 pub fn to_html(hir: &FrozenHir) -> String {
     let mut out = String::from(
@@ -49,7 +49,7 @@ pub fn to_html(hir: &FrozenHir) -> String {
 
 #[cfg(test)]
 mod tests {
-    use rhdl_builder::{ElaborateSession, GroundType, Span};
+    use bitloom_builder::{ElaborateSession, GroundType, Span};
 
     use super::*;
 

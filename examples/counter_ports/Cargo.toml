@@ -7,7 +7,7 @@ license.workspace = true
 publish = false
 
 [dependencies]
-rhdl-prelude = { workspace = true }
+bitloom-prelude = { workspace = true }
 
 [dev-dependencies]
 trybuild = "1"
