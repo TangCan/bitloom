@@ -39,6 +39,12 @@ cargo run -p bitloom -- build --package counter_ports --out-dir /tmp/bitloom-out
 
 多包发布与 Trusted Publishing：见 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。
 
+## 教学 RV32（Episode I）
+
+逐步教程：[`docs/tutorials/rv32-episode-i/`](docs/tutorials/rv32-episode-i/README.md)。示例核：`examples/rv32_core`（裁剪 RV32I；无 SoC/MMU/Linux；无流水线/CSR）。
+
+延伸阅读：Harris DDCA Ch.7；FemtoRV `FROM_BLINKER_TO_RISCV`；对照 PicoRV32/SERV。**不要**以 VexRiscv Linux 教程为第一路径。子集合规是**最小过滤器**（见 `examples/rv32_core/COMPLIANCE.md`），未宣称 arch-test。
+
 ### 可选：独立仿真（`bitloom-sim`）
 
 设计 crate 的 `[dependencies]` 仍只有 `bitloom-prelude`。需要 `tick` / VCD 时：
