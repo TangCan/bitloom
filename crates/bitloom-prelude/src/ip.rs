@@ -1,4 +1,4 @@
-//! First-class IP stubs (FR37 / FR48): SyncFifo, UartTx, black-box wrapper.
+//! First-class IP stubs (FR37 / FR48): SyncFifo, UartTx, SpiMaster, black-box wrapper.
 //!
 //! Minimal synthesizable Bitloom modules — not full protocol stacks.
 //! Design crates reach these via `bitloom_prelude::ip` (only dependency: this prelude).
@@ -54,6 +54,53 @@ impl Elaboratable for UartTx {
         // Stub: always sample wr_data / wr_en (full UART would gate on !busy).
         s.assign_reg_d_from("hold", "wr_data", Span::default());
         s.assign_reg_d_from("busy", "wr_en", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish()
+    }
+}
+
+/// Minimal SPI **master** byte buffer (not a full multi-mode / multi-slave stack).
+///
+/// Role: master. Stream/register surface: `start` + `tx_data[7:0]` → held `mosi_byte`,
+/// `busy` mirrors start; `cs_n`/`sclk`/`mosi` are registered stubs for port semantics.
+///
+/// Non-goals: CPOL/CPHA modes, multi-CS, continuous DMA, slave mode.
+pub struct SpiMaster;
+
+impl Elaboratable for SpiMaster {
+    fn elaborate() -> Result<FrozenHir, Diagnostics> {
+        let mut s = ElaborateSession::new("SpiMaster");
+        s.begin_module("SpiMaster", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("start", GroundType::UInt { width: 1 }, Span::default());
+        s.add_input("tx_data", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("miso", GroundType::UInt { width: 1 }, Span::default());
+        s.add_output("mosi_byte", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("busy", GroundType::UInt { width: 1 }, Span::default());
+        s.add_output("cs_n", GroundType::UInt { width: 1 }, Span::default());
+        s.add_output("sclk", GroundType::UInt { width: 1 }, Span::default());
+        s.add_output("mosi", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("hold", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_reg("busy_r", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("cs_r", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("sclk_r", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("mosi_r", GroundType::UInt { width: 1 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("mosi_byte", "hold", Span::default());
+        s.assign_net("busy", "busy_r", Span::default());
+        s.assign_net("cs_n", "cs_r", Span::default());
+        s.assign_net("sclk", "sclk_r", Span::default());
+        s.assign_net("mosi", "mosi_r", Span::default());
+        s.end_process();
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_from("hold", "tx_data", Span::default());
+        s.assign_reg_d_from("busy_r", "start", Span::default());
+        // Stub: cs_n/sclk track start; mosi samples miso for port liveness.
+        s.assign_reg_d_from("cs_r", "start", Span::default());
+        s.assign_reg_d_from("sclk_r", "start", Span::default());
+        s.assign_reg_d_from("mosi_r", "miso", Span::default());
         s.end_process();
         s.end_module();
         s.finish()
@@ -139,6 +186,27 @@ mod tests {
         sim.tick();
         assert_eq!(sim.ports().get("tx_byte"), Some(0xA5));
         assert_eq!(sim.ports().get("tx_busy"), Some(1));
+    }
+
+    #[test]
+    fn spi_master_elaborate_emit_tick() {
+        smoke_elaborate_emit_tick::<SpiMaster>("SpiMaster");
+        let mut sim = Sim::new(SpiMaster::elaborate().unwrap());
+        let mut pv = PortValues::default();
+        pv.set("rst", 1);
+        pv.set("start", 0);
+        pv.set("tx_data", 0);
+        pv.set("miso", 0);
+        sim.set_inputs(pv.clone());
+        sim.tick();
+        pv.set("rst", 0);
+        pv.set("start", 1);
+        pv.set("tx_data", 0x3C);
+        pv.set("miso", 1);
+        sim.set_inputs(pv);
+        sim.tick();
+        assert_eq!(sim.ports().get("mosi_byte"), Some(0x3C));
+        assert_eq!(sim.ports().get("busy"), Some(1));
     }
 
     #[test]
