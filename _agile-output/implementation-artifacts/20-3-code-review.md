@@ -12,7 +12,7 @@
 | medium | patch | dangling 连接跳过无断言 | 增 `chisel_fr28_dangling_connect_omitted` |
 | medium | patch | 未知子模块 `panic!` | 改为预检 `rhdl::E0903` |
 | low | patch | sprint `last_updated` 回拨 | 已校正 |
-| low | defer | 文档路径仍名 `fr28-chisel-best-effort.md` | deferred-work |
+| low | defer | 文档路径仍名 `fr28-chisel-compilable.md` | deferred-work |
 | low | defer | InOut → `Analog(Analog())` 双包；预存 | deferred-work |
 | low | defer | 非 `clk`/`rst` 名的 Clock/Reset 端口仍进 IO | deferred-work |
 | — | reject | 未连接子输入 / 未知 parent net | FrozenHir seal 已门禁 |

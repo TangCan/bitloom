@@ -46,7 +46,7 @@ deferred: []
 - `crates/rhdl-firrtl/src/chisel.rs` — `emit_chisel`；层次 `Module(new)`；E0901 mem；E0903 未知模块
 - `crates/rhdl-firrtl/src/lib.rs` — `chisel_fr28_*` 谓词与夹具
 - FIRRTL `inst` 发射 `lib.rs` — 连接方向参考
-- `docs/fr28-chisel-best-effort.md` + `README.md` — FR28 可编译合同 + CI pin
+- `docs/fr28-chisel-compilable.md` + `README.md` — FR28 可编译合同 + CI pin
 - `scripts/chisel-fr28-compile.sh` — 可选真编译（Java≥17+sbt）
 - Sprint：`20-3-firrtl-frozenhir-可编译-chisel-fr28`
 
@@ -55,7 +55,7 @@ deferred: []
 **Execution:**
 - [x] `crates/rhdl-firrtl/src/chisel.rs` -- 发射层次 `Module(new …)` + 端口连线；去掉实例尽力失败；保留 mem 子集外错误 -- FR28
 - [x] `crates/rhdl-firrtl/src/lib.rs` -- 反转/新增 ATDD：层次成功、端口/层次谓词、`.fir`→Scala、pin -- 验收
-- [x] `docs/fr28-chisel-best-effort.md`（或继任名）+ `README.md` -- 可编译合同 + CI 无 Scala 时谓词路径 + pin -- 文档
+- [x] `docs/fr28-chisel-compilable.md`（或继任名）+ `README.md` -- 可编译合同 + CI 无 Scala 时谓词路径 + pin -- 文档
 - [x] 可选 `scripts/` 或测试旁路 -- 若 Java≥17+coursier/sbt 可用则真编译；否则文档跳过 -- NFR14
 - [x] `sprint-status.yaml` -- backlog→in-progress→review→done -- 追踪
 - [x] `20-3-code-review.md` -- 对抗性审查 -- 流水线
@@ -115,7 +115,7 @@ Composer (Cursor agent)
 
 - `crates/rhdl-firrtl/src/chisel.rs`
 - `crates/rhdl-firrtl/src/lib.rs`
-- `docs/fr28-chisel-best-effort.md`
+- `docs/fr28-chisel-compilable.md`
 - `README.md`
 - `scripts/chisel-fr28-compile.sh`
 - `_agile-output/implementation-artifacts/sprint-status.yaml`
@@ -154,7 +154,7 @@ Composer (Cursor agent)
 **文档 / 可选编译**
 
 - 可编译合同与 CI pin
-  [`fr28-chisel-best-effort.md:1`](../../docs/fr28-chisel-best-effort.md#L1)
+  [`fr28-chisel-compilable.md:1`](../../docs/fr28-chisel-compilable.md#L1)
 
 - 可选 Chisel 7.14.0 编译脚本
   [`chisel-fr28-compile.sh:1`](../../scripts/chisel-fr28-compile.sh#L1)

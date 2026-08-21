@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-21-2026 16:23
+last_updated: 08-21-2026 16:28
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -434,37 +434,37 @@ action_items:
     epic: 19
     action: "支持嵌套 Bundle / HwVec<Bundle,_>（或文档升级边界并加负向测）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-19-retro-2026-08-21.md"
   - id: "epic-19-retro-item-39-展平叶名碰撞门禁-fail-before-emit"
     epic: 19
     action: "展平叶名碰撞门禁（fail-before-emit）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-19-retro-2026-08-21.md"
   - id: "epic-19-retro-item-40-对齐-architecture-spine-ad-22-与-session-域标"
     epic: 19
     action: "对齐 ARCHITECTURE-SPINE AD-22 与 session 域标签产品面"
     owner: "Architect"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-19-retro-2026-08-21.md"
   - id: "epic-19-retro-item-41-可选-derive-bundle-宏"
     epic: 19
     action: "可选：#[derive(Bundle)] 宏"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-19-retro-2026-08-21.md"
   - id: "epic-20-retro-item-42-将-docs-fr28-chisel-best-effort-md-正式更名并更"
     epic: 20
-    action: "将 docs/fr28-chisel-best-effort.md 正式更名并更新全仓链接"
+    action: "将 docs/fr28-chisel-compilable.md 正式更名并更新全仓链接"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-20-retro-2026-08-21.md"
   - id: "epic-20-retro-item-43-加固未知-parent-inst-port-与-dangling-connect"
     epic: 20
     action: "加固未知 parent<=inst.port 与 dangling connect 的导入/往返谓词或显式拒绝"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-20-retro-2026-08-21.md"
   - id: "epic-20-retro-item-44-可选-import-emit-cli-可选输出-chisel-scala"
     epic: 20

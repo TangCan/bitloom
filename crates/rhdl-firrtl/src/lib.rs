@@ -160,6 +160,7 @@ pub fn import(text: &str) -> Result<FrozenHir, bitloom_hir::Diagnostics> {
     let mut current: Option<Module> = None;
     let mut comb_assigns: Vec<Assign> = Vec::new();
     let mut seq_assigns: Vec<Assign> = Vec::new();
+    let mut import_errs: Vec<bitloom_hir::Diagnostic> = Vec::new();
 
     let flush_processes = |m: &mut Module, comb: &mut Vec<Assign>, seq: &mut Vec<Assign>| {
         if !comb.is_empty() {
@@ -271,11 +272,19 @@ pub fn import(text: &str) -> Result<FrozenHir, bitloom_hir::Diagnostics> {
                             span: bitloom_hir::Span::default(),
                             dangling: false,
                         });
-                        took_inst = true;
                     } else {
-                        // Dotted lhs that is not a known instance: skip (do not invent a net name).
-                        took_inst = true;
+                        import_errs.push(bitloom_hir::Diagnostic {
+                            span: bitloom_hir::Span::default(),
+                            code: "rhdl::E0403".into(),
+                            en: format!(
+                                "import rejects unknown instance connect `{inst}.{port} <= …` (no matching `inst {inst}`)"
+                            ),
+                            zh: format!(
+                                "导入拒绝未知实例连接 `{inst}.{port} <= …`（无匹配的 `inst {inst}`）"
+                            ),
+                        });
                     }
+                    took_inst = true;
                 } else if let Some((inst, port)) = rhs.split_once('.') {
                     if let Some(Stmt::Instance(i)) = m
                         .body
@@ -289,8 +298,19 @@ pub fn import(text: &str) -> Result<FrozenHir, bitloom_hir::Diagnostics> {
                             span: bitloom_hir::Span::default(),
                             dangling: false,
                         });
-                        took_inst = true;
+                    } else {
+                        import_errs.push(bitloom_hir::Diagnostic {
+                            span: bitloom_hir::Span::default(),
+                            code: "rhdl::E0403".into(),
+                            en: format!(
+                                "import rejects unknown `… <= {inst}.{port}` (no matching `inst {inst}`; will not treat as ordinary assign)"
+                            ),
+                            zh: format!(
+                                "导入拒绝未知 `… <= {inst}.{port}`（无匹配的 `inst {inst}`；不会降为普通赋值）"
+                            ),
+                        });
                     }
+                    took_inst = true;
                 }
                 if !took_inst {
                     let expr = parse_expr(rhs);
@@ -319,6 +339,10 @@ pub fn import(text: &str) -> Result<FrozenHir, bitloom_hir::Diagnostics> {
     if let Some(mut m) = current.take() {
         flush_processes(&mut m, &mut comb_assigns, &mut seq_assigns);
         modules.push(m);
+    }
+
+    if !import_errs.is_empty() {
+        return Err(bitloom_hir::Diagnostics(import_errs));
     }
 
     let mut owned = bitloom_hir::BuilderOwnedHir::new(circuit_name);
@@ -449,6 +473,24 @@ pub fn instance_graph_roundtrip_ok(expected: &FrozenHir, got: &FrozenHir) -> Res
                 .map(|c| (c.child_port.as_str(), c.parent_net.as_str(), c.dangling))
                 .collect();
             if eset != gset {
+                let e_dangling: Vec<_> = ei
+                    .connects
+                    .iter()
+                    .filter(|c| c.dangling)
+                    .map(|c| c.child_port.as_str())
+                    .collect();
+                let g_dangling: Vec<_> = gi
+                    .connects
+                    .iter()
+                    .filter(|c| c.dangling)
+                    .map(|c| c.child_port.as_str())
+                    .collect();
+                if e_dangling != g_dangling {
+                    return Err(format!(
+                        "instance `{}` dangling connects mismatch (FIRRTL emit omits dangling; they cannot round-trip): expected dangling {e_dangling:?}, got {g_dangling:?}; full expected {eset:?}, got {gset:?}",
+                        ei.name
+                    ));
+                }
                 return Err(format!(
                     "instance `{}` connects mismatch: expected {eset:?}, got {gset:?}",
                     ei.name
@@ -933,5 +975,107 @@ mod tests {
         sim.tick();
         sim.tick();
         assert_eq!(sim.ports().get("data_out"), Some(2));
+    }
+
+    #[test]
+    fn fr46_rejects_unknown_parent_le_inst_port() {
+        let fir = r#"FIRRTL version 6.0.0
+circuit BadRhs :
+  module BadRhs :
+    input clock : Clock
+    input reset : UInt<1>
+    input x : UInt<8>
+    output y : UInt<8>
+    y <= missing.y
+"#;
+        let err = import(fir).expect_err("unknown rhs inst.port must reject");
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0403"),
+            "expected E0403, got {err}"
+        );
+        assert!(
+            err.0.iter().any(|d| d.en.contains("missing.y")),
+            "diagnostic should name unknown inst.port, got {err}"
+        );
+    }
+
+    #[test]
+    fn fr46_rejects_unknown_inst_port_le_parent() {
+        let fir = r#"FIRRTL version 6.0.0
+circuit BadLhs :
+  module BadLhs :
+    input clock : Clock
+    input reset : UInt<1>
+    input x : UInt<8>
+    output y : UInt<8>
+    ghost.x <= x
+"#;
+        let err = import(fir).expect_err("unknown lhs inst.port must reject");
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0403"),
+            "expected E0403, got {err}"
+        );
+        assert!(
+            err.0.iter().any(|d| d.en.contains("ghost.x")),
+            "diagnostic should name unknown inst.port, got {err}"
+        );
+    }
+
+    #[test]
+    fn fr46_dangling_connect_roundtrip_predicate_fails_clearly() {
+        fn top_with_child(spare_dangling: bool) -> FrozenHir {
+            let mut s = ElaborateSession::new("t");
+            s.begin_module("Child", Span::default());
+            s.add_input("clk", GroundType::Clock, Span::default());
+            s.add_input("rst", GroundType::Reset, Span::default());
+            s.add_input("x", GroundType::UInt { width: 8 }, Span::default());
+            if spare_dangling {
+                s.add_input("spare", GroundType::UInt { width: 8 }, Span::default());
+            }
+            s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+            s.begin_combinational(Span::default());
+            s.assign_net("y", "x", Span::default());
+            s.end_process();
+            s.end_module();
+
+            s.begin_module("Top", Span::default());
+            s.add_input("clk", GroundType::Clock, Span::default());
+            s.add_input("rst", GroundType::Reset, Span::default());
+            s.add_input("x", GroundType::UInt { width: 8 }, Span::default());
+            s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+            s.add_instance(
+                "u0",
+                "Child",
+                vec![
+                    ("clk".into(), "clk".into()),
+                    ("rst".into(), "rst".into()),
+                    ("x".into(), "x".into()),
+                    ("y".into(), "y".into()),
+                ],
+                vec![],
+                Span::default(),
+            );
+            if spare_dangling {
+                s.add_dangling_input("u0", "spare", Span::default());
+            }
+            s.end_module();
+            s.finish().unwrap()
+        }
+
+        let with_dangling = top_with_child(true);
+        let fir = emit(&with_dangling).files[0].contents.clone();
+        assert!(
+            !fir.contains("u0.spare"),
+            "FIRRTL emit must omit dangling instance connects, got:\n{fir}"
+        );
+        // Emit drops dangling marks; a re-imported graph matches the no-dangling shape.
+        // Strengthened predicate must fail clearly rather than silently accepting.
+        let without = top_with_child(false);
+        let err = instance_graph_roundtrip_ok(&with_dangling, &without)
+            .expect_err("dangling must fail FR46 instance-graph round-trip");
+        assert!(
+            err.contains("dangling"),
+            "predicate message must call out dangling: {err}"
+        );
     }
 }

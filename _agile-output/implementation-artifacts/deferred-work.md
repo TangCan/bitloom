@@ -32,14 +32,23 @@
 - source_spec: `_agile-output/implementation-artifacts/19-4-实现-bundle-vec-可综合路径-fr51.md`
   summary: Bundle 叶仅 GroundType；不支持嵌套 Bundle 或 HwVec&lt;Bundle,_&gt;
   evidence: 最小展平实现；AsGround 门控 HwVec；评审指出嵌套路径未交付
+  status: closed — OUT OF SCOPE + trybuild `nested_hwvec_bundle`（epic-19-retro-item-38）
+  resolved: '2026-08-21'
+  resolution: 文档锁定嵌套为 OUT OF SCOPE；负向编译测失败清晰
 
 - source_spec: `_agile-output/implementation-artifacts/19-4-实现-bundle-vec-可综合路径-fr51.md`
   summary: 未提供 #[derive(Bundle)]；仅手写 Bundle::leaves
   evidence: Design Notes 允许手写；夹具已用手写；宏 derive 非 AC
+  status: closed — documented defer + trybuild `derive_bundle_unavailable`（epic-19-retro-item-41）
+  resolved: '2026-08-21'
+  resolution: language-surface/prelude 声明 derive 不可用；负向测
 
 - source_spec: `_agile-output/implementation-artifacts/19-4-实现-bundle-vec-可综合路径-fr51.md`
   summary: 展平叶名可能碰撞（field_a + member b_c vs field_a_b + member c）
   evidence: 命名约定 {field}_{member}/{field}_{i}；无去重门禁；评审指出
+  status: closed — E0152 fail-before-emit（epic-19-retro-item-39）
+  resolved: '2026-08-21'
+  resolution: `ensure_fresh_signal_name` + `flatten_leaf_name_collision_fails_before_emit`
 
 - source_spec: `_agile-output/implementation-artifacts/19-4-实现-bundle-vec-可综合路径-fr51.md`
   summary: check_connect 只比位宽、不比 GroundType kind（Bool↔UInt 等同宽仍可能过）
@@ -52,6 +61,9 @@
 - source_spec: `_agile-output/implementation-artifacts/19-5-clockdomain-产品叙事与夹具-fr52.md`
   summary: ARCHITECTURE-SPINE AD-22 仍写 Clash Signal&lt;D,T&gt;，与 session 域标签实现不一致
   evidence: 本故事可选对齐未改脊柱；产品面已在 language-surface/prelude 钉死
+  status: closed — AD-22 修订对齐产品面（epic-19-retro-item-40）
+  resolved: '2026-08-21'
+  resolution: ARCHITECTURE-SPINE AD-22 + walkthrough 改为 ClockDomain::&lt;ID&gt; + bind_domain
 
 - source_spec: `_agile-output/implementation-artifacts/19-5-clockdomain-产品叙事与夹具-fr52.md`
   summary: 跨域诊断码命名空间仍为 rhdl::E0220（Bitloom 品牌下预存）
@@ -60,6 +72,9 @@
 - source_spec: `_agile-output/implementation-artifacts/20-3-firrtl-frozenhir-可编译-chisel-fr28.md`
   summary: 文档路径仍为 `docs/fr28-chisel-best-effort.md`（内容已改写为可编译合同）
   evidence: 避免断链；README 已改显示名；正式更名可另故事
+  status: closed — 更名为 `docs/fr28-chisel-compilable.md`（epic-20-retro-item-42）
+  resolved: '2026-08-21'
+  resolution: git mv + 全仓链接更新
 
 - source_spec: `_agile-output/implementation-artifacts/20-3-firrtl-frozenhir-可编译-chisel-fr28.md`
   summary: InOut 端口发射为 `Analog(Analog())`；实例 InOut 连接仅注释
@@ -72,10 +87,16 @@
 - source_spec: `_agile-output/implementation-artifacts/20-4-反向导入-chisel-fir-bitloom-fr46-腿-2.md`
   summary: 未知 `parent <= inst.port`（rhs 有点但无匹配实例）仍落入普通 assign
   evidence: 评审；合法夹具均有匹配实例；坏 fir 由 seal 或语义外失败
+  status: closed — E0403 显式拒绝（epic-20-retro-item-43）
+  resolved: '2026-08-21'
+  resolution: 未知 lhs/rhs 点号实例连接 → E0403；往返谓词对 dangling 失配文案加强
 
 - source_spec: `_agile-output/implementation-artifacts/20-4-反向导入-chisel-fir-bitloom-fr46-腿-2.md`
   summary: dangling connect 经 emit 丢失，往返谓词不覆盖 dangling
   evidence: emit 跳过 dangling；FR46 夹具无 dangling
+  status: closed — 往返谓词明确拒绝 dangling 失配（epic-20-retro-item-43）
+  resolved: '2026-08-21'
+  resolution: `fr46_dangling_connect_roundtrip_predicate_fails_clearly`
 
 - source_spec: `_agile-output/implementation-artifacts/20-5-import-cli-混合夹具-fr40-fr46-腿-3.md`
   summary: `import` CLI 默认只写 `.v`（可选 `--also-fir`），不发射 Chisel Scala

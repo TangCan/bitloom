@@ -45,7 +45,7 @@ deferred: []
 - `crates/bitloom/tests/ad5_rust_functional_sim_allowed.rs` / `ad20_bundle_vec_allowed.rs` — 脊柱 AD 切片 ATDD 样板
 - `_agile-output/implementation-artifacts/nfr14-risk-chisel-bidirectional.md` — 20.1 门禁已存在（Given）
 - `AGENTS.md` — Brand lock；尚无 AD-27 / FR28 指针
-- `docs/fr28-chisel-best-effort.md` — 历史尽力文档（本故事只读；不改生成器）
+- `docs/fr28-chisel-compilable.md` — 历史尽力文档（本故事只读；不改生成器）
 - `_agile-output/implementation-artifacts/sprint-status.yaml` — `20-2-架构-ad-firrtl-可编译-chisel-fr28-条`
 
 ## Tasks & Acceptance
@@ -68,7 +68,7 @@ deferred: []
 
 ## Design Notes
 
-AD-27 主体已 ADOPTED；本故事以核对 + 缺口补齐 + ATDD 为主。生成器实现属 Story 20.3。`docs/fr28-chisel-best-effort.md` 历史措辞可另故事改写，不在本范围强制。
+AD-27 主体已 ADOPTED；本故事以核对 + 缺口补齐 + ATDD 为主。生成器实现属 Story 20.3。`docs/fr28-chisel-compilable.md` 历史措辞可另故事改写，不在本范围强制。
 
 ## Verification
 

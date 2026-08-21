@@ -13,7 +13,7 @@
 ### Low — accepted
 
 2. **AD-27 Rule 仍含「不承诺可维护 Chisel」字样：** 出现在「NFR9『…』已被推翻」引用中，属故意；ATDD 要求同句含推翻语义。
-3. **`docs/fr28-chisel-best-effort.md` / README 仍写「尽力」：** 历史文档漂移；本故事范围是脊柱 AD + 门禁，留给 20.3 实现时改写产品文档。
+3. **`docs/fr28-chisel-compilable.md` / README 仍写「尽力」：** 历史文档漂移；本故事范围是脊柱 AD + 门禁，留给 20.3 实现时改写产品文档。
 
 ### Out of scope (not defects)
 
