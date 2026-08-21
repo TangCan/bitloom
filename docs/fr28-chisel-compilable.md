@@ -9,6 +9,8 @@ let art = rhdl_firrtl::emit_chisel(&frozen)?;
 // 或 .fir → import → emit_chisel
 ```
 
+**CLI：** `cargo bitloom import --input design.fir --out-dir out --also-chisel` 在写 `.v` 的同时经 `emit_chisel` 写出 `.scala`。
+
 ## 产出
 
 - 成功：`.scala`（`class … extends Module`），含层次时 `Module(new Child)` 与按方向连线（跳过 `clk`/`rst`；Chisel `Module` 隐式 clock/reset）。

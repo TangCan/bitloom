@@ -93,7 +93,7 @@ Composer (Cursor agent)
 
 ### Completion Notes List
 
-- `cargo bitloom import --input … --out-dir … [--also-fir]`
+- `cargo bitloom import --input … --out-dir … [--also-fir] [--also-chisel]`
 - `examples/chisel_mixed` 混合夹具
 - FR40/FR46/README 文档；epic-20 done
 

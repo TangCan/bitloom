@@ -101,6 +101,9 @@
 - source_spec: `_agile-output/implementation-artifacts/20-5-import-cli-混合夹具-fr40-fr46-腿-3.md`
   summary: `import` CLI 默认只写 `.v`（可选 `--also-fir`），不发射 Chisel Scala
   evidence: 对齐 `build` Verilog 后端；Scala 仍用库 `emit_chisel`
+  status: closed — `import --also-chisel` 经 `emit_chisel` 可选写出 `.scala`（epic-20-retro-item-44）
+  resolved: '2026-08-21'
+  resolution: `cargo bitloom import --also-chisel` + `import_also_chisel_writes_scala`
 
 - source_spec: `_agile-output/implementation-artifacts/20-5-import-cli-混合夹具-fr40-fr46-腿-3.md`
   summary: 混合夹具 `include_str` 耦合 monorepo 相对路径

@@ -30,6 +30,8 @@ let _ = bitloom_vlog::emit(&hir);
 cargo bitloom import --input design.fir --out-dir out
 # optional: also re-emit FIRRTL text
 cargo bitloom import --input design.fir --out-dir out --also-fir
+# optional: also emit Chisel Scala (FR28 `emit_chisel`)
+cargo bitloom import --input design.fir --out-dir out --also-chisel
 ```
 
 混合夹具（一侧 Bitloom elaborate、一侧外部 `.fir`，同一 `bitloom_vlog::emit`）：[`examples/chisel_mixed`](../examples/chisel_mixed)。

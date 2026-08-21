@@ -67,12 +67,15 @@ enum Commands {
         /// Path to a `.fir` file with `FIRRTL version 6.0.0` header.
         #[arg(long)]
         input: PathBuf,
-        /// Directory for emitted Yosys-friendly `.v` (and optional `.fir` re-emit).
+        /// Directory for emitted Yosys-friendly `.v` (and optional `.fir` / Chisel Scala).
         #[arg(long, default_value = ".")]
         out_dir: PathBuf,
         /// Also write re-emitted FIRRTL text next to Verilog.
         #[arg(long, default_value_t = false)]
         also_fir: bool,
+        /// Also write Chisel Scala via `emit_chisel` (FR28) next to Verilog.
+        #[arg(long, default_value_t = false)]
+        also_chisel: bool,
     },
     /// Generate a Rust functional-sim crate from a design package's FrozenHir (FR47 leg 1).
     GenFunc {
@@ -514,7 +517,8 @@ fn main() {
             input,
             out_dir,
             also_fir,
-        } => match run_import(&input, &out_dir, also_fir) {
+            also_chisel,
+        } => match run_import(&input, &out_dir, also_fir, also_chisel) {
             Ok(()) => {}
             Err(e) => {
                 eprintln!("error: {e}");
@@ -646,7 +650,12 @@ fn main() {
     }
 }
 
-fn run_import(input: &Path, out_dir: &Path, also_fir: bool) -> Result<(), String> {
+fn run_import(
+    input: &Path,
+    out_dir: &Path,
+    also_fir: bool,
+    also_chisel: bool,
+) -> Result<(), String> {
     let text = fs::read_to_string(input).map_err(|e| format!("read {}: {e}", input.display()))?;
     let hir = rhdl_firrtl::import(&text).map_err(|d| d.to_string())?;
     fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
@@ -659,6 +668,14 @@ fn run_import(input: &Path, out_dir: &Path, also_fir: bool) -> Result<(), String
     if also_fir {
         let fir = rhdl_firrtl::emit(&hir);
         for f in &fir.files {
+            let path = out_dir.join(&f.path);
+            fs::write(&path, &f.contents).map_err(|e| format!("write {}: {e}", path.display()))?;
+            println!("wrote {}", path.display());
+        }
+    }
+    if also_chisel {
+        let chisel = rhdl_firrtl::emit_chisel(&hir).map_err(|e| e.to_string())?;
+        for f in &chisel.files {
             let path = out_dir.join(&f.path);
             fs::write(&path, &f.contents).map_err(|e| format!("write {}: {e}", path.display()))?;
             println!("wrote {}", path.display());

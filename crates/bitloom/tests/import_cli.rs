@@ -19,6 +19,10 @@ fn import_help_mentions_input_and_out_dir() {
         text.contains(".fir") || text.contains("FIRRTL") || text.contains("fir"),
         "help should mention FIRRTL/.fir:\n{text}"
     );
+    assert!(
+        text.contains("--also-chisel"),
+        "help must document --also-chisel:\n{text}"
+    );
 }
 
 #[test]
@@ -58,6 +62,47 @@ fn import_smoke_emits_verilog_from_external_fir() {
     assert!(
         entries.iter().any(|n| n.ends_with(".fir")),
         "expected .fir re-emit with --also-fir in {entries:?}"
+    );
+    let _ = std::fs::remove_dir_all(&out_dir);
+}
+
+#[test]
+fn import_also_chisel_writes_scala() {
+    let bin = env!("CARGO_BIN_EXE_cargo-bitloom");
+    let fir = concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../rhdl-firrtl/fixtures/external_hierarchy.fir"
+    );
+    let out_dir = tempfile_dir();
+    let out = Command::new(bin)
+        .args([
+            "import",
+            "--input",
+            fir,
+            "--out-dir",
+            out_dir.to_str().unwrap(),
+            "--also-chisel",
+        ])
+        .output()
+        .expect("run import --also-chisel");
+    assert!(
+        out.status.success(),
+        "import --also-chisel failed:\nstdout={}\nstderr={}",
+        String::from_utf8_lossy(&out.stdout),
+        String::from_utf8_lossy(&out.stderr)
+    );
+    let entries: Vec<_> = std::fs::read_dir(&out_dir)
+        .expect("out_dir")
+        .filter_map(|e| e.ok())
+        .map(|e| e.file_name().to_string_lossy().into_owned())
+        .collect();
+    assert!(
+        entries.iter().any(|n| n.ends_with(".v")),
+        "expected .v in {entries:?}"
+    );
+    assert!(
+        entries.iter().any(|n| n.ends_with(".scala")),
+        "expected .scala with --also-chisel in {entries:?}"
     );
     let _ = std::fs::remove_dir_all(&out_dir);
 }

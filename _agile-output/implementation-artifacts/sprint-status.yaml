@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-21-2026 16:28
+last_updated: 08-21-2026 16:31
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -470,7 +470,7 @@ action_items:
     epic: 20
     action: "可选：import/emit CLI 可选输出 Chisel Scala"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-20-retro-2026-08-21.md"
   - id: "epic-20-retro-item-45-可选-拆分或模块化膨胀的-rhdl-firrtl-import-emit-面"
     epic: 20
