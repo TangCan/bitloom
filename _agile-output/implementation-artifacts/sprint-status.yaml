@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-21-2026 15:23
+last_updated: 08-21-2026 16:20
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -166,7 +166,7 @@ development_status:
   19-3-修订-ad-20-允许-bundle-vec: done
   19-4-实现-bundle-vec-可综合路径-fr51: done
   19-5-clockdomain-产品叙事与夹具-fr52: done
-  epic-19-retrospective: optional
+  epic-19-retrospective: done
 
   epic-20: done
   20-1-nfr14-风险记录-chisel-双向: done
@@ -174,7 +174,7 @@ development_status:
   20-3-firrtl-frozenhir-可编译-chisel-fr28: done
   20-4-反向导入-chisel-fir-bitloom-fr46-腿-2: done
   20-5-import-cli-混合夹具-fr40-fr46-腿-3: done
-  epic-20-retrospective: optional
+  epic-20-retrospective: done
 
   epic-21: done
   21-1-nfr14-风险记录-双模拟器生成: done
@@ -182,7 +182,7 @@ development_status:
   21-3-生成-rust-功能模拟器工件-fr47-腿-1: done
   21-4-生成周期精确模拟器工件-桥接对照-fr47-腿-2: done
   21-5-双视图等价接入生成路径-fr30: done
-  epic-21-retrospective: optional
+  epic-21-retrospective: done
 
   epic-22: done
   22-1-nfr14-风险记录-一级-ip: done
@@ -191,7 +191,7 @@ development_status:
   22-4-i2c-ip-smoke-fr48: done
   22-5-axi4-lite-最小从接口-fr48: done
   22-6-ip-索引与例化文档-fr48-收口: done
-  epic-22-retrospective: optional
+  epic-22-retrospective: done
 
   epic-23: done
   23-1-nfr14-风险记录-可视化: done
@@ -199,14 +199,14 @@ development_status:
   23-3-时序图-波形产品入口-fr38-fr49: done
   23-4-统一文档与-uj-6-可视化半程: done
   23-5-fr38-fr49-联验收口: done
-  epic-23-retrospective: optional
+  epic-23-retrospective: done
 
   epic-24: done
   24-1-nfr14-风险记录-hls: done
   24-2-钉死后端的默认-hls-路径-fr35: done
   24-3-ci-发布烟测夹具-fr35-fr50: done
   24-4-文档将-hls-列为支持功能-fr50: done
-  epic-24-retrospective: optional
+  epic-24-retrospective: done
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1
@@ -430,3 +430,111 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-18-retro-2026-08-21.md"
+  - id: "epic-19-retro-item-38-支持嵌套-bundle-hwvec-bundle-_-或文档升级边界并加负向测"
+    epic: 19
+    action: "支持嵌套 Bundle / HwVec<Bundle,_>（或文档升级边界并加负向测）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-19-retro-2026-08-21.md"
+  - id: "epic-19-retro-item-39-展平叶名碰撞门禁-fail-before-emit"
+    epic: 19
+    action: "展平叶名碰撞门禁（fail-before-emit）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-19-retro-2026-08-21.md"
+  - id: "epic-19-retro-item-40-对齐-architecture-spine-ad-22-与-session-域标"
+    epic: 19
+    action: "对齐 ARCHITECTURE-SPINE AD-22 与 session 域标签产品面"
+    owner: "Architect"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-19-retro-2026-08-21.md"
+  - id: "epic-19-retro-item-41-可选-derive-bundle-宏"
+    epic: 19
+    action: "可选：#[derive(Bundle)] 宏"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-19-retro-2026-08-21.md"
+  - id: "epic-20-retro-item-42-将-docs-fr28-chisel-best-effort-md-正式更名并更"
+    epic: 20
+    action: "将 docs/fr28-chisel-best-effort.md 正式更名并更新全仓链接"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-20-retro-2026-08-21.md"
+  - id: "epic-20-retro-item-43-加固未知-parent-inst-port-与-dangling-connect"
+    epic: 20
+    action: "加固未知 parent<=inst.port 与 dangling connect 的导入/往返谓词或显式拒绝"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-20-retro-2026-08-21.md"
+  - id: "epic-20-retro-item-44-可选-import-emit-cli-可选输出-chisel-scala"
+    epic: 20
+    action: "可选：import/emit CLI 可选输出 Chisel Scala"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-20-retro-2026-08-21.md"
+  - id: "epic-20-retro-item-45-可选-拆分或模块化膨胀的-rhdl-firrtl-import-emit-面"
+    epic: 20
+    action: "可选：拆分或模块化膨胀的 rhdl-firrtl import/emit 面"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-20-retro-2026-08-21.md"
+  - id: "epic-21-retro-item-46-可选-将-cycle-functional-生成器扁平单模块子集写入-defer"
+    epic: 21
+    action: "可选：将 cycle/functional 生成器扁平单模块子集写入 deferred-work 或 language-surface"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-21-retro-2026-08-21.md"
+  - id: "epic-21-retro-item-47-可选-层次-mem-周期精确生成作为后续故事-勿静默扩子集而不改文档"
+    epic: 21
+    action: "可选：层次/mem 周期精确生成作为后续故事，勿静默扩子集而不改文档"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-21-retro-2026-08-21.md"
+  - id: "epic-22-retro-item-48-将五类-ip-stub-边界写入-deferred-work-md-避免被误读为"
+    epic: 22
+    action: "将五类 IP stub 边界写入 deferred-work.md，避免被误读为全协议"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md"
+  - id: "epic-22-retro-item-49-可选-加深-uart-spi-i2c-协议语义-或产品文档显式锁定长期-stub"
+    epic: 22
+    action: "可选：加深 UART/SPI/I2C 协议语义，或产品文档显式锁定长期 stub MVP"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md"
+  - id: "epic-22-retro-item-50-可选-axi4-lite-与-uart-fifo-简易连接夹具"
+    epic: 22
+    action: "可选：AXI4-Lite 与 UART/FIFO 简易连接夹具"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md"
+  - id: "epic-23-retro-item-51-可选-交互式-更丰富波形浏览-超出静态-timing-html-value-ta"
+    epic: 23
+    action: "可选：交互式/更丰富波形浏览（超出静态 timing.html Value table）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-23-retro-2026-08-21.md"
+  - id: "epic-23-retro-item-52-可选-lsp-hover-goto-作为后续-epic-已声明-deferred"
+    epic: 23
+    action: "可选：LSP hover/goto 作为后续 epic（已声明 deferred）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-23-retro-2026-08-21.md"
+  - id: "epic-24-retro-item-53-将-ci-默认-bambu-stub-非真实-hls-质量写入-deferred"
+    epic: 24
+    action: "将 CI 默认 Bambu stub、非真实 HLS 质量写入 deferred-work.md 并标明真机入口"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md"
+  - id: "epic-24-retro-item-54-可选-ci-optional-夜间-job-跑真实-bambu-2024-10"
+    epic: 24
+    action: "可选：CI optional/夜间 job 跑真实 Bambu 2024.10（失败不 ignore）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md"
+  - id: "epic-24-retro-item-55-可选-发布烟测夹具扩到第二算法函数或负向调度质量断言"
+    epic: 24
+    action: "可选：发布烟测夹具扩到第二算法函数或负向调度质量断言"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md"
