@@ -1,10 +1,32 @@
 #!/usr/bin/env bash
-# Optional FR28 smoke: compile emitted Chisel Scala under pinned Chisel 7.14.0.
-# Skips cleanly when Java < 17 or coursier/sbt is unavailable — does not fail CI.
-# Pin: Chisel 7.14.0 ↔ firtool 1.155.0 (AD-9). Never silent-downgrade FR28 to best-effort.
+# FR28 Chisel Scala compile under pinned Chisel 7.14.0 (AD-9).
+#
+# Modes:
+#   BITLOOM_REQUIRE_CHISEL_JVM=1  — missing Java≥17 / sbt / compile fail → non-zero (FR71)
+#   BITLOOM_CHISEL_JVM_SKIP=1    — escape hatch: skip with exit 0 (NOT for default CI; NFR34)
+#   (default / optional)         — missing toolchain → skip exit 0 (legacy local convenience)
+#
+# Prefer scripts/chisel-fr28-compile-required.sh for CI and just chisel-fr28-jvm.
+# Pin: Chisel 7.14.0 ↔ firtool 1.155.0. Never silent-downgrade FR28 to best-effort.
 set -euo pipefail
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT="$(cd "${BASH_SOURCE[0]%/*}/.." && pwd)"
 SCALA="${1:-}"
+REQUIRE="${BITLOOM_REQUIRE_CHISEL_JVM:-0}"
+SKIP="${BITLOOM_CHISEL_JVM_SKIP:-0}"
+
+fail_or_skip() {
+  local msg="$1"
+  if [[ "$SKIP" == "1" ]]; then
+    echo "BITLOOM_CHISEL_JVM_SKIP=1: $msg (escape hatch; not default CI)" >&2
+    exit 0
+  fi
+  if [[ "$REQUIRE" == "1" ]]; then
+    echo "error: $msg" >&2
+    exit 1
+  fi
+  echo "$msg (optional path; set BITLOOM_REQUIRE_CHISEL_JVM=1 to fail)"
+  exit 0
+}
 
 if [[ -z "$SCALA" ]]; then
   echo "usage: $0 <generated.scala>" >&2
@@ -15,60 +37,48 @@ if [[ ! -f "$SCALA" ]]; then
   exit 2
 fi
 
-need_java_major=17
-if ! command -v java >/dev/null 2>&1; then
-  echo "java not found; skipping Chisel compile (need Java >= ${need_java_major} + coursier/sbt)"
+if [[ "$SKIP" == "1" ]]; then
+  echo "BITLOOM_CHISEL_JVM_SKIP=1: skipping Chisel compile (escape hatch; not default CI)"
   exit 0
 fi
+
+need_java_major=17
+if ! command -v java >/dev/null 2>&1; then
+  fail_or_skip "java not found (need Java >= ${need_java_major} + sbt)"
+fi
 java_ver="$(java -version 2>&1 | head -n1 || true)"
-# Extract major: 1.8.x → 8; 11.x / 17.x → 11 / 17
 major="$(sed -nE 's/.* version "([0-9]+)(\.[0-9]+)*.*/\1/p' <<<"$java_ver")"
 if [[ "$major" == "1" ]]; then
   major="$(sed -nE 's/.* version "1\.([0-9]+).*/\1/p' <<<"$java_ver")"
 fi
 if [[ -z "${major:-}" ]] || (( major < need_java_major )); then
-  echo "Java ${major:-unknown} (< ${need_java_major}); skipping Chisel compile"
-  echo "  detected: $java_ver"
-  echo "  install Java >= ${need_java_major} and coursier/sbt to enable true compile"
-  exit 0
+  fail_or_skip "Java ${major:-unknown} < ${need_java_major} (detected: $java_ver)"
 fi
 
-CS=""
-if command -v cs >/dev/null 2>&1; then
-  CS=cs
-elif command -v coursier >/dev/null 2>&1; then
-  CS=coursier
-fi
-if [[ -z "$CS" ]] && ! command -v sbt >/dev/null 2>&1; then
-  echo "coursier/sbt not found; skipping Chisel compile (Java ${major} OK)"
-  exit 0
+if ! command -v sbt >/dev/null 2>&1; then
+  fail_or_skip "sbt not found (Java ${major} OK; install sbt for Chisel plugin compile)"
 fi
 
 WORKDIR="$ROOT/target/chisel-fr28-compile"
 rm -rf "$WORKDIR"
-mkdir -p "$WORKDIR/src/main/scala"
+mkdir -p "$WORKDIR/src/main/scala" "$WORKDIR/project"
 cp "$SCALA" "$WORKDIR/src/main/scala/"
 
-# Minimal build.sbt for syntax+elaborate smoke under pinned Chisel.
+# Minimal build.sbt: matching chisel + chisel-plugin (CrossVersion.full), Chisel 7.14.0.
 cat >"$WORKDIR/build.sbt" <<'EOF'
 scalaVersion := "2.13.16"
 libraryDependencies += "org.chipsalliance" %% "chisel" % "7.14.0"
 addCompilerPlugin("org.chipsalliance" % "chisel-plugin" % "7.14.0" cross CrossVersion.full)
 EOF
 
-echo "compiling under Chisel 7.14.0 in $WORKDIR ..."
+# Pin sbt launcher for reproducible CI (optional; system sbt also OK).
+cat >"$WORKDIR/project/build.properties" <<'EOF'
+sbt.version=1.10.11
+EOF
+
+echo "compiling under Chisel 7.14.0 in $WORKDIR (require=$REQUIRE) ..."
 (
   cd "$WORKDIR"
-  if [[ -n "$CS" ]]; then
-    # Fetch deps via coursier then use scalac if no sbt — prefer sbt when present.
-    if command -v sbt >/dev/null 2>&1; then
-      sbt -batch compile
-    else
-      echo "sbt not found; coursier alone cannot drive full Chisel plugin compile — skipping"
-      exit 0
-    fi
-  else
-    sbt -batch compile
-  fi
+  sbt -batch compile
 )
 echo "FR28 Chisel compile OK (Chisel 7.14.0)"

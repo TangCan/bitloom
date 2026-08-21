@@ -16,10 +16,14 @@ let art = rhdl_firrtl::emit_chisel(&frozen)?;
 - 成功：`.scala`（`class … extends Module`），含层次时 `Module(new Child)` 与按方向连线（跳过 `clk`/`rst`；Chisel `Module` 隐式 clock/reset）。
 - 子集外：`MemDecl` → 结构化失败 `rhdl::E0901`（不得冒充 FR28 已覆盖 mem）。
 
-## CI / 本机
+## CI / 本机（FR71 / NFR34）
 
-- **默认 CI：** Rust 语法检查 + 端口/层次谓词测试（`cargo test -p rhdl-firrtl`）即可绿；**不**要求 CI 安装完整 Chisel JVM。
-- **可选真编译：** 本机 Java ≥ 17 + coursier/sbt 时，可运行 [`scripts/chisel-fr28-compile.sh`](../scripts/chisel-fr28-compile.sh)；不满足则干净跳过（不得静默把 FR28 降为尽力失败）。
+- **默认 CI（Epic 25 / FR71）：** 除 Rust 谓词外，须有 **required** JVM job（见 Story 25.3）对黄金 `.scala` 跑真编译；失败则红。
+- **Required 本机/脚本：** [`scripts/chisel-fr28-compile-required.sh`](../scripts/chisel-fr28-compile-required.sh)（或 `BITLOOM_REQUIRE_CHISEL_JVM=1` + [`chisel-fr28-compile.sh`](../scripts/chisel-fr28-compile.sh)）。缺 Java≥17 / sbt / 编译失败 → **非零退出**。ATDD：`bash scripts/test-chisel-fr28-required.sh`。
+- **黄金夹具：** [`crates/rhdl-firrtl/testdata/fr28_golden_counter.scala`](../crates/rhdl-firrtl/testdata/fr28_golden_counter.scala)。
+- **逃生舱：** `BITLOOM_CHISEL_JVM_SKIP=1` 可跳过并 exit 0——**仅**本地逃生；**默认 CI 不得设置**（NFR34）。
+- **可选 legacy：** 不设 require 时，缺工具链仍可 skip=0（非合同路径）。
+- **本机 `just test`：** 默认可仍仅 Rust（Story 25.2 增加 `just chisel-fr28-jvm`）。
 
 ## 与 AD-3
 
