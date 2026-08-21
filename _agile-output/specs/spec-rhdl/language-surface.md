@@ -13,6 +13,7 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 - `Bundle` 与 `Vec<T,N>`（或文档等价）允许进入可综合路径。
 - 位宽/方向不匹配必须在 emit 前失败；不得 silently 可用却无检查。
 - HIR ground 是否扩展 Bundle/Vector 节点由实现选择；公开表面与 emit 语义须一致（AD-20）。
+- **FR22 边界：** 单时钟表面加厚（FR22）的构造条**不含** Bundle/Vec；复合类型由本节 / FR51 交付，不得 silently 算进 FR22 验收。
 
 ## ClockDomain (CAP-11 / FR52)
 
@@ -29,7 +30,7 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 - `#[combinational]` and `#[sequential]` are mandatory.
 - Comb may drive `Wire` / `Output` only; incomplete assignment is an error (no inferred latch).
 - Only seq writes `Reg.d`. Comb must not write `Reg.d`; seq must not drive combinational nets.
-- Stage-2 surface thickening (FR22 / AD-20): `if`/`match`（或等价）、严格同位宽二元运算与连接、显式 pad/trunc、同步复位赋值语义。
+- Stage-2 surface thickening (FR22 / AD-20): `if`/`match`（或等价）、严格同位宽二元运算与连接、显式 pad/trunc、同步复位赋值语义。Bundle/Vec 不在 FR22 构造条内——见上文 Composite types / FR51。
 
 ## Width
 

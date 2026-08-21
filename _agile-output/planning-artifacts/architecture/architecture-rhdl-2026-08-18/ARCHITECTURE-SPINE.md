@@ -183,9 +183,9 @@ flowchart TB
 ### AD-20 — 阶段二单时钟语言表面加厚 [ADOPTED]
 
 - **Binds:** prelude, builder, macro, freeze, examples
-- **Prevents:** 用阶段一骨架 fixture 冒充「可写真实小设计」；复合类型无宽度/方向门控
-- **Rule:** 在不上多时钟/HLS 的前提下，表面必须支持：强制 comb/seq 下的 `if`/`match`（或等价分支）、严格同位宽二元运算与连接、显式 pad/trunc、同步复位 `Reg` 的复位赋值语义，且组合完整赋值检查（AD-18）仍生效。验收以文档化构造清单 + 计数器与单时钟 FIFO 形 fixture 为准（阶段二 PRD FR22）。**`Bundle` 与 `Vec<T,N>`（或文档等价）允许进入可综合路径（FR51）**：位宽/方向不匹配必须在 emit 前失败；不得 silently 可用却无检查。HIR ground 是否扩展 Bundle/Vector 节点由实现选择，但公开表面与 emit 语义须一致。
-- **Revised:** 2026-08-21 — 取消「Bundle/Vec 禁止」；由 FR51 / Epic 19.3–19.4 交付。
+- **Prevents:** 用阶段一骨架 fixture 冒充「可写真实小设计」；复合类型无宽度/方向门控；把 FR22 与 FR51 混成同一验收条
+- **Rule:** 在不上多时钟/HLS 的前提下，表面必须支持：强制 comb/seq 下的 `if`/`match`（或等价分支）、严格同位宽二元运算与连接、显式 pad/trunc、同步复位 `Reg` 的复位赋值语义，且组合完整赋值检查（AD-18）仍生效。验收以文档化构造清单 + 计数器与单时钟 FIFO 形 fixture 为准（阶段二 PRD **FR22**）。**FR22 本 FR 非目标：** `Bundle` / `Vec<T,N>`（或文档等价）**不**算进 FR22 构造条；复合类型由 **PRD FR51** 交付。**`Bundle` 与 `Vec<T,N>`（或文档等价）允许进入可综合路径（FR51）**：位宽/方向不匹配必须在 emit 前失败；不得 silently 可用却无检查。HIR ground 是否扩展 Bundle/Vector 节点由实现选择，但公开表面与 emit 语义须一致。历史「Bundle/Vec 禁止可综合」不再作为阻断 FR51 的依据。
+- **Revised:** 2026-08-21 — 取消「Bundle/Vec 禁止」；引用 **PRD FR51**；明确与 **FR22**「本 FR 非目标」边界（复合类型由 FR51 / Epic 19.3–19.4 交付）。
 
 ### AD-21 — Mem 语义 [ADOPTED]
 

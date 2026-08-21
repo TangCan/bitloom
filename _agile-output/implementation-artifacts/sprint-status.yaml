@@ -163,7 +163,7 @@ development_status:
   epic-19: in-progress
   19-1-nfr14-风险记录模板: done
   19-2-修订-ad-5-允许生成-rust-功能模拟器: done
-  19-3-修订-ad-20-允许-bundle-vec: backlog
+  19-3-修订-ad-20-允许-bundle-vec: done
   19-4-实现-bundle-vec-可综合路径-fr51: backlog
   19-5-clockdomain-产品叙事与夹具-fr52: backlog
   epic-19-retrospective: optional
