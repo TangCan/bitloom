@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-21-2026 17:45
+last_updated: 08-21-2026 17:27
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -212,7 +212,7 @@ development_status:
   25-1-必失败-fr28-jvm-编译脚本: done
   25-2-just-chisel-fr28-jvm-与本机合同: done
   25-3-gha-required-job-fr28-chisel-jvm: done
-  epic-25-retrospective: optional
+  epic-25-retrospective: done
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1
@@ -544,3 +544,15 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md"
+  - id: "epic-25-retro-item-56-首次-push-后记录-gha-fr28-chisel-jvm-冷-热墙钟并收紧"
+    epic: 25
+    action: "首次 push 后记录 GHA fr28-chisel-jvm 冷/热墙钟并收紧 timeout-minutes"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-25-retro-2026-08-21.md"
+  - id: "epic-25-retro-item-57-可选-维护者合并-fr28-emit_chisel-前本机-just-chise"
+    epic: 25
+    action: "可选：维护者合并 FR28/emit_chisel 前本机 just chisel-fr28-jvm 检查清单勾选"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-25-retro-2026-08-21.md"
