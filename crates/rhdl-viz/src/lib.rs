@@ -26,10 +26,16 @@ pub fn to_html(hir: &FrozenHir) -> String {
          </style></head><body>\n",
     );
     out.push_str("<p class=\"brand\">Bitloom</p>\n");
-    out.push_str(&format!("<h1>Hierarchy — {}</h1>\n", escape_html(&hir.abi_name)));
+    out.push_str(&format!(
+        "<h1>Hierarchy — {}</h1>\n",
+        escape_html(&hir.abi_name)
+    ));
     out.push_str("<h2>Modules and ports</h2>\n<ul>\n");
     for m in &hir.circuit().modules {
-        out.push_str(&format!("<li><strong>{}</strong><ul>\n", escape_html(&m.name)));
+        out.push_str(&format!(
+            "<li><strong>{}</strong><ul>\n",
+            escape_html(&m.name)
+        ));
         for p in &m.ports {
             out.push_str(&format!(
                 "<li>port {} {:?} {:?}</li>\n",
@@ -195,7 +201,11 @@ pub fn instance_edges(hir: &FrozenHir) -> Vec<(String, String, String)> {
 fn mermaid_hierarchy(hir: &FrozenHir) -> String {
     let mut s = String::from("flowchart TD\n");
     let top = &hir.abi_name;
-    s.push_str(&format!("  {id}[\"{label}\"]\n", id = mmd_id(top), label = top));
+    s.push_str(&format!(
+        "  {id}[\"{label}\"]\n",
+        id = mmd_id(top),
+        label = top
+    ));
     for (parent, name, module) in instance_edges(hir) {
         let child_label = format!("{name}:{module}");
         let child_id = mmd_id(&format!("{parent}__{name}"));

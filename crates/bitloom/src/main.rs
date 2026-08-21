@@ -727,8 +727,8 @@ fn run_wave(input: &Path, out_dir: &Path, ticks: u64, want_fst: bool) -> Result<
         eprintln!("note: finish_waves: {e}");
     }
 
-    let vcd_text = fs::read_to_string(&vcd_path)
-        .map_err(|e| format!("read {}: {e}", vcd_path.display()))?;
+    let vcd_text =
+        fs::read_to_string(&vcd_path).map_err(|e| format!("read {}: {e}", vcd_path.display()))?;
     if vcd_text.trim().is_empty() {
         return Err(format!("VCD empty at {}", vcd_path.display()));
     }

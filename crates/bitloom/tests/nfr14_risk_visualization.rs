@@ -13,8 +13,8 @@ fn workspace_root() -> PathBuf {
 
 #[test]
 fn nfr14_risk_visualization_has_required_fields() {
-    let path = workspace_root()
-        .join("_agile-output/implementation-artifacts/nfr14-risk-visualization.md");
+    let path =
+        workspace_root().join("_agile-output/implementation-artifacts/nfr14-risk-visualization.md");
     let text = fs::read_to_string(&path).unwrap_or_else(|e| panic!("read {}: {e}", path.display()));
 
     // (a)–(d) mandatory NFR14 fields

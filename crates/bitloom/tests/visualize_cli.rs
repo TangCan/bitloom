@@ -59,10 +59,7 @@ fn visualize_smoke_emits_nonempty_hierarchy_html() {
     );
     let html_path = out_dir.join("hierarchy.html");
     let html = fs::read_to_string(&html_path).expect("hierarchy.html");
-    assert!(
-        !html.trim().is_empty(),
-        "hierarchy.html must be non-empty"
-    );
+    assert!(!html.trim().is_empty(), "hierarchy.html must be non-empty");
     assert!(
         html.contains("Bitloom")
             && html.contains("Modules and ports")

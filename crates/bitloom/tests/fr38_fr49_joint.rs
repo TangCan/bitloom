@@ -44,15 +44,7 @@ fn fr38_fr49_joint_acceptance_same_fixture() {
     );
 
     let wave = Command::new(bin)
-        .args([
-            "wave",
-            "--input",
-            fir_s,
-            "--out-dir",
-            out_s,
-            "--ticks",
-            "4",
-        ])
+        .args(["wave", "--input", fir_s, "--out-dir", out_s, "--ticks", "4"])
         .output()
         .expect("wave");
     assert!(
@@ -79,9 +71,7 @@ fn fr38_fr49_joint_acceptance_same_fixture() {
         "hierarchy missing required content:\n{hierarchy}"
     );
     assert!(
-        timing.contains("Bitloom")
-            && timing.contains("Value table")
-            && timing.contains("sole"),
+        timing.contains("Bitloom") && timing.contains("Value table") && timing.contains("sole"),
         "timing missing product-view markers:\n{timing}"
     );
 
