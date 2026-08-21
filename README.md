@@ -106,7 +106,9 @@ mod sim {
 | Analog/InOut | [`docs/fr27-analog-inout.md`](docs/fr27-analog-inout.md) |
 | rhdl-float | [`docs/fr36-rhdl-float.md`](docs/fr36-rhdl-float.md) |
 | IP / 黑盒 | [`docs/fr37-ip-box.md`](docs/fr37-ip-box.md) |
-| HIR HTML / LSP | [`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md) |
+| HIR HTML / LSP（层次；LSP deferred） | [`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md) |
+| 时序 / 波形产品入口 | [`docs/fr38-wave.md`](docs/fr38-wave.md) |
+| UJ-6 可视化半程跟练 | [`docs/tutorials/uj6-visualization.md`](docs/tutorials/uj6-visualization.md) |
 | 额外 CLI | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) |
 | 多平台 firtool | [`docs/nfr11-firtool-platforms.md`](docs/nfr11-firtool-platforms.md) |
 | MSRV 1.97.1 (NFR13) | [`docs/nfr13-msrv-1.97.1.md`](docs/nfr13-msrv-1.97.1.md) |
@@ -141,14 +143,33 @@ just hls-smoke
 
 专章、限制与烟测位置：[`docs/fr35-hls.md`](docs/fr35-hls.md)。
 
+## 可视化（层次 + 时序 · FR38 / FR49）
+
+产品入口（**不是**「请自行打开 GTKWave」）：
+
+```bash
+cargo bitloom visualize \
+  --input crates/rhdl-firrtl/fixtures/external_hierarchy.fir \
+  --out-dir target/viz
+# → target/viz/hierarchy.html
+
+cargo bitloom wave \
+  --input crates/rhdl-firrtl/fixtures/external_hierarchy.fir \
+  --out-dir target/wave --ticks 8
+# → target/wave/timing.html + wave.vcd
+```
+
+端到端跟练：[`docs/tutorials/uj6-visualization.md`](docs/tutorials/uj6-visualization.md)。  
+FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。完整 LSP **deferred**（非本 epic 完成条件）。
+
 ## 状态与 deferred（诚实声明）
 
-当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS 产品路径（外挂 Bambu）** 等阶段二能力（见 `epics.md`）。
+当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS 产品路径（外挂 Bambu）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
 
 **明确 deferred / 未承诺为产品完整面：**
 
-- 完整 LSP hover/goto（FR38 部分）
-- 部分 CLI 动词（`check` / `visualize` / `wave` / `doc` / `build-sim`）
+- 完整 LSP hover/goto（FR38 部分；层次/时序 HTML 入口已交付）
+- 部分 CLI 动词（`check` / `build-sim`）
 - 自研 HLS 调度器（永不；仅外挂 Bambu——HLS **本身已支持**）
 - crates.io 名 `rhdl` / `rhdl-bits`（禁止）
 

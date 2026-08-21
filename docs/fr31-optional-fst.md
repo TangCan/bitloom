@@ -21,3 +21,9 @@ sim.finish_waves()?;
 **Verilator `--trace-fst`** is for *Verilated* C++ models, not `rhdl-sim` tick. Use it when co-simulating emitted Verilog.
 
 Closing FST leaves VCD dump unchanged (`enable_vcd` only).
+
+## Product CLI cross-link (FR49)
+
+`cargo bitloom wave` always writes browsable `timing.html` plus default `wave.vcd`. Pass `--fst` to attempt optional FST conversion; missing `vcd2fst` does not fail the HTML/VCD path.
+
+See [`fr38-wave.md`](fr38-wave.md) and the UJ-6 walkthrough [`tutorials/uj6-visualization.md`](tutorials/uj6-visualization.md).
