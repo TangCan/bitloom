@@ -1,13 +1,25 @@
 # FR29 — handwritten `#[bridge]` / `#[abstraction]` / mixed `both`
 
-Multi-view simulation is **two handwritten models**, compared only on `PortValues`.
-The toolchain does **not** lower `FrozenHir` to TLM-2.0 or any untimed SystemC socket.
+Multi-view simulation starts as **two handwritten models**, compared only on `PortValues`
+(`bitloom-hir` / AD-17). Cycle-accurate RTL remains `FrozenHir` + `bitloom_sim::Sim::tick`
+(AD-5). SystemC TLM-2.0 is **not** a product contract.
+
+## Handwritten path vs generated path (FR47)
+
+| Path | Status | Notes |
+|------|--------|-------|
+| **Handwritten** `#[functional_model]` / `#[abstraction]` / `#[bridge]` / `#[both]` | **Supported now (FR29)** | Host-side attributes; never enter `freeze` / HIR. Design crates depend only on `bitloom-prelude`. |
+| **Generated** Rust functional-sim crate + cycle-accurate sim artifacts | **Coming (FR47 / Epic 21.3+)** | Toolchain generates artifacts; does **not** remove or replace handwritten annotation capability. |
+
+FR29 no longer forbids generating a functional simulator (see PRD overturn table / AD-5 / FR47).
+What remains forbidden as a silent downgrade: claiming FR47 done with **only** handwritten
+fixtures, or claiming **SystemC TLM** delivery.
 
 ## Views
 
 | Attribute | Kind | Role |
 |-----------|------|------|
-| `#[rhdl::functional_model]` | `ViewKind::FunctionalModel` | Host cycle() matching `tick` (CAP-6 / Story 3.3) |
+| `#[rhdl::functional_model]` | `ViewKind::FunctionalModel` | Host `cycle()` matching `tick` |
 | `#[rhdl::abstraction]` | `ViewKind::Abstraction` | Untimed / transaction-shaped host model |
 | `#[rhdl::bridge]` | `ViewKind::Bridge` | Handwritten adapter between pin-level `PortValues` and the abstraction |
 | `#[rhdl::both]` | `ViewKind::Both` | Mixed fixture that owns RTL (`FrozenHir` + `tick`) **and** a handwritten view |
@@ -24,9 +36,13 @@ inputs ──► Sim::tick(FrozenHir) ──► PortValues (RTL)
 compare_port_values(rtl, host)  // mismatch → test fail
 ```
 
-Use `rhdl_sim::check_mixed_both` (dev-dependency `rhdl-sim` only). Design `[dependencies]` stay `rhdl-prelude`.
+Use `bitloom_sim::check_mixed_both` (dev-dependency `bitloom-sim` only). Design
+`[dependencies]` stay `bitloom-prelude`.
 
-## Non-goals
+Regression: `cargo test -p mixed_both` and `cargo test -p bitloom-sim --lib mixed_both`.
 
-- No `emit_tlm` / HIR→TLM generator (FR14, FR29).
-- No generated TLM sockets from Verilog or FIRRTL.
+## Non-goals (this story / handwritten surface)
+
+- No SystemC TLM-2.0 / `emit_tlm` product API (still absent; not contracted).
+- No FR47 generator in this story — generation lands in Epic 21.3+.
+- Handwritten attributes remain first-class after generation ships.

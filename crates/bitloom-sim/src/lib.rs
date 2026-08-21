@@ -736,7 +736,8 @@ mod tests {
 
     #[test]
     fn no_hir_to_tlm_api() {
-        // FR14 / FR29: toolchain must not expose a HIR→TLM lowering entry point.
+        // No SystemC TLM-2.0 / emit_tlm product API on the sim surface (AD-5 / FR29).
+        // This does *not* ban FR47 Rust functional-sim *generation* (Epic 21.3+).
         // Scan only the production surface above `#[cfg(test)]`.
         let src = include_str!("lib.rs");
         let prod = src.split("#[cfg(test)]").next().unwrap_or(src);
