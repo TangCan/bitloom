@@ -1,22 +1,35 @@
 # Language surface
 
-Catalog for CAP-1…CAP-3 and CAP-7. HOW（宏如何展开、freeze 何时跑）见架构脊柱。
+Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、freeze 何时跑）见架构脊柱。
 
-## Hardware types (in-scope now)
+## Hardware types (baseline)
 
 - `Bool`, `Bits<N>`, `UInt<N>`, `SInt<N>`, `Clock`, `Reset`
 - Ports: `Input<T>`, `Output<T>` — not bare `UInt` at the module boundary
 - Builder facade `Bits<N>` lowers to runtime widths on FrozenHir / `PortValues`
 
-## Deferred types (not CAP-1)
+## Composite types (CAP-10 / FR51)
 
-See `later-product.md`: `Analog`, `InOut`, `Bundle`, `Vec<T,N>`, `Mem<T,DEPTH>`, `ClockDomain` / `Polarity` / `ResetKind` as multi-clock types.
+- `Bundle` 与 `Vec<T,N>`（或文档等价）允许进入可综合路径。
+- 位宽/方向不匹配必须在 emit 前失败；不得 silently 可用却无检查。
+- HIR ground 是否扩展 Bundle/Vector 节点由实现选择；公开表面与 emit 语义须一致（AD-20）。
+
+## ClockDomain (CAP-11 / FR52)
+
+- 产品叙事与夹具须展示 ClockDomain（或等价）绑定时钟/复位极性与同步·异步。
+- 跨域无语言级同步器则 freeze 失败（机制随 FR23 / AD-22）。
+- 默认模块仍是单时钟：恰好一个 `Clock` + 同步高有效 `Reset`（AD-15），除非显式声明多域。
+
+## Still deferred from this catalog
+
+见 `later-product.md` / PRD：`Analog`, `InOut`, `Mem`/`SyncReadMem`（FR26/AD-21）、浮点 crate（FR36）等——有独立 FR，不并入 CAP-1。
 
 ## Comb / seq
 
 - `#[combinational]` and `#[sequential]` are mandatory.
 - Comb may drive `Wire` / `Output` only; incomplete assignment is an error (no inferred latch).
 - Only seq writes `Reg.d`. Comb must not write `Reg.d`; seq must not drive combinational nets.
+- Stage-2 surface thickening (FR22 / AD-20): `if`/`match`（或等价）、严格同位宽二元运算与连接、显式 pad/trunc、同步复位赋值语义。
 
 ## Width
 
@@ -26,12 +39,12 @@ See `later-product.md`: `Analog`, `InOut`, `Bundle`, `Vec<T,N>`, `Mem<T,DEPTH>`,
 
 ## Synthesizable subset (cycle-accurate / generate path)
 
-Allowed: hardware types and their ops; `if` / `match`; statically bounded loops that fully unroll; inlined functions; const generics; arrays / structs / enums used as hardware aggregates in-scope.
+Allowed: hardware types and their ops; `if` / `match`; statically bounded loops that fully unroll; inlined functions; const generics; arrays / structs / enums / Bundle / Vec used as hardware aggregates in-scope.
 
-Rejected on this path: `Vec`/`Box`/`String` heap; unbounded recursion; `dyn Trait`; capturing closures; file/net/threads; default `f32`/`f64`.
+Rejected on this path: heap `Vec`/`Box`/`String`（软件堆，非硬件 `Vec<T,N>`）；unbounded recursion; `dyn Trait`; capturing closures; file/net/threads; default `f32`/`f64`（可综合浮点见 FR36）。
 
-Functional view (`#[functional_model]`) may use rejected constructs. Fields marked `#[functional_state]` never enter HIR.
+Functional view（手写 `#[functional_model]` 或 CAP-13 生成的 Rust crate）may use rejected constructs. Fields marked `#[functional_state]` never enter HIR.
 
-## Sequential envelope (in-scope now)
+## Sequential envelope (default)
 
-Every module has exactly one `Clock` port and one sync active-high `Reset` port. `tick` is one posedge of that clock. No implicit ports at emit.
+Every default module has exactly one `Clock` port and one sync active-high `Reset` port. `tick` is one posedge of that clock. No implicit ports at emit. Multi-clock / async reset / enables：见 PRD FR23–FR25 与脊柱 AD-22/AD-23。

@@ -7,12 +7,13 @@ paradigm: staged-runtime-elaboration
 scope: RHDL 语言与工具链（生成器、HIR、后端、仿真）；约束后续 epic
 status: final
 created: 2026-08-18
-updated: 2026-08-19
-binds: [core-language, hir, verilog-backend, firrtl-interop, native-sim, cli, phase-2-surface, mem, multi-clock, fst, hls-attach, bitloom-identity]
+updated: 2026-08-21
+binds: [core-language, hir, verilog-backend, firrtl-interop, native-sim, cli, phase-2-surface, mem, multi-clock, fst, hls-attach, bitloom-identity, chisel-product-interop, bundle-vec, dual-sim-generation]
 sources:
   - docs/requirements
   - _agile-output/planning-artifacts/research/technical-rhdl-rust-edsl-hdl-implementation-archit-2026-08-18/research.md
   - _agile-output/planning-artifacts/research/technical-rhdl-phase-two-later-product-fr21-nfr3-l-2026-08-19/research.md
+  - _agile-output/planning-artifacts/research/technical-closing-bitloom-overview-requirement-gap-2026-08-21/research.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
 companions:
   - team-walkthrough.html
@@ -50,8 +51,9 @@ rhdl-builder / rhdl-macro / **bitloom-prelude**（对外名；目录可暂 `rhdl
 ### AD-3 — HIR ↔ FIRRTL 文本双向 [ADOPTED]
 
 - **Binds:** rhdl-firrtl, CLI, 互转 epic
-- **Prevents:** 一 epic 以 Chisel Scala 源码往返为契约、另一 epic 只 dump `.fir`；「有损」与「可逆」各取所需
-- **Rule:** 互转契约是 **本工具链的 FrozenHir ↔ 带 `FIRRTL version 6.0.0` 头的文本**。可从 FrozenHir 再生成 RHDL 源（调试用）。**不**承诺可维护的 Chisel Scala，**不**依赖 Chisel 解析 `.fir`。导入子集：标量端口；无 property；无 CHIRRTL 特有 mem；无 Analog/InOut。导入必须把 last-connect 规范化成唯一驱动后再 `freeze`。往返谓词：HIR → `.fir` → HIR 在模块层次、公开端口名/宽/向、实例图、ground 运算、寄存器上必须相等；可丢注释、非子集 annotation、规范化前的语句顺序。源名字与参数以 annotation/元数据随 FrozenHir 与导出存活。
+- **Prevents:** 一 epic 只 dump 无往返谓词的 `.fir`、另一 epic 把 FIRRTL 文本契约与 Chisel Scala 产品路径混为一谈
+- **Rule:** **FIRRTL 互转契约**仍是 **本工具链的 FrozenHir ↔ 带 `FIRRTL version 6.0.0` 头的文本**。可从 FrozenHir 再生成 Bitloom/RHDL 源（调试用，NFR10）。**不**依赖 Chisel 解析 `.fir`（无 Scala FIRRTL Parser 要求）。导入子集：标量端口；无 property；无 CHIRRTL 特有 mem；无 Analog/InOut。导入必须把 last-connect 规范化成唯一驱动后再 `freeze`。往返谓词：HIR → `.fir` → HIR 在模块层次、公开端口名/宽/向、实例图、ground 运算、寄存器上必须相等；可丢注释、非子集 annotation、规范化前的语句顺序。源名字与参数以 annotation/元数据随 FrozenHir 与导出存活。**Chisel Scala 产品路径见 AD-27**（不替代本 AD）。
+- **Revised:** 2026-08-21 — 与 Phase 7 / FR46 对齐：AD-3 专责 FIRRTL 文本；Scala 生成/导入升格为 AD-27。
 
 ### AD-4 — 冻结时唯一驱动 [ADOPTED]
 
@@ -61,9 +63,10 @@ rhdl-builder / rhdl-macro / **bitloom-prelude**（对外名；目录可暂 `rhdl
 
 ### AD-5 — 双模型仿真 [ADOPTED]
 
-- **Binds:** rhdl-sim, 测试
-- **Prevents:** 一 epic 从 HIR 生成 TLM/无定时 sim、另一 epic 只实现 `tick`
-- **Rule:** 周期精确仿真只从 `FrozenHir`（原生 `tick`）。`rhdl-sim` 必须能 dump VCD（同一记录器 API）。功能视图是手写 `#[functional_model]` 普通 Rust。标 `#[functional_state]` 的字段不得进入 HIR/`freeze`。一致性用随机/对照测试，比较对象是 `PortValues`（AD-17）。禁止从 HIR 降低 TLM-2.0。阶段一 IP 就是普通设计 crate，无第二条仿真/Verilog 路径。
+- **Binds:** rhdl-sim, 测试, 可选生成器
+- **Prevents:** 一 epic 只实现 `tick`、另一 epic 发明无对照的第二套仿真语义；把 SystemC TLM-2.0 当成默认合同
+- **Rule:** 周期精确仿真只从 `FrozenHir`（原生 `tick`）。`rhdl-sim` 必须能 dump VCD（同一记录器 API）。功能视图可为手写 `#[functional_model]` **或**工具链**生成的 Rust 功能模拟器 crate**（FR47；形态不强制 SystemC）。标 `#[functional_state]` 的字段不得进入 HIR/`freeze`。一致性用随机/对照/`equiv`，比较对象是 `PortValues`（AD-17）。**不**承诺 / **不**要求从 HIR 降低 **SystemC TLM-2.0**。阶段一 IP 仍是普通设计 crate。
+- **Revised:** 2026-08-21 — 允许生成 Rust 功能模拟器；废止「禁止一切 HIR→功能模拟器生成」的旧读法（PRD ①C / Epic 19.2）。
 
 ### AD-6 — 依赖只准向下 [ADOPTED]
 
@@ -180,8 +183,9 @@ flowchart TB
 ### AD-20 — 阶段二单时钟语言表面加厚 [ADOPTED]
 
 - **Binds:** prelude, builder, macro, freeze, examples
-- **Prevents:** 用阶段一骨架 fixture 冒充「可写真实小设计」；`Bundle`/`Vec` 静默可用
-- **Rule:** 在不上多时钟/HLS 的前提下，表面必须支持：强制 comb/seq 下的 `if`/`match`（或等价分支）、严格同位宽二元运算与连接、显式 pad/trunc、同步复位 `Reg` 的复位赋值语义，且组合完整赋值检查（AD-18）仍生效。验收以文档化构造清单 + 计数器与单时钟 FIFO 形 fixture 为准（阶段二 PRD FR22）。`Bundle`、`Vec<T,N>` **不得**在未另立 AD/FR 前进入可综合路径。
+- **Prevents:** 用阶段一骨架 fixture 冒充「可写真实小设计」；复合类型无宽度/方向门控
+- **Rule:** 在不上多时钟/HLS 的前提下，表面必须支持：强制 comb/seq 下的 `if`/`match`（或等价分支）、严格同位宽二元运算与连接、显式 pad/trunc、同步复位 `Reg` 的复位赋值语义，且组合完整赋值检查（AD-18）仍生效。验收以文档化构造清单 + 计数器与单时钟 FIFO 形 fixture 为准（阶段二 PRD FR22）。**`Bundle` 与 `Vec<T,N>`（或文档等价）允许进入可综合路径（FR51）**：位宽/方向不匹配必须在 emit 前失败；不得 silently 可用却无检查。HIR ground 是否扩展 Bundle/Vector 节点由实现选择，但公开表面与 emit 语义须一致。
+- **Revised:** 2026-08-21 — 取消「Bundle/Vec 禁止」；由 FR51 / Epic 19.3–19.4 交付。
 
 ### AD-21 — Mem 语义 [ADOPTED]
 
@@ -210,14 +214,29 @@ flowchart TB
 ### AD-25 — HLS 仅外挂 [ADOPTED]
 
 - **Binds:** 可选 HLS 前端, CLI
-- **Prevents:** 树内自研调度器；把 Handshake/动态数据流当默认 RTL 语义
-- **Rule:** `#[hls]`（或等价）只允许 **发射** 宿主工具接受的 IR/C，并调用 **Bambu 或 XLS**（启用时至少钉死一个后端）。禁止 rhdl crate 实现 scheduling/allocation。未启用时文档/CLI 标明 unsupported。
+- **Prevents:** 树内自研调度器；把 Handshake/动态数据流当默认 RTL 语义；「永久 unsupported」冒充产品 HLS
+- **Rule:** `#[hls]`（或等价）只允许 **发射** 宿主工具接受的 IR/C，并调用 **Bambu 或 XLS**（启用时钉死**一个**后端）。禁止 bitloom/rhdl crate 实现 scheduling/allocation。当产品合同要求 HLS 路径（PRD FR35/FR50 / Phase 7）时：**默认文档路径必须可用**，并有 CI/烟测；禁止以「未启用则永久 unsupported」交差。后端缺失须失败可读，不得 silent 成功。
+- **Revised:** 2026-08-21 — 产品化默认路径；仍禁止自研调度。
 
 ### AD-26 — 产品合同海拔 [ADOPTED]
 
 - **Binds:** 文档, epic 拆解, agents
 - **Prevents:** SPEC / later-product / 阶段二 PRD 三套无 ID 真相
-- **Rule:** **阶段一**权威：`SPEC.md` CAP-1…CAP-9。**阶段二及以后**权威：`prd-rhdl-2026-08-19`（FR21–FR40、NFR3、NFR10–NFR13）。`later-product.md` 仅为索引。本脊柱 AD 不改编号；阶段二能力映射见 Capability 表。
+- **Rule:** **阶段一**权威：`SPEC.md` CAP-1…CAP-9。**阶段二及以后**权威：`prd-rhdl-2026-08-19`（含 amendment `overview-literal-C`：**FR21–FR40、FR46–FR52**、NFR3、NFR10–NFR14）。`later-product.md` 仅为索引。本脊柱 AD 不改编号；能力映射见 Capability 表。历史 Phase-3 文档别名：**FR46-tp**（Trusted Publishing）、**NFR14-crates**（crates.io FCFS）≠ 本 PRD 的 FR46 / NFR14。
+- **Revised:** 2026-08-21 — 纳入概述字面升格与 NFR14 风险门禁。
+
+### AD-27 — Bitloom ↔ Chisel 产品互操作 [ADOPTED]
+
+- **Binds:** firrtl, CLI (`import` 等), 可选 Scala 生成
+- **Prevents:** 一 epic 仍以「尽力失败」交差、另一 epic 要求 idiomatic 手写 Chisel；依赖已删除的 Scala FIRRTL Parser；用调试用 HIR→源码再生冒充 Chisel 双向
+- **Rule:** 在 AD-3 FIRRTL 文本契约之外，产品路径（PRD FR28/FR46）要求：(1) FrozenHir/`.fir` → **可编译** Chisel Scala（钉死 Chisel + firtool 配对，见 Stack）；验收=编译通过 + 公开端口名/宽/向与实例层次往返谓词；**允许机械/生成风格**（不要求手写 idiomatic）。(2) `.fir`（及文档化 Chisel 工作流输出）→ FrozenHir / Bitloom 表面 → emit/tick，满足对称往返谓词。(3) **不**要求恢复 Chisel 5 前的 Scala `firrtl.Parser` API；生成器/导入器属于本工具链。(4) NFR10 调试再生 **不得**冒充本 AD 完成。
+- **[ASSUMPTION]** 生成器实现可放在 `rhdl-firrtl` 扩展或 `bitloom` CLI 子命令；具体包边界不钉死。
+
+### AD-28 — Phase 7 风险门禁（NFR14）[ADOPTED]
+
+- **Binds:** epic ready, implementation-artifacts
+- **Prevents:** 无记录开工 FR46/47/48/49/50；静默把合同降回「尽力/deferred」
+- **Rule:** FR46/47/48/49（及适用的 FR50）在 epic/story 标 `ready` **之前**，须有风险记录：上游约束、粗工期带、禁止静默降级清单、负责人。缺记录不得开工。与历史 **NFR14-crates** 无关。
 
 ## Consistency Conventions
 
@@ -286,29 +305,30 @@ flowchart LR
 | HIR 模式 / FrozenHir | rhdl-hir | AD-7, AD-12, AD-13 |
 | Verilog 后端 | rhdl-vlog | AD-8, AD-10, AD-16 |
 | FIRRTL 导入导出 | rhdl-firrtl | AD-3, AD-8, AD-9 |
+| Chisel 产品互操作 | firrtl / CLI | AD-27, AD-3, AD-9 |
 | 周期精确仿真 / VCD | rhdl-sim | AD-5, AD-17 |
-| 功能视图 | 设计 crate 普通 Rust | AD-5, AD-17 |
+| 功能视图（手写或生成 Rust） | 设计 crate / 生成器 | AD-5, AD-17 |
 | CLI / firtool / host | bitloom (`crates/bitloom`, bin `cargo-bitloom`) | AD-2, AD-9, AD-11, AD-14 |
-| 阶段二表面加厚 | prelude, builder, macro | AD-20, AD-18 |
+| 阶段二表面加厚 + Bundle/Vec | prelude, builder, macro | AD-20, AD-18 |
 | Mem | hir, vlog, firrtl, sim | AD-21 |
 | 多时钟 / CDC | prelude, freeze, sim | AD-22, AD-15 |
 | 异步复位 / enable | hir, vlog, sim | AD-23 |
 | FST（可选） | rhdl-sim | AD-24, AD-5 |
-| HLS 外挂 | 可选前端 + CLI | AD-25 |
-| 产品合同海拔 | docs / PRD / SPEC | AD-26 |
-| IP / IDE / formal / float / Analog | — | Deferred |
+| HLS 外挂（产品路径） | 可选前端 + CLI | AD-25 |
+| 产品合同海拔 / NFR14 门禁 | docs / PRD / SPEC / impl-artifacts | AD-26, AD-28 |
+| IP / 可视化 / formal / float / Analog | 产品 FR；脊柱不钉实现形状 | Deferred（实现形状） |
 
 ## Deferred
 
 - **所有权作声音性证明**：永不作为 freeze 门控；若做，独立 epic。
-- **Chisel Scala 源码生成/导入**：非互转契约（阶段二 PRD FR28 为尽力工具，不改 AD-3）。
-- **HIR → TLM / 无定时生成器**。
-- **手写 `#[bridge]` / `#[abstraction]` / mixed `both`；双视图形式化等价；C ABI / cdylib；覆盖率**（产品 FR 已定，脊柱不钉实现形状）。
-- **`Bundle` / `Vec<T,N>`** 语言类型（AD-20 明确排除直至另立 AD）。
-- **IP 产品 crate、可视化、LSP、黑盒包装、形式/SVA、`rhdl-float`、Analog/InOut/三态**（产品 FR 已定，脊柱不钉实现形状）。
+- **SystemC TLM-2.0**：不作为合同；Rust 功能模拟器生成见 AD-5。
+- **Chisel idiomatic 手写风格**：非验收条；机械可编译即可（AD-27）。
+- **手写 `#[bridge]` / `#[abstraction]` / mixed `both`；形式化等价引擎细节；C ABI / cdylib；覆盖率**（产品 FR 已定，脊柱不钉实现形状）。
+- **IP / 可视化 / LSP / 黑盒 / formal/SVA / float / Analog** 的**实现形状**（产品 FR 已定；不在此钉 crate 切分）。
 - **interp vs 编译版 `tick` 引擎**（产品 FR32；脊柱不选引擎）。
-- **`cargo bitloom` 其余动词**形态细节（FR40）。
+- **`cargo bitloom` 其余动词**形态细节（FR40；`import`/`visualize`/`wave` 为 Phase 7 必需能力，名称可调）。
 - **macos / windows / linux-aarch64 firtool 资产**（NFR11；机制同 AD-9）。
 - **firtool-1.156.0**：等 Chisel 正式配对后再改 AD-9 / Stack 表（NFR12）。
-- **更高 MSRV（>1.97.1）**：须另改 PRD/NFR13；当前 NFR13 = **1.97.1**（原 1.98.0 目标已废弃）。
-- **AD-22 phantom 选型的替代**：若推翻 ASSUMPTION，改为 Spinal 式 ClockDomain 图检查或纯库级 CDC——须修订 AD-22，不得 silently 分叉。
+- **更高 MSRV（>1.97.1）**：须另改 PRD/NFR13；当前 NFR13 = **1.97.1**。
+- **AD-22 phantom 选型的替代**：若推翻，须修订 AD-22，不得 silently 分叉。
+- **AD-27 Scala 生成器所在 crate**：`[ASSUMPTION]` 可 firrtl 或 CLI。

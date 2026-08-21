@@ -77,7 +77,7 @@ a { color: var(--accent); }
 <div id="deck">
 
 <section class="slide on" data-title="先记住一件事">
-  <p class="kicker">1 / 11</p>
+  <p class="kicker">1 / 12</p>
   <h2>设计是生成器，不是 rustc 里抽出的网表</h2>
   <p class="lede"><code>cargo rhdl build</code> 跑用户的 Rust、得到冻结电路图、再降后端。过程宏只是 builder 的语法糖。</p>
   <ul>
@@ -89,7 +89,7 @@ a { color: var(--accent); }
 </section>
 
 <section class="slide" data-title="一次 build">
-  <p class="kicker">2 / 11</p>
+  <p class="kicker">2 / 12</p>
   <h2>一次 build 怎么走</h2>
   <p>CLI 写一个 host crate（在 <code>target/</code>），同时链上设计 crate 和后端。冻结图在同一进程里交给 emit。阶段一不把 HIR 序列化成另一套 CLI 协议。</p>
   <svg class="flow" viewBox="0 0 720 168" role="img" aria-label="设计 crate 经 host 得到 FrozenHir，再出 Verilog 与 tick">
@@ -121,7 +121,7 @@ a { color: var(--accent); }
 </section>
 
 <section class="slide" data-title="依赖">
-  <p class="kicker">3 / 11</p>
+  <p class="kicker">3 / 12</p>
   <h2>依赖只准向下</h2>
   <p>后端 = <code>rhdl-vlog</code>、<code>rhdl-firrtl</code>、<code>rhdl-sim</code>。宏只准打到 builder，不准写 HIR 节点。</p>
   <table class="tight">
@@ -136,7 +136,7 @@ a { color: var(--accent); }
 </section>
 
 <section class="slide" data-title="电路图">
-  <p class="kicker">4 / 11</p>
+  <p class="kicker">4 / 12</p>
   <h2>电路只有一张图</h2>
   <ul>
     <li>FrozenHir 是 FIRRTL 6 可逆子集的<strong>层次 AST</strong>（模块、实例、Connect、寄存器）。展平只许发生在后端私有视图。</li>
@@ -148,7 +148,7 @@ a { color: var(--accent); }
 </section>
 
 <section class="slide" data-title="阶段一语言">
-  <p class="kicker">5 / 11</p>
+  <p class="kicker">5 / 12</p>
   <h2>阶段一：写出来的电路长什么样</h2>
   <ul>
     <li>每个模块一个显式 <code>Clock</code>、一个同步高有效 <code>Reset</code>。<code>tick</code> 就是这个时钟的一个上升沿。Verilog 是 <code>always @(posedge clock)</code>。emit 不得发明端口。</li>
@@ -161,21 +161,21 @@ a { color: var(--accent); }
 </section>
 
 <section class="slide" data-title="仿真与互转">
-  <p class="kicker">6 / 11</p>
-  <h2>两套仿真；互转是文本不是 Scala</h2>
+  <p class="kicker">6 / 12</p>
+  <h2>两套仿真；FIRRTL 文本 + Chisel 产品路径</h2>
   <ul>
     <li>周期精确：从 FrozenHir <code>tick</code>，同一套 API dump VCD。</li>
-    <li>功能视图：手写 <code>#[functional_model]</code>，普通 Rust。禁止从 HIR 生成 TLM。</li>
-    <li>对照只比 <code>PortValues</code>（按端口名和运行时宽度）。<code>Bits&lt;W&gt;</code> 是门面，降到运行时宽度。</li>
-    <li>与 Chisel 的契约是 FrozenHir ↔ <code>FIRRTL version 6.0.0</code> 文本。不维护 Scala，不指望 Chisel 读 .fir。</li>
-    <li>导入先把 last-connect 收成唯一驱动。往返要保住层次、端口、实例图、运算和寄存器；注释可以丢。</li>
-    <li>阶段一 <code>rhdl-firrtl</code> 可以有解析/AST，不能写用户面向的 .fir，也不能调 firtool。</li>
+    <li>功能视图：手写 <code>#[functional_model]</code> <strong>或</strong>工具链<strong>生成 Rust 功能模拟器</strong>（AD-5）。不承诺 SystemC TLM-2.0。</li>
+    <li>对照只比 <code>PortValues</code>。<code>Bits&lt;W&gt;</code> 是门面，降到运行时宽度。</li>
+    <li><strong>AD-3：</strong> FrozenHir ↔ <code>FIRRTL version 6.0.0</code> 文本往返。不依赖 Chisel 解析 .fir。</li>
+    <li><strong>AD-27：</strong> 另有产品路径 — 生成<strong>可编译</strong> Chisel Scala + 导入；机械风格可接受；不是「尽力失败」。</li>
+    <li>导入先把 last-connect 收成唯一驱动。往返要保住层次、端口、实例图、运算和寄存器。</li>
   </ul>
-  <p class="cite">AD-5 · AD-17 · AD-3 · AD-8</p>
+  <p class="cite">AD-5 · AD-17 · AD-3 · AD-27 · AD-8</p>
 </section>
 
 <section class="slide" data-title="钉死">
-  <p class="kicker">7 / 11</p>
+  <p class="kicker">7 / 12</p>
   <h2>本机 CLI，版本钉死</h2>
   <table class="tight">
     <tr><th>钉什么</th><th>值</th></tr>
@@ -190,31 +190,33 @@ a { color: var(--accent); }
   <p class="cite">AD-9 · AD-11 · AD-10（用户错误走 Diagnostic，禁止 panic）</p>
 </section>
 
-<section class="slide" data-title="阶段二">
-  <p class="kicker">8 / 11</p>
-  <h2>阶段二已经定下的不变式</h2>
+<section class="slide" data-title="阶段二与七">
+  <p class="kicker">8 / 12</p>
+  <h2>阶段二 + Phase 7（概述字面）不变式</h2>
   <ul>
-    <li><strong>表面加厚（AD-20）：</strong> if/match、同位宽运算、pad/trunc、同步 Reg 复位语义；<code>Bundle</code>/<code>Vec</code> 仍禁止静默可用。</li>
-    <li><strong>Mem（AD-21）：</strong> 表面用 CHIRRTL 友好名（<code>Mem</code>/<code>SyncReadMem</code>）；降级/互转锚规范 <code>mem</code>；跨时钟存储只能经命名 CDC FIFO。</li>
-    <li><strong>多时钟（AD-22）：</strong> Clash 式 phantom 域（可改 ASSUMPTION）；非法跨域 freeze 失败；默认模块仍是 AD-15 单时钟。</li>
-    <li><strong>复位/使能（AD-23）、FST（AD-24）、HLS 外挂（AD-25）、合同海拔（AD-26）。</strong></li>
+    <li><strong>表面（AD-20）：</strong> if/match、同位宽、pad/trunc、同步 Reg 复位；<code>Bundle</code>/<code>Vec</code> <strong>允许</strong>（FR51），emit 前检查宽/向。</li>
+    <li><strong>Mem（AD-21）/ 多时钟（AD-22）/ 复位使能（AD-23）/ FST（AD-24）</strong> — 同前。</li>
+    <li><strong>HLS（AD-25）：</strong> 仅外挂；产品路径须默认可用 + 烟测；禁止自研调度。</li>
+    <li><strong>合同（AD-26）：</strong> PRD 含 FR46–52；历史 FR46-tp / NFR14-crates 别名勿混。</li>
+    <li><strong>NFR14 门禁（AD-28）：</strong> P3 epic ready 前必须有风险记录。</li>
   </ul>
-  <p class="cite">对应阶段二 PRD：FR22 → FR26 → FR23…；交付顺序不要颠倒。</p>
+  <p class="cite">Epic 19–24 · PRD overview-literal-C</p>
 </section>
 
 <section class="slide" data-title="先别做">
-  <p class="kicker">9 / 11</p>
+  <p class="kicker">9 / 12</p>
   <h2>现在不要做的事</h2>
   <p>这些不是「没写所以自由发挥」。做了就是第二个工具链。</p>
   <ul>
-    <li><span class="later">产品已有 FR、脊柱未钉实现形状：</span>bridge/形式等价/C ABI/覆盖率、IP/LSP、Analog、CLI 其余动词。</li>
-    <li><span class="no">不要做：</span>从 HIR 生成 TLM；自研 HLS 调度；用所有权当多驱动证明；Chisel Scala 当互转契约；未配对就钉 firtool-1.156.0；发布 <code>rhdl</code>/<code>rhdl-bits</code>。</li>
+    <li><span class="later">产品已有 FR、脊柱未钉实现形状：</span>IP/可视化/formal 的 crate 切分细节、LSP、CLI 其余动词名。</li>
+    <li><span class="no">不要做：</span>自研 HLS 调度；用所有权当多驱动证明；用调试 HIR→源码冒充 AD-27；未配对就钉 firtool-1.156.0；发布 <code>rhdl</code>/<code>rhdl-bits</code>。</li>
+    <li><span class="no">不要做：</span>无 NFR14 记录就把 FR46–49 标 ready；把 FR28 静默降回「尽力失败」。</li>
     <li><span class="no">不要做：</span>在 AD-22 未修订前另起一套 CDC 检查并与 phantom 并存。</li>
   </ul>
 </section>
 
 <section class="slide" data-title="CDC 假设">
-  <p class="kicker">10 / 11</p>
+  <p class="kicker">10 / 12</p>
   <h2>CDC 选型已确认</h2>
   <p class="lede">AD-22 采用 <span class="ok">Clash 式 phantom 域</span>（用户 2026-08-19 确认）。若改 Spinal 图检查或纯库级，必须修订 AD-22。</p>
   <table class="tight">
@@ -226,17 +228,27 @@ a { color: var(--accent); }
 </section>
 
 <section class="slide" data-title="开工">
-  <p class="kicker">11 / 11</p>
+  <p class="kicker">11 / 12</p>
   <h2>开工时引用 AD，不要发明第二套规则</h2>
-  <p>阶段二建议顺序（与 PRD P0→P1 对齐）：</p>
+  <p>Phase 7 建议顺序（与 Epic 19–24 对齐）：</p>
   <ol>
-    <li>README + firtool 钉死实现（AD-9 / AD-26 / NFR3）</li>
-    <li>表面加厚（AD-20 / FR22）</li>
-    <li>Mem（AD-21 / FR26）</li>
-    <li>多时钟 + CDC（AD-22 / FR23）— 先确认或推翻 ASSUMPTION</li>
-    <li>异步复位 / enable、可选 FST、外挂 HLS</li>
+    <li>NFR14 模板 + 修订 AD 落地确认（Epic 19）</li>
+    <li>Bundle/Vec + ClockDomain 叙事（FR51/52）</li>
+    <li>Chisel 双向（AD-27 / Epic 20）∥ 双模拟器生成（AD-5 / Epic 21）</li>
+    <li>IP / 可视化 / HLS（Epic 22–24；各需 NFR14）</li>
   </ol>
-  <p>下一步：<code>bmad-create-epics-and-stories</code> 按阶段二 PRD 拆 epic；<strong>AD 编号不要改</strong>。</p>
+  <p>下一步：<code>bmad-build</code> 从 <strong>19.1</strong> 开始；<strong>AD 编号不要改</strong>。</p>
+</section>
+
+<section class="slide" data-title="修订摘要">
+  <p class="kicker">12 / 12</p>
+  <h2>2026-08-21 脊柱修订（Fast）</h2>
+  <ul>
+    <li>修订 AD-3 / AD-5 / AD-20 / AD-25 / AD-26</li>
+    <li>新增 AD-27（Chisel 产品互操作）、AD-28（NFR14 门禁）</li>
+    <li>对齐 PRD overview-literal-C 与 Epic 19–24</li>
+  </ul>
+  <p class="cite">权威：ARCHITECTURE-SPINE.md · memlog</p>
 </section>
 
 </div>
