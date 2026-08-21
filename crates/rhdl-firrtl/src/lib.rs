@@ -255,6 +255,9 @@ pub fn import(text: &str) -> Result<FrozenHir, bitloom_hir::Diagnostics> {
                 let (lhs, rhs) = line.split_once(" <= ").unwrap();
                 let lhs = lhs.trim();
                 let rhs = rhs.trim();
+                // Bitloom emit: `inst.port <= parent`. firtool/Chisel output often uses
+                // `parent <= inst.port` for child outputs (FR46 reverse).
+                let mut took_inst = false;
                 if let Some((inst, port)) = lhs.split_once('.') {
                     if let Some(Stmt::Instance(i)) = m
                         .body
@@ -268,8 +271,28 @@ pub fn import(text: &str) -> Result<FrozenHir, bitloom_hir::Diagnostics> {
                             span: bitloom_hir::Span::default(),
                             dangling: false,
                         });
+                        took_inst = true;
+                    } else {
+                        // Dotted lhs that is not a known instance: skip (do not invent a net name).
+                        took_inst = true;
                     }
-                } else {
+                } else if let Some((inst, port)) = rhs.split_once('.') {
+                    if let Some(Stmt::Instance(i)) = m
+                        .body
+                        .iter_mut()
+                        .rev()
+                        .find(|s| matches!(s, Stmt::Instance(ii) if ii.name == inst))
+                    {
+                        i.connects.push(PortConnect {
+                            child_port: port.to_string(),
+                            parent_net: lhs.to_string(),
+                            span: bitloom_hir::Span::default(),
+                            dangling: false,
+                        });
+                        took_inst = true;
+                    }
+                }
+                if !took_inst {
                     let expr = parse_expr(rhs);
                     let is_reg = m
                         .body
@@ -303,6 +326,137 @@ pub fn import(text: &str) -> Result<FrozenHir, bitloom_hir::Diagnostics> {
         owned.add_module(m);
     }
     bitloom_hir::seal_from_builder(owned)
+}
+
+/// FR46: public port name / width / direction round-trip between two FrozenHir circuits.
+/// Modules are matched by name; port order may differ.
+pub fn ports_roundtrip_ok(expected: &FrozenHir, got: &FrozenHir) -> Result<(), String> {
+    let exp: std::collections::HashMap<&str, &Module> = expected
+        .circuit()
+        .modules
+        .iter()
+        .map(|m| (m.name.as_str(), m))
+        .collect();
+    let got_map: std::collections::HashMap<&str, &Module> = got
+        .circuit()
+        .modules
+        .iter()
+        .map(|m| (m.name.as_str(), m))
+        .collect();
+    if exp.len() != got_map.len() {
+        return Err(format!(
+            "module count: expected {}, got {}",
+            exp.len(),
+            got_map.len()
+        ));
+    }
+    for (name, em) in &exp {
+        let gm = got_map
+            .get(name)
+            .ok_or_else(|| format!("missing module `{name}` after import"))?;
+        if em.ports.len() != gm.ports.len() {
+            return Err(format!(
+                "module `{name}` port count: expected {}, got {}",
+                em.ports.len(),
+                gm.ports.len()
+            ));
+        }
+        let mut gp: std::collections::HashMap<&str, &Port> =
+            gm.ports.iter().map(|p| (p.name.as_str(), p)).collect();
+        for ep in &em.ports {
+            let p = gp
+                .remove(ep.name.as_str())
+                .ok_or_else(|| format!("module `{name}` missing port `{}`", ep.name))?;
+            if p.direction != ep.direction {
+                return Err(format!(
+                    "module `{name}` port `{}` direction mismatch",
+                    ep.name
+                ));
+            }
+            if p.ty != ep.ty {
+                return Err(format!(
+                    "module `{name}` port `{}` type mismatch: {:?} vs {:?}",
+                    ep.name, ep.ty, p.ty
+                ));
+            }
+        }
+    }
+    Ok(())
+}
+
+/// FR46: instance graph round-trip (instance name, child module, connects).
+/// Connects compared as unordered `(child_port, parent_net, dangling)` sets.
+pub fn instance_graph_roundtrip_ok(expected: &FrozenHir, got: &FrozenHir) -> Result<(), String> {
+    let exp: std::collections::HashMap<&str, &Module> = expected
+        .circuit()
+        .modules
+        .iter()
+        .map(|m| (m.name.as_str(), m))
+        .collect();
+    let got_map: std::collections::HashMap<&str, &Module> = got
+        .circuit()
+        .modules
+        .iter()
+        .map(|m| (m.name.as_str(), m))
+        .collect();
+    for (name, em) in &exp {
+        let gm = got_map
+            .get(name)
+            .ok_or_else(|| format!("missing module `{name}`"))?;
+        let e_insts: Vec<_> = em
+            .body
+            .iter()
+            .filter_map(|s| match s {
+                Stmt::Instance(i) => Some(i),
+                _ => None,
+            })
+            .collect();
+        let g_insts: Vec<_> = gm
+            .body
+            .iter()
+            .filter_map(|s| match s {
+                Stmt::Instance(i) => Some(i),
+                _ => None,
+            })
+            .collect();
+        if e_insts.len() != g_insts.len() {
+            return Err(format!(
+                "module `{name}` instance count: expected {}, got {}",
+                e_insts.len(),
+                g_insts.len()
+            ));
+        }
+        let mut g_by_name: std::collections::HashMap<&str, &Instance> =
+            g_insts.iter().map(|i| (i.name.as_str(), *i)).collect();
+        for ei in e_insts {
+            let gi = g_by_name
+                .remove(ei.name.as_str())
+                .ok_or_else(|| format!("module `{name}` missing instance `{}`", ei.name))?;
+            if gi.module != ei.module {
+                return Err(format!(
+                    "instance `{}` module: expected {}, got {}",
+                    ei.name, ei.module, gi.module
+                ));
+            }
+            let eset: std::collections::HashSet<_> = ei
+                .connects
+                .iter()
+                .map(|c| (c.child_port.as_str(), c.parent_net.as_str(), c.dangling))
+                .collect();
+            let gset: std::collections::HashSet<_> = gi
+                .connects
+                .iter()
+                .map(|c| (c.child_port.as_str(), c.parent_net.as_str(), c.dangling))
+                .collect();
+            if eset != gset {
+                return Err(format!(
+                    "instance `{}` connects mismatch: expected {eset:?}, got {gset:?}",
+                    ei.name
+                ));
+            }
+        }
+    }
+    Ok(())
 }
 
 fn parse_expr(s: &str) -> AssignExpr {
@@ -692,5 +846,92 @@ mod tests {
         let err = emit_chisel(&s.finish().unwrap()).unwrap_err();
         assert_eq!(err.code, "rhdl::E0901");
         assert!(err.en.contains("mem"));
+    }
+
+    #[test]
+    fn fr46_export_reimport_ports_and_instance_graph() {
+        let frozen = hierarchical_sample();
+        let fir = emit(&frozen).files[0].contents.clone();
+        let back = import(&fir).expect("export→import");
+        ports_roundtrip_ok(&frozen, &back).expect("FR46 port predicates");
+        instance_graph_roundtrip_ok(&frozen, &back).expect("FR46 instance graph");
+        // Re-emit FIRRTL and Chisel from imported HIR (same backend path as Bitloom surface).
+        let re = emit(&back).files[0].contents.clone();
+        assert!(re.starts_with("FIRRTL version 6.0.0"));
+        let scala = emit_chisel(&back)
+            .expect("emit_chisel after FR46 import")
+            .files[0]
+            .contents
+            .clone();
+        assert!(scala.contains("Module(new Child)"));
+    }
+
+    #[test]
+    fn fr46_external_fir_firtool_style_connects_then_emit() {
+        let fir = include_str!("../fixtures/external_hierarchy.fir");
+        assert!(
+            fir.contains("y <= u0.y"),
+            "fixture must use firtool-style output connect"
+        );
+        let hir = import(fir).expect("import external .fir");
+        let child = hir
+            .circuit()
+            .modules
+            .iter()
+            .find(|m| m.name == "Child")
+            .expect("Child");
+        assert!(
+            child
+                .ports
+                .iter()
+                .any(|p| p.name == "x" && p.direction == PortDirection::Input)
+        );
+        let top = hir
+            .circuit()
+            .modules
+            .iter()
+            .find(|m| m.name == "ExternalTop")
+            .expect("ExternalTop");
+        let inst = top
+            .body
+            .iter()
+            .find_map(|s| match s {
+                Stmt::Instance(i) if i.name == "u0" => Some(i),
+                _ => None,
+            })
+            .expect("u0");
+        assert_eq!(inst.module, "Child");
+        assert!(
+            inst.connects
+                .iter()
+                .any(|c| c.child_port == "y" && c.parent_net == "y" && !c.dangling)
+        );
+        let v = bitloom_vlog::emit(&hir);
+        assert!(!v.files.is_empty());
+        assert!(v.files[0].contents.contains("module"));
+        let fir_out = emit(&hir).files[0].contents.clone();
+        assert!(fir_out.starts_with("FIRRTL version 6.0.0"));
+        let scala = emit_chisel(&hir).expect("chisel from external").files[0]
+            .contents
+            .clone();
+        assert!(scala.contains("Module(new Child)"));
+    }
+
+    #[test]
+    fn fr46_import_counter_then_tick() {
+        let hir = counter_for_chisel();
+        let fir = emit(&hir).files[0].contents.clone();
+        let back = import(&fir).expect("import counter");
+        ports_roundtrip_ok(&hir, &back).unwrap();
+        let mut sim = bitloom_sim::Sim::new(back);
+        let mut pv = bitloom_hir::PortValues::default();
+        pv.set("rst", 1);
+        sim.set_inputs(pv.clone());
+        sim.tick();
+        pv.set("rst", 0);
+        sim.set_inputs(pv);
+        sim.tick();
+        sim.tick();
+        assert_eq!(sim.ports().get("data_out"), Some(2));
     }
 }

@@ -68,3 +68,11 @@
 - source_spec: `_agile-output/implementation-artifacts/20-3-firrtl-frozenhir-可编译-chisel-fr28.md`
   summary: 仅精确名 `clk`/`rst` 从 IO 剥离；其他 Clock/Reset 端口名仍进入 Bundle
   evidence: 机械约定；多时钟命名留给后续 epic
+
+- source_spec: `_agile-output/implementation-artifacts/20-4-反向导入-chisel-fir-bitloom-fr46-腿-2.md`
+  summary: 未知 `parent <= inst.port`（rhs 有点但无匹配实例）仍落入普通 assign
+  evidence: 评审；合法夹具均有匹配实例；坏 fir 由 seal 或语义外失败
+
+- source_spec: `_agile-output/implementation-artifacts/20-4-反向导入-chisel-fir-bitloom-fr46-腿-2.md`
+  summary: dangling connect 经 emit 丢失，往返谓词不覆盖 dangling
+  evidence: emit 跳过 dangling；FR46 夹具无 dangling

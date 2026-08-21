@@ -99,6 +99,7 @@ mod sim {
 | C ABI cdylib | [`docs/fr33-c-abi.md`](docs/fr33-c-abi.md) |
 | 仿真覆盖率 | [`docs/fr34-sim-coverage.md`](docs/fr34-sim-coverage.md) |
 | Chisel 可编译生成（FR28） | [`docs/fr28-chisel-best-effort.md`](docs/fr28-chisel-best-effort.md) |
+| Chisel / `.fir` 反向导入（FR46） | [`docs/fr46-chisel-import.md`](docs/fr46-chisel-import.md) |
 | HLS（Bambu） | [`docs/fr35-hls.md`](docs/fr35-hls.md) |
 | Formal/SVA | [`docs/fr39-formal-sva.md`](docs/fr39-formal-sva.md) |
 | Analog/InOut | [`docs/fr27-analog-inout.md`](docs/fr27-analog-inout.md) |

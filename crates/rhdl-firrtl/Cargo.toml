@@ -12,3 +12,5 @@ bitloom-hir = { workspace = true }
 
 [dev-dependencies]
 bitloom-builder = { workspace = true }
+bitloom-sim = { workspace = true }
+bitloom-vlog = { workspace = true }

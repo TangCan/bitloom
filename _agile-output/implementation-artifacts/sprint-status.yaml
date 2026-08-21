@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-21-2026 15:20
+last_updated: 08-21-2026 15:30
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -172,7 +172,7 @@ development_status:
   20-1-nfr14-风险记录-chisel-双向: done
   20-2-架构-ad-firrtl-可编译-chisel-fr28-条: done
   20-3-firrtl-frozenhir-可编译-chisel-fr28: done
-  20-4-反向导入-chisel-fir-bitloom-fr46-腿-2: backlog
+  20-4-反向导入-chisel-fir-bitloom-fr46-腿-2: done
   20-5-import-cli-混合夹具-fr40-fr46-腿-3: backlog
   epic-20-retrospective: optional
 
