@@ -28,6 +28,7 @@ cargo bitloom build --package blink --manifest-dir blink --out-dir out
 
 - **工具链：** `rust-toolchain.toml` 钉死 **rustc 1.97.1** / edition 2024
 - **测试（贡献者）：** `just test`（或 `cargo test --workspace`）
+- **ClockDomain / CDC（FR52）：** 产品叙事与夹具见 [`examples/clockdomain_skel`](examples/clockdomain_skel)（`bind_domain` / `mark_cdc_bridge` / `rhdl::E0220`；全局 `Sim::tick` 为按域 tick 的 MVP 等价）
 
 ### 贡献者：在 monorepo 里跑示例
 

@@ -18,6 +18,7 @@ members = [
   "examples/wide_adder",
   "examples/fifo_skel",
   "examples/bundle_vec_skel",
+  "examples/clockdomain_skel",
   "examples/mixed_both",
   "examples/ip_box",
   "examples/rv32_feasibility",

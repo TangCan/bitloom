@@ -20,9 +20,16 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 
 ## ClockDomain (CAP-11 / FR52)
 
-- 产品叙事与夹具须展示 ClockDomain（或等价）绑定时钟/复位极性与同步·异步。
-- 跨域无语言级同步器则 freeze 失败（机制随 FR23 / AD-22）。
+- **API 映射（产品面）：**
+  - 域标记：`ClockDomain::<ID>`（prelude ZST）+ `ElaborateSession::bind_domain(name, id)`
+  - 合法 CDC：`mark_cdc_bridge(name)` — 文档等价 `DoubleFlop` / `SyncFIFO`（叙事锚点，非真实同步器 RTL IP）
+  - 非法跨域无 bridge：`assign_net` 跨域 → `finish`/`freeze` 失败，诊断码 **`rhdl::E0220`**（诊断文案点名 DoubleFlop/SyncFIFO）
+  - 同步/异步复位：`declare_reg_ex(..., async_reset, has_enable, ...)`；**极性** = 默认同步**高有效** `Reset`（AD-15，无 ActiveLow API）
+  - 仿真步进：全局 `Sim::tick` 为「按域 tick」的 MVP 等价（尚无独立 per-domain tick 引擎）
+  - **MVP 门禁范围：** 跨域检查在 `assign_net`；`assign_reg_d_*` 暂不查域（预存缺口，非 FR52 新引入）
+- 夹具：`examples/clockdomain_skel`（非法 E0220 + 同形无 bridge 负向 + 合法 emit/tick + sync/async 并排）。
 - 默认模块仍是单时钟：恰好一个 `Clock` + 同步高有效 `Reset`（AD-15），除非显式声明多域。
+- 域为 session 标签：多域夹具可仍用一对 `clk`/`rst` 端口（非每域独立时钟端口）。
 
 ## Still deferred from this catalog
 

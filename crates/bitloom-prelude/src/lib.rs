@@ -97,14 +97,28 @@ pub trait Bundle {
 #[derive(Debug, Clone, Copy, Default)]
 pub struct HwVec<T, const N: u32>(pub core::marker::PhantomData<T>);
 
-/// Clash-style phantom clock domain marker (AD-22).
+/// Clash 风格 phantom 时钟域标记（AD-22 / FR52）。
+///
+/// 产品叙事：用 `ClockDomain::<ID>` 标明信号所属域，再经
+/// [`ElaborateSession::bind_domain`] 写入 session。默认模块仍是单时钟 + **同步高有效**
+/// [`Reset`]（AD-15）。同步/异步复位由 [`ElaborateSession::declare_reg_ex`] 的
+/// `async_reset` 选择；合法跨域须 [`ElaborateSession::mark_cdc_bridge`]
+///（见 [`DoubleFlop`] / [`SyncFIFO`]），否则 `finish` → `rhdl::E0220`。
+///
+/// 夹具：`examples/clockdomain_skel`。仿真步进：全局 `Sim::tick` 为按域 tick 的 MVP 等价。
 #[derive(Debug, Clone, Copy, Default)]
 pub struct ClockDomain<const ID: u32>;
 
-/// Language-level CDC primitives (AD-22).
+/// 语言级 CDC 原语叙事锚点（AD-22 / FR52）。
+///
+/// 不生成真实双触发器 RTL；合法跨域今日为 session
+/// [`ElaborateSession::mark_cdc_bridge`]（诊断文案指向 DoubleFlop/SyncFIFO）。
 #[derive(Debug, Clone, Copy)]
 pub struct DoubleFlop;
 
+/// 语言级 CDC FIFO 叙事锚点（AD-22 / FR52）。
+///
+/// 非一级 SyncFIFO IP；与 [`DoubleFlop`] 同为 `mark_cdc_bridge` 文档等价名。
 #[derive(Debug, Clone, Copy)]
 pub struct SyncFIFO<const DEPTH: u32, const WIDTH: u32>;
 

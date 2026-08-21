@@ -44,3 +44,15 @@
 - source_spec: `_agile-output/implementation-artifacts/19-4-实现-bundle-vec-可综合路径-fr51.md`
   summary: check_connect 只比位宽、不比 GroundType kind（Bool↔UInt 等同宽仍可能过）
   evidence: 预存宽合同；edge-case hunter；非 FR51 引入
+
+- source_spec: `_agile-output/implementation-artifacts/19-5-clockdomain-产品叙事与夹具-fr52.md`
+  summary: assign_reg_d_* 不做跨域检查（仅 assign_net）
+  evidence: 预存 builder 行为；language-surface 已披露；夹具合法路径用 assign_net
+
+- source_spec: `_agile-output/implementation-artifacts/19-5-clockdomain-产品叙事与夹具-fr52.md`
+  summary: ARCHITECTURE-SPINE AD-22 仍写 Clash Signal&lt;D,T&gt;，与 session 域标签实现不一致
+  evidence: 本故事可选对齐未改脊柱；产品面已在 language-surface/prelude 钉死
+
+- source_spec: `_agile-output/implementation-artifacts/19-5-clockdomain-产品叙事与夹具-fr52.md`
+  summary: 跨域诊断码命名空间仍为 rhdl::E0220（Bitloom 品牌下预存）
+  evidence: builder 既有码；夹具沿用
