@@ -57,3 +57,4 @@ cd target/bitloom-cycle-sim && cargo test && cargo run
 - Generator lives in the **toolchain** (`bitloom-sim` / `bitloom` CLI). Design crates depend only on `bitloom-prelude`.
 - **Not** SystemC / TLM-2.0.
 - **FR30 / P3:** product acceptance uses `check_functional_equiv_generated` on the generated path (see `docs/fr30-dual-view-equiv.md`). Handwritten equiv may coexist.
+- **MVP subset (locked):** flat **single top module** only. Cycle-accurate emit **rejects** hierarchy instances and memories; functional generate takes `modules.first()`. Hierarchy / `Mem` cycle-accurate generation is a **future story** — do not silently expand the subset without updating this page, `language-surface.md`, and `deferred-work.md`.

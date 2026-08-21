@@ -41,7 +41,9 @@ cargo run -p bitloom -- hls --function add --out-dir target/bitloom-hls
 | --- | --- |
 | 发布/本地烟测 | `just hls-smoke` → [`scripts/hls-smoke.sh`](../scripts/hls-smoke.sh) |
 | CI job | `.github/workflows/ci.yml` → job **`hls-smoke`**（失败不 ignore） |
-| CI stub | [`scripts/fixtures/bambu-ci-stub.sh`](../scripts/fixtures/bambu-ci-stub.sh)（接线 + 可综合 `.v`；非真实 HLS 质量） |
+| CI stub | [`scripts/fixtures/bambu-ci-stub.sh`](../scripts/fixtures/bambu-ci-stub.sh)（接线 + 可综合 `.v`；**非真实 HLS 质量**） |
 | 真 Bambu | `BITLOOM_HLS_USE_REAL=1` + `BITLOOM_BAMBU_PATH` 或缓存 `${BITLOOM_HLS_CACHE:-~/.cache/bitloom-hls}/bambu-2024.10.AppImage` |
+
+**Locked:** CI / `just hls-smoke` 默认走 stub；stub 绿 ≠ 调度质量。真机入口仅为 `BITLOOM_HLS_USE_REAL=1`。可选夜间真机 job、第二算法烟测夹具见 `_agile-output/implementation-artifacts/deferred-work.md`（未实现）。
 
 常驻覆盖：`cargo test -p bitloom --test hls_smoke`（缺后端可读失败）亦在主 `test` job 中运行。

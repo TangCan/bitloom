@@ -30,4 +30,8 @@ If FST conversion is unavailable, the command still succeeds with **VCD + `timin
 
 FR49 is satisfied by `timing.html` from the product CLI. External viewers remain useful for large dumps but are **not** the sole completion path.
 
+## Deferred — richer interactive wave
+
+Interactive / richer waveform browsing beyond the static `timing.html` value table is a **future epic** (not claimed done here). See `_agile-output/implementation-artifacts/deferred-work.md`.
+
 Cross-link: optional FST details in [`fr31-optional-fst.md`](fr31-optional-fst.md). Hierarchy entry: [`fr38-viz-lsp.md`](fr38-viz-lsp.md).

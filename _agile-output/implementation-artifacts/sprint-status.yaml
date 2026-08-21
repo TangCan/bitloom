@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-21-2026 16:20
+last_updated: 08-21-2026 16:23
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -476,65 +476,65 @@ action_items:
     epic: 20
     action: "可选：拆分或模块化膨胀的 rhdl-firrtl import/emit 面"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-20-retro-2026-08-21.md"
   - id: "epic-21-retro-item-46-可选-将-cycle-functional-生成器扁平单模块子集写入-defer"
     epic: 21
     action: "可选：将 cycle/functional 生成器扁平单模块子集写入 deferred-work 或 language-surface"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-21-retro-2026-08-21.md"
   - id: "epic-21-retro-item-47-可选-层次-mem-周期精确生成作为后续故事-勿静默扩子集而不改文档"
     epic: 21
     action: "可选：层次/mem 周期精确生成作为后续故事，勿静默扩子集而不改文档"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-21-retro-2026-08-21.md"
   - id: "epic-22-retro-item-48-将五类-ip-stub-边界写入-deferred-work-md-避免被误读为"
     epic: 22
     action: "将五类 IP stub 边界写入 deferred-work.md，避免被误读为全协议"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md"
   - id: "epic-22-retro-item-49-可选-加深-uart-spi-i2c-协议语义-或产品文档显式锁定长期-stub"
     epic: 22
     action: "可选：加深 UART/SPI/I2C 协议语义，或产品文档显式锁定长期 stub MVP"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md"
   - id: "epic-22-retro-item-50-可选-axi4-lite-与-uart-fifo-简易连接夹具"
     epic: 22
     action: "可选：AXI4-Lite 与 UART/FIFO 简易连接夹具"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md"
   - id: "epic-23-retro-item-51-可选-交互式-更丰富波形浏览-超出静态-timing-html-value-ta"
     epic: 23
     action: "可选：交互式/更丰富波形浏览（超出静态 timing.html Value table）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-23-retro-2026-08-21.md"
   - id: "epic-23-retro-item-52-可选-lsp-hover-goto-作为后续-epic-已声明-deferred"
     epic: 23
     action: "可选：LSP hover/goto 作为后续 epic（已声明 deferred）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-23-retro-2026-08-21.md"
   - id: "epic-24-retro-item-53-将-ci-默认-bambu-stub-非真实-hls-质量写入-deferred"
     epic: 24
     action: "将 CI 默认 Bambu stub、非真实 HLS 质量写入 deferred-work.md 并标明真机入口"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md"
   - id: "epic-24-retro-item-54-可选-ci-optional-夜间-job-跑真实-bambu-2024-10"
     epic: 24
     action: "可选：CI optional/夜间 job 跑真实 Bambu 2024.10（失败不 ignore）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md"
   - id: "epic-24-retro-item-55-可选-发布烟测夹具扩到第二算法函数或负向调度质量断言"
     epic: 24
     action: "可选：发布烟测夹具扩到第二算法函数或负向调度质量断言"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md"

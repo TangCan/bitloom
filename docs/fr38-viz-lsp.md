@@ -20,7 +20,7 @@ Open the HTML in a browser. This is the product hierarchy path for FR38/FR49 —
 
 ## LSP
 
-Full LSP hover/goto remains **deferred** (no language-server binary). See this page historically; hierarchy/HTML does not claim LSP done.
+Full LSP hover/goto remains **deferred** as a later epic (no language-server binary). Reinforced in `_agile-output/implementation-artifacts/deferred-work.md`. Hierarchy/HTML does **not** claim LSP done.
 
 ## Wave / timing
 

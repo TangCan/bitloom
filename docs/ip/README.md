@@ -13,18 +13,22 @@ use bitloom_prelude::Elaboratable;
 
 例化：`T::elaborate()` → `bitloom_vlog::emit` → `bitloom_sim::Sim::tick`。
 
+## 长期 stub MVP（产品锁）
+
+五类一级 IP 的**产品合同是端口语义 stub**，不是全协议 RTL。尤其 **UART / SPI / I2C** 长期保持 stub MVP：加深波特率/CPOL/CPHA/仲裁等协议语义须新 epic 显式改合同，不得默认当作已交付全协议。边界亦写入 `_agile-output/implementation-artifacts/deferred-work.md`。
+
 ## 五类 + 黑盒
 
-| 类 | 包路径 / 类型 | Smoke 命令 | 已知限制 |
+| 类 | 包路径 / 类型 | Smoke 命令 | 已知限制（stub 边界） |
 | --- | --- | --- | --- |
 | **FIFO** | `bitloom_prelude::ip::SyncFifo` | `cargo test -p bitloom-prelude --lib sync_fifo` | depth-1 skid；非异步跨域 FIFO |
-| **UART** | `bitloom_prelude::ip::UartTx` | `cargo test -p bitloom-prelude --lib uart_tx` | 字节保持寄存器；非波特率移位 / 全双工 |
-| **SPI** | `bitloom_prelude::ip::SpiMaster` | `cargo test -p bitloom-prelude --lib spi_master` | **主**设备字节缓冲；非 CPOL/CPHA / 多 CS / 从模式 |
-| **I2C** | `bitloom_prelude::ip::I2cMaster` | `cargo test -p bitloom-prelude --lib i2c_master` | **主**设备字节缓冲；非多主仲裁 / clock stretch / 从模式 |
-| **AXI** | `bitloom_prelude::ip::Axi4LiteSlave` | `cargo test -p bitloom-prelude --lib axi4_lite` | **AXI4-Lite 最小从**（ADDR=8, DATA=32）；非 Full AXI / 非互联 |
+| **UART** | `bitloom_prelude::ip::UartTx` | `cargo test -p bitloom-prelude --lib uart_tx` | 字节保持寄存器；非波特率移位 / 全双工（**长期 stub MVP**） |
+| **SPI** | `bitloom_prelude::ip::SpiMaster` | `cargo test -p bitloom-prelude --lib spi_master` | **主**设备字节缓冲；非 CPOL/CPHA / 多 CS / 从模式（**长期 stub MVP**） |
+| **I2C** | `bitloom_prelude::ip::I2cMaster` | `cargo test -p bitloom-prelude --lib i2c_master` | **主**设备字节缓冲；非多主仲裁 / clock stretch / 从模式（**长期 stub MVP**） |
+| **AXI** | `bitloom_prelude::ip::Axi4LiteSlave` | `cargo test -p bitloom-prelude --lib axi4_lite` | **AXI4-Lite 最小从握手 stub**（ADDR=8, DATA=32）；非 Full AXI / 非互联 |
 | **黑盒** | `bitloom_prelude::ip::ExtBlackBox` + `vendor_blackbox_v()` | `cargo test -p bitloom-prelude --lib blackbox` | 仅端口；不内联子 HIR；vendor `.v` 旁路 |
 
-联验夹具：`examples/ip_box`（`cargo test -p ip_box`）再导出 FIFO/UART/黑盒。
+联验夹具：`examples/ip_box`（`cargo test -p ip_box`）再导出 FIFO/UART/黑盒。**无** AXI↔UART/FIFO 互联夹具（可选后续；见 deferred-work）。
 
 ## CI / `just test`
 

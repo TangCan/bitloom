@@ -84,3 +84,64 @@
 - source_spec: `_agile-output/implementation-artifacts/20-5-import-cli-混合夹具-fr40-fr46-腿-3.md`
   summary: 混合夹具 `include_str` 耦合 monorepo 相对路径
   evidence: 文档夹具；standalone 用户经 `cargo bitloom import --input`
+
+- source_spec: `_agile-output/implementation-artifacts/epic-20-retro-2026-08-21.md`
+  summary: 可选卫生：拆分/模块化膨胀的 `rhdl-firrtl` import/emit 面（`lib.rs` 等）
+  evidence: epic-20-retro-item-45；不阻塞 FR28/46；大重构另开 hygiene 故事，勿 silently 大 refactor
+  status: deferred — 文档锁定；不做本批次大重构
+
+- source_spec: `_agile-output/implementation-artifacts/epic-21-retro-2026-08-21.md`
+  summary: FR47 cycle/functional 生成器 MVP = 扁平单模块子集（无层次实例、无 MemDecl 周期精确 emit）
+  evidence: epic-21-retro-item-46；`bitloom-sim` `cycle.rs` 显式拒绝 instances/memories；`generate.rs` 取 `modules.first()`；见 language-surface / `docs/fr47-dual-sim-generation.md`
+  status: deferred — 子集已文档锁定；扩子集须改文档+故事，禁止静默扩大
+
+- source_spec: `_agile-output/implementation-artifacts/epic-21-retro-2026-08-21.md`
+  summary: 层次模块 / Mem 的周期精确生成（及对应 functional 语义）作为后续故事
+  evidence: epic-21-retro-item-47；当前 MVP 故意不含；扩子集前必须更新 deferred-work + language-surface + fr47 文档
+  status: deferred — 未来故事；forbid silent subset expansion
+
+- source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
+  summary: 五类一级 IP 均为端口语义 stub，非全协议实现
+  evidence: |
+    epic-22-retro-item-48；边界：
+    - SyncFifo：depth-1 skid；非异步跨域 FIFO
+    - UartTx：字节保持寄存器；非波特率移位 / 全双工
+    - SpiMaster：主设备字节缓冲；非 CPOL/CPHA / 多 CS / 从模式
+    - I2cMaster：主设备字节缓冲；非多主仲裁 / clock stretch / 从模式
+    - Axi4LiteSlave：最小从握手 stub（ADDR=8, DATA=32）；非 Full AXI / 非互联
+  status: deferred — 边界写入本文件 + `docs/ip/README.md`；勿误读为全协议
+
+- source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
+  summary: UART/SPI/I2C 长期保持 stub MVP（产品锁）；不深化协议语义除非新 epic 显式改合同
+  evidence: epic-22-retro-item-49；优先锁 MVP 而非加深协议；见 `docs/ip/README.md`「长期 stub MVP」
+  status: locked — 产品文档显式锁定；加深协议 = 新 epic
+
+- source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
+  summary: 可选：AXI4-Lite 与 UART/FIFO 简易连接夹具
+  evidence: epic-22-retro-item-50；本批次不实现；现有 `examples/ip_box` 仅再导出单 IP，非互联夹具
+  status: deferred — 可选后续故事
+
+- source_spec: `_agile-output/implementation-artifacts/epic-23-retro-2026-08-21.md`
+  summary: 交互式/更丰富波形浏览（超出静态 `timing.html` Value table）作为后续 epic
+  evidence: epic-23-retro-item-51；当前产品面 = `cargo bitloom wave` → 静态 HTML + VCD；见 `docs/fr38-wave.md`
+  status: deferred — 未来 epic；不宣称交互式波形已交付
+
+- source_spec: `_agile-output/implementation-artifacts/epic-23-retro-2026-08-21.md`
+  summary: 完整 LSP hover/goto 作为后续 epic（已声明 deferred；本条加固）
+  evidence: epic-23-retro-item-52；`docs/fr38-viz-lsp.md` / README 已声明；无 language-server 二进制
+  status: deferred — 后续 epic；层次/时序 HTML 不声称 LSP 完成
+
+- source_spec: `_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md`
+  summary: CI 默认 Bambu stub（`bambu-ci-stub.sh`）验证接线与非零覆盖，非真实 HLS 调度质量
+  evidence: epic-24-retro-item-53；真机入口 `BITLOOM_HLS_USE_REAL=1`（+ `BITLOOM_BAMBU_PATH` 或缓存 AppImage）；见 `docs/fr35-hls.md`
+  status: deferred — 文档锁定 stub≠质量；真机为显式入口而非 CI 默认
+
+- source_spec: `_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md`
+  summary: 可选：CI optional/夜间 job 跑真实 Bambu 2024.10（缓存 AppImage；失败不 ignore）
+  evidence: epic-24-retro-item-54；本批次不实现完整 CI；默认路径保持 stub
+  status: deferred — 可选夜间真机 job
+
+- source_spec: `_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md`
+  summary: 可选：发布烟测夹具扩到第二算法函数或负向调度质量断言
+  evidence: epic-24-retro-item-55；当前烟测以 `add` 等最小夹具为主；扩夹具另开可选故事
+  status: deferred — 可选后续
