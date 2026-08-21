@@ -14,7 +14,9 @@ pub use coverage::{Coverage, parse_report};
 mod engine;
 pub use engine::TickEngine;
 mod equiv;
-pub use equiv::{EquivStatus, check_functional_equiv, reset_then_run};
+pub use equiv::{
+    EquivStatus, check_functional_equiv, check_functional_equiv_generated, reset_then_run,
+};
 
 mod generate;
 pub use generate::{

@@ -6,9 +6,7 @@ use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
 
-use bitloom_hir::{
-    AssignExpr, AssignTarget, FrozenHir, GroundType, ProcessKind, Stmt,
-};
+use bitloom_hir::{AssignExpr, AssignTarget, FrozenHir, GroundType, ProcessKind, Stmt};
 
 use crate::AbstractionView;
 use bitloom_hir::PortValues;
@@ -222,16 +220,9 @@ path = "src/main.rs"
 fn resolve_hir_dep(out_dir: &Path) -> String {
     // Prefer workspace path when generating inside the monorepo (tests / CLI).
     let candidates = [
-        out_dir
-            .join("../../crates/bitloom-hir")
-            .canonicalize()
-            .ok(),
-        std::env::var_os("CARGO_MANIFEST_DIR").and_then(|m| {
-            PathBuf::from(m)
-                .join("../bitloom-hir")
-                .canonicalize()
-                .ok()
-        }),
+        out_dir.join("../../crates/bitloom-hir").canonicalize().ok(),
+        std::env::var_os("CARGO_MANIFEST_DIR")
+            .and_then(|m| PathBuf::from(m).join("../bitloom-hir").canonicalize().ok()),
         PathBuf::from(env!("CARGO_MANIFEST_DIR"))
             .join("../bitloom-hir")
             .canonicalize()
@@ -242,10 +233,7 @@ fn resolve_hir_dep(out_dir: &Path) -> String {
             return format!("bitloom-hir = {{ path = \"{}\" }}", c.display());
         }
     }
-    format!(
-        "bitloom-hir = \"{}\"",
-        env!("CARGO_PKG_VERSION")
-    )
+    format!("bitloom-hir = \"{}\"", env!("CARGO_PKG_VERSION"))
 }
 
 fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
@@ -368,12 +356,12 @@ fn render_expr(expr: &AssignExpr) -> String {
         AssignExpr::Ref(n) => format!("self.lookup(inputs, {n:?})"),
         AssignExpr::Lit(v) => format!("{v}"),
         AssignExpr::Inc(n) => format!("self.lookup(inputs, {n:?}).wrapping_add(1)"),
-        AssignExpr::Add(a, b) => format!(
-            "self.lookup(inputs, {a:?}).wrapping_add(self.lookup(inputs, {b:?}))"
-        ),
-        AssignExpr::Sub(a, b) => format!(
-            "self.lookup(inputs, {a:?}).wrapping_sub(self.lookup(inputs, {b:?}))"
-        ),
+        AssignExpr::Add(a, b) => {
+            format!("self.lookup(inputs, {a:?}).wrapping_add(self.lookup(inputs, {b:?}))")
+        }
+        AssignExpr::Sub(a, b) => {
+            format!("self.lookup(inputs, {a:?}).wrapping_sub(self.lookup(inputs, {b:?}))")
+        }
         AssignExpr::And(a, b) => format!("self.lookup(inputs, {a:?}) & self.lookup(inputs, {b:?})"),
         AssignExpr::Or(a, b) => format!("self.lookup(inputs, {a:?}) | self.lookup(inputs, {b:?})"),
         AssignExpr::Xor(a, b) => format!("self.lookup(inputs, {a:?}) ^ self.lookup(inputs, {b:?})"),
@@ -395,9 +383,9 @@ fn render_expr(expr: &AssignExpr) -> String {
 
 fn render_expr_ports_regs(expr: &AssignExpr) -> String {
     match expr {
-        AssignExpr::Ref(n) => format!(
-            "out.get({n:?}).or_else(|| self.regs.get({n:?}).copied()).unwrap_or(0)"
-        ),
+        AssignExpr::Ref(n) => {
+            format!("out.get({n:?}).or_else(|| self.regs.get({n:?}).copied()).unwrap_or(0)")
+        }
         other => render_expr(other).replace("inputs", "&out"),
     }
 }
@@ -476,10 +464,7 @@ mod tests {
     #[test]
     fn emit_writes_crate_with_gold_test() {
         let hir = counter_hir();
-        let dir = std::env::temp_dir().join(format!(
-            "bitloom-func-gen-{}",
-            std::process::id()
-        ));
+        let dir = std::env::temp_dir().join(format!("bitloom-func-gen-{}", std::process::id()));
         let _ = fs::remove_dir_all(&dir);
         let out = generate_functional_sim_with_bin(&hir, &dir).unwrap();
         let lib = fs::read_to_string(out.join("src/lib.rs")).unwrap();

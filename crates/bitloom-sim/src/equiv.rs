@@ -1,4 +1,7 @@
-//! Dual-view equivalence: handwritten functional vs cycle-accurate `tick` (FR30).
+//! Dual-view equivalence: functional vs cycle-accurate `tick` (FR30).
+//!
+//! Handwritten views remain supported. **P3 product acceptance** uses the FR47
+//! **generated** path via [`check_functional_equiv_generated`].
 
 use bitloom_hir::{FrozenHir, PortValues};
 
@@ -22,7 +25,8 @@ impl EquivStatus {
     }
 }
 
-/// Drive the same stimulus on FrozenHir `tick` and a handwritten view.
+/// Drive the same stimulus on FrozenHir `tick` and a functional view
+/// (handwritten **or** generated `AbstractionView`).
 /// Consistent PortValues → `Pass`; first divergence → `Fail`.
 pub fn check_functional_equiv<A: AbstractionView>(
     hir: FrozenHir,
@@ -43,6 +47,17 @@ pub fn check_functional_equiv<A: AbstractionView>(
         }
     }
     EquivStatus::Pass { cycles }
+}
+
+/// FR30 on the **generated** path (P3 acceptance): `GeneratedFunctional` vs `tick`.
+///
+/// Alias of [`crate::check_generated_bridge`]. Handwritten `check_functional_equiv`
+/// remains available but is not the P3 gate.
+pub fn check_functional_equiv_generated(
+    hir: FrozenHir,
+    stimuli: impl IntoIterator<Item = PortValues>,
+) -> EquivStatus {
+    crate::check_generated_bridge(hir, stimuli)
 }
 
 /// Reset-high one cycle, then `n` cycles with `rst=0`.

@@ -56,4 +56,4 @@ cd target/bitloom-cycle-sim && cargo test && cargo run
 
 - Generator lives in the **toolchain** (`bitloom-sim` / `bitloom` CLI). Design crates depend only on `bitloom-prelude`.
 - **Not** SystemC / TLM-2.0.
-- FR30 product acceptance on the **generated** path is Story 21.5 (`docs/fr30-dual-view-equiv.md` will be updated there).
+- **FR30 / P3:** product acceptance uses `check_functional_equiv_generated` on the generated path (see `docs/fr30-dual-view-equiv.md`). Handwritten equiv may coexist.
