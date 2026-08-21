@@ -28,6 +28,10 @@ stepsCompleted:
   - step-02-design-epics-phase-7
   - step-03-create-stories-phase-7
   - step-04-final-validation-phase-7
+  - step-01-validate-prerequisites-phase-8
+  - step-02-design-epics-phase-8
+  - step-03-create-stories-phase-8
+  - step-04-final-validation-phase-8
 status: complete
 phase1Status: complete
 phase2Status: complete
@@ -36,18 +40,23 @@ phase4Status: complete
 phase5Status: complete
 phase6Status: complete
 phase7Status: complete
+phase8Status: complete
 phase3Scope: Bitloom rename + maturity closeout + crates.io publish
 phase4Scope: True standalone after cargo install (bitloom-* publish graph)
 phase5Scope: Teaching RV32 example core + step-by-step tutorial (Bitloom)
 phase6Scope: Episode II — full user RV32I immediates → classic 5-stage+hazards → optional Zicsr/M-trap
 phase7Scope: Overview-literal closure (PRD amendment overview-literal-C — FR46–52 / strengthened FR28–40 / NFR14 risk gate)
+phase8Scope: FR28 JVM true-compile hard gate in default CI — FR71/NFR34 (research technical-forcing-jvm-chisel-compile-in-default-ci-2026-08-21)
 inputDocuments:
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md
   - _agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
+  - _agile-output/planning-artifacts/research/technical-forcing-jvm-chisel-compile-in-default-ci-2026-08-21/research.md
   - _agile-output/planning-artifacts/epics.md
 excludedFromPhase7Rewrite:
   - Phase 1–6 epics/stories (Epic 1–18 retained as historical complete)
+excludedFromPhase8Rewrite:
+  - Phase 1–7 epics/stories (Epic 1–24 retained as historical complete)
 uxDesign: none
 idCollisionNote: >
   Phase-3 inventory already used FR46 (Trusted Publishing) and NFR14 (crates.io FCFS).
@@ -61,7 +70,7 @@ idCollisionNote: >
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。**阶段七（进行中）：** PRD amendment `overview-literal-C` — 概述字面闭环（双向 Chisel、双模拟器生成、一级 IP、内置可视化、HLS 产品路径、Bundle/Vec、ClockDomain 叙事）。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。无 UX。
 
 ## Requirements Inventory
 
@@ -1688,6 +1697,58 @@ NFR14: Epic 19 提供模板；Epic 20–24 ready 前门禁
 **FRs covered:** FR35, FR50
 **Depends on:** Epic 19（NFR14）。可与 20–23 并行。
 
+---
+
+## Phase 8 Requirements Inventory（追加 · 2026-08-21）
+
+**范围：** 仅 FR28「钉死版本下 fixture→Scala **必须编译通过**」在**默认 CI** 上的验证缺口（今日：Rust 谓词 + 可选 JVM skip）。不重开 FR46–52；不重写 Epic 1–24。
+
+**输入：** PRD FR28/FR46 success；脊柱 AD-9 / AD-27 / Stack（Chisel 7.14.0 ↔ firtool 1.155.0）；调研 `technical-forcing-jvm-chisel-compile-in-default-ci-2026-08-21`。
+
+### Phase 8 Functional Requirements
+
+**ID 注记：** 本阶段新需求编号为 **FR71** / **NFR34**，避免与 Phase 4 **FR53**、Phase 5 **FR60**、Phase 3 **NFR15** 等历史 ID 撞号。
+
+FR28: （继承 · 加强验收面）FrozenHir/FIRRTL → 可编译 Chisel Scala；钉死 Chisel+firtool 下 fixture **必须编译通过**；端口/层次谓词；机械风格可接受。
+FR46: （继承 · 正向腿依赖 FR28）Bitloom → Chisel 须满足 FR28 编译合同。
+FR71: **默认 CI 强制 JVM 真编译门禁** — GitHub Actions（或等价默认流水线）存在 **required** job，对文档化黄金夹具生成的 `.scala`，在钉死 Chisel 版本下执行真实 `scalac`/Chisel 插件编译（推荐 `sbt -batch compile`）；失败则流水线红。禁止以「Java/sbt 缺失则 exit 0 skip」冒充通过。Rust 谓词测试可并行保留，**不得**单独充当 FR28「必须编译通过」的唯一 CI 证据。
+
+### Phase 8 Non-Functional Requirements
+
+NFR12: （继承）firtool/Chisel 升钉策略；本阶段 JVM job 使用的 Chisel 版本必须与 Stack/AD-9 钉死对一致（当前 7.14.0）。
+NFR34: **CI JVM 工具链合同** — required Chisel 编译 job 使用 Temurin（或文档等价）**Java ≥ 17**；启用 sbt 依赖缓存（如 `actions/setup-java` `cache: sbt`）+ 官方 `sbt/setup-sbt`（或文档等价）；job **不得** `continue-on-error: true`；缺 JDK/sbt 必须失败。本机 `just test` 默认可仍仅 Rust；须提供 `just chisel-fr28-jvm`（或等价）供 CI/维护者调用。墙钟：实现时实测冷/热后钉 `timeout-minutes`（调研建议初值 15–20）。
+NFR14: （可选）若本 epic 标 ready 前需风险记录，可复用模板记 JDK/sbt/缓存/墙钟风险；不阻塞 FR71 本身定义。
+
+### Phase 8 Additional Requirements (Architecture + Research)
+
+- 遵守 AD-27（可编译 Chisel）与 AD-9（Chisel 7.14.0 ↔ firtool 1.155.0）；本阶段**不**要求把 firtool 降级并入同一 JVM job。
+- `build.sbt`（或等价）须同时钉死同版本 `chisel` + `chisel-plugin`（`CrossVersion.full`），`scalaVersion` 与插件发布匹配。
+- 推荐 Pattern A：独立 required job `fr28-chisel-jvm` 与现有 Rust `test` **并行**（调研结论）。
+- 将 `scripts/chisel-fr28-compile.sh` 改为缺工具链 **非零退出**，或新增 `-required` 变体；默认 CI 调用 required 路径。
+- 可选逃生舱 `BITLOOM_CHISEL_JVM_SKIP=1` 仅文档化，**默认 CI 不设**。
+- 无 UX；无新 starter 模板；设计 crate 仍只依赖 `bitloom-prelude`。
+
+### Phase 8 UX Design Requirements
+
+无 UI。无 UX-DR。
+
+### Phase 8 FR Coverage Map
+
+FR28: Epic 25 — 「必须编译通过」默认 CI 证据（Rust 谓词保留）
+FR46: Epic 20（继承）+ Epic 25 — 25 只加强正向腿 CI 证据，不重做互转
+FR71: Epic 25 — 默认 CI required JVM 真编译门禁
+NFR12: Epic 25 — job 使用 Chisel/firtool 钉死对
+NFR34: Epic 25 — JDK17 / sbt cache / 无 continue-on-error / just 配方
+
+### Phase 8 Epic List
+
+### Epic 25: 默认 CI 兑现「Chisel 必须编译」
+贡献者与维护者在默认 GitHub Actions 上获得硬失败证据：黄金夹具生成的 Chisel Scala 在钉死 Chisel 7.14.0 下真实 JVM 编译通过；缺 JDK/sbt 或编译失败则流水线红。本机 `just test` 仍可 Rust-only；维护者可用 `just chisel-fr28-jvm` 复现。
+**FRs covered:** FR71；加强验收面 FR28；正向腿证据支撑 FR46
+**NFRs:** NFR34；遵守 NFR12 / AD-9 / AD-27
+**Depends on:** Epic 20（已有 emit + 谓词）。无后续 Phase 8 epic。
+
+---
 
 ## Epic 19: 语言表面与合同解锁
 
@@ -2155,3 +2216,60 @@ So that 概述 §1.3.8 的对外承诺可核对。
 **Then** 不再将 HLS 描述为「永久 unsupported / 仅实验且无路径」（FR50）
 **And** 链到烟测/夹具位置
 **And** Bitloom 品牌一致
+
+
+## Epic 25: 默认 CI 兑现「Chisel 必须编译」
+
+贡献者与维护者在默认 GitHub Actions 上获得硬失败证据：黄金夹具生成的 Chisel Scala 在钉死 Chisel 7.14.0 下真实 JVM 编译通过；缺 JDK/sbt 或编译失败则流水线红。本机 `just test` 仍可 Rust-only；维护者可用 `just chisel-fr28-jvm` 复现。  
+**FRs covered:** FR71；加强验收面 FR28；正向腿证据支撑 FR46  
+**NFRs:** NFR34；遵守 NFR12 / AD-9 / AD-27  
+**Depends on:** Epic 20（已有 emit + 谓词）。无后续 Phase 8 epic。
+
+### Story 25.1: 必失败 FR28 JVM 编译脚本
+
+As a 维护者,
+I want 缺 Java≥17 / sbt（或等价）或编译失败时脚本非零退出,
+So that 无法再以 skip=0 冒充「必须编译通过」。
+
+**Acceptance Criteria:**
+
+**Given** 今日 `scripts/chisel-fr28-compile.sh` 在缺工具链时 `exit 0`
+**When** 改为 required 行为（改原脚本 **或** 新增 `chisel-fr28-compile-required.sh`，CI/just 调用后者亦可）
+**Then** 缺 Java≥17、或缺 sbt/coursier、或 `sbt compile` 失败 → **非零退出**（FR71）
+**And** 生成的 `build.sbt` 同时钉死同版本 `chisel` + `chisel-plugin`（`CrossVersion.full`），Chisel **7.14.0**，`scalaVersion` 与插件匹配（NFR12 / AD-9）
+**And** 可选 `BITLOOM_CHISEL_JVM_SKIP=1` 若保留：须文档化，且**不得**为默认 CI 路径
+**And** 至少一黄金夹具 `.scala`（或 emit→编译）在有工具链环境下可本地跑通
+**And** 不要求本故事改 GHA（留给 25.3）；不强制改本机 `just test`
+
+### Story 25.2: `just chisel-fr28-jvm` 与本机合同
+
+As a 维护者 / 贡献者,
+I want 有文档化的 `just chisel-fr28-jvm`（或等价）复现 JVM 编译门禁,
+So that 本机不必改 `just test` 默认门槛，又能与 CI 同一路径对齐。
+
+**Acceptance Criteria:**
+
+**Given** Story 25.1 的 required 编译脚本可用
+**When** 新增 `just chisel-fr28-jvm`（名称可微调）：对文档化黄金夹具执行 emit（若需）+ required 编译
+**Then** 成功时 exit 0；工具链缺失或编译失败时非零（NFR34）
+**And** 默认 `just test` **不**强制装 JDK / 不调用 JVM 门禁（保持 Rust-only）
+**And** 用户/贡献者文档说明：CI 强制；本机可选；维护者合并前应至少跑通一次 `just chisel-fr28-jvm`
+**And** 若保留 `BITLOOM_CHISEL_JVM_SKIP`，文档写明仅逃生舱、默认 CI 不设
+**And** 不要求本故事落地 GHA required job（留给 25.3）
+
+### Story 25.3: GHA required job `fr28-chisel-jvm`
+
+As a 贡献者 / 审查者,
+I want 默认 GitHub Actions 上有独立 required job 对黄金夹具做真实 Chisel JVM 编译,
+So that FR28「必须编译通过」不能只靠 Rust 谓词或 skip=0 交差。
+
+**Acceptance Criteria:**
+
+**Given** Story 25.1–25.2；现有 Rust `test` job 保留谓词测试
+**When** 新增并行 required job（推荐名 `fr28-chisel-jvm`）：Temurin **Java 17** + `actions/setup-java` `cache: sbt` + `sbt/setup-sbt`（或文档等价）→ 调用与 `just chisel-fr28-jvm` 同一路径（NFR34；调研 Pattern A）
+**Then** 编译失败或缺工具链 → job **失败**（非零）；**不得** `continue-on-error: true`（FR71 / FR28）
+**And** job **不**设 `BITLOOM_CHISEL_JVM_SKIP`；默认分支 / PR 检查将该 job 视为必过
+**And** 与 Rust `test` job **并行**（不串进同一关键路径除非有记录理由）
+**And** 钉 `timeout-minutes`（初值 15–20 可接受）；实现后记录一次冷/热墙钟备注（可在故事完成注记或 CI 注释）
+**And** 本 job **不**要求跑 firtool 降级（AD-9 仍由既有路径覆盖）
+**And** 失败日志能指向失败的 `.scala` / sbt 输出，便于修 emit

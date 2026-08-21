@@ -3,12 +3,14 @@ title: Bitloom 阶段二 PRD — 2026-08-21 概述字面升格修订
 status: final
 created: 2026-08-19
 updated: 2026-08-21
-amendment: overview-literal-C-2026-08-21
+amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21
 ---
 
 # PRD: Bitloom 阶段二及愿景闭环（later-product → FR + 概述字面升格）
 
 *Working title — 2026-08-21 Update（①C / 只改 PRD）：在保留 FR21–FR40 / NFR3 / NFR10–NFR13 稳定 ID 的前提下，将 `docs/requirements/1. 项目概述.md` §1.3.7–11 与 §1.5 亮点升格为**可验收硬需求**；**推翻**本 PRD 原「不以 Chisel Scala 为互转契约 / 禁止 HIR→TLM」等 non-goal。概述 `.md` 本轮不改。*
+
+*2026-08-21 追加（`fr71-jvm-ci`）：为 FR28「必须编译通过」补默认 CI JVM 真编译门禁 **FR71** + 工具链合同 **NFR34**（与 `epics.md` Phase 8 / Epic 25 对齐）。*
 
 ## 0. Document Purpose
 
@@ -18,6 +20,7 @@ amendment: overview-literal-C-2026-08-21
 - **阶段一**产品合同：`_agile-output/specs/spec-rhdl/SPEC.md`（CAP-1…CAP-9）+ companions；`epics.md` 中 FR1–FR20。
 - **阶段二基线（仍有效）：** FR21–FR40、NFR3、NFR10–NFR13（本文件原 Finalize 正文；下文有修订处以其新 success 为准）。
 - **2026-08-21 升格（本修订）：** FR46–FR52 将概述愿景中尚未被「弱定义」覆盖的部分升为硬 FR；并对 FR28 / FR29 / FR30 / FR35 / FR37 / FR38 的 **success 条**做字面加强。
+- **2026-08-21 CI 证据补强：** **FR71** / **NFR34** — 默认 CI 强制 Chisel JVM 真编译（禁止 skip=0）；编号避开历史 Phase 3–5 撞号（见 addendum）。
 - **身份 supersession：** 公开产品名 **Bitloom**，crates.io / CLI **`bitloom`**（阶段三 FR41）；禁止发布 `rhdl` / `rhdl-bits`。正文不再以 `rhdl-rs` 为发布名。[ASSUMPTION] 概述仍写 RHDL；合同以 Bitloom 为准，概述另开任务对齐。
 - `later-product.md` 仍为索引，不承载无 ID 需求。
 
@@ -99,7 +102,7 @@ Bitloom（公开品牌；仓库历史名可含 rhdl）要把「合法 Rust → F
 | SM-3 | later-product 无无 ID 项 | 映射到 FR/NFR 或拒绝 | 无 ID 清单回流 |
 | SM-4 | 身份清晰 | README：Bitloom / `bitloom`；与 samitbasu/rhdl 无关 | 暗示 crates.io `rhdl` 或仍写死唯一发布名 `rhdl-rs` |
 | SM-5 | FR22 构造条 | 清单项均可 elaborate/emit/tick | 两 fixture 冒充表面 |
-| SM-6 | 概述字面升格（新） | FR46–FR52 与修订后的 FR28/30/35/37/38 均有自动化或文档化黄金验收 | 「尽力 / deferred / 非目标」冒充概述完成 |
+| SM-6 | 概述字面升格（新） | FR46–FR52 与修订后的 FR28/30/35/37/38 均有自动化或文档化黄金验收；FR28「必须编译」默认 CI 证据见 **FR71** | 「尽力 / deferred / 非目标」冒充概述完成；仅 Rust 谓词或 skip=0 冒充 FR28 编译 |
 | SM-7 | 双模拟器（新） | UJ-6 夹具绿 | 仅手写 functional 无生成路径 |
 
 **反指标（合同级）：** 用调研「同业未做满」作为永久免责而不改 FR——在 ①C 下**不可接受**；风险须进计划与估算，不得进 non-goal。
@@ -185,8 +188,8 @@ Bitloom（公开品牌；仓库历史名可含 rhdl）要把「合法 Rust → F
 
 - **FR28 — FIRRTL→Chisel 生成器** *(修订 2026-08-21)*  
   - **intent：** 从 FIRRTL/FrozenHir 生成 **可编译** 的 Chisel Scala（概述正向腿）。  
-  - **success：** 文档钉死的 Chisel + firtool 版本下，fixture → Scala **必须编译通过**；公开端口名/宽/向与实例层次满足往返谓词。**「可维护」验收条（已关闭 Open Q5）：** 允许机械/生成风格；不要求手写 idiomatic；不得以「尽力失败」交差。  
-  - **phase：** P2b · UJ-4。完整双向见 **FR46**。
+  - **success：** 文档钉死的 Chisel + firtool 版本下，fixture → Scala **必须编译通过**；公开端口名/宽/向与实例层次满足往返谓词。**「可维护」验收条（已关闭 Open Q5）：** 允许机械/生成风格；不要求手写 idiomatic；不得以「尽力失败」交差。**默认 CI 证据：** 「必须编译通过」不得仅由 Rust 往返谓词或「缺 JDK/sbt 则 skip=0」交差；须满足 **FR71** / **NFR34**。  
+  - **phase：** P2b · UJ-4。完整双向见 **FR46**。CI 硬门见 **FR71**。
 
 ### 5.5 仿真扩展
 
@@ -298,6 +301,16 @@ Bitloom（公开品牌；仓库历史名可含 rhdl）要把「合法 Rust → F
   - **success：** 文档与夹具展示 ClockDomain（或等价）绑定时钟/复位极性/同步·异步；跨域无显式同步器则 freeze 失败。  
   - **phase：** P1（机制随 FR23）/ P3（对外叙事收口）。
 
+### 5.8 FR28 CI 证据补强（新 · 2026-08-21）
+
+**F-Chisel-CI**
+
+- **FR71 — 默认 CI 强制 Chisel JVM 真编译门禁**  
+  - **intent：** 兑现 FR28「必须编译通过」在**默认流水线**上的硬证据（调研 `technical-forcing-jvm-chisel-compile-in-default-ci-2026-08-21`）。  
+  - **success：** GitHub Actions（或等价默认 CI）存在 **required** job，对文档化黄金夹具生成的 `.scala`，在钉死 Chisel 版本下执行真实 `scalac`/Chisel 插件编译（推荐 `sbt -batch compile`）；失败则流水线红。禁止以「Java/sbt 缺失则 exit 0 skip」冒充通过。Rust 往返谓词测试可并行保留，**不得**单独充当 FR28「必须编译通过」的唯一 CI 证据。本机 `just test` 默认可仍仅 Rust；须提供文档化的 `just chisel-fr28-jvm`（或等价）供 CI/维护者复现。  
+  - **phase：** P3 / 结项后补强 · UJ-4 · 支撑 FR28/FR46 正向腿。**ID 注记：** 使用 **FR71**，避免与 epics 历史 Phase 4 FR53、Phase 5 FR60 撞号。  
+  - **实现指引（非替代架构）：** Pattern A — 并行 required job（推荐名 `fr28-chisel-jvm`）；钉死版本对齐 AD-9 / Stack（Chisel 7.14.0）；本 job **不**要求跑 firtool 降级。
+
 ## 6. Non-Functional Requirements
 
 | ID | 要求 | Phase |
@@ -308,6 +321,7 @@ Bitloom（公开品牌；仓库历史名可含 rhdl）要把「合法 Rust → F
 | **NFR12** | 默认 firtool 钉死版本直至有记录的 Chisel 配对再升；升钉更新校验表。 | P0 |
 | **NFR13** | MSRV rustc **1.97.1**；workspace/CI/文档一致。 | P2c |
 | **NFR14** | **P3 风险门禁（强制）：** 每个 FR46/47/48/49（及启动前的 FR50 若尚无记录）在 epic 标 `ready` **之前**，须在 `_agile-output/implementation-artifacts/`（或 epic 故事文件）存在风险记录，字段至少含：`(a)` 上游约束（如 CIRCT/Chisel 版本、HLS 许可）、`(b)` 粗工期带、`(c)` **禁止的静默降级**清单（例：不得把 FR46 改回「尽力失败」而不改本 PRD）、`(d)` 负责人。缺记录 = 不得开工。并行 P3 多项时另记 Chipyard 式维护风险。 | P3 |
+| **NFR34** | **CI JVM 工具链合同（FR71）：** required Chisel 编译 job 使用 Temurin（或文档等价）**Java ≥ 17**；启用 sbt 依赖缓存（如 `actions/setup-java` `cache: sbt`）+ 官方 `sbt/setup-sbt`（或文档等价）；job **不得** `continue-on-error: true`；缺 JDK/sbt 必须失败。可选 `BITLOOM_CHISEL_JVM_SKIP=1` 仅文档化逃生舱，**默认 CI 不设**。墙钟：实现时实测冷/热后钉 `timeout-minutes`（建议初值 15–20）。**ID 注记：** 使用 **NFR34**，避免与 Phase 3 **NFR15**（0.x 版本政策）撞号。 | P3 |
 
 继承：合法 Rust eDSL；显式 comb/seq；同位宽；无云控；禁止发布 `rhdl`/`rhdl-bits`。  
 **不再继承：** 「互转契约仅 FrozenHir↔FIRRTL 文本、禁止 Chisel 源码合同」「禁止 HIR→功能模拟器生成」。
@@ -343,7 +357,7 @@ Bitloom（公开品牌；仓库历史名可含 rhdl）要把「合法 Rust → F
 | Async reset; clock gating | FR24, FR25 |
 | Mem | FR26 |
 | Analog/InOut/tri-state | FR27 |
-| FIRRTL→Chisel | FR28, FR46 |
+| FIRRTL→Chisel | FR28, FR46, **FR71** |
 | HIR→源码 regen debug | NFR10 |
 | bridge/abstraction/both | FR29, FR47 |
 | Dual-view equivalence | FR30, FR47 |
@@ -364,13 +378,14 @@ Bitloom（公开品牌；仓库历史名可含 rhdl）要把「合法 Rust → F
 | linux-x64 firtool | NFR3 |
 | 单时钟表面 | FR22 |
 | Bundle / Vec | **FR51**（升格；不再是「非本 PRD FR」） |
+| 默认 CI Chisel JVM 真编译 | **FR71**, **NFR34** |
 
 ### 9.2 概述 → FR（2026-08-21）
 
 | 概述条目 | FR |
 |----------|-----|
 | §1.3.1–6 类型/所有权/comb-seq/参数化/Cargo/可综合 | 阶段一 + FR22 等（已覆盖） |
-| §1.3.7 / §1.5.3 Chisel 双向 | FR28, FR46 |
+| §1.3.7 / §1.5.3 Chisel 双向 | FR28, FR46, **FR71**（默认 CI 编译证据） |
 | §1.3.8 / §1.5.4 HLS | FR35, FR50 |
 | §1.3.9 / §1.5.4 IP 库 | FR37, FR48 |
 | §1.3.10 可视化 | FR38, FR49 |

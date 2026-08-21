@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-21-2026 16:31
+last_updated: 08-21-2026 17:09
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -207,6 +207,12 @@ development_status:
   24-3-ci-发布烟测夹具-fr35-fr50: done
   24-4-文档将-hls-列为支持功能-fr50: done
   epic-24-retrospective: done
+
+  epic-25: backlog
+  25-1-必失败-fr28-jvm-编译脚本: backlog
+  25-2-just-chisel-fr28-jvm-与本机合同: backlog
+  25-3-gha-required-job-fr28-chisel-jvm: backlog
+  epic-25-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1

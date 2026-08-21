@@ -70,3 +70,16 @@
 ## Phase-3 identity supersession
 
 公开产品名 **Bitloom**，发布名 **`bitloom`**。FR21 正文已于 2026-08-21 修订；实现与文档须按 Bitloom 执行。
+
+## 2026-08-21 Update — FR71 / NFR34（默认 CI Chisel JVM 门禁）
+
+**用户决议：** Phase 8 追加 epic（Epic 25）；先修 PRD 再 sprint tracking。
+
+**合同：**
+- **FR71：** 默认 CI required job 对黄金 `.scala` 做真实 Chisel JVM 编译；禁 skip=0；Rust 谓词不可单独交差。
+- **NFR34：** Temurin Java≥17、`cache: sbt`、setup-sbt、无 `continue-on-error`；本机 `just test` 可 Rust-only + `just chisel-fr28-jvm`。
+- **FR28 success** 显式指向 FR71/NFR34 为默认 CI 证据面。
+
+**调研：** `_agile-output/planning-artifacts/research/technical-forcing-jvm-chisel-compile-in-default-ci-2026-08-21/research.md`（Pattern A）。
+
+**ID 避撞：** FR71 / NFR34（不用 FR53/FR60/NFR15）。Epic 映射：`epics.md` Epic 25。
