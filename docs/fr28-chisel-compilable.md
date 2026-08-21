@@ -19,11 +19,12 @@ let art = rhdl_firrtl::emit_chisel(&frozen)?;
 ## CI / 本机（FR71 / NFR34）
 
 - **默认 CI（Epic 25 / FR71）：** 除 Rust 谓词外，须有 **required** JVM job（见 Story 25.3）对黄金 `.scala` 跑真编译；失败则红。
-- **Required 本机/脚本：** [`scripts/chisel-fr28-compile-required.sh`](../scripts/chisel-fr28-compile-required.sh)（或 `BITLOOM_REQUIRE_CHISEL_JVM=1` + [`chisel-fr28-compile.sh`](../scripts/chisel-fr28-compile.sh)）。缺 Java≥17 / sbt / 编译失败 → **非零退出**。ATDD：`bash scripts/test-chisel-fr28-required.sh`。
+- **Required 本机/脚本：** [`scripts/chisel-fr28-compile-required.sh`](../scripts/chisel-fr28-compile-required.sh)（或 `BITLOOM_REQUIRE_CHISEL_JVM=1` + [`chisel-fr28-compile.sh`](../scripts/chisel-fr28-compile.sh)）。缺 Java≥17 / sbt / 编译失败 → **非零退出**。ATDD：`just chisel-fr28-atdd` 或 `bash scripts/test-chisel-fr28-required.sh`。
 - **黄金夹具：** [`crates/rhdl-firrtl/testdata/fr28_golden_counter.scala`](../crates/rhdl-firrtl/testdata/fr28_golden_counter.scala)。
+- **本机配方：** `just chisel-fr28-jvm` — 与 CI 同一 required 路径；**不**并入默认 `just test`（保持 Rust-only，降低贡献门槛）。维护者在合并涉及 `emit_chisel` / FR28 的变更前应至少跑通一次（有 JDK17+sbt 时）。
 - **逃生舱：** `BITLOOM_CHISEL_JVM_SKIP=1` 可跳过并 exit 0——**仅**本地逃生；**默认 CI 不得设置**（NFR34）。
 - **可选 legacy：** 不设 require 时，缺工具链仍可 skip=0（非合同路径）。
-- **本机 `just test`：** 默认可仍仅 Rust（Story 25.2 增加 `just chisel-fr28-jvm`）。
+- **默认 CI：** Story 25.3 增加 required GHA job `fr28-chisel-jvm`。
 
 ## 与 AD-3
 
