@@ -16,6 +16,12 @@ pub use engine::TickEngine;
 mod equiv;
 pub use equiv::{EquivStatus, check_functional_equiv, reset_then_run};
 
+mod generate;
+pub use generate::{
+    GeneratedFunctional, emit_functional_crate, generate_functional_sim,
+    generate_functional_sim_with_bin,
+};
+
 mod fst;
 pub use fst::{FstError, resolve_vcd2fst};
 

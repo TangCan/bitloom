@@ -69,6 +69,16 @@ enum Commands {
         #[arg(long, default_value_t = false)]
         also_fir: bool,
     },
+    /// Generate a Rust functional-sim crate from a design package's FrozenHir (FR47 leg 1).
+    GenFunc {
+        /// Cargo package that exports `rhdl_elaborate()`.
+        #[arg(long)]
+        package: String,
+        #[arg(long, default_value = "target/bitloom-func-sim")]
+        out_dir: PathBuf,
+        #[arg(long, default_value = ".")]
+        manifest_dir: PathBuf,
+    },
 }
 
 #[derive(Subcommand)]
@@ -200,6 +210,57 @@ fn build_host_main(package: &str, out_dir: &Path) -> String {
         std::fs::write(&path, &f.contents).expect("write");
         println!("wrote {{}}", path.display());
     }}
+}}
+"#,
+        crate_name = crate_name,
+        out_dir = out_dir,
+    )
+}
+
+fn build_gen_func_host_cargo(workspace: &Path, package: &str, pkg_path: &Path) -> String {
+    let crate_name = package.replace('-', "_");
+    let backends = if use_dev_path_backends(workspace) {
+        format!(
+            r#"bitloom-sim = {{ path = "{sim}" }}
+bitloom-hir = {{ path = "{hir}" }}
+"#,
+            sim = workspace.join("crates/bitloom-sim").display(),
+            hir = workspace.join("crates/bitloom-hir").display(),
+        )
+    } else {
+        format!(
+            r#"bitloom-sim = "{ver}"
+bitloom-hir = "{ver}"
+"#,
+            ver = BITLOOM_BACKEND_VERSION,
+        )
+    };
+    format!(
+        r#"[package]
+name = "bitloom-gen-func-shim"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+{crate_name} = {{ path = "{pkg}" }}
+{backends}"#,
+        crate_name = crate_name,
+        pkg = pkg_path.display(),
+        backends = backends,
+    )
+}
+
+fn build_gen_func_host_main(package: &str, out_dir: &Path) -> String {
+    let crate_name = package.replace('-', "_");
+    format!(
+        r#"fn main() {{
+    let frozen = {crate_name}::rhdl_elaborate().expect("rhdl_elaborate");
+    let out_dir = std::path::PathBuf::from({out_dir:?});
+    let written = bitloom_sim::generate_functional_sim(&frozen, &out_dir).expect("generate");
+    println!("wrote functional-sim crate {{}}", written.display());
 }}
 "#,
         crate_name = crate_name,
@@ -386,6 +447,56 @@ fn main() {
                 std::process::exit(1);
             }
         },
+        Commands::GenFunc {
+            package,
+            out_dir,
+            manifest_dir,
+        } => {
+            let workspace = fs::canonicalize(&manifest_dir).unwrap_or(manifest_dir);
+            let pkg_path = match resolve_package_dir(&workspace, &package) {
+                Ok(p) => p,
+                Err(e) => {
+                    eprintln!("error: {e}");
+                    std::process::exit(1);
+                }
+            };
+            let host_dir = workspace.join("target/rhdl-gen-func-host").join(&package);
+            fs::create_dir_all(host_dir.join("src")).expect("host dir");
+            let abs_out = if out_dir.is_absolute() {
+                out_dir
+            } else {
+                workspace.join(out_dir)
+            };
+            fs::create_dir_all(&abs_out).expect("out_dir");
+            fs::write(
+                host_dir.join("Cargo.toml"),
+                build_gen_func_host_cargo(&workspace, &package, &pkg_path),
+            )
+            .expect("host Cargo.toml");
+            fs::write(
+                host_dir.join("src/main.rs"),
+                build_gen_func_host_main(&package, &abs_out),
+            )
+            .expect("host main");
+            let status = Command::new("cargo")
+                .arg("+1.97.1")
+                .arg("run")
+                .arg("--manifest-path")
+                .arg(host_dir.join("Cargo.toml"))
+                .arg("--quiet")
+                .status();
+            match status {
+                Ok(s) if s.success() => {}
+                Ok(s) => {
+                    eprintln!("error: gen-func host failed ({s})");
+                    std::process::exit(s.code().unwrap_or(1));
+                }
+                Err(e) => {
+                    eprintln!("error: spawn cargo: {e}");
+                    std::process::exit(1);
+                }
+            }
+        }
     }
 }
 

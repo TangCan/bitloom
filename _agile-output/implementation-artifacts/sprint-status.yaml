@@ -179,7 +179,7 @@ development_status:
   epic-21: in-progress
   21-1-nfr14-风险记录-双模拟器生成: done
   21-2-手写-bridge-abstraction-both-回归-fr29: done
-  21-3-生成-rust-功能模拟器工件-fr47-腿-1: backlog
+  21-3-生成-rust-功能模拟器工件-fr47-腿-1: done
   21-4-生成周期精确模拟器工件-桥接对照-fr47-腿-2: backlog
   21-5-双视图等价接入生成路径-fr30: backlog
   epic-21-retrospective: optional

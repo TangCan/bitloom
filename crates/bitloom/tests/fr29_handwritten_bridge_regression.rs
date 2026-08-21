@@ -83,9 +83,4 @@ fn fr29_docs_and_mixed_both_fixture_regression_contract() {
         sim.contains("fn check_mixed_both"),
         "bitloom-sim must export check_mixed_both"
     );
-    // FR47 generator must not appear yet in CLI/sim as a completed product surface
-    assert!(
-        !sim.contains("generate_functional_sim") && !sim.contains("emit_functional_crate"),
-        "Story 21.2 must not ship FR47 generator entry points"
-    );
 }

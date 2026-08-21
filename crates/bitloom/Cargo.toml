@@ -25,3 +25,8 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 rhdl-firrtl = { workspace = true }
 bitloom-vlog = { workspace = true }
+bitloom-sim = { workspace = true }
+bitloom-hir = { workspace = true }
+
+[dev-dependencies]
+bitloom-builder = { workspace = true }
