@@ -79,6 +79,15 @@ enum Commands {
         #[arg(long, default_value = ".")]
         manifest_dir: PathBuf,
     },
+    /// Generate a cycle-accurate tick-wrapper crate from FrozenHir (FR47 leg 2).
+    GenCycle {
+        #[arg(long)]
+        package: String,
+        #[arg(long, default_value = "target/bitloom-cycle-sim")]
+        out_dir: PathBuf,
+        #[arg(long, default_value = ".")]
+        manifest_dir: PathBuf,
+    },
 }
 
 #[derive(Subcommand)]
@@ -261,6 +270,21 @@ fn build_gen_func_host_main(package: &str, out_dir: &Path) -> String {
     let out_dir = std::path::PathBuf::from({out_dir:?});
     let written = bitloom_sim::generate_functional_sim(&frozen, &out_dir).expect("generate");
     println!("wrote functional-sim crate {{}}", written.display());
+}}
+"#,
+        crate_name = crate_name,
+        out_dir = out_dir,
+    )
+}
+
+fn build_gen_cycle_host_main(package: &str, out_dir: &Path) -> String {
+    let crate_name = package.replace('-', "_");
+    format!(
+        r#"fn main() {{
+    let frozen = {crate_name}::rhdl_elaborate().expect("rhdl_elaborate");
+    let out_dir = std::path::PathBuf::from({out_dir:?});
+    let written = bitloom_sim::generate_cycle_accurate_sim(&frozen, &out_dir).expect("generate");
+    println!("wrote cycle-accurate crate {{}}", written.display());
 }}
 "#,
         crate_name = crate_name,
@@ -489,6 +513,57 @@ fn main() {
                 Ok(s) if s.success() => {}
                 Ok(s) => {
                     eprintln!("error: gen-func host failed ({s})");
+                    std::process::exit(s.code().unwrap_or(1));
+                }
+                Err(e) => {
+                    eprintln!("error: spawn cargo: {e}");
+                    std::process::exit(1);
+                }
+            }
+        }
+        Commands::GenCycle {
+            package,
+            out_dir,
+            manifest_dir,
+        } => {
+            let workspace = fs::canonicalize(&manifest_dir).unwrap_or(manifest_dir);
+            let pkg_path = match resolve_package_dir(&workspace, &package) {
+                Ok(p) => p,
+                Err(e) => {
+                    eprintln!("error: {e}");
+                    std::process::exit(1);
+                }
+            };
+            let host_dir = workspace.join("target/rhdl-gen-cycle-host").join(&package);
+            fs::create_dir_all(host_dir.join("src")).expect("host dir");
+            let abs_out = if out_dir.is_absolute() {
+                out_dir
+            } else {
+                workspace.join(out_dir)
+            };
+            fs::create_dir_all(&abs_out).expect("out_dir");
+            fs::write(
+                host_dir.join("Cargo.toml"),
+                build_gen_func_host_cargo(&workspace, &package, &pkg_path)
+                    .replace("bitloom-gen-func-shim", "bitloom-gen-cycle-shim"),
+            )
+            .expect("host Cargo.toml");
+            fs::write(
+                host_dir.join("src/main.rs"),
+                build_gen_cycle_host_main(&package, &abs_out),
+            )
+            .expect("host main");
+            let status = Command::new("cargo")
+                .arg("+1.97.1")
+                .arg("run")
+                .arg("--manifest-path")
+                .arg(host_dir.join("Cargo.toml"))
+                .arg("--quiet")
+                .status();
+            match status {
+                Ok(s) if s.success() => {}
+                Ok(s) => {
+                    eprintln!("error: gen-cycle host failed ({s})");
                     std::process::exit(s.code().unwrap_or(1));
                 }
                 Err(e) => {

@@ -22,6 +22,12 @@ pub use generate::{
     generate_functional_sim_with_bin,
 };
 
+mod cycle;
+pub use cycle::{
+    CycleAccurateSim, check_generated_bridge, check_generated_bridge_with,
+    emit_cycle_accurate_crate, generate_cycle_accurate_sim,
+};
+
 mod fst;
 pub use fst::{FstError, resolve_vcd2fst};
 

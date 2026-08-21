@@ -1,36 +1,59 @@
-# FR47 — dual simulator generation (leg 1: Rust functional sim)
+# FR47 — dual simulator generation
 
-Bitloom can **generate** a Rust functional-simulator crate from `FrozenHir` (AD-5 / PRD FR47).
+Bitloom can **generate** both a Rust functional simulator and a cycle-accurate tick wrapper from `FrozenHir` (AD-5 / PRD FR47). Comparison uses **PortValues** only.
 
-## API
+## Leg 1 — functional sim
+
+### API
 
 ```rust
 use bitloom_sim::{generate_functional_sim, GeneratedFunctional};
 
-// In-process model (same semantics as the emitted crate):
 let mut abs = GeneratedFunctional::from_hir(&hir);
-
-// Write a standalone crate (Cargo.toml + lib + main) for `cargo test` / `cargo run`:
 generate_functional_sim(&hir, out_dir)?;
 ```
 
 Alias: `emit_functional_crate`.
 
-## CLI
+### CLI
 
 ```bash
 cargo bitloom gen-func --package counter_ports --out-dir target/bitloom-func-sim
 cd target/bitloom-func-sim && cargo test && cargo run
 ```
 
-The generator lives in the **toolchain** (`bitloom-sim` / `bitloom` CLI). Design crates continue to depend only on `bitloom-prelude`.
+## Leg 2 — cycle-accurate + bridge/compare
 
-## Gold fixture
+Cycle-accurate artifact = FrozenHir → `Sim::tick` wrapper crate (not SystemC).
 
-For a counter-style HIR (`count++`, `data_out = count`), after reset + three cycles the generated model yields `PortValues` with `data_out == 3`.
+### API
 
-## Non-goals
+```rust
+use bitloom_sim::{
+    generate_cycle_accurate_sim, check_generated_bridge, reset_then_run, CycleAccurateSim,
+};
 
-- **Not** SystemC / TLM-2.0 (never contracted).
-- Cycle-accurate artifact + bridge/compare → Story 21.4.
-- FR30 product equiv on the **generated** path → Story 21.5 (handwritten equiv remains in `docs/fr30-dual-view-equiv.md`).
+generate_cycle_accurate_sim(&hir, out_dir)?;
+let status = check_generated_bridge(hir, reset_then_run(3));
+assert!(status.is_pass());
+```
+
+Deliberate mismatch (wrong functional view) must fail — paving Story 21.5 / FR30:
+
+```rust
+let status = check_generated_bridge_with(hir, &mut wrong_abs, reset_then_run(1));
+assert!(!status.is_pass());
+```
+
+### CLI
+
+```bash
+cargo bitloom gen-cycle --package counter_ports --out-dir target/bitloom-cycle-sim
+cd target/bitloom-cycle-sim && cargo test && cargo run
+```
+
+## Constraints
+
+- Generator lives in the **toolchain** (`bitloom-sim` / `bitloom` CLI). Design crates depend only on `bitloom-prelude`.
+- **Not** SystemC / TLM-2.0.
+- FR30 product acceptance on the **generated** path is Story 21.5 (`docs/fr30-dual-view-equiv.md` will be updated there).
