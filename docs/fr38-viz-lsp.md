@@ -24,4 +24,4 @@ Full LSP hover/goto remains **deferred** (no language-server binary). See this p
 
 ## Wave / timing
 
-See Story 23.3 (`cargo bitloom wave`) and [`fr38-wave.md`](fr38-wave.md) when landed.
+See [`fr38-wave.md`](fr38-wave.md) — `cargo bitloom wave` emits `timing.html` + `wave.vcd` (not GTKWave-only).

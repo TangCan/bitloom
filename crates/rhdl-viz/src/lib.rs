@@ -1,9 +1,19 @@
 //! HTML dump of FrozenHir for debugging and product visualize/doc (FR38 / FR49).
 //!
 //! Delivers: module/port HTML + instance hierarchy (list + Mermaid).
+//! Also: browsable timing HTML from tick samples / VCD (FR49 wave path).
 //! LSP hover/goto: deferred (no language-server binary in this phase).
 
+use std::collections::BTreeMap;
+
 use bitloom_hir::{FrozenHir, Stmt};
+
+/// One time-step of signal values for the product timing view.
+#[derive(Clone, Debug, Default)]
+pub struct WaveSample {
+    pub time: u64,
+    pub values: BTreeMap<String, u64>,
+}
 
 /// Render FrozenHir as a self-contained HTML hierarchy document (Bitloom product view).
 pub fn to_html(hir: &FrozenHir) -> String {
@@ -57,6 +67,116 @@ pub fn to_html(hir: &FrozenHir) -> String {
          <p>Unrelated to <code>samitbasu/rhdl</code>.</p>\n</body></html>\n",
     );
     out
+}
+
+/// Browsable timing / wave HTML (product path — not GTKWave-only).
+pub fn timing_html(title: &str, samples: &[WaveSample]) -> String {
+    let mut signal_names: Vec<String> = samples
+        .iter()
+        .flat_map(|s| s.values.keys().cloned())
+        .collect();
+    signal_names.sort();
+    signal_names.dedup();
+
+    let mut out = String::from(
+        "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Bitloom timing</title>\n\
+         <style>body{font-family:system-ui,sans-serif;margin:1.5rem;line-height:1.4}\n\
+         .brand{color:#0b3d5c;font-weight:700}\n\
+         table{border-collapse:collapse;font-size:0.9rem}\n\
+         th,td{border:1px solid #ccc;padding:0.25rem 0.5rem;text-align:left}\n\
+         th{background:#f0f4f8}\n\
+         .lane{font-family:ui-monospace,monospace;white-space:pre}\n\
+         </style></head><body>\n",
+    );
+    out.push_str("<p class=\"brand\">Bitloom</p>\n");
+    out.push_str(&format!("<h1>Timing — {}</h1>\n", escape_html(title)));
+    out.push_str(
+        "<p>Product timing view from tick/VCD samples. GTKWave/Surfer remain optional \
+         viewers for the sibling <code>.vcd</code>; they are <strong>not</strong> the sole path.</p>\n",
+    );
+
+    if samples.is_empty() || signal_names.is_empty() {
+        out.push_str("<p><em>(no samples)</em></p>\n</body></html>\n");
+        return out;
+    }
+
+    out.push_str("<h2>Value table</h2>\n<table>\n<tr><th>time</th>");
+    for n in &signal_names {
+        out.push_str(&format!("<th>{}</th>", escape_html(n)));
+    }
+    out.push_str("</tr>\n");
+    for s in samples {
+        out.push_str(&format!("<tr><td>{}</td>", s.time));
+        for n in &signal_names {
+            let v = s.values.get(n).copied().unwrap_or(0);
+            out.push_str(&format!("<td>{v}</td>"));
+        }
+        out.push_str("</tr>\n");
+    }
+    out.push_str("</table>\n");
+
+    out.push_str("<h2>ASCII timing lanes</h2>\n<pre class=\"lane\">\n");
+    for n in &signal_names {
+        let mut lane = format!("{:>12} ", n);
+        let mut prev: Option<u64> = None;
+        for s in samples {
+            let v = s.values.get(n).copied().unwrap_or(0);
+            if prev == Some(v) {
+                lane.push('-');
+            } else {
+                lane.push_str(&format!("[{v}]"));
+                prev = Some(v);
+            }
+        }
+        out.push_str(&lane);
+        out.push('\n');
+    }
+    out.push_str("</pre>\n");
+    out.push_str("<p>Unrelated to <code>samitbasu/rhdl</code>.</p>\n</body></html>\n");
+    out
+}
+
+/// Parse a minimal VCD (as emitted by `bitloom-sim`) into wave samples.
+pub fn samples_from_vcd(vcd: &str) -> Result<Vec<WaveSample>, String> {
+    let mut samples = Vec::new();
+    let mut current = WaveSample::default();
+    let mut started = false;
+    for line in vcd.lines() {
+        let line = line.trim();
+        if let Some(rest) = line.strip_prefix('#') {
+            if started && !current.values.is_empty() {
+                samples.push(current.clone());
+            }
+            let t: u64 = rest
+                .split_whitespace()
+                .next()
+                .ok_or_else(|| "empty VCD time".to_string())?
+                .parse()
+                .map_err(|e| format!("bad VCD time: {e}"))?;
+            current = WaveSample {
+                time: t,
+                values: current.values.clone(),
+            };
+            started = true;
+        } else if let Some(rest) = line.strip_prefix('b') {
+            let mut parts = rest.split_whitespace();
+            let bits = parts
+                .next()
+                .ok_or_else(|| "VCD b-line missing bits".to_string())?;
+            let name = parts
+                .next()
+                .ok_or_else(|| "VCD b-line missing name".to_string())?;
+            let val = u64::from_str_radix(bits, 2).unwrap_or(0);
+            current.values.insert(name.to_string(), val);
+        }
+    }
+    if started {
+        samples.push(current);
+    }
+    if samples.is_empty() {
+        return Err("VCD contained no time samples".into());
+    }
+    Ok(samples)
 }
 
 /// Collect `(parent_module, instance_name, child_module)` edges.
@@ -159,5 +279,42 @@ mod tests {
         let html = to_html(&hir);
         assert!(html.contains("Top → <strong>u0</strong> : Child"), "{html}");
         assert!(html.contains("u0:Child"), "{html}");
+    }
+
+    #[test]
+    fn timing_html_from_samples_and_vcd() {
+        let samples = vec![
+            WaveSample {
+                time: 0,
+                values: BTreeMap::from([("x".into(), 1), ("y".into(), 1)]),
+            },
+            WaveSample {
+                time: 1,
+                values: BTreeMap::from([("x".into(), 2), ("y".into(), 2)]),
+            },
+        ];
+        let html = timing_html("demo", &samples);
+        assert!(html.contains("Bitloom") && html.contains("Timing"));
+        assert!(html.contains("Value table") && html.contains("[1]"));
+
+        let vcd = "\
+$timescale 1ns $end
+$scope module demo $end
+$var wire 8 x x $end
+$var wire 8 y y $end
+$upscope $end
+$enddefinitions $end
+#0
+b1 x
+b1 y
+#1
+b10 x
+b10 y
+";
+        let parsed = samples_from_vcd(vcd).unwrap();
+        assert_eq!(parsed.len(), 2);
+        assert_eq!(parsed[1].values.get("x"), Some(&2));
+        let from_vcd = timing_html("demo", &parsed);
+        assert!(from_vcd.contains("Value table"));
     }
 }

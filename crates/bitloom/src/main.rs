@@ -109,6 +109,21 @@ enum Commands {
         #[arg(long, default_value = ".")]
         out_dir: PathBuf,
     },
+    /// Tick a `.fir` design, dump VCD, and emit browsable timing HTML (FR38 / FR49 / FR40).
+    Wave {
+        /// Path to a `.fir` file with `FIRRTL version 6.0.0` header.
+        #[arg(long)]
+        input: PathBuf,
+        /// Directory for `wave.vcd` + `timing.html`.
+        #[arg(long, default_value = ".")]
+        out_dir: PathBuf,
+        /// Number of ticks after reset.
+        #[arg(long, default_value_t = 8)]
+        ticks: u64,
+        /// Also attempt FST via `vcd2fst` (optional; VCD+HTML always written).
+        #[arg(long, default_value_t = false)]
+        fst: bool,
+    },
 }
 
 #[derive(Subcommand)]
@@ -616,6 +631,18 @@ fn main() {
                 }
             }
         }
+        Commands::Wave {
+            input,
+            out_dir,
+            ticks,
+            fst,
+        } => match run_wave(&input, &out_dir, ticks, fst) {
+            Ok(()) => {}
+            Err(e) => {
+                eprintln!("error: {e}");
+                std::process::exit(1);
+            }
+        },
     }
 }
 
@@ -652,6 +679,74 @@ fn run_visualize(input: &Path, out_dir: &Path) -> Result<PathBuf, String> {
     let path = out_dir.join("hierarchy.html");
     fs::write(&path, &html).map_err(|e| format!("write {}: {e}", path.display()))?;
     Ok(path)
+}
+
+/// Product entry: tick → VCD + browsable `timing.html` (not GTKWave-only).
+fn run_wave(input: &Path, out_dir: &Path, ticks: u64, want_fst: bool) -> Result<(), String> {
+    use bitloom_hir::PortValues;
+    use bitloom_sim::Sim;
+
+    let text = fs::read_to_string(input).map_err(|e| format!("read {}: {e}", input.display()))?;
+    let hir = rhdl_firrtl::import(&text).map_err(|d| d.to_string())?;
+    let title = hir.abi_name.clone();
+    fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
+
+    let vcd_path = out_dir.join("wave.vcd");
+    let mut sim = Sim::new(hir);
+    if want_fst {
+        let fst_path = out_dir.join("wave.fst");
+        match sim.enable_fst(&fst_path) {
+            Ok(()) => {}
+            Err(e) => {
+                eprintln!("note: FST unavailable ({e}); continuing with VCD + timing HTML");
+                sim.enable_vcd(&vcd_path)
+                    .map_err(|e| format!("enable_vcd: {e}"))?;
+            }
+        }
+    } else {
+        sim.enable_vcd(&vcd_path)
+            .map_err(|e| format!("enable_vcd: {e}"))?;
+    }
+
+    let mut pv = PortValues::default();
+    pv.set("rst", 1);
+    pv.set("clk", 0);
+    pv.set("x", 0);
+    sim.set_inputs(pv.clone());
+    sim.tick();
+
+    pv.set("rst", 0);
+    for i in 0..ticks {
+        pv.set("x", i.wrapping_add(1));
+        pv.set("clk", i & 1);
+        sim.set_inputs(pv.clone());
+        sim.tick();
+    }
+
+    if let Err(e) = sim.finish_waves() {
+        eprintln!("note: finish_waves: {e}");
+    }
+
+    let vcd_text = fs::read_to_string(&vcd_path)
+        .map_err(|e| format!("read {}: {e}", vcd_path.display()))?;
+    if vcd_text.trim().is_empty() {
+        return Err(format!("VCD empty at {}", vcd_path.display()));
+    }
+    let samples = rhdl_viz::samples_from_vcd(&vcd_text)?;
+    let html = rhdl_viz::timing_html(&title, &samples);
+    if !html.contains("Value table") {
+        return Err("timing HTML missing Value table".into());
+    }
+    let timing_path = out_dir.join("timing.html");
+    fs::write(&timing_path, &html).map_err(|e| format!("write {}: {e}", timing_path.display()))?;
+    println!("wrote {}", vcd_path.display());
+    println!("wrote {}", timing_path.display());
+    println!(
+        "open {} in a browser (GTKWave optional for {})",
+        timing_path.display(),
+        vcd_path.display()
+    );
+    Ok(())
 }
 
 #[cfg(test)]
