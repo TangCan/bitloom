@@ -7,6 +7,7 @@
 - Never publish `rhdl` / `rhdl-bits`; do not use `rhdl-rs` as the publish name
 - Naming research: `_agile-output/planning-artifacts/research/technical-rhdl-rename-alternatives-product-naming-2026-08-19/research.md`
 - Standalone path: `_agile-output/planning-artifacts/research/technical-cargo-bitloom-standalone-usage-after-ins-2026-08-20/research.md`
+- AD-5 / FR47: toolchain may generate Rust functional-sim crates; SystemC TLM-2.0 is not contracted (see ARCHITECTURE-SPINE AD-5)
 
 ## Process
 

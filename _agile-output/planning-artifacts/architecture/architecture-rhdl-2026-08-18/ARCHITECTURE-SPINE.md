@@ -66,7 +66,7 @@ rhdl-builder / rhdl-macro / **bitloom-prelude**（对外名；目录可暂 `rhdl
 - **Binds:** rhdl-sim, 测试, 可选生成器
 - **Prevents:** 一 epic 只实现 `tick`、另一 epic 发明无对照的第二套仿真语义；把 SystemC TLM-2.0 当成默认合同
 - **Rule:** 周期精确仿真只从 `FrozenHir`（原生 `tick`）。`rhdl-sim` 必须能 dump VCD（同一记录器 API）。功能视图可为手写 `#[functional_model]` **或**工具链**生成的 Rust 功能模拟器 crate**（FR47；形态不强制 SystemC）。标 `#[functional_state]` 的字段不得进入 HIR/`freeze`。一致性用随机/对照/`equiv`，比较对象是 `PortValues`（AD-17）。**不**承诺 / **不**要求从 HIR 降低 **SystemC TLM-2.0**。阶段一 IP 仍是普通设计 crate。
-- **Revised:** 2026-08-21 — 允许生成 Rust 功能模拟器；废止「禁止一切 HIR→功能模拟器生成」的旧读法（PRD ①C / Epic 19.2）。
+- **Revised:** 2026-08-21 — 允许生成 Rust 功能模拟器；废止「禁止一切 HIR→功能模拟器生成」的旧读法（PRD **FR47** 与 §0 **推翻表**；①C / Epic 19.2）。历史「禁止 HIR→TLM」不再作为阻断 FR47 的依据。
 
 ### AD-6 — 依赖只准向下 [ADOPTED]
 
