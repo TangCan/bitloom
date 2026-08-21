@@ -1,4 +1,4 @@
-//! First-class IP stubs (FR37 / FR48): SyncFifo, UartTx, SpiMaster, black-box wrapper.
+//! First-class IP stubs (FR37 / FR48): SyncFifo, UartTx, SpiMaster, I2cMaster, black-box.
 //!
 //! Minimal synthesizable Bitloom modules — not full protocol stacks.
 //! Design crates reach these via `bitloom_prelude::ip` (only dependency: this prelude).
@@ -107,6 +107,48 @@ impl Elaboratable for SpiMaster {
     }
 }
 
+/// Minimal I2C **master** byte buffer (not a full multi-master / SMBUS stack).
+///
+/// Role: master. Register surface: `start` + `tx_data[7:0]` → held `tx_byte`;
+/// `busy` mirrors start; `scl`/`sda_out` are registered stubs. `sda_in` is sampled.
+///
+/// Non-goals: multi-master arbitration, clock stretching FSM, 10-bit addressing, slave mode.
+pub struct I2cMaster;
+
+impl Elaboratable for I2cMaster {
+    fn elaborate() -> Result<FrozenHir, Diagnostics> {
+        let mut s = ElaborateSession::new("I2cMaster");
+        s.begin_module("I2cMaster", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("start", GroundType::UInt { width: 1 }, Span::default());
+        s.add_input("tx_data", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("sda_in", GroundType::UInt { width: 1 }, Span::default());
+        s.add_output("tx_byte", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("busy", GroundType::UInt { width: 1 }, Span::default());
+        s.add_output("scl", GroundType::UInt { width: 1 }, Span::default());
+        s.add_output("sda_out", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("hold", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_reg("busy_r", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("scl_r", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("sda_r", GroundType::UInt { width: 1 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("tx_byte", "hold", Span::default());
+        s.assign_net("busy", "busy_r", Span::default());
+        s.assign_net("scl", "scl_r", Span::default());
+        s.assign_net("sda_out", "sda_r", Span::default());
+        s.end_process();
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_from("hold", "tx_data", Span::default());
+        s.assign_reg_d_from("busy_r", "start", Span::default());
+        s.assign_reg_d_from("scl_r", "start", Span::default());
+        s.assign_reg_d_from("sda_r", "sda_in", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish()
+    }
+}
+
 /// Opaque vendor IP wrapper: ports only; no child FrozenHir body (FR37 black-box).
 pub struct ExtBlackBox;
 
@@ -206,6 +248,27 @@ mod tests {
         sim.set_inputs(pv);
         sim.tick();
         assert_eq!(sim.ports().get("mosi_byte"), Some(0x3C));
+        assert_eq!(sim.ports().get("busy"), Some(1));
+    }
+
+    #[test]
+    fn i2c_master_elaborate_emit_tick() {
+        smoke_elaborate_emit_tick::<I2cMaster>("I2cMaster");
+        let mut sim = Sim::new(I2cMaster::elaborate().unwrap());
+        let mut pv = PortValues::default();
+        pv.set("rst", 1);
+        pv.set("start", 0);
+        pv.set("tx_data", 0);
+        pv.set("sda_in", 0);
+        sim.set_inputs(pv.clone());
+        sim.tick();
+        pv.set("rst", 0);
+        pv.set("start", 1);
+        pv.set("tx_data", 0x42);
+        pv.set("sda_in", 1);
+        sim.set_inputs(pv);
+        sim.tick();
+        assert_eq!(sim.ports().get("tx_byte"), Some(0x42));
         assert_eq!(sim.ports().get("busy"), Some(1));
     }
 

@@ -188,7 +188,7 @@ development_status:
   22-1-nfr14-风险记录-一级-ip: done
   22-2-树内-fifo-uart-黑盒-fr37: done
   22-3-spi-ip-smoke-fr48: done
-  22-4-i2c-ip-smoke-fr48: backlog
+  22-4-i2c-ip-smoke-fr48: done
   22-5-axi4-lite-最小从接口-fr48: backlog
   22-6-ip-索引与例化文档-fr48-收口: backlog
   epic-22-retrospective: optional
