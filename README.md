@@ -100,6 +100,7 @@ mod sim {
 | 仿真覆盖率 | [`docs/fr34-sim-coverage.md`](docs/fr34-sim-coverage.md) |
 | Chisel 可编译生成（FR28） | [`docs/fr28-chisel-best-effort.md`](docs/fr28-chisel-best-effort.md) |
 | Chisel / `.fir` 反向导入（FR46） | [`docs/fr46-chisel-import.md`](docs/fr46-chisel-import.md) |
+| `import` CLI + 混合夹具 | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) · [`examples/chisel_mixed`](examples/chisel_mixed) |
 | HLS（Bambu） | [`docs/fr35-hls.md`](docs/fr35-hls.md) |
 | Formal/SVA | [`docs/fr39-formal-sva.md`](docs/fr39-formal-sva.md) |
 | Analog/InOut | [`docs/fr27-analog-inout.md`](docs/fr27-analog-inout.md) |
@@ -130,7 +131,7 @@ cargo run -p bitloom -- firtool ensure   # 下载/校验/缓存并打印二进�
 **明确 deferred / 未承诺为产品完整面：**
 
 - 完整 LSP hover/goto（FR38 部分）
-- 部分 CLI 动词（`check` / `import` / `visualize` / `wave` / `doc` / `build-sim`）
+- 部分 CLI 动词（`check` / `visualize` / `wave` / `doc` / `build-sim`）
 - 自研 HLS 调度器（永不；仅外挂）
 - crates.io 名 `rhdl` / `rhdl-bits`（禁止）
 

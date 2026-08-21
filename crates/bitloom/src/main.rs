@@ -57,6 +57,18 @@ enum Commands {
         #[arg(long, default_value = "target/rhdl-hls")]
         out_dir: PathBuf,
     },
+    /// Import FIRRTL 6.0.0 `.fir` (Chisel→firtool output ok) into the same emit path as `build` (FR40 / FR46).
+    Import {
+        /// Path to a `.fir` file with `FIRRTL version 6.0.0` header.
+        #[arg(long)]
+        input: PathBuf,
+        /// Directory for emitted Yosys-friendly `.v` (and optional `.fir` re-emit).
+        #[arg(long, default_value = ".")]
+        out_dir: PathBuf,
+        /// Also write re-emitted FIRRTL text next to Verilog.
+        #[arg(long, default_value_t = false)]
+        also_fir: bool,
+    },
 }
 
 #[derive(Subcommand)]
@@ -363,7 +375,39 @@ fn main() {
                 }
             }
         }
+        Commands::Import {
+            input,
+            out_dir,
+            also_fir,
+        } => match run_import(&input, &out_dir, also_fir) {
+            Ok(()) => {}
+            Err(e) => {
+                eprintln!("error: {e}");
+                std::process::exit(1);
+            }
+        },
     }
+}
+
+fn run_import(input: &Path, out_dir: &Path, also_fir: bool) -> Result<(), String> {
+    let text = fs::read_to_string(input).map_err(|e| format!("read {}: {e}", input.display()))?;
+    let hir = rhdl_firrtl::import(&text).map_err(|d| d.to_string())?;
+    fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
+    let art = bitloom_vlog::emit(&hir);
+    for f in &art.files {
+        let path = out_dir.join(&f.path);
+        fs::write(&path, &f.contents).map_err(|e| format!("write {}: {e}", path.display()))?;
+        println!("wrote {}", path.display());
+    }
+    if also_fir {
+        let fir = rhdl_firrtl::emit(&hir);
+        for f in &fir.files {
+            let path = out_dir.join(&f.path);
+            fs::write(&path, &f.contents).map_err(|e| format!("write {}: {e}", path.display()))?;
+            println!("wrote {}", path.display());
+        }
+    }
+    Ok(())
 }
 
 #[cfg(test)]

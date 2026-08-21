@@ -1,0 +1,15 @@
+[package]
+name = "chisel_mixed"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+description = "FR46 mixed fixture: Bitloom RTL + external .fir enter the same emit path"
+
+[dependencies]
+bitloom-prelude = { workspace = true }
+
+[dev-dependencies]
+bitloom-vlog = { workspace = true }
+rhdl-firrtl = { workspace = true }

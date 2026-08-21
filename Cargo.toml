@@ -20,6 +20,7 @@ members = [
   "examples/bundle_vec_skel",
   "examples/clockdomain_skel",
   "examples/mixed_both",
+  "examples/chisel_mixed",
   "examples/ip_box",
   "examples/rv32_feasibility",
   "examples/rv32_pipeline_feasibility",

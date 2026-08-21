@@ -76,3 +76,11 @@
 - source_spec: `_agile-output/implementation-artifacts/20-4-反向导入-chisel-fir-bitloom-fr46-腿-2.md`
   summary: dangling connect 经 emit 丢失，往返谓词不覆盖 dangling
   evidence: emit 跳过 dangling；FR46 夹具无 dangling
+
+- source_spec: `_agile-output/implementation-artifacts/20-5-import-cli-混合夹具-fr40-fr46-腿-3.md`
+  summary: `import` CLI 默认只写 `.v`（可选 `--also-fir`），不发射 Chisel Scala
+  evidence: 对齐 `build` Verilog 后端；Scala 仍用库 `emit_chisel`
+
+- source_spec: `_agile-output/implementation-artifacts/20-5-import-cli-混合夹具-fr40-fr46-腿-3.md`
+  summary: 混合夹具 `include_str` 耦合 monorepo 相对路径
+  evidence: 文档夹具；standalone 用户经 `cargo bitloom import --input`

@@ -24,6 +24,16 @@ let _ = bitloom_vlog::emit(&hir);
 - **导出再导入：** `emit` → `import` → `ports_roundtrip_ok` / `instance_graph_roundtrip_ok`
 - **外部 `.fir`：** [`crates/rhdl-firrtl/fixtures/external_hierarchy.fir`](../crates/rhdl-firrtl/fixtures/external_hierarchy.fir) — 使用 firtool 常见的 `y <= u0.y` 输出连线
 
+## CLI 产品入口（Story 20.5）
+
+```bash
+cargo bitloom import --input design.fir --out-dir out
+# optional: also re-emit FIRRTL text
+cargo bitloom import --input design.fir --out-dir out --also-fir
+```
+
+混合夹具（一侧 Bitloom elaborate、一侧外部 `.fir`，同一 `bitloom_vlog::emit`）：[`examples/chisel_mixed`](../examples/chisel_mixed)。
+
 ## 与 FR28 / AD-3
 
 - **AD-3：** FrozenHir ↔ FIRRTL 6.0.0 文本契约不变。
