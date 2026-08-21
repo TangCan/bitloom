@@ -203,7 +203,7 @@ development_status:
 
   epic-24: in-progress
   24-1-nfr14-风险记录-hls: done
-  24-2-钉死后端的默认-hls-路径-fr35: backlog
+  24-2-钉死后端的默认-hls-路径-fr35: done
   24-3-ci-发布烟测夹具-fr35-fr50: backlog
   24-4-文档将-hls-列为支持功能-fr50: backlog
   epic-24-retrospective: optional
