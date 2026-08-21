@@ -19,3 +19,17 @@ jobs:
         run: cargo fmt --all -- --check
       - name: test (MSRV 1.97.1)
         run: cargo test --workspace
+
+  # FR35 / FR50: HLS product-path smoke. Failures are never ignored.
+  # Default uses CI stub (wiring + synthesizable .v). Real Bambu 2024.10 via
+  # BITLOOM_HLS_USE_REAL=1 + cached AppImage (see scripts/hls-smoke.sh / NFR14).
+  hls-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.97.1"
+      - name: HLS smoke (Bambu 2024.10 pin / CI stub)
+        run: bash scripts/hls-smoke.sh

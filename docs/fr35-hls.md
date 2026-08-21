@@ -37,4 +37,11 @@ cargo run -p bitloom -- hls --function add --out-dir target/bitloom-hls
 
 ## 烟测 / CI
 
-见 Story 24.3：`scripts/hls-smoke.sh` 与 CI `hls-smoke` job（夹具 + 版本/缓存策略）。
+| 项 | 位置 |
+| --- | --- |
+| 发布/本地烟测 | `just hls-smoke` → [`scripts/hls-smoke.sh`](../scripts/hls-smoke.sh) |
+| CI job | `.github/workflows/ci.yml` → job **`hls-smoke`**（失败不 ignore） |
+| CI stub | [`scripts/fixtures/bambu-ci-stub.sh`](../scripts/fixtures/bambu-ci-stub.sh)（接线 + 可综合 `.v`；非真实 HLS 质量） |
+| 真 Bambu | `BITLOOM_HLS_USE_REAL=1` + `BITLOOM_BAMBU_PATH` 或缓存 `${BITLOOM_HLS_CACHE:-~/.cache/bitloom-hls}/bambu-2024.10.AppImage` |
+
+常驻覆盖：`cargo test -p bitloom --test hls_smoke`（缺后端可读失败）亦在主 `test` job 中运行。
