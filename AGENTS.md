@@ -9,6 +9,7 @@
 - Standalone path: `_agile-output/planning-artifacts/research/technical-cargo-bitloom-standalone-usage-after-ins-2026-08-20/research.md`
 - AD-5 / FR47: toolchain may generate Rust functional-sim crates; SystemC TLM-2.0 is not contracted (see ARCHITECTURE-SPINE AD-5)
 - AD-20 / FR51: documented `Bundle` / `Vec<T,N>` (or equiv.) allowed on synthesizable path; width/dir fail before emit; FR22 surface thicken does not deliver composites (see ARCHITECTURE-SPINE AD-20)
+- AD-27 / FR28+FR46: FrozenHir/`.fir` → **compilable** Chisel Scala (mechanical OK); no Scala `Parser.parse` requirement; historical NFR9 “no maintainable Chisel” is overturned (see ARCHITECTURE-SPINE AD-27)
 
 ## Process
 

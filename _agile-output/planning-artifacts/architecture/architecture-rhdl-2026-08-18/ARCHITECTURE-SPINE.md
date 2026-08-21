@@ -228,8 +228,9 @@ flowchart TB
 ### AD-27 — Bitloom ↔ Chisel 产品互操作 [ADOPTED]
 
 - **Binds:** firrtl, CLI (`import` 等), 可选 Scala 生成
-- **Prevents:** 一 epic 仍以「尽力失败」交差、另一 epic 要求 idiomatic 手写 Chisel；依赖已删除的 Scala FIRRTL Parser；用调试用 HIR→源码再生冒充 Chisel 双向
-- **Rule:** 在 AD-3 FIRRTL 文本契约之外，产品路径（PRD FR28/FR46）要求：(1) FrozenHir/`.fir` → **可编译** Chisel Scala（钉死 Chisel + firtool 配对，见 Stack）；验收=编译通过 + 公开端口名/宽/向与实例层次往返谓词；**允许机械/生成风格**（不要求手写 idiomatic）。(2) `.fir`（及文档化 Chisel 工作流输出）→ FrozenHir / Bitloom 表面 → emit/tick，满足对称往返谓词。(3) **不**要求恢复 Chisel 5 前的 Scala `firrtl.Parser` API；生成器/导入器属于本工具链。(4) NFR10 调试再生 **不得**冒充本 AD 完成。
+- **Prevents:** 一 epic 仍以「尽力失败」交差、另一 epic 要求 idiomatic 手写 Chisel；依赖已删除的 Scala FIRRTL Parser；用调试用 HIR→源码再生冒充 Chisel 双向；继续引用历史 **NFR9**「不承诺可维护 Chisel」阻断 FR28/FR46
+- **Rule:** 在 AD-3 FIRRTL 文本契约之外，产品路径（PRD **FR28** / **FR46**）要求：(1) FrozenHir/`.fir` → **可编译** Chisel Scala（钉死 Chisel + firtool 配对，见 Stack）；验收=编译通过 + 公开端口名/宽/向与实例层次往返谓词；**允许机械/生成风格**（不要求手写 idiomatic；PRD Open Q5 已关闭）。(2) `.fir`（及文档化 Chisel 工作流输出）→ FrozenHir / Bitloom 表面 → emit/tick，满足对称往返谓词。(3) **不**要求恢复 Chisel 5 前的 Scala `Parser.parse` / `firrtl.Parser` API（CIRCT 时代交换边界为 `.fir` + firtool；见 chipsalliance/chisel#4899）；生成器/导入器属于本工具链。(4) NFR10 调试再生 **不得**冒充本 AD 完成。(5) 历史阶段一 **NFR9**「不承诺可维护 Chisel Scala」**已被推翻**，不再作为阻断 FR28/FR46 的依据。
+- **Revised:** 2026-08-21 — Phase 7 / Epic 20.2：钉死 FR28+FR46 可编译验收条与 Open Q5；显式推翻 NFR9；禁止依赖已删 `Parser.parse`（PRD §0 推翻表 / FR28 / FR46）。
 - **[ASSUMPTION]** 生成器实现可放在 `rhdl-firrtl` 扩展或 `bitloom` CLI 子命令；具体包边界不钉死。
 
 ### AD-28 — Phase 7 风险门禁（NFR14）[ADOPTED]
