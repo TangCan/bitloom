@@ -13,15 +13,17 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 - `Bundle` 与 `Vec<T,N>`（或文档等价）允许进入可综合路径。
 - **文档等价：** 公开类型名为 `HwVec<T,N>`（避免与堆 `Vec` / E0141 冲突）；合同与叙述中的 `Vec<T,N>` 即指 `HwVec`。`N` 须 > 0。
 - **展平：** elaborate 时展平为标量 HIR 端口；叶命名 `{field}_{member}`（Bundle）与 `{field}_{i}`（HwVec）。公开 HIR 可不含 Bundle/Vector 节点。
-- **MVP 边界：** `Bundle::leaves` 仅为 ground 叶；不支持嵌套 Bundle / `HwVec<Bundle,_>`；手写 `leaves()`（无 `#[derive(Bundle)]`）。
+- **OUT OF SCOPE（MVP 锁定）：** 嵌套 `Bundle` 成员与 `HwVec<Bundle,_>` — `Bundle::leaves` 仅为 ground；`HwVec` 元素须 `AsGround`。负向：`examples/bundle_vec_skel` trybuild `nested_hwvec_bundle`。
+- **`#[derive(Bundle)]`：不可用（documented defer）** — 无 derive 宏；须手写 `Bundle::leaves`。负向：trybuild `derive_bundle_unavailable`。
+- **叶名碰撞：** `{field}_{member}` / `{field}_{i}` 与已有信号冲突 → emit 前失败（`rhdl::E0152`）。
 - 位宽/方向不匹配必须在 emit 前失败；不得 silently 可用却无检查。
 - HIR ground 是否扩展 Bundle/Vector 节点由实现选择；公开表面与 emit 语义须一致（AD-20）。
 - **FR22 边界：** 单时钟表面加厚（FR22）的构造条**不含** Bundle/Vec；复合类型由本节 / FR51 交付，不得 silently 算进 FR22 验收。
 
 ## ClockDomain (CAP-11 / FR52)
 
-- **API 映射（产品面）：**
-  - 域标记：`ClockDomain::<ID>`（prelude ZST）+ `ElaborateSession::bind_domain(name, id)`
+- **API 映射（产品面；对齐 AD-22）：**
+  - 域标记：`ClockDomain::<ID>`（prelude ZST）+ `ElaborateSession::bind_domain(name, id)`（session 域标签；**非**独立 `Signal<D,T>` 包装）
   - 合法 CDC：`mark_cdc_bridge(name)` — 文档等价 `DoubleFlop` / `SyncFIFO`（叙事锚点，非真实同步器 RTL IP）
   - 非法跨域无 bridge：`assign_net` 跨域 → `finish`/`freeze` 失败，诊断码 **`rhdl::E0220`**（诊断文案点名 DoubleFlop/SyncFIFO）
   - 同步/异步复位：`declare_reg_ex(..., async_reset, has_enable, ...)`；**极性** = 默认同步**高有效** `Reset`（AD-15，无 ActiveLow API）

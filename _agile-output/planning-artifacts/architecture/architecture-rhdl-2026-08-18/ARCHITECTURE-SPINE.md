@@ -196,8 +196,9 @@ flowchart TB
 ### AD-22 — 多时钟与语言级 CDC [ADOPTED]
 
 - **Binds:** prelude, builder, freeze, sim
-- **Prevents:** 一 epic 用 phantom、一 epic 用图分析、一 epic 仅库级且无门控；与 AD-15 单时钟默认打架却无规则
-- **Rule:** 时钟域以 **Clash 式 phantom 类型参数**（如 `Signal<D, T>` / 等价 ZST 域标记）进入类型系统；非法跨域在 **freeze** 拒绝（`rhdl::E0xxx`）。合法跨越 **仅**语言级 `DoubleFlop` / `SyncFIFO`（或同名原语）。AD-15 仍是**默认**：未声明多时钟的模块恰好一个 `Clock` + 同步高有效 `Reset`。多时钟模块显式声明域与端口，不得隐式全局时钟。
+- **Prevents:** 一 epic 用 phantom、一 epic 用图分析、一 epic 仅库级且无门控；与 AD-15 单时钟默认打架却无规则；脊柱写 `Signal<D,T>` 而产品面已是 session 域标签却无修订
+- **Rule:** 时钟域以 **Clash 式 phantom 域标记**进入类型系统与 elaborate session。**产品面（已落地）：** prelude `ClockDomain::<ID>`（ZST）+ `ElaborateSession::bind_domain(name, id)`（session 域标签）；非法跨域在 **`finish` / freeze** 拒绝（`rhdl::E0220`）。合法跨越 **仅**语言级 `DoubleFlop` / `SyncFIFO`（或同名原语，经 `mark_cdc_bridge`）。AD-15 仍是**默认**：未声明多时钟的模块恰好一个 `Clock` + 同步高有效 `Reset`。多时钟模块显式声明域与端口，不得隐式全局时钟。不要求独立的 `Signal<D, T>` 包装类型；域检查在 session 标签上执行（见 `language-surface.md` / `examples/clockdomain_skel`）。
+- **Revised:** 2026-08-21 — 对齐产品面：`ClockDomain::<ID>` + session `bind_domain`（取代脊柱旧述 `Signal<D,T>` 示例）。
 
 ### AD-23 — 异步复位与时钟使能 [ADOPTED]
 

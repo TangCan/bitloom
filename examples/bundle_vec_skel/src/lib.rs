@@ -242,4 +242,50 @@ mod tests {
             "expected E0131 on Reg.d, got {err:?}"
         );
     }
+
+    /// field `a` + member `b_c` and field `a_b` + member `c` both flatten to `a_b_c`.
+    #[test]
+    fn flatten_leaf_name_collision_fails_before_emit() {
+        struct LeafBc;
+        impl Bundle for LeafBc {
+            fn leaves() -> &'static [(&'static str, GroundType)] {
+                &[("b_c", GroundType::Bool)]
+            }
+        }
+        struct LeafC;
+        impl Bundle for LeafC {
+            fn leaves() -> &'static [(&'static str, GroundType)] {
+                &[("c", GroundType::Bool)]
+            }
+        }
+
+        let mut s = ElaborateSession::new("LeafClash");
+        s.begin_module("LeafClash", Span::default());
+        add_port_field::<Input<Clock>>(&mut s, "clk", Span::default());
+        add_port_field::<Input<Reset>>(&mut s, "rst", Span::default());
+        add_port_field::<Input<LeafBc>>(&mut s, "a", Span::default());
+        add_port_field::<Input<LeafC>>(&mut s, "a_b", Span::default());
+        s.end_module();
+        let err = s.finish().expect_err("leaf name collision must fail before emit");
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0152"),
+            "expected E0152, got {err:?}"
+        );
+        assert!(
+            err.0.iter().any(|d| d.en.contains("a_b_c")),
+            "diagnostic should name colliding leaf, got {err:?}"
+        );
+    }
+
+    #[test]
+    fn nested_hwvec_bundle_rejected_at_compile_time() {
+        let t = trybuild::TestCases::new();
+        t.compile_fail("tests/ui/nested_hwvec_bundle.rs");
+    }
+
+    #[test]
+    fn derive_bundle_unavailable_at_compile_time() {
+        let t = trybuild::TestCases::new();
+        t.compile_fail("tests/ui/derive_bundle_unavailable.rs");
+    }
 }

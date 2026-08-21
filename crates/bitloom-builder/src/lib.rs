@@ -100,8 +100,29 @@ impl ElaborateSession {
         self.widths.insert(name.to_string(), w);
     }
 
+    /// Fail-before-emit when a flattened leaf / port name collides (FR51).
+    fn ensure_fresh_signal_name(&mut self, name: &str, span: Span) -> bool {
+        if self.signals.contains_key(name) {
+            self.push_err(Diagnostic {
+                span,
+                code: "rhdl::E0152".into(),
+                en: format!(
+                    "flattened leaf/port name '{name}' collides with an existing signal (rename Bundle members or fields so `{{field}}_{{member}}` / `{{field}}_{{i}}` stay unique)"
+                ),
+                zh: format!(
+                    "展平叶/端口名 '{name}' 与已有信号冲突（请调整 Bundle 成员或字段名，保证 `{{field}}_{{member}}` / `{{field}}_{{i}}` 唯一）"
+                ),
+            });
+            return false;
+        }
+        true
+    }
+
     pub fn add_input(&mut self, name: impl Into<String>, ty: GroundType, span: Span) {
         let name = name.into();
+        if !self.ensure_fresh_signal_name(&name, span) {
+            return;
+        }
         if matches!(ty, GroundType::Clock) {
             self.clock_port = Some(name.clone());
         }
@@ -122,6 +143,9 @@ impl ElaborateSession {
 
     pub fn add_output(&mut self, name: impl Into<String>, ty: GroundType, span: Span) {
         let name = name.into();
+        if !self.ensure_fresh_signal_name(&name, span) {
+            return;
+        }
         self.signals.insert(name.clone(), SignalKind::Output);
         self.record_width(&name, &ty);
         if let Some(m) = self.current.as_mut() {
@@ -137,6 +161,9 @@ impl ElaborateSession {
     /// Top-level InOut / Analog IO (FR27). Non-top uses are rejected at freeze.
     pub fn add_inout(&mut self, name: impl Into<String>, ty: GroundType, span: Span) {
         let name = name.into();
+        if !self.ensure_fresh_signal_name(&name, span) {
+            return;
+        }
         self.signals.insert(name.clone(), SignalKind::Wire);
         self.record_width(&name, &ty);
         if let Some(m) = self.current.as_mut() {

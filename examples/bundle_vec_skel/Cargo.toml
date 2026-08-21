@@ -13,3 +13,4 @@ bitloom-prelude = { workspace = true }
 bitloom-hir = { workspace = true }
 bitloom-sim = { workspace = true }
 bitloom-vlog = { workspace = true }
+trybuild = "1"

@@ -218,7 +218,7 @@ a { color: var(--accent); }
 <section class="slide" data-title="CDC 假设">
   <p class="kicker">10 / 12</p>
   <h2>CDC 选型已确认</h2>
-  <p class="lede">AD-22 采用 <span class="ok">Clash 式 phantom 域</span>（用户 2026-08-19 确认）。若改 Spinal 图检查或纯库级，必须修订 AD-22。</p>
+  <p class="lede">AD-22 采用 <span class="ok">Clash 式 phantom 域</span>（产品面：<code>ClockDomain::&lt;ID&gt;</code> + session <code>bind_domain</code>；用户 2026-08-19 确认）。若改 Spinal 图检查或纯库级，必须修订 AD-22。</p>
   <table class="tight">
     <tr><th>选项</th><th>一句话</th></tr>
     <tr><td>Phantom（当前）</td><td>类型拦住误跨域；实现相对轻</td></tr>

@@ -1,0 +1,11 @@
+error: cannot find derive macro `Bundle` in this scope
+ --> tests/ui/derive_bundle_unavailable.rs:4:10
+  |
+4 | #[derive(Bundle)]
+  |          ^^^^^^
+  |
+note: `Bundle` is imported here, but it is only a trait, without a derive macro
+ --> tests/ui/derive_bundle_unavailable.rs:2:5
+  |
+2 | use bitloom_prelude::Bundle;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^

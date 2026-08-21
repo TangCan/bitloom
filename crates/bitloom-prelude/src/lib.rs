@@ -86,10 +86,14 @@ pub struct Output<T>(pub T);
 
 /// Documented synthesizable named aggregate (FR51).
 ///
-/// Implementors declare ground leaves; `Input<Self>` / `Output<Self>` flatten to
+/// Implementors declare **ground** leaves; `Input<Self>` / `Output<Self>` flatten to
 /// `{field}_{member}` scalar HIR ports. Does not extend public HIR with Bundle nodes.
+///
+/// **OUT OF SCOPE (MVP):** nested `Bundle` members and `HwVec<Bundle, _>` — leaves are
+/// `GroundType` only; `HwVec` elements must be ground types. **`#[derive(Bundle)]` is not
+/// available** — hand-write [`Bundle::leaves`] (documented defer).
 pub trait Bundle {
-    /// Leaf members `(member_name, GroundType)`.
+    /// Leaf members `(member_name, GroundType)` — ground only; no nested Bundle.
     fn leaves() -> &'static [(&'static str, GroundType)];
 }
 
@@ -97,18 +101,22 @@ pub trait Bundle {
 ///
 /// Named `HwVec` to avoid collision with heap [`alloc::vec::Vec`] / E0141.
 /// `Input<HwVec<T,N>>` flattens to `{field}_0` … `{field}_{N-1}`.
+/// Element type must be ground (`Bool` / `UInt` / …); **`HwVec<Bundle, _>` is OUT OF SCOPE**.
 #[derive(Debug, Clone, Copy, Default)]
 pub struct HwVec<T, const N: u32>(pub core::marker::PhantomData<T>);
 
-/// Clash 风格 phantom 时钟域标记（AD-22 / FR52）。
+/// Clash-style phantom clock-domain marker (AD-22 / FR52).
 ///
-/// 产品叙事：用 `ClockDomain::<ID>` 标明信号所属域，再经
-/// [`ElaborateSession::bind_domain`] 写入 session。默认模块仍是单时钟 + **同步高有效**
-/// [`Reset`]（AD-15）。同步/异步复位由 [`ElaborateSession::declare_reg_ex`] 的
-/// `async_reset` 选择；合法跨域须 [`ElaborateSession::mark_cdc_bridge`]
-///（见 [`DoubleFlop`] / [`SyncFIFO`]），否则 `finish` → `rhdl::E0220`。
+/// **Product surface:** `ClockDomain::<ID>` (this ZST) +
+/// [`ElaborateSession::bind_domain`] session domain tags — not a separate
+/// `Signal<D, T>` wrapper type. Default modules remain single-clock + **sync
+/// active-high** [`Reset`]（AD-15）. Sync/async reset via
+/// [`ElaborateSession::declare_reg_ex`] `async_reset`; legal CDC via
+/// [`ElaborateSession::mark_cdc_bridge`]（[`DoubleFlop`] / [`SyncFIFO`]），else
+/// `finish` → `rhdl::E0220`.
 ///
-/// 夹具：`examples/clockdomain_skel`。仿真步进：全局 `Sim::tick` 为按域 tick 的 MVP 等价。
+/// Fixture: `examples/clockdomain_skel`. Sim: global `Sim::tick` is the MVP
+/// per-domain tick stand-in.
 #[derive(Debug, Clone, Copy, Default)]
 pub struct ClockDomain<const ID: u32>;
 

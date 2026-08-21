@@ -1,0 +1,16 @@
+error[E0277]: the trait bound `bitloom_prelude::Input<HwVec<Nested, 2>>: PortField` is not satisfied
+  --> tests/ui/nested_hwvec_bundle.rs:13:1
+   |
+13 | #[module]
+   | ^^^^^^^^^ the trait `PortField` is not implemented for `bitloom_prelude::Input<HwVec<Nested, 2>>`
+   |
+   = help: the following other types implement trait `PortField`:
+             bitloom_prelude::Input<Bits<N>>
+             bitloom_prelude::Input<HwVec<T, N>>
+             bitloom_prelude::Input<T>
+             bitloom_prelude::Input<bitloom_prelude::Bool>
+             bitloom_prelude::Input<bitloom_prelude::Clock>
+             bitloom_prelude::Input<bitloom_prelude::Reset>
+             bitloom_prelude::Input<bitloom_prelude::SInt<N>>
+             bitloom_prelude::Input<bitloom_prelude::UInt<N>>
+   = note: this error originates in the attribute macro `module` (in Nightly builds, run with -Z macro-backtrace for more info)
