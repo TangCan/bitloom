@@ -1,8 +1,27 @@
-# FR38 — HIR visualization / LSP
+# FR38 / FR49 — built-in hierarchy visualization
 
-**Delivered now**
+**Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-- `rhdl_viz::to_html` — module/port tree + **instance hierarchy** list
-- Documented LSP: **deferred** (no `rhdl` language-server binary in this phase)
+## Hierarchy entry (Story 23.2)
 
-**AC alignment (2026-08-19):** Story / PRD FR38 success criteria are scoped to HTML + hierarchy; full LSP hover/goto is a follow-on, not claimed done.
+```bash
+cargo bitloom visualize --input crates/rhdl-firrtl/fixtures/external_hierarchy.fir --out-dir target/viz
+# alias:
+cargo bitloom doc --input crates/rhdl-firrtl/fixtures/external_hierarchy.fir --out-dir target/viz
+```
+
+Writes `hierarchy.html` with:
+
+- Modules and ports
+- Instance hierarchy list
+- Mermaid flowchart of the instance tree
+
+Open the HTML in a browser. This is the product hierarchy path for FR38/FR49 — not a library-only dump.
+
+## LSP
+
+Full LSP hover/goto remains **deferred** (no language-server binary). See this page historically; hierarchy/HTML does not claim LSP done.
+
+## Wave / timing
+
+See Story 23.3 (`cargo bitloom wave`) and [`fr38-wave.md`](fr38-wave.md) when landed.

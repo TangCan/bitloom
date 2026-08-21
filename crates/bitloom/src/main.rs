@@ -50,12 +50,17 @@ enum Commands {
     },
     /// List `bitloom-sim` tick engines (FR32). Simulation itself lives in tests / bitloom-sim.
     SimEngines,
-    /// Optional HLS front-end status / run (FR35 / AD-25). Default: unsupported.
+    /// Product HLS path: emit C and invoke pinned Bambu (FR35 / FR50 / AD-25).
     Hls {
+        /// Top function name (also used for the emitted C stub).
         #[arg(long, default_value = "add")]
         function: String,
-        #[arg(long, default_value = "target/rhdl-hls")]
+        /// Output directory for C stub and backend RTL artifacts.
+        #[arg(long, default_value = "target/bitloom-hls")]
         out_dir: PathBuf,
+        /// Write the C stub only; do not invoke Bambu (not a successful RTL run).
+        #[arg(long, default_value_t = false)]
+        emit_only: bool,
     },
     /// Import FIRRTL 6.0.0 `.fir` (Chisel→firtool output ok) into the same emit path as `build` (FR40 / FR46).
     Import {
@@ -87,6 +92,22 @@ enum Commands {
         out_dir: PathBuf,
         #[arg(long, default_value = ".")]
         manifest_dir: PathBuf,
+    },
+    /// Emit module hierarchy HTML from a FIRRTL 6.0.0 `.fir` (FR38 / FR49 / FR40).
+    Visualize {
+        /// Path to a `.fir` file with `FIRRTL version 6.0.0` header.
+        #[arg(long)]
+        input: PathBuf,
+        /// Directory for `hierarchy.html`.
+        #[arg(long, default_value = ".")]
+        out_dir: PathBuf,
+    },
+    /// Alias of `visualize` — hierarchy HTML docs from FrozenHir (FR40 `doc`).
+    Doc {
+        #[arg(long)]
+        input: PathBuf,
+        #[arg(long, default_value = ".")]
+        out_dir: PathBuf,
     },
 }
 
@@ -450,10 +471,24 @@ fn main() {
             println!("compiled     # linearized assign schedule compiled at Sim construction");
             println!("select=bitloom_sim::Sim::with_engine(hir, TickEngine::from_name(..))");
         }
-        Commands::Hls { function, out_dir } => {
-            println!("backend={}", hls::HLS_BACKEND);
-            match hls::run_hls(&function, &out_dir) {
-                Ok(p) => println!("ok={}", p.display()),
+        Commands::Hls {
+            function,
+            out_dir,
+            emit_only,
+        } => {
+            println!(
+                "backend={} version={}",
+                hls::HLS_BACKEND,
+                hls::HLS_BACKEND_VERSION
+            );
+            match hls::run_hls(&function, &out_dir, emit_only) {
+                Ok(p) => {
+                    if emit_only {
+                        println!("emit_only={}", p.display());
+                    } else {
+                        println!("ok={}", p.display());
+                    }
+                }
                 Err(e) => {
                     eprintln!("error: {e}");
                     std::process::exit(1);
@@ -572,6 +607,15 @@ fn main() {
                 }
             }
         }
+        Commands::Visualize { input, out_dir } | Commands::Doc { input, out_dir } => {
+            match run_visualize(&input, &out_dir) {
+                Ok(path) => println!("wrote {}", path.display()),
+                Err(e) => {
+                    eprintln!("error: {e}");
+                    std::process::exit(1);
+                }
+            }
+        }
     }
 }
 
@@ -594,6 +638,20 @@ fn run_import(input: &Path, out_dir: &Path, also_fir: bool) -> Result<(), String
         }
     }
     Ok(())
+}
+
+/// Product entry: FrozenHir → hierarchy HTML (`hierarchy.html`).
+fn run_visualize(input: &Path, out_dir: &Path) -> Result<PathBuf, String> {
+    let text = fs::read_to_string(input).map_err(|e| format!("read {}: {e}", input.display()))?;
+    let hir = rhdl_firrtl::import(&text).map_err(|d| d.to_string())?;
+    fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
+    let html = rhdl_viz::to_html(&hir);
+    if !html.contains("Instance hierarchy") || !html.contains("Modules and ports") {
+        return Err("hierarchy HTML missing required sections".into());
+    }
+    let path = out_dir.join("hierarchy.html");
+    fs::write(&path, &html).map_err(|e| format!("write {}: {e}", path.display()))?;
+    Ok(path)
 }
 
 #[cfg(test)]
