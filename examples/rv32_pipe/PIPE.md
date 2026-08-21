@@ -14,10 +14,10 @@
 |----|------|
 | 五级 | IF/ID/EX/MEM/WB 级间 Reg |
 | 转发 | EX/MEM→EX 优先（且 **非** LW），其次 MEM/WB→EX；`rd∈{1..4}` |
-| Load-use（17.5） | ID/EX 为 LW 且 IF/ID 源匹配 → 冻结 PC/IF-ID、向 ID/EX 插 bubble；随后 MEM/WB→EX 转发 |
+| Load-use（17.5） | ID/EX 为 LW 且 IF/ID 源匹配 → 冻结 PC/IF-ID、向 ID/EX 插 bubble；随后 MEM/WB→EX 转发；rs1 ATDD + rs2（ADD）ATDD |
 | 分支 | predict-not-taken；taken 时 flush IF/ID 与 ID/EX（NOP/bubble）并 redirect PC |
-| 子集 | 同 Episode I（ADDI/ADD/BEQ/LW/SW，x1–x4） |
-| 非目标 | **无** CSR/trap（可选 Zicsr/M-trap：**延期**；见教程 [Ch.06](../../docs/tutorials/rv32-episode-ii/06-csr-m-trap-deferred.md)；NFR32 — 不阻塞 Epic 17） |
+| 子集 | 同 Episode I（ADDI/ADD/BEQ/LW/SW，x1–x4）；SW@LED `0x100` 写 LED，**不**旁路写 DMEM |
+| 非目标 | **无** CSR/trap（流水主路径）；可选 Zicsr/M-trap 见 **`examples/rv32_priv`** + 教程 [Ch.06](../../docs/tutorials/rv32-episode-ii/06-csr-m-trap.md)（NFR32 — 不阻塞 Epic 17） |
 
 ## 仿真时序（`bitloom-sim`）
 
@@ -38,4 +38,6 @@ cargo test -p rv32_core
 cargo bitloom build --package rv32_pipe
 ```
 
-黄金：`tick_clean_path_addi_add_golden`、`tick_alu_alu_raw_forward_golden`、`tick_addi_negative_imm_pipe_golden`、`tick_beq_taken_flush_wrong_path_not_committed`、`tick_load_use_stall_atdd_golden`。
+黄金：`tick_clean_path_addi_add_golden`、`tick_alu_alu_raw_forward_golden`、`tick_addi_negative_imm_pipe_golden`、`tick_beq_taken_flush_wrong_path_not_committed`、`tick_load_use_stall_atdd_golden`、`tick_load_use_rs2_consumer_atdd_golden`、`tick_sw_mmio_excludes_dmem_bypass_golden`。
+
+可选对照 / VCD 提示：[`docs/tutorials/rv32-episode-ii/femtorv-compare.md`](../../docs/tutorials/rv32-episode-ii/femtorv-compare.md)。

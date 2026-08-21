@@ -46,7 +46,7 @@ cargo run -p bitloom -- build --package counter_ports --out-dir /tmp/bitloom-out
 | 集 | 教程 | 示例核 | 范围摘要 |
 |----|------|--------|----------|
 | **Episode I** | [`docs/tutorials/rv32-episode-i/`](docs/tutorials/rv32-episode-i/README.md) | `examples/rv32_core` | 裁剪 RV32I 单周期；无 SoC/MMU/Linux |
-| **Episode II** | [`docs/tutorials/rv32-episode-ii/`](docs/tutorials/rv32-episode-ii/README.md) | `examples/rv32_pipe` | 立即数冻结 → 五级 + 转发 + load-use + 分支 flush；**可选 CSR 延期**（NFR32） |
+| **Episode II** | [`docs/tutorials/rv32-episode-ii/`](docs/tutorials/rv32-episode-ii/README.md) | `examples/rv32_pipe`（可选 CSR：`rv32_priv`） | 立即数冻结 → 五级 + 转发 + load-use + 分支 flush；**可选** Zicsr/M-trap 教学最小集（NFR32） |
 
 **非目标（两集共用）：** cache / MMU / Linux Softcore；动态分支预测；完整 Privileged / arch-test。VexRiscv **仅对照**，不作第一路径。CSR/trap **不**阻塞 Epic 17 流水完成定义。
 

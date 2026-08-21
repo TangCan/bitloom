@@ -20,4 +20,4 @@ cargo test -p rv32_pipe tick_beq_taken_flush_wrong_path_not_committed
 
 类型：`tick`。
 
-至此 Episode II **流水主线**（FR64）完成；CSR 见下一章（可选 / 延期，NFR32）。
+至此 Episode II **流水主线**（FR64）完成；可选 CSR/trap 见 [Ch.06](./06-csr-m-trap.md)（`examples/rv32_priv`，NFR32）。

@@ -8,7 +8,7 @@
 |------|------|------|
 | 用户态立即数 / 符号扩展 | **已实现**（17.3） | `examples/rv32_core` + [Episode II Ch.01](../rv32-episode-ii/01-isa-and-imm.md) |
 | 经典 5 级 + 转发 + load-use + 分支 flush | **已实现**（17.4–17.5） | `examples/rv32_pipe` + [Episode II 教程](../rv32-episode-ii/README.md) |
-| 可选 Zicsr + M-mode trap | **延期 stub**（18.3 / NFR32） | [Ch.06](../rv32-episode-ii/06-csr-m-trap-deferred.md) |
+| 可选 Zicsr + M-mode trap | **可选已实现**（FR65） | `examples/rv32_priv` + [Ch.06](../rv32-episode-ii/06-csr-m-trap.md) |
 
 逐步章节：[`docs/tutorials/rv32-episode-ii/`](../rv32-episode-ii/README.md)。
 

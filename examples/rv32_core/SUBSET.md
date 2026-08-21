@@ -10,7 +10,7 @@ Public brand: **Bitloom**. Unrelated to `samitbasu/rhdl`.
 | `ADD` | R-type, funct3/funct7 = 0 |
 | `BEQ` | B-imm `{31,7,30:25,11:8,0}` then sign-extend from bit12 (=instr[31]); positive and negative offsets |
 | `LW` | Word load from DMEM[ea[3:0]] (async Mem); I-imm sign-extended |
-| `SW` | Word store gated by `assign_mem_write_en(..., is_sw)`; ea=`0x100` → LED MMIO; S-imm sign-extended |
+| `SW` | Word store gated by `assign_mem_write_en(..., dmem_we)` where `dmem_we = is_sw && !is_mmio`; ea=`0x100` → LED MMIO only (no DMEM[0] bypass); S-imm sign-extended |
 
 Decode also rebuilds **U-imm** (`{instr[31:12],12'b0}`) and **J-imm** (`{31,19:12,20,30:21,0}` + sext) into a unified `imm` bus for future LUI/AUIPC/JAL — those opcodes are **not** executed in this subset yet.
 
@@ -43,6 +43,6 @@ Until then, 17.4–17.5 must obey **(b)**.
 - **SyncReadMem instruction fetch** — see Fetch strategy above; optional/later story after hazard lands.
 - **LB / LH / LBU / LHU / SB / SH** — byte/half load-store and load sign-/zero-extend are **out of subset**. DMEM is word-addressed (`ea[3:0]` → 16×32); teaching path stays `LW`/`SW` only so imm/sign-extend freeze (17.3) is not entangled with sub-word align/mux. A later story may add them with explicit SUBSET rows.
 - **LUI / AUIPC / JAL / JALR** and remaining RV32I ops — U/J imm rebuilt in decode; execute paths not wired yet.
-- No CSR/ECALL/EBREAK/FENCE, no MMU/Linux.
+- No EBREAK/FENCE, no MMU/Linux. Optional Zicsr/ECALL/MRET teaching path：`examples/rv32_priv`（非本包）。
 - Classic 5-stage + forward + load-use stall + branch flush lives in **`examples/rv32_pipe`** (Stories 17.4–17.5 / `PIPE.md`); this package stays Episode I single-cycle.
-- **Optional Zicsr + M-mode trap (FR65 / NFR32):** **deferred** — teaching stub only in [`docs/tutorials/rv32-episode-ii/06-csr-m-trap-deferred.md`](../../docs/tutorials/rv32-episode-ii/06-csr-m-trap-deferred.md). Does **not** block Epic 17 Done.
+- **Optional Zicsr + M-mode trap (FR65 / NFR32):** **optional implemented** in [`examples/rv32_priv`](../rv32_priv/) — teaching minimum only; see [`docs/tutorials/rv32-episode-ii/06-csr-m-trap.md`](../../docs/tutorials/rv32-episode-ii/06-csr-m-trap.md). Does **not** block Epic 17 Done. Not Privileged/arch-test compliance.

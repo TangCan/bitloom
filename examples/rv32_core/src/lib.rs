@@ -170,7 +170,7 @@ impl Elaboratable for EpisodeICore {
             "is_addi", "is_add", "is_beq", "is_op", "is_lw", "is_sw", "is_lui", "is_auipc",
             "is_jal", "is_u", "f3_add", "f7_add", "eq_rs", "take_br", "we_alu", "we", "we1", "we2",
             "we3", "we4", "rd1", "rd2", "rd3", "rd4", "rs1_1", "rs1_2", "rs1_3", "rs1_4", "rs2_1",
-            "rs2_2", "rs2_3", "rs2_4", "is_mmio", "sign31",
+            "rs2_2", "rs2_3", "rs2_4", "is_mmio", "not_mmio", "dmem_we", "bfalse", "sign31",
         ] {
             s.declare_wire(n, GroundType::Bool, Span::default());
         }
@@ -215,6 +215,7 @@ impl Elaboratable for EpisodeICore {
         s.assign_lit("funct3_add", 0, Span::default());
         s.assign_lit("funct7_add", 0, Span::default());
         s.assign_lit("mmio_led", 0x100, Span::default());
+        s.assign_eq("bfalse", "c0", "c1", Span::default());
 
         s.assign_and("opcode", "instr", "mask7", Span::default());
         s.assign_shr("sh7", "instr", "c7", Span::default());
@@ -348,6 +349,9 @@ impl Elaboratable for EpisodeICore {
         s.assign_and("ea", "ea_raw", "mask32", Span::default());
         s.assign_and("dmem_idx", "ea", "mask4", Span::default());
         s.assign_eq("is_mmio", "ea", "mmio_led", Span::default());
+        // SW to LED MMIO must not also write DMEM[ea&0xf] (0x100 → idx 0).
+        s.assign_eq("not_mmio", "is_mmio", "bfalse", Span::default());
+        s.assign_and("dmem_we", "is_sw", "not_mmio", Span::default());
         s.assign_mux(
             "next_led_mmio",
             "is_mmio",
@@ -385,7 +389,7 @@ impl Elaboratable for EpisodeICore {
         s.assign_reg_d_from("x3", "next_x3", Span::default());
         s.assign_reg_d_from("x4", "next_x4", Span::default());
         s.assign_reg_d_from("led", "next_led", Span::default());
-        s.assign_mem_write_en("dmem", "dmem_idx", "rs2_data", "is_sw", Span::default());
+        s.assign_mem_write_en("dmem", "dmem_idx", "rs2_data", "dmem_we", Span::default());
         s.assign_reg_d_mem_read("load_q", "dmem", "dmem_idx", Span::default());
         s.end_process();
 
@@ -606,6 +610,40 @@ mod tests {
         tick_instr(&mut sim, enc_sw(1, 2, 0));
         tick_instr(&mut sim, enc_sw(1, 2, 0));
         assert_eq!(sim.ports().get("led_out"), Some(0xA5));
+    }
+
+    /// SW to LED@0x100 must not also write DMEM[0] (0x100 & 0xf).
+    #[test]
+    fn tick_sw_mmio_excludes_dmem_bypass_golden() {
+        let mut sim = reset_sim();
+
+        // DMEM[0] = 0x11
+        tick_instr(&mut sim, enc_addi(1, 0, 0));
+        tick_instr(&mut sim, enc_addi(1, 0, 0));
+        tick_instr(&mut sim, enc_addi(2, 0, 0x11));
+        tick_instr(&mut sim, enc_addi(2, 0, 0x11));
+        tick_instr(&mut sim, enc_sw(1, 2, 0));
+        tick_instr(&mut sim, enc_sw(1, 2, 0));
+
+        // LED MMIO write 0xA5
+        tick_instr(&mut sim, enc_addi(1, 0, 0x100));
+        tick_instr(&mut sim, enc_addi(1, 0, 0x100));
+        tick_instr(&mut sim, enc_addi(3, 0, 0xA5));
+        tick_instr(&mut sim, enc_addi(3, 0, 0xA5));
+        tick_instr(&mut sim, enc_sw(1, 3, 0));
+        tick_instr(&mut sim, enc_sw(1, 3, 0));
+        assert_eq!(sim.ports().get("led_out"), Some(0xA5));
+
+        // LW from ea=0 must still see 0x11 (not 0xA5)
+        tick_instr(&mut sim, enc_addi(1, 0, 0));
+        tick_instr(&mut sim, enc_addi(1, 0, 0));
+        tick_instr(&mut sim, enc_lw(4, 1, 0));
+        tick_instr(&mut sim, enc_lw(4, 1, 0));
+        assert_eq!(
+            sim.ports().get("x4_out"),
+            Some(0x11),
+            "MMIO SW must not bypass-write DMEM[0]"
+        );
     }
 
     #[test]

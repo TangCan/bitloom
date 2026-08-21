@@ -23,6 +23,7 @@ members = [
   "examples/rv32_pipeline_feasibility",
   "examples/rv32_core",
   "examples/rv32_pipe",
+  "examples/rv32_priv",
 ]
 default-members = [
   "crates/bitloom-hir",

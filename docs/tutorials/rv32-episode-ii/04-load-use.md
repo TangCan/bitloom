@@ -20,6 +20,10 @@ Stall 用 **mux hold**（非模块级 `en`）。`rs2` 匹配仅对 ADD/BEQ/SW �
 
 ```bash
 cargo test -p rv32_pipe tick_load_use_stall_atdd_golden
+cargo test -p rv32_pipe tick_load_use_rs2_consumer_atdd_golden
 ```
 
-类型：`tick`。合规阶梯见 `COMPLIANCE.md`（定向黄金；可选 `rv32ui` 延期；非完整 DV）。
+- `tick_load_use_stall_atdd_golden` — rs1 消费者（`ADDI`）
+- `tick_load_use_rs2_consumer_atdd_golden` — rs2 消费者（`ADD`）
+
+类型：`tick`。合规阶梯见 `COMPLIANCE.md`（定向黄金；可选 `rv32ui` 延期；非完整 DV）。Harris/FemtoRV 对照见 [femtorv-compare.md](./femtorv-compare.md)。

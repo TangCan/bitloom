@@ -309,6 +309,8 @@ impl Elaboratable for EpisodeIIPipe {
             "ex_mem_is_sw_n",
             "mem_wb_we_n",
             "is_mmio",
+            "not_mmio",
+            "dmem_we",
             "rd1",
             "rd2",
             "rd3",
@@ -728,6 +730,9 @@ impl Elaboratable for EpisodeIIPipe {
         s.assign_mux("next_x4", "we4", "wb_data", "x4", Span::default());
 
         s.assign_eq("is_mmio", "ex_mem_ea", "mmio_led", Span::default());
+        // SW to LED MMIO must not also write DMEM[ea&0xf] (0x100 → idx 0).
+        s.assign_eq("not_mmio", "is_mmio", "bfalse", Span::default());
+        s.assign_and("dmem_we", "ex_mem_is_sw", "not_mmio", Span::default());
         s.assign_mux(
             "next_led_mmio",
             "is_mmio",
@@ -762,7 +767,7 @@ impl Elaboratable for EpisodeIIPipe {
             "dmem",
             "ex_mem_dmem_idx",
             "ex_mem_rs2_data",
-            "ex_mem_is_sw",
+            "dmem_we",
             Span::default(),
         );
         s.assign_reg_d_mem_read("load_q", "dmem", "ex_mem_dmem_idx", Span::default());
@@ -992,7 +997,7 @@ mod tests {
         );
     }
 
-    /// Load-use ATDD：`LW` 后紧跟依赖该 rd 的 `ADDI`。
+    /// Load-use ATDD：`LW` 后紧跟依赖该 rd 的 `ADDI`（rs1 消费者）。
     /// 无停顿时 EX 见陈旧 RF（转发被 `em_not_lw` 挡住）→ x4 错；正确 stall + MEM/WB→EX 则 x4=43。
     #[test]
     fn tick_load_use_stall_atdd_golden() {
@@ -1020,6 +1025,66 @@ mod tests {
             sim.ports().get("x4_out"),
             Some(43),
             "load-use ADDI must see forwarded load data after stall"
+        );
+    }
+
+    /// Load-use ATDD（rs2 消费者）：`LW` 写入 x2 后紧跟 `ADD` 用该 rd 作 rs2。
+    /// 无停顿时 ADD 见陈旧 x2→x3 错；正确 stall + MEM/WB→EX 则 x3=42。
+    #[test]
+    fn tick_load_use_rs2_consumer_atdd_golden() {
+        let mut sim = reset_sim();
+        let mut rom = HashMap::new();
+        // 0: x1=0; 4: x4=42; 8: SW x4,0(x1); 12: LW x2,0(x1); 16: ADD x3,x1,x2 → 42
+        rom.insert(0, enc_addi(1, 0, 0));
+        rom.insert(4, enc_addi(4, 0, 42));
+        rom.insert(8, enc_sw(1, 4, 0));
+        rom.insert(12, enc_lw(2, 1, 0));
+        rom.insert(16, enc_add(3, 1, 2));
+
+        tick_with(&mut sim, enc_addi(1, 0, 0));
+        for _ in 0..36 {
+            rom_tick(&mut sim, &rom);
+        }
+        assert_eq!(sim.ports().get("x1_out"), Some(0));
+        assert_eq!(
+            sim.ports().get("x2_out"),
+            Some(42),
+            "LW must write 42 to x2"
+        );
+        assert_eq!(
+            sim.ports().get("x3_out"),
+            Some(42),
+            "load-use ADD rs2 must see forwarded load data after stall"
+        );
+    }
+
+    /// SW to LED MMIO (ea==0x100) must update led_out and must not clobber DMEM[0]
+    /// (0x100 & 0xf == 0). Without `dmem_we = is_sw && !is_mmio`, LW from 0 would see LED data.
+    #[test]
+    fn tick_sw_mmio_excludes_dmem_bypass_golden() {
+        let mut sim = reset_sim();
+        let mut rom = HashMap::new();
+        // 0: x1=0; 4: x2=0x11; 8: SW → DMEM[0]=0x11
+        // 12: x1=0x100; 16: x3=0xA5; 20: SW → LED only
+        // 24: x1=0; 28: LW x4,0(x1) → must remain 0x11
+        rom.insert(0, enc_addi(1, 0, 0));
+        rom.insert(4, enc_addi(2, 0, 0x11));
+        rom.insert(8, enc_sw(1, 2, 0));
+        rom.insert(12, enc_addi(1, 0, 0x100));
+        rom.insert(16, enc_addi(3, 0, 0xA5));
+        rom.insert(20, enc_sw(1, 3, 0));
+        rom.insert(24, enc_addi(1, 0, 0));
+        rom.insert(28, enc_lw(4, 1, 0));
+
+        tick_with(&mut sim, enc_addi(1, 0, 0));
+        for _ in 0..48 {
+            rom_tick(&mut sim, &rom);
+        }
+        assert_eq!(sim.ports().get("led_out"), Some(0xA5));
+        assert_eq!(
+            sim.ports().get("x4_out"),
+            Some(0x11),
+            "MMIO SW must not bypass-write DMEM[0]"
         );
     }
 

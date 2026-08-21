@@ -20,7 +20,7 @@
 | [06](./06-load-store-mmio.md) | 访存与 MMIO | `tick_sw_mmio_led_golden` |
 | [对照](./femtorv-compare.md) | FemtoRV Ch.4–6 对照表 | 阅读 |
 | [07](./07-asm-and-c.md) | 手写 asm / C（简化） | 编码助手 + 外部汇编对照 |
-| [99](./99-episode-ii-outline.md) | Episode II 入口 | 指向已实现教程 / 延期 CSR |
+| [99](./99-episode-ii-outline.md) | Episode II 入口 | 指向已实现教程 / 可选 CSR（`rv32_priv`） |
 
 ## 延伸阅读
 

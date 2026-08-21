@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-21-2026 08:58
+last_updated: 08-21-2026 09:15
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -350,35 +350,35 @@ action_items:
     epic: 17
     action: "为 load-use 增加 rs2 消费者 ATDD（ADD/BEQ/SW 之一）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-17-retro-2026-08-21.md"
   - id: "epic-17-retro-item-33-可选-sw-mmio-路径排除-dmem-旁路写"
     epic: 17
     action: "可选：SW MMIO 路径排除 DMEM 旁路写"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-17-retro-2026-08-21.md"
   - id: "epic-17-retro-item-34-可选-接入-riscv-tests-rv32ui-文档化跑法或最小子集-ci"
     epic: 17
     action: "可选：接入 riscv-tests rv32ui 文档化跑法或最小子集 CI"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-17-retro-2026-08-21.md"
   - id: "epic-18-retro-item-35-实现可选-zicsr-m-mode-trap-教学最小集-fr65-并替换-06"
     epic: 18
     action: "实现可选 Zicsr + M-mode trap 教学最小集（FR65）并替换 06 stub"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-18-retro-2026-08-21.md"
   - id: "epic-18-retro-item-36-恢复一-story-一提交纪律于后续-epic"
     epic: 18
     action: "恢复一 story 一提交纪律于后续 epic"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-18-retro-2026-08-21.md"
   - id: "epic-18-retro-item-37-可选-episode-ii-教程加-vcd-femtorv-对照"
     epic: 18
     action: "可选：Episode II 教程加 VCD/FemtoRV 对照"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-18-retro-2026-08-21.md"
