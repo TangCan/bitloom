@@ -201,11 +201,11 @@ development_status:
   23-5-fr38-fr49-联验收口: backlog
   epic-23-retrospective: optional
 
-  epic-24: in-progress
+  epic-24: done
   24-1-nfr14-风险记录-hls: done
   24-2-钉死后端的默认-hls-路径-fr35: done
   24-3-ci-发布烟测夹具-fr35-fr50: done
-  24-4-文档将-hls-列为支持功能-fr50: backlog
+  24-4-文档将-hls-列为支持功能-fr50: done
   epic-24-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"

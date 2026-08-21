@@ -101,7 +101,7 @@ mod sim {
 | Chisel 可编译生成（FR28） | [`docs/fr28-chisel-best-effort.md`](docs/fr28-chisel-best-effort.md) |
 | Chisel / `.fir` 反向导入（FR46） | [`docs/fr46-chisel-import.md`](docs/fr46-chisel-import.md) |
 | `import` CLI + 混合夹具 | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) · [`examples/chisel_mixed`](examples/chisel_mixed) |
-| HLS（Bambu） | [`docs/fr35-hls.md`](docs/fr35-hls.md) |
+| HLS 产品路径（**支持** · FR35/FR50 · Bambu 2024.10） | [`docs/fr35-hls.md`](docs/fr35-hls.md) · 烟测 [`scripts/hls-smoke.sh`](scripts/hls-smoke.sh) |
 | Formal/SVA | [`docs/fr39-formal-sva.md`](docs/fr39-formal-sva.md) |
 | Analog/InOut | [`docs/fr27-analog-inout.md`](docs/fr27-analog-inout.md) |
 | rhdl-float | [`docs/fr36-rhdl-float.md`](docs/fr36-rhdl-float.md) |
@@ -124,15 +124,32 @@ cargo run -p bitloom -- firtool ensure   # 下载/校验/缓存并打印二进�
 
 工具链 crate：MIT OR Apache-2.0（见各 crate 的 `Cargo.toml`）。
 
+## HLS（支持功能 · FR35 / FR50）
+
+Bitloom **将 HLS 列为支持功能**：算法级 `#[hls]` / `cargo bitloom hls` 经钉死外挂 **PandA Bambu 2024.10** 产出可综合 RTL。Bitloom **不**实现树内调度器（AD-25）。
+
+跟练：
+
+```bash
+cargo run -p bitloom -- hls --help
+# 安装 Bambu 2024.10 后：
+export BITLOOM_BAMBU_PATH=/path/to/bambu
+cargo run -p bitloom -- hls --function add --out-dir target/bitloom-hls
+# 或 CI/本地烟测（默认 stub；真机设 BITLOOM_HLS_USE_REAL=1）：
+just hls-smoke
+```
+
+专章、限制与烟测位置：[`docs/fr35-hls.md`](docs/fr35-hls.md)。
+
 ## 状态与 deferred（诚实声明）
 
-当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC 等阶段二能力（见 `epics.md`）。
+当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS 产品路径（外挂 Bambu）** 等阶段二能力（见 `epics.md`）。
 
 **明确 deferred / 未承诺为产品完整面：**
 
 - 完整 LSP hover/goto（FR38 部分）
 - 部分 CLI 动词（`check` / `visualize` / `wave` / `doc` / `build-sim`）
-- 自研 HLS 调度器（永不；仅外挂）
+- 自研 HLS 调度器（永不；仅外挂 Bambu——HLS **本身已支持**）
 - crates.io 名 `rhdl` / `rhdl-bits`（禁止）
 
 详见 [`docs/semver-0x-policy.md`](docs/semver-0x-policy.md) 与 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。

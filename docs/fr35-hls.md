@@ -32,7 +32,7 @@ cargo run -p bitloom -- hls --function add --out-dir target/bitloom-hls
 
 ## 失败语义
 
-- **后端缺失：** 非零退出 + `error:` 说明如何安装 2024.10 / 设置 `BITLOOM_BAMBU_PATH`（**不是**「永久 unsupported」）。
+- **后端缺失：** 非零退出 + `error:` 说明如何安装 2024.10 / 设置 `BITLOOM_BAMBU_PATH`（产品路径始终可用；缺工具是安装问题，不是功能关闭）。
 - **后端非零退出或无 RTL 工件：** 非零退出；不得 silent 成功。
 
 ## 烟测 / CI
