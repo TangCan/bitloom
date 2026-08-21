@@ -843,6 +843,10 @@ impl ElaborateSession {
             });
             return;
         }
+        // Width gate (E0131) before emit — FR51 / FR22 same-width connects.
+        if self.check_connect(&name, &from, span).is_none() {
+            return;
+        }
         let kind = self.signals.get(&name).copied();
         let process_kind = match &self.process {
             Some(ProcessState::Combinational { .. }) => Some(ProcessKind::Combinational),
@@ -1022,6 +1026,11 @@ impl ElaborateSession {
 
     fn assign_reg_d_expr(&mut self, name: impl Into<String>, from: Option<String>, span: Span) {
         let name = name.into();
+        if let Some(ref src) = from
+            && self.check_connect(&name, src, span).is_none()
+        {
+            return;
+        }
         let kind = self.signals.get(&name).copied();
         let process_kind = match &self.process {
             Some(ProcessState::Combinational { .. }) => Some(ProcessKind::Combinational),
@@ -1357,6 +1366,38 @@ mod tests {
         s.end_module();
         let err = s.finish().unwrap_err();
         assert!(err.0.iter().any(|d| d.code == "rhdl::E0130"));
+    }
+
+    #[test]
+    fn mismatched_assign_net_width_rejected() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.add_output("narrow", GroundType::UInt { width: 4 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("narrow", "data_in", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().unwrap_err();
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0131"),
+            "expected E0131, got {err}"
+        );
+    }
+
+    #[test]
+    fn mismatched_assign_reg_d_width_rejected() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.declare_reg("q_narrow", GroundType::UInt { width: 4 }, Span::default());
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_from("q_narrow", "data_in", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().unwrap_err();
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0131"),
+            "expected E0131 on Reg.d path, got {err}"
+        );
     }
 
     #[test]

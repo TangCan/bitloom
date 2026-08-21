@@ -17,6 +17,7 @@ members = [
   "examples/counter_ports",
   "examples/wide_adder",
   "examples/fifo_skel",
+  "examples/bundle_vec_skel",
   "examples/mixed_both",
   "examples/ip_box",
   "examples/rv32_feasibility",

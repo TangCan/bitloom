@@ -25,7 +25,7 @@ Unlock synthesizable `Bundle`/`Vec` and ship an acceptably documented ClockDomai
 ## Technical Decisions
 
 - Dual-model: cycle-accurate `tick` remains from FrozenHir; functional view may be handwritten `#[functional_model]` **or** a toolchain-generated Rust functional-sim crate; no SystemC TLM-2.0 contract. `#[functional_state]` never enters freeze/HIR.
-- Bundle/Vec allowed on the synthesizable path; whether HIR grows Bundle/Vector nodes is an implementation choice, but public surface and emit semantics must stay consistent. Width/dir checks before emit.
+- Bundle/Vec allowed on the synthesizable path (Story 19.3 revised AD-20; HIR may stay scalar via flatten); whether HIR grows Bundle/Vector nodes is an implementation choice, but public surface and emit semantics must stay consistent. Width/dir checks before emit.
 - Multi-clock: Clash-style phantom domain markers in the type system; illegal crossing rejected at freeze; legal crossing only via language-level DoubleFlop/SyncFIFO. Default modules stay single Clock + sync active-high Reset unless multi-clock is declared.
 - AD revisions (allow generated Rust functional sim; allow Bundle/Vec) and the NFR14 ready-gate are architecture contract work for this epic; project context that still restates the old bans must be corrected or pointed at the spine.
 - Dependency rule unchanged: design crates → `bitloom-prelude` only (no backends/CLI).

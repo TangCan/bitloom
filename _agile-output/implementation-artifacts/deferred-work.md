@@ -28,3 +28,19 @@
   evidence: Story 18.3 / NFR32 允许延期；优先 stub 而非半成品 CSR；见 `docs/tutorials/rv32-episode-ii/06-csr-m-trap-deferred.md`
   resolved: '2026-08-21'
   resolution: 由 epic-18-retro-item-35 交付 `examples/rv32_priv` + `06-csr-m-trap.md`；教学最小集 tick 黄金绿；不宣称 Privileged 合规
+
+- source_spec: `_agile-output/implementation-artifacts/19-4-实现-bundle-vec-可综合路径-fr51.md`
+  summary: Bundle 叶仅 GroundType；不支持嵌套 Bundle 或 HwVec&lt;Bundle,_&gt;
+  evidence: 最小展平实现；AsGround 门控 HwVec；评审指出嵌套路径未交付
+
+- source_spec: `_agile-output/implementation-artifacts/19-4-实现-bundle-vec-可综合路径-fr51.md`
+  summary: 未提供 #[derive(Bundle)]；仅手写 Bundle::leaves
+  evidence: Design Notes 允许手写；夹具已用手写；宏 derive 非 AC
+
+- source_spec: `_agile-output/implementation-artifacts/19-4-实现-bundle-vec-可综合路径-fr51.md`
+  summary: 展平叶名可能碰撞（field_a + member b_c vs field_a_b + member c）
+  evidence: 命名约定 {field}_{member}/{field}_{i}；无去重门禁；评审指出
+
+- source_spec: `_agile-output/implementation-artifacts/19-4-实现-bundle-vec-可综合路径-fr51.md`
+  summary: check_connect 只比位宽、不比 GroundType kind（Bool↔UInt 等同宽仍可能过）
+  evidence: 预存宽合同；edge-case hunter；非 FR51 引入

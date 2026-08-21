@@ -4,12 +4,14 @@ error[E0277]: the trait bound `bitloom_prelude::UInt<8>: PortField` is not satis
 4 | #[module]
   | ^^^^^^^^^ the trait `PortField` is not implemented for `bitloom_prelude::UInt<8>`
   |
-help: the following other types implement trait `PortField`
- --> $WORKSPACE/crates/bitloom-prelude/src/lib.rs
-  |
-  | impl<T: AsGround> PortField for Input<T> {
-  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `bitloom_prelude::Input<T>`
-...
-  | impl<T: AsGround> PortField for Output<T> {
-  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `bitloom_prelude::Output<T>`
+  = help: the following other types implement trait `PortField`:
+            bitloom_prelude::Input<Bits<N>>
+            bitloom_prelude::Input<HwVec<T, N>>
+            bitloom_prelude::Input<T>
+            bitloom_prelude::Input<bitloom_prelude::Bool>
+            bitloom_prelude::Input<bitloom_prelude::Clock>
+            bitloom_prelude::Input<bitloom_prelude::Reset>
+            bitloom_prelude::Input<bitloom_prelude::SInt<N>>
+            bitloom_prelude::Input<bitloom_prelude::UInt<N>>
+          and $N others
   = note: this error originates in the attribute macro `module` (in Nightly builds, run with -Z macro-backtrace for more info)

@@ -37,13 +37,24 @@ pub fn module(_attr: TokenStream, item: TokenStream) -> TokenStream {
         quote! {
             {
                 type __PortTy = #ty;
-                let (__dir, __gt) = <__PortTy as ::bitloom_prelude::PortField>::describe();
-                match __dir {
-                    ::bitloom_prelude::PortDir::Input => {
-                        __session.add_input(#name_str, __gt, ::bitloom_prelude::Span::default());
-                    }
-                    ::bitloom_prelude::PortDir::Output => {
-                        __session.add_output(#name_str, __gt, ::bitloom_prelude::Span::default());
+                for (__leaf, __dir, __gt) in
+                    <__PortTy as ::bitloom_prelude::PortField>::flatten(#name_str)
+                {
+                    match __dir {
+                        ::bitloom_prelude::PortDir::Input => {
+                            __session.add_input(
+                                __leaf,
+                                __gt,
+                                ::bitloom_prelude::Span::default(),
+                            );
+                        }
+                        ::bitloom_prelude::PortDir::Output => {
+                            __session.add_output(
+                                __leaf,
+                                __gt,
+                                ::bitloom_prelude::Span::default(),
+                            );
+                        }
                     }
                 }
             }

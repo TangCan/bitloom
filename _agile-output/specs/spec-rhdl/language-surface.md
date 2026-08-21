@@ -11,6 +11,9 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 ## Composite types (CAP-10 / FR51)
 
 - `Bundle` 与 `Vec<T,N>`（或文档等价）允许进入可综合路径。
+- **文档等价：** 公开类型名为 `HwVec<T,N>`（避免与堆 `Vec` / E0141 冲突）；合同与叙述中的 `Vec<T,N>` 即指 `HwVec`。`N` 须 > 0。
+- **展平：** elaborate 时展平为标量 HIR 端口；叶命名 `{field}_{member}`（Bundle）与 `{field}_{i}`（HwVec）。公开 HIR 可不含 Bundle/Vector 节点。
+- **MVP 边界：** `Bundle::leaves` 仅为 ground 叶；不支持嵌套 Bundle / `HwVec<Bundle,_>`；手写 `leaves()`（无 `#[derive(Bundle)]`）。
 - 位宽/方向不匹配必须在 emit 前失败；不得 silently 可用却无检查。
 - HIR ground 是否扩展 Bundle/Vector 节点由实现选择；公开表面与 emit 语义须一致（AD-20）。
 - **FR22 边界：** 单时钟表面加厚（FR22）的构造条**不含** Bundle/Vec；复合类型由本节 / FR51 交付，不得 silently 算进 FR22 验收。
