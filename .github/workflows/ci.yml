@@ -20,6 +20,24 @@ jobs:
       - name: test (MSRV 1.97.1)
         run: cargo test --workspace
 
+  # FR71 / NFR34 / FR28: required true Chisel JVM compile (Pattern A — parallel to Rust test).
+  # Escape hatch env must never be enabled here. Do not use continue-on-error.
+  # Wall-clock: pin timeout 20m initially; tighten after first cold/hot CI samples.
+  fr28-chisel-jvm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: sbt
+      - uses: sbt/setup-sbt@v1
+      - name: Required Chisel 7.14.0 compile (golden fixture)
+        # Same path as `just chisel-fr28-jvm` (required compile; no escape hatch).
+        run: bash scripts/chisel-fr28-compile-required.sh crates/rhdl-firrtl/testdata/fr28_golden_counter.scala
+
   # FR35 / FR50: HLS product-path smoke. Failures are never ignored.
   # Default uses CI stub (wiring + synthesizable .v). Real Bambu 2024.10 via
   # BITLOOM_HLS_USE_REAL=1 + cached AppImage (see scripts/hls-smoke.sh / NFR14).
