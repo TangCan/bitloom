@@ -184,8 +184,8 @@ development_status:
   21-5-双视图等价接入生成路径-fr30: done
   epic-21-retrospective: optional
 
-  epic-22: backlog
-  22-1-nfr14-风险记录-一级-ip: backlog
+  epic-22: in-progress
+  22-1-nfr14-风险记录-一级-ip: done
   22-2-树内-fifo-uart-黑盒-fr37: backlog
   22-3-spi-ip-smoke-fr48: backlog
   22-4-i2c-ip-smoke-fr48: backlog
