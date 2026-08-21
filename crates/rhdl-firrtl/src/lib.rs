@@ -6,7 +6,7 @@ use bitloom_hir::{
 };
 
 mod chisel;
-pub use chisel::{CHISEL_TARGET, ChiselGenError, emit_chisel};
+pub use chisel::{CHISEL_TARGET, ChiselGenError, FIRTOOL_TARGET, emit_chisel};
 
 /// Emit `<abi_name>.fir` with FIRRTL version 6.0.0 header.
 pub fn emit(hir: &FrozenHir) -> Artifact {
@@ -442,32 +442,243 @@ mod tests {
         s.finish().unwrap()
     }
 
+    /// Port name / width / direction predicates for FR28 (skip clk/rst).
+    fn assert_port_predicates(scala: &str, hir: &FrozenHir) {
+        for m in &hir.circuit().modules {
+            assert!(
+                scala.contains(&format!("class {} extends Module", m.name)),
+                "missing class for module {}",
+                m.name
+            );
+            for p in &m.ports {
+                if p.name == "clk" || p.name == "rst" {
+                    continue;
+                }
+                let dir = match p.direction {
+                    PortDirection::Input => "Input",
+                    PortDirection::Output => "Output",
+                    PortDirection::InOut => "Analog",
+                };
+                let ty = match &p.ty {
+                    GroundType::UInt { width } => format!("UInt({width}.W)"),
+                    GroundType::SInt { width } => format!("SInt({width}.W)"),
+                    GroundType::Bool => "Bool()".into(),
+                    GroundType::Clock => "Clock()".into(),
+                    GroundType::Reset => "Reset()".into(),
+                    GroundType::Analog => "Analog()".into(),
+                };
+                let field = format!("val {} = {dir}({ty})", p.name);
+                assert!(
+                    scala.contains(&field),
+                    "port predicate failed for {}.{}: expected `{field}`",
+                    m.name,
+                    p.name
+                );
+            }
+        }
+    }
+
+    /// Instance hierarchy predicates: Module(new Child) + directional connects.
+    fn assert_hierarchy_predicates(scala: &str, hir: &FrozenHir) {
+        let modules: std::collections::HashMap<&str, &Module> = hir
+            .circuit()
+            .modules
+            .iter()
+            .map(|m| (m.name.as_str(), m))
+            .collect();
+        for m in &hir.circuit().modules {
+            for stmt in &m.body {
+                let Stmt::Instance(inst) = stmt else {
+                    continue;
+                };
+                assert!(
+                    scala.contains(&format!("val {} = Module(new {})", inst.name, inst.module)),
+                    "missing Module(new {}) for instance {}",
+                    inst.module,
+                    inst.name
+                );
+                let child = modules
+                    .get(inst.module.as_str())
+                    .expect("child module in circuit");
+                for c in &inst.connects {
+                    if c.dangling || c.child_port == "clk" || c.child_port == "rst" {
+                        continue;
+                    }
+                    let port = child
+                        .ports
+                        .iter()
+                        .find(|p| p.name == c.child_port)
+                        .expect("child port");
+                    let parent_ref = if m.ports.iter().any(|p| p.name == c.parent_net) {
+                        format!("io.{}", c.parent_net)
+                    } else {
+                        c.parent_net.clone()
+                    };
+                    let child_io = format!("{}.io.{}", inst.name, c.child_port);
+                    let expected = match port.direction {
+                        PortDirection::Input => format!("{child_io} := {parent_ref}"),
+                        PortDirection::Output => format!("{parent_ref} := {child_io}"),
+                        PortDirection::InOut => continue,
+                    };
+                    assert!(
+                        scala.contains(&expected),
+                        "connect predicate failed: expected `{expected}`"
+                    );
+                }
+            }
+        }
+    }
+
     #[test]
-    fn chisel_best_effort_emits_scala() {
+    fn chisel_fr28_flat_counter_emits_scala() {
         assert_eq!(CHISEL_TARGET, "7.14.0");
-        let art = emit_chisel(&counter_for_chisel()).unwrap();
+        assert_eq!(FIRTOOL_TARGET, "1.155.0");
+        let hir = counter_for_chisel();
+        let art = emit_chisel(&hir).unwrap();
         let scala = &art.files[0].contents;
         assert!(scala.contains("target Chisel 7.14.0"));
-        assert!(scala.contains("NOT a round-trip contract"));
+        assert!(scala.contains("firtool-1.155.0"));
+        assert!(scala.contains("FR28 compilable Chisel"));
         assert!(scala.contains("class Counter extends Module"));
         assert!(scala.contains("io.data_out := count"));
         assert!(scala.contains("count := count + 1.U"));
-        // FIRRTL path unchanged
+        assert_port_predicates(scala, &hir);
+        // FIRRTL path unchanged (AD-3)
         assert!(
-            emit(&counter_for_chisel()).files[0]
+            emit(&hir).files[0]
                 .contents
                 .starts_with("FIRRTL version 6.0.0")
         );
     }
 
     #[test]
-    fn chisel_best_effort_fails_on_instance() {
-        let err = emit_chisel(&hierarchical_sample()).unwrap_err();
-        assert_eq!(err.code, "rhdl::E0902");
+    fn chisel_fr28_hierarchy_emits_module_new_and_connects() {
+        let hir = hierarchical_sample();
+        let art = emit_chisel(&hir).expect("hierarchy must emit; E0902 removed");
+        let scala = &art.files[0].contents;
+        assert!(scala.contains("val u0 = Module(new Child)"));
+        assert!(scala.contains("u0.io.x := io.x"));
+        assert!(scala.contains("io.y := u0.io.y"));
+        assert!(!scala.contains("u0.io.clk"));
+        assert!(!scala.contains("u0.io.rst"));
+        assert_port_predicates(scala, &hir);
+        assert_hierarchy_predicates(scala, &hir);
     }
 
     #[test]
-    fn chisel_best_effort_fails_on_mem() {
+    fn chisel_fr28_hierarchy_via_wire_parent_net() {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("Child", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("x", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("y", "x", Span::default());
+        s.end_process();
+        s.end_module();
+
+        s.begin_module("Top", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("x", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("w", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("w", "x", Span::default());
+        s.end_process();
+        s.add_instance(
+            "u0",
+            "Child",
+            vec![
+                ("clk".into(), "clk".into()),
+                ("rst".into(), "rst".into()),
+                ("x".into(), "w".into()),
+                ("y".into(), "y".into()),
+            ],
+            vec![],
+            Span::default(),
+        );
+        s.end_module();
+        let hir = s.finish().unwrap();
+        let scala = emit_chisel(&hir).unwrap().files[0].contents.clone();
+        assert!(scala.contains("val w = Wire(UInt(8.W))"));
+        assert!(scala.contains("u0.io.x := w"));
+        assert!(!scala.contains("u0.io.x := io.w"));
+        assert_hierarchy_predicates(&scala, &hir);
+    }
+
+    #[test]
+    fn chisel_fr28_dangling_connect_omitted() {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("Child", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("x", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("spare", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("y", "x", Span::default());
+        s.end_process();
+        s.end_module();
+
+        s.begin_module("Top", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("x", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+        s.add_instance(
+            "u0",
+            "Child",
+            vec![
+                ("clk".into(), "clk".into()),
+                ("rst".into(), "rst".into()),
+                ("x".into(), "x".into()),
+                ("y".into(), "y".into()),
+            ],
+            vec![],
+            Span::default(),
+        );
+        s.add_dangling_input("u0", "spare", Span::default());
+        s.end_module();
+        let hir = s.finish().unwrap();
+        let scala = emit_chisel(&hir).unwrap().files[0].contents.clone();
+        assert!(scala.contains("u0.io.x := io.x"));
+        assert!(
+            !scala.contains("u0.io.spare"),
+            "dangling child input must not appear as a connect"
+        );
+        assert_hierarchy_predicates(&scala, &hir);
+    }
+
+    #[test]
+    fn chisel_fr28_fir_import_then_emit() {
+        let frozen = hierarchical_sample();
+        let fir = emit(&frozen).files[0].contents.clone();
+        let back = import(&fir).expect("import .fir");
+        let scala = emit_chisel(&back).expect("emit_chisel after import").files[0]
+            .contents
+            .clone();
+        assert_port_predicates(&scala, &back);
+        assert_hierarchy_predicates(&scala, &back);
+        assert!(scala.contains("Module(new Child)"));
+        assert!(scala.contains("target Chisel 7.14.0"));
+        assert!(scala.contains("firtool-1.155.0"));
+    }
+
+    #[test]
+    fn chisel_fr28_pin_locked() {
+        assert_eq!(CHISEL_TARGET, "7.14.0");
+        assert_eq!(FIRTOOL_TARGET, "1.155.0");
+        let scala = emit_chisel(&counter_for_chisel()).unwrap().files[0]
+            .contents
+            .clone();
+        assert!(scala.contains("Chisel 7.14.0"));
+        assert!(scala.contains("firtool-1.155.0"));
+    }
+
+    #[test]
+    fn chisel_fr28_fails_on_mem() {
         let mut s = ElaborateSession::new("t");
         s.begin_module("MemTop", Span::default());
         s.add_input("clk", GroundType::Clock, Span::default());

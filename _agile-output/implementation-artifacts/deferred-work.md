@@ -56,3 +56,15 @@
 - source_spec: `_agile-output/implementation-artifacts/19-5-clockdomain-产品叙事与夹具-fr52.md`
   summary: 跨域诊断码命名空间仍为 rhdl::E0220（Bitloom 品牌下预存）
   evidence: builder 既有码；夹具沿用
+
+- source_spec: `_agile-output/implementation-artifacts/20-3-firrtl-frozenhir-可编译-chisel-fr28.md`
+  summary: 文档路径仍为 `docs/fr28-chisel-best-effort.md`（内容已改写为可编译合同）
+  evidence: 避免断链；README 已改显示名；正式更名可另故事
+
+- source_spec: `_agile-output/implementation-artifacts/20-3-firrtl-frozenhir-可编译-chisel-fr28.md`
+  summary: InOut 端口发射为 `Analog(Analog())`；实例 InOut 连接仅注释
+  evidence: 预存尽力路径；AD-3 导入子集本就排除 Analog/InOut；FR28 夹具不覆盖
+
+- source_spec: `_agile-output/implementation-artifacts/20-3-firrtl-frozenhir-可编译-chisel-fr28.md`
+  summary: 仅精确名 `clk`/`rst` 从 IO 剥离；其他 Clock/Reset 端口名仍进入 Bundle
+  evidence: 机械约定；多时钟命名留给后续 epic
