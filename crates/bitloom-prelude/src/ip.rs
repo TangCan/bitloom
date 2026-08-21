@@ -1,4 +1,5 @@
-//! First-class IP stubs (FR37 / FR48): SyncFifo, UartTx, SpiMaster, I2cMaster, black-box.
+//! First-class IP stubs (FR37 / FR48): SyncFifo, UartTx, SpiMaster, I2cMaster,
+//! Axi4LiteSlave, black-box.
 //!
 //! Minimal synthesizable Bitloom modules — not full protocol stacks.
 //! Design crates reach these via `bitloom_prelude::ip` (only dependency: this prelude).
@@ -149,6 +150,141 @@ impl Elaboratable for I2cMaster {
     }
 }
 
+/// AXI4-Lite **minimal slave** (FR48 / Open Q7).
+///
+/// Documented widths: **ADDR=8**, **DATA=32**. Handshake stubs register channel valids;
+/// a single `data_r` holds the last `s_axi_wdata` for `s_axi_rdata` smoke.
+///
+/// Non-goals: Full AXI (burst/ID/QoS), interconnect, multi-slave decode, VIP compliance.
+pub struct Axi4LiteSlave;
+
+impl Elaboratable for Axi4LiteSlave {
+    fn elaborate() -> Result<FrozenHir, Diagnostics> {
+        let mut s = ElaborateSession::new("Axi4LiteSlave");
+        s.begin_module("Axi4LiteSlave", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        // Write address
+        s.add_input(
+            "s_axi_awaddr",
+            GroundType::UInt { width: 8 },
+            Span::default(),
+        );
+        s.add_input(
+            "s_axi_awvalid",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        s.add_output(
+            "s_axi_awready",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        // Write data
+        s.add_input(
+            "s_axi_wdata",
+            GroundType::UInt { width: 32 },
+            Span::default(),
+        );
+        s.add_input(
+            "s_axi_wstrb",
+            GroundType::UInt { width: 4 },
+            Span::default(),
+        );
+        s.add_input(
+            "s_axi_wvalid",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        s.add_output(
+            "s_axi_wready",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        // Write response
+        s.add_output(
+            "s_axi_bresp",
+            GroundType::UInt { width: 2 },
+            Span::default(),
+        );
+        s.add_output(
+            "s_axi_bvalid",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        s.add_input(
+            "s_axi_bready",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        // Read address
+        s.add_input(
+            "s_axi_araddr",
+            GroundType::UInt { width: 8 },
+            Span::default(),
+        );
+        s.add_input(
+            "s_axi_arvalid",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        s.add_output(
+            "s_axi_arready",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        // Read data
+        s.add_output(
+            "s_axi_rdata",
+            GroundType::UInt { width: 32 },
+            Span::default(),
+        );
+        s.add_output(
+            "s_axi_rresp",
+            GroundType::UInt { width: 2 },
+            Span::default(),
+        );
+        s.add_output(
+            "s_axi_rvalid",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        s.add_input(
+            "s_axi_rready",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+
+        s.declare_reg("data_r", GroundType::UInt { width: 32 }, Span::default());
+        s.declare_reg("awready_r", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("wready_r", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("bvalid_r", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("arready_r", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("rvalid_r", GroundType::UInt { width: 1 }, Span::default());
+
+        s.begin_combinational(Span::default());
+        s.assign_net("s_axi_awready", "awready_r", Span::default());
+        s.assign_net("s_axi_wready", "wready_r", Span::default());
+        s.assign_net("s_axi_bvalid", "bvalid_r", Span::default());
+        s.assign_lit("s_axi_bresp", 0, Span::default()); // OKAY
+        s.assign_net("s_axi_arready", "arready_r", Span::default());
+        s.assign_net("s_axi_rdata", "data_r", Span::default());
+        s.assign_net("s_axi_rvalid", "rvalid_r", Span::default());
+        s.assign_lit("s_axi_rresp", 0, Span::default()); // OKAY
+        s.end_process();
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_from("data_r", "s_axi_wdata", Span::default());
+        s.assign_reg_d_from("awready_r", "s_axi_awvalid", Span::default());
+        s.assign_reg_d_from("wready_r", "s_axi_wvalid", Span::default());
+        s.assign_reg_d_from("bvalid_r", "s_axi_bready", Span::default());
+        s.assign_reg_d_from("arready_r", "s_axi_arvalid", Span::default());
+        s.assign_reg_d_from("rvalid_r", "s_axi_rready", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish()
+    }
+}
+
 /// Opaque vendor IP wrapper: ports only; no child FrozenHir body (FR37 black-box).
 pub struct ExtBlackBox;
 
@@ -270,6 +406,38 @@ mod tests {
         sim.tick();
         assert_eq!(sim.ports().get("tx_byte"), Some(0x42));
         assert_eq!(sim.ports().get("busy"), Some(1));
+    }
+
+    #[test]
+    fn axi4_lite_slave_elaborate_emit_tick() {
+        smoke_elaborate_emit_tick::<Axi4LiteSlave>("Axi4LiteSlave");
+        let mut sim = Sim::new(Axi4LiteSlave::elaborate().unwrap());
+        let mut pv = PortValues::default();
+        pv.set("rst", 1);
+        pv.set("s_axi_awaddr", 0);
+        pv.set("s_axi_awvalid", 0);
+        pv.set("s_axi_wdata", 0);
+        pv.set("s_axi_wstrb", 0);
+        pv.set("s_axi_wvalid", 0);
+        pv.set("s_axi_bready", 0);
+        pv.set("s_axi_araddr", 0);
+        pv.set("s_axi_arvalid", 0);
+        pv.set("s_axi_rready", 0);
+        sim.set_inputs(pv.clone());
+        sim.tick();
+        pv.set("rst", 0);
+        pv.set("s_axi_awvalid", 1);
+        pv.set("s_axi_wvalid", 1);
+        pv.set("s_axi_wdata", 0xDEAD_BEEFu64);
+        pv.set("s_axi_wstrb", 0xF);
+        pv.set("s_axi_bready", 1);
+        pv.set("s_axi_arvalid", 1);
+        pv.set("s_axi_rready", 1);
+        sim.set_inputs(pv);
+        sim.tick();
+        assert_eq!(sim.ports().get("s_axi_rdata"), Some(0xDEAD_BEEF));
+        assert_eq!(sim.ports().get("s_axi_awready"), Some(1));
+        assert_eq!(sim.ports().get("s_axi_bresp"), Some(0));
     }
 
     #[test]
