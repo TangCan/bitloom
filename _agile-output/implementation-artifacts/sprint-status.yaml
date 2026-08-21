@@ -193,8 +193,8 @@ development_status:
   22-6-ip-索引与例化文档-fr48-收口: done
   epic-22-retrospective: optional
 
-  epic-23: backlog
-  23-1-nfr14-风险记录-可视化: backlog
+  epic-23: in-progress
+  23-1-nfr14-风险记录-可视化: done
   23-2-层次视图产品入口-fr38-fr49: backlog
   23-3-时序图-波形产品入口-fr38-fr49: backlog
   23-4-统一文档与-uj-6-可视化半程: backlog
