@@ -8,4 +8,8 @@ publish = false
 
 [dependencies]
 bitloom-prelude = { workspace = true }
-fifo_skel = { path = "../fifo_skel" }
+
+[dev-dependencies]
+bitloom-hir = { workspace = true }
+bitloom-sim = { workspace = true }
+bitloom-vlog = { workspace = true }

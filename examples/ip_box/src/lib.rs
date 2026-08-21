@@ -1,41 +1,36 @@
-//! Tree IP (fifo_skel) + external black-box wrapper stub (FR37).
+//! Tree IP + black-box via `bitloom_prelude::ip` (FR37).
 
-use bitloom_prelude::{Diagnostics, Elaboratable, ElaborateSession, FrozenHir, GroundType, Span};
-
-/// In-tree IP re-export.
-pub use fifo_skel::SkidFifo;
-
-/// Opaque vendor IP: emit-only black box (no FrozenHir body for the child).
-pub struct ExtUartBlackBox;
-
-impl Elaboratable for ExtUartBlackBox {
-    fn elaborate() -> Result<FrozenHir, Diagnostics> {
-        let mut s = ElaborateSession::new("ExtUartWrap");
-        s.begin_module("ExtUartWrap", Span::default());
-        s.add_input("clk", GroundType::Clock, Span::default());
-        s.add_input("rst", GroundType::Reset, Span::default());
-        s.add_input("tx_data", GroundType::UInt { width: 8 }, Span::default());
-        s.add_output("tx", GroundType::UInt { width: 1 }, Span::default());
-        // Black-box: declare ports only; vendor netlist supplied separately.
-        s.end_module();
-        s.finish()
-    }
-}
-
-pub fn vendor_blackbox_v() -> &'static str {
-    "module vendor_uart(input clk, input rst, input [7:0] tx_data, output tx);\nendmodule\n"
-}
+pub use bitloom_prelude::ip::{ExtBlackBox, SyncFifo, UartTx, vendor_blackbox_v};
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use bitloom_hir::PortValues;
     use bitloom_prelude::Elaboratable;
+    use bitloom_sim::Sim;
+    use bitloom_vlog::emit;
 
     #[test]
-    fn tree_ip_and_blackbox() {
-        assert!(SkidFifo::elaborate().is_ok());
-        let bb = ExtUartBlackBox::elaborate().unwrap();
-        assert_eq!(bb.abi_name, "ExtUartWrap");
-        assert!(vendor_blackbox_v().contains("vendor_uart"));
+    fn fifo_uart_blackbox_elaborate_emit_tick() {
+        for (hir, name) in [
+            (SyncFifo::elaborate().unwrap(), "SyncFifo"),
+            (UartTx::elaborate().unwrap(), "UartTx"),
+            (ExtBlackBox::elaborate().unwrap(), "ExtBlackBox"),
+        ] {
+            assert_eq!(hir.abi_name, name);
+            let art = emit(&hir);
+            assert!(art.files.iter().any(|f| f.contents.contains(name)));
+            let mut sim = Sim::new(hir);
+            let mut pv = PortValues::default();
+            pv.set("rst", 1);
+            sim.set_inputs(pv);
+            sim.tick();
+        }
+        assert!(vendor_blackbox_v().contains("vendor_ext_ip"));
+        assert!(
+            ExtBlackBox::elaborate().unwrap().circuit().modules[0]
+                .body
+                .is_empty()
+        );
     }
 }

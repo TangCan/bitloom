@@ -15,3 +15,7 @@ documentation = "https://docs.rs/bitloom-prelude"
 bitloom-builder = { workspace = true }
 bitloom-macro = { workspace = true }
 bitloom-hir = { workspace = true }
+
+[dev-dependencies]
+bitloom-sim = { workspace = true }
+bitloom-vlog = { workspace = true }

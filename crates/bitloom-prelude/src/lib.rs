@@ -3,6 +3,9 @@
 pub use bitloom_builder::{Elaboratable, ElaborateSession};
 pub use bitloom_hir::{Diagnostics, FrozenHir, GroundType, PortDirection, PortValues, Span};
 
+/// First-class IP stubs (FR37 / FR48): FIFO, UART, … via this prelude only.
+pub mod ip;
+
 /// Re-export attributes via this crate's `rhdl` facade.
 pub mod rhdl {
     pub use bitloom_macro::{
