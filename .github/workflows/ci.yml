@@ -22,7 +22,8 @@ jobs:
 
   # FR71 / NFR34 / FR28: required true Chisel JVM compile (Pattern A — parallel to Rust test).
   # Escape hatch env must never be enabled here. Do not use continue-on-error.
-  # Wall-clock: pin timeout 20m initially; tighten after first cold/hot CI samples.
+  # Wall-clock: timeout 20m until cold/hot samples are logged in docs/fr28-chisel-compilable.md
+  # (epic-25-retro-item-56). Tighten after first push CI runs — do not guess downward.
   fr28-chisel-jvm:
     runs-on: ubuntu-latest
     timeout-minutes: 20

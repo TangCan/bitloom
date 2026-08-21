@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-21-2026 17:27
+last_updated: 08-21-2026 17:29
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -548,11 +548,11 @@ action_items:
     epic: 25
     action: "首次 push 后记录 GHA fr28-chisel-jvm 冷/热墙钟并收紧 timeout-minutes"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-25-retro-2026-08-21.md"
   - id: "epic-25-retro-item-57-可选-维护者合并-fr28-emit_chisel-前本机-just-chise"
     epic: 25
     action: "可选：维护者合并 FR28/emit_chisel 前本机 just chisel-fr28-jvm 检查清单勾选"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-25-retro-2026-08-21.md"

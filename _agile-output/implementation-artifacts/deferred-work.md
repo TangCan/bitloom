@@ -169,3 +169,17 @@
   summary: 可选：发布烟测夹具扩到第二算法函数或负向调度质量断言
   evidence: epic-24-retro-item-55；当前烟测以 `add` 等最小夹具为主；扩夹具另开可选故事
   status: deferred — 可选后续
+
+- source_spec: `_agile-output/implementation-artifacts/epic-25-retro-2026-08-21.md`
+  summary: 首次 push 后记录 GHA fr28-chisel-jvm 冷/热墙钟并收紧 timeout-minutes（现行 20）
+  evidence: epic-25-retro-item-56；流程与空表已写入 `docs/fr28-chisel-compilable.md`「GHA 墙钟记录」；ci.yml 注释指向该表。在实测样本填入前不得盲目下调 timeout
+  status: deferred — 等待首次 CI 样本；文档门禁已就位
+  resolved: '2026-08-21'
+  resolution: 文档化测量流程 + 占位表；关闭 action item（实测填表为后续运维，非阻塞代码）
+
+- source_spec: `_agile-output/implementation-artifacts/epic-25-retro-2026-08-21.md`
+  summary: 维护者合并 FR28/emit_chisel 前本机 just chisel-fr28-jvm 检查清单
+  evidence: epic-25-retro-item-57
+  status: closed — `docs/fr28-chisel-compilable.md`「维护者合并前检查清单」
+  resolved: '2026-08-21'
+  resolution: 勾选清单已写入 FR28 文档并链 README

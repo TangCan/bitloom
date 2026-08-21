@@ -98,7 +98,7 @@ mod sim {
 | tick 引擎 | [`docs/fr32-tick-engines.md`](docs/fr32-tick-engines.md) |
 | C ABI cdylib | [`docs/fr33-c-abi.md`](docs/fr33-c-abi.md) |
 | 仿真覆盖率 | [`docs/fr34-sim-coverage.md`](docs/fr34-sim-coverage.md) |
-| Chisel 可编译生成（FR28） | [`docs/fr28-chisel-compilable.md`](docs/fr28-chisel-compilable.md) · 本机 `just chisel-fr28-jvm`（JDK17+sbt；**不**在默认 `just test` 内） |
+| Chisel 可编译生成（FR28） | [`docs/fr28-chisel-compilable.md`](docs/fr28-chisel-compilable.md) · 本机 `just chisel-fr28-jvm` · [维护者合并清单](docs/fr28-chisel-compilable.md#维护者合并前检查清单fr28--emit_chisel) |
 | Chisel / `.fir` 反向导入（FR46） | [`docs/fr46-chisel-import.md`](docs/fr46-chisel-import.md) |
 | `import` CLI + 混合夹具 | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) · [`examples/chisel_mixed`](examples/chisel_mixed) |
 | HLS 产品路径（**支持** · FR35/FR50 · Bambu 2024.10） | [`docs/fr35-hls.md`](docs/fr35-hls.md) · 烟测 [`scripts/hls-smoke.sh`](scripts/hls-smoke.sh) |
