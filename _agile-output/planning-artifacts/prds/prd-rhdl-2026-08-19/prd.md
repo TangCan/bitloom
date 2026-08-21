@@ -1,22 +1,36 @@
 ---
-title: RHDL 阶段二 — later-product 升格为正式需求
+title: Bitloom 阶段二 PRD — 2026-08-21 概述字面升格修订
 status: final
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-08-21
+amendment: overview-literal-C-2026-08-21
 ---
 
-# PRD: RHDL 阶段二（later-product → FR）
+# PRD: Bitloom 阶段二及愿景闭环（later-product → FR + 概述字面升格）
 
-*Working title — 确认：本 PRD 覆盖原 `later-product.md` 全部条目的正式升格，并补齐阶段一缺口 FR21 / NFR3；阶段一 CAP-1…CAP-9 / FR1–FR20 仍有效。*
+*Working title — 2026-08-21 Update（①C / 只改 PRD）：在保留 FR21–FR40 / NFR3 / NFR10–NFR13 稳定 ID 的前提下，将 `docs/requirements/1. 项目概述.md` §1.3.7–11 与 §1.5 亮点升格为**可验收硬需求**；**推翻**本 PRD 原「不以 Chisel Scala 为互转契约 / 禁止 HIR→TLM」等 non-goal。概述 `.md` 本轮不改。*
 
 ## 0. Document Purpose
 
-本 PRD 面向 PM、架构与 epic 拆解：把 `later-product.md` 中条目**正式升格为带稳定 ID 的 FR/NFR**。
+本 PRD 面向 PM、架构与 epic 拆解。
 
-**权威边界（Finalize 决议）：**
-- **阶段一**产品合同：`_agile-output/specs/spec-rhdl/SPEC.md`（CAP-1…CAP-9）+ companions；`epics.md` 中 FR1–FR20 为阶段一拆解。
-- **阶段二及以后**产品范围：**本 PRD 为唯一升格后的需求源**（FR21–FR40、NFR3、NFR10–NFR13）。`later-product.md` 降为**索引**，不再承载无 ID 需求。
-- **FR21 / NFR3**：阶段一已声明但未交付的缺口；本 PRD 将其列为 **P0 交付所有权**（不另立第二真相），直至合入后仍保留 ID。
+**权威边界：**
+- **阶段一**产品合同：`_agile-output/specs/spec-rhdl/SPEC.md`（CAP-1…CAP-9）+ companions；`epics.md` 中 FR1–FR20。
+- **阶段二基线（仍有效）：** FR21–FR40、NFR3、NFR10–NFR13（本文件原 Finalize 正文；下文有修订处以其新 success 为准）。
+- **2026-08-21 升格（本修订）：** FR46–FR52 将概述愿景中尚未被「弱定义」覆盖的部分升为硬 FR；并对 FR28 / FR29 / FR30 / FR35 / FR37 / FR38 的 **success 条**做字面加强。
+- **身份 supersession：** 公开产品名 **Bitloom**，crates.io / CLI **`bitloom`**（阶段三 FR41）；禁止发布 `rhdl` / `rhdl-bits`。正文不再以 `rhdl-rs` 为发布名。[ASSUMPTION] 概述仍写 RHDL；合同以 Bitloom 为准，概述另开任务对齐。
+- `later-product.md` 仍为索引，不承载无 ID 需求。
+
+**显式推翻（须记入架构/epics，不得 silent 保留旧 non-goal）：**
+
+| 原决议 | 本修订 |
+|--------|--------|
+| 不以可维护 Chisel Scala 为互转契约；FR28 仅尽力 | **FR28 修订 + FR46：** 双向可维护源码互转列为合同 |
+| 禁止从 HIR 生成 TLM / 功能模拟器 | **FR47：** 工具链须能生成功能模拟器与周期精确模拟器 |
+| FR37 至少一个树内 IP + 黑盒即可 | **FR37 修订 + FR48：** UART/SPI/I2C/FIFO/AXI 一级产品 IP |
+| FR38 HTML 层次即可；LSP deferred 可长期挂起 | **FR38 修订 + FR49：** 内置层次图 + 时序图为验收条 |
+| FR35 可选外挂、未启用可标 unsupported | **FR35 修订 + FR50：** HLS 为产品路径（仍可外挂调度，但不可永久 unsupported） |
+| 调研 2026-08-21「重定义 done / 勿字面全做」建议 | **用户明示 ①C 拒绝**；接受多年与上游方向冲突风险（见 addendum） |
 
 随时可用 `bmad-party-mode` / `bmad-advanced-elicitation` 深挖某一节。
 
@@ -30,81 +44,88 @@ updated: 2026-08-19
 | tick | 模块 Clock 的一个上升沿步进 |
 | PortValues | tick / 功能模型共用的端口取值 |
 | CAP-n | 阶段一 SPEC 能力编号 |
-| FR-n / NFR-n | 可验收功能/非功能需求 ID（阶段一见 epics；阶段二见本 PRD） |
+| FR-n / NFR-n | 可验收功能/非功能需求 ID |
+| 概述愿景 | `docs/requirements/1. 项目概述.md` 中的设计目标与亮点（本轮未改文件，但已映射进 FR） |
+| 可维护 Chisel（验收） | 生成 Scala 在钉死版本下**可编译**；端口/层次往返谓词通过；允许机械风格（Open Q5 已关闭） |
+| 功能模拟器（FR47） | 默认生成 **Rust** 功能模拟器 crate（非强制 SystemC） |
+| 一级 IP | 官方可依赖例化的 UART/SPI/I2C/FIFO/AXI 类模块；AXI 默认 = AXI4-Lite 最小从接口 |
+| ClockDomain | 时钟/复位极性/同步·异步绑定；跨域须语言级同步器（FR23/FR52） |
+| FR41 | 阶段三身份升格（Bitloom）；本 PRD FR 编号自 FR40 后跳至 FR46 为刻意预留，非缺失 |
 
 ## 1. Vision
 
-RHDL 阶段一把「合法 Rust → FrozenHir → Yosys 友好 `.v` + `tick`/VCD + FIRRTL 文本互转」立住了。阶段二要在**不偏离生成器阐述、不自研 HLS 调度、不占用 crates.io `rhdl`/`rhdl-bits`** 的前提下，让工具从「骨架」变成可写真实小设计的语言，并按证据排序引入 Mem、多时钟/CDC、可选 FST，以及可选的外挂 HLS。身份上，公开文档必须说清本仓库与 `samitbasu/rhdl` 无关，发布名为 `rhdl-rs`。
+Bitloom（公开品牌；仓库历史名可含 rhdl）要把「合法 Rust → FrozenHir → Yosys 友好 `.v` + `tick`/波形 + FIRRTL」做成可写真实设计的语言，并**按概述字面**兑现：与 Chisel **双向**互操作、**内置/产品化 HLS**、**丰富一级 IP 库**、**内置可视化**、**多视图建模与双模拟器生成**。身份上须声明与 `samitbasu/rhdl` 无关，发布名 **`bitloom`**（禁止 `rhdl` / `rhdl-bits`）。
 
-成功时，设计者不必离开 Cargo：能写更完整的 comb/seq，能钉死可离线的 firtool，能按里程碑打开 Mem 与 CDC，而不是把这些永远堆在 later-product 清单里无法验收。
+成功时，设计者不必离开 Cargo：能写完整 comb/seq 与 CDC，能钉死 firtool，能把模块以 FIRRTL **与可维护 Chisel 源**双向交换，能从算法级路径得到 RTL，能例化一级 IP，能看层次/时序可视化，能对同一模块生成功能与周期精确模拟器并做一致性验证——而不是把这些永远标成「尽力 / deferred / 非目标」。
+
+*[ASSUMPTION] 「自研 HLS 调度器」仍可不实现：允许钉死单一外挂（Bambu 或 Vitis），但产品路径必须默认可用且有 CI 夹具——见 FR35/FR50。*
 
 ## 2. Target User
 
 ### 2.1 Jobs To Be Done
 
-- **功能：** 用 Rust 写可综合 RTL，尽早失败，接上现有 Verilog/FIRRTL 流程。
+- **功能：** 用 Rust 写可综合 RTL，尽早失败，接上 Verilog/FIRRTL/**Chisel** 与 HLS/IP/可视化工作流。
 - **情境：** 嵌入式/FPGA 小团队或个人，本机 CLI，无云控。
-- **情感：** 信任工具不会静默截断位宽、不会 silently 变成 latch、不会把我当成另一个叫 rhdl 的项目。
-- **社会：** 能把模块级 IP 以 `.fir` 文本与 Chisel 生态交换，而不被迫写可维护 Scala。
+- **情感：** 信任工具不会静默截断位宽、不会 silently 变成 latch、不会冒充另一个 rhdl；愿景条目可验收而非营销幻灯片。
+- **社会：** 能与 Chisel 生态**双向**复用 IP；能用一级 IP 与可视化向同事展示设计。
 
-### 2.2 Non-Users（本阶段明确不做的用户）
+### 2.2 Non-Users（仍明确不做）
 
-- 需要完整 IDE/可视化优先于语言正确性的用户（FR38 在 P2，不挡主路径）。
-- 需要自研 HLS 调度器或把 RHDL 当高位综合主产品的用户（FR35 仅外挂）。
-- 需要以 crates.io 名 `rhdl` 发布的用户（禁止）。
+- 需要以 crates.io 名 `rhdl` / `rhdl-bits` 发布的用户（禁止）。
+- 需要云控/远程 elaboration 的用户（禁止）。
+- *[修订]* 原「不服务完整 IDE/可视化优先」与「不服务以 HLS 为主产品」——**在 ①C 下移出 Non-Users**；改由 FR38/FR49、FR35/FR50 服务。
 
 ### 2.3 Key User Journeys
 
-*[ASSUMPTION] 工具链 PRD 以能力为主；旅程缩到三条可验收场景。*
+*[ASSUMPTION] 保留 UJ-1…3；新增 UJ-4…6 覆盖概述字面升格。*
 
-- **UJ-1. Alex 加厚表面后写出可测 FIFO 形模块。**
-  - **Persona：** 熟悉 Rust 的 FPGA 工程师，已有阶段一计数器。
-  - **Entry：** 单时钟设计 crate，仅依赖 `rhdl-prelude`。
-  - **Path：** 写 comb/seq + 同位宽运算 → `cargo test` tick → `cargo rhdl build` 出 `.v`。
-  - **Climax：** 黄金向量通过且 Yosys 可读 `.v`。
-  - **Resolution：** 准备加 Mem（FR26），仍不碰多时钟。
-
-- **UJ-2. Blair 在本机离线复现 firtool 钉死构建。**
-  - **Persona：** CI 维护者，linux-x64 runner。
-  - **Entry：** 干净缓存目录。
-  - **Path：** 首次 `cargo rhdl` 相关 firtool 路径下载并校验 → 断网第二次命中缓存 → 设 `RHDL_FIRTOOL_PATH` 覆盖。
-  - **Climax：** checksum 失败则拒绝继续；成功则可调用钉死版本。
-  - **Edge：** checksum 失败或缓存损坏则拒绝继续（NFR3）；多平台扩展见 NFR11（P2）。
-
-- **UJ-3. Casey 打开双时钟 SyncFIFO 并被错误的跨域拦住。**
-  - **Persona：** 有过 CDC bug 的 ASIC 设计者。
-  - **Entry：** 两时钟端口的模块。
-  - **Path：** 非法跨域赋值 → freeze 失败带 `rhdl::E0xxx`；改用语言级 SyncFIFO/DoubleFlop → elaborate/emit/tick。
-  - **Climax：** 错误在网表前，不在硅上。
+- **UJ-1. Alex 加厚表面后写出可测 FIFO 形模块。**（不变要旨；prelude = `bitloom-prelude`；CLI = `cargo bitloom`。）
+- **UJ-2. Blair 本机离线复现 firtool 钉死构建。**（`cargo bitloom`；`BITLOOM_FIRTOOL_PATH` 或文档化的 env 别名可与历史 `RHDL_FIRTOOL_PATH` 并存。[ASSUMPTION]）
+- **UJ-3. Casey 打开双时钟 SyncFIFO 并被错误跨域拦住。**
+- **UJ-4. Dana 将 Bitloom 模块导出为可维护 Chisel，再导入回 Bitloom。**  
+  - **Path：** elaborate → emit `.fir` → **生成可编译 Chisel Scala** → 在钉死 Chisel/firtool 版本编译；反向：Chisel/`fir` **导入**为 FrozenHir/Bitloom 模块表面 → elaborate/emit/tick。  
+  - **Climax：** 往返后公开端口名/宽/向与实例图在文档谓词下相等（强于「尽力失败」）。
+- **UJ-5. Ellis 用 `#[hls]` 从算法级函数得到可综合 RTL，并例化一级 UART+FIFO。**  
+  - **Climax：** 默认启用路径产出 RTL；树内 IP crate 可 `use` 并 elaborate。
+- **UJ-6. Flynn 对同一 UART 模块生成功能模拟器与周期精确模拟器，跑一致性检查，并打开层次图+时序图。**  
+  - **Climax：** 故意不一致则 fail；可视化产物可人工打开且含层次与时序两类视图。
 
 ## 3. Success Metrics
 
 | ID | 指标 | 目标 | 反指标 |
 |----|------|------|--------|
-| SM-1 | P0（FR21,NFR3,FR22,NFR10,NFR12）可演示 | 全部有自动化验收 | 「文档写了但 CLI 仍信任 PATH firtool」 |
-| SM-2 | P1（FR26→FR23/24/25）按序交付 | Mem 先于多时钟合并 | 多时钟合并时仍无 Mem 语义锚 |
-| SM-3 | later-product 无「无 ID 保留项」 | 每条映射到 FR/NFR 或明确拒绝进产品 | 重新出现无 ID 的 later 清单作为唯一真相 |
-| SM-4 | 身份清晰 | README 可见免责与 `rhdl-rs` | crates.io/文档暗示名 `rhdl` |
-| SM-5 | FR22 语言条 | 文档化构造清单中的项均可 elaborate/emit/tick；未列入清单的 `language-surface.md` Deferred 类型不得 silently 可用 | 仅靠阶段一骨架通过「两个 fixture」冒充 FR22 |
+| SM-1 | P0 可演示 | 全部有自动化验收 | 仍信任 PATH firtool |
+| SM-2 | P1 按序交付 | Mem 先于多时钟 | 多时钟无 Mem 锚 |
+| SM-3 | later-product 无无 ID 项 | 映射到 FR/NFR 或拒绝 | 无 ID 清单回流 |
+| SM-4 | 身份清晰 | README：Bitloom / `bitloom`；与 samitbasu/rhdl 无关 | 暗示 crates.io `rhdl` 或仍写死唯一发布名 `rhdl-rs` |
+| SM-5 | FR22 构造条 | 清单项均可 elaborate/emit/tick | 两 fixture 冒充表面 |
+| SM-6 | 概述字面升格（新） | FR46–FR52 与修订后的 FR28/30/35/37/38 均有自动化或文档化黄金验收 | 「尽力 / deferred / 非目标」冒充概述完成 |
+| SM-7 | 双模拟器（新） | UJ-6 夹具绿 | 仅手写 functional 无生成路径 |
+
+**反指标（合同级）：** 用调研「同业未做满」作为永久免责而不改 FR——在 ①C 下**不可接受**；风险须进计划与估算，不得进 non-goal。
 
 ## 4. Scope & Phasing
 
-**In scope：** 下文全部 FR22–FR40 与 NFR3/NFR10–NFR13，以及阶段一缺口 **FR21**。  
-**Out of scope（仍禁止）：** 自研 HLS 调度器；以 Chisel Scala 为互转契约；HIR→TLM；发布 `rhdl`/`rhdl-bits`；云控。
+**In scope：** FR21–FR40（含本修订加强条）、NFR3/NFR10–NFR13、**FR46–FR52**。  
+**仍禁止：** 发布 `rhdl` / `rhdl-bits`；云控；*[ASSUMPTION]* 树内自研 HLS **调度器实现**（外挂调度允许，见 FR35/FR50）。
 
-**交付阶段（验收顺序，不是「非 FR」）：**
+**已移出「禁止」、改为必须交付：** 可维护 Chisel 双向源码互操作；HIR/双视图驱动的功能模拟器生成；一级完整 IP 线；内置层次+时序可视化；产品化 HLS 路径。
 
 | Phase | 内容 | 依据 |
 |-------|------|------|
-| **P0** | FR21, NFR3, FR22, NFR10, NFR12 | 调研 R1–R3；关闭阶段一缺口 |
-| **P1** | FR26, 然后 FR23, FR24, FR25 | Mem → 多时钟/复位/门控 |
-| **P2a** | FR31, FR32, FR29, FR33, FR34 | 仿真加厚（FST 可选、双引擎、bridge、C ABI、覆盖率） |
-| **P2b** | FR35, FR28, FR39 | 外挂 HLS / 尽力 Scala / formal·SVA |
-| **P2c** | FR27, FR36, FR37, FR38, FR40, NFR11, NFR13 | IO 扩展、浮点、IP、可视化/LSP、CLI 动词、多平台 firtool、MSRV |
+| **P0** | FR21（按 Bitloom 修订）、NFR3、FR22、NFR10、NFR12 | 基线 |
+| **P1** | FR26 → FR23 → FR24 → FR25 | Mem → CDC/复位/门控 |
+| **P2a** | FR31、FR32、FR29、FR33、FR34 | 仿真加厚 |
+| **P2b** | FR35（加强）、FR28（加强）、FR39、**FR50** | HLS + Chisel 生成起步 + formal |
+| **P2c** | FR27、FR36、FR37（加强）、FR38（加强）、FR40、NFR11、NFR13 | IO/浮点/IP 起步/可视化起步/CLI |
+| **P3 — 概述字面闭环（新）** | **FR46、FR47、FR48、FR49、FR51、FR52**（及未在 P2 收口的加强验收） | 用户 ①C；概述 §1.3.7–11 / §1.5 |
 
-*[ASSUMPTION] P2a→P2b→P2c 为默认建议顺序；同桶内可并行拆 epic。不提升到 P0/P1 除非改本 PRD。*
+**P3 建议交付序（可并行处已标明）：** FR52 叙事随 FR23 → FR51（语言）∥ FR28→**FR46** → FR30 加强→**FR47** → FR37 加强→**FR48** ∥ FR38 加强→**FR49**；**FR50** 随 FR35。禁止无 NFR14 记录即把 P3 FR 标 ready。
 
-**与 SPEC 关系：** 已 Finalize：`later-product.md` 为索引；`SPEC.md` Non-goals 仅约束阶段一，并指向本 PRD。
+**Launch 里程碑（Finalize 决议 2026-08-21）：**  
+- **Launch（对外可宣称 Bitloom 工具链可用）** = P0+P1 完成 + FR21 Bitloom 身份 + 阶段三已交付之真独立路径（若已合入）仍有效。  
+- **P2** = 仿真/生态加厚（仍为正式合同，可分批宣称）。  
+- **P3 / SM-6** = 概述字面闭环；**不**阻塞上述 Launch 宣称，但**阻塞**「概述愿景已全部兑现」类对外表述。
 
 ## 5. Features & Functional Requirements
 
@@ -112,10 +133,10 @@ RHDL 阶段一把「合法 Rust → FrozenHir → Yosys 友好 `.v` + `tick`/VCD
 
 **F-Identity**
 
-- **FR21 — 公开 README 免责与发布名**  
-  - **intent：** 公开首页声明与 `samitbasu/rhdl` 无关，发布名为 `rhdl-rs`。  
-  - **success：** 仓库 README 含免责声明；写明 crates.io 名 `rhdl-rs`；禁止暗示 `rhdl` / `rhdl-bits`。  
-  - **phase：** P0 · 实现 UJ 外的合规门槛。
+- **FR21 — 公开 README 免责与发布名** *(修订 2026-08-21)*  
+  - **intent：** 与 `samitbasu/rhdl` 无关；发布名为 **`bitloom`**。  
+  - **success：** README 含免责；写明公开产品名 Bitloom 与 crates.io **`bitloom`**；禁止暗示 `rhdl` / `rhdl-bits`；不得再将 **`rhdl-rs`** 表述为现行唯一发布名。  
+  - **phase：** P0。
 
 ### 5.2 语言表面加厚
 
@@ -126,17 +147,17 @@ RHDL 阶段一把「合法 Rust → FrozenHir → Yosys 友好 `.v` + `tick`/VCD
   - **success：**  
     1. **构造条（必须）：** 文档化清单中的项均可经 prelude/builder elaborate → emit `.v` → `tick`：`if`/`match`（或等价分支）、严格同位宽二元运算与连接、显式 pad/trunc、同步复位 `Reg` 的复位赋值语义、组合完整赋值检查（延续 FR3）。  
     2. **集成 fixture：** 计数器 + 单时钟 FIFO 形示例均对齐黄金值（不得仅靠阶段一骨架冒充）。  
-    3. **明确非目标（本 FR）：** `Bundle`、`Vec<T,N>` 仍 defer，除非另开 FR；不得 silently 可用。[NON-GOAL for this FR]  
+    3. **本 FR 非目标：** `Bundle`、`Vec<T,N>` 走 **FR51**；不得 silently 可用。  
   - **phase：** P0 · UJ-1 · SM-5。
 
-### 5.3 时钟、复位与存储（原 Clocking and memory）
+### 5.3 时钟、复位与存储
 
 **F-Clock-Mem**
 
 - **FR23 — 多时钟 HIR 与语言级 CDC**  
   - **intent：** 多时钟 HIR；**Clash 式 phantom 域**（AD-22）；DoubleFlop / SyncFIFO 为语言级 CDC。  
-  - **success：** 非法跨域在 freeze 失败；双时钟 DoubleFlop 或 SyncFIFO fixture 可 elaborate/emit/按域 tick。机制已定：**Clash 式 phantom 域**（架构脊柱 **AD-22**，2026-08-19）。
-  - **phase：** P1（在 FR26 之后交付）。
+  - **success：** 非法跨域在 freeze 失败；双时钟 DoubleFlop 或 SyncFIFO fixture 可 elaborate/emit/按域 tick。机制：**Clash 式 phantom 域**（AD-22）。  
+  - **phase：** P1（在 FR26 之后）。
 
 - **FR24 — 异步复位**  
   - **intent：** 时序包络支持异步复位（相对阶段一同频高有效同步复位）。  
@@ -149,146 +170,211 @@ RHDL 阶段一把「合法 Rust → FrozenHir → Yosys 友好 `.v` + `tick`/VCD
   - **phase：** P1。
 
 - **FR26 — 同步读 Mem（CHIRRTL 友好表面）**  
-  - **intent：** 语言表面暴露 **CHIRRTL 友好名**（对齐 Chisel：`Mem` ≈ comb/async-read、`SyncReadMem` ≈ sync-read；文档可对应 `cmem`/`smem` 语义）；降级与互转锚定 FIRRTL 规范 `mem`。  
-  - **success：** 用户用友好名编写的 SyncReadMem（及文档化的 Mem）fixture → HIR → `.v`/`firrtl.mem`；tick 满足读延迟黄金值。双口跨时钟 Mem **仅**允许经命名 CDC FIFO（与 FR23 衔接），不得以裸双时钟 `mem` 作为默认可综合路径。  
+  - **intent：** 语言表面暴露 **CHIRRTL 友好名**（`Mem` ≈ comb/async-read、`SyncReadMem` ≈ sync-read；文档可对应 `cmem`/`smem`）；降级与互转锚定 FIRRTL 规范 `mem`。  
+  - **success：** SyncReadMem（及文档化的 Mem）fixture → HIR → `.v`/`firrtl.mem`；tick 满足读延迟黄金值。双口跨时钟 Mem **仅**经命名 CDC FIFO（与 FR23 衔接）。  
   - **phase：** P1（先于 FR23）。
 
 - **FR27 — 顶层 Analog / InOut / 三态**  
   - **intent：** 仅顶层 IO 允许 Analog/InOut/三态。  
-  - **success：** 顶层可 emit；非顶层同构构造被 `rhdl::E0xxx` 拒绝。  
-  - **phase：** P2。
+  - **success：** 顶层可 emit；非顶层同构构造被结构化诊断拒绝。  
+  - **phase：** P2c。
 
 ### 5.4 互操作扩展
 
 **F-Interop**
 
-- **FR28 — FIRRTL→Chisel 尽力生成器**  
-  - **intent：** 可选工具从 FIRRTL 生成 Chisel Scala；**不是**互转契约。  
-  - **success：** fixture `.fir` 产出可在文档钉死的 Chisel 版本编译的 Scala，或结构化尽力失败；FrozenHir↔FIRRTL 6 文本仍为互转合同。  
-  - **phase：** P2。
+- **FR28 — FIRRTL→Chisel 生成器** *(修订 2026-08-21)*  
+  - **intent：** 从 FIRRTL/FrozenHir 生成 **可编译** 的 Chisel Scala（概述正向腿）。  
+  - **success：** 文档钉死的 Chisel + firtool 版本下，fixture → Scala **必须编译通过**；公开端口名/宽/向与实例层次满足往返谓词。**「可维护」验收条（已关闭 Open Q5）：** 允许机械/生成风格；不要求手写 idiomatic；不得以「尽力失败」交差。  
+  - **phase：** P2b · UJ-4。完整双向见 **FR46**。
 
 ### 5.5 仿真扩展
 
 **F-Sim**
 
-- **FR29 — 手写 bridge / abstraction / mixed both**  
-  - **intent：** 支持 `#[bridge]`、`#[abstraction]`、混合 `both` 仿真视图。  
-  - **success：** 混合 fixture 按文档视图跑通；`PortValues` 对照；不从 HIR 生成 TLM。  
-  - **phase：** P2。
+- **FR29 — bridge / abstraction / mixed both** *(修订)*  
+  - **intent：** 手写多视图标注仍支持。  
+  - **success：** 混合 fixture `PortValues` 对照通过。生成路径见 **FR47**（不再禁止生成功能模拟器）。  
+  - **phase：** P2a。
 
-- **FR30 — 双视图形式等价**  
-  - **intent：** 功能视图与周期精确视图可做形式等价检查。  
-  - **success：** fixture 输出 pass/fail；故意不一致则 fail。  
-  - **phase：** P2。
+- **FR30 — 双视图形式等价** *(修订)*  
+  - **intent：** 功能视图与周期精确视图一致性检查为产品能力。  
+  - **success：** 一致则 pass、故意不一致则 fail；P3 收口时须接入 **FR47** 生成的双模拟器路径。  
+  - **phase：** P2a → P3 与 FR47 联验。
 
 - **FR31 — 可选 FST 波形**  
-  - **intent：** FST 为可选项；VCD 仍为 CAP-5 默认。  
-  - **success：** 开关写出可被 GTKWave 或 Surfer 打开的 FST（允许经 Verilator `--trace-fst` 或文档化的 vcd2fst 路径；不要求自研 FST writer）；关闭时仍写 VCD。  
+  - **intent：** FST 可选；VCD 仍为默认。  
+  - **success：** 开关写出可被 GTKWave 或 Surfer 打开的 FST（允许 Verilator `--trace-fst` 或文档化 vcd2fst；不要求自研 FST writer）；关闭时仍写 VCD。  
   - **phase：** P2a。
 
 - **FR32 — 解释器与编译 tick 引擎**  
   - **intent：** 同一 FrozenHir 可用解释或编译引擎 tick。  
   - **success：** 同一 suite 两引擎 `PortValues` 一致；文档 API/CLI 可选引擎。  
-  - **phase：** P2。
+  - **phase：** P2a。
 
 - **FR33 — C ABI / cdylib 仿真**  
   - **intent：** 功能与周期精确仿真可经 C ABI cdylib 消费。  
   - **success：** C harness 加载 cdylib，tick 两视图，对齐 Rust 黄金值。  
-  - **phase：** P2。
+  - **phase：** P2a。
 
 - **FR34 — 仿真覆盖率**  
   - **intent：** 仿真可报告覆盖。  
   - **success：** fixture 跑后报告至少一 hit 与一 miss（分支或翻转），格式稳定。  
-  - **phase：** P2。
+  - **phase：** P2a。
 
 ### 5.6 生态扩展
 
 **F-Ecosystem**
 
-- **FR35 — 可选 HLS 前端（无自研调度）**  
-  - **intent：** 树内 `#[hls]` 可发射 IR/C 并调用 Bambu/XLS；**不**实现自研调度器。  
-  - **success：** 当启用 HLS 路径时，`#[hls]` 至少对 **一个** 文档钉死的后端（Bambu **或** XLS，须写明）产生可复现产物；未启用时 CLI/文档标明 unsupported。无 rhdl crate 实现 scheduling。  
-  - **phase：** P2b。
+- **FR35 — HLS 前端** *(修订)*  
+  - **intent：** 算法级 Rust（`#[hls]` 或等价）→ RTL 为产品路径。  
+  - **success：** 默认文档路径下，至少一钉死后端（Bambu **或** Vitis）对夹具可复现产出可综合 RTL；CI/发布烟测覆盖；不可永久 unsupported。无树内自研 scheduler。  
+  - **phase：** P2b · UJ-5 · 与 **FR50** 联验。
 
-- **FR36 — 可综合浮点 `rhdl-float`**  
-  - **intent：** 提供可综合浮点类型产品 crate。  
+- **FR36 — 可综合浮点 `bitloom-float`**  
+  - **intent：** 可综合浮点类型产品 crate（公开名对齐 Bitloom；过渡期可双名文档）。  
   - **success：** fixture elaborate/emit；tick 对齐文档化舍入用例。  
-  - **phase：** P2。
+  - **phase：** P2c。
 
-- **FR37 — IP 产品箱与黑盒封装**  
-  - **intent：** UART/SPI/I2C/FIFO/AXI 等 IP 与外部 IP 黑盒封装。  
-  - **success：** 至少一个树内 IP + 一个黑盒 wrapper 可 elaborate/emit，外部实例保持不透明。  
-  - **phase：** P2。
+- **FR37 — IP 产品箱与黑盒** *(修订)*  
+  - **intent：** 一级硬件 IP + 黑盒。  
+  - **success：** 树内至少 **FIFO + UART** 可 elaborate/emit/tick；另至少一黑盒 wrapper。完整五类见 **FR48**。  
+  - **phase：** P2c · UJ-5。
 
-- **FR38 — HIR 可视化、LSP 与 HTML 文档**  
-  - **intent：** FrozenHir 驱动可视化与 HTML 文档；LSP 为后续增强。  
-  - **success：** 同一 fixture 产出 HTML（含模块/端口与实例层次列表）。完整 LSP hover/goto **deferred**（见 `docs/fr38-viz-lsp.md`）。  
-  - **phase：** P2。
+- **FR38 — 可视化与 HTML** *(修订)*  
+  - **intent：** 内置可视化（概述 §1.3.10）。  
+  - **success：** 同一 fixture：**HTML/文档化层次视图** + **时序图或等价波形视图**（可基于 VCD/FST，但须产品命令/文档入口；不得仅「用户自行打开 GTKWave」）。完整 LSP 可分阶段。  
+  - **phase：** P2c → P3 与 **FR49** 联验。
 
 - **FR39 — 形式验证 / SVA 导出**  
   - **intent：** 可向 formal/SVA 流程导出。  
   - **success：** 含断言的 fixture 导出 SVA 或文档化 formal 输入；假断言可被检查器失败。  
-  - **phase：** P2。
+  - **phase：** P2b。
 
-- **FR40 — 额外 CLI 动词**  
-  - **intent：** CLI 覆盖常用工作流动词；`cargo rhdl build` 仍为生成主路径。  
-  - **success：** 已交付 `build` / `firtool` / `sim-engines` / `hls`（各有 `--help` 与 smoke）。`check`/`import`/`visualize`/`wave`/`doc`/`build-sim` **deferred**（见 `docs/fr40-cli-verbs.md`）。  
-  - **phase：** P2。
+- **FR40 — 额外 CLI 动词** *(修订)*  
+  - **intent：** CLI 覆盖常用工作流动词；`cargo bitloom build` 仍为生成主路径。  
+  - **success：** 已有 `build` / `firtool` / `sim-engines` / `hls`。**P3 前必须**交付（名称可调整，能力不可缺）：`import`（FR46 反向）、`visualize` 或 `doc`（FR49 层次）、`wave` 或等价（FR49 时序/波形入口）。其余动词仍可后续加。  
+  - **phase：** P2c / P3。
+
+### 5.7 概述字面升格（新 · 2026-08-21）
+
+**F-Overview-Literal**
+
+- **FR46 — Bitloom ↔ Chisel 双向可维护源码互操作**  
+  - **intent：** 概述 §1.3.7 / §1.5.3：以 FIRRTL 为桥的**双向**转换与混合设计。  
+  - **success：**  
+    1. Bitloom → Chisel Scala（满足 FR28：**可编译** + 端口/层次谓词；机械风格可接受）；  
+    2. Chisel 或 `.fir` → Bitloom 可编辑模块表面或 FrozenHir 再 emit，公开端口与实例图往返谓词通过；  
+    3. 文档化混合设计夹具可进入同一后端流程。  
+  - **phase：** P3 · UJ-4 · SM-6。**门禁：** 无 NFR14 风险记录不得标 ready。
+
+- **FR47 — 双视图模拟器生成与桥接**  
+  - **intent：** 概述 §1.3.11 / §1.5.5。  
+  - **success：** CLI/API **生成**功能模拟器工件（**Rust crate**，Open Q6 已关闭）与周期精确模拟器工件；二者经桥接或对照运行；与 FR30 联验；故意破坏等价则 fail。  
+  - **phase：** P3 · UJ-6 · SM-7。**门禁：** NFR14。
+
+- **FR48 — 一级 IP 库（UART / SPI / I2C / FIFO / AXI）**  
+  - **intent：** 概述 §1.3.9 / §1.5.4。  
+  - **success：** 五类均有可 `bitloom-prelude` 依赖例化的官方 IP；各至少一 smoke：elaborate → emit → tick（或文档等价）。**AXI 类（Open Q7 已关闭）= AXI4-Lite 最小从接口**即达标；另保留黑盒路径。  
+  - **phase：** P3 · UJ-5 · SM-6。**门禁：** NFR14（含稳定收编/树外策略）。
+
+- **FR49 — 内置层次图与时序图**  
+  - **intent：** 概述 §1.3.10。  
+  - **success：** 产品入口生成**模块层次图**与**时序图**（或等价交互视图）；夹具可无人工手写 GTKWave 脚本作为唯一路径。  
+  - **phase：** P3 · UJ-6。**门禁：** NFR14。
+
+- **FR50 — HLS 产品路径（概述 §1.3.8）**  
+  - **intent：** 从算法级 Rust 自动生成 RTL 为对外承诺。  
+  - **success：** 与加强后的 FR35 联验；发布文档将 HLS 列为支持功能；至少一个端到端算法夹具进 CI。  
+  - **phase：** P2b / P3。
+
+- **FR51 — 参数化复合类型 `Bundle` / `Vec`**  
+  - **intent：** 概述 §1.3.4 复合结构参数化。  
+  - **success：** 文档化 `Bundle` 与 `Vec<T,N>`（或等价）可 elaborate/emit/tick；位宽/方向错误在 emit 前失败。  
+  - **phase：** P3。
+
+- **FR52 — 显式 ClockDomain 产品叙事与跨域强制**  
+  - **intent：** 概述 §1.5.2。  
+  - **success：** 文档与夹具展示 ClockDomain（或等价）绑定时钟/复位极性/同步·异步；跨域无显式同步器则 freeze 失败。  
+  - **phase：** P1（机制随 FR23）/ P3（对外叙事收口）。
 
 ## 6. Non-Functional Requirements
 
 | ID | 要求 | Phase |
 |----|------|-------|
-| **NFR3** | linux-x64：下载钉死 `firtool-1.155.0` 的 `firrtl-bin-linux-x64.tar.gz`，校验 sibling `.sha256`，缓存可离线，支持 `RHDL_FIRTOOL_PATH`；默认不信任 PATH firtool。 | P0 |
-| **NFR10** | HIR→RHDL 源码再生仅调试；非产品互转格式；发行测试不宣称源码往返稳定。 | P0 |
-| **NFR11** | firtool 资产覆盖 macos / windows / linux-aarch64；**同一套**下载/`.sha256`/缓存/`RHDL_FIRTOOL_PATH` 机制（扩展 NFR3 的平台三元组）；不支持的平台给出明确错误。 | P2c |
-| **NFR12** | 默认钉 1.155.0，直至有记录的 Chisel 配对再升到 1.156.0；升钉须更新校验表。 | P0 |
-| **NFR13** | MSRV 为 rustc **1.97.1**；workspace/`rust-version`/CI/文档一致（原「升至 1.98.0」因上游未发布而修订）。 | P2 |
+| **NFR3** | linux-x64：钉死 firtool 下载+`.sha256`+缓存；支持文档化 firtool 路径覆盖；默认不信任 PATH。 | P0 |
+| **NFR10** | HIR→源码再生仍可仅调试；**不**因 FR46 而把「调试再生」冒充 Chisel 双向合同。 | P0 |
+| **NFR11** | firtool 资产 macos / windows / linux-aarch64；同机制。 | P2c |
+| **NFR12** | 默认 firtool 钉死版本直至有记录的 Chisel 配对再升；升钉更新校验表。 | P0 |
+| **NFR13** | MSRV rustc **1.97.1**；workspace/CI/文档一致。 | P2c |
+| **NFR14** | **P3 风险门禁（强制）：** 每个 FR46/47/48/49（及启动前的 FR50 若尚无记录）在 epic 标 `ready` **之前**，须在 `_agile-output/implementation-artifacts/`（或 epic 故事文件）存在风险记录，字段至少含：`(a)` 上游约束（如 CIRCT/Chisel 版本、HLS 许可）、`(b)` 粗工期带、`(c)` **禁止的静默降级**清单（例：不得把 FR46 改回「尽力失败」而不改本 PRD）、`(d)` 负责人。缺记录 = 不得开工。并行 P3 多项时另记 Chipyard 式维护风险。 | P3 |
 
-继承阶段一约束：合法 Rust eDSL；显式 comb/seq；同位宽；无云控；互转契约 FrozenHir↔FIRRTL 6 文本；禁止自研 HLS 调度；禁止发布 `rhdl`/`rhdl-bits`。
+继承：合法 Rust eDSL；显式 comb/seq；同位宽；无云控；禁止发布 `rhdl`/`rhdl-bits`。  
+**不再继承：** 「互转契约仅 FrozenHir↔FIRRTL 文本、禁止 Chisel 源码合同」「禁止 HIR→功能模拟器生成」。
 
 ## 7. Assumptions（索引）
 
-- [ASSUMPTION] FR 编号自 FR22 起连续；FR21/NFR3 复用阶段一编号以关闭缺口。
-- [ASSUMPTION] 「升格为 FR」含分阶段交付；P2 项仍是正式需求，不是 later-product 垃圾桶。
-- ~~[ASSUMPTION] CDC 机制待 architecture~~ — **已关闭：** 见 AD-22 / Open Q1。
-- [ASSUMPTION] 工具链旅程 UJ-1…3 足够 launch 文档；不设独立 UX 规格。
-- [ASSUMPTION] Finalize 后 `later-product.md` 改为指向本 PRD 的索引，不再作为唯一需求源。
+- [ASSUMPTION] 公开品牌/发布名 = Bitloom/`bitloom`；概述文件本轮不改。
+- [ASSUMPTION] 外挂 HLS 调度可接受；树内不实现 scheduler。
+- [ASSUMPTION] FR46 可在 CIRCT 时代通过「生成 Scala + 导入 `.fir`/CIRCT」组合满足，不要求恢复已删除的 Scala FIRRTL Parser API——但验收不因上游删除 API 而自动豁免。
+- [ASSUMPTION] P2a→P2b→P2c→P3 为默认顺序；同桶可并行 epic。
+- [ASSUMPTION] UJ-1…6 足够 launch 文档；不另开 UX 规格。
+- 既有：CDC=AD-22；Mem 友好名=AD-21；FST 不自研 writer。
 
 ## 8. Open Questions
 
-1. ~~FR23 的 CDC 机制选型~~ — **已关闭（2026-08-19）：** 由架构脊柱 **AD-22** 采纳 Clash 式 phantom 域；合法跨越仅语言级 `DoubleFlop` / `SyncFIFO`。若改选型须修订 AD-22，不得 silent 分叉。
-2. ~~Mem 用户 API 是否暴露 CHIRRTL 友好名~~ — **已关闭（2026-08-19）：** **暴露** CHIRRTL 友好名（`Mem` / `SyncReadMem` 及文档化的 `cmem`/`smem` 语义对应）；FIRRTL 文本互转与降级仍锚定规范 `mem`（AD-21）。
-3. ~~FST 自研 writer~~ — **已决议（Finalize）：** 不要求自研；Verilator/vcd2fst 即可（见 FR31）。
-4. ~~权威边界~~ — **已决议（Finalize）：** 阶段一=SPEC；阶段二+=本 PRD；`later-product.md`=索引。
+1. ~~FR23 CDC~~ — 已关闭（AD-22）。  
+2. ~~Mem 友好名~~ — 已关闭（AD-21）。  
+3. ~~FST writer~~ — 已关闭。  
+4. ~~权威边界~~ — 已关闭；概述字面由 FR46–FR52 进合同；概述文件同步另任务。  
+5. ~~FR46「可维护」条~~ — **已关闭（Finalize 2026-08-21）：** 可编译 + 端口/层次谓词；允许机械风格。  
+6. ~~FR47 功能模拟器形态~~ — **已关闭：** 生成 Rust crate；不强制 SystemC。  
+7. ~~FR48 AXI 范围~~ — **已关闭：** AXI4-Lite 最小从接口算 AXI 类达标。  
 
-## 9. Traceability（later-product → FR）
+**非阻塞跟进（不挡 Finalize）：** 概述 `.md` 与 Bitloom 命名/elaborate 叙事对齐；调研 reconcile 中 HLS 许可 spike、IP 稳定收编细则 → 架构/epic。
+
+## 9. Traceability
+
+### 9.1 later-product → FR（基线，仍有效）
 
 | later-product 条目 | FR/NFR |
 |--------------------|--------|
-| Multi-clock HIR; CDC phantom; DoubleFlop/SyncFIFO | FR23 |
-| Async reset; clock gating/enables | FR24, FR25 |
-| Mem / sync-read vs cmem/smem | FR26 |
-| Analog, InOut, tri-state | FR27 |
-| FIRRTL→Chisel Scala generator | FR28 |
-| HIR→RHDL regen (debug-only) | NFR10 |
-| bridge/abstraction/both | FR29 |
-| Dual-view formal equivalence | FR30 |
-| FST waveforms | FR31 |
+| Multi-clock / CDC | FR23, FR52 |
+| Async reset; clock gating | FR24, FR25 |
+| Mem | FR26 |
+| Analog/InOut/tri-state | FR27 |
+| FIRRTL→Chisel | FR28, FR46 |
+| HIR→源码 regen debug | NFR10 |
+| bridge/abstraction/both | FR29, FR47 |
+| Dual-view equivalence | FR30, FR47 |
+| FST | FR31 |
 | Interpreter vs compiled tick | FR32 |
-| C ABI / cdylib | FR33 |
+| C ABI | FR33 |
 | Coverage | FR34 |
-| HLS `#[hls]` + Bambu/XLS | FR35 |
-| rhdl-float | FR36 |
-| IP crates + black-box | FR37 |
-| Visualization, LSP, HTML | FR38 |
-| Formal / SVA export | FR39 |
-| CLI verbs build/firtool/sim-engines/hls | FR40 |
-| firtool macos/windows/linux-aarch64 | NFR11 |
-| firtool-1.156.0 until Chisel pairs | NFR12 |
-| rustc 1.97.1 MSRV | NFR13 |
-| （调研缺口）README / rhdl-rs | FR21 |
-| （调研缺口）linux-x64 firtool pin | NFR3 |
-| （调研加厚）单时钟表面 | FR22 |
-| `language-surface.md` Deferred：`Bundle` / `Vec` | **非本 PRD FR**（FR22 NON-GOAL）；升格需新变更 |
-| `Polarity` / `ResetKind` | 随 FR23/FR24 架构选型一并定；未单列 FR |
+| HLS | FR35, FR50 |
+| float crate | FR36 |
+| IP + black-box | FR37, FR48 |
+| Visualization / LSP / HTML | FR38, FR49 |
+| Formal / SVA | FR39 |
+| CLI verbs | FR40 |
+| firtool multi-arch | NFR11 |
+| firtool pin policy | NFR12 |
+| MSRV | NFR13 |
+| README / 发布名 | FR21 |
+| linux-x64 firtool | NFR3 |
+| 单时钟表面 | FR22 |
+| Bundle / Vec | **FR51**（升格；不再是「非本 PRD FR」） |
+
+### 9.2 概述 → FR（2026-08-21）
+
+| 概述条目 | FR |
+|----------|-----|
+| §1.3.1–6 类型/所有权/comb-seq/参数化/Cargo/可综合 | 阶段一 + FR22 等（已覆盖） |
+| §1.3.7 / §1.5.3 Chisel 双向 | FR28, FR46 |
+| §1.3.8 / §1.5.4 HLS | FR35, FR50 |
+| §1.3.9 / §1.5.4 IP 库 | FR37, FR48 |
+| §1.3.10 可视化 | FR38, FR49 |
+| §1.3.11 / §1.5.5 多视图与双模拟器 | FR29, FR30, FR47 |
+| §1.5.1 所有权防多驱动 | 阶段一 FR15 |
+| §1.5.2 ClockDomain / 显式 CDC | FR23, FR24, FR52 |
+| §1.3.4 复合参数化缺口 | FR51 |

@@ -24,6 +24,10 @@ stepsCompleted:
   - step-02-design-epics-phase-6
   - step-03-create-stories-phase-6
   - step-04-final-validation-phase-6
+  - step-01-validate-prerequisites-phase-7
+  - step-02-design-epics-phase-7
+  - step-03-create-stories-phase-7
+  - step-04-final-validation-phase-7
 status: complete
 phase1Status: complete
 phase2Status: complete
@@ -31,22 +35,24 @@ phase3Status: complete
 phase4Status: complete
 phase5Status: complete
 phase6Status: complete
+phase7Status: complete
 phase3Scope: Bitloom rename + maturity closeout + crates.io publish
 phase4Scope: True standalone after cargo install (bitloom-* publish graph)
 phase5Scope: Teaching RV32 example core + step-by-step tutorial (Bitloom)
 phase6Scope: Episode II — full user RV32I immediates → classic 5-stage+hazards → optional Zicsr/M-trap
+phase7Scope: Overview-literal closure (PRD amendment overview-literal-C — FR46–52 / strengthened FR28–40 / NFR14 risk gate)
 inputDocuments:
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md
   - _agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
-  - _agile-output/planning-artifacts/research/technical-rv32-episode-ii-pipeline-zicsr-full-rv32-2026-08-20/research.md
-  - docs/tutorials/rv32-episode-i/99-episode-ii-outline.md
-  - examples/rv32_core/SUBSET.md
-  - examples/rv32_core/COMPLIANCE.md
-  - AGENTS.md
-excludedFromPhase6Rewrite:
-  - Phase 1–5 epics/stories (Epic 1–16 retained as historical complete)
+  - _agile-output/planning-artifacts/epics.md
+excludedFromPhase7Rewrite:
+  - Phase 1–6 epics/stories (Epic 1–18 retained as historical complete)
 uxDesign: none
+idCollisionNote: >
+  Phase-3 inventory already used FR46 (Trusted Publishing) and NFR14 (crates.io FCFS).
+  PRD 2026-08-21 amendment reuses FR46–FR52 and NFR14 for overview-literal / risk gate.
+  Phase-7 stories MUST disambiguate (proposed: keep PRD IDs as contract; refer historical as FR46-tp / NFR14-crates).
 ---
 
 # rhdl - Epic Breakdown
@@ -55,7 +61,7 @@ uxDesign: none
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。**阶段五：** 教学向 **RV32 示例核 + step-by-step 教程**（主需求源：RV32 technical research；继承 AD / 真独立合同）。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。**阶段七（进行中）：** PRD amendment `overview-literal-C` — 概述字面闭环（双向 Chisel、双模拟器生成、一级 IP、内置可视化、HLS 产品路径、Bundle/Vec、ClockDomain 叙事）。无 UX。
 
 ## Requirements Inventory
 
@@ -1573,3 +1579,579 @@ So that 不会再把流水/CSR 当成「纯延期空大纲」，也不会误走 
 **And** 更新 README 与 Episode II 教程首页：范围与非目标（无 cache/MMU/Linux/动态预测；VexRiscv 仅对照）（FR70）
 **Then** 持续声明 Bitloom / 与 `samitbasu/rhdl` 无关（NFR33）
 **And** 写明 CSR 章可选；Epic 17 完成不依赖 18.3（NFR32）
+
+
+## Phase 7 Requirements Inventory
+
+> 范围确认（2026-08-21）：**追加阶段七**，不重写 Epic 1–18。来源：PRD `prd-rhdl-2026-08-19` amendment `overview-literal-C` + addendum + ARCHITECTURE-SPINE。用户 ①C：概述字面硬 FR；推翻「Chisel Scala 非契约」「禁止 HIR→功能模拟器生成」。Launch=P0+P1+Bitloom 身份；P3/SM-6 不挡 Launch，但挡「概述愿景已全部兑现」表述。
+
+### ID collision (must resolve before / during epic design)
+
+| ID | Historical (Phase 3 epics) | PRD amendment (Phase 7 contract) |
+|----|---------------------------|----------------------------------|
+| FR46 | Trusted Publishing / release-plz | Bitloom ↔ Chisel 双向互操作 |
+| NFR14 | crates.io FCFS / 禁止 rhdl 名 | P3 风险门禁（epic ready 前） |
+
+**Disambiguation（已确认 2026-08-21）：** 合同以 **PRD 正文 FR46–FR52 / NFR14（风险门禁）** 为准；历史项改称 **FR46-tp**、**NFR14-crates**（仅文档别名，不改已完成故事实现）。
+
+### Phase 7 Functional Requirements (from PRD)
+
+**Strengthened baseline (re-work / raise bar if not already meeting new success):**
+
+FR28: FIRRTL/FrozenHir → Chisel Scala **必须**在钉死 Chisel+firtool 下编译通过；端口/层次往返谓词；允许机械风格；禁止「尽力失败」交差。
+FR29: 手写 bridge/abstraction/both；PortValues 对照；**不再**禁止生成功能模拟器（生成见 FR47）。
+FR30: 双视图等价为产品能力；P3 收口须接入 FR47 生成路径。
+FR35: HLS 为产品路径；钉死 Bambu **或** Vitis；CI/烟测；不可永久 unsupported；无树内 scheduler。
+FR37: 树内至少 FIFO+UART + 一黑盒；完整五类见 FR48。
+FR38: 产品入口层次视图 + 时序/波形视图（不得仅「用户自己开 GTKWave」）。
+FR40: 既有 build/firtool/sim-engines/hls；P3 前必须有 import、visualize|doc、wave（或等价能力）。
+
+**New overview-literal FRs:**
+
+FR46: Bitloom ↔ Chisel 双向（正向生成可编译 Scala + 反向导入 + 混合夹具）；NFR14 门禁。
+FR47: 生成功能模拟器（Rust crate）+ 周期精确模拟器工件；桥接/对照；与 FR30 联验。
+FR48: 一级 IP：UART/SPI/I2C/FIFO/AXI（AXI=AXI4-Lite 最小从）；各 smoke elaborate→emit→tick。
+FR49: 内置层次图 + 时序图产品入口。
+FR50: HLS 产品路径与 FR35 联验；文档列为支持；端到端 CI 夹具。
+FR51: `Bundle` / `Vec<T,N>`（或等价）可综合路径；位宽/方向错误 emit 前失败。（推翻 AD-20「Bundle/Vec 不得进入」直至新 AD。）
+FR52: ClockDomain 产品叙事 + 跨域强制（机制随 FR23/AD-22；P3 对外收口）。
+
+### Phase 7 NonFunctional Requirements
+
+NFR14: **P3 风险门禁** — FR46/47/48/49（及适用 FR50）在 epic→ready 前须有风险记录：上游约束、粗工期带、禁止静默降级清单、负责人；缺则不得开工；并行多项记维护叠加风险。
+NFR10: HIR→源码再生仍可仅调试；不得冒充 FR46 Chisel 双向合同。（延续并强调）
+NFR3 / NFR12: firtool 钉死与升钉策略仍约束 FR28/FR46 配对。
+NFR13: MSRV 1.97.1。
+
+### Phase 7 Additional Requirements (Architecture)
+
+- 遵守 AD-1…AD-26 不变量，**但本阶段将冲突项显式升级为架构变更故事：**
+  - **AD-5 / 历史 FR14：** 「禁止从 HIR 降低 TLM」与 **FR47** 冲突 → 须修订 AD-5（允许生成 Rust 功能模拟器；仍可不承诺 SystemC TLM-2.0）。
+  - **AD-20：** Bundle/Vec 禁止与 **FR51** 冲突 → 须新 AD 或修订 AD-20。
+  - **NFR9 / 历史「不承诺可维护 Chisel Scala」** 与 **FR28/FR46** 冲突 → 文档与脊柱需同步推翻记录。
+  - **FR46** 实现选项（addendum A/B/C）须在开工前写入脊柱 AD（CIRCT 时代无 Scala FIRRTL Parser）。
+- 无 UX；无新 starter 模板。
+- 设计 crate 仍只依赖 `bitloom-prelude`（AD-6）。
+- NFR14 风险记录落 `_agile-output/implementation-artifacts/` 或故事文件。
+
+### Phase 7 UX Design Requirements
+
+无 UI。无 UX-DR。
+
+### Phase 7 FR Coverage Map
+
+FR28: Epic 20 — FIRRTL→可编译 Chisel（机械风格可）
+FR29: Epic 21 — bridge/abstraction/both（为生成路径铺路）
+FR30: Epic 21 — 双视图等价（与 FR47 联验）
+FR35: Epic 24 — HLS 产品路径（钉死后端 + CI）
+FR37: Epic 22 — FIFO+UART + 黑盒（IP 起步）
+FR38: Epic 23 — 层次 + 时序/波形产品入口
+FR40: Epic 20 + Epic 23 — `import`；`visualize`/`doc`/`wave`
+FR46: Epic 20 — Bitloom ↔ Chisel 双向
+FR47: Epic 21 — 生成双模拟器 + 桥接
+FR48: Epic 22 — UART/SPI/I2C/FIFO/AXI4-Lite 一级 IP
+FR49: Epic 23 — 内置层次图与时序图
+FR50: Epic 24 — HLS 与 FR35 联验 / 文档列为支持
+FR51: Epic 19 — Bundle / Vec 可综合
+FR52: Epic 19 — ClockDomain 叙事与跨域强制收口
+NFR14: Epic 19 提供模板；Epic 20–24 ready 前门禁
+
+### Phase 7 Epic List
+
+### Epic 19: 语言表面与合同解锁
+设计者可使用 `Bundle`/`Vec` 编写可综合 RTL，并获得可验收的 ClockDomain/CDC 产品叙事；架构 AD 与 ①C 对齐；NFR14 风险记录模板就位，供后续 P3 epic 开工门禁。
+**FRs covered:** FR51, FR52；附加：修订 AD-5、AD-20；NFR14 模板
+**Depends on:** Phase 1–6 complete（语言/CDC 基线）。不依赖 Epic 20–24。
+
+### Epic 20: 与 Chisel 双向互操作
+设计者可将 Bitloom 模块导出为可编译 Chisel Scala，再导回 Bitloom/FrozenHir，并有文档化混合夹具与 `import` CLI。
+**FRs covered:** FR28, FR46, FR40(`import`)
+**Depends on:** Epic 19（合同/AD）；既有 FIRRTL 路径。不依赖 Epic 21–24。
+
+### Epic 21: 双视图模拟器生成
+设计者可对双视图模块**生成** Rust 功能模拟器与周期精确模拟器工件，经桥接/对照运行，故意不一致则 fail。
+**FRs covered:** FR29, FR30, FR47
+**Depends on:** Epic 19（AD-5 修订）。可与 20/22/23/24 并行（各需 NFR14）。
+
+### Epic 22: 一级 IP 库
+设计者可 `bitloom-prelude` 依赖例化 UART/SPI/I2C/FIFO/AXI4-Lite（及黑盒），各有 elaborate→emit→tick smoke。
+**FRs covered:** FR37, FR48
+**Depends on:** Epic 19（语言表面若 IP 用 Bundle）。可与 20/21/23/24 并行。
+
+### Epic 23: 内置层次与时序可视化
+设计者通过产品 CLI/文档入口获得模块层次图与时序图（或等价视图），不以「自行打开 GTKWave」为唯一完成路径。
+**FRs covered:** FR38, FR49, FR40(`visualize`/`doc`/`wave`)
+**Depends on:** 既有 VCD/FST。可与 20–22/24 并行。
+
+### Epic 24: HLS 产品路径
+设计者在默认文档路径下用 `#[hls]`（或等价）经钉死后端得到可综合 RTL，且有 CI/烟测；文档将 HLS 列为支持功能。
+**FRs covered:** FR35, FR50
+**Depends on:** Epic 19（NFR14）。可与 20–23 并行。
+
+
+## Epic 19: 语言表面与合同解锁
+
+设计者可使用 `Bundle`/`Vec` 编写可综合 RTL，并获得可验收的 ClockDomain/CDC 产品叙事；架构 AD 与 ①C 对齐；NFR14 风险记录模板就位，供后续 P3 epic 开工门禁。  
+**FRs covered:** FR51, FR52；附加：修订 AD-5、AD-20；NFR14 模板  
+**Depends on:** Phase 1–6 complete。不依赖 Epic 20–24。
+
+### Story 19.1: NFR14 风险记录模板
+
+As a PM / 架构 / 实现负责人,
+I want 一份可复制的 P3 风险记录模板与使用说明,
+So that Epic 20–24 在标 ready 前有强制门禁，且不与历史 NFR14-crates 混淆。
+
+**Acceptance Criteria:**
+
+**Given** `_agile-output/implementation-artifacts/` 可写
+**When** 新增 NFR14 风险记录模板（建议路径如 `implementation-artifacts/nfr14-risk-record-template.md`）及简短使用说明
+**Then** 模板字段至少含：`(a)` 上游约束、`(b)` 粗工期带、`(c)` 禁止的静默降级清单、`(d)` 负责人（NFR14）
+**And** 文档写明：缺记录不得将 FR46/47/48/49（及适用 FR50）对应 epic/story 标为 ready
+**And** 明确区分历史别名 **NFR14-crates**（crates.io FCFS）与本门禁 **NFR14**
+**And** 说明并行多项 P3 工作时应另记维护叠加 / Chipyard 式风险
+
+### Story 19.2: 修订 AD-5（允许生成 Rust 功能模拟器）
+
+As a 架构维护者,
+I want AD-5 与 ①C / FR47 对齐,
+So that 「生成功能模拟器」不再被脊柱禁止，同时仍可不承诺 SystemC TLM-2.0。
+
+**Acceptance Criteria:**
+
+**Given** `ARCHITECTURE-SPINE.md` 中 AD-5 仍写禁止从 HIR 降低 TLM
+**When** 修订 AD-5（或追加 ADOPTED 修订段）：允许工具链**生成 Rust 功能模拟器 crate**；显式保留「不强制 / 不承诺 SystemC TLM-2.0」；周期精确仍仅从 FrozenHir `tick`
+**Then** 修订说明引用 PRD FR47 与推翻表；历史「禁止 HIR→TLM」不再作为阻断 FR47 的依据
+**And** `AGENTS.md` / 项目上下文若仍复述旧禁令则同步更正或指向脊柱
+**And** 不在本故事实现 FR47 生成器本身
+
+### Story 19.3: 修订 AD-20（允许 Bundle/Vec）
+
+As a 架构维护者,
+I want AD-20 不再禁止可综合 `Bundle`/`Vec`,
+So that FR51 实现有合法架构依据。
+
+**Acceptance Criteria:**
+
+**Given** AD-20 声明 Bundle/Vec 不得进入可综合路径
+**When** 修订 AD-20 或新增 AD（编号由架构选定）：允许文档化的 `Bundle` 与 `Vec<T,N>`（或等价）进入可综合路径，并要求位宽/方向错误在 emit 前失败
+**Then** 修订引用 PRD FR51；明确与 FR22「本 FR 非目标」的边界（复合类型由 FR51 交付）
+**And** 不在本故事完成完整语言实现（留给 19.4）
+
+### Story 19.4: 实现 Bundle / Vec 可综合路径（FR51）
+
+As a 硬件设计者,
+I want 使用 `Bundle` 与 `Vec<T,N>`（或文档等价 API）描述复合端口/数组,
+So that 参数化复用不再卡在标量表面。
+
+**Acceptance Criteria:**
+
+**Given** Story 19.3 架构修订已合入
+**When** 在 `bitloom-prelude` / builder / emit 路径实现文档化的 Bundle 与 Vec（或等价）
+**Then** 至少一 fixture：含 Bundle 与/或 Vec 的模块可 elaborate → emit `.v` → `tick`（FR51）
+**And** 位宽或方向不匹配在发出网表前失败（延续 FR8 精神）
+**And** 设计 crate 仅依赖 `bitloom-prelude`
+**And** 相关 `cargo test` / `cargo bitloom build` 通过
+
+### Story 19.5: ClockDomain 产品叙事与夹具（FR52）
+
+As a 有 CDC 经验的设计者,
+I want 文档与夹具展示 ClockDomain（或等价）绑定与跨域强制,
+So that 概述 §1.5.2 的对外叙事可验收，而非仅内部实现细节。
+
+**Acceptance Criteria:**
+
+**Given** FR23 / AD-22 多时钟与 DoubleFlop/SyncFIFO 已存在（Phase 2）
+**When** 更新用户可见文档 + 至少一演示夹具：ClockDomain（或等价）绑定时钟/复位极性/同步·异步；非法跨域 freeze 失败；合法路径经 DoubleFlop 或 SyncFIFO
+**Then** 夹具可 elaborate/emit/按域 tick 或文档等价验收（FR52）
+**And** 不得仅靠「文档纪律」而无 freeze 失败路径
+**And** 品牌与 CLI 表述为 Bitloom / `cargo bitloom`
+
+
+## Epic 20: 与 Chisel 双向互操作
+
+设计者可将 Bitloom 模块导出为可编译 Chisel Scala，再导回 Bitloom/FrozenHir，并有文档化混合夹具与 `import` CLI。  
+**FRs covered:** FR28, FR46, FR40(`import`)  
+**Depends on:** Epic 19（合同/AD）；既有 FIRRTL。不依赖 Epic 21–24。  
+**Gate:** 开工前须有本 epic 的 NFR14 风险记录（可用 19.1 模板）。
+
+### Story 20.1: NFR14 风险记录（Chisel 双向）
+
+As a 实现负责人,
+I want 为 FR28/FR46 填写 NFR14 风险记录,
+So that Epic 20 可合法标 ready 并开工，且禁止静默降级回「尽力失败」。
+
+**Acceptance Criteria:**
+
+**Given** Story 19.1 模板存在
+**When** 创建 Epic 20 / FR28+FR46 风险记录（implementation-artifacts 或故事旁路文件）
+**Then** 字段含上游约束（至少：Chisel/firtool 钉死版本、CIRCT 无 Scala FIRRTL Parser / issue#4899）、粗工期带、禁止静默降级（含：不得把 FR28 改回「结构化尽力失败」而不改 PRD）、负责人（NFR14）
+**And** 引用 addendum FR46 选项 A/B/C 中拟选方向（可标 `[ASSUMPTION]` 待 AD）
+**And** 无此记录则后续 20.2–20.5 不得标 ready
+
+### Story 20.2: 架构 AD — FIRRTL→可编译 Chisel（FR28 条）
+
+As a 架构维护者,
+I want 脊柱明确 FR28/FR46 的验收条与 CIRCT 时代实现边界,
+So that 实现不依赖已删除的 Scala FIRRTL Parser，且「可维护」=可编译+端口/层次谓词。
+
+**Acceptance Criteria:**
+
+**Given** Story 20.1 风险记录已存在
+**When** 新增或修订 ARCHITECTURE-SPINE AD：Bitloom/FrozenHir/`.fir` → **可编译** Chisel Scala；验收=钉死 Chisel+firtool 下编译通过 + 公开端口名/宽/向与实例层次往返谓词；允许机械风格（PRD Open Q5 已关闭）
+**Then** AD 写明不要求恢复 Chisel 5 前的 Scala `Parser.parse` API
+**And** 记录与历史 NFR9「不承诺可维护 Chisel」的推翻关系
+**And** 不在本故事完成代码生成器
+
+### Story 20.3: FIRRTL/FrozenHir → 可编译 Chisel（FR28）
+
+As a 需要对接 Chisel 工具链的设计者,
+I want 从 FrozenHir 或 `.fir` 生成在钉死版本下可编译的 Chisel Scala,
+So that 概述正向互转腿可验收，且不再以「尽力失败」交差。
+
+**Acceptance Criteria:**
+
+**Given** Story 20.2 AD 已合入；文档钉死 Chisel 与 firtool 版本对
+**When** 实现生成路径（CLI 或库 API），对文档 fixture 产出 Scala
+**Then** 在钉死环境下 **编译通过**（FR28）
+**And** 公开端口名/宽/向与实例层次满足文档往返谓词（FR28）
+**And** 「结构化尽力失败」**不**算本故事完成
+**And** 相关自动化测试或 CI job 可复现（允许标记可选 runner 若需 JVM）
+
+### Story 20.4: 反向导入 Chisel/`.fir` → Bitloom（FR46 腿 2）
+
+As a 混合设计者,
+I want 将 Chisel 产物或 `.fir` 导入为 Bitloom 可编辑表面或 FrozenHir 再 emit,
+So that 双向互操作的反向腿可验收。
+
+**Acceptance Criteria:**
+
+**Given** Story 20.3 正向生成可用；既有 FIRRTL 导入能力可扩展
+**When** 实现/加固导入路径：`.fir`（及文档化的 Chisel 工作流输出）→ FrozenHir 或 Bitloom 模块表面 → elaborate/emit/tick
+**Then** 公开端口与实例图满足与正向对称的往返谓词（FR46）
+**And** 至少一夹具覆盖「导出再导入」或「外部 `.fir` 导入再 emit」
+**And** 设计依赖仍仅 `bitloom-prelude`（导入工具可在 bitloom CLI/crates）
+
+### Story 20.5: `import` CLI + 混合夹具（FR40 / FR46 腿 3）
+
+As a CLI 用户,
+I want `cargo bitloom import`（或文档等价动词）与混合设计夹具,
+So that 双向互操作有产品入口，且一侧 Bitloom、一侧 Chisel 产物能进入同一后端流程。
+
+**Acceptance Criteria:**
+
+**Given** Story 20.3–20.4 库能力可用
+**When** 交付 `import` 子命令（`--help` + smoke）并文档化用法（FR40）
+**Then** 存在混合夹具：Bitloom 模块与 Chisel/`.fir` 产物在文档流程下进入同一 emit/后端路径（FR46）
+**And** README/教程至少一处指向该流程（UJ-4）
+**And** 品牌为 Bitloom；NFR14 禁止项未被静默违反
+
+
+## Epic 21: 双视图模拟器生成
+
+设计者可对双视图模块**生成** Rust 功能模拟器与周期精确模拟器工件，经桥接/对照运行，故意不一致则 fail。  
+**FRs covered:** FR29, FR30, FR47  
+**Depends on:** Epic 19（AD-5 修订）。可与 20/22/23/24 并行（各需 NFR14）。  
+**Gate:** 开工前须有本 epic 的 NFR14 风险记录。
+
+### Story 21.1: NFR14 风险记录（双模拟器生成）
+
+As a 实现负责人,
+I want 为 FR47/FR30 填写 NFR14 风险记录,
+So that Epic 21 可合法开工，且不把「仅手写 functional」冒充生成路径完成。
+
+**Acceptance Criteria:**
+
+**Given** Story 19.1 模板存在；Story 19.2 AD-5 已允许 Rust 功能模拟器生成
+**When** 创建 Epic 21 风险记录
+**Then** 含上游约束、粗工期带、禁止静默降级（至少：不得删除生成路径改回「仅手写对照」而不改 PRD；不得宣称 SystemC TLM 已交付）、负责人（NFR14）
+**And** 写明功能模拟器形态 = **生成 Rust crate**（PRD Open Q6 已关闭）
+**And** 无此记录则 21.2–21.5 不得标 ready
+
+### Story 21.2: 手写 bridge / abstraction / both 回归（FR29）
+
+As a 验证工程师,
+I want 既有手写多视图路径保持可用且有回归夹具,
+So that 生成路径建立在稳定的 bridge/both 语义上。
+
+**Acceptance Criteria:**
+
+**Given** 阶段二已有或可恢复的 `#[bridge]` / `#[abstraction]` / mixed `both` 支持
+**When** 整理或新增混合 fixture：按文档视图跑通，`PortValues` 对照通过（FR29）
+**Then** 文档说明手写路径与即将到来的**生成**路径的关系（生成不取代手写标注能力）
+**And** 相关 `cargo test` 通过
+**And** 本故事不要求已实现 FR47 生成器
+
+### Story 21.3: 生成 Rust 功能模拟器工件（FR47 腿 1）
+
+As a 需要快速功能验证的设计者,
+I want CLI/API 从双视图模块**生成** Rust 功能模拟器 crate/工件,
+So that 功能模拟器不是只能手写维护。
+
+**Acceptance Criteria:**
+
+**Given** Story 21.1–21.2；AD-5 允许生成 Rust 功能模拟器
+**When** 实现生成路径：输入为标注双视图的模块（或 FrozenHir + 功能视图元数据，以文档为准）
+**Then** 产出可 `cargo test`/`cargo run`（或文档等价）的 **Rust** 功能模拟器工件（FR47）
+**And** 至少一黄金夹具：生成产物对已知向量给出预期 `PortValues` 或文档等价结果
+**And** 不要求 SystemC / TLM-2.0
+**And** 设计 crate 仍只依赖 `bitloom-prelude`；生成器属工具链 crate
+
+### Story 21.4: 生成周期精确模拟器工件 + 桥接对照（FR47 腿 2）
+
+As a 需要 RTL 精度的设计者,
+I want 同时获得周期精确模拟器工件，并能与功能模拟器桥接/对照运行,
+So that 双模拟器路径完整。
+
+**Acceptance Criteria:**
+
+**Given** Story 21.3 功能模拟器生成可用；既有 `tick` / 可选 cdylib 路径
+**When** 实现周期精确模拟器工件生成（或文档化的 FrozenHir→可执行 tick 封装）并提供桥接/对照运行入口
+**Then** 同一双视图夹具可跑功能工件与周期精确工件的对照（FR47）
+**And** 对照 API/CLI 有 smoke 与文档
+**And** 故意破坏等价时对照失败（为 21.5 铺路）
+
+### Story 21.5: 双视图等价接入生成路径（FR30）
+
+As a 质量负责人,
+I want 形式/有界等价检查跑在**生成**的双模拟器上,
+So that FR30 不再仅手写模型对 tick。
+
+**Acceptance Criteria:**
+
+**Given** Story 21.4 桥接/对照可用
+**When** 将 FR30 等价检查接到 FR47 生成产物路径（扩展既有 equiv 或新命令）
+**Then** 一致夹具 pass、故意不一致 fail（FR30）
+**And** 文档写明 P3 收口验收以生成路径为准（手写路径可并存）
+**And** 自动化测试覆盖 pass 与 fail 各至少一例（SM-7）
+
+
+## Epic 22: 一级 IP 库
+
+设计者可 `bitloom-prelude` 依赖例化 UART/SPI/I2C/FIFO/AXI4-Lite（及黑盒），各有 elaborate→emit→tick smoke。  
+**FRs covered:** FR37, FR48  
+**Depends on:** Epic 19（若 IP 使用 Bundle）。可与 20/21/23/24 并行。  
+**Gate:** 开工前须有本 epic 的 NFR14 风险记录（含稳定收编/树外策略）。
+
+### Story 22.1: NFR14 风险记录（一级 IP）
+
+As a 实现负责人,
+I want 为 FR37/FR48 填写 NFR14 风险记录,
+So that IP 全线交付有工期与「禁止静默砍类」约束。
+
+**Acceptance Criteria:**
+
+**Given** Story 19.1 模板存在
+**When** 创建 Epic 22 风险记录
+**Then** 含上游约束、粗工期带、禁止静默降级（至少：不得将五类缩成「仅 FIFO」而不改 PRD；AXI 范围锁定 AXI4-Lite 最小从）、负责人（NFR14）
+**And** 记录树内 vs 官方组织下发布 crate 的治理偏好（可引用调研：新鲜 IP 宜稳定后再深绑）
+**And** 无此记录则 22.2–22.6 不得标 ready
+
+### Story 22.2: 树内 FIFO + UART + 黑盒（FR37）
+
+As a 设计者,
+I want 至少 FIFO 与 UART 一级模块及一个黑盒 wrapper 可例化,
+So that IP 起步条（FR37）先可演示。
+
+**Acceptance Criteria:**
+
+**Given** Story 22.1 风险记录存在
+**When** 交付树内（或官方包）FIFO 与 UART，另加一黑盒 wrapper
+**Then** 三者均可 elaborate → emit → tick（或黑盒文档等价不透明实例路径）（FR37）
+**And** 设计侧依赖仅为 `bitloom-prelude`（及文档化的官方 IP 包名）
+**And** 至少各一 smoke 测试
+
+### Story 22.3: SPI IP smoke（FR48）
+
+As a 设计者,
+I want 可例化的 SPI 一级 IP,
+So that FR48 五类中的 SPI 可验收。
+
+**Acceptance Criteria:**
+
+**Given** Story 22.2 模式可复用
+**When** 交付 SPI 模块（主或从，文档钉死角色与最小寄存器/流接口）
+**Then** elaborate → emit → tick smoke 通过（FR48）
+**And** README/crate 文档说明限制（非全协议栈亦可，但不得空壳无端口语义）
+
+### Story 22.4: I2C IP smoke（FR48）
+
+As a 设计者,
+I want 可例化的 I2C 一级 IP,
+So that FR48 的 I2C 类可验收。
+
+**Acceptance Criteria:**
+
+**Given** Story 22.3 完成或并行不依赖其代码（可共享脚手架）
+**When** 交付 I2C 模块（主或从，文档钉死）
+**Then** elaborate → emit → tick smoke 通过（FR48）
+**And** 文档说明范围与非目标
+
+### Story 22.5: AXI4-Lite 最小从接口（FR48）
+
+As a 设计者,
+I want AXI4-Lite 最小从接口 IP,
+So that FR48 的 AXI 类按 PRD（Open Q7）达标。
+
+**Acceptance Criteria:**
+
+**Given** Story 22.1 已锁定 AXI = AXI4-Lite 最小从
+**When** 交付可例化的 AXI4-Lite slave（文档化地址/数据宽度）
+**Then** elaborate → emit → tick smoke 通过（FR48）
+**And** 文档声明非 Full AXI / 非完整互联；达标定义为 Lite 最小从
+**And** 可选：与 UART/FIFO 的简易连接夹具（非必须）
+
+### Story 22.6: IP 索引与例化文档（FR48 收口）
+
+As a 仓库访客,
+I want 五类 IP 的统一索引与例化说明,
+So that FR48「可依赖例化」在文档层可发现、可复制。
+
+**Acceptance Criteria:**
+
+**Given** Story 22.2–22.5 各类至少一模块存在
+**When** 新增或更新 IP 索引页（README 或 `docs/`）：UART/SPI/I2C/FIFO/AXI4-Lite + 黑盒路径
+**Then** 每类有包路径、smoke 命令、已知限制（FR48）
+**And** 声明 Bitloom / 与 `samitbasu/rhdl` 无关
+**And** 确认五类均有至少一 smoke 在 CI 或 `just test` 可触达（或文档化可选 job）
+
+
+## Epic 23: 内置层次与时序可视化
+
+设计者通过产品 CLI/文档入口获得模块层次图与时序图（或等价视图），不以「自行打开 GTKWave」为唯一完成路径。  
+**FRs covered:** FR38, FR49, FR40(`visualize`/`doc`/`wave`)  
+**Depends on:** 既有 VCD/FST。可与 20–22/24 并行。  
+**Gate:** 开工前须有本 epic 的 NFR14 风险记录。
+
+### Story 23.1: NFR14 风险记录（可视化）
+
+As a 实现负责人,
+I want 为 FR38/FR49 填写 NFR14 风险记录,
+So that 「内置可视化」不会被静默降级成仅 HTML dump 或仅外部 GTKWave。
+
+**Acceptance Criteria:**
+
+**Given** Story 19.1 模板存在
+**When** 创建 Epic 23 风险记录
+**Then** 含上游约束、粗工期带、禁止静默降级（至少：不得以「用户自行打开 GTKWave」作为 FR49 唯一完成路径；不得删掉产品 `wave`/`visualize` 入口而不改 PRD）、负责人（NFR14）
+**And** 允许基于 VCD/FST 渲染，但必须有产品命令/文档入口
+**And** 无此记录则 23.2–23.5 不得标 ready
+
+### Story 23.2: 层次视图产品入口（FR38 / FR49）
+
+As a 设计者,
+I want 通过 CLI/文档入口生成模块层次视图,
+So that 概述「层次图」可验收。
+
+**Acceptance Criteria:**
+
+**Given** Story 23.1；既有或可扩展的 FrozenHir→HTML/文档能力（`rhdl-viz` 或等价）
+**When** 交付产品入口（`cargo bitloom visualize` 或 `doc`，名称可调整）从 fixture 产出**模块层次**视图（HTML 或文档化交互视图）（FR38, FR49）
+**Then** 同一夹具输出含模块/端口与实例层次（不得空壳）
+**And** `--help` + smoke 存在（FR40）
+**And** 完整 LSP 仍可延期，不阻塞本故事
+
+### Story 23.3: 时序图 / 波形产品入口（FR38 / FR49）
+
+As a 设计者,
+I want 通过产品入口获得时序图或等价波形视图,
+So that 不以手写 GTKWave 脚本为唯一路径。
+
+**Acceptance Criteria:**
+
+**Given** Story 23.2；既有 VCD 与可选 FST（FR31）路径
+**When** 交付 `wave`（或等价）产品入口：从 tick/仿真轨迹生成时序图或可浏览波形视图（可基于 VCD/FST 渲染/转码）（FR38, FR49）
+**Then** 夹具可一键（文档化命令）打开或产出可查看工件，而不仅是「请自行 gtkwave foo.vcd」
+**And** `--help` + smoke 存在（FR40）
+**And** 关闭 FST 时仍可用 VCD 路径
+
+### Story 23.4: 统一文档与 UJ-6 可视化半程
+
+As a 学习者 / 访客,
+I want README/教程说明 visualize 与 wave 的用法,
+So that UJ-6 的可视化半程可跟随操作。
+
+**Acceptance Criteria:**
+
+**Given** Story 23.2–23.3 命令可用
+**When** 更新用户文档：层次图与时序/波形入口、示例命令、输出位置
+**Then** 至少一夹具在文档中端到端可跟练（UJ-6 可视化部分）
+**And** 声明 Bitloom；写明 LSP 非本 epic 完成条件
+**And** 与 FR31 FST 可选说明交叉链接（若适用）
+
+### Story 23.5: FR38/FR49 联验收口
+
+As a 质量负责人,
+I want 同一 fixture 同时验收层次 + 时序两条可视化,
+So that SM-6 可视化部分可勾选。
+
+**Acceptance Criteria:**
+
+**Given** Story 23.2–23.4
+**When** 增加联验：同一 FrozenHir/仿真夹具跑通层次入口与时序/波形入口
+**Then** 两条产物均非空且满足文档最小内容检查（FR38, FR49）
+**And** CI 或 `just test` 可触达（或文档化可选 job + 本地必过脚本）
+
+
+## Epic 24: HLS 产品路径
+
+设计者在默认文档路径下用 `#[hls]`（或等价）经钉死后端得到可综合 RTL，且有 CI/烟测；文档将 HLS 列为支持功能。  
+**FRs covered:** FR35, FR50  
+**Depends on:** Epic 19（NFR14）。可与 20–23 并行。  
+**Gate:** 开工前须有本 epic 的 NFR14 风险记录。
+
+### Story 24.1: NFR14 风险记录（HLS）
+
+As a 实现负责人,
+I want 为 FR35/FR50 填写 NFR14 风险记录,
+So that HLS 不会被静默标成永久 unsupported。
+
+**Acceptance Criteria:**
+
+**Given** Story 19.1 模板存在
+**When** 创建 Epic 24 风险记录
+**Then** 含上游约束（钉死 **Bambu 或 Vitis** 二选一、许可/安装、CI 可用性）、粗工期带、禁止静默降级（至少：不得以「未启用则永久 unsupported」交差；不得引入树内自研 scheduler）、负责人（NFR14）
+**And** 明确所选单一后端名称与版本策略
+**And** 无此记录则 24.2–24.4 不得标 ready
+
+### Story 24.2: 钉死后端的默认 HLS 路径（FR35）
+
+As a 算法级设计者,
+I want 文档默认路径下 `#[hls]`（或等价）调用钉死后端产出可综合 RTL,
+So that HLS 是产品路径而非可选孤儿开关。
+
+**Acceptance Criteria:**
+
+**Given** Story 24.1 已选定 Bambu **或** Vitis
+**When** 实现/加固默认启用文档路径：源 → 外挂后端 → 可综合 RTL 工件
+**Then** 文档夹具可复现产出 RTL（FR35）
+**And** 无树内 scheduling 实现（AD-25）
+**And** `cargo bitloom hls`（或既有动词）有 `--help` 与成功/失败可读诊断
+**And** 后端缺失时错误明确（非 silent skip 冒充成功）
+
+### Story 24.3: CI / 发布烟测夹具（FR35 / FR50）
+
+As a 质量负责人,
+I want 至少一个端到端算法夹具进入 CI 或发布烟测,
+So that HLS 支持可被持续验证。
+
+**Acceptance Criteria:**
+
+**Given** Story 24.2 默认路径可用
+**When** 增加端到端夹具 + CI job 或文档化的发布烟测脚本（允许 `optional` runner 若工具链过重，但不得零覆盖）
+**Then** 夹具在文档环境可复现通过（FR35, FR50）
+**And** 失败时 job 失败（不 ignore）
+**And** 记录后端版本与缓存策略（与 NFR14 一致）
+
+### Story 24.4: 文档将 HLS 列为支持功能（FR50）
+
+As a 仓库访客,
+I want README/用户文档将 HLS 列为支持功能并给出跟练步骤,
+So that 概述 §1.3.8 的对外承诺可核对。
+
+**Acceptance Criteria:**
+
+**Given** Story 24.2–24.3
+**When** 更新 README 与 HLS 专章：支持声明、钉死后端、安装前提、示例命令、限制（无自研调度）
+**Then** 不再将 HLS 描述为「永久 unsupported / 仅实验且无路径」（FR50）
+**And** 链到烟测/夹具位置
+**And** Bitloom 品牌一致
