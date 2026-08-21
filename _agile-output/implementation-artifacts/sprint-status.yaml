@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-20-2026 21:15
+last_updated: 08-21-2026 08:58
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -151,14 +151,14 @@ development_status:
   17-3-冻结用户态立即数与符号扩展: done
   17-4-五级流水-转发-分支-flush: done
   17-5-load-use-停顿-atdd-验证阶梯: done
-  epic-17-retrospective: optional
+  epic-17-retrospective: done
 
   epic-18: done
   18-1-episode-ii-教程骨架与索引: done
   18-2-递进教程正文-isa-流水-hazard: done
   18-3-可选-zicsr-m-mode-trap-教学最小集: done
   18-4-更新大纲-readme-范围与品牌: done
-  epic-18-retrospective: optional
+  epic-18-retrospective: done
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1
@@ -346,3 +346,39 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-16-retro-2026-08-20.md"
+  - id: "epic-17-retro-item-32-为-load-use-增加-rs2-消费者-atdd-add-beq-sw-之一"
+    epic: 17
+    action: "为 load-use 增加 rs2 消费者 ATDD（ADD/BEQ/SW 之一）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-17-retro-2026-08-21.md"
+  - id: "epic-17-retro-item-33-可选-sw-mmio-路径排除-dmem-旁路写"
+    epic: 17
+    action: "可选：SW MMIO 路径排除 DMEM 旁路写"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-17-retro-2026-08-21.md"
+  - id: "epic-17-retro-item-34-可选-接入-riscv-tests-rv32ui-文档化跑法或最小子集-ci"
+    epic: 17
+    action: "可选：接入 riscv-tests rv32ui 文档化跑法或最小子集 CI"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-17-retro-2026-08-21.md"
+  - id: "epic-18-retro-item-35-实现可选-zicsr-m-mode-trap-教学最小集-fr65-并替换-06"
+    epic: 18
+    action: "实现可选 Zicsr + M-mode trap 教学最小集（FR65）并替换 06 stub"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-18-retro-2026-08-21.md"
+  - id: "epic-18-retro-item-36-恢复一-story-一提交纪律于后续-epic"
+    epic: 18
+    action: "恢复一 story 一提交纪律于后续 epic"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-18-retro-2026-08-21.md"
+  - id: "epic-18-retro-item-37-可选-episode-ii-教程加-vcd-femtorv-对照"
+    epic: 18
+    action: "可选：Episode II 教程加 VCD/FemtoRV 对照"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-18-retro-2026-08-21.md"
