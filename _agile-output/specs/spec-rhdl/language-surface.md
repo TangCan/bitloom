@@ -197,8 +197,16 @@ Every default module has exactly one `Clock` port and one sync active-high `Rese
 
 - Surface：`bitloom_prelude::ip::{SyncFifo, UartTx, SpiMaster, I2cMaster, Axi4LiteSlave, ExtBlackBox}`。
 - **FR82（Epic 34）：** `SyncFifo` = depth-4 sync FIFO；`UartTx` = 8N1 bit-bang；`SpiMaster` = Mode-0-ish MSB byte shifter；`I2cMaster` = START+8data+STOP bit-bang；`Axi4LiteSlave` = 单寄存器 AXI4-Lite write/read 握手玩具（ADDR=8, DATA=32）。均无生成器闭包参数。
-- **Epic 29 handoff：** Epic 34 = 无闭包可综合基线；Epic 29 / FR77 = 闭包定制 **overlay**（Story 29.3；须先于基线）。相对 Epic 22 stub：**NFR37** 规划 done ≠ FR82 深度。索引：`docs/ip/README.md`。
+- **Epic 29 handoff / FR77：** Epic 34 = 无闭包可综合基线；Epic 29 / FR77 = 闭包定制 **overlay** — `bitloom_prelude::ip::Crc8Lut`（`elaborate_with_table_fn` / 默认 poly `0x07`；Story 29.3）。相对 Epic 22 stub：**NFR37** 规划 done ≠ FR82 深度。索引：`docs/ip/README.md`。
 - **黑盒：** `ExtBlackBox` 仅端口、空 body；`vendor_blackbox_v()` 旁路；不内联 vendor 网表进 HIR。
 - **Sim：** 同周期输入门控须 `set_inputs` → `Sim::settle` → `tick`（见 `docs/ip/README.md`）。
-- **ATDD 配方：** `cargo test -p bitloom --test fr82_ip_baseline_matrix`（+ sibling `fr82_*_baseline`）。
+- **ATDD 配方：** `cargo test -p bitloom --test fr82_ip_baseline_matrix`（+ sibling `fr82_*_baseline`）；FR77：`cargo test -p bitloom --test fr77_ip_generator_closure`。
 - 索引与已知限制：`docs/ip/README.md`（NFR37：基线 ≠ 全协议 / VIP / Full AXI）。
+
+## IP generator closures (FR77 / Cap-R-63 / Epic 29.3)
+
+- **API：** `Crc8Lut::elaborate()`（文档默认 poly `DEFAULT_POLY = 0x07`）或 `Crc8Lut::elaborate_with_table_fn(violations, f)`（`Fn(usize) -> u64` → SyncReadMem init）。
+- **约束类（D1）：** 可综合腿走 `SynthesizableClosure`；非空 `violations` → 明确诊断，不静默回退默认表。
+- **NFR36：** 闭包在 elaborate 内消解；FrozenHir / Verilog / FIRRTL 无闭包 IR。
+- **文档：** `docs/ip/README.md`；风险：`nfr14-risk-epic29-hls-ip-closures.md`。
+- **非目标：** 不要求 IP 内 comb/seq 可综合闭包内联（Epic 28）；不把 HLS `HlsFree` 用到可综合 IP 腿。

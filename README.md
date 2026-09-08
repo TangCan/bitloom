@@ -85,6 +85,8 @@ let _ = s.finish().unwrap();
 
   警告：**不要**在闭包环境捕获 `Wire`/`Reg` 等硬件句柄；用端口名字符串传给 `inline_*_fn`，不要把信号句柄关进闭包。共存矩阵 ATDD：`cargo test -p bitloom --test fr74_fr75_fr16_coexist_matrix`。
 
+- **IP 生成器闭包定制（FR77）：** `Crc8Lut` 用 elaborate-time `Fn` 定制 CRC 表（默认 poly `0x07`；`elaborate_with_table_fn`）。叠在 Epic 34 无闭包基线 + Epic 27 Mem-init 之上；freeze 后无闭包残留。见 [`docs/ip/README.md`](docs/ip/README.md)。ATDD：`cargo test -p bitloom --test fr77_ip_generator_closure`。
+
 ### 贡献者：在 monorepo 里跑示例
 
 ```bash

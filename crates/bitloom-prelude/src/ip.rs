@@ -1,11 +1,19 @@
 //! First-class IP (FR37 / FR48 / FR82): SyncFifo, UartTx, SpiMaster, I2cMaster,
-//! Axi4LiteSlave, black-box.
+//! Axi4LiteSlave, black-box; plus FR77 overlay [`Crc8Lut`] (Epic 29.3).
 //!
 //! Epic 34 / FR82 deepens all five classes to **non-stub** synthesizable baselines
-//! (still not full protocol stacks / VIP). Design crates reach these via
-//! `bitloom_prelude::ip` only (no generator closures — Epic 29).
+//! (still not full protocol stacks / VIP). Those five APIs take **no** generator
+//! closures. Design crates reach IP via `bitloom_prelude::ip` only.
+//!
+//! **FR77 / Cap-R-63:** [`Crc8Lut`] accepts elaborate-time table closures
+//! (`elaborate_with_table_fn`) on top of the Epic 27 Mem-init path; default poly
+//! needs no closure. Closures dissolve before freeze (NFR36); synthesizable leg
+//! uses [`SynthesizableClosure`] checks (D1).
 
-use crate::{Diagnostics, Elaboratable, ElaborateSession, FrozenHir, GroundType, Span};
+use crate::{
+    Diagnostics, Elaboratable, ElaborateSession, FrozenHir, GroundType, Span,
+    SynthesizableClosureViolation, diagnose_synthesizable_closure_violations,
+};
 
 /// Depth-4 single-clock sync FIFO with `wr_en`/`rd_en` and `full`/`empty` (FR82).
 ///
@@ -854,9 +862,103 @@ pub fn vendor_blackbox_v() -> &'static str {
     "module vendor_ext_ip(input clk, input rst, input [7:0] data_in, output [7:0] data_out);\nendmodule\n"
 }
 
+/// CRC-8 byte → residue for one table entry (MSB-first, poly XOR).
+pub fn crc8_table_byte(byte: u8, poly: u8) -> u8 {
+    let mut b = byte;
+    for _ in 0..8 {
+        if b & 0x80 != 0 {
+            b = (b << 1) ^ poly;
+        } else {
+            b <<= 1;
+        }
+    }
+    b
+}
+
+/// CRC-8 LUT ROM IP — FR77 / Cap-R-63 generator-closure customization overlay.
+///
+/// SyncReadMem depth-256 × 8: `addr` → registered `rdata`. Built on Epic 27
+/// `declare_sync_read_mem_with_init_fn` / `generate_mem_init`.
+///
+/// - **Without user closure:** [`Crc8Lut::elaborate`] / [`Elaboratable::elaborate`]
+///   use documented default poly [`Crc8Lut::DEFAULT_POLY`] (`0x07`, CRC-8/SMBUS-style).
+/// - **With closure:** [`Crc8Lut::elaborate_with_table_fn`] runs `Fn(usize) -> u64`
+///   at elaborate time; empty `violations` = legal [`crate::SynthesizableClosure`];
+///   non-empty → clear diagnostics (no silent default).
+///
+/// Closures do **not** enter FrozenHir / emit (NFR36). Not comb/seq synthesizable
+/// closure inline (Epic 28) — table generation only.
+pub struct Crc8Lut;
+
+impl Crc8Lut {
+    pub const DEPTH: u32 = 256;
+    pub const WIDTH: u32 = 8;
+    /// Documented default polynomial when no customization closure is supplied.
+    pub const DEFAULT_POLY: u8 = 0x07;
+
+    /// Elaborate with documented default CRC-8/SMBUS-style poly `0x07` (no user Fn).
+    pub fn elaborate_default() -> Result<FrozenHir, Diagnostics> {
+        Self::elaborate_with_poly(Self::DEFAULT_POLY)
+    }
+
+    /// Elaborate with a fixed polynomial (table built inside the session; no user Fn).
+    pub fn elaborate_with_poly(poly: u8) -> Result<FrozenHir, Diagnostics> {
+        Self::elaborate_with_table_fn(&[], move |i| crc8_table_byte(i as u8, poly) as u64)
+    }
+
+    /// Customize the LUT via an elaborate-time generator closure (FR77 / Cap-R-63).
+    ///
+    /// `f(addr)` is evaluated for each address inside [`ElaborateSession`] and stored
+    /// as plain `Vec<u64>` on the mem node — the Rust `Fn` does not survive freeze
+    /// (NFR36). Pass empty `violations` for a legal synthesizable generator; any
+    /// documented [`SynthesizableClosureViolation`] fails with clear diagnostics.
+    pub fn elaborate_with_table_fn<F>(
+        violations: &[SynthesizableClosureViolation],
+        f: F,
+    ) -> Result<FrozenHir, Diagnostics>
+    where
+        F: Fn(usize) -> u64,
+    {
+        if !violations.is_empty() {
+            return Err(diagnose_synthesizable_closure_violations(
+                violations,
+                Span::default(),
+            ));
+        }
+
+        let mut s = ElaborateSession::new("Crc8Lut");
+        s.begin_module("Crc8Lut", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("addr", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("rdata", GroundType::UInt { width: 8 }, Span::default());
+
+        s.declare_reg("q", GroundType::UInt { width: 8 }, Span::default());
+        // Epic 27 path: Fn dissolves to MemDecl.init before freeze (NFR36).
+        s.declare_sync_read_mem_with_init_fn("lut", Self::DEPTH, Self::WIDTH, f, Span::default());
+
+        s.begin_combinational(Span::default());
+        s.assign_net("rdata", "q", Span::default());
+        s.end_process();
+
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_mem_read("q", "lut", "addr", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish()
+    }
+}
+
+impl Elaboratable for Crc8Lut {
+    fn elaborate() -> Result<FrozenHir, Diagnostics> {
+        Crc8Lut::elaborate_default()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::SynthesizableClosureViolation;
     use bitloom_hir::PortValues;
     use bitloom_sim::Sim;
     use bitloom_vlog::emit;
@@ -1179,5 +1281,77 @@ mod tests {
         let _ = SpiMaster::elaborate();
         let _ = I2cMaster::elaborate();
         let _ = Axi4LiteSlave::elaborate();
+    }
+
+    #[test]
+    fn crc8_lut_default_elaborate_emit_tick() {
+        let hir = Crc8Lut::elaborate().expect("default");
+        assert_eq!(hir.abi_name, "Crc8Lut");
+        let art = emit(&hir);
+        let v = &art.files[0].contents;
+        assert!(v.contains("module Crc8Lut"));
+        assert!(v.contains("lut[0] = 0;"));
+        assert!(v.contains(&format!(
+            "lut[1] = {};",
+            crc8_table_byte(1, Crc8Lut::DEFAULT_POLY)
+        )));
+        assert!(
+            !v.to_lowercase().contains("closure") && !v.contains("||"),
+            "NFR36: emit must not retain closure IR"
+        );
+
+        let mut sim = Sim::new(hir);
+        let mut pv = PortValues::default();
+        pv.set("rst", 1);
+        sim.set_inputs(pv.clone());
+        sim.tick();
+        pv.set("rst", 0);
+        pv.set("addr", 1);
+        sim.set_inputs(pv);
+        sim.tick(); // schedule SyncReadMem
+        sim.tick(); // deliver into q / rdata
+        assert_eq!(
+            sim.ports().get("rdata"),
+            Some(crc8_table_byte(1, Crc8Lut::DEFAULT_POLY) as u64)
+        );
+    }
+
+    #[test]
+    fn crc8_lut_custom_poly_via_table_fn() {
+        let poly = 0x1du8;
+        let hir = Crc8Lut::elaborate_with_table_fn(&[], |i| crc8_table_byte(i as u8, poly) as u64)
+            .expect("custom");
+        let mut sim = Sim::new(hir);
+        let mut pv = PortValues::default();
+        pv.set("rst", 1);
+        sim.set_inputs(pv.clone());
+        sim.tick();
+        pv.set("rst", 0);
+        pv.set("addr", 0xA5);
+        sim.set_inputs(pv);
+        sim.tick(); // schedule
+        sim.tick(); // deliver
+        assert_eq!(
+            sim.ports().get("rdata"),
+            Some(crc8_table_byte(0xA5, poly) as u64)
+        );
+        // Custom poly must differ from default at this address (proves customization).
+        assert_ne!(
+            crc8_table_byte(0xA5, poly),
+            crc8_table_byte(0xA5, Crc8Lut::DEFAULT_POLY)
+        );
+    }
+
+    #[test]
+    fn crc8_lut_synthesizable_closure_violation_is_clear_error() {
+        let err = Crc8Lut::elaborate_with_table_fn(
+            &[SynthesizableClosureViolation::heap("Vec in table Fn")],
+            |_| 0,
+        )
+        .expect_err("must reject");
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0143"),
+            "expected E0143, got {err:?}"
+        );
     }
 }
