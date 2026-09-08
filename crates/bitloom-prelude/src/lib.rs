@@ -2,8 +2,10 @@
 
 pub use bitloom_builder::{
     CombInline, Elaboratable, ElaborateSession, GeneratedInstance, HwCaptureKind, HwCaptureRef,
-    LegalEmptyClosure, LegalSimpleClosure, SynthesizableClosure, SynthesizableClosureViolation,
-    SynthesizableClosureViolationKind, diagnose_synthesizable_closure_violations,
+    LegalEmptyClosure, LegalSimpleClosure, SeqInline, SeqOwnershipViolation,
+    SeqOwnershipViolationKind, SynthesizableClosure, SynthesizableClosureViolation,
+    SynthesizableClosureViolationKind, diagnose_seq_ownership_violations,
+    diagnose_synthesizable_closure_violations,
 };
 pub use bitloom_hir::{Diagnostics, FrozenHir, GroundType, PortDirection, PortValues, Span};
 
@@ -191,7 +193,12 @@ pub use bitloom_builder::{generate_mem_init_words as generate_mem_init, mask_mem
 /// **Comb inline (FR75 / Cap-R-55 / Epic 28.2):**
 /// [`ElaborateSession::inline_comb_fn`] / [`ElaborateSession::inline_comb_fn_marker`]
 /// + [`CombInline`] — Cap-R-60 check then elaborate-time expand into ordinary
-/// `assign_*` / Wire assigns. Seq inline → Story 28.3.
+/// `assign_*` / Wire assigns.
+///
+/// **Seq inline (FR75 / Cap-R-56 / Cap-R-70 / Epic 28.3):**
+/// [`ElaborateSession::inline_seq_fn`] / [`ElaborateSession::inline_seq_fn_marker`]
+/// + [`SeqInline`] — Cap-R-60 + Cap-R-70 (`rhdl::E0146`) then expand into ordinary
+/// `Reg.d` / sequential assigns (NFR36).
 
 trait AsGround {
     fn ground() -> GroundType;

@@ -231,7 +231,7 @@ development_status:
   epic-28: in-progress
   28-1-synthesizableclosure-约束与检查钩子: done
   28-2-组合逻辑内联可综合闭包: done
-  28-3-时序逻辑内联-所有权: backlog
+  28-3-时序逻辑内联-所有权: done
   28-4-诊断矩阵-fr16-共存-atdd: backlog
   epic-28-retrospective: optional
 

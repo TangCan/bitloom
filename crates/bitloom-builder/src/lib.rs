@@ -106,10 +106,12 @@ impl HwCaptureRef {
 ///   `tick` / FIRRTL / Chisel (NFR36 / Cap-R-58)
 ///
 /// Comb inline (Story 28.2 / Cap-R-55): call
-/// [`ElaborateSession::inline_comb_fn`] after Cap-R-60 check; seq inline is
-/// Story 28.3. Automatic rustc capture analysis is out of scope — macros /
-/// ATDD / typed surfaces pass violation tokens to
-/// [`ElaborateSession::check_synthesizable_closure`].
+/// [`ElaborateSession::inline_comb_fn`] after Cap-R-60 check.
+/// Seq inline (Story 28.3 / Cap-R-56): [`ElaborateSession::inline_seq_fn`]
+/// with Cap-R-70 ownership checks. Automatic rustc capture analysis is out of
+/// scope — macros / ATDD / typed surfaces pass violation tokens to
+/// [`ElaborateSession::check_synthesizable_closure`] /
+/// [`ElaborateSession::check_seq_ownership`].
 ///
 /// Empty / simple stand-ins ([`LegalEmptyClosure`], [`LegalSimpleClosure`])
 /// implement this marker with no violations.
@@ -136,7 +138,8 @@ impl SynthesizableClosure for LegalSimpleClosure {}
 ///
 /// Produced by [`ElaborateSession::inline_comb_fn`] closures and immediately
 /// lowered to ordinary [`AssignExpr`] via existing `assign_*` APIs. Never
-/// stored as a Rust `Fn` in FrozenHir (NFR36).
+/// stored as a Rust `Fn` in FrozenHir (NFR36). Also reusable as the RHS of
+/// [`SeqInline::Comb`] for sequential Reg.d inline (Cap-R-56).
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum CombInline {
     /// Copy from a named net / port / reg.
@@ -157,6 +160,101 @@ pub enum CombInline {
     Eq(String, String),
     /// 2:1 mux (`sel != 0 ? t : f`).
     Mux { sel: String, t: String, f: String },
+}
+
+/// Elaborate-time description of a sequential `Reg.d` next-state (FR75 / Cap-R-56).
+///
+/// Produced by [`ElaborateSession::inline_seq_fn`] and immediately lowered to
+/// ordinary sequential [`AssignExpr`] targeting [`AssignTarget::RegD`]. Never
+/// stored as a Rust `Fn` in FrozenHir (NFR36).
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum SeqInline {
+    /// Wrapping `dst + 1` (same as [`ElaborateSession::assign_reg_d_inc`]).
+    Inc,
+    /// Comb-shaped RHS lowered onto `Reg.d` (reuses [`CombInline`]).
+    Comb(CombInline),
+}
+
+impl From<CombInline> for SeqInline {
+    fn from(c: CombInline) -> Self {
+        Self::Comb(c)
+    }
+}
+
+/// Cap-R-70 ownership breach inside sequential synthesizable-closure inline.
+///
+/// Distinct from Cap-R-60 [`SynthesizableClosureViolation`] (E0143–E0145) and
+/// freeze multi-drive [`rhdl::E0140`] (AD-4, across processes).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum SeqOwnershipViolationKind {
+    /// Illegal extra mutable borrow / second `Reg.d` write in the same
+    /// sequential process (or documented equivalent) → `rhdl::E0146`.
+    IllegalMutableBorrow,
+}
+
+impl SeqOwnershipViolationKind {
+    pub fn code(self) -> &'static str {
+        match self {
+            Self::IllegalMutableBorrow => "rhdl::E0146",
+        }
+    }
+
+    fn label(self) -> &'static str {
+        match self {
+            Self::IllegalMutableBorrow => "illegal mutable signal borrow",
+        }
+    }
+}
+
+/// Documented Cap-R-70 ownership violation token (Story 28.3).
+///
+/// Pass to [`ElaborateSession::check_seq_ownership`] /
+/// [`ElaborateSession::inline_seq_fn`]. Empty list = no tokenized breach;
+/// session still auto-detects a second `Reg.d` write on the inline destination.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct SeqOwnershipViolation {
+    pub kind: SeqOwnershipViolationKind,
+    pub detail: String,
+}
+
+impl SeqOwnershipViolation {
+    pub fn illegal_mutable_borrow(detail: impl Into<String>) -> Self {
+        Self {
+            kind: SeqOwnershipViolationKind::IllegalMutableBorrow,
+            detail: detail.into(),
+        }
+    }
+
+    pub fn code(&self) -> &'static str {
+        self.kind.code()
+    }
+}
+
+/// Cap-R-70 check surface: diagnose seq-ownership violations without a session.
+pub fn diagnose_seq_ownership_violations(
+    violations: &[SeqOwnershipViolation],
+    span: Span,
+) -> Diagnostics {
+    let mut diags = Diagnostics::default();
+    for v in violations {
+        diags.push(Diagnostic {
+            span,
+            code: v.code().into(),
+            en: format!(
+                "sequential synthesizable-closure ownership violation: {} ({}); \
+                 Cap-R-70 forbids illegal extra mutable signal borrows / multi-drive \
+                 patterns inside seq inline (FR75)",
+                v.kind.label(),
+                v.detail
+            ),
+            zh: format!(
+                "时序可综合闭包所有权违规：{}（{}）；Cap-R-70 禁止闭包体内额外非法可变信号借用/多驱动（FR75）",
+                v.kind.label(),
+                v.detail
+            ),
+        });
+    }
+    diags
 }
 
 /// Kind of SynthesizableClosure constraint breach (FR74 / Cap-R-48…50).
@@ -1332,6 +1430,36 @@ impl ElaborateSession {
         self.assign_reg_d_expr(name, Some(from.into()), span);
     }
 
+    /// Assign `Reg.d` as a 2:1 mux (same-width `t`/`f` as the register).
+    ///
+    /// Used for handwritten seq goldens alongside [`Self::inline_seq_fn`].
+    pub fn assign_reg_d_mux(
+        &mut self,
+        name: impl Into<String>,
+        sel: impl Into<String>,
+        t: impl Into<String>,
+        f: impl Into<String>,
+        span: Span,
+    ) {
+        let name = name.into();
+        let t = t.into();
+        let f = f.into();
+        if self.check_connect(&name, &t, span).is_none()
+            || self.check_connect(&name, &f, span).is_none()
+        {
+            return;
+        }
+        self.push_reg_d_assign(
+            name,
+            AssignExpr::Mux {
+                sel: sel.into(),
+                t,
+                f,
+            },
+            span,
+        );
+    }
+
     /// Sequential SyncReadMem / Mem write: `mem[addr] <= data` (always enabled).
     pub fn assign_mem_write(
         &mut self,
@@ -1423,62 +1551,11 @@ impl ElaborateSession {
         {
             return;
         }
-        let kind = self.signals.get(&name).copied();
-        let process_kind = match &self.process {
-            Some(ProcessState::Combinational { .. }) => Some(ProcessKind::Combinational),
-            Some(ProcessState::Sequential { .. }) => Some(ProcessKind::Sequential),
-            None => None,
+        let expr = match from {
+            Some(src) => AssignExpr::Ref(src),
+            None => AssignExpr::Inc(name.clone()),
         };
-
-        match process_kind {
-            Some(ProcessKind::Sequential) => match kind {
-                Some(SignalKind::Reg) => {
-                    if let Some(ProcessState::Sequential { assigns, .. }) = self.process.as_mut() {
-                        let expr = match from {
-                            Some(src) => AssignExpr::Ref(src),
-                            None => AssignExpr::Inc(name.clone()),
-                        };
-                        assigns.push(Assign {
-                            target: AssignTarget::RegD(name),
-                            expr,
-                            span,
-                        });
-                    }
-                }
-                Some(_) => {
-                    self.push_err(Diagnostic {
-                        span,
-                        code: "rhdl::E0115".into(),
-                        en: format!("'{name}' is not a Reg; Reg.d requires a register"),
-                        zh: format!("'{name}' 不是寄存器，不能写 Reg.d"),
-                    });
-                }
-                None => {
-                    self.push_err(Diagnostic {
-                        span,
-                        code: "rhdl::E0113".into(),
-                        en: format!("unknown signal '{name}'"),
-                        zh: format!("未知信号 '{name}'"),
-                    });
-                }
-            },
-            Some(ProcessKind::Combinational) => {
-                self.push_err(Diagnostic {
-                    span,
-                    code: "rhdl::E0116".into(),
-                    en: format!("combinational process must not write Reg.d for '{name}'"),
-                    zh: format!("组合过程不能写 '{name}' 的 Reg.d"),
-                });
-            }
-            None => {
-                self.push_err(Diagnostic {
-                    span,
-                    code: "rhdl::E0103".into(),
-                    en: "assignment outside a marked combinational/sequential process".into(),
-                    zh: "在未标注的 comb/seq 过程外赋值".into(),
-                });
-            }
-        }
+        self.push_reg_d_assign(name, expr, span);
     }
 
     pub fn end_process(&mut self) {
@@ -1640,7 +1717,7 @@ impl ElaborateSession {
     ///    [`AssignExpr`] (NFR36; no `Fn` objects after freeze)
     ///
     /// Incomplete-assign / latch analysis (AD-18) still applies to `dst`.
-    /// Sequential-block inline is Story 28.3.
+    /// Sequential-block inline: [`Self::inline_seq_fn`] (Cap-R-56 / Cap-R-70).
     ///
     /// ```ignore
     /// session.begin_combinational(span);
@@ -1694,6 +1771,215 @@ impl ElaborateSession {
             CombInline::Xor(l, r) => self.assign_xor(dst, l, r, span),
             CombInline::Eq(l, r) => self.assign_eq(dst, l, r, span),
             CombInline::Mux { sel, t, f } => self.assign_mux(dst, sel, t, f, span),
+        }
+    }
+
+    /// Cap-R-70: record documented seq-ownership violations (`rhdl::E0146`).
+    pub fn reject_seq_ownership_violation(
+        &mut self,
+        violation: &SeqOwnershipViolation,
+        span: Span,
+    ) {
+        for d in diagnose_seq_ownership_violations(std::slice::from_ref(violation), span).0 {
+            self.push_err(d);
+        }
+    }
+
+    /// Cap-R-70 check hook: record all documented seq-ownership violations.
+    /// Empty `violations` is a no-op.
+    pub fn check_seq_ownership(&mut self, violations: &[SeqOwnershipViolation], span: Span) {
+        for v in violations {
+            self.reject_seq_ownership_violation(v, span);
+        }
+    }
+
+    /// Inline a synthesizable sequential transform onto `Reg.d` (FR75 / Cap-R-56).
+    ///
+    /// Must be called inside an open [`Self::begin_sequential`] process.
+    /// Sequence:
+    /// 1. Cap-R-60 [`Self::check_synthesizable_closure`] on `synth_violations`
+    /// 2. Cap-R-70 [`Self::check_seq_ownership`] on `ownership_violations`
+    /// 3. Cap-R-70 auto-detect: if `dst_reg.d` is already assigned in this
+    ///    sequential process, diagnose `rhdl::E0146` and **do not** expand
+    /// 4. If any Cap-R-60 / Cap-R-70 token was supplied, **do not** expand
+    /// 5. Otherwise invoke `f(args)` once and lower [`SeqInline`] to ordinary
+    ///    sequential [`AssignExpr`] / `Reg.d` — FrozenHir holds no `Fn` (NFR36)
+    ///
+    /// Cross-process multi-drive / undriven after expand still use AD-4 freeze
+    /// checks (`rhdl::E0140`, …).
+    ///
+    /// ```ignore
+    /// session.begin_sequential(span);
+    /// session.inline_seq_fn("count", &[], &[], &[], span, |_args| SeqInline::Inc);
+    /// session.end_process();
+    /// ```
+    pub fn inline_seq_fn<F>(
+        &mut self,
+        dst_reg: impl Into<String>,
+        args: &[&str],
+        synth_violations: &[SynthesizableClosureViolation],
+        ownership_violations: &[SeqOwnershipViolation],
+        span: Span,
+        f: F,
+    ) where
+        F: FnOnce(&[&str]) -> SeqInline,
+    {
+        self.check_synthesizable_closure(synth_violations, span);
+        self.check_seq_ownership(ownership_violations, span);
+        let dst = dst_reg.into();
+        let already = self.seq_reg_d_already_assigned(&dst);
+        if already {
+            self.reject_seq_ownership_violation(
+                &SeqOwnershipViolation::illegal_mutable_borrow(format!(
+                    "Reg.d '{dst}' already assigned in this sequential process"
+                )),
+                span,
+            );
+        }
+        if !synth_violations.is_empty() || !ownership_violations.is_empty() || already {
+            return;
+        }
+        let inline = f(args);
+        self.apply_seq_inline(dst, inline, span);
+    }
+
+    /// Cap-R-56 helper: marker Cap-R-60 check then seq inline (Cap-R-70 ownership args).
+    pub fn inline_seq_fn_marker<C, F>(
+        &mut self,
+        dst_reg: impl Into<String>,
+        args: &[&str],
+        marker: &C,
+        ownership_violations: &[SeqOwnershipViolation],
+        span: Span,
+        f: F,
+    ) where
+        C: SynthesizableClosure,
+        F: FnOnce(&[&str]) -> SeqInline,
+    {
+        let vs = marker.synthesizable_closure_violations();
+        self.inline_seq_fn(dst_reg, args, &vs, ownership_violations, span, f);
+    }
+
+    fn seq_reg_d_already_assigned(&self, name: &str) -> bool {
+        match &self.process {
+            Some(ProcessState::Sequential { assigns, .. }) => assigns
+                .iter()
+                .any(|a| matches!(&a.target, AssignTarget::RegD(n) if n == name)),
+            _ => false,
+        }
+    }
+
+    fn apply_seq_inline(&mut self, dst: String, inline: SeqInline, span: Span) {
+        let expr = match inline {
+            SeqInline::Inc => AssignExpr::Inc(dst.clone()),
+            SeqInline::Comb(CombInline::Ref(src)) => {
+                if self.check_connect(&dst, &src, span).is_none() {
+                    return;
+                }
+                AssignExpr::Ref(src)
+            }
+            SeqInline::Comb(CombInline::Lit(v)) => AssignExpr::Lit(v),
+            SeqInline::Comb(CombInline::Add(l, r)) => {
+                if self.check_add(&l, &r, span).is_none() {
+                    return;
+                }
+                AssignExpr::Add(l, r)
+            }
+            SeqInline::Comb(CombInline::Sub(l, r)) => {
+                if self.check_add(&l, &r, span).is_none() {
+                    return;
+                }
+                AssignExpr::Sub(l, r)
+            }
+            SeqInline::Comb(CombInline::And(l, r)) => {
+                if self.check_add(&l, &r, span).is_none() {
+                    return;
+                }
+                AssignExpr::And(l, r)
+            }
+            SeqInline::Comb(CombInline::Or(l, r)) => {
+                if self.check_add(&l, &r, span).is_none() {
+                    return;
+                }
+                AssignExpr::Or(l, r)
+            }
+            SeqInline::Comb(CombInline::Xor(l, r)) => {
+                if self.check_add(&l, &r, span).is_none() {
+                    return;
+                }
+                AssignExpr::Xor(l, r)
+            }
+            SeqInline::Comb(CombInline::Eq(l, r)) => {
+                if self.check_add(&l, &r, span).is_none() {
+                    return;
+                }
+                AssignExpr::Eq(l, r)
+            }
+            SeqInline::Comb(CombInline::Mux { sel, t, f }) => {
+                if self.check_connect(&dst, &t, span).is_none()
+                    || self.check_connect(&dst, &f, span).is_none()
+                {
+                    return;
+                }
+                AssignExpr::Mux { sel, t, f }
+            }
+        };
+        self.push_reg_d_assign(dst, expr, span);
+    }
+
+    /// Push a sequential `Reg.d` assign (shared by `assign_reg_d_*` and seq inline).
+    fn push_reg_d_assign(&mut self, name: String, expr: AssignExpr, span: Span) {
+        let kind = self.signals.get(&name).copied();
+        let process_kind = match &self.process {
+            Some(ProcessState::Combinational { .. }) => Some(ProcessKind::Combinational),
+            Some(ProcessState::Sequential { .. }) => Some(ProcessKind::Sequential),
+            None => None,
+        };
+
+        match process_kind {
+            Some(ProcessKind::Sequential) => match kind {
+                Some(SignalKind::Reg) => {
+                    if let Some(ProcessState::Sequential { assigns, .. }) = self.process.as_mut() {
+                        assigns.push(Assign {
+                            target: AssignTarget::RegD(name),
+                            expr,
+                            span,
+                        });
+                    }
+                }
+                Some(_) => {
+                    self.push_err(Diagnostic {
+                        span,
+                        code: "rhdl::E0115".into(),
+                        en: format!("'{name}' is not a Reg; Reg.d requires a register"),
+                        zh: format!("'{name}' 不是寄存器，不能写 Reg.d"),
+                    });
+                }
+                None => {
+                    self.push_err(Diagnostic {
+                        span,
+                        code: "rhdl::E0113".into(),
+                        en: format!("unknown signal '{name}'"),
+                        zh: format!("未知信号 '{name}'"),
+                    });
+                }
+            },
+            Some(ProcessKind::Combinational) => {
+                self.push_err(Diagnostic {
+                    span,
+                    code: "rhdl::E0116".into(),
+                    en: format!("combinational process must not write Reg.d for '{name}'"),
+                    zh: format!("组合过程不能写 '{name}' 的 Reg.d"),
+                });
+            }
+            None => {
+                self.push_err(Diagnostic {
+                    span,
+                    code: "rhdl::E0103".into(),
+                    en: "assignment outside a marked combinational/sequential process".into(),
+                    zh: "在未标注的 comb/seq 过程外赋值".into(),
+                });
+            }
         }
     }
 
@@ -2603,5 +2889,120 @@ mod tests {
             err.0.iter().any(|d| d.code == "rhdl::E0110"),
             "expected latch diagnostic after inline, got {err}"
         );
+    }
+
+    #[test]
+    fn inline_seq_fn_expands_to_ordinary_reg_d() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.declare_reg("count", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_sequential(Span::default());
+        s.inline_seq_fn("count", &[], &[], &[], Span::default(), |_args| {
+            SeqInline::Inc
+        });
+        s.end_process();
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "count", Span::default());
+        s.end_process();
+        s.end_module();
+        let hir = s.finish().expect("legal seq inline must finish");
+        let body = &hir.circuit().modules[0].body;
+        let seq = body.iter().find_map(|st| match st {
+            Stmt::Process(p) if matches!(p.kind, ProcessKind::Sequential) => Some(p),
+            _ => None,
+        });
+        let seq = seq.expect("sequential process");
+        assert_eq!(seq.assigns.len(), 1);
+        assert!(matches!(
+            &seq.assigns[0],
+            Assign {
+                target: AssignTarget::RegD(n),
+                expr: AssignExpr::Inc(i),
+                ..
+            } if n == "count" && i == "count"
+        ));
+        let dump = format!("{body:?}");
+        assert!(!dump.contains("SeqInline"));
+        assert!(!dump.to_lowercase().contains("closure"));
+    }
+
+    #[test]
+    fn inline_seq_fn_cap_r70_blocks_second_reg_d() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.declare_reg("count", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_inc("count", Span::default());
+        s.inline_seq_fn("count", &["data_in"], &[], &[], Span::default(), |args| {
+            CombInline::Ref(args[0].into()).into()
+        });
+        s.end_process();
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "count", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().expect_err("second Reg.d must fail Cap-R-70");
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0146"),
+            "expected E0146, got {err}"
+        );
+    }
+
+    #[test]
+    fn inline_seq_fn_ownership_token_skips_expand() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.declare_reg("count", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_sequential(Span::default());
+        s.inline_seq_fn(
+            "count",
+            &[],
+            &[],
+            &[SeqOwnershipViolation::illegal_mutable_borrow(
+                "&mut count captured",
+            )],
+            Span::default(),
+            |_args| SeqInline::Inc,
+        );
+        s.end_process();
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "count", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().expect_err("ownership token must fail");
+        assert!(err.0.iter().any(|d| d.code == "rhdl::E0146"));
+    }
+
+    #[test]
+    fn inline_seq_fn_multi_drive_still_e0140() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.declare_reg("count", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_sequential(Span::default());
+        s.inline_seq_fn("count", &[], &[], &[], Span::default(), |_args| {
+            SeqInline::Inc
+        });
+        s.end_process();
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_from("count", "data_in", Span::default());
+        s.end_process();
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "count", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().expect_err("cross-process multi-drive");
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0140"),
+            "expected E0140, got {err}"
+        );
+    }
+
+    #[test]
+    fn diagnose_seq_ownership_free_fn() {
+        let diags = diagnose_seq_ownership_violations(
+            &[SeqOwnershipViolation::illegal_mutable_borrow("x")],
+            Span::default(),
+        );
+        assert!(diags.0.iter().any(|d| d.code == "rhdl::E0146"));
     }
 }
