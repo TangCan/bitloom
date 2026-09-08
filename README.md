@@ -45,6 +45,46 @@ let _frozen = s.finish().unwrap();
 
   ATDD：`cargo test -p bitloom --test fr73_crc_lut_golden`（CRC 闭包表 vs 手写 golden）。
 
+- **可综合闭包进 comb/seq（FR74/FR75）：** 满足 `SynthesizableClosure` 约束的闭包在 elaborate 期内联为普通赋值；**勿捕获 `Wire`/`Reg`**（硬件引用 → `rhdl::E0142`；周期精确捕获闭包仍为 `rhdl::E0141`）。最小面：
+
+```rust
+use bitloom_prelude::{CombInline, ElaborateSession, GroundType, SeqInline, Span};
+
+// Comb: y = a + b（Cap-R-55）
+let mut s = ElaborateSession::new("Add");
+s.begin_module("Add", Span::default());
+s.add_input("clk", GroundType::Clock, Span::default());
+s.add_input("rst", GroundType::Reset, Span::default());
+s.add_input("a", GroundType::UInt { width: 8 }, Span::default());
+s.add_input("b", GroundType::UInt { width: 8 }, Span::default());
+s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+s.begin_combinational(Span::default());
+s.inline_comb_fn("y", &["a", "b"], &[], Span::default(), |args| {
+    CombInline::Add(args[0].into(), args[1].into())
+});
+s.end_process();
+s.end_module();
+let _ = s.finish().unwrap();
+
+// Seq: count.d = count + 1（Cap-R-56）
+let mut s = ElaborateSession::new("Cnt");
+s.begin_module("Cnt", Span::default());
+s.add_input("clk", GroundType::Clock, Span::default());
+s.add_input("rst", GroundType::Reset, Span::default());
+s.add_output("q", GroundType::UInt { width: 8 }, Span::default());
+s.declare_reg("count", GroundType::UInt { width: 8 }, Span::default());
+s.begin_sequential(Span::default());
+s.inline_seq_fn("count", &[], &[], &[], Span::default(), |_args| SeqInline::Inc);
+s.end_process();
+s.begin_combinational(Span::default());
+s.assign_net("q", "count", Span::default());
+s.end_process();
+s.end_module();
+let _ = s.finish().unwrap();
+```
+
+  警告：**不要**在闭包环境捕获 `Wire`/`Reg` 等硬件句柄；用端口名字符串传给 `inline_*_fn`，不要把信号句柄关进闭包。共存矩阵 ATDD：`cargo test -p bitloom --test fr74_fr75_fr16_coexist_matrix`。
+
 ### 贡献者：在 monorepo 里跑示例
 
 ```bash

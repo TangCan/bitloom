@@ -228,11 +228,11 @@ development_status:
   27-4-atdd-golden-后端无感知抽检: done
   epic-27-retrospective: optional
 
-  epic-28: in-progress
+  epic-28: done
   28-1-synthesizableclosure-约束与检查钩子: done
   28-2-组合逻辑内联可综合闭包: done
   28-3-时序逻辑内联-所有权: done
-  28-4-诊断矩阵-fr16-共存-atdd: backlog
+  28-4-诊断矩阵-fr16-共存-atdd: done
   epic-28-retrospective: optional
 
   epic-29: backlog

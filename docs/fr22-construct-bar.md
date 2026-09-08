@@ -21,4 +21,4 @@
 - `Bundle`, `Vec<T, N>`
 - Multi-clock / phantom domains (Epic 7 / AD-22)
 - Capturing Wire/Reg into elaborate-time generator/factory → `rhdl::E0142` (`assert_no_hw_capture` / `HwCaptureRef`); FR16 capturing closure stays `rhdl::E0141`
-- Full FR74/FR75/FR16 diagnostic matrix ATDD → Story 28.4
+- FR74/FR75/FR16 coexistence matrix ATDD → `crates/bitloom/tests/fr74_fr75_fr16_coexist_matrix.rs` (Story 28.4 done)

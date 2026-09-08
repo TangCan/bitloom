@@ -133,6 +133,25 @@ let frozen = s.finish()?;
 - **AD-4：** 跨过程多驱动仍为 **`rhdl::E0140`**（展开后的网照常进 freeze）。
 - **夹具：** `crates/bitloom/tests/fr75_seq_inline_closure.rs`。
 
+## FR74/FR75 + FR16 coexistence matrix (Story 28.4 / NFR35)
+
+- **正例：** 合法 `inline_comb_fn` / `inline_seq_fn`（及 Cap-R-60 空 violation）elaborate 成功；emit `.v`/FIRRTL **无** closure/callback IR（NFR36）。
+- **负例（稳定码并存，互不吞并）：**
+
+| 场景 | 码 |
+|------|----|
+| 堆 | `rhdl::E0143` |
+| 运行时捕获状态 | `rhdl::E0144` |
+| 不纯 / 非法 IO | `rhdl::E0145` |
+| 捕获 Wire/Reg（**勿捕获 Wire**） | `rhdl::E0142` |
+| 周期精确捕获闭包（FR16） | `rhdl::E0141` |
+| 时序非法可变借用（Cap-R-70） | `rhdl::E0146` |
+
+- **警告：** 可综合 / 生成器闭包**不得**捕获 `Wire`/`Reg`；将信号名以 `&str` 传给 `inline_*_fn` / generator API。
+- **最小示例：** 见仓库根 `README.md`（comb add + seq Inc）。
+- **夹具：** `crates/bitloom/tests/fr74_fr75_fr16_coexist_matrix.rs`（汇总；深度行仍见 `fr74_*` / `fr75_*` / `fr73_hw_capture_diag`）。
+- **配方：** `cargo test -p bitloom --test fr74_fr75_fr16_coexist_matrix`（亦由 `just test` 覆盖）。
+
 ## Comb / seq
 
 - `#[combinational]` and `#[sequential]` are mandatory.
