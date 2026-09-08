@@ -69,7 +69,7 @@
 - Open Q7 — AXI4-Lite 最小从
 - 历史记录：`nfr14-risk-first-class-ip.md`（Epic 22）
 - 闭包叠加：`nfr14-risk-epic29-hls-ip-closures.md`（Epic 34 → 29.3）
-- `bitloom-prelude` `ip` — 当前 stub 表面（须被本 epic 加深，不得仅改名）
+- `bitloom-prelude` `ip` — FR82 非 stub 基线（Epic 34.2–34.3）；全协议仍非默认
 - 历史别名消歧：**NFR14-crates** ≠ 本门禁 **NFR14**
 
 ---

@@ -125,19 +125,21 @@
   status: deferred — 未来故事；forbid silent subset expansion
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
-  summary: 五类一级 IP 历史为端口语义 stub；Epic 34/FR82 加深 FIFO+UART（及后续 34.3 其余类）
+  summary: 五类一级 IP 历史为端口语义 stub；Epic 34/FR82 加深为非 stub 文档最小子集
   evidence: |
-    epic-22-retro-item-48；更新（2026-09-08 / Story 34.2）：
+    epic-22-retro-item-48；更新（2026-09-08 / Story 34.3）：
     - SyncFifo：**FR82 非 stub** depth-4 + full/empty；非异步跨域 FIFO
     - UartTx：**FR82 非 stub** 8N1 bit-bang（baud=clk）；非可编程波特率 / RX / 全双工
-    - SpiMaster / I2cMaster / Axi4LiteSlave：仍为 stub，待 Story 34.3
-  status: partial — FIFO/UART 已由 Epic 34 加深；其余见 34.3；边界 `docs/ip/README.md`
+    - SpiMaster：**FR82 非 stub** Mode-0-ish MSB byte shifter；非多 CPOL/CPHA / 多 CS
+    - I2cMaster：**FR82 非 stub** START+8data+STOP；非 ACK/伸展/多主
+    - Axi4LiteSlave：**FR82 非 stub** 单寄存器握手玩具；非 Full AXI / VIP
+  status: done — 五类 FR82 基线已交付；全协议仍见下条；边界 `docs/ip/README.md`
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
   summary: UART/SPI/I2C「全协议」仍非默认交付；Epic 34 仅合同化最小可综合基线（非 VIP 级）
   evidence: |
     epic-22-retro-item-49 + Epic 34 / FR82 / nfr14-risk-epic34-ip-baseline.md；
-    34.2 已交付 UART 8N1 bit-bang 基线；可编程波特率/RX 等仍须新合同
+    34.2–34.3 已交付五类文档最小子集；可编程波特率/RX、多模式 SPI、I2C ACK、VIP 等仍须新合同
   status: locked — 全协议加深仍须显式改合同；FR82 基线 ≠ 全协议
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`

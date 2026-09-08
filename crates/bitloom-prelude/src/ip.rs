@@ -1,10 +1,9 @@
 //! First-class IP (FR37 / FR48 / FR82): SyncFifo, UartTx, SpiMaster, I2cMaster,
 //! Axi4LiteSlave, black-box.
 //!
-//! Epic 34 / FR82 deepens FIFO + UART to **non-stub** synthesizable paths (still
-//! not full protocol stacks). SPI / I2C / AXI remain Epic 22-style stubs until 34.3.
-//! Design crates reach these via `bitloom_prelude::ip` only (no generator closures —
-//! Epic 29).
+//! Epic 34 / FR82 deepens all five classes to **non-stub** synthesizable baselines
+//! (still not full protocol stacks / VIP). Design crates reach these via
+//! `bitloom_prelude::ip` only (no generator closures — Epic 29).
 
 use crate::{Diagnostics, Elaboratable, ElaborateSession, FrozenHir, GroundType, Span};
 
@@ -304,13 +303,14 @@ impl Elaboratable for UartTx {
     }
 }
 
-/// Minimal SPI **master** byte buffer (not a full multi-mode / multi-slave stack).
+/// SPI **master** Mode-0-ish byte shifter (FR82) — not a full multi-mode stack.
 ///
-/// Role: master. Stream/register surface: `start` + `tx_data[7:0]` → held `mosi_byte`,
-/// `busy` mirrors start; `cs_n`/`sclk`/`mosi` are registered stubs for port semantics.
+/// Accepts `start && !busy`; latches `tx_data` into `mosi_byte`; for 8 cycles drives
+/// `cs_n` low, `sclk` high, `mosi` = MSB-first of the shift register, and samples
+/// `miso` into the LSB of the shift (RX not exported — ABI unchanged).
 ///
-/// Non-goals: CPOL/CPHA modes, multi-CS, continuous DMA, slave mode.
-/// Epic 34.3 may deepen; until then this remains the Epic 22 stub path.
+/// Documented subset: CPOL=0 / CPHA=0 *toy* (1 bit/clk; idle `sclk=0`, `cs_n=1`).
+/// Non-goals: other CPOL/CPHA, multi-CS, DMA, slave mode, generator closures (Epic 29).
 pub struct SpiMaster;
 
 impl Elaboratable for SpiMaster {
@@ -327,37 +327,140 @@ impl Elaboratable for SpiMaster {
         s.add_output("cs_n", GroundType::UInt { width: 1 }, Span::default());
         s.add_output("sclk", GroundType::UInt { width: 1 }, Span::default());
         s.add_output("mosi", GroundType::UInt { width: 1 }, Span::default());
+
         s.declare_reg("hold", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_reg("shift", GroundType::UInt { width: 8 }, Span::default());
         s.declare_reg("busy_r", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_reg("cs_r", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_reg("sclk_r", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_reg("mosi_r", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("bit_idx", GroundType::UInt { width: 4 }, Span::default());
+
+        s.declare_wire("c0_1", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("c1_1", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("c0_4", GroundType::UInt { width: 4 }, Span::default());
+        s.declare_wire("c1_4", GroundType::UInt { width: 4 }, Span::default());
+        s.declare_wire("c7_4", GroundType::UInt { width: 4 }, Span::default());
+        s.declare_wire("c0_8", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("c1_8", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("cff_8", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("c80_8", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("accept", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("is_last", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("msb_masked", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("mosi_bit", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("shift_shl", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("shift_shl8", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("miso8", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("shift_in", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("bit_idx_p1", GroundType::UInt { width: 4 }, Span::default());
+        s.declare_wire("busy_cont", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("next_busy", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire(
+            "next_bit_busy",
+            GroundType::UInt { width: 4 },
+            Span::default(),
+        );
+        s.declare_wire(
+            "next_bit_gated",
+            GroundType::UInt { width: 4 },
+            Span::default(),
+        );
+        s.declare_wire(
+            "next_bit_idx",
+            GroundType::UInt { width: 4 },
+            Span::default(),
+        );
+        s.declare_wire(
+            "next_shift_busy",
+            GroundType::UInt { width: 8 },
+            Span::default(),
+        );
+        s.declare_wire("next_shift", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("next_hold", GroundType::UInt { width: 8 }, Span::default());
+
         s.begin_combinational(Span::default());
+        s.assign_lit("c0_1", 0, Span::default());
+        s.assign_lit("c1_1", 1, Span::default());
+        s.assign_lit("c0_4", 0, Span::default());
+        s.assign_lit("c1_4", 1, Span::default());
+        s.assign_lit("c7_4", 7, Span::default());
+        s.assign_lit("c0_8", 0, Span::default());
+        s.assign_lit("c1_8", 1, Span::default());
+        s.assign_lit("cff_8", 0xFF, Span::default());
+        s.assign_lit("c80_8", 0x80, Span::default());
+        s.assign_mux("accept", "busy_r", "c0_1", "start", Span::default());
+        s.assign_eq("is_last", "bit_idx", "c7_4", Span::default());
+        s.assign_and("msb_masked", "shift", "c80_8", Span::default());
+        s.assign_eq("mosi_bit", "msb_masked", "c80_8", Span::default());
+        s.assign_mux("mosi", "busy_r", "mosi_bit", "c0_1", Span::default());
+        // cs_n active-low while busy; idle high
+        s.assign_mux("cs_n", "busy_r", "c0_1", "c1_1", Span::default());
+        s.assign_mux("sclk", "busy_r", "c1_1", "c0_1", Span::default());
         s.assign_net("mosi_byte", "hold", Span::default());
         s.assign_net("busy", "busy_r", Span::default());
-        s.assign_net("cs_n", "cs_r", Span::default());
-        s.assign_net("sclk", "sclk_r", Span::default());
-        s.assign_net("mosi", "mosi_r", Span::default());
+
+        s.assign_shl("shift_shl", "shift", "c1_8", Span::default());
+        s.assign_and("shift_shl8", "shift_shl", "cff_8", Span::default());
+        s.assign_mux("miso8", "miso", "c1_8", "c0_8", Span::default());
+        s.assign_or("shift_in", "shift_shl8", "miso8", Span::default());
+        s.assign_add("bit_idx_p1", "bit_idx", "c1_4", Span::default());
+        s.assign_mux("busy_cont", "is_last", "c0_1", "busy_r", Span::default());
+        s.assign_mux("next_busy", "accept", "c1_1", "busy_cont", Span::default());
+        s.assign_mux(
+            "next_bit_busy",
+            "is_last",
+            "c0_4",
+            "bit_idx_p1",
+            Span::default(),
+        );
+        s.assign_mux(
+            "next_bit_gated",
+            "busy_r",
+            "next_bit_busy",
+            "c0_4",
+            Span::default(),
+        );
+        s.assign_mux(
+            "next_bit_idx",
+            "accept",
+            "c0_4",
+            "next_bit_gated",
+            Span::default(),
+        );
+        s.assign_mux(
+            "next_shift_busy",
+            "busy_r",
+            "shift_in",
+            "shift",
+            Span::default(),
+        );
+        s.assign_mux(
+            "next_shift",
+            "accept",
+            "tx_data",
+            "next_shift_busy",
+            Span::default(),
+        );
+        s.assign_mux("next_hold", "accept", "tx_data", "hold", Span::default());
         s.end_process();
+
         s.begin_sequential(Span::default());
-        s.assign_reg_d_from("hold", "tx_data", Span::default());
-        s.assign_reg_d_from("busy_r", "start", Span::default());
-        // Stub: cs_n/sclk track start; mosi samples miso for port liveness.
-        s.assign_reg_d_from("cs_r", "start", Span::default());
-        s.assign_reg_d_from("sclk_r", "start", Span::default());
-        s.assign_reg_d_from("mosi_r", "miso", Span::default());
+        s.assign_reg_d_from("busy_r", "next_busy", Span::default());
+        s.assign_reg_d_from("bit_idx", "next_bit_idx", Span::default());
+        s.assign_reg_d_from("shift", "next_shift", Span::default());
+        s.assign_reg_d_from("hold", "next_hold", Span::default());
         s.end_process();
         s.end_module();
         s.finish()
     }
 }
 
-/// Minimal I2C **master** byte buffer (not a full multi-master / SMBUS stack).
+/// I2C **master** START + 8-data + STOP bit-bang (FR82) — not multi-master / SMBus.
 ///
-/// Role: master. Register surface: `start` + `tx_data[7:0]` → held `tx_byte`;
-/// `busy` mirrors start; `scl`/`sda_out` are registered stubs. `sda_in` is sampled.
+/// Accepts `start && !busy`; latches `tx_data` into `tx_byte`; 10 busy cycles:
+/// START (`scl=1`,`sda_out=0`) → 8 MSB-first data bits (`scl=1`) → STOP (`scl=1`,`sda_out=1`).
+/// Idle: both lines high. `sda_in` sampled into sticky `ack_sample` (not exported).
 ///
-/// Non-goals: multi-master arbitration, clock stretching FSM, 10-bit addressing, slave mode.
+/// Documented subset: 1 bit/clk teaching toy (no half-period SCL, no ACK/NACK drive).
+/// Non-goals: clock stretch, arbitration, 10-bit addr, slave, generator closures (Epic 29).
 pub struct I2cMaster;
 
 impl Elaboratable for I2cMaster {
@@ -373,33 +476,178 @@ impl Elaboratable for I2cMaster {
         s.add_output("busy", GroundType::UInt { width: 1 }, Span::default());
         s.add_output("scl", GroundType::UInt { width: 1 }, Span::default());
         s.add_output("sda_out", GroundType::UInt { width: 1 }, Span::default());
+
         s.declare_reg("hold", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_reg("shift", GroundType::UInt { width: 8 }, Span::default());
         s.declare_reg("busy_r", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_reg("scl_r", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_reg("sda_r", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("phase", GroundType::UInt { width: 4 }, Span::default());
+        s.declare_reg("ack_sample", GroundType::UInt { width: 1 }, Span::default());
+
+        s.declare_wire("c0_1", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("c1_1", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("c0_4", GroundType::UInt { width: 4 }, Span::default());
+        s.declare_wire("c1_4", GroundType::UInt { width: 4 }, Span::default());
+        s.declare_wire("c9_4", GroundType::UInt { width: 4 }, Span::default());
+        s.declare_wire("c0_8", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("c1_8", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("cff_8", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("c80_8", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("accept", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire(
+            "is_start_ph",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        s.declare_wire("is_stop_ph", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("is_data", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("is_data2", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("is_data3", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("msb_masked", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("data_bit", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire(
+            "sda_data_or_stop",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        s.declare_wire("sda_active", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("shift_shl", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("shift_shl8", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("phase_p1", GroundType::UInt { width: 4 }, Span::default());
+        s.declare_wire("busy_cont", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("next_busy", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire(
+            "next_phase_busy",
+            GroundType::UInt { width: 4 },
+            Span::default(),
+        );
+        s.declare_wire(
+            "next_phase_gated",
+            GroundType::UInt { width: 4 },
+            Span::default(),
+        );
+        s.declare_wire("next_phase", GroundType::UInt { width: 4 }, Span::default());
+        s.declare_wire(
+            "next_shift_data",
+            GroundType::UInt { width: 8 },
+            Span::default(),
+        );
+        s.declare_wire("next_shift", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("next_hold", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("next_ack", GroundType::UInt { width: 1 }, Span::default());
+
         s.begin_combinational(Span::default());
+        s.assign_lit("c0_1", 0, Span::default());
+        s.assign_lit("c1_1", 1, Span::default());
+        s.assign_lit("c0_4", 0, Span::default());
+        s.assign_lit("c1_4", 1, Span::default());
+        s.assign_lit("c9_4", 9, Span::default());
+        s.assign_lit("c0_8", 0, Span::default());
+        s.assign_lit("c1_8", 1, Span::default());
+        s.assign_lit("cff_8", 0xFF, Span::default());
+        s.assign_lit("c80_8", 0x80, Span::default());
+        s.assign_mux("accept", "busy_r", "c0_1", "start", Span::default());
+        s.assign_eq("is_start_ph", "phase", "c0_4", Span::default());
+        s.assign_eq("is_stop_ph", "phase", "c9_4", Span::default());
+        // is_data3 = busy && !start_ph && !stop_ph
+        s.assign_mux("is_data", "is_start_ph", "c0_1", "c1_1", Span::default());
+        s.assign_mux("is_data2", "is_stop_ph", "c0_1", "is_data", Span::default());
+        s.assign_and("is_data3", "is_data2", "busy_r", Span::default());
+
+        s.assign_and("msb_masked", "shift", "c80_8", Span::default());
+        s.assign_eq("data_bit", "msb_masked", "c80_8", Span::default());
+        s.assign_mux(
+            "sda_data_or_stop",
+            "is_stop_ph",
+            "c1_1",
+            "data_bit",
+            Span::default(),
+        );
+        // START forces sda=0; else data/stop; idle high when !busy
+        s.assign_mux(
+            "sda_active",
+            "is_start_ph",
+            "c0_1",
+            "sda_data_or_stop",
+            Span::default(),
+        );
+        s.assign_mux("sda_out", "busy_r", "sda_active", "c1_1", Span::default());
+        // scl idle/START/STOP/data all high in this 1-bit/clk toy
+        s.assign_lit("scl", 1, Span::default());
         s.assign_net("tx_byte", "hold", Span::default());
         s.assign_net("busy", "busy_r", Span::default());
-        s.assign_net("scl", "scl_r", Span::default());
-        s.assign_net("sda_out", "sda_r", Span::default());
+
+        s.assign_shl("shift_shl", "shift", "c1_8", Span::default());
+        s.assign_and("shift_shl8", "shift_shl", "cff_8", Span::default());
+        s.assign_add("phase_p1", "phase", "c1_4", Span::default());
+        s.assign_mux("busy_cont", "is_stop_ph", "c0_1", "busy_r", Span::default());
+        s.assign_mux("next_busy", "accept", "c1_1", "busy_cont", Span::default());
+        s.assign_mux(
+            "next_phase_busy",
+            "is_stop_ph",
+            "c0_4",
+            "phase_p1",
+            Span::default(),
+        );
+        s.assign_mux(
+            "next_phase_gated",
+            "busy_r",
+            "next_phase_busy",
+            "c0_4",
+            Span::default(),
+        );
+        s.assign_mux(
+            "next_phase",
+            "accept",
+            "c0_4",
+            "next_phase_gated",
+            Span::default(),
+        );
+        s.assign_mux(
+            "next_shift_data",
+            "is_data3",
+            "shift_shl8",
+            "shift",
+            Span::default(),
+        );
+        s.assign_mux(
+            "next_shift",
+            "accept",
+            "tx_data",
+            "next_shift_data",
+            Span::default(),
+        );
+        s.assign_mux("next_hold", "accept", "tx_data", "hold", Span::default());
+        s.assign_mux(
+            "next_ack",
+            "is_data3",
+            "sda_in",
+            "ack_sample",
+            Span::default(),
+        );
         s.end_process();
+
         s.begin_sequential(Span::default());
-        s.assign_reg_d_from("hold", "tx_data", Span::default());
-        s.assign_reg_d_from("busy_r", "start", Span::default());
-        s.assign_reg_d_from("scl_r", "start", Span::default());
-        s.assign_reg_d_from("sda_r", "sda_in", Span::default());
+        s.assign_reg_d_from("busy_r", "next_busy", Span::default());
+        s.assign_reg_d_from("phase", "next_phase", Span::default());
+        s.assign_reg_d_from("shift", "next_shift", Span::default());
+        s.assign_reg_d_from("hold", "next_hold", Span::default());
+        s.assign_reg_d_from("ack_sample", "next_ack", Span::default());
         s.end_process();
         s.end_module();
         s.finish()
     }
 }
 
-/// AXI4-Lite **minimal slave** (FR48 / Open Q7).
+/// AXI4-Lite **minimal slave** single-register handshake toy (FR82 / Open Q7).
 ///
-/// Documented widths: **ADDR=8**, **DATA=32**. Handshake stubs register channel valids;
-/// a single `data_r` holds the last `s_axi_wdata` for `s_axi_rdata` smoke.
+/// Documented widths: **ADDR=8**, **DATA=32**. One backing `data_r` register:
+/// write when `awvalid && wvalid && !bvalid` (captures `wdata`; ignores addr/wstrb);
+/// holds `bvalid` until `bready`; read when `arvalid && !rvalid && !bvalid`
+/// (asserts `rvalid` with `rdata=data_r` until `rready`). `*ready` are combinatorial
+/// when the corresponding response channel is idle.
 ///
-/// Non-goals: Full AXI (burst/ID/QoS), interconnect, multi-slave decode, VIP compliance.
+/// Non-goals: Full AXI (burst/ID/QoS), interconnect, multi-slave decode, VIP,
+/// generator closures (Epic 29).
 pub struct Axi4LiteSlave;
 
 impl Elaboratable for Axi4LiteSlave {
@@ -408,7 +656,6 @@ impl Elaboratable for Axi4LiteSlave {
         s.begin_module("Axi4LiteSlave", Span::default());
         s.add_input("clk", GroundType::Clock, Span::default());
         s.add_input("rst", GroundType::Reset, Span::default());
-        // Write address
         s.add_input(
             "s_axi_awaddr",
             GroundType::UInt { width: 8 },
@@ -424,7 +671,6 @@ impl Elaboratable for Axi4LiteSlave {
             GroundType::UInt { width: 1 },
             Span::default(),
         );
-        // Write data
         s.add_input(
             "s_axi_wdata",
             GroundType::UInt { width: 32 },
@@ -445,7 +691,6 @@ impl Elaboratable for Axi4LiteSlave {
             GroundType::UInt { width: 1 },
             Span::default(),
         );
-        // Write response
         s.add_output(
             "s_axi_bresp",
             GroundType::UInt { width: 2 },
@@ -461,7 +706,6 @@ impl Elaboratable for Axi4LiteSlave {
             GroundType::UInt { width: 1 },
             Span::default(),
         );
-        // Read address
         s.add_input(
             "s_axi_araddr",
             GroundType::UInt { width: 8 },
@@ -477,7 +721,6 @@ impl Elaboratable for Axi4LiteSlave {
             GroundType::UInt { width: 1 },
             Span::default(),
         );
-        // Read data
         s.add_output(
             "s_axi_rdata",
             GroundType::UInt { width: 32 },
@@ -500,29 +743,85 @@ impl Elaboratable for Axi4LiteSlave {
         );
 
         s.declare_reg("data_r", GroundType::UInt { width: 32 }, Span::default());
-        s.declare_reg("awready_r", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_reg("wready_r", GroundType::UInt { width: 1 }, Span::default());
         s.declare_reg("bvalid_r", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_reg("arready_r", GroundType::UInt { width: 1 }, Span::default());
         s.declare_reg("rvalid_r", GroundType::UInt { width: 1 }, Span::default());
 
+        s.declare_wire("c0_1", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("c1_1", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("aw_ready", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("ar_ready", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("aw_fire", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("w_fire", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("do_write", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("ar_fire", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("do_read", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("b_fire", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("r_fire", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("next_data", GroundType::UInt { width: 32 }, Span::default());
+        s.declare_wire("b_clear", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("b_hold", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire(
+            "next_bvalid",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        s.declare_wire("r_clear", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("r_hold", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire(
+            "next_rvalid",
+            GroundType::UInt { width: 1 },
+            Span::default(),
+        );
+        s.declare_wire("not_bvalid", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("not_rvalid", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_wire("can_ar", GroundType::UInt { width: 1 }, Span::default());
+
         s.begin_combinational(Span::default());
-        s.assign_net("s_axi_awready", "awready_r", Span::default());
-        s.assign_net("s_axi_wready", "wready_r", Span::default());
+        s.assign_lit("c0_1", 0, Span::default());
+        s.assign_lit("c1_1", 1, Span::default());
+        // awready/wready when !bvalid; arready when !rvalid && !bvalid
+        s.assign_xor("not_bvalid", "bvalid_r", "c1_1", Span::default());
+        s.assign_xor("not_rvalid", "rvalid_r", "c1_1", Span::default());
+        s.assign_net("aw_ready", "not_bvalid", Span::default());
+        s.assign_and("can_ar", "not_rvalid", "not_bvalid", Span::default());
+        s.assign_net("ar_ready", "can_ar", Span::default());
+        s.assign_net("s_axi_awready", "aw_ready", Span::default());
+        s.assign_net("s_axi_wready", "aw_ready", Span::default());
+        s.assign_net("s_axi_arready", "ar_ready", Span::default());
         s.assign_net("s_axi_bvalid", "bvalid_r", Span::default());
-        s.assign_lit("s_axi_bresp", 0, Span::default()); // OKAY
-        s.assign_net("s_axi_arready", "arready_r", Span::default());
-        s.assign_net("s_axi_rdata", "data_r", Span::default());
         s.assign_net("s_axi_rvalid", "rvalid_r", Span::default());
-        s.assign_lit("s_axi_rresp", 0, Span::default()); // OKAY
+        s.assign_net("s_axi_rdata", "data_r", Span::default());
+        s.assign_lit("s_axi_bresp", 0, Span::default());
+        s.assign_lit("s_axi_rresp", 0, Span::default());
+
+        s.assign_and("aw_fire", "s_axi_awvalid", "aw_ready", Span::default());
+        s.assign_and("w_fire", "s_axi_wvalid", "aw_ready", Span::default());
+        s.assign_and("do_write", "aw_fire", "w_fire", Span::default());
+        s.assign_and("ar_fire", "s_axi_arvalid", "ar_ready", Span::default());
+        // Prefer write over read in the same cycle
+        s.assign_mux("do_read", "do_write", "c0_1", "ar_fire", Span::default());
+        s.assign_and("b_fire", "bvalid_r", "s_axi_bready", Span::default());
+        s.assign_and("r_fire", "rvalid_r", "s_axi_rready", Span::default());
+
+        s.assign_mux(
+            "next_data",
+            "do_write",
+            "s_axi_wdata",
+            "data_r",
+            Span::default(),
+        );
+        s.assign_mux("b_clear", "b_fire", "c0_1", "bvalid_r", Span::default());
+        s.assign_mux("b_hold", "do_write", "c1_1", "b_clear", Span::default());
+        s.assign_net("next_bvalid", "b_hold", Span::default());
+        s.assign_mux("r_clear", "r_fire", "c0_1", "rvalid_r", Span::default());
+        s.assign_mux("r_hold", "do_read", "c1_1", "r_clear", Span::default());
+        s.assign_net("next_rvalid", "r_hold", Span::default());
         s.end_process();
+
         s.begin_sequential(Span::default());
-        s.assign_reg_d_from("data_r", "s_axi_wdata", Span::default());
-        s.assign_reg_d_from("awready_r", "s_axi_awvalid", Span::default());
-        s.assign_reg_d_from("wready_r", "s_axi_wvalid", Span::default());
-        s.assign_reg_d_from("bvalid_r", "s_axi_bready", Span::default());
-        s.assign_reg_d_from("arready_r", "s_axi_arvalid", Span::default());
-        s.assign_reg_d_from("rvalid_r", "s_axi_rready", Span::default());
+        s.assign_reg_d_from("data_r", "next_data", Span::default());
+        s.assign_reg_d_from("bvalid_r", "next_bvalid", Span::default());
+        s.assign_reg_d_from("rvalid_r", "next_rvalid", Span::default());
         s.end_process();
         s.end_module();
         s.finish()
@@ -689,78 +988,174 @@ mod tests {
         assert_eq!(sim.ports().get("tx_byte"), Some(0x3C));
     }
 
+    fn spi_drive(sim: &mut Sim, rst: u64, start: u64, tx_data: u64, miso: u64) {
+        let mut pv = PortValues::default();
+        pv.set("rst", rst);
+        pv.set("start", start);
+        pv.set("tx_data", tx_data);
+        pv.set("miso", miso);
+        sim.set_inputs(pv);
+        sim.settle();
+        sim.tick();
+    }
+
     #[test]
     fn spi_master_elaborate_emit_tick() {
         smoke_elaborate_emit_tick::<SpiMaster>("SpiMaster");
+        let hir = SpiMaster::elaborate().unwrap();
+        let art = emit(&hir);
+        let v = &art.files[0].contents;
+        assert!(v.contains("module SpiMaster"));
+        assert!(
+            v.contains("cs_n") && v.contains("sclk") && v.contains("mosi"),
+            "FR82 SPI must emit serial pins"
+        );
+
         let mut sim = Sim::new(SpiMaster::elaborate().unwrap());
-        let mut pv = PortValues::default();
-        pv.set("rst", 1);
-        pv.set("start", 0);
-        pv.set("tx_data", 0);
-        pv.set("miso", 0);
-        sim.set_inputs(pv.clone());
-        sim.tick();
-        pv.set("rst", 0);
-        pv.set("start", 1);
-        pv.set("tx_data", 0x3C);
-        pv.set("miso", 1);
-        sim.set_inputs(pv);
-        sim.tick();
-        assert_eq!(sim.ports().get("mosi_byte"), Some(0x3C));
+        spi_drive(&mut sim, 1, 0, 0, 0);
+        assert_eq!(sim.ports().get("busy"), Some(0));
+        assert_eq!(sim.ports().get("cs_n"), Some(1));
+        assert_eq!(sim.ports().get("sclk"), Some(0));
+
+        // 0xA5 = 0b1010_0101 → MSB first: 1,0,1,0,0,1,0,1
+        spi_drive(&mut sim, 0, 1, 0xA5, 0);
         assert_eq!(sim.ports().get("busy"), Some(1));
+        assert_eq!(sim.ports().get("mosi_byte"), Some(0xA5));
+        assert_eq!(sim.ports().get("cs_n"), Some(0));
+        assert_eq!(sim.ports().get("sclk"), Some(1));
+        assert_eq!(sim.ports().get("mosi"), Some(1)); // MSB
+
+        let expected = [1u64, 0, 1, 0, 0, 1, 0, 1];
+        for (i, &bit) in expected.iter().enumerate().skip(1) {
+            spi_drive(&mut sim, 0, 0, 0, 0);
+            assert_eq!(sim.ports().get("mosi"), Some(bit), "SPI bit {i}");
+            assert_eq!(sim.ports().get("busy"), Some(1));
+        }
+        // last bit cycle already shown; one more tick clears busy
+        spi_drive(&mut sim, 0, 0, 0, 0);
+        assert_eq!(sim.ports().get("busy"), Some(0));
+        assert_eq!(sim.ports().get("cs_n"), Some(1));
+
+        // busy-gated: start while busy must not replace hold
+        spi_drive(&mut sim, 0, 1, 0x3C, 0);
+        assert_eq!(sim.ports().get("busy"), Some(1));
+        spi_drive(&mut sim, 0, 1, 0xFF, 0);
+        assert_eq!(sim.ports().get("mosi_byte"), Some(0x3C));
+    }
+
+    fn i2c_drive(sim: &mut Sim, rst: u64, start: u64, tx_data: u64, sda_in: u64) {
+        let mut pv = PortValues::default();
+        pv.set("rst", rst);
+        pv.set("start", start);
+        pv.set("tx_data", tx_data);
+        pv.set("sda_in", sda_in);
+        sim.set_inputs(pv);
+        sim.settle();
+        sim.tick();
     }
 
     #[test]
     fn i2c_master_elaborate_emit_tick() {
         smoke_elaborate_emit_tick::<I2cMaster>("I2cMaster");
+        let hir = I2cMaster::elaborate().unwrap();
+        let art = emit(&hir);
+        let v = &art.files[0].contents;
+        assert!(v.contains("module I2cMaster"));
+        assert!(
+            v.contains("scl") && v.contains("sda_out"),
+            "FR82 I2C must emit scl/sda_out"
+        );
+
         let mut sim = Sim::new(I2cMaster::elaborate().unwrap());
-        let mut pv = PortValues::default();
-        pv.set("rst", 1);
-        pv.set("start", 0);
-        pv.set("tx_data", 0);
-        pv.set("sda_in", 0);
-        sim.set_inputs(pv.clone());
-        sim.tick();
-        pv.set("rst", 0);
-        pv.set("start", 1);
-        pv.set("tx_data", 0x42);
-        pv.set("sda_in", 1);
-        sim.set_inputs(pv);
-        sim.tick();
-        assert_eq!(sim.ports().get("tx_byte"), Some(0x42));
+        i2c_drive(&mut sim, 1, 0, 0, 1);
+        assert_eq!(sim.ports().get("busy"), Some(0));
+        assert_eq!(sim.ports().get("scl"), Some(1));
+        assert_eq!(sim.ports().get("sda_out"), Some(1)); // idle high
+
+        // 0xA5 MSB-first after START
+        i2c_drive(&mut sim, 0, 1, 0xA5, 1);
         assert_eq!(sim.ports().get("busy"), Some(1));
+        assert_eq!(sim.ports().get("tx_byte"), Some(0xA5));
+        assert_eq!(sim.ports().get("sda_out"), Some(0)); // START
+
+        let data_bits = [1u64, 0, 1, 0, 0, 1, 0, 1];
+        for (i, &bit) in data_bits.iter().enumerate() {
+            i2c_drive(&mut sim, 0, 0, 0, 1);
+            assert_eq!(sim.ports().get("sda_out"), Some(bit), "I2C data bit {i}");
+            assert_eq!(sim.ports().get("busy"), Some(1));
+        }
+        // STOP
+        i2c_drive(&mut sim, 0, 0, 0, 1);
+        assert_eq!(sim.ports().get("sda_out"), Some(1));
+        assert_eq!(sim.ports().get("busy"), Some(1));
+        i2c_drive(&mut sim, 0, 0, 0, 1);
+        assert_eq!(sim.ports().get("busy"), Some(0));
+        assert_eq!(sim.ports().get("sda_out"), Some(1));
+
+        i2c_drive(&mut sim, 0, 1, 0x42, 1);
+        i2c_drive(&mut sim, 0, 1, 0xFF, 1);
+        assert_eq!(sim.ports().get("tx_byte"), Some(0x42));
+    }
+
+    fn axi_drive(
+        sim: &mut Sim,
+        rst: u64,
+        awvalid: u64,
+        wvalid: u64,
+        wdata: u64,
+        bready: u64,
+        arvalid: u64,
+        rready: u64,
+    ) {
+        let mut pv = PortValues::default();
+        pv.set("rst", rst);
+        pv.set("s_axi_awaddr", 0);
+        pv.set("s_axi_awvalid", awvalid);
+        pv.set("s_axi_wdata", wdata);
+        pv.set("s_axi_wstrb", 0xF);
+        pv.set("s_axi_wvalid", wvalid);
+        pv.set("s_axi_bready", bready);
+        pv.set("s_axi_araddr", 0);
+        pv.set("s_axi_arvalid", arvalid);
+        pv.set("s_axi_rready", rready);
+        sim.set_inputs(pv);
+        sim.settle();
+        sim.tick();
     }
 
     #[test]
     fn axi4_lite_slave_elaborate_emit_tick() {
         smoke_elaborate_emit_tick::<Axi4LiteSlave>("Axi4LiteSlave");
+        let hir = Axi4LiteSlave::elaborate().unwrap();
+        let art = emit(&hir);
+        let v = &art.files[0].contents;
+        assert!(v.contains("module Axi4LiteSlave"));
+        assert!(
+            v.contains("s_axi_awready") && v.contains("s_axi_bvalid") && v.contains("s_axi_rvalid"),
+            "FR82 AXI-Lite must emit handshake ports"
+        );
+
         let mut sim = Sim::new(Axi4LiteSlave::elaborate().unwrap());
-        let mut pv = PortValues::default();
-        pv.set("rst", 1);
-        pv.set("s_axi_awaddr", 0);
-        pv.set("s_axi_awvalid", 0);
-        pv.set("s_axi_wdata", 0);
-        pv.set("s_axi_wstrb", 0);
-        pv.set("s_axi_wvalid", 0);
-        pv.set("s_axi_bready", 0);
-        pv.set("s_axi_araddr", 0);
-        pv.set("s_axi_arvalid", 0);
-        pv.set("s_axi_rready", 0);
-        sim.set_inputs(pv.clone());
-        sim.tick();
-        pv.set("rst", 0);
-        pv.set("s_axi_awvalid", 1);
-        pv.set("s_axi_wvalid", 1);
-        pv.set("s_axi_wdata", 0xDEAD_BEEFu64);
-        pv.set("s_axi_wstrb", 0xF);
-        pv.set("s_axi_bready", 1);
-        pv.set("s_axi_arvalid", 1);
-        pv.set("s_axi_rready", 1);
-        sim.set_inputs(pv);
-        sim.tick();
-        assert_eq!(sim.ports().get("s_axi_rdata"), Some(0xDEAD_BEEF));
+        axi_drive(&mut sim, 1, 0, 0, 0, 0, 0, 0);
         assert_eq!(sim.ports().get("s_axi_awready"), Some(1));
+        assert_eq!(sim.ports().get("s_axi_bvalid"), Some(0));
+
+        // write 0xDEAD_BEEF; hold bready low so bvalid sticks
+        axi_drive(&mut sim, 0, 1, 1, 0xDEAD_BEEF, 0, 0, 0);
+        assert_eq!(sim.ports().get("s_axi_bvalid"), Some(1));
         assert_eq!(sim.ports().get("s_axi_bresp"), Some(0));
+        assert_eq!(sim.ports().get("s_axi_awready"), Some(0)); // blocked while bvalid
+
+        axi_drive(&mut sim, 0, 0, 0, 0, 1, 0, 0);
+        assert_eq!(sim.ports().get("s_axi_bvalid"), Some(0));
+        assert_eq!(sim.ports().get("s_axi_awready"), Some(1));
+
+        // read back
+        axi_drive(&mut sim, 0, 0, 0, 0, 0, 1, 0);
+        assert_eq!(sim.ports().get("s_axi_rvalid"), Some(1));
+        assert_eq!(sim.ports().get("s_axi_rdata"), Some(0xDEAD_BEEF));
+        axi_drive(&mut sim, 0, 0, 0, 0, 0, 0, 1);
+        assert_eq!(sim.ports().get("s_axi_rvalid"), Some(0));
     }
 
     #[test]
@@ -781,5 +1176,8 @@ mod tests {
         // Compile-time / surface check: Elaboratable::elaborate takes no Fn.
         let _ = SyncFifo::elaborate();
         let _ = UartTx::elaborate();
+        let _ = SpiMaster::elaborate();
+        let _ = I2cMaster::elaborate();
+        let _ = Axi4LiteSlave::elaborate();
     }
 }

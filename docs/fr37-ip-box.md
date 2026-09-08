@@ -2,7 +2,6 @@
 
 完整五类与黑盒索引见 **[docs/ip/README.md](ip/README.md)**（经 `bitloom_prelude::ip`）。
 
-- In-tree / prelude：`SyncFifo`（depth-4 + full/empty）、`UartTx`（8N1 bit-bang）、`ExtBlackBox`（opaque）
+- In-tree / prelude：`SyncFifo`（depth-4 + full/empty）、`UartTx`（8N1 bit-bang）、`SpiMaster`（Mode-0-ish byte shifter）、`I2cMaster`（START+8data+STOP）、`Axi4LiteSlave`（单寄存器握手）、`ExtBlackBox`（opaque）
 - 演示 crate：`examples/ip_box`（仅依赖 `bitloom-prelude`）
-- FR48 另含：`SpiMaster`、`I2cMaster`、`Axi4LiteSlave`（34.3 前仍为 stub）
-- FR82：FIFO/UART 为非 stub 可综合路径；API **无**生成器闭包（Epic 29）
+- FR82：五类均为非 stub 可综合路径（文档最小子集）；API **无**生成器闭包（Epic 29）
