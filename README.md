@@ -181,9 +181,9 @@ cargo run -p bitloom -- firtool ensure   # 下载/校验/缓存并打印二进�
 
 工具链 crate：MIT OR Apache-2.0（见各 crate 的 `Cargo.toml`）。
 
-## HLS（支持功能 · FR35 / FR50）
+## HLS（支持功能 · FR35 / FR50 / FR76）
 
-Bitloom **将 HLS 列为支持功能**：算法级 `#[hls]` / `cargo bitloom hls` 经钉死外挂 **PandA Bambu 2024.10** 产出可综合 RTL。Bitloom **不**实现树内调度器（AD-25）。
+Bitloom **将 HLS 列为支持功能**：算法级 `#[hls]` / `cargo bitloom hls` 经钉死外挂 **PandA Bambu 2024.10** 产出可综合 RTL。Bitloom **不**实现树内调度器（AD-25）。数据流闭包（FR76）在外挂调度前溶解为 C。
 
 跟练：
 
@@ -192,6 +192,8 @@ cargo run -p bitloom -- hls --help
 # 安装 Bambu 2024.10 后：
 export BITLOOM_BAMBU_PATH=/path/to/bambu
 cargo run -p bitloom -- hls --function add --out-dir target/bitloom-hls
+# FR76 数据流变换（emit-only 检查溶解产物）：
+cargo run -p bitloom -- hls --function map_xor --dataflow xor_a5 --emit-only --out-dir target/bitloom-hls
 # 或 CI/本地烟测（默认 stub；真机设 BITLOOM_HLS_USE_REAL=1）：
 just hls-smoke
 ```

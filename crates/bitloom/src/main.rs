@@ -1,12 +1,12 @@
 //! `cargo bitloom` CLI — published as crate `bitloom` (AD-2). Never publish as `rhdl` / `rhdl-bits`.
 
 mod firtool;
-mod hls;
 
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::{Command, Stdio};
 
+use bitloom::hls;
 use clap::{Parser, Subcommand};
 use serde::Deserialize;
 
@@ -50,7 +50,7 @@ enum Commands {
     },
     /// List `bitloom-sim` tick engines (FR32). Simulation itself lives in tests / bitloom-sim.
     SimEngines,
-    /// Product HLS path: emit C and invoke pinned Bambu (FR35 / FR50 / AD-25).
+    /// Product HLS path: emit C and invoke pinned Bambu (FR35 / FR50 / FR76 / AD-25).
     Hls {
         /// Top function name (also used for the emitted C stub).
         #[arg(long, default_value = "add")]
@@ -61,6 +61,10 @@ enum Commands {
         /// Write the C stub only; do not invoke Bambu (not a successful RTL run).
         #[arg(long, default_value_t = false)]
         emit_only: bool,
+        /// Dissolve a documented dataflow transform before emit (FR76):
+        /// `add` | `identity` | `add1` | `xor_a5`.
+        #[arg(long, default_value = "add")]
+        dataflow: String,
     },
     /// Import FIRRTL 6.0.0 `.fir` (Chisel→firtool output ok) into the same emit path as `build` (FR40 / FR46).
     Import {
@@ -493,13 +497,15 @@ fn main() {
             function,
             out_dir,
             emit_only,
+            dataflow,
         } => {
             println!(
-                "backend={} version={}",
+                "backend={} version={} dataflow={}",
                 hls::HLS_BACKEND,
-                hls::HLS_BACKEND_VERSION
+                hls::HLS_BACKEND_VERSION,
+                dataflow
             );
-            match hls::run_hls(&function, &out_dir, emit_only) {
+            match hls::run_hls_dataflow(&function, &dataflow, &out_dir, emit_only) {
                 Ok(p) => {
                     if emit_only {
                         println!("emit_only={}", p.display());

@@ -152,6 +152,16 @@ let frozen = s.finish()?;
 - **夹具：** `crates/bitloom/tests/fr74_fr75_fr16_coexist_matrix.rs`（汇总；深度行仍见 `fr74_*` / `fr75_*` / `fr73_hw_capture_diag`）。
 - **配方：** `cargo test -p bitloom --test fr74_fr75_fr16_coexist_matrix`（亦由 `just test` 覆盖）。
 
+## HLS dataflow closures (FR76 / Cap-R-62 / Cap-R-71 / Epic 29.2)
+
+- **路径：** AD-25 外挂 HLS only（`bitloom::hls` / `cargo bitloom hls`）；**不是**可综合 comb/seq 表面。
+- **约束类（D1）：** `HlsClosureConstraintClass::HlsFree` — 自由闭包仅外挂 HLS / 功能侧；可综合腿仍用 `SynthesizableClosure`（FR74）。
+- **API：** `dissolve_dataflow_transform(name, violations, || HlsDataflowOp::…)` 在发射 prep 执行一次闭包，展开为 C 运算；`run_hls_dissolved` / CLI `--dataflow add|identity|add1|xor_a5`。
+- **语义：** 调度/降低**前**消解；C / RTL **无** `Fn` / closure 残留（NFR36）；无树内 scheduler（AD-25）。
+- **检查：** 非空 `HlsDataflowClosureViolation`（捕获 / 错路径）→ 可读失败，不 silent 进后端。
+- **ATDD：** `cargo test -p bitloom --test fr76_hls_dataflow_closure`（emit-only + bambu-ci-stub RTL）。
+- **文档：** `docs/fr35-hls.md`；NFR14：`nfr14-risk-epic29-hls-ip-closures.md`。
+
 ## Comb / seq
 
 - `#[combinational]` and `#[sequential]` are mandatory.

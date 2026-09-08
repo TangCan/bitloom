@@ -237,7 +237,7 @@ development_status:
 
   epic-29: in-progress
   29-1-epic-29-nfr14-风险记录: done
-  29-2-hls-数据流闭包: backlog
+  29-2-hls-数据流闭包: done
   29-3-ip-生成器闭包定制: backlog
   29-4-闭包透明抽检与文档: backlog
   epic-29-retrospective: optional
