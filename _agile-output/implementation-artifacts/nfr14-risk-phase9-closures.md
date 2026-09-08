@@ -54,6 +54,7 @@
 - AD-18 — 语言表面 / 捕获闭包（待 26.3 修订）
 - AD-25 / FR86 — HLS 仅外挂
 - PRD NFR14；Phase 9 FR72–78 / NFR35–36（`epics.md` inventory → 26.4 写入 PRD）
+- **闭包决策表（Story 26.2 / FR72）：** `architecture/architecture-rhdl-2026-08-18/closure-decision-table-2026-09-08.md`
 - 调研：`technical-requirements-implementation-gap-generic-2026-09-08/research.md`
 - 历史别名消歧：**NFR14-crates** ≠ 本门禁 **NFR14**
 

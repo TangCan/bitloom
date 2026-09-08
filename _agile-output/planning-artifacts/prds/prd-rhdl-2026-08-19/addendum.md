@@ -94,5 +94,6 @@
 - 深度指针（正式 FR79+ 编号由后续 CE/PRD 增补钉死）：FR23 CDC 真 RTL、FR51 嵌套 Bundle、FR28 Mem→Chisel、FR37/48 非 stub IP、FR33/36/39 残余 Partial。
 - **HLS：** 维持 **AD-25** 外挂-only；**不**立项树内调度器（Wave 3 HLS 项无新实现 epic）。
 - Phase 9（FR72–78）范围不变。
+- **Phase 9 Wave 0 决策表（FR72 / Story 26.2）：** `architecture/architecture-rhdl-2026-08-18/closure-decision-table-2026-09-08.md`（HLS 自由 vs 可综合分裂；FR75→Epic 28；const fn / 生成器双轨；Cap-R-58）。
 
 **调研：** `_agile-output/planning-artifacts/research/technical-requirements-implementation-gap-generic-2026-09-08/research.md`（Wave 3）。

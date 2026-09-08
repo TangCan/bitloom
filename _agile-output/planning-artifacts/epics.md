@@ -1792,7 +1792,7 @@ NFR34: Epic 25 — JDK17 / sbt cache / 无 continue-on-error / just 配方
 **ID 注记：** 新编号 **FR72–FR78** / **NFR35–NFR36**，接在 FR71 / NFR34 之后。禁止把本阶段能力写成 FR47（FR47 = 双视图模拟器 **crate 生成**，非用户 `Fn` 展开硬件）。
 
 FR16: （继承 · 澄清）周期精确路径继续拒绝**捕获闭包**、堆、无界递归、`dyn Trait` 等；与 FR72/FR73 共存——允许的是 **elaborate-time / 非捕获** 闭包，且不得以 Rust 闭包对象进入 `tick`。
-FR72: **闭包合同与架构解锁** — PRD 增补本阶段 FR73–FR78；修订 AD-18：保留禁捕获；新增允许 elaborate-time 非捕获 `Fn`，且必须在 `freeze` 前消解为 HIR；产出一页决策表消解 requirements 内 HLS/阶段矛盾；明确非目标：FIRRTL/Chisel **不**编码闭包节点（Cap-R-58）。无 NFR14 风险记录不得将后续闭包 epic 标 ready。
+FR72: **闭包合同与架构解锁** — PRD 增补本阶段 FR73–FR78；修订 AD-18：保留禁捕获；新增允许 elaborate-time 非捕获 `Fn`，且必须在 `freeze` 前消解为 HIR；产出一页决策表消解 requirements 内 HLS/阶段矛盾（**决策页：** `architecture/architecture-rhdl-2026-08-18/closure-decision-table-2026-09-08.md`，Story 26.2）；明确非目标：FIRRTL/Chisel **不**编码闭包节点（Cap-R-58）。无 NFR14 风险记录不得将后续闭包 epic 标 ready。
 FR73: **Elaborate-time 生成器闭包（MVP）** — 设计 crate（仅 `bitloom-prelude`）可把 `Fn`（或等价）作为生成器参数：在 `ElaborateSession` 内执行，写入 Mem/ROM/常量初值与/或工厂式实例化+connect（Cap-R-52…54, 69）；执行后 FrozenHir **无**闭包残留（Cap-R-51/59-generator）；捕获 `Wire`/`Reg` 等硬件引用 → 诊断失败；ATDD：LUT/CRC 表闭包生成 vs 手写表 golden。非目标：comb/seq 内联可综合闭包（→ FR75）。
 FR74: **SynthesizableClosure 约束与诊断** — 文档化/类型化可综合闭包约束（纯函数、无堆、无运行时捕获状态等，Cap-R-48…50）；`cargo bitloom check`（或等价）覆盖闭包可综合性（Cap-R-60）；违规有稳定诊断码。
 FR75: **组合/时序可综合闭包** — 在 `#[combinational]` / `#[sequential]` 中允许满足 FR74 的闭包并在 elaborate 期**内联展开**为普通 HIR（Cap-R-55/56/70）；与 FR16 负例矩阵共存；依赖 FR73+FR74。
@@ -1813,7 +1813,7 @@ NFR36: **冻前消解 / 后端无感知** — Verilog / FIRRTL / Chisel / tick �
 - **修订 AD-18**（FR72）：禁捕获保留；增加 elaborate-time 非捕获允许条款。
 - 术语消歧：本阶段「生成器闭包」≠ FR47「sim generators」≠ Phase 7 英文 closure（闭环）。
 - 外部实践约束（调研 D4）：禁止将硬件线网捕获为模块构造参数；Clash 式「顶层须一阶」精神适用于 tick 路径。
-- Wave 0 开放问题必须落进决策表后再开 FR76：HLS 闭包自由 vs 可综合；FR75 是否与 MVP 同阶段或延后；`const fn`（Cap-R-18）与 FR73 双轨或先后。
+- Wave 0 开放问题已落入决策表（Story 26.2）：`architecture/architecture-rhdl-2026-08-18/closure-decision-table-2026-09-08.md`（HLS 自由 vs 可综合；FR75→Wave 2/Epic 28；`const fn` 与 FR73 双轨）。
 - 无 UX；无新 starter 模板。
 
 ### Phase 9 UX Design Requirements
