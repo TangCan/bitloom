@@ -214,6 +214,8 @@ flowchart TB
 
 ### AD-25 — HLS 仅外挂 [ADOPTED]
 
+- **Correct Course 2026-09-08：** Wave 3「HLS 真调度」**不**立项；产品路径保持本 AD 外挂（Bambu/Vitis）。见 `sprint-change-proposal-2026-09-08.md`。
+
 - **Binds:** 可选 HLS 前端, CLI
 - **Prevents:** 树内自研调度器；把 Handshake/动态数据流当默认 RTL 语义；「永久 unsupported」冒充产品 HLS
 - **Rule:** `#[hls]`（或等价）只允许 **发射** 宿主工具接受的 IR/C，并调用 **Bambu 或 XLS**（启用时钉死**一个**后端）。禁止 bitloom/rhdl crate 实现 scheduling/allocation。当产品合同要求 HLS 路径（PRD FR35/FR50 / Phase 7）时：**默认文档路径必须可用**，并有 CI/烟测；禁止以「未启用则永久 unsupported」交差。后端缺失须失败可读，不得 silent 成功。
@@ -239,6 +241,14 @@ flowchart TB
 - **Binds:** epic ready, implementation-artifacts
 - **Prevents:** 无记录开工 FR46/47/48/49/50；静默把合同降回「尽力/deferred」
 - **Rule:** FR46/47/48/49（及适用的 FR50）在 epic/story 标 `ready` **之前**，须有风险记录：上游约束、粗工期带、禁止静默降级清单、负责人。缺记录不得开工。与历史 **NFR14-crates** 无关。
+
+### AD-29 — CDC 原语须可综合真 RTL（深度）[ADOPTED]
+
+- **Binds:** prelude CDC 原语, builder, vlog/sim, FR23 深度验收
+- **Prevents:** 仅以 ZST + `mark_cdc_bridge` 叙事关闭 FR23/FR52 深度 epic
+- **Rule:** 语言级 `DoubleFlop` / `SyncFIFO`（或文档等价）在 Phase 10 / Epic 31 深度验收中必须 **emit 可综合同步器 RTL** 并支持按域 tick 黄金夹具。phantom 域与非法跨域失败（既有）仍然有效，但不足以单独交差深度合同。
+- **Adopted:** 2026-09-08 — Correct Course Wave 3。
+
 
 ## Consistency Conventions
 
@@ -317,6 +327,7 @@ flowchart LR
 | 异步复位 / enable | hir, vlog, sim | AD-23 |
 | FST（可选） | rhdl-sim | AD-24, AD-5 |
 | HLS 外挂（产品路径） | 可选前端 + CLI | AD-25 |
+| CDC 真 RTL 深度 | prelude, builder, vlog, sim | AD-29, AD-22 |
 | 产品合同海拔 / NFR14 门禁 | docs / PRD / SPEC / impl-artifacts | AD-26, AD-28 |
 | IP / 可视化 / formal / float / Analog | 产品 FR；脊柱不钉实现形状 | Deferred（实现形状） |
 

@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 08-21-2026 17:29
+last_updated: 09-08-2026 19:34
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -213,6 +213,76 @@ development_status:
   25-2-just-chisel-fr28-jvm-与本机合同: done
   25-3-gha-required-job-fr28-chisel-jvm: done
   epic-25-retrospective: done
+
+  epic-26: backlog
+  26-1-phase-9-闭包-nfr14-风险记录: backlog
+  26-2-闭包决策表: backlog
+  26-3-修订-ad-18: backlog
+  26-4-prd-增补-fr72-78-nfr35-36: backlog
+  epic-26-retrospective: optional
+
+  epic-27: backlog
+  27-1-lut-常量初值生成器闭包-api: backlog
+  27-2-模块工厂闭包: backlog
+  27-3-捕获硬件引用诊断-fr16-回归: backlog
+  27-4-atdd-golden-后端无感知抽检: backlog
+  epic-27-retrospective: optional
+
+  epic-28: backlog
+  28-1-synthesizableclosure-约束与检查钩子: backlog
+  28-2-组合逻辑内联可综合闭包: backlog
+  28-3-时序逻辑内联-所有权: backlog
+  28-4-诊断矩阵-fr16-共存-atdd: backlog
+  epic-28-retrospective: optional
+
+  epic-29: backlog
+  29-1-epic-29-nfr14-风险记录: backlog
+  29-2-hls-数据流闭包: backlog
+  29-3-ip-生成器闭包定制: backlog
+  29-4-闭包透明抽检与文档: backlog
+  epic-29-retrospective: optional
+
+  epic-30: backlog
+  30-1-epic-30-nfr14-风险记录: backlog
+  30-2-桥接适配器闭包模板-api: backlog
+  30-3-fr47-双视图联验: backlog
+  30-4-多视图闭包文档收口: backlog
+  epic-30-retrospective: optional
+
+  epic-31: backlog
+  31-1-epic-31-nfr14-风险记录: backlog
+  31-2-doubleflop-可综合同步器-rtl: backlog
+  31-3-syncfifo-或等价-可综合跨域-fifo: backlog
+  31-4-cdc-深度-atdd-文档叙事收口: backlog
+  epic-31-retrospective: optional
+
+  epic-32: backlog
+  32-1-epic-32-nfr14-风险记录: backlog
+  32-2-嵌套-bundle-可综合路径: backlog
+  32-3-bundle-derive-或等价: backlog
+  32-4-嵌套-bundle-atdd-文档: backlog
+  epic-32-retrospective: optional
+
+  epic-33: backlog
+  33-1-epic-33-nfr14-风险记录: backlog
+  33-2-mem-chisel-合同决策: backlog
+  33-3-实现所选-mem-chisel-路径: backlog
+  33-4-atdd-fr71-回归: backlog
+  epic-33-retrospective: optional
+
+  epic-34: backlog
+  34-1-epic-34-nfr14-风险记录: backlog
+  34-2-fifo-uart-可综合基线: backlog
+  34-3-spi-i2c-axi-基线-或文档最小子集: backlog
+  34-4-ip-基线-atdd-epic-29-衔接文档: backlog
+  epic-34-retrospective: optional
+
+  epic-35: backlog
+  35-1-epic-35-nfr14-风险记录: backlog
+  35-2-c-abi-超出-counter-demo-fr83: backlog
+  35-3-softf16-可综合或显式-defer-fr84: backlog
+  35-4-formal-夹具-lsp-deferred-收口-fr85: backlog
+  epic-35-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1

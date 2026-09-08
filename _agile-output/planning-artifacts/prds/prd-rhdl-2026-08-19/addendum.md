@@ -83,3 +83,16 @@
 **调研：** `_agile-output/planning-artifacts/research/technical-forcing-jvm-chisel-compile-in-default-ci-2026-08-21/research.md`（Pattern A）。
 
 **ID 避撞：** FR71 / NFR34（不用 FR53/FR60/NFR15）。Epic 映射：`epics.md` Epic 25。
+
+
+## 2026-09-08 Update — Phase 10 / Wave 3 深度诚实度（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-08.md` — 将调研 Wave 3 非闭包 Partial 缺口并进 **Phase 10**（Epic 31–35），与 Phase 9 闭包并行。
+
+**合同澄清：**
+- Epic/sprint `done` 表示当时 AC 的**最小合同**；若 crates 盘点仍为 Partial，须经 **depth epic**（Phase 10）收口，不得用历史 `done` 关闭深度缺口。
+- 深度指针（正式 FR79+ 编号由后续 CE/PRD 增补钉死）：FR23 CDC 真 RTL、FR51 嵌套 Bundle、FR28 Mem→Chisel、FR37/48 非 stub IP、FR33/36/39 残余 Partial。
+- **HLS：** 维持 **AD-25** 外挂-only；**不**立项树内调度器（Wave 3 HLS 项无新实现 epic）。
+- Phase 9（FR72–78）范围不变。
+
+**调研：** `_agile-output/planning-artifacts/research/technical-requirements-implementation-gap-generic-2026-09-08/research.md`（Wave 3）。

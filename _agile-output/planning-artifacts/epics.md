@@ -32,6 +32,14 @@ stepsCompleted:
   - step-02-design-epics-phase-8
   - step-03-create-stories-phase-8
   - step-04-final-validation-phase-8
+  - step-01-validate-prerequisites-phase-9
+  - step-02-design-epics-phase-9
+  - step-03-create-stories-phase-9
+  - step-04-final-validation-phase-9
+  - step-01-validate-prerequisites-phase-10
+  - step-02-design-epics-phase-10
+  - step-03-create-stories-phase-10
+  - step-04-final-validation-phase-10
 status: complete
 phase1Status: complete
 phase2Status: complete
@@ -41,27 +49,46 @@ phase5Status: complete
 phase6Status: complete
 phase7Status: complete
 phase8Status: complete
+phase9Status: complete
+phase10Status: complete
+phase10Epic31Status: complete
+phase10Epic32Status: complete
+phase10Epic33Status: complete
+phase10Epic34Status: complete
+phase10Epic35Status: complete
 phase3Scope: Bitloom rename + maturity closeout + crates.io publish
 phase4Scope: True standalone after cargo install (bitloom-* publish graph)
 phase5Scope: Teaching RV32 example core + step-by-step tutorial (Bitloom)
 phase6Scope: Episode II — full user RV32I immediates → classic 5-stage+hazards → optional Zicsr/M-trap
 phase7Scope: Overview-literal closure (PRD amendment overview-literal-C — FR46–52 / strengthened FR28–40 / NFR14 risk gate)
 phase8Scope: FR28 JVM true-compile hard gate in default CI — FR71/NFR34 (research technical-forcing-jvm-chisel-compile-in-default-ci-2026-08-21)
+phase9Scope: Controlled generic closures (elaborate-time Fn dissolve-before-freeze) — FR72–FR78 / NFR35–NFR36 (research technical-requirements-implementation-gap-generic-2026-09-08)
+phase10Scope: Wave 3 non-closure Partial depth — FR79–FR86 / NFR37 (Correct Course 2026-09-08)
 inputDocuments:
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md
   - _agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
-  - _agile-output/planning-artifacts/research/technical-forcing-jvm-chisel-compile-in-default-ci-2026-08-21/research.md
+  - _agile-output/planning-artifacts/sprint-change-proposal-2026-09-08.md
+  - _agile-output/planning-artifacts/research/technical-requirements-implementation-gap-generic-2026-09-08/research.md
+  - _agile-output/planning-artifacts/research/technical-requirements-implementation-gap-generic-2026-09-08/imports/crates-implementation-inventory.md
   - _agile-output/planning-artifacts/epics.md
 excludedFromPhase7Rewrite:
   - Phase 1–6 epics/stories (Epic 1–18 retained as historical complete)
 excludedFromPhase8Rewrite:
   - Phase 1–7 epics/stories (Epic 1–24 retained as historical complete)
+excludedFromPhase9Rewrite:
+  - Phase 1–8 epics/stories (Epic 1–25 retained as historical complete)
+  - Wave 3 non-closure Partial gaps — NOT implemented in Phase 9; tracked as Phase 10 (see Correct Course sprint-change-proposal-2026-09-08)
+excludedFromPhase10Rewrite:
+  - Phase 1–9 epics/stories (Epic 1–30 retained; Phase 9 closures unchanged)
 uxDesign: none
 idCollisionNote: >
   Phase-3 inventory already used FR46 (Trusted Publishing) and NFR14 (crates.io FCFS).
   PRD 2026-08-21 amendment reuses FR46–FR52 and NFR14 for overview-literal / risk gate.
   Phase-7 stories MUST disambiguate (proposed: keep PRD IDs as contract; refer historical as FR46-tp / NFR14-crates).
+  Phase-9 NEW IDs start at FR72 / NFR35 (after FR71/NFR34). Do NOT reuse FR47 for generator-closures
+  (FR47 remains dual-view sim crate generation). English Phase-7 "closure" = 闭环, not Rust Fn.
+  Phase-10 NEW IDs: FR79–FR86 / NFR37 (after FR78/NFR36). Depth FRs deepen existing FR23/28/33/36/37/39/48/51 — they do not renumber historical FRs.
 ---
 
 # rhdl - Epic Breakdown
@@ -70,7 +97,7 @@ idCollisionNote: >
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。无 UX。
 
 ## Requirements Inventory
 
@@ -1750,6 +1777,192 @@ NFR34: Epic 25 — JDK17 / sbt cache / 无 continue-on-error / just 配方
 
 ---
 
+## Phase 9 Requirements Inventory（追加 · 2026-09-08）
+
+**范围：** 将 `docs/requirements` 中的**受控泛型闭包**升格为可验收合同，并与 AD-18 / FR16 对齐；按调研 Wave 0→1→2→4→5 排期。不重写 Epic 1–25。
+
+**非本阶段 FR 集（显式排除）：** 调研 Wave 3 非闭包 Partial（CDC DoubleFlop 真 RTL 深度、嵌套 Bundle derive、Chisel Mem E0901、HLS 调度器自研等）— 另开阶段/Correct Course；本 inventory 仅记录依赖关系。
+
+**输入：** PRD（现无正向闭包 FR；继承 FR16 禁捕获）；脊柱 AD-1 / AD-7 / AD-13 / AD-18；调研 `technical-requirements-implementation-gap-generic-2026-09-08`（含 Cap-R-47…72）。
+
+**签约前提（Wave 0）：** 本阶段 FR 正式进入 PRD 前须完成：HLS 闭包「自由 vs 可综合」裁决；可综合 comb/seq 闭包是否进 Wave 2；AD-18 修订文本。下列 FR 为**拟签约草案**，与 PRD 增补同步。
+
+### Phase 9 Functional Requirements
+
+**ID 注记：** 新编号 **FR72–FR78** / **NFR35–NFR36**，接在 FR71 / NFR34 之后。禁止把本阶段能力写成 FR47（FR47 = 双视图模拟器 **crate 生成**，非用户 `Fn` 展开硬件）。
+
+FR16: （继承 · 澄清）周期精确路径继续拒绝**捕获闭包**、堆、无界递归、`dyn Trait` 等；与 FR72/FR73 共存——允许的是 **elaborate-time / 非捕获** 闭包，且不得以 Rust 闭包对象进入 `tick`。
+FR72: **闭包合同与架构解锁** — PRD 增补本阶段 FR73–FR78；修订 AD-18：保留禁捕获；新增允许 elaborate-time 非捕获 `Fn`，且必须在 `freeze` 前消解为 HIR；产出一页决策表消解 requirements 内 HLS/阶段矛盾；明确非目标：FIRRTL/Chisel **不**编码闭包节点（Cap-R-58）。无 NFR14 风险记录不得将后续闭包 epic 标 ready。
+FR73: **Elaborate-time 生成器闭包（MVP）** — 设计 crate（仅 `bitloom-prelude`）可把 `Fn`（或等价）作为生成器参数：在 `ElaborateSession` 内执行，写入 Mem/ROM/常量初值与/或工厂式实例化+connect（Cap-R-52…54, 69）；执行后 FrozenHir **无**闭包残留（Cap-R-51/59-generator）；捕获 `Wire`/`Reg` 等硬件引用 → 诊断失败；ATDD：LUT/CRC 表闭包生成 vs 手写表 golden。非目标：comb/seq 内联可综合闭包（→ FR75）。
+FR74: **SynthesizableClosure 约束与诊断** — 文档化/类型化可综合闭包约束（纯函数、无堆、无运行时捕获状态等，Cap-R-48…50）；`cargo bitloom check`（或等价）覆盖闭包可综合性（Cap-R-60）；违规有稳定诊断码。
+FR75: **组合/时序可综合闭包** — 在 `#[combinational]` / `#[sequential]` 中允许满足 FR74 的闭包并在 elaborate 期**内联展开**为普通 HIR（Cap-R-55/56/70）；与 FR16 负例矩阵共存；依赖 FR73+FR74。
+FR76: **HLS 数据流闭包** — `#[hls]`（或等价）路径支持将无状态（或决策表裁定的约束类）闭包作为数据流变换，在调度/降低前消解（Cap-R-62/71）；依赖 FR73 与 FR35/FR50 产品路径决策；Wave 0 须裁定「自由 vs 可综合」。
+FR77: **IP 生成器闭包定制** — 一级 IP / 生成器 API 可接受 elaborate-time 闭包定制算法表（如 CRC 多项式、滤波系数）（Cap-R-63）；生成后 HIR/IP 对后端闭包透明（Cap-R-64）；依赖 FR73；建议先有非闭包可综合 IP 基线再叠加。
+FR78: **桥接适配器闭包模板** — 提供可复用的事务↔周期转换模板（如 `start_wait_complete`）（Cap-R-65…68）；功能视图可继续自由使用闭包；周期精确侧仅经模板消解后的信号级接口；依赖 FR73 与 FR47 双视图路径。
+
+### Phase 9 Non-Functional Requirements
+
+NFR14: （继承 · 门禁）Phase 9 各实现 epic 标 ready 前须有风险记录（闭包误用、AD-18 回归、与 FR16 混淆、诊断逃逸）。
+NFR35: **Elaborate-time vs 捕获闭包合同** — 公开文档与 AD-18 修订必须可测试地区分两类；周期精确/`tick` 路径抽样负例证明捕获闭包仍失败；生成器正例证明非捕获 elaborate-time 闭包在 freeze 前消解成功。
+NFR36: **冻前消解 / 后端无感知** — Verilog / FIRRTL / Chisel / tick 后端不得新增「闭包」IR 节点；抽检 FrozenHir 与 emit 产物无闭包语义残留；设计 crate 仍只依赖 `bitloom-prelude`（AD-6）。
+
+### Phase 9 Additional Requirements (Architecture + Research)
+
+- 遵守 **AD-1**：闭包展开是 generator / elaborate-time，**禁止** rustc 编译期抽网表。
+- 遵守 **AD-7 / AD-13**：闭包产物必须经唯一 `ElaborateSession` → `freeze` → `FrozenHir`；后端纯 `fn(&FrozenHir)`。
+- **修订 AD-18**（FR72）：禁捕获保留；增加 elaborate-time 非捕获允许条款。
+- 术语消歧：本阶段「生成器闭包」≠ FR47「sim generators」≠ Phase 7 英文 closure（闭环）。
+- 外部实践约束（调研 D4）：禁止将硬件线网捕获为模块构造参数；Clash 式「顶层须一阶」精神适用于 tick 路径。
+- Wave 0 开放问题必须落进决策表后再开 FR76：HLS 闭包自由 vs 可综合；FR75 是否与 MVP 同阶段或延后；`const fn`（Cap-R-18）与 FR73 双轨或先后。
+- 无 UX；无新 starter 模板。
+
+### Phase 9 UX Design Requirements
+
+无 UI。无 UX-DR。
+
+### Phase 9 FR Coverage Map
+
+FR16: Epic 26 — 澄清与 elaborate-time 非捕获闭包共存（仍禁捕获）
+FR72: Epic 26 — 闭包合同与 AD-18 解锁 + 决策表
+FR73: Epic 27 — Elaborate-time 生成器闭包 MVP
+FR74: Epic 28 — SynthesizableClosure 约束与诊断
+FR75: Epic 28 — Comb/seq 可综合闭包内联
+FR76: Epic 29 — HLS 数据流闭包
+FR77: Epic 29 — IP 生成器闭包定制
+FR78: Epic 30 — 桥接适配器闭包模板
+NFR14: Epic 26 建立门禁；Epic 27–30 ready 前复用
+NFR35: Epic 26 合同文本；Epic 27/28 可测区分
+NFR36: Epic 27–30 — 冻前消解 / 后端无闭包 IR
+
+### Phase 9 Epic List
+
+### Epic 26: 闭包合同与架构解锁
+维护者与设计者获得可签约的受控闭包定义：PRD 写入 FR73–78；修订 AD-18（保留禁捕获，允许 elaborate-time 非捕获且冻前消解）；决策表消解 HLS/阶段矛盾；NFR14 风险模板可用。无此 epic，后续实现会与 FR16 冲突。
+**FRs covered:** FR72（澄清 FR16）
+**NFRs:** NFR14（门禁建立）、NFR35（合同文本面）
+**Depends on:** 无（Phase 9 起点）。不重写 Epic 1–25。
+
+### Epic 27: 生成器闭包可用
+设计者可用 elaborate-time `Fn` 生成 LUT/ROM 初值与工厂式实例化+connect；freeze 后 FrozenHir 无闭包残留；捕获硬件引用诊断失败；Verilog/FIRRTL/tick 后端无闭包 IR。
+**FRs covered:** FR73
+**NFRs:** NFR35（可测区分）、NFR36
+**Depends on:** Epic 26
+
+### Epic 28: 可综合闭包进 comb/seq
+设计者在满足 SynthesizableClosure 约束时，于 `#[combinational]` / `#[sequential]` 使用闭包并在 elaborate 期内联为普通 HIR；稳定诊断；与 FR16 负例矩阵共存。
+**FRs covered:** FR74, FR75
+**NFRs:** NFR35, NFR36
+**Depends on:** Epic 27
+
+### Epic 29: HLS 与 IP 的闭包定制
+HLS 作者用闭包做数据流变换（约束类以 Epic 26 决策表为准）；IP 作者用闭包定制算法表/系数；后端与 viz 对闭包透明。
+**FRs covered:** FR76, FR77
+**NFRs:** NFR14, NFR36
+**Depends on:** Epic 27；FR35/FR50 产品路径；Epic 26 决策表（HLS 自由 vs 可综合）
+
+### Epic 30: 桥接适配器闭包模板
+验证/桥接作者使用可复用的事务↔周期转换模板（如 `start_wait_complete`）；功能视图可自由闭包，周期精确侧仅见消解后的信号级接口。
+**FRs covered:** FR78
+**NFRs:** NFR14, NFR36
+**Depends on:** Epic 27；既有 FR47 双视图路径
+
+
+---
+
+## Phase 10 Requirements Inventory（追加 · 2026-09-08 · Correct Course + CE）
+
+**范围：** 调研 Wave 3 非闭包 Partial 深度收口。不重写 Epic 1–30；不替代 Phase 9 闭包。  
+**依据：** `sprint-change-proposal-2026-09-08.md`（approved）；PRD addendum 2026-09-08；AD-25 / AD-29；crates Partial 盘点。  
+**ID 注记：** 新编号 **FR79–FR86** / **NFR37**（接 FR78 / NFR36）。加深既有 FR23/28/33/36/37/39/48/51，**不**改写历史 FR 编号。
+
+### Phase 10 Functional Requirements
+
+FR23: （继承）多时钟 HIR + 语言级 CDC；非法跨域失败。
+FR52: （继承）ClockDomain 产品叙事。
+FR79: **CDC 同步器真 RTL** — `DoubleFlop` / `SyncFIFO`（或文档等价）须 emit **可综合同步器 RTL**，并可按域 tick 黄金；不得仅以 ZST + `mark_cdc_bridge` 交差（AD-29；加深 FR23/FR52）。
+FR51: （继承）Bundle / Vec 可综合表面。
+FR80: **嵌套 Bundle / derive** — 文档化嵌套 `Bundle` 与/或 derive 路径；位宽/方向错误仍 emit 前失败（加深 FR51 / AD-20）。
+FR28: （继承）FIRRTL→可编译 Chisel；Mem 当前可 E0901。
+FR81: **Chisel Mem 合同收敛** — 收敛 Mem→Chisel E0901：支持文档化 Mem 子集使 emit_chisel 可编译，**或** PRD/文档明确永久非目标 + 替代验收（加深 FR28；正向腿仍服务 FR46；NFR12 钉死对不变）。
+FR37: （继承）IP 产品箱起步。
+FR48: （继承）一级 IP 库五类。
+FR82: **一级 IP 可综合基线（无闭包）** — UART/SPI/I2C/FIFO/AXI 至少达到可 elaborate/emit/tick 的**非 stub** 基线（无闭包）；供 Epic 29 叠加（加深 FR37/FR48）。
+FR33: （继承）C ABI / cdylib。
+FR83: **C ABI 超出 Counter demo** — cdylib/仿真 ABI 支持文档化通用路径或第二 DUT，不得仅硬编码 Counter（加深 FR33）。
+FR36: （继承）SoftF16 / bitloom-float。
+FR84: **SoftF16 可综合或显式 defer** — SoftF16 进入可综合降低路径（HIR→emit），**或** PRD/文档显式将可综合浮点标为 deferred 并关闭虚假 done（加深 FR36）。
+FR39: （继承）SVA / formal 导出。
+FR85: **Formal / SVA 超出 toy check** — formal 路径超出 `check_sva_text` 玩具检查：至少一真实夹具导出 + 文档化工具链调用（加深 FR39）。
+FR86: **HLS 调度政策（非实现）** — 确认树内 HLS 调度非目标；外挂 Bambu/Vitis 为唯一产品路径（AD-25）。本 FR 仅要求决策/文档落地（可并入 Epic 26.2），**不**新建实现 epic。
+
+### Phase 10 Non-Functional Requirements
+
+NFR14: （继承）Phase 10 各实现 epic 标 ready 前须有风险记录。
+NFR12: （继承）Chisel/firtool 钉死对；Epic 33 不得漂移。
+NFR37: **规划 done ≠ 深度 done** — 公开/内部文档不得仅以历史 epic `done` 关闭 FR79–85；深度缺口须以本阶段 FR 验收。
+
+### Phase 10 Additional Requirements (Architecture + Research)
+
+- 遵守 **AD-29**：CDC 原语须可综合真 RTL。
+- 遵守 **AD-25**：不立项树内 HLS 调度（FR86）。
+- 设计 crate 仍只依赖 `bitloom-prelude`。
+- Wave 3 crates 证据：DoubleFlop ZST、nested Bundle OUT OF SCOPE、Chisel E0901、IP stubs、C ABI Counter-only、SoftF16 host-only、SVA toy、LSP deferred。
+- LSP：本阶段**不**新建 FR；继续 deferred（Epic 35 文档声明即可）。
+
+### Phase 10 UX Design Requirements
+
+无 UI。无 UX-DR。
+
+### Phase 10 FR Coverage Map
+
+FR79: Epic 31 — CDC 同步器真 RTL（加深 FR23/FR52；AD-29）
+FR80: Epic 32 — 嵌套 Bundle / derive（加深 FR51）
+FR81: Epic 33 — Chisel Mem / E0901 合同收敛（加深 FR28）
+FR82: Epic 34 — 一级 IP 非 stub 基线（加深 FR37/FR48）
+FR83: Epic 35 — C ABI 超出 Counter demo（加深 FR33）
+FR84: Epic 35 — SoftF16 可综合或显式 defer（加深 FR36）
+FR85: Epic 35 — Formal/SVA 超出 toy check（加深 FR39）
+FR86: Epic 26.2 决策表 + AD-25 — HLS 外挂政策（无新实现 epic）
+NFR14: Epic 31–35 ready 门禁
+NFR12: Epic 33 — Chisel/firtool 钉死对
+NFR37: 横切 — 规划 done ≠ 深度 done
+
+### Phase 10 Epic List
+
+### Epic 31: CDC 同步器真 RTL
+设计者获得可综合的 DoubleFlop/SyncFIFO（或等价）真 RTL，非法跨域仍失败，合法路径可按域 tick。  
+**FRs covered:** FR79（继承 FR23/FR52）  
+**NFRs:** NFR14, NFR37  
+**Depends on:** 无（可与 Phase 9 并行）
+
+### Epic 32: Bundle 嵌套与 derive
+设计者可使用文档化嵌套 Bundle 与/或 derive，位宽/方向错误仍在 emit 前失败。  
+**FRs covered:** FR80（继承 FR51）  
+**NFRs:** NFR14, NFR37  
+**Depends on:** 无（可与 31 并行）
+
+### Epic 33: Chisel Mem / FR28 深度
+维护者/设计者在钉死 Chisel 版本下获得 Mem 路径的明确合同（支持子集或永久非目标+替代验收）；E0901 清单收敛。  
+**FRs covered:** FR81（继承 FR28）  
+**NFRs:** NFR12, NFR14, NFR37  
+**Depends on:** Epic 25 CI 门禁仍绿
+
+### Epic 34: 一级 IP 可综合基线（无闭包）
+集成者获得可 elaborate/emit/tick 的非 stub 一级 IP 基线（无闭包），供后续 Epic 29 闭包定制叠加。  
+**FRs covered:** FR82（继承 FR37/FR48）  
+**NFRs:** NFR14, NFR37  
+**Depends on:** 建议先于或并行优先于 Epic 29
+
+### Epic 35: 残余 Partial 收口
+工具链在 C ABI / SoftF16 / formal 上达到深度验收或显式 defer；LSP 本 epic 仍 deferred。  
+**FRs covered:** FR83, FR84, FR85  
+**NFRs:** NFR14, NFR37  
+**Depends on:** 可并行；优先级低于 31–34
+
+---
+
+---
+
 ## Epic 19: 语言表面与合同解锁
 
 设计者可使用 `Bundle`/`Vec` 编写可综合 RTL，并获得可验收的 ClockDomain/CDC 产品叙事；架构 AD 与 ①C 对齐；NFR14 风险记录模板就位，供后续 P3 epic 开工门禁。  
@@ -2273,3 +2486,651 @@ So that FR28「必须编译通过」不能只靠 Rust 谓词或 skip=0 交差。
 **And** 钉 `timeout-minutes`（初值 15–20 可接受）；实现后记录一次冷/热墙钟备注（可在故事完成注记或 CI 注释）
 **And** 本 job **不**要求跑 firtool 降级（AD-9 仍由既有路径覆盖）
 **And** 失败日志能指向失败的 `.scala` / sbt 输出，便于修 emit
+
+
+## Epic 26: 闭包合同与架构解锁
+
+维护者与设计者获得可签约的受控闭包定义：PRD 写入 FR73–78；修订 AD-18（保留禁捕获，允许 elaborate-time 非捕获且冻前消解）；决策表消解 HLS/阶段矛盾；NFR14 风险模板可用。无此 epic，后续实现会与 FR16 冲突。  
+**FRs covered:** FR72（澄清 FR16）  
+**NFRs:** NFR14（门禁建立）、NFR35（合同文本面）  
+**Depends on:** 无（Phase 9 起点）。不重写 Epic 1–25。  
+**Gate:** Story 26.1 风险记录未完成前，26.3–26.4 及 Epic 27+ 不得标 ready。
+
+### Story 26.1: Phase 9 闭包 NFR14 风险记录
+
+As a 实现负责人,
+I want 为受控泛型闭包填写 NFR14 风险记录,
+So that Epic 27–30 不会在无门禁下被标 ready。
+
+**Acceptance Criteria:**
+
+**Given** 既有 NFR14 风险记录模板（Epic 19.1 或等价）可用
+**When** 创建 Phase 9 / 闭包主题风险记录
+**Then** 含：与 FR16/AD-18 冲突风险、误把 FR47 当成生成器闭包、诊断逃逸、粗工期带、禁止事项（至少：不得在未修订 AD-18 前合并正向闭包 API；不得在 FIRRTL/Chisel 编码闭包节点）、负责人（NFR14）
+**And** 无此记录则 Story 26.3–26.4 及 Epic 27+ 不得标 ready
+
+### Story 26.2: 闭包决策表
+
+As a 架构师 / PM,
+I want 一页决策表消解 requirements 内矛盾,
+So that 后续 FR 验收不打架。
+
+**Acceptance Criteria:**
+
+**Given** 调研 open questions（HLS 自由 vs 可综合；FR75 是否进 Wave 2；const fn vs 生成器闭包双轨）
+**When** 写入规划产物（PRD addendum 或 `architecture`/`planning-artifacts` 下决策页）并链接进 FR72
+**Then** 每项有明确裁决 + 生效 epic（26/27/28/29）
+**And** 明确非目标：FIRRTL/Chisel 不编码闭包（Cap-R-58）
+**And** 术语表：生成器闭包 ≠ FR47 sim generators ≠ Phase 7「闭环」
+
+### Story 26.3: 修订 AD-18
+
+As a 架构维护者,
+I want AD-18 区分捕获闭包与 elaborate-time 非捕获闭包,
+So that 实现有脊柱依据且 FR16 负例仍成立。
+
+**Acceptance Criteria:**
+
+**Given** Story 26.1–26.2；现有 AD-18「拒绝捕获闭包」条文
+**When** 修订 `ARCHITECTURE-SPINE.md` AD-18（及必要交叉引用）
+**Then** 保留：周期精确路径拒绝**捕获**闭包（及原有堆/`dyn` 等）
+**And** 新增：允许 elaborate-time **非捕获** `Fn`（或文档等价），必须在 `freeze` 前消解为 HIR，不得作为 Rust 闭包对象进入 `tick`
+**And** 遵守 AD-1（非 rustc 期抽网表）与 AD-7/13（经 ElaborateSession）
+**And** AGENTS.md / 项目上下文若引用 AD-18 禁令，同步澄清措辞（NFR35）
+
+### Story 26.4: PRD 增补 FR72–78 / NFR35–36
+
+As a 产品负责人,
+I want PRD 正式写入 Phase 9 FR/NFR,
+So that 实现与验收有合同 ID（避免只活在 epics 草案）。
+
+**Acceptance Criteria:**
+
+**Given** Story 26.2–26.3；`epics.md` Phase 9 inventory 草案
+**When** 修订 `prd-rhdl-2026-08-19/prd.md`（及必要 addendum）
+**Then** 写入可验收条文：**FR72–FR78**、**NFR35–NFR36**；继承澄清 **FR16**
+**And** ID 注记：不与 FR47/Phase7 closure 混淆；编号在 FR71/NFR34 之后
+**And** 标明 Epic 27–30 ready 依赖 NFR14 记录 + 本增补落地
+**And** 公开成功标准与调研 Wave 对齐（生成器 → 可综合 → HLS/IP → 桥接）
+
+
+## Epic 27: 生成器闭包可用
+
+设计者可用 elaborate-time `Fn` 生成 LUT/ROM 初值与工厂式实例化+connect；freeze 后 FrozenHir 无闭包残留；捕获硬件引用诊断失败；Verilog/FIRRTL/tick 后端无闭包 IR。  
+**FRs covered:** FR73  
+**NFRs:** NFR35（可测区分）、NFR36  
+**Depends on:** Epic 26  
+**Gate:** Epic 26（含 NFR14 记录与 PRD/AD-18）完成前不得标 ready。
+
+### Story 27.1: LUT/常量初值生成器闭包 API
+
+As a 设计者,
+I want 在 elaborate 时用 `Fn`（或等价）生成 Mem/ROM/常量初值,
+So that 不必手写大表也能得到可综合初始化数据。
+
+**Acceptance Criteria:**
+
+**Given** Epic 26 完成（AD-18 修订 + PRD FR73）；设计 crate 仅依赖 `bitloom-prelude`
+**When** 提供文档化 API（如 `with_init` / 等价），在 `ElaborateSession` 内执行用户 `Fn` 并写入初值
+**Then** 至少一夹具：闭包生成的表经 elaborate → emit `.v`（及/或 FIRRTL）可见为常量/mem init（FR73）
+**And** freeze 后 FrozenHir **无**闭包节点/残留（NFR36）
+**And** 遵守 AD-1/7/13；非 rustc 编译期抽网表
+**And** 本故事不要求 comb/seq 内联闭包（→ Epic 28）
+
+### Story 27.2: 模块工厂闭包
+
+As a 设计者,
+I want 用闭包工厂批量实例化并连接子模块,
+So that 层次化重复结构少写样板代码。
+
+**Acceptance Criteria:**
+
+**Given** Story 27.1 的 elaborate-time 执行通路可用
+**When** 文档化工厂 API：`Fn` 返回子模块实例并完成类型安全 connect（FR73 / Cap-R-53）
+**Then** 夹具可 elaborate → emit，层次与端口连接正确
+**And** 宽度/方向错误仍在 emit 前失败（既有 FR8 行为）
+**And** freeze 后无闭包残留（NFR36）
+
+### Story 27.3: 捕获硬件引用诊断 + FR16 回归
+
+As a 设计者,
+I want 捕获 `Wire`/`Reg` 等硬件引用时得到清晰失败,
+So that 不会把运行时捕获闭包误当成生成器闭包。
+
+**Acceptance Criteria:**
+
+**Given** Story 27.1–27.2
+**When** 负例：闭包捕获硬件信号引用（或文档定义的非法捕获）尝试 elaborate
+**Then** 稳定诊断失败（非 silent 成功）（FR73、NFR35、AD-18）
+**And** 既有 FR16 周期精确路径「捕获闭包」负例矩阵仍红（回归）
+**And** 文档说明 elaborate-time 非捕获 vs 捕获的区别（NFR35）
+
+### Story 27.4: ATDD golden + 后端无感知抽检
+
+As a 质量负责人,
+I want LUT/CRC 闭包生成与手写表 golden 一致，并抽检后端无闭包语义,
+So that FR73/NFR36 可自动验收。
+
+**Acceptance Criteria:**
+
+**Given** Story 27.1–27.3
+**When** 增加 ATDD：同一算法（如 CRC 表或 LUT）闭包生成 vs 手写常量表 → tick 或 emit 等价断言
+**Then** 测试在 `just test`（或文档化配方）下稳定通过（FR73）
+**And** 抽检 emit 的 Verilog/FIRRTL（及可选 Chisel）**无**闭包/callback IR（NFR36）
+**And** README/语言表面文档有最小用法示例（Bitloom / `bitloom-prelude`）
+
+
+## Epic 28: 可综合闭包进 comb/seq
+
+设计者在满足 SynthesizableClosure 约束时，于 `#[combinational]` / `#[sequential]` 使用闭包并在 elaborate 期内联为普通 HIR；稳定诊断；与 FR16 负例矩阵共存。  
+**FRs covered:** FR74, FR75  
+**NFRs:** NFR35, NFR36  
+**Depends on:** Epic 27  
+**Gate:** Epic 26 决策表须确认 FR75 进入本 epic；Epic 27 完成前不得标 ready。
+
+### Story 28.1: SynthesizableClosure 约束与检查钩子
+
+As a 设计者,
+I want 明确的可综合闭包约束与检查入口,
+So that 我知道哪些闭包能进硬件路径。
+
+**Acceptance Criteria:**
+
+**Given** Epic 27；Epic 26 决策表（FR75 已确认进入本 epic）
+**When** 文档化 `SynthesizableClosure`（或等价）约束：纯函数、无堆、无运行时捕获状态等（FR74 / Cap-R-48…50）
+**When** 提供 prelude/builder 或 `cargo bitloom check` 可触达的检查钩子（Cap-R-60）
+**Then** 违规示例产生稳定诊断码（FR74）
+**And** 合法空/简单闭包可通过检查（为 28.2 铺路）
+**And** 不在 FIRRTL/Chisel 增加闭包 IR（NFR36）
+
+### Story 28.2: 组合逻辑内联可综合闭包
+
+As a 设计者,
+I want 在 `#[combinational]` 中调用满足约束的闭包并得到组合逻辑,
+So that 可复用纯变换而不手写重复表达式。
+
+**Acceptance Criteria:**
+
+**Given** Story 28.1
+**When** 支持在组合块中使用可综合闭包；elaborate 期**内联展开**为普通 HIR 赋值/算子（FR75 / Cap-R-55）
+**Then** 夹具 elaborate → emit `.v` → tick 与手写等价组合逻辑 golden 一致
+**And** freeze 后无闭包残留（NFR36）
+**And** 不完整赋值等既有 comb 规则仍生效（AD-18）
+
+### Story 28.3: 时序逻辑内联 + 所有权
+
+As a 设计者,
+I want 在 `#[sequential]` 中安全使用可综合闭包,
+So that 时序更新逻辑可复用且不引入多驱动。
+
+**Acceptance Criteria:**
+
+**Given** Story 28.2
+**When** 支持时序块内可综合闭包内联（FR75 / Cap-R-56）
+**Then** 夹具 tick 行为与手写等价
+**And** 闭包体不得引入额外非法可变信号借用；违规诊断（Cap-R-70）
+**And** 多驱动/欠驱动既有 freeze 检查仍覆盖闭包展开后的网（AD-4）
+
+### Story 28.4: 诊断矩阵 + FR16 共存 ATDD
+
+As a 质量负责人,
+I want 正/负例矩阵证明可综合闭包与捕获闭包禁令共存,
+So that FR74/FR75/FR16/NFR35 可回归。
+
+**Acceptance Criteria:**
+
+**Given** Story 28.1–28.3
+**When** 增加 ATDD 矩阵：合法可综合闭包通过；堆/捕获/非法 IO 等失败；FR16 原负例仍失败
+**Then** `just test`（或文档化配方）稳定执行（FR74, FR75, NFR35）
+**And** 抽检 emit 无闭包 IR（NFR36）
+**And** 用户文档含 comb/seq 闭包最小示例与「勿捕获 Wire」警告
+
+
+## Epic 29: HLS 与 IP 的闭包定制
+
+HLS 作者用闭包做数据流变换（约束类以 Epic 26 决策表为准）；IP 作者用闭包定制算法表/系数；后端与 viz 对闭包透明。  
+**FRs covered:** FR76, FR77  
+**NFRs:** NFR14, NFR36  
+**Depends on:** Epic 27；FR35/FR50 产品路径；Epic 26 决策表（HLS 自由 vs 可综合）  
+**Gate:** Story 29.1 NFR14 记录未完成前，29.2–29.4 不得标 ready。
+
+### Story 29.1: Epic 29 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 HLS/IP 闭包填写专用 NFR14 记录,
+So that 不在未裁决约束类时合并危险 API。
+
+**Acceptance Criteria:**
+
+**Given** Story 26.1 模板与 26.2 决策表（HLS 自由 vs 可综合已裁决）
+**When** 创建 Epic 29 风险记录
+**Then** 含：所选约束类、与 FR35/FR50 外挂后端交互风险、IP 基线不足风险、禁止事项、负责人（NFR14）
+**And** 无此记录则 29.2–29.4 不得标 ready
+
+### Story 29.2: HLS 数据流闭包
+
+As a 算法级设计者,
+I want 在 `#[hls]` 路径用闭包表达数据流变换并在降低前消解,
+So that HLS 夹具可复用纯变换而不把闭包留给后端。
+
+**Acceptance Criteria:**
+
+**Given** Story 29.1；Epic 27 生成器通路；既有 FR35/FR50 产品路径
+**When** 支持文档化的 HLS 数据流闭包；按决策表约束类检查；在调度/降低前消解（FR76 / Cap-R-62/71）
+**Then** 至少一算法夹具经 HLS 路径产出可综合 RTL（或文档钉死的中间可综合工件）
+**And** 进入 HIR/后端前无闭包残留（NFR36）
+**And** 后端缺失时错误明确（不 silent skip 冒充成功）
+
+### Story 29.3: IP 生成器闭包定制
+
+As a IP 集成者,
+I want 用 elaborate-time 闭包定制 IP 内部表/系数,
+So that 同一 IP 骨架可生成不同算法变体。
+
+**Acceptance Criteria:**
+
+**Given** Story 29.1；Epic 27；至少一种可 elaborate 的 IP 基线（FIFO/UART 或 stub 升级路径）
+**When** IP/生成器 API 接受闭包定制（如 CRC 多项式表、滤波系数）（FR77 / Cap-R-63）
+**Then** 夹具 elaborate → emit/tick（或文档化等价验收）证明定制生效
+**And** 未提供闭包时行为有文档默认或明确错误
+**And** freeze 后无闭包残留（NFR36）
+
+### Story 29.4: 闭包透明抽检与文档
+
+As a 工具链用户,
+I want viz/后端不感知闭包，并有 HLS/IP 闭包用法文档,
+So that 下游工具链不被闭包概念污染。
+
+**Acceptance Criteria:**
+
+**Given** Story 29.2–29.3
+**When** 抽检：同一设计闭包消解后，viz（若启用）与 Verilog/FIRRTL 路径无闭包语义（Cap-R-64 / NFR36）
+**Then** 自动化或文档化检查通过
+**And** 用户文档含 HLS 与 IP 闭包示例、约束类说明、与 FR47「sim generators」消歧
+**And** NFR14 记录勾选本 epic 关闭条件
+
+
+## Epic 30: 桥接适配器闭包模板
+
+验证/桥接作者使用可复用的事务↔周期转换模板（如 `start_wait_complete`）；功能视图可自由闭包，周期精确侧仅见消解后的信号级接口。  
+**FRs covered:** FR78  
+**NFRs:** NFR14, NFR36  
+**Depends on:** Epic 27；既有 FR47 双视图路径  
+**Gate:** Story 30.1 NFR14 记录未完成前，30.2–30.4 不得标 ready。
+
+### Story 30.1: Epic 30 NFR14 风险记录
+
+As a 实现负责人,
+I want 为桥接闭包模板填写 NFR14 记录,
+So that 功能视图自由闭包不会泄漏进周期精确路径。
+
+**Acceptance Criteria:**
+
+**Given** Story 26.1 模板；FR47 双视图路径可用
+**When** 创建 Epic 30 风险记录
+**Then** 含：TLM↔信号泄漏风险、模板误用、与 FR16 混淆、禁止事项、负责人（NFR14）
+**And** 无此记录则 30.2–30.4 不得标 ready
+
+### Story 30.2: 桥接适配器闭包模板 API
+
+As a 验证工程师,
+I want 可复用的 `start_wait_complete`（或文档等价）闭包模板,
+So that 事务级激励能映射到周期精确握手而不手写样板。
+
+**Acceptance Criteria:**
+
+**Given** Story 30.1；Epic 27 elaborate-time 通路
+**When** 在 prelude/验证辅助层交付文档化模板 API（FR78 / Cap-R-65）
+**Then** 示例可将「启动→等待完成」模式绑定到信号级端口时序
+**And** 模板展开/执行后进入周期精确侧的接口为普通信号（无闭包对象）（NFR36）
+**And** 功能视图侧可继续使用自由闭包（Cap-R-66/67），文档标明边界
+
+### Story 30.3: FR47 双视图联验
+
+As a 质量负责人,
+I want 模板驱动的桥接夹具与 FR47 生成/对照路径联验,
+So that FR78 与既有双视图合同不互相破坏。
+
+**Acceptance Criteria:**
+
+**Given** Story 30.2；既有 FR47 `generate_*` / bridge 路径
+**When** 增加联验夹具：功能侧用模板/闭包发事务，周期侧 tick；与对照路径一致或故意破坏则 fail（衔接 FR30 精神）
+**Then** 自动化测试稳定通过（FR78）
+**And** 周期精确路径仍拒绝非法捕获闭包（FR16 回归抽样）
+**And** emit/HIR 抽检无闭包 IR（NFR36）
+
+### Story 30.4: 多视图闭包文档收口
+
+As a 学习者 / 验证作者,
+I want 文档清楚说明自由闭包 vs 约束/模板闭包的适用视图,
+So that Phase 9 闭包故事可端到端跟练。
+
+**Acceptance Criteria:**
+
+**Given** Story 30.2–30.3
+**When** 更新用户文档：桥接模板用法、视图边界、与 Epic 27/28 生成器/可综合闭包交叉链接
+**Then** 至少一夹具可按文档跟练（UJ 级「桥接半程」）
+**And** 术语消歧表含：生成器闭包 / FR47 / Phase7 闭环 / 本模板
+**And** NFR14 记录勾选 Epic 30 关闭条件
+
+
+## Epic 31: CDC 同步器真 RTL
+
+设计者获得可综合的 DoubleFlop/SyncFIFO（或等价）真 RTL，非法跨域仍失败，合法路径可按域 tick。  
+**FRs covered:** FR79（继承 FR23/FR52）  
+**NFRs:** NFR14, NFR37  
+**Depends on:** 无（可与 Phase 9 并行）  
+**Gate:** Story 31.1 NFR14 未完成前，31.2–31.4 不得标 ready。
+
+### Story 31.1: Epic 31 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 CDC 真 RTL 深度填写 NFR14 风险记录,
+So that 不以 ZST 叙事关闭 FR79。
+
+**Acceptance Criteria:**
+
+**Given** 既有 NFR14 模板；AD-29；crates 现状为 ZST + `mark_cdc_bridge`
+**When** 创建 Epic 31 风险记录
+**Then** 含：与历史 Epic 7「done」冲突的诚实度风险、双 FF 延迟/亚稳态文档边界、禁止事项（至少：不得仅改文档声称真 RTL）、负责人（NFR14 / NFR37）
+**And** 无此记录则 31.2–31.4 不得标 ready
+
+### Story 31.2: DoubleFlop 可综合同步器 RTL
+
+As a 多时钟设计者,
+I want `DoubleFlop`（或文档等价）emit 真实双触发器同步链路,
+So that CDC 位同步可进入综合与 tick。
+
+**Acceptance Criteria:**
+
+**Given** Story 31.1；既有 phantom 域 / FR23 非法跨域失败
+**When** 实现 DoubleFlop：prelude API → HIR → emit `.v` 含可识别的两级（或文档钉死级数）同步寄存器（FR79 / AD-29）
+**Then** 夹具可 elaborate、emit，并对源/目的域按文档方式 tick，黄金值满足同步延迟语义
+**And** 非法未同步跨域仍 freeze/诊断失败（继承 FR23）
+**And** 不得仅保留空 ZST 无网表（NFR37）
+
+### Story 31.3: SyncFIFO（或等价）可综合跨域 FIFO
+
+As a 多时钟设计者,
+I want 语言级跨域 FIFO 原语发出可综合 RTL,
+So that 多位/流式 CDC 有合同路径。
+
+**Acceptance Criteria:**
+
+**Given** Story 31.2 的域绑定与 emit 通路
+**When** 实现 SyncFIFO（或文档等价）：可 elaborate/emit/tick，深度/宽度参数文档化（FR79）
+**Then** 夹具证明跨域写入/读取在文档延迟与满/空语义下正确（或文档化最小子集）
+**And** 未标记 CDC 的非法跨域仍失败
+**And** Verilog（及可选 FIRRTL）抽检非空同步/FIFO 结构
+
+### Story 31.4: CDC 深度 ATDD + 文档叙事收口
+
+As a 质量负责人 / 学习者,
+I want ATDD 与产品叙事证明 FR79 深度，而非 Epic 7 最小合同,
+So that NFR37 可勾选。
+
+**Acceptance Criteria:**
+
+**Given** Story 31.2–31.3
+**When** 增加 ATDD：DoubleFlop + SyncFIFO 黄金；负例非法跨域；与「仅 ZST」回归对照（若可测）
+**Then** `just test`（或文档化配方）稳定通过（FR79）
+**And** 用户文档更新 ClockDomain/CDC 章节：真 RTL 要求、与历史最小合同区别（FR52 叙事 + NFR37）
+**And** NFR14 记录勾选 Epic 31 关闭条件
+
+
+## Epic 32: Bundle 嵌套与 derive
+
+设计者可使用文档化嵌套 Bundle 与/或 derive，位宽/方向错误仍在 emit 前失败。  
+**FRs covered:** FR80（继承 FR51）  
+**NFRs:** NFR14, NFR37  
+**Depends on:** 无（可与 31 并行）  
+**Gate:** Story 32.1 NFR14 未完成前，32.2–32.4 不得标 ready。
+
+### Story 32.1: Epic 32 NFR14 风险记录
+
+As a 实现负责人,
+I want 为嵌套 Bundle 深度填写 NFR14,
+So that 不以「flatten only / OUT OF SCOPE」关闭 FR80。
+
+**Acceptance Criteria:**
+
+**Given** 既有 NFR14 模板；FR51 最小合同；prelude 文档 nested OUT OF SCOPE
+**When** 创建 Epic 32 风险记录
+**Then** 含：嵌套深度上限假设、与 FR51 最小合同区别、禁止事项（至少：不得仅删除 OUT OF SCOPE 注释而无实现）、负责人（NFR14 / NFR37）
+**And** 无此记录则 32.2–32.4 不得标 ready
+
+### Story 32.2: 嵌套 Bundle 可综合路径
+
+As a 设计者,
+I want 在端口/内部使用嵌套 `Bundle`,
+So that 复合层次不必手工摊平。
+
+**Acceptance Criteria:**
+
+**Given** Story 32.1
+**When** 支持至少一层文档化嵌套 Bundle → HIR → emit `.v`（FR80）
+**Then** 夹具可 elaborate、emit、tick（或文档化等价验收）
+**And** 嵌套字段宽/向不匹配在 emit 前失败（继承 FR8/FR51 精神）
+**And** nested 不再仅以 OUT OF SCOPE 交差（NFR37）
+
+### Story 32.3: Bundle derive（或等价）
+
+As a 设计者,
+I want `#[derive(Bundle)]`（或文档等价）生成 Bundle 实现,
+So that 少写样板 flatten。
+
+**Acceptance Criteria:**
+
+**Given** Story 32.2
+**When** 提供 derive 或文档等价 API，并文档化支持/限制集合（FR80）
+**Then** 正例结构体可进入可综合路径并 emit
+**And** 不支持的嵌套/字段形态有稳定诊断
+**And** 设计 crate 仍只依赖 `bitloom-prelude`（AD-6）
+
+### Story 32.4: 嵌套 Bundle ATDD + 文档
+
+As a 质量负责人,
+I want 嵌套 Bundle 正/负例自动化与文档示例,
+So that FR80/NFR37 可回归。
+
+**Acceptance Criteria:**
+
+**Given** Story 32.2–32.3
+**When** 增加 ATDD：嵌套正例 emit/tick；宽/向负例 emit 前失败
+**Then** `just test`（或文档化配方）稳定通过（FR80）
+**And** 用户文档含嵌套/derive 最小示例与限制表
+**And** NFR14 记录勾选 Epic 32 关闭条件
+
+
+## Epic 33: Chisel Mem / FR28 深度
+
+维护者/设计者在钉死 Chisel 版本下获得 Mem 路径的明确合同（支持子集或永久非目标+替代验收）；E0901 清单收敛。  
+**FRs covered:** FR81（继承 FR28）  
+**NFRs:** NFR12, NFR14, NFR37  
+**Depends on:** Epic 25 CI 门禁仍绿  
+**Gate:** Story 33.1 NFR14 未完成前，33.2–33.4 不得标 ready。
+
+### Story 33.1: Epic 33 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 Mem→Chisel 深度填写 NFR14,
+So that E0901 不会被静默忽略或破坏 FR71。
+
+**Acceptance Criteria:**
+
+**Given** 既有 NFR14 模板；`emit_chisel` E0901 on Mem；Epic 25 / FR71 JVM 门禁
+**When** 创建 Epic 33 风险记录
+**Then** 含：NFR12 钉死对、E0901 现状、支持子集 vs 永久非目标两条路径利弊、禁止事项（至少：不得在未决策时删除 E0901 冒充支持；不得破坏 FR71）、负责人（NFR14 / NFR37）
+**And** 无此记录则 33.2–33.4 不得标 ready
+
+### Story 33.2: Mem→Chisel 合同决策
+
+As a PM / 架构师,
+I want 明确选择「支持文档化 Mem 子集」或「永久非目标+替代验收」,
+So that FR81 有可测关闭条件。
+
+**Acceptance Criteria:**
+
+**Given** Story 33.1
+**When** 决策写入 PRD addendum 或架构/规划注记并链接本 epic
+**Then** 选定**唯一**路径（FR81）
+**And** 若选非目标：须定义替代验收（如 FIRRTL mem 保留 + 文档声明 Chisel 路径不含 Mem）
+**And** 若选支持子集：须列出支持的 Mem 形态与版本约束（NFR12）
+**And** 显式引用 NFR37（历史 done ≠ 深度关闭）
+
+### Story 33.3: 实现所选 Mem/Chisel 路径
+
+As a 工具链维护者,
+I want `emit_chisel` 按决策收敛 Mem 行为,
+So that FR81 可实现验收。
+
+**Acceptance Criteria:**
+
+**Given** Story 33.2 决策已文档化
+**When** 实现对应路径：Mem 子集 → 可编译 Scala；**或** 合同化非目标（稳定诊断/文档）+ 替代夹具
+**Then** 行为满足决策条文（FR81）
+**And** Chisel/firtool 版本仍为 NFR12 钉死对（不得私自升版交差）
+**And** 非决策范围的 Mem 形态仍有明确失败或文档边界
+
+### Story 33.4: ATDD + FR71 回归
+
+As a 质量负责人,
+I want Mem 合同夹具与 JVM CI 门禁回归,
+So that 深度不破坏 Phase 8。
+
+**Acceptance Criteria:**
+
+**Given** Story 33.3
+**When** 增加 ATDD 覆盖决策路径；并跑 `just chisel-fr28-jvm`（或等价）回归
+**Then** 测试稳定通过（FR81）
+**And** FR71 / GHA `fr28-chisel-jvm` 合同路径仍绿（或不因本变更变红）
+**And** 用户/维护者文档更新 Mem↔Chisel 边界
+**And** NFR14 记录勾选 Epic 33 关闭条件
+
+
+## Epic 34: 一级 IP 可综合基线（无闭包）
+
+集成者获得可 elaborate/emit/tick 的非 stub 一级 IP 基线（无闭包），供后续 Epic 29 闭包定制叠加。  
+**FRs covered:** FR82（继承 FR37/FR48）  
+**NFRs:** NFR14, NFR37  
+**Depends on:** 建议先于或并行优先于 Epic 29  
+**Gate:** Story 34.1 NFR14 未完成前，34.2–34.4 不得标 ready。
+
+### Story 34.1: Epic 34 NFR14 风险记录
+
+As a 实现负责人,
+I want 为一级 IP 深度填写 NFR14,
+So that stub 不会继续冒充 FR37/48 完成。
+
+**Acceptance Criteria:**
+
+**Given** 既有 NFR14 模板；`bitloom-prelude` IP stubs；Epic 22/历史 done
+**When** 创建 Epic 34 风险记录
+**Then** 含：五类 IP（UART/SPI/I2C/FIFO/AXI）范围、与历史最小合同区别、与 Epic 29 依赖顺序、禁止事项（至少：不得仅重命名 stub 交差）、负责人（NFR14 / NFR37）
+**And** 无此记录则 34.2–34.4 不得标 ready
+
+### Story 34.2: FIFO + UART 可综合基线
+
+As a IP 集成者,
+I want FIFO 与 UART 达到可 elaborate/emit/tick,
+So that FR82 有首批非 stub 证据。
+
+**Acceptance Criteria:**
+
+**Given** Story 34.1
+**When** 实现/加固 SyncFifo（或等价）与 UartTx（或文档等价）为非 stub 硬件路径（FR82）
+**Then** 各至少一夹具：elaborate → emit `.v` → tick（或文档化等价验收）通过
+**And** 本故事 API **不**接受生成器闭包（留给 Epic 29）
+**And** 黑盒 wrapper（若保留）行为与边界文档化
+
+### Story 34.3: SPI / I2C / AXI 基线（或文档最小子集）
+
+As a IP 集成者,
+I want 其余一级 IP 达到合同化最小可综合基线,
+So that FR48 五类深度可勾选。
+
+**Acceptance Criteria:**
+
+**Given** Story 34.2
+**When** 交付 SPI、I2C、AXI4-Lite Slave（或文档钉死的等价最小子集）可 elaborate/emit/tick（FR82）
+**Then** 每类有自动化夹具，或决策表明确「本 epic 交付子集」且仍满足 FR82 关闭条
+**And** 未在本 epic 交付的类型须书面降级（不得静默声称五类全完成）（NFR37）
+**And** 无闭包定制参数
+
+### Story 34.4: IP 基线 ATDD + Epic 29 衔接文档
+
+As a 质量负责人,
+I want IP 基线自动化与「无闭包/有闭包」边界说明,
+So that FR82 可回归且 Epic 29 可叠加。
+
+**Acceptance Criteria:**
+
+**Given** Story 34.2–34.3
+**When** 增加 ATDD 覆盖已交付 IP；更新用户/IP 文档
+**Then** `just test`（或文档化配方）稳定通过（FR82）
+**And** 文档声明：本 epic 无闭包；Epic 29 为闭包定制叠加点；与 stub 历史区别（NFR37）
+**And** NFR14 记录勾选 Epic 34 关闭条件
+
+
+## Epic 35: 残余 Partial 收口
+
+工具链在 C ABI / SoftF16 / formal 上达到深度验收或显式 defer；LSP 本 epic 仍 deferred。  
+**FRs covered:** FR83, FR84, FR85  
+**NFRs:** NFR14, NFR37  
+**Depends on:** 可并行；优先级低于 31–34  
+**Note:** FR86（HLS 外挂政策）由 Epic 26.2 + AD-25 覆盖，本 epic 不实现。  
+**Gate:** Story 35.1 NFR14 未完成前，35.2–35.4 不得标 ready。
+
+### Story 35.1: Epic 35 NFR14 风险记录
+
+As a 实现负责人,
+I want 为残余 Partial 填写 NFR14,
+So that Counter-only / host-only SoftF16 / toy SVA 不再冒充深度完成。
+
+**Acceptance Criteria:**
+
+**Given** 既有 NFR14 模板；crates Partial：C ABI Counter-only、SoftF16 host-only、SVA toy check、LSP deferred
+**When** 创建 Epic 35 风险记录
+**Then** 含：FR83/84/85 各自「实现 vs 显式 defer」选项、LSP 非本 epic、禁止事项（至少：不得用 toy check 关闭 FR85；不得声称 SoftF16 可综合若选 defer）、负责人（NFR14 / NFR37）
+**And** 无此记录则 35.2–35.4 不得标 ready
+
+### Story 35.2: C ABI 超出 Counter demo（FR83）
+
+As a 嵌入式 / 验证集成者,
+I want cdylib ABI 超出硬编码 Counter,
+So that FR33 深度可验收。
+
+**Acceptance Criteria:**
+
+**Given** Story 35.1
+**When** 支持文档化第二 DUT 或通用 generate/link 路径（FR83）
+**Then** 自动化夹具证明非 Counter-only
+**And** 文档说明导出符号、生命周期与错误模式
+**And** 失败时诊断明确（非 silent 成功）
+
+### Story 35.3: SoftF16 可综合或显式 defer（FR84）
+
+As a 设计者 / PM,
+I want SoftF16 要么进入可综合降低，要么合同化 defer,
+So that FR36 深度诚实。
+
+**Acceptance Criteria:**
+
+**Given** Story 35.1
+**When** 二选一落地：（A）SoftF16 → HIR → emit 可综合夹具；或（B）PRD/用户文档显式 deferred，并声明不得声称可综合浮点已交付（FR84 / NFR37）
+**Then** 关闭条件可自动或文档检查勾选
+**And** 若选（A），至少一黄金数值/位宽夹具；若选（B），addendum 或等价合同段落存在且与实现一致
+
+### Story 35.4: Formal 夹具 + LSP deferred 收口（FR85）
+
+As a 质量负责人,
+I want 超出 toy check 的 SVA/formal 夹具，并声明 LSP 仍 deferred,
+So that FR85 与可视化边界清晰。
+
+**Acceptance Criteria:**
+
+**Given** Story 35.1–35.3
+**When** 至少一真实设计导出 SVA（或文档钉死的 formal 工具链调用）并执行非玩具检查（FR85）
+**Then** 验收超出 `check_sva_text` 级玩具断言
+**And** 用户文档写明 LSP hover/goto **非**本 epic 完成条件（继续 deferred）
+**And** NFR14 记录勾选 Epic 35 关闭条件
