@@ -242,8 +242,8 @@ development_status:
   29-4-闭包透明抽检与文档: done
   epic-29-retrospective: optional
 
-  epic-30: backlog
-  30-1-epic-30-nfr14-风险记录: backlog
+  epic-30: in-progress
+  30-1-epic-30-nfr14-风险记录: done
   30-2-桥接适配器闭包模板-api: backlog
   30-3-fr47-双视图联验: backlog
   30-4-多视图闭包文档收口: backlog
