@@ -97,3 +97,22 @@
 - **Phase 9 Wave 0 决策表（FR72 / Story 26.2）：** `architecture/architecture-rhdl-2026-08-18/closure-decision-table-2026-09-08.md`（HLS 自由 vs 可综合分裂；FR75→Epic 28；const fn / 生成器双轨；Cap-R-58）。
 
 **调研：** `_agile-output/planning-artifacts/research/technical-requirements-implementation-gap-generic-2026-09-08/research.md`（Wave 3）。
+
+## 2026-09-08 Update — Phase 9 闭包合同（FR72–78 / NFR35–36）
+
+**用户决议：** Story 26.4 — 将 `epics.md` Phase 9 inventory 正式写入 PRD（§5.9 + NFR 表），使实现与验收有合同 ID。
+
+**合同：**
+- **FR16（继承澄清）：** 周期精确路径仍拒**捕获**闭包；允许 elaborate-time 非捕获且不得以闭包对象进 `tick`。
+- **FR72–FR78：** 合同解锁 → 生成器 MVP → SynthesizableClosure / comb·seq → HLS/IP → 桥接模板。
+- **NFR35 / NFR36：** 两类闭包可测区分；冻前消解 / 后端无闭包 IR（Cap-R-58）。
+- **门禁：** Epic 27–30 ready 依赖 NFR14 记录 + 本增补落地。
+
+**链接：**
+- 决策表（FR72 / Story 26.2）：`architecture/architecture-rhdl-2026-08-18/closure-decision-table-2026-09-08.md`
+- NFR14 风险记录：`_agile-output/implementation-artifacts/nfr14-risk-phase9-closures.md`
+- PRD 正文：`prd.md` §5.9 / §6 NFR35–36 / SM-8
+
+**ID 避撞：** FR72–78 / NFR35–36（接 FR71/NFR34）；**不得**复用 FR47 或与 Phase 7「闭环」混写。Epic 映射：`epics.md` Epic 26–30。
+
+**公开成功标准 Waves：** 生成器 → 可综合 → HLS/IP → 桥接（SM-8）。

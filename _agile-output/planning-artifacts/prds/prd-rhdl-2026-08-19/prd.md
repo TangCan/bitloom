@@ -2,8 +2,8 @@
 title: Bitloom 阶段二 PRD — 2026-08-21 概述字面升格修订
 status: final
 created: 2026-08-19
-updated: 2026-08-21
-amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21
+updated: 2026-09-08
+amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08
 ---
 
 # PRD: Bitloom 阶段二及愿景闭环（later-product → FR + 概述字面升格）
@@ -11,6 +11,8 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21
 *Working title — 2026-08-21 Update（①C / 只改 PRD）：在保留 FR21–FR40 / NFR3 / NFR10–NFR13 稳定 ID 的前提下，将 `docs/requirements/1. 项目概述.md` §1.3.7–11 与 §1.5 亮点升格为**可验收硬需求**；**推翻**本 PRD 原「不以 Chisel Scala 为互转契约 / 禁止 HIR→TLM」等 non-goal。概述 `.md` 本轮不改。*
 
 *2026-08-21 追加（`fr71-jvm-ci`）：为 FR28「必须编译通过」补默认 CI JVM 真编译门禁 **FR71** + 工具链合同 **NFR34**（与 `epics.md` Phase 8 / Epic 25 对齐）。*
+
+*2026-09-08 追加（`phase9-closures`）：Phase 9 受控泛型闭包合同 **FR72–FR78** / **NFR35–NFR36**；澄清 **FR16** 与 elaborate-time 非捕获共存（与 `epics.md` Phase 9 / Epic 26–30 对齐）。*
 
 ## 0. Document Purpose
 
@@ -21,6 +23,7 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21
 - **阶段二基线（仍有效）：** FR21–FR40、NFR3、NFR10–NFR13（本文件原 Finalize 正文；下文有修订处以其新 success 为准）。
 - **2026-08-21 升格（本修订）：** FR46–FR52 将概述愿景中尚未被「弱定义」覆盖的部分升为硬 FR；并对 FR28 / FR29 / FR30 / FR35 / FR37 / FR38 的 **success 条**做字面加强。
 - **2026-08-21 CI 证据补强：** **FR71** / **NFR34** — 默认 CI 强制 Chisel JVM 真编译（禁止 skip=0）；编号避开历史 Phase 3–5 撞号（见 addendum）。
+- **2026-09-08 Phase 9 闭包合同：** **FR72–FR78** / **NFR35–NFR36** — elaborate-time 非捕获 `Fn` 冻前消解；编号接在 FR71/NFR34 之后；**不得**与 FR47（双视图 sim crate 生成）或 Phase 7「闭环」混淆（见 §5.9 / addendum）。
 - **身份 supersession：** 公开产品名 **Bitloom**，crates.io / CLI **`bitloom`**（阶段三 FR41）；禁止发布 `rhdl` / `rhdl-bits`。正文不再以 `rhdl-rs` 为发布名。[ASSUMPTION] 概述仍写 RHDL；合同以 Bitloom 为准，概述另开任务对齐。
 - `later-product.md` 仍为索引，不承载无 ID 需求。
 
@@ -104,6 +107,7 @@ Bitloom（公开品牌；仓库历史名可含 rhdl）要把「合法 Rust → F
 | SM-5 | FR22 构造条 | 清单项均可 elaborate/emit/tick | 两 fixture 冒充表面 |
 | SM-6 | 概述字面升格（新） | FR46–FR52 与修订后的 FR28/30/35/37/38 均有自动化或文档化黄金验收；FR28「必须编译」默认 CI 证据见 **FR71** | 「尽力 / deferred / 非目标」冒充概述完成；仅 Rust 谓词或 skip=0 冒充 FR28 编译 |
 | SM-7 | 双模拟器（新） | UJ-6 夹具绿 | 仅手写 functional 无生成路径 |
+| SM-8 | Phase 9 闭包 Waves（新） | 公开成功标准按调研 Wave：**生成器（FR73）→ 可综合（FR74/75）→ HLS/IP（FR76/77）→ 桥接（FR78）**；Epic 27–30 依序可验收 | 把 FR47 / Phase7「闭环」写成闭包完成；未冻前消解即宣称可综合；缺 NFR14 即标 Epic 27+ ready |
 
 **反指标（合同级）：** 用调研「同业未做满」作为永久免责而不改 FR——在 ①C 下**不可接受**；风险须进计划与估算，不得进 non-goal。
 
@@ -311,6 +315,57 @@ Bitloom（公开品牌；仓库历史名可含 rhdl）要把「合法 Rust → F
   - **phase：** P3 / 结项后补强 · UJ-4 · 支撑 FR28/FR46 正向腿。**ID 注记：** 使用 **FR71**，避免与 epics 历史 Phase 4 FR53、Phase 5 FR60 撞号。  
   - **实现指引（非替代架构）：** Pattern A — 并行 required job（推荐名 `fr28-chisel-jvm`）；钉死版本对齐 AD-9 / Stack（Chisel 7.14.0）；本 job **不**要求跑 firtool 降级。
 
+### 5.9 Phase 9 受控泛型闭包（新 · 2026-09-08）
+
+**F-Closures** — 将 `docs/requirements` / 调研中的受控泛型闭包升格为可验收合同（`epics.md` Phase 9 inventory；Epic 26–30）。
+
+**ID 注记：** 新编号 **FR72–FR78** / **NFR35–NFR36**，接在 **FR71** / **NFR34** 之后。禁止把本阶段能力写成 **FR47**（FR47 = 双视图模拟器 **crate 生成**，非用户 `Fn` 展开硬件）。禁止与 Phase 7 概述字面「闭环」（英文偶用 *closure*）混为同一完成定义。
+
+**门禁：** Epic **27–30** 标 `ready` 前须同时具备：(1) NFR14 风险记录 `_agile-output/implementation-artifacts/nfr14-risk-phase9-closures.md`；(2) 本增补（§5.9 + NFR35/36）落地。无此二者不得开工实现 epic。
+
+**公开成功标准（与调研 Wave 对齐）：** 生成器闭包 MVP（Wave 1 / Epic 27 · FR73）→ 可综合闭包进 comb/seq（Wave 2 / Epic 28 · FR74–75）→ HLS/IP 闭包定制（Epic 29 · FR76–77）→ 桥接适配器模板（Epic 30 · FR78）。合同解锁与决策表为 Wave 0 / Epic 26 · FR72。
+
+**FR16 — 继承 · 澄清（捕获禁令仍成立）**
+
+- **intent：** 阶段一周期精确子集仍拒绝**捕获闭包**及堆、无界递归、`dyn Trait` 等；与本阶段 elaborate-time 能力共存。
+- **success：** 周期精确 / `tick` 路径对**捕获**闭包的负例仍失败；允许的仅是 **elaborate-time / 非捕获** 闭包，且不得以 Rust 闭包对象进入 `tick`。与 FR72/FR73、AD-18（Revised 2026-09-08）、NFR35 联验。
+- **phase：** 继承阶段一 · Phase 9 澄清。
+
+- **FR72 — 闭包合同与架构解锁**
+  - **intent：** PRD 正式写入本阶段 FR73–FR78；修订 AD-18（保留禁捕获；允许 elaborate-time 非捕获 `Fn` 且必须在 `freeze` 前消解为 HIR）；产出决策表消解 requirements 内 HLS/阶段矛盾。
+  - **success：** 本 §5.9 与 NFR35–36 可验收；AD-18 Revised 2026-09-08 已落地；决策页 `architecture/architecture-rhdl-2026-08-18/closure-decision-table-2026-09-08.md`（D1–D5）链接进合同；明确非目标：**Cap-R-58** — FIRRTL/Chisel（及 Verilog/tick）**不**编码闭包节点；NFR14 记录存在后方可将 Epic 27+ 标 ready。
+  - **phase：** Phase 9 · Epic 26 · Wave 0。
+
+- **FR73 — Elaborate-time 生成器闭包（MVP）**
+  - **intent：** 设计 crate（仅 `bitloom-prelude`）可将 `Fn`（或等价）作为生成器参数，在 `ElaborateSession` 内执行并写入 Mem/ROM/常量初值与/或工厂式实例化+connect。
+  - **success：** 执行后 FrozenHir **无**闭包残留；捕获 `Wire`/`Reg` 等硬件引用 → 诊断失败；ATDD：LUT/CRC 表闭包生成 vs 手写表 golden。非目标：comb/seq 内联可综合闭包（→ FR75）。
+  - **phase：** Phase 9 · Epic 27 · Wave 1（生成器）。
+
+- **FR74 — SynthesizableClosure 约束与诊断**
+  - **intent：** 文档化/类型化可综合闭包约束（纯函数、无堆、无运行时捕获状态等）。
+  - **success：** `cargo bitloom check`（或等价）覆盖闭包可综合性；违规有稳定诊断码。
+  - **phase：** Phase 9 · Epic 28 · Wave 2（可综合）。
+
+- **FR75 — 组合/时序可综合闭包**
+  - **intent：** 在 `#[combinational]` / `#[sequential]` 中允许满足 FR74 的闭包并在 elaborate 期**内联展开**为普通 HIR。
+  - **success：** 与 FR16 负例矩阵共存；依赖 FR73+FR74；决策表裁定进 Wave 2 / Epic 28（非永久 defer）。
+  - **phase：** Phase 9 · Epic 28 · Wave 2（可综合）。
+
+- **FR76 — HLS 数据流闭包**
+  - **intent：** `#[hls]`（或等价）路径支持将无状态（或决策表裁定的约束类）闭包作为数据流变换，在调度/降低前消解。
+  - **success：** 依赖 FR73 与 FR35/FR50；遵循决策表 D1（外挂/功能自由 vs 可综合 SynthesizableClosure）；**禁止**树内 HLS scheduler。
+  - **phase：** Phase 9 · Epic 29 · Wave（HLS/IP）。
+
+- **FR77 — IP 生成器闭包定制**
+  - **intent：** 一级 IP / 生成器 API 可接受 elaborate-time 闭包定制算法表（如 CRC 多项式、滤波系数）。
+  - **success：** 生成后 HIR/IP 对后端闭包透明；依赖 FR73；可综合腿仍走 SynthesizableClosure。
+  - **phase：** Phase 9 · Epic 29 · Wave（HLS/IP）。
+
+- **FR78 — 桥接适配器闭包模板**
+  - **intent：** 提供可复用的事务↔周期转换模板（如 `start_wait_complete`）。
+  - **success：** 功能视图可继续自由使用闭包；周期精确侧仅经模板消解后的信号级接口；依赖 FR73 与 FR47 双视图路径。
+  - **phase：** Phase 9 · Epic 30 · Wave（桥接）。
+
 ## 6. Non-Functional Requirements
 
 | ID | 要求 | Phase |
@@ -322,9 +377,12 @@ Bitloom（公开品牌；仓库历史名可含 rhdl）要把「合法 Rust → F
 | **NFR13** | MSRV rustc **1.97.1**；workspace/CI/文档一致。 | P2c |
 | **NFR14** | **P3 风险门禁（强制）：** 每个 FR46/47/48/49（及启动前的 FR50 若尚无记录）在 epic 标 `ready` **之前**，须在 `_agile-output/implementation-artifacts/`（或 epic 故事文件）存在风险记录，字段至少含：`(a)` 上游约束（如 CIRCT/Chisel 版本、HLS 许可）、`(b)` 粗工期带、`(c)` **禁止的静默降级**清单（例：不得把 FR46 改回「尽力失败」而不改本 PRD）、`(d)` 负责人。缺记录 = 不得开工。并行 P3 多项时另记 Chipyard 式维护风险。 | P3 |
 | **NFR34** | **CI JVM 工具链合同（FR71）：** required Chisel 编译 job 使用 Temurin（或文档等价）**Java ≥ 17**；启用 sbt 依赖缓存（如 `actions/setup-java` `cache: sbt`）+ 官方 `sbt/setup-sbt`（或文档等价）；job **不得** `continue-on-error: true`；缺 JDK/sbt 必须失败。可选 `BITLOOM_CHISEL_JVM_SKIP=1` 仅文档化逃生舱，**默认 CI 不设**。墙钟：实现时实测冷/热后钉 `timeout-minutes`（建议初值 15–20）。**ID 注记：** 使用 **NFR34**，避免与 Phase 3 **NFR15**（0.x 版本政策）撞号。 | P3 |
+| **NFR35** | **Elaborate-time vs 捕获闭包合同：** 公开文档与 AD-18 修订必须可测试地区分两类；周期精确/`tick` 路径抽样负例证明捕获闭包仍失败（FR16）；生成器正例证明非捕获 elaborate-time 闭包在 freeze 前消解成功。**ID 注记：** **NFR35** 接 NFR34 之后。 | Phase 9 |
+| **NFR36** | **冻前消解 / 后端无感知：** Verilog / FIRRTL / Chisel / tick 后端不得新增「闭包」IR 节点（**Cap-R-58**）；抽检 FrozenHir 与 emit 产物无闭包语义残留；设计 crate 仍只依赖 `bitloom-prelude`（AD-6）。**ID 注记：** **NFR36** 接 NFR35 之后。 | Phase 9 |
 
 继承：合法 Rust eDSL；显式 comb/seq；同位宽；无云控；禁止发布 `rhdl`/`rhdl-bits`。  
-**不再继承：** 「互转契约仅 FrozenHir↔FIRRTL 文本、禁止 Chisel 源码合同」「禁止 HIR→功能模拟器生成」。
+**不再继承：** 「互转契约仅 FrozenHir↔FIRRTL 文本、禁止 Chisel 源码合同」「禁止 HIR→功能模拟器生成」。  
+**Phase 9 继承澄清：** FR16 捕获闭包禁令仍成立；允许的是 elaborate-time 非捕获且冻前消解（见 §5.9）。
 
 ## 7. Assumptions（索引）
 
@@ -379,6 +437,7 @@ Bitloom（公开品牌；仓库历史名可含 rhdl）要把「合法 Rust → F
 | 单时钟表面 | FR22 |
 | Bundle / Vec | **FR51**（升格；不再是「非本 PRD FR」） |
 | 默认 CI Chisel JVM 真编译 | **FR71**, **NFR34** |
+| Phase 9 受控泛型闭包 | **FR16**（澄清）, **FR72–FR78**, **NFR35–NFR36** |
 
 ### 9.2 概述 → FR（2026-08-21）
 
