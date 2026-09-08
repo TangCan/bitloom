@@ -24,7 +24,7 @@
   - **HLS 自由闭包**仅允许在 **AD-25 外挂 HLS** 路径与功能侧；须在调度/降低**前**消解（FR76）。
   - **可综合 Bitloom 路径**（comb/seq / elaborate→freeze / IP 可综合腿）一律 **`SynthesizableClosure`**（FR74）；不得借「HLS 自由」绕过。
 - **AD-25 / FR86：** **禁止**树内 HLS scheduler / allocation；闭包定制不得把 scheduler 偷渡进工具链。
-- **Epic 34 IP 基线优先于 29.3：** FR77（IP 生成器闭包定制）建议叠在 **非 stub、无闭包** 的可综合 IP 基线（FR82 / Epic 34）之上；在 Epic 34 基线未就绪时，不得将 **29.3** 标 `ready` 或用 stub 重命名冒充定制完成。
+- **Epic 34 IP 基线优先于 29.3：** FR77（IP 生成器闭包定制）建议叠在 **非 stub、无闭包** 的可综合 IP 基线（FR82 / Epic 34）之上；在 Epic 34 基线未就绪时，不得将 **29.3** 标 `ready` 或用 stub 重命名冒充定制完成。**（2026-09-08：Epic 34 / FR82 五类基线已交付并关闭；29.3 可依赖本基线开工。）**
 - **NFR36 / D4：** freeze 后 FrozenHir / Verilog / FIRRTL / Chisel / tick **无**闭包残留；后端不编码闭包 IR。
 - **品牌 / 依赖：** 公开产品 **Bitloom**；设计 crate 只依赖 **`bitloom-prelude`**。
 

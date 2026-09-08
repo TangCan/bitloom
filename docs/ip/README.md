@@ -16,6 +16,17 @@ use bitloom_prelude::Elaboratable;
 
 **无生成器闭包参数**（Epic 34 / FR82）；闭包定制叠加点为 **Epic 29**。
 
+## Epic 29 handoff（无闭包基线 → 闭包定制叠加）
+
+| 层 | Epic / FR | 含义 |
+| --- | --- | --- |
+| **IP 基线（本索引）** | Epic **34** / **FR82** | 五类非 stub 可综合路径；`T::elaborate()` **无** `Fn` / 生成器闭包参数 |
+| **闭包定制叠加** | Epic **29** / **FR77** | 在 FR82 骨架上用 elaborate-time 闭包定制表/系数（Story **29.3**）；须叠在本基线之上，不得用 stub 包一层闭包冒充 |
+| **历史 stub** | Epic **22** / FR37+FR48 当时 AC | 端口语义 stub + smoke；**NFR37：** 规划 `done` ≠ FR82 深度 done |
+
+**测序：** Epic 34 **先于** Story 29.3。Epic 29 是 **closure customization overlay**，不是对本索引五类的重复交付。  
+风险：[`nfr14-risk-epic34-ip-baseline.md`](../../_agile-output/implementation-artifacts/nfr14-risk-epic34-ip-baseline.md)、[`nfr14-risk-epic29-hls-ip-closures.md`](../../_agile-output/implementation-artifacts/nfr14-risk-epic29-hls-ip-closures.md)。
+
 ## Epic 34 / FR82 深度（相对 Epic 22 stub）
 
 | 类 | Epic 22 stub | FR82（本索引当前） |
@@ -50,8 +61,18 @@ use bitloom_prelude::Elaboratable;
 
 ## CI / `just test`
 
-上述 `bitloom-prelude` IP 单元测试与 `ip_box` 均在 workspace `just test`（`cargo test --workspace`）内，默认 CI 可触达。  
-FR82 ATDD：`cargo test -p bitloom --test fr82_fifo_uart_baseline`、`cargo test -p bitloom --test fr82_spi_i2c_axi_baseline`。
+上述 `bitloom-prelude` IP 单元测试与 `ip_box` 均在 workspace `just test`（`cargo test --workspace`）内，默认 CI 可触达。
+
+**FR82 文档化配方（Story 34.4；亦含于 `just test`）：**
+
+```text
+cargo test -p bitloom --test fr82_ip_baseline_matrix
+cargo test -p bitloom --test fr82_fifo_uart_baseline
+cargo test -p bitloom --test fr82_spi_i2c_axi_baseline
+```
+
+- 矩阵：`fr82_ip_baseline_matrix` — 五类 elaborate→emit 汇总 + 无闭包扫描 + Epic 29 handoff / NFR37 文档断言  
+- 深度夹具：`fr82_fifo_uart_baseline`、`fr82_spi_i2c_axi_baseline`
 
 ## 例化片段
 

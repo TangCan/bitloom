@@ -186,7 +186,9 @@ Every default module has exactly one `Clock` port and one sync active-high `Rese
 ## First-class IP (FR37 / FR48 / FR82)
 
 - Surface：`bitloom_prelude::ip::{SyncFifo, UartTx, SpiMaster, I2cMaster, Axi4LiteSlave, ExtBlackBox}`。
-- **FR82（Epic 34）：** `SyncFifo` = depth-4 sync FIFO；`UartTx` = 8N1 bit-bang；`SpiMaster` = Mode-0-ish MSB byte shifter；`I2cMaster` = START+8data+STOP bit-bang；`Axi4LiteSlave` = 单寄存器 AXI4-Lite write/read 握手玩具（ADDR=8, DATA=32）。均无生成器闭包参数（Epic 29 叠加）。
+- **FR82（Epic 34）：** `SyncFifo` = depth-4 sync FIFO；`UartTx` = 8N1 bit-bang；`SpiMaster` = Mode-0-ish MSB byte shifter；`I2cMaster` = START+8data+STOP bit-bang；`Axi4LiteSlave` = 单寄存器 AXI4-Lite write/read 握手玩具（ADDR=8, DATA=32）。均无生成器闭包参数。
+- **Epic 29 handoff：** Epic 34 = 无闭包可综合基线；Epic 29 / FR77 = 闭包定制 **overlay**（Story 29.3；须先于基线）。相对 Epic 22 stub：**NFR37** 规划 done ≠ FR82 深度。索引：`docs/ip/README.md`。
 - **黑盒：** `ExtBlackBox` 仅端口、空 body；`vendor_blackbox_v()` 旁路；不内联 vendor 网表进 HIR。
 - **Sim：** 同周期输入门控须 `set_inputs` → `Sim::settle` → `tick`（见 `docs/ip/README.md`）。
+- **ATDD 配方：** `cargo test -p bitloom --test fr82_ip_baseline_matrix`（+ sibling `fr82_*_baseline`）。
 - 索引与已知限制：`docs/ip/README.md`（NFR37：基线 ≠ 全协议 / VIP / Full AXI）。

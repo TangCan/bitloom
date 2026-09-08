@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR82（加深 FR37/FR48）/ Epic 34；NFR14、NFR37 |
 | 记录日期 | 2026-09-08 |
-| 状态 | accepted |
+| 状态 | accepted — Epic 34 关闭条件已勾选（Story 34.4） |
 
 ### (a) 上游约束
 
@@ -74,6 +74,18 @@
 
 ---
 
+### Epic 34 关闭条件（Story 34.4 勾选）
+
+- [x] **FR82 五类非 stub：** UART / SPI / I2C / FIFO / AXI 均可 elaborate → emit → tick（文档最小子集；见 `docs/ip/README.md`）
+- [x] **本 epic 无生成器闭包 API**（闭包定制叠加点 = **Epic 29** / FR77 / Story 29.3）
+- [x] **NFR37：** 相对 Epic 22 stub 历史已文档化；不得用 stub / 历史 `done` 冒充深度关闭
+- [x] **ATDD / 配方：** `fr82_ip_baseline_matrix` + `fr82_fifo_uart_baseline` + `fr82_spi_i2c_axi_baseline`（亦含于 `just test`）
+- [x] **Epic 29 handoff：** `docs/ip/README.md` 声明无闭包基线 vs 闭包 overlay 测序（34 → 29.3）
+- [x] **禁止事项未触发：** 无仅重命名 stub 交差；无静默砍类；无提前标 29.3 ready
+
+---
+
 ## 门禁一句话
 
-**缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 34 故事 34.2–34.4 标 `ready`。**
+**缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 34 故事 34.2–34.4 标 `ready`。**  
+**Epic 34 关闭条件（上节）已于 Story 34.4 勾选。**
