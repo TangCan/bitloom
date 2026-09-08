@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-08-2026 19:58
+last_updated: 09-08-2026 20:20
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -224,7 +224,7 @@ development_status:
   epic-27: in-progress
   27-1-lut-常量初值生成器闭包-api: done
   27-2-模块工厂闭包: done
-  27-3-捕获硬件引用诊断-fr16-回归: backlog
+  27-3-捕获硬件引用诊断-fr16-回归: done
   27-4-atdd-golden-后端无感知抽检: backlog
   epic-27-retrospective: optional
 

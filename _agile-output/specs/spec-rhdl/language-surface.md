@@ -48,7 +48,8 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
   `declare_sync_read_mem_with_init_fn`（或 `generate_mem_init` + `declare_*_with_init`）。
 - **语义：** 在 `ElaborateSession` 内执行非捕获 `Fn(usize) -> u64`，写入 `MemDecl.init: Option<Vec<u64>>`；freeze 后 **无**闭包节点（NFR36 / AD-18）。
 - **Emit：** Verilog `initial` 块可见初值；FIRRTL 以 `; mem-init …` 注释记录。
-- **非目标（本 epic）：** comb/seq 内联可综合闭包（→ Epic 28）；捕获 `Wire`/`Reg` 诊断（→ Story 27.3）。
+- **捕获：** 见下节 NFR35；`rhdl::E0142`。
+- **非目标（本 epic）：** comb/seq 内联可综合闭包（→ Epic 28）。
 - 设计 crate 仅依赖 `bitloom-prelude`（AD-2）。
 
 ## Elaborate-time module factory (FR73 / Cap-R-53)
@@ -56,8 +57,19 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 - **API：** `ElaborateSession::generate_instances(n, |i, s| { s.add_instance(...); })` 或
   `generate_instances_from(n, |i| GeneratedInstance::new(...), span)`（prelude 再导出 `GeneratedInstance`）。
 - **语义：** 在 elaborate 内批量实例化子模块并完成类型安全 connect；freeze 后仅普通 `Stmt::Instance` / `PortConnect`（NFR36）。
-- **错误：** 宽度/方向等既有实例校验仍在 `finish` 前失败（FR8 / E0203 等）。
-- **非目标：** comb/seq 内联工厂；捕获硬件引用诊断（→ 27.3）。
+- **错误：** 宽度/方向等既有实例校验仍在 `finish` 前失败（FR8 / E0203 等）；硬件引用捕获 → `rhdl::E0142`。
+- **非目标：** comb/seq 内联工厂。
+
+## Elaborate-time vs capturing (NFR35 / AD-18)
+
+| 类别 | 含义 | 诊断 |
+|------|------|------|
+| **Elaborate-time 非捕获 `Fn`** | 在 session 内生成 Mem init / 工厂 Instance，freeze 前消解为普通 HIR（FR73） | 正例：空 `assert_no_hw_capture(&[])` + generator/factory |
+| **捕获硬件引用** | 闭包环境持有 Wire / Reg / 端口等硬件句柄（文档标记 `HwCaptureRef`） | **`rhdl::E0142`** via `reject_hw_capture` / `assert_no_hw_capture` — **不得** silent 成功 |
+| **周期精确捕获闭包（FR16）** | 进入 cycle-accurate / `tick` 路径的捕获闭包等不可综合构造 | **`rhdl::E0141`** via `reject_unsynthesizable("capturing closure", …)`（与 E0142 分立） |
+
+- **Wire/Reg 映射：** `HwCaptureRef::wire(name)` / `::reg(name)` / `::signal(name)`（prelude 再导出）。
+- **夹具：** `crates/bitloom/tests/fr73_hw_capture_diag.rs`。
 
 ## Comb / seq
 

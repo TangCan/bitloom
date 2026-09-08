@@ -1,6 +1,8 @@
 //! Design-facing surface. Designs depend only on this crate.
 
-pub use bitloom_builder::{Elaboratable, ElaborateSession, GeneratedInstance};
+pub use bitloom_builder::{
+    Elaboratable, ElaborateSession, GeneratedInstance, HwCaptureKind, HwCaptureRef,
+};
 pub use bitloom_hir::{Diagnostics, FrozenHir, GroundType, PortDirection, PortValues, Span};
 
 /// First-class IP stubs (FR37 / FR48): FIFO, UART, … via this prelude only.
@@ -150,6 +152,9 @@ pub struct Mem<const DEPTH: u32, const WIDTH: u32>;
 /// and initializing in one step. The closure dissolves before freeze —
 /// FrozenHir stores only `Vec<u64>` (NFR36).
 ///
+/// **Non-capturing only:** do not capture Wire/Reg/signal refs. Documented
+/// illegal capture → [`ElaborateSession::assert_no_hw_capture`] (`rhdl::E0142`).
+///
 /// ```ignore
 /// use bitloom_prelude::{generate_mem_init, ElaborateSession, GroundType, Span};
 /// let init = generate_mem_init(16, 8, |i| ((i * i) & 0xff) as u64);
@@ -162,7 +167,12 @@ pub use bitloom_builder::{generate_mem_init_words as generate_mem_init, mask_mem
 /// [`ElaborateSession::generate_instances`] and
 /// [`ElaborateSession::generate_instances_from`] (+ [`GeneratedInstance`])
 /// (FR73 / Cap-R-53). Factory `Fn` runs at elaborate time and dissolves to
-/// ordinary instance/connect HIR (NFR36).
+/// ordinary instance/connect HIR (NFR36). Capturing Wire/Reg →
+/// [`ElaborateSession::assert_no_hw_capture`] (`rhdl::E0142`).
+///
+/// **HwCaptureRef mapping (NFR35):** Wire → [`HwCaptureRef::wire`], Reg →
+/// [`HwCaptureRef::reg`], port/signal → [`HwCaptureRef::signal`]. See
+/// language-surface “Elaborate-time vs capturing”.
 
 trait AsGround {
     fn ground() -> GroundType;

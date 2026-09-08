@@ -34,6 +34,67 @@ where
         .collect()
 }
 
+/// Kind of hardware reference that must not be captured into elaborate-time
+/// generator / factory closures (FR73 / NFR35 / AD-18).
+///
+/// Session `Wire` / `Reg` / port names map to these kinds via [`HwCaptureRef`].
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum HwCaptureKind {
+    Wire,
+    Reg,
+    /// Directed port or other named hardware signal handle.
+    Signal,
+}
+
+/// Documented illegal-capture marker for Wire/Reg/signal refs (Story 27.3).
+///
+/// Elaborate-time generator APIs accept only **non-capturing** `Fn` that dissolve
+/// before freeze. Capturing a hardware ref is diagnosed via
+/// [`ElaborateSession::assert_no_hw_capture`] / [`ElaborateSession::reject_hw_capture`]
+/// (`rhdl::E0142`) — not silently treated as a legal generator closure.
+///
+/// Cycle-accurate “capturing closure” bans remain [`ElaborateSession::reject_unsynthesizable`]
+/// (`rhdl::E0141` / FR16).
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct HwCaptureRef {
+    pub kind: HwCaptureKind,
+    pub name: String,
+}
+
+impl HwCaptureRef {
+    /// Map a Wire net name to the illegal-capture marker.
+    pub fn wire(name: impl Into<String>) -> Self {
+        Self {
+            kind: HwCaptureKind::Wire,
+            name: name.into(),
+        }
+    }
+
+    /// Map a Reg name to the illegal-capture marker.
+    pub fn reg(name: impl Into<String>) -> Self {
+        Self {
+            kind: HwCaptureKind::Reg,
+            name: name.into(),
+        }
+    }
+
+    /// Map a port / signal handle name to the illegal-capture marker.
+    pub fn signal(name: impl Into<String>) -> Self {
+        Self {
+            kind: HwCaptureKind::Signal,
+            name: name.into(),
+        }
+    }
+
+    fn kind_label(&self) -> &'static str {
+        match self.kind {
+            HwCaptureKind::Wire => "Wire",
+            HwCaptureKind::Reg => "Reg",
+            HwCaptureKind::Signal => "Signal",
+        }
+    }
+}
+
 /// Plain instance spec produced by an elaborate-time factory `Fn` (FR73 / Cap-R-53).
 ///
 /// Dissolves to ordinary [`bitloom_hir::Stmt::Instance`] via
@@ -342,8 +403,9 @@ impl ElaborateSession {
     ///
     /// Runs `f(addr)` for each address inside the session, masks to `width` bits,
     /// and stores plain `Vec<u64>` on the HIR mem node. The closure does **not**
-    /// enter FrozenHir (NFR36). Capturing hardware Signal/Reg is out of scope
-    /// for this story (→ 27.3 diagnostics).
+    /// enter FrozenHir (NFR36). Only **non-capturing** `Fn` is legal; capturing
+    /// Wire/Reg/signal refs must be rejected via
+    /// [`Self::assert_no_hw_capture`] (`rhdl::E0142`).
     pub fn declare_mem_with_init_fn<F>(
         &mut self,
         name: impl Into<String>,
@@ -1316,7 +1378,8 @@ impl ElaborateSession {
         bitloom_hir::seal_from_builder(self.hir)
     }
 
-    /// Record a synthesizable-path violation (heap, threads, f64, …) as a structured diagnostic.
+    /// Record a synthesizable-path violation (heap, threads, f64, capturing closure, …)
+    /// as a structured diagnostic (`rhdl::E0141` / FR16).
     pub fn reject_unsynthesizable(&mut self, construct: &str, span: Span) {
         self.push_err(Diagnostic {
             span,
@@ -1326,6 +1389,40 @@ impl ElaborateSession {
             ),
             zh: format!("周期精确路径不允许不可综合构造 '{construct}'"),
         });
+    }
+
+    /// Reject capturing a hardware Wire/Reg/signal ref into an elaborate-time
+    /// generator or factory closure (FR73 / NFR35 / AD-18).
+    ///
+    /// Stable code: **`rhdl::E0142`**. Distinct from FR16 cycle-accurate
+    /// [`Self::reject_unsynthesizable`] (`rhdl::E0141`).
+    pub fn reject_hw_capture(&mut self, capture: &HwCaptureRef, span: Span) {
+        let kind = capture.kind_label();
+        self.push_err(Diagnostic {
+            span,
+            code: "rhdl::E0142".into(),
+            en: format!(
+                "illegal capture of hardware {kind} '{}' into elaborate-time generator closure; \
+                 only non-capturing Fn that dissolves before freeze is allowed (FR73 / NFR35 / AD-18)",
+                capture.name
+            ),
+            zh: format!(
+                "不允许将硬件 {kind} '{}' 捕获进 elaborate-time 生成器闭包；\
+                 仅允许冻前消解的非捕获 Fn（FR73 / NFR35 / AD-18）",
+                capture.name
+            ),
+        });
+    }
+
+    /// Assert that no hardware Wire/Reg/signal refs were captured into a
+    /// generator / factory context. Empty slice is a no-op (legal non-capturing path).
+    ///
+    /// Call when a documented illegal capture is present (ATDD / macros / typed
+    /// handles). Any token → `rhdl::E0142` at [`Self::finish`].
+    pub fn assert_no_hw_capture(&mut self, captures: &[HwCaptureRef], span: Span) {
+        for c in captures {
+            self.reject_hw_capture(c, span);
+        }
     }
 
     /// Hierarchical instance (Story 2.2); not flattened at elaborate.
@@ -1365,7 +1462,8 @@ impl ElaborateSession {
     /// records a child instance plus type-safe port connects. Only ordinary
     /// `Stmt::Instance` / `PortConnect` remain after the loop — the closure
     /// does **not** enter FrozenHir (NFR36). Width/dir checks still run at
-    /// `finish` (FR8 / existing instance validation).
+    /// `finish` (FR8 / existing instance validation). Capturing Wire/Reg into
+    /// the factory is illegal — use [`Self::assert_no_hw_capture`] (`rhdl::E0142`).
     ///
     /// ```ignore
     /// session.generate_instances(4, |i, s| {
@@ -1996,5 +2094,77 @@ mod tests {
         s.end_module();
         let err = s.finish().unwrap_err();
         assert!(err.0.iter().any(|d| d.code == "rhdl::E0204"), "{err}");
+    }
+
+    #[test]
+    fn hw_capture_wire_rejected_e0142() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.declare_wire("w", GroundType::UInt { width: 8 }, Span::default());
+        // Documented illegal capture of Wire into generator context.
+        s.assert_no_hw_capture(&[HwCaptureRef::wire("w")], Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "data_in", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().unwrap_err();
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0142"),
+            "expected E0142, got {err}"
+        );
+        assert!(
+            err.0
+                .iter()
+                .any(|d| d.en.contains("Wire") && d.en.contains("w")),
+            "diagnostic should name Wire 'w': {err}"
+        );
+    }
+
+    #[test]
+    fn hw_capture_reg_rejected_e0142() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.declare_reg("r", GroundType::UInt { width: 8 }, Span::default());
+        s.reject_hw_capture(&HwCaptureRef::reg("r"), Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "data_in", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().unwrap_err();
+        assert!(
+            err.0
+                .iter()
+                .any(|d| d.code == "rhdl::E0142" && d.en.contains("Reg")),
+            "expected E0142 Reg, got {err}"
+        );
+    }
+
+    #[test]
+    fn assert_no_hw_capture_empty_ok() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.assert_no_hw_capture(&[], Span::default());
+        s.declare_mem_with_init_fn("rom", 2, 8, |i| i as u64, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "data_in", Span::default());
+        s.end_process();
+        s.end_module();
+        assert!(s.finish().is_ok());
+    }
+
+    #[test]
+    fn fr16_capturing_closure_still_e0141() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.reject_unsynthesizable("capturing closure", Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "data_in", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().unwrap_err();
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0141"),
+            "FR16 capturing closure must stay E0141, got {err}"
+        );
     }
 }

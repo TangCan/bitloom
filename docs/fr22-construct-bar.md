@@ -17,3 +17,4 @@
 
 - `Bundle`, `Vec<T, N>`
 - Multi-clock / phantom domains (Epic 7 / AD-22)
+- Capturing Wire/Reg into elaborate-time generator/factory → `rhdl::E0142` (`assert_no_hw_capture` / `HwCaptureRef`); FR16 capturing closure stays `rhdl::E0141`
