@@ -125,20 +125,20 @@
   status: deferred — 未来故事；forbid silent subset expansion
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
-  summary: 五类一级 IP 均为端口语义 stub，非全协议实现
+  summary: 五类一级 IP 历史为端口语义 stub；Epic 34/FR82 加深 FIFO+UART（及后续 34.3 其余类）
   evidence: |
-    epic-22-retro-item-48；边界：
-    - SyncFifo：depth-1 skid；非异步跨域 FIFO
-    - UartTx：字节保持寄存器；非波特率移位 / 全双工
-    - SpiMaster：主设备字节缓冲；非 CPOL/CPHA / 多 CS / 从模式
-    - I2cMaster：主设备字节缓冲；非多主仲裁 / clock stretch / 从模式
-    - Axi4LiteSlave：最小从握手 stub（ADDR=8, DATA=32）；非 Full AXI / 非互联
-  status: deferred — 边界写入本文件 + `docs/ip/README.md`；勿误读为全协议
+    epic-22-retro-item-48；更新（2026-09-08 / Story 34.2）：
+    - SyncFifo：**FR82 非 stub** depth-4 + full/empty；非异步跨域 FIFO
+    - UartTx：**FR82 非 stub** 8N1 bit-bang（baud=clk）；非可编程波特率 / RX / 全双工
+    - SpiMaster / I2cMaster / Axi4LiteSlave：仍为 stub，待 Story 34.3
+  status: partial — FIFO/UART 已由 Epic 34 加深；其余见 34.3；边界 `docs/ip/README.md`
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
-  summary: UART/SPI/I2C 长期保持 stub MVP（产品锁）；不深化协议语义除非新 epic 显式改合同
-  evidence: epic-22-retro-item-49；优先锁 MVP 而非加深协议；见 `docs/ip/README.md`「长期 stub MVP」
-  status: locked — 产品文档显式锁定；加深协议 = 新 epic
+  summary: UART/SPI/I2C「全协议」仍非默认交付；Epic 34 仅合同化最小可综合基线（非 VIP 级）
+  evidence: |
+    epic-22-retro-item-49 + Epic 34 / FR82 / nfr14-risk-epic34-ip-baseline.md；
+    34.2 已交付 UART 8N1 bit-bang 基线；可编程波特率/RX 等仍须新合同
+  status: locked — 全协议加深仍须显式改合同；FR82 基线 ≠ 全协议
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
   summary: 可选：AXI4-Lite 与 UART/FIFO 简易连接夹具

@@ -341,6 +341,14 @@ impl Sim {
         self.tick_combinational();
     }
 
+    /// Recompute combinational nets from current ports/regs without a clock edge.
+    ///
+    /// Use after [`Self::set_inputs`] when sequential logic samples same-cycle
+    /// enables derived from inputs (e.g. `wr_en && !full`).
+    pub fn settle(&mut self) {
+        self.tick_combinational();
+    }
+
     fn tick_compiled(&mut self) {
         // Compiled schedule covers plain RegD/Net; mem / enable share the interpreter path.
         if self.mems.is_empty()

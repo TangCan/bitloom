@@ -182,3 +182,11 @@ Functional view（手写 `#[functional_model]` 或 CAP-13 生成的 Rust crate�
 ## Sequential envelope (default)
 
 Every default module has exactly one `Clock` port and one sync active-high `Reset` port. `tick` is one posedge of that clock. No implicit ports at emit. Multi-clock / async reset / enables：见 PRD FR23–FR25 与脊柱 AD-22/AD-23。
+
+## First-class IP (FR37 / FR48 / FR82)
+
+- Surface：`bitloom_prelude::ip::{SyncFifo, UartTx, SpiMaster, I2cMaster, Axi4LiteSlave, ExtBlackBox}`。
+- **FR82（Epic 34.2）：** `SyncFifo` = depth-4 sync FIFO（`wr_en`/`rd_en`/`full`/`empty`）；`UartTx` = 8N1 bit-bang（`tx` + busy-gated write；baud=`clk`）。均无生成器闭包参数（Epic 29 叠加）。
+- **黑盒：** `ExtBlackBox` 仅端口、空 body；`vendor_blackbox_v()` 旁路；不内联 vendor 网表进 HIR。
+- **Sim：** 同周期输入门控须 `set_inputs` → `Sim::settle` → `tick`（见 `docs/ip/README.md`）。
+- SPI/I2C/AXI 在 34.3 前仍为 Epic 22 stub；索引：`docs/ip/README.md`。

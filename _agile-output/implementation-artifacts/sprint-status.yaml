@@ -272,7 +272,7 @@ development_status:
 
   epic-34: in-progress
   34-1-epic-34-nfr14-风险记录: done
-  34-2-fifo-uart-可综合基线: backlog
+  34-2-fifo-uart-可综合基线: done
   34-3-spi-i2c-axi-基线-或文档最小子集: backlog
   34-4-ip-基线-atdd-epic-29-衔接文档: backlog
   epic-34-retrospective: optional
