@@ -202,6 +202,9 @@ pub enum Stmt {
         width: u32,
         /// true => SyncReadMem (read latency 1); false => Mem (async read / reg file).
         sync_read: bool,
+        /// Elaborate-time constant init (FR73). Plain words only — no closure residue.
+        /// `None` ⇒ uninitialized (sim zeros); `Some` length must equal `depth`.
+        init: Option<Vec<u64>>,
         span: Span,
     },
 }

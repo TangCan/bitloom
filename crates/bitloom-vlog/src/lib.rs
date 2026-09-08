@@ -122,6 +122,7 @@ fn emit_module(m: &bitloom_hir::Module) -> String {
                 depth,
                 width,
                 sync_read,
+                init,
                 ..
             } => {
                 let kind = if *sync_read {
@@ -134,6 +135,13 @@ fn emit_module(m: &bitloom_hir::Module) -> String {
                     w = width.saturating_sub(1),
                     d = depth.saturating_sub(1),
                 ));
+                if let Some(words) = init {
+                    out.push_str("  initial begin\n");
+                    for (i, word) in words.iter().enumerate() {
+                        out.push_str(&format!("    {name}[{i}] = {word};\n"));
+                    }
+                    out.push_str("  end\n");
+                }
             }
             Stmt::Process(p) => match p.kind {
                 ProcessKind::Combinational => {

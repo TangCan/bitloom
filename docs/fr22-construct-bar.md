@@ -10,6 +10,7 @@
 - Explicit `pad_to` / `trunc_to`
 - Sync `Reg` + `assign_reg_d_inc` / `assign_reg_d_from` under AD-15 reset
 - SyncReadMem: `declare_sync_read_mem` + `assign_mem_write` / `assign_reg_d_mem_read`
+- Elaborate-time Mem/ROM init (FR73): `declare_mem_with_init_fn` / `generate_mem_init` — not comb/seq inlined closures
 
 # Explicitly deferred (must not silently work)
 

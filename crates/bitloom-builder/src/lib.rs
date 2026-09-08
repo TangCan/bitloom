@@ -12,6 +12,28 @@ pub use bitloom_hir::{
     GroundType, SignalKind, Span,
 };
 
+/// Mask a mem init word to `width` bits (MVP: width ≤ 64).
+pub fn mask_mem_word(word: u64, width: u32) -> u64 {
+    if width == 0 {
+        0
+    } else if width >= 64 {
+        word
+    } else {
+        word & ((1u64 << width) - 1)
+    }
+}
+
+/// Elaborate-time LUT/ROM table builder (FR73). Runs `f(addr)` for each address;
+/// returns plain words — the closure never enters HIR.
+pub fn generate_mem_init_words<F>(depth: u32, width: u32, f: F) -> Vec<u64>
+where
+    F: Fn(usize) -> u64,
+{
+    (0..depth as usize)
+        .map(|i| mask_mem_word(f(i), width))
+        .collect()
+}
+
 #[derive(Debug)]
 enum ProcessState {
     Combinational {
@@ -253,12 +275,72 @@ impl ElaborateSession {
         width: u32,
         span: Span,
     ) {
-        self.declare_mem_inner(name, depth, width, true, span);
+        self.declare_mem_inner(name, depth, width, true, None, span);
     }
 
     /// Declare Mem (async-read / reg-file style; sync_read=false).
     pub fn declare_mem(&mut self, name: impl Into<String>, depth: u32, width: u32, span: Span) {
-        self.declare_mem_inner(name, depth, width, false, span);
+        self.declare_mem_inner(name, depth, width, false, None, span);
+    }
+
+    /// Declare Mem with elaborate-time init words (FR73). Prefer
+    /// [`Self::declare_mem_with_init_fn`] for generator closures.
+    pub fn declare_mem_with_init(
+        &mut self,
+        name: impl Into<String>,
+        depth: u32,
+        width: u32,
+        init: Vec<u64>,
+        span: Span,
+    ) {
+        self.declare_mem_inner(name, depth, width, false, Some(init), span);
+    }
+
+    /// Declare SyncReadMem with elaborate-time init words (FR73).
+    pub fn declare_sync_read_mem_with_init(
+        &mut self,
+        name: impl Into<String>,
+        depth: u32,
+        width: u32,
+        init: Vec<u64>,
+        span: Span,
+    ) {
+        self.declare_mem_inner(name, depth, width, true, Some(init), span);
+    }
+
+    /// Elaborate-time Mem init generator (FR73 / AD-18).
+    ///
+    /// Runs `f(addr)` for each address inside the session, masks to `width` bits,
+    /// and stores plain `Vec<u64>` on the HIR mem node. The closure does **not**
+    /// enter FrozenHir (NFR36). Capturing hardware Signal/Reg is out of scope
+    /// for this story (→ 27.3 diagnostics).
+    pub fn declare_mem_with_init_fn<F>(
+        &mut self,
+        name: impl Into<String>,
+        depth: u32,
+        width: u32,
+        f: F,
+        span: Span,
+    ) where
+        F: Fn(usize) -> u64,
+    {
+        let init = generate_mem_init_words(depth, width, f);
+        self.declare_mem_inner(name, depth, width, false, Some(init), span);
+    }
+
+    /// SyncReadMem variant of [`Self::declare_mem_with_init_fn`] (FR73).
+    pub fn declare_sync_read_mem_with_init_fn<F>(
+        &mut self,
+        name: impl Into<String>,
+        depth: u32,
+        width: u32,
+        f: F,
+        span: Span,
+    ) where
+        F: Fn(usize) -> u64,
+    {
+        let init = generate_mem_init_words(depth, width, f);
+        self.declare_mem_inner(name, depth, width, true, Some(init), span);
     }
 
     fn declare_mem_inner(
@@ -267,6 +349,7 @@ impl ElaborateSession {
         depth: u32,
         width: u32,
         sync_read: bool,
+        init: Option<Vec<u64>>,
         span: Span,
     ) {
         let name = name.into();
@@ -279,6 +362,33 @@ impl ElaborateSession {
             });
             return;
         }
+        let init = match init {
+            None => None,
+            Some(words) => {
+                if width > 64 {
+                    self.push_err(Diagnostic {
+                        span,
+                        code: "rhdl::E0211".into(),
+                        en: "Mem init path supports width ≤ 64 for this MVP".into(),
+                        zh: "本 MVP 的 Mem 初值路径仅支持 width ≤ 64".into(),
+                    });
+                    return;
+                }
+                if words.len() != depth as usize {
+                    self.push_err(Diagnostic {
+                        span,
+                        code: "rhdl::E0212".into(),
+                        en: format!(
+                            "Mem init length {} does not match depth {depth}",
+                            words.len()
+                        ),
+                        zh: format!("Mem 初值长度 {} 与 depth {depth} 不一致", words.len()),
+                    });
+                    return;
+                }
+                Some(words.into_iter().map(|w| mask_mem_word(w, width)).collect())
+            }
+        };
         self.signals.insert(name.clone(), SignalKind::Wire);
         self.widths.insert(name.clone(), width);
         if let Some(m) = self.current.as_mut() {
@@ -287,6 +397,7 @@ impl ElaborateSession {
                 depth,
                 width,
                 sync_read,
+                init,
                 span,
             });
         }
@@ -1573,6 +1684,46 @@ mod tests {
                 ..
             }
         )));
+    }
+
+    #[test]
+    fn mem_with_init_fn_stores_plain_words() {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("Lut", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_mem_with_init_fn("rom", 4, 8, |i| ((i * i) & 0xff) as u64, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("y", "rom", Span::default());
+        s.end_process();
+        s.end_module();
+        let frozen = s.finish().unwrap();
+        let init = frozen.circuit().modules[0]
+            .body
+            .iter()
+            .find_map(|st| match st {
+                bitloom_hir::Stmt::MemDecl {
+                    name,
+                    init: Some(words),
+                    ..
+                } if name == "rom" => Some(words.clone()),
+                _ => None,
+            })
+            .expect("rom init present");
+        assert_eq!(init, vec![0, 1, 4, 9]);
+    }
+
+    #[test]
+    fn mem_init_len_mismatch_fails() {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("Bad", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.declare_mem_with_init("rom", 4, 8, vec![1, 2], Span::default());
+        s.end_module();
+        let err = s.finish().unwrap_err();
+        assert!(err.0.iter().any(|d| d.code == "rhdl::E0212"));
     }
 
     #[test]

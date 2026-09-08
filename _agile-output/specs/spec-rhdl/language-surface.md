@@ -35,7 +35,21 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 
 ## Still deferred from this catalog
 
-见 `later-product.md` / PRD：`Analog`, `InOut`, `Mem`/`SyncReadMem`（FR26/AD-21）、浮点 crate（FR36）等——有独立 FR，不并入 CAP-1。
+见 `later-product.md` / PRD：`Analog`, `InOut`、浮点 crate（FR36）等——有独立 FR，不并入 CAP-1。
+
+## Mem / SyncReadMem (AD-21 / FR26)
+
+- 表面：`Mem` / `SyncReadMem`（prelude ZST 标记）+ session `declare_mem` / `declare_sync_read_mem`。
+- 互转/降级锚 FIRRTL `mem`；Chisel emit 对 Mem 仍可 E0901（见 FR28 / Epic 33）。
+
+## Elaborate-time Mem init generators (FR73 / Epic 27)
+
+- **API：** `ElaborateSession::declare_mem_with_init_fn` /
+  `declare_sync_read_mem_with_init_fn`（或 `generate_mem_init` + `declare_*_with_init`）。
+- **语义：** 在 `ElaborateSession` 内执行非捕获 `Fn(usize) -> u64`，写入 `MemDecl.init: Option<Vec<u64>>`；freeze 后 **无**闭包节点（NFR36 / AD-18）。
+- **Emit：** Verilog `initial` 块可见初值；FIRRTL 以 `; mem-init …` 注释记录。
+- **非目标（本 epic）：** comb/seq 内联可综合闭包（→ Epic 28）；捕获 `Wire`/`Reg` 诊断（→ Story 27.3）。
+- 设计 crate 仅依赖 `bitloom-prelude`（AD-2）。
 
 ## Comb / seq
 
@@ -52,9 +66,9 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 
 ## Synthesizable subset (cycle-accurate / generate path)
 
-Allowed: hardware types and their ops; `if` / `match`; statically bounded loops that fully unroll; inlined functions; const generics; arrays / structs / enums / Bundle / Vec used as hardware aggregates in-scope.
+Allowed: hardware types and their ops; `if` / `match`; statically bounded loops that fully unroll; inlined functions; const generics; arrays / structs / enums / Bundle / Vec used as hardware aggregates in-scope; **elaborate-time non-capturing generator `Fn`** that dissolves to Mem/ROM init (or similar) before freeze (FR73 / AD-18).
 
-Rejected on this path: heap `Vec`/`Box`/`String`（软件堆，非硬件 `Vec<T,N>`）；unbounded recursion; `dyn Trait`; capturing closures; file/net/threads; default `f32`/`f64`（可综合浮点见 FR36）。
+Rejected on this path: heap `Vec`/`Box`/`String`（软件堆，非硬件 `Vec<T,N>`）；unbounded recursion; `dyn Trait`; **capturing** closures; file/net/threads; default `f32`/`f64`（可综合浮点见 FR36）；Rust 闭包对象进入 `tick` / 后端 IR（NFR36）。
 
 Functional view（手写 `#[functional_model]` 或 CAP-13 生成的 Rust crate）may use rejected constructs. Fields marked `#[functional_state]` never enter HIR.
 

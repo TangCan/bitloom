@@ -89,12 +89,20 @@ fn emit_module(m: &Module) -> String {
                 depth,
                 width,
                 sync_read,
+                init,
                 ..
             } => {
                 let ruw = if *sync_read { "smem" } else { "cmem" };
                 out.push_str(&format!(
                     "    ; CHIRRTL-friendly {ruw} {name} : UInt<{width}>[{depth}]\n"
                 ));
+                if let Some(words) = init {
+                    let preview: Vec<String> = words.iter().map(|w| w.to_string()).collect();
+                    out.push_str(&format!(
+                        "    ; mem-init {name} = [{}]\n",
+                        preview.join(", ")
+                    ));
+                }
                 let rlat = if *sync_read { 1 } else { 0 };
                 out.push_str(&format!(
                     "    mem {name} :\n      data-type => UInt<{width}>\n      depth => {depth}\n      read-latency => {rlat}\n      write-latency => 1\n      readwriter => rw\n      read-under-write => undefined\n"

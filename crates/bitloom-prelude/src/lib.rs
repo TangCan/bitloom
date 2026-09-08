@@ -141,6 +141,23 @@ pub struct SyncReadMem<const DEPTH: u32, const WIDTH: u32>;
 #[derive(Debug, Clone, Copy)]
 pub struct Mem<const DEPTH: u32, const WIDTH: u32>;
 
+/// Elaborate-time LUT/ROM/Mem init generator (FR73 / AD-18).
+///
+/// Runs `f(addr)` for each address and returns plain words for
+/// [`ElaborateSession::declare_mem_with_init`] /
+/// [`ElaborateSession::declare_sync_read_mem_with_init`]. Prefer session
+/// helpers [`ElaborateSession::declare_mem_with_init_fn`] when declaring
+/// and initializing in one step. The closure dissolves before freeze —
+/// FrozenHir stores only `Vec<u64>` (NFR36).
+///
+/// ```ignore
+/// use bitloom_prelude::{generate_mem_init, ElaborateSession, GroundType, Span};
+/// let init = generate_mem_init(16, 8, |i| ((i * i) & 0xff) as u64);
+/// session.declare_mem_with_init("rom", 16, 8, init, Span::default());
+/// // or: session.declare_mem_with_init_fn("rom", 16, 8, |i| ..., Span::default());
+/// ```
+pub use bitloom_builder::{generate_mem_init_words as generate_mem_init, mask_mem_word};
+
 trait AsGround {
     fn ground() -> GroundType;
 }

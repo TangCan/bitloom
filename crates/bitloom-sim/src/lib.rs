@@ -75,10 +75,18 @@ impl Sim {
                         regs.insert(name.clone(), 0);
                     }
                     Stmt::MemDecl {
-                        name, depth, width, ..
+                        name,
+                        depth,
+                        width,
+                        init,
+                        ..
                     } => {
                         let _ = width;
-                        mems.insert(name.clone(), vec![0; *depth as usize]);
+                        let words = match init {
+                            Some(v) => v.clone(),
+                            None => vec![0; *depth as usize],
+                        };
+                        mems.insert(name.clone(), words);
                     }
                     _ => {}
                 }
