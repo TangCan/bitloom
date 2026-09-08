@@ -105,13 +105,14 @@ impl HwCaptureRef {
 /// - dissolved to ordinary HIR **before** freeze — never a Rust closure object in
 ///   `tick` / FIRRTL / Chisel (NFR36 / Cap-R-58)
 ///
-/// Story 28.1 delivers the **constraint surface + check hook** only; comb/seq
-/// inline expansion is Story 28.2 / 28.3. Automatic rustc capture analysis is
-/// out of scope — macros / ATDD / typed surfaces call
+/// Comb inline (Story 28.2 / Cap-R-55): call
+/// [`ElaborateSession::inline_comb_fn`] after Cap-R-60 check; seq inline is
+/// Story 28.3. Automatic rustc capture analysis is out of scope — macros /
+/// ATDD / typed surfaces pass violation tokens to
 /// [`ElaborateSession::check_synthesizable_closure`].
 ///
 /// Empty / simple stand-ins ([`LegalEmptyClosure`], [`LegalSimpleClosure`])
-/// implement this marker with no violations (paves 28.2).
+/// implement this marker with no violations.
 pub trait SynthesizableClosure {
     /// Documented violation tokens for Cap-R-60 checking. Empty = legal.
     fn synthesizable_closure_violations(&self) -> Vec<SynthesizableClosureViolation> {
@@ -125,11 +126,38 @@ pub struct LegalEmptyClosure;
 
 impl SynthesizableClosure for LegalEmptyClosure {}
 
-/// Positive stand-in: simple pure unary transform (FR74; paves comb inline 28.2).
+/// Positive stand-in: simple pure unary transform (FR74 / FR75 comb inline).
 #[derive(Debug, Default, Clone, Copy)]
 pub struct LegalSimpleClosure;
 
 impl SynthesizableClosure for LegalSimpleClosure {}
+
+/// Elaborate-time description of a combinational RHS (FR75 / Cap-R-55).
+///
+/// Produced by [`ElaborateSession::inline_comb_fn`] closures and immediately
+/// lowered to ordinary [`AssignExpr`] via existing `assign_*` APIs. Never
+/// stored as a Rust `Fn` in FrozenHir (NFR36).
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum CombInline {
+    /// Copy from a named net / port / reg.
+    Ref(String),
+    /// Integer literal.
+    Lit(u64),
+    /// Same-width add.
+    Add(String, String),
+    /// Same-width subtract.
+    Sub(String, String),
+    /// Bitwise AND.
+    And(String, String),
+    /// Bitwise OR.
+    Or(String, String),
+    /// Bitwise XOR.
+    Xor(String, String),
+    /// Equality → 0/1 Bool.
+    Eq(String, String),
+    /// 2:1 mux (`sel != 0 ? t : f`).
+    Mux { sel: String, t: String, f: String },
+}
 
 /// Kind of SynthesizableClosure constraint breach (FR74 / Cap-R-48…50).
 ///
@@ -1601,6 +1629,74 @@ impl ElaborateSession {
         self.check_synthesizable_closure(&vs, span);
     }
 
+    /// Inline a synthesizable combinational transform (FR75 / Cap-R-55).
+    ///
+    /// Must be called inside an open [`Self::begin_combinational`] process
+    /// (same rules as `assign_*`). Sequence:
+    /// 1. Cap-R-60 [`Self::check_synthesizable_closure`] on `violations`
+    /// 2. If any violation token was supplied, **do not** expand (finish fails)
+    /// 3. Otherwise invoke `f(args)` once and lower [`CombInline`] through
+    ///    existing Wire/`assign_*` paths — FrozenHir holds only ordinary
+    ///    [`AssignExpr`] (NFR36; no `Fn` objects after freeze)
+    ///
+    /// Incomplete-assign / latch analysis (AD-18) still applies to `dst`.
+    /// Sequential-block inline is Story 28.3.
+    ///
+    /// ```ignore
+    /// session.begin_combinational(span);
+    /// session.inline_comb_fn("y", &["a", "b"], &[], span, |args| {
+    ///     CombInline::Add(args[0].into(), args[1].into())
+    /// });
+    /// session.end_process();
+    /// ```
+    pub fn inline_comb_fn<F>(
+        &mut self,
+        dst: impl Into<String>,
+        args: &[&str],
+        violations: &[SynthesizableClosureViolation],
+        span: Span,
+        f: F,
+    ) where
+        F: FnOnce(&[&str]) -> CombInline,
+    {
+        self.check_synthesizable_closure(violations, span);
+        if !violations.is_empty() {
+            return;
+        }
+        let inline = f(args);
+        self.apply_comb_inline(dst.into(), inline, span);
+    }
+
+    /// Cap-R-55 helper: run marker [`SynthesizableClosure`] check then inline.
+    pub fn inline_comb_fn_marker<C, F>(
+        &mut self,
+        dst: impl Into<String>,
+        args: &[&str],
+        marker: &C,
+        span: Span,
+        f: F,
+    ) where
+        C: SynthesizableClosure,
+        F: FnOnce(&[&str]) -> CombInline,
+    {
+        let vs = marker.synthesizable_closure_violations();
+        self.inline_comb_fn(dst, args, &vs, span, f);
+    }
+
+    fn apply_comb_inline(&mut self, dst: String, inline: CombInline, span: Span) {
+        match inline {
+            CombInline::Ref(src) => self.assign_net(dst, src, span),
+            CombInline::Lit(v) => self.assign_lit(dst, v, span),
+            CombInline::Add(l, r) => self.assign_add(dst, l, r, span),
+            CombInline::Sub(l, r) => self.assign_sub(dst, l, r, span),
+            CombInline::And(l, r) => self.assign_and(dst, l, r, span),
+            CombInline::Or(l, r) => self.assign_or(dst, l, r, span),
+            CombInline::Xor(l, r) => self.assign_xor(dst, l, r, span),
+            CombInline::Eq(l, r) => self.assign_eq(dst, l, r, span),
+            CombInline::Mux { sel, t, f } => self.assign_mux(dst, sel, t, f, span),
+        }
+    }
+
     /// Hierarchical instance (Story 2.2); not flattened at elaborate.
     pub fn add_instance(
         &mut self,
@@ -2424,5 +2520,88 @@ mod tests {
             Span::default(),
         );
         assert!(diags.0.iter().any(|d| d.code == "rhdl::E0143"));
+    }
+
+    #[test]
+    fn inline_comb_fn_expands_to_ordinary_assign() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.add_input("b", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_wire("sum", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.inline_comb_fn("sum", &["data_in", "b"], &[], Span::default(), |args| {
+            CombInline::Add(args[0].into(), args[1].into())
+        });
+        s.inline_comb_fn_marker(
+            "data_out",
+            &["sum"],
+            &LegalSimpleClosure,
+            Span::default(),
+            |args| CombInline::Ref(args[0].into()),
+        );
+        s.end_process();
+        s.end_module();
+        let hir = s.finish().expect("legal inline must finish");
+        let body = &hir.circuit().modules[0].body;
+        let procs: Vec<_> = body
+            .iter()
+            .filter_map(|st| match st {
+                Stmt::Process(p) => Some(p),
+                _ => None,
+            })
+            .collect();
+        assert_eq!(procs.len(), 1);
+        assert_eq!(procs[0].assigns.len(), 2);
+        assert!(matches!(
+            &procs[0].assigns[0].expr,
+            AssignExpr::Add(l, r) if l == "data_in" && r == "b"
+        ));
+        assert!(matches!(
+            &procs[0].assigns[1].expr,
+            AssignExpr::Ref(n) if n == "sum"
+        ));
+        // NFR36: no Fn / closure types in Debug of frozen module body.
+        let dump = format!("{body:?}");
+        assert!(!dump.contains("CombInline"));
+        assert!(!dump.to_lowercase().contains("closure"));
+    }
+
+    #[test]
+    fn inline_comb_fn_violation_skips_expand() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.begin_combinational(Span::default());
+        s.inline_comb_fn(
+            "data_out",
+            &["data_in"],
+            &[SynthesizableClosureViolation::heap("Box in transform")],
+            Span::default(),
+            |_args| CombInline::Ref("data_in".into()),
+        );
+        s.end_process();
+        s.end_module();
+        let err = s.finish().expect_err("heap must fail");
+        assert!(err.0.iter().any(|d| d.code == "rhdl::E0143"));
+    }
+
+    #[test]
+    fn inline_comb_fn_incomplete_branch_still_latch() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.begin_combinational(Span::default());
+        s.begin_then(Span::default());
+        s.inline_comb_fn("data_out", &["data_in"], &[], Span::default(), |args| {
+            CombInline::Ref(args[0].into())
+        });
+        s.begin_else(Span::default());
+        // else does not assign data_out — AD-18 latch
+        s.end_if(Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().unwrap_err();
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0110"),
+            "expected latch diagnostic after inline, got {err}"
+        );
     }
 }

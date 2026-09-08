@@ -1,7 +1,7 @@
 //! Design-facing surface. Designs depend only on this crate.
 
 pub use bitloom_builder::{
-    Elaboratable, ElaborateSession, GeneratedInstance, HwCaptureKind, HwCaptureRef,
+    CombInline, Elaboratable, ElaborateSession, GeneratedInstance, HwCaptureKind, HwCaptureRef,
     LegalEmptyClosure, LegalSimpleClosure, SynthesizableClosure, SynthesizableClosureViolation,
     SynthesizableClosureViolationKind, diagnose_synthesizable_closure_violations,
 };
@@ -186,7 +186,12 @@ pub use bitloom_builder::{generate_mem_init_words as generate_mem_init, mask_mem
 /// present. Stable codes: **`rhdl::E0143`** (heap), **`rhdl::E0144`** (runtime
 /// capture state), **`rhdl::E0145`** (impure). Legal empty/simple stand-ins:
 /// [`LegalEmptyClosure`], [`LegalSimpleClosure`]. Does **not** add closure IR
-/// to FrozenHir / backends (NFR36). Comb/seq inline → Story 28.2 / 28.3.
+/// to FrozenHir / backends (NFR36).
+///
+/// **Comb inline (FR75 / Cap-R-55 / Epic 28.2):**
+/// [`ElaborateSession::inline_comb_fn`] / [`ElaborateSession::inline_comb_fn_marker`]
+/// + [`CombInline`] — Cap-R-60 check then elaborate-time expand into ordinary
+/// `assign_*` / Wire assigns. Seq inline → Story 28.3.
 
 trait AsGround {
     fn ground() -> GroundType;
