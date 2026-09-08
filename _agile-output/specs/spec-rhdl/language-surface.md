@@ -49,6 +49,22 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 - **语义：** 在 `ElaborateSession` 内执行非捕获 `Fn(usize) -> u64`，写入 `MemDecl.init: Option<Vec<u64>>`；freeze 后 **无**闭包节点（NFR36 / AD-18）。
 - **Emit：** Verilog `initial` 块可见初值；FIRRTL 以 `; mem-init …` 注释记录。
 - **捕获：** 见下节 NFR35；`rhdl::E0142`。
+- **ATDD golden（Story 27.4）：** 同一 CRC/LUT 算法闭包生成 vs 手写常量表 → emit / `tick` 等价；抽检 `.v`/FIRRTL **无** closure/callback IR（NFR36）。夹具：`crates/bitloom/tests/fr73_crc_lut_golden.rs`（`cargo test -p bitloom --test fr73_crc_lut_golden`）。
+- **最小用法（Bitloom / `bitloom-prelude`）：**
+
+```ignore
+use bitloom_prelude::{ElaborateSession, GroundType, Span};
+
+let mut s = ElaborateSession::new("CrcRom");
+s.begin_module("CrcRom", Span::default());
+s.add_input("clk", GroundType::Clock, Span::default());
+s.add_input("rst", GroundType::Reset, Span::default());
+// Elaborate-time Fn → plain MemDecl.init words (no closure in emit).
+s.declare_mem_with_init_fn("crc", 16, 8, |i| /* crc8(i) */ i as u64, Span::default());
+s.end_module();
+let frozen = s.finish()?;
+```
+
 - **非目标（本 epic）：** comb/seq 内联可综合闭包（→ Epic 28）。
 - 设计 crate 仅依赖 `bitloom-prelude`（AD-2）。
 
