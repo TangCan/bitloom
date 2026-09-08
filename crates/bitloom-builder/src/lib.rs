@@ -95,6 +95,140 @@ impl HwCaptureRef {
     }
 }
 
+/// Documented constraints for closures that may enter the synthesizable hardware
+/// path (FR74 / Cap-R-48…50 / AD-18).
+///
+/// A legal synthesizable closure is:
+/// - **pure** (no side effects / I/O / threads) — Cap-R-50
+/// - **no heap** (`Box` / software `Vec` / `String` / …) — Cap-R-48
+/// - **no runtime capture state** (non-`const` captures; Wire/Reg still → E0142) — Cap-R-49
+/// - dissolved to ordinary HIR **before** freeze — never a Rust closure object in
+///   `tick` / FIRRTL / Chisel (NFR36 / Cap-R-58)
+///
+/// Story 28.1 delivers the **constraint surface + check hook** only; comb/seq
+/// inline expansion is Story 28.2 / 28.3. Automatic rustc capture analysis is
+/// out of scope — macros / ATDD / typed surfaces call
+/// [`ElaborateSession::check_synthesizable_closure`].
+///
+/// Empty / simple stand-ins ([`LegalEmptyClosure`], [`LegalSimpleClosure`])
+/// implement this marker with no violations (paves 28.2).
+pub trait SynthesizableClosure {
+    /// Documented violation tokens for Cap-R-60 checking. Empty = legal.
+    fn synthesizable_closure_violations(&self) -> Vec<SynthesizableClosureViolation> {
+        Vec::new()
+    }
+}
+
+/// Positive stand-in: empty non-capturing closure (FR74 ATDD).
+#[derive(Debug, Default, Clone, Copy)]
+pub struct LegalEmptyClosure;
+
+impl SynthesizableClosure for LegalEmptyClosure {}
+
+/// Positive stand-in: simple pure unary transform (FR74; paves comb inline 28.2).
+#[derive(Debug, Default, Clone, Copy)]
+pub struct LegalSimpleClosure;
+
+impl SynthesizableClosure for LegalSimpleClosure {}
+
+/// Kind of SynthesizableClosure constraint breach (FR74 / Cap-R-48…50).
+///
+/// Distinct from FR16 [`ElaborateSession::reject_unsynthesizable`] (`rhdl::E0141`)
+/// and hardware-ref capture [`ElaborateSession::reject_hw_capture`] (`rhdl::E0142`).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum SynthesizableClosureViolationKind {
+    /// Heap allocation in closure body / environment (Cap-R-48) → `rhdl::E0143`.
+    Heap,
+    /// Runtime (non-const) capture state (Cap-R-49) → `rhdl::E0144`.
+    RuntimeCaptureState,
+    /// Impure / side-effecting body (Cap-R-50) → `rhdl::E0145`.
+    Impure,
+}
+
+impl SynthesizableClosureViolationKind {
+    pub fn code(self) -> &'static str {
+        match self {
+            Self::Heap => "rhdl::E0143",
+            Self::RuntimeCaptureState => "rhdl::E0144",
+            Self::Impure => "rhdl::E0145",
+        }
+    }
+
+    fn label(self) -> &'static str {
+        match self {
+            Self::Heap => "heap allocation",
+            Self::RuntimeCaptureState => "runtime capture state",
+            Self::Impure => "impure / side-effecting body",
+        }
+    }
+}
+
+/// Documented SynthesizableClosure violation token (Story 28.1 / Cap-R-60).
+///
+/// Pass to [`ElaborateSession::reject_unsynthesizable_closure`] /
+/// [`ElaborateSession::check_synthesizable_closure`]. Empty violation list =
+/// legal empty/simple closure.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct SynthesizableClosureViolation {
+    pub kind: SynthesizableClosureViolationKind,
+    pub detail: String,
+}
+
+impl SynthesizableClosureViolation {
+    pub fn heap(detail: impl Into<String>) -> Self {
+        Self {
+            kind: SynthesizableClosureViolationKind::Heap,
+            detail: detail.into(),
+        }
+    }
+
+    pub fn runtime_capture_state(detail: impl Into<String>) -> Self {
+        Self {
+            kind: SynthesizableClosureViolationKind::RuntimeCaptureState,
+            detail: detail.into(),
+        }
+    }
+
+    pub fn impure(detail: impl Into<String>) -> Self {
+        Self {
+            kind: SynthesizableClosureViolationKind::Impure,
+            detail: detail.into(),
+        }
+    }
+
+    pub fn code(&self) -> &'static str {
+        self.kind.code()
+    }
+}
+
+/// Cap-R-60 check surface: diagnose SynthesizableClosure violations without a
+/// session (CLI / `cargo bitloom check` can call this; session methods wrap it).
+pub fn diagnose_synthesizable_closure_violations(
+    violations: &[SynthesizableClosureViolation],
+    span: Span,
+) -> Diagnostics {
+    let mut diags = Diagnostics::default();
+    for v in violations {
+        diags.push(Diagnostic {
+            span,
+            code: v.code().into(),
+            en: format!(
+                "synthesizable-closure violation: {} ({}); \
+                 SynthesizableClosure requires pure, no-heap, no runtime capture state \
+                 (FR74 / Cap-R-48…50)",
+                v.kind.label(),
+                v.detail
+            ),
+            zh: format!(
+                "可综合闭包违规：{}（{}）；SynthesizableClosure 要求纯函数、无堆、无运行时捕获状态（FR74 / Cap-R-48…50）",
+                v.kind.label(),
+                v.detail
+            ),
+        });
+    }
+    diags
+}
+
 /// Plain instance spec produced by an elaborate-time factory `Fn` (FR73 / Cap-R-53).
 ///
 /// Dissolves to ordinary [`bitloom_hir::Stmt::Instance`] via
@@ -1425,6 +1559,48 @@ impl ElaborateSession {
         }
     }
 
+    /// Reject a documented SynthesizableClosure constraint breach (FR74 / Cap-R-60).
+    ///
+    /// Stable codes: **`rhdl::E0143`** (heap), **`rhdl::E0144`** (runtime capture
+    /// state), **`rhdl::E0145`** (impure). Does **not** emit closure IR into HIR
+    /// (NFR36) — diagnostics only. Distinct from E0141 / E0142.
+    pub fn reject_unsynthesizable_closure(
+        &mut self,
+        violation: &SynthesizableClosureViolation,
+        span: Span,
+    ) {
+        for d in diagnose_synthesizable_closure_violations(std::slice::from_ref(violation), span).0
+        {
+            self.push_err(d);
+        }
+    }
+
+    /// Cap-R-60 check hook: record all documented SynthesizableClosure violations.
+    ///
+    /// Empty `violations` is a no-op (legal empty/simple closure — paves 28.2).
+    /// Reachable from design crates via prelude and from future
+    /// `cargo bitloom check` (or equivalent) wrappers.
+    pub fn check_synthesizable_closure(
+        &mut self,
+        violations: &[SynthesizableClosureViolation],
+        span: Span,
+    ) {
+        for v in violations {
+            self.reject_unsynthesizable_closure(v, span);
+        }
+    }
+
+    /// Cap-R-60 helper: run [`SynthesizableClosure::synthesizable_closure_violations`]
+    /// and record any tokens (empty = pass).
+    pub fn check_synthesizable_closure_marker<C: SynthesizableClosure>(
+        &mut self,
+        closure: &C,
+        span: Span,
+    ) {
+        let vs = closure.synthesizable_closure_violations();
+        self.check_synthesizable_closure(&vs, span);
+    }
+
     /// Hierarchical instance (Story 2.2); not flattened at elaborate.
     pub fn add_instance(
         &mut self,
@@ -2166,5 +2342,87 @@ mod tests {
             err.0.iter().any(|d| d.code == "rhdl::E0141"),
             "FR16 capturing closure must stay E0141, got {err}"
         );
+    }
+
+    #[test]
+    fn synthesizable_closure_heap_e0143() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.reject_unsynthesizable_closure(
+            &SynthesizableClosureViolation::heap("Box<u8> in body"),
+            Span::default(),
+        );
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "data_in", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().unwrap_err();
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0143"),
+            "expected E0143, got {err}"
+        );
+    }
+
+    #[test]
+    fn synthesizable_closure_capture_state_e0144() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.check_synthesizable_closure(
+            &[SynthesizableClosureViolation::runtime_capture_state(
+                "captures local threshold",
+            )],
+            Span::default(),
+        );
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "data_in", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().unwrap_err();
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0144"),
+            "expected E0144, got {err}"
+        );
+    }
+
+    #[test]
+    fn synthesizable_closure_impure_e0145() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.reject_unsynthesizable_closure(
+            &SynthesizableClosureViolation::impure("file I/O"),
+            Span::default(),
+        );
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "data_in", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().unwrap_err();
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0145"),
+            "expected E0145, got {err}"
+        );
+    }
+
+    #[test]
+    fn legal_empty_and_simple_synthesizable_closure_pass() {
+        let mut s = ElaborateSession::new("t");
+        base_ports(&mut s);
+        s.check_synthesizable_closure(&[], Span::default());
+        s.check_synthesizable_closure_marker(&LegalEmptyClosure, Span::default());
+        s.check_synthesizable_closure_marker(&LegalSimpleClosure, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "data_in", Span::default());
+        s.end_process();
+        s.end_module();
+        assert!(s.finish().is_ok(), "legal empty/simple must pass");
+    }
+
+    #[test]
+    fn diagnose_free_fn_cap_r60() {
+        let diags = diagnose_synthesizable_closure_violations(
+            &[SynthesizableClosureViolation::heap("String")],
+            Span::default(),
+        );
+        assert!(diags.0.iter().any(|d| d.code == "rhdl::E0143"));
     }
 }

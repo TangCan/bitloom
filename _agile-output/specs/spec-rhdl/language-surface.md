@@ -87,6 +87,30 @@ let frozen = s.finish()?;
 - **Wire/Reg 映射：** `HwCaptureRef::wire(name)` / `::reg(name)` / `::signal(name)`（prelude 再导出）。
 - **夹具：** `crates/bitloom/tests/fr73_hw_capture_diag.rs`。
 
+## SynthesizableClosure constraints + check hook (FR74 / Cap-R-48…50 / Cap-R-60)
+
+- **约束（文档化 / 标记 trait `SynthesizableClosure`）：**
+  - **纯函数**（无副作用 / I/O / 线程）— Cap-R-50
+  - **无堆**（软件 `Box` / `Vec` / `String` 等；非硬件 `HwVec`）— Cap-R-48
+  - **无运行时捕获状态**（非 `const` 捕获；Wire/Reg 硬件引用仍走 **E0142**）— Cap-R-49
+  - 冻前消解为普通 HIR；**不得**作为 Rust 闭包对象进入 `tick` / FIRRTL / Chisel（NFR36）
+- **检查钩子（Cap-R-60）：** `ElaborateSession::check_synthesizable_closure` /
+  `reject_unsynthesizable_closure` / `check_synthesizable_closure_marker`；自由函数
+  `diagnose_synthesizable_closure_violations`（供 `cargo bitloom check` 或等价包装）。
+  空 violation 列表 / `LegalEmptyClosure` / `LegalSimpleClosure` = 合法（为 28.2 铺路）。
+- **稳定诊断码：**
+
+| 违规 | 码 | API |
+|------|----|-----|
+| 堆分配 | **`rhdl::E0143`** | `SynthesizableClosureViolation::heap` |
+| 运行时捕获状态 | **`rhdl::E0144`** | `::runtime_capture_state` |
+| 不纯 / 副作用 | **`rhdl::E0145`** | `::impure` |
+| 周期精确捕获闭包（FR16） | **`rhdl::E0141`**（分立） | `reject_unsynthesizable` |
+| 硬件引用捕获（FR73） | **`rhdl::E0142`**（分立） | `reject_hw_capture` |
+
+- **非目标（本故事）：** comb/seq 内联展开（→ Story 28.2 / 28.3）；不在 FIRRTL/Chisel 增加闭包 IR（NFR36）。
+- **夹具：** `crates/bitloom/tests/fr74_synthesizable_closure_check.rs`。
+
 ## Comb / seq
 
 - `#[combinational]` and `#[sequential]` are mandatory.
@@ -102,9 +126,9 @@ let frozen = s.finish()?;
 
 ## Synthesizable subset (cycle-accurate / generate path)
 
-Allowed: hardware types and their ops; `if` / `match`; statically bounded loops that fully unroll; inlined functions; const generics; arrays / structs / enums / Bundle / Vec used as hardware aggregates in-scope; **elaborate-time non-capturing generator `Fn`** that dissolves to Mem/ROM init or factory Instance/Connect before freeze (FR73 / AD-18).
+Allowed: hardware types and their ops; `if` / `match`; statically bounded loops that fully unroll; inlined functions; const generics; arrays / structs / enums / Bundle / Vec used as hardware aggregates in-scope; **elaborate-time non-capturing generator `Fn`** that dissolves to Mem/ROM init or factory Instance/Connect before freeze (FR73 / AD-18); **SynthesizableClosure-constrained closures** once checked (FR74) — inline into comb/seq is Story 28.2+ (not yet).
 
-Rejected on this path: heap `Vec`/`Box`/`String`（软件堆，非硬件 `Vec<T,N>`）；unbounded recursion; `dyn Trait`; **capturing** closures; file/net/threads; default `f32`/`f64`（可综合浮点见 FR36）；Rust 闭包对象进入 `tick` / 后端 IR（NFR36）。
+Rejected on this path: heap `Vec`/`Box`/`String`（软件堆，非硬件 `Vec<T,N>`）→ FR74 **`rhdl::E0143`** when diagnosed via SynthesizableClosure check；unbounded recursion; `dyn Trait`; **capturing** closures / runtime capture state → **`rhdl::E0141`** / **`rhdl::E0144`** / **`rhdl::E0142`** as documented；file/net/threads / impure → **`rhdl::E0145`**；default `f32`/`f64`（可综合浮点见 FR36）；Rust 闭包对象进入 `tick` / 后端 IR（NFR36）。
 
 Functional view（手写 `#[functional_model]` 或 CAP-13 生成的 Rust crate）may use rejected constructs. Fields marked `#[functional_state]` never enter HIR.
 

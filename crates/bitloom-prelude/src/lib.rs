@@ -2,6 +2,8 @@
 
 pub use bitloom_builder::{
     Elaboratable, ElaborateSession, GeneratedInstance, HwCaptureKind, HwCaptureRef,
+    LegalEmptyClosure, LegalSimpleClosure, SynthesizableClosure, SynthesizableClosureViolation,
+    SynthesizableClosureViolationKind, diagnose_synthesizable_closure_violations,
 };
 pub use bitloom_hir::{Diagnostics, FrozenHir, GroundType, PortDirection, PortValues, Span};
 
@@ -173,6 +175,18 @@ pub use bitloom_builder::{generate_mem_init_words as generate_mem_init, mask_mem
 /// **HwCaptureRef mapping (NFR35):** Wire → [`HwCaptureRef::wire`], Reg →
 /// [`HwCaptureRef::reg`], port/signal → [`HwCaptureRef::signal`]. See
 /// language-surface “Elaborate-time vs capturing”.
+
+/// SynthesizableClosure constraints + Cap-R-60 check hook (FR74 / Epic 28.1).
+///
+/// Marker trait [`SynthesizableClosure`] documents Cap-R-48…50 (pure, no heap,
+/// no runtime capture state). Call
+/// [`ElaborateSession::check_synthesizable_closure`] /
+/// [`ElaborateSession::reject_unsynthesizable_closure`] (or free
+/// [`diagnose_synthesizable_closure_violations`]) when a documented breach is
+/// present. Stable codes: **`rhdl::E0143`** (heap), **`rhdl::E0144`** (runtime
+/// capture state), **`rhdl::E0145`** (impure). Legal empty/simple stand-ins:
+/// [`LegalEmptyClosure`], [`LegalSimpleClosure`]. Does **not** add closure IR
+/// to FrozenHir / backends (NFR36). Comb/seq inline → Story 28.2 / 28.3.
 
 trait AsGround {
     fn ground() -> GroundType;

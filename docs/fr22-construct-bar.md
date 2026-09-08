@@ -12,9 +12,11 @@
 - SyncReadMem: `declare_sync_read_mem` + `assign_mem_write` / `assign_reg_d_mem_read`
 - Elaborate-time Mem/ROM init (FR73): `declare_mem_with_init_fn` / `generate_mem_init` — not comb/seq inlined closures
 - Elaborate-time module factory (FR73 / Cap-R-53): `generate_instances` / `generate_instances_from` + `GeneratedInstance` — dissolves to Instance/Connect before freeze
+- SynthesizableClosure constraints + Cap-R-60 check hook (FR74): `check_synthesizable_closure` / `reject_unsynthesizable_closure` — E0143 heap / E0144 runtime capture state / E0145 impure; **not** comb/seq inline yet (→ 28.2)
 
 # Explicitly deferred (must not silently work)
 
 - `Bundle`, `Vec<T, N>`
 - Multi-clock / phantom domains (Epic 7 / AD-22)
 - Capturing Wire/Reg into elaborate-time generator/factory → `rhdl::E0142` (`assert_no_hw_capture` / `HwCaptureRef`); FR16 capturing closure stays `rhdl::E0141`
+- Comb/seq inlined synthesizable closures (FR75 / Story 28.2–28.3)
