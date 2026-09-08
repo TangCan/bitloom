@@ -159,7 +159,9 @@ let frozen = s.finish()?;
 - **API：** `dissolve_dataflow_transform(name, violations, || HlsDataflowOp::…)` 在发射 prep 执行一次闭包，展开为 C 运算；`run_hls_dissolved` / CLI `--dataflow add|identity|add1|xor_a5`。
 - **语义：** 调度/降低**前**消解；C / RTL **无** `Fn` / closure 残留（NFR36）；无树内 scheduler（AD-25）。
 - **检查：** 非空 `HlsDataflowClosureViolation`（捕获 / 错路径）→ 可读失败，不 silent 进后端。
+- **消歧：** ≠ **FR47** dual-sim generators（下节）；≠ Phase 7「闭环」。
 - **ATDD：** `cargo test -p bitloom --test fr76_hls_dataflow_closure`（emit-only + bambu-ci-stub RTL）。
+- **透明矩阵（29.4）：** `cargo test -p bitloom --test fr76_fr77_nfr36_transparency_matrix`。
 - **文档：** `docs/fr35-hls.md`；NFR14：`nfr14-risk-epic29-hls-ip-closures.md`。
 
 ## Comb / seq
@@ -189,6 +191,8 @@ Functional view（手写 `#[functional_model]` 或 CAP-13 生成的 Rust crate�
 
 `generate_functional_sim` / `generate_cycle_accurate_sim`（及 CLI `gen-func` / `gen-cycle`）当前 **MVP = 扁平单模块**：只消费顶层一个 module；**不**保证层次实例（`instances`）或 `MemDecl` 的周期精确 emit。扩到层次/mem 须单独故事并先改本段与 `docs/fr47-dual-sim-generation.md` / `deferred-work.md`——禁止静默扩子集。
 
+**消歧（Epic 29）：** FR47「sim generators」= 从 FrozenHir **生成**功能/周期精确 **Rust crate**。**不是** FR73/FR76/FR77 的 elaborate-time / HLS 数据流 **闭包**定制。不得用 FR47 完成话术冒充 Epic 29 关闭。
+
 ## Sequential envelope (default)
 
 Every default module has exactly one `Clock` port and one sync active-high `Reset` port. `tick` is one posedge of that clock. No implicit ports at emit. Multi-clock / async reset / enables：见 PRD FR23–FR25 与脊柱 AD-22/AD-23。
@@ -203,10 +207,11 @@ Every default module has exactly one `Clock` port and one sync active-high `Rese
 - **ATDD 配方：** `cargo test -p bitloom --test fr82_ip_baseline_matrix`（+ sibling `fr82_*_baseline`）；FR77：`cargo test -p bitloom --test fr77_ip_generator_closure`。
 - 索引与已知限制：`docs/ip/README.md`（NFR37：基线 ≠ 全协议 / VIP / Full AXI）。
 
-## IP generator closures (FR77 / Cap-R-63 / Epic 29.3)
+## IP generator closures (FR77 / Cap-R-63 / Cap-R-64 / Epic 29.3–29.4)
 
 - **API：** `Crc8Lut::elaborate()`（文档默认 poly `DEFAULT_POLY = 0x07`）或 `Crc8Lut::elaborate_with_table_fn(violations, f)`（`Fn(usize) -> u64` → SyncReadMem init）。
 - **约束类（D1）：** 可综合腿走 `SynthesizableClosure`；非空 `violations` → 明确诊断，不静默回退默认表。
-- **NFR36：** 闭包在 elaborate 内消解；FrozenHir / Verilog / FIRRTL 无闭包 IR。
+- **NFR36 / Cap-R-64：** 闭包在 elaborate 内消解；FrozenHir / Verilog / FIRRTL / **viz** 无闭包 IR。
+- **透明矩阵（29.4）：** `cargo test -p bitloom --test fr76_fr77_nfr36_transparency_matrix`（+ sibling `fr77_ip_generator_closure`）。
 - **文档：** `docs/ip/README.md`；风险：`nfr14-risk-epic29-hls-ip-closures.md`。
-- **非目标：** 不要求 IP 内 comb/seq 可综合闭包内联（Epic 28）；不把 HLS `HlsFree` 用到可综合 IP 腿。
+- **非目标：** 不要求 IP 内 comb/seq 可综合闭包内联（Epic 28）；不把 HLS `HlsFree` 用到可综合 IP 腿；≠ FR47 sim generators。

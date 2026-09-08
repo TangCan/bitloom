@@ -37,14 +37,17 @@ cargo run -p bitloom -- hls --function add --out-dir target/bitloom-hls
 
 决策表 **D1**：HLS **自由**闭包仅允许在 **AD-25 外挂 HLS** 路径（与功能侧）；可综合 comb/seq 仍走 `SynthesizableClosure`（FR74），不得借 HLS 自由绕过。
 
+**消歧（≠ FR47）：** 本路径的「数据流闭包」是 elaborate/emit-prep 期消解的用户 `Fn` → C。**不是** FR47「sim generators」（`generate_*_sim` / `gen-func` / `gen-cycle` 双视图 crate 生成）。Phase 7 英文偶用 *closure*（闭环）也无关。
+
 | 项 | 值 |
 | --- | --- |
 | API | `bitloom::hls::dissolve_dataflow_transform` → `HlsDataflowOp` → C；`run_hls_dissolved` / CLI `--dataflow` |
 | 约束类检查 | `check_hls_dataflow_closure(HlsFree, violations)`；捕获/错路径 token → 可读失败 |
 | 消解时机 | **调度/降低前**（发射 C 时）；产物无 `Fn` / closure 残留（NFR36） |
-| 非目标 | 树内 scheduler（AD-25 / FR86） |
+| 透明抽检 | Story **29.4**：C / stub RTL 无闭包 IR；矩阵 `fr76_fr77_nfr36_transparency_matrix`（Cap-R-64 / NFR36） |
+| 非目标 | 树内 scheduler（AD-25 / FR86）；把 `HlsFree` 用到可综合 comb/seq/IP |
 | CLI aliases | `add` \| `identity` \| `add1` \| `xor_a5` |
-| ATDD | `cargo test -p bitloom --test fr76_hls_dataflow_closure`（emit-only + bambu-ci-stub） |
+| ATDD | `cargo test -p bitloom --test fr76_hls_dataflow_closure`（emit-only + bambu-ci-stub）；透明矩阵见上 |
 
 最小库用法：
 
@@ -73,6 +76,7 @@ run_hls_dissolved(&dissolved, out_dir, /* emit_only */ true)?;
 | CI stub | [`scripts/fixtures/bambu-ci-stub.sh`](../scripts/fixtures/bambu-ci-stub.sh)（接线 + 可综合 `.v`；**非真实 HLS 质量**） |
 | 真 Bambu | `BITLOOM_HLS_USE_REAL=1` + `BITLOOM_BAMBU_PATH` 或缓存 `${BITLOOM_HLS_CACHE:-~/.cache/bitloom-hls}/bambu-2024.10.AppImage` |
 | FR76 ATDD | `cargo test -p bitloom --test fr76_hls_dataflow_closure` |
+| FR76+FR77 透明矩阵（29.4） | `cargo test -p bitloom --test fr76_fr77_nfr36_transparency_matrix` |
 
 **Locked:** CI / `just hls-smoke` 默认走 stub；stub 绿 ≠ 调度质量。真机入口仅为 `BITLOOM_HLS_USE_REAL=1`。可选夜间真机 job、第二算法烟测夹具见 `_agile-output/implementation-artifacts/deferred-work.md`（未实现）。
 

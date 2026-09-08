@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR76 + FR77 / Epic 29；NFR14、NFR36 |
 | 记录日期 | 2026-09-08 |
-| 状态 | accepted |
+| 状态 | accepted — Epic 29 关闭条件已勾选（Story 29.4） |
 
 ### (a) 上游约束
 
@@ -77,6 +77,17 @@
 
 ---
 
+### Epic 29 关闭条件（Story 29.4 勾选）
+
+- [x] **FR76：** HLS 数据流闭包 dissolve-before-schedule（D1 `HlsFree`；AD-25 外挂；无树内 scheduler）
+- [x] **FR77：** IP 生成器闭包定制 overlay（`Crc8Lut`；可综合腿 `SynthesizableClosure`；叠在 Epic 34 基线之上）
+- [x] **NFR36 / Cap-R-64：** 透明抽检 — viz（IP）+ Verilog/FIRRTL + HLS C/RTL 无闭包 IR（`fr76_fr77_nfr36_transparency_matrix`）
+- [x] **用户文档：** HLS + IP 闭包示例、约束类说明、与 FR47「sim generators」消歧（README / `docs/fr35-hls.md` / `docs/ip/README.md` / language-surface）
+- [x] **禁止事项未触发：** 无树内 scheduler；无 HlsFree 偷渡可综合腿；无 FR47 冒充本 epic；无 silent skip 假成功
+
+---
+
 ## 门禁一句话
 
-**缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 29 故事 29.2–29.4 标 `ready`。**
+**缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 29 故事 29.2–29.4 标 `ready`。**  
+**Epic 29 关闭条件（上节）已于 Story 29.4 勾选。**

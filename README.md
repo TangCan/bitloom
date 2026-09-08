@@ -86,6 +86,7 @@ let _ = s.finish().unwrap();
   警告：**不要**在闭包环境捕获 `Wire`/`Reg` 等硬件句柄；用端口名字符串传给 `inline_*_fn`，不要把信号句柄关进闭包。共存矩阵 ATDD：`cargo test -p bitloom --test fr74_fr75_fr16_coexist_matrix`。
 
 - **IP 生成器闭包定制（FR77）：** `Crc8Lut` 用 elaborate-time `Fn` 定制 CRC 表（默认 poly `0x07`；`elaborate_with_table_fn`）。叠在 Epic 34 无闭包基线 + Epic 27 Mem-init 之上；freeze 后无闭包残留。见 [`docs/ip/README.md`](docs/ip/README.md)。ATDD：`cargo test -p bitloom --test fr77_ip_generator_closure`。
+- **HLS / IP 闭包透明（FR76+FR77 / NFR36）：** 消解后 viz / Verilog / FIRRTL / HLS C·RTL **不**感知闭包 IR（Cap-R-64）。**≠** FR47「sim generators」（双视图 crate 生成）。约束类：外挂 HLS = D1 `HlsFree`；可综合 IP = `SynthesizableClosure`。矩阵 ATDD：`cargo test -p bitloom --test fr76_fr77_nfr36_transparency_matrix`。
 
 ### 贡献者：在 monorepo 里跑示例
 
@@ -185,7 +186,9 @@ cargo run -p bitloom -- firtool ensure   # 下载/校验/缓存并打印二进�
 
 ## HLS（支持功能 · FR35 / FR50 / FR76）
 
-Bitloom **将 HLS 列为支持功能**：算法级 `#[hls]` / `cargo bitloom hls` 经钉死外挂 **PandA Bambu 2024.10** 产出可综合 RTL。Bitloom **不**实现树内调度器（AD-25）。数据流闭包（FR76）在外挂调度前溶解为 C。
+Bitloom **将 HLS 列为支持功能**：算法级 `#[hls]` / `cargo bitloom hls` 经钉死外挂 **PandA Bambu 2024.10** 产出可综合 RTL。Bitloom **不**实现树内调度器（AD-25）。数据流闭包（FR76）在外挂调度前溶解为 C（D1 **HlsFree**；可综合 comb/seq/IP 仍走 **SynthesizableClosure**）。
+
+**消歧：** FR76/FR77 的「生成器/数据流闭包」≠ **FR47**「sim generators」（`gen-func` / `gen-cycle` 双视图 crate）。后者不消解用户 `Fn` 进硬件。
 
 跟练：
 

@@ -35,7 +35,9 @@ use bitloom_prelude::Elaboratable;
 | **骨架** | SyncReadMem depth-256×8；`addr` → 寄存器 `rdata`（Epic 27 `declare_sync_read_mem_with_init_fn`） |
 | **无闭包默认** | `Crc8Lut::elaborate()` / `elaborate_default()` → poly **`0x07`**（CRC-8/SMBUS-style，[`DEFAULT_POLY`](../../crates/bitloom-prelude/src/ip.rs)） |
 | **闭包定制** | `Crc8Lut::elaborate_with_table_fn(violations, \|i\| …)` — elaborate 期消解为普通字表（Cap-R-63）；空 `violations` = 合法 `SynthesizableClosure`（D1）；非空 → 明确诊断（如 `rhdl::E0143`/`E0144`） |
-| **NFR36** | freeze / emit 无闭包 / `Fn` / `\|\|` 残留 |
+| **NFR36 / Cap-R-64** | freeze / emit / **viz** 无闭包 / `Fn` / `\|\|` 残留（Story **29.4** 抽检） |
+| **约束类（D1）** | 可综合腿 = **`SynthesizableClosure`**（FR74）；**不是** HLS `HlsFree` |
+| **消歧** | ≠ **FR47** sim generators（双视图 crate）；≠ FR76 外挂 HLS 数据流闭包 |
 | **非目标** | 不是 comb/seq 内联可综合闭包（Epic 28）；不改 FR82 五类无闭包 API |
 
 ```rust
@@ -107,6 +109,14 @@ cargo test -p bitloom --test fr82_spi_i2c_axi_baseline
 ```text
 cargo test -p bitloom --test fr77_ip_generator_closure
 ```
+
+**FR76+FR77 透明抽检（Story 29.4 / Cap-R-64 / NFR36；亦含于 `just test`）：**
+
+```text
+cargo test -p bitloom --test fr76_fr77_nfr36_transparency_matrix
+```
+
+矩阵覆盖：同一 `Crc8Lut` 闭包消解后 **viz HTML + Verilog + FIRRTL** 无闭包语义；FR76 dissolve C / stub RTL 同行。
 
 ## 例化片段
 
