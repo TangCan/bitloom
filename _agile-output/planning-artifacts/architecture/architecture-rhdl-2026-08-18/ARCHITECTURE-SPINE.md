@@ -171,8 +171,9 @@ flowchart TB
 ### AD-18 — 阶段一语言表面 [ADOPTED]
 
 - **Binds:** prelude, builder, macro, freeze
-- **Prevents:** 推断 latch vs 显式 comb/seq；裸线 vs 方向包装；算术截断 vs FIRRTL 变宽；非法构造进网表
-- **Rule:** `#[combinational]` / `#[sequential]` 强制，禁止推断。组合不完整赋值是错误（无隐式 latch）。组合不得写 `Reg.d`；时序不得驱动组合网。端口类型是 `Input<T>` / `Output<T>`，不是裸 `UInt`。表面算术与连接**严格同位宽**；扩展/截断必须是显式节点。FIRRTL `add` 的 n+1 位只允许由这些显式 pad/trunc 节点产生，禁止 prelude 静默截断而 `.fir` 变宽。周期精确路径拒绝堆（`Vec`/`Box`/`String`）、无界递归、`dyn Trait`、捕获闭包、文件/网络/线程、默认 `f32`/`f64`。`#[functional_state]` 不得进入 freeze/HIR。
+- **Prevents:** 推断 latch vs 显式 comb/seq；裸线 vs 方向包装；算术截断 vs FIRRTL 变宽；非法构造进网表；把**捕获闭包**或未消解的 Rust 闭包对象带进周期精确/`tick` 路径
+- **Rule:** `#[combinational]` / `#[sequential]` 强制，禁止推断。组合不完整赋值是错误（无隐式 latch）。组合不得写 `Reg.d`；时序不得驱动组合网。端口类型是 `Input<T>` / `Output<T>`，不是裸 `UInt`。表面算术与连接**严格同位宽**；扩展/截断必须是显式节点。FIRRTL `add` 的 n+1 位只允许由这些显式 pad/trunc 节点产生，禁止 prelude 静默截断而 `.fir` 变宽。周期精确路径拒绝堆（`Vec`/`Box`/`String`）、无界递归、`dyn Trait`、**捕获闭包**、文件/网络/线程、默认 `f32`/`f64`。**允许** elaborate-time **非捕获** `Fn`（或文档等价 / 生成器闭包）：须经 `ElaborateSession`（AD-7 / AD-13）在生成器进程内展开并写入 HIR，**必须在 `freeze` 前消解完毕**，不得作为 Rust 闭包对象进入 `tick` 或后端；展开遵守 AD-1（禁止 rustc 编译期抽网表）。裁决见同目录 `closure-decision-table-2026-09-08.md`（D1–D3）。`#[functional_state]` 不得进入 freeze/HIR。
+- **Revised:** 2026-09-08 — 区分捕获闭包禁令与 elaborate-time 非捕获 `Fn`（冻前消解；NFR35 / FR72；Story 26.3）。
 
 ### AD-19 — 生成器入口 [ADOPTED]
 

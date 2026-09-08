@@ -79,7 +79,8 @@
 ## 5. 引用
 
 - `epics.md` — FR72、Epic 26–30、Story 26.2
-- `ARCHITECTURE-SPINE.md` — AD-1 / AD-7 / AD-13 / AD-18（待 26.3）/ AD-25 / AD-28
+- `ARCHITECTURE-SPINE.md` — AD-1 / AD-7 / AD-13 / AD-18（**Revised 2026-09-08** / Story 26.3：禁捕获保留；允许 elaborate-time 非捕获 `Fn` 冻前消解）/ AD-25 / AD-28
+
 - NFR14：`_agile-output/implementation-artifacts/nfr14-risk-phase9-closures.md`
 - 调研：`technical-requirements-implementation-gap-generic-2026-09-08/research.md`（Open Q1/Q2/Q4）
 - Cap-R-58（后端不编码闭包）；Cap-R-18（`const fn`）

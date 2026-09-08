@@ -16,7 +16,7 @@
 
 ### (a) 上游约束
 
-- **FR16 / AD-18 冲突面：** 现行 AD-18 与 FR16 **拒绝捕获闭包**进入周期精确路径。Phase 9 仅允许 **elaborate-time 非捕获 `Fn`（或文档等价）且必须在 `freeze` 前消解为 HIR**；在 **26.3 修订 AD-18 落地前**，不得合并任何正向闭包表面 API。
+- **FR16 / AD-18 冲突面：** AD-18（**Revised 2026-09-08** / Story 26.3）与 FR16 **拒绝捕获闭包**进入周期精确路径；**允许** elaborate-time **非捕获** `Fn`（或文档等价）且必须在 `freeze` 前消解为 HIR，不得作为 Rust 闭包对象进入 `tick`。正向闭包表面 API 仍须等 Epic 27+（PRD 增补见 26.4）后方可合并。
 - **术语消歧（强制）：** **生成器闭包**（elaborate-time 初值/工厂）≠ **FR47** 双视图 / sim **generators** ≠ Phase 7 英文 overview「**closure** / 闭环」。文档与故事标题不得把三者写成同一完成定义。
 - **诊断逃逸：** 捕获硬件引用、逃逸到 `tick`/后端的闭包对象、或 FIRRTL/Chisel 侧「闭包节点」均须可诊断失败；不得 silent 成功。
 - **后端合同（Cap-R-58）：** Verilog / FIRRTL / Chisel / tick **不得**编码闭包 IR；闭包只存在于 elaborate 期。
@@ -30,7 +30,7 @@
 
 ### (c) 禁止的静默降级清单
 
-- 不得在 **未修订 AD-18**（Story 26.3）前合并正向闭包 API 或将 Epic 27+ 标 `ready`。
+- 不得在 **AD-18 未修订**（历史门禁；Story **26.3** 已落地）或 **缺 PRD FR73+（Story 26.4）** 时合并正向闭包 API 或将 Epic 27+ 标 `ready`。
 - 不得在 **FIRRTL / Chisel**（或任何后端 IR）中编码闭包节点。
 - 不得把 **FR47** sim generators / 双视图生成器冒充 **生成器闭包**完成，或把 Phase 7「闭环」冒充本主题 done。
 - 不得允许捕获硬件引用的闭包进入 freeze/`tick` 而不失败。
@@ -51,7 +51,7 @@
 ### 引用
 
 - AD-28 — 风险门禁（NFR14）
-- AD-18 — 语言表面 / 捕获闭包（待 26.3 修订）
+- AD-18 — 语言表面 / 捕获闭包禁令 + elaborate-time 非捕获允许（**Revised 2026-09-08** / Story 26.3）
 - AD-25 / FR86 — HLS 仅外挂
 - PRD NFR14；Phase 9 FR72–78 / NFR35–36（`epics.md` inventory → 26.4 写入 PRD）
 - **闭包决策表（Story 26.2 / FR72）：** `architecture/architecture-rhdl-2026-08-18/closure-decision-table-2026-09-08.md`
