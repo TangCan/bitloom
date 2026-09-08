@@ -266,7 +266,9 @@ mod tests {
         add_port_field::<Input<LeafBc>>(&mut s, "a", Span::default());
         add_port_field::<Input<LeafC>>(&mut s, "a_b", Span::default());
         s.end_module();
-        let err = s.finish().expect_err("leaf name collision must fail before emit");
+        let err = s
+            .finish()
+            .expect_err("leaf name collision must fail before emit");
         assert!(
             err.0.iter().any(|d| d.code == "rhdl::E0152"),
             "expected E0152, got {err:?}"
