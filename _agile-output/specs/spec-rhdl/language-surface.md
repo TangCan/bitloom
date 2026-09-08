@@ -51,6 +51,14 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 - **非目标（本 epic）：** comb/seq 内联可综合闭包（→ Epic 28）；捕获 `Wire`/`Reg` 诊断（→ Story 27.3）。
 - 设计 crate 仅依赖 `bitloom-prelude`（AD-2）。
 
+## Elaborate-time module factory (FR73 / Cap-R-53)
+
+- **API：** `ElaborateSession::generate_instances(n, |i, s| { s.add_instance(...); })` 或
+  `generate_instances_from(n, |i| GeneratedInstance::new(...), span)`（prelude 再导出 `GeneratedInstance`）。
+- **语义：** 在 elaborate 内批量实例化子模块并完成类型安全 connect；freeze 后仅普通 `Stmt::Instance` / `PortConnect`（NFR36）。
+- **错误：** 宽度/方向等既有实例校验仍在 `finish` 前失败（FR8 / E0203 等）。
+- **非目标：** comb/seq 内联工厂；捕获硬件引用诊断（→ 27.3）。
+
 ## Comb / seq
 
 - `#[combinational]` and `#[sequential]` are mandatory.
@@ -66,7 +74,7 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 
 ## Synthesizable subset (cycle-accurate / generate path)
 
-Allowed: hardware types and their ops; `if` / `match`; statically bounded loops that fully unroll; inlined functions; const generics; arrays / structs / enums / Bundle / Vec used as hardware aggregates in-scope; **elaborate-time non-capturing generator `Fn`** that dissolves to Mem/ROM init (or similar) before freeze (FR73 / AD-18).
+Allowed: hardware types and their ops; `if` / `match`; statically bounded loops that fully unroll; inlined functions; const generics; arrays / structs / enums / Bundle / Vec used as hardware aggregates in-scope; **elaborate-time non-capturing generator `Fn`** that dissolves to Mem/ROM init or factory Instance/Connect before freeze (FR73 / AD-18).
 
 Rejected on this path: heap `Vec`/`Box`/`String`（软件堆，非硬件 `Vec<T,N>`）；unbounded recursion; `dyn Trait`; **capturing** closures; file/net/threads; default `f32`/`f64`（可综合浮点见 FR36）；Rust 闭包对象进入 `tick` / 后端 IR（NFR36）。
 

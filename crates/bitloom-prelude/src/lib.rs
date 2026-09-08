@@ -1,6 +1,6 @@
 //! Design-facing surface. Designs depend only on this crate.
 
-pub use bitloom_builder::{Elaboratable, ElaborateSession};
+pub use bitloom_builder::{Elaboratable, ElaborateSession, GeneratedInstance};
 pub use bitloom_hir::{Diagnostics, FrozenHir, GroundType, PortDirection, PortValues, Span};
 
 /// First-class IP stubs (FR37 / FR48): FIFO, UART, … via this prelude only.
@@ -157,6 +157,12 @@ pub struct Mem<const DEPTH: u32, const WIDTH: u32>;
 /// // or: session.declare_mem_with_init_fn("rom", 16, 8, |i| ..., Span::default());
 /// ```
 pub use bitloom_builder::{generate_mem_init_words as generate_mem_init, mask_mem_word};
+
+/// Module-factory entry points live on [`ElaborateSession`]:
+/// [`ElaborateSession::generate_instances`] and
+/// [`ElaborateSession::generate_instances_from`] (+ [`GeneratedInstance`])
+/// (FR73 / Cap-R-53). Factory `Fn` runs at elaborate time and dissolves to
+/// ordinary instance/connect HIR (NFR36).
 
 trait AsGround {
     fn ground() -> GroundType;

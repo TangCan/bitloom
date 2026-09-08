@@ -223,7 +223,7 @@ development_status:
 
   epic-27: in-progress
   27-1-lut-常量初值生成器闭包-api: done
-  27-2-模块工厂闭包: backlog
+  27-2-模块工厂闭包: done
   27-3-捕获硬件引用诊断-fr16-回归: backlog
   27-4-atdd-golden-后端无感知抽检: backlog
   epic-27-retrospective: optional

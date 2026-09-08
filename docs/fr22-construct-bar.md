@@ -11,6 +11,7 @@
 - Sync `Reg` + `assign_reg_d_inc` / `assign_reg_d_from` under AD-15 reset
 - SyncReadMem: `declare_sync_read_mem` + `assign_mem_write` / `assign_reg_d_mem_read`
 - Elaborate-time Mem/ROM init (FR73): `declare_mem_with_init_fn` / `generate_mem_init` — not comb/seq inlined closures
+- Elaborate-time module factory (FR73 / Cap-R-53): `generate_instances` / `generate_instances_from` + `GeneratedInstance` — dissolves to Instance/Connect before freeze
 
 # Explicitly deferred (must not silently work)
 

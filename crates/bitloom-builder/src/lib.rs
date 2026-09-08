@@ -34,6 +34,36 @@ where
         .collect()
 }
 
+/// Plain instance spec produced by an elaborate-time factory `Fn` (FR73 / Cap-R-53).
+///
+/// Dissolves to ordinary [`bitloom_hir::Stmt::Instance`] via
+/// [`ElaborateSession::generate_instances_from`] / [`ElaborateSession::add_instance`].
+/// Never stored as a closure in FrozenHir (NFR36).
+#[derive(Debug, Clone)]
+pub struct GeneratedInstance {
+    pub name: String,
+    pub module: String,
+    /// `(child_port, parent_net)` pairs — same as [`ElaborateSession::add_instance`].
+    pub connects: Vec<(String, String)>,
+    pub params: Vec<(String, u32)>,
+}
+
+impl GeneratedInstance {
+    pub fn new(
+        name: impl Into<String>,
+        module: impl Into<String>,
+        connects: Vec<(String, String)>,
+        params: Vec<(String, u32)>,
+    ) -> Self {
+        Self {
+            name: name.into(),
+            module: module.into(),
+            connects,
+            params,
+        }
+    }
+}
+
 #[derive(Debug)]
 enum ProcessState {
     Combinational {
@@ -1328,6 +1358,54 @@ impl ElaborateSession {
         }
     }
 
+    /// Elaborate-time module factory (FR73 / Cap-R-53).
+    ///
+    /// Invokes `f(i, session)` for each `i` in `0..count`. The factory should
+    /// call [`Self::add_instance`] (and optional wire decls) so each iteration
+    /// records a child instance plus type-safe port connects. Only ordinary
+    /// `Stmt::Instance` / `PortConnect` remain after the loop — the closure
+    /// does **not** enter FrozenHir (NFR36). Width/dir checks still run at
+    /// `finish` (FR8 / existing instance validation).
+    ///
+    /// ```ignore
+    /// session.generate_instances(4, |i, s| {
+    ///     s.add_instance(
+    ///         format!("u{i}"),
+    ///         "Lane",
+    ///         vec![
+    ///             ("clk".into(), "clk".into()),
+    ///             ("rst".into(), "rst".into()),
+    ///             ("x".into(), format!("x{i}")),
+    ///             ("y".into(), format!("y{i}")),
+    ///         ],
+    ///         vec![],
+    ///         Span::default(),
+    ///     );
+    /// });
+    /// ```
+    pub fn generate_instances<F>(&mut self, count: usize, mut f: F)
+    where
+        F: FnMut(usize, &mut Self),
+    {
+        for i in 0..count {
+            f(i, self);
+        }
+    }
+
+    /// Pure-return factory variant (FR73 / Cap-R-53): `f(i)` returns an
+    /// [`GeneratedInstance`] that is immediately recorded as HIR via
+    /// [`Self::add_instance`]. Prefer when the factory needs no extra session
+    /// side effects (wires, dangling marks).
+    pub fn generate_instances_from<F>(&mut self, count: usize, f: F, span: Span)
+    where
+        F: Fn(usize) -> GeneratedInstance,
+    {
+        for i in 0..count {
+            let g = f(i);
+            self.add_instance(g.name, g.module, g.connects, g.params, span);
+        }
+    }
+
     pub fn add_dangling_input(
         &mut self,
         instance: &str,
@@ -1633,6 +1711,102 @@ mod tests {
             st,
             bitloom_hir::Stmt::Instance(i) if i.name == "u0" && i.module == "Child"
         )));
+    }
+
+    #[test]
+    fn generate_instances_factory_batches_children() {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("Lane", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("x", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("y", "x", Span::default());
+        s.end_process();
+        s.end_module();
+
+        s.begin_module("Parent", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        for i in 0..3 {
+            s.add_input(
+                format!("x{i}"),
+                GroundType::UInt { width: 8 },
+                Span::default(),
+            );
+            s.add_output(
+                format!("y{i}"),
+                GroundType::UInt { width: 8 },
+                Span::default(),
+            );
+        }
+        s.generate_instances(3, |i, sess| {
+            sess.add_instance(
+                format!("u{i}"),
+                "Lane",
+                vec![
+                    ("clk".into(), "clk".into()),
+                    ("rst".into(), "rst".into()),
+                    ("x".into(), format!("x{i}")),
+                    ("y".into(), format!("y{i}")),
+                ],
+                vec![],
+                Span::default(),
+            );
+        });
+        s.end_module();
+        let frozen = s.finish().unwrap();
+        let parent = frozen
+            .circuit()
+            .modules
+            .iter()
+            .find(|m| m.name == "Parent")
+            .unwrap();
+        let instances: Vec<_> = parent
+            .body
+            .iter()
+            .filter_map(|st| match st {
+                bitloom_hir::Stmt::Instance(i) => Some(i.name.as_str()),
+                _ => None,
+            })
+            .collect();
+        assert_eq!(instances, ["u0", "u1", "u2"]);
+    }
+
+    #[test]
+    fn generate_instances_from_returns_plain_specs() {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("Lane", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("x", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+        s.end_module();
+        s.begin_module("Parent", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("x0", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("y0", GroundType::UInt { width: 8 }, Span::default());
+        s.generate_instances_from(
+            1,
+            |_| {
+                GeneratedInstance::new(
+                    "u0",
+                    "Lane",
+                    vec![
+                        ("clk".into(), "clk".into()),
+                        ("rst".into(), "rst".into()),
+                        ("x".into(), "x0".into()),
+                        ("y".into(), "y0".into()),
+                    ],
+                    vec![],
+                )
+            },
+            Span::default(),
+        );
+        s.end_module();
+        assert!(s.finish().is_ok());
     }
 
     #[test]
