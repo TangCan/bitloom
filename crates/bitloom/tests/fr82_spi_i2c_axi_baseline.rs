@@ -59,10 +59,12 @@ fn fr82_spi_master_elaborate_emit_tick_non_stub() {
     assert_eq!(sim.ports().get("mosi"), Some(0));
 }
 
-fn i2c_drive(sim: &mut Sim, rst: u64, start: u64, tx_data: u64, sda_in: u64) {
+fn i2c_drive(sim: &mut Sim, rst: u64, start: u64, addr: u64, rw: u64, tx_data: u64, sda_in: u64) {
     let mut pv = PortValues::default();
     pv.set("rst", rst);
     pv.set("start", start);
+    pv.set("addr", addr);
+    pv.set("rw", rw);
     pv.set("tx_data", tx_data);
     pv.set("sda_in", sda_in);
     sim.set_inputs(pv);
@@ -83,13 +85,14 @@ fn fr82_i2c_master_elaborate_emit_tick_non_stub() {
     );
 
     let mut sim = Sim::new(hir);
-    i2c_drive(&mut sim, 1, 0, 0, 1);
+    i2c_drive(&mut sim, 1, 0, 0, 0, 0, 1);
     assert_eq!(sim.ports().get("sda_out"), Some(1));
-    i2c_drive(&mut sim, 0, 1, 0x80, 1); // MSB=1
+    i2c_drive(&mut sim, 0, 1, 0x40, 0, 0x80, 0); // addr=0x40 → addr_byte MSB=1
     assert_eq!(sim.ports().get("busy"), Some(1));
     assert_eq!(sim.ports().get("sda_out"), Some(0)); // START
-    i2c_drive(&mut sim, 0, 0, 0, 1);
-    assert_eq!(sim.ports().get("sda_out"), Some(1)); // first data MSB
+    i2c_drive(&mut sim, 0, 0, 0x40, 0, 0x80, 0); // addr half0
+    assert_eq!(sim.ports().get("scl"), Some(0), "near-VIP SCL half0 low");
+    assert_eq!(sim.ports().get("sda_out"), Some(1), "addr MSB of 0x80");
 }
 
 fn axi_drive(

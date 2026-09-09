@@ -137,7 +137,7 @@
 
 - [x] **UART：** U1–U5 + ATDD — Story 43.2
 - [x] **SPI：** S1–S4 + ATDD — Story 43.3
-- [ ] **I2C：** I1–I4 + ATDD — Story 43.4
+- [x] **I2C：** I1–I4 + ATDD — Story 43.4
 - [ ] **AXI：** A1–A4 + ATDD；（若纳入）GPIO G0 — Story 43.5
 - [ ] **文档 / deferred：** 不再把「VIP 级全协议 IP」列为永久非目标；`docs/ip/` 边界诚实
 - [ ] **禁止事项未触发：** 无单类加深冒充全绿（除非显式裁剪）；无无 ATDD 宣称 VIP
