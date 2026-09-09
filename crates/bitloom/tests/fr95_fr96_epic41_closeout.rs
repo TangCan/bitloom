@@ -144,7 +144,7 @@ fn fr95_fr96_deferred_readme_epic41_closed() {
 }
 
 #[test]
-fn fr95_fr96_sprint_epic41_done_epic42_untouched() {
+fn fr95_fr96_sprint_epic41_done() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
         sprint.contains("epic-41: done") || sprint.contains("epic-41:done"),
@@ -154,17 +154,19 @@ fn fr95_fr96_sprint_epic41_done_epic42_untouched() {
         sprint.contains("41-4-fr95-fr96-收口与回归: done"),
         "sprint-status must mark 41-4 done"
     );
+    // Epic 42 may remain backlog after 41.4, or advance after Story 42.1 NFR14.
     assert!(
-        sprint.contains("epic-42: backlog"),
-        "sprint-status must leave epic-42 backlog (do not start Epic 42+)"
+        sprint.contains("epic-42: backlog")
+            || sprint.contains("epic-42: in-progress")
+            || sprint.contains("epic-42: done"),
+        "sprint-status must list epic-42 as backlog, in-progress, or done"
     );
-    assert!(
-        !sprint.contains("epic-42: ready")
-            && !sprint.contains("epic-42: in-progress")
-            && !sprint.contains("42-1-epic-42-nfr14-风险记录: ready-for-dev")
-            && !sprint.contains("42-1-epic-42-nfr14-风险记录: in-progress"),
-        "must not mark Epic 42 stories ready/in-progress during 41.4 closeout"
-    );
+    if !sprint.contains("epic-42: backlog") {
+        assert!(
+            sprint.contains("42-1-epic-42-nfr14-风险记录: done"),
+            "leaving epic-42 backlog requires Story 42.1 NFR14 done (gate)"
+        );
+    }
 }
 
 #[test]
