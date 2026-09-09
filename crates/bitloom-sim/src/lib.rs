@@ -24,6 +24,9 @@ pub use shared_stimulus::SharedStimulusScoreboard;
 mod formal_equiv;
 pub use formal_equiv::FormalEquivProduct;
 
+mod ip_dual;
+pub use ip_dual::{IpDualModelMatrix, SyncFifoFunctional, sync_fifo_dual_stimulus};
+
 mod generate;
 pub use generate::{
     GeneratedFunctional, emit_functional_crate, generate_functional_sim,

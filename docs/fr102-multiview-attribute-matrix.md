@@ -73,7 +73,7 @@ Do **not** claim adapter templates alone close FR102.
 
 ## Non-goals (this story)
 
-- FR103 first-class IP dual-model completeness / Epic 45 closeout → Story 45.4
+- FR103 first-class IP dual-model completeness / Epic 45 closeout → [`fr103-ip-dual-model.md`](fr103-ip-dual-model.md) (**Story 45.4 / Epic 45 closed**)
 - SystemC TLM-2.0 product → FR101 / Epic 46
 - Allowing `functional_state` into HIR / `freeze` (forbidden unless NFR14 revises)
 

@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR100, FR102, FR103 / Epic 45；NFR14、NFR40、NFR43；推翻 FR93#3；对照 FR92 / FR29 / FR30 / FR47 / FR78 / FR98 |
 | 记录日期 | 2026-09-09 |
-| 状态 | accepted — Story 45.1（开门禁；**未**勾选 Epic 45 关闭） |
+| 状态 | closed — Story 45.4（Epic 45 / FR100+FR102+FR103 关闭） |
 
 ### (a) 上游约束
 
@@ -130,10 +130,10 @@
 
 - [x] **45.2 / FR100：** F1–F5 形式等价产品入口 + 随机/对照配套路径 + ATDD — Story 45.2
 - [x] **45.3 / FR102：** 属性宏全矩阵（含非法组合门禁）+ 正/负向 ATDD — Story 45.3
-- [ ] **45.4 / FR103：** 清单内 FIFO/UART/SPI/I2C/AXI 功能+周期双模型联验 — Story 45.4
-- [ ] **文档 / deferred：** 撤销「默认 TLM≡CA / 自动形式等价」永久非目标话术（FR100 口径；TLM 产品面仍见 Epic 46）— Story 45.4
-- [ ] **禁止事项未触发：** 无随机记分板单独关闭 FR100；无仅模板 adapter 关闭 FR102/103 — Story 45.4
-- [ ] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude` — Story 45.4
+- [x] **45.4 / FR103：** 清单内 FIFO/UART/SPI/I2C/AXI 功能+周期双模型联验 — Story 45.4
+- [x] **文档 / deferred：** 撤销「默认 TLM≡CA / 自动形式等价」永久非目标话术（FR100 口径；TLM 产品面仍见 Epic 46）— Story 45.4
+- [x] **禁止事项未触发：** 无随机记分板单独关闭 FR100；无仅模板 adapter 关闭 FR102/103 — Story 45.4
+- [x] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude` — Story 45.4
 
 ---
 
@@ -142,4 +142,4 @@
 **缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 45 故事 45.2–45.4 标 `ready`。**  
 **FR100 完成面 = 形式等价产品（工具/证明义务/夹具见 F1–F5）+ ATDD；不得以随机共测记分板单独关闭。**  
 **FR102/103 完成面 = 属性宏全矩阵 + 清单内一级 IP 双模型；不得仅以模板 adapter 关闭。**  
-**Epic 45 / FR100–103：仍 open — 待 45.2–45.4。**
+**Epic 45 / FR100–103：closed — Story 45.4。**

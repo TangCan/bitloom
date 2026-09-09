@@ -141,3 +141,7 @@ sim.tick();
 
 实现源码：[`crates/bitloom-prelude/src/ip.rs`](../../crates/bitloom-prelude/src/ip.rs)。  
 风险记录：[`nfr14-risk-epic34-ip-baseline.md`](../../_agile-output/implementation-artifacts/nfr14-risk-epic34-ip-baseline.md)。
+
+## FR103 — 功能 + 周期双模型齐全（Epic 45）
+
+五类一级 IP（FIFO/UART/SPI/I2C/AXI）具备可运行功能视图与周期精确模型，并与刺激/等价路径联验。完成面：[`docs/fr103-ip-dual-model.md`](../fr103-ip-dual-model.md)（`IpDualModelMatrix`）。**Epic 45 / FR103 已关闭**（Story 45.4）。SystemC TLM 产品仍见 Epic 46 / FR101。

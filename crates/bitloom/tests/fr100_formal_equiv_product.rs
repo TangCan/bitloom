@@ -194,18 +194,11 @@ fn fr100_sprint_45_2_done_epic_open() {
         sprint.contains("45-2-自动-fl-rtl-形式等价产品路径-fr100: done"),
         "sprint must mark 45-2 done"
     );
-    // 45.3+ may advance after this story; FR100 must not freeze later epic stories at backlog.
+    // Epic 45 may be in-progress or done (after Story 45.4). FR100 alone must not
+    // be the only story; 45-2 remains done either way.
     assert!(
-        !sprint
-            .lines()
-            .any(|l| l.trim() == "epic-45: done" || l.contains("epic-45: done")),
-        "sprint must not mark epic-45 done from FR100 alone"
-    );
-    assert!(
-        sprint
-            .lines()
-            .any(|l| l.trim() == "epic-45: in-progress" || l.contains("epic-45: in-progress")),
-        "sprint must keep epic-45 in-progress (not done)"
+        sprint.contains("epic-45: in-progress") || sprint.contains("epic-45: done"),
+        "sprint must list epic-45 as in-progress or done"
     );
 }
 

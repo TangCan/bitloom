@@ -67,10 +67,10 @@ cargo test -p bitloom --test fr100_formal_equiv_product
 
 Do **not** claim FR92 alone closes FR100.
 
-## Non-goals (this story)
+## Non-goals (historical — closed by later stories)
 
-- FR102 attribute-macro full matrix → [`fr102-multiview-attribute-matrix.md`](fr102-multiview-attribute-matrix.md) (Story 45.3)
-- FR103 first-class IP dual-model completeness / Epic 45 closeout → Story 45.4
+- FR102 attribute-macro full matrix → [`fr102-multiview-attribute-matrix.md`](fr102-multiview-attribute-matrix.md) (**Story 45.3 / closed**)
+- FR103 first-class IP dual-model completeness / Epic 45 closeout → [`fr103-ip-dual-model.md`](fr103-ip-dual-model.md) (**Story 45.4 / Epic 45 closed**)
 - SystemC TLM-2.0 product → FR101 / Epic 46
 - External SymbiYosys as the sole F1 close for this MVP
 

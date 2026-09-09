@@ -221,12 +221,16 @@ fn fr102_sprint_45_3_done_epic_open() {
         sprint.contains("45-3-多视图属性全矩阵-fr102: done"),
         "sprint must mark 45-3 done"
     );
+    // 45-4 / epic-45 may be done after Story 45.4 closeout.
     assert!(
-        sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: backlog"),
-        "sprint must keep 45-4 backlog"
+        sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: backlog")
+            || sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: ready-for-dev")
+            || sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: in-progress")
+            || sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: done"),
+        "sprint must list 45-4"
     );
     assert!(
-        sprint.contains("epic-45: in-progress"),
-        "epic-45 must remain in-progress (no Epic 45 closeout)"
+        sprint.contains("epic-45: in-progress") || sprint.contains("epic-45: done"),
+        "epic-45 must be in-progress or done"
     );
 }
