@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 11:25
+last_updated: 09-09-2026 11:40
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -219,7 +219,7 @@ development_status:
   26-2-闭包决策表: done
   26-3-修订-ad-18: done
   26-4-prd-增补-fr72-78-nfr35-36: done
-  epic-26-retrospective: optional
+  epic-26-retrospective: done
 
   epic-27: done
   27-1-lut-常量初值生成器闭包-api: done
@@ -626,3 +626,16 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-25-retro-2026-08-21.md"
+  - id: "epic-26-retro-item-58-epic-27-及-28-30-标-ready-前-在-sprint-plann"
+    epic: 26
+    action: "Epic 27（及 28–30）标 ready 前，在 sprint-planning 核对 nfr14-risk-phase9-closures.md
+      与 PRD §5.9 Epic 27–30 门禁句仍有效"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-26-retro-2026-09-09.md"
+  - id: "epic-26-retro-item-59-后续-story-提交保持-diff-范围纯净-避免无关示例-格式化进入合同故事"
+    epic: 26
+    action: "后续 story 提交保持 diff 范围纯净，避免无关示例/格式化进入合同故事 commit（例：e30e6ca 中 examples/bundle_vec_skel）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-26-retro-2026-09-09.md"
