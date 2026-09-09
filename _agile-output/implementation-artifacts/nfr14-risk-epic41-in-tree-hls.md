@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR95 / FR96 / Epic 41；NFR14、NFR40、NFR41、NFR43；对照 FR35/FR86（外挂诚实路径） |
 | 记录日期 | 2026-09-09 |
-| 状态 | open — Story 41.1；Epic 41 实现故事 41.2–41.4 仍 backlog 直至本记录后方可 ready |
+| 状态 | closed — Story 41.4；Epic 41（FR95/FR96）已关闭 |
 
 ### (a) 上游约束
 
@@ -101,12 +101,12 @@
 
 ### Epic 41 关闭条件（Story 41.4 勾选）
 
-- [ ] **FR95：** 树内调度 MVP 可验收且不依赖外挂 Bambu — Story 41.2
-- [ ] **FR96：** 调度前闭包内联遵守 AD-18 — Story 41.3
-- [ ] **回归 / 文档：** 外挂诚实路径不回退为「唯一完成定义」；README/deferred 不再把树内 HLS 列为永久非目标 — Story 41.4
-- [ ] **禁止事项未触发：** 无仅文档假交付；无 stub/`BITLOOM_HLS_USE_REAL` 冒充 FR95；无 silent 动态数据流默认
-- [ ] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
-- [ ] **NFR41：** 实现故事引用修订后 AD-25
+- [x] **FR95：** 树内调度 MVP 可验收且不依赖外挂 Bambu — Story 41.2（`f4257b2`）
+- [x] **FR96：** 调度前闭包内联遵守 AD-18 — Story 41.3（`bb8b256`）
+- [x] **回归 / 文档：** 外挂诚实路径不回退为「唯一完成定义」；README/deferred 不再把树内 HLS 列为永久非目标 — Story 41.4
+- [x] **禁止事项未触发：** 无仅文档假交付；无 stub/`BITLOOM_HLS_USE_REAL` 冒充 FR95；无 silent 动态数据流默认
+- [x] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
+- [x] **NFR41：** 实现故事引用修订后 AD-25
 
 ---
 

@@ -156,6 +156,7 @@ run_hls_dissolved(&dissolved, out_dir, /* emit_only */ true)?;
 | 真 Bambu | `BITLOOM_HLS_USE_REAL=1` + `BITLOOM_BAMBU_PATH` 或缓存 AppImage |
 | FR95 ATDD | `cargo test -p bitloom --test fr95_in_tree_hls_schedule` |
 | FR96 ATDD | `cargo test -p bitloom --test fr96_hls_closure_dataflow_transform` |
+| Epic 41 收口 | `cargo test -p bitloom --test fr95_fr96_epic41_closeout` |
 | FR76 ATDD | `cargo test -p bitloom --test fr76_hls_dataflow_closure` |
 | FR76+FR77 透明矩阵（29.4） | `cargo test -p bitloom --test fr76_fr77_nfr36_transparency_matrix` |
 
@@ -163,6 +164,6 @@ run_hls_dissolved(&dissolved, out_dir, /* emit_only */ true)?;
 
 ### FR88 / Epic 37 — Path B（外挂诚实选型）
 
-Epic 37 **显式选择 Path B**：保持 **stub 默认**；**不**落地 CI optional/夜间真机 Bambu job。真机仍为显式环境变量入口。不得把 stub 绿写成「HLS 质量已验」。**树内 FR95** 由 Epic 41 / `fr95_in_tree_hls_schedule` 验收，与 stub 无关；**FR96** 由 `fr96_hls_closure_dataflow_transform` 验收。
+Epic 37 **显式选择 Path B**：保持 **stub 默认**；**不**落地 CI optional/夜间真机 Bambu job。真机仍为显式环境变量入口。不得把 stub 绿写成「HLS 质量已验」。**树内 FR95** 由 Epic 41 / `fr95_in_tree_hls_schedule` 验收，与 stub 无关；**FR96** 由 `fr96_hls_closure_dataflow_transform` 验收。**Epic 41 已关闭**（Story 41.4）：FR95/FR96 收口 ATDD 见 `fr95_fr96_epic41_closeout`；外挂路径仍诚实可选，**不得单独满足 FR95**。
 
 常驻覆盖：`cargo test -p bitloom --test hls_smoke`（缺后端可读失败）亦在主 `test` job 中运行。

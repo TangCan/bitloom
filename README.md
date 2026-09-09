@@ -168,7 +168,7 @@ mod sim {
 | Chisel 可编译生成（FR28 / FR88）+ Mem Path A（FR81） | [`docs/fr28-chisel-compilable.md`](docs/fr28-chisel-compilable.md)（**可编译 ≠ idiomatic**；[钉死运维清单](docs/fr28-chisel-compilable.md#firtool--chisel-钉死运维清单fr88--nfr3--nfr12)）· FR71：`just chisel-fr28-jvm` · 可选 Mem：`just chisel-fr81-mem-jvm` · [维护者合并清单](docs/fr28-chisel-compilable.md#维护者合并前检查清单fr28--emit_chisel) |
 | Chisel / `.fir` 反向导入（FR46） | [`docs/fr46-chisel-import.md`](docs/fr46-chisel-import.md) |
 | `import` CLI + 混合夹具 | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) · [`examples/chisel_mixed`](examples/chisel_mixed) |
-| HLS 产品路径（**支持** · FR35/FR50 · Bambu 2024.10） | [`docs/fr35-hls.md`](docs/fr35-hls.md) · 烟测 [`scripts/hls-smoke.sh`](scripts/hls-smoke.sh) |
+| HLS 产品路径（**支持** · FR35/FR50/FR95/FR96 · 树内 MVP + 外挂 Bambu） | [`docs/fr35-hls.md`](docs/fr35-hls.md) · 烟测 [`scripts/hls-smoke.sh`](scripts/hls-smoke.sh) |
 | Formal/SVA | [`docs/fr39-formal-sva.md`](docs/fr39-formal-sva.md) |
 | Analog/InOut | [`docs/fr27-analog-inout.md`](docs/fr27-analog-inout.md) |
 | rhdl-float | [`docs/fr36-rhdl-float.md`](docs/fr36-rhdl-float.md) |
@@ -197,9 +197,14 @@ cargo run -p bitloom -- firtool ensure   # 下载/校验/缓存并打印二进�
 
 工具链 crate：MIT OR Apache-2.0（见各 crate 的 `Cargo.toml`）。
 
-## HLS（支持功能 · FR35 / FR50 / FR76）
+## HLS（支持功能 · FR35 / FR50 / FR76 / FR95 / FR96）
 
-Bitloom **将 HLS 列为支持功能**：算法级 `#[hls]` / `cargo bitloom hls` 经钉死外挂 **PandA Bambu 2024.10** 产出可综合 RTL。Bitloom **不**实现树内调度器（AD-25）。数据流闭包（FR76）在外挂调度前溶解为 C（D1 **HlsFree**；可综合 comb/seq/IP 仍走 **SynthesizableClosure**）。
+Bitloom **将 HLS 列为支持功能**，含两条诚实路径（修订 **AD-25**；**Epic 41 已关闭**）：
+
+- **树内** `schedule_in_tree` / `cargo bitloom hls --in-tree`（loop-unroll MVP）= **FR95** 完成面；**FR96** = 调度前闭包 dissolve/inline 后进入树内路径（`--in-tree --dataflow`）。
+- **外挂** 钉死 **PandA Bambu 2024.10**（stub / `BITLOOM_HLS_USE_REAL`）= **FR35 / FR76 / FR86** 可选对照；**不得单独满足 FR95**。
+
+数据流闭包：外挂侧 FR76 dissolve→C；树内侧 FR96 dissolve→树内 schedule（D1 **HlsFree**；可综合 comb/seq/IP 仍走 **SynthesizableClosure**）。
 
 **消歧：** FR76/FR77 的「生成器/数据流闭包」≠ **FR47**「sim generators」（`gen-func` / `gen-cycle` 双视图 crate）。后者不消解用户 `Fn` 进硬件。
 
@@ -207,7 +212,11 @@ Bitloom **将 HLS 列为支持功能**：算法级 `#[hls]` / `cargo bitloom hls
 
 ```bash
 cargo run -p bitloom -- hls --help
-# 安装 Bambu 2024.10 后：
+# FR95 树内调度（不调用 Bambu）：
+cargo run -p bitloom -- hls --function map_add1 --in-tree --out-dir target/bitloom-hls-in-tree
+# FR96 闭包→树内：
+cargo run -p bitloom -- hls --function map_xor --dataflow xor_a5 --in-tree --out-dir target/bitloom-hls-fr96
+# 外挂路径（安装 Bambu 2024.10 后）：
 export BITLOOM_BAMBU_PATH=/path/to/bambu
 cargo run -p bitloom -- hls --function add --out-dir target/bitloom-hls
 # FR76 数据流变换（emit-only 检查溶解产物）：
@@ -216,7 +225,7 @@ cargo run -p bitloom -- hls --function map_xor --dataflow xor_a5 --emit-only --o
 just hls-smoke
 ```
 
-**FR88 Path B：** 本阶段保持 stub 默认（stub 绿 ≠ HLS 调度质量）；**无**夜间真机 CI job；真机仅显式 `BITLOOM_HLS_USE_REAL=1`。详见 [`docs/fr35-hls.md`](docs/fr35-hls.md)。
+**FR88 Path B：** 外挂侧保持 stub 默认（stub 绿 ≠ HLS 调度质量，亦 ≠ FR95）；**无**夜间真机 CI job；真机仅显式 `BITLOOM_HLS_USE_REAL=1`。详见 [`docs/fr35-hls.md`](docs/fr35-hls.md)。
 
 ## 可视化（层次 + 时序 · FR38 / FR49）
 
@@ -239,7 +248,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 ## 状态与 deferred（诚实声明）
 
-当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS 产品路径（外挂 Bambu）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
+当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS（树内 FR95/FR96 MVP + 外挂 Bambu 可选）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
 
 **路线图阶段五–七「绿 / 全绿」当前按 Phase 12 字面绿验收（FR94–105 / NFR42）：字面项须由对应 FR 关闭后方可勾选。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9。Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**，**禁止**用合同绿冒充字面全绿。延期与边界 ledger：[`_agile-output/implementation-artifacts/deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
@@ -247,7 +256,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 PRD 才能推翻」。**Correct Course + FR94（2026-09-09 Path B）已批准推翻**该锁定。下列项现为 Phase 12 **交付目标**（**须由对应 FR 关闭后方可宣称完成** / NFR42）；实现 epic 须引用已修订 AD（**NFR41**）。同源：PRD addendum「Phase 12 字面绿」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
-1. **树内 / 自研 HLS 调度器** → **FR95** / **FR96**（Epic 41；修订后 **AD-25**）；外挂 Bambu 等可保留为可选，不得单独满足 FR95
+1. **树内 / 自研 HLS 调度器** → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付；修订后 **AD-25**）；外挂 Bambu 等可保留为可选，不得单独满足 FR95
 2. **FIRRTL→idiomatic Scala / idiomatic Chisel** → **FR97**（Epic 42；修订后 **AD-27**）；机械可编译仍满足 FR28/FR46，不得冒充 FR97
 3. 默认 **TLM≡CA 形式证明** → **FR100**（Epic 45）；**SystemC TLM-2.0 产品** → **FR101**（Epic 46；修订后 **AD-5**）
 4. **VIP 级全协议 IP** → **FR98**（Epic 43）

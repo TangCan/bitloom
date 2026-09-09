@@ -55,7 +55,19 @@ fn readme_and_fr35_list_hls_as_supported() {
     );
     assert!(
         fr35.contains("调度") || fr35.contains("scheduler") || fr35.contains("scheduling"),
-        "fr35 must state no in-tree scheduler limit"
+        "fr35 must discuss scheduling (in-tree FR95 and/or external)"
+    );
+    // After Epic 41: public README must not forbid in-tree scheduler as current AD-25.
+    assert!(
+        !readme.contains("不实现树内调度器"),
+        "README must not claim Bitloom does not implement an in-tree scheduler"
+    );
+    assert!(
+        readme.contains("FR95")
+            && (readme.contains("树内")
+                || readme.contains("--in-tree")
+                || readme.contains("in-tree")),
+        "README must document FR95 in-tree path after Epic 41"
     );
     assert!(
         !fr35.contains("永久 unsupported") && !fr35.contains("仅实验且无路径"),
