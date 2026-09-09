@@ -1,11 +1,15 @@
-//! Product HLS front-end (AD-25 revised / FR35 / FR50 / FR76 / **FR95**).
+//! Product HLS front-end (AD-25 revised / FR35 / FR50 / FR76 / **FR95** / **FR96**).
 //!
 //! - **FR35 / FR76 external path:** emit host C and call pinned Bambu (optional/对照).
 //! - **FR95 in-tree path:** documented-subset scheduling/allocation inside bitloom
 //!   (`schedule_in_tree` / loop-unroll MVP) — does **not** call Bambu; alone satisfies FR95.
+//! - **FR96:** dissolve/inline dataflow-transform closures **before** in-tree schedule
+//!   (`schedule_in_tree_from_transform`) — feeds the FR95 path; capturing closures reject
+//!   readably (AD-18).
 //!
 //! Story 29.2: HLS dataflow closures dissolve to C ops **before** external schedule/lower.
 //! Story 41.2: in-tree loop-unroll schedule IR + optional RTL stub.
+//! Story 41.3: closure transform → FR95 in-tree schedule (FR96).
 
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -237,7 +241,9 @@ pub fn assert_no_closure_residue_in_c(c_source: &str) -> Result<(), HlsError> {
 /// Invoke a dataflow transform closure once, expand to C ops, drop the `Fn` (FR76 / Cap-R-71).
 ///
 /// Minimal API: the closure returns an [`HlsDataflowOp`] descriptor (same pattern as
-/// `CombInline` on the synthesizable path). Scheduling remains external (AD-25).
+/// `CombInline` on the synthesizable path). After dissolve, callers may take the **external**
+/// Bambu path (FR35/FR76) or the **in-tree** FR95 schedule via
+/// [`schedule_in_tree_from_transform`] (FR96).
 pub fn dissolve_dataflow_transform<F>(
     fn_name: &str,
     violations: &[HlsDataflowClosureViolation],
@@ -390,10 +396,19 @@ fn verilog_expr(op: &HlsDataflowOp, input: &str) -> String {
     }
 }
 
-fn build_schedule_ir(fn_name: &str, kind: &InTreeScheduleKind, stages: &[ScheduleStage]) -> String {
+fn build_schedule_ir(
+    fn_name: &str,
+    kind: &InTreeScheduleKind,
+    stages: &[ScheduleStage],
+    fr96: bool,
+) -> String {
     let mut lines = Vec::new();
     lines.push("{".into());
     lines.push(format!("  \"fr95\": true,"));
+    if fr96 {
+        lines.push(format!("  \"fr96\": true,"));
+        lines.push(format!("  \"dataflow_transform\": \"dissolved\","));
+    }
     lines.push(format!("  \"path\": \"in-tree\","));
     lines.push(format!("  \"fn_name\": \"{fn_name}\","));
     match kind {
@@ -501,7 +516,7 @@ pub fn schedule_in_tree(
         })
         .collect();
 
-    let schedule_ir = build_schedule_ir(fn_name, &kind, &stages);
+    let schedule_ir = build_schedule_ir(fn_name, &kind, &stages, false);
     let rtl_stub = build_rtl_stub(fn_name, &kind, &stages);
     Ok(InTreeScheduleArtifact {
         fn_name: fn_name.to_string(),
@@ -510,6 +525,31 @@ pub fn schedule_in_tree(
         schedule_ir,
         rtl_stub,
     })
+}
+
+/// FR96: dissolve/inline a dataflow-transform closure, then enter the FR95 in-tree schedule.
+///
+/// Capturing / illegal surfaces fail in [`dissolve_dataflow_transform`] **before** schedule
+/// (AD-18). The `Fn` never enters schedule IR / RTL (NFR36).
+pub fn schedule_in_tree_from_transform<F>(
+    fn_name: &str,
+    violations: &[HlsDataflowClosureViolation],
+    kind: InTreeScheduleKind,
+    transform: F,
+) -> Result<InTreeScheduleArtifact, HlsError>
+where
+    F: FnOnce() -> HlsDataflowOp,
+{
+    let dissolved = dissolve_dataflow_transform(fn_name, violations, transform)?;
+    let mut artifact = schedule_in_tree(&dissolved.fn_name, dissolved.op, kind)?;
+    // Re-emit IR with FR96 markers while keeping the same stages / FR95 path metadata.
+    artifact.schedule_ir =
+        build_schedule_ir(&artifact.fn_name, &artifact.kind, &artifact.stages, true);
+    artifact.rtl_stub = format!(
+        "// FR96: dataflow transform dissolved before in-tree schedule\n{}",
+        artifact.rtl_stub
+    );
+    Ok(artifact)
 }
 
 /// Write `{fn}.schedule.json` + `{fn}.v` for an in-tree FR95 artifact (never spawns Bambu).
@@ -533,6 +573,21 @@ pub fn run_hls_in_tree(
     out_dir: &Path,
 ) -> Result<(PathBuf, PathBuf), HlsError> {
     let artifact = schedule_in_tree(fn_name, op, kind)?;
+    emit_in_tree_schedule(&artifact, out_dir)
+}
+
+/// FR96 convenience: dissolve transform closure → in-tree schedule + emit (no Bambu).
+pub fn run_hls_in_tree_from_transform<F>(
+    fn_name: &str,
+    violations: &[HlsDataflowClosureViolation],
+    kind: InTreeScheduleKind,
+    transform: F,
+    out_dir: &Path,
+) -> Result<(PathBuf, PathBuf), HlsError>
+where
+    F: FnOnce() -> HlsDataflowOp,
+{
+    let artifact = schedule_in_tree_from_transform(fn_name, violations, kind, transform)?;
     emit_in_tree_schedule(&artifact, out_dir)
 }
 

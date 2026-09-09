@@ -510,13 +510,16 @@ fn main() {
         } => {
             if in_tree {
                 println!(
-                    "path=in-tree fr95=true kind=loop-unroll trip_count={unroll} dataflow={dataflow}"
+                    "path=in-tree fr95=true fr96=true kind=loop-unroll trip_count={unroll} dataflow={dataflow}"
                 );
+                // FR96: CLI `--in-tree --dataflow` dissolves the transform alias as a
+                // closure unit before entering the FR95 schedule path (no Bambu).
                 match hls::parse_dataflow_alias(&dataflow).and_then(|op| {
-                    hls::run_hls_in_tree(
+                    hls::run_hls_in_tree_from_transform(
                         &function,
-                        op,
+                        &[],
                         hls::InTreeScheduleKind::LoopUnroll { trip_count: unroll },
+                        move || op,
                         &out_dir,
                     )
                 }) {
