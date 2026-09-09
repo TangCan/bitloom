@@ -2,7 +2,8 @@
 //!
 //! Locks NFR14 close checkboxes, README/deferred honesty (「不承诺 SystemC TLM」
 //! is not a product completion exclusion; Epic 46 / FR101 closed — LT-only MVP;
-//! AT deferred), docs/fr101, and sprint `epic-46: done`. Epic 47 must remain backlog.
+//! AT deferred), docs/fr101, and sprint `epic-46: done`. Epic 47 may leave backlog
+//! only after Story 47.1 NFR14 is done.
 //!
 //! ```text
 //! cargo test -p bitloom --test fr101_epic46_closeout
@@ -144,7 +145,7 @@ fn fr101_docs_epic46_closed_lt_only() {
 }
 
 #[test]
-fn fr101_sprint_epic46_done_epic47_backlog() {
+fn fr101_sprint_epic46_done_epic47_gated() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
         sprint.contains("epic-46: done") || sprint.contains("epic-46:done"),
@@ -160,8 +161,17 @@ fn fr101_sprint_epic46_done_epic47_backlog() {
             || sprint.contains("46-2-systemc-tlm-2-0-产品面-fr101:done"),
         "sprint must keep 46-2 done"
     );
+    // Epic 47: backlog, or in-progress/done only after 47.1 NFR14 gate
     assert!(
-        sprint.contains("epic-47: backlog"),
-        "closeout must leave epic-47: backlog (do not start Epic 47)"
+        sprint.contains("epic-47: backlog")
+            || sprint.contains("epic-47: in-progress")
+            || sprint.contains("epic-47: done"),
+        "sprint-status must list epic-47 as backlog, in-progress, or done"
     );
+    if !sprint.contains("epic-47: backlog") {
+        assert!(
+            sprint.contains("47-1-epic-47-nfr14-风险记录: done"),
+            "leaving epic-47 backlog requires Story 47.1 NFR14 done (gate)"
+        );
+    }
 }

@@ -95,7 +95,7 @@ fn fr103_deferred_readme_epic45_closed() {
 }
 
 #[test]
-fn fr103_sprint_epic45_done_epic46_gated_epic47_backlog() {
+fn fr103_sprint_epic45_done_epic46_gated_epic47_gated() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
         sprint.contains("epic-45: done") || sprint.contains("epic-45:done"),
@@ -119,10 +119,19 @@ fn fr103_sprint_epic45_done_epic46_gated_epic47_backlog() {
             "leaving epic-46 backlog requires Story 46.1 NFR14 done (gate)"
         );
     }
+    // Epic 47: backlog, or in-progress/done only after 47.1 NFR14 gate
     assert!(
-        sprint.contains("epic-47: backlog"),
-        "closeout must leave epic-47: backlog (do not start Epic 47)"
+        sprint.contains("epic-47: backlog")
+            || sprint.contains("epic-47: in-progress")
+            || sprint.contains("epic-47: done"),
+        "sprint-status must list epic-47 as backlog, in-progress, or done"
     );
+    if !sprint.contains("epic-47: backlog") {
+        assert!(
+            sprint.contains("47-1-epic-47-nfr14-风险记录: done"),
+            "leaving epic-47 backlog requires Story 47.1 NFR14 done (gate)"
+        );
+    }
 }
 
 #[test]

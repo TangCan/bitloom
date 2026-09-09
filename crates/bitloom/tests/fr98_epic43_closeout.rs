@@ -142,10 +142,19 @@ fn fr98_sprint_epic43_done_epic44_gated() {
             "leaving epic-46 backlog requires Story 46.1 NFR14 done (gate)"
         );
     }
+    // Epic 47: backlog, or in-progress/done only after 47.1 NFR14 gate
     assert!(
-        sprint.contains("epic-47: backlog"),
-        "closeout must leave epic-47: backlog (do not start Epic 47)"
+        sprint.contains("epic-47: backlog")
+            || sprint.contains("epic-47: in-progress")
+            || sprint.contains("epic-47: done"),
+        "sprint-status must list epic-47 as backlog, in-progress, or done"
     );
+    if !sprint.contains("epic-47: backlog") {
+        assert!(
+            sprint.contains("47-1-epic-47-nfr14-风险记录: done"),
+            "leaving epic-47 backlog requires Story 47.1 NFR14 done (gate)"
+        );
+    }
 }
 
 #[test]
