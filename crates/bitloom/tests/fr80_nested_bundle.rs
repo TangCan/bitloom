@@ -1,5 +1,5 @@
-//! ATDD / guardrail: FR80 one-level nested Bundle (Story 32.2).
-//! Locks language-surface contract so nested is not closed only by OUT OF SCOPE.
+//! ATDD / guardrail: FR80 one-level nested Bundle + derive (Stories 32.2–32.3).
+//! Locks language-surface contract so nested/derive is not closed only by OUT OF SCOPE.
 
 use std::path::PathBuf;
 
@@ -40,6 +40,17 @@ fn language_surface_documents_one_level_nested_bundle_fr80() {
             && (composite.contains("OUT OF SCOPE") || composite.contains("仍 OUT OF SCOPE")),
         "HwVec<Bundle,_> may remain OUT OF SCOPE"
     );
+    assert!(
+        composite.contains("#[derive(Bundle)]")
+            && (composite.contains("经 `bitloom-prelude`")
+                || composite.contains("bitloom-prelude")
+                || composite.contains("可用")),
+        "language-surface must document #[derive(Bundle)] as available via prelude"
+    );
+    assert!(
+        !composite.contains("不可用（documented defer"),
+        "must not keep derive unavailable defer wording"
+    );
 }
 
 #[test]
@@ -53,5 +64,33 @@ fn prelude_bundle_trait_exposes_nested_bundles() {
     assert!(
         !text.contains("**OUT OF SCOPE (MVP):** nested `Bundle` members and `HwVec<Bundle, _>`"),
         "must not keep blanket nested+HwVec OUT OF SCOPE MVP phrase"
+    );
+    assert!(
+        text.contains("pub use bitloom_macro::Bundle")
+            || (text.contains("Derive (FR80)") && text.contains("#[derive(Bundle)] is available")),
+        "prelude must re-export or document #[derive(Bundle)]"
+    );
+    assert!(
+        !text.contains("**`#[derive(Bundle)]` is not available**"),
+        "must not claim derive unavailable"
+    );
+}
+
+#[test]
+fn design_crate_bundle_skel_depends_only_on_prelude() {
+    let path = repo_root().join("examples/bundle_vec_skel/Cargo.toml");
+    let text = std::fs::read_to_string(&path).unwrap_or_else(|e| panic!("read {path:?}: {e}"));
+    let deps = text
+        .split("[dependencies]")
+        .nth(1)
+        .and_then(|s| s.split('[').next())
+        .expect("[dependencies]");
+    assert!(
+        deps.contains("bitloom-prelude"),
+        "skel must depend on bitloom-prelude"
+    );
+    assert!(
+        !deps.contains("bitloom-macro") && !deps.contains("bitloom ="),
+        "design crate must not depend on bitloom-macro or CLI bitloom (AD-6)"
     );
 }

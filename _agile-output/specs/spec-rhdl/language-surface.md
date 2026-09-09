@@ -15,7 +15,7 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 - **展平：** elaborate 时展平为标量 HIR 端口；叶命名 `{field}_{member}`（Bundle ground）、`{field}_{nested}_{leaf}`（一层嵌套 Bundle，FR80）、`{field}_{i}`（HwVec）。公开 HIR 可不含 Bundle/Vector 节点。
 - **嵌套 Bundle（FR80）：** 至少**一层**文档化嵌套（子 Bundle 作父成员，经 `Bundle::nested_bundles` → 子 `leaves`）可 elaborate → emit `.v` → tick。夹具：`examples/bundle_vec_skel` 嵌套正/负例。更深嵌套（≥2 层）为本 epic **默认非目标**，不得静默声称任意深度。
 - **仍 OUT OF SCOPE：** `HwVec<Bundle,_>` — `HwVec` 元素须 `AsGround`。负向：trybuild `nested_hwvec_bundle`。
-- **`#[derive(Bundle)]`：不可用（documented defer / Story 32.3）** — 无 derive 宏；须手写 `Bundle`（含可选 `nested_bundles`）。负向：trybuild `derive_bundle_unavailable`。
+- **`#[derive(Bundle)]`（FR80）：** 经 `bitloom-prelude` 可用（AD-6；设计 crate 勿直接依赖 `bitloom-macro` / CLI）。支持：具名字段 struct；ground 字段 `Bool`/`Clock`/`Reset`/`UInt<N>`/`SInt<N>`/`Bits<N>`；其它简单 path 类型作为**一层**嵌套 Bundle。限制/拒绝（稳定 `rhdl::E0180`）：enum、tuple/unit struct、结构体泛型、`HwVec<_>`/`Input<_>`/`Output<_>` 字段、非 path 字段。夹具：`examples/bundle_vec_skel` 正例 + trybuild 负例。手写 `Bundle` 仍可用。
 - **叶名碰撞：** `{field}_{member}` / `{field}_{nested}_{leaf}` / `{field}_{i}` 与已有信号冲突 → emit 前失败（`rhdl::E0152`）。
 - 位宽/方向不匹配必须在 emit 前失败（含嵌套叶）；不得 silently 可用却无检查。
 - HIR ground 是否扩展 Bundle/Vector 节点由实现选择；公开表面与 emit 语义须一致（AD-20）。

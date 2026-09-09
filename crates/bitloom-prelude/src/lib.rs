@@ -8,6 +8,8 @@ pub use bitloom_builder::{
     diagnose_synthesizable_closure_violations,
 };
 pub use bitloom_hir::{Diagnostics, FrozenHir, GroundType, PortDirection, PortValues, Span};
+/// `#[derive(Bundle)]` (FR80) — same name as the [`Bundle`] trait (macro vs type namespace).
+pub use bitloom_macro::Bundle;
 
 /// First-class IP stubs (FR37 / FR48): FIFO, UART, … via this prelude only.
 pub mod ip;
@@ -154,8 +156,14 @@ pub struct Output<T>(pub T);
 /// nesting (≥2 levels) is deferred / non-goal for the Epic 32 default contract; do
 /// not claim arbitrary depth.
 ///
+/// **Derive (FR80):** `#[derive(Bundle)]` is available via this prelude (AD-6 —
+/// design crates must not depend on `bitloom-macro` / CLI). Supported: named-field
+/// structs; ground fields `Bool` / `Clock` / `Reset` / `UInt<N>` / `SInt<N>` /
+/// `Bits<N>`; other simple path types as one-level nested Bundles. Rejected with
+/// stable `rhdl::E0180` diagnostics: enums, tuple/unit structs, generics on the
+/// struct, `HwVec<_>` / `Input<_>` / `Output<_>` fields, and non-path field types.
+///
 /// **Still OUT OF SCOPE:** `HwVec<Bundle, _>` — `HwVec` elements must be ground.
-/// **`#[derive(Bundle)]` is not available** — hand-write this trait (Story 32.3).
 pub trait Bundle {
     /// Ground leaf members at this Bundle level `(member_name, GroundType)`.
     fn leaves() -> &'static [(&'static str, GroundType)];

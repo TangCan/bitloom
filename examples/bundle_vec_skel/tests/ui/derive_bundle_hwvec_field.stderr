@@ -1,0 +1,5 @@
+error: rhdl::E0180: #[derive(Bundle)] does not support HwVec fields; HwVec<Bundle,_> remains OUT OF SCOPE
+ --> tests/ui/derive_bundle_hwvec_field.rs:6:12
+  |
+6 |     lanes: HwVec<UInt<8>, 4>,
+  |            ^^^^^^^^^^^^^^^^^

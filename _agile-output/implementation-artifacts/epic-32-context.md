@@ -20,7 +20,7 @@
 - nested 不得仅以 OUT OF SCOPE 交差；不得仅删注释而无实现。
 - 本 epic 默认验收以一层为主；更深（≥2）须文档钉死或书面非目标。
 - 设计 crate 只依赖 `bitloom-prelude`。
-- derive（或文档等价）与完整 ATDD/限制表在后续故事。
+- derive：Story 32.3 经 `bitloom-prelude` 提供 `#[derive(Bundle)]`；完整嵌套 ATDD/限制表收口在 32.4。
 
 ## Technical Decisions
 
