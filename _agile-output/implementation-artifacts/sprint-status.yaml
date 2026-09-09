@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 11:43
+last_updated: 09-09-2026 11:50
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -233,7 +233,7 @@ development_status:
   28-2-组合逻辑内联可综合闭包: done
   28-3-时序逻辑内联-所有权: done
   28-4-诊断矩阵-fr16-共存-atdd: done
-  epic-28-retrospective: optional
+  epic-28-retrospective: done
 
   epic-29: done
   29-1-epic-29-nfr14-风险记录: done
@@ -659,3 +659,24 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-27-retro-2026-09-09.md"
+  - id: "epic-28-retro-item-63-epic-29-标-ready-前-确认-story-29-1-nfr14-风险"
+    epic: 28
+    action: "Epic 29 标 ready 前：确认 Story 29.1 NFR14 风险记录完成，且 Epic 26 决策表 D1（HLS 自由仅外挂；可综合腿
+      SynthesizableClosure）仍有效（epics.md Epic 29 Gate）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-28-retro-2026-09-09.md"
+  - id: "epic-28-retro-item-64-当-macros-language-surface-获得-typed-inlin"
+    epic: 28
+    action: "当 macros / language surface 获得 typed inline 时，跟进自动 rustc 闭包体与借用分析（增强/替代
+      Cap-R-60/70 token 路径），并保持 E0141–E0146 分立（NFR35）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-28-retro-2026-09-09.md"
+  - id: "epic-28-retro-item-65-兑现-epic-27-retro-item-62-评估将-bitloom-bui"
+    epic: 28
+    action: "兑现 epic-27-retro-item-62：评估将 bitloom-builder 按域拆分（SynthesizableClosure
+      / comb·seq inline / hw_capture），本 epic 已再 +~838 行至 ~3008"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-28-retro-2026-09-09.md"
