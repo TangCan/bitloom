@@ -88,7 +88,7 @@
 
 ### Epic 36 关闭条件（Story 36.3 勾选）
 
-- [ ] **FR87：** `docs/requirements/19. 实施路线图.md` P5–P7「绿」已改为合同条款（外挂 HLS + 薄 IP + VCD/层次；精选 IP 深度 + 文档站 + 宿主 LSP；同刺激多视图 + adapter 模板；禁字面未交付勾选）
+- [x] **FR87：** `docs/requirements/19. 实施路线图.md` P5–P7「绿」已改为合同条款（外挂 HLS + 薄 IP + VCD/层次；精选 IP 深度 + 文档站 + 宿主 LSP；同刺激多视图 + adapter 模板；禁字面未交付勾选）— Story 36.2
 - [ ] **FR93：** README 与/或 `deferred-work.md` + addendum 指针锁定永久非目标清单；须新 PRD 才能推翻
 - [ ] **NFR38：** 公开/内部「全绿」表述引用合同条款；无字面七阶段假完成话术
 - [ ] **禁止事项未触发：** 无未改文档宣称字面全绿；无永久非目标标 done；无回滚 FR46–FR86；无提前标 36.2–36.3 ready（对本记录而言）

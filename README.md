@@ -237,11 +237,14 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS 产品路径（外挂 Bambu）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
 
+**路线图阶段五–七「绿 / 全绿」按合同绿验收（FR87 / NFR38），不是字面愿景勾选。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9；禁止用未交付项宣称七阶段字面全绿。延期与边界 ledger：[`_agile-output/implementation-artifacts/deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+
 **明确 deferred / 未承诺为产品完整面：**
 
-- 完整 LSP hover/goto（FR38 部分；层次/时序 HTML 入口已交付）
+- 完整 LSP hover/goto（FR38 部分；层次/时序 HTML 入口已交付；宿主路径以 rust-analyzer 为主）
 - 部分 CLI 动词（`check` / `build-sim`）
 - 自研 HLS 调度器（永不；仅外挂 Bambu——HLS **本身已支持**）
 - crates.io 名 `rhdl` / `rhdl-bits`（禁止）
+- 自动等价证明 / SystemC TLM-2.0 产品（非 P7 合同绿条件；见 doc-19）
 
 详见 [`docs/semver-0x-policy.md`](docs/semver-0x-policy.md) 与 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。

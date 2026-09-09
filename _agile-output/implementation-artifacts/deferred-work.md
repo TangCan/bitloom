@@ -1,5 +1,12 @@
 # Deferred work
 
+## Contract-green pointer (FR87 / NFR38)
+
+阶段五–七「绿 / 产品做完」验收以 **合同绿** 为准，定义见
+[`docs/requirements/19. 实施路线图.md`](../../docs/requirements/19.%20实施路线图.md) §19.7–19.9
+与 README「状态与 deferred」。**禁止**用字面未交付项勾选全绿。  
+永久非目标清单锁定（FR93）→ Story 36.3；本段仅为交叉链，不替代 FR93 正文。
+
 - source_spec: `_agile-output/implementation-artifacts/17-4-五级流水-转发-分支-flush.md`
   summary: LW/SW 在 EpisodeIIPipe 已接线但无 tick 黄金；load_q 时序与 load-use stall 留给 17.5
   evidence: 17.4 AC 明确不要求 load-use；PIPE.md 标明 LW 依赖未定义直至 17.5
