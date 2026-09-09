@@ -109,7 +109,7 @@
 ### Epic 39 关闭条件（Story 39.4 勾选）
 
 - [ ] **FR90：** 宿主 rust-analyzer（或等价）工作流文档 + 至少一夹具工程说明可复现 — Story 39.2
-- [ ] **FR91：** 分支 **B** 合同化 defer（README / `docs/fr38-viz-lsp.md` 或等价）；无半成品 LSP 二进制冒充完成 — Story 39.3
+- [x] **FR91：** 分支 **B** 合同化 defer（README / `docs/fr38-viz-lsp.md` 或等价）；无半成品 LSP 二进制冒充完成 — Story 39.3
 - [ ] **FR92：** 同刺激夹具 + adapter 模板；文档写明不承诺自动 FL≡RTL / SystemC TLM-2.0 — Story 39.4
 - [ ] **HTML ≠ LSP：** 层次/时序 HTML 不计入 LSP 完成
 - [ ] **禁止事项未触发：** 无 TLM-2.0 / 形式等价宣称；无 HTML 冒充 LSP；无未文档化半成品 LSP

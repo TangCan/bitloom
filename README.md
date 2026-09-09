@@ -254,7 +254,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **明确 deferred / 未承诺为产品完整面（可延期，非上列永久非目标）：**
 
-- 完整 / 自研 Bitloom LSP hover/goto（FR91 Path B defer；层次/时序 HTML 入口已交付且 **≠ LSP**；**宿主 IDE 必做路径（FR90）已文档化：** [`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md)）
+- 完整 / 自研 Bitloom LSP hover/goto（**FR91 Path B 显式 defer** — Story 39.3 合同化；**不得声称** Bitloom LSP / language-server **已交付**；无半成品 LSP 二进制；层次/时序 HTML 入口已交付且 **≠ LSP**；**宿主 IDE 必做路径（FR90）已文档化：** [`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md)；细节 [`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md)）
 - 部分 CLI 动词（`check` / `build-sim`）
 - crates.io 名 `rhdl` / `rhdl-bits`（禁止）
 - 自动等价证明 / SystemC TLM-2.0 产品（非 P7 合同绿条件；见 doc-19；与 FR93「默认 TLM≡CA 形式证明」永久非目标一致）

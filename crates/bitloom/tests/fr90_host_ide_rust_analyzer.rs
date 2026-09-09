@@ -184,13 +184,7 @@ fn fr90_scope_guards_no_lsp_binary_and_epic39_siblings_backlog() {
         );
     }
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
-    assert!(
-        sprint.contains("39-3-浅层-bitloom-lsp-或显式-defer-fr91: backlog")
-            || sprint
-                .lines()
-                .any(|l| l.contains("39-3-") && l.contains("backlog")),
-        "Story 39.3 must remain backlog (FR91 not started)"
-    );
+    // Story 39.3 may be done (FR91 Path B); FR92 / 39.4 must stay backlog until its story
     assert!(
         sprint.contains("39-4-多视图同刺激与-adapter-模板-fr92: backlog")
             || sprint
@@ -199,13 +193,11 @@ fn fr90_scope_guards_no_lsp_binary_and_epic39_siblings_backlog() {
         "Story 39.4 must remain backlog (FR92 not started)"
     );
     let nfr14 = read("_agile-output/implementation-artifacts/nfr14-risk-epic39-ide-multiview.md");
-    // Epic 39 close checkboxes for FR90 may remain unticked until 39.4; must not all be closed here
+    // Epic 39 close checklist: FR92 (and full epic close) remain for Story 39.4
     assert!(
-        (nfr14.contains("- [ ]") && nfr14.contains("FR91") && nfr14.contains("FR92"))
-            && (nfr14.contains("- [ ] **FR91：**")
-                || nfr14.contains("- [ ] **FR91:**")
-                || nfr14.contains("- [ ] **FR92：**")
-                || nfr14.contains("- [ ] **FR92:**")),
-        "Epic 39 NFR14 close checklist must still have unticked FR91/FR92 (not closed by 39.2)"
+        nfr14.contains("- [ ] **FR92：**")
+            || nfr14.contains("- [ ] **FR92:**")
+            || (nfr14.contains("[ ]") && nfr14.contains("FR92")),
+        "Epic 39 NFR14 close checklist must still have unticked FR92 (not closed by FR90/FR91 alone)"
     );
 }

@@ -2,7 +2,7 @@
 
 **Product:** Bitloom（`cargo bitloom`）。与 [samitbasu/rhdl](https://github.com/samitbasu/rhdl) 无关。
 
-**合同：** Wave D **必做**宿主路径——用 **rust-analyzer**（或等价宿主 LSP）为 Bitloom **设计 crate** 提供 Rust 语言智能（补全、跳转、诊断）。**不**交付硬件语义 / netlist LSP，也**不**交付 Bitloom 自研 language-server（FR91 Path B → Story 39.3）。
+**合同：** Wave D **必做**宿主路径——用 **rust-analyzer**（或等价宿主 LSP）为 Bitloom **设计 crate** 提供 Rust 语言智能（补全、跳转、诊断）。**不**交付硬件语义 / netlist LSP，也**不**交付 Bitloom 自研 language-server（**FR91 Path B** 已由 Story 39.3 合同化 defer；见 [`fr38-viz-lsp.md`](fr38-viz-lsp.md)）。
 
 ## 前置
 
@@ -47,7 +47,7 @@ cargo bitloom build --package counter_ports
 | --- | --- | --- |
 | Rust 补全 / 跳转 / rustc 诊断 | ✅ rust-analyzer 宿主路径 | — |
 | 硬件语义 / netlist 符号与 elaborate 语义 LSP | ❌ | FR93 永久非目标；非 FR90 |
-| Bitloom 自研 language-server 二进制 | ❌ | FR91 **Path B** 显式 defer（Story 39.3） |
+| Bitloom 自研 language-server 二进制 | ❌ | FR91 **Path B** 显式 defer（Story 39.3 已合同化） |
 | 层次 / 时序 HTML | ❌ 不计入 LSP | 见 [`fr38-viz-lsp.md`](fr38-viz-lsp.md) / [`fr38-wave.md`](fr38-wave.md) |
 
 **不得**把本页、层次 HTML、或宿主 rust-analyzer 写成自研硬件语义 language-server 已完成。
