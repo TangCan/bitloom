@@ -9,7 +9,12 @@ extern "C" {
 
 typedef struct Handle Handle;
 
+/* Legacy Counter DUT (FR33). Equivalent to rhdl_sim_new_dut("Counter"). */
 Handle *rhdl_sim_new(void);
+/* Documented DUT select (FR83): "Counter" | "Adder". Null + rhdl_last_error on failure. */
+Handle *rhdl_sim_new_dut(const char *dut_name);
+/* Thread-local last error; null if none. Valid until next rhdl_* that sets/clears it. */
+const char *rhdl_last_error(void);
 void rhdl_sim_free(Handle *h);
 void rhdl_sim_set(Handle *h, const char *name, uint64_t val);
 void rhdl_sim_tick(Handle *h);
