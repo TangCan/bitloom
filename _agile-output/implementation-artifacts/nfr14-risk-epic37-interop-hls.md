@@ -4,7 +4,7 @@
 > **模板：** `nfr14-risk-record-template.md`（Story 19.1）。  
 > **体例对照：** `nfr14-risk-epic36-contract-green.md`；`nfr14-risk-epic33-chisel-mem.md`。  
 > **前置：** Epic 36 合同绿文本已合入（软依赖）；Correct Course `sprint-change-proposal-2026-09-09.md` approved。  
-> **deferred：** `deferred-work.md` — CI 默认 Bambu stub；可选夜间真机 Bambu（失败不 ignore）。  
+> **deferred：** `deferred-work.md` — CI 默认 Bambu stub；Epic 37 / FR88 **本阶段选 Path B**（关闭「可选夜间」；真机仍显式入口）。  
 > **门禁：** 无本有效记录（或缺字段 a–d）⇒ **不得**将 Epic 37 后续故事 **37.2–37.3** 标为 `ready`，亦不得开工实现。
 
 ---
@@ -15,7 +15,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR88 / Epic 37；NFR14、NFR12、NFR39 |
 | 记录日期 | 2026-09-09 |
-| 状态 | open — Story 37.1 门禁；关闭条件由 37.3 勾选 |
+| 状态 | closed — Story 37.3 Path B；Epic 37 关闭条件已勾选 |
 
 ### (a) 上游约束
 
@@ -23,7 +23,7 @@
 - **NFR12 / AD-9 钉死对（当前）：** Chisel **7.14.0** ↔ firtool **1.155.0**。升钉须等上游正式配对并更新 ARCHITECTURE-SPINE Stack / AD-9 / addendum 后再改；覆盖入口文档化（如 `RHDL_FIRTOOL_PATH` 或等价），禁止默认裸 `PATH` firtool 冒充钉死。
 - **漂移风险：** 上游已有更新 firtool 标签时，若未改合同就「顺手升版」交差，会破坏 NFR12 配对、Chisel 夹具与缓存哈希；Epic 37 须把运维清单与诚实声明钉在文档，而不是静默 bump。
 - **AD-27 / FR28：** `emit_chisel` / 往返验收 = **可编译 + 端口/层次谓词**；机械风格可接受。**误读风险：** 对外或文档把机械生成 Scala 写成「可维护 / idiomatic 手写风格」——与 FR93（FIRRTL→idiomatic Scala 永久非目标）及 NFR39 冲突。
-- **AD-25 / FR86：** HLS 仅外挂（Bambu 或等价）；树内/自研调度仍为非目标。`deferred-work.md`：CI 默认 `bambu-ci-stub.sh` 验证接线与非零覆盖，**非**真实 HLS 调度质量；可选夜间真机 job 仍为 deferred，本 epic 在 37.3 二选一（A 真机夜间 / B 显式保持 stub）。
+- **AD-25 / FR86：** HLS 仅外挂（Bambu 或等价）；树内/自研调度仍为非目标。`deferred-work.md`：CI 默认 `bambu-ci-stub.sh` 验证接线与非零覆盖，**非**真实 HLS 调度质量；Story **37.3 选 Path B**（显式保持 stub 默认；不落地夜间真机 job；真机 = `BITLOOM_HLS_USE_REAL=1`）。
 - **设计依赖边界：** 设计 crate 只依赖 **`bitloom-prelude`**；公开品牌 **Bitloom**（crates.io / CLI：`bitloom`）。
 - **NFR39：** 禁止静默扩大子集或用话术把 stub/机械路径冒充更深完成度。
 
@@ -87,15 +87,15 @@
 
 ### Epic 37 关闭条件（Story 37.3 勾选）
 
-- [ ] **FR88（firtool/Chisel）：** 用户/维护者文档写明钉死版本对与缓存/覆盖入口；公开「可编译 ≠ idiomatic」— Story 37.2
-- [ ] **FR88（HLS）：** 落地 A（夜间真机 Bambu，失败不 ignore）**或** B（显式保持 stub 默认 + deferred 收口）— Story 37.3
-- [ ] **NFR12 / NFR39：** 无私自升钉死对；无机械冒充 idiomatic；无 stub/continue-on-error 假绿
-- [ ] **禁止事项未触发：** 无私自升 firtool 交差；无 stub CI 写成 HLS 质量已验；无 `continue-on-error` 掩盖真机失败；无提前标 37.2–37.3 ready（对本记录而言）
-- [ ] **品牌：** 仍为 Bitloom / `bitloom-*`
+- [x] **FR88（firtool/Chisel）：** 用户/维护者文档写明钉死版本对与缓存/覆盖入口；公开「可编译 ≠ idiomatic」— Story 37.2
+- [x] **FR88（HLS）：** 落地 A（夜间真机 Bambu，失败不 ignore）**或** B（显式保持 stub 默认 + deferred 收口）— Story 37.3 **选 Path B**
+- [x] **NFR12 / NFR39：** 无私自升钉死对；无机械冒充 idiomatic；无 stub/continue-on-error 假绿
+- [x] **禁止事项未触发：** 无私自升 firtool 交差；无 stub CI 写成 HLS 质量已验；无 `continue-on-error` 掩盖真机失败；无提前标 37.2–37.3 ready（对本记录而言）
+- [x] **品牌：** 仍为 Bitloom / `bitloom-*`
 
 ---
 
 ## 门禁一句话
 
 **缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 37 故事 37.2–37.3 标 `ready`。**  
-**Epic 37 关闭条件（上节）须由 Story 37.3 勾选。**
+**Epic 37 关闭条件（上节）已由 Story 37.3（Path B）勾选。**

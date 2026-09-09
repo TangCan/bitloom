@@ -291,10 +291,10 @@ development_status:
   36-3-永久非目标锁定-fr93: done
   epic-36-retrospective: optional
 
-  epic-37: in-progress
+  epic-37: done
   37-1-epic-37-nfr14-风险记录: done
   37-2-firtool-chisel-钉死运维与机械-chisel-诚实声明-fr88: done
-  37-3-可选夜间真机-bambu-或显式保持-stub-fr88: backlog
+  37-3-可选夜间真机-bambu-或显式保持-stub-fr88: done
   epic-37-retrospective: optional
 
   epic-38: backlog

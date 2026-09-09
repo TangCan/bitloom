@@ -78,6 +78,10 @@ run_hls_dissolved(&dissolved, out_dir, /* emit_only */ true)?;
 | FR76 ATDD | `cargo test -p bitloom --test fr76_hls_dataflow_closure` |
 | FR76+FR77 透明矩阵（29.4） | `cargo test -p bitloom --test fr76_fr77_nfr36_transparency_matrix` |
 
-**Locked:** CI / `just hls-smoke` 默认走 stub；stub 绿 ≠ 调度质量。真机入口仅为 `BITLOOM_HLS_USE_REAL=1`。可选夜间真机 job、第二算法烟测夹具见 `_agile-output/implementation-artifacts/deferred-work.md`（未实现）。
+**Locked:** CI / `just hls-smoke` 默认走 stub；stub 绿 ≠ 调度质量。真机入口仅为 `BITLOOM_HLS_USE_REAL=1`。
+
+### FR88 / Epic 37 — Path B（本阶段选型）
+
+Epic 37 **显式选择 Path B**：保持 **stub 默认**；**不**落地 CI optional/夜间真机 Bambu job。真机仍为显式环境变量入口（上表 `BITLOOM_HLS_USE_REAL=1` + `BITLOOM_BAMBU_PATH` / 缓存 AppImage）。不得把 stub 绿写成「HLS 质量已验」；若将来另开夜间真机 job，失败**不得** `continue-on-error` / ignore。树内 HLS 调度仍为非目标（AD-25 / FR86 / FR93）。deferred 收口见 `_agile-output/implementation-artifacts/deferred-work.md`（「本阶段选 B」）。第二算法烟测夹具仍可另开可选故事。
 
 常驻覆盖：`cargo test -p bitloom --test hls_smoke`（缺后端可读失败）亦在主 `test` job 中运行。

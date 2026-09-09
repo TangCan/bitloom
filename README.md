@@ -214,7 +214,7 @@ cargo run -p bitloom -- hls --function map_xor --dataflow xor_a5 --emit-only --o
 just hls-smoke
 ```
 
-专章、限制与烟测位置：[`docs/fr35-hls.md`](docs/fr35-hls.md)。
+**FR88 Path B：** 本阶段保持 stub 默认（stub 绿 ≠ HLS 调度质量）；**无**夜间真机 CI job；真机仅显式 `BITLOOM_HLS_USE_REAL=1`。详见 [`docs/fr35-hls.md`](docs/fr35-hls.md)。
 
 ## 可视化（层次 + 时序 · FR38 / FR49）
 

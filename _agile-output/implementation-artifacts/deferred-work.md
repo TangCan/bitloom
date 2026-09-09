@@ -177,13 +177,17 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
 
 - source_spec: `_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md`
   summary: CI 默认 Bambu stub（`bambu-ci-stub.sh`）验证接线与非零覆盖，非真实 HLS 调度质量
-  evidence: epic-24-retro-item-53；真机入口 `BITLOOM_HLS_USE_REAL=1`（+ `BITLOOM_BAMBU_PATH` 或缓存 AppImage）；见 `docs/fr35-hls.md`
-  status: deferred — 文档锁定 stub≠质量；真机为显式入口而非 CI 默认
+  evidence: epic-24-retro-item-53；真机入口 `BITLOOM_HLS_USE_REAL=1`（+ `BITLOOM_BAMBU_PATH` 或缓存 AppImage）；见 `docs/fr35-hls.md`；Epic 37 / FR88 Path B
+  status: closed — 文档锁定 stub≠质量；真机为显式入口而非 CI 默认（Epic 37 本阶段选 B）
+  resolved: '2026-09-09'
+  resolution: Story 37.3 Path B；FR88 HLS 诚实条勾选；不冒充真机质量
 
 - source_spec: `_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md`
   summary: 可选：CI optional/夜间 job 跑真实 Bambu 2024.10（缓存 AppImage；失败不 ignore）
-  evidence: epic-24-retro-item-54；本批次不实现完整 CI；默认路径保持 stub
-  status: deferred — 可选夜间真机 job
+  evidence: epic-24-retro-item-54；Epic 37 / FR88 **本阶段选 B**（显式保持 stub 默认；真机仍为 `BITLOOM_HLS_USE_REAL=1`）；见 `docs/fr35-hls.md`
+  status: closed — 本阶段选 B（不落地夜间真机 job）
+  resolved: '2026-09-09'
+  resolution: Story 37.3 显式 Path B；可选夜间 A 路径未实现；若未来重开须失败不 ignore / 无 continue-on-error
 
 - source_spec: `_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md`
   summary: 可选：发布烟测夹具扩到第二算法函数或负向调度质量断言
