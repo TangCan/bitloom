@@ -177,6 +177,7 @@ mod sim {
 | HIR HTML / LSP（层次；**FR99** / Epic 44 **已关闭** · `bitloom-lsp`） | [`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md) · [`docs/fr99-bitloom-lsp.md`](docs/fr99-bitloom-lsp.md) |
 | 宿主 IDE / rust-analyzer（FR90） | [`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md) · 夹具 [`examples/counter_ports`](examples/counter_ports) |
 | 多视图同刺激 + adapter 模板（FR92） | [`docs/fr92-shared-stimulus-adapter.md`](docs/fr92-shared-stimulus-adapter.md) · `SharedStimulusScoreboard` · FR78 adapter |
+| 自动 FL≡RTL / 形式等价产品（**FR100**） | [`docs/fr100-formal-equiv.md`](docs/fr100-formal-equiv.md) · `FormalEquivProduct`（超出 FR92 记分板） |
 | 时序 / 波形产品入口 | [`docs/fr38-wave.md`](docs/fr38-wave.md) |
 | UJ-6 可视化半程跟练 | [`docs/tutorials/uj6-visualization.md`](docs/tutorials/uj6-visualization.md) |
 | 额外 CLI | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) |

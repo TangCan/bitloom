@@ -1,8 +1,9 @@
 //! FR92 shared-stimulus scoreboard skeleton.
 //!
 //! One stimulus vector drives both the functional-sim path and cycle-accurate
-//! `tick` (via [`crate::check_functional_equiv_generated`]). This is **not** an
-//! automatic formal FL≡RTL product and **not** SystemC TLM-2.0 (AD-5).
+//! `tick` (via [`crate::check_functional_equiv_generated`]). This is **not**
+//! sufficient alone to close FR100 — see [`crate::FormalEquivProduct`] and
+//! `docs/fr100-formal-equiv.md`. SystemC TLM-2.0 remains Epic 46 / FR101 (AD-5).
 //!
 //! Bridge adapter template for transaction→cycle handshakes remains
 //! `bitloom_prelude::{StartWaitComplete, start_wait_complete}` (FR78).

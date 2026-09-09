@@ -21,6 +21,9 @@ pub use equiv::{
 mod shared_stimulus;
 pub use shared_stimulus::SharedStimulusScoreboard;
 
+mod formal_equiv;
+pub use formal_equiv::FormalEquivProduct;
+
 mod generate;
 pub use generate::{
     GeneratedFunctional, emit_functional_crate, generate_functional_sim,

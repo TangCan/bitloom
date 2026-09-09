@@ -53,15 +53,16 @@ pins / `PortValues` only (NFR36 / AD-18). FR92 does not replace FR78 — it name
 the Wave D requirement that the adapter template + shared stimulus path exist
 together for P7 green.
 
-## Explicit non-goals (AD-5 / NFR38)
+## Explicit non-goals for *this* FR (AD-5 / NFR38)
 
-**FR92 does not claim and must not be closed as:**
+**FR92 itself is not the FR100 completion surface.** Do not close FR100 by
+pointing only at this scoreboard.
 
-- Automatic formal **FL≡RTL** (or default TLM≡CA) product / proof suite
-- **SystemC TLM-2.0** product path (`emit_tlm` / TLM libraries)
+- Automatic formal **FL≡RTL** product / proof suite → **[`fr100-formal-equiv.md`](fr100-formal-equiv.md)** (FR100 / Epic 45)
+- **SystemC TLM-2.0** product path (`emit_tlm` / TLM libraries) → FR101 / Epic 46
 
-Consistency remains random / contrast / PortValues scoreboard tests (AD-5), not
-a silent formal-equivalence product.
+FR92 consistency remains random / contrast / PortValues scoreboard tests — a
+**supporting** path for FR100 (NFR14 F5: scoreboard alone ≠ formal product).
 
 ## Cross-links
 
@@ -71,5 +72,6 @@ a silent formal-equivalence product.
 | [`fr78-bridge-adapter-closures.md`](fr78-bridge-adapter-closures.md) | Adapter template |
 | [`fr29-bridge-abstraction-both.md`](fr29-bridge-abstraction-both.md) | Handwritten multi-view |
 | [`fr30-dual-view-equiv.md`](fr30-dual-view-equiv.md) | Equiv / mismatch spirit |
+| [`fr100-formal-equiv.md`](fr100-formal-equiv.md) | **FR100** formal-equiv product (beyond this scoreboard) |
 | [`docs/requirements/19. 实施路线图.md`](requirements/19.%20实施路线图.md) §19.9 | P7 合同绿 |
 | NFR14 Epic 39 | `_agile-output/implementation-artifacts/nfr14-risk-epic39-ide-multiview.md` |

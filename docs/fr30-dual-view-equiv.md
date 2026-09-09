@@ -25,3 +25,7 @@ let status = bitloom_sim::check_functional_equiv(hir, &mut abs, bitloom_sim::res
 ```
 
 See also `docs/fr47-dual-sim-generation.md`.
+
+**FR100:** This bounded fixture checker is a **prerequisite**, not the FR100
+completion surface. Automatic random/compare + in-tree bounded exhaustive
+formal product entry: [`docs/fr100-formal-equiv.md`](fr100-formal-equiv.md).
