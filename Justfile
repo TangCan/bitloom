@@ -20,6 +20,11 @@ hls-smoke:
 chisel-fr28-jvm:
 	bash scripts/chisel-fr28-compile-required.sh crates/rhdl-firrtl/testdata/fr28_golden_counter.scala
 
+# FR81 Path A (optional): Mem SyncReadMem contract fixture under the same NFR12 compile path.
+# Does NOT replace FR71 / `chisel-fr28-jvm` (counter golden remains the required gate).
+chisel-fr81-mem-jvm:
+	bash scripts/chisel-fr28-compile-required.sh crates/rhdl-firrtl/testdata/fr81_path_a_sync_read_mem.scala
+
 # Exit-code ATDD for the required compile contract (no JDK install required for most asserts).
 chisel-fr28-atdd:
 	bash scripts/test-chisel-fr28-required.sh

@@ -14,26 +14,28 @@ let art = rhdl_firrtl::emit_chisel(&frozen)?;
 ## 产出
 
 - 成功：`.scala`（`class … extends Module`），含层次时 `Module(new Child)` 与按方向连线（跳过 `clk`/`rst`；Chisel `Module` 隐式 clock/reset）。
-- **FR81 Path A：** 文档化单时钟 `Mem` / `SyncReadMem`（含可选常量 `init`）→ 可编译 Scala；子集外 `MemDecl` 仍结构化失败 `rhdl::E0901`（不得删除诊断冒充全表面）。
+- **FR81 Path A（Epic 33）：** 文档化单时钟 `Mem` / `SyncReadMem`（含可选常量 `init`）→ 可编译 Scala；子集外 `MemDecl` 仍结构化失败 `rhdl::E0901`（不得删除诊断冒充全表面）。决策页：`fr81-mem-chisel-contract-decision-2026-09-09.md`。
+- **Mem↔Chisel 边界：** FIRRTL/`firrtl.mem` 腿（AD-3 / AD-21）独立；本页约束 **`emit_chisel` Scala 腿**。双时钟裸 mem、超出 HIR `MemDecl` 的多口/掩码等仍在子集外 → E0901。
 
 ## CI / 本机（FR71 / NFR34）
 
 - **默认 CI（Epic 25 / FR71）：** 除 Rust 谓词外，须有 **required** JVM job（见 Story 25.3）对黄金 `.scala` 跑真编译；失败则红。
 - **Required 本机/脚本：** [`scripts/chisel-fr28-compile-required.sh`](../scripts/chisel-fr28-compile-required.sh)（或 `BITLOOM_REQUIRE_CHISEL_JVM=1` + [`chisel-fr28-compile.sh`](../scripts/chisel-fr28-compile.sh)）。缺 Java≥17 / sbt / 编译失败 → **非零退出**。ATDD：`just chisel-fr28-atdd` 或 `bash scripts/test-chisel-fr28-required.sh`。
-- **黄金夹具：** [`crates/rhdl-firrtl/testdata/fr28_golden_counter.scala`](../crates/rhdl-firrtl/testdata/fr28_golden_counter.scala)。
-- **本机配方：** `just chisel-fr28-jvm` — 与 CI 同一 required 路径；**不**并入默认 `just test`（保持 Rust-only，降低贡献门槛）。维护者在合并涉及 `emit_chisel` / FR28 的变更前应至少跑通一次（有 JDK17+sbt 时）。
+- **黄金夹具（FR71 required）：** [`crates/rhdl-firrtl/testdata/fr28_golden_counter.scala`](../crates/rhdl-firrtl/testdata/fr28_golden_counter.scala)（**无 Mem**；不得因 FR81 变更变红或被 Mem 夹具替换）。
+- **Mem Path A 合同夹具（FR81 / Story 33.4，可选 JVM）：** [`crates/rhdl-firrtl/testdata/fr81_path_a_sync_read_mem.scala`](../crates/rhdl-firrtl/testdata/fr81_path_a_sync_read_mem.scala) — 机械 `SyncReadMem` 读写烟测；同一 required 编译脚本、NFR12 钉死对。本机：`just chisel-fr81-mem-jvm`（**不**替代 `just chisel-fr28-jvm`）。
+- **本机配方：** `just chisel-fr28-jvm` — 与 CI 同一 required 路径；**不**并入默认 `just test`（保持 Rust-only，降低贡献门槛）。维护者在合并涉及 `emit_chisel` / FR28 / FR81 的变更前应至少跑通一次（有 JDK17+sbt 时）；触及 Mem 降级时另跑 `just chisel-fr81-mem-jvm`。
 - **逃生舱：** `BITLOOM_CHISEL_JVM_SKIP=1` 可跳过并 exit 0——**仅**本地逃生；**默认 CI 不得设置**（NFR34）。
 - **可选 legacy：** 不设 require 时，缺工具链仍可 skip=0（非合同路径）。
-- **默认 CI：** GitHub Actions required job **`fr28-chisel-jvm`**（与 Rust `test` 并行）：Temurin Java 17 + `cache: sbt` + `setup-sbt` → `scripts/chisel-fr28-compile-required.sh` 编译黄金夹具。失败则红；**不**设 `BITLOOM_CHISEL_JVM_SKIP`；**不** `continue-on-error`。当前 `timeout-minutes: 20`（首批冷/热样本前的保守上限；见下方墙钟记录）。
+- **默认 CI：** GitHub Actions required job **`fr28-chisel-jvm`**（与 Rust `test` 并行）：Temurin Java 17 + `cache: sbt` + `setup-sbt` → `scripts/chisel-fr28-compile-required.sh` 编译 **counter** 黄金夹具。失败则红；**不**设 `BITLOOM_CHISEL_JVM_SKIP`；**不** `continue-on-error`。当前 `timeout-minutes: 20`（首批冷/热样本前的保守上限；见下方墙钟记录）。Mem Path A 夹具由 Rust ATDD + 可选本机 `just chisel-fr81-mem-jvm` 覆盖，**不**削弱 FR71 required 面。
 
 ## 维护者合并前检查清单（FR28 / `emit_chisel`）
 
-合并触及 `emit_chisel`、`scripts/chisel-fr28-*`、黄金 `.scala`、或 FR28 文档的 PR 前，维护者应勾选：
+合并触及 `emit_chisel`、`scripts/chisel-fr28-*`、黄金 `.scala`、或 FR28/FR81 文档的 PR 前，维护者应勾选：
 
-- [ ] `cargo test -p rhdl-firrtl -- chisel_fr28`（Rust 谓词）绿
-- [ ] 本机有 Java ≥ 17 + sbt 时：`just chisel-fr28-jvm` 绿（与 CI 同路径）
-- [ ] 若本机无 JDK17+sbt：确认默认 CI 的 `fr28-chisel-jvm` job 将覆盖真编译；**不要**用 `BITLOOM_CHISEL_JVM_SKIP=1` 冒充通过
-- [ ] 未把 FR28 改回「尽力失败 / skip=0 即合同」
+- [ ] `cargo test -p rhdl-firrtl -- chisel_fr28`（Rust 谓词）绿；触及 Mem 时另跑 `cargo test -p bitloom --test fr81_path_a_mem_chisel_emit` / `fr81_mem_chisel_atdd_fr71`
+- [ ] 本机有 Java ≥ 17 + sbt 时：`just chisel-fr28-jvm` 绿（与 CI 同路径）；Mem 变更另跑 `just chisel-fr81-mem-jvm`
+- [ ] 若本机无 JDK17+sbt：确认默认 CI 的 `fr28-chisel-jvm` job 将覆盖 **counter** 真编译；**不要**用 `BITLOOM_CHISEL_JVM_SKIP=1` 冒充通过
+- [ ] 未把 FR28 改回「尽力失败 / skip=0 即合同」；未删除子集外 E0901 冒充全表面 Mem 支持
 
 ## GHA 墙钟记录（epic-25-retro-item-56）
 

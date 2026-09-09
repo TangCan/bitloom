@@ -54,6 +54,7 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 
 - 表面：`Mem` / `SyncReadMem`（prelude ZST 标记）+ session `declare_mem` / `declare_sync_read_mem`。
 - 互转/降级锚 FIRRTL `mem`；`emit_chisel`：**Path A 子集内可编译**（`Mem`/`SyncReadMem` + 可选常量 init）；**子集外仍 E0901**（FR81 / Epic 33）。
+- **Story 33.4 收口：** ATDD `fr81_path_a_mem_chisel_emit` + `fr81_mem_chisel_atdd_fr71`；Mem 合同夹具 `testdata/fr81_path_a_sync_read_mem.scala`（可选 `just chisel-fr81-mem-jvm`）；**FR71 required** 仍为无 Mem 的 `fr28_golden_counter.scala` / `just chisel-fr28-jvm` / GHA `fr28-chisel-jvm`。用户文档边界见 `docs/fr28-chisel-compilable.md`。
 
 ## Elaborate-time Mem init generators (FR73 / Epic 27)
 

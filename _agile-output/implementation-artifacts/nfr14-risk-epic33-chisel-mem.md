@@ -14,13 +14,13 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR81（加深 FR28）/ Epic 33；NFR12、NFR14、NFR37；衔接 FR71 / AD-27 |
 | 记录日期 | 2026-09-09 |
-| 状态 | accepted — 门禁有效；Epic 33 关闭条件待 Story 33.4 勾选 |
+| 状态 | accepted — 门禁有效；Epic 33 关闭条件已由 Story 33.4 勾选 |
 
 ### (a) 上游约束
 
 - **NFR12 钉死对（强制继承，本 epic 不得漂移）：** Chisel **7.14.0** ↔ CIRCT firtool **1.155.0**（ARCHITECTURE-SPINE Stack / AD-9）。升钉须等 Chisel 正式配对并更新校验表后再改 AD-9 / Stack；**不得**为「让 Mem 编过」私自升 firtool-1.156.0 或换未配对 Chisel。
 - **AD-27 / FR28 产品路径：** FrozenHir/`.fir` → **可编译** Chisel Scala；验收=编译通过 + 端口/层次谓词；机械风格可接受；**不**要求 Scala `Parser.parse`。AD-3 FIRRTL 文本契约仍独立。
-- **E0901 现状（诚实基线）：** `rhdl_firrtl::emit_chisel` 在遇到 `Stmt::MemDecl` 时返回结构化错误 **`rhdl::E0901`**（「Chisel emit does not lower mem … / Chisel 发射不降低 mem …」）。即：**今日 Mem→Chisel 为显式不支持**，非静默跳过。FIRRTL / Verilog / tick 路径上的 Mem（AD-21）可继续存在；缺口专指 **Chisel Scala 降级腿**。
+- **E0901 现状（诚实基线 → Path A 收敛）：** 历史全量 `MemDecl`→`rhdl::E0901`；Story 33.3 后 **Path A 子集内** `emit_chisel` 降级为可编译机械 Scala，**子集外仍 E0901**（不得批发删除诊断）。FIRRTL / Verilog / tick 路径上的 Mem（AD-21）独立；缺口收口专指 **Chisel Scala 降级腿**。
 - **Epic 25 / FR71 JVM 门禁（不得破坏）：** GHA required job `fr28-chisel-jvm` 与 `just chisel-fr28-jvm` 对文档化黄金夹具在钉死 Chisel 下真 `sbt`/`scalac` 编译；缺 JDK/sbt 或编译失败必须红。本 epic 任何 Mem 实现或非目标合同化**不得**使既有无 Mem 黄金夹具变红，亦不得把 FR71 改成 `continue-on-error` / skip-on-missing-Java。
 - **FR81 合同目标（Story 33.2 已选定 Path A）：** 支持文档化 Mem 子集使 `emit_chisel` 可编译；子集外保留 E0901。决策页 `fr81-mem-chisel-contract-decision-2026-09-09.md`。正向腿仍服务 FR46 / AD-27。
 - **NFR37：** Epic 20 / FR28「done」+ E0901 清单存在 ≠ FR81 深度关闭；不得用「Mem 本来就 E0901」话术永久回避合同收敛。
@@ -62,10 +62,10 @@
 
 | 维度 | 今日现状 | Epic 33 / FR81 期望 |
 | --- | --- | --- |
-| `emit_chisel` + Mem | **E0901** 结构化失败 | 按 33.2 决策：子集可编译 **或** 合同化非目标+替代 |
+| `emit_chisel` + Mem | **Path A 子集可编译**；子集外 **E0901** | 已按 33.2 Path A + 33.3 实现；33.4 夹具/FR71 回归 |
 | NFR12 | Chisel 7.14.0 ↔ firtool 1.155.0 | **不变**（不得私自升版交差） |
-| FR71 | 无 Mem 黄金夹具 JVM 编译硬门禁 | **保持绿**；Mem 变更不得破坏 |
-| 诚实度 | FR28 done 可与 E0901 并存 | **不得**用该并存关闭深度（NFR37） |
+| FR71 | 无 Mem 黄金夹具 JVM 编译硬门禁 | **保持绿**；Mem 变更不得破坏；可选 Mem 夹具不替换 required 面 |
+| 诚实度 | FR28 done 可与历史 E0901 并存 | **不得**用该并存关闭深度（NFR37）；Path A 深度已关闭 |
 
 ### 并行 / 维护叠加（Chipyard 式）
 
@@ -89,13 +89,13 @@
 ### Epic 33 关闭条件（Story 33.4 勾选）
 
 - [x] **FR81 决策：** 33.2 已选定唯一路径 **Path A（支持文档化 Mem 子集）** — `fr81-mem-chisel-contract-decision-2026-09-09.md`
-- [ ] **实现：** 33.3 行为满足决策条文；子集外或非目标路径有明确失败/边界
-- [ ] **NFR12：** Chisel/firtool 仍为钉死对（无私自升版交差）
-- [ ] **FR71：** `just chisel-fr28-jvm` / GHA `fr28-chisel-jvm` 合同路径仍绿
-- [ ] **NFR37：** 相对 FR28 done + 历史 E0901 已文档化；不得用最小合同冒充深度关闭
-- [ ] **禁止事项未触发：** 无未决策删 E0901 冒充支持；无破坏 FR71；无静默漂移 NFR12
+- [x] **实现：** 33.3 行为满足决策条文；子集外或非目标路径有明确失败/边界（Path A emit + OOS E0901）
+- [x] **NFR12：** Chisel/firtool 仍为钉死对（无私自升版交差；7.14.0 ↔ 1.155.0）
+- [x] **FR71：** `just chisel-fr28-jvm` / GHA `fr28-chisel-jvm` 合同路径仍绿（counter 黄金未改；脚本 ATDD 回归）
+- [x] **NFR37：** 相对 FR28 done + 历史 E0901 已文档化；不得用最小合同冒充深度关闭（Path A 深度 + 子集外 E0901）
+- [x] **禁止事项未触发：** 无未决策删 E0901 冒充支持；无破坏 FR71；无静默漂移 NFR12
 
-**证据（33.4 填写）：** _待 Story 33.4_
+**证据（33.4 填写）：** Story 33.4 — ATDD `fr81_path_a_mem_chisel_emit` + `fr81_mem_chisel_atdd_fr71`；Mem 夹具 `testdata/fr81_path_a_sync_read_mem.scala` + 可选 `just chisel-fr81-mem-jvm`；FR71 required 仍为 `fr28_golden_counter.scala` / `just chisel-fr28-jvm` / GHA `fr28-chisel-jvm`；文档 `docs/fr28-chisel-compilable.md` Mem↔Chisel 边界；`bash scripts/test-just-chisel-fr28-jvm.sh` PASS。
 
 ---
 
