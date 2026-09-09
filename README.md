@@ -174,7 +174,7 @@ mod sim {
 | Analog/InOut | [`docs/fr27-analog-inout.md`](docs/fr27-analog-inout.md) |
 | rhdl-float | [`docs/fr36-rhdl-float.md`](docs/fr36-rhdl-float.md) |
 | IP / 黑盒 | [`docs/fr37-ip-box.md`](docs/fr37-ip-box.md) |
-| HIR HTML / LSP（层次；LSP deferred） | [`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md) |
+| HIR HTML / LSP（层次；`bitloom-lsp` MVP → FR99 / 44.2） | [`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md) · [`docs/fr99-bitloom-lsp.md`](docs/fr99-bitloom-lsp.md) |
 | 宿主 IDE / rust-analyzer（FR90） | [`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md) · 夹具 [`examples/counter_ports`](examples/counter_ports) |
 | 多视图同刺激 + adapter 模板（FR92） | [`docs/fr92-shared-stimulus-adapter.md`](docs/fr92-shared-stimulus-adapter.md) · `SharedStimulusScoreboard` · FR78 adapter |
 | 时序 / 波形产品入口 | [`docs/fr38-wave.md`](docs/fr38-wave.md) |
@@ -245,7 +245,7 @@ cargo bitloom wave \
 ```
 
 端到端跟练：[`docs/tutorials/uj6-visualization.md`](docs/tutorials/uj6-visualization.md)。  
-FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。完整 LSP **deferred**（非本 epic 完成条件）。
+FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。按键全 elaborate LSP（**FR99**）见 Epic 44；Story 44.2 已交付 `bitloom-lsp` MVP（[`docs/fr99-bitloom-lsp.md`](docs/fr99-bitloom-lsp.md)），完整 elaborate 诊断尚未关闭。
 
 ## 状态与 deferred（诚实声明）
 
@@ -265,7 +265,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 **明确 deferred / 未承诺为产品完整面（可延期；上列五项已不再是永久非目标）：**
 
-- 完整 / 自研 Bitloom LSP hover/goto（**FR91 Path B 显式 defer** — Story 39.3 合同化；**FR99** 为 Phase 12 字面绿交付面，关闭前**不得声称** Bitloom LSP / language-server **已交付**；无半成品 LSP 二进制；层次/时序 HTML 入口已交付且 **≠ LSP**；**宿主 IDE 必做路径（FR90）已文档化：** [`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md)；细节 [`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md)）
+- 完整 / 按键全 elaborate Bitloom LSP（**FR91 Path B 显式 defer** — Story 39.3 合同化历史关闭；**不得**用 Path B defer 冒充 Phase 12 FR99 完成口径。**Story 44.2** 已交付可安装/可启动的 **`bitloom-lsp`** MVP + 接线文档（[`docs/fr99-bitloom-lsp.md`](docs/fr99-bitloom-lsp.md)）；**不得声称**「仅 rust-analyzer」或半成品二进制即完成 FR99；按键全 elaborate 诊断 / FR99 收口仍属 Story 44.3–44.4。层次/时序 HTML **≠ LSP**；宿主 IDE（FR90）：[`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md)；细节 [`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md)）
 - 部分 CLI 动词（`check` / `build-sim`）
 - crates.io 名 `rhdl` / `rhdl-bits`（禁止）
 - 自动等价证明 / SystemC TLM-2.0 产品（**FR100 / FR101** 关闭前不得宣称字面完成；见 doc-19）

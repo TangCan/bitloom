@@ -2,7 +2,7 @@
 
 **Product:** Bitloom（`cargo bitloom`）。与 [samitbasu/rhdl](https://github.com/samitbasu/rhdl) 无关。
 
-**合同：** Wave D **必做**宿主路径——用 **rust-analyzer**（或等价宿主 LSP）为 Bitloom **设计 crate** 提供 Rust 语言智能（补全、跳转、诊断）。**不**交付硬件语义 / netlist LSP，也**不**交付 Bitloom 自研 language-server（**FR91 Path B** 已由 Story 39.3 合同化 defer；见 [`fr38-viz-lsp.md`](fr38-viz-lsp.md)）。
+**合同：** Wave D **必做**宿主路径——用 **rust-analyzer**（或等价宿主 LSP）为 Bitloom **设计 crate** 提供 Rust 语言智能（补全、跳转、诊断）。**不**替代 Epic 44 / **FR99** 自研 Bitloom language-server（Story **44.2** 起交付 `bitloom-lsp` MVP — 见 [`fr99-bitloom-lsp.md`](fr99-bitloom-lsp.md)）。Epic 39 **FR91 Path B** 仍为该 epic 的历史关闭路径（显式 defer）；见 [`fr38-viz-lsp.md`](fr38-viz-lsp.md)。
 
 ## 前置
 

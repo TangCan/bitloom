@@ -173,14 +173,21 @@ fn fr90_readme_and_fr38_cross_link_host_path() {
 #[test]
 fn fr90_scope_guards_no_lsp_binary_and_fr91_path_b() {
     let root = workspace_root();
-    // No Bitloom language-server binary / crate delivered this story
-    let forbidden_names = ["language-server", "bitloom-lsp", "bitloom_lsp"];
-    for name in forbidden_names {
+    // FR90 must not ship anonymous / alias LSP crates. Documented `bitloom-lsp` is Epic 44 / FR99
+    // (Story 44.2+) and does **not** mean rust-analyzer alone completed FR99.
+    for name in ["language-server", "bitloom_lsp"] {
         let p = root.join("crates").join(name);
         assert!(
             !p.exists(),
-            "must not ship Bitloom LSP crate/binary at {}",
+            "must not ship undocumented Bitloom LSP crate alias at {}",
             p.display()
+        );
+    }
+    if root.join("crates/bitloom-lsp").exists() {
+        let doc = read("docs/fr99-bitloom-lsp.md");
+        assert!(
+            doc.contains("bitloom-lsp") && (doc.contains("rust-analyzer") || doc.contains("FR90")),
+            "when bitloom-lsp exists, docs must contrast it with rust-analyzer / FR90"
         );
     }
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");

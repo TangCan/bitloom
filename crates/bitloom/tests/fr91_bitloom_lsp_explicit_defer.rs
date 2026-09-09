@@ -1,6 +1,6 @@
 //! ATDD — Story 39.3 / FR91: shallow Bitloom LSP **or** explicit defer.
-//! Chosen close path: **Path B (explicit defer)**. Red until README / fr38
-//! contract Path B, NFR14 FR91 is ticked, and no half-built LSP binary exists.
+//! Chosen close path: **Path B (explicit defer)** for Epic 39. Epic 44 may later
+//! ship a documented `bitloom-lsp` (FR99) without undoing the Epic 39 Path B close.
 //!
 //! ```text
 //! cargo test -p bitloom --test fr91_bitloom_lsp_explicit_defer
@@ -137,13 +137,33 @@ fn fr91_nfr14_fr91_checkbox_ticked() {
 
 #[test]
 fn fr91_no_half_built_lsp_binary() {
+    // Epic 39 Path B forbade an *undocumented half-built* LSP binary.
+    // Epic 44 Story 44.2 delivers a documented `bitloom-lsp` MVP (FR99 server surface).
+    // Keep forbidding anonymous `language-server` / `bitloom_lsp` crates; require docs when
+    // `bitloom-lsp` exists.
     let root = workspace_root();
-    for name in ["language-server", "bitloom-lsp", "bitloom_lsp"] {
+    for name in ["language-server", "bitloom_lsp"] {
         let p = root.join("crates").join(name);
         assert!(
             !p.exists(),
-            "Path B forbids half-built Bitloom LSP crate/binary at {}",
+            "Path B / NFR39 still forbids undocumented LSP crate alias at {}",
             p.display()
+        );
+    }
+    let bitloom_lsp = root.join("crates/bitloom-lsp");
+    if bitloom_lsp.exists() {
+        let doc = read("docs/fr99-bitloom-lsp.md");
+        assert!(
+            doc.contains("bitloom-lsp")
+                && (doc.contains("initialize") || doc.contains("stdio") || doc.contains("VS Code")),
+            "bitloom-lsp crate requires docs/fr99-bitloom-lsp.md wiring (Epic 44 / 44.2; not a half-built binary)"
+        );
+        let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
+        assert!(
+            sprint.contains("44-2-bitloom-lsp-服务器-mvp-fr99: done")
+                || sprint.contains("44-2-bitloom-lsp-服务器-mvp-fr99: ready-for-dev")
+                || sprint.contains("44-2-bitloom-lsp-服务器-mvp-fr99: in-progress"),
+            "bitloom-lsp must be tracked under Epic 44 story 44-2 (not a silent Epic 39 Path B violation)"
         );
     }
 }
@@ -155,9 +175,18 @@ fn fr91_scope_guards_path_b_no_lsp_after_39_4() {
         sprint.contains("39-3-浅层-bitloom-lsp-或显式-defer-fr91: done"),
         "Story 39.3 (FR91 Path B) must remain done"
     );
-    // 39.4 closes FR92 / epic-39; Path B still forbids LSP binary (covered above).
+    // Epic 39 close must not introduce an anonymous `language-server` crate name.
     assert!(
         !workspace_root().join("crates/language-server").exists(),
-        "closing FR92 must not introduce a language-server crate"
+        "closing FR92 must not introduce a language-server crate alias"
+    );
+    // Historical Path B decision remains visible even after Epic 44 starts shipping bitloom-lsp.
+    let nfr14 = read("_agile-output/implementation-artifacts/nfr14-risk-epic39-ide-multiview.md");
+    assert!(
+        nfr14.contains("Path B")
+            || nfr14.contains("分支 B")
+            || nfr14.contains("显式 defer")
+            || nfr14.contains("explicit defer"),
+        "Epic 39 NFR14 must keep FR91 Path B / explicit defer decision visible"
     );
 }

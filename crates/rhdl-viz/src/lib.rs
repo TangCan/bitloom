@@ -2,7 +2,7 @@
 //!
 //! Delivers: module/port HTML + instance hierarchy (list + Mermaid).
 //! Also: browsable timing HTML from tick samples / VCD (FR49 wave path).
-//! LSP hover/goto: deferred (no language-server binary in this phase).
+//! LSP: product server is `bitloom-lsp` (FR99 / Epic 44); HTML hierarchy ≠ LSP.
 
 use std::collections::BTreeMap;
 
@@ -69,7 +69,7 @@ pub fn to_html(hir: &FrozenHir) -> String {
     out.push_str(&mermaid_hierarchy(hir));
     out.push_str("</pre>\n");
     out.push_str(
-        "<p>LSP: deferred — no Bitloom language-server binary in this phase; see docs/fr38-viz-lsp.md</p>\n\
+        "<p>LSP: see <code>bitloom-lsp</code> / docs/fr99-bitloom-lsp.md (FR99); HTML hierarchy ≠ LSP — docs/fr38-viz-lsp.md</p>\n\
          <p>Unrelated to <code>samitbasu/rhdl</code>.</p>\n</body></html>\n",
     );
     out

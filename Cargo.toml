@@ -9,6 +9,7 @@ members = [
   "crates/bitloom-sim",
   "crates/rhdl-firrtl",
   "crates/bitloom",
+  "crates/bitloom-lsp",
   "crates/rhdl-cabi",
   "crates/rhdl-hls",
   "crates/rhdl-formal",

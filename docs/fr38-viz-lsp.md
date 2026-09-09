@@ -18,17 +18,19 @@ Writes `hierarchy.html` with:
 
 Open the HTML in a browser. This is the product hierarchy path for FR38/FR49 — not a library-only dump.
 
-## LSP / FR91 Path B (explicit defer)
+## LSP / FR91 Path B / Epic 44 (FR99)
 
-**FR91 Path B (Story 39.3):** Self-hosted Bitloom language-server (shallow diagnostic / symbol LSP MVP **or** full hover/goto) remains **explicitly deferred**. There is **no** Bitloom `language-server` binary in this repo.
+**FR91 Path B (Story 39.3 — historical close):** Epic 39 closed FR91 by **explicit defer** of a self-hosted Bitloom language-server as that epic’s completion path. Hierarchy / timing HTML does **not** count as FR91 completion (HTML ≠ LSP). Host **rust-analyzer** (FR90) is the Wave D Rust IDE path — **not** a substitute for Bitloom hardware-semantics LSP.
 
-**MUST NOT** claim Bitloom LSP / language-server **delivered**. Hierarchy / timing HTML does **not** claim LSP done and does **not** count as FR91 completion (HTML ≠ LSP). Host **rust-analyzer** (FR90) is the Wave D IDE path — **not** a substitute for FR91 self-hosted LSP.
+**Epic 44 / FR99 (Phase 12):** Story **44.2** delivers an installable/startable **`bitloom-lsp`** binary (stdio LSP, minimal `initialize` / capabilities) plus editor wiring — see [`fr99-bitloom-lsp.md`](fr99-bitloom-lsp.md). This is the Bitloom language-server **product surface MVP**. Keystroke full-elaborate diagnostics / symbols are **Story 44.3**; FR99 epic closeout is **Story 44.4**.
 
-Reinforced in `_agile-output/implementation-artifacts/deferred-work.md` and NFR14 Epic 39 (`nfr14-risk-epic39-ide-multiview.md` — FR91 close checkbox).
+**MUST NOT** claim: (1) HTML visualization is LSP; (2) rust-analyzer alone completes FR99 / Story 44.2; (3) FR99 is fully closed before 44.3–44.4.
 
-**FR90 host path:** Bitloom design crates use **rust-analyzer** (host IDE) for completion / goto / rustc diagnostics — see [`fr90-host-ide-rust-analyzer.md`](fr90-host-ide-rust-analyzer.md). That host workflow is **not** a Bitloom language-server and does **not** close FR91 (Path B).
+Reinforced in `_agile-output/implementation-artifacts/deferred-work.md`, NFR14 Epic 39 (`nfr14-risk-epic39-ide-multiview.md` — FR91 Path B checkbox remains historically ticked), and NFR14 Epic 44 (`nfr14-risk-epic44-full-elaborate-lsp.md`).
 
-**Epic 35:** LSP hover/goto is **not** an Epic 35 completion criterion (still deferred). Story 35.4 only re-documents this boundary; it does **not** deliver a language-server.
+**FR90 host path:** Bitloom design crates use **rust-analyzer** (host IDE) for completion / goto / rustc diagnostics — see [`fr90-host-ide-rust-analyzer.md`](fr90-host-ide-rust-analyzer.md). That host workflow is **not** a substitute for FR99 `bitloom-lsp`.
+
+**Epic 35:** LSP hover/goto was **not** an Epic 35 completion criterion. Story 35.4 only re-documented that boundary.
 
 ## Wave / timing
 
