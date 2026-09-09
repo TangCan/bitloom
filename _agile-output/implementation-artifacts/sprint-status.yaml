@@ -309,6 +309,62 @@ development_status:
   39-3-浅层-bitloom-lsp-或显式-defer-fr91: done
   39-4-多视图同刺激与-adapter-模板-fr92: done
   epic-39-retrospective: done
+
+  # Phase 12 — literal seven-stage green Path B (Correct Course 2026-09-09-phase12-path-b)
+  # Gate: epic-40 must be done before 41–47 may leave backlog/ready
+  epic-40: backlog
+  40-1-epic-40-nfr14-风险记录: backlog
+  40-2-correct-course-prd-推翻-fr93-fr94: backlog
+  40-3-重写-doc-19-字面绿定义-fr94: backlog
+  40-4-修订-ad-撤销-fr93-锁定-fr94: backlog
+  epic-40-retrospective: optional
+
+  epic-41: backlog
+  41-1-epic-41-nfr14-风险记录: backlog
+  41-2-树内-hls-调度-mvp-fr95: backlog
+  41-3-hls-闭包数据流变换-fr96: backlog
+  41-4-fr95-fr96-收口与回归: backlog
+  epic-41-retrospective: optional
+
+  epic-42: backlog
+  42-1-epic-42-nfr14-风险记录: backlog
+  42-2-idiomatic-chisel-发射与验收-fr97: backlog
+  42-3-fr97-收口与回归: backlog
+  epic-42-retrospective: optional
+
+  epic-43: backlog
+  43-1-epic-43-nfr14-风险记录: backlog
+  43-2-uart-全协议-近-vip-fr98: backlog
+  43-3-spi-全协议-近-vip-fr98: backlog
+  43-4-i2c-全协议-近-vip-fr98: backlog
+  43-5-axi-可选-gpio-fr98-收口: backlog
+  epic-43-retrospective: optional
+
+  epic-44: backlog
+  44-1-epic-44-nfr14-风险记录: backlog
+  44-2-bitloom-lsp-服务器-mvp-fr99: backlog
+  44-3-按键全-elaborate-诊断-符号-fr99: backlog
+  44-4-fr99-收口与撤销-lsp-非目标: backlog
+  epic-44-retrospective: optional
+
+  epic-45: backlog
+  45-1-epic-45-nfr14-风险记录: backlog
+  45-2-自动-fl-rtl-形式等价产品路径-fr100: backlog
+  45-3-多视图属性全矩阵-fr102: backlog
+  45-4-一级-ip-双模型齐全-epic45-收口-fr103: backlog
+  epic-45-retrospective: optional
+
+  epic-46: backlog
+  46-1-epic-46-nfr14-风险记录: backlog
+  46-2-systemc-tlm-2-0-产品面-fr101: backlog
+  46-3-fr101-收口与撤销-不承诺-tlm: backlog
+  epic-46-retrospective: optional
+
+  epic-47: backlog
+  47-1-epic-47-nfr14-风险记录: backlog
+  47-2-交互式富波形-fr104: backlog
+  47-3-仿真覆盖率扩展-fr105-收口: backlog
+  epic-47-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1

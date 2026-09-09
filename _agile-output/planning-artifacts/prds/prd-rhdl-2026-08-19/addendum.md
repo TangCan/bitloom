@@ -183,4 +183,25 @@
 - 调研：`_agile-output/planning-artifacts/research/technical-doc19-seven-stage-full-green-product-pla-2026-09-09/research.md`
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-09.md`
 
-**FR93 永久非目标（公开清单指针）：** 树内/自研 HLS 调度器；FIRRTL→idiomatic Scala；默认 TLM≡CA 形式证明；VIP 级全协议 IP；按键全设计 elaborate 的 netlist LSP。正文见 README「状态与 deferred」§永久非目标（FR93）与 `_agile-output/implementation-artifacts/deferred-work.md` 同名节。**须新 PRD 才能推翻**；不得标 done。
+**FR93 永久非目标（公开清单指针）：** 树内/自研 HLS 调度器；FIRRTL→idiomatic Scala；默认 TLM≡CA 形式证明；VIP 级全协议 IP；按键全设计 elaborate 的 netlist LSP。正文见 README「状态与 deferred」§永久非目标（FR93）与 `_agile-output/implementation-artifacts/deferred-work.md` 同名节。**历史锁定语：** 原「须新 PRD 才能推翻」——已由下方 **Phase 12** 满足并推翻。
+
+## 2026-09-09 Update — Phase 12 字面绿（Path B）（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-09-phase12-path-b.md` —
+在 Phase 11 合同绿结项之后，继续追求 **字面七阶段全绿（Path B / B1）**，正式 **Phase 12**
+（Epic 40–47 · **FR94–FR105** / **NFR40–NFR43**）。
+
+**与 Phase 11 / FR93 的关系（必须同时读）：**
+- Phase 11 **FR87 / NFR38 合同绿**仍为**历史已交付里程碑**；已交付工程 **不回滚**。
+- 本更新 **推翻 FR93** 五条永久非目标锁定；对应字面交付见 **FR95–FR105**（闸门 **FR94**）。
+- Research `technical-doc19-seven-stage-full-green-product-pla-2026-09-09` 曾建议勿走字面全绿；
+  **产品强制选择 B1**，接受多年/高维护（**NFR40**）。
+- 对外「七阶段字面全绿 / 产品字面做完」：**仅**可在 FR94–105 对应门关闭后，按 **NFR42** 宣称；
+  **禁止**继续用 FR87 合同绿冒充字面 B。
+
+**实现闸门：** Epic 40（Story 40.1–40.4）关闭前，Epic 41–47 不得标 ready。  
+须修订 ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 及 doc-19 / README / deferred（Story 40.3–40.4 · **NFR41**）。
+
+**合同指针：** 详见 `epics.md` Phase 12 Inventory（FR94–FR105 / NFR40–NFR43）。
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-09-phase12-path-b.md`
+- 调研（反建议字面；已被本决议否决为排期默认）：`research/technical-doc19-seven-stage-full-green-product-pla-2026-09-09/research.md`

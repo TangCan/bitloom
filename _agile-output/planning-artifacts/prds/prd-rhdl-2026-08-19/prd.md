@@ -3,7 +3,7 @@ title: Bitloom 阶段二 PRD — 2026-08-21 概述字面升格修订
 status: final
 created: 2026-08-19
 updated: 2026-09-09
-amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08; phase11-contract-green-2026-09-09
+amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08; phase11-contract-green-2026-09-09; phase12-literal-green-path-b-2026-09-09
 ---
 
 # PRD: Bitloom 阶段二及愿景闭环（later-product → FR + 概述字面升格）
@@ -16,6 +16,8 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 
 *2026-09-09 追加（`phase11-contract-green`）：Phase 11 合同绿 **FR87–FR93** / **NFR38–NFR39** — 路线图阶段五–七「绿」与「产品做完」按同业重定义完成标准；**不**回滚 ①C 已交付 FR46–86（见 addendum）。*
 
+*2026-09-09 追加（`phase12-literal-green-path-b`）：Phase 12 字面七阶段全绿 **FR94–FR105** / **NFR40–NFR43** — 推翻 FR93 永久非目标；合同绿（FR87）保留为历史里程碑；字面宣称仅引用 FR94–105（见 addendum「Phase 12 字面绿」）。*
+
 ## 0. Document Purpose
 
 本 PRD 面向 PM、架构与 epic 拆解。
@@ -27,6 +29,7 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 - **2026-08-21 CI 证据补强：** **FR71** / **NFR34** — 默认 CI 强制 Chisel JVM 真编译（禁止 skip=0）；编号避开历史 Phase 3–5 撞号（见 addendum）。
 - **2026-09-08 Phase 9 闭包合同：** **FR72–FR78** / **NFR35–NFR36** — elaborate-time 非捕获 `Fn` 冻前消解；编号接在 FR71/NFR34 之后；**不得**与 FR47（双视图 sim crate 生成）或 Phase 7「闭环」混淆（见 §5.9 / addendum）。
 - **2026-09-09 Phase 11 合同绿：** **FR87–FR93** / **NFR38–NFR39** — 「产品做完 / 路线图七阶段全绿」按合同条款验收；与 ①C 边界见 addendum「Phase 11 合同绿」；**不**回滚 FR46–86。
+- **2026-09-09 Phase 12 字面绿（Path B）：** **FR94–FR105** / **NFR40–NFR43** — 推翻 FR93；字面七阶段全绿为当前完成合同；FR87 合同绿为历史里程碑（见 addendum「Phase 12 字面绿」）。
 - **身份 supersession：** 公开产品名 **Bitloom**，crates.io / CLI **`bitloom`**（阶段三 FR41）；禁止发布 `rhdl` / `rhdl-bits`。正文不再以 `rhdl-rs` 为发布名。[ASSUMPTION] 概述仍写 RHDL；合同以 Bitloom 为准，概述另开任务对齐。
 - `later-product.md` 仍为索引，不承载无 ID 需求。
 

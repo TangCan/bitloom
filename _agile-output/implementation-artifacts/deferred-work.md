@@ -1,22 +1,25 @@
 # Deferred work
 
-## Contract-green pointer (FR87 / NFR38)
+## Contract-green pointer (FR87 / NFR38) — 历史里程碑
 
-阶段五–七「绿 / 产品做完」验收以 **合同绿** 为准，定义见
-[`docs/requirements/19. 实施路线图.md`](../../docs/requirements/19.%20实施路线图.md) §19.7–19.9
-与 README「状态与 deferred」。**禁止**用字面未交付项勾选全绿。
+阶段五–七「合同绿」验收定义仍见
+[`docs/requirements/19. 实施路线图.md`](../../docs/requirements/19.%20实施路线图.md) §19.7–19.9（**Story 40.3 将改为字面绿勾选**）。  
+Phase 11 合同绿为**历史已交付**；当前完成合同见 Phase 12 字面绿（addendum「Phase 12 字面绿」/ FR94–105）。
 
-## 永久非目标（FR93）
+## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
-公开合同锁定（与 README「状态与 deferred」§永久非目标（FR93）同源）。**须新 PRD 才能推翻**；不得把下列项标成 done 或静默交付交差。
+**历史（Phase 11）：** 曾公开锁定下列五项，并写「须新 PRD 才能推翻」。
 
-1. 树内 / 自研 HLS 调度器
-2. FIRRTL→idiomatic Scala
-3. 默认 TLM≡CA 形式证明
-4. VIP 级全协议 IP
-5. 按键全设计 elaborate 的 netlist LSP
+1. 树内 / 自研 HLS 调度器 → 现 **FR95**（Epic 41）
+2. FIRRTL→idiomatic Scala → 现 **FR97**（Epic 42）
+3. 默认 TLM≡CA 形式证明 → 现 **FR100**（Epic 45）；SystemC TLM 产品 → **FR101**（Epic 46）
+4. VIP 级全协议 IP → 现 **FR98**（Epic 43）
+5. 按键全设计 elaborate 的 netlist LSP → 现 **FR99**（Epic 44）
 
-PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 11 / FR93）。
+**Phase 12（2026-09-09）：** Correct Course `sprint-change-proposal-2026-09-09-phase12-path-b.md` + PRD addendum「Phase 12 字面绿」**已推翻**上述锁定。  
+正文/README 的「永久非目标」措辞由 **Story 40.4** 与实现收口故事最终对齐；在 40.4 完成前，实现仍须遵守 Epic 40 闸门（41–47 不得 ready）。
+
+PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 11 FR93 历史 + Phase 12 推翻）。
 
 - source_spec: `_agile-output/implementation-artifacts/17-4-五级流水-转发-分支-flush.md`
   summary: LW/SW 在 EpisodeIIPipe 已接线但无 tick 黄金；load_q 时序与 load-use stall 留给 17.5
