@@ -2,8 +2,8 @@
 //!
 //! Locks NFR14 close checkboxes, README/deferred honesty (VIP-level full-protocol
 //! IP is not a permanent non-goal; Epic 43 / FR98 closed), docs/ip boundaries,
-//! and sprint `epic-43: done`. Epic 45–47 must remain backlog.
-//! Epic 44 may be `in-progress` only after Story 44.1 NFR14 is `done`.
+//! and sprint `epic-43: done`. Epic 44 may be `in-progress`/`done` after Story 44.1;
+//! Epic 45 may be `in-progress`/`done` after Story 45.1; Epic 46–47 must remain backlog.
 //!
 //! ```text
 //! cargo test -p bitloom --test fr98_epic43_closeout
@@ -116,11 +116,23 @@ fn fr98_sprint_epic43_done_epic44_gated() {
             "leaving epic-44 backlog requires Story 44.1 NFR14 done (gate)"
         );
     }
-    // Must not have started Epic 45+
-    for key in ["epic-45: backlog", "epic-46: backlog", "epic-47: backlog"] {
+    // Epic 45: backlog, or in-progress/done only after 45.1 NFR14 gate
+    assert!(
+        sprint.contains("epic-45: backlog")
+            || sprint.contains("epic-45: in-progress")
+            || sprint.contains("epic-45: done"),
+        "sprint-status must list epic-45 as backlog, in-progress, or done"
+    );
+    if !sprint.contains("epic-45: backlog") {
+        assert!(
+            sprint.contains("45-1-epic-45-nfr14-风险记录: done"),
+            "leaving epic-45 backlog requires Story 45.1 NFR14 done (gate)"
+        );
+    }
+    for key in ["epic-46: backlog", "epic-47: backlog"] {
         assert!(
             sprint.contains(key),
-            "closeout must leave {key} (do not start Epic 45+)"
+            "closeout must leave {key} (do not start Epic 46+)"
         );
     }
 }
