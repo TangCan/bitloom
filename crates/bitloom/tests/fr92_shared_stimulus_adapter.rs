@@ -216,13 +216,28 @@ fn fr92_no_second_sim_semantics_or_tlm_product() {
             "FR92 must not present emit_tlm as a product deliverable"
         );
     }
-    // Spot-check: public sim lib still has no SystemC TLM emit *product API*
+    // Spot-check: FR92 must not be the home of SystemC TLM product API.
+    // FR101 (Epic 46) may export `systemc_tlm` / `emit_systemc_tlm_lt` — that is a
+    // different FR; FR92 docs must still forbid treating shared-stimulus as TLM.
     let sim = read("crates/bitloom-sim/src/lib.rs");
-    assert!(
-        !sim.contains("pub fn emit_tlm")
-            && !sim.contains("fn emit_tlm")
-            && !sim.contains("mod systemc_tlm")
-            && !sim.contains("pub mod systemc"),
-        "bitloom-sim must not grow SystemC TLM product API under FR92"
-    );
+    if sim.contains("mod systemc_tlm") || sim.contains("emit_systemc_tlm") {
+        let fr101 = read("docs/fr101-systemc-tlm.md");
+        assert!(
+            fr101.contains("FR101") && fr101.contains("Bitloom"),
+            "SystemC TLM product API must be owned by FR101 docs, not FR92"
+        );
+        assert!(
+            (fr92.contains("不") && (fr92.contains("SystemC") || fr92.contains("TLM")))
+                || (fr92.to_lowercase().contains("not")
+                    && (fr92.contains("SystemC") || fr92.contains("TLM"))),
+            "FR92 must still forbid SystemC TLM as its own contract when FR101 exists"
+        );
+    } else {
+        assert!(
+            !sim.contains("pub fn emit_tlm")
+                && !sim.contains("fn emit_tlm")
+                && !sim.contains("pub mod systemc"),
+            "bitloom-sim must not grow unnamed SystemC TLM product API under FR92"
+        );
+    }
 }

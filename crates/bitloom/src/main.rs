@@ -107,6 +107,15 @@ enum Commands {
         #[arg(long, default_value = ".")]
         manifest_dir: PathBuf,
     },
+    /// Generate SystemC TLM-2.0 LT C++ fixture from FrozenHir (FR101). Not Rust FL.
+    GenTlm {
+        #[arg(long)]
+        package: String,
+        #[arg(long, default_value = "target/bitloom-systemc-tlm")]
+        out_dir: PathBuf,
+        #[arg(long, default_value = ".")]
+        manifest_dir: PathBuf,
+    },
     /// Emit module hierarchy HTML from a FIRRTL 6.0.0 `.fir` (FR38 / FR49 / FR40).
     Visualize {
         /// Path to a `.fir` file with `FIRRTL version 6.0.0` header.
@@ -335,6 +344,21 @@ fn build_gen_cycle_host_main(package: &str, out_dir: &Path) -> String {
     let out_dir = std::path::PathBuf::from({out_dir:?});
     let written = bitloom_sim::generate_cycle_accurate_sim(&frozen, &out_dir).expect("generate");
     println!("wrote cycle-accurate crate {{}}", written.display());
+}}
+"#,
+        crate_name = crate_name,
+        out_dir = out_dir,
+    )
+}
+
+fn build_gen_tlm_host_main(package: &str, out_dir: &Path) -> String {
+    let crate_name = package.replace('-', "_");
+    format!(
+        r#"fn main() {{
+    let frozen = {crate_name}::rhdl_elaborate().expect("rhdl_elaborate");
+    let out_dir = std::path::PathBuf::from({out_dir:?});
+    let written = bitloom_sim::emit_systemc_tlm_lt(&frozen, &out_dir).expect("emit_systemc_tlm_lt");
+    println!("wrote SystemC TLM-2.0 LT fixture {{}}", written.display());
 }}
 "#,
         crate_name = crate_name,
@@ -659,6 +683,57 @@ fn main() {
                 Ok(s) if s.success() => {}
                 Ok(s) => {
                     eprintln!("error: gen-cycle host failed ({s})");
+                    std::process::exit(s.code().unwrap_or(1));
+                }
+                Err(e) => {
+                    eprintln!("error: spawn cargo: {e}");
+                    std::process::exit(1);
+                }
+            }
+        }
+        Commands::GenTlm {
+            package,
+            out_dir,
+            manifest_dir,
+        } => {
+            let workspace = fs::canonicalize(&manifest_dir).unwrap_or(manifest_dir);
+            let pkg_path = match resolve_package_dir(&workspace, &package) {
+                Ok(p) => p,
+                Err(e) => {
+                    eprintln!("error: {e}");
+                    std::process::exit(1);
+                }
+            };
+            let host_dir = workspace.join("target/rhdl-gen-tlm-host").join(&package);
+            fs::create_dir_all(host_dir.join("src")).expect("host dir");
+            let abs_out = if out_dir.is_absolute() {
+                out_dir
+            } else {
+                workspace.join(out_dir)
+            };
+            fs::create_dir_all(&abs_out).expect("out_dir");
+            fs::write(
+                host_dir.join("Cargo.toml"),
+                build_gen_func_host_cargo(&workspace, &package, &pkg_path)
+                    .replace("bitloom-gen-func-shim", "bitloom-gen-tlm-shim"),
+            )
+            .expect("host Cargo.toml");
+            fs::write(
+                host_dir.join("src/main.rs"),
+                build_gen_tlm_host_main(&package, &abs_out),
+            )
+            .expect("host main");
+            let status = Command::new("cargo")
+                .arg("+1.97.1")
+                .arg("run")
+                .arg("--manifest-path")
+                .arg(host_dir.join("Cargo.toml"))
+                .arg("--quiet")
+                .status();
+            match status {
+                Ok(s) if s.success() => {}
+                Ok(s) => {
+                    eprintln!("error: gen-tlm host failed ({s})");
                     std::process::exit(s.code().unwrap_or(1));
                 }
                 Err(e) => {

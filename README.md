@@ -159,7 +159,7 @@ mod sim {
 | 手写 bridge / abstraction / both | [`docs/fr29-bridge-abstraction-both.md`](docs/fr29-bridge-abstraction-both.md) |
 | 桥接适配器闭包模板（FR78） | [`docs/fr78-bridge-adapter-closures.md`](docs/fr78-bridge-adapter-closures.md) · UJ「桥接半程」[`docs/tutorials/bridge-half.md`](docs/tutorials/bridge-half.md) |
 | 嵌套 Bundle + derive（FR80） | [`docs/fr80-nested-bundle.md`](docs/fr80-nested-bundle.md) · UJ「嵌套 Bundle」[`docs/tutorials/nested-bundle.md`](docs/tutorials/nested-bundle.md) |
-| 双视图 sim 生成（FR47） | [`docs/fr47-dual-sim-generation.md`](docs/fr47-dual-sim-generation.md) |
+| 双视图 sim 生成（FR47） | [`docs/fr47-dual-sim-generation.md`](docs/fr47-dual-sim-generation.md) · **≠** SystemC TLM |
 | 双视图等价检查 | [`docs/fr30-dual-view-equiv.md`](docs/fr30-dual-view-equiv.md) |
 | 可选 FST | [`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md) |
 | tick 引擎 | [`docs/fr32-tick-engines.md`](docs/fr32-tick-engines.md) |
@@ -178,6 +178,7 @@ mod sim {
 | 宿主 IDE / rust-analyzer（FR90） | [`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md) · 夹具 [`examples/counter_ports`](examples/counter_ports) |
 | 多视图同刺激 + adapter 模板（FR92） | [`docs/fr92-shared-stimulus-adapter.md`](docs/fr92-shared-stimulus-adapter.md) · `SharedStimulusScoreboard` · FR78 adapter |
 | 自动 FL≡RTL / 形式等价产品（**FR100**） | [`docs/fr100-formal-equiv.md`](docs/fr100-formal-equiv.md) · `FormalEquivProduct`（超出 FR92 记分板）；**Epic 45 已关闭** |
+| SystemC TLM-2.0 产品路径（**FR101**） | [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md) · `emit_systemc_tlm_lt` / `cargo bitloom gen-tlm`（LT-only MVP；Story 46.2；Epic 46 收口 → 46.3） |
 | 多视图属性全矩阵（**FR102**） | [`docs/fr102-multiview-attribute-matrix.md`](docs/fr102-multiview-attribute-matrix.md) · 超出仅 adapter 模板 |
 | 一级 IP 双模型齐全（**FR103**） | [`docs/fr103-ip-dual-model.md`](docs/fr103-ip-dual-model.md) · `IpDualModelMatrix`；FIFO/UART/SPI/I2C/AXI |
 | 时序 / 波形产品入口 | [`docs/fr38-wave.md`](docs/fr38-wave.md) |
@@ -271,6 +272,6 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 - 完整 / 按键全 elaborate Bitloom LSP（**FR99 / Epic 44 已关闭**。Epic 39 **FR91 Path B** 显式 defer 仅为**历史**关闭路径，**不得**再当作 Phase 12 完成口径。宿主 rust-analyzer（FR90）仍可用，**不替代** FR99。层次/时序 HTML **≠ LSP**；见 [`docs/fr99-bitloom-lsp.md`](docs/fr99-bitloom-lsp.md)、[`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md)、[`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md)）
 - 部分 CLI 动词（`check` / `build-sim`）
 - crates.io 名 `rhdl` / `rhdl-bits`（禁止）
-- 自动等价证明 / SystemC TLM-2.0 产品（**FR100 / Epic 45 已关闭** — 形式等价产品 + IP 双模型；**FR101** / Epic 46 关闭前不得宣称 TLM 产品字面完成；见 doc-19）
+- 自动等价证明 / SystemC TLM-2.0 产品（**FR100 / Epic 45 已关闭** — 形式等价产品 + IP 双模型；**FR101** 产品面见 [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md) / Story 46.2；**Epic 46 收口**仍 Story 46.3 — 关闭前不得宣称 epic 字面完成；见 doc-19）
 
 详见 [`docs/semver-0x-policy.md`](docs/semver-0x-policy.md) 与 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。

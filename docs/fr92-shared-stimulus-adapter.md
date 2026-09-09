@@ -59,7 +59,7 @@ together for P7 green.
 pointing only at this scoreboard.
 
 - Automatic formal **FL≡RTL** product / proof suite → **[`fr100-formal-equiv.md`](fr100-formal-equiv.md)** (FR100 / Epic 45)
-- **SystemC TLM-2.0** product path (`emit_tlm` / TLM libraries) → FR101 / Epic 46
+- **SystemC TLM-2.0** product path → **[`fr101-systemc-tlm.md`](fr101-systemc-tlm.md)** (FR101 / Epic 46; `emit_systemc_tlm_lt` — **not** an FR92 deliverable)
 
 FR92 consistency remains random / contrast / PortValues scoreboard tests — a
 **supporting** path for FR100 (NFR14 F5: scoreboard alone ≠ formal product).

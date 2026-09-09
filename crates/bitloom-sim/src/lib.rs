@@ -42,6 +42,12 @@ pub use cycle::{
 mod fst;
 pub use fst::{FstError, resolve_vcd2fst};
 
+mod systemc_tlm;
+pub use systemc_tlm::{
+    SYSTEMC_PIN_VERSION, SystemcToolchain, build_and_run_tlm_lt_smoke, emit_systemc_tlm_lt,
+    generate_systemc_tlm_lt, resolve_systemc,
+};
+
 /// Simulator state for one FrozenHir circuit.
 pub struct Sim {
     hir: FrozenHir,
@@ -786,15 +792,19 @@ mod tests {
 
     #[test]
     fn no_hir_to_tlm_api() {
-        // No SystemC TLM-2.0 / emit_tlm product API on the sim surface (AD-5 / FR29).
-        // This does *not* ban FR47 Rust functional-sim *generation* (Epic 21.3+).
-        // Scan only the production surface above `#[cfg(test)]`.
+        // FR29: no HIR→TLM *lowering* that replaces cycle-accurate tick.
+        // FR101 may export `systemc_tlm` / `emit_systemc_tlm_lt` as a separate product path
+        // (revised AD-5); that must not appear as `to_tlm` / bare `emit_tlm` on this surface.
         let src = include_str!("lib.rs");
         let prod = src.split("#[cfg(test)]").next().unwrap_or(src);
-        assert!(!prod.contains("emit_tlm"));
-        assert!(!prod.contains("to_tlm"));
-        assert!(!prod.contains("TLM-2.0"));
-        assert!(!prod.contains("systemc"));
+        assert!(!prod.contains("fn to_tlm") && !prod.contains("pub fn to_tlm"));
+        assert!(!prod.contains("pub fn emit_tlm(") && !prod.contains("fn emit_tlm("));
+        if prod.contains("mod systemc_tlm") || prod.contains("emit_systemc_tlm") {
+            assert!(
+                prod.contains("FR101") || include_str!("systemc_tlm.rs").contains("FR101"),
+                "SystemC TLM surface must be labeled FR101"
+            );
+        }
     }
 
     #[test]

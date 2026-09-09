@@ -55,7 +55,7 @@ cd target/bitloom-cycle-sim && cargo test && cargo run
 ## Constraints
 
 - Generator lives in the **toolchain** (`bitloom-sim` / `bitloom` CLI). Design crates depend only on `bitloom-prelude`.
-- **Not** SystemC / TLM-2.0.
+- **Not** SystemC / TLM-2.0. SystemC TLM-2.0 product path is **FR101** — see [`fr101-systemc-tlm.md`](fr101-systemc-tlm.md) (Story 46.2; revised **AD-5**).
 - **FR30 / P3:** product acceptance uses `check_functional_equiv_generated` on the generated path (see `docs/fr30-dual-view-equiv.md`). Handwritten equiv may coexist.
 - **FR78 × FR47 (Story 30.3–30.4):** bridge-adapter `start_wait_complete` templates may drive PortValues stimuli into this same generated-path bridge — see `docs/fr78-bridge-adapter-closures.md`, UJ「桥接半程」[`docs/tutorials/bridge-half.md`](tutorials/bridge-half.md), and `cargo test -p bitloom --test fr78_fr47_dual_view_coverify`. **FR47 ≠ FR78** (sim-crate generation ≠ host handshake template). Not SystemC TLM.
 - **FR92 (Wave D / Story 39.4):** product contract for **shared stimulus / scoreboard** + adapter template over this path — see [`docs/fr92-shared-stimulus-adapter.md`](fr92-shared-stimulus-adapter.md) and `SharedStimulusScoreboard`. Does **not** claim automatic formal FL≡RTL / SystemC TLM-2.0.
