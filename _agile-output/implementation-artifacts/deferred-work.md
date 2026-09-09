@@ -313,3 +313,11 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   resolution: |
     编入本 ledger；公开文档已含对应诚实条。触碰相关 crate/文档/CI 叙事时对照；
     加深子集或改选分支须新合同 + NFR14，禁止静默扩大。
+
+- source_spec: `_agile-output/implementation-artifacts/42-2-idiomatic-chisel-发射与验收-fr97.md`
+  summary: `check_idiomatic_chisel` 按模块块作用域校验端口/IO Bundle（当前整文件子串）
+  evidence: 审查 edge-case；层次夹具下缺 Child class 仍会失败；加深作用域属后续硬化
+
+- source_spec: `_agile-output/implementation-artifacts/42-2-idiomatic-chisel-发射与验收-fr97.md`
+  summary: 空模块电路上 idiomatic emit 是否应 E0904（正常 elaborate 难达）
+  evidence: maybe-false；若出现空 FrozenHir 需实测后再钉拒绝策略

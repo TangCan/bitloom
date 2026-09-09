@@ -2,7 +2,7 @@
 
 **验收合同（AD-27 / FR88）：** 在钉死栈下可编译 + 公开端口名/宽/向与实例层次往返谓词。允许机械/生成风格；**不以**「结构化尽力失败」交差。
 
-**公开诚实声明（FR88）：** `emit_chisel` / 往返验收 = **可编译 ≠ idiomatic**。合同只要求钉死栈下**可编译** + **端口/层次谓词**；**不**要求 idiomatic / 手写可维护 Scala。FIRRTL→idiomatic Scala 为 **FR93 永久非目标**（须新 PRD；见 README「永久非目标（FR93）」）。
+**公开诚实声明（FR88）：** `emit_chisel` / 往返验收 = **可编译 ≠ idiomatic**。合同只要求钉死栈下**可编译** + **端口/层次谓词**；本页**不**以机械面关闭 **FR97**。Idiomatic / 可维护完成面见 **[FR97](fr97-idiomatic-chisel.md)**（`emit_chisel_idiomatic` + `check_idiomatic_chisel`；AD-27 修订 / Epic 42）。
 
 **钉死版本对（AD-9 / NFR12）：** Chisel **7.14.0** ↔ firtool **1.155.0**。升钉须上游正式配对并更新脊柱 Stack / AD-9 / 本页运维清单；**禁止**私自升版交差。
 

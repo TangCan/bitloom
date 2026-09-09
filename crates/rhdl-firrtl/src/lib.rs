@@ -6,7 +6,10 @@ use bitloom_hir::{
 };
 
 mod chisel;
-pub use chisel::{CHISEL_TARGET, ChiselGenError, FIRTOOL_TARGET, emit_chisel};
+pub use chisel::{
+    CHISEL_TARGET, ChiselGenError, FIRTOOL_TARGET, IdiomaticCheckError, check_idiomatic_chisel,
+    emit_chisel, emit_chisel_idiomatic,
+};
 
 /// Emit `<abi_name>.fir` with FIRRTL version 6.0.0 header.
 pub fn emit(hir: &FrozenHir) -> Artifact {
