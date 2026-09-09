@@ -308,7 +308,7 @@ development_status:
   39-2-宿主-ide-rust-analyzer-工作流-fr90: done
   39-3-浅层-bitloom-lsp-或显式-defer-fr91: done
   39-4-多视图同刺激与-adapter-模板-fr92: done
-  epic-39-retrospective: optional
+  epic-39-retrospective: done
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1
@@ -927,3 +927,25 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-38-retro-2026-09-09.md"
+  - id: "epic-39-retro-item-96-fr91-path-b-nfr39-诚实度-对外与文档保持-宿主-rust-an"
+    epic: 39
+    action: "FR91 Path B / NFR39 诚实度：对外与文档保持「宿主 rust-analyzer ≠ Bitloom 自研 LSP」；HTML/时序可视化
+      不计入 LSP 完成；未改选分支 A 不得声称浅层 LSP 已交付；半成品 language-server 二进制不得冒充完成。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-39-retro-2026-09-09.md"
+  - id: "epic-39-retro-item-97-fr92-ad-5-诚实度-同刺激记分板-adapter-模板-自动-fl-rt"
+    epic: 39
+    action: "FR92 / AD-5 诚实度：同刺激记分板 + adapter 模板 ≠ 自动 FL≡RTL 形式证明 ≠ SystemC TLM-2.0
+      产品；不得引入第二套无对照仿真语义作为完成定义；后续加深多视图须新合同。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-39-retro-2026-09-09.md"
+  - id: "epic-39-retro-item-98-同步-epics-md-frontmatter-将-phase11epic39s"
+    epic: 39
+    action: "同步 epics.md frontmatter：将 phase11Epic39Status（及已完成的 36/37/38）从 ready-for-dev
+      改为与 sprint done / phase11Status: complete 一致（续 Epic 36 item-89 / 37 item-92
+      / 38 item-95）；不发明 Phase 11 之后的新 epic。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-39-retro-2026-09-09.md"
