@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 11:48
+last_updated: 09-09-2026 11:55
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -247,7 +247,7 @@ development_status:
   30-2-桥接适配器闭包模板-api: done
   30-3-fr47-双视图联验: done
   30-4-多视图闭包文档收口: done
-  epic-30-retrospective: optional
+  epic-30-retrospective: done
 
   epic-31: done
   31-1-epic-31-nfr14-风险记录: done
@@ -700,3 +700,25 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-29-retro-2026-09-09.md"
+  - id: "epic-30-retro-item-69-epic-31-标-ready-前-确认-story-31-1-nfr14-风险"
+    epic: 30
+    action: "Epic 31 标 ready 前：确认 Story 31.1 NFR14 风险记录完成（epics.md Epic 31 Gate）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-30-retro-2026-09-09.md"
+  - id: "epic-30-retro-item-70-当-macros-language-surface-获得-typed-inlin"
+    epic: 30
+    action: "当 macros / language surface 获得 typed inline 时，跟进自动 rustc 闭包体与借用分析（增强/替代
+      Cap-R-60/70 与 FR76 HlsDataflowOp 手写 descriptor），并保持 E0141–E0146 与 D1/FR78 host
+      路径分立（NFR35）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-30-retro-2026-09-09.md"
+  - id: "epic-30-retro-item-71-若产品需要-dut-真-busy-针脚-fr47-生成对照深度夹具-单独立项增强"
+    epic: 30
+    action: "若产品需要 DUT 真 busy 针脚 × FR47 生成对照深度夹具，单独立项增强（当前 30.3 为 Counter + host 合成
+      busy；30.2 UartTx 已覆盖真实 busy 握手，AC 已满足）；同时继续兑现 epic-28-retro-item-65 对 bitloom-builder
+      的拆分评估（本 epic builder 净 0，债未清）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-30-retro-2026-09-09.md"
