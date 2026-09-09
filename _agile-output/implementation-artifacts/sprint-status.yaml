@@ -340,11 +340,11 @@ development_status:
   43-5-axi-可选-gpio-fr98-收口: done
   epic-43-retrospective: optional
 
-  epic-44: in-progress
+  epic-44: done
   44-1-epic-44-nfr14-风险记录: done
   44-2-bitloom-lsp-服务器-mvp-fr99: done
   44-3-按键全-elaborate-诊断-符号-fr99: done
-  44-4-fr99-收口与撤销-lsp-非目标: backlog
+  44-4-fr99-收口与撤销-lsp-非目标: done
   epic-44-retrospective: optional
 
   epic-45: backlog

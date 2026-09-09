@@ -182,36 +182,37 @@ fn fr99_bitloom_lsp_mvp_scope_guards() {
         sprint.contains("44-2-bitloom-lsp-服务器-mvp-fr99: done"),
         "sprint must mark 44-2 done"
     );
-    // After 44.3, 44-3 is done; 44-4 + epic close remain open.
     assert!(
         sprint.contains("44-3-按键全-elaborate-诊断-符号-fr99: done")
             || sprint.contains("44-3-按键全-elaborate-诊断-符号-fr99: backlog"),
         "44-3 must be tracked (backlog during 44.2-only; done after 44.3)"
     );
+    // After 44.4 closeout, 44-4 and epic-44 are done; earlier phases may still show backlog/in-progress.
     assert!(
-        sprint.contains("44-4-fr99-收口与撤销-lsp-非目标: backlog"),
-        "44-4 must remain backlog"
+        sprint.contains("44-4-fr99-收口与撤销-lsp-非目标: done")
+            || sprint.contains("44-4-fr99-收口与撤销-lsp-非目标: backlog"),
+        "44-4 must be tracked (backlog until closeout; done after 44.4)"
     );
     assert!(
-        sprint.contains("epic-44: in-progress"),
-        "epic-44 must stay in-progress"
+        sprint.contains("epic-44: done") || sprint.contains("epic-44: in-progress"),
+        "epic-44 must be in-progress or done"
     );
 
     let nfr14 =
         read("_agile-output/implementation-artifacts/nfr14-risk-epic44-full-elaborate-lsp.md");
-    // Epic 44 close checklist must NOT be fully ticked yet (44.4).
     assert!(
         nfr14.contains("- [ ] **44.2：**")
             || nfr14.contains("- [x] **44.2：**")
             || nfr14.contains("44.2"),
         "NFR14 must still discuss 44.2 close item"
     );
-    // Full FR99 / Path B revocation boxes remain open (44.4).
+    // Close checklist may be fully ticked after 44.4.
     assert!(
-        nfr14.contains("- [ ] **文档")
-            || nfr14.contains("- [ ] **禁止")
-            || nfr14.contains("Story 44.4"),
-        "NFR14 Epic 44 close / Path B revocation must remain for 44.4"
+        nfr14.contains("Story 44.4")
+            || nfr14.contains("- [x] **文档")
+            || nfr14.contains("- [ ] **文档")
+            || nfr14.contains("closed"),
+        "NFR14 must retain Epic 44 / Story 44.4 close narrative"
     );
 
     // fr38 honesty: must not claim repo has zero language-server binary once 44.2 lands.

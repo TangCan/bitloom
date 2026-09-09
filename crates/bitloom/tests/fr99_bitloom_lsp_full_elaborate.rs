@@ -192,21 +192,22 @@ fn fr99_full_elaborate_scope_guards() {
         "sprint must mark 44-3 done"
     );
     assert!(
-        sprint.contains("44-4-fr99-收口与撤销-lsp-非目标: backlog"),
-        "44-4 must remain backlog"
+        sprint.contains("44-4-fr99-收口与撤销-lsp-非目标: done")
+            || sprint.contains("44-4-fr99-收口与撤销-lsp-非目标: backlog"),
+        "44-4 must be tracked (backlog until closeout; done after 44.4)"
     );
     assert!(
-        sprint.contains("epic-44: in-progress"),
-        "epic-44 must stay in-progress (no FR99 closeout)"
+        sprint.contains("epic-44: done") || sprint.contains("epic-44: in-progress"),
+        "epic-44 must be in-progress or done"
     );
 
     let nfr14 =
         read("_agile-output/implementation-artifacts/nfr14-risk-epic44-full-elaborate-lsp.md");
-    // 44.4 owns full epic close — do not require all boxes ticked.
     assert!(
-        nfr14.contains("- [ ] **文档")
-            || nfr14.contains("- [ ] **禁止")
-            || nfr14.contains("Story 44.4"),
-        "NFR14 epic close / Path B revocation must remain for 44.4"
+        nfr14.contains("Story 44.4")
+            || nfr14.contains("- [x] **文档")
+            || nfr14.contains("- [ ] **文档")
+            || nfr14.contains("closed"),
+        "NFR14 must retain Epic 44 / Story 44.4 close narrative"
     );
 }

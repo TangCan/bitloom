@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR99 / Epic 44；NFR14、NFR40、NFR43；推翻 FR91 Path B defer 作为完成口径；对照 FR90 / FR38 / FR49 |
 | 记录日期 | 2026-09-09 |
-| 状态 | accepted — Story 44.1（门禁开启；关闭条件留给 44.4） |
+| 状态 | closed — Story 44.4（Epic 44 / FR99 关闭） |
 
 ### (a) 上游约束
 
@@ -111,13 +111,14 @@
 
 - [x] **44.2：** 可安装/可启动 language-server + 编辑器接线 + 可复现会话 — Story 44.2
 - [x] **44.3：** 按键全 elaborate 诊断 + 符号/跳转（P1–P6）+ ATDD 可区分浅层路径 — Story 44.3
-- [ ] **文档 / deferred：** 撤销「LSP 永久非目标 / FR91 Path B defer 作为完成」；FR90 仍可用但不替代 FR99
-- [ ] **禁止事项未触发：** 无半成品二进制交差；无 HTML 计入 LSP；无仅浅层诊断关闭 FR99
-- [ ] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
+- [x] **文档 / deferred：** 撤销「LSP 永久非目标 / FR91 Path B defer 作为完成」；FR90 仍可用但不替代 FR99 — Story 44.4
+- [x] **禁止事项未触发：** 无半成品二进制交差；无 HTML 计入 LSP；无仅浅层诊断关闭 FR99 — Story 44.4
+- [x] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude` — Story 44.4
 
 ---
 
 ## 门禁一句话
 
 **缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 44 故事 44.2–44.4 标 `ready`。**  
-**FR99 完成面 = 按键全设计 elaborate 的自研 Bitloom LSP（性能/范围见上表）+ 与 rust-analyzer 分工诚实 + ATDD；不得以半成品二进制、HTML 可视化、宿主 RA、或仅浅层诊断单独关闭 FR99。**
+**FR99 完成面 = 按键全设计 elaborate 的自研 Bitloom LSP（性能/范围见上表）+ 与 rust-analyzer 分工诚实 + ATDD；不得以半成品二进制、HTML 可视化、宿主 RA、或仅浅层诊断单独关闭 FR99。**  
+**Epic 44 / FR99：closed — Story 44.4。**

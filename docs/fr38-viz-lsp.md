@@ -20,15 +20,15 @@ Open the HTML in a browser. This is the product hierarchy path for FR38/FR49 —
 
 ## LSP / FR91 Path B / Epic 44 (FR99)
 
-**FR91 Path B (Story 39.3 — historical close):** Epic 39 closed FR91 by **explicit defer** of a self-hosted Bitloom language-server as that epic’s completion path. Hierarchy / timing HTML does **not** count as FR91 completion (HTML ≠ LSP). Host **rust-analyzer** (FR90) is the Wave D Rust IDE path — **not** a substitute for Bitloom hardware-semantics LSP.
+**FR91 Path B (Story 39.3 — historical close):** Epic 39 closed FR91 by **explicit defer** of a self-hosted Bitloom language-server as that epic’s completion path. That Path B defer is **historical only** and is **not** a Phase 12 / FR99 completion bar. Hierarchy / timing HTML does **not** count as LSP (HTML ≠ LSP). Host **rust-analyzer** (FR90) is the Wave D Rust IDE path — **not** a substitute for Bitloom hardware-semantics LSP.
 
-**Epic 44 / FR99 (Phase 12):** Story **44.2** delivered installable **`bitloom-lsp`** (stdio `initialize` / capabilities + wiring). Story **44.3** adds **didSave → full-design elaborate** with `publishDiagnostics` + document symbols / goto — see [`fr99-bitloom-lsp.md`](fr99-bitloom-lsp.md). FR99 epic closeout / Path B completion-narrative revocation remains **Story 44.4**. HTML still ≠ LSP.
+**Epic 44 / FR99 (Phase 12) — closed (Story 44.4):** Stories **44.2–44.3** delivered installable **`bitloom-lsp`** with **didSave → full-design elaborate**, `publishDiagnostics`, and document symbols / goto — see [`fr99-bitloom-lsp.md`](fr99-bitloom-lsp.md). Epic 44 / FR99 closeout and Path B completion-narrative revocation are **done**. HTML still ≠ LSP.
 
-**MUST NOT** claim: (1) HTML visualization is LSP; (2) rust-analyzer alone completes FR99 / Story 44.2; (3) FR99 is fully closed before 44.3–44.4.
+**MUST NOT** claim: (1) HTML visualization is LSP; (2) rust-analyzer alone completes FR99; (3) FR91 Path B defer still satisfies Phase 12 LSP literal-green.
 
-Reinforced in `_agile-output/implementation-artifacts/deferred-work.md`, NFR14 Epic 39 (`nfr14-risk-epic39-ide-multiview.md` — FR91 Path B checkbox remains historically ticked), and NFR14 Epic 44 (`nfr14-risk-epic44-full-elaborate-lsp.md`).
+Reinforced in `_agile-output/implementation-artifacts/deferred-work.md`, NFR14 Epic 39 (`nfr14-risk-epic39-ide-multiview.md` — FR91 Path B checkbox remains historically ticked), and NFR14 Epic 44 (`nfr14-risk-epic44-full-elaborate-lsp.md` — **closed**).
 
-**FR90 host path:** Bitloom design crates use **rust-analyzer** (host IDE) for completion / goto / rustc diagnostics — see [`fr90-host-ide-rust-analyzer.md`](fr90-host-ide-rust-analyzer.md). That host workflow is **not** a substitute for FR99 `bitloom-lsp`.
+**FR90 host path:** Bitloom design crates use **rust-analyzer** (host IDE) for completion / goto / rustc diagnostics — see [`fr90-host-ide-rust-analyzer.md`](fr90-host-ide-rust-analyzer.md). That host workflow remains available and is **not** a substitute for FR99 `bitloom-lsp`.
 
 **Epic 35:** LSP hover/goto was **not** an Epic 35 completion criterion. Story 35.4 only re-documented that boundary.
 

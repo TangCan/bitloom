@@ -1,8 +1,8 @@
 //! ATDD — Story 39.2 / FR90: host IDE / rust-analyzer workflow docs.
 //!
-//! Red until `docs/fr90-host-ide-rust-analyzer.md` delivers reproducible
-//! steps + fixture explanation, and README/fr38 cross-link the host path
-//! without claiming Bitloom LSP delivered.
+//! Documents reproducible host rust-analyzer steps + fixture explanation.
+//! Cross-links README/fr38 without claiming rust-analyzer alone completes FR99.
+//! After Epic 44, FR99 `bitloom-lsp` may be closed; FR90 remains the Rust host path.
 //!
 //! ```text
 //! cargo test -p bitloom --test fr90_host_ide_rust_analyzer
@@ -117,19 +117,25 @@ fn fr90_doc_distinguishes_host_ide_from_hardware_lsp_and_html() {
                 || text.contains("非")
                 || text.contains("❌")
                 || text.contains("not")),
-        "FR90 doc must reject hardware-semantic / netlist LSP as in-scope"
+        "FR90 doc must reject hardware-semantic / netlist LSP as in-scope for FR90"
     );
+    // FR90 itself does not deliver Bitloom LSP (❌ / 非本故事); FR99 may be closed.
     assert!(
         (text.contains("Bitloom LSP")
             || (text.contains("自研") && text.contains("language-server"))
-            || text.contains("自研 LSP"))
+            || text.contains("自研 LSP")
+            || text.contains("bitloom-lsp"))
             && (text.contains("不交付")
+                || text.contains("非本故事")
+                || text.contains("非 FR90")
+                || text.contains("不替代")
+                || text.contains("does not substitute")
                 || text.contains("deferred")
                 || text.contains("defer")
                 || text.contains("Path B")
                 || text.contains("分支 B")
                 || text.contains("❌")),
-        "FR90 doc must state Bitloom / self-hosted LSP is not delivered (Path B)"
+        "FR90 doc must state host path does not deliver / substitute for Bitloom hardware LSP"
     );
     assert!(
         (text.contains("fr38") || text.contains("层次") || text.contains("HTML"))
@@ -140,13 +146,20 @@ fn fr90_doc_distinguishes_host_ide_from_hardware_lsp_and_html() {
                 || text.contains("not")),
         "FR90 doc must situate hierarchy HTML / fr38 as not substituting for host IDE LSP"
     );
+    assert!(
+        text.contains("FR99")
+            && (text.contains("不替代")
+                || text.contains("does not substitute")
+                || text.contains("alone")
+                || text.contains("仅")),
+        "FR90 doc must keep FR99 non-substitution honesty after Epic 44 close"
+    );
     let lower = text.to_lowercase();
     assert!(
-        !text.contains("Bitloom LSP 已交付")
-            && !text.contains("Bitloom LSP delivered")
-            && !lower.contains("bitloom lsp is complete")
-            && !lower.contains("bitloom language server delivered"),
-        "FR90 doc must not claim Bitloom LSP delivered"
+        !lower.contains("rust-analyzer alone completes fr99")
+            && !text.contains("仅 rust-analyzer 即完成 FR99")
+            && !text.contains("仅 rust-analyzer = FR99"),
+        "FR90 doc must not claim rust-analyzer alone completes FR99"
     );
 }
 

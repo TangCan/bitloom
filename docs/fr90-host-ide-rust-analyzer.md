@@ -2,7 +2,7 @@
 
 **Product:** Bitloom（`cargo bitloom`）。与 [samitbasu/rhdl](https://github.com/samitbasu/rhdl) 无关。
 
-**合同：** Wave D **必做**宿主路径——用 **rust-analyzer**（或等价宿主 LSP）为 Bitloom **设计 crate** 提供 Rust 语言智能（补全、跳转、诊断）。**不**替代 Epic 44 / **FR99** 自研 Bitloom language-server（Story **44.2** 起交付 `bitloom-lsp` MVP — 见 [`fr99-bitloom-lsp.md`](fr99-bitloom-lsp.md)）。Epic 39 **FR91 Path B** 仍为该 epic 的历史关闭路径（显式 defer）；见 [`fr38-viz-lsp.md`](fr38-viz-lsp.md)。
+**合同：** Wave D **必做**宿主路径——用 **rust-analyzer**（或等价宿主 LSP）为 Bitloom **设计 crate** 提供 Rust 语言智能（补全、跳转、诊断）。**不**替代 Epic 44 / **FR99** 自研 Bitloom language-server（**Epic 44 closed** — `bitloom-lsp`；见 [`fr99-bitloom-lsp.md`](fr99-bitloom-lsp.md)）。Epic 39 **FR91 Path B** 仍为该 epic 的**历史**关闭路径（显式 defer）；Path B defer **不再**作为 Phase 12 FR99 完成口径。见 [`fr38-viz-lsp.md`](fr38-viz-lsp.md)。
 
 ## 前置
 
@@ -46,19 +46,21 @@ cargo bitloom build --package counter_ports
 | 能力 | 本故事（FR90） | 非本故事 |
 | --- | --- | --- |
 | Rust 补全 / 跳转 / rustc 诊断 | ✅ rust-analyzer 宿主路径 | — |
-| 硬件语义 / netlist 符号与 elaborate 语义 LSP | ❌ | FR93 永久非目标；非 FR90 |
-| Bitloom 自研 language-server 二进制 | ❌ | FR91 **Path B** 显式 defer（Story 39.3 已合同化） |
+| 硬件语义 / netlist 符号与 elaborate 语义 LSP | ❌（非 FR90） | ✅ **FR99** / Epic 44 **closed** — [`fr99-bitloom-lsp.md`](fr99-bitloom-lsp.md) |
+| Bitloom 自研 language-server 二进制 | ❌（非 FR90；本页不交付） | ✅ **FR99** `bitloom-lsp`（Epic 44 closed）；Epic 39 FR91 Path B 仅为历史 defer |
 | 层次 / 时序 HTML | ❌ 不计入 LSP | 见 [`fr38-viz-lsp.md`](fr38-viz-lsp.md) / [`fr38-wave.md`](fr38-wave.md) |
 
-**不得**把本页、层次 HTML、或宿主 rust-analyzer 写成自研硬件语义 language-server 已完成。
+**不得**把本页或层次 HTML 写成「装了 rust-analyzer 就等于 FR99 完成」。FR90 宿主路径**仍可用**，且 **does not substitute** for FR99。
 
 ## 相关链接
 
-- [`fr38-viz-lsp.md`](fr38-viz-lsp.md) — 层次 HTML；完整 LSP deferred；HTML ≠ LSP
+- [`fr38-viz-lsp.md`](fr38-viz-lsp.md) — 层次 HTML；HTML ≠ LSP；FR99 / Epic 44 closed
+- [`fr99-bitloom-lsp.md`](fr99-bitloom-lsp.md) — 自研 Bitloom LSP（FR99）
 - [`nfr13-msrv-1.97.1.md`](nfr13-msrv-1.97.1.md) — MSRV / 工具链
 - [`../README.md`](../README.md) — 快速开始与文档索引
-- NFR14 Epic 39：`_agile-output/implementation-artifacts/nfr14-risk-epic39-ide-multiview.md`（FR91 Path B）
-- deferred ledger：[`../_agile-output/implementation-artifacts/deferred-work.md`](../_agile-output/implementation-artifacts/deferred-work.md)（完整 Bitloom LSP 仍 deferred；**宿主路径见本页 FR90**）
+- NFR14 Epic 39：`_agile-output/implementation-artifacts/nfr14-risk-epic39-ide-multiview.md`（FR91 Path B 历史）
+- NFR14 Epic 44：`_agile-output/implementation-artifacts/nfr14-risk-epic44-full-elaborate-lsp.md`（closed）
+- deferred ledger：[`../_agile-output/implementation-artifacts/deferred-work.md`](../_agile-output/implementation-artifacts/deferred-work.md)
 
 ## 验证（ATDD）
 

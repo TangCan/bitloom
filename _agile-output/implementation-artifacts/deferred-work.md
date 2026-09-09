@@ -14,10 +14,10 @@ Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**；当前完�
 2. FIRRTL→idiomatic Scala → **FR97**（**Epic 42 已关闭** — MVP 已交付 / Story 42.3；修订后 **AD-27**）；机械 FR28/FR46 不得冒充 FR97
 3. 默认 TLM≡CA 形式证明 → 现 **FR100**（Epic 45）；SystemC TLM 产品 → **FR101**（Epic 46；修订后 **AD-5**）
 4. VIP 级全协议 IP → 现 **FR98**（**Epic 43 已关闭** — UART/SPI/I2C/AXI4-Lite 近 VIP MVP；GPIO 可选未纳入；Story 43.5）
-5. 按键全设计 elaborate 的 netlist LSP → 现 **FR99**（Epic 44）
+5. 按键全设计 elaborate 的 netlist LSP → 现 **FR99**（**Epic 44 已关闭** — Story 44.4；`bitloom-lsp` 全设计 elaborate MVP）
 
 **Phase 12（2026-09-09）：** Correct Course `sprint-change-proposal-2026-09-09-phase12-path-b.md` + PRD addendum「Phase 12 字面绿」**已推翻**上述锁定（闸门 **FR94**）。  
-README 与本文件同源：原五项不再是永久非目标；其中 **#1（树内 HLS）已由 Epic 41 关闭**，**#2（idiomatic Chisel）已由 Epic 42 关闭**，**#4（VIP / 全协议 IP）已由 Epic 43 / FR98 关闭**；其余仍为交付目标（对应 FR 关闭后方可宣称 / **NFR42**）；ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 已于 Story **40.4** 修订（**NFR41**）。Epic 44–47 仍须各自经 NFR14 后标 ready——**本条目不把 44–47 标为已开工**。
+README 与本文件同源：原五项不再是永久非目标；其中 **#1（树内 HLS）已由 Epic 41 关闭**，**#2（idiomatic Chisel）已由 Epic 42 关闭**，**#4（VIP / 全协议 IP）已由 Epic 43 / FR98 关闭**，**#5（按键全 elaborate LSP）已由 Epic 44 / FR99 关闭**；其余仍为交付目标（对应 FR 关闭后方可宣称 / **NFR42**）；ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 已于 Story **40.4** 修订（**NFR41**）。Epic 45–47 仍须各自经 NFR14 后标 ready——**本条目不把 45–47 标为已开工**。
 
 PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 11 FR93 历史 + Phase 12 推翻）。
 
@@ -180,9 +180,11 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   status: deferred — 未来 epic；不宣称交互式波形已交付
 
 - source_spec: `_agile-output/implementation-artifacts/epic-23-retro-2026-08-21.md`
-  summary: 完整 / 按键全 elaborate Bitloom LSP（FR91 Path B 历史 defer；FR99 / Epic 44 交付中）
-  evidence: epic-23-retro-item-52；**Story 39.3** 合同化 FR91 Path B（历史关闭）；**Story 44.2** `bitloom-lsp` MVP；**Story 44.3** didSave 全设计 elaborate + 诊断/符号（`docs/fr99-bitloom-lsp.md`）；FR99 收口 → **44.4**；**FR90** ≠ FR99；HTML ≠ LSP
-  status: in-progress — Epic 44；44.2–44.3 done；FR99 未全关（待 44.4）；不得以仅 rust-analyzer 冒充完成
+  summary: 完整 / 按键全 elaborate Bitloom LSP（FR91 Path B 历史 defer；FR99 / Epic 44 已关闭）
+  evidence: epic-23-retro-item-52；**Story 39.3** 合同化 FR91 Path B（历史关闭，≠ Phase 12 完成口径）；**Stories 44.2–44.4** 交付并收口 `bitloom-lsp`（`docs/fr99-bitloom-lsp.md`）；**FR90** ≠ FR99；HTML ≠ LSP
+  status: closed — Epic 44 / FR99；Story 44.4
+  resolved: '2026-09-09'
+  resolution: Story 44.4 勾选 NFR14；撤销 Path B defer 作为完成口径；epic-44 done
 
 - source_spec: `_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md`
   summary: CI 默认 Bambu stub（`bambu-ci-stub.sh`）验证接线与非零覆盖，非真实 HLS 调度质量

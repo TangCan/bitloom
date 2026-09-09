@@ -1,6 +1,8 @@
-# FR99 — Bitloom language-server（Stories 44.2 + 44.3）
+# FR99 — Bitloom language-server（Epic 44 closed）
 
 **Product:** Bitloom（`bitloom-lsp`）。与 [samitbasu/rhdl](https://github.com/samitbasu/rhdl) 无关。
+
+**Status:** **Epic 44 / FR99 closed** — Story **44.4** (2026-09-09). FR91 Path B explicit defer is **historical** (Epic 39) and is **not** a Phase 12 completion bar.
 
 **Scope:**
 
@@ -8,9 +10,9 @@
 | --- | --- |
 | **44.2** | Installable/startable `bitloom-lsp` + minimal `initialize` / capabilities + editor wiring |
 | **44.3** | Documented edit-trigger → **full-design elaborate**; `publishDiagnostics` + document symbols / goto (hardware-semantic) |
-| **44.4** | FR99 epic closeout / Path B completion-narrative revocation — **not yet** |
+| **44.4** | FR99 epic closeout / Path B completion-narrative revocation — **closed** |
 
-**MUST NOT** claim that **rust-analyzer alone** (FR90) completes FR99. Host rust-analyzer remains the Rust IDE path; Bitloom LSP is the hardware-semantics product path under Epic 44. HTML visualization (FR38/FR49) ≠ LSP.
+**MUST NOT** claim that **rust-analyzer alone** (FR90) completes FR99. Host rust-analyzer remains the Rust IDE path and **does not substitute** for FR99; Bitloom LSP is the hardware-semantics product path. HTML visualization (FR38/FR49) ≠ LSP.
 
 ## Install / start
 
@@ -95,6 +97,9 @@ cargo test -p bitloom --test fr99_bitloom_lsp_server_mvp fr99_bitloom_lsp_initia
 
 # 44.3 full vs shallow elaborate + diagnostics/symbols
 cargo test -p bitloom --test fr99_bitloom_lsp_full_elaborate -- --nocapture
+
+# 44.4 Epic 44 / FR99 closeout
+cargo test -p bitloom --test fr99_epic44_closeout -- --nocapture
 ```
 
 ## Design crate dependency boundary
