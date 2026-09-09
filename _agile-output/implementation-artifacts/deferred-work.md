@@ -147,7 +147,7 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   evidence: |
     epic-22-retro-item-48；更新（2026-09-08 / Story 34.3）：
     - SyncFifo：**FR82 非 stub** depth-4 + full/empty；非异步跨域 FIFO
-    - UartTx：**FR82 非 stub** 8N1 bit-bang（baud=clk）；非可编程波特率 / RX / 全双工
+    - UartTx：**FR82 非 stub** 8N1；**FR89 / Epic 38.2：** 可编程 `baud_div` 子集已交付；仍非 RX / 全双工 / VIP / 全协议 / 小数分频
     - SpiMaster：**FR82 非 stub** Mode-0-ish MSB byte shifter；非多 CPOL/CPHA / 多 CS
     - I2cMaster：**FR82 非 stub** START+8data+STOP；非 ACK/伸展/多主
     - Axi4LiteSlave：**FR82 非 stub** 单寄存器握手玩具；非 Full AXI / VIP
@@ -157,7 +157,8 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   summary: UART/SPI/I2C「全协议」仍非默认交付；Epic 34 仅合同化最小可综合基线（非 VIP 级）
   evidence: |
     epic-22-retro-item-49 + Epic 34 / FR82 / nfr14-risk-epic34-ip-baseline.md；
-    34.2–34.3 已交付五类文档最小子集；可编程波特率/RX、多模式 SPI、I2C ACK、VIP 等仍须新合同
+    34.2–34.3 已交付五类文档最小子集；Epic 38.2 合同化 UartTx **可编程波特率子集**（非 RX/VIP）；
+    全协议 / RX / 多模式 SPI / I2C ACK / VIP 等仍须新合同（关闭交叉引用 → Story 38.3）
   status: locked — 全协议加深仍须显式改合同；FR82 基线 ≠ 全协议
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
@@ -283,7 +284,7 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     - item-74：可配置 DEPTH/WIDTH 全家桶或 wr_clk/rd_clk 双物理时钟（超出 4×8 / phantom 双域）
     - item-77：≥2 层嵌套递归或 HwVec&lt;Bundle,_&gt;（超出一层 MVP）
     - item-80：双时钟裸 mem / 多口掩码 / 翻转 Path B（永久非目标除非新合同）
-    - item-83：全协议 / VIP / Full AXI / 可编程 baud / depth·width 全家桶（超出 FR82 文档最小子集）
+    - item-83：全协议 / VIP / Full AXI / 可编程 baud **全家桶**（小数分频/表）/ depth·width 全家桶；注：UartTx **分频子集**已由 Epic 38.2 / FR89 合同化，不等于全家桶
     - item-86：任意 FrozenHir C 加载器 / SoftF16→HIR→emit Path A / 商用 sby 全证明 / LSP 二进制
   status: deferred — optional product scope（explicit new contract required）
   resolved: '2026-09-09'
