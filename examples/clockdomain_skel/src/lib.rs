@@ -1,9 +1,13 @@
-//! FR52 夹具：ClockDomain / CDC 产品叙事（AD-22）。
+//! FR52 夹具：ClockDomain / CDC **历史最小合同**（AD-22）。
 //!
 //! - 域绑定：`ClockDomain::<ID>` 叙事锚点 + `bind_domain`
 //! - 非法跨域无 bridge → `finish` 失败（`rhdl::E0220`）
-//! - 合法跨域：`mark_cdc_bridge`（文档等价 [`DoubleFlop`] / [`SyncFIFO`]）→ emit → tick
+//! - 合法跨域：`mark_cdc_bridge`（诊断文案仍点名 [`DoubleFlop`] / [`SyncFIFO`]）→ emit → tick
 //! - 同步·异步复位：`declare_reg_ex`（`async_reset` false/true）；极性 = 默认同步高有效 [`Reset`]（AD-15）
+//!
+//! **NFR37：** 本夹具**不是** FR79 真 RTL 深度。`DoubleFlop`/`SyncFIFO` 在此仅作 ZST
+//! 叙事锚点 + `mark_cdc_bridge`；可综合同步器/FIFO 见 `examples/doubleflop_skel`、
+//! `examples/syncfifo_skel` 与 `docs/tutorials/cdc-depth.md`。
 //!
 //! **仿真步进：** MVP 使用全局 [`bitloom_sim::Sim::tick`]；文档上等价于「按域 tick」
 //!（尚未提供独立 per-domain tick 引擎）。
@@ -72,9 +76,10 @@ fn elaborate_cdc(with_bridge: bool) -> Result<FrozenHir, Diagnostics> {
     s.finish()
 }
 
-/// 合法 CDC 路径夹具：经 `mark_cdc_bridge`（DoubleFlop / SyncFIFO 文档等价）。
+/// 合法 CDC 路径夹具：经 `mark_cdc_bridge`（FR52 最小合同）。
 ///
-/// `DoubleFlop` / `SyncFIFO` 为语言级 ZST 锚点，不生成真实同步器 RTL IP。
+/// 此处的 `DoubleFlop` / `SyncFIFO` 仅作语言级 ZST 叙事锚点，**本夹具不 emit**
+/// 同步器/FIFO 网表。FR79 真 RTL → `doubleflop_skel` / `syncfifo_skel`。
 pub struct ClockDomainSkel;
 
 impl Elaboratable for ClockDomainSkel {

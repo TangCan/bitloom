@@ -10,7 +10,8 @@
 | `DoubleFlop` | ZST 叙事锚点 | `Elaboratable` → `sync_ff0` / `sync_ff1` |
 | 深度关闭 | sprint 可 `done`（最小） | **不得**用历史 done 冒充 |
 
-`examples/clockdomain_skel` 仍演示 FR52 最小合同。真 RTL 夹具：`examples/doubleflop_skel`。
+`examples/clockdomain_skel` 仍演示 FR52 最小合同。真 RTL 夹具：`examples/doubleflop_skel`。  
+Epic 31 收口跟练：[`docs/tutorials/cdc-depth.md`](tutorials/cdc-depth.md)（CDC 深度 / FR79）。
 
 ## 合同内
 

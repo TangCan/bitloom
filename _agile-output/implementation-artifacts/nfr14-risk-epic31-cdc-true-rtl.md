@@ -14,12 +14,12 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR79（加深 FR23/FR52）/ Epic 31；NFR14、NFR37；AD-29 |
 | 记录日期 | 2026-09-09 |
-| 状态 | accepted — 门禁生效；Epic 31 关闭条件待 Story 31.4 勾选 |
+| 状态 | accepted — Epic 31 关闭条件已由 Story 31.4 勾选 |
 
 ### (a) 上游约束
 
 - **AD-29：** 语言级 `DoubleFlop` / `SyncFIFO`（或文档等价）在 Phase 10 / Epic 31 深度验收中必须 **emit 可综合同步器 RTL**，并支持按域 tick 黄金夹具。phantom 域与非法跨域失败（既有 FR23）仍然有效，但**不足以单独交差**深度合同。
-- **crates 现状（诚实基线）：** `bitloom-prelude` 中 `DoubleFlop` / `SyncFIFO` 今日为 **ZST 叙事锚点**；合法跨域靠 `ElaborateSession::mark_cdc_bridge`；emit 不产生可识别的两级同步寄存器网表。此现状**不是** FR79 完成定义。
+- **crates 现状（诚实基线 → Story 31.2–31.3 已兑现）：** `DoubleFlop` / `SyncFIFO` 类型本身仍可为 **ZST 标记**，但 `::elaborate()` 已 emit 可识别同步/FIFO 网表（两级 `sync_ff*`；DEPTH=4/WIDTH=8 灰码 SyncFIFO）。FR52 `examples/clockdomain_skel` 仍演示 **仅** `mark_cdc_bridge` 最小合同，**不得**冒充 FR79 深度（NFR37）。
 - **与历史 Epic 7「done」冲突的诚实度风险（NFR37）：** Epic 7 交付了跨域诊断、prelude 标记名与（部分）注释形 emit；sprint 可将 Epic 7 标 `done`，但那是 **FR23 最小合同**（诊断 + 标记路径），**≠** FR79 / AD-29 **真 RTL 深度**。公开/内部文档若仅以 Epic 7 / FR52「done」关闭 CDC 深度，构成 **诚实度失败** — 须以本 epic FR79 验收，不得静默沿用历史话术。
 - **双 FF 延迟 / 亚稳态文档边界（强制写清，留给 31.2–31.4 实现兑现）：**
   - **合同内：** 同步器级数（默认两级，或文档钉死 N 级）、源域→目的域的 **可观测延迟（以目的域 tick 计）**、黄金夹具期望值、非法未标记跨域仍 `E0220`（或等价）失败。
@@ -54,7 +54,7 @@
 | 维度 | Epic 7 / FR23（+ FR52 夹具） | Epic 31 / FR79（AD-29） |
 | --- | --- | --- |
 | 完成话术 | phantom 域 + 非法跨域失败 + DoubleFlop/SyncFIFO **标记名**；`mark_cdc_bridge` | emit **可综合同步器 RTL** + 按域 tick 黄金 |
-| prelude 形态 | ZST 叙事锚点 | 须驱动真实网表（不得仅 ZST） |
+| prelude 形态 | ZST 叙事锚点 + `mark_cdc_bridge` | ZST 标记 **+** elaborate 真网表（不得仅 bridge） |
 | 诚实度 | sprint 可 `done`（最小合同） | **不得**用该 done 关闭深度（NFR37） |
 | 亚稳态 | 多未钉死 | 文档钉死 **延迟语义**；物理 MTBF **非**默认合同 |
 
@@ -70,7 +70,8 @@
 - AD-29 — CDC 原语须可综合真 RTL（深度）
 - AD-22 / AD-15 — phantom 域；默认单时钟
 - PRD NFR14 / FR23 / FR52 / FR79；NFR37（规划 done ≠ 深度 done）
-- `bitloom-prelude` — `DoubleFlop` / `SyncFIFO`（现状 ZST）；`ElaborateSession::mark_cdc_bridge`
+- `bitloom-prelude` — `DoubleFlop` / `SyncFIFO`（ZST 标记 + elaborate 真 RTL）；FR52 `mark_cdc_bridge` 仍保留
+- 跟练 / 收口：`docs/tutorials/cdc-depth.md`；ATDD `fr79_cdc_depth_closeout`
 - 体例：`nfr14-risk-epic30-bridge-adapter-closures.md`；`nfr14-risk-epic34-ip-baseline.md`
 - 历史别名消歧：**NFR14-crates** ≠ 本门禁 **NFR14**
 
@@ -78,16 +79,16 @@
 
 ### Epic 31 关闭条件（Story 31.4 勾选）
 
-- [ ] **FR79 DoubleFlop：** emit `.v` 含可识别两级（或文档钉死级数）同步寄存器；按域 tick 黄金满足延迟语义
-- [ ] **FR79 SyncFIFO（或等价）：** 可 elaborate/emit/tick；深度/宽度文档化；跨域满/空（或书面最小子集）正确
-- [ ] **负例保留：** 未标记非法跨域仍失败（继承 FR23）
-- [ ] **NFR37：** 相对 Epic 7 / ZST+`mark_cdc_bridge` 历史已文档化；不得用历史 `done` 冒充深度关闭
-- [ ] **ATDD / 配方：** DoubleFlop + SyncFIFO 黄金 + 负例（亦含于 `just test` 或文档化配方）
-- [ ] **禁止事项未触发：** 无仅改文档声称真 RTL；无仅 ZST 无网表交差；无静默砍掉 SyncFIFO 却宣称 FR79 全完成
+- [x] **FR79 DoubleFlop：** emit `.v` 含可识别两级（或文档钉死级数）同步寄存器；按域 tick 黄金满足延迟语义
+- [x] **FR79 SyncFIFO（或等价）：** 可 elaborate/emit/tick；深度/宽度文档化；跨域满/空（或书面最小子集）正确
+- [x] **负例保留：** 未标记非法跨域仍失败（继承 FR23）
+- [x] **NFR37：** 相对 Epic 7 / ZST+`mark_cdc_bridge` 历史已文档化；不得用历史 `done` 冒充深度关闭
+- [x] **ATDD / 配方：** DoubleFlop + SyncFIFO 黄金 + 负例（亦含于 `just test` 或文档化配方）
+- [x] **禁止事项未触发：** 无仅改文档声称真 RTL；无仅 ZST 无网表交差；无静默砍掉 SyncFIFO 却宣称 FR79 全完成
 
 ---
 
 ## 门禁一句话
 
 **缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 31 故事 31.2–31.4 标 `ready`。**  
-**Epic 31 关闭条件（上节）待 Story 31.4 勾选。**
+**Epic 31 关闭条件（上节）已由 Story 31.4 勾选（2026-09-09）。**

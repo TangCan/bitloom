@@ -28,7 +28,9 @@ cargo bitloom build --package blink --manifest-dir blink --out-dir out
 
 - **工具链：** `rust-toolchain.toml` 钉死 **rustc 1.97.1** / edition 2024
 - **测试（贡献者）：** `just test`（或 `cargo test --workspace`）
-- **ClockDomain / CDC（FR52）：** 产品叙事与夹具见 [`examples/clockdomain_skel`](examples/clockdomain_skel)（`bind_domain` / `mark_cdc_bridge` / `rhdl::E0220`；全局 `Sim::tick` 为按域 tick 的 MVP 等价）
+- **ClockDomain / CDC：**
+  - **FR52（历史最小合同）：** [`examples/clockdomain_skel`](examples/clockdomain_skel) — `bind_domain` / `mark_cdc_bridge` / `rhdl::E0220`；全局 `Sim::tick` 为按域 tick 的 MVP 等价。**不得**单独交差 FR79 深度（NFR37）。
+  - **FR79（真 RTL / AD-29）：** [`examples/doubleflop_skel`](examples/doubleflop_skel) · [`examples/syncfifo_skel`](examples/syncfifo_skel)；文档 [`docs/fr79-doubleflop-cdc.md`](docs/fr79-doubleflop-cdc.md) · [`docs/fr79-syncfifo-cdc.md`](docs/fr79-syncfifo-cdc.md)；跟练 [`docs/tutorials/cdc-depth.md`](docs/tutorials/cdc-depth.md)（`cargo test -p bitloom --test fr79_cdc_depth_closeout`）
 - **Elaborate-time Mem init（FR73）：** 非捕获 `Fn` 在 `ElaborateSession` 内生成 ROM/LUT 初值，freeze 前消解为普通字表（后端无闭包 IR）。最小面：
 
 ```rust

@@ -38,6 +38,8 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
   - 同步/异步复位：`declare_reg_ex(..., async_reset, has_enable, ...)`；**极性** = 默认同步**高有效** `Reset`（AD-15，无 ActiveLow API）
   - 仿真步进：全局 `Sim::tick` 为「按域 tick」的 MVP 等价（尚无独立 per-domain tick 引擎）；RegD 按 **NBA** 提交（双 FF 延迟不折叠）
 - 夹具：`examples/clockdomain_skel`（FR52）；`examples/doubleflop_skel` / `examples/syncfifo_skel`（FR79）。
+- **文档收口（Story 31.4）：** `docs/tutorials/cdc-depth.md`；ATDD
+  `cargo test -p bitloom --test fr79_cdc_depth_closeout`（黄金矩阵 +「仅 ZST/bridge」对照 + NFR14 勾选）。
 - 默认模块仍是单时钟：恰好一个 `Clock` + 同步高有效 `Reset`（AD-15），除非显式声明多域。
 - 域为 session 标签：多域夹具可仍用一对 `clk`/`rst` 端口（非每域独立时钟端口）。
 

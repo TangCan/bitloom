@@ -10,7 +10,8 @@
 | 时钟 | 单 clk 叙事 | 单 clk | 单物理 `clk` + **phantom 双域** MVP |
 | 模块名 | — | `SyncFifo` | `SyncFIFO` |
 
-`examples/clockdomain_skel` 仍演示 FR52 最小合同。真 RTL 夹具：`examples/syncfifo_skel`。DoubleFlop 见 `docs/fr79-doubleflop-cdc.md`。
+`examples/clockdomain_skel` 仍演示 FR52 最小合同。真 RTL 夹具：`examples/syncfifo_skel`。DoubleFlop 见 `docs/fr79-doubleflop-cdc.md`。  
+Epic 31 收口跟练：[`docs/tutorials/cdc-depth.md`](tutorials/cdc-depth.md)（CDC 深度 / FR79）。
 
 ## 合同内（文档化最小子集）
 

@@ -249,11 +249,11 @@ development_status:
   30-4-多视图闭包文档收口: done
   epic-30-retrospective: optional
 
-  epic-31: in-progress
+  epic-31: done
   31-1-epic-31-nfr14-风险记录: done
   31-2-doubleflop-可综合同步器-rtl: done
   31-3-syncfifo-或等价-可综合跨域-fifo: done
-  31-4-cdc-深度-atdd-文档叙事收口: backlog
+  31-4-cdc-深度-atdd-文档叙事收口: done
   epic-31-retrospective: optional
 
   epic-32: backlog
