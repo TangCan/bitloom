@@ -81,6 +81,13 @@ fn matrix_all_five_ip_apis_have_no_generator_closures() {
             "UartTx",
             src.split("impl Elaboratable for UartTx")
                 .nth(1)
+                .and_then(|s| s.split("impl Elaboratable for UartRx").next())
+                .unwrap_or(""),
+        ),
+        (
+            "UartRx",
+            src.split("impl Elaboratable for UartRx")
+                .nth(1)
                 .and_then(|s| s.split("impl Elaboratable for SpiMaster").next())
                 .unwrap_or(""),
         ),

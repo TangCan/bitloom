@@ -111,32 +111,35 @@ fn fr89_docs_ip_readme_documents_baud_subset_and_non_goals() {
         readme.contains("FR89") || readme.contains("Epic 38") || readme.contains("38"),
         "docs should tie deepen to FR89 / Epic 38"
     );
-    // Explicit non-goals: RX / VIP / full-duplex / full protocol
-    let has_rx_nongoal = readme.contains("RX")
-        && (readme.contains("非") || readme.contains("非目标") || readme.contains("不"));
+    // Explicit non-goals for Epic 38 UartTx deepen (historical): VIP / full protocol
+    // family beyond baud subset. RX / full-duplex overturned later by FR98 / Epic 43.2.
     let has_vip = readme.contains("VIP") || readme.contains("全协议");
-    let has_duplex = readme.contains("全双工")
-        || uartish.contains("full-duplex")
-        || uartish.contains("full duplex");
     assert!(
-        has_rx_nongoal && has_vip && has_duplex,
-        "docs must list RX / VIP|全协议 / 全双工 as non-goals for UartTx deepen"
+        has_vip
+            && (readme.contains("非目标")
+                || readme.contains("明确非")
+                || uartish.contains("non-goal")),
+        "docs must keep VIP|全协议 honesty / non-goals language"
     );
-    // Must not claim RX delivered
     assert!(
-        !readme.contains("最小 RX 已交付") && !readme.contains("UartRx"),
-        "must not claim branch B (RX) delivered"
+        readme.contains("FR89") || readme.contains("Epic 38") || readme.contains("38"),
+        "docs should retain FR89 / Epic 38 baud deepen mention"
+    );
+    // Epic 38 must not claim "最小 RX 已交付" under FR89 wording
+    assert!(
+        !readme.contains("最小 RX 已交付"),
+        "must not claim Epic 38 branch B (minimal RX) under FR89 wording"
     );
 }
 
 #[test]
-fn fr89_uarttx_api_has_no_generator_closures_and_no_rx_module() {
+fn fr89_uarttx_api_has_no_generator_closures_and_baud_div() {
     let src = fs::read_to_string(workspace_root().join("crates/bitloom-prelude/src/ip.rs"))
         .expect("ip.rs");
     let uart = src
         .split("impl Elaboratable for UartTx")
         .nth(1)
-        .and_then(|s| s.split("impl Elaboratable for SpiMaster").next())
+        .and_then(|s| s.split("impl Elaboratable for UartRx").next())
         .unwrap_or("");
     assert!(
         !uart.contains("Fn(") && !uart.contains("dyn Fn"),
@@ -146,8 +149,6 @@ fn fr89_uarttx_api_has_no_generator_closures_and_no_rx_module() {
         uart.contains("baud_div") || uart.contains("baud_cnt"),
         "UartTx deepen must include baud divider / counter nets"
     );
-    assert!(
-        !src.contains("struct UartRx") && !src.contains("impl Elaboratable for UartRx"),
-        "branch B UartRx must not be delivered in this epic"
-    );
+    // FR98 may add UartRx under Epic 43; Epic 38 branch B remains historically undelivered
+    // (see nfr14-risk-epic38 + fr89_epic38_boundary_closeout).
 }

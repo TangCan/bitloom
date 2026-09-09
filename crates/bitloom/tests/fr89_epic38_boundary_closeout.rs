@@ -107,18 +107,20 @@ fn fr89_deepen_atdd_fixture_still_present() {
 fn fr89_no_branch_b_rx_delivery_claims() {
     let nfr = read("_agile-output/implementation-artifacts/nfr14-risk-epic38-uarttx-deepen.md");
     let readme = read("docs/ip/README.md");
-    let ip = read("crates/bitloom-prelude/src/ip.rs");
-    assert!(
-        !readme.contains("UartRx") && !ip.contains("struct UartRx"),
-        "must not deliver UartRx / claim branch B"
-    );
+    // Epic 38 contract: branch B not selected under FR89 (historical).
+    // FR98 / Epic 43.2 may deliver UartRx under a *new* contract — that must not
+    // rewrite NFR14 Epic 38 into claiming branch B was delivered in Epic 38.
     assert!(
         nfr.contains("分支 B") && (nfr.contains("不选用") || nfr.contains("不得")),
-        "NFR14 must keep branch B as not selected / not delivered"
+        "NFR14 must keep branch B as not selected / not delivered under Epic 38"
     );
     assert!(
         !nfr.contains("最小 RX 已交付") && !readme.contains("最小 RX 已交付"),
-        "must not claim minimal RX delivered"
+        "must not claim Epic 38 minimal RX delivered"
+    );
+    assert!(
+        !nfr.contains("struct UartRx"),
+        "Epic 38 NFR14 record must not claim UartRx as an Epic 38 deliverable"
     );
 }
 
@@ -131,10 +133,8 @@ fn fr89_docs_ip_keeps_fr89_subset_and_non_goals() {
         "docs/ip must keep FR89 programmable baud subset"
     );
     assert!(
-        readme.contains("RX")
-            && (readme.contains("非目标") || readme.contains("非"))
-            && (readme.contains("VIP") || readme.contains("全协议"))
-            && readme.contains("全双工"),
-        "docs/ip must keep RX / VIP|全协议 / 全双工 as non-goals"
+        (readme.contains("VIP") || readme.contains("全协议"))
+            && (readme.contains("非目标") || readme.contains("明确非")),
+        "docs/ip must keep VIP|全协议 honesty / non-goals language"
     );
 }

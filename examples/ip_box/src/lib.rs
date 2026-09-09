@@ -1,6 +1,6 @@
 //! Tree IP + black-box via `bitloom_prelude::ip` (FR37 / FR82).
 
-pub use bitloom_prelude::ip::{ExtBlackBox, SyncFifo, UartTx, vendor_blackbox_v};
+pub use bitloom_prelude::ip::{ExtBlackBox, SyncFifo, UartRx, UartTx, vendor_blackbox_v};
 
 #[cfg(test)]
 mod tests {
@@ -76,6 +76,28 @@ mod tests {
                 Some(0),
                 "ip_box: start bit holds for full baud_div period"
             );
+        }
+
+        // UartRx — FR98 near-VIP 8N1 (Epic 43.2)
+        {
+            let hir = UartRx::elaborate().unwrap();
+            assert_eq!(hir.abi_name, "UartRx");
+            let art = emit(&hir);
+            let v = &art.files[0].contents;
+            assert!(v.contains("UartRx") && v.contains("rd_valid") && v.contains("baud_div"));
+            let mut sim = Sim::new(hir);
+            let mut pv = PortValues::default();
+            pv.set("rst", 1);
+            pv.set("rx", 1);
+            pv.set("baud_div", 0);
+            sim.set_inputs(pv.clone());
+            sim.settle();
+            sim.tick();
+            pv.set("rst", 0);
+            sim.set_inputs(pv);
+            sim.settle();
+            sim.tick();
+            assert_eq!(sim.ports().get("rx_busy"), Some(0));
         }
 
         // ExtBlackBox — opaque ports-only wrapper (retained)

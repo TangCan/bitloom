@@ -6,7 +6,7 @@
 
 ```rust
 use bitloom_prelude::ip::{
-    SyncFifo, UartTx, SpiMaster, I2cMaster, Axi4LiteSlave, ExtBlackBox,
+    SyncFifo, UartTx, UartRx, SpiMaster, I2cMaster, Axi4LiteSlave, ExtBlackBox,
 };
 use bitloom_prelude::Elaboratable;
 ```
@@ -61,7 +61,7 @@ ATDD：`cargo test -p bitloom --test fr77_ip_generator_closure`。
 | 类 | Epic 22 stub | FR82（本索引当前） |
 | --- | --- | --- |
 | **FIFO** | depth-1 skid，无 full/empty | **非 stub：** depth-4 sync FIFO，`wr_en`/`rd_en`/`full`/`empty` |
-| **UART** | 字节保持，无串行帧 | **非 stub：** 8N1 bit-bang；FR82 时 `baud_div=0`（1 bit/clk）；**FR89 / Epic 38：** 可编程 `baud_div`（每位 clk−1） |
+| **UART** | 字节保持，无串行帧 | **非 stub：** 8N1 bit-bang；FR82 时 `baud_div=0`（1 bit/clk）；**FR89 / Epic 38：** 可编程 `baud_div`（TX）；**FR98 / Epic 43.2：** [`UartTx`](#五类--黑盒)+[`UartRx`](#五类--黑盒) 近 VIP |
 | **SPI** | 端口语义 stub | **非 stub（文档最小子集）：** Mode-0-ish MSB byte shifter，`cs_n`/`sclk`/`mosi` |
 | **I2C** | 端口语义 stub | **非 stub（文档最小子集）：** START + 8 data + STOP bit-bang |
 | **AXI** | 握手镜像 stub | **非 stub（文档最小子集）：** AXI4-Lite **最小从**单寄存器 write/read 握手玩具 |
@@ -74,7 +74,8 @@ ATDD：`cargo test -p bitloom --test fr77_ip_generator_closure`。
 | 类 | 包路径 / 类型 | Smoke 命令 | 已知限制（基线边界） |
 | --- | --- | --- | --- |
 | **FIFO** | `bitloom_prelude::ip::SyncFifo` | `cargo test -p bitloom-prelude --lib sync_fifo` | depth=4、宽=8；**单时钟** FR82 IP；非跨域（语言级 CDC 见 [`SyncFIFO`](../fr79-syncfifo-cdc.md) / FR79） |
-| **UART** | `bitloom_prelude::ip::UartTx` | `cargo test -p bitloom-prelude --lib uart_tx`；`cargo test -p bitloom --test fr89_uarttx_programmable_baud` | **FR82+FR89：** 8N1 TX，`baud_div`（clk/bit−1；0≡baud=`clk`）；**明确非目标：** RX / 全双工 / VIP / 全协议 / 小数分频 |
+| **UART TX** | `bitloom_prelude::ip::UartTx` | `cargo test -p bitloom-prelude --lib uart_tx`；`cargo test -p bitloom --test fr89_uarttx_programmable_baud` | **FR82+FR89：** 8N1 TX，`baud_div`（clk/bit−1；0≡baud=`clk`） |
+| **UART RX** | `bitloom_prelude::ip::UartRx` | `cargo test -p bitloom-prelude --lib uart_rx`；`cargo test -p bitloom --test fr98_uart_near_vip` | **FR98 / Epic 43.2 近 VIP：** 8N1 RX，同 `baud_div` 语义；`rd_valid` 一周期脉冲；**全双工合同** = 同设计例化 `UartTx`+`UartRx`（独立 `tx`/`rx` 线）。**明确非目标：** 片上半双工切换、parity、流控、IrDA、小数分频、FIFO'd UART、商业 VIP 对拍；**不得**仅因本类宣称 FR98 四类全绿（SPI/I2C/AXI → 43.3–43.5） |
 | **SPI** | `bitloom_prelude::ip::SpiMaster` | `cargo test -p bitloom-prelude --lib spi_master` | Mode-0-ish、MSB-first、1 bit/clk；非其它 CPOL/CPHA / 多 CS / DMA / slave |
 | **I2C** | `bitloom_prelude::ip::I2cMaster` | `cargo test -p bitloom-prelude --lib i2c_master` | START+8data+STOP 教学玩具（SCL 恒高）；非 ACK 驱动 / 伸展 / 多主 / 10-bit / slave |
 | **AXI** | `bitloom_prelude::ip::Axi4LiteSlave` | `cargo test -p bitloom-prelude --lib axi4_lite` | AXI4-Lite **最小从**单寄存器握手（ADDR=8, DATA=32）；忽略 addr/wstrb；非 Full AXI / 互联 / VIP |
