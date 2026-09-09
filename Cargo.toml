@@ -19,6 +19,7 @@ members = [
   "examples/fifo_skel",
   "examples/bundle_vec_skel",
   "examples/clockdomain_skel",
+  "examples/doubleflop_skel",
   "examples/mixed_both",
   "examples/chisel_mixed",
   "examples/ip_box",

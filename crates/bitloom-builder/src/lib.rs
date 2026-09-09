@@ -465,6 +465,71 @@ impl ElaborateSession {
         self.cdc_bridges.insert(name.into());
     }
 
+    /// Declare a synthesizable 2-stage CDC synchronizer register pair (FR79 / AD-29).
+    ///
+    /// Creates `{stem}_ff0` and `{stem}_ff1`, binds both to `dst_domain`, and marks
+    /// `{stem}_ff0` as a CDC bridge so [`Self::assign_reg_d_from`] / [`Self::assign_net`]
+    /// may sample a source-domain `din`. Call [`Self::connect_double_flop`] inside a
+    /// sequential process to wire `ff0 ← din`, `ff1 ← ff0`.
+    ///
+    /// **Stage count:** 2. **Latency:** 2 destination-domain ticks to `ff1` (see
+    /// `DoubleFlop::LATENCY_DST_TICKS` in prelude).
+    pub fn declare_double_flop_stages(
+        &mut self,
+        stem: impl Into<String>,
+        ty: GroundType,
+        dst_domain: u32,
+        span: Span,
+    ) -> (String, String) {
+        let stem = stem.into();
+        let ff0 = format!("{stem}_ff0");
+        let ff1 = format!("{stem}_ff1");
+        self.declare_reg(ff0.clone(), ty.clone(), span);
+        self.declare_reg(ff1.clone(), ty, span);
+        self.bind_domain(&ff0, dst_domain);
+        self.bind_domain(&ff1, dst_domain);
+        self.mark_cdc_bridge(&ff0);
+        (ff0, ff1)
+    }
+
+    /// Wire a previously declared DoubleFlop pair: `ff0 ← din`, `ff1 ← ff0`.
+    ///
+    /// Must be called inside a sequential process. `ff0`/`ff1` should come from
+    /// [`Self::declare_double_flop_stages`].
+    pub fn connect_double_flop(
+        &mut self,
+        ff0: impl Into<String>,
+        ff1: impl Into<String>,
+        din: impl Into<String>,
+        span: Span,
+    ) {
+        let ff0 = ff0.into();
+        let ff1 = ff1.into();
+        let din = din.into();
+        self.assign_reg_d_from(&ff0, &din, span);
+        self.assign_reg_d_from(&ff1, &ff0, span);
+    }
+
+    fn reject_illegal_cdc(&mut self, from: &str, to: &str, span: Span) -> bool {
+        let src_dom = self.domains.get(from).copied().unwrap_or(0);
+        let dst_dom = self.domains.get(to).copied().unwrap_or(0);
+        if src_dom != dst_dom && !self.cdc_bridges.contains(to) && !self.cdc_bridges.contains(from)
+        {
+            self.push_err(Diagnostic {
+                span,
+                code: "rhdl::E0220".into(),
+                en: format!(
+                    "illegal clock-domain crossing '{from}'(D{src_dom}) → '{to}'(D{dst_dom}); use DoubleFlop/SyncFIFO"
+                ),
+                zh: format!(
+                    "非法跨时钟域：'{from}'(D{src_dom}) → '{to}'(D{dst_dom})；请用 DoubleFlop/SyncFIFO"
+                ),
+            });
+            return true;
+        }
+        false
+    }
+
     fn record_width(&mut self, name: &str, ty: &GroundType) {
         let w = match ty {
             GroundType::UInt { width } | GroundType::SInt { width } => *width,
@@ -1315,22 +1380,7 @@ impl ElaborateSession {
     pub fn assign_net(&mut self, name: impl Into<String>, from: impl Into<String>, span: Span) {
         let name = name.into();
         let from = from.into();
-        let src_dom = self.domains.get(&from).copied().unwrap_or(0);
-        let dst_dom = self.domains.get(&name).copied().unwrap_or(0);
-        if src_dom != dst_dom
-            && !self.cdc_bridges.contains(&name)
-            && !self.cdc_bridges.contains(&from)
-        {
-            self.push_err(Diagnostic {
-                span,
-                code: "rhdl::E0220".into(),
-                en: format!(
-                    "illegal clock-domain crossing '{from}'(D{src_dom}) → '{name}'(D{dst_dom}); use DoubleFlop/SyncFIFO"
-                ),
-                zh: format!(
-                    "非法跨时钟域：'{from}'(D{src_dom}) → '{name}'(D{dst_dom})；请用 DoubleFlop/SyncFIFO"
-                ),
-            });
+        if self.reject_illegal_cdc(&from, &name, span) {
             return;
         }
         // Width gate (E0131) before emit — FR51 / FR22 same-width connects.
@@ -1546,10 +1596,13 @@ impl ElaborateSession {
 
     fn assign_reg_d_expr(&mut self, name: impl Into<String>, from: Option<String>, span: Span) {
         let name = name.into();
-        if let Some(ref src) = from
-            && self.check_connect(&name, src, span).is_none()
-        {
-            return;
+        if let Some(ref src) = from {
+            if self.reject_illegal_cdc(src, &name, span) {
+                return;
+            }
+            if self.check_connect(&name, src, span).is_none() {
+                return;
+            }
         }
         let expr = match from {
             Some(src) => AssignExpr::Ref(src),
@@ -2622,6 +2675,46 @@ mod tests {
         s.end_process();
         s.end_module();
         assert!(s.finish().is_ok());
+    }
+
+    #[test]
+    fn double_flop_stages_allow_reg_d_crossing() {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("Df", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("din", GroundType::UInt { width: 1 }, Span::default());
+        s.add_output("dout", GroundType::UInt { width: 1 }, Span::default());
+        s.bind_domain("din", 0);
+        s.bind_domain("dout", 1);
+        let (ff0, ff1) =
+            s.declare_double_flop_stages("sync", GroundType::UInt { width: 1 }, 1, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("dout", &ff1, Span::default());
+        s.end_process();
+        s.begin_sequential(Span::default());
+        s.connect_double_flop(&ff0, &ff1, "din", Span::default());
+        s.end_process();
+        s.end_module();
+        assert!(s.finish().is_ok());
+    }
+
+    #[test]
+    fn assign_reg_d_cross_domain_without_bridge_rejected() {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("Bad", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("din", GroundType::UInt { width: 1 }, Span::default());
+        s.declare_reg("q", GroundType::UInt { width: 1 }, Span::default());
+        s.bind_domain("din", 0);
+        s.bind_domain("q", 1);
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_from("q", "din", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().unwrap_err();
+        assert!(err.0.iter().any(|d| d.code == "rhdl::E0220"), "{err}");
     }
 
     #[test]

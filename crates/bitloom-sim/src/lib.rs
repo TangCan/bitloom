@@ -370,9 +370,14 @@ impl Sim {
             let reset = self.reset_active(&m);
             let seq = self.kernel.seq.clone();
             let comb = self.kernel.comb.clone();
+            // NBA: evaluate all next values before committing register updates.
+            let mut next_regs: BTreeMap<String, u64> = BTreeMap::new();
             for (name, expr) in seq {
                 let next = if reset { 0 } else { self.eval(&expr) };
-                self.regs.insert(name, next);
+                next_regs.insert(name, next);
+            }
+            for (name, val) in next_regs {
+                self.regs.insert(name, val);
             }
             for (name, expr) in comb {
                 let val = self.eval(&expr);
@@ -401,6 +406,9 @@ impl Sim {
         }
 
         let mut next_pending = BTreeMap::new();
+        // NBA: evaluate all RegD next-values against the pre-edge register file,
+        // then commit — required for 2-flop CDC latency (FR79 / AD-29).
+        let mut next_regs: BTreeMap<String, u64> = BTreeMap::new();
         for stmt in &m.body {
             if let Stmt::Process(p) = stmt {
                 if p.kind != ProcessKind::Sequential {
@@ -411,7 +419,7 @@ impl Sim {
                         AssignTarget::RegD(name) => {
                             let (_async_rst, has_en) = self.reg_meta(name);
                             if reset {
-                                self.regs.insert(name.clone(), 0);
+                                next_regs.insert(name.clone(), 0);
                                 continue;
                             }
                             if has_en && !enable {
@@ -427,7 +435,7 @@ impl Sim {
                                 }
                                 _ => {
                                     let next = self.eval(&a.expr);
-                                    self.regs.insert(name.clone(), next);
+                                    next_regs.insert(name.clone(), next);
                                 }
                             }
                         }
@@ -452,6 +460,9 @@ impl Sim {
                     }
                 }
             }
+        }
+        for (name, val) in next_regs {
+            self.regs.insert(name, val);
         }
         self.pending_mem_reads = next_pending;
     }

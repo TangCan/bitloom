@@ -20,16 +20,20 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 - HIR ground 是否扩展 Bundle/Vector 节点由实现选择；公开表面与 emit 语义须一致（AD-20）。
 - **FR22 边界：** 单时钟表面加厚（FR22）的构造条**不含** Bundle/Vec；复合类型由本节 / FR51 交付，不得 silently 算进 FR22 验收。
 
-## ClockDomain (CAP-11 / FR52)
+## ClockDomain (CAP-11 / FR52) + DoubleFlop 真 RTL (FR79 / AD-29)
 
-- **API 映射（产品面；对齐 AD-22）：**
+- **API 映射（产品面；对齐 AD-22 / AD-29）：**
   - 域标记：`ClockDomain::<ID>`（prelude ZST）+ `ElaborateSession::bind_domain(name, id)`（session 域标签；**非**独立 `Signal<D,T>` 包装）
-  - 合法 CDC：`mark_cdc_bridge(name)` — 文档等价 `DoubleFlop` / `SyncFIFO`（叙事锚点，非真实同步器 RTL IP）
-  - 非法跨域无 bridge：`assign_net` 跨域 → `finish`/`freeze` 失败，诊断码 **`rhdl::E0220`**（诊断文案点名 DoubleFlop/SyncFIFO）
+  - **FR79 DoubleFlop 真 RTL：** `DoubleFlop::elaborate()` / `elaborate_width` → HIR 含 `sync_ff0`/`sync_ff1`；session
+    `declare_double_flop_stages` + `connect_double_flop`。emit `.v` 须可见两级 reg + `always @(posedge …)`。
+    **级数=2**；`dout` 延迟 = **2** 目的域 tick（`DoubleFlop::LATENCY_DST_TICKS`；MVP = 全局 `Sim::tick`）。
+    **非**物理亚稳态/MTBF 合同。夹具：`examples/doubleflop_skel`；ATDD：`fr79_doubleflop_rtl`。
+  - **历史最小合同（Epic 7 / FR52）仍有效：** `mark_cdc_bridge(name)` 允许跨域（诊断文案仍点名 DoubleFlop/SyncFIFO）；
+    **不得**用该最小合同冒充 FR79 深度（NFR37）。`SyncFIFO` 真 RTL → Story 31.3。
+  - 非法跨域无 bridge：`assign_net` **与** `assign_reg_d_from` 跨域 → `finish`/`freeze` 失败，诊断码 **`rhdl::E0220`**
   - 同步/异步复位：`declare_reg_ex(..., async_reset, has_enable, ...)`；**极性** = 默认同步**高有效** `Reset`（AD-15，无 ActiveLow API）
-  - 仿真步进：全局 `Sim::tick` 为「按域 tick」的 MVP 等价（尚无独立 per-domain tick 引擎）
-  - **MVP 门禁范围：** 跨域检查在 `assign_net`；`assign_reg_d_*` 暂不查域（预存缺口，非 FR52 新引入）
-- 夹具：`examples/clockdomain_skel`（非法 E0220 + 同形无 bridge 负向 + 合法 emit/tick + sync/async 并排）。
+  - 仿真步进：全局 `Sim::tick` 为「按域 tick」的 MVP 等价（尚无独立 per-domain tick 引擎）；RegD 按 **NBA** 提交（双 FF 延迟不折叠）
+- 夹具：`examples/clockdomain_skel`（FR52）；`examples/doubleflop_skel`（FR79）。
 - 默认模块仍是单时钟：恰好一个 `Clock` + 同步高有效 `Reset`（AD-15），除非显式声明多域。
 - 域为 session 标签：多域夹具可仍用一对 `clk`/`rst` 端口（非每域独立时钟端口）。
 

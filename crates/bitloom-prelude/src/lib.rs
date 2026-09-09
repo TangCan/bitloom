@@ -169,24 +169,75 @@ pub struct HwVec<T, const N: u32>(pub core::marker::PhantomData<T>);
 /// `Signal<D, T>` wrapper type. Default modules remain single-clock + **sync
 /// active-high** [`Reset`]（AD-15）. Sync/async reset via
 /// [`ElaborateSession::declare_reg_ex`] `async_reset`; legal CDC via
-/// [`ElaborateSession::mark_cdc_bridge`]（[`DoubleFlop`] / [`SyncFIFO`]），else
-/// `finish` → `rhdl::E0220`.
+/// [`DoubleFlop`]（FR79 真 RTL）或 [`ElaborateSession::mark_cdc_bridge`] /
+/// [`SyncFIFO`]（31.3 前叙事），else `finish` → `rhdl::E0220`.
 ///
-/// Fixture: `examples/clockdomain_skel`. Sim: global `Sim::tick` is the MVP
-/// per-domain tick stand-in.
+/// Fixture: `examples/clockdomain_skel`（FR52 最小合同）；`examples/doubleflop_skel`
+///（FR79 真 RTL）。Sim: global `Sim::tick` is the MVP per-domain tick stand-in.
 #[derive(Debug, Clone, Copy, Default)]
 pub struct ClockDomain<const ID: u32>;
 
-/// 语言级 CDC 原语叙事锚点（AD-22 / FR52）。
+/// 语言级 CDC 两级同步器（FR79 / AD-29；加深 FR23/FR52）。
 ///
-/// 不生成真实双触发器 RTL；合法跨域今日为 session
-/// [`ElaborateSession::mark_cdc_bridge`]（诊断文案指向 DoubleFlop/SyncFIFO）。
-#[derive(Debug, Clone, Copy)]
+/// **真 RTL：** [`Elaboratable::elaborate`] 发出可综合模块，含 `sync_ff0` /
+/// `sync_ff1` 两级寄存器（不得仅以空 ZST + [`ElaborateSession::mark_cdc_bridge`]
+/// 交差深度合同）。亦可在会话内用
+/// [`ElaborateSession::declare_double_flop_stages`] +
+/// [`ElaborateSession::connect_double_flop`] 嵌入更大模块。
+///
+/// **级数 / 延迟合同：** [`Self::STAGES`] = 2；稳定 `din` 后经
+/// [`Self::LATENCY_DST_TICKS`] 个**目的域** tick（MVP：全局
+/// `bitloom_sim::Sim::tick`）才在 `dout` 可见。
+///
+/// **合同外：** 不保证物理亚稳态消除或 MTBF（见
+/// `nfr14-risk-epic31-cdc-true-rtl.md`）。
+///
+/// `SyncFIFO` 真 RTL 见 Epic 31.3；在此之前 `SyncFIFO` 仍可为 bridge 叙事锚点。
+#[derive(Debug, Clone, Copy, Default)]
 pub struct DoubleFlop;
+
+impl DoubleFlop {
+    /// Documented synchronizer stage count (FR79).
+    pub const STAGES: u32 = 2;
+    /// Destination-domain ticks until `dout` follows a stable `din`.
+    pub const LATENCY_DST_TICKS: u32 = 2;
+}
+
+impl Elaboratable for DoubleFlop {
+    fn elaborate() -> Result<FrozenHir, Diagnostics> {
+        Self::elaborate_width(1)
+    }
+}
+
+impl DoubleFlop {
+    /// Elaborate a DoubleFlop with `width`-bit `din`/`dout` (default path uses 1).
+    pub fn elaborate_width(width: u32) -> Result<FrozenHir, Diagnostics> {
+        let ty = GroundType::UInt { width };
+        let mut s = ElaborateSession::new("DoubleFlop");
+        s.begin_module("DoubleFlop", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("din", ty.clone(), Span::default());
+        s.add_output("dout", ty.clone(), Span::default());
+        // Phantom domains: din = src (0), sync chain + dout = dst (1).
+        s.bind_domain("din", 0);
+        s.bind_domain("dout", 1);
+        let (ff0, ff1) = s.declare_double_flop_stages("sync", ty, 1, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("dout", &ff1, Span::default());
+        s.end_process();
+        s.begin_sequential(Span::default());
+        s.connect_double_flop(&ff0, &ff1, "din", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish()
+    }
+}
 
 /// 语言级 CDC FIFO 叙事锚点（AD-22 / FR52）。
 ///
-/// 非一级 SyncFIFO IP；与 [`DoubleFlop`] 同为 `mark_cdc_bridge` 文档等价名。
+/// 非一级 SyncFIFO IP；Epic 31.3 前仍为 `mark_cdc_bridge` 文档等价名。
+/// 与 [`DoubleFlop`]（已真 RTL）深度不对等 — 见 NFR37 / FR79。
 #[derive(Debug, Clone, Copy)]
 pub struct SyncFIFO<const DEPTH: u32, const WIDTH: u32>;
 
