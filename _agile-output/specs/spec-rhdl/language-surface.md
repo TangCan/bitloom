@@ -53,7 +53,7 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 ## Mem / SyncReadMem (AD-21 / FR26)
 
 - 表面：`Mem` / `SyncReadMem`（prelude ZST 标记）+ session `declare_mem` / `declare_sync_read_mem`。
-- 互转/降级锚 FIRRTL `mem`；Chisel emit 对 Mem 仍可 E0901（见 FR28 / Epic 33）。
+- 互转/降级锚 FIRRTL `mem`；`emit_chisel`：**Path A 子集内可编译**（`Mem`/`SyncReadMem` + 可选常量 init）；**子集外仍 E0901**（FR81 / Epic 33）。
 
 ## Elaborate-time Mem init generators (FR73 / Epic 27)
 

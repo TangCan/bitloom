@@ -189,10 +189,15 @@ fn fr73_crc_closure_matches_handwritten_emit_and_tick() {
     assert_no_closure_ir("firrtl/fn", &fir_fn);
     assert_no_closure_ir("firrtl/vec", &fir_vec);
 
-    // Optional Chisel: MemDecl remains unsupported (Epic 33 / E0901) — not a closure IR path.
-    let chisel_err = rhdl_firrtl::emit_chisel(&via_fn).unwrap_err();
-    assert_eq!(chisel_err.code, "rhdl::E0901");
-    assert_no_closure_ir("chisel-error", &format!("{chisel_err:?}"));
+    // Optional Chisel (FR81 Path A): async Mem+init lowers; must not leave closure IR in Scala.
+    let scala = rhdl_firrtl::emit_chisel(&via_fn)
+        .expect("Path A Mem init must emit")
+        .files[0]
+        .contents
+        .clone();
+    assert!(scala.contains("Mem(16, UInt(8.W))"), "{scala}");
+    assert!(scala.contains("crc_init = VecInit("), "{scala}");
+    assert_no_closure_ir("chisel/fn", &scala);
 
     // Tick equivalence on SyncReadMem (latency-1 reads of init).
     let mut sim_fn = Sim::new(sync_rom_hir("CrcSyncGen", true));

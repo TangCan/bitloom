@@ -266,7 +266,7 @@ development_status:
   epic-33: in-progress
   33-1-epic-33-nfr14-风险记录: done
   33-2-mem-chisel-合同决策: done
-  33-3-实现所选-mem-chisel-路径: backlog
+  33-3-实现所选-mem-chisel-路径: done
   33-4-atdd-fr71-回归: backlog
   epic-33-retrospective: optional
 

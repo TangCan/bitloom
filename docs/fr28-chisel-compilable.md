@@ -14,7 +14,7 @@ let art = rhdl_firrtl::emit_chisel(&frozen)?;
 ## 产出
 
 - 成功：`.scala`（`class … extends Module`），含层次时 `Module(new Child)` 与按方向连线（跳过 `clk`/`rst`；Chisel `Module` 隐式 clock/reset）。
-- 子集外：`MemDecl` → 结构化失败 `rhdl::E0901`（不得冒充 FR28 已覆盖 mem）。
+- **FR81 Path A：** 文档化单时钟 `Mem` / `SyncReadMem`（含可选常量 `init`）→ 可编译 Scala；子集外 `MemDecl` 仍结构化失败 `rhdl::E0901`（不得删除诊断冒充全表面）。
 
 ## CI / 本机（FR71 / NFR34）
 

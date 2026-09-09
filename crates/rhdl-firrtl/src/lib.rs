@@ -882,20 +882,98 @@ mod tests {
     }
 
     #[test]
-    fn chisel_fr28_fails_on_mem() {
+    fn chisel_fr81_path_a_lowers_sync_read_mem() {
         let mut s = ElaborateSession::new("t");
         s.begin_module("MemTop", Span::default());
         s.add_input("clk", GroundType::Clock, Span::default());
         s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("addr", GroundType::UInt { width: 2 }, Span::default());
         s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
         s.declare_sync_read_mem("ram", 4, 8, Span::default());
+        s.declare_reg("q", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_mem_read("q", "ram", "addr", Span::default());
+        s.end_process();
         s.begin_combinational(Span::default());
-        s.assign_net("y", "ram", Span::default());
+        s.assign_net("y", "q", Span::default());
         s.end_process();
         s.end_module();
-        let err = emit_chisel(&s.finish().unwrap()).unwrap_err();
+        let scala = emit_chisel(&s.finish().unwrap()).unwrap().files[0]
+            .contents
+            .clone();
+        assert!(scala.contains("SyncReadMem(4, UInt(8.W))"), "{scala}");
+        assert!(scala.contains("ram.read("), "{scala}");
+        assert!(scala.contains("Chisel 7.14.0"));
+        assert!(scala.contains("firtool-1.155.0"));
+    }
+
+    #[test]
+    fn chisel_fr81_path_a_lowers_async_mem_and_init() {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("RomTop", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("addr", GroundType::UInt { width: 2 }, Span::default());
+        s.add_input("wdata", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("we", GroundType::UInt { width: 1 }, Span::default());
+        s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_mem_with_init("rom", 4, 8, vec![1, 2, 3, 4], Span::default());
+        s.declare_reg("q", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_sequential(Span::default());
+        s.assign_mem_write_en("rom", "addr", "wdata", "we", Span::default());
+        s.assign_reg_d_mem_read("q", "rom", "addr", Span::default());
+        s.end_process();
+        s.begin_combinational(Span::default());
+        s.assign_net("y", "q", Span::default());
+        s.end_process();
+        s.end_module();
+        let scala = emit_chisel(&s.finish().unwrap()).unwrap().files[0]
+            .contents
+            .clone();
+        assert!(scala.contains("Mem(4, UInt(8.W))"), "{scala}");
+        assert!(!scala.contains("SyncReadMem("), "{scala}");
+        assert!(scala.contains("rom_init = VecInit("), "{scala}");
+        assert!(scala.contains("rom.write(i.U, rom_init(i))"), "{scala}");
+        assert!(scala.contains("when (io.we)"), "{scala}");
+        assert!(scala.contains("rom.write(io.addr, io.wdata)"), "{scala}");
+    }
+
+    #[test]
+    fn chisel_fr81_e0901_out_of_subset_init_len() {
+        use bitloom_hir::{
+            BuilderOwnedHir, GroundType, Module, Port, PortDirection, Span, Stmt, seal_from_builder,
+        };
+        let mut owned = BuilderOwnedHir::new("BadMem");
+        owned.add_module(Module {
+            name: "BadMem".into(),
+            ports: vec![
+                Port {
+                    name: "clk".into(),
+                    direction: PortDirection::Input,
+                    ty: GroundType::Clock,
+                    span: Span::default(),
+                },
+                Port {
+                    name: "rst".into(),
+                    direction: PortDirection::Input,
+                    ty: GroundType::Reset,
+                    span: Span::default(),
+                },
+            ],
+            body: vec![Stmt::MemDecl {
+                name: "ram".into(),
+                depth: 4,
+                width: 8,
+                sync_read: true,
+                init: Some(vec![1, 2]), // length ≠ depth → out of Path A
+                span: Span::default(),
+            }],
+            span: Span::default(),
+        });
+        let frozen = seal_from_builder(owned).expect("freeze allows mismatched init");
+        let err = emit_chisel(&frozen).unwrap_err();
         assert_eq!(err.code, "rhdl::E0901");
-        assert!(err.en.contains("mem"));
+        assert!(err.en.contains("mem"), "{err}");
     }
 
     #[test]
