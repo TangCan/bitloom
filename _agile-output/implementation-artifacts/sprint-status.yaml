@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 15:50
+last_updated: 09-09-2026 15:55
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -289,7 +289,7 @@ development_status:
   36-1-epic-36-nfr14-风险记录: done
   36-2-重写-doc-19-阶段五-七完成定义-fr87: done
   36-3-永久非目标锁定-fr93: done
-  epic-36-retrospective: optional
+  epic-36-retrospective: done
 
   epic-37: done
   37-1-epic-37-nfr14-风险记录: done
@@ -861,3 +861,25 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-35-retro-2026-09-09.md"
+  - id: "epic-36-retro-item-87-对外宣称阶段五-七-全绿-产品做完-时-必须引用-fr87-nfr38-合同条款"
+    epic: 36
+    action: "对外宣称阶段五–七「全绿 / 产品做完」时：必须引用 FR87 / NFR38 合同条款（docs/requirements/19 §19.7–19.9）；禁止用字面未交付项勾选；合同绿
+      ≠ 字面七阶段（续 NFR38）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-36-retro-2026-09-09.md"
+  - id: "epic-36-retro-item-88-fr93-五条永久非目标保持公开锁定-readme-deferred-adden"
+    epic: 36
+    action: "FR93 五条永久非目标保持公开锁定（README / deferred / addendum 同源）；须新 PRD 才能推翻；不得标 done
+      或静默交付交差；双写漂移靠既有 ATDD 拦截。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-36-retro-2026-09-09.md"
+  - id: "epic-36-retro-item-89-同步-epics-md-frontmatter-将-phase11epic36s"
+    epic: 36
+    action: "同步 epics.md frontmatter：将 phase11Epic36Status（及已完成的 37–39 若适用）从 ready-for-dev
+      改为与 sprint done / phase11Status: complete 一致，避免编排误读；Phase 11 后续加深仍须遵守各 epic
+      FR 合同与 NFR39（禁止静默扩大子集）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-36-retro-2026-09-09.md"
