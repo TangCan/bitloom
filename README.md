@@ -31,6 +31,9 @@ cargo bitloom build --package blink --manifest-dir blink --out-dir out
 - **ClockDomain / CDC：**
   - **FR52（历史最小合同）：** [`examples/clockdomain_skel`](examples/clockdomain_skel) — `bind_domain` / `mark_cdc_bridge` / `rhdl::E0220`；全局 `Sim::tick` 为按域 tick 的 MVP 等价。**不得**单独交差 FR79 深度（NFR37）。
   - **FR79（真 RTL / AD-29）：** [`examples/doubleflop_skel`](examples/doubleflop_skel) · [`examples/syncfifo_skel`](examples/syncfifo_skel)；文档 [`docs/fr79-doubleflop-cdc.md`](docs/fr79-doubleflop-cdc.md) · [`docs/fr79-syncfifo-cdc.md`](docs/fr79-syncfifo-cdc.md)；跟练 [`docs/tutorials/cdc-depth.md`](docs/tutorials/cdc-depth.md)（`cargo test -p bitloom --test fr79_cdc_depth_closeout`）
+- **Bundle / 嵌套 + derive（FR51 → FR80）：**
+  - **FR51（历史最小）：** ground-leaf `Bundle` / `HwVec` flatten；nested 曾 OUT OF SCOPE。**不得**单独交差 FR80 深度（NFR37）。
+  - **FR80（一层嵌套 + `#[derive(Bundle)]`）：** [`examples/bundle_vec_skel`](examples/bundle_vec_skel)；文档 [`docs/fr80-nested-bundle.md`](docs/fr80-nested-bundle.md)；跟练 [`docs/tutorials/nested-bundle.md`](docs/tutorials/nested-bundle.md)（`cargo test -p bitloom --test fr80_nested_bundle`）
 - **Elaborate-time Mem init（FR73）：** 非捕获 `Fn` 在 `ElaborateSession` 内生成 ROM/LUT 初值，freeze 前消解为普通字表（后端无闭包 IR）。最小面：
 
 ```rust
@@ -155,6 +158,7 @@ mod sim {
 | HIR→源码再生（仅调试） | [`docs/hir-to-source-debug-only.md`](docs/hir-to-source-debug-only.md) |
 | 手写 bridge / abstraction / both | [`docs/fr29-bridge-abstraction-both.md`](docs/fr29-bridge-abstraction-both.md) |
 | 桥接适配器闭包模板（FR78） | [`docs/fr78-bridge-adapter-closures.md`](docs/fr78-bridge-adapter-closures.md) · UJ「桥接半程」[`docs/tutorials/bridge-half.md`](docs/tutorials/bridge-half.md) |
+| 嵌套 Bundle + derive（FR80） | [`docs/fr80-nested-bundle.md`](docs/fr80-nested-bundle.md) · UJ「嵌套 Bundle」[`docs/tutorials/nested-bundle.md`](docs/tutorials/nested-bundle.md) |
 | 双视图 sim 生成（FR47） | [`docs/fr47-dual-sim-generation.md`](docs/fr47-dual-sim-generation.md) |
 | 双视图等价检查 | [`docs/fr30-dual-view-equiv.md`](docs/fr30-dual-view-equiv.md) |
 | 可选 FST | [`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md) |

@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR80（加深 FR51 / AD-20）/ Epic 32；NFR14、NFR37 |
 | 记录日期 | 2026-09-09 |
-| 状态 | accepted — 门禁有效；Epic 32 关闭条件待 Story 32.4 勾选 |
+| 状态 | accepted — 门禁有效；Epic 32 关闭条件已由 Story 32.4 勾选 |
 
 ### (a) 上游约束
 
@@ -79,16 +79,18 @@
 
 ### Epic 32 关闭条件（Story 32.4 勾选）
 
-- [ ] **FR80 嵌套：** 至少一层文档化嵌套 Bundle → elaborate → emit `.v` → tick（或文档等价）
-- [ ] **FR80 derive（或等价）：** 文档化支持/限制；正例可综合；不支持形态有稳定诊断
-- [ ] **宽/向负例：** 嵌套字段不匹配仍 emit 前失败（继承 FR51）
-- [ ] **NFR37：** 相对 FR51 / OUT OF SCOPE 历史已文档化；不得用最小合同或仅删注释冒充深度关闭
-- [ ] **ATDD / 配方：** 嵌套正例 + 宽/向负例（亦含于 `just test` 或文档化配方）
-- [ ] **禁止事项未触发：** 无仅删除 OUT OF SCOPE 注释交差；无静默砍掉嵌套或 derive 却宣称 FR80 全完成
+- [x] **FR80 嵌套：** 至少一层文档化嵌套 Bundle → elaborate → emit `.v` → tick（或文档等价）
+- [x] **FR80 derive（或等价）：** 文档化支持/限制；正例可综合；不支持形态有稳定诊断
+- [x] **宽/向负例：** 嵌套字段不匹配仍 emit 前失败（继承 FR51）
+- [x] **NFR37：** 相对 FR51 / OUT OF SCOPE 历史已文档化；不得用最小合同或仅删注释冒充深度关闭
+- [x] **ATDD / 配方：** 嵌套正例 + 宽/向负例（亦含于 `just test` 或文档化配方）
+- [x] **禁止事项未触发：** 无仅删除 OUT OF SCOPE 注释交差；无静默砍掉嵌套或 derive 却宣称 FR80 全完成
+
+**证据（32.4）：** `examples/bundle_vec_skel` 正/负例；`docs/tutorials/nested-bundle.md` 限制表；`cargo test -p bitloom --test fr80_nested_bundle`；`docs/fr80-nested-bundle.md`。
 
 ---
 
 ## 门禁一句话
 
 **缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 32 故事 32.2–32.4 标 `ready`。**  
-**Epic 32 关闭条件（上节）待 Story 32.4 勾选。**
+**Epic 32 关闭条件（上节）已由 Story 32.4 勾选。**

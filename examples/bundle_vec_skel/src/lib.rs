@@ -1,5 +1,8 @@
 //! FR51 / FR80 fixture: documented `Bundle` + `HwVec` + one-level nested Bundle
 //! → flatten → emit → tick. Includes `#[derive(Bundle)]` (Story 32.3).
+//!
+//! User follow-along / limits table (Story 32.4): `docs/tutorials/nested-bundle.md`
+//! · product note `docs/fr80-nested-bundle.md` · ATDD `fr80_nested_bundle`.
 
 use bitloom_prelude::rhdl::module;
 use bitloom_prelude::{

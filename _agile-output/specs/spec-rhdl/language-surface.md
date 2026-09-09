@@ -20,6 +20,8 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 - 位宽/方向不匹配必须在 emit 前失败（含嵌套叶）；不得 silently 可用却无检查。
 - HIR ground 是否扩展 Bundle/Vector 节点由实现选择；公开表面与 emit 语义须一致（AD-20）。
 - **FR22 边界：** 单时钟表面加厚（FR22）的构造条**不含** Bundle/Vec；复合类型由本节 / FR51 / FR80 交付，不得 silently 算进 FR22 验收。
+- **文档收口（Story 32.4）：** `docs/tutorials/nested-bundle.md` · `docs/fr80-nested-bundle.md`；ATDD
+  `cargo test -p bitloom --test fr80_nested_bundle`（嵌套正/负例矩阵 + 限制表 + NFR14 勾选）。
 
 ## ClockDomain (CAP-11 / FR52) + CDC 真 RTL (FR79 / AD-29)
 
