@@ -15,7 +15,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR89 / Epic 38；NFR14、NFR39；对照 FR82 基线 |
 | 记录日期 | 2026-09-09 |
-| 状态 | accepted — Story 38.1；加深分支已钉死；关闭条件留给 38.3 |
+| 状态 | closed — Story 38.3；分支 A 加深已交付；Epic 38 关闭条件已勾选 |
 
 ### 加深分支选择（Story 38.1 钉死 · 必读）
 
@@ -108,16 +108,16 @@
 
 ### Epic 38 关闭条件（Story 38.3 勾选）
 
-- [ ] **FR89：** UartTx **分支 A（可编程波特率）** 可 elaborate → emit → tick（或文档等价）— Story 38.2
-- [ ] **文档边界：** `docs/ip/README.md`（或等价）写明本 epic 交付子集与明确非目标（全协议/VIP/全双工/RX 等）— Story 38.2–38.3
-- [ ] **未选分支：** 不得声称分支 B（最小 RX）已交付 — NFR39
-- [ ] **ATDD / 收口：** 加深路径自动化稳定；deferred-work「全协议仍须新合同」交叉引用 — Story 38.3
-- [ ] **禁止事项未触发：** 无 VIP/全协议宣称；无静默扩到 SPI/I2C/AXI；无提前标 38.2–38.3 ready（对本记录而言）
-- [ ] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
+- [x] **FR89：** UartTx **分支 A（可编程波特率）** 可 elaborate → emit → tick（或文档等价）— Story 38.2（`baud_div`；夹具 `fr89_uarttx_programmable_baud`）
+- [x] **文档边界：** `docs/ip/README.md`（或等价）写明本 epic 交付子集与明确非目标（全协议/VIP/全双工/RX 等）— Story 38.2–38.3
+- [x] **未选分支：** 不得声称分支 B（最小 RX）已交付 — NFR39
+- [x] **ATDD / 收口：** 加深路径自动化稳定；deferred-work「全协议仍须新合同」交叉引用 — Story 38.3（`fr89_epic38_boundary_closeout`）
+- [x] **禁止事项未触发：** 无 VIP/全协议宣称；无静默扩到 SPI/I2C/AXI；无提前标 38.2–38.3 ready（对本记录而言）
+- [x] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
 
 ---
 
 ## 门禁一句话
 
 **缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 38 故事 38.2–38.3 标 `ready`。**  
-**加深分支已钉死为 A（可编程波特率）；关闭条件（上节）留给 Story 38.3 勾选。**
+**加深分支已钉死为 A（可编程波特率）；Epic 38 关闭条件已由 Story 38.3 勾选（status: closed — Story 38.3）。**

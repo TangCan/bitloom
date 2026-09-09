@@ -41,28 +41,41 @@ mod tests {
             assert_eq!(sim.ports().get("data_out"), Some(0x5A));
         }
 
-        // UartTx — 8N1 bit-bang non-stub (FR82)
+        // UartTx — FR82 8N1 + FR89 programmable baud_div demo (Epic 38)
         {
             let hir = UartTx::elaborate().unwrap();
             assert_eq!(hir.abi_name, "UartTx");
             let art = emit(&hir);
-            assert!(art.files.iter().any(|f| f.contents.contains("UartTx")));
+            let v = &art.files[0].contents;
+            assert!(v.contains("UartTx") && v.contains("baud_div"));
+            let baud_div = 1u64; // 2 clocks per bit
             let mut sim = Sim::new(hir);
             let mut pv = PortValues::default();
             pv.set("rst", 1);
             pv.set("wr_en", 0);
             pv.set("wr_data", 0);
+            pv.set("baud_div", baud_div);
             sim.set_inputs(pv.clone());
             sim.settle();
             sim.tick();
             pv.set("rst", 0);
             pv.set("wr_en", 1);
-            pv.set("wr_data", 0xA5);
-            sim.set_inputs(pv);
+            pv.set("wr_data", 0x01);
+            sim.set_inputs(pv.clone());
             sim.settle();
             sim.tick();
             assert_eq!(sim.ports().get("tx_busy"), Some(1));
             assert_eq!(sim.ports().get("tx"), Some(0)); // start bit
+            // Hold start for second clock of baud period
+            pv.set("wr_en", 0);
+            sim.set_inputs(pv);
+            sim.settle();
+            sim.tick();
+            assert_eq!(
+                sim.ports().get("tx"),
+                Some(0),
+                "ip_box: start bit holds for full baud_div period"
+            );
         }
 
         // ExtBlackBox — opaque ports-only wrapper (retained)

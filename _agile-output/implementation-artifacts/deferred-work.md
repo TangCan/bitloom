@@ -157,9 +157,10 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   summary: UART/SPI/I2C「全协议」仍非默认交付；Epic 34 仅合同化最小可综合基线（非 VIP 级）
   evidence: |
     epic-22-retro-item-49 + Epic 34 / FR82 / nfr14-risk-epic34-ip-baseline.md；
-    34.2–34.3 已交付五类文档最小子集；Epic 38.2 合同化 UartTx **可编程波特率子集**（非 RX/VIP）；
-    全协议 / RX / 多模式 SPI / I2C ACK / VIP 等仍须新合同（关闭交叉引用 → Story 38.3）
-  status: locked — 全协议加深仍须显式改合同；FR82 基线 ≠ 全协议
+    34.2–34.3 已交付五类文档最小子集；Epic 38.2 合同化 UartTx **可编程波特率子集**（`baud_div`；非 RX/VIP）；
+    Story 38.3 已收口交叉引用并勾选 NFR14 Epic 38 关闭条件；
+    全协议 / RX / 多模式 SPI / I2C ACK / VIP 等**仍须新合同**（FR89 子集 ≠ 全家桶）
+  status: locked — 全协议加深仍须显式改合同；FR82 基线 ≠ 全协议；Epic 38 / FR89 子集已关闭
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
   summary: 可选：AXI4-Lite 与 UART/FIFO 简易连接夹具
@@ -284,7 +285,7 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     - item-74：可配置 DEPTH/WIDTH 全家桶或 wr_clk/rd_clk 双物理时钟（超出 4×8 / phantom 双域）
     - item-77：≥2 层嵌套递归或 HwVec&lt;Bundle,_&gt;（超出一层 MVP）
     - item-80：双时钟裸 mem / 多口掩码 / 翻转 Path B（永久非目标除非新合同）
-    - item-83：全协议 / VIP / Full AXI / 可编程 baud **全家桶**（小数分频/表）/ depth·width 全家桶；注：UartTx **分频子集**已由 Epic 38.2 / FR89 合同化，不等于全家桶
+    - item-83：全协议 / VIP / Full AXI / 可编程 baud **全家桶**（小数分频/表）/ depth·width 全家桶；注：UartTx **分频子集**已由 Epic 38.2 / FR89 合同化并由 Story 38.3 收口，不等于全家桶
     - item-86：任意 FrozenHir C 加载器 / SoftF16→HIR→emit Path A / 商用 sby 全证明 / LSP 二进制
   status: deferred — optional product scope（explicit new contract required）
   resolved: '2026-09-09'
