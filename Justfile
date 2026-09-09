@@ -28,3 +28,8 @@ chisel-fr81-mem-jvm:
 # Exit-code ATDD for the required compile contract (no JDK install required for most asserts).
 chisel-fr28-atdd:
 	bash scripts/test-chisel-fr28-required.sh
+
+# FR85: real design → emit_sva → external checker (verilator or sby).
+# Not part of default `just test`. Missing checker → non-zero (never silent success).
+formal-sva-check:
+	bash scripts/formal-sva-check.sh

@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR83 / FR84 / FR85（加深 FR33 / FR36 / FR39）/ Epic 35；NFR14、NFR37 |
 | 记录日期 | 2026-09-09 |
-| 状态 | draft — Story 35.1；关闭条件待 35.4 勾选 |
+| 状态 | closed — Story 35.4；Epic 35 关闭条件已勾选 |
 
 ### (a) 上游约束
 
@@ -59,7 +59,7 @@
 | --- | --- | --- | --- | --- | --- |
 | **FR83** | FR33 C ABI | Counter-only cdylib | 文档化第二 DUT **或** 通用 generate/link 路径 + 非 Counter-only 夹具 | PRD/用户文档显式 deferred：声明 cdylib 仍 Counter-only，**不得**声称通用 C ABI 深度已交付 | 35.2 **已选 A**（`Adder` + `rhdl_sim_new_dut`） |
 | **FR84** | FR36 SoftF16 | host-only 模型 | SoftF16 → HIR → emit 可综合夹具（至少一黄金数值/位宽） | PRD/用户文档显式 deferred：**不得声称 SoftF16 可综合**已交付 | 35.3 **已选 B**（PRD addendum + `docs/fr36-rhdl-float.md`） |
-| **FR85** | FR39 Formal/SVA | `check_sva_text` toy | 至少一真实设计导出 SVA（或文档钉死的 formal 工具链调用）并执行**非玩具**检查 | PRD/用户文档显式 deferred：声明 formal 仍玩具级，**不得**用 toy check 关闭深度 | 35.4 |
+| **FR85** | FR39 Formal/SVA | `check_sva_text` toy | 至少一真实设计导出 SVA（或文档钉死的 formal 工具链调用）并执行**非玩具**检查 | PRD/用户文档显式 deferred：声明 formal 仍玩具级，**不得**用 toy check 关闭深度 | 35.4 **已选 A**（Counter `emit_sva` + `just formal-sva-check` / Verilator） |
 
 **LSP（非本 epic）：** 继续 **deferred**；35.4 用户文档须写明 hover/goto **不是**本 epic 完成条件。无独立「实现 vs defer」选型行——本阶段固定 defer。
 
@@ -93,14 +93,14 @@
 
 - [x] **FR83：** 已落地选项 A（非 Counter-only 夹具）**或** 选项 B（显式 defer 合同段落）
 - [x] **FR84：** 已落地选项 A（可综合夹具）**或** 选项 B（显式 defer；无「可综合 SoftF16 已交付」话术）— **已选 B**
-- [ ] **FR85：** 已落地选项 A（非 toy formal 夹具）**或** 选项 B（显式 defer）；**未**用 `check_sva_text` 关单
-- [ ] **LSP：** 用户文档声明仍 deferred / 非本 epic 完成条件
-- [ ] **NFR37：** 相对 Epic 8/9/10 历史最小合同已文档化；不得用 Partial / 历史 `done` 冒充深度关闭
-- [ ] **禁止事项未触发：** 无 toy 关 FR85；无 defer 却称 SoftF16 可综合；无提前标 35.2–35.4 ready（对本记录而言）
+- [x] **FR85：** 已落地选项 A（非 toy formal 夹具）**或** 选项 B（显式 defer）；**未**用 `check_sva_text` 关单 — **已选 A**（`emit_sva` + `just formal-sva-check`）
+- [x] **LSP：** 用户文档声明仍 deferred / 非本 epic 完成条件（`docs/fr38-viz-lsp.md`）
+- [x] **NFR37：** 相对 Epic 8/9/10 历史最小合同已文档化；不得用 Partial / 历史 `done` 冒充深度关闭
+- [x] **禁止事项未触发：** 无 toy 关 FR85；无 defer 却称 SoftF16 可综合；无提前标 35.2–35.4 ready（对本记录而言）
 
 ---
 
 ## 门禁一句话
 
 **缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 35 故事 35.2–35.4 标 `ready`。**  
-**Epic 35 关闭条件（上节）待 Story 35.4 勾选。**
+**Epic 35 关闭条件（上节）已由 Story 35.4 勾选。**

@@ -149,3 +149,18 @@
 - 用户文档：`docs/fr36-rhdl-float.md`
 - NFR14：`_agile-output/implementation-artifacts/nfr14-risk-epic35-residual-partials.md`
 - Epic 映射：`epics.md` Epic 35 Story 35.3
+
+## 2026-09-09 Update — FR85 Formal 非玩具夹具（Epic 35 / Story 35.4）
+
+**用户 / 管道决议：** 选定 **Option A — 实现**（非 Option B 显式 defer）：真实设计导出 SVA + 文档钉死的外部 checker 调用。
+
+**合同：**
+- **唯一路径：** FR85 **Option A**；Counter HIR → `rhdl_formal::emit_sva` → `crates/rhdl-formal/fixtures/fr85_counter_sva.sv`；入口 `just formal-sva-check` / `scripts/formal-sva-check.sh`（默认 `verilator --lint-only --assert`；可选 `sby`）。
+- **禁止话术（NFR14 / NFR37）：** **不得**用 `check_sva_text` / toy 字符串启发式关闭 FR85 或宣称 FR39 深度完成；缺 checker 时脚本须 **非零退出**（禁止 silent success）。
+- **LSP：** hover/goto **继续 deferred**；**不是** Epic 35 完成条件（见 `docs/fr38-viz-lsp.md`）。
+- **NFR14：** Epic 35 风险记录勾选 FR85 已选 A 与全部关闭条件；可经 `fr85_formal_fixture_beyond_toy` ATDD 检查。
+
+**链接：**
+- 用户文档：`docs/fr39-formal-sva.md`；LSP：`docs/fr38-viz-lsp.md`
+- NFR14：`_agile-output/implementation-artifacts/nfr14-risk-epic35-residual-partials.md`
+- Epic 映射：`epics.md` Epic 35 Story 35.4

@@ -154,8 +154,8 @@
 
 - source_spec: `_agile-output/implementation-artifacts/epic-23-retro-2026-08-21.md`
   summary: 完整 LSP hover/goto 作为后续 epic（已声明 deferred；本条加固）
-  evidence: epic-23-retro-item-52；`docs/fr38-viz-lsp.md` / README 已声明；无 language-server 二进制
-  status: deferred — 后续 epic；层次/时序 HTML 不声称 LSP 完成
+  evidence: epic-23-retro-item-52；`docs/fr38-viz-lsp.md` / README 已声明；无 language-server 二进制；Epic 35 / Story 35.4 再次声明 LSP **不是**本 epic 完成条件
+  status: deferred — 后续 epic；层次/时序 HTML 不声称 LSP 完成；Epic 35 不交付 LSP
 
 - source_spec: `_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md`
   summary: CI 默认 Bambu stub（`bambu-ci-stub.sh`）验证接线与非零覆盖，非真实 HLS 调度质量
