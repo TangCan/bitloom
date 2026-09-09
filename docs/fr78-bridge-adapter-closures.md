@@ -71,8 +71,11 @@ Risk gate: `_agile-output/implementation-artifacts/nfr14-risk-epic30-bridge-adap
 |------------|------|
 | FR29 handwritten `#[bridge]` / `HostView` | Host markers; never enter HIR |
 | FR78 `start_wait_complete` | Reusable handshake **inside** host/bridge code |
-| FR47 `generate_*` / `check_generated_bridge` | Dual-view **crate** generation + compare (Epic 21+;联验 → Story 30.3) |
+| FR47 `generate_*` / `check_generated_bridge` / `check_functional_equiv_generated` | Dual-view **crate** generation + PortValues compare (Epic 21+) |
+
+**Story 30.3 co-verification:** template-recorded stimuli (free closures on the host) feed the FR47 generated-path bridge. Matching views pass; a deliberate wrong abstraction fails (FR30 spirit). See ATDD below — do not invent a parallel transaction semantics.
 
 ## ATDD
 
-`cargo test -p bitloom --test fr78_bridge_adapter_start_wait_complete`
+- Template API: `cargo test -p bitloom --test fr78_bridge_adapter_start_wait_complete`
+- FR47 dual-view co-verification (Story 30.3): `cargo test -p bitloom --test fr78_fr47_dual_view_coverify`
