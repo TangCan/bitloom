@@ -254,7 +254,7 @@ development_status:
   31-2-doubleflop-可综合同步器-rtl: done
   31-3-syncfifo-或等价-可综合跨域-fifo: done
   31-4-cdc-深度-atdd-文档叙事收口: done
-  epic-31-retrospective: optional
+  epic-31-retrospective: done
 
   epic-32: done
   32-1-epic-32-nfr14-风险记录: done
@@ -722,3 +722,24 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-30-retro-2026-09-09.md"
+  - id: "epic-31-retro-item-72-epic-32-标-ready-前-确认-story-32-1-nfr14-风险"
+    epic: 31
+    action: "Epic 32 标 ready 前：确认 Story 32.1 NFR14 风险记录完成（epics.md Epic 32 Gate）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-31-retro-2026-09-09.md"
+  - id: "epic-31-retro-item-73-后续触及语言-cdc-或一级-ip-fifo-时-保持-syncfifo-fr7"
+    epic: 31
+    action: "后续触及语言 CDC 或一级 IP FIFO 时，保持 SyncFIFO（FR79 跨域）与 ip::SyncFifo（FR82 单时钟）消歧（文档表
+      + ATDD）；不得混为同一完成话术（NFR37）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-31-retro-2026-09-09.md"
+  - id: "epic-31-retro-item-74-若产品需要可配置-depth-width-全家桶或双物理时钟端口-wr_clk"
+    epic: 31
+    action: "若产品需要可配置 DEPTH/WIDTH 全家桶或双物理时钟端口（wr_clk/rd_clk），单独立项超出 4×8 / phantom
+      双域 MVP（当前 AC 已满足）；同时继续兑现 epic-28-retro-item-65 对 bitloom-builder 的拆分评估（本 epic
+      builder +~93 至 ~3101，债加重）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-31-retro-2026-09-09.md"
