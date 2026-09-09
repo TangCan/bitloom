@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 12:00
+last_updated: 09-09-2026 12:05
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -282,7 +282,7 @@ development_status:
   35-2-c-abi-超出-counter-demo-fr83: done
   35-3-softf16-可综合或显式-defer-fr84: done
   35-4-formal-夹具-lsp-deferred-收口-fr85: done
-  epic-35-retrospective: optional
+  epic-35-retrospective: done
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1
@@ -810,3 +810,28 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-34-retro-2026-09-09.md"
+  - id: "epic-35-retro-item-84-后续若再加深-fr83-84-85-或开启-26-35-之后的新-epic-前"
+    epic: 35
+    action: "后续若再加深 FR83/84/85 或开启 26–35 之后的新 epic 前：复用 NFR14「实现 vs 显式 defer」选型表与关闭勾选；不得用
+      Epic 8/9/10 历史 done / Partial 现状冒充深度（NFR37）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-35-retro-2026-09-09.md"
+  - id: "epic-35-retro-item-85-后续触及-c-abi-softf16-formal-lsp-时-保持-fr83"
+    epic: 35
+    action: "后续触及 C ABI / SoftF16 / formal / LSP 时：保持 FR83 非 Counter-only（Adder /
+      rhdl_sim_new_dut + 可诊断失败）；FR84 Path B 合同下不得声称 SoftF16 可综合浮点已交付（亦不得用 Bits<16>
+      冒充）；FR85 保持外部 Verilator/sby 路径，不得用 check_sva_text toy 关单；LSP hover/goto 继续 deferred（非本批次完成条件）；合同故事
+      commit 避免无关范围噪声（续 item-59）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-35-retro-2026-09-09.md"
+  - id: "epic-35-retro-item-86-若产品需要任意-frozenhir-c-加载器-softf16-hir-emit"
+    epic: 35
+    action: "若产品需要任意 FrozenHir C 加载器 / SoftF16→HIR→emit Path A 可综合浮点 / 商用 SymbiYosys
+      全证明产品集成 / LSP language-server 二进制，单独立项超出 Epic 35 合同（当前 AC 已满足）；同时继续兑现 epic-29-retro-item-68
+      对 bitloom-prelude ip.rs 的拆分/体量评估（本 epic 净 0，仍 ~1357），并继续兑现 epic-28-retro-item-65
+      对 bitloom-builder 的拆分评估（本 epic builder 净 0 至 ~3101）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-35-retro-2026-09-09.md"
