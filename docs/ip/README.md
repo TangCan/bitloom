@@ -144,4 +144,4 @@ sim.tick();
 
 ## FR103 — 功能 + 周期双模型齐全（Epic 45）
 
-五类一级 IP（FIFO/UART/SPI/I2C/AXI）具备可运行功能视图与周期精确模型，并与刺激/等价路径联验。完成面：[`docs/fr103-ip-dual-model.md`](../fr103-ip-dual-model.md)（`IpDualModelMatrix`）。**Epic 45 / FR103 已关闭**（Story 45.4）。SystemC TLM 产品仍见 Epic 46 / FR101。
+五类一级 IP（FIFO/UART/SPI/I2C/AXI）具备可运行功能视图与周期精确模型，并与刺激/等价路径联验。完成面：[`docs/fr103-ip-dual-model.md`](../fr103-ip-dual-model.md)（`IpDualModelMatrix`）。**Epic 45 / FR103 已关闭**（Story 45.4）。SystemC TLM 产品见 Epic 46 / FR101（**已关闭** — LT-only MVP）。

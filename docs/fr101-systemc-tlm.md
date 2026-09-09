@@ -2,10 +2,14 @@
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-This page is the **FR101 product completion surface** for Story **46.2** (Epic 46).
+This page is the **FR101 product completion surface**. **Epic 46 / FR101 is
+closed** (Story **46.3** closeout; product face delivered in Story **46.2**).
 It delivers a buildable/runnable SystemC TLM-2.0 path per NFR14
-(`nfr14-risk-epic46-systemc-tlm.md` D1–D4). Epic **46 closeout** (revoke「不承诺
-TLM」/ docs+deferred) remains **Story 46.3**.
+(`nfr14-risk-epic46-systemc-tlm.md` D1–D4).
+
+「不承诺 SystemC TLM-2.0」is **no longer** a product completion exclusion
+(revised **AD-5** / Phase 12). Contracted MVP remains **LT-only**; AT
+(`nb_transport_*`) is **deferred** (risk-record L2), not delivered by this epic.
 
 ## Abstraction contract (L3)
 
@@ -14,8 +18,8 @@ TLM」/ docs+deferred) remains **Story 46.3**.
 - `tlm::tlm_generic_payload`
 - `b_transport` on `tlm_utils::simple_*_socket`
 
-**Out of MVP:** AT (`nb_transport_fw` / `nb_transport_bw`), full SoC VP, default
-TLM≡CA formal proof (that is **FR100** / Epic 45 — already closed).
+**Out of MVP / deferred:** AT (`nb_transport_fw` / `nb_transport_bw`), full SoC
+VP, default TLM≡CA formal proof (that is **FR100** / Epic 45 — already closed).
 
 ## Deliverables (D1–D4)
 
@@ -78,12 +82,13 @@ TLM-2.0 product path. Cycle-accurate simulation remains only `FrozenHir` →
 |------|------|---------------|
 | `emit_functional_crate` / `GeneratedFunctional` | Host Rust FL | **No** |
 | README slogan / empty stub headers | Docs only | **No** |
-| This page + `emit_systemc_tlm_lt` ATDD | SystemC TLM-2.0 LT product | **Yes** (46.2 product face; epic closeout → 46.3) |
+| This page + `emit_systemc_tlm_lt` ATDD | SystemC TLM-2.0 LT product | **Yes** (Epic 46 **closed**) |
 
 ## Recipe
 
 ```text
 cargo test -p bitloom --test fr101_systemc_tlm_product
+cargo test -p bitloom --test fr101_epic46_closeout
 ```
 
 ## Cross-links
@@ -92,5 +97,5 @@ cargo test -p bitloom --test fr101_systemc_tlm_product
 |-----|------|
 | [`fr47-dual-sim-generation.md`](fr47-dual-sim-generation.md) | Rust FL / CA generators — **Not** SystemC |
 | [`fr100-formal-equiv.md`](fr100-formal-equiv.md) | FL≡RTL formal product — **≠** TLM product |
-| NFR14 Epic 46 | `_agile-output/implementation-artifacts/nfr14-risk-epic46-systemc-tlm.md` |
+| NFR14 Epic 46 | `_agile-output/implementation-artifacts/nfr14-risk-epic46-systemc-tlm.md` (**closed**) |
 | AD-5 | `_agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md` |

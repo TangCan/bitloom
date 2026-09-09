@@ -50,8 +50,8 @@ Regression: `cargo test -p mixed_both` and `cargo test -p bitloom-sim --lib mixe
 
 - No HIR→TLM *lowering* that replaces cycle-accurate `tick`. SystemC TLM-2.0
   **product** path is **FR101** — see [`fr101-systemc-tlm.md`](fr101-systemc-tlm.md)
-  (`emit_systemc_tlm_lt` / `cargo bitloom gen-tlm`; revised **AD-5**). Not contracted
-  by FR29.
+  (`emit_systemc_tlm_lt` / `cargo bitloom gen-tlm`; revised **AD-5**; **Epic 46 closed**).
+  Not contracted by FR29.
 - No FR47 generator in this story — generation lands in Epic 21.3+.
 - Handwritten attributes remain first-class after generation ships.
 

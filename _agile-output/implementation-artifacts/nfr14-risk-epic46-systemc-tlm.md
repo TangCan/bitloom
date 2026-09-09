@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR101 / Epic 46；NFR14、NFR40、NFR41、NFR43；推翻 FR93「不承诺 TLM」；对照 FR47 / FR100 / AD-5 |
 | 记录日期 | 2026-09-09 |
-| 状态 | accepted — Story 46.1（门禁记录；产品实现 → 46.2；收口 → 46.3） |
+| 状态 | **closed** — Story 46.3（FR101 / Epic 46 收口；LT-only MVP；AT deferred） |
 
 ### (a) 上游约束
 
@@ -113,13 +113,13 @@
 
 ---
 
-### Epic 46 关闭条件（Story 46.3 勾选 · 本故事不勾）
+### Epic 46 关闭条件（Story 46.3 勾选）
 
 - [x] **46.2 / FR101：** D1–D4 交付物 + L1/L2（LT 与/或 AT）+ 可复现烟测 — Story 46.2
-- [ ] **文档 / deferred / doc-19：** 撤销「不承诺 SystemC TLM-2.0」作为产品完成排除项；明确区分 Rust FL（FR47）vs SystemC TLM（FR101）— Story 46.3
-- [ ] **禁止事项未触发：** 无仅文档口号关闭；无 host Rust FL 冒充 TLM — Story 46.3
+- [x] **文档 / deferred / doc-19：** 撤销「不承诺 SystemC TLM-2.0」作为产品完成排除项；明确区分 Rust FL（FR47）vs SystemC TLM（FR101）— Story 46.3
+- [x] **禁止事项未触发：** 无仅文档口号关闭；无 host Rust FL 冒充 TLM — Story 46.3
 - [x] **修订后 AD-5 / NFR41：** 实现与文档交叉引用修订后 AD-5 — Story 46.2（产品面）；Story 46.3 收口再核
-- [ ] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude` — Story 46.3
+- [x] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude` — Story 46.3
 
 ---
 

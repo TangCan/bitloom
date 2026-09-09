@@ -64,14 +64,15 @@ Closing FR103 with this page + ATDD also closes **Epic 45** (FR100 + FR102 + FR1
 - FR102 multi-view attribute matrix — [`fr102-multiview-attribute-matrix.md`](fr102-multiview-attribute-matrix.md)
 - FR103 IP dual-model — **this page**
 
-**SystemC TLM-2.0 product path remains Epic 46 / FR101** (revised AD-5). Closing
-Epic 45 does **not** deliver TLM product. Default TLM≡CA / automatic formal
-equivalence is **no longer** a permanent non-goal (FR100 delivered); TLM **product**
-is still a separate epic.
+**SystemC TLM-2.0 product path is Epic 46 / FR101** (revised AD-5; **Epic 46 closed** —
+LT-only MVP). Closing Epic 45 does **not** by itself deliver TLM product (that is a
+separate epic, now closed). Default TLM≡CA / automatic formal equivalence is **no
+longer** a permanent non-goal (FR100 delivered). 「不承诺 SystemC TLM」is **no longer**
+a product completion exclusion.
 
 ## Non-goals (this story)
 
-- SystemC TLM-2.0 product → FR101 / Epic 46
+- SystemC TLM-2.0 product → FR101 / Epic 46 (**closed** separately; LT-only; AT deferred)
 - GPIO VIP (optional; FR98 G1)
 - Full-chip unbounded formal proof
 - Expanding `GeneratedFunctional` MemRead ≡ tick (deferred; SyncFifo uses handwritten FL)

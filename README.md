@@ -178,7 +178,7 @@ mod sim {
 | 宿主 IDE / rust-analyzer（FR90） | [`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md) · 夹具 [`examples/counter_ports`](examples/counter_ports) |
 | 多视图同刺激 + adapter 模板（FR92） | [`docs/fr92-shared-stimulus-adapter.md`](docs/fr92-shared-stimulus-adapter.md) · `SharedStimulusScoreboard` · FR78 adapter |
 | 自动 FL≡RTL / 形式等价产品（**FR100**） | [`docs/fr100-formal-equiv.md`](docs/fr100-formal-equiv.md) · `FormalEquivProduct`（超出 FR92 记分板）；**Epic 45 已关闭** |
-| SystemC TLM-2.0 产品路径（**FR101**） | [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md) · `emit_systemc_tlm_lt` / `cargo bitloom gen-tlm`（LT-only MVP；Story 46.2；Epic 46 收口 → 46.3） |
+| SystemC TLM-2.0 产品路径（**FR101**） | [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md) · `emit_systemc_tlm_lt` / `cargo bitloom gen-tlm`（LT-only MVP；**Epic 46 已关闭** / Story 46.3；AT deferred） |
 | 多视图属性全矩阵（**FR102**） | [`docs/fr102-multiview-attribute-matrix.md`](docs/fr102-multiview-attribute-matrix.md) · 超出仅 adapter 模板 |
 | 一级 IP 双模型齐全（**FR103**） | [`docs/fr103-ip-dual-model.md`](docs/fr103-ip-dual-model.md) · `IpDualModelMatrix`；FIFO/UART/SPI/I2C/AXI |
 | 时序 / 波形产品入口 | [`docs/fr38-wave.md`](docs/fr38-wave.md) |
@@ -263,7 +263,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 1. **树内 / 自研 HLS 调度器** → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付；修订后 **AD-25**）；外挂 Bambu 等可保留为可选，不得单独满足 FR95
 2. **FIRRTL→idiomatic Scala / idiomatic Chisel** → **FR97**（**Epic 42 已关闭** — MVP 已交付；修订后 **AD-27**）；机械可编译仍满足 FR28/FR46，不得冒充 FR97；完成面见 [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md)
-3. 默认 **TLM≡CA 形式证明** → **FR100**（**Epic 45 已关闭** — FR100 形式等价产品 + FR102 属性全矩阵 + FR103 一级 IP 双模型 MVP；见 [`docs/fr100-formal-equiv.md`](docs/fr100-formal-equiv.md)、[`docs/fr103-ip-dual-model.md`](docs/fr103-ip-dual-model.md)）；**SystemC TLM-2.0 产品** → **FR101**（Epic 46；修订后 **AD-5**）
+3. 默认 **TLM≡CA 形式证明** → **FR100**（**Epic 45 已关闭** — FR100 形式等价产品 + FR102 属性全矩阵 + FR103 一级 IP 双模型 MVP；见 [`docs/fr100-formal-equiv.md`](docs/fr100-formal-equiv.md)、[`docs/fr103-ip-dual-model.md`](docs/fr103-ip-dual-model.md)）；**SystemC TLM-2.0 产品** → **FR101**（**Epic 46 已关闭** — LT-only MVP / Story 46.3；修订后 **AD-5**；AT deferred；见 [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md)）
 4. **VIP 级全协议 IP** → **FR98**（**Epic 43 已关闭** — UART/SPI/I2C/AXI4-Lite 近 VIP MVP 已交付；GPIO 可选未纳入；边界见 [`docs/ip/README.md`](docs/ip/README.md)）
 5. **按键全设计 elaborate** 的 netlist LSP → **FR99**（**Epic 44 已关闭** — `bitloom-lsp` 全设计 elaborate 诊断/符号 MVP；见 [`docs/fr99-bitloom-lsp.md`](docs/fr99-bitloom-lsp.md)）
 
@@ -272,6 +272,6 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 - 完整 / 按键全 elaborate Bitloom LSP（**FR99 / Epic 44 已关闭**。Epic 39 **FR91 Path B** 显式 defer 仅为**历史**关闭路径，**不得**再当作 Phase 12 完成口径。宿主 rust-analyzer（FR90）仍可用，**不替代** FR99。层次/时序 HTML **≠ LSP**；见 [`docs/fr99-bitloom-lsp.md`](docs/fr99-bitloom-lsp.md)、[`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md)、[`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md)）
 - 部分 CLI 动词（`check` / `build-sim`）
 - crates.io 名 `rhdl` / `rhdl-bits`（禁止）
-- 自动等价证明 / SystemC TLM-2.0 产品（**FR100 / Epic 45 已关闭** — 形式等价产品 + IP 双模型；**FR101** 产品面见 [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md) / Story 46.2；**Epic 46 收口**仍 Story 46.3 — 关闭前不得宣称 epic 字面完成；见 doc-19）
+- 自动等价证明 / SystemC TLM-2.0 产品（**FR100 / Epic 45 已关闭** — 形式等价产品 + IP 双模型；**FR101 / Epic 46 已关闭** — LT-only MVP；「不承诺 SystemC TLM」不再是完成排除项；AT deferred；见 [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md) / doc-19）
 
 详见 [`docs/semver-0x-policy.md`](docs/semver-0x-policy.md) 与 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。

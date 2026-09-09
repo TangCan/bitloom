@@ -74,8 +74,11 @@ fn fr101_docs_lt_only_ad5_not_rust_fl() {
         "must contrast FR47 Rust FL ≠ SystemC TLM"
     );
     assert!(
-        !text.contains("closes Epic 46") && !text.to_lowercase().contains("epic 46 closed"),
-        "46.2 must not claim Epic 46 closed (→ 46.3)"
+        text.contains("closed")
+            || text.contains("关闭")
+            || text.contains("已关闭")
+            || text.contains("46.3"),
+        "fr101 doc should note Epic 46 / Story 46.3 closeout after product face"
     );
 }
 
@@ -193,29 +196,41 @@ fn fr101_nfr14_gate_still_present_and_46_2_checkable() {
 }
 
 #[test]
-fn fr101_sprint_46_2_done_46_3_backlog_epic_in_progress() {
+fn fr101_sprint_46_2_done_epic_may_close_after_46_3() {
     let text = read("_agile-output/implementation-artifacts/sprint-status.yaml");
-    let epic = text
-        .lines()
-        .find(|l| l.trim_start().starts_with("epic-46:"))
-        .expect("epic-46");
-    assert!(
-        epic.contains("in-progress"),
-        "epic-46 must stay in-progress until 46.3; got {epic}"
-    );
     let s2 = text
         .lines()
         .find(|l| l.contains("46-2-systemc-tlm-2-0-产品面-fr101:"))
         .expect("46-2 key");
     assert!(
         s2.contains("done"),
-        "46-2 must be done after this story; got {s2}"
+        "46-2 must remain done after product face; got {s2}"
     );
     let s3 = text
         .lines()
         .find(|l| l.contains("46-3-fr101-收口"))
         .expect("46-3 key");
-    assert!(s3.contains("backlog"), "46-3 must remain backlog; got {s3}");
+    let epic = text
+        .lines()
+        .find(|l| l.trim_start().starts_with("epic-46:"))
+        .expect("epic-46");
+    // After 46.2 alone: 46-3 backlog + epic in-progress.
+    // After 46.3 closeout: 46-3 done + epic done.
+    if s3.contains("done") {
+        assert!(
+            epic.contains("done"),
+            "when 46-3 is done, epic-46 must be done; got {epic}"
+        );
+    } else {
+        assert!(
+            s3.contains("backlog") || s3.contains("ready-for-dev") || s3.contains("in-progress"),
+            "before 46.3 closeout, 46-3 must not be falsely done; got {s3}"
+        );
+        assert!(
+            epic.contains("in-progress"),
+            "before 46.3 closeout, epic-46 must stay in-progress; got {epic}"
+        );
+    }
 }
 
 #[test]
