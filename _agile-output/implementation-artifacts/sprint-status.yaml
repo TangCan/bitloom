@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 11:55
+last_updated: 09-09-2026 11:53
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -261,7 +261,7 @@ development_status:
   32-2-嵌套-bundle-可综合路径: done
   32-3-bundle-derive-或等价: done
   32-4-嵌套-bundle-atdd-文档: done
-  epic-32-retrospective: optional
+  epic-32-retrospective: done
 
   epic-33: done
   33-1-epic-33-nfr14-风险记录: done
@@ -743,3 +743,25 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-31-retro-2026-09-09.md"
+  - id: "epic-32-retro-item-75-epic-33-标-ready-前-确认-story-33-1-nfr14-风险"
+    epic: 32
+    action: "Epic 33 标 ready 前：确认 Story 33.1 NFR14 风险记录完成（epics.md Epic 33 Gate）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-32-retro-2026-09-09.md"
+  - id: "epic-32-retro-item-76-后续触及-bundle-language-surface-时-保持一层嵌套合同与"
+    epic: 32
+    action: "后续触及 Bundle / language-surface 时，保持一层嵌套合同与 HwVec<Bundle,_> / ≥2 层诚实边界（文档表
+      + ATDD）；不得用 FR51 最小合同或仅删 OUT OF SCOPE 冒充 FR80（NFR37）；合同故事 commit 避免无关工具脚本（续
+      item-59：b758832 中 render_skill.py）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-32-retro-2026-09-09.md"
+  - id: "epic-32-retro-item-77-若产品需要-2-层嵌套递归或-hwvec-bundle-_-单独立项超出一层-m"
+    epic: 32
+    action: "若产品需要 ≥2 层嵌套递归或 HwVec<Bundle,_>，单独立项超出一层 MVP（当前 AC 已满足）；同时继续兑现 epic-28-retro-item-65
+      对 bitloom-builder 的拆分评估（本 epic builder 净 0 至 ~3101），并监视 bitloom-macro 体量（本 epic
+      207→430）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-32-retro-2026-09-09.md"
