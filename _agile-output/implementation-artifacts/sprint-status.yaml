@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 10:55
+last_updated: 09-09-2026 10:41
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -263,8 +263,8 @@ development_status:
   32-4-嵌套-bundle-atdd-文档: done
   epic-32-retrospective: optional
 
-  epic-33: backlog
-  33-1-epic-33-nfr14-风险记录: backlog
+  epic-33: in-progress
+  33-1-epic-33-nfr14-风险记录: done
   33-2-mem-chisel-合同决策: backlog
   33-3-实现所选-mem-chisel-路径: backlog
   33-4-atdd-fr71-回归: backlog
