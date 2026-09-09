@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 12:05
+last_updated: 09-09-2026 12:09
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -631,80 +631,80 @@ action_items:
     action: "Epic 27（及 28–30）标 ready 前，在 sprint-planning 核对 nfr14-risk-phase9-closures.md
       与 PRD §5.9 Epic 27–30 门禁句仍有效"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-26-retro-2026-09-09.md"
   - id: "epic-26-retro-item-59-后续-story-提交保持-diff-范围纯净-避免无关示例-格式化进入合同故事"
     epic: 26
     action: "后续 story 提交保持 diff 范围纯净，避免无关示例/格式化进入合同故事 commit（例：e30e6ca 中 examples/bundle_vec_skel）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-26-retro-2026-09-09.md"
   - id: "epic-27-retro-item-60-epic-28-标-ready-前-确认-epic-26-决策表仍将-fr75"
     epic: 27
     action: "Epic 28 标 ready 前：确认 Epic 26 决策表仍将 FR75 纳入本 epic，且 Epic 27 done（epics.md
       Epic 28 Gate）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-27-retro-2026-09-09.md"
   - id: "epic-27-retro-item-61-当-language-surface-获得-typed-wire-reg-han"
     epic: 27
     action: "当 language surface 获得 typed Wire/Reg handle 时，跟进自动硬件捕获检测（增强/替代 Option
       C 手工 HwCaptureRef），并保持 E0141/E0142 分立"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-27-retro-2026-09-09.md"
   - id: "epic-27-retro-item-62-bitloom-builder-单文件持续增长-本-epic-500-行-后续闭"
     epic: 27
     action: "bitloom-builder 单文件持续增长（本 epic +~500 行）— 后续闭包/elaborate API 故事评估是否按域拆分模块，避免不可见神类"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-27-retro-2026-09-09.md"
   - id: "epic-28-retro-item-63-epic-29-标-ready-前-确认-story-29-1-nfr14-风险"
     epic: 28
     action: "Epic 29 标 ready 前：确认 Story 29.1 NFR14 风险记录完成，且 Epic 26 决策表 D1（HLS 自由仅外挂；可综合腿
       SynthesizableClosure）仍有效（epics.md Epic 29 Gate）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-28-retro-2026-09-09.md"
   - id: "epic-28-retro-item-64-当-macros-language-surface-获得-typed-inlin"
     epic: 28
     action: "当 macros / language surface 获得 typed inline 时，跟进自动 rustc 闭包体与借用分析（增强/替代
       Cap-R-60/70 token 路径），并保持 E0141–E0146 分立（NFR35）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-28-retro-2026-09-09.md"
   - id: "epic-28-retro-item-65-兑现-epic-27-retro-item-62-评估将-bitloom-bui"
     epic: 28
     action: "兑现 epic-27-retro-item-62：评估将 bitloom-builder 按域拆分（SynthesizableClosure
       / comb·seq inline / hw_capture），本 epic 已再 +~838 行至 ~3008"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-28-retro-2026-09-09.md"
   - id: "epic-29-retro-item-66-epic-30-标-ready-前-确认-story-30-1-nfr14-风险"
     epic: 29
     action: "Epic 30 标 ready 前：确认 Story 30.1 NFR14 风险记录完成（epics.md Epic 30 Gate）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-29-retro-2026-09-09.md"
   - id: "epic-29-retro-item-67-当-macros-language-surface-获得-typed-inlin"
     epic: 29
     action: "当 macros / language surface 获得 typed inline 时，跟进自动 rustc 闭包体与借用分析（增强/替代
       Cap-R-60/70 与 FR76 HlsDataflowOp 手写 descriptor），并保持 E0141–E0146 与 D1 路径分立（NFR35）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-29-retro-2026-09-09.md"
   - id: "epic-29-retro-item-68-监视并评估-bitloom-prelude-ip-rs-体量-epic-29-f"
     epic: 29
     action: "监视并评估 bitloom-prelude ip.rs 体量（Epic 29 FR77 +~182；跨 34+29 已至 ~1357 行）；同时继续兑现
       epic-28-retro-item-65 对 bitloom-builder 的拆分评估（本 epic builder 净 0，债未清）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-29-retro-2026-09-09.md"
   - id: "epic-30-retro-item-69-epic-31-标-ready-前-确认-story-31-1-nfr14-风险"
     epic: 30
     action: "Epic 31 标 ready 前：确认 Story 31.1 NFR14 风险记录完成（epics.md Epic 31 Gate）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-30-retro-2026-09-09.md"
   - id: "epic-30-retro-item-70-当-macros-language-surface-获得-typed-inlin"
     epic: 30
@@ -712,7 +712,7 @@ action_items:
       Cap-R-60/70 与 FR76 HlsDataflowOp 手写 descriptor），并保持 E0141–E0146 与 D1/FR78 host
       路径分立（NFR35）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-30-retro-2026-09-09.md"
   - id: "epic-30-retro-item-71-若产品需要-dut-真-busy-针脚-fr47-生成对照深度夹具-单独立项增强"
     epic: 30
@@ -720,20 +720,20 @@ action_items:
       busy；30.2 UartTx 已覆盖真实 busy 握手，AC 已满足）；同时继续兑现 epic-28-retro-item-65 对 bitloom-builder
       的拆分评估（本 epic builder 净 0，债未清）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-30-retro-2026-09-09.md"
   - id: "epic-31-retro-item-72-epic-32-标-ready-前-确认-story-32-1-nfr14-风险"
     epic: 31
     action: "Epic 32 标 ready 前：确认 Story 32.1 NFR14 风险记录完成（epics.md Epic 32 Gate）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-31-retro-2026-09-09.md"
   - id: "epic-31-retro-item-73-后续触及语言-cdc-或一级-ip-fifo-时-保持-syncfifo-fr7"
     epic: 31
     action: "后续触及语言 CDC 或一级 IP FIFO 时，保持 SyncFIFO（FR79 跨域）与 ip::SyncFifo（FR82 单时钟）消歧（文档表
       + ATDD）；不得混为同一完成话术（NFR37）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-31-retro-2026-09-09.md"
   - id: "epic-31-retro-item-74-若产品需要可配置-depth-width-全家桶或双物理时钟端口-wr_clk"
     epic: 31
@@ -741,13 +741,13 @@ action_items:
       双域 MVP（当前 AC 已满足）；同时继续兑现 epic-28-retro-item-65 对 bitloom-builder 的拆分评估（本 epic
       builder +~93 至 ~3101，债加重）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-31-retro-2026-09-09.md"
   - id: "epic-32-retro-item-75-epic-33-标-ready-前-确认-story-33-1-nfr14-风险"
     epic: 32
     action: "Epic 33 标 ready 前：确认 Story 33.1 NFR14 风险记录完成（epics.md Epic 33 Gate）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-32-retro-2026-09-09.md"
   - id: "epic-32-retro-item-76-后续触及-bundle-language-surface-时-保持一层嵌套合同与"
     epic: 32
@@ -755,7 +755,7 @@ action_items:
       + ATDD）；不得用 FR51 最小合同或仅删 OUT OF SCOPE 冒充 FR80（NFR37）；合同故事 commit 避免无关工具脚本（续
       item-59：b758832 中 render_skill.py）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-32-retro-2026-09-09.md"
   - id: "epic-32-retro-item-77-若产品需要-2-层嵌套递归或-hwvec-bundle-_-单独立项超出一层-m"
     epic: 32
@@ -763,13 +763,13 @@ action_items:
       对 bitloom-builder 的拆分评估（本 epic builder 净 0 至 ~3101），并监视 bitloom-macro 体量（本 epic
       207→430）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-32-retro-2026-09-09.md"
   - id: "epic-33-retro-item-78-epic-34-标-ready-前-确认-story-34-1-nfr14-风险"
     epic: 33
     action: "Epic 34 标 ready 前：确认 Story 34.1 NFR14 风险记录完成（epics.md Epic 34 Gate）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-33-retro-2026-09-09.md"
   - id: "epic-33-retro-item-79-后续触及-emit_chisel-mem-fr71-时-保持-path-a-子集"
     epic: 33
@@ -777,7 +777,7 @@ action_items:
       或私自漂移 NFR12（7.14.0 ↔ 1.155.0）；FR71 required 仍为无 Mem counter（Mem JVM 可选夹具不替换
       GHA）；不得用 FR28 done + 历史 E0901 冒充 FR81（NFR37）；合同故事 commit 避免无关工具脚本（续 item-59）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-33-retro-2026-09-09.md"
   - id: "epic-33-retro-item-80-若产品需要双时钟裸-mem-多口掩码-翻转-path-b-永久非目标-单独立项超"
     epic: 33
@@ -785,13 +785,13 @@ action_items:
       epic-28-retro-item-65 对 bitloom-builder 的拆分评估（本 epic builder 净 0 至 ~3101），并监视
       rhdl-firrtl chisel.rs 体量（本 epic 248→317）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-33-retro-2026-09-09.md"
   - id: "epic-34-retro-item-81-epic-35-标-ready-前-确认-story-35-1-nfr14-风险"
     epic: 34
     action: "Epic 35 标 ready 前：确认 Story 35.1 NFR14 风险记录完成（epics.md Epic 35 Gate）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-34-retro-2026-09-09.md"
   - id: "epic-34-retro-item-82-后续触及一级-ip-bitloom-prelude-ip-fr82-时-保持五类"
     epic: 34
@@ -799,7 +799,7 @@ action_items:
       消歧；不得仅重命名 stub 交差；保持 SyncFifo（FR82 单时钟）与 SyncFIFO（FR79 CDC）完成话术分立；FR82 五类 API
       保持无生成器闭包（闭包 overlay = Epic 29 / FR77）；合同故事 commit 避免无关工具脚本（续 item-59）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-34-retro-2026-09-09.md"
   - id: "epic-34-retro-item-83-若产品需要全协议-vip-full-axi-可编程-baud-可配置-depth"
     epic: 34
@@ -808,14 +808,14 @@ action_items:
       epic net +728，~455→~1183；跨 34+29 已至 ~1357），并继续兑现 epic-28-retro-item-65 对 bitloom-builder
       的拆分评估（本 epic builder 净 0 至 ~3101）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-34-retro-2026-09-09.md"
   - id: "epic-35-retro-item-84-后续若再加深-fr83-84-85-或开启-26-35-之后的新-epic-前"
     epic: 35
     action: "后续若再加深 FR83/84/85 或开启 26–35 之后的新 epic 前：复用 NFR14「实现 vs 显式 defer」选型表与关闭勾选；不得用
       Epic 8/9/10 历史 done / Partial 现状冒充深度（NFR37）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-35-retro-2026-09-09.md"
   - id: "epic-35-retro-item-85-后续触及-c-abi-softf16-formal-lsp-时-保持-fr83"
     epic: 35
@@ -824,7 +824,7 @@ action_items:
       冒充）；FR85 保持外部 Verilator/sby 路径，不得用 check_sva_text toy 关单；LSP hover/goto 继续 deferred（非本批次完成条件）；合同故事
       commit 避免无关范围噪声（续 item-59）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-35-retro-2026-09-09.md"
   - id: "epic-35-retro-item-86-若产品需要任意-frozenhir-c-加载器-softf16-hir-emit"
     epic: 35
@@ -833,5 +833,5 @@ action_items:
       对 bitloom-prelude ip.rs 的拆分/体量评估（本 epic 净 0，仍 ~1357），并继续兑现 epic-28-retro-item-65
       对 bitloom-builder 的拆分评估（本 epic builder 净 0 至 ~3101）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-35-retro-2026-09-09.md"

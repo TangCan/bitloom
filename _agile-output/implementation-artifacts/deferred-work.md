@@ -185,3 +185,84 @@
   status: closed — `docs/fr28-chisel-compilable.md`「维护者合并前检查清单」
   resolved: '2026-08-21'
   resolution: 勾选清单已写入 FR28 文档并链 README
+
+<!-- action-items-sweep-2026-09-09: epics 26–35 open retro items disposition -->
+
+- source_spec: `_agile-output/implementation-artifacts/epic-26-retro-2026-09-09.md`
+  summary: Epic 27–35 ready 前门禁（NFR14 + PRD §5.9 / epics.md Gate）— 历史 gate 已兑现
+  evidence: |
+    epic-26-retro-item-58 + items 60/63/66/69/72/75/78/81；
+    sprint-status：epic-27…35 与各 `*-1-*nfr14*` 均为 done；
+    记录：`nfr14-risk-phase9-closures.md`（26–28/Phase9）、`nfr14-risk-epic29…35-*.md`
+  status: closed — gates satisfied; sweep 2026-09-09
+  resolved: '2026-09-09'
+  resolution: 全部后续 epic 已 done；NFR14 故事与风险记录在库；无需再挡 ready
+
+- source_spec: `_agile-output/implementation-artifacts/epic-26-retro-2026-09-09.md`
+  summary: 合同故事 commit 保持 diff 纯净（无无关示例/格式化/工具脚本）
+  evidence: epic-26-retro-item-59；续 76/79/82/85
+  status: deferred — standing process
+  resolved: '2026-09-09'
+  resolution: 写入 `process-one-story-one-commit.md`「Diff purity」；后续故事触及时遵守
+
+- source_spec: `_agile-output/implementation-artifacts/epic-27-retro-2026-09-09.md`
+  summary: Typed Wire/Reg handle / typed inline macros 落地后，跟进自动硬件捕获与 rustc 闭包体·借用分析（增强/替代手工 HwCaptureRef 与 Cap-R-60/70 token）；保持 E0141–E0146 与 D1/host 路径分立（NFR35）
+  evidence: |
+    epic-27-retro-item-61；epic-28-retro-item-64；epic-29-retro-item-67；epic-30-retro-item-70；
+    当前仍为 token/手工路径；typed language-surface 未交付
+  status: deferred — future trigger（typed Wire/Reg / inline macros）
+  resolved: '2026-09-09'
+  resolution: 阻塞于 typed surface；出现后新开故事，禁止静默替换诊断码分立合同
+
+- source_spec: `_agile-output/implementation-artifacts/epic-27-retro-2026-09-09.md`
+  summary: bitloom-builder 按域拆分（closures / inline / hw_capture / session）— 体量卫生
+  evidence: |
+    epic-27-retro-item-62；epic-28-retro-item-65；复现于 68/71/74/77/80/83/86；
+    2026-09-09 首步：`crates/bitloom-builder/src/closures.rs`（~379 行）抽出 FR73–75
+    自由函数与类型；`lib.rs` ~2731（原 ~3101）；crate root `pub use` 不变；
+    `cargo test -p bitloom-builder --lib` 45 passed
+  status: deferred — further domain splits
+  resolved: '2026-09-09'
+  resolution: |
+    首步 scaffolding 已落地。后续预算：仅当单文件再增 ≥~800 行或新 FR 域进入时，
+    再拆 `inline`/`hw_capture` 或 session 子模块；禁止无故事的大 refactor。
+    评估完成 → action items 关闭；剩余拆分为可选 hygiene 故事。
+
+- source_spec: `_agile-output/implementation-artifacts/epic-29-retro-2026-09-09.md`
+  summary: bitloom-prelude `ip.rs` 体量监视与拆分预算（FR77 overlay + FR82 五类）
+  evidence: |
+    epic-29-retro-item-68；续 83/86；现行 ~1357 行单文件（SyncFifo/UartTx/SpiMaster/
+    I2cMaster/Axi4LiteSlave/ExtBlackBox/Crc8Lut + tests）
+  status: deferred — size watch + split budget
+  resolved: '2026-09-09'
+  resolution: |
+    本 sweep **不**拆 `ip.rs`（行为风险高于收益；五类 Elaboratable 紧耦合测试）。
+    触发拆分：单文件 ≥~1800 行，或新增第六类一级 IP / 大块 FR77 生成器时，
+    按 IP 类型 `mod` 拆（`ip/{sync_fifo,uart_tx,…}.rs`）且保持 `bitloom_prelude::ip::*` 再导出。
+    在此之前仅监视；禁止 silent 大 refactor。
+
+- source_spec: `_agile-output/implementation-artifacts/epic-31-retro-2026-09-09.md`
+  summary: Standing NFR37 诚实边界（触及对应面时遵守；非立即实现）
+  evidence: |
+    - item-73：SyncFIFO（FR79 CDC）≠ ip::SyncFifo（FR82 单时钟）— docs/ip/README.md
+    - item-76：一层 Bundle 嵌套合同；HwVec&lt;Bundle,_&gt; / ≥2 层不冒充 FR80
+    - item-79：emit_chisel Mem Path A + E0901；NFR12 版本钉死；FR71≠历史 E0901
+    - item-82：FR82 五类非 stub ≠ Epic 22 stub；无生成器闭包（overlay=FR77）
+    - item-84：加深 FR83/84/85 或新 epic 前复用 NFR14 选型表；禁历史 Partial 冒充深度
+    - item-85：C ABI / SoftF16 / formal / LSP 合同边界（FR83–85）；LSP 仍 deferred
+  status: deferred — standing contract when touching area
+  resolved: '2026-09-09'
+  resolution: 编入本 ledger；触碰相关 crate/文档时对照；合同故事仍遵守 diff purity（item-59）
+
+- source_spec: `_agile-output/implementation-artifacts/epic-30-retro-2026-09-09.md`
+  summary: 可选产品加深（「若产品需要…」）— 超出已满足 AC 的 MVP；单独立项
+  evidence: |
+    - item-71：DUT 真 busy × FR47 深度夹具（30.3 Counter+host busy；30.2 UartTx 已覆盖真实 busy）
+    - item-74：可配置 DEPTH/WIDTH 全家桶或 wr_clk/rd_clk 双物理时钟（超出 4×8 / phantom 双域）
+    - item-77：≥2 层嵌套递归或 HwVec&lt;Bundle,_&gt;（超出一层 MVP）
+    - item-80：双时钟裸 mem / 多口掩码 / 翻转 Path B（永久非目标除非新合同）
+    - item-83：全协议 / VIP / Full AXI / 可编程 baud / depth·width 全家桶（超出 FR82 文档最小子集）
+    - item-86：任意 FrozenHir C 加载器 / SoftF16→HIR→emit Path A / 商用 sby 全证明 / LSP 二进制
+  status: deferred — optional product scope（explicit new contract required）
+  resolved: '2026-09-09'
+  resolution: 非缺陷；当前 epic AC 已满足。需要时开新故事+改文档/NFR14，禁止静默扩大 MVP。
