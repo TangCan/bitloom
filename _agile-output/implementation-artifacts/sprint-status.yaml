@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 15:45
+last_updated: 09-09-2026 15:50
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -303,11 +303,11 @@ development_status:
   38-3-atdd-与边界收口-可选树外示例: done
   epic-38-retrospective: optional
 
-  epic-39: in-progress
+  epic-39: done
   39-1-epic-39-nfr14-风险记录: done
   39-2-宿主-ide-rust-analyzer-工作流-fr90: done
   39-3-浅层-bitloom-lsp-或显式-defer-fr91: done
-  39-4-多视图同刺激与-adapter-模板-fr92: backlog
+  39-4-多视图同刺激与-adapter-模板-fr92: done
   epic-39-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"

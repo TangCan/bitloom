@@ -112,7 +112,7 @@ fn fr91_html_does_not_count_as_lsp() {
 }
 
 #[test]
-fn fr91_nfr14_fr91_checkbox_ticked_fr92_open() {
+fn fr91_nfr14_fr91_checkbox_ticked() {
     let text = read("_agile-output/implementation-artifacts/nfr14-risk-epic39-ide-multiview.md");
     assert!(
         text.contains("- [x] **FR91：**")
@@ -125,22 +125,13 @@ fn fr91_nfr14_fr91_checkbox_ticked_fr92_open() {
                     || text.contains("explicit defer"))),
         "NFR14 must tick FR91 Path B close checkbox"
     );
+    // Story 39.4 may tick FR92 and close the epic; FR91 must remain Path B ticked.
     assert!(
-        text.contains("- [ ] **FR92：**")
-            || text.contains("- [ ] **FR92:**")
-            || (text.contains("[ ]") && text.contains("FR92")),
-        "NFR14 FR92 close checkbox must remain open (Story 39.4)"
-    );
-    // Must not mark entire epic record closed by this story alone
-    let status_line = text
-        .lines()
-        .find(|l| l.contains("| 状态 |") || l.contains("| Status |"))
-        .unwrap_or("");
-    assert!(
-        !status_line.to_lowercase().contains("closed")
-            || status_line.contains("39.4")
-            || !text.contains("status: closed"),
-        "Epic 39 NFR14 must not be fully closed by Story 39.3 alone"
+        text.contains("Path B")
+            || text.contains("分支 B")
+            || text.contains("显式 defer")
+            || text.contains("explicit defer"),
+        "NFR14 must keep FR91 Path B / explicit defer decision visible"
     );
 }
 
@@ -158,13 +149,15 @@ fn fr91_no_half_built_lsp_binary() {
 }
 
 #[test]
-fn fr91_scope_guards_39_4_backlog() {
+fn fr91_scope_guards_path_b_no_lsp_after_39_4() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
-        sprint.contains("39-4-多视图同刺激与-adapter-模板-fr92: backlog")
-            || sprint
-                .lines()
-                .any(|l| l.contains("39-4-") && l.contains("backlog")),
-        "Story 39.4 must remain backlog (FR92 not started)"
+        sprint.contains("39-3-浅层-bitloom-lsp-或显式-defer-fr91: done"),
+        "Story 39.3 (FR91 Path B) must remain done"
+    );
+    // 39.4 closes FR92 / epic-39; Path B still forbids LSP binary (covered above).
+    assert!(
+        !workspace_root().join("crates/language-server").exists(),
+        "closing FR92 must not introduce a language-server crate"
     );
 }

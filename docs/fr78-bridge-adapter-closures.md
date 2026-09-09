@@ -84,11 +84,15 @@ permission to capture into cycle-accurate `tick` (FR16 / AD-18 / NFR35 still rej
 | FR29 handwritten `#[bridge]` / `HostView` | Host markers; never enter HIR | [`fr29-bridge-abstraction-both.md`](fr29-bridge-abstraction-both.md) |
 | FR78 `start_wait_complete` | Reusable handshake **inside** host/bridge code | This page · [`tutorials/bridge-half.md`](tutorials/bridge-half.md) |
 | FR47 `generate_*` / bridge compare | Dual-view **crate** generation + PortValues compare | [`fr47-dual-sim-generation.md`](fr47-dual-sim-generation.md) |
+| FR92 shared stimulus + adapter (Wave D) | Same stimuli / scoreboard for functional + tick; adapter template = this page | [`fr92-shared-stimulus-adapter.md`](fr92-shared-stimulus-adapter.md) |
 
 **Story 30.3 co-verification:** template-recorded stimuli (free closures on the host) feed the FR47 generated-path bridge via `check_functional_equiv_generated` / `check_generated_bridge`. Matching views pass; a deliberate wrong abstraction fails (FR30 spirit). Do not invent a parallel transaction semantics.
+
+**Story 39.4 / FR92:** names the Wave D / P7 contract over the same shared-stimulus + adapter-template path (`SharedStimulusScoreboard`); does **not** claim automatic formal FL≡RTL / SystemC TLM-2.0 (AD-5).
 
 ## ATDD
 
 - Template API: `cargo test -p bitloom --test fr78_bridge_adapter_start_wait_complete`
 - FR47 dual-view co-verification (Story 30.3): `cargo test -p bitloom --test fr78_fr47_dual_view_coverify`
 - Docs / UJ「桥接半程」收口 (Story 30.4): `cargo test -p bitloom --test fr78_bridge_half_followalong`
+- FR92 shared stimulus contract (Story 39.4): `cargo test -p bitloom --test fr92_shared_stimulus_adapter`

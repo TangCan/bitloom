@@ -18,6 +18,9 @@ pub use equiv::{
     EquivStatus, check_functional_equiv, check_functional_equiv_generated, reset_then_run,
 };
 
+mod shared_stimulus;
+pub use shared_stimulus::SharedStimulusScoreboard;
+
 mod generate;
 pub use generate::{
     GeneratedFunctional, emit_functional_crate, generate_functional_sim,

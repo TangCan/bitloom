@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR90, FR91, FR92 / Epic 39；NFR14、NFR39；对照 AD-5 / FR93 |
 | 记录日期 | 2026-09-09 |
-| 状态 | accepted — Story 39.1；FR91 分支 B 钉死；关闭条件留给 39.4 |
+| 状态 | closed — Story 39.4；FR90–FR92 + Epic 39 关闭条件已勾选；FR91 仍为 Path B |
 
 ### FR91 分支选择（Story 39.1 钉死 · 必读）
 
@@ -108,16 +108,16 @@
 
 ### Epic 39 关闭条件（Story 39.4 勾选）
 
-- [ ] **FR90：** 宿主 rust-analyzer（或等价）工作流文档 + 至少一夹具工程说明可复现 — Story 39.2
+- [x] **FR90：** 宿主 rust-analyzer（或等价）工作流文档 + 至少一夹具工程说明可复现 — Story 39.2
 - [x] **FR91：** 分支 **B** 合同化 defer（README / `docs/fr38-viz-lsp.md` 或等价）；无半成品 LSP 二进制冒充完成 — Story 39.3
-- [ ] **FR92：** 同刺激夹具 + adapter 模板；文档写明不承诺自动 FL≡RTL / SystemC TLM-2.0 — Story 39.4
-- [ ] **HTML ≠ LSP：** 层次/时序 HTML 不计入 LSP 完成
-- [ ] **禁止事项未触发：** 无 TLM-2.0 / 形式等价宣称；无 HTML 冒充 LSP；无未文档化半成品 LSP
-- [ ] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
+- [x] **FR92：** 同刺激夹具 + adapter 模板；文档写明不承诺自动 FL≡RTL / SystemC TLM-2.0 — Story 39.4（`docs/fr92-shared-stimulus-adapter.md`；`SharedStimulusScoreboard`；ATDD `fr92_shared_stimulus_adapter`）
+- [x] **HTML ≠ LSP：** 层次/时序 HTML 不计入 LSP 完成
+- [x] **禁止事项未触发：** 无 TLM-2.0 / 形式等价宣称；无 HTML 冒充 LSP；无未文档化半成品 LSP
+- [x] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
 
 ---
 
 ## 门禁一句话
 
 **缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 39 故事 39.2–39.4 标 `ready`。**  
-**FR91 分支已钉死为 B（显式 defer Bitloom LSP / Path B）；Epic 39 关闭条件由 Story 39.4 勾选。**
+**FR91 分支已钉死为 B（显式 defer Bitloom LSP / Path B）；Epic 39 关闭条件已由 Story 39.4 勾选（FR90–FR92）。**
