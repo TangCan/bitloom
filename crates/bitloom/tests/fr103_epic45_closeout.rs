@@ -2,7 +2,8 @@
 //!
 //! Locks NFR14 close checkboxes, README/deferred honesty (default TLM≡CA /
 //! automatic formal equiv is not a permanent non-goal; Epic 45 / FR100+FR103
-//! closed), docs/fr103, and sprint `epic-45: done`. Epic 46–47 must remain backlog.
+//! closed), docs/fr103, and sprint `epic-45: done`. Epic 46 may leave backlog only
+//! after Story 46.1 NFR14; Epic 47 must remain backlog.
 //!
 //! ```text
 //! cargo test -p bitloom --test fr103_epic45_closeout
@@ -94,7 +95,7 @@ fn fr103_deferred_readme_epic45_closed() {
 }
 
 #[test]
-fn fr103_sprint_epic45_done_epic46_plus_backlog() {
+fn fr103_sprint_epic45_done_epic46_gated_epic47_backlog() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
         sprint.contains("epic-45: done") || sprint.contains("epic-45:done"),
@@ -105,12 +106,23 @@ fn fr103_sprint_epic45_done_epic46_plus_backlog() {
             || sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103:done"),
         "sprint must mark story 45-4 done"
     );
-    for key in ["epic-46: backlog", "epic-47: backlog"] {
+    // Epic 46: backlog, or in-progress/done only after 46.1 NFR14 gate
+    assert!(
+        sprint.contains("epic-46: backlog")
+            || sprint.contains("epic-46: in-progress")
+            || sprint.contains("epic-46: done"),
+        "sprint-status must list epic-46 as backlog, in-progress, or done"
+    );
+    if !sprint.contains("epic-46: backlog") {
         assert!(
-            sprint.contains(key),
-            "closeout must leave {key} (do not start Epic 46+)"
+            sprint.contains("46-1-epic-46-nfr14-风险记录: done"),
+            "leaving epic-46 backlog requires Story 46.1 NFR14 done (gate)"
         );
     }
+    assert!(
+        sprint.contains("epic-47: backlog"),
+        "closeout must leave epic-47: backlog (do not start Epic 47)"
+    );
 }
 
 #[test]
