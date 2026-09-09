@@ -1,10 +1,10 @@
 # Deferred work
 
-## Contract-green pointer (FR87 / NFR38) — 历史里程碑
+## Literal-green pointer (FR94–105 / NFR42) — 当前完成合同
 
-阶段五–七「合同绿」验收定义仍见
-[`docs/requirements/19. 实施路线图.md`](../../docs/requirements/19.%20实施路线图.md) §19.7–19.9（**Story 40.3 将改为字面绿勾选**）。  
-Phase 11 合同绿为**历史已交付**；当前完成合同见 Phase 12 字面绿（addendum「Phase 12 字面绿」/ FR94–105）。
+阶段五–七「字面绿」勾选定义见
+[`docs/requirements/19. 实施路线图.md`](../../docs/requirements/19.%20实施路线图.md) §19.7–19.9（**Story 40.3 已落地**）：字面项须由对应 FR 关闭后方可勾选。  
+Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**；当前完成合同为 Phase 12 字面绿（addendum「Phase 12 字面绿」/ FR94–105）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 

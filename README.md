@@ -241,7 +241,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS 产品路径（外挂 Bambu）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
 
-**路线图阶段五–七「绿 / 全绿」按合同绿验收（FR87 / NFR38），不是字面愿景勾选。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9；禁止用未交付项宣称七阶段字面全绿。延期与边界 ledger：[`_agile-output/implementation-artifacts/deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+**路线图阶段五–七「绿 / 全绿」当前按 Phase 12 字面绿验收（FR94–105 / NFR42）：字面项须由对应 FR 关闭后方可勾选。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9。Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**，**禁止**用合同绿冒充字面全绿。延期与边界 ledger：[`_agile-output/implementation-artifacts/deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
 ### 永久非目标（FR93）
 
