@@ -2,7 +2,8 @@
 //!
 //! Locks NFR14 close checkboxes, README/deferred honesty (VIP-level full-protocol
 //! IP is not a permanent non-goal; Epic 43 / FR98 closed), docs/ip boundaries,
-//! and sprint `epic-43: done`. Epic 44+ must remain backlog.
+//! and sprint `epic-43: done`. Epic 45–47 must remain backlog.
+//! Epic 44 may be `in-progress` only after Story 44.1 NFR14 is `done`.
 //!
 //! ```text
 //! cargo test -p bitloom --test fr98_epic43_closeout
@@ -91,7 +92,7 @@ fn fr98_deferred_readme_epic43_closed() {
 }
 
 #[test]
-fn fr98_sprint_epic43_done_epic44_backlog() {
+fn fr98_sprint_epic43_done_epic44_gated() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
         sprint.contains("epic-43: done") || sprint.contains("epic-43:done"),
@@ -102,17 +103,24 @@ fn fr98_sprint_epic43_done_epic44_backlog() {
             || sprint.contains("43-5-axi-可选-gpio-fr98-收口:done"),
         "sprint must mark story 43-5 done"
     );
-    // Must not have started Epic 44+
-    for key in [
-        "epic-44: backlog",
-        "44-1-epic-44-nfr14-风险记录: backlog",
-        "epic-45: backlog",
-        "epic-46: backlog",
-        "epic-47: backlog",
-    ] {
+    // Epic 44: backlog, or in-progress/done only after 44.1 NFR14 gate
+    assert!(
+        sprint.contains("epic-44: backlog")
+            || sprint.contains("epic-44: in-progress")
+            || sprint.contains("epic-44: done"),
+        "sprint-status must list epic-44 as backlog, in-progress, or done"
+    );
+    if !sprint.contains("epic-44: backlog") {
+        assert!(
+            sprint.contains("44-1-epic-44-nfr14-风险记录: done"),
+            "leaving epic-44 backlog requires Story 44.1 NFR14 done (gate)"
+        );
+    }
+    // Must not have started Epic 45+
+    for key in ["epic-45: backlog", "epic-46: backlog", "epic-47: backlog"] {
         assert!(
             sprint.contains(key),
-            "closeout must leave {key} (do not start Epic 44+)"
+            "closeout must leave {key} (do not start Epic 45+)"
         );
     }
 }
