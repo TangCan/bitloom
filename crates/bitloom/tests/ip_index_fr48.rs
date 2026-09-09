@@ -50,8 +50,13 @@ fn ip_index_documents_five_categories_via_prelude() {
     }
 
     assert!(
-        text.contains("AXI4-Lite") && (text.contains("最小从") || text.contains("min")),
-        "index must state AXI = AXI4-Lite min slave"
+        text.contains("AXI4-Lite")
+            && (text.contains("最小从")
+                || text.contains("min")
+                || text.contains("近 VIP")
+                || text.contains("near-VIP")
+                || text.contains("从窗口")),
+        "index must state AXI = AXI4-Lite slave (min / near-VIP)"
     );
     assert!(
         text.contains("just test") || text.contains("cargo test --workspace"),

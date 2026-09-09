@@ -13,11 +13,11 @@ Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**；当前完�
 1. 树内 / 自研 HLS 调度器 → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付 / Story 41.4；修订后 **AD-25**）；外挂不得单独满足 FR95
 2. FIRRTL→idiomatic Scala → **FR97**（**Epic 42 已关闭** — MVP 已交付 / Story 42.3；修订后 **AD-27**）；机械 FR28/FR46 不得冒充 FR97
 3. 默认 TLM≡CA 形式证明 → 现 **FR100**（Epic 45）；SystemC TLM 产品 → **FR101**（Epic 46；修订后 **AD-5**）
-4. VIP 级全协议 IP → 现 **FR98**（Epic 43）
+4. VIP 级全协议 IP → 现 **FR98**（**Epic 43 已关闭** — UART/SPI/I2C/AXI4-Lite 近 VIP MVP；GPIO 可选未纳入；Story 43.5）
 5. 按键全设计 elaborate 的 netlist LSP → 现 **FR99**（Epic 44）
 
 **Phase 12（2026-09-09）：** Correct Course `sprint-change-proposal-2026-09-09-phase12-path-b.md` + PRD addendum「Phase 12 字面绿」**已推翻**上述锁定（闸门 **FR94**）。  
-README 与本文件同源：原五项不再是永久非目标；其中 **#1（树内 HLS）已由 Epic 41 关闭**，**#2（idiomatic Chisel）已由 Epic 42 关闭**；其余仍为交付目标（对应 FR 关闭后方可宣称 / **NFR42**）；ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 已于 Story **40.4** 修订（**NFR41**）。Epic 43–47 仍须各自经 NFR14 后标 ready——**本条目不把 43–47 标为已开工**。
+README 与本文件同源：原五项不再是永久非目标；其中 **#1（树内 HLS）已由 Epic 41 关闭**，**#2（idiomatic Chisel）已由 Epic 42 关闭**，**#4（VIP / 全协议 IP）已由 Epic 43 / FR98 关闭**；其余仍为交付目标（对应 FR 关闭后方可宣称 / **NFR42**）；ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 已于 Story **40.4** 修订（**NFR41**）。Epic 44–47 仍须各自经 NFR14 后标 ready——**本条目不把 44–47 标为已开工**。
 
 PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 11 FR93 历史 + Phase 12 推翻）。
 
@@ -154,9 +154,9 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     - UartRx：**FR98 / Epic 43.2** 近 VIP 8N1 RX（与 TX 全双工双例化）；小数分频 / 流控 / IrDA / parity 仍非目标
     - SpiMaster：**FR98 / Epic 43.3** 近 VIP — CPOL/CPHA 四模式、多字节 `cs_n` 帧、半周期 sclk、`rx_data`；DMA / 多 CS / slave 仍非目标
     - I2cMaster：**FR98 / Epic 43.4** 近 VIP — ACK/NACK 写+读、7-bit addr、半周期 SCL、`rx_data`/`ack_error`；stretch / 多主 / 10-bit / slave 仍非目标
-    - 全协议四类 VIP：UART+SPI+I2C 近 VIP 已合同化；AXI → Story 43.5；**不得**单类宣称 FR98 全绿
-    - Axi4LiteSlave：**FR82 非 stub** 单寄存器握手玩具；非 Full AXI / VIP
-  status: done — 五类 FR82 基线已交付；UART+SPI+I2C 近 VIP 见 43.2–43.4；AXI 全协议仍见下条；边界 `docs/ip/README.md`
+    - 全协议四类 VIP：UART+SPI+I2C+AXI4-Lite 近 VIP 已由 Epic 43 / FR98 关闭（Story 43.5）；GPIO 可选未纳入
+    - Axi4LiteSlave：**FR98 近 VIP** 多寄存器 + addr/wstrb；非 Full AXI / 互联 / 商业 VIP
+  status: done — 五类 FR82 基线 + Epic 43 / FR98 四类近 VIP；边界 `docs/ip/README.md`
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
   summary: UART/SPI/I2C「全协议」仍非默认交付；Epic 34 仅合同化最小可综合基线（非 VIP 级）
@@ -166,8 +166,8 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     Story 38.3 已收口交叉引用并勾选 NFR14 Epic 38 关闭条件；
     Epic 43.2 合同化 UART 近 VIP（`UartTx`+`UartRx`，U1–U5）；
     Epic 43.3 合同化 SPI 近 VIP（`SpiMaster` S1–S4）；
-    Epic 43.4 合同化 I2C 近 VIP（`I2cMaster` I1–I4）；AXI 全协议 / VIP **仍须** Story 43.5（单类 ≠ FR98 全绿）
-  status: locked — UART+SPI+I2C 近 VIP → 43.2–43.4；AXI 加深仍须 43.5；FR82 基线 ≠ 全协议；Epic 38 / FR89 子集已关闭
+    Epic 43.4 合同化 I2C 近 VIP（`I2cMaster` I1–I4）；Epic 43.5 合同化 AXI4-Lite 近 VIP（A1–A4）并收口 FR98 / Epic 43
+  status: done — UART+SPI+I2C+AXI 近 VIP → 43.2–43.5；FR98 / Epic 43 已关闭；FR82 基线 ≠ 全协议；Epic 38 / FR89 子集已关闭
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
   summary: 可选：AXI4-Lite 与 UART/FIFO 简易连接夹具

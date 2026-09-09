@@ -2,7 +2,7 @@
 //!
 //! Beyond FR82 START+8data+STOP SCL-high toy: ACK/NACK-driven master write,
 //! documented read path, START / 7-bit addr / data / STOP, half-period SCL,
-//! elaborate→emit→tick, docs. Does **not** close FR98 four-class VIP (AXI/GPIO → 43.5).
+//! elaborate→emit→tick, docs. I2C face only; full Epic 43 / FR98 closeout is Story 43.5.
 
 use std::fs;
 use std::path::PathBuf;
@@ -230,8 +230,7 @@ fn fr98_docs_ip_i2c_near_vip_boundaries() {
         ))
         .expect("nfr14");
     assert!(
-        nfr.contains("- [ ] **AXI：**")
-            || (nfr.contains("AXI") && nfr.contains("- [ ]") && nfr.contains("43.5")),
-        "must not close full Epic 43 NFR14 checklist in Story 43.4"
+        nfr.contains("- [x] **I2C：**") || nfr.contains("I1–I4"),
+        "NFR14 must record I2C near-VIP acceptance (I1–I4)"
     );
 }

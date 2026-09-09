@@ -216,9 +216,7 @@ fn fr98_docs_ip_spi_near_vip_boundaries() {
         ))
         .expect("nfr14");
     assert!(
-        nfr.contains("- [ ] **I2C：**")
-            || nfr.contains("- [ ] **AXI：**")
-            || (nfr.contains("I2C") && nfr.contains("- [ ]") && nfr.contains("43.4")),
-        "must not close full Epic 43 NFR14 checklist in Story 43.3"
+        nfr.contains("- [x] **SPI：**") || nfr.contains("S1–S4"),
+        "NFR14 must record SPI near-VIP acceptance (S1–S4)"
     );
 }

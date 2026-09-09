@@ -1,10 +1,10 @@
-//! First-class IP (FR37 / FR48 / FR82 / FR89 / FR98 UART+SPI+I2C): SyncFifo,
-//! UartTx, UartRx, SpiMaster, I2cMaster, Axi4LiteSlave, black-box; plus FR77
-//! overlay [`Crc8Lut`] (Epic 29.3).
+//! First-class IP (FR37 / FR48 / FR82 / FR89 / FR98): SyncFifo, UartTx, UartRx,
+//! SpiMaster, I2cMaster, Axi4LiteSlave, black-box; plus FR77 overlay [`Crc8Lut`]
+//! (Epic 29.3).
 //!
 //! Epic 34 / FR82 deepens five classes to **non-stub** synthesizable baselines.
 //! Epic 38 / FR89 deepens UartTx programmable baud. Epic 43 / FR98 Stories
-//! 43.2–43.4 add UART/SPI/I2C near-VIP; AXI near-VIP remains Story 43.5.
+//! 43.2–43.5 add UART/SPI/I2C/AXI near-VIP (GPIO optional, not required).
 //! Those IP APIs take **no** generator closures. Design crates reach IP via
 //! `bitloom_prelude::ip` only.
 //!
@@ -1907,16 +1907,21 @@ impl Elaboratable for I2cMaster {
     }
 }
 
-/// AXI4-Lite **minimal slave** single-register handshake toy (FR82 / Open Q7).
+/// AXI4-Lite **near-VIP slave** multi-register window (FR82 baseline → FR98 / Epic 43.5).
 ///
-/// Documented widths: **ADDR=8**, **DATA=32**. One backing `data_r` register:
-/// write when `awvalid && wvalid && !bvalid` (captures `wdata`; ignores addr/wstrb);
-/// holds `bvalid` until `bready`; read when `arvalid && !rvalid && !bvalid`
-/// (asserts `rvalid` with `rdata=data_r` until `rready`). `*ready` are combinatorial
-/// when the corresponding response channel is idle.
+/// Documented widths: **ADDR=8**, **DATA=32**, `wstrb` 4-bit. Word window
+/// `0x00` / `0x04` / `0x08` / `0x0C` → `data0_r`..`data3_r`.
 ///
-/// Non-goals: Full AXI (burst/ID/QoS), interconnect, multi-slave decode, VIP,
-/// generator closures (Epic 29).
+/// - **Write (A1):** when `awvalid && wvalid && !bvalid`, decode `awaddr`, merge
+///   `wdata` through `wstrb` byte lanes into the hit register (unmapped write
+///   ignored); hold `bvalid` until `bready`.
+/// - **Read (A1):** when `arvalid && !rvalid && !bvalid`, latch `rdata` from the
+///   decoded register (unmapped → 0); hold `rvalid` until `rready`.
+/// - **Ready:** combinatorial when the corresponding response channel is idle;
+///   write preferred over read in the same cycle.
+///
+/// Non-goals (A4): Full AXI (burst/ID/QoS), interconnect, multi-slave arrays,
+/// commercial VIP co-sim, GPIO VIP, generator closures (Epic 29).
 pub struct Axi4LiteSlave;
 
 impl Elaboratable for Axi4LiteSlave {
@@ -2011,44 +2016,123 @@ impl Elaboratable for Axi4LiteSlave {
             Span::default(),
         );
 
-        s.declare_reg("data_r", GroundType::UInt { width: 32 }, Span::default());
+        for name in ["data0_r", "data1_r", "data2_r", "data3_r", "rdata_r"] {
+            s.declare_reg(name, GroundType::UInt { width: 32 }, Span::default());
+        }
         s.declare_reg("bvalid_r", GroundType::UInt { width: 1 }, Span::default());
         s.declare_reg("rvalid_r", GroundType::UInt { width: 1 }, Span::default());
 
-        s.declare_wire("c0_1", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("c1_1", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("aw_ready", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("ar_ready", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("aw_fire", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("w_fire", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("do_write", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("ar_fire", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("do_read", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("b_fire", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("r_fire", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("next_data", GroundType::UInt { width: 32 }, Span::default());
-        s.declare_wire("b_clear", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("b_hold", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire(
+        for (n, w) in [
+            ("c0_1", 1u32),
+            ("c1_1", 1),
+            ("c1_4", 4),
+            ("c2_4", 4),
+            ("c4_4", 4),
+            ("c8_4", 4),
+            ("c0_8", 8),
+            ("c4_8", 8),
+            ("c8_8", 8),
+            ("c12_8", 8),
+            ("c0_32", 32),
+            ("c_ff", 32),
+            ("c_ff00", 32),
+            ("c_ff0000", 32),
+            ("c_ff000000", 32),
+            ("c_ffff_ffff", 32),
+        ] {
+            s.declare_wire(n, GroundType::UInt { width: w }, Span::default());
+        }
+
+        for n in [
+            "aw_ready",
+            "ar_ready",
+            "aw_fire",
+            "w_fire",
+            "do_write",
+            "ar_fire",
+            "do_read",
+            "b_fire",
+            "r_fire",
+            "b_clear",
+            "b_hold",
             "next_bvalid",
-            GroundType::UInt { width: 1 },
-            Span::default(),
-        );
-        s.declare_wire("r_clear", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("r_hold", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire(
+            "r_clear",
+            "r_hold",
             "next_rvalid",
-            GroundType::UInt { width: 1 },
-            Span::default(),
-        );
-        s.declare_wire("not_bvalid", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("not_rvalid", GroundType::UInt { width: 1 }, Span::default());
-        s.declare_wire("can_ar", GroundType::UInt { width: 1 }, Span::default());
+            "not_bvalid",
+            "not_rvalid",
+            "can_ar",
+            "aw_eq0",
+            "aw_eq1",
+            "aw_eq2",
+            "aw_eq3",
+            "ar_eq0",
+            "ar_eq1",
+            "ar_eq2",
+            "ar_eq3",
+            "ar_lo",
+            "wr0",
+            "wr1",
+            "wr2",
+            "wr3",
+        ] {
+            s.declare_wire(n, GroundType::UInt { width: 1 }, Span::default());
+        }
+
+        for n in ["strb0", "strb1", "strb2", "strb3"] {
+            s.declare_wire(n, GroundType::UInt { width: 4 }, Span::default());
+        }
+
+        for n in [
+            "lane0",
+            "lane1",
+            "lane2",
+            "lane3",
+            "lane01",
+            "lane23",
+            "byte_mask",
+            "byte_mask_n",
+            "wdata_m",
+            "old0_m",
+            "old1_m",
+            "old2_m",
+            "old3_m",
+            "merged0",
+            "merged1",
+            "merged2",
+            "merged3",
+            "next_data0",
+            "next_data1",
+            "next_data2",
+            "next_data3",
+            "rdata_lo1",
+            "rdata_lo",
+            "rdata_hi1",
+            "rdata_hi",
+            "rdata_mux",
+            "next_rdata",
+        ] {
+            s.declare_wire(n, GroundType::UInt { width: 32 }, Span::default());
+        }
 
         s.begin_combinational(Span::default());
         s.assign_lit("c0_1", 0, Span::default());
         s.assign_lit("c1_1", 1, Span::default());
-        // awready/wready when !bvalid; arready when !rvalid && !bvalid
+        s.assign_lit("c1_4", 1, Span::default());
+        s.assign_lit("c2_4", 2, Span::default());
+        s.assign_lit("c4_4", 4, Span::default());
+        s.assign_lit("c8_4", 8, Span::default());
+        s.assign_lit("c0_8", 0, Span::default());
+        s.assign_lit("c4_8", 4, Span::default());
+        s.assign_lit("c8_8", 8, Span::default());
+        s.assign_lit("c12_8", 12, Span::default());
+        s.assign_lit("c0_32", 0, Span::default());
+        s.assign_lit("c_ff", 0x0000_00FF, Span::default());
+        s.assign_lit("c_ff00", 0x0000_FF00, Span::default());
+        s.assign_lit("c_ff0000", 0x00FF_0000, Span::default());
+        s.assign_lit("c_ff000000", 0xFF00_0000, Span::default());
+        s.assign_lit("c_ffff_ffff", 0xFFFF_FFFF, Span::default());
+
         s.assign_xor("not_bvalid", "bvalid_r", "c1_1", Span::default());
         s.assign_xor("not_rvalid", "rvalid_r", "c1_1", Span::default());
         s.assign_net("aw_ready", "not_bvalid", Span::default());
@@ -2059,7 +2143,7 @@ impl Elaboratable for Axi4LiteSlave {
         s.assign_net("s_axi_arready", "ar_ready", Span::default());
         s.assign_net("s_axi_bvalid", "bvalid_r", Span::default());
         s.assign_net("s_axi_rvalid", "rvalid_r", Span::default());
-        s.assign_net("s_axi_rdata", "data_r", Span::default());
+        s.assign_net("s_axi_rdata", "rdata_r", Span::default());
         s.assign_lit("s_axi_bresp", 0, Span::default());
         s.assign_lit("s_axi_rresp", 0, Span::default());
 
@@ -2067,18 +2151,86 @@ impl Elaboratable for Axi4LiteSlave {
         s.assign_and("w_fire", "s_axi_wvalid", "aw_ready", Span::default());
         s.assign_and("do_write", "aw_fire", "w_fire", Span::default());
         s.assign_and("ar_fire", "s_axi_arvalid", "ar_ready", Span::default());
-        // Prefer write over read in the same cycle
         s.assign_mux("do_read", "do_write", "c0_1", "ar_fire", Span::default());
         s.assign_and("b_fire", "bvalid_r", "s_axi_bready", Span::default());
         s.assign_and("r_fire", "rvalid_r", "s_axi_rready", Span::default());
 
+        s.assign_eq("aw_eq0", "s_axi_awaddr", "c0_8", Span::default());
+        s.assign_eq("aw_eq1", "s_axi_awaddr", "c4_8", Span::default());
+        s.assign_eq("aw_eq2", "s_axi_awaddr", "c8_8", Span::default());
+        s.assign_eq("aw_eq3", "s_axi_awaddr", "c12_8", Span::default());
+        s.assign_eq("ar_eq0", "s_axi_araddr", "c0_8", Span::default());
+        s.assign_eq("ar_eq1", "s_axi_araddr", "c4_8", Span::default());
+        s.assign_eq("ar_eq2", "s_axi_araddr", "c8_8", Span::default());
+        s.assign_eq("ar_eq3", "s_axi_araddr", "c12_8", Span::default());
+        s.assign_and("wr0", "do_write", "aw_eq0", Span::default());
+        s.assign_and("wr1", "do_write", "aw_eq1", Span::default());
+        s.assign_and("wr2", "do_write", "aw_eq2", Span::default());
+        s.assign_and("wr3", "do_write", "aw_eq3", Span::default());
+
+        s.assign_and("strb0", "s_axi_wstrb", "c1_4", Span::default());
+        s.assign_and("strb1", "s_axi_wstrb", "c2_4", Span::default());
+        s.assign_and("strb2", "s_axi_wstrb", "c4_4", Span::default());
+        s.assign_and("strb3", "s_axi_wstrb", "c8_4", Span::default());
+        s.assign_mux("lane0", "strb0", "c_ff", "c0_32", Span::default());
+        s.assign_mux("lane1", "strb1", "c_ff00", "c0_32", Span::default());
+        s.assign_mux("lane2", "strb2", "c_ff0000", "c0_32", Span::default());
+        s.assign_mux("lane3", "strb3", "c_ff000000", "c0_32", Span::default());
+        s.assign_or("lane01", "lane0", "lane1", Span::default());
+        s.assign_or("lane23", "lane2", "lane3", Span::default());
+        s.assign_or("byte_mask", "lane01", "lane23", Span::default());
+        s.assign_xor("byte_mask_n", "byte_mask", "c_ffff_ffff", Span::default());
+        s.assign_and("wdata_m", "s_axi_wdata", "byte_mask", Span::default());
+
+        s.assign_and("old0_m", "data0_r", "byte_mask_n", Span::default());
+        s.assign_or("merged0", "wdata_m", "old0_m", Span::default());
+        s.assign_mux("next_data0", "wr0", "merged0", "data0_r", Span::default());
+
+        s.assign_and("old1_m", "data1_r", "byte_mask_n", Span::default());
+        s.assign_or("merged1", "wdata_m", "old1_m", Span::default());
+        s.assign_mux("next_data1", "wr1", "merged1", "data1_r", Span::default());
+
+        s.assign_and("old2_m", "data2_r", "byte_mask_n", Span::default());
+        s.assign_or("merged2", "wdata_m", "old2_m", Span::default());
+        s.assign_mux("next_data2", "wr2", "merged2", "data2_r", Span::default());
+
+        s.assign_and("old3_m", "data3_r", "byte_mask_n", Span::default());
+        s.assign_or("merged3", "wdata_m", "old3_m", Span::default());
+        s.assign_mux("next_data3", "wr3", "merged3", "data3_r", Span::default());
+
+        // rdata = ar_eq0 ? data0 : ar_eq1 ? data1 : ar_eq2 ? data2 : ar_eq3 ? data3 : 0
+        s.assign_mux("rdata_lo1", "ar_eq1", "data1_r", "c0_32", Span::default());
         s.assign_mux(
-            "next_data",
-            "do_write",
-            "s_axi_wdata",
-            "data_r",
+            "rdata_lo",
+            "ar_eq0",
+            "data0_r",
+            "rdata_lo1",
             Span::default(),
         );
+        s.assign_mux("rdata_hi1", "ar_eq3", "data3_r", "c0_32", Span::default());
+        s.assign_mux(
+            "rdata_hi",
+            "ar_eq2",
+            "data2_r",
+            "rdata_hi1",
+            Span::default(),
+        );
+        s.assign_or("ar_lo", "ar_eq0", "ar_eq1", Span::default());
+        s.assign_mux(
+            "rdata_mux",
+            "ar_lo",
+            "rdata_lo",
+            "rdata_hi",
+            Span::default(),
+        );
+        s.assign_mux(
+            "next_rdata",
+            "do_read",
+            "rdata_mux",
+            "rdata_r",
+            Span::default(),
+        );
+
         s.assign_mux("b_clear", "b_fire", "c0_1", "bvalid_r", Span::default());
         s.assign_mux("b_hold", "do_write", "c1_1", "b_clear", Span::default());
         s.assign_net("next_bvalid", "b_hold", Span::default());
@@ -2088,7 +2240,11 @@ impl Elaboratable for Axi4LiteSlave {
         s.end_process();
 
         s.begin_sequential(Span::default());
-        s.assign_reg_d_from("data_r", "next_data", Span::default());
+        s.assign_reg_d_from("data0_r", "next_data0", Span::default());
+        s.assign_reg_d_from("data1_r", "next_data1", Span::default());
+        s.assign_reg_d_from("data2_r", "next_data2", Span::default());
+        s.assign_reg_d_from("data3_r", "next_data3", Span::default());
+        s.assign_reg_d_from("rdata_r", "next_rdata", Span::default());
         s.assign_reg_d_from("bvalid_r", "next_bvalid", Span::default());
         s.assign_reg_d_from("rvalid_r", "next_rvalid", Span::default());
         s.end_process();

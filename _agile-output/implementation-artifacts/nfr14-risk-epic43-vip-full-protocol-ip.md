@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR98 / Epic 43；NFR14、NFR40、NFR43；扩大 FR82/FR89；对照 FR37/FR48 |
 | 记录日期 | 2026-09-09 |
-| 状态 | accepted — Story 43.1（开门禁；关闭勾选 → Story 43.5） |
+| 状态 | closed — Story 43.5（FR98 / Epic 43 关闭；GPIO 可选未纳入） |
 
 ### (a) 上游约束
 
@@ -133,15 +133,15 @@
 
 ---
 
-### Epic 43 关闭条件（Story 43.5 勾选 · 本故事不勾）
+### Epic 43 关闭条件（Story 43.5 勾选）
 
 - [x] **UART：** U1–U5 + ATDD — Story 43.2
 - [x] **SPI：** S1–S4 + ATDD — Story 43.3
 - [x] **I2C：** I1–I4 + ATDD — Story 43.4
-- [ ] **AXI：** A1–A4 + ATDD；（若纳入）GPIO G0 — Story 43.5
-- [ ] **文档 / deferred：** 不再把「VIP 级全协议 IP」列为永久非目标；`docs/ip/` 边界诚实
-- [ ] **禁止事项未触发：** 无单类加深冒充全绿（除非显式裁剪）；无无 ATDD 宣称 VIP
-- [ ] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
+- [x] **AXI：** A1–A4 + ATDD；（GPIO G0 **未纳入** — G1 可选未交付）— Story 43.5
+- [x] **文档 / deferred：** 不再把「VIP 级全协议 IP」列为永久非目标；`docs/ip/` 边界诚实
+- [x] **禁止事项未触发：** 无单类加深冒充全绿（除非显式裁剪）；无无 ATDD 宣称 VIP
+- [x] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
 
 ---
 

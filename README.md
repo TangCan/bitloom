@@ -260,7 +260,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 1. **树内 / 自研 HLS 调度器** → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付；修订后 **AD-25**）；外挂 Bambu 等可保留为可选，不得单独满足 FR95
 2. **FIRRTL→idiomatic Scala / idiomatic Chisel** → **FR97**（**Epic 42 已关闭** — MVP 已交付；修订后 **AD-27**）；机械可编译仍满足 FR28/FR46，不得冒充 FR97；完成面见 [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md)
 3. 默认 **TLM≡CA 形式证明** → **FR100**（Epic 45）；**SystemC TLM-2.0 产品** → **FR101**（Epic 46；修订后 **AD-5**）
-4. **VIP 级全协议 IP** → **FR98**（Epic 43）
+4. **VIP 级全协议 IP** → **FR98**（**Epic 43 已关闭** — UART/SPI/I2C/AXI4-Lite 近 VIP MVP 已交付；GPIO 可选未纳入；边界见 [`docs/ip/README.md`](docs/ip/README.md)）
 5. **按键全设计 elaborate** 的 netlist LSP → **FR99**（Epic 44）
 
 **明确 deferred / 未承诺为产品完整面（可延期；上列五项已不再是永久非目标）：**

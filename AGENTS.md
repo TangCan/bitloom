@@ -12,6 +12,7 @@
 - AD-20 / FR51: documented `Bundle` / `Vec<T,N>` (or equiv.) allowed on synthesizable path; width/dir fail before emit; FR22 surface thicken does not deliver composites (see ARCHITECTURE-SPINE AD-20)
 - AD-25 / FR95: in-tree `#[hls]` scheduling allowed as a product path (revised AD-25); external Bambu optional — **Epic 41 closed** (FR95/FR96 MVP)
 - AD-27 / FR28+FR46: FrozenHir/`.fir` → **compilable** Chisel Scala (mechanical OK); **FR97** adds idiomatic/maintainable acceptance (revised AD-27); no Scala `Parser.parse` requirement; historical NFR9 “no maintainable Chisel” is overturned — **Epic 42 closed** (FR97 MVP)
+- FR98 / Epic 43: UART/SPI/I2C/AXI4-Lite near-VIP first-class IP — **Epic 43 closed** (MVP; GPIO optional not included)
 
 ## Process
 
