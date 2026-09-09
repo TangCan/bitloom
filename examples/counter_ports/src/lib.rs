@@ -1,4 +1,5 @@
-//! Example design crate: depends only on `rhdl-prelude`.
+//! Example Bitloom design crate: depends only on `bitloom-prelude`.
+//! Host IDE workflow (FR90): see `docs/fr90-host-ide-rust-analyzer.md`.
 
 use bitloom_prelude::rhdl::module;
 use bitloom_prelude::{Clock, Elaboratable, Input, Output, Reset, UInt};
@@ -11,7 +12,7 @@ pub struct CounterPorts {
     pub data_out: Output<UInt<8>>,
 }
 
-/// Host entry for `cargo rhdl build --package counter_ports`.
+/// Host entry for `cargo bitloom build --package counter_ports`.
 pub fn rhdl_elaborate() -> Result<bitloom_prelude::FrozenHir, bitloom_prelude::Diagnostics> {
     CounterPorts::elaborate()
 }

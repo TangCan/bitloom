@@ -22,6 +22,8 @@ Open the HTML in a browser. This is the product hierarchy path for FR38/FR49 —
 
 Full LSP hover/goto remains **deferred** as a later epic (no language-server binary). Reinforced in `_agile-output/implementation-artifacts/deferred-work.md`. Hierarchy/HTML does **not** claim LSP done.
 
+**FR90 host path:** Bitloom design crates use **rust-analyzer** (host IDE) for completion / goto / rustc diagnostics — see [`fr90-host-ide-rust-analyzer.md`](fr90-host-ide-rust-analyzer.md). That host workflow is **not** a Bitloom language-server and does **not** close FR91.
+
 **Epic 35:** LSP hover/goto is **not** an Epic 35 completion criterion (still deferred). Story 35.4 only re-documents this boundary; it does **not** deliver a language-server.
 
 ## Wave / timing

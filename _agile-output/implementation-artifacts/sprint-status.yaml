@@ -305,7 +305,7 @@ development_status:
 
   epic-39: in-progress
   39-1-epic-39-nfr14-风险记录: done
-  39-2-宿主-ide-rust-analyzer-工作流-fr90: backlog
+  39-2-宿主-ide-rust-analyzer-工作流-fr90: done
   39-3-浅层-bitloom-lsp-或显式-defer-fr91: backlog
   39-4-多视图同刺激与-adapter-模板-fr92: backlog
   epic-39-retrospective: optional

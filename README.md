@@ -174,6 +174,7 @@ mod sim {
 | rhdl-float | [`docs/fr36-rhdl-float.md`](docs/fr36-rhdl-float.md) |
 | IP / 黑盒 | [`docs/fr37-ip-box.md`](docs/fr37-ip-box.md) |
 | HIR HTML / LSP（层次；LSP deferred） | [`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md) |
+| 宿主 IDE / rust-analyzer（FR90） | [`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md) · 夹具 [`examples/counter_ports`](examples/counter_ports) |
 | 时序 / 波形产品入口 | [`docs/fr38-wave.md`](docs/fr38-wave.md) |
 | UJ-6 可视化半程跟练 | [`docs/tutorials/uj6-visualization.md`](docs/tutorials/uj6-visualization.md) |
 | 额外 CLI | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) |
@@ -253,7 +254,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **明确 deferred / 未承诺为产品完整面（可延期，非上列永久非目标）：**
 
-- 完整 LSP hover/goto（FR38 部分；层次/时序 HTML 入口已交付；宿主路径以 rust-analyzer 为主；浅层 Bitloom LSP 另合同）
+- 完整 / 自研 Bitloom LSP hover/goto（FR91 Path B defer；层次/时序 HTML 入口已交付且 **≠ LSP**；**宿主 IDE 必做路径（FR90）已文档化：** [`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md)）
 - 部分 CLI 动词（`check` / `build-sim`）
 - crates.io 名 `rhdl` / `rhdl-bits`（禁止）
 - 自动等价证明 / SystemC TLM-2.0 产品（非 P7 合同绿条件；见 doc-19；与 FR93「默认 TLM≡CA 形式证明」永久非目标一致）
