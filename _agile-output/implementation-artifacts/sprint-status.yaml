@@ -301,7 +301,7 @@ development_status:
   38-1-epic-38-nfr14-风险记录: done
   38-2-uarttx-显式加深子集实现-fr89: done
   38-3-atdd-与边界收口-可选树外示例: done
-  epic-38-retrospective: optional
+  epic-38-retrospective: done
 
   epic-39: done
   39-1-epic-39-nfr14-风险记录: done
@@ -905,3 +905,25 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-37-retro-2026-09-09.md"
+  - id: "epic-38-retro-item-93-fr89-nfr39-子集诚实度-对外与文档保持-可编程-baud_div-子集"
+    epic: 38
+    action: "FR89 / NFR39 子集诚实度：对外与文档保持「可编程 baud_div 子集 ≠ RX / 全双工 / VIP / 全协议 / 小数分频·波特率表全家桶」；未选分支
+      B 不得声称已交付；加深其它一级 IP 须新合同。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-38-retro-2026-09-09.md"
+  - id: "epic-38-retro-item-94-uarttx-abi-纪律-新增-baud_div-为合同加深-既有夹具依赖-未"
+    epic: 38
+    action: "UartTx ABI 纪律：新增 baud_div 为合同加深；既有夹具依赖「未驱动→0 ≡ FR82」；后续改分频语义或默认值须显式回归
+      fr82_* / fr89_* 并改文档。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-38-retro-2026-09-09.md"
+  - id: "epic-38-retro-item-95-同步-epics-md-frontmatter-将-phase11epic38s"
+    epic: 38
+    action: "同步 epics.md frontmatter：将 phase11Epic38Status（及已完成的 36/37/39 若适用）从 ready-for-dev
+      改为与 sprint done / phase11Status: complete 一致（续 Epic 36 item-89 / Epic 37 item-92）；Phase
+      11 后续仍须遵守各 epic FR 合同与 NFR39。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-38-retro-2026-09-09.md"
