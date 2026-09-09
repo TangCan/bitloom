@@ -63,10 +63,10 @@ phase10Epic35Status: complete
 phase11Status: complete
 correctCourseApproved: 2026-09-09
 phase11Scope: Contract-green for docs/requirements roadmap stages 5–7 (redefined completion) — FR87–FR93 / NFR38–NFR39 (research technical-doc19-seven-stage-full-green-product-pla-2026-09-09)
-phase11Epic36Status: ready-for-dev
-phase11Epic37Status: ready-for-dev
-phase11Epic38Status: ready-for-dev
-phase11Epic39Status: ready-for-dev
+phase11Epic36Status: complete
+phase11Epic37Status: complete
+phase11Epic38Status: complete
+phase11Epic39Status: complete
 phase3Scope: Bitloom rename + maturity closeout + crates.io publish
 phase4Scope: True standalone after cargo install (bitloom-* publish graph)
 phase5Scope: Teaching RV32 example core + step-by-step tutorial (Bitloom)
@@ -111,7 +111,7 @@ idCollisionNote: >
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，epics complete · ready-for-dev）。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。无 UX。
 
 ## Requirements Inventory
 

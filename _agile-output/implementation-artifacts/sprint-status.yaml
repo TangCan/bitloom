@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 15:55
+last_updated: 09-09-2026 16:35
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -866,14 +866,14 @@ action_items:
     action: "对外宣称阶段五–七「全绿 / 产品做完」时：必须引用 FR87 / NFR38 合同条款（docs/requirements/19 §19.7–19.9）；禁止用字面未交付项勾选；合同绿
       ≠ 字面七阶段（续 NFR38）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-36-retro-2026-09-09.md"
   - id: "epic-36-retro-item-88-fr93-五条永久非目标保持公开锁定-readme-deferred-adden"
     epic: 36
     action: "FR93 五条永久非目标保持公开锁定（README / deferred / addendum 同源）；须新 PRD 才能推翻；不得标 done
       或静默交付交差；双写漂移靠既有 ATDD 拦截。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-36-retro-2026-09-09.md"
   - id: "epic-36-retro-item-89-同步-epics-md-frontmatter-将-phase11epic36s"
     epic: 36
@@ -881,21 +881,21 @@ action_items:
       改为与 sprint done / phase11Status: complete 一致，避免编排误读；Phase 11 后续加深仍须遵守各 epic
       FR 合同与 NFR39（禁止静默扩大子集）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-36-retro-2026-09-09.md"
   - id: "epic-37-retro-item-90-nfr12-升钉纪律-不得私自升-chisel-firtool-钉死对交差-升钉"
     epic: 37
     action: "NFR12 升钉纪律：不得私自升 Chisel/firtool 钉死对交差；升钉须上游正式配对并同步 ARCHITECTURE-SPINE
       Stack / AD-9 / addendum / docs/fr28-chisel-compilable.md 运维清单。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-37-retro-2026-09-09.md"
   - id: "epic-37-retro-item-91-fr88-hls-path-b-诚实度-对外与-ci-叙事保持-stub-质量"
     epic: 37
     action: "FR88 HLS Path B 诚实度：对外与 CI 叙事保持 stub≠质量；真机仅 BITLOOM_HLS_USE_REAL=1；若未来重开
       Path A 夜间真机 job，失败不得 continue-on-error / ignore。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-37-retro-2026-09-09.md"
   - id: "epic-37-retro-item-92-同步-epics-md-frontmatter-将-phase11epic37s"
     epic: 37
@@ -903,21 +903,21 @@ action_items:
       改为与 sprint done / phase11Status: complete 一致（续 Epic 36 item-89）；Phase 11 后续加深仍须遵守各
       epic FR 合同与 NFR39。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-37-retro-2026-09-09.md"
   - id: "epic-38-retro-item-93-fr89-nfr39-子集诚实度-对外与文档保持-可编程-baud_div-子集"
     epic: 38
     action: "FR89 / NFR39 子集诚实度：对外与文档保持「可编程 baud_div 子集 ≠ RX / 全双工 / VIP / 全协议 / 小数分频·波特率表全家桶」；未选分支
       B 不得声称已交付；加深其它一级 IP 须新合同。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-38-retro-2026-09-09.md"
   - id: "epic-38-retro-item-94-uarttx-abi-纪律-新增-baud_div-为合同加深-既有夹具依赖-未"
     epic: 38
     action: "UartTx ABI 纪律：新增 baud_div 为合同加深；既有夹具依赖「未驱动→0 ≡ FR82」；后续改分频语义或默认值须显式回归
       fr82_* / fr89_* 并改文档。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-38-retro-2026-09-09.md"
   - id: "epic-38-retro-item-95-同步-epics-md-frontmatter-将-phase11epic38s"
     epic: 38
@@ -925,21 +925,21 @@ action_items:
       改为与 sprint done / phase11Status: complete 一致（续 Epic 36 item-89 / Epic 37 item-92）；Phase
       11 后续仍须遵守各 epic FR 合同与 NFR39。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-38-retro-2026-09-09.md"
   - id: "epic-39-retro-item-96-fr91-path-b-nfr39-诚实度-对外与文档保持-宿主-rust-an"
     epic: 39
     action: "FR91 Path B / NFR39 诚实度：对外与文档保持「宿主 rust-analyzer ≠ Bitloom 自研 LSP」；HTML/时序可视化
       不计入 LSP 完成；未改选分支 A 不得声称浅层 LSP 已交付；半成品 language-server 二进制不得冒充完成。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-39-retro-2026-09-09.md"
   - id: "epic-39-retro-item-97-fr92-ad-5-诚实度-同刺激记分板-adapter-模板-自动-fl-rt"
     epic: 39
     action: "FR92 / AD-5 诚实度：同刺激记分板 + adapter 模板 ≠ 自动 FL≡RTL 形式证明 ≠ SystemC TLM-2.0
       产品；不得引入第二套无对照仿真语义作为完成定义；后续加深多视图须新合同。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-39-retro-2026-09-09.md"
   - id: "epic-39-retro-item-98-同步-epics-md-frontmatter-将-phase11epic39s"
     epic: 39
@@ -947,5 +947,5 @@ action_items:
       改为与 sprint done / phase11Status: complete 一致（续 Epic 36 item-89 / 37 item-92
       / 38 item-95）；不发明 Phase 11 之后的新 epic。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-39-retro-2026-09-09.md"

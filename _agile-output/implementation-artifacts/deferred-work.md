@@ -290,3 +290,23 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   status: deferred — optional product scope（explicit new contract required）
   resolved: '2026-09-09'
   resolution: 非缺陷；当前 epic AC 已满足。需要时开新故事+改文档/NFR14，禁止静默扩大 MVP。
+
+<!-- action-items-sweep-2026-09-09: epics 36–39 Phase-11 open retro items disposition -->
+
+- source_spec: `_agile-output/implementation-artifacts/epic-36-retro-2026-09-09.md`
+  summary: Standing Phase-11 诚实 / 过程边界（Epic 36–39；触及对应面时遵守；非立即实现）
+  evidence: |
+    - item-87：对外「阶段五–七全绿 / 产品做完」须引 FR87 / NFR38（docs/requirements/19 §19.7–19.9；README「状态与 deferred」；本文件 Contract-green pointer）；合同绿 ≠ 字面七阶段
+    - item-88：FR93 五条永久非目标公开锁定（本文件「永久非目标」+ README + PRD addendum）；须新 PRD 才能推翻；不得标 done / 静默交付
+    - item-90：NFR12 升钉纪律 — 禁止私自升 Chisel/firtool；须上游正式配对并同步 ARCHITECTURE-SPINE Stack / AD-9 / addendum / docs/fr28-chisel-compilable.md 运维清单
+    - item-91：FR88 HLS Path B — stub≠质量；真机仅 BITLOOM_HLS_USE_REAL=1；未来夜间真机 job 失败不得 continue-on-error（docs/fr35-hls.md）
+    - item-93：FR89 / NFR39 — 可编程 baud_div 子集 ≠ RX / 全双工 / VIP / 全协议 / 小数分频·波特率表全家桶；未选分支 B 不得声称已交付（docs/ip/README.md）
+    - item-94：UartTx ABI — 新增 baud_div 为合同加深；未驱动→0 ≡ FR82；改分频语义/默认值须回归 fr82_* / fr89_* 并改文档
+    - item-96：FR91 Path B / NFR39 — 宿主 rust-analyzer ≠ 自研 LSP；HTML/时序可视化 ≠ LSP 完成；半成品 language-server 不得冒充完成（docs/fr38-viz-lsp.md / fr90-host-ide-rust-analyzer.md）
+    - item-97：FR92 / AD-5 — 同刺激记分板 + adapter 模板 ≠ 自动 FL≡RTL 形式证明 ≠ SystemC TLM-2.0；不得引入第二套无对照仿真语义（docs/fr92-shared-stimulus-adapter.md）
+    - item-89/92/95/98：epics.md frontmatter phase11Epic36–39Status 与 phase11Status 对齐为 complete（编排元数据；非产品加深）
+  status: deferred — standing contract when touching area
+  resolved: '2026-09-09'
+  resolution: |
+    编入本 ledger；公开文档已含对应诚实条。触碰相关 crate/文档/CI 叙事时对照；
+    加深子集或改选分支须新合同 + NFR14，禁止静默扩大。
