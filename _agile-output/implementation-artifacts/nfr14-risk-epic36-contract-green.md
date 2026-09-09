@@ -15,7 +15,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR87 / FR93 / Epic 36；NFR14、NFR38 |
 | 记录日期 | 2026-09-09 |
-| 状态 | accepted — Story 36.1；36.2–36.3 仍 backlog 直至本记录门禁满足后标 ready |
+| 状态 | closed — Story 36.1–36.3 完成；Epic 36 关闭条件已勾选 |
 
 ### (a) 上游约束
 
@@ -89,10 +89,10 @@
 ### Epic 36 关闭条件（Story 36.3 勾选）
 
 - [x] **FR87：** `docs/requirements/19. 实施路线图.md` P5–P7「绿」已改为合同条款（外挂 HLS + 薄 IP + VCD/层次；精选 IP 深度 + 文档站 + 宿主 LSP；同刺激多视图 + adapter 模板；禁字面未交付勾选）— Story 36.2
-- [ ] **FR93：** README 与/或 `deferred-work.md` + addendum 指针锁定永久非目标清单；须新 PRD 才能推翻
-- [ ] **NFR38：** 公开/内部「全绿」表述引用合同条款；无字面七阶段假完成话术
-- [ ] **禁止事项未触发：** 无未改文档宣称字面全绿；无永久非目标标 done；无回滚 FR46–FR86；无提前标 36.2–36.3 ready（对本记录而言）
-- [ ] **品牌：** 仍为 Bitloom / `bitloom-*`
+- [x] **FR93：** README 与/或 `deferred-work.md` + addendum 指针锁定永久非目标清单；须新 PRD 才能推翻 — Story 36.3
+- [x] **NFR38：** 公开/内部「全绿」表述引用合同条款；无字面七阶段假完成话术
+- [x] **禁止事项未触发：** 无未改文档宣称字面全绿；无永久非目标标 done；无回滚 FR46–FR86；无提前标 36.2–36.3 ready（对本记录而言）
+- [x] **品牌：** 仍为 Bitloom / `bitloom-*`
 
 ---
 

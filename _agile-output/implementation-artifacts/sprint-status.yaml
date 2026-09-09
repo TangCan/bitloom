@@ -285,10 +285,10 @@ development_status:
   epic-35-retrospective: done
 
   # Phase 11 — contract-green (Correct Course 2026-09-09)
-  epic-36: in-progress
+  epic-36: done
   36-1-epic-36-nfr14-风险记录: done
   36-2-重写-doc-19-阶段五-七完成定义-fr87: done
-  36-3-永久非目标锁定-fr93: backlog
+  36-3-永久非目标锁定-fr93: done
   epic-36-retrospective: optional
 
   epic-37: backlog

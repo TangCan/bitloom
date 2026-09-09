@@ -4,8 +4,19 @@
 
 阶段五–七「绿 / 产品做完」验收以 **合同绿** 为准，定义见
 [`docs/requirements/19. 实施路线图.md`](../../docs/requirements/19.%20实施路线图.md) §19.7–19.9
-与 README「状态与 deferred」。**禁止**用字面未交付项勾选全绿。  
-永久非目标清单锁定（FR93）→ Story 36.3；本段仅为交叉链，不替代 FR93 正文。
+与 README「状态与 deferred」。**禁止**用字面未交付项勾选全绿。
+
+## 永久非目标（FR93）
+
+公开合同锁定（与 README「状态与 deferred」§永久非目标（FR93）同源）。**须新 PRD 才能推翻**；不得把下列项标成 done 或静默交付交差。
+
+1. 树内 / 自研 HLS 调度器
+2. FIRRTL→idiomatic Scala
+3. 默认 TLM≡CA 形式证明
+4. VIP 级全协议 IP
+5. 按键全设计 elaborate 的 netlist LSP
+
+PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 11 / FR93）。
 
 - source_spec: `_agile-output/implementation-artifacts/17-4-五级流水-转发-分支-flush.md`
   summary: LW/SW 在 EpisodeIIPipe 已接线但无 tick 黄金；load_q 时序与 load-use stall 留给 17.5

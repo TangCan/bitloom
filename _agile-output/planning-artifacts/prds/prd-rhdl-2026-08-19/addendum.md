@@ -182,3 +182,5 @@
 **合同指针：** 详见 `epics.md` Phase 11 Inventory（FR87–FR93 / NFR38–NFR39）。
 - 调研：`_agile-output/planning-artifacts/research/technical-doc19-seven-stage-full-green-product-pla-2026-09-09/research.md`
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-09.md`
+
+**FR93 永久非目标（公开清单指针）：** 树内/自研 HLS 调度器；FIRRTL→idiomatic Scala；默认 TLM≡CA 形式证明；VIP 级全协议 IP；按键全设计 elaborate 的 netlist LSP。正文见 README「状态与 deferred」§永久非目标（FR93）与 `_agile-output/implementation-artifacts/deferred-work.md` 同名节。**须新 PRD 才能推翻**；不得标 done。

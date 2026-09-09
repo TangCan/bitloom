@@ -239,12 +239,21 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **路线图阶段五–七「绿 / 全绿」按合同绿验收（FR87 / NFR38），不是字面愿景勾选。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9；禁止用未交付项宣称七阶段字面全绿。延期与边界 ledger：[`_agile-output/implementation-artifacts/deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
-**明确 deferred / 未承诺为产品完整面：**
+### 永久非目标（FR93）
 
-- 完整 LSP hover/goto（FR38 部分；层次/时序 HTML 入口已交付；宿主路径以 rust-analyzer 为主）
+下列项为 **Bitloom** 公开合同下的**永久非目标**（不是延期待办，也不得标 done）。**须新 PRD 才能推翻**；静默改 README / deferred 不构成合同变更。同源指针：PRD addendum「Phase 11」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+
+1. **树内 / 自研 HLS 调度器**（外挂 Bambu 等可复现 HLS 产物仍可；调度器本身非目标）
+2. **FIRRTL→idiomatic Scala**（可编译机械 Chisel ≠ idiomatic）
+3. 默认 **TLM≡CA 形式证明**
+4. **VIP 级全协议 IP**
+5. **按键全设计 elaborate** 的 netlist LSP
+
+**明确 deferred / 未承诺为产品完整面（可延期，非上列永久非目标）：**
+
+- 完整 LSP hover/goto（FR38 部分；层次/时序 HTML 入口已交付；宿主路径以 rust-analyzer 为主；浅层 Bitloom LSP 另合同）
 - 部分 CLI 动词（`check` / `build-sim`）
-- 自研 HLS 调度器（永不；仅外挂 Bambu——HLS **本身已支持**）
 - crates.io 名 `rhdl` / `rhdl-bits`（禁止）
-- 自动等价证明 / SystemC TLM-2.0 产品（非 P7 合同绿条件；见 doc-19）
+- 自动等价证明 / SystemC TLM-2.0 产品（非 P7 合同绿条件；见 doc-19；与 FR93「默认 TLM≡CA 形式证明」永久非目标一致）
 
 详见 [`docs/semver-0x-policy.md`](docs/semver-0x-policy.md) 与 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。
