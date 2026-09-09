@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR104, FR105 / Epic 47；NFR14、NFR40、NFR43；推翻 FR93 可视化/覆盖率字面排除；对照 FR38 / FR49 / FR31 / FR34 |
 | 记录日期 | 2026-09-09 |
-| 状态 | **accepted** — Story 47.1 门禁；**47.2 / FR104 已交付**；47.3 / FR105 + Epic 关闭仍开 |
+| 状态 | **closed** — Story 47.3；FR104 + FR105 / Epic 47 已关闭 |
 
 ### (a) 上游约束
 
@@ -114,11 +114,11 @@
 ### Epic 47 关闭条件（Story 47.3 勾选）
 
 - [x] **47.2 / FR104：** I1–I3 或 E1 交互产品路径 + 可复现验收 — Story 47.2
-- [ ] **47.3 / FR105：** C2（+C3 合同）+ R1–R2 记录器与报告 + ≥1 夹具 — Story 47.3
-- [ ] **文档 / deferred / doc-19：** 撤销「富波形/覆盖率仅 defer」作为完成排除；交叉 FR38/49/34 — Story 47.3
-- [ ] **禁止事项未触发：** 无仅静态 HTML 关闭 FR104；无 docs-only 无记录器关闭 FR105 — Story 47.3
-- [ ] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude` — Story 47.3
-- [ ] **Phase 12 故事清单：** 规划/实现故事齐；字面绿剩余门仅为各 epic 关闭态诚实声明 — Story 47.3
+- [x] **47.3 / FR105：** C2（+C3 合同）+ R1–R2 记录器与报告 + ≥1 夹具 — Story 47.3
+- [x] **文档 / deferred / doc-19：** 撤销「富波形/覆盖率仅 defer」作为完成排除；交叉 FR38/49/34 — Story 47.3
+- [x] **禁止事项未触发：** 无仅静态 HTML 关闭 FR104；无 docs-only 无记录器关闭 FR105 — Story 47.3
+- [x] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude` — Story 47.3
+- [x] **Phase 12 故事清单：** 规划/实现故事齐；字面绿剩余门仅为各 epic 关闭态诚实声明 — Story 47.3
 
 ---
 

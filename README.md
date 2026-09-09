@@ -164,7 +164,7 @@ mod sim {
 | 可选 FST | [`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md) |
 | tick 引擎 | [`docs/fr32-tick-engines.md`](docs/fr32-tick-engines.md) |
 | C ABI cdylib | [`docs/fr33-c-abi.md`](docs/fr33-c-abi.md) |
-| 仿真覆盖率 | [`docs/fr34-sim-coverage.md`](docs/fr34-sim-coverage.md) |
+| 仿真覆盖率（FR34 基线 + **FR105** 扩展） | [`docs/fr34-sim-coverage.md`](docs/fr34-sim-coverage.md) · [`docs/fr105-sim-coverage-ext.md`](docs/fr105-sim-coverage-ext.md)（Mux 分支；**Epic 47 已关闭**） |
 | Chisel 可编译生成（FR28 / FR88）+ Mem Path A（FR81） | [`docs/fr28-chisel-compilable.md`](docs/fr28-chisel-compilable.md)（**可编译 ≠ idiomatic**；[钉死运维清单](docs/fr28-chisel-compilable.md#firtool--chisel-钉死运维清单fr88--nfr3--nfr12)）· FR71：`just chisel-fr28-jvm` · 可选 Mem：`just chisel-fr81-mem-jvm` · [维护者合并清单](docs/fr28-chisel-compilable.md#维护者合并前检查清单fr28--emit_chisel) |
 | Idiomatic / 可维护 Chisel（**FR97** · Epic 42 已关闭） | [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md)（`emit_chisel_idiomatic` + `check_idiomatic_chisel`；机械面不得单独关闭 FR97） |
 | Chisel / `.fir` 反向导入（FR46） | [`docs/fr46-chisel-import.md`](docs/fr46-chisel-import.md) |
@@ -182,7 +182,7 @@ mod sim {
 | 多视图属性全矩阵（**FR102**） | [`docs/fr102-multiview-attribute-matrix.md`](docs/fr102-multiview-attribute-matrix.md) · 超出仅 adapter 模板 |
 | 一级 IP 双模型齐全（**FR103**） | [`docs/fr103-ip-dual-model.md`](docs/fr103-ip-dual-model.md) · `IpDualModelMatrix`；FIFO/UART/SPI/I2C/AXI |
 | 时序 / 波形产品入口 | [`docs/fr38-wave.md`](docs/fr38-wave.md) |
-| 交互式富波形（**FR104**） | [`docs/fr104-interactive-wave.md`](docs/fr104-interactive-wave.md) · `interactive.html`（Story 47.2；≠ 仅静态 `timing.html`；Epic 47 / FR105 未关闭） |
+| 交互式富波形（**FR104**） | [`docs/fr104-interactive-wave.md`](docs/fr104-interactive-wave.md) · `interactive.html`（≠ 仅静态 `timing.html`；**Epic 47 / FR104+FR105 已关闭**） |
 | UJ-6 可视化半程跟练 | [`docs/tutorials/uj6-visualization.md`](docs/tutorials/uj6-visualization.md) |
 | 额外 CLI | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) |
 | 多平台 firtool | [`docs/nfr11-firtool-platforms.md`](docs/nfr11-firtool-platforms.md) |
@@ -257,6 +257,8 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS（树内 FR95/FR96 MVP + 外挂 Bambu 可选）**、**Idiomatic Chisel（FR97 · Epic 42）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
 
 **路线图阶段五–七「绿 / 全绿」当前按 Phase 12 字面绿验收（FR94–105 / NFR42）：字面项须由对应 FR 关闭后方可勾选。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9。Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**，**禁止**用合同绿冒充字面全绿。延期与边界 ledger：[`_agile-output/implementation-artifacts/deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+
+**Phase 12 规划/实现故事已齐（Epic 40–47）。字面绿剩余门仅为各 epic 的实现关闭态**（optional retrospectives 可不阻塞）。Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。
 
 ### 永久非目标（FR93）— 历史；已被 Phase 12 推翻
 

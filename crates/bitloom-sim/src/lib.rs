@@ -10,7 +10,7 @@ use bitloom_hir::{AssignExpr, AssignTarget, FrozenHir, GroundType, PortValues, P
 pub use bitloom_hir::PortValues as Values;
 
 mod coverage;
-pub use coverage::{Coverage, parse_report};
+pub use coverage::{Coverage, parse_branch_report, parse_report};
 mod engine;
 pub use engine::TickEngine;
 mod equiv;
@@ -226,7 +226,7 @@ impl Sim {
             .unwrap_or(0)
     }
 
-    fn eval(&self, expr: &AssignExpr) -> u64 {
+    fn eval(&mut self, expr: &AssignExpr) -> u64 {
         match expr {
             AssignExpr::Ref(n) => self.lookup(n),
             AssignExpr::Lit(v) => *v,
@@ -240,7 +240,9 @@ impl Sim {
             AssignExpr::Shr(a, b) => self.lookup(a) >> (self.lookup(b) & 63),
             AssignExpr::Eq(a, b) => u64::from(self.lookup(a) == self.lookup(b)),
             AssignExpr::Mux { sel, t, f } => {
-                if self.lookup(sel) != 0 {
+                let took_true = self.lookup(sel) != 0;
+                self.coverage.sample_mux_branch(sel, took_true);
+                if took_true {
                     self.lookup(t)
                 } else {
                     self.lookup(f)
@@ -882,7 +884,10 @@ mod tests {
         sim.tick();
         sim.tick();
         let report = sim.coverage_report();
-        assert!(report.starts_with("# bitloom-sim coverage v1"));
+        assert!(
+            report.starts_with("# bitloom-sim coverage v2"),
+            "FR105 extends report header to v2 (toggle lines retained)"
+        );
         let (hits, misses) = parse_report(&report);
         assert!(
             hits.iter().any(|h| h == "data_out" || h == "count"),

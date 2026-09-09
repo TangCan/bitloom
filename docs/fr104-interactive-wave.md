@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Story **47.2** product path (I1–I3). Does **not** close Epic 47 / FR105 (→ Story 47.3).
+**Status:** Story **47.2** product path (I1–I3). **Epic 47 / FR104 + FR105 closed** (Story 47.3 delivered coverage extension).
 
 ## Contract (NFR14 I1–I3)
 
@@ -50,11 +50,10 @@ ATDD: `cargo test -p bitloom --test fr104_interactive_wave`
 ## Cross-links
 
 - Baseline wave entry: [`fr38-wave.md`](fr38-wave.md)
+- Coverage extension (FR105): [`fr105-sim-coverage-ext.md`](fr105-sim-coverage-ext.md)
 - NFR14 gate: `_agile-output/implementation-artifacts/nfr14-risk-epic47-waveform-coverage.md`
-- Coverage extension (FR105) is **not** this document — Story 47.3
 
 ## Non-goals (this story)
 
-- FR105 coverage recorder / Phase 12 / Epic 47 closeout
 - Tywaves-class typed source-level IDE waveform
 - Removing default VCD or static `timing.html`

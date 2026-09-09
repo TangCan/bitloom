@@ -66,9 +66,44 @@ fn fr104_docs_interactive_contract() {
             || text.contains("AD-24"),
         "must retain / cross-link default VCD path (AD-5/24)"
     );
+}
+
+#[test]
+fn fr104_sprint_47_2_done_epic47_closed_ok() {
+    let text = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
-        !text.contains("Epic 47 已关闭") && !text.contains("epic-47: done"),
-        "must not claim Epic 47 closed in FR104 product doc"
+        text.contains("47-2-交互式富波形-fr104: done")
+            || text.contains("47-2-交互式富波形-fr104:done"),
+        "47-2 must be done"
+    );
+    assert!(
+        text.contains("47-3-仿真覆盖率扩展-fr105-收口: done")
+            || text.contains("47-3-仿真覆盖率扩展-fr105-收口:done")
+            || text.contains("47-3-仿真覆盖率扩展-fr105-收口: backlog")
+            || text.contains("47-3-仿真覆盖率扩展-fr105-收口: in-progress")
+            || text.contains("47-3-仿真覆盖率扩展-fr105-收口: ready-for-dev"),
+        "47-3 must be listed (backlog→done across stories)"
+    );
+    assert!(
+        text.contains("epic-47: in-progress")
+            || text.contains("epic-47:in-progress")
+            || text.contains("epic-47: done")
+            || text.contains("epic-47:done"),
+        "epic-47 must be in-progress or done"
+    );
+}
+
+#[test]
+fn fr104_nfr14_47_2_checkable() {
+    let text =
+        read("_agile-output/implementation-artifacts/nfr14-risk-epic47-waveform-coverage.md");
+    assert!(
+        text.contains("47.2") && (text.contains("FR104") || text.contains("交互")),
+        "NFR14 must still reference 47.2 / FR104"
+    );
+    assert!(
+        text.contains("[x] **47.2") || text.contains("[x] 47.2") || text.contains("- [x] **47.2"),
+        "NFR14 47.2 / FR104 close item must be checked"
     );
 }
 
@@ -187,52 +222,6 @@ fn fr104_vcd_and_timing_still_emitted() {
     );
     assert!(out_dir.join("interactive.html").is_file());
     let _ = fs::remove_dir_all(&out_dir);
-}
-
-#[test]
-fn fr104_sprint_47_2_done_47_3_backlog_epic_in_progress() {
-    let text = read("_agile-output/implementation-artifacts/sprint-status.yaml");
-    assert!(
-        text.contains("47-2-交互式富波形-fr104: done")
-            || text.contains("47-2-交互式富波形-fr104:done"),
-        "47-2 must be done"
-    );
-    assert!(
-        text.contains("47-3-仿真覆盖率扩展-fr105-收口: backlog")
-            || text.contains("47-3-仿真覆盖率扩展-fr105-收口:backlog"),
-        "47-3 must stay backlog"
-    );
-    assert!(
-        text.contains("epic-47: in-progress") || text.contains("epic-47:in-progress"),
-        "epic-47 must stay in-progress (not done)"
-    );
-    assert!(
-        !text.contains("epic-47: done") && !text.contains("epic-47:done"),
-        "must not close epic-47 in this story"
-    );
-}
-
-#[test]
-fn fr104_nfr14_47_2_checkable_not_epic_closed() {
-    let text =
-        read("_agile-output/implementation-artifacts/nfr14-risk-epic47-waveform-coverage.md");
-    assert!(
-        text.contains("47.2") && (text.contains("FR104") || text.contains("交互")),
-        "NFR14 must still reference 47.2 / FR104"
-    );
-    // 47.2 close item should be checkable (checked after implementation)
-    assert!(
-        text.contains("[x] **47.2") || text.contains("[x] 47.2") || text.contains("- [x] **47.2"),
-        "NFR14 47.2 / FR104 close item must be checked after this story"
-    );
-    assert!(
-        text.contains("[ ] **47.3") || text.contains("[ ] 47.3") || text.contains("- [ ] **47.3"),
-        "47.3 / FR105 must remain unchecked"
-    );
-    assert!(
-        !text.contains("状态 | **closed**") && !text.contains("状态 | closed"),
-        "must not mark Epic 47 NFR14 record closed yet"
-    );
 }
 
 #[test]

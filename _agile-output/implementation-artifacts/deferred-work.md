@@ -177,7 +177,7 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
 - source_spec: `_agile-output/implementation-artifacts/epic-23-retro-2026-08-21.md`
   summary: 交互式/更丰富波形浏览（超出静态 `timing.html` Value table）作为后续 epic
   evidence: epic-23-retro-item-51；Story 47.2 / FR104 → `interactive.html`（I1–I3）；见 `docs/fr104-interactive-wave.md`；静态 timing + VCD 仍保留
-  status: closed — Epic 47 Story 47.2 / FR104（交互产品路径）；覆盖率扩展仍 → 47.3
+  status: closed — Epic 47 Story 47.2 / FR104（交互产品路径）；覆盖率扩展 → 47.3 / FR105（亦已关闭）
   resolved: '2026-09-09'
   resolution: Story 47.2 交付自研 interactive.html；不得以静态 timing 单独关 FR104
 
