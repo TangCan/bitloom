@@ -23,6 +23,7 @@ fn spi_drive(sim: &mut Sim, rst: u64, start: u64, tx_data: u64, miso: u64) {
     pv.set("start", start);
     pv.set("tx_data", tx_data);
     pv.set("miso", miso);
+    // FR82 default path: Mode-0, single byte (unset ports read as 0).
     sim.set_inputs(pv);
     sim.settle();
     sim.tick();
@@ -42,12 +43,19 @@ fn fr82_spi_master_elaborate_emit_tick_non_stub() {
 
     let mut sim = Sim::new(hir);
     spi_drive(&mut sim, 1, 0, 0, 0);
-    spi_drive(&mut sim, 0, 1, 0x81, 0); // MSB=1, LSB=1
+    spi_drive(&mut sim, 0, 1, 0x81, 0); // MSB=1
     assert_eq!(sim.ports().get("busy"), Some(1));
     assert_eq!(sim.ports().get("cs_n"), Some(0));
-    assert_eq!(sim.ports().get("sclk"), Some(1));
+    assert_eq!(
+        sim.ports().get("sclk"),
+        Some(0),
+        "Mode-0 setup half (FR82 deepened)"
+    );
     assert_eq!(sim.ports().get("mosi"), Some(1)); // MSB
-    spi_drive(&mut sim, 0, 0, 0, 0);
+    spi_drive(&mut sim, 0, 0, 0, 0); // leading
+    assert_eq!(sim.ports().get("sclk"), Some(1));
+    assert_eq!(sim.ports().get("mosi"), Some(1));
+    spi_drive(&mut sim, 0, 0, 0, 0); // trailing → next bit 0
     assert_eq!(sim.ports().get("mosi"), Some(0));
 }
 

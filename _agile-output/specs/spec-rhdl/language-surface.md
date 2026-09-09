@@ -216,7 +216,8 @@ Every default module has exactly one `Clock` port and one sync active-high `Rese
 - Surface：`bitloom_prelude::ip::{SyncFifo, UartTx, UartRx, SpiMaster, I2cMaster, Axi4LiteSlave, ExtBlackBox}`。
 - **FR82（Epic 34）：** `SyncFifo` = depth-4 sync FIFO；`UartTx` = 8N1 bit-bang（基线 `baud_div=0` ⇒ 1 bit/clk）；`SpiMaster` = Mode-0-ish MSB byte shifter；`I2cMaster` = START+8data+STOP bit-bang；`Axi4LiteSlave` = 单寄存器 AXI4-Lite write/read 握手玩具（ADDR=8, DATA=32）。均无生成器闭包参数。
 - **FR89（Epic 38）：** `UartTx` 加深分支 A — 可编程 `baud_div`（每位时钟数−1）；Epic 38 **未**交付 RX（分支 B）。
-- **FR98（Epic 43.2）：** `UartRx` 8N1 + 同 `baud_div`；全双工 = `UartTx`+`UartRx` 双例化；SPI/I2C/AXI 近 VIP 仍属 43.3–43.5。
+- **FR98（Epic 43.2）：** `UartRx` 8N1 + 同 `baud_div`；全双工 = `UartTx`+`UartRx` 双例化。
+- **FR98（Epic 43.3）：** `SpiMaster` 近 VIP — `cpol`/`cpha` 四模式、`byte_count` 多字节、`cs_n` 帧边界、`rx_data`/`rx_valid`；I2C/AXI 近 VIP 仍属 43.4–43.5。
 - **Epic 29 handoff / FR77：** Epic 34 = 无闭包可综合基线；Epic 29 / FR77 = 闭包定制 **overlay** — `bitloom_prelude::ip::Crc8Lut`（`elaborate_with_table_fn` / 默认 poly `0x07`；Story 29.3）。相对 Epic 22 stub：**NFR37** 规划 done ≠ FR82 深度。索引：`docs/ip/README.md`。
 - **黑盒：** `ExtBlackBox` 仅端口、空 body；`vendor_blackbox_v()` 旁路；不内联 vendor 网表进 HIR。
 - **Sim：** 同周期输入门控须 `set_inputs` → `Sim::settle` → `tick`（见 `docs/ip/README.md`）。

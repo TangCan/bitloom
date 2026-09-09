@@ -152,11 +152,11 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     - SyncFifo：**FR82 非 stub** depth-4 + full/empty；非异步跨域 FIFO
     - UartTx：**FR82 非 stub** 8N1；**FR89 / Epic 38.2：** 可编程 `baud_div` 子集已交付
     - UartRx：**FR98 / Epic 43.2** 近 VIP 8N1 RX（与 TX 全双工双例化）；小数分频 / 流控 / IrDA / parity 仍非目标
-    - 全协议四类 VIP：UART 近 VIP 已合同化；SPI/I2C/AXI → Stories 43.3–43.5；**不得**单类宣称 FR98 全绿
-    - SpiMaster：**FR82 非 stub** Mode-0-ish MSB byte shifter；非多 CPOL/CPHA / 多 CS
+    - SpiMaster：**FR98 / Epic 43.3** 近 VIP — CPOL/CPHA 四模式、多字节 `cs_n` 帧、半周期 sclk、`rx_data`；DMA / 多 CS / slave 仍非目标
+    - 全协议四类 VIP：UART+SPI 近 VIP 已合同化；I2C/AXI → Stories 43.4–43.5；**不得**单类宣称 FR98 全绿
     - I2cMaster：**FR82 非 stub** START+8data+STOP；非 ACK/伸展/多主
     - Axi4LiteSlave：**FR82 非 stub** 单寄存器握手玩具；非 Full AXI / VIP
-  status: done — 五类 FR82 基线已交付；全协议仍见下条；边界 `docs/ip/README.md`
+  status: done — 五类 FR82 基线已交付；UART+SPI 近 VIP 见 43.2/43.3；其余全协议仍见下条；边界 `docs/ip/README.md`
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
   summary: UART/SPI/I2C「全协议」仍非默认交付；Epic 34 仅合同化最小可综合基线（非 VIP 级）
@@ -164,8 +164,9 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     epic-22-retro-item-49 + Epic 34 / FR82 / nfr14-risk-epic34-ip-baseline.md；
     34.2–34.3 已交付五类文档最小子集；Epic 38.2 合同化 UartTx **可编程波特率子集**（`baud_div`；Epic 38 未交付 RX）；
     Story 38.3 已收口交叉引用并勾选 NFR14 Epic 38 关闭条件；
-    Epic 43.2 合同化 UART 近 VIP（`UartTx`+`UartRx`，U1–U5）；SPI/I2C/AXI 全协议 / VIP **仍须新合同**（Stories 43.3–43.5；FR89 子集 ≠ 全家桶；UART 单类 ≠ FR98 全绿）
-  status: locked — UART 近 VIP → 43.2；其余全协议加深仍须新合同；FR82 基线 ≠ 全协议；Epic 38 / FR89 子集已关闭
+    Epic 43.2 合同化 UART 近 VIP（`UartTx`+`UartRx`，U1–U5）；
+    Epic 43.3 合同化 SPI 近 VIP（`SpiMaster` S1–S4）；I2C/AXI 全协议 / VIP **仍须新合同**（Stories 43.4–43.5；单类 ≠ FR98 全绿）
+  status: locked — UART+SPI 近 VIP → 43.2/43.3；其余全协议加深仍须新合同；FR82 基线 ≠ 全协议；Epic 38 / FR89 子集已关闭
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
   summary: 可选：AXI4-Lite 与 UART/FIFO 简易连接夹具
