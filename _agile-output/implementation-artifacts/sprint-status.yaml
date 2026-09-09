@@ -295,7 +295,7 @@ development_status:
   37-1-epic-37-nfr14-风险记录: done
   37-2-firtool-chisel-钉死运维与机械-chisel-诚实声明-fr88: done
   37-3-可选夜间真机-bambu-或显式保持-stub-fr88: done
-  epic-37-retrospective: optional
+  epic-37-retrospective: done
 
   epic-38: done
   38-1-epic-38-nfr14-风险记录: done
@@ -883,3 +883,25 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-36-retro-2026-09-09.md"
+  - id: "epic-37-retro-item-90-nfr12-升钉纪律-不得私自升-chisel-firtool-钉死对交差-升钉"
+    epic: 37
+    action: "NFR12 升钉纪律：不得私自升 Chisel/firtool 钉死对交差；升钉须上游正式配对并同步 ARCHITECTURE-SPINE
+      Stack / AD-9 / addendum / docs/fr28-chisel-compilable.md 运维清单。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-37-retro-2026-09-09.md"
+  - id: "epic-37-retro-item-91-fr88-hls-path-b-诚实度-对外与-ci-叙事保持-stub-质量"
+    epic: 37
+    action: "FR88 HLS Path B 诚实度：对外与 CI 叙事保持 stub≠质量；真机仅 BITLOOM_HLS_USE_REAL=1；若未来重开
+      Path A 夜间真机 job，失败不得 continue-on-error / ignore。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-37-retro-2026-09-09.md"
+  - id: "epic-37-retro-item-92-同步-epics-md-frontmatter-将-phase11epic37s"
+    epic: 37
+    action: "同步 epics.md frontmatter：将 phase11Epic37Status（及已完成的 36/38/39 若适用）从 ready-for-dev
+      改为与 sprint done / phase11Status: complete 一致（续 Epic 36 item-89）；Phase 11 后续加深仍须遵守各
+      epic FR 合同与 NFR39。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-37-retro-2026-09-09.md"
