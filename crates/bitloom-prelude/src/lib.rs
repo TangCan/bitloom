@@ -15,6 +15,11 @@ pub use bitloom_macro::Bundle;
 pub mod ip;
 
 /// Re-export attributes via this crate's `rhdl` facade.
+///
+/// **FR102 multi-view matrix:** `functional_model` / `abstraction` / `bridge` / `both`
+/// are type attributes; `functional_state` is an **inert field attribute** recognized
+/// by [`module`](rhdl::module) and HostView macros (stripped on expand; never HIR).
+/// See `docs/fr102-multiview-attribute-matrix.md`.
 pub mod rhdl {
     pub use bitloom_macro::{
         abstraction, both, bridge, combinational, functional_model, hls, module, process,
@@ -22,7 +27,7 @@ pub mod rhdl {
     };
 }
 
-/// Host-only simulation view kind (FR29). Never a FrozenHir node.
+/// Host-only simulation view kind (FR29 / FR102). Never a FrozenHir node.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ViewKind {
     FunctionalModel,
@@ -33,6 +38,9 @@ pub enum ViewKind {
 
 /// Marker implemented by `#[rhdl::bridge]` / `#[rhdl::abstraction]` / `#[rhdl::both]` /
 /// `#[rhdl::functional_model]`. These types do not enter HIR.
+///
+/// Soft fields on modules / host views use inert `#[functional_state]` /
+/// `#[rhdl::functional_state]` (FR102) — never registered as FrozenHir ports.
 pub trait HostView {
     const KIND: ViewKind;
 }

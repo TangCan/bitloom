@@ -26,6 +26,11 @@ fixtures, or claiming **SystemC TLM** delivery.
 
 All four expand to `impl HostView`; they **never** enter `freeze` / HIR.
 
+**FR102:** the full multi-view attribute matrix (including `#[functional_state]` soft
+fields and illegal-combination gates) is documented in
+[`fr102-multiview-attribute-matrix.md`](fr102-multiview-attribute-matrix.md).
+FR29 rows remain first-class; FR102 is the completion surface beyond adapter templates.
+
 ## Mixed fixture (documented)
 
 See `examples/mixed_both`: a counter RTL `tick` vs a `#[rhdl::abstraction]` + `#[rhdl::bridge]` pair, driven as `#[rhdl::both]`.
@@ -53,3 +58,7 @@ Reusable host handshake helpers (`start_wait_complete`) live **inside** bridge /
 verification code and are **not** HIR attributes. See
 [`fr78-bridge-adapter-closures.md`](fr78-bridge-adapter-closures.md) and the
 UJ「桥接半程」[`tutorials/bridge-half.md`](tutorials/bridge-half.md).
+
+**FR102 honesty:** FR78 / FR92 adapter templates are **supporting** and **alone do
+not** close the multi-view attribute full matrix — see
+[`fr102-multiview-attribute-matrix.md`](fr102-multiview-attribute-matrix.md).

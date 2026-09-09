@@ -3,8 +3,26 @@
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{
-    Data, DeriveInput, Fields, GenericArgument, ItemFn, PathArguments, Type, parse_macro_input,
+    Attribute, Data, DeriveInput, Fields, GenericArgument, ItemFn, PathArguments, Type,
+    parse_macro_input,
 };
+
+/// FR102 / AD-5: `#[functional_state]` / `#[rhdl::functional_state]` (last path segment).
+fn is_functional_state_attr(attr: &Attribute) -> bool {
+    attr.path()
+        .segments
+        .last()
+        .is_some_and(|s| s.ident == "functional_state")
+}
+
+/// Drop inert `functional_state` field attrs so rustc never sees unknown attributes.
+fn strip_functional_state_field_attrs(input: &mut DeriveInput) {
+    if let Data::Struct(data) = &mut input.data {
+        for field in data.fields.iter_mut() {
+            field.attrs.retain(|a| !is_functional_state_attr(a));
+        }
+    }
+}
 
 /// Derive [`bitloom_prelude::Bundle`] from named struct fields (FR80 / Story 32.3).
 ///
@@ -229,6 +247,10 @@ fn const_generic_u32(ty: &Type, args: &PathArguments) -> Result<u32, syn::Error>
 
 /// Marks a struct as an RHDL module shell for Story 1.1.
 /// Generates `Elaboratable` that records directed ports via the builder session.
+///
+/// Fields marked `#[functional_state]` / `#[rhdl::functional_state]` (FR102) are
+/// host-only soft state: kept on the Rust struct, **skipped** for port registration,
+/// and never enter FrozenHir / `freeze` (AD-5 / AD-18).
 #[proc_macro_attribute]
 pub fn module(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as DeriveInput);
@@ -246,18 +268,28 @@ pub fn module(_attr: TokenStream, item: TokenStream) -> TokenStream {
         let id = f.ident.as_ref().unwrap();
         let ty = &f.ty;
         let fvis = &f.vis;
-        quote! { #fvis #id: #ty }
+        // Strip functional_state so the expanded struct is plain Rust.
+        let keep_attrs: Vec<_> = f
+            .attrs
+            .iter()
+            .filter(|a| !is_functional_state_attr(a))
+            .collect();
+        quote! { #(#keep_attrs)* #fvis #id: #ty }
     });
 
-    let port_stmts = data.fields.iter().map(|field| {
+    let port_stmts = data.fields.iter().filter_map(|field| {
+        if field.attrs.iter().any(is_functional_state_attr) {
+            // FR102 negative gate: soft fields must not register as HIR ports.
+            return None;
+        }
         let Some(ident) = &field.ident else {
-            return quote! {
+            return Some(quote! {
                 compile_error!("tuple structs are not supported by rhdl::module");
-            };
+            });
         };
         let ty = &field.ty;
         let name_str = ident.to_string();
-        quote! {
+        Some(quote! {
             {
                 type __PortTy = #ty;
                 for (__leaf, __dir, __gt) in
@@ -281,7 +313,7 @@ pub fn module(_attr: TokenStream, item: TokenStream) -> TokenStream {
                     }
                 }
             }
-        }
+        })
     });
 
     TokenStream::from(quote! {
@@ -402,7 +434,9 @@ pub fn hls(_attr: TokenStream, item: TokenStream) -> TokenStream {
 }
 
 fn host_only_view(item: TokenStream, kind: &str) -> TokenStream {
-    let input = parse_macro_input!(item as DeriveInput);
+    let mut input = parse_macro_input!(item as DeriveInput);
+    // FR102: allow `#[functional_state]` on host view fields; strip before emit.
+    strip_functional_state_field_attrs(&mut input);
     let name = &input.ident;
     let kind_ident = syn::Ident::new(kind, name.span());
     TokenStream::from(quote! {

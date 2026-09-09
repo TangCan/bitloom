@@ -82,6 +82,7 @@ permission to capture into cycle-accurate `tick` (FR16 / AD-18 / NFR35 still rej
 | FR73 generator closures (Epic 27) | Elaborate-time Mem init / factory `Fn` → HIR before freeze | README「Elaborate-time Mem init」· [`fr22-construct-bar.md`](fr22-construct-bar.md) |
 | FR74/FR75 synthesizable closures (Epic 28) | Comb/seq `inline_*_fn` under `SynthesizableClosure` | README「可综合闭包」· [`fr22-construct-bar.md`](fr22-construct-bar.md) |
 | FR29 handwritten `#[bridge]` / `HostView` | Host markers; never enter HIR | [`fr29-bridge-abstraction-both.md`](fr29-bridge-abstraction-both.md) |
+| FR102 multi-view attribute full matrix | Completion surface beyond this template | [`fr102-multiview-attribute-matrix.md`](fr102-multiview-attribute-matrix.md) |
 | FR78 `start_wait_complete` | Reusable handshake **inside** host/bridge code | This page · [`tutorials/bridge-half.md`](tutorials/bridge-half.md) |
 | FR47 `generate_*` / bridge compare | Dual-view **crate** generation + PortValues compare | [`fr47-dual-sim-generation.md`](fr47-dual-sim-generation.md) |
 | FR92 shared stimulus + adapter (Wave D) | Same stimuli / scoreboard for functional + tick; adapter template = this page | [`fr92-shared-stimulus-adapter.md`](fr92-shared-stimulus-adapter.md) |

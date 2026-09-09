@@ -194,13 +194,12 @@ fn fr100_sprint_45_2_done_epic_open() {
         sprint.contains("45-2-自动-fl-rtl-形式等价产品路径-fr100: done"),
         "sprint must mark 45-2 done"
     );
+    // 45.3+ may advance after this story; FR100 must not freeze later epic stories at backlog.
     assert!(
-        sprint.contains("45-3-多视图属性全矩阵-fr102: backlog"),
-        "sprint must keep 45-3 backlog"
-    );
-    assert!(
-        sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: backlog"),
-        "sprint must keep 45-4 backlog"
+        !sprint
+            .lines()
+            .any(|l| l.trim() == "epic-45: done" || l.contains("epic-45: done")),
+        "sprint must not mark epic-45 done from FR100 alone"
     );
     assert!(
         sprint
