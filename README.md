@@ -182,6 +182,7 @@ mod sim {
 | 多视图属性全矩阵（**FR102**） | [`docs/fr102-multiview-attribute-matrix.md`](docs/fr102-multiview-attribute-matrix.md) · 超出仅 adapter 模板 |
 | 一级 IP 双模型齐全（**FR103**） | [`docs/fr103-ip-dual-model.md`](docs/fr103-ip-dual-model.md) · `IpDualModelMatrix`；FIFO/UART/SPI/I2C/AXI |
 | 时序 / 波形产品入口 | [`docs/fr38-wave.md`](docs/fr38-wave.md) |
+| 交互式富波形（**FR104**） | [`docs/fr104-interactive-wave.md`](docs/fr104-interactive-wave.md) · `interactive.html`（Story 47.2；≠ 仅静态 `timing.html`；Epic 47 / FR105 未关闭） |
 | UJ-6 可视化半程跟练 | [`docs/tutorials/uj6-visualization.md`](docs/tutorials/uj6-visualization.md) |
 | 额外 CLI | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) |
 | 多平台 firtool | [`docs/nfr11-firtool-platforms.md`](docs/nfr11-firtool-platforms.md) |

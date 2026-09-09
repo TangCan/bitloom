@@ -75,6 +75,123 @@ pub fn to_html(hir: &FrozenHir) -> String {
     out
 }
 
+/// Interactive waveform HTML (FR104): browse / zoom·pan / signal search.
+///
+/// Self-contained product viewer — **not** static `timing.html` alone and **not**
+/// GTKWave-only. Sibling of FR49 `timing_html`; signal names match VCD/`tick` dump.
+pub fn interactive_wave_html(title: &str, samples: &[WaveSample]) -> String {
+    let mut signal_names: Vec<String> = samples
+        .iter()
+        .flat_map(|s| s.values.keys().cloned())
+        .collect();
+    signal_names.sort();
+    signal_names.dedup();
+
+    let mut times: Vec<u64> = samples.iter().map(|s| s.time).collect();
+    times.sort_unstable();
+    times.dedup();
+
+    // Embed samples as JSON: { "times": [...], "signals": { name: [v,...] } }
+    let mut json = String::from("{\"times\":[");
+    for (i, t) in times.iter().enumerate() {
+        if i > 0 {
+            json.push(',');
+        }
+        json.push_str(&t.to_string());
+    }
+    json.push_str("],\"signals\":{");
+    for (si, name) in signal_names.iter().enumerate() {
+        if si > 0 {
+            json.push(',');
+        }
+        json.push('"');
+        json.push_str(&escape_js_string(name));
+        json.push_str("\":[");
+        for (ti, t) in times.iter().enumerate() {
+            if ti > 0 {
+                json.push(',');
+            }
+            let v = samples
+                .iter()
+                .find(|s| s.time == *t)
+                .and_then(|s| s.values.get(name))
+                .copied()
+                .unwrap_or(0);
+            json.push_str(&v.to_string());
+        }
+        json.push(']');
+    }
+    json.push_str("}}");
+
+    let mut out = String::from(
+        "<!DOCTYPE html><html><head><meta charset=\"utf-8\">\
+         <title>Bitloom interactive wave</title>\n\
+         <style>\n\
+         body{font-family:system-ui,sans-serif;margin:1rem;line-height:1.4;background:#f7fafc;color:#122}\n\
+         .brand{color:#0b3d5c;font-weight:700;letter-spacing:.02em}\n\
+         .toolbar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:0.75rem 0}\n\
+         .toolbar input[type=search]{min-width:12rem;padding:.35rem .5rem}\n\
+         .toolbar button{padding:.35rem .75rem;cursor:pointer}\n\
+         #wave-canvas{display:block;width:100%;max-width:100%;background:#fff;\
+         border:1px solid #c5d0da;border-radius:4px;cursor:crosshair;touch-action:none}\n\
+         .hint{font-size:.85rem;color:#456}\n\
+         </style></head><body>\n",
+    );
+    out.push_str("<p class=\"brand\">Bitloom</p>\n");
+    out.push_str(&format!(
+        "<h1>Interactive wave — {}</h1>\n",
+        escape_html(title)
+    ));
+    out.push_str(
+        "<p class=\"hint\">FR104 interactive viewer (browse / zoom·pan / search). \
+         Static <code>timing.html</code> alone is <strong>not</strong> this path; \
+         GTKWave/Surfer remain optional for sibling <code>wave.vcd</code> (AD-5/24), \
+         not the sole completion path.</p>\n",
+    );
+
+    if samples.is_empty() || signal_names.is_empty() {
+        out.push_str(
+            "<div id=\"root\" data-bitloom-interactive-wave=\"empty\"><p><em>(no samples)</em></p></div>\n\
+             </body></html>\n",
+        );
+        return out;
+    }
+
+    out.push_str(
+        "<div id=\"root\" class=\"bitloom-interactive-wave\" data-bitloom-interactive-wave=\"1\">\n\
+         <div class=\"toolbar\">\n\
+         <label for=\"signal-search\">Search signals </label>\n\
+         <input type=\"search\" id=\"signal-search\" placeholder=\"filter by name\" \
+          aria-label=\"signal search filter\" />\n\
+         <button type=\"button\" id=\"zoom-in\" title=\"zoom in\">Zoom +</button>\n\
+         <button type=\"button\" id=\"zoom-out\" title=\"zoom out\">Zoom −</button>\n\
+         <button type=\"button\" id=\"pan-left\" title=\"pan left\">Pan ←</button>\n\
+         <button type=\"button\" id=\"pan-right\" title=\"pan right\">Pan →</button>\n\
+         <button type=\"button\" id=\"zoom-fit\" title=\"fit all\">Fit</button>\n\
+         <span id=\"viewport-label\" class=\"hint\"></span>\n\
+         </div>\n\
+         <canvas id=\"wave-canvas\" class=\"wave-canvas timeline\" width=\"960\" height=\"360\" \
+          role=\"img\" aria-label=\"waveform timeline canvas\"></canvas>\n\
+         </div>\n",
+    );
+    out.push_str("<script id=\"wave-data\" type=\"application/json\">");
+    out.push_str(&json);
+    out.push_str("</script>\n<script>\n");
+    out.push_str(INTERACTIVE_WAVE_JS);
+    out.push_str("\n</script>\n");
+    out.push_str("<p>Unrelated to <code>samitbasu/rhdl</code>.</p>\n</body></html>\n");
+    out
+}
+
+const INTERACTIVE_WAVE_JS: &str = include_str!("interactive_wave.js");
+
+fn escape_js_string(s: &str) -> String {
+    s.replace('\\', "\\\\")
+        .replace('"', "\\\"")
+        .replace('\n', "\\n")
+        .replace('\r', "\\r")
+}
+
 /// Browsable timing / wave HTML (product path — not GTKWave-only).
 pub fn timing_html(title: &str, samples: &[WaveSample]) -> String {
     let mut signal_names: Vec<String> = samples
@@ -326,5 +443,25 @@ b10 y
         assert_eq!(parsed[1].values.get("x"), Some(&2));
         let from_vcd = timing_html("demo", &parsed);
         assert!(from_vcd.contains("Value table"));
+    }
+
+    #[test]
+    fn interactive_wave_html_has_i1_i3_markers() {
+        let samples = vec![
+            WaveSample {
+                time: 0,
+                values: BTreeMap::from([("clk".into(), 0), ("x".into(), 1)]),
+            },
+            WaveSample {
+                time: 1,
+                values: BTreeMap::from([("clk".into(), 1), ("x".into(), 2)]),
+            },
+        ];
+        let html = interactive_wave_html("demo", &samples);
+        assert!(html.contains("Bitloom"));
+        assert!(html.contains("data-bitloom-interactive-wave"));
+        assert!(html.contains("wave-canvas") || html.contains("<canvas"));
+        assert!(html.contains("zoom") || html.contains("Zoom"));
+        assert!(html.contains("signal-search") || html.contains("search"));
     }
 }

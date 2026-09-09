@@ -132,12 +132,12 @@ enum Commands {
         #[arg(long, default_value = ".")]
         out_dir: PathBuf,
     },
-    /// Tick a `.fir` design, dump VCD, and emit browsable timing HTML (FR38 / FR49 / FR40).
+    /// Tick a `.fir` design, dump VCD, timing HTML (FR38/49), and interactive wave (FR104).
     Wave {
         /// Path to a `.fir` file with `FIRRTL version 6.0.0` header.
         #[arg(long)]
         input: PathBuf,
-        /// Directory for `wave.vcd` + `timing.html`.
+        /// Directory for `wave.vcd` + `timing.html` + `interactive.html`.
         #[arg(long, default_value = ".")]
         out_dir: PathBuf,
         /// Number of ticks after reset.
@@ -814,7 +814,7 @@ fn run_visualize(input: &Path, out_dir: &Path) -> Result<PathBuf, String> {
     Ok(path)
 }
 
-/// Product entry: tick → VCD + browsable `timing.html` (not GTKWave-only).
+/// Product entry: tick → VCD + timing.html + interactive.html (FR38/49 + FR104).
 fn run_wave(input: &Path, out_dir: &Path, ticks: u64, want_fst: bool) -> Result<(), String> {
     use bitloom_hir::PortValues;
     use bitloom_sim::Sim;
@@ -872,11 +872,21 @@ fn run_wave(input: &Path, out_dir: &Path, ticks: u64, want_fst: bool) -> Result<
     }
     let timing_path = out_dir.join("timing.html");
     fs::write(&timing_path, &html).map_err(|e| format!("write {}: {e}", timing_path.display()))?;
+
+    let interactive = rhdl_viz::interactive_wave_html(&title, &samples);
+    if !interactive.contains("data-bitloom-interactive-wave") {
+        return Err("interactive HTML missing FR104 marker".into());
+    }
+    let interactive_path = out_dir.join("interactive.html");
+    fs::write(&interactive_path, &interactive)
+        .map_err(|e| format!("write {}: {e}", interactive_path.display()))?;
+
     println!("wrote {}", vcd_path.display());
     println!("wrote {}", timing_path.display());
+    println!("wrote {}", interactive_path.display());
     println!(
-        "open {} in a browser (GTKWave optional for {})",
-        timing_path.display(),
+        "open {} in a browser for FR104 interactive wave (timing.html is static FR38/49; GTKWave optional for {})",
+        interactive_path.display(),
         vcd_path.display()
     );
     Ok(())
