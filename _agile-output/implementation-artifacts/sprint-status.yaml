@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 11:40
+last_updated: 09-09-2026 11:43
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -226,7 +226,7 @@ development_status:
   27-2-模块工厂闭包: done
   27-3-捕获硬件引用诊断-fr16-回归: done
   27-4-atdd-golden-后端无感知抽检: done
-  epic-27-retrospective: optional
+  epic-27-retrospective: done
 
   epic-28: done
   28-1-synthesizableclosure-约束与检查钩子: done
@@ -639,3 +639,23 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-26-retro-2026-09-09.md"
+  - id: "epic-27-retro-item-60-epic-28-标-ready-前-确认-epic-26-决策表仍将-fr75"
+    epic: 27
+    action: "Epic 28 标 ready 前：确认 Epic 26 决策表仍将 FR75 纳入本 epic，且 Epic 27 done（epics.md
+      Epic 28 Gate）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-27-retro-2026-09-09.md"
+  - id: "epic-27-retro-item-61-当-language-surface-获得-typed-wire-reg-han"
+    epic: 27
+    action: "当 language surface 获得 typed Wire/Reg handle 时，跟进自动硬件捕获检测（增强/替代 Option
+      C 手工 HwCaptureRef），并保持 E0141/E0142 分立"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-27-retro-2026-09-09.md"
+  - id: "epic-27-retro-item-62-bitloom-builder-单文件持续增长-本-epic-500-行-后续闭"
+    epic: 27
+    action: "bitloom-builder 单文件持续增长（本 epic +~500 行）— 后续闭包/elaborate API 故事评估是否按域拆分模块，避免不可见神类"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-27-retro-2026-09-09.md"
