@@ -215,3 +215,13 @@ Every default module has exactly one `Clock` port and one sync active-high `Rese
 - **透明矩阵（29.4）：** `cargo test -p bitloom --test fr76_fr77_nfr36_transparency_matrix`（+ sibling `fr77_ip_generator_closure`）。
 - **文档：** `docs/ip/README.md`；风险：`nfr14-risk-epic29-hls-ip-closures.md`。
 - **非目标：** 不要求 IP 内 comb/seq 可综合闭包内联（Epic 28）；不把 HLS `HlsFree` 用到可综合 IP 腿；≠ FR47 sim generators。
+
+## Bridge adapter closure templates (FR78 / Cap-R-65…68 / Epic 30.2)
+
+- **API（prelude / 验证辅助）：** `bitloom_prelude::StartWaitComplete`（默认 `start_wait_complete`）与自由函数 `bitloom_prelude::start_wait_complete`（文档等价）。
+- **语义：** host/桥接侧「启动 → 等待完成」握手模板；`start_fn` 为**自由** Rust 闭包（Cap-R-66/67），仅设置信号级字段；循环调用 `tick` / `is_busy`。
+- **NFR36：** 模板展开后周期精确侧仅见普通信号 / `PortValues`；`Fn` **不得**进入 FrozenHir / `Sim::tick` / Verilog / FIRRTL / Chisel。
+- **消歧：** ≠ FR73 生成器闭包；≠ FR74/FR75 SynthesizableClosure；≠ FR47 sim generators；≠ SystemC TLM（AD-5）。
+- **文档：** `docs/fr78-bridge-adapter-closures.md`；风险门禁：`nfr14-risk-epic30-bridge-adapter-closures.md`。
+- **ATDD：** `cargo test -p bitloom --test fr78_bridge_adapter_start_wait_complete`。
+- **非本故事：** FR47 联验夹具 → Story 30.3；Epic 30 文档收口 → Story 30.4。

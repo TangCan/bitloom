@@ -35,6 +35,57 @@ pub trait HostView {
     const KIND: ViewKind;
 }
 
+/// Host/bridge handshake template: start action → tick until not busy (FR78 / Cap-R-65).
+///
+/// **View boundary (Cap-R-66/67 / NFR36):** `start_fn` is a **free host closure** — it may
+/// set signal-level fields on `Self`. The cycle-accurate path continues only via
+/// [`Self::tick`] / ordinary pins/`PortValues`. The `Fn` **never** enters FrozenHir or
+/// `Sim::tick` as a closure object. Not SynthesizableClosure (≠ FR74/75) and not an
+/// elaborate-time generator (≠ FR73). SystemC TLM is not a product path (AD-5).
+///
+/// See `docs/fr78-bridge-adapter-closures.md`.
+pub trait StartWaitComplete {
+    /// Whether the handshake is still in progress (e.g. `tx_busy`).
+    fn is_busy(&self) -> bool;
+
+    /// Advance one cycle on the cycle-accurate side (ordinary signal update only).
+    fn tick(&mut self);
+
+    /// Run `start_fn` once, commit with one [`tick`](Self::tick), then tick while
+    /// [`is_busy`](Self::is_busy) (documented equivalent of requirements
+    /// `start → while busy { tick }` — the mandatory first tick lets registered
+    /// busy flags assert before the wait loop).
+    fn start_wait_complete<F>(&mut self, start_fn: F)
+    where
+        F: FnOnce(&mut Self),
+    {
+        start_fn(self);
+        self.tick();
+        while self.is_busy() {
+            self.tick();
+        }
+    }
+}
+
+/// Free-function form of [`StartWaitComplete::start_wait_complete`] (same FR78 contract).
+///
+/// Prefer the trait when the adapter owns `tick` / `is_busy`; use this when wiring an
+/// external sim/`PortValues` driver without implementing the trait.
+pub fn start_wait_complete<H, F>(
+    host: &mut H,
+    mut tick: impl FnMut(&mut H),
+    is_busy: impl Fn(&H) -> bool,
+    start_fn: F,
+) where
+    F: FnOnce(&mut H),
+{
+    start_fn(host);
+    tick(host);
+    while is_busy(host) {
+        tick(host);
+    }
+}
+
 /// Marker retained by `#[rhdl::hls]` expansions (FR35).
 #[derive(Debug, Clone, Copy)]
 pub struct HlsMark;
