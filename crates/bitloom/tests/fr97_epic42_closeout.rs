@@ -2,7 +2,8 @@
 //!
 //! Locks NFR14 close checkboxes, README/deferred honesty (FIRRTL→idiomatic
 //! Scala is not a permanent non-goal; Epic 42 / FR97 closed), fr28 mechanical
-//! honesty retained, and sprint `epic-42: done` without starting Epic 43+.
+//! honesty retained, and sprint `epic-42: done`. Epic 43 may leave backlog only
+//! after Story 43.1 NFR14 (same gate pattern as Epic 41→42).
 //!
 //! ```text
 //! cargo test -p bitloom --test fr97_epic42_closeout
@@ -157,13 +158,17 @@ fn fr97_sprint_epic42_done_epic43_untouched() {
         "sprint-status must mark 42-3 done"
     );
     assert!(
-        sprint.contains("epic-43: backlog") || sprint.contains("epic-43:backlog"),
-        "sprint-status must keep epic-43: backlog (do not start Epic 43+)"
+        sprint.contains("epic-43: backlog")
+            || sprint.contains("epic-43: in-progress")
+            || sprint.contains("epic-43: done"),
+        "sprint-status must list epic-43 as backlog, in-progress, or done"
     );
-    assert!(
-        sprint.contains("43-1-epic-43-nfr14-风险记录: backlog"),
-        "sprint-status must keep 43.1 backlog"
-    );
+    if !sprint.contains("epic-43: backlog") {
+        assert!(
+            sprint.contains("43-1-epic-43-nfr14-风险记录: done"),
+            "leaving epic-43 backlog requires Story 43.1 NFR14 done (gate)"
+        );
+    }
 }
 
 #[test]
