@@ -118,7 +118,7 @@
 
 ### Epic 40 关闭条件（Story 40.4 勾选）
 
-- [ ] **FR94 / Correct Course + PRD：** Path B 批准与 FR93 推翻文案验收 — Story 40.2
+- [x] **FR94 / Correct Course + PRD：** Path B 批准与 FR93 推翻文案验收 — Story 40.2
 - [ ] **doc-19：** §19.7–19.9 改为字面绿勾选条件 — Story 40.3
 - [ ] **AD / deferred：** AD-5/25/27 + 永久非目标指针与 Path B 一致 — Story 40.4
 - [ ] **NFR40–42：** 多年/高维护已登记；宣称纪律明确；AD 同步门禁可执行

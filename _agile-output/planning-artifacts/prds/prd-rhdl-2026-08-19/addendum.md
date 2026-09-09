@@ -191,9 +191,19 @@
 在 Phase 11 合同绿结项之后，继续追求 **字面七阶段全绿（Path B / B1）**，正式 **Phase 12**
 （Epic 40–47 · **FR94–FR105** / **NFR40–NFR43**）。
 
+**公开品牌（不变）：** **Bitloom**；crates.io / CLI **`bitloom`** / `bitloom-*`（设计 crate 仍只依赖
+`bitloom-prelude`）。禁止发布 `rhdl` / `rhdl-bits`。
+
 **与 Phase 11 / FR93 的关系（必须同时读）：**
 - Phase 11 **FR87 / NFR38 合同绿**仍为**历史已交付里程碑**；已交付工程 **不回滚**。
-- 本更新 **推翻 FR93** 五条永久非目标锁定；对应字面交付见 **FR95–FR105**（闸门 **FR94**）。
+  FR87 **不再**作为「产品做完 / 七阶段全绿」的**唯一**完成口径。
+- 本更新 **推翻 FR93** 五条永久非目标锁定（闸门 **FR94**）；逐条收缩为可交付：
+  1. 树内 / 自研 HLS 调度 → **FR95** / **FR96**
+  2. FIRRTL→idiomatic / 可维护 Chisel Scala → **FR97**
+  3. 默认 TLM≡CA / 形式等价 → **FR100**（SystemC TLM 产品 → **FR101**）
+  4. VIP 级全协议 IP → **FR98**
+  5. 按键全设计 elaborate netlist LSP → **FR99**
+  （扩展字面绿面另见 **FR102–FR105**。）
 - Research `technical-doc19-seven-stage-full-green-product-pla-2026-09-09` 曾建议勿走字面全绿；
   **产品强制选择 B1**，接受多年/高维护（**NFR40**）。
 - 对外「七阶段字面全绿 / 产品字面做完」：**仅**可在 FR94–105 对应门关闭后，按 **NFR42** 宣称；
