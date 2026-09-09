@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 11:57
+last_updated: 09-09-2026 12:00
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -275,7 +275,7 @@ development_status:
   34-2-fifo-uart-可综合基线: done
   34-3-spi-i2c-axi-基线-或文档最小子集: done
   34-4-ip-基线-atdd-epic-29-衔接文档: done
-  epic-34-retrospective: optional
+  epic-34-retrospective: done
 
   epic-35: done
   35-1-epic-35-nfr14-风险记录: done
@@ -787,3 +787,26 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-33-retro-2026-09-09.md"
+  - id: "epic-34-retro-item-81-epic-35-标-ready-前-确认-story-35-1-nfr14-风险"
+    epic: 34
+    action: "Epic 35 标 ready 前：确认 Story 35.1 NFR14 风险记录完成（epics.md Epic 35 Gate）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-34-retro-2026-09-09.md"
+  - id: "epic-34-retro-item-82-后续触及一级-ip-bitloom-prelude-ip-fr82-时-保持五类"
+    epic: 34
+    action: "后续触及一级 IP / bitloom-prelude::ip / FR82 时，保持五类非 stub 合同与 Epic 22 stub·NFR37
+      消歧；不得仅重命名 stub 交差；保持 SyncFifo（FR82 单时钟）与 SyncFIFO（FR79 CDC）完成话术分立；FR82 五类 API
+      保持无生成器闭包（闭包 overlay = Epic 29 / FR77）；合同故事 commit 避免无关工具脚本（续 item-59）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-34-retro-2026-09-09.md"
+  - id: "epic-34-retro-item-83-若产品需要全协议-vip-full-axi-可编程-baud-可配置-depth"
+    epic: 34
+    action: "若产品需要全协议 / VIP / Full AXI / 可编程 baud / 可配置 depth·width 全家桶，单独立项超出 FR82
+      文档最小子集（当前 AC 已满足）；同时继续兑现 epic-29-retro-item-68 对 bitloom-prelude ip.rs 的拆分/体量评估（本
+      epic net +728，~455→~1183；跨 34+29 已至 ~1357），并继续兑现 epic-28-retro-item-65 对 bitloom-builder
+      的拆分评估（本 epic builder 净 0 至 ~3101）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-34-retro-2026-09-09.md"
