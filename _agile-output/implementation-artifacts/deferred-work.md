@@ -181,8 +181,8 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
 
 - source_spec: `_agile-output/implementation-artifacts/epic-23-retro-2026-08-21.md`
   summary: 完整 / 按键全 elaborate Bitloom LSP（FR91 Path B 历史 defer；FR99 / Epic 44 交付中）
-  evidence: epic-23-retro-item-52；**Story 39.3** 合同化 FR91 Path B（历史关闭）；**Story 44.2** 交付 `bitloom-lsp` MVP + 接线（`docs/fr99-bitloom-lsp.md`）；按键全 elaborate / FR99 收口 → 44.3–44.4；**FR90 宿主 rust-analyzer** ≠ FR99；HTML ≠ LSP
-  status: in-progress — Epic 44；44.2 MVP server；FR99 未全关；不得以半成品或仅 rust-analyzer 冒充完成
+  evidence: epic-23-retro-item-52；**Story 39.3** 合同化 FR91 Path B（历史关闭）；**Story 44.2** `bitloom-lsp` MVP；**Story 44.3** didSave 全设计 elaborate + 诊断/符号（`docs/fr99-bitloom-lsp.md`）；FR99 收口 → **44.4**；**FR90** ≠ FR99；HTML ≠ LSP
+  status: in-progress — Epic 44；44.2–44.3 done；FR99 未全关（待 44.4）；不得以仅 rust-analyzer 冒充完成
 
 - source_spec: `_agile-output/implementation-artifacts/epic-24-retro-2026-08-21.md`
   summary: CI 默认 Bambu stub（`bambu-ci-stub.sh`）验证接线与非零覆盖，非真实 HLS 调度质量

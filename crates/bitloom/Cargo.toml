@@ -32,3 +32,4 @@ rhdl-viz = { workspace = true }
 [dev-dependencies]
 bitloom-builder = { workspace = true }
 bitloom-prelude = { workspace = true }
+bitloom-lsp = { path = "../bitloom-lsp" }

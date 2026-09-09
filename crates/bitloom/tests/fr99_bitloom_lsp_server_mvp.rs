@@ -182,9 +182,11 @@ fn fr99_bitloom_lsp_mvp_scope_guards() {
         sprint.contains("44-2-bitloom-lsp-服务器-mvp-fr99: done"),
         "sprint must mark 44-2 done"
     );
+    // After 44.3, 44-3 is done; 44-4 + epic close remain open.
     assert!(
-        sprint.contains("44-3-按键全-elaborate-诊断-符号-fr99: backlog"),
-        "44-3 must remain backlog"
+        sprint.contains("44-3-按键全-elaborate-诊断-符号-fr99: done")
+            || sprint.contains("44-3-按键全-elaborate-诊断-符号-fr99: backlog"),
+        "44-3 must be tracked (backlog during 44.2-only; done after 44.3)"
     );
     assert!(
         sprint.contains("44-4-fr99-收口与撤销-lsp-非目标: backlog"),
@@ -204,14 +206,12 @@ fn fr99_bitloom_lsp_mvp_scope_guards() {
             || nfr14.contains("44.2"),
         "NFR14 must still discuss 44.2 close item"
     );
-    // Full FR99 close / epic close boxes remain open (44.4 owns ticking the set).
+    // Full FR99 / Path B revocation boxes remain open (44.4).
     assert!(
-        nfr14.contains("- [ ] **44.3：**") || nfr14.contains("- [ ] **文档"),
-        "NFR14 Epic 44 close checklist must remain open for 44.3+"
-    );
-    assert!(
-        !nfr14.contains("- [x] **44.3：**") || nfr14.contains("- [ ] **44.3：**"),
-        "must not tick 44.3 close while delivering 44.2 only"
+        nfr14.contains("- [ ] **文档")
+            || nfr14.contains("- [ ] **禁止")
+            || nfr14.contains("Story 44.4"),
+        "NFR14 Epic 44 close / Path B revocation must remain for 44.4"
     );
 
     // fr38 honesty: must not claim repo has zero language-server binary once 44.2 lands.

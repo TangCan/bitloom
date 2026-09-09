@@ -4,11 +4,15 @@ version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-description = "Bitloom language-server MVP (FR99 / Story 44.2). Stdio LSP with minimal initialize/capabilities. Unrelated to samitbasu/rhdl."
+description = "Bitloom language-server (FR99). Stdio LSP with didSave full-design elaborate diagnostics/symbols. Unrelated to samitbasu/rhdl."
 publish = false
 authors = ["Bitloom contributors"]
 keywords = ["hdl", "rtl", "lsp", "bitloom"]
 categories = ["development-tools"]
+
+[lib]
+name = "bitloom_lsp"
+path = "src/lib.rs"
 
 [[bin]]
 name = "bitloom-lsp"
@@ -17,3 +21,5 @@ path = "src/main.rs"
 [dependencies]
 tokio = { version = "1", features = ["io-std", "macros", "rt-multi-thread"] }
 tower-lsp-server = "0.23.0"
+bitloom-builder = { workspace = true }
+bitloom-hir = { workspace = true }

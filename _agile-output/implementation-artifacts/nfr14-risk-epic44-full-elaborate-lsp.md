@@ -109,8 +109,8 @@
 
 ### Epic 44 关闭条件（Story 44.4 勾选）
 
-- [ ] **44.2：** 可安装/可启动 language-server + 编辑器接线 + 可复现会话 — Story 44.2
-- [ ] **44.3：** 按键全 elaborate 诊断 + 符号/跳转（P1–P6）+ ATDD 可区分浅层路径 — Story 44.3
+- [x] **44.2：** 可安装/可启动 language-server + 编辑器接线 + 可复现会话 — Story 44.2
+- [x] **44.3：** 按键全 elaborate 诊断 + 符号/跳转（P1–P6）+ ATDD 可区分浅层路径 — Story 44.3
 - [ ] **文档 / deferred：** 撤销「LSP 永久非目标 / FR91 Path B defer 作为完成」；FR90 仍可用但不替代 FR99
 - [ ] **禁止事项未触发：** 无半成品二进制交差；无 HTML 计入 LSP；无仅浅层诊断关闭 FR99
 - [ ] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
