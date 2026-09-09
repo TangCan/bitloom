@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 11:53
+last_updated: 09-09-2026 11:57
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -268,7 +268,7 @@ development_status:
   33-2-mem-chisel-合同决策: done
   33-3-实现所选-mem-chisel-路径: done
   33-4-atdd-fr71-回归: done
-  epic-33-retrospective: optional
+  epic-33-retrospective: done
 
   epic-34: done
   34-1-epic-34-nfr14-风险记录: done
@@ -765,3 +765,25 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-32-retro-2026-09-09.md"
+  - id: "epic-33-retro-item-78-epic-34-标-ready-前-确认-story-34-1-nfr14-风险"
+    epic: 33
+    action: "Epic 34 标 ready 前：确认 Story 34.1 NFR14 风险记录完成（epics.md Epic 34 Gate）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-33-retro-2026-09-09.md"
+  - id: "epic-33-retro-item-79-后续触及-emit_chisel-mem-fr71-时-保持-path-a-子集"
+    epic: 33
+    action: "后续触及 emit_chisel / Mem / FR71 时，保持 Path A 子集合同与子集外 E0901；不得批发删除 E0901
+      或私自漂移 NFR12（7.14.0 ↔ 1.155.0）；FR71 required 仍为无 Mem counter（Mem JVM 可选夹具不替换
+      GHA）；不得用 FR28 done + 历史 E0901 冒充 FR81（NFR37）；合同故事 commit 避免无关工具脚本（续 item-59）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-33-retro-2026-09-09.md"
+  - id: "epic-33-retro-item-80-若产品需要双时钟裸-mem-多口掩码-翻转-path-b-永久非目标-单独立项超"
+    epic: 33
+    action: "若产品需要双时钟裸 mem / 多口掩码 / 翻转 Path B 永久非目标，单独立项超出 Path A MVP（当前 AC 已满足）；同时继续兑现
+      epic-28-retro-item-65 对 bitloom-builder 的拆分评估（本 epic builder 净 0 至 ~3101），并监视
+      rhdl-firrtl chisel.rs 体量（本 epic 248→317）"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-33-retro-2026-09-09.md"
