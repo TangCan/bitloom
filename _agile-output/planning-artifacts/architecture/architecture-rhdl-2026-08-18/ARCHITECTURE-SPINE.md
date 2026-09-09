@@ -346,3 +346,4 @@ flowchart LR
 - **更高 MSRV（>1.97.1）**：须另改 PRD/NFR13；当前 NFR13 = **1.97.1**。
 - **AD-22 phantom 选型的替代**：若推翻，须修订 AD-22，不得 silently 分叉。
 - **AD-27 Scala 生成器所在 crate**：`[ASSUMPTION]` 可 firrtl 或 CLI。
+- **产品「全绿 / 七阶段字面完成」标签：** 见 Phase 11 **FR87 / FR93 / NFR38**（Correct Course 2026-09-09）；不新增冲突 AD；永久非目标（自研 HLS 调度、idiomatic Chisel、TLM≡CA、VIP 全协议 IP、按键全 elaborate LSP）以 PRD/epics 为准。

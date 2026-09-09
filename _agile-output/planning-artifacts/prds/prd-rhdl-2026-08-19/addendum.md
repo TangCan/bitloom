@@ -65,7 +65,7 @@
 - ~~把 later-product 继续作为无 FR ID 唯一真相~~ — 仍拒绝。
 - ~~把 HLS/FST 提到 P0~~ — 仍不提到 P0；改在 P2b/P3 升验收条。
 - ~~不以 Chisel Scala 为契约 / 禁止 HIR→功能模拟器~~ — **①C 作废；见 prd §0 推翻表。**
-- ~~调研建议的「重定义 done」作为合同策略~~ — **用户 ①C 拒绝。**
+- ~~调研建议的「重定义 done」作为合同策略~~ — **用户 ①C 拒绝。**（注：2026-09-09 批准的是 **路线图绿标签合同绿**，非回滚 ①C 概述 FR；见「Phase 11 合同绿」节。）
 
 ## Phase-3 identity supersession
 
@@ -164,3 +164,21 @@
 - 用户文档：`docs/fr39-formal-sva.md`；LSP：`docs/fr38-viz-lsp.md`
 - NFR14：`_agile-output/implementation-artifacts/nfr14-risk-epic35-residual-partials.md`
 - Epic 映射：`epics.md` Epic 35 Story 35.4
+
+## 2026-09-09 Update — Phase 11 合同绿（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-09.md` —
+将「产品做完 / docs/requirements/19 七阶段全绿」定义为 **合同绿**（research
+`technical-doc19-seven-stage-full-green-product-pla-2026-09-09`），正式 **Phase 11**
+（Epic 36–39 · **FR87–FR93** / **NFR38–NFR39**）。
+
+**与 2026-08-21 ①C 的边界（必须同时读）：**
+- ①C 升格的 FR46–52 及后续深度 FR71–86 **仍然有效**；已交付验收 **不回滚**。
+- ①C「拒绝重定义 done」适用于当时「概述愿景是否升格为硬 FR」的决策，
+  **不**禁止其后用合同条款定义 **路线图阶段五–七的「绿」标签** 与剩余生态缺口。
+- 对外「概述愿景已全部兑现 / 七阶段字面全绿」类表述：在合同绿落地前 **禁止**；
+  落地后仅可按 **FR87 / NFR38** 合同条款宣称。
+
+**合同指针：** 详见 `epics.md` Phase 11 Inventory（FR87–FR93 / NFR38–NFR39）。
+- 调研：`_agile-output/planning-artifacts/research/technical-doc19-seven-stage-full-green-product-pla-2026-09-09/research.md`
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-09.md`

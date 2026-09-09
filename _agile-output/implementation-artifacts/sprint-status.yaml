@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 12:09
+last_updated: 09-09-2026 14:20
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -283,6 +283,32 @@ development_status:
   35-3-softf16-可综合或显式-defer-fr84: done
   35-4-formal-夹具-lsp-deferred-收口-fr85: done
   epic-35-retrospective: done
+
+  # Phase 11 — contract-green (Correct Course 2026-09-09)
+  epic-36: backlog
+  36-1-epic-36-nfr14-风险记录: backlog
+  36-2-重写-doc-19-阶段五-七完成定义-fr87: backlog
+  36-3-永久非目标锁定-fr93: backlog
+  epic-36-retrospective: optional
+
+  epic-37: backlog
+  37-1-epic-37-nfr14-风险记录: backlog
+  37-2-firtool-chisel-钉死运维与机械-chisel-诚实声明-fr88: backlog
+  37-3-可选夜间真机-bambu-或显式保持-stub-fr88: backlog
+  epic-37-retrospective: optional
+
+  epic-38: backlog
+  38-1-epic-38-nfr14-风险记录: backlog
+  38-2-uarttx-显式加深子集实现-fr89: backlog
+  38-3-atdd-与边界收口-可选树外示例: backlog
+  epic-38-retrospective: optional
+
+  epic-39: backlog
+  39-1-epic-39-nfr14-风险记录: backlog
+  39-2-宿主-ide-rust-analyzer-工作流-fr90: backlog
+  39-3-浅层-bitloom-lsp-或显式-defer-fr91: backlog
+  39-4-多视图同刺激与-adapter-模板-fr92: backlog
+  epic-39-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1

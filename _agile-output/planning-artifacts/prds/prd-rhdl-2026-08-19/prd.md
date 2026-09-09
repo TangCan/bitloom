@@ -2,8 +2,8 @@
 title: Bitloom 阶段二 PRD — 2026-08-21 概述字面升格修订
 status: final
 created: 2026-08-19
-updated: 2026-09-08
-amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08
+updated: 2026-09-09
+amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08; phase11-contract-green-2026-09-09
 ---
 
 # PRD: Bitloom 阶段二及愿景闭环（later-product → FR + 概述字面升格）
@@ -13,6 +13,8 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 *2026-08-21 追加（`fr71-jvm-ci`）：为 FR28「必须编译通过」补默认 CI JVM 真编译门禁 **FR71** + 工具链合同 **NFR34**（与 `epics.md` Phase 8 / Epic 25 对齐）。*
 
 *2026-09-08 追加（`phase9-closures`）：Phase 9 受控泛型闭包合同 **FR72–FR78** / **NFR35–NFR36**；澄清 **FR16** 与 elaborate-time 非捕获共存（与 `epics.md` Phase 9 / Epic 26–30 对齐）。*
+
+*2026-09-09 追加（`phase11-contract-green`）：Phase 11 合同绿 **FR87–FR93** / **NFR38–NFR39** — 路线图阶段五–七「绿」与「产品做完」按同业重定义完成标准；**不**回滚 ①C 已交付 FR46–86（见 addendum）。*
 
 ## 0. Document Purpose
 
@@ -24,6 +26,7 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 - **2026-08-21 升格（本修订）：** FR46–FR52 将概述愿景中尚未被「弱定义」覆盖的部分升为硬 FR；并对 FR28 / FR29 / FR30 / FR35 / FR37 / FR38 的 **success 条**做字面加强。
 - **2026-08-21 CI 证据补强：** **FR71** / **NFR34** — 默认 CI 强制 Chisel JVM 真编译（禁止 skip=0）；编号避开历史 Phase 3–5 撞号（见 addendum）。
 - **2026-09-08 Phase 9 闭包合同：** **FR72–FR78** / **NFR35–NFR36** — elaborate-time 非捕获 `Fn` 冻前消解；编号接在 FR71/NFR34 之后；**不得**与 FR47（双视图 sim crate 生成）或 Phase 7「闭环」混淆（见 §5.9 / addendum）。
+- **2026-09-09 Phase 11 合同绿：** **FR87–FR93** / **NFR38–NFR39** — 「产品做完 / 路线图七阶段全绿」按合同条款验收；与 ①C 边界见 addendum「Phase 11 合同绿」；**不**回滚 FR46–86。
 - **身份 supersession：** 公开产品名 **Bitloom**，crates.io / CLI **`bitloom`**（阶段三 FR41）；禁止发布 `rhdl` / `rhdl-bits`。正文不再以 `rhdl-rs` 为发布名。[ASSUMPTION] 概述仍写 RHDL；合同以 Bitloom 为准，概述另开任务对齐。
 - `later-product.md` 仍为索引，不承载无 ID 需求。
 
@@ -36,7 +39,7 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 | FR37 至少一个树内 IP + 黑盒即可 | **FR37 修订 + FR48：** UART/SPI/I2C/FIFO/AXI 一级产品 IP |
 | FR38 HTML 层次即可；LSP deferred 可长期挂起 | **FR38 修订 + FR49：** 内置层次图 + 时序图为验收条 |
 | FR35 可选外挂、未启用可标 unsupported | **FR35 修订 + FR50：** HLS 为产品路径（仍可外挂调度，但不可永久 unsupported） |
-| 调研 2026-08-21「重定义 done / 勿字面全做」建议 | **用户明示 ①C 拒绝**；接受多年与上游方向冲突风险（见 addendum） |
+| 调研 2026-08-21「重定义 done / 勿字面全做」建议 | **用户明示 ①C 拒绝**（概述愿景升格为硬 FR）；接受多年与上游方向冲突风险（见 addendum）。**2026-09-09：** 另批准 **路线图绿标签合同绿**（Phase 11），不回滚本表已交付 FR |
 
 随时可用 `bmad-party-mode` / `bmad-advanced-elicitation` 深挖某一节。
 

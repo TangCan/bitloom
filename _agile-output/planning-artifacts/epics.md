@@ -40,6 +40,10 @@ stepsCompleted:
   - step-02-design-epics-phase-10
   - step-03-create-stories-phase-10
   - step-04-final-validation-phase-10
+  - step-01-validate-prerequisites-phase-11
+  - step-02-design-epics-phase-11
+  - step-03-create-stories-phase-11
+  - step-04-final-validation-phase-11
 status: complete
 phase1Status: complete
 phase2Status: complete
@@ -56,6 +60,13 @@ phase10Epic32Status: complete
 phase10Epic33Status: complete
 phase10Epic34Status: complete
 phase10Epic35Status: complete
+phase11Status: complete
+correctCourseApproved: 2026-09-09
+phase11Scope: Contract-green for docs/requirements roadmap stages 5–7 (redefined completion) — FR87–FR93 / NFR38–NFR39 (research technical-doc19-seven-stage-full-green-product-pla-2026-09-09)
+phase11Epic36Status: ready-for-dev
+phase11Epic37Status: ready-for-dev
+phase11Epic38Status: ready-for-dev
+phase11Epic39Status: ready-for-dev
 phase3Scope: Bitloom rename + maturity closeout + crates.io publish
 phase4Scope: True standalone after cargo install (bitloom-* publish graph)
 phase5Scope: Teaching RV32 example core + step-by-step tutorial (Bitloom)
@@ -68,6 +79,9 @@ inputDocuments:
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md
   - _agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
+  - _agile-output/planning-artifacts/research/technical-doc19-seven-stage-full-green-product-pla-2026-09-09/research.md
+  - docs/requirements/19. 实施路线图.md
+  - _agile-output/implementation-artifacts/deferred-work.md
   - _agile-output/planning-artifacts/sprint-change-proposal-2026-09-08.md
   - _agile-output/planning-artifacts/research/technical-requirements-implementation-gap-generic-2026-09-08/research.md
   - _agile-output/planning-artifacts/research/technical-requirements-implementation-gap-generic-2026-09-08/imports/crates-implementation-inventory.md
@@ -97,7 +111,7 @@ idCollisionNote: >
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，epics complete · ready-for-dev）。无 UX。
 
 ## Requirements Inventory
 
@@ -1961,6 +1975,94 @@ NFR37: 横切 — 规划 done ≠ 深度 done
 
 ---
 
+## Phase 11 Requirements Inventory（追加 · 2026-09-09 · 合同绿 / doc-19 重定义）
+
+**范围：** 将「产品做完 / `docs/requirements/19` 七阶段全绿」落地为**可验收合同绿**（按同业重定义完成标准），分波交付；**不**重写 Epic 1–35；**不**要求字面兑现自研 HLS / idiomatic Chisel 往返 / 自动 TLM≡CA / VIP 全协议 IP / 按键全 elaborate netlist LSP。  
+**依据：** `research/technical-doc19-seven-stage-full-green-product-pla-2026-09-09/research.md`；`ARCHITECTURE-SPINE.md`（AD-5/6/9/25/27）；`deferred-work.md`；对照 `docs/requirements/19. 实施路线图.md`。  
+**与 PRD 关系：** 2026-08-21 曾拒绝「重定义 done」并升格概述字面 FR46–52（Phase 7–10 已交付深度）。本阶段**另开合同**：只改写 **路线图阶段五–七的「绿」标签与剩余缺口验收**，不回滚已交付 FR。须在 PRD addendum / Correct Course 中显式批准本清单（本 CE 抽取稿待用户确认）。  
+**ID 注记：** 新编号 **FR87–FR93** / **NFR38–NFR39**（接 FR86 / NFR37）。
+
+### Phase 11 Functional Requirements
+
+FR47: （继承）双模拟器生成路径已存在；本阶段加深「同刺激」合同（见 FR92），不重开生成器 MVP。  
+FR35/FR50/FR86: （继承）HLS 产品路径 = 外挂；树内调度非目标（AD-25）。  
+FR28/FR46: （继承）可编译 Chisel / 往返；**idiomatic** Scala 非合同（AD-27）。  
+FR82: （继承）一级 IP **文档最小非 stub 基线**已交付；本阶段可选加深（FR89）。  
+FR38/FR49: （继承）层次/时序可视化已交付；完整 LSP 仍非历史完成条件。  
+
+FR87: **路线图合同绿对齐（Wave A）** — 重写 `docs/requirements/19. 实施路线图.md`（及 README / deferred 交叉链）中阶段五–七的**完成定义**为合同条款：P5 绿 = 外挂 HLS 可复现 + 薄 IP 生成器 + VCD/层次可视化；P6 绿 = 精选 IP 深度合同（非 VIP）+ 文档站 + 宿主 LSP 路径；P7 绿 = 多抽象同刺激功能/周期路径 + 桥接 adapter 模板（不承诺自动等价 / SystemC TLM 产品）。禁止用字面未交付项勾选「全绿」。  
+FR88: **互操作硬化（Wave B）** — 文档化 CIRCT/`firtool` 钉死运维（继承 AD-9 / NFR12）；公开声明机械 Chisel emit = **可编译 ≠ idiomatic**；可选 CI/夜间真机 Bambu（失败不 ignore）或显式保持 stub 默认并写明。  
+FR89: **IP 深度合同（Wave C）** — 在 FR82 基线之上，对至少一类一级 IP（产品选定）交付**显式加深子集**（可 elaborate/emit/tick + 文档边界）；允许树外示例包；**禁止**静默宣称全协议/VIP/Full AXI。  
+FR90: **宿主 IDE 路径（Wave D · 必做）** — 文档化 Bitloom 设计 crate 的 **rust-analyzer / 宿主 LSP** 工作流（补全、跳转、诊断）；验收=可复现步骤 + 至少一夹具工程说明；**不**要求硬件语义 netlist LSP。  
+FR91: **浅层 Bitloom 诊断 LSP（Wave D · 可选）** — 交付浅层（非按键全 elaborate）诊断/符号 LSP MVP，**或** PRD/文档显式将「自研 Bitloom LSP」标为 deferred/非目标并关闭虚假 done。默认建议：**本阶段可选；若不做则走 defer 分支**。  
+FR92: **多视图同刺激路径（Wave D）** — 功能模拟路径与周期精确 `tick`（及/或 `build-sim`）共享刺激/记分板夹具；提供桥接 adapter **模板**（可为文档+代码骨架）；**不**承诺自动形式 FL≡RTL / SystemC TLM-2.0 产品（AD-5）。  
+FR93: **永久非目标锁定** — 公开合同锁定（除非新 PRD）：树内 HLS 调度器；FIRRTL→idiomatic Scala；默认 TLM≡CA 形式证明；VIP 级全协议 IP；按键全设计 elaborate 的 netlist LSP。
+
+### Phase 11 Non-Functional Requirements
+
+NFR14: （继承）Phase 11 各实现 epic 标 ready 前须有风险记录。  
+NFR12: （继承）Chisel/`firtool` 钉死对；Wave B 不得漂移。  
+NFR15: （继承）结项期停 0.x；不以冲 1.0 为完成条件。  
+NFR38: **合同绿 ≠ 字面七阶段** — 公开/内部「路线图全绿 / 产品做完」表述必须引用本阶段重定义条款；不得仅以概述字面未交付项宣称完成。  
+NFR39: **禁止静默扩大子集** — IP / LSP / 多视图 / HLS 加深不得超过本阶段 FR 合同；扩子集须改文档+新故事（延续 deferred-work 纪律）。
+
+### Phase 11 Additional Requirements (Architecture + Research)
+
+- 遵守 **AD-25**：HLS 仅外挂；不立项树内调度。  
+- 遵守 **AD-5**：不承诺 SystemC TLM-2.0；功能模拟可为生成 Rust。  
+- 遵守 **AD-6**：设计 crate 只依赖 `bitloom-prelude`。  
+- 遵守 **AD-9 / NFR12**：firtool 钉死与 CLI 缓存合同。  
+- 遵守 **AD-27**：Chisel 可编译机械风格可接受；非 idiomatic 往返。  
+- Research 四波：A 合同 → B 互操作 → C IP → D IDE/多视图。  
+- `deferred-work.md` 中 standing / optional 项：触碰时遵守；产品可选加深须显式新合同（本 FR89/91）。
+
+### Phase 11 UX Design Requirements
+
+无 UI。无 UX-DR。
+
+### Phase 11 FR Coverage Map
+
+FR87: Epic 36 — 路线图合同绿对齐（Wave A）
+FR88: Epic 37 — 互操作硬化（Wave B）
+FR89: Epic 38 — 一级 IP 显式加深（Wave C）
+FR90: Epic 39 — 宿主 IDE 路径（Wave D）
+FR91: Epic 39 — 浅层 Bitloom LSP 或显式 defer（Wave D）
+FR92: Epic 39 — 多视图同刺激路径（Wave D）
+FR93: Epic 36 — 永久非目标锁定（Wave A）
+NFR14: Epic 36–39 ready 门禁
+NFR12: Epic 37 — firtool/Chisel 钉死
+NFR15: 横切 — 仍停 0.x
+NFR38: Epic 36 — 合同绿 ≠ 字面七阶段
+NFR39: Epic 37–39 — 禁止静默扩大子集
+
+### Phase 11 Epic List
+
+### Epic 36: 路线图合同绿与诚实边界
+维护者/用户看到阶段五–七「绿」的合同定义，以及永久非目标锁定，不再把字面未交付项当成产品做完。  
+**FRs covered:** FR87, FR93  
+**NFRs:** NFR14, NFR38  
+**Depends on:** Phase 1–10 complete。不依赖 Epic 37–39。
+
+### Epic 37: 互操作硬化与 HLS 外挂诚实
+维护者能按钉死版本运维 firtool/Chisel，对外诚实「可编译≠idiomatic」，HLS 真机路径可选可验。  
+**FRs covered:** FR88  
+**NFRs:** NFR12, NFR14, NFR39  
+**Depends on:** 建议 Epic 36 合同文本已合入（软依赖）。
+
+### Epic 38: 一级 IP 显式加深
+集成者在 FR82 基线上获得至少一类有文档边界的加深子集（非 VIP），可 elaborate/emit/tick。  
+**FRs covered:** FR89  
+**NFRs:** NFR14, NFR39  
+**Depends on:** Epic 34 / FR82 基线已存在。可与 37 并行。[ASSUMPTION] 默认优先加深类：`ip::UartTx` 或 `ip::SyncFifo`（故事 AC 开场钉死一类）。
+
+### Epic 39: 宿主 IDE 与多视图同刺激
+设计者有可复现的 rust-analyzer 工作流；功能/周期路径共享刺激夹具 + adapter 模板；浅层 Bitloom LSP 按 FR91 做或 defer。  
+**FRs covered:** FR90, FR91, FR92  
+**NFRs:** NFR14, NFR39  
+**Depends on:** 不硬依赖 38；软依赖 36 的完成定义文案。
+
+---
+
 ---
 
 ## Epic 19: 语言表面与合同解锁
@@ -3136,3 +3238,225 @@ So that FR85 与可视化边界清晰。
 **Then** 验收超出 `check_sva_text` 级玩具断言
 **And** 用户文档写明 LSP hover/goto **非**本 epic 完成条件（继续 deferred）
 **And** NFR14 记录勾选 Epic 35 关闭条件
+
+
+## Epic 36: 路线图合同绿与诚实边界
+
+维护者/用户看到阶段五–七「绿」的合同定义，以及永久非目标锁定，不再把字面未交付项当成产品做完。  
+**FRs covered:** FR87, FR93  
+**NFRs:** NFR14, NFR38  
+**Depends on:** Phase 1–10 complete。不依赖 Epic 37–39。  
+**Gate:** Story 36.1 NFR14 未完成前，36.2–36.3 不得标 ready。
+
+### Story 36.1: Epic 36 NFR14 风险记录
+
+As a 实现负责人,
+I want 为合同绿 / 路线图重定义填写 NFR14 风险记录,
+So that 不以字面勾选关闭「产品做完」。
+
+**Acceptance Criteria:**
+
+**Given** 既有 NFR14 模板；research `technical-doc19-seven-stage-full-green-product-pla-2026-09-09`；PRD 2026-08-21 曾拒绝「重定义 done」
+**When** 创建 Epic 36 风险记录
+**Then** 含：本阶段只改写路线图 P5–P7「绿」标签与剩余缺口、不回滚已交付 FR46–86；与 2026-08-21 决议的关系说明；禁止事项（至少：不得未改文档就宣称七阶段字面全绿；不得把永久非目标标成 done）；负责人（NFR14 / NFR38）
+**And** 无此记录则 36.2–36.3 不得标 ready
+
+### Story 36.2: 重写 doc-19 阶段五–七完成定义（FR87）
+
+As a 产品 / 文档维护者,
+I want `docs/requirements/19. 实施路线图.md` 中阶段五–七的「绿」改为合同条款,
+So that 「全绿」可验收而非字面幻灯片。
+
+**Acceptance Criteria:**
+
+**Given** Story 36.1
+**When** 修订 `19. 实施路线图.md`（及必要交叉链至 README / deferred-work）
+**Then** P5 绿 = 外挂 HLS 可复现产物 + 薄 IP 生成器 + VCD/层次可视化（对齐已交付能力即可勾）
+**And** P6 绿 = 精选 IP 深度合同（非 VIP）+ 文档站 + 宿主 LSP 路径（rust-analyzer）
+**And** P7 绿 = 多抽象同刺激功能/周期路径 + 桥接 adapter 模板；**不**承诺自动等价证明 / SystemC TLM-2.0 产品（AD-5）
+**And** 文中禁止用字面未交付项勾选「全绿」（FR87 / NFR38）
+**And** README「状态与 deferred」指向合同绿定义
+
+### Story 36.3: 永久非目标锁定（FR93）
+
+As a 用户 / 维护者,
+I want 公开合同锁定永久非目标清单,
+So that 不被 VIP / 自研 HLS / idiomatic Chisel / 全 elaborate LSP 误导。
+
+**Acceptance Criteria:**
+
+**Given** Story 36.2
+**When** 更新 README 与/或 `deferred-work.md`，并在 PRD addendum（或等价）增加指针段落
+**Then** 明确列出至少：树内 HLS 调度器；FIRRTL→idiomatic Scala；默认 TLM≡CA 形式证明；VIP 级全协议 IP；按键全设计 elaborate 的 netlist LSP（FR93）
+**And** 写明须**新 PRD** 才能推翻上述非目标
+**And** 公开品牌仍为 Bitloom / `bitloom-*`；NFR14 记录勾选 Epic 36 关闭条件
+
+
+## Epic 37: 互操作硬化与 HLS 外挂诚实
+
+维护者能按钉死版本运维 firtool/Chisel，对外诚实「可编译≠idiomatic」，HLS 真机路径可选可验。  
+**FRs covered:** FR88  
+**NFRs:** NFR12, NFR14, NFR39  
+**Depends on:** 建议 Epic 36 合同文本已合入（软依赖）。  
+**Gate:** Story 37.1 NFR14 未完成前，37.2–37.3 不得标 ready。
+
+### Story 37.1: Epic 37 NFR14 风险记录
+
+As a 实现负责人,
+I want 为互操作硬化 / HLS 诚实路径填写 NFR14,
+So that 不以版本漂移或 stub 冒充关闭 FR88。
+
+**Acceptance Criteria:**
+
+**Given** 既有 NFR14 模板；AD-9 / NFR12；AD-25 / FR86；deferred-work 夜间 Bambu 条目
+**When** 创建 Epic 37 风险记录
+**Then** 含：firtool/Chisel 钉死对漂移风险、机械 Chisel 被误读为 idiomatic 的风险、夜间真机 vs stub 默认路径；禁止事项（至少：不得私自升 firtool 交差；不得把 stub CI 写成「HLS 质量已验」；不得 `continue-on-error` 掩盖真机失败）；负责人（NFR14 / NFR12 / NFR39）
+**And** 无此记录则 37.2–37.3 不得标 ready
+
+### Story 37.2: firtool/Chisel 钉死运维 + 机械 Chisel 诚实声明（FR88）
+
+As a 工具链维护者 / 用户,
+I want 钉死版本运维清单与「可编译 ≠ idiomatic」公开声明,
+So that 互操作边界诚实可复现。
+
+**Acceptance Criteria:**
+
+**Given** Story 37.1；AD-9 / NFR12；AD-27 / FR28
+**When** 更新用户/维护者文档（至少：`docs/fr28-chisel-compilable.md` 或等价 + README 交叉链）
+**Then** 写明当前钉死 Chisel↔firtool 版本对与缓存/覆盖入口（`RHDL_FIRTOOL_PATH` 或文档等价）
+**And** 明确声明 emit_chisel / 往返验收 = **可编译 + 端口/层次谓词**，**不**要求 idiomatic Scala（FR88）
+**And** 抽检既有 FR28/FR46 文档无「可维护手写风格」误导表述（NFR39）
+**And** 本故事不强制改 emit 实现（文档合同即可；若发现实现与合同冲突须记入风险记录）
+
+### Story 37.3: 可选夜间真机 Bambu 或显式保持 stub（FR88）
+
+As a 维护者,
+I want HLS 真机路径要么可验、要么诚实保持 stub 默认,
+So that 外挂 HLS 合同不被 stub CI 冒充。
+
+**Acceptance Criteria:**
+
+**Given** Story 37.2；`docs/fr35-hls.md`（或等价）；AD-25
+**When** 二选一落地：（A）增加 CI optional/夜间 job 跑真实 Bambu（缓存 AppImage 或文档钉死入口），**失败不得 ignore**；或（B）文档确认默认路径保持 stub，真机仍为显式环境变量入口，并更新 deferred-work 关闭「可选夜间」为「本阶段选 B」
+**Then** FR88 的 HLS 诚实条可勾选（A 或 B）
+**And** 树内 HLS 调度仍为非目标（继承 FR86 / AD-25）
+**And** NFR14 记录勾选 Epic 37 关闭条件
+
+
+## Epic 38: 一级 IP 显式加深
+
+集成者在 FR82 基线上获得至少一类有文档边界的加深子集（非 VIP），可 elaborate/emit/tick。  
+**FRs covered:** FR89  
+**NFRs:** NFR14, NFR39  
+**Depends on:** Epic 34 / FR82 基线已存在。可与 37 并行。  
+**Assumption:** 本 epic 加深目标钉死为 **`bitloom_prelude::ip::UartTx`**（在 FR82 8N1 bit-bang / baud=clk 之上，交付可编程波特率**或**最小 RX 路径二者之一的显式子集；故事 38.2 开场在风险记录中选定分支）。  
+**Gate:** Story 38.1 NFR14 未完成前，38.2–38.3 不得标 ready。
+
+### Story 38.1: Epic 38 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 UartTx 显式加深填写 NFR14,
+So that FR82 基线不被 VIP/全协议叙事吞掉。
+
+**Acceptance Criteria:**
+
+**Given** 既有 NFR14 模板；`docs/ip/README.md`；FR82 UartTx 基线（8N1 / baud=clk）
+**When** 创建 Epic 38 风险记录
+**Then** 钉死加深分支：（A）可编程波特率子集，或（B）最小 RX 子集（二选一写入记录）
+**And** 含与 FR82 边界对照、禁止事项（至少：不得声称全双工/可编程全特性/VIP；不得静默扩大到 SPI/I2C/AXI）；负责人（NFR14 / NFR39）
+**And** 无此记录则 38.2–38.3 不得标 ready
+
+### Story 38.2: UartTx 显式加深子集实现（FR89）
+
+As a IP 集成者,
+I want UartTx 在文档化加深子集上可 elaborate/emit/tick,
+So that FR89 有一类可验收深度。
+
+**Acceptance Criteria:**
+
+**Given** Story 38.1 已选定分支 A 或 B
+**When** 实现该分支的 UartTx 加深行为（prelude → HIR → emit `.v`）
+**Then** 至少一夹具 elaborate → emit → tick（或文档等价）证明加深语义（FR89）
+**And** `docs/ip/README.md`（或等价）写明本 epic 交付子集与**明确非目标**（全协议/VIP 等）
+**And** 未选中的另一分支不得声称已交付（NFR39）
+**And** 设计 crate 仍只依赖 `bitloom-prelude`（AD-6）
+
+### Story 38.3: ATDD + 边界收口（可选树外示例）
+
+As a 质量负责人,
+I want 加深路径有稳定 ATDD，并可选树外示例,
+So that FR89 关闭条件可重复验证。
+
+**Acceptance Criteria:**
+
+**Given** Story 38.2
+**When** 增加自动化黄金/ATDD 覆盖选定加深分支；更新 deferred-work 中「全协议仍须新合同」条目交叉引用
+**Then** 测试稳定通过
+**And** （可选）增加树外/`examples` 包演示加深 API——不做不阻塞关闭
+**And** NFR14 记录勾选 Epic 38 关闭条件
+
+
+## Epic 39: 宿主 IDE 与多视图同刺激
+
+设计者有可复现的 rust-analyzer 工作流；功能/周期路径共享刺激夹具 + adapter 模板；浅层 Bitloom LSP 按 FR91 做或 defer。  
+**FRs covered:** FR90, FR91, FR92  
+**NFRs:** NFR14, NFR39  
+**Depends on:** 不硬依赖 38；软依赖 36 的完成定义文案。  
+**Assumption:** FR91 默认走 **分支 B（显式 defer）**；若产品改为实现浅层 LSP MVP，须在 39.1 风险记录改选分支 A 并扩大 39.3 范围。  
+**Gate:** Story 39.1 NFR14 未完成前，39.2–39.4 不得标 ready。
+
+### Story 39.1: Epic 39 NFR14 风险记录
+
+As a 实现负责人,
+I want 为宿主 IDE / 多视图同刺激填写 NFR14,
+So that 不以形式等价或自研 LSP 冒充关闭 FR90–92。
+
+**Acceptance Criteria:**
+
+**Given** 既有 NFR14 模板；AD-5；deferred-work LSP / 多视图条目；research Wave D
+**When** 创建 Epic 39 风险记录
+**Then** 钉死 FR91 分支：**B = 显式 defer Bitloom LSP**（或若改选 A = 浅层 MVP，须写明浅层范围）
+**And** 含禁止事项（至少：不得承诺 SystemC TLM-2.0；不得声称自动 FL≡RTL 形式证明；不得把层次 HTML 冒充 LSP 完成；分支 B 下不得交付未文档化的半成品 LSP 二进制）
+**And** 负责人（NFR14 / NFR39）；无此记录则 39.2–39.4 不得标 ready
+
+### Story 39.2: 宿主 IDE / rust-analyzer 工作流（FR90）
+
+As a 硬件设计者,
+I want 可复现的 rust-analyzer（宿主 LSP）工作流文档与夹具说明,
+So that Bitloom 设计 crate 获得补全 / 跳转 / 诊断，而无需自研 netlist LSP。
+
+**Acceptance Criteria:**
+
+**Given** Story 39.1
+**When** 新增或更新用户文档（建议 `docs/` 下 IDE/工作流页）+ 至少一夹具/示例工程说明
+**Then** 步骤可复现：打开设计 crate → rust-analyzer（或文档等价宿主 LSP）提供补全与跳转与 rustc 诊断可见（FR90）
+**And** 明确区分宿主语言智能 vs 硬件语义 / 层次导航（非本故事范围）
+**And** 公开品牌表述为 Bitloom
+
+### Story 39.3: 浅层 Bitloom LSP 或显式 defer（FR91）
+
+As a PM / 用户,
+I want Bitloom 自研 LSP 要么有浅层 MVP、要么合同化 defer,
+So that FR91 深度诚实。
+
+**Acceptance Criteria:**
+
+**Given** Story 39.1 所选分支
+**When** 若分支 **B**（默认）：更新 README / `docs/fr38-viz-lsp.md`（或等价）显式 deferred，并声明不得声称 LSP 已交付；若分支 **A**：交付浅层（非按键全 elaborate）诊断/符号 LSP MVP 与最小编辑器接线文档
+**Then** FR91 关闭条件可检查勾选
+**And** 分支 B 下无半成品 language-server 二进制冒充完成（NFR39）
+**And** 层次/时序 HTML 入口不计入 LSP 完成
+
+### Story 39.4: 多视图同刺激 + adapter 模板（FR92）
+
+As a 验证工程师 / 设计者,
+I want 功能路径与周期精确路径共享刺激夹具，并有桥接 adapter 模板,
+So that 多视图一致性可落地且不承诺 TLM≡CA。
+
+**Acceptance Criteria:**
+
+**Given** Story 39.1–39.2；既有 FR47 生成/手写功能模型路径与 `tick`
+**When** 交付：（1）至少一夹具证明功能模型（或生成功能 sim）与周期精确 `tick`（及/或 `build-sim`）**共享同一刺激/期望向量**；（2）桥接 adapter **模板**（文档 + 代码骨架，可为 prelude/examples）
+**Then** 满足 FR92；文档写明**不**承诺自动形式 FL≡RTL / SystemC TLM-2.0（AD-5）
+**And** 不得引入第二套无对照的仿真语义作为「完成」
+**And** NFR14 记录勾选 Epic 39 关闭条件
