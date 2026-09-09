@@ -1,8 +1,10 @@
 # FR28 — FrozenHir / FIRRTL → 可编译 Chisel Scala
 
-**验收合同（AD-27）：** 在钉死栈下可编译 + 公开端口名/宽/向与实例层次往返谓词。允许机械风格；**不以**「结构化尽力失败」交差。
+**验收合同（AD-27 / FR88）：** 在钉死栈下可编译 + 公开端口名/宽/向与实例层次往返谓词。允许机械/生成风格；**不以**「结构化尽力失败」交差。
 
-**钉死版本对（AD-9 / NFR12）：** Chisel **7.14.0** ↔ firtool **1.155.0**。
+**公开诚实声明（FR88）：** `emit_chisel` / 往返验收 = **可编译 ≠ idiomatic**。合同只要求钉死栈下**可编译** + **端口/层次谓词**；**不**要求 idiomatic / 手写可维护 Scala。FIRRTL→idiomatic Scala 为 **FR93 永久非目标**（须新 PRD；见 README「永久非目标（FR93）」）。
+
+**钉死版本对（AD-9 / NFR12）：** Chisel **7.14.0** ↔ firtool **1.155.0**。升钉须上游正式配对并更新脊柱 Stack / AD-9 / 本页运维清单；**禁止**私自升版交差。
 
 ```rust
 let art = rhdl_firrtl::emit_chisel(&frozen)?;
@@ -10,6 +12,20 @@ let art = rhdl_firrtl::emit_chisel(&frozen)?;
 ```
 
 **CLI：** `cargo bitloom import --input design.fir --out-dir out --also-chisel` 在写 `.v` 的同时经 `emit_chisel` 写出 `.scala`。
+
+## firtool / Chisel 钉死运维清单（FR88 / NFR3 / NFR12）
+
+| 项 | 合同 |
+|----|------|
+| Chisel | **7.14.0**（JVM 真编译：`just chisel-fr28-jvm` / GHA `fr28-chisel-jvm`） |
+| firtool | **1.155.0**（与 Chisel 正式配对；源码常量 `FIRTOOL_TARGET`） |
+| 默认策略 | **不信任** `PATH` 上的裸 firtool；不得用 PATH 冒充钉死对 |
+| 下载/校验/缓存 | `cargo run -p bitloom -- firtool info` · `firtool ensure`（资产 + `.sha256` → 本地缓存） |
+| 覆盖入口 | `RHDL_FIRTOOL_PATH` = 含 `firtool` 二进制的目录 |
+| 缓存根 | `RHDL_FIRTOOL_CACHE`（可选；覆盖默认缓存位置） |
+| 多平台资产 | [`docs/nfr11-firtool-platforms.md`](nfr11-firtool-platforms.md)；不支持的 triple 必须设 `RHDL_FIRTOOL_PATH` |
+
+README 交叉入口：[firtool（NFR3）](../README.md#firtoolnfr3) · 合同表「Chisel 可编译生成（FR28）」。
 
 ## 产出
 

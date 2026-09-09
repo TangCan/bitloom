@@ -10,3 +10,5 @@
 | windows-x64 | `firrtl-bin-windows-x64.tar.gz` |
 
 Unsupported triples require `RHDL_FIRTOOL_PATH`.
+
+Pinned Chisel↔firtool ops (versions, cache, override) and FR88 honesty：[`fr28-chisel-compilable.md`](fr28-chisel-compilable.md#firtool--chisel-钉死运维清单fr88--nfr3--nfr12).

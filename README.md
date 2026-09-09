@@ -165,7 +165,7 @@ mod sim {
 | tick 引擎 | [`docs/fr32-tick-engines.md`](docs/fr32-tick-engines.md) |
 | C ABI cdylib | [`docs/fr33-c-abi.md`](docs/fr33-c-abi.md) |
 | 仿真覆盖率 | [`docs/fr34-sim-coverage.md`](docs/fr34-sim-coverage.md) |
-| Chisel 可编译生成（FR28）+ Mem Path A（FR81） | [`docs/fr28-chisel-compilable.md`](docs/fr28-chisel-compilable.md) · FR71：`just chisel-fr28-jvm` · 可选 Mem：`just chisel-fr81-mem-jvm` · [维护者合并清单](docs/fr28-chisel-compilable.md#维护者合并前检查清单fr28--emit_chisel) |
+| Chisel 可编译生成（FR28 / FR88）+ Mem Path A（FR81） | [`docs/fr28-chisel-compilable.md`](docs/fr28-chisel-compilable.md)（**可编译 ≠ idiomatic**；[钉死运维清单](docs/fr28-chisel-compilable.md#firtool--chisel-钉死运维清单fr88--nfr3--nfr12)）· FR71：`just chisel-fr28-jvm` · 可选 Mem：`just chisel-fr81-mem-jvm` · [维护者合并清单](docs/fr28-chisel-compilable.md#维护者合并前检查清单fr28--emit_chisel) |
 | Chisel / `.fir` 反向导入（FR46） | [`docs/fr46-chisel-import.md`](docs/fr46-chisel-import.md) |
 | `import` CLI + 混合夹具 | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) · [`examples/chisel_mixed`](examples/chisel_mixed) |
 | HLS 产品路径（**支持** · FR35/FR50 · Bambu 2024.10） | [`docs/fr35-hls.md`](docs/fr35-hls.md) · 烟测 [`scripts/hls-smoke.sh`](scripts/hls-smoke.sh) |
@@ -182,7 +182,7 @@ mod sim {
 
 ## firtool（NFR3）
 
-默认**不信任** `PATH` 上的 firtool。CLI 钉死 **firtool-1.155.0**（`firrtl-bin-linux-x64.tar.gz` + `.sha256`）：
+默认**不信任** `PATH` 上的 firtool。CLI 钉死 **firtool-1.155.0**（与 Chisel **7.14.0** 配对 · AD-9 / NFR12；`firrtl-bin-linux-x64.tar.gz` + `.sha256`）：
 
 ```bash
 cargo run -p bitloom -- firtool info
@@ -190,6 +190,8 @@ cargo run -p bitloom -- firtool ensure   # 下载/校验/缓存并打印二进�
 ```
 
 覆盖：`RHDL_FIRTOOL_PATH` 指向含 `firtool` 的目录；缓存根可用 `RHDL_FIRTOOL_CACHE`。
+
+完整钉死运维清单 + `emit_chisel` **可编译 ≠ idiomatic** 诚实声明（FR88）：[`docs/fr28-chisel-compilable.md`](docs/fr28-chisel-compilable.md)。
 
 工具链 crate：MIT OR Apache-2.0（见各 crate 的 `Cargo.toml`）。
 

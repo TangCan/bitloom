@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 14:45
+last_updated: 09-09-2026 14:55
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -293,7 +293,7 @@ development_status:
 
   epic-37: in-progress
   37-1-epic-37-nfr14-风险记录: done
-  37-2-firtool-chisel-钉死运维与机械-chisel-诚实声明-fr88: backlog
+  37-2-firtool-chisel-钉死运维与机械-chisel-诚实声明-fr88: done
   37-3-可选夜间真机-bambu-或显式保持-stub-fr88: backlog
   epic-37-retrospective: optional
 
