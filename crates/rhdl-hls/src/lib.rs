@@ -1,5 +1,5 @@
 //! Legacy crate name: product HLS path lives in `bitloom` (`cargo bitloom hls` / `bitloom::hls`).
-//! Kept for workspace continuity; mirrors AD-25 / FR35 / FR76 (no in-crate scheduling).
+//! Kept for workspace continuity; mirrors AD-25 / FR35 / FR76 / FR95 (in-tree schedule in `bitloom`).
 
 use std::fs;
 use std::path::{Path, PathBuf};

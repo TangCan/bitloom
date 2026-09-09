@@ -50,21 +50,28 @@ enum Commands {
     },
     /// List `bitloom-sim` tick engines (FR32). Simulation itself lives in tests / bitloom-sim.
     SimEngines,
-    /// Product HLS path: emit C and invoke pinned Bambu (FR35 / FR50 / FR76 / AD-25).
+    /// Product HLS: external Bambu (FR35) or in-tree schedule MVP (FR95 / AD-25).
     Hls {
-        /// Top function name (also used for the emitted C stub).
+        /// Top function name (also used for the emitted C stub / schedule artifact).
         #[arg(long, default_value = "add")]
         function: String,
-        /// Output directory for C stub and backend RTL artifacts.
+        /// Output directory for C stub, schedule IR, and RTL artifacts.
         #[arg(long, default_value = "target/bitloom-hls")]
         out_dir: PathBuf,
         /// Write the C stub only; do not invoke Bambu (not a successful RTL run).
+        /// Ignored when `--in-tree` (in-tree never calls Bambu).
         #[arg(long, default_value_t = false)]
         emit_only: bool,
         /// Dissolve a documented dataflow transform before emit (FR76):
         /// `add` | `identity` | `add1` | `xor_a5`.
         #[arg(long, default_value = "add")]
         dataflow: String,
+        /// FR95: run in-tree schedule MVP (no Bambu). Optional `--unroll N` (default 4).
+        #[arg(long, default_value_t = false)]
+        in_tree: bool,
+        /// Loop-unroll trip count for `--in-tree` (FR95 documented subset).
+        #[arg(long, default_value_t = 4)]
+        unroll: u32,
     },
     /// Import FIRRTL 6.0.0 `.fir` (Chisel→firtool output ok) into the same emit path as `build` (FR40 / FR46).
     Import {
@@ -498,24 +505,49 @@ fn main() {
             out_dir,
             emit_only,
             dataflow,
+            in_tree,
+            unroll,
         } => {
-            println!(
-                "backend={} version={} dataflow={}",
-                hls::HLS_BACKEND,
-                hls::HLS_BACKEND_VERSION,
-                dataflow
-            );
-            match hls::run_hls_dataflow(&function, &dataflow, &out_dir, emit_only) {
-                Ok(p) => {
-                    if emit_only {
-                        println!("emit_only={}", p.display());
-                    } else {
-                        println!("ok={}", p.display());
+            if in_tree {
+                println!(
+                    "path=in-tree fr95=true kind=loop-unroll trip_count={unroll} dataflow={dataflow}"
+                );
+                match hls::parse_dataflow_alias(&dataflow).and_then(|op| {
+                    hls::run_hls_in_tree(
+                        &function,
+                        op,
+                        hls::InTreeScheduleKind::LoopUnroll { trip_count: unroll },
+                        &out_dir,
+                    )
+                }) {
+                    Ok((sched, rtl)) => {
+                        println!("ok_schedule={}", sched.display());
+                        println!("ok_rtl={}", rtl.display());
+                    }
+                    Err(e) => {
+                        eprintln!("error: {e}");
+                        std::process::exit(1);
                     }
                 }
-                Err(e) => {
-                    eprintln!("error: {e}");
-                    std::process::exit(1);
+            } else {
+                println!(
+                    "backend={} version={} dataflow={}",
+                    hls::HLS_BACKEND,
+                    hls::HLS_BACKEND_VERSION,
+                    dataflow
+                );
+                match hls::run_hls_dataflow(&function, &dataflow, &out_dir, emit_only) {
+                    Ok(p) => {
+                        if emit_only {
+                            println!("emit_only={}", p.display());
+                        } else {
+                            println!("ok={}", p.display());
+                        }
+                    }
+                    Err(e) => {
+                        eprintln!("error: {e}");
+                        std::process::exit(1);
+                    }
                 }
             }
         }

@@ -1,7 +1,11 @@
-//! Product HLS front-end: emit host C and call pinned Bambu (AD-25 / FR35 / FR50 / FR76).
-//! Never implements scheduling inside bitloom crates.
+//! Product HLS front-end (AD-25 revised / FR35 / FR50 / FR76 / **FR95**).
 //!
-//! Story 29.2: HLS dataflow closures dissolve to C ops **before** schedule/lower (D1 / Cap-R-62/71).
+//! - **FR35 / FR76 external path:** emit host C and call pinned Bambu (optional/对照).
+//! - **FR95 in-tree path:** documented-subset scheduling/allocation inside bitloom
+//!   (`schedule_in_tree` / loop-unroll MVP) — does **not** call Bambu; alone satisfies FR95.
+//!
+//! Story 29.2: HLS dataflow closures dissolve to C ops **before** external schedule/lower.
+//! Story 41.2: in-tree loop-unroll schedule IR + optional RTL stub.
 
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -94,6 +98,38 @@ pub struct DissolvedHlsDataflow {
     pub op: HlsDataflowOp,
     /// Full C translation unit after dissolve (NFR36: no Fn / closure tokens).
     pub c_source: String,
+}
+
+/// FR95 in-tree schedule kind (documented MVP subset; AD-25 revised).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum InTreeScheduleKind {
+    /// Fully unroll a counted loop of `trip_count` iterations (Story 41.2 demo).
+    LoopUnroll { trip_count: u32 },
+    /// Simple initiation-interval pipeline (optional second documented mode).
+    Pipeline {
+        initiation_interval: u32,
+        stages: u32,
+    },
+}
+
+/// One scheduled stage in an in-tree HLS artifact (FR95).
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ScheduleStage {
+    pub index: u32,
+    pub op: HlsDataflowOp,
+    pub label: String,
+}
+
+/// Checkable in-tree schedule result — never produced by spawning Bambu.
+#[derive(Debug, Clone)]
+pub struct InTreeScheduleArtifact {
+    pub fn_name: String,
+    pub kind: InTreeScheduleKind,
+    pub stages: Vec<ScheduleStage>,
+    /// Machine/human readable schedule IR (must cite FR95 + kind metadata).
+    pub schedule_ir: String,
+    /// Optional trivial Verilog stub (honestly marked `in-tree-mvp`; not commercial HLS quality).
+    pub rtl_stub: String,
 }
 
 /// Resolve pinned Bambu binary: `BITLOOM_BAMBU_PATH`, else `RHDL_BAMBU_PATH`, else `PATH`.
@@ -332,6 +368,174 @@ pub fn run_hls_dataflow_with_backend(
     run_hls_dissolved_with_backend(&dissolved, out_dir, emit_only, bambu_override)
 }
 
+fn op_label(op: &HlsDataflowOp) -> String {
+    match op {
+        HlsDataflowOp::Identity => "identity".into(),
+        HlsDataflowOp::AddConst(k) => format!("add_const_{k}"),
+        HlsDataflowOp::XorConst(k) => format!("xor_const_{k}"),
+        HlsDataflowOp::MulConst(k) => format!("mul_const_{k}"),
+        HlsDataflowOp::AddInputs => "add_inputs".into(),
+    }
+}
+
+fn verilog_expr(op: &HlsDataflowOp, input: &str) -> String {
+    match op {
+        HlsDataflowOp::Identity => input.to_string(),
+        HlsDataflowOp::AddConst(k) => format!("({input} + 32'd{k})"),
+        HlsDataflowOp::XorConst(k) => format!("({input} ^ 32'd{k})"),
+        HlsDataflowOp::MulConst(k) => format!("({input} * 32'd{k})"),
+        HlsDataflowOp::AddInputs => {
+            format!("({input} /* binary AddInputs collapsed to unary MVP */)")
+        }
+    }
+}
+
+fn build_schedule_ir(fn_name: &str, kind: &InTreeScheduleKind, stages: &[ScheduleStage]) -> String {
+    let mut lines = Vec::new();
+    lines.push("{".into());
+    lines.push(format!("  \"fr95\": true,"));
+    lines.push(format!("  \"path\": \"in-tree\","));
+    lines.push(format!("  \"fn_name\": \"{fn_name}\","));
+    match kind {
+        InTreeScheduleKind::LoopUnroll { trip_count } => {
+            lines.push(format!("  \"kind\": \"loop-unroll\","));
+            lines.push(format!("  \"trip_count\": {trip_count},"));
+        }
+        InTreeScheduleKind::Pipeline {
+            initiation_interval,
+            stages: n,
+        } => {
+            lines.push(format!("  \"kind\": \"pipeline\","));
+            lines.push(format!("  \"initiation_interval\": {initiation_interval},"));
+            lines.push(format!("  \"pipeline_stages\": {n},"));
+        }
+    }
+    lines.push(format!("  \"stage_count\": {},", stages.len()));
+    lines.push("  \"stages\": [".into());
+    for (i, st) in stages.iter().enumerate() {
+        let comma = if i + 1 == stages.len() { "" } else { "," };
+        lines.push(format!(
+            "    {{\"index\": {}, \"label\": \"{}\", \"op\": \"{}\"}}{comma}",
+            st.index,
+            st.label,
+            op_label(&st.op)
+        ));
+    }
+    lines.push("  ]".into());
+    lines.push("}".into());
+    lines.join("\n")
+}
+
+fn build_rtl_stub(fn_name: &str, kind: &InTreeScheduleKind, stages: &[ScheduleStage]) -> String {
+    let kind_note = match kind {
+        InTreeScheduleKind::LoopUnroll { trip_count } => {
+            format!("loop-unroll trip_count={trip_count}")
+        }
+        InTreeScheduleKind::Pipeline {
+            initiation_interval,
+            stages: n,
+        } => format!("pipeline II={initiation_interval} stages={n}"),
+    };
+    let mut body = String::new();
+    body.push_str("  // FR95 in-tree-mvp: combinatorial unroll/pipeline sketch (not commercial HLS quality)\n");
+    let mut cur = "x".to_string();
+    for st in stages {
+        let next = format!("s{}", st.index);
+        let expr = verilog_expr(&st.op, &cur);
+        body.push_str(&format!("  wire [31:0] {next} = {expr};\n"));
+        cur = next;
+    }
+    format!(
+        "// generated by bitloom FR95 in-tree-mvp ({kind_note}); no Bambu\n\
+         module {fn_name}(\n\
+           input  wire [31:0] x,\n\
+           output wire [31:0] y\n\
+         );\n\
+         {body}\
+           assign y = {cur};\n\
+         endmodule\n"
+    )
+}
+
+/// FR95 in-tree scheduling MVP: produce a checkable schedule without calling Bambu.
+///
+/// Documented subset: [`InTreeScheduleKind::LoopUnroll`] (primary) and
+/// [`InTreeScheduleKind::Pipeline`] (secondary).
+pub fn schedule_in_tree(
+    fn_name: &str,
+    op: HlsDataflowOp,
+    kind: InTreeScheduleKind,
+) -> Result<InTreeScheduleArtifact, HlsError> {
+    if fn_name.is_empty() {
+        return Err(HlsError::Message(
+            "FR95 in-tree schedule: fn_name must be non-empty".into(),
+        ));
+    }
+    let stage_count = match kind {
+        InTreeScheduleKind::LoopUnroll { trip_count } => {
+            if trip_count == 0 {
+                return Err(HlsError::Message(
+                    "FR95 in-tree loop-unroll: trip_count must be >= 1".into(),
+                ));
+            }
+            trip_count
+        }
+        InTreeScheduleKind::Pipeline {
+            initiation_interval,
+            stages,
+        } => {
+            if initiation_interval == 0 || stages == 0 {
+                return Err(HlsError::Message(
+                    "FR95 in-tree pipeline: initiation_interval and stages must be >= 1".into(),
+                ));
+            }
+            stages
+        }
+    };
+
+    let stages: Vec<ScheduleStage> = (0..stage_count)
+        .map(|index| ScheduleStage {
+            index,
+            op,
+            label: format!("stage_{index}_{}", op_label(&op)),
+        })
+        .collect();
+
+    let schedule_ir = build_schedule_ir(fn_name, &kind, &stages);
+    let rtl_stub = build_rtl_stub(fn_name, &kind, &stages);
+    Ok(InTreeScheduleArtifact {
+        fn_name: fn_name.to_string(),
+        kind,
+        stages,
+        schedule_ir,
+        rtl_stub,
+    })
+}
+
+/// Write `{fn}.schedule.json` + `{fn}.v` for an in-tree FR95 artifact (never spawns Bambu).
+pub fn emit_in_tree_schedule(
+    artifact: &InTreeScheduleArtifact,
+    out_dir: &Path,
+) -> Result<(PathBuf, PathBuf), HlsError> {
+    fs::create_dir_all(out_dir).map_err(|e| HlsError::Message(e.to_string()))?;
+    let sched_path = out_dir.join(format!("{}.schedule.json", artifact.fn_name));
+    let rtl_path = out_dir.join(format!("{}.v", artifact.fn_name));
+    fs::write(&sched_path, &artifact.schedule_ir).map_err(|e| HlsError::Message(e.to_string()))?;
+    fs::write(&rtl_path, &artifact.rtl_stub).map_err(|e| HlsError::Message(e.to_string()))?;
+    Ok((sched_path, rtl_path))
+}
+
+/// Convenience: schedule + emit in-tree (FR95), no Bambu.
+pub fn run_hls_in_tree(
+    fn_name: &str,
+    op: HlsDataflowOp,
+    kind: InTreeScheduleKind,
+    out_dir: &Path,
+) -> Result<(PathBuf, PathBuf), HlsError> {
+    let artifact = schedule_in_tree(fn_name, op, kind)?;
+    emit_in_tree_schedule(&artifact, out_dir)
+}
+
 fn find_rtl_artifact(out_dir: &Path, fn_name: &str) -> Result<PathBuf, HlsError> {
     let candidates = [
         out_dir.join(format!("{fn_name}.v")),
@@ -374,6 +578,20 @@ fn which(name: &str) -> Option<PathBuf> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn in_tree_loop_unroll_without_bambu() {
+        let a = schedule_in_tree(
+            "demo",
+            HlsDataflowOp::AddConst(1),
+            InTreeScheduleKind::LoopUnroll { trip_count: 3 },
+        )
+        .unwrap();
+        assert_eq!(a.stages.len(), 3);
+        assert!(a.schedule_ir.contains("fr95"));
+        assert!(a.schedule_ir.contains("loop-unroll"));
+        assert!(a.rtl_stub.contains("in-tree-mvp"));
+    }
 
     #[test]
     fn missing_bambu_is_readable_error() {

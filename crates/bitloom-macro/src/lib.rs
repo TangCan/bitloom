@@ -381,7 +381,8 @@ pub fn both(_attr: TokenStream, item: TokenStream) -> TokenStream {
     host_only_view(item, "Both")
 }
 
-/// Marks a function for optional external HLS (FR35 / AD-25). Never schedules in-process.
+/// Marks a function for HLS (FR35 external and/or FR95 in-tree). Does not schedule in the macro;
+/// scheduling is `bitloom::hls::schedule_in_tree` (FR95) or external Bambu (FR35).
 #[proc_macro_attribute]
 pub fn hls(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as ItemFn);
