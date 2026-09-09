@@ -169,11 +169,12 @@ pub struct HwVec<T, const N: u32>(pub core::marker::PhantomData<T>);
 /// `Signal<D, T>` wrapper type. Default modules remain single-clock + **sync
 /// active-high** [`Reset`]（AD-15）. Sync/async reset via
 /// [`ElaborateSession::declare_reg_ex`] `async_reset`; legal CDC via
-/// [`DoubleFlop`]（FR79 真 RTL）或 [`ElaborateSession::mark_cdc_bridge`] /
-/// [`SyncFIFO`]（31.3 前叙事），else `finish` → `rhdl::E0220`.
+/// [`DoubleFlop`] / [`SyncFIFO`]（FR79 真 RTL）或 [`ElaborateSession::mark_cdc_bridge`]
+///（FR52 最小合同），else `finish` → `rhdl::E0220`.
 ///
 /// Fixture: `examples/clockdomain_skel`（FR52 最小合同）；`examples/doubleflop_skel`
-///（FR79 真 RTL）。Sim: global `Sim::tick` is the MVP per-domain tick stand-in.
+/// / `examples/syncfifo_skel`（FR79 真 RTL）。Sim: global `Sim::tick` is the MVP
+/// per-domain tick stand-in.
 #[derive(Debug, Clone, Copy, Default)]
 pub struct ClockDomain<const ID: u32>;
 
@@ -192,7 +193,7 @@ pub struct ClockDomain<const ID: u32>;
 /// **合同外：** 不保证物理亚稳态消除或 MTBF（见
 /// `nfr14-risk-epic31-cdc-true-rtl.md`）。
 ///
-/// `SyncFIFO` 真 RTL 见 Epic 31.3；在此之前 `SyncFIFO` 仍可为 bridge 叙事锚点。
+/// 多位/流式 CDC 见 [`SyncFIFO`]（FR79）。
 #[derive(Debug, Clone, Copy, Default)]
 pub struct DoubleFlop;
 
@@ -234,12 +235,180 @@ impl DoubleFlop {
     }
 }
 
-/// 语言级 CDC FIFO 叙事锚点（AD-22 / FR52）。
+/// 语言级跨域 FIFO（FR79 / AD-29；加深 FR23/FR52）。
 ///
-/// 非一级 SyncFIFO IP；Epic 31.3 前仍为 `mark_cdc_bridge` 文档等价名。
-/// 与 [`DoubleFlop`]（已真 RTL）深度不对等 — 见 NFR37 / FR79。
+/// **真 RTL：** [`Elaboratable::elaborate`]（默认 [`SyncFIFO`]`<4, 8>`）发出可综合
+/// 模块：`mem` + 二进制/灰码指针 + 经 [`DoubleFlop`] 级数同步的跨域灰码 +
+/// `full`/`empty`（不得仅以空 ZST + [`ElaborateSession::mark_cdc_bridge`] 交差）。
+///
+/// **文档化最小子集：** `DEPTH=4`、`WIDTH=8`；单物理 `clk`/`rst` + phantom 写域 D0 /
+/// 读域 D1（与 DoubleFlop MVP 一致）；全局 `Sim::tick` ≡ 按域 tick。
+///
+/// **延迟：** 灰码指针同步 [`Self::LATENCY_PTR_SYNC_TICKS`]（= DoubleFlop 2）；
+/// 注册读 [`Self::LATENCY_REG_READ_TICKS`]。详见 `docs/fr79-syncfifo-cdc.md`。
+///
+/// **≠** [`ip::SyncFifo`]（FR82 单时钟一级 IP）。合同外：非 MTBF / 非双物理时钟端口矩阵。
 #[derive(Debug, Clone, Copy)]
 pub struct SyncFIFO<const DEPTH: u32, const WIDTH: u32>;
+
+impl<const DEPTH: u32, const WIDTH: u32> SyncFIFO<DEPTH, WIDTH> {
+    /// Documented FIFO depth (FR79 MVP default 4).
+    pub const DEPTH: u32 = DEPTH;
+    /// Documented data width (FR79 MVP default 8).
+    pub const WIDTH: u32 = WIDTH;
+    /// Binary/gray pointer width = clog2(DEPTH)+1 (DEPTH must be power of two).
+    pub const PTR_WIDTH: u32 = {
+        match DEPTH {
+            4 => 3,
+            _ => 3, // MVP documents DEPTH=4 only; other depths are Ask First.
+        }
+    };
+    /// Destination-domain ticks for gray pointer DoubleFlop sync (empty/full observe).
+    pub const LATENCY_PTR_SYNC_TICKS: u32 = DoubleFlop::LATENCY_DST_TICKS;
+    /// Registered mem-read latency to `data_out` after an accepted `rd_en`.
+    pub const LATENCY_REG_READ_TICKS: u32 = 1;
+}
+
+impl Elaboratable for SyncFIFO<4, 8> {
+    fn elaborate() -> Result<FrozenHir, Diagnostics> {
+        Self::elaborate_cdc()
+    }
+}
+
+impl SyncFIFO<4, 8> {
+    /// Elaborate the FR79 CDC SyncFIFO MVP (DEPTH=4, WIDTH=8).
+    pub fn elaborate_cdc() -> Result<FrozenHir, Diagnostics> {
+        const DEPTH: u32 = 4;
+        const WIDTH: u32 = 8;
+        const PTR_W: u32 = 3;
+        let data_ty = GroundType::UInt { width: WIDTH };
+        let ptr_ty = GroundType::UInt { width: PTR_W };
+        let bit_ty = GroundType::UInt { width: 1 };
+
+        let mut s = ElaborateSession::new("SyncFIFO");
+        s.begin_module("SyncFIFO", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("wr_en", bit_ty.clone(), Span::default());
+        s.add_input("rd_en", bit_ty.clone(), Span::default());
+        s.add_input("data_in", data_ty.clone(), Span::default());
+        s.add_output("data_out", data_ty.clone(), Span::default());
+        s.add_output("full", bit_ty.clone(), Span::default());
+        s.add_output("empty", bit_ty.clone(), Span::default());
+
+        // Write domain D0, read domain D1 (phantom; single physical clk MVP).
+        s.bind_domain("wr_en", 0);
+        s.bind_domain("data_in", 0);
+        s.bind_domain("full", 0);
+        s.bind_domain("rd_en", 1);
+        s.bind_domain("data_out", 1);
+        s.bind_domain("empty", 1);
+
+        s.declare_mem("ram", DEPTH, WIDTH, Span::default());
+        s.declare_reg("wr_ptr", ptr_ty.clone(), Span::default());
+        s.declare_reg("rd_ptr", ptr_ty.clone(), Span::default());
+        s.declare_reg("dout", data_ty, Span::default());
+        s.bind_domain("wr_ptr", 0);
+        s.bind_domain("rd_ptr", 1);
+        s.bind_domain("dout", 1);
+
+        // DoubleFlop sync gray(wr) → read domain; gray(rd) → write domain.
+        let (w2r_ff0, w2r_ff1) =
+            s.declare_double_flop_stages("w2r", ptr_ty.clone(), 1, Span::default());
+        let (r2w_ff0, r2w_ff1) =
+            s.declare_double_flop_stages("r2w", ptr_ty.clone(), 0, Span::default());
+
+        // Constants / comb helpers
+        s.declare_wire("c0_1", bit_ty.clone(), Span::default());
+        s.declare_wire("c1_1", bit_ty.clone(), Span::default());
+        s.declare_wire("c0_3", ptr_ty.clone(), Span::default());
+        s.declare_wire("c1_3", ptr_ty.clone(), Span::default());
+        s.declare_wire("c3_3", ptr_ty.clone(), Span::default());
+        s.declare_wire("c7_3", ptr_ty.clone(), Span::default());
+        s.declare_wire("wr_ptr_p1", ptr_ty.clone(), Span::default());
+        s.declare_wire("rd_ptr_p1", ptr_ty.clone(), Span::default());
+        s.declare_wire("wr_ptr_shr", ptr_ty.clone(), Span::default());
+        s.declare_wire("rd_ptr_shr", ptr_ty.clone(), Span::default());
+        s.declare_wire("wr_gray", ptr_ty.clone(), Span::default());
+        s.declare_wire("rd_gray", ptr_ty.clone(), Span::default());
+        s.declare_wire("wr_addr", ptr_ty.clone(), Span::default());
+        s.declare_wire("rd_addr", ptr_ty.clone(), Span::default());
+        s.declare_wire("rd_sync_shr", ptr_ty.clone(), Span::default());
+        s.declare_wire("rd_sync_hi_x", ptr_ty.clone(), Span::default());
+        s.declare_wire("rd_sync_hi", ptr_ty.clone(), Span::default());
+        s.declare_wire("rd_sync_hi_shl", ptr_ty.clone(), Span::default());
+        s.declare_wire("rd_sync_lo", ptr_ty.clone(), Span::default());
+        s.declare_wire("rd_fold", ptr_ty.clone(), Span::default());
+        s.declare_wire("can_wr", bit_ty.clone(), Span::default());
+        s.declare_wire("can_rd", bit_ty.clone(), Span::default());
+        s.declare_wire("next_wr", ptr_ty.clone(), Span::default());
+        s.declare_wire("next_rd", ptr_ty.clone(), Span::default());
+        s.declare_wire("not_full", bit_ty.clone(), Span::default());
+        s.declare_wire("not_empty", bit_ty, Span::default());
+
+        s.bind_domain("wr_gray", 0);
+        s.bind_domain("rd_fold", 0);
+        s.bind_domain("can_wr", 0);
+        s.bind_domain("next_wr", 0);
+        s.bind_domain("rd_gray", 1);
+        s.bind_domain("can_rd", 1);
+        s.bind_domain("next_rd", 1);
+        // Bridged sync outputs already marked via declare_double_flop_stages.
+        s.mark_cdc_bridge("wr_gray");
+        s.mark_cdc_bridge("rd_gray");
+
+        s.begin_combinational(Span::default());
+        s.assign_lit("c0_1", 0, Span::default());
+        s.assign_lit("c1_1", 1, Span::default());
+        s.assign_lit("c0_3", 0, Span::default());
+        s.assign_lit("c1_3", 1, Span::default());
+        s.assign_lit("c3_3", 3, Span::default());
+        s.assign_lit("c7_3", 7, Span::default());
+
+        s.assign_add("wr_ptr_p1", "wr_ptr", "c1_3", Span::default());
+        s.assign_add("rd_ptr_p1", "rd_ptr", "c1_3", Span::default());
+        s.assign_and("wr_addr", "wr_ptr", "c3_3", Span::default());
+        s.assign_and("rd_addr", "rd_ptr", "c3_3", Span::default());
+
+        // gray = bin ^ (bin >> 1)
+        s.assign_shr("wr_ptr_shr", "wr_ptr", "c1_3", Span::default());
+        s.assign_xor("wr_gray", "wr_ptr", "wr_ptr_shr", Span::default());
+        s.assign_shr("rd_ptr_shr", "rd_ptr", "c1_3", Span::default());
+        s.assign_xor("rd_gray", "rd_ptr", "rd_ptr_shr", Span::default());
+
+        // rd_fold = {~rd_sync[2:1], rd_sync[0]} for Cummings full compare
+        // = ((~(rd>>1) & 3) << 1) | (rd & 1)
+        s.assign_shr("rd_sync_shr", &r2w_ff1, "c1_3", Span::default());
+        s.assign_xor("rd_sync_hi_x", "rd_sync_shr", "c7_3", Span::default());
+        s.assign_and("rd_sync_hi", "rd_sync_hi_x", "c3_3", Span::default());
+        s.assign_shl("rd_sync_hi_shl", "rd_sync_hi", "c1_3", Span::default());
+        s.assign_and("rd_sync_lo", &r2w_ff1, "c1_3", Span::default());
+        s.assign_or("rd_fold", "rd_sync_hi_shl", "rd_sync_lo", Span::default());
+
+        s.assign_eq("full", "wr_gray", "rd_fold", Span::default());
+        s.assign_eq("empty", "rd_gray", &w2r_ff1, Span::default());
+        // not_full / not_empty via mux against constants (no bitwise not on 1-bit eq)
+        s.assign_mux("not_full", "full", "c0_1", "c1_1", Span::default());
+        s.assign_mux("not_empty", "empty", "c0_1", "c1_1", Span::default());
+        s.assign_and("can_wr", "wr_en", "not_full", Span::default());
+        s.assign_and("can_rd", "rd_en", "not_empty", Span::default());
+        s.assign_mux("next_wr", "can_wr", "wr_ptr_p1", "wr_ptr", Span::default());
+        s.assign_mux("next_rd", "can_rd", "rd_ptr_p1", "rd_ptr", Span::default());
+        s.assign_net("data_out", "dout", Span::default());
+        s.end_process();
+
+        s.begin_sequential(Span::default());
+        s.assign_mem_write_en("ram", "wr_addr", "data_in", "can_wr", Span::default());
+        s.assign_reg_d_mem_read("dout", "ram", "rd_addr", Span::default());
+        s.assign_reg_d_from("wr_ptr", "next_wr", Span::default());
+        s.assign_reg_d_from("rd_ptr", "next_rd", Span::default());
+        s.connect_double_flop(&w2r_ff0, &w2r_ff1, "wr_gray", Span::default());
+        s.connect_double_flop(&r2w_ff0, &r2w_ff1, "rd_gray", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish()
+    }
+}
 
 /// CHIRRTL-friendly SyncReadMem surface marker (AD-21).
 #[derive(Debug, Clone, Copy)]

@@ -26,7 +26,7 @@
 
 - **不**保证硅片亚稳态消除、MTBF 公式或工艺时序签核。
 - 文档区分 **RTL/仿真语义延迟** vs **物理亚稳态风险提示**。
-- `SyncFIFO` 真 RTL → Story 31.3。
+- `SyncFIFO` 真 RTL → 见 `docs/fr79-syncfifo-cdc.md`（Story 31.3）。
 
 ## 最小用法
 

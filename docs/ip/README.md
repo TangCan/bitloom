@@ -73,7 +73,7 @@ ATDD：`cargo test -p bitloom --test fr77_ip_generator_closure`。
 
 | 类 | 包路径 / 类型 | Smoke 命令 | 已知限制（基线边界） |
 | --- | --- | --- | --- |
-| **FIFO** | `bitloom_prelude::ip::SyncFifo` | `cargo test -p bitloom-prelude --lib sync_fifo` | depth=4、宽=8；非异步/CDC FIFO（[`SyncFIFO`](../../crates/bitloom-prelude) 为 bridge 标记） |
+| **FIFO** | `bitloom_prelude::ip::SyncFifo` | `cargo test -p bitloom-prelude --lib sync_fifo` | depth=4、宽=8；**单时钟** FR82 IP；非跨域（语言级 CDC 见 [`SyncFIFO`](../fr79-syncfifo-cdc.md) / FR79） |
 | **UART** | `bitloom_prelude::ip::UartTx` | `cargo test -p bitloom-prelude --lib uart_tx` | 8N1、1 bit/clk；非可编程波特率 / RX / 全双工 |
 | **SPI** | `bitloom_prelude::ip::SpiMaster` | `cargo test -p bitloom-prelude --lib spi_master` | Mode-0-ish、MSB-first、1 bit/clk；非其它 CPOL/CPHA / 多 CS / DMA / slave |
 | **I2C** | `bitloom_prelude::ip::I2cMaster` | `cargo test -p bitloom-prelude --lib i2c_master` | START+8data+STOP 教学玩具（SCL 恒高）；非 ACK 驱动 / 伸展 / 多主 / 10-bit / slave |

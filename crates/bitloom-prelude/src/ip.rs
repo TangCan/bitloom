@@ -17,7 +17,7 @@ use crate::{
 
 /// Depth-4 single-clock sync FIFO with `wr_en`/`rd_en` and `full`/`empty` (FR82).
 ///
-/// Non-goals: async/CDC FIFO ([`crate::SyncFIFO`] bridge marker), FWFT bypass,
+/// Non-goals: async/CDC FIFO ([`crate::SyncFIFO`] language-level FR79), FWFT bypass,
 /// generator-closure depth/width params (Epic 29).
 pub struct SyncFifo;
 
