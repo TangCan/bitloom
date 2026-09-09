@@ -1883,7 +1883,7 @@ FR79: **CDC 同步器真 RTL** — `DoubleFlop` / `SyncFIFO`（或文档等价�
 FR51: （继承）Bundle / Vec 可综合表面。
 FR80: **嵌套 Bundle / derive** — 文档化嵌套 `Bundle` 与/或 derive 路径；位宽/方向错误仍 emit 前失败（加深 FR51 / AD-20）。
 FR28: （继承）FIRRTL→可编译 Chisel；Mem 当前可 E0901。
-FR81: **Chisel Mem 合同收敛** — 收敛 Mem→Chisel E0901：支持文档化 Mem 子集使 emit_chisel 可编译，**或** PRD/文档明确永久非目标 + 替代验收（加深 FR28；正向腿仍服务 FR46；NFR12 钉死对不变）。
+FR81: **Chisel Mem 合同收敛** — 收敛 Mem→Chisel E0901：支持文档化 Mem 子集使 emit_chisel 可编译，**或** PRD/文档明确永久非目标 + 替代验收（加深 FR28；正向腿仍服务 FR46；NFR12 钉死对不变）。**Story 33.2 裁决：Path A（支持文档化子集）** — 决策页 `architecture/architecture-rhdl-2026-08-18/fr81-mem-chisel-contract-decision-2026-09-09.md`。
 FR37: （继承）IP 产品箱起步。
 FR48: （继承）一级 IP 库五类。
 FR82: **一级 IP 可综合基线（无闭包）** — UART/SPI/I2C/FIFO/AXI 至少达到可 elaborate/emit/tick 的**非 stub** 基线（无闭包）；供 Epic 29 叠加（加深 FR37/FR48）。
@@ -2968,6 +2968,8 @@ So that E0901 不会被静默忽略或破坏 FR71。
 As a PM / 架构师,
 I want 明确选择「支持文档化 Mem 子集」或「永久非目标+替代验收」,
 So that FR81 有可测关闭条件。
+
+**Decision artifact:** `architecture/architecture-rhdl-2026-08-18/fr81-mem-chisel-contract-decision-2026-09-09.md`（**Path A** ADOPTED）。
 
 **Acceptance Criteria:**
 

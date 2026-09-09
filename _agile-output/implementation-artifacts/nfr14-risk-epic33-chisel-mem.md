@@ -22,7 +22,7 @@
 - **AD-27 / FR28 产品路径：** FrozenHir/`.fir` → **可编译** Chisel Scala；验收=编译通过 + 端口/层次谓词；机械风格可接受；**不**要求 Scala `Parser.parse`。AD-3 FIRRTL 文本契约仍独立。
 - **E0901 现状（诚实基线）：** `rhdl_firrtl::emit_chisel` 在遇到 `Stmt::MemDecl` 时返回结构化错误 **`rhdl::E0901`**（「Chisel emit does not lower mem … / Chisel 发射不降低 mem …」）。即：**今日 Mem→Chisel 为显式不支持**，非静默跳过。FIRRTL / Verilog / tick 路径上的 Mem（AD-21）可继续存在；缺口专指 **Chisel Scala 降级腿**。
 - **Epic 25 / FR71 JVM 门禁（不得破坏）：** GHA required job `fr28-chisel-jvm` 与 `just chisel-fr28-jvm` 对文档化黄金夹具在钉死 Chisel 下真 `sbt`/`scalac` 编译；缺 JDK/sbt 或编译失败必须红。本 epic 任何 Mem 实现或非目标合同化**不得**使既有无 Mem 黄金夹具变红，亦不得把 FR71 改成 `continue-on-error` / skip-on-missing-Java。
-- **FR81 合同目标（留给 33.2 选定唯一路径）：** 收敛 Mem→Chisel E0901 — **要么**支持文档化 Mem 子集使 `emit_chisel` 可编译，**要么** PRD/文档明确永久非目标 + 替代验收（例：FIRRTL mem 保留 + 声明 Chisel 路径不含 Mem）。两条路径均加深 FR28；正向腿仍服务 FR46。
+- **FR81 合同目标（Story 33.2 已选定 Path A）：** 支持文档化 Mem 子集使 `emit_chisel` 可编译；子集外保留 E0901。决策页 `fr81-mem-chisel-contract-decision-2026-09-09.md`。正向腿仍服务 FR46 / AD-27。
 - **NFR37：** Epic 20 / FR28「done」+ E0901 清单存在 ≠ FR81 深度关闭；不得用「Mem 本来就 E0901」话术永久回避合同收敛。
 
 ### (b) 粗工期带
@@ -56,7 +56,7 @@
 | **A. 支持文档化 Mem 子集** | 真正加深 FR28/AD-27；含 Mem 设计可走 Chisel 产品腿；E0901 清单可收敛为「子集外仍失败」 | 实现/回归成本；须钉死形态与 NFR12 版本；可能扩 FR71 夹具面 | 支持形态表 + 正例可编译 + 子集外稳定诊断 + FR71 仍绿 |
 | **B. 永久非目标 + 替代验收** | 合同诚实、工期可控；保留 E0901（或等价）清晰边界；不扩大 JVM 夹具 | 含 Mem 设计不能经 `emit_chisel`；须明确替代（如 `.fir` mem 保留）避免「未做=永久豁免」话术滥用 | PRD/文档永久非目标声明 + 可测替代验收 + NFR37 引用 + 不得删 E0901 冒充支持 |
 
-**本记录不选定路径** — 唯一路径由 Story **33.2** 写入 PRD addendum 或架构/规划注记。
+**Story 33.2 已选定 Path A** — 决策页：`architecture/architecture-rhdl-2026-08-18/fr81-mem-chisel-contract-decision-2026-09-09.md`（支持文档化 Mem 子集；拒绝 Path B）。本表仍保留利弊对照供审计。
 
 ### E0901 / FR71 / NFR12 对照
 
@@ -88,7 +88,7 @@
 
 ### Epic 33 关闭条件（Story 33.4 勾选）
 
-- [ ] **FR81 决策：** 33.2 已选定唯一路径（支持子集 **或** 永久非目标+替代验收）并文档化
+- [x] **FR81 决策：** 33.2 已选定唯一路径 **Path A（支持文档化 Mem 子集）** — `fr81-mem-chisel-contract-decision-2026-09-09.md`
 - [ ] **实现：** 33.3 行为满足决策条文；子集外或非目标路径有明确失败/边界
 - [ ] **NFR12：** Chisel/firtool 仍为钉死对（无私自升版交差）
 - [ ] **FR71：** `just chisel-fr28-jvm` / GHA `fr28-chisel-jvm` 合同路径仍绿

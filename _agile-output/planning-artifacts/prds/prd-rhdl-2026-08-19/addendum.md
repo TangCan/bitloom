@@ -116,3 +116,21 @@
 **ID 避撞：** FR72–78 / NFR35–36（接 FR71/NFR34）；**不得**复用 FR47 或与 Phase 7「闭环」混写。Epic 映射：`epics.md` Epic 26–30。
 
 **公开成功标准 Waves：** 生成器 → 可综合 → HLS/IP → 桥接（SM-8）。
+
+## 2026-09-09 Update — FR81 Mem→Chisel 合同（Epic 33 / Story 33.2）
+
+**用户决议 / 管道偏好：** 选定 **Path A — 支持文档化 Mem 子集**（非 Path B 永久非目标）；与 AD-27 可编译 Chisel Scala 产品路径一致。
+
+**合同：**
+- **唯一路径：** Path A；`emit_chisel` 对文档化子集产出可编译 Scala；子集外保留 **E0901**。
+- **子集（最小）：** 单时钟 AD-21 `Mem` / `SyncReadMem`（HIR `MemDecl`，含可选常量 `init`）。
+- **NFR12：** Chisel **7.14.0** ↔ firtool **1.155.0**（不得私自升版交差）。
+- **NFR37：** FR28「done」+ 历史全量 Mem→E0901 ≠ FR81 深度关闭。
+- **FR71：** 不得削弱 `fr28-chisel-jvm` / `just chisel-fr28-jvm`。
+
+**链接：**
+- 决策页（FR81 / Story 33.2）：`architecture/architecture-rhdl-2026-08-18/fr81-mem-chisel-contract-decision-2026-09-09.md`
+- NFR14 风险记录：`_agile-output/implementation-artifacts/nfr14-risk-epic33-chisel-mem.md`
+- Epic 映射：`epics.md` Epic 33
+
+**实现指针：** Story 33.3 按 Path A 降级；33.4 ATDD + FR71 回归。
