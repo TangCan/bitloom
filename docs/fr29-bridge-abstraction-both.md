@@ -46,3 +46,10 @@ Regression: `cargo test -p mixed_both` and `cargo test -p bitloom-sim --lib mixe
 - No SystemC TLM-2.0 / `emit_tlm` product API (still absent; not contracted).
 - No FR47 generator in this story — generation lands in Epic 21.3+.
 - Handwritten attributes remain first-class after generation ships.
+
+## Related: FR78 bridge-adapter templates
+
+Reusable host handshake helpers (`start_wait_complete`) live **inside** bridge /
+verification code and are **not** HIR attributes. See
+[`fr78-bridge-adapter-closures.md`](fr78-bridge-adapter-closures.md) and the
+UJ「桥接半程」[`tutorials/bridge-half.md`](tutorials/bridge-half.md).

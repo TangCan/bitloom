@@ -87,6 +87,7 @@ let _ = s.finish().unwrap();
 
 - **IP 生成器闭包定制（FR77）：** `Crc8Lut` 用 elaborate-time `Fn` 定制 CRC 表（默认 poly `0x07`；`elaborate_with_table_fn`）。叠在 Epic 34 无闭包基线 + Epic 27 Mem-init 之上；freeze 后无闭包残留。见 [`docs/ip/README.md`](docs/ip/README.md)。ATDD：`cargo test -p bitloom --test fr77_ip_generator_closure`。
 - **HLS / IP 闭包透明（FR76+FR77 / NFR36）：** 消解后 viz / Verilog / FIRRTL / HLS C·RTL **不**感知闭包 IR（Cap-R-64）。**≠** FR47「sim generators」（双视图 crate 生成）。约束类：外挂 HLS = D1 `HlsFree`；可综合 IP = `SynthesizableClosure`。矩阵 ATDD：`cargo test -p bitloom --test fr76_fr77_nfr36_transparency_matrix`。
+- **桥接适配器闭包模板（FR78）：** host/bridge `start_wait_complete` 把事务形启动映射到周期精确握手；功能侧自由闭包 OK，周期侧仅见普通信号（NFR36）。**≠** FR73 生成器闭包 / FR74–75 可综合闭包 / FR47 sim generators / Phase 7「闭环」。跟练：[`docs/tutorials/bridge-half.md`](docs/tutorials/bridge-half.md)。专章：[`docs/fr78-bridge-adapter-closures.md`](docs/fr78-bridge-adapter-closures.md)。ATDD：`cargo test -p bitloom --test fr78_bridge_adapter_start_wait_complete` · `fr78_fr47_dual_view_coverify` · `fr78_bridge_half_followalong`。
 
 ### 贡献者：在 monorepo 里跑示例
 
@@ -151,6 +152,8 @@ mod sim {
 | Sprint 状态 | `_agile-output/implementation-artifacts/sprint-status.yaml` |
 | HIR→源码再生（仅调试） | [`docs/hir-to-source-debug-only.md`](docs/hir-to-source-debug-only.md) |
 | 手写 bridge / abstraction / both | [`docs/fr29-bridge-abstraction-both.md`](docs/fr29-bridge-abstraction-both.md) |
+| 桥接适配器闭包模板（FR78） | [`docs/fr78-bridge-adapter-closures.md`](docs/fr78-bridge-adapter-closures.md) · UJ「桥接半程」[`docs/tutorials/bridge-half.md`](docs/tutorials/bridge-half.md) |
+| 双视图 sim 生成（FR47） | [`docs/fr47-dual-sim-generation.md`](docs/fr47-dual-sim-generation.md) |
 | 双视图等价检查 | [`docs/fr30-dual-view-equiv.md`](docs/fr30-dual-view-equiv.md) |
 | 可选 FST | [`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md) |
 | tick 引擎 | [`docs/fr32-tick-engines.md`](docs/fr32-tick-engines.md) |

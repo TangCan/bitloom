@@ -216,13 +216,14 @@ Every default module has exactly one `Clock` port and one sync active-high `Rese
 - **文档：** `docs/ip/README.md`；风险：`nfr14-risk-epic29-hls-ip-closures.md`。
 - **非目标：** 不要求 IP 内 comb/seq 可综合闭包内联（Epic 28）；不把 HLS `HlsFree` 用到可综合 IP 腿；≠ FR47 sim generators。
 
-## Bridge adapter closure templates (FR78 / Cap-R-65…68 / Epic 30.2–30.3)
+## Bridge adapter closure templates (FR78 / Cap-R-65…68 / Epic 30.2–30.4)
 
 - **API（prelude / 验证辅助）：** `bitloom_prelude::StartWaitComplete`（默认 `start_wait_complete`）与自由函数 `bitloom_prelude::start_wait_complete`（文档等价）。
 - **语义：** host/桥接侧「启动 → 等待完成」握手模板；`start_fn` 为**自由** Rust 闭包（Cap-R-66/67），仅设置信号级字段；循环调用 `tick` / `is_busy`。
 - **NFR36：** 模板展开后周期精确侧仅见普通信号 / `PortValues`；`Fn` **不得**进入 FrozenHir / `Sim::tick` / Verilog / FIRRTL / Chisel。
-- **消歧：** ≠ FR73 生成器闭包；≠ FR74/FR75 SynthesizableClosure；≠ FR47 sim generators；≠ SystemC TLM（AD-5）。
-- **文档：** `docs/fr78-bridge-adapter-closures.md`；风险门禁：`nfr14-risk-epic30-bridge-adapter-closures.md`。
+- **消歧（术语表）：** 生成器闭包（FR73）≠ FR47 sim generators ≠ Phase 7「闭环」≠ **本模板 FR78**；亦 ≠ FR74/FR75 SynthesizableClosure；≠ SystemC TLM（AD-5）。见 `docs/fr78-bridge-adapter-closures.md` 与决策表 §3。
+- **交叉链接：** Epic 27 生成器 / Epic 28 可综合闭包 → README + `docs/fr22-construct-bar.md`；双视图 → `docs/fr47-dual-sim-generation.md`。
+- **文档：** `docs/fr78-bridge-adapter-closures.md`；UJ「桥接半程」：`docs/tutorials/bridge-half.md`；风险门禁：`nfr14-risk-epic30-bridge-adapter-closures.md`（Epic 30 关闭条件已勾选）。
 - **ATDD：** `cargo test -p bitloom --test fr78_bridge_adapter_start_wait_complete`。
 - **FR47 联验（Story 30.3）：** `cargo test -p bitloom --test fr78_fr47_dual_view_coverify` — 模板录制激励 × `check_functional_equiv_generated` / `generate_*`；故意破坏 fail；FR16 + NFR36 抽检。
-- **非本故事：** Epic 30 文档收口 → Story 30.4。
+- **文档收口（Story 30.4）：** `cargo test -p bitloom --test fr78_bridge_half_followalong`。
