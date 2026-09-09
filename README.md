@@ -166,6 +166,7 @@ mod sim {
 | C ABI cdylib | [`docs/fr33-c-abi.md`](docs/fr33-c-abi.md) |
 | 仿真覆盖率 | [`docs/fr34-sim-coverage.md`](docs/fr34-sim-coverage.md) |
 | Chisel 可编译生成（FR28 / FR88）+ Mem Path A（FR81） | [`docs/fr28-chisel-compilable.md`](docs/fr28-chisel-compilable.md)（**可编译 ≠ idiomatic**；[钉死运维清单](docs/fr28-chisel-compilable.md#firtool--chisel-钉死运维清单fr88--nfr3--nfr12)）· FR71：`just chisel-fr28-jvm` · 可选 Mem：`just chisel-fr81-mem-jvm` · [维护者合并清单](docs/fr28-chisel-compilable.md#维护者合并前检查清单fr28--emit_chisel) |
+| Idiomatic / 可维护 Chisel（**FR97** · Epic 42 已关闭） | [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md)（`emit_chisel_idiomatic` + `check_idiomatic_chisel`；机械面不得单独关闭 FR97） |
 | Chisel / `.fir` 反向导入（FR46） | [`docs/fr46-chisel-import.md`](docs/fr46-chisel-import.md) |
 | `import` CLI + 混合夹具 | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) · [`examples/chisel_mixed`](examples/chisel_mixed) |
 | HLS 产品路径（**支持** · FR35/FR50/FR95/FR96 · 树内 MVP + 外挂 Bambu） | [`docs/fr35-hls.md`](docs/fr35-hls.md) · 烟测 [`scripts/hls-smoke.sh`](scripts/hls-smoke.sh) |
@@ -248,7 +249,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 ## 状态与 deferred（诚实声明）
 
-当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS（树内 FR95/FR96 MVP + 外挂 Bambu 可选）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
+当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS（树内 FR95/FR96 MVP + 外挂 Bambu 可选）**、**Idiomatic Chisel（FR97 · Epic 42）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
 
 **路线图阶段五–七「绿 / 全绿」当前按 Phase 12 字面绿验收（FR94–105 / NFR42）：字面项须由对应 FR 关闭后方可勾选。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9。Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**，**禁止**用合同绿冒充字面全绿。延期与边界 ledger：[`_agile-output/implementation-artifacts/deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
@@ -257,7 +258,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 PRD 才能推翻」。**Correct Course + FR94（2026-09-09 Path B）已批准推翻**该锁定。下列项现为 Phase 12 **交付目标**（**须由对应 FR 关闭后方可宣称完成** / NFR42）；实现 epic 须引用已修订 AD（**NFR41**）。同源：PRD addendum「Phase 12 字面绿」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
 1. **树内 / 自研 HLS 调度器** → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付；修订后 **AD-25**）；外挂 Bambu 等可保留为可选，不得单独满足 FR95
-2. **FIRRTL→idiomatic Scala / idiomatic Chisel** → **FR97**（Epic 42；修订后 **AD-27**）；机械可编译仍满足 FR28/FR46，不得冒充 FR97
+2. **FIRRTL→idiomatic Scala / idiomatic Chisel** → **FR97**（**Epic 42 已关闭** — MVP 已交付；修订后 **AD-27**）；机械可编译仍满足 FR28/FR46，不得冒充 FR97；完成面见 [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md)
 3. 默认 **TLM≡CA 形式证明** → **FR100**（Epic 45）；**SystemC TLM-2.0 产品** → **FR101**（Epic 46；修订后 **AD-5**）
 4. **VIP 级全协议 IP** → **FR98**（Epic 43）
 5. **按键全设计 elaborate** 的 netlist LSP → **FR99**（Epic 44）

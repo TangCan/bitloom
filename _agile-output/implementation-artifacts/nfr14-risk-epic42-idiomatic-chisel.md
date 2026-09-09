@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR97 / Epic 42；NFR14、NFR40、NFR41、NFR43；对照 FR28/FR46（机械可编译）/ FR88 |
 | 记录日期 | 2026-09-09 |
-| 状态 | accepted — Story 42.1；关闭条件留给 Story 42.3 |
+| 状态 | closed — Story 42.3 |
 
 ### (a) 上游约束
 
@@ -110,16 +110,17 @@
 
 ### Epic 42 关闭条件（Story 42.3 勾选）
 
-- [ ] **FR97：** 至少一夹具满足本记录 idiomatic 验收条 + 自动化断言 — Story 42.2
-- [ ] **文档：** 区分机械可编译 vs FR97 idiomatic；`docs/fr28-chisel-*.md`（或等价）与 deferred/README 更新 — Story 42.3
-- [ ] **回归：** 既有机械 FR28/FR46 路径不回退 — Story 42.3
-- [ ] **禁止事项未触发：** 无仅文档把机械标成 idiomatic；无「恢复 Parser」而无替代合同
-- [ ] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
-- [ ] **NFR41：** 实现故事引用修订后 AD-27
+- [x] **FR97：** 至少一夹具满足本记录 idiomatic 验收条 + 自动化断言 — Story 42.2
+- [x] **文档：** 区分机械可编译 vs FR97 idiomatic；`docs/fr28-chisel-*.md`（或等价）与 deferred/README 更新 — Story 42.3
+- [x] **回归：** 既有机械 FR28/FR46 路径不回退 — Story 42.3
+- [x] **禁止事项未触发：** 无仅文档把机械标成 idiomatic；无「恢复 Parser」而无替代合同
+- [x] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
+- [x] **NFR41：** 实现故事引用修订后 AD-27
 
 ---
 
 ## 门禁一句话
 
 **缺 NFR14 风险记录（或缺字段 a–d）⇒ 不得将 Epic 42 故事 42.2–42.3 标 `ready`。**  
-**FR97 完成面 = idiomatic / 可维护验收；机械 `emit_chisel` / FR28/FR46 不得单独关闭 FR97；不得把「恢复上游 Parser」当作完成定义。**
+**FR97 完成面 = idiomatic / 可维护验收；机械 `emit_chisel` / FR28/FR46 不得单独关闭 FR97；不得把「恢复上游 Parser」当作完成定义。**  
+**Epic 42 closed — Story 42.3（2026-09-09）。**

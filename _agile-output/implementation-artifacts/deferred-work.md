@@ -11,13 +11,13 @@ Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**；当前完�
 **历史（Phase 11）：** 曾公开锁定下列五项，并写「须新 PRD 才能推翻」。
 
 1. 树内 / 自研 HLS 调度器 → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付 / Story 41.4；修订后 **AD-25**）；外挂不得单独满足 FR95
-2. FIRRTL→idiomatic Scala → 现 **FR97**（Epic 42；修订后 **AD-27**）
+2. FIRRTL→idiomatic Scala → **FR97**（**Epic 42 已关闭** — MVP 已交付 / Story 42.3；修订后 **AD-27**）；机械 FR28/FR46 不得冒充 FR97
 3. 默认 TLM≡CA 形式证明 → 现 **FR100**（Epic 45）；SystemC TLM 产品 → **FR101**（Epic 46；修订后 **AD-5**）
 4. VIP 级全协议 IP → 现 **FR98**（Epic 43）
 5. 按键全设计 elaborate 的 netlist LSP → 现 **FR99**（Epic 44）
 
 **Phase 12（2026-09-09）：** Correct Course `sprint-change-proposal-2026-09-09-phase12-path-b.md` + PRD addendum「Phase 12 字面绿」**已推翻**上述锁定（闸门 **FR94**）。  
-README 与本文件同源：原五项不再是永久非目标；其中 **#1（树内 HLS）已由 Epic 41 关闭**，其余仍为交付目标（对应 FR 关闭后方可宣称 / **NFR42**）；ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 已于 Story **40.4** 修订（**NFR41**）。Epic 42–47 仍须各自经 NFR14 后标 ready——**本条目不把 42–47 标为已开工**。
+README 与本文件同源：原五项不再是永久非目标；其中 **#1（树内 HLS）已由 Epic 41 关闭**，**#2（idiomatic Chisel）已由 Epic 42 关闭**；其余仍为交付目标（对应 FR 关闭后方可宣称 / **NFR42**）；ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 已于 Story **40.4** 修订（**NFR41**）。Epic 43–47 仍须各自经 NFR14 后标 ready——**本条目不把 43–47 标为已开工**。
 
 PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 11 FR93 历史 + Phase 12 推翻）。
 
