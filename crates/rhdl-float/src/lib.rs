@@ -1,7 +1,13 @@
-//! Soft-float helpers for synthesizable designs (FR36).
+//! SoftF16 host-only golden helpers (FR36 minimal contract).
+//!
+//! **FR84 Option B (explicit defer):** SoftF16 float operators are **not**
+//! lowered through HIR→emit as synthesizable float. Emit treats SoftF16-shaped
+//! values as a `Bits<16>` bitvector surface — that is **not** a synthesizable
+//! floating-point operator library. Do not claim synthesizable SoftF16 delivered.
+//!
 //! Rounding: round-ties-to-even on the truncated mantissa bit.
 
-/// Fixed-point style float with documented round-ties-to-even.
+/// Host-only soft-float golden with documented round-ties-to-even.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct SoftF16 {
     /// IEEE-ish bits: 1 sign + 5 exp + 10 frac (host model only).

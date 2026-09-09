@@ -280,7 +280,7 @@ development_status:
   epic-35: in-progress
   35-1-epic-35-nfr14-风险记录: done
   35-2-c-abi-超出-counter-demo-fr83: done
-  35-3-softf16-可综合或显式-defer-fr84: backlog
+  35-3-softf16-可综合或显式-defer-fr84: done
   35-4-formal-夹具-lsp-deferred-收口-fr85: backlog
   epic-35-retrospective: optional
 action_items:

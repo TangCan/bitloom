@@ -134,3 +134,18 @@
 - Epic 映射：`epics.md` Epic 33
 
 **实现指针：** Story 33.3 按 Path A 降级；33.4 ATDD + FR71 回归。
+
+## 2026-09-09 Update — FR84 SoftF16 显式 defer（Epic 35 / Story 35.3）
+
+**用户 / 管道决议：** 选定 **Option B — 显式 defer**（非 Option A SoftF16→HIR→emit 可综合夹具）。不得用 host-only SoftF16 或 `Bits<16>` 位向量 emit 冒充可综合浮点算子。
+
+**合同：**
+- **唯一路径：** FR84 **Option B**；SoftF16 保持 **host-only** 黄金模型（FR36 历史最小合同）。
+- **未交付：** SoftF16 浮点算子 → HIR → emit 可综合路径（Option A）— **explicitly deferred**。
+- **禁止话术（NFR37）：** **不得**声称 SoftF16 可综合浮点 / synthesizable SoftF16 已交付；**不得**把 `Bits<16>` emit 表面营销为可综合浮点算子库。
+- **NFR14：** Epic 35 风险记录勾选 FR84 已选 B；关闭条件可经 `fr84_softf16_explicit_defer` ATDD 检查。
+
+**链接：**
+- 用户文档：`docs/fr36-rhdl-float.md`
+- NFR14：`_agile-output/implementation-artifacts/nfr14-risk-epic35-residual-partials.md`
+- Epic 映射：`epics.md` Epic 35 Story 35.3

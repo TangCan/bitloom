@@ -58,7 +58,7 @@
 | FR | 加深对象 | 现状（Partial） | 选项 A — 实现 | 选项 B — 显式 defer | 关闭故事 |
 | --- | --- | --- | --- | --- | --- |
 | **FR83** | FR33 C ABI | Counter-only cdylib | 文档化第二 DUT **或** 通用 generate/link 路径 + 非 Counter-only 夹具 | PRD/用户文档显式 deferred：声明 cdylib 仍 Counter-only，**不得**声称通用 C ABI 深度已交付 | 35.2 **已选 A**（`Adder` + `rhdl_sim_new_dut`） |
-| **FR84** | FR36 SoftF16 | host-only 模型 | SoftF16 → HIR → emit 可综合夹具（至少一黄金数值/位宽） | PRD/用户文档显式 deferred：**不得声称 SoftF16 可综合**已交付 | 35.3 |
+| **FR84** | FR36 SoftF16 | host-only 模型 | SoftF16 → HIR → emit 可综合夹具（至少一黄金数值/位宽） | PRD/用户文档显式 deferred：**不得声称 SoftF16 可综合**已交付 | 35.3 **已选 B**（PRD addendum + `docs/fr36-rhdl-float.md`） |
 | **FR85** | FR39 Formal/SVA | `check_sva_text` toy | 至少一真实设计导出 SVA（或文档钉死的 formal 工具链调用）并执行**非玩具**检查 | PRD/用户文档显式 deferred：声明 formal 仍玩具级，**不得**用 toy check 关闭深度 | 35.4 |
 
 **LSP（非本 epic）：** 继续 **deferred**；35.4 用户文档须写明 hover/goto **不是**本 epic 完成条件。无独立「实现 vs defer」选型行——本阶段固定 defer。
@@ -92,7 +92,7 @@
 ### Epic 35 关闭条件（Story 35.4 勾选）
 
 - [x] **FR83：** 已落地选项 A（非 Counter-only 夹具）**或** 选项 B（显式 defer 合同段落）
-- [ ] **FR84：** 已落地选项 A（可综合夹具）**或** 选项 B（显式 defer；无「可综合 SoftF16 已交付」话术）
+- [x] **FR84：** 已落地选项 A（可综合夹具）**或** 选项 B（显式 defer；无「可综合 SoftF16 已交付」话术）— **已选 B**
 - [ ] **FR85：** 已落地选项 A（非 toy formal 夹具）**或** 选项 B（显式 defer）；**未**用 `check_sva_text` 关单
 - [ ] **LSP：** 用户文档声明仍 deferred / 非本 epic 完成条件
 - [ ] **NFR37：** 相对 Epic 8/9/10 历史最小合同已文档化；不得用 Partial / 历史 `done` 冒充深度关闭
