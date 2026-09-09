@@ -243,21 +243,21 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **路线图阶段五–七「绿 / 全绿」当前按 Phase 12 字面绿验收（FR94–105 / NFR42）：字面项须由对应 FR 关闭后方可勾选。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9。Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**，**禁止**用合同绿冒充字面全绿。延期与边界 ledger：[`_agile-output/implementation-artifacts/deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
-### 永久非目标（FR93）
+### 永久非目标（FR93）— 历史；已被 Phase 12 推翻
 
-下列项为 **Bitloom** 公开合同下的**永久非目标**（不是延期待办，也不得标 done）。**须新 PRD 才能推翻**；静默改 README / deferred 不构成合同变更。同源指针：PRD addendum「Phase 11」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 PRD 才能推翻」。**Correct Course + FR94（2026-09-09 Path B）已批准推翻**该锁定。下列项现为 Phase 12 **交付目标**（**须由对应 FR 关闭后方可宣称完成** / NFR42）；实现 epic 须引用已修订 AD（**NFR41**）。同源：PRD addendum「Phase 12 字面绿」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
-1. **树内 / 自研 HLS 调度器**（外挂 Bambu 等可复现 HLS 产物仍可；调度器本身非目标）
-2. **FIRRTL→idiomatic Scala**（可编译机械 Chisel ≠ idiomatic）
-3. 默认 **TLM≡CA 形式证明**
-4. **VIP 级全协议 IP**
-5. **按键全设计 elaborate** 的 netlist LSP
+1. **树内 / 自研 HLS 调度器** → **FR95** / **FR96**（Epic 41；修订后 **AD-25**）；外挂 Bambu 等可保留为可选，不得单独满足 FR95
+2. **FIRRTL→idiomatic Scala / idiomatic Chisel** → **FR97**（Epic 42；修订后 **AD-27**）；机械可编译仍满足 FR28/FR46，不得冒充 FR97
+3. 默认 **TLM≡CA 形式证明** → **FR100**（Epic 45）；**SystemC TLM-2.0 产品** → **FR101**（Epic 46；修订后 **AD-5**）
+4. **VIP 级全协议 IP** → **FR98**（Epic 43）
+5. **按键全设计 elaborate** 的 netlist LSP → **FR99**（Epic 44）
 
-**明确 deferred / 未承诺为产品完整面（可延期，非上列永久非目标）：**
+**明确 deferred / 未承诺为产品完整面（可延期；上列五项已不再是永久非目标）：**
 
-- 完整 / 自研 Bitloom LSP hover/goto（**FR91 Path B 显式 defer** — Story 39.3 合同化；**不得声称** Bitloom LSP / language-server **已交付**；无半成品 LSP 二进制；层次/时序 HTML 入口已交付且 **≠ LSP**；**宿主 IDE 必做路径（FR90）已文档化：** [`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md)；细节 [`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md)）
+- 完整 / 自研 Bitloom LSP hover/goto（**FR91 Path B 显式 defer** — Story 39.3 合同化；**FR99** 为 Phase 12 字面绿交付面，关闭前**不得声称** Bitloom LSP / language-server **已交付**；无半成品 LSP 二进制；层次/时序 HTML 入口已交付且 **≠ LSP**；**宿主 IDE 必做路径（FR90）已文档化：** [`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md)；细节 [`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md)）
 - 部分 CLI 动词（`check` / `build-sim`）
 - crates.io 名 `rhdl` / `rhdl-bits`（禁止）
-- 自动等价证明 / SystemC TLM-2.0 产品（非 P7 合同绿条件；见 doc-19；与 FR93「默认 TLM≡CA 形式证明」永久非目标一致）
+- 自动等价证明 / SystemC TLM-2.0 产品（**FR100 / FR101** 关闭前不得宣称字面完成；见 doc-19）
 
 详见 [`docs/semver-0x-policy.md`](docs/semver-0x-policy.md) 与 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。

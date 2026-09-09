@@ -63,10 +63,11 @@ rhdl-builder / rhdl-macro / **bitloom-prelude**（对外名；目录可暂 `rhdl
 
 ### AD-5 — 双模型仿真 [ADOPTED]
 
-- **Binds:** rhdl-sim, 测试, 可选生成器
-- **Prevents:** 一 epic 只实现 `tick`、另一 epic 发明无对照的第二套仿真语义；把 SystemC TLM-2.0 当成默认合同
-- **Rule:** 周期精确仿真只从 `FrozenHir`（原生 `tick`）。`rhdl-sim` 必须能 dump VCD（同一记录器 API）。功能视图可为手写 `#[functional_model]` **或**工具链**生成的 Rust 功能模拟器 crate**（FR47；形态不强制 SystemC）。标 `#[functional_state]` 的字段不得进入 HIR/`freeze`。一致性用随机/对照/`equiv`，比较对象是 `PortValues`（AD-17）。**不**承诺 / **不**要求从 HIR 降低 **SystemC TLM-2.0**。阶段一 IP 仍是普通设计 crate。
+- **Binds:** rhdl-sim, 测试, 可选生成器；Phase 12 SystemC TLM 产品路径（**FR101**）
+- **Prevents:** 一 epic 只实现 `tick`、另一 epic 发明无对照的第二套仿真语义；把未关闭的 TLM 半成品冒充字面绿；用「默认 TLM≡CA 已证明」冒充 **FR100** 关闭
+- **Rule:** 周期精确仿真只从 `FrozenHir`（原生 `tick`）。`rhdl-sim` 必须能 dump VCD（同一记录器 API）。功能视图可为手写 `#[functional_model]` **或**工具链**生成的 Rust 功能模拟器 crate**（FR47；形态不强制 SystemC）。标 `#[functional_state]` 的字段不得进入 HIR/`freeze`。一致性用随机/对照/`equiv`，比较对象是 `PortValues`（AD-17）。**Phase 12 / Path B：** **允许**从工具链交付 **SystemC TLM-2.0 产品路径（PRD FR101 / Epic 46）**；实现形状由该 epic 钉死。Rust 功能模拟器（FR47）仍为合法功能视图。**默认 TLM≡CA 形式证明**属 **FR100**（Epic 45），不得因本 AD 允许 TLM 产品路径而自动宣称已关闭。阶段一 IP 仍是普通设计 crate。**NFR41：** 实现 FR101 的 epic 须引用本修订后 AD-5。
 - **Revised:** 2026-08-21 — 允许生成 Rust 功能模拟器；废止「禁止一切 HIR→功能模拟器生成」的旧读法（PRD **FR47** 与 §0 **推翻表**；①C / Epic 19.2）。历史「禁止 HIR→TLM」不再作为阻断 FR47 的依据。
+- **Revised:** 2026-09-09 — Phase 12 Path B / **FR94** / **NFR41**：允许 SystemC TLM-2.0 产品路径（**FR101**）；废止「不承诺 / 不要求 SystemC TLM-2.0」作为阻断 FR101 的依据。
 
 ### AD-6 — 依赖只准向下 [ADOPTED]
 
@@ -213,14 +214,16 @@ flowchart TB
 - **Prevents:** 自研 FST writer 与 Verilator 路径两套真相；去掉 VCD
 - **Rule:** VCD 仍是默认波形（AD-5）。FST 为可选：允许经 **Verilator `--trace-fst`** 或文档化的 **vcd2fst**；不要求自研 FST writer。开关关闭时必须仍能 dump VCD。
 
-### AD-25 — HLS 仅外挂 [ADOPTED]
+### AD-25 — HLS 路径（外挂 + 树内）[ADOPTED]
 
-- **Correct Course 2026-09-08：** Wave 3「HLS 真调度」**不**立项；产品路径保持本 AD 外挂（Bambu/Vitis）。见 `sprint-change-proposal-2026-09-08.md`。
+- **Correct Course 2026-09-08（历史）：** Wave 3「HLS 真调度」曾不立项；产品路径保持外挂（Bambu/Vitis）。见 `sprint-change-proposal-2026-09-08.md`。
+- **Correct Course 2026-09-09（现行）：** Phase 12 Path B / **FR94** **覆盖**上条：树内调度为字面绿交付面（**FR95** / Epic 41）。见 `sprint-change-proposal-2026-09-09-phase12-path-b.md`。
 
-- **Binds:** 可选 HLS 前端, CLI
-- **Prevents:** 树内自研调度器；把 Handshake/动态数据流当默认 RTL 语义；「永久 unsupported」冒充产品 HLS
-- **Rule:** `#[hls]`（或等价）只允许 **发射** 宿主工具接受的 IR/C，并调用 **Bambu 或 XLS**（启用时钉死**一个**后端）。禁止 bitloom/rhdl crate 实现 scheduling/allocation。当产品合同要求 HLS 路径（PRD FR35/FR50 / Phase 7）时：**默认文档路径必须可用**，并有 CI/烟测；禁止以「未启用则永久 unsupported」交差。后端缺失须失败可读，不得 silent 成功。
-- **Revised:** 2026-08-21 — 产品化默认路径；仍禁止自研调度。
+- **Binds:** 可选 HLS 前端, CLI；树内调度实现（Epic 41）
+- **Prevents:** 把 Handshake/动态数据流当默认 RTL 语义；「永久 unsupported」冒充产品 HLS；仅以外挂路径冒充 **FR95** 关闭
+- **Rule:** **Phase 12 / Path B：** **允许** bitloom/rhdl crate 实现树内 `#[hls]`（或等价）**scheduling/allocation** 作为 **FR95** 产品主路径之一；调度前闭包数据流变换见 **FR96**（须遵守 AD-18 溶解规则）。**外挂**路径（发射宿主 IR/C 并调用 **Bambu 或 XLS**，启用时钉死**一个**后端）**可保留**为可选/对照/FR35 诚实路径，但**不得单独**满足 FR95。仍禁止 Handshake/动态数据流作为默认可综合 RTL 语义。当产品合同要求 HLS 路径时：文档路径必须可用，后端/树内路径缺失须失败可读，不得 silent 成功。**NFR41：** 实现 FR95/FR96 的 epic 须引用本修订后 AD-25。
+- **Revised:** 2026-08-21 — 产品化默认路径；仍禁止自研调度（Phase 11）。
+- **Revised:** 2026-09-09 — Phase 12 Path B / **FR94** / **NFR41**：允许树内调度（**FR95**）；外挂可保留为可选；废止「禁止 crate 实现 scheduling/allocation」作为阻断 FR95 的依据。
 
 ### AD-26 — 产品合同海拔 [ADOPTED]
 
@@ -232,9 +235,10 @@ flowchart TB
 ### AD-27 — Bitloom ↔ Chisel 产品互操作 [ADOPTED]
 
 - **Binds:** firrtl, CLI (`import` 等), 可选 Scala 生成
-- **Prevents:** 一 epic 仍以「尽力失败」交差、另一 epic 要求 idiomatic 手写 Chisel；依赖已删除的 Scala FIRRTL Parser；用调试用 HIR→源码再生冒充 Chisel 双向；继续引用历史 **NFR9**「不承诺可维护 Chisel」阻断 FR28/FR46
-- **Rule:** 在 AD-3 FIRRTL 文本契约之外，产品路径（PRD **FR28** / **FR46**）要求：(1) FrozenHir/`.fir` → **可编译** Chisel Scala（钉死 Chisel + firtool 配对，见 Stack）；验收=编译通过 + 公开端口名/宽/向与实例层次往返谓词；**允许机械/生成风格**（不要求手写 idiomatic；PRD Open Q5 已关闭）。(2) `.fir`（及文档化 Chisel 工作流输出）→ FrozenHir / Bitloom 表面 → emit/tick，满足对称往返谓词。(3) **不**要求恢复 Chisel 5 前的 Scala `Parser.parse` / `firrtl.Parser` API（CIRCT 时代交换边界为 `.fir` + firtool；见 chipsalliance/chisel#4899）；生成器/导入器属于本工具链。(4) NFR10 调试再生 **不得**冒充本 AD 完成。(5) 历史阶段一 **NFR9**「不承诺可维护 Chisel Scala」**已被推翻**，不再作为阻断 FR28/FR46 的依据。
+- **Prevents:** 一 epic 仍以「尽力失败」交差、另一 epic 要求 idiomatic 却无验收；依赖已删除的 Scala FIRRTL Parser；用调试用 HIR→源码再生冒充 Chisel 双向；继续引用历史 **NFR9**「不承诺可维护 Chisel」阻断 FR28/FR46；用机械面冒充 **FR97** 关闭
+- **Rule:** 在 AD-3 FIRRTL 文本契约之外，产品路径要求：(1) FrozenHir/`.fir` → **可编译** Chisel Scala（钉死 Chisel + firtool 配对，见 Stack）；验收=编译通过 + 公开端口名/宽/向与实例层次往返谓词；**机械/生成风格仍满足 PRD FR28 / FR46**（PRD Open Q5 已关闭）。(2) `.fir`（及文档化 Chisel 工作流输出）→ FrozenHir / Bitloom 表面 → emit/tick，满足对称往返谓词。(3) **不**要求恢复 Chisel 5 前的 Scala `Parser.parse` / `firrtl.Parser` API（CIRCT 时代交换边界为 `.fir` + firtool；见 chipsalliance/chisel#4899）；生成器/导入器属于本工具链。(4) NFR10 调试再生 **不得**冒充本 AD 完成。(5) 历史阶段一 **NFR9**「不承诺可维护 Chisel Scala」**已被推翻**，不再作为阻断 FR28/FR46 的依据。(6) **Phase 12 / Path B：** **另增** **FR97** idiomatic / 可维护 Scala 验收面（Epic 42）——超出机械可编译；实现 epic 须文档化 idiomatic 验收谓词，**不得**仅以 FR28/FR46 机械面宣称 FR97 关闭。**NFR41：** 实现 FR97 的 epic 须引用本修订后 AD-27。
 - **Revised:** 2026-08-21 — Phase 7 / Epic 20.2：钉死 FR28+FR46 可编译验收条与 Open Q5；显式推翻 NFR9；禁止依赖已删 `Parser.parse`（PRD §0 推翻表 / FR28 / FR46）。
+- **Revised:** 2026-09-09 — Phase 12 Path B / **FR94** / **NFR41**：增加 idiomatic / 可维护验收面（**FR97**）；机械可编译仍合法满足 FR28/FR46。
 - **[ASSUMPTION]** 生成器实现可放在 `rhdl-firrtl` 扩展或 `bitloom` CLI 子命令；具体包边界不钉死。
 
 ### AD-28 — Phase 7 风险门禁（NFR14）[ADOPTED]
@@ -327,16 +331,18 @@ flowchart LR
 | 多时钟 / CDC | prelude, freeze, sim | AD-22, AD-15 |
 | 异步复位 / enable | hir, vlog, sim | AD-23 |
 | FST（可选） | rhdl-sim | AD-24, AD-5 |
-| HLS 外挂（产品路径） | 可选前端 + CLI | AD-25 |
+| HLS（外挂 + 树内 FR95） | 可选前端 + CLI / 树内调度 | AD-25 |
 | CDC 真 RTL 深度 | prelude, builder, vlog, sim | AD-29, AD-22 |
 | 产品合同海拔 / NFR14 门禁 | docs / PRD / SPEC / impl-artifacts | AD-26, AD-28 |
 | IP / 可视化 / formal / float / Analog | 产品 FR；脊柱不钉实现形状 | Deferred（实现形状） |
+| SystemC TLM-2.0 产品（FR101） | 实现 epic 钉形状 | AD-5 |
+| Idiomatic Chisel（FR97） | firrtl / CLI | AD-27 |
 
 ## Deferred
 
 - **所有权作声音性证明**：永不作为 freeze 门控；若做，独立 epic。
-- **SystemC TLM-2.0**：不作为合同；Rust 功能模拟器生成见 AD-5。
-- **Chisel idiomatic 手写风格**：非验收条；机械可编译即可（AD-27）。
+- **SystemC TLM-2.0 实现形状**：产品合同见 **FR101** / AD-5（允许产品路径）；crate 切分与发射细节由 Epic 46 钉死，不在此预钉。
+- **Chisel idiomatic 验收谓词细节**：产品合同见 **FR97** / AD-27；机械可编译仍满足 FR28/FR46；idiomatic 谓词由 Epic 42 钉死。
 - **手写 `#[bridge]` / `#[abstraction]` / mixed `both`；形式化等价引擎细节；C ABI / cdylib；覆盖率**（产品 FR 已定，脊柱不钉实现形状）。
 - **IP / 可视化 / LSP / 黑盒 / formal/SVA / float / Analog** 的**实现形状**（产品 FR 已定；不在此钉 crate 切分）。
 - **interp vs 编译版 `tick` 引擎**（产品 FR32；脊柱不选引擎）。
@@ -346,4 +352,4 @@ flowchart LR
 - **更高 MSRV（>1.97.1）**：须另改 PRD/NFR13；当前 NFR13 = **1.97.1**。
 - **AD-22 phantom 选型的替代**：若推翻，须修订 AD-22，不得 silently 分叉。
 - **AD-27 Scala 生成器所在 crate**：`[ASSUMPTION]` 可 firrtl 或 CLI。
-- **产品「全绿 / 七阶段字面完成」标签：** 见 Phase 11 **FR87 / FR93 / NFR38**（Correct Course 2026-09-09）；不新增冲突 AD；永久非目标（自研 HLS 调度、idiomatic Chisel、TLM≡CA、VIP 全协议 IP、按键全 elaborate LSP）以 PRD/epics 为准。
+- **产品「全绿 / 七阶段字面完成」标签（现行）：** Phase 12 **FR94–FR105** / **NFR40–NFR43**（Correct Course 2026-09-09 Path B）。Phase 11 **FR87 / NFR38** 为历史合同绿里程碑。原 **FR93** 五条永久非目标**已被 FR94 推翻**，交付映射：树内 HLS→FR95/96；idiomatic Chisel→FR97；TLM≡CA→FR100；TLM 产品→FR101；VIP 全协议 IP→FR98；按键全 elaborate LSP→FR99。实现 epic 须引用已修订 AD（**NFR41**）；字面宣称须对应 FR 关闭（**NFR42**）。

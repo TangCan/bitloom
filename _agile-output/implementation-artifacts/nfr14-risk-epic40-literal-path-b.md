@@ -15,7 +15,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR94 / Epic 40；NFR14、NFR40、NFR41、NFR42、NFR43；对照 FR87/FR93/NFR38 |
 | 记录日期 | 2026-09-09 |
-| 状态 | accepted — Story 40.1；关闭条件待 40.4 勾选 |
+| 状态 | closed — Story 40.4 勾选完成；Epic 40 关闭；Epic 41–47 仍 backlog（各 epic 自有 NFR14 后方可 ready） |
 
 ### B1 强制选择与 research 冲突说明（必读）
 
@@ -32,7 +32,7 @@
 
 - **Correct Course 批准（2026-09-09）：** `sprint-change-proposal-2026-09-09-phase12-path-b.md` 批准 Phase 12 = Epic 40–47 · FR94–FR105 / NFR40–NFR43；**推翻 FR93**；不回滚 Phase 11 工程。
 - **PRD addendum：** 「2026-09-09 Update — Phase 12 字面绿（Path B）」已落地；字面宣称仅可引用 FR94–105（**NFR42**）；**禁止**用 FR87 冒充字面 B。
-- **仍待故事落地（本记录不开工）：** doc-19 §19.7–19.9 字面绿勾选（→ **40.3**）；ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 与 Deferred/永久非目标指针（→ **40.4** / **NFR41**）。Correct Course + addendum 已授权；正文差分仍属后续故事。
+- **仍待故事落地（本记录不开工）：** ~~doc-19 §19.7–19.9 字面绿勾选（→ **40.3**）~~ **已关闭**；~~ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 与 Deferred/永久非目标指针（→ **40.4** / **NFR41**）~~ **已关闭（Story 40.4）**。Correct Course + addendum 已授权；正文差分已由 40.3–40.4 落地。
 - **推翻 FR93 五条的范围（→ 对应交付 FR）：**
   1. 树内/自研 HLS 调度器 → **FR95**（+ **FR96** 闭包数据流变换）；须修订 **AD-25**
   2. FIRRTL→idiomatic / 可维护 Scala → **FR97**；须修订 **AD-27**
@@ -120,11 +120,11 @@
 
 - [x] **FR94 / Correct Course + PRD：** Path B 批准与 FR93 推翻文案验收 — Story 40.2
 - [x] **doc-19：** §19.7–19.9 改为字面绿勾选条件 — Story 40.3
-- [ ] **AD / deferred：** AD-5/25/27 + 永久非目标指针与 Path B 一致 — Story 40.4
-- [ ] **NFR40–42：** 多年/高维护已登记；宣称纪律明确；AD 同步门禁可执行
-- [ ] **禁止事项未触发：** 无 FR87 冒充字面绿；无未合 FR94 开 41–47；无半成品 LSP/HLS 冒充字面
-- [ ] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
-- [ ] **Epic 41–47：** 本 epic 关闭前不得标 ready
+- [x] **AD / deferred：** AD-5/25/27 + 永久非目标指针与 Path B 一致 — Story 40.4
+- [x] **NFR40–42：** 多年/高维护已登记；宣称纪律明确；AD 同步门禁可执行（NFR41 写进修订 AD + README/deferred）
+- [x] **禁止事项未触发：** 无 FR87 冒充字面绿；无未合 FR94 开 41–47；无半成品 LSP/HLS 冒充字面（sprint 41–47 仍 backlog）
+- [x] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
+- [x] **Epic 41–47：** 本 epic 关闭前不得标 ready（关闭后仍 backlog，直至各自 NFR14）
 
 ---
 

@@ -210,7 +210,7 @@
   **禁止**继续用 FR87 合同绿冒充字面 B。
 
 **实现闸门：** Epic 40（Story 40.1–40.4）关闭前，Epic 41–47 不得标 ready。  
-须修订 ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 及 doc-19 / README / deferred（Story 40.3–40.4 · **NFR41**）。
+须修订 ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 及 doc-19 / README / deferred（Story 40.3–40.4 · **NFR41**）——**Story 40.4 已落地**（脊柱修订 + README/deferred 撤销 FR93 当前锁）。
 
 **合同指针：** 详见 `epics.md` Phase 12 Inventory（FR94–FR105 / NFR40–NFR43）。
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-09-phase12-path-b.md`

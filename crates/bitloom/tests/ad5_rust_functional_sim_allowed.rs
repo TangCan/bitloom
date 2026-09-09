@@ -37,14 +37,16 @@ fn ad5_allows_generated_rust_functional_sim_and_cites_fr47() {
     // Cite FR47 in Rule and/or Revised
     assert!(ad5.contains("FR47"), "AD-5 must cite FR47");
 
-    // Explicitly not SystemC TLM-2.0 contract
+    // FR47 Rust functional sim remains; SystemC form not forced for FR47.
+    // Phase 12 / FR101 may add a TLM product path — that must not erase FR47.
     assert!(
-        ad5.contains("SystemC TLM-2.0")
-            && (ad5.contains("不承诺")
-                || ad5.contains("不要求")
-                || ad5.contains("不强制")
-                || ad5.contains("形态不强制")),
-        "AD-5 must state SystemC TLM-2.0 is not contracted / not required"
+        ad5.contains("形态不强制")
+            || (ad5.contains("FR47")
+                && (ad5.contains("不强制 SystemC") || ad5.contains("形态不强制 SystemC")))
+            || (ad5.contains("FR101")
+                && ad5.contains("SystemC")
+                && (ad5.contains("允许") || ad5.contains("产品路径"))),
+        "AD-5 must keep FR47 Rust path (SystemC not forced for FR47) and/or allow FR101 TLM product path"
     );
 
     // Cycle-accurate only from FrozenHir tick
@@ -107,10 +109,13 @@ fn ad5_allows_generated_rust_functional_sim_and_cites_fr47() {
     );
     assert!(
         (agents.contains("SystemC TLM-2.0") || agents.contains("TLM-2.0"))
-            && (agents.contains("not contracted")
+            && (agents.contains("FR101")
+                || agents.contains("product path")
+                || agents.contains("产品路径")
+                || agents.contains("not contracted")
                 || agents.contains("不承诺")
                 || agents.contains("不要求")
                 || agents.contains("不强制")),
-        "AGENTS.md must note SystemC TLM-2.0 is not contracted (not merely mention TLM)"
+        "AGENTS.md must note SystemC TLM-2.0 status (FR101 product path under Path B, or legacy non-contract)"
     );
 }

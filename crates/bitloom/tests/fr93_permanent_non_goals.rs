@@ -1,8 +1,9 @@
-//! ATDD / guardrail: Story 36.3 / FR93 — permanent non-goals lock + new-PRD gate.
+//! Guardrail: Story 36.3 / FR93 historical lock — rewritten under Story 40.4.
 //!
-//! Red until README and/or deferred-work contain an explicit FR93 lock listing
-//! all five permanent non-goals, state that a new PRD is required to overturn,
-//! and PRD addendum points at that public list (not merely FR87–FR93 inventory).
+//! Phase 11 locked five permanent non-goals behind "须新 PRD". Phase 12 / FR94
+//! overturned that lock. These tests now assert the **public surface documents
+//! the overturn** and maps the five items to Phase 12 FRs — **not** that an
+//! active "须新 PRD" lock remains.
 //!
 //! ```text
 //! cargo test -p bitloom --test fr93_permanent_non_goals
@@ -27,63 +28,55 @@ fn readme_and_deferred() -> (String, String) {
     (readme, deferred)
 }
 
-/// Public contract surface: README and/or deferred-work must lock FR93.
 fn public_fr93_surface() -> String {
     let (readme, deferred) = readme_and_deferred();
     format!("{readme}\n{deferred}")
 }
 
-fn has_fr93_lock_heading(text: &str) -> bool {
-    // Require an explicit lock heading — not only the 36.2 "→ Story 36.3" pointer.
-    let headed = text.contains("永久非目标（FR93）")
-        || text.contains("永久非目标 (FR93)")
-        || text.contains("## 永久非目标")
-        || text.contains("### 永久非目标")
-        || text.contains("FR93 永久非目标");
-    headed && (text.contains("须新 PRD") || text.contains("须**新 PRD**"))
-}
-
 #[test]
-fn fr93_public_lock_heading_exists() {
+fn fr93_public_section_exists_as_historical_or_remapped() {
     let text = public_fr93_surface();
     assert!(
-        has_fr93_lock_heading(&text)
-            || ((text.contains("永久非目标") && text.contains("FR93"))
-                && (text.contains("须新 PRD") || text.contains("须**新 PRD**"))),
-        "README and/or deferred-work must publish an explicit FR93 permanent-non-goals lock \
-         (not only a pointer to Story 36.3)"
+        (text.contains("永久非目标（FR93）")
+            || text.contains("永久非目标 (FR93)")
+            || text.contains("## 永久非目标")
+            || text.contains("### 永久非目标"))
+            && text.contains("FR93"),
+        "README and/or deferred-work must retain an explicit FR93 section (historical remapping OK)"
+    );
+    assert!(
+        text.contains("推翻") || text.contains("Phase 12") || text.contains("FR94"),
+        "FR93 section must state the Phase 12 / FR94 overturn"
     );
 }
 
 #[test]
-fn fr93_lists_in_tree_hls_scheduler() {
+fn fr93_lists_in_tree_hls_scheduler_as_fr95() {
     let text = public_fr93_surface();
     assert!(
         (text.contains("树内") || text.contains("自研") || text.contains("in-tree"))
             && text.contains("HLS")
-            && text.contains("调度器"),
-        "FR93 lock must list in-tree / self-built HLS scheduler"
-    );
-    assert!(
-        text.contains("永久非目标") && text.contains("FR93"),
-        "HLS scheduler non-goal must sit under FR93 permanent-non-goals framing"
+            && (text.contains("调度") || text.contains("调度器"))
+            && text.contains("FR95"),
+        "FR93 remapping must list in-tree / self-built HLS scheduler → FR95"
     );
 }
 
 #[test]
-fn fr93_lists_firrtl_to_idiomatic_scala() {
+fn fr93_lists_firrtl_to_idiomatic_scala_as_fr97() {
     let text = public_fr93_surface();
     assert!(
         (text.contains("idiomatic Scala")
             || text.contains("惯用 Scala")
             || text.contains("idiomatic Chisel")
-            || (text.contains("FIRRTL") && text.contains("idiomatic") && text.contains("Scala"))),
-        "FR93 lock must list FIRRTL→idiomatic Scala as permanent non-goal"
+            || (text.contains("FIRRTL") && text.contains("idiomatic") && text.contains("Scala")))
+            && text.contains("FR97"),
+        "FR93 remapping must list FIRRTL→idiomatic Scala → FR97"
     );
 }
 
 #[test]
-fn fr93_lists_tlm_ca_formal_proof() {
+fn fr93_lists_tlm_ca_formal_proof_as_fr100_or_fr101() {
     let text = public_fr93_surface();
     assert!(
         (text.contains("TLM≡CA")
@@ -92,29 +85,27 @@ fn fr93_lists_tlm_ca_formal_proof() {
             || (text.contains("TLM")
                 && text.contains("CA")
                 && (text.contains("形式证明") || text.contains("形式化证明"))))
-            && (text.contains("形式证明")
-                || text.contains("形式化证明")
-                || text.contains("formal proof")
-                || text.contains("≡")),
-        "FR93 lock must list default TLM≡CA formal proof as permanent non-goal"
+            && (text.contains("FR100") || text.contains("FR101")),
+        "FR93 remapping must list TLM≡CA / TLM product → FR100/FR101"
     );
 }
 
 #[test]
-fn fr93_lists_vip_full_protocol_ip() {
+fn fr93_lists_vip_full_protocol_ip_as_fr98() {
     let text = public_fr93_surface();
     assert!(
         (text.contains("VIP 级全协议")
             || text.contains("VIP级全协议")
             || text.contains("VIP 全协议 IP")
             || text.contains("VIP-level full-protocol")
-            || (text.contains("VIP") && text.contains("全协议 IP"))),
-        "FR93 lock must list VIP-level full-protocol IP with distinctive phrasing"
+            || (text.contains("VIP") && text.contains("全协议 IP")))
+            && text.contains("FR98"),
+        "FR93 remapping must list VIP-level full-protocol IP → FR98"
     );
 }
 
 #[test]
-fn fr93_lists_keystroke_full_elaboration_netlist_lsp() {
+fn fr93_lists_keystroke_full_elaboration_netlist_lsp_as_fr99() {
     let text = public_fr93_surface();
     assert!(
         text.contains("LSP")
@@ -124,46 +115,78 @@ fn fr93_lists_keystroke_full_elaboration_netlist_lsp() {
                 || text.contains("keystroke full")
                 || (text.contains("按键")
                     && text.contains("elaborate")
-                    && (text.contains("netlist") || text.contains("全设计")))),
-        "FR93 lock must list keystroke full-elaboration netlist LSP"
+                    && (text.contains("netlist") || text.contains("全设计"))))
+            && text.contains("FR99"),
+        "FR93 remapping must list keystroke full-elaboration netlist LSP → FR99"
     );
 }
 
 #[test]
-fn fr93_requires_new_prd_to_overturn() {
-    let text = public_fr93_surface();
+fn fr93_active_new_prd_lock_is_not_current_requirement() {
+    let (readme, deferred) = readme_and_deferred();
+    // Historical mention of the old gate is OK if framed as overturned.
+    for (label, text) in [("README", &readme), ("deferred-work", &deferred)] {
+        if text.contains("须新 PRD") {
+            assert!(
+                text.contains("历史")
+                    || text.contains("曾")
+                    || text.contains("已推翻")
+                    || text.contains("已被")
+                    || text.contains("已批准推翻")
+                    || text.contains("原「须新 PRD"),
+                "{label}: if '须新 PRD' appears it must be historical / overturn framing, not an active lock"
+            );
+        }
+    }
+    // README FR93 section must not present active lock without overturn.
+    let fr93_start = readme
+        .find("永久非目标")
+        .expect("README must have 永久非目标 section");
+    let block = &readme[fr93_start..];
+    let end = block
+        .find("\n## ")
+        .or_else(|| block.find("\n详见"))
+        .unwrap_or(block.len().min(3000));
+    let section = &block[..end];
     assert!(
-        (text.contains("须新 PRD")
-            || text.contains("须**新 PRD**")
-            || text.contains("必须新 PRD")
-            || text.contains("requires a new PRD")
-            || text.contains("new PRD required"))
-            && (text.contains("推翻") || text.contains("overturn") || text.contains("撤销")),
-        "public FR93 lock must state a new PRD is required to overturn the non-goals"
+        section.contains("已推翻")
+            || section.contains("已被")
+            || section.contains("已批准推翻")
+            || section.contains("Phase 12")
+            || section.contains("FR94"),
+        "README FR93 section must frame overturn / Phase 12 delivery"
+    );
+    assert!(
+        !section.contains("须新 PRD 才能推翻")
+            || section.contains("曾")
+            || section.contains("历史")
+            || section.contains("并写「须新 PRD"),
+        "README must not keep '须新 PRD 才能推翻' as an active current lock"
     );
 }
 
 #[test]
-fn fr93_addendum_points_to_permanent_non_goals() {
+fn fr93_addendum_retains_historical_pointer_and_phase12_overturn() {
     let root = workspace_root();
     let addendum = fs::read_to_string(
         root.join("_agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md"),
     )
     .expect("addendum.md");
-    // Inventory alone (FR87–FR93) is insufficient — need an explicit FR93 pointer block.
     assert!(
-        addendum.contains("永久非目标")
-            && addendum.contains("FR93")
-            && (addendum.contains("须新 PRD")
-                || addendum.contains("新 PRD")
-                || addendum.contains("除非新 PRD")),
-        "PRD addendum must have an explicit FR93 permanent-non-goals pointer (incl. new-PRD gate)"
+        addendum.contains("永久非目标") && addendum.contains("FR93"),
+        "PRD addendum must retain FR93 permanent-non-goals historical pointer"
+    );
+    assert!(
+        addendum.contains("Phase 12")
+            && (addendum.contains("推翻 FR93")
+                || addendum.contains("推翻") && addendum.contains("FR93")),
+        "addendum Phase 12 must document FR93 overturn"
     );
     assert!(
         addendum.contains("README")
             || addendum.contains("deferred-work")
             || addendum.contains("状态与 deferred"),
-        "addendum FR93 pointer must cite README and/or deferred-work as the public list"
+        "addendum FR93 pointer must cite README and/or deferred-work"
     );
 }
 
