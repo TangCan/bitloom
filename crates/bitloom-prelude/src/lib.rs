@@ -108,7 +108,8 @@ pub enum PortDir {
 /// Bare `UInt<N>` etc. cannot be used as module fields with `#[rhdl::module]`.
 ///
 /// Composites (`Bundle`, [`HwVec`]) flatten to scalar leaf ports before HIR
-/// (FR51 / AD-20). Leaf names: `{field}_{member}` / `{field}_{i}`.
+/// (FR51 / FR80 / AD-20). Leaf names: `{field}_{member}` / `{field}_{nested}_{leaf}` /
+/// `{field}_{i}`.
 pub trait PortField {
     /// Flatten this directed port field into scalar `(leaf_name, dir, ground)` rows.
     fn flatten(field: &str) -> Vec<(String, PortDir, GroundType)>;
@@ -141,17 +142,33 @@ pub struct Input<T>(pub T);
 #[derive(Debug, Clone, Copy, Default)]
 pub struct Output<T>(pub T);
 
-/// Documented synthesizable named aggregate (FR51).
+/// Documented synthesizable named aggregate (FR51 / FR80).
 ///
-/// Implementors declare **ground** leaves; `Input<Self>` / `Output<Self>` flatten to
-/// `{field}_{member}` scalar HIR ports. Does not extend public HIR with Bundle nodes.
+/// Implementors declare ground leaves and optional **one-level** nested Bundle
+/// members via [`Self::nested_bundles`]. `Input<Self>` / `Output<Self>` flatten to
+/// `{field}_{member}` or `{field}_{nested}_{leaf}` scalar HIR ports. Does not extend
+/// public HIR with Bundle nodes.
 ///
-/// **OUT OF SCOPE (MVP):** nested `Bundle` members and `HwVec<Bundle, _>` — leaves are
-/// `GroundType` only; `HwVec` elements must be ground types. **`#[derive(Bundle)]` is not
-/// available** — hand-write [`Bundle::leaves`] (documented defer).
+/// **Nesting (FR80 / AD-20):** at least one documented nesting level is in scope —
+/// child Bundles are referenced by their ground [`Self::leaves`] functions. Deeper
+/// nesting (≥2 levels) is deferred / non-goal for the Epic 32 default contract; do
+/// not claim arbitrary depth.
+///
+/// **Still OUT OF SCOPE:** `HwVec<Bundle, _>` — `HwVec` elements must be ground.
+/// **`#[derive(Bundle)]` is not available** — hand-write this trait (Story 32.3).
 pub trait Bundle {
-    /// Leaf members `(member_name, GroundType)` — ground only; no nested Bundle.
+    /// Ground leaf members at this Bundle level `(member_name, GroundType)`.
     fn leaves() -> &'static [(&'static str, GroundType)];
+
+    /// One-level nested Bundle members: `(member_name, nested_leaves_fn)`.
+    ///
+    /// Typical entry: `("stream", Stream::leaves)`. Nested leaves must be ground;
+    /// the nested fn does not recurse into further `nested_bundles` under the Epic 32
+    /// one-level contract.
+    fn nested_bundles() -> &'static [(&'static str, fn() -> &'static [(&'static str, GroundType)])]
+    {
+        &[]
+    }
 }
 
 /// Hardware vector; documented as the synthesizable `Vec<T,N>` equivalent (FR51).
@@ -516,10 +533,16 @@ fn scalar_leaves(field: &str, dir: PortDir, gt: GroundType) -> Vec<(String, Port
 }
 
 fn bundle_leaves<B: Bundle>(field: &str, dir: PortDir) -> Vec<(String, PortDir, GroundType)> {
-    B::leaves()
+    let mut out: Vec<(String, PortDir, GroundType)> = B::leaves()
         .iter()
         .map(|(member, gt)| (format!("{field}_{member}"), dir, gt.clone()))
-        .collect()
+        .collect();
+    for (nested, nested_leaves) in B::nested_bundles() {
+        for (leaf, gt) in nested_leaves() {
+            out.push((format!("{field}_{nested}_{leaf}"), dir, gt.clone()));
+        }
+    }
+    out
 }
 
 fn hwvec_leaves<T: AsGround, const N: u32>(

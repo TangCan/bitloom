@@ -19,7 +19,7 @@
 ### (a) 上游约束
 
 - **AD-20 / FR51 现状（诚实基线）：** `Bundle` 与 `HwVec`（文档等价 `Vec<T,N>`）**允许**进入可综合路径；实现以 ground 叶子 flatten（`{field}_{member}` / `{field}_{i}`）为主，**不**要求公开 HIR 扩展 Bundle 节点。宽/向不匹配须在 emit 前失败。这是 **FR51 最小合同**，sprint 可将 Epic 19 标 `done`，但 **≠** FR80 嵌套/derive 深度（NFR37）。
-- **prelude 文档 OUT OF SCOPE（强制承认）：** `bitloom-prelude` 今日写明 nested `Bundle` 成员、`HwVec<Bundle, _>`、以及 `#[derive(Bundle)]` 均 **OUT OF SCOPE (MVP)** — leaves 仅为 `GroundType`。该注释是诚实边界，**不是** FR80 完成证明；亦不得仅靠删除该注释假装已支持嵌套。
+- **prelude 文档边界（强制承认）：** FR51 / Epic 19 时 `bitloom-prelude` 写明 nested `Bundle` 成员、`HwVec<Bundle, _>`、以及 `#[derive(Bundle)]` 均 **OUT OF SCOPE (MVP)**。**Story 32.2 后：** 至少一层嵌套经 `Bundle::nested_bundles` 已进入可综合路径（FR80）；`HwVec<Bundle,_>` 与 `#[derive(Bundle)]` 仍 OUT OF SCOPE / defer（32.3）。历史 OUT OF SCOPE 注释**不是** FR80 完成证明；亦不得仅靠删除注释假装已支持嵌套（NFR37）。
 - **嵌套深度上限假设（本 epic 钉死，留给 32.2–32.4 兑现）：**
   - **合同下限：** 至少 **一层**文档化嵌套 Bundle（子 Bundle 作为父 Bundle 成员）可 elaborate → emit `.v` → tick（或文档等价）（Story 32.2 / FR80）。
   - **本 epic 默认上限：** 验收与文档以 **一层嵌套**为主路径；**更深嵌套（≥2 层）** 若未在 32.2–32.4 实现，须书面列为延期/非目标，**不得**静默声称「任意深度」。
@@ -71,7 +71,7 @@
 - AD-20 — Bundle/Vec 可综合；宽/向 emit 前失败；与 FR22 边界
 - AD-6 — 设计 crate 只依赖 `bitloom-prelude`
 - PRD NFR14 / FR51 / FR80；NFR37（规划 done ≠ 深度 done）
-- `bitloom-prelude` — `Bundle` / `HwVec`；今日 nested / derive OUT OF SCOPE（FR51）；FR80 加深目标
+- `bitloom-prelude` — `Bundle` / `HwVec`；FR51 曾 nested/derive OUT OF SCOPE；32.2 一层 `nested_bundles`；derive → 32.3；`HwVec<Bundle,_>` 仍 OOS
 - 体例：`nfr14-risk-epic31-cdc-true-rtl.md`；`nfr14-risk-epic34-ip-baseline.md`
 - 历史别名消歧：**NFR14-crates** ≠ 本门禁 **NFR14**
 

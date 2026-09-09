@@ -144,6 +144,15 @@ def _resolve_short_config(
     if not matches:
         raise RenderError(f"missing config value `{key}`")
     if len(matches) > 1:
+        # Identical values across modules (e.g. bmm + gds sharing one artifacts dir)
+        # are not ambiguous — prefer the first match in path order.
+        resolved_vals = {
+            _resolve_config_value(value, f"config.{path}", project_root)
+            for path, value in matches
+        }
+        if len(resolved_vals) == 1:
+            path, value = matches[0]
+            return path, _resolve_config_value(value, f"config.{path}", project_root)
         paths = ", ".join(path for path, _ in matches)
         raise RenderError(f"ambiguous config value `{key}` found at: {paths}")
     path, value = matches[0]

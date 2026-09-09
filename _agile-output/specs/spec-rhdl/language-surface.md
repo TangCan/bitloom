@@ -8,17 +8,18 @@ Catalog for CAP-1…CAP-3、CAP-7、CAP-10、CAP-11。HOW（宏如何展开、fr
 - Ports: `Input<T>`, `Output<T>` — not bare `UInt` at the module boundary
 - Builder facade `Bits<N>` lowers to runtime widths on FrozenHir / `PortValues`
 
-## Composite types (CAP-10 / FR51)
+## Composite types (CAP-10 / FR51 / FR80)
 
 - `Bundle` 与 `Vec<T,N>`（或文档等价）允许进入可综合路径。
 - **文档等价：** 公开类型名为 `HwVec<T,N>`（避免与堆 `Vec` / E0141 冲突）；合同与叙述中的 `Vec<T,N>` 即指 `HwVec`。`N` 须 > 0。
-- **展平：** elaborate 时展平为标量 HIR 端口；叶命名 `{field}_{member}`（Bundle）与 `{field}_{i}`（HwVec）。公开 HIR 可不含 Bundle/Vector 节点。
-- **OUT OF SCOPE（MVP 锁定）：** 嵌套 `Bundle` 成员与 `HwVec<Bundle,_>` — `Bundle::leaves` 仅为 ground；`HwVec` 元素须 `AsGround`。负向：`examples/bundle_vec_skel` trybuild `nested_hwvec_bundle`。
-- **`#[derive(Bundle)]`：不可用（documented defer）** — 无 derive 宏；须手写 `Bundle::leaves`。负向：trybuild `derive_bundle_unavailable`。
-- **叶名碰撞：** `{field}_{member}` / `{field}_{i}` 与已有信号冲突 → emit 前失败（`rhdl::E0152`）。
-- 位宽/方向不匹配必须在 emit 前失败；不得 silently 可用却无检查。
+- **展平：** elaborate 时展平为标量 HIR 端口；叶命名 `{field}_{member}`（Bundle ground）、`{field}_{nested}_{leaf}`（一层嵌套 Bundle，FR80）、`{field}_{i}`（HwVec）。公开 HIR 可不含 Bundle/Vector 节点。
+- **嵌套 Bundle（FR80）：** 至少**一层**文档化嵌套（子 Bundle 作父成员，经 `Bundle::nested_bundles` → 子 `leaves`）可 elaborate → emit `.v` → tick。夹具：`examples/bundle_vec_skel` 嵌套正/负例。更深嵌套（≥2 层）为本 epic **默认非目标**，不得静默声称任意深度。
+- **仍 OUT OF SCOPE：** `HwVec<Bundle,_>` — `HwVec` 元素须 `AsGround`。负向：trybuild `nested_hwvec_bundle`。
+- **`#[derive(Bundle)]`：不可用（documented defer / Story 32.3）** — 无 derive 宏；须手写 `Bundle`（含可选 `nested_bundles`）。负向：trybuild `derive_bundle_unavailable`。
+- **叶名碰撞：** `{field}_{member}` / `{field}_{nested}_{leaf}` / `{field}_{i}` 与已有信号冲突 → emit 前失败（`rhdl::E0152`）。
+- 位宽/方向不匹配必须在 emit 前失败（含嵌套叶）；不得 silently 可用却无检查。
 - HIR ground 是否扩展 Bundle/Vector 节点由实现选择；公开表面与 emit 语义须一致（AD-20）。
-- **FR22 边界：** 单时钟表面加厚（FR22）的构造条**不含** Bundle/Vec；复合类型由本节 / FR51 交付，不得 silently 算进 FR22 验收。
+- **FR22 边界：** 单时钟表面加厚（FR22）的构造条**不含** Bundle/Vec；复合类型由本节 / FR51 / FR80 交付，不得 silently 算进 FR22 验收。
 
 ## ClockDomain (CAP-11 / FR52) + CDC 真 RTL (FR79 / AD-29)
 

@@ -1,4 +1,5 @@
-//! FR51 fixture: documented `Bundle` + `HwVec` (`Vec<T,N>` equiv.) → flatten → emit → tick.
+//! FR51 / FR80 fixture: documented `Bundle` + `HwVec` + one-level nested Bundle
+//! → flatten → emit → tick.
 
 use bitloom_prelude::rhdl::module;
 use bitloom_prelude::{
@@ -19,6 +20,21 @@ impl Bundle for Stream {
     }
 }
 
+/// Parent Bundle with one-level nested `Stream` (FR80).
+#[derive(Debug, Clone, Copy, Default)]
+pub struct Packet;
+
+impl Bundle for Packet {
+    fn leaves() -> &'static [(&'static str, GroundType)] {
+        &[("ready", GroundType::Bool)]
+    }
+
+    fn nested_bundles() -> &'static [(&'static str, fn() -> &'static [(&'static str, GroundType)])]
+    {
+        &[("stream", Stream::leaves)]
+    }
+}
+
 /// Macro path: composite fields flatten to scalar leaf ports.
 #[module]
 pub struct BundleVecPorts {
@@ -28,6 +44,15 @@ pub struct BundleVecPorts {
     pub lanes: Input<HwVec<UInt<8>, 4>>,
     pub out_stream: Output<Stream>,
     pub lane0_out: Output<UInt<8>>,
+}
+
+/// Macro path with one-level nested Bundle port (FR80).
+#[module]
+pub struct NestedBundlePorts {
+    pub clk: Input<Clock>,
+    pub rst: Input<Reset>,
+    pub pkt: Input<Packet>,
+    pub out_pkt: Output<Packet>,
 }
 
 /// Skid-style body over flattened Bundle / HwVec leaves.
@@ -58,6 +83,39 @@ impl Elaboratable for BundleVecSkel {
         s.assign_reg_d_from("q_data", "stream_data", Span::default());
         s.assign_reg_d_from("q_valid", "stream_valid", Span::default());
         s.assign_reg_d_from("q_lane0", "lanes_0", Span::default());
+        s.end_process();
+
+        s.end_module();
+        s.finish()
+    }
+}
+
+/// FR80: one-level nested Bundle → flatten → seq → emit/tick.
+pub struct NestedBundleSkel;
+
+impl Elaboratable for NestedBundleSkel {
+    fn elaborate() -> Result<FrozenHir, Diagnostics> {
+        let mut s = ElaborateSession::new("NestedBundleSkel");
+        s.begin_module("NestedBundleSkel", Span::default());
+        add_port_field::<Input<Clock>>(&mut s, "clk", Span::default());
+        add_port_field::<Input<Reset>>(&mut s, "rst", Span::default());
+        add_port_field::<Input<Packet>>(&mut s, "pkt", Span::default());
+        add_port_field::<Output<Packet>>(&mut s, "out_pkt", Span::default());
+
+        s.declare_reg("q_data", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_reg("q_valid", GroundType::Bool, Span::default());
+        s.declare_reg("q_ready", GroundType::Bool, Span::default());
+
+        s.begin_combinational(Span::default());
+        s.assign_net("out_pkt_stream_data", "q_data", Span::default());
+        s.assign_net("out_pkt_stream_valid", "q_valid", Span::default());
+        s.assign_net("out_pkt_ready", "q_ready", Span::default());
+        s.end_process();
+
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_from("q_data", "pkt_stream_data", Span::default());
+        s.assign_reg_d_from("q_valid", "pkt_stream_valid", Span::default());
+        s.assign_reg_d_from("q_ready", "pkt_ready", Span::default());
         s.end_process();
 
         s.end_module();
@@ -289,5 +347,116 @@ mod tests {
     fn derive_bundle_unavailable_at_compile_time() {
         let t = trybuild::TestCases::new();
         t.compile_fail("tests/ui/derive_bundle_unavailable.rs");
+    }
+
+    #[test]
+    fn flatten_names_one_level_nested_bundle() {
+        let pkt = <Input<Packet> as PortField>::flatten("pkt");
+        assert_eq!(
+            pkt,
+            vec![
+                (
+                    "pkt_ready".into(),
+                    bitloom_prelude::PortDir::Input,
+                    GroundType::Bool
+                ),
+                (
+                    "pkt_stream_data".into(),
+                    bitloom_prelude::PortDir::Input,
+                    GroundType::UInt { width: 8 }
+                ),
+                (
+                    "pkt_stream_valid".into(),
+                    bitloom_prelude::PortDir::Input,
+                    GroundType::Bool
+                ),
+            ]
+        );
+    }
+
+    #[test]
+    fn module_macro_registers_nested_bundle_leaf_ports() {
+        let frozen = NestedBundlePorts::elaborate().expect("elaborate");
+        let ports = &frozen.circuit().modules[0].ports;
+        let names: Vec<_> = ports.iter().map(|p| p.name.as_str()).collect();
+        assert!(names.contains(&"pkt_ready"));
+        assert!(names.contains(&"pkt_stream_data"));
+        assert!(names.contains(&"pkt_stream_valid"));
+        assert!(names.contains(&"out_pkt_ready"));
+        assert!(names.contains(&"out_pkt_stream_data"));
+        assert!(names.contains(&"out_pkt_stream_valid"));
+        let art = emit(&frozen);
+        assert_eq!(art.filelist, vec!["NestedBundlePorts.v"]);
+        assert!(art.files[0].contents.contains("pkt_stream_data"));
+    }
+
+    #[test]
+    fn elaborate_emit_tick_one_level_nested_bundle() {
+        let hir = NestedBundleSkel::elaborate().expect("elaborate");
+        let art = emit(&hir);
+        assert_eq!(art.filelist, vec!["NestedBundleSkel.v"]);
+        let v = &art.files[0].contents;
+        assert!(v.contains("module NestedBundleSkel"));
+        assert!(v.contains("pkt_stream_data"));
+        assert!(v.contains("out_pkt_ready"));
+
+        let mut sim = Sim::new(hir);
+        let mut pv = PortValues::default();
+        pv.set("rst", 1);
+        pv.set("pkt_ready", 0);
+        pv.set("pkt_stream_data", 0);
+        pv.set("pkt_stream_valid", 0);
+        sim.set_inputs(pv.clone());
+        sim.tick();
+        assert_eq!(sim.ports().get("out_pkt_stream_data"), Some(0));
+        assert_eq!(sim.ports().get("out_pkt_ready"), Some(0));
+
+        pv.set("rst", 0);
+        pv.set("pkt_ready", 1);
+        pv.set("pkt_stream_data", 0x5A);
+        pv.set("pkt_stream_valid", 1);
+        sim.set_inputs(pv);
+        sim.tick();
+        assert_eq!(sim.ports().get("out_pkt_stream_data"), Some(0x5A));
+        assert_eq!(sim.ports().get("out_pkt_stream_valid"), Some(1));
+        assert_eq!(sim.ports().get("out_pkt_ready"), Some(1));
+    }
+
+    #[test]
+    fn nested_width_mismatch_fails_before_emit() {
+        let mut s = ElaborateSession::new("NestedWidthBad");
+        s.begin_module("NestedWidthBad", Span::default());
+        add_port_field::<Input<Clock>>(&mut s, "clk", Span::default());
+        add_port_field::<Input<Reset>>(&mut s, "rst", Span::default());
+        add_port_field::<Input<Packet>>(&mut s, "pkt", Span::default());
+        s.add_output("narrow", GroundType::UInt { width: 4 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("narrow", "pkt_stream_data", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().expect_err("nested width mismatch must fail");
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0131"),
+            "expected E0131, got {err:?}"
+        );
+    }
+
+    #[test]
+    fn nested_dir_mismatch_fails_before_emit() {
+        let mut s = ElaborateSession::new("NestedDirBad");
+        s.begin_module("NestedDirBad", Span::default());
+        add_port_field::<Input<Clock>>(&mut s, "clk", Span::default());
+        add_port_field::<Input<Reset>>(&mut s, "rst", Span::default());
+        add_port_field::<Input<Packet>>(&mut s, "pkt", Span::default());
+        s.add_input("other_data", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("pkt_stream_data", "other_data", Span::default());
+        s.end_process();
+        s.end_module();
+        let err = s.finish().expect_err("nested dir mismatch must fail");
+        assert!(
+            err.0.iter().any(|d| d.code == "rhdl::E0112"),
+            "expected E0112, got {err:?}"
+        );
     }
 }
