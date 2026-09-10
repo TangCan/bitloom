@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 14:05
+last_updated: 09-10-2026 14:12
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -1297,183 +1297,183 @@ action_items:
     action: "FR106/FR115 诚实边界：对外不得把 Phase 12 FR94–105 MVP 写成「商业加深已完成」；不得把 Epic 48
       闸门关闭冒充 FR107–114 任一加深 FR 关闭；宣称须引对应 FR（FR115）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-48-retro-2026-09-10.md"
   - id: "epic-48-retro-item-131-闸门-closeout-atdd-惯例-epic-n-关闭后允许-epic-n"
     epic: 48
     action: "闸门 closeout ATDD 惯例：Epic N 关闭后允许 Epic N+1 离开永久 backlog 冻结（断言「关闭前不得 ready；关闭后仍
       backlog 直至各自 NFR14」），避免再出现需 e85bc69 类事后放宽。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-48-retro-2026-09-10.md"
   - id: "epic-48-retro-item-132-续保持-commit-subject-story-n-m-retro-stori"
     epic: 48
     action: "续保持 commit subject Story N.M + retro --stories 短 id，使 git_evidence.py
       归因可用（本 epic 已验证；对照 Epic 47 归因空）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-48-retro-2026-09-10.md"
   - id: "epic-48-retro-item-133-后续加深-epic-49-56-首故事须引用适用已修订-ad-nfr46-不得静"
     epic: 48
     action: "后续加深 epic（49–56）首故事须引用适用已修订 AD（NFR46）；不得静默扩大各 epic NFR14 子集（NFR47）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-48-retro-2026-09-10.md"
   - id: "epic-49-retro-item-134-fr107-at-诚实边界-对外不得把-at-documented-subset"
     epic: 49
     action: "FR107/AT 诚实边界：对外不得把 AT documented subset（collapsed nb_transport_fw）写成全
       AT/PEQ/quantum 全家桶；不得以 FR101 LT / Rust FL 冒充 FR107；宣称须引 FR107（续 FR115）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-49-retro-2026-09-10.md"
   - id: "epic-49-retro-item-135-保持-at-lt-gen-tlm-emit_systemc_tlm_lt-回归不"
     epic: 49
     action: "保持 AT ∥ LT：gen-tlm / emit_systemc_tlm_lt 回归不得因 AT 路径被改写或删除（NFR44）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-49-retro-2026-09-10.md"
   - id: "epic-49-retro-item-136-续保持-commit-subject-story-n-m-retro-stori"
     epic: 49
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-49-retro-2026-09-10.md"
   - id: "epic-49-retro-item-137-可选品牌卫生-将-cli-host-暂存目录-target-rhdl-gen-t"
     epic: 49
     action: "可选品牌卫生：将 CLI host 暂存目录 target/rhdl-gen-tlm-*-host 对齐为 bitloom-gen-tlm-*-host（非
       FR107 AC 缺口）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-49-retro-2026-09-10.md"
   - id: "epic-50-retro-item-138-fr108-gpio-诚实边界-对外不得把近-vip-p1-p4-写成商业-vi"
     epic: 50
     action: "FR108/GPIO 诚实边界：对外不得把近 VIP（P1–P4）写成商业 VIP GPIO / 全协议 GPIO 全家桶；不得以 FR98
       四类近 VIP 冒充 FR108；宣称须引 FR108（续 FR115）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-50-retro-2026-09-10.md"
   - id: "epic-50-retro-item-139-触碰-bitloom-prelude-ip-rs-时保持-fr98-uart-s"
     epic: 50
     action: "触碰 bitloom-prelude ip.rs 时保持 FR98 UART/SPI/I2C/AXI 近 VIP 回归不破（NFR44）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-50-retro-2026-09-10.md"
   - id: "epic-50-retro-item-140-续保持-commit-subject-story-n-m-retro-stori"
     epic: 50
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-50-retro-2026-09-10.md"
   - id: "epic-50-retro-item-141-可选工程卫生-评估将-ip-rs-现-2975-loc-按协议拆分模块-非-fr"
     epic: 50
     action: "可选工程卫生：评估将 ip.rs（现 ~2975 LOC）按协议拆分模块（非 FR108 AC 缺口；NFR14 已记「拆分非关闭条件」）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-50-retro-2026-09-10.md"
   - id: "epic-51-retro-item-142-fr109-c3-诚实边界-对外不得把-fr105-mux-分支-v2-alon"
     epic: 51
     action: "FR109/C3 诚实边界：对外不得把 FR105 Mux 分支 v2 alone 或 FR34 toggle alone 写成 C3 /
       FR109 完成面；不得以 Tywaves/LCOV GUI（FR114）冒充 FR109；宣称须引 FR109（续 FR115）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-51-retro-2026-09-10.md"
   - id: "epic-51-retro-item-143-触碰-bitloom-sim-覆盖率路径时保持-fr105-mux-v2-fr3"
     epic: 51
     action: "触碰 bitloom-sim 覆盖率路径时保持 FR105 Mux v2 / FR34 toggle 回归不破（NFR44）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-51-retro-2026-09-10.md"
   - id: "epic-51-retro-item-144-续保持-commit-subject-story-n-m-retro-stori"
     epic: 51
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-51-retro-2026-09-10.md"
   - id: "epic-51-retro-item-145-可选工程卫生-若后续自动从设计提取-fsm-标签集-须新合同钉死-当前显式-re"
     epic: 51
     action: "可选工程卫生：若后续自动从设计提取 FSM 标签集，须新合同钉死；当前显式 register_fsm_states 为 FR109 完成面（非
       AC 缺口）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-51-retro-2026-09-10.md"
   - id: "epic-52-retro-item-146-fr110-诚实边界-对外不得把-fr95-96-mvp-in-tree-mvp"
     epic: 52
     action: "FR110 诚实边界：对外不得把 FR95/96 MVP / in-tree-mvp / 仅 loop-unroll 或外挂 Bambu
       stub alone 写成商业完整 HLS / FR110 完成面；宣称须引 FR110（续 FR115）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-52-retro-2026-09-10.md"
   - id: "epic-52-retro-item-147-触碰-bitloom-hls-路径时保持-fr95-96-树内-mvp-与外挂诚"
     epic: 52
     action: "触碰 bitloom HLS 路径时保持 FR95/96 树内 MVP 与外挂诚实路径回归不破（NFR44）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-52-retro-2026-09-10.md"
   - id: "epic-52-retro-item-148-续保持-commit-subject-story-n-m-retro-stori"
     epic: 52
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-52-retro-2026-09-10.md"
   - id: "epic-52-retro-item-149-可选工程卫生-若后续交付-allocation-binding-全优化套件或-h"
     epic: 52
     action: "可选工程卫生：若后续交付 allocation/binding/全优化套件或 Handshake 默认可综合语义，须新合同钉死（NFR47）；当前
       Q1+Q2 为 FR110 完成面（非 AC 缺口）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-52-retro-2026-09-10.md"
   - id: "epic-53-retro-item-150-fr111-诚实边界-对外不得把-fr97-mvp-单夹具-机械-emit_ch"
     epic: 53
     action: "FR111 诚实边界：对外不得把 FR97 MVP 单夹具 / 机械 emit_chisel alone 写成可维护加深 / FR111
       完成面；宣称须引 FR111（续 FR115）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-53-retro-2026-09-10.md"
   - id: "epic-53-retro-item-151-触碰-rhdl-firrtl-chisel-idiomatic-路径时保持-fr"
     epic: 53
     action: "触碰 rhdl-firrtl Chisel idiomatic 路径时保持 FR97 MVP emit/check 回归不破（NFR44）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-53-retro-2026-09-10.md"
   - id: "epic-53-retro-item-152-续保持-commit-subject-story-n-m-retro-stori"
     epic: 53
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-53-retro-2026-09-10.md"
   - id: "epic-53-retro-item-153-可选工程卫生-若后续交付官方风格全家桶或恢复废弃-parser-须新合同钉死-n"
     epic: 53
     action: "可选工程卫生：若后续交付官方风格全家桶或恢复废弃 Parser，须新合同钉死（NFR47）；当前 D1+D3 为 FR111 完成面（非
       AC 缺口）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-53-retro-2026-09-10.md"
   - id: "epic-54-retro-item-154-fr112-诚实边界-对外不得把-fr92-记分板-fr100-f1-i-fr1"
     epic: 54
     action: "FR112 诚实边界：对外不得把 FR92 记分板 / FR100 F1-(i) / FR103 SyncFifo MVP alone 写成形式等价加深
       / FR112 完成面；宣称须引 FR112 分支 B（续 FR115）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-54-retro-2026-09-10.md"
   - id: "epic-54-retro-item-155-触碰-bitloom-sim-generatedfunctional-emit"
     epic: 54
     action: "触碰 bitloom-sim GeneratedFunctional / emit 路径时保持 FR100 F1-(i) 与 FR103
       SyncFifo 双模型回归不破（NFR44）；发射 crate MemRead stub 须保持文档诚实。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-54-retro-2026-09-10.md"
   - id: "epic-54-retro-item-156-续保持-commit-subject-story-n-m-retro-stori"
     epic: 54
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-54-retro-2026-09-10.md"
   - id: "epic-54-retro-item-157-可选工程卫生-若后续交付分支-a-symbiyosys-smt-或分支-c-更多"
     epic: 54
     action: "可选工程卫生：若后续交付分支 A（SymbiYosys/SMT）或分支 C（更多 IP 手写 FL），或把 emit crate MemRead
       stub 升为完整生成，须新合同钉死（NFR47）；当前分支 B in-process MemRead≡tick 为 FR112 完成面（非 AC 缺口）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-54-retro-2026-09-10.md"
   - id: "epic-55-retro-item-158-fr113-诚实边界-对外不得把-fr99-designfixture-mvp"
     epic: 55
@@ -1481,20 +1481,20 @@ action_items:
       HTML / AnalysisMode::Shallow alone 写成设计根发现加深 / FR113 完成面；宣称须引 FR113 Cargo-graph
       + metadata design_roots（续 FR115）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-55-retro-2026-09-10.md"
   - id: "epic-55-retro-item-159-触碰-bitloom-lsp-发现-elaborate-路径时保持-fr99-d"
     epic: 55
     action: "触碰 bitloom-lsp 发现/elaborate 路径时保持 FR99 DesignFixture MVP 回归不破（NFR44）；shallow
       不得伪装 finish 成功。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-55-retro-2026-09-10.md"
   - id: "epic-55-retro-item-160-续保持-commit-subject-story-n-m-retro-stori"
     epic: 55
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-55-retro-2026-09-10.md"
   - id: "epic-55-retro-item-161-可选工程卫生-若后续交付无-metadata-的全-workspace-bitl"
     epic: 55
@@ -1502,7 +1502,7 @@ action_items:
       .rs 路径自动解析，须新合同钉死（NFR47）；当前 Cargo-graph + metadata design_roots 为 FR113 完成面（非
       AC 缺口）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-55-retro-2026-09-10.md"
   - id: "epic-56-retro-item-162-fr114-诚实边界-对外不得把-fr104-interactive-html"
     epic: 56
@@ -1510,25 +1510,25 @@ action_items:
       文本报告 / timing·VCD·GTKWave alone 写成 FR114 完成面；宣称须引 FR114 LCOV + 树内 coverage.html（续
       FR115）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-56-retro-2026-09-10.md"
   - id: "epic-56-retro-item-163-触碰-bitloom-sim-覆盖率-cli-coverage-路径时保持-fr"
     epic: 56
     action: "触碰 bitloom-sim 覆盖率 / CLI coverage 路径时保持 FR104 波路径与 FR105 Mux v2 默认可用（NFR44）；空覆盖不得
       silent 宣称 FR114 绿。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-56-retro-2026-09-10.md"
   - id: "epic-56-retro-item-164-续保持-commit-subject-story-n-m-retro-stori"
     epic: 56
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-56-retro-2026-09-10.md"
   - id: "epic-56-retro-item-165-可选工程卫生-若后续交付子集-a-tywaves-级-typed-ide-波形"
     epic: 56
     action: "可选工程卫生：若后续交付子集 (A) Tywaves 级 typed IDE 波形，或把第三方 LCOV GUI 升为一等关闭条件，须新合同钉死（NFR47）；当前
       LCOV + 树内 coverage GUI 为 FR114 完成面。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-56-retro-2026-09-10.md"

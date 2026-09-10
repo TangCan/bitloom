@@ -72,13 +72,13 @@ phase13Note: >
   Phase 12 AC unmet. Epic 48 must close before 49–56 ready. Sprint seeded backlog.
 phase13Epic48Status: complete
 phase13Epic49Status: complete
-phase13Epic50Status: backlog
-phase13Epic51Status: backlog
-phase13Epic52Status: backlog
-phase13Epic53Status: backlog
-phase13Epic54Status: backlog
-phase13Epic55Status: backlog
-phase13Epic56Status: backlog
+phase13Epic50Status: complete
+phase13Epic51Status: complete
+phase13Epic52Status: complete
+phase13Epic53Status: complete
+phase13Epic54Status: complete
+phase13Epic55Status: complete
+phase13Epic56Status: complete
 phase1Status: complete
 phase2Status: complete
 phase3Status: complete

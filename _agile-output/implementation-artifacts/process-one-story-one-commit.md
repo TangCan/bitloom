@@ -8,7 +8,7 @@ Lesson from Epic 18 (and earlier retros): bundling multiple stories into a singl
 
 Contract / story commits must stay scoped to the story. Do **not** fold unrelated example reformats, tool-script churn (e.g. `render_skill.py`), or drive-by formatting into the same commit as AC/contract changes. Historical noise: `e30e6ca` (`examples/bundle_vec_skel`), `b758832` (`render_skill.py`). Hygiene or tooling edits → separate commit or omit.
 
-## NFR14 / closeout commit subject (epic-42–47 retro items 109/113/116/120/124/128)
+## NFR14 / closeout commit subject (epic-42–47 retro items 109/113/116/120/124/128; continued epic-48–56 items 132/136/140/144/148/152/156/160/164)
 
 Gate and closeout (and implementation) commits must put a story id in the **subject** so `git_evidence.py` can attribute them. Prefer ASCII short forms:
 
@@ -16,3 +16,7 @@ Gate and closeout (and implementation) commits must put a story id in the **subj
 - or the sprint short id (`47.1`, `47.2`, `47.3`)
 
 When running evidence scripts, pass short ids via `--stories` rather than full Chinese sprint keys. Subjects that only use Chinese epic titles with no `Story N.M` / short id produce empty attribution.
+
+## Gate closeout ATDD (epic-48-retro-item-131)
+
+When Epic N is a hard gate for Epic N+1…M, ATDD must assert: stories for N+1…M stay frozen (not ready) until N closes; after N closes they remain backlog until each epic’s own NFR14 story lands. Do not re-introduce ad-hoc “post-hoc unfreeze” commits as the normal path.

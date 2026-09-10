@@ -383,3 +383,44 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     Epic 56 / FR114 LCOV + in-tree coverage GUI **已关闭**（Story 56.3；Tywaves deferred）。
     **Phase 13 规划/实现故事已齐（Epic 48–56）。** 对外商业加深宣称按 **FR115**。Phase 12 MVP 关闭证据仍有效（NFR44）。
     未选子集（Tywaves / 全树 syn-scan / SymbiYosys 等）仍须新合同（NFR47）。
+
+<!-- action-items-sweep-2026-09-10-phase13: epics 48–56 open retro items disposition -->
+
+- source_spec: `_agile-output/implementation-artifacts/epic-48-retro-2026-09-10.md`
+  summary: Standing Phase-13 诚实 / NFR44 / 过程边界（Epic 48–56；触及对应面时遵守；非立即实现）
+  evidence: |
+    - item-130：FR106/FR115 — Phase 12 MVP ≠ 商业加深完成；Epic 48 闸门 ≠ FR107–114 关闭（docs/requirements + FR115）
+    - item-134：FR107 — AT documented subset ≠ 全 AT/PEQ/quantum；FR101 LT / Rust FL ≠ FR107
+    - item-138：FR108 — 近 VIP P1–P4 ≠ 商业 VIP GPIO；FR98 四类 ≠ FR108
+    - item-142：FR109 — FR105 Mux v2 / FR34 toggle alone ≠ C3/FR109；FR114 ≠ FR109
+    - item-146：FR110 — FR95/96 MVP / in-tree-mvp / Bambu stub alone ≠ 商业 HLS/FR110
+    - item-150：FR111 — FR97 MVP / 机械 emit_chisel alone ≠ 可维护加深/FR111
+    - item-154：FR112 — FR92 / FR100 F1-(i) / FR103 SyncFifo MVP alone ≠ FR112 分支 B
+    - item-158：FR113 — FR99 DesignFixture / FR90 / Shallow alone ≠ Cargo-graph+metadata design_roots
+    - item-162：FR114 — FR104 I1–I3 / FR105 / FR109 文本 / VCD alone ≠ LCOV+coverage.html
+    - item-135/139/143/147/151/155/159/163：NFR44 — 触碰面保持对应 Phase 12/13 MVP 回归与文档诚实
+    - item-133：NFR46/NFR47 — 首故事引用修订 AD；不得静默扩大 NFR14 子集
+    - item-131：闸门 closeout ATDD 惯例 → process-one-story-one-commit.md
+    - item-132/136/140/144/148/152/156/160/164：commit subject Story N.M → process note（续 Phase 12）
+  status: deferred — standing contract when touching area
+  resolved: '2026-09-10'
+  resolution: |
+    编入本 ledger；公开 FR 文档已含对应诚实条。触碰相关 crate/文档/CI 叙事时对照；
+    加深子集须新合同 + NFR14，禁止静默扩大。
+
+- source_spec: `_agile-output/implementation-artifacts/epic-49-retro-2026-09-10.md`
+  summary: Phase-13 可选卫生 / 未选加深（评估后 defer 或本 sweep 实现）
+  evidence: |
+    - item-137：**已实现** — CLI host `target/rhdl-gen-tlm-*-host` → `target/bitloom-gen-tlm-*-host`（crates/bitloom/src/main.rs）
+    - item-141：ip.rs ~2975 LOC — **assess-and-defer**（本 sweep 不拆；双模型/FR98/FR108 耦合；需独立 hygiene 故事）
+    - item-145：自动 FSM 标签集提取 — 须新合同（NFR47）；当前显式 register_fsm_states = FR109 完成面
+    - item-149：allocation/binding/Handshake 默认可综合 — 须新合同（NFR47）；Q1+Q2 = FR110 完成面
+    - item-153：官方风格全家桶 / 恢复 Parser — 须新合同（NFR47）；D1+D3 = FR111 完成面
+    - item-157：SymbiYosys/SMT / 更多 IP FL / emit MemRead 完整生成 — 须新合同（NFR47）；分支 B = FR112 完成面
+    - item-161：无 metadata 全树 syn-scan / 任意 .rs 根解析 — 须新合同（NFR47）；Cargo-graph+metadata = FR113 完成面
+    - item-165：Tywaves typed IDE / 第三方 LCOV GUI 一等关闭 — 须新合同（NFR47）；LCOV+树内 GUI = FR114 完成面
+    - frontmatter：epics.md phase13Epic50–56Status → complete（对齐 sprint done）
+  status: deferred — optional hygiene / NFR47（item-137 implemented this sweep）
+  resolved: '2026-09-10'
+  resolution: |
+    item-137 品牌路径已落地；其余评估/未选加深写入本 ledger，禁止静默扩大关闭面。

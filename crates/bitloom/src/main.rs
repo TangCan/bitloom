@@ -766,7 +766,7 @@ fn main() {
                     std::process::exit(1);
                 }
             };
-            let host_dir = workspace.join("target/rhdl-gen-tlm-host").join(&package);
+            let host_dir = workspace.join("target/bitloom-gen-tlm-host").join(&package);
             fs::create_dir_all(host_dir.join("src")).expect("host dir");
             let abs_out = if out_dir.is_absolute() {
                 out_dir
@@ -817,7 +817,9 @@ fn main() {
                     std::process::exit(1);
                 }
             };
-            let host_dir = workspace.join("target/rhdl-gen-tlm-at-host").join(&package);
+            let host_dir = workspace
+                .join("target/bitloom-gen-tlm-at-host")
+                .join(&package);
             fs::create_dir_all(host_dir.join("src")).expect("host dir");
             let abs_out = if out_dir.is_absolute() {
                 out_dir
