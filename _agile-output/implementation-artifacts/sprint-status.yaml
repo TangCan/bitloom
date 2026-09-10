@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 13:41
+last_updated: 09-10-2026 13:45
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -385,7 +385,7 @@ development_status:
   50-1-epic-50-nfr14-风险记录: done
   50-2-gpio-近-vip-实现与-atdd-fr108: done
   50-3-fr108-收口与-fr98-交叉链: done
-  epic-50-retrospective: optional
+  epic-50-retrospective: done
 
   epic-51: done
   51-1-epic-51-nfr14-风险记录: done
@@ -1345,3 +1345,28 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-49-retro-2026-09-10.md"
+  - id: "epic-50-retro-item-138-fr108-gpio-诚实边界-对外不得把近-vip-p1-p4-写成商业-vi"
+    epic: 50
+    action: "FR108/GPIO 诚实边界：对外不得把近 VIP（P1–P4）写成商业 VIP GPIO / 全协议 GPIO 全家桶；不得以 FR98
+      四类近 VIP 冒充 FR108；宣称须引 FR108（续 FR115）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-50-retro-2026-09-10.md"
+  - id: "epic-50-retro-item-139-触碰-bitloom-prelude-ip-rs-时保持-fr98-uart-s"
+    epic: 50
+    action: "触碰 bitloom-prelude ip.rs 时保持 FR98 UART/SPI/I2C/AXI 近 VIP 回归不破（NFR44）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-50-retro-2026-09-10.md"
+  - id: "epic-50-retro-item-140-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 50
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-50-retro-2026-09-10.md"
+  - id: "epic-50-retro-item-141-可选工程卫生-评估将-ip-rs-现-2975-loc-按协议拆分模块-非-fr"
+    epic: 50
+    action: "可选工程卫生：评估将 ip.rs（现 ~2975 LOC）按协议拆分模块（非 FR108 AC 缺口；NFR14 已记「拆分非关闭条件」）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-50-retro-2026-09-10.md"
