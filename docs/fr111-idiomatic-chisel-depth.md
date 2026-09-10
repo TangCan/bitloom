@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`rhdl_firrtl` / Chisel emit). Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 53 / FR111 closed** (Story **53.3**). D1+D3 deepen path delivered in Story **53.2**. FR97 MVP remains closed (NFR44). Undeclared full style suite still needs a new contract (NFR47).
+**Status:** **Epic 53 / FR111 closed** (Story **53.3**). D1+D3 deepen path delivered in Story **53.2**. FR97 MVP remains closed (NFR44). Official-style full pack → **FR122** / [`fr122-official-style-chisel.md`](fr122-official-style-chisel.md) (Epic 63).
 
 ## Contract (NFR14 D1 + D3)
 
@@ -32,11 +32,11 @@ FR97 path unchanged: `emit_chisel_idiomatic` / `check_idiomatic_chisel`.
 - Mechanical FR28: [`fr28-chisel-compilable.md`](fr28-chisel-compilable.md)
 - NFR14: `_agile-output/implementation-artifacts/nfr14-risk-epic53-idiomatic-chisel-depth.md`
 
-## Non-goals (NFR47)
+## Non-goals (NFR47 → Phase 14)
 
-- Restoring deprecated `Parser.parse`
-- Undeclared full official Chisel style suite
+- Restoring deprecated `Parser.parse` (still forbidden by default under FR122 / AD-27)
 - Claiming mechanical emit is FR111
+- FR122 official-style pack is a **separate** contract — see [`fr122-official-style-chisel.md`](fr122-official-style-chisel.md)
 
 ```text
 cargo test -p bitloom --test fr111_idiomatic_chisel_depth

@@ -236,12 +236,13 @@ flowchart TB
 
 ### AD-27 — Bitloom ↔ Chisel 产品互操作 [ADOPTED]
 
-- **Binds:** firrtl, CLI (`import` 等), 可选 Scala 生成；可维护加深（Epic 53 / **FR111**）
-- **Prevents:** 一 epic 仍以「尽力失败」交差、另一 epic 要求 idiomatic 却无验收；依赖已删除的 Scala FIRRTL Parser；用调试用 HIR→源码再生冒充 Chisel 双向；继续引用历史 **NFR9**「不承诺可维护 Chisel」阻断 FR28/FR46；用机械面冒充 **FR97** 关闭；以 FR97 MVP alone / 机械 emit 冒充 **FR111** 可维护加深
-- **Rule:** 在 AD-3 FIRRTL 文本契约之外，产品路径要求：(1) FrozenHir/`.fir` → **可编译** Chisel Scala（钉死 Chisel + firtool 配对，见 Stack）；验收=编译通过 + 公开端口名/宽/向与实例层次往返谓词；**机械/生成风格仍满足 PRD FR28 / FR46**（PRD Open Q5 已关闭）。(2) `.fir`（及文档化 Chisel 工作流输出）→ FrozenHir / Bitloom 表面 → emit/tick，满足对称往返谓词。(3) **不**要求恢复 Chisel 5 前的 Scala `Parser.parse` / `firrtl.Parser` API（CIRCT 时代交换边界为 `.fir` + firtool；见 chipsalliance/chisel#4899）；生成器/导入器属于本工具链。(4) NFR10 调试再生 **不得**冒充本 AD 完成。(5) 历史阶段一 **NFR9**「不承诺可维护 Chisel Scala」**已被推翻**，不再作为阻断 FR28/FR46 的依据。(6) **Phase 12 / Path B：** **另增** **FR97** idiomatic / 可维护 Scala 验收面（Epic 42）——超出机械可编译；实现 epic 须文档化 idiomatic 验收谓词，**不得**仅以 FR28/FR46 机械面宣称 FR97 关闭。**NFR41：** 实现 FR97 的 epic 须引用本修订后 AD-27。(7) **Phase 13 / FR111：** idiomatic **可维护加深**（风险记录钉死：至少多模块风格一致性与/或加严规则）为合法产品完成面；**不得**把 FR97 MVP alone / 机械 emit 重标为 FR111；未列入风格全家桶须新合同（**NFR47**）。**NFR46：** 实现 FR111 的 epic 须引用本修订。
+- **Binds:** firrtl, CLI (`import` 等), 可选 Scala 生成；可维护加深（Epic 53 / **FR111**）；官方风格全家桶（Epic 63 / **FR122**）
+- **Prevents:** 一 epic 仍以「尽力失败」交差、另一 epic 要求 idiomatic 却无验收；依赖已删除的 Scala FIRRTL Parser；用调试用 HIR→源码再生冒充 Chisel 双向；继续引用历史 **NFR9**「不承诺可维护 Chisel」阻断 FR28/FR46；用机械面冒充 **FR97** 关闭；以 FR97 MVP alone / 机械 emit 冒充 **FR111** 可维护加深；以 FR97 alone / FR111 D1+D3 alone / 机械 emit / docs-only 冒充 **FR122** 官方风格全家桶；静默恢复废弃 `Parser.parse` 作为产品依赖
+- **Rule:** 在 AD-3 FIRRTL 文本契约之外，产品路径要求：(1) FrozenHir/`.fir` → **可编译** Chisel Scala（钉死 Chisel + firtool 配对，见 Stack）；验收=编译通过 + 公开端口名/宽/向与实例层次往返谓词；**机械/生成风格仍满足 PRD FR28 / FR46**（PRD Open Q5 已关闭）。(2) `.fir`（及文档化 Chisel 工作流输出）→ FrozenHir / Bitloom 表面 → emit/tick，满足对称往返谓词。(3) **不**要求恢复 Chisel 5 前的 Scala `Parser.parse` / `firrtl.Parser` API（CIRCT 时代交换边界为 `.fir` + firtool；见 chipsalliance/chisel#4899）；生成器/导入器属于本工具链；**默认仍禁止**把恢复 Parser 写成产品关闭条件（除非另开 Correct Course + 修订本 AD）。(4) NFR10 调试再生 **不得**冒充本 AD 完成。(5) 历史阶段一 **NFR9**「不承诺可维护 Chisel Scala」**已被推翻**，不再作为阻断 FR28/FR46 的依据。(6) **Phase 12 / Path B：** **另增** **FR97** idiomatic / 可维护 Scala 验收面（Epic 42）——超出机械可编译；实现 epic 须文档化 idiomatic 验收谓词，**不得**仅以 FR28/FR46 机械面宣称 FR97 关闭。**NFR41：** 实现 FR97 的 epic 须引用本修订后 AD-27。(7) **Phase 13 / FR111：** idiomatic **可维护加深**（风险记录钉死：至少多模块风格一致性与/或加严规则）为合法产品完成面；**不得**把 FR97 MVP alone / 机械 emit 重标为 FR111。**NFR46：** 实现 FR111 的 epic 须引用本修订。(8) **Phase 14 / FR122：** **官方/idiomatic 风格全家桶**（风险记录 O1–O4：`package` + FR122 宣称、官方分节顺序、每模块 FR122 标记、`emit_chisel_idiomatic_fr122` / `check_idiomatic_chisel_fr122`）为合法产品完成面；**不得**以 FR97 alone / FR111 D1+D3 alone / 机械 emit / docs-only 关闭 FR122；完整 Style Guide 全文 / Parser 恢复仍须新合同（**NFR51**）。**NFR50：** 实现 FR122 的 epic 须引用本修订。
 - **Revised:** 2026-08-21 — Phase 7 / Epic 20.2：钉死 FR28+FR46 可编译验收条与 Open Q5；显式推翻 NFR9；禁止依赖已删 `Parser.parse`（PRD §0 推翻表 / FR28 / FR46）。
 - **Revised:** 2026-09-09 — Phase 12 Path B / **FR94** / **NFR41**：增加 idiomatic / 可维护验收面（**FR97**）；机械可编译仍合法满足 FR28/FR46。
 - **Revised:** 2026-09-10 — Phase 13 / **FR111** / **NFR46**：允许 idiomatic 可维护加深（Epic 53）；FR97 MVP 关闭仍有效（**NFR44**）。
+- **Revised:** 2026-09-10 — Phase 14 / **FR122** / **NFR50**：允许官方风格全家桶（Epic 63）；FR97/FR111 关闭仍有效（**NFR48**）；默认仍不恢复 Parser。
 - **[ASSUMPTION]** 生成器实现可放在 `rhdl-firrtl` 扩展或 `bitloom` CLI 子命令；具体包边界不钉死。
 
 ### AD-28 — Phase 7 风险门禁（NFR14）[ADOPTED]
@@ -349,7 +350,7 @@ flowchart LR
 - **树内 HLS 调度深度：** 产品合同见 **FR95/96** / AD-25（MVP 已关闭 / Epic 41）；**商业调度深度**见 **FR110** / Epic 52（**已关闭** / Story 52.3；AD-25 2026-09-10 修订；**NFR46**）。**Handshake / 动态数据流默认可综合**见 **FR121** / Epic 62（**已关闭** / Story 62.3；AD-25 **2026-09-10 FR121 修订**；**NFR50**）。
 - **手写 `#[bridge]` / `#[abstraction]` / mixed `both`；形式化等价引擎细节；C ABI / cdylib；覆盖率**（产品 FR 已定，脊柱不钉实现形状）。
 - **IP / 可视化 / LSP / 黑盒 / formal/SVA / float / Analog** 的**实现形状**（产品 FR 已定；不在此钉 crate 切分）。GPIO 近 VIP 加深见 **FR108**；商业 VIP GPIO 全家桶见 **FR120**；LSP 根发现加深见 **FR113**；无 metadata syn-scan 见 **FR118**；FSM/state-visit 与 LCOV 见 **FR109** / **FR114**；Tywaves 级 typed IDE 波形见 **FR117**；**SymbiYosys/SMT formal** 见 **FR119** / Epic 60（工具链形状由实现 epic + NFR14 钉死；**NFR50**）。
-- **Chisel 官方风格全家桶：** 产品合同见 **FR97** / **FR111** / AD-27（MVP + D1+D3 已关闭）；**官方/idiomatic 风格全家桶**见 **FR122** / Epic 63（须在实现 epic 内视需要进一步修订 **AD-27**；默认仍不恢复 Scala `Parser.parse`；**NFR50**）。
+- **Chisel 官方风格全家桶：** 产品合同见 **FR97** / **FR111** / AD-27（MVP + D1+D3 已关闭）；**官方/idiomatic 风格全家桶**见 **FR122** / Epic 63（AD-27 **2026-09-10 FR122 修订**；默认仍不恢复 Scala `Parser.parse`；**NFR50**；实现关闭前仍为加深交付面）。
 - **interp vs 编译版 `tick` 引擎**（产品 FR32；脊柱不选引擎）。
 - **`cargo bitloom` 其余动词**形态细节（FR40；`import`/`visualize`/`wave` 为 Phase 7 必需能力，名称可调）。
 - **macos / windows / linux-aarch64 firtool 资产**（NFR11；机制同 AD-9）。

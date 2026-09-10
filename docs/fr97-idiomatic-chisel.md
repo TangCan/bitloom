@@ -15,6 +15,8 @@
 
 **Phase 13 可维护加深（FR111）：** 多模块一致性 + 加严标记 → [`fr111-idiomatic-chisel-depth.md`](fr111-idiomatic-chisel-depth.md)（`emit_chisel_idiomatic_fr111` / `check_idiomatic_chisel_fr111`）。FR97 MVP alone ≠ FR111。
 
+**Phase 14 官方风格全家桶（FR122）：** 超出 FR111 D1+D3 → [`fr122-official-style-chisel.md`](fr122-official-style-chisel.md)（`emit_chisel_idiomatic_fr122` / `check_idiomatic_chisel_fr122`）。FR97/FR111 alone ≠ FR122。
+
 ## Idiomatic 验收谓词（钉死）
 
 对齐 NFR14 Epic 42 风险记录；**未**采纳 Chisel 官方 Style Guide 全文——不得口头宣称「符合官方风格」。
