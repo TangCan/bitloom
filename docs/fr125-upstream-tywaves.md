@@ -2,7 +2,8 @@
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** **in progress** (Story **65.2** product path). Epic 65 closeout → Story **65.3**.
+**Status:** **Epic 65 / FR125 closed** (Story **65.3**). T1–T4 delivered in Story **65.2**.
+FR117 in-house typed (subset B) remains closed (NFR52) and is **not** this face.
 
 Beyond FR117 in-house `typed-wave.html` / `wave.typed.json` (subset B).  
 **Forbidden closes:** FR104 alone; FR114 alone; FR117 typed-wave alone; docs-only.

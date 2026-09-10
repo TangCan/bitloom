@@ -97,7 +97,7 @@ phase15Scope: >
   全 SoC pad；CIRCT Handshake 全家桶；完整 Style Guide/Parser；
   ip.rs 协议拆分卫生（及闸门/宣称 FR）。
 phase15Epic64Status: complete
-phase15Epic65Status: backlog
+phase15Epic65Status: complete
 phase15Epic66Status: backlog
 phase15Epic67Status: backlog
 phase15Epic68Status: backlog

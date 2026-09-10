@@ -314,7 +314,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 | 加深面 | FR / Epic | 相对 Phase 14 关闭面 |
 | --- | --- | --- |
-| 上游 Tywaves 一等集成 | FR125 / 65 | vs FR117 自研 typed |
+| 上游 Tywaves 一等集成 | FR125 / 65 | vs FR117 自研 typed — **Epic 65 已关闭**（Story 65.3；`--tywaves` / `wave.tywaves.json`） |
 | 更多 IP 手写 FL | FR126 / 66 | vs FR103/112-B / FR119-(A) |
 | 默认 CI 强制真 sby | FR127 / 67 | vs 本机 `formal-sby-check` / FR119 |
 | 全 SoC pad / 商业对拍 | FR128 / 68 | vs FR120 GpioVip C1–C4 |

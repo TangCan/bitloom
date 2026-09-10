@@ -13,7 +13,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR125 / Epic 65；对照 FR117 / FR104 / FR114 |
 | 记录日期 | 2026-09-10 |
-| 状态 | accepted — Story 65.1 |
+| 状态 | **closed** — Story **65.3**（Epic 65 / FR125 收口；T1–T4 已交付） |
 | **选定加深子集** | **上游 Tywaves 一等集成形状（T1–T4）** |
 
 ### (a) 上游约束
@@ -59,8 +59,8 @@
 
 ### Epic 65 关闭条件（65.3 勾选）
 
-- [ ] **65.2 / FR125：** T1–T4 产品路径 + ATDD
-- [ ] **文档 / deferred / README**
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom / bitloom-prelude
-- [ ] **FR117 关闭仍有效**
+- [x] **65.2 / FR125：** T1–T4 产品路径 + ATDD
+- [x] **文档 / deferred / README**
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom / bitloom-prelude
+- [x] **FR117 关闭仍有效**
