@@ -169,7 +169,7 @@ mod sim {
 | Idiomatic / 可维护 Chisel（**FR97** · Epic 42 已关闭） | [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md)（`emit_chisel_idiomatic` + `check_idiomatic_chisel`；机械面不得单独关闭 FR97） |
 | Chisel / `.fir` 反向导入（FR46） | [`docs/fr46-chisel-import.md`](docs/fr46-chisel-import.md) |
 | `import` CLI + 混合夹具 | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) · [`examples/chisel_mixed`](examples/chisel_mixed) |
-| HLS 产品路径（**支持** · FR35/FR50/FR95/FR96 · 树内 MVP + 外挂 Bambu） | [`docs/fr35-hls.md`](docs/fr35-hls.md) · 烟测 [`scripts/hls-smoke.sh`](scripts/hls-smoke.sh) |
+| HLS 产品路径（**支持** · FR35/FR50/FR95/FR96 + **FR110** 深度） | [`docs/fr35-hls.md`](docs/fr35-hls.md) · [`docs/fr110-hls-commercial-depth.md`](docs/fr110-hls-commercial-depth.md)（pipeline/II；**Epic 52 已关闭** / Story 52.3）· 烟测 [`scripts/hls-smoke.sh`](scripts/hls-smoke.sh) |
 | Formal/SVA | [`docs/fr39-formal-sva.md`](docs/fr39-formal-sva.md) |
 | Analog/InOut | [`docs/fr27-analog-inout.md`](docs/fr27-analog-inout.md) |
 | rhdl-float | [`docs/fr36-rhdl-float.md`](docs/fr36-rhdl-float.md) |
@@ -204,12 +204,13 @@ cargo run -p bitloom -- firtool ensure   # 下载/校验/缓存并打印二进�
 
 工具链 crate：MIT OR Apache-2.0（见各 crate 的 `Cargo.toml`）。
 
-## HLS（支持功能 · FR35 / FR50 / FR76 / FR95 / FR96）
+## HLS（支持功能 · FR35 / FR50 / FR76 / FR95 / FR96 / FR110）
 
-Bitloom **将 HLS 列为支持功能**，含两条诚实路径（修订 **AD-25**；**Epic 41 已关闭**）：
+Bitloom **将 HLS 列为支持功能**，含诚实路径（修订 **AD-25**；**Epic 41** + **Epic 52 已关闭**）：
 
 - **树内** `schedule_in_tree` / `cargo bitloom hls --in-tree`（loop-unroll MVP）= **FR95** 完成面；**FR96** = 调度前闭包 dissolve/inline 后进入树内路径（`--in-tree --dataflow`）。
-- **外挂** 钉死 **PandA Bambu 2024.10**（stub / `BITLOOM_HLS_USE_REAL`）= **FR35 / FR76 / FR86** 可选对照；**不得单独满足 FR95**。
+- **树内商业深度** `schedule_in_tree_fr110` / `--in-tree --pipeline --ii N --stages N`（`pipeline_stages≥2` + `ii`）= **FR110**（**Epic 52 已关闭** / Story 52.3；≠ 完整商业 HLS 全家桶）。
+- **外挂** 钉死 **PandA Bambu 2024.10**（stub / `BITLOOM_HLS_USE_REAL`）= **FR35 / FR76 / FR86** 可选对照；**不得单独满足 FR95 或 FR110**。
 
 数据流闭包：外挂侧 FR76 dissolve→C；树内侧 FR96 dissolve→树内 schedule（D1 **HlsFree**；可综合 comb/seq/IP 仍走 **SynthesizableClosure**）。
 
@@ -267,7 +268,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 PRD 才能推翻」。**Correct Course + FR94（2026-09-09 Path B）已批准推翻**该锁定。下列项现为 Phase 12 **交付目标**（**须由对应 FR 关闭后方可宣称完成** / NFR42）；实现 epic 须引用已修订 AD（**NFR41**）。同源：PRD addendum「Phase 12 字面绿」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
-1. **树内 / 自研 HLS 调度器** → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付；修订后 **AD-25**）；外挂 Bambu 等可保留为可选，不得单独满足 FR95
+1. **树内 / 自研 HLS 调度器** → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付；修订后 **AD-25**）；**商业深度 → FR110 / Epic 52 已关闭**（Story 52.3）；外挂 Bambu 等可保留为可选，不得单独满足 FR95/FR110
 2. **FIRRTL→idiomatic Scala / idiomatic Chisel** → **FR97**（**Epic 42 已关闭** — MVP 已交付；修订后 **AD-27**）；机械可编译仍满足 FR28/FR46，不得冒充 FR97；完成面见 [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md)
 3. 默认 **TLM≡CA 形式证明** → **FR100**（**Epic 45 已关闭** — FR100 形式等价产品 + FR102 属性全矩阵 + FR103 一级 IP 双模型 MVP；见 [`docs/fr100-formal-equiv.md`](docs/fr100-formal-equiv.md)、[`docs/fr103-ip-dual-model.md`](docs/fr103-ip-dual-model.md)）；**SystemC TLM-2.0 产品** → **FR101**（**Epic 46 已关闭** — LT-only MVP / Story 46.3；修订后 **AD-5**；**AT 加深 → Phase 13 FR107 / Epic 49**；见 [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md)）
 4. **VIP 级全协议 IP** → **FR98**（**Epic 43 已关闭** — UART/SPI/I2C/AXI4-Lite 近 VIP MVP 已交付；**GPIO 近 VIP → Phase 13 FR108 / Epic 50 已关闭** / Story 50.3；边界见 [`docs/ip/README.md`](docs/ip/README.md)）
@@ -282,7 +283,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | SystemC TLM AT / `nb_transport` | FR107 / 49 | vs FR101 LT-only — **Epic 49 已关闭**（Story 49.3） |
 | GPIO 近 VIP | FR108 / 50 | vs FR98 G0 可选 — **Epic 50 已关闭**（Story 50.3） |
 | FSM / state-visit 覆盖率（C3） | FR109 / 51 | vs FR105 Mux v2 — **Epic 51 已关闭**（Story 51.3） |
-| 树内 HLS 商业深度 | FR110 / 52 | vs FR95/96 MVP stub |
+| 树内 HLS 商业深度 | FR110 / 52 | vs FR95/96 MVP stub — **Epic 52 已关闭**（Story 52.3） |
 | Idiomatic Chisel 可维护深度 | FR111 / 53 | vs FR97 MVP |
 | 形式等价 / 双模型深度 | FR112 / 54 | vs FR100/103 MVP |
 | LSP 设计根发现加深 | FR113 / 55 | vs FR99 DesignFixture |

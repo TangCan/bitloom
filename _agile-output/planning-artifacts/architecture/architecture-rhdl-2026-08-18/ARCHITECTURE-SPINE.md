@@ -219,11 +219,12 @@ flowchart TB
 - **Correct Course 2026-09-08（历史）：** Wave 3「HLS 真调度」曾不立项；产品路径保持外挂（Bambu/Vitis）。见 `sprint-change-proposal-2026-09-08.md`。
 - **Correct Course 2026-09-09（现行）：** Phase 12 Path B / **FR94** **覆盖**上条：树内调度为字面绿交付面（**FR95** / Epic 41）。见 `sprint-change-proposal-2026-09-09-phase12-path-b.md`。
 
-- **Binds:** 可选 HLS 前端, CLI；树内调度实现（Epic 41）
-- **Prevents:** 把 Handshake/动态数据流当默认 RTL 语义；「永久 unsupported」冒充产品 HLS；仅以外挂路径冒充 **FR95** 关闭
-- **Rule:** **Phase 12 / Path B：** **允许** bitloom/rhdl crate 实现树内 `#[hls]`（或等价）**scheduling/allocation** 作为 **FR95** 产品主路径之一；调度前闭包数据流变换见 **FR96**（须遵守 AD-18 溶解规则）。**外挂**路径（发射宿主 IR/C 并调用 **Bambu 或 XLS**，启用时钉死**一个**后端）**可保留**为可选/对照/FR35 诚实路径，但**不得单独**满足 FR95。仍禁止 Handshake/动态数据流作为默认可综合 RTL 语义。当产品合同要求 HLS 路径时：文档路径必须可用，后端/树内路径缺失须失败可读，不得 silent 成功。**NFR41：** 实现 FR95/FR96 的 epic 须引用本修订后 AD-25。
+- **Binds:** 可选 HLS 前端, CLI；树内调度实现（Epic 41）；商业深度（Epic 52 / **FR110**）
+- **Prevents:** 把 Handshake/动态数据流当默认 RTL 语义；「永久 unsupported」冒充产品 HLS；仅以外挂路径冒充 **FR95** 关闭；以 FR95/96 MVP stub / 仅 loop-unroll 冒充 **FR110** 商业深度
+- **Rule:** **Phase 12 / Path B：** **允许** bitloom/rhdl crate 实现树内 `#[hls]`（或等价）**scheduling/allocation** 作为 **FR95** 产品主路径之一；调度前闭包数据流变换见 **FR96**（须遵守 AD-18 溶解规则）。**外挂**路径（发射宿主 IR/C 并调用 **Bambu 或 XLS**，启用时钉死**一个**后端）**可保留**为可选/对照/FR35 诚实路径，但**不得单独**满足 FR95。仍禁止 Handshake/动态数据流作为默认可综合 RTL 语义。当产品合同要求 HLS 路径时：文档路径必须可用，后端/树内路径缺失须失败可读，不得 silent 成功。**NFR41：** 实现 FR95/FR96 的 epic 须引用本修订后 AD-25。**Phase 13 / FR110：** 树内 **商业深度**（风险记录钉死：至少 `pipeline_stages ≥ 2` + initiation interval `ii`，或等价 Q*）为合法产品完成面；**不得**把 MVP/`in-tree-mvp`/外挂 stub 重标为 FR110；未列入质量门的调度全家桶须新合同（**NFR47**）。**NFR46：** 实现 FR110 的 epic 须引用本修订。
 - **Revised:** 2026-08-21 — 产品化默认路径；仍禁止自研调度（Phase 11）。
 - **Revised:** 2026-09-09 — Phase 12 Path B / **FR94** / **NFR41**：允许树内调度（**FR95**）；外挂可保留为可选；废止「禁止 crate 实现 scheduling/allocation」作为阻断 FR95 的依据。
+- **Revised:** 2026-09-10 — Phase 13 / **FR110** / **NFR46**：允许树内商业深度质量门（Epic 52）；FR95/96 MVP 关闭仍有效（**NFR44**）。
 
 ### AD-26 — 产品合同海拔 [ADOPTED]
 
@@ -343,7 +344,7 @@ flowchart LR
 - **所有权作声音性证明**：永不作为 freeze 门控；若做，独立 epic。
 - **SystemC TLM-2.0 实现形状：** 产品合同见 **FR101** / AD-5（LT-only MVP 已关闭 / Epic 46）；**AT / `nb_transport` 加深**见 **FR107** / Epic 49（须引用/进一步修订 AD-5；**NFR46**）。crate 切分与发射细节由实现 epic 钉死，不在此预钉。
 - **Chisel idiomatic 验收谓词细节：** 产品合同见 **FR97** / AD-27（MVP 已关闭 / Epic 42）；**可维护加深**见 **FR111** / Epic 53（须引用/进一步修订 AD-27；**NFR46**）。
-- **树内 HLS 调度深度：** 产品合同见 **FR95/96** / AD-25（MVP 已关闭 / Epic 41）；**商业调度深度**见 **FR110** / Epic 52（须引用/进一步修订 AD-25；**NFR46**）。
+- **树内 HLS 调度深度：** 产品合同见 **FR95/96** / AD-25（MVP 已关闭 / Epic 41）；**商业调度深度**见 **FR110** / Epic 52（**已关闭** / Story 52.3；AD-25 2026-09-10 修订；**NFR46**）。
 - **手写 `#[bridge]` / `#[abstraction]` / mixed `both`；形式化等价引擎细节；C ABI / cdylib；覆盖率**（产品 FR 已定，脊柱不钉实现形状）。
 - **IP / 可视化 / LSP / 黑盒 / formal/SVA / float / Analog** 的**实现形状**（产品 FR 已定；不在此钉 crate 切分）。GPIO 近 VIP 加深见 **FR108**；LSP 根发现加深见 **FR113**；FSM/state-visit 与 Tywaves/LCOV 见 **FR109** / **FR114**。
 - **interp vs 编译版 `tick` 引擎**（产品 FR32；脊柱不选引擎）。

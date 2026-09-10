@@ -16,7 +16,7 @@ Correct Course `sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen.
 
 **历史（Phase 11）：** 曾公开锁定下列五项，并写「须新 PRD 才能推翻」。
 
-1. 树内 / 自研 HLS 调度器 → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付 / Story 41.4；修订后 **AD-25**）；外挂不得单独满足 FR95
+1. 树内 / 自研 HLS 调度器 → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付 / Story 41.4；修订后 **AD-25**）；外挂不得单独满足 FR95；**商业深度 → FR110 / Epic 52 已关闭**（Story 52.3）
 2. FIRRTL→idiomatic Scala → **FR97**（**Epic 42 已关闭** — MVP 已交付 / Story 42.3；修订后 **AD-27**）；机械 FR28/FR46 不得冒充 FR97
 3. 默认 TLM≡CA 形式证明 → 现 **FR100**（**Epic 45 已关闭** — FR100 + FR102 + FR103 MVP / Story 45.4；见 `docs/fr100-formal-equiv.md`、`docs/fr103-ip-dual-model.md`）；SystemC TLM 产品 → **FR101**（**Epic 46 已关闭** — LT-only MVP / Story 46.3；修订后 **AD-5**；AT deferred；见 `docs/fr101-systemc-tlm.md`）
 4. VIP 级全协议 IP → 现 **FR98**（**Epic 43 已关闭** — UART/SPI/I2C/AXI4-Lite 近 VIP MVP；GPIO 可选未纳入；Story 43.5）；**GPIO 近 VIP → FR108 / Epic 50 已关闭**（Story 50.3）
@@ -348,7 +348,7 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   evidence: |
     - item-99：NFR42 / FR94 — 对外「产品做完 / 字面全绿」须引 FR94–105 关闭证据；禁 FR87 合同绿冒充字面 B（docs/requirements/19 §19.7–19.9；本文件 Literal-green pointer）
     - item-100：NFR41 — Epic 41–47 / 加深须引用修订 AD-5/25/27；未引用不得宣称 FR95/97/101 合法关闭（ARCHITECTURE-SPINE）
-    - item-102：FR95/FR96 — 树内 MVP / in-tree-mvp stub ≠ 商业 HLS；外挂 stub/BITLOOM_HLS_USE_REAL 不得单独关 FR95（docs/fr35-hls.md）
+    - item-102：FR95/FR96 — 树内 MVP / in-tree-mvp stub ≠ 商业 HLS；外挂 stub/BITLOOM_HLS_USE_REAL 不得单独关 FR95（docs/fr35-hls.md）；**商业深度 → FR110 / Epic 52 已关闭**（Story 52.3；docs/fr110-hls-commercial-depth.md）
     - item-106：FR97 — 机械 emit_chisel / FR28 ≠ idiomatic；须 emit_chisel_idiomatic + check_idiomatic_chisel（docs/fr97-idiomatic-chisel.md）
     - item-110：FR98 — FR82 基线 / FR89 UartTx 子集 / 单类加深 ≠ VIP 全绿；近 VIP MVP ≠ 商业 VIP；不得口头宣称 GPIO VIP（docs/ip/README.md）
     - item-114：FR99 — rust-analyzer（FR90）/ HTML（FR38/49）/ 浅层诊断 / FR91 Path B ≠ 按键全 elaborate；DesignFixture ≠ 任意 Cargo-graph 根（docs/fr99-bitloom-lsp.md）
@@ -369,11 +369,12 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     - item-121：GeneratedFunctional MemRead ≡ tick；F1-(ii) SymbiYosys/SMT → **FR112 / Epic 54**（仍 open）；**GPIO 近 VIP → FR108 / Epic 50 已关闭**（Story 50.3；商业 VIP GPIO 仍非目标）
     - item-125：AT-style nb_transport_fw/bw → **FR107 / Epic 49**（**已关闭** / Story 49.3；docs/fr107-systemc-tlm-at.md）
     - item-129：**C3 FSM/state-visit 覆盖率 → FR109 / Epic 51 已关闭**（Story 51.3；docs/fr109-fsm-state-visit-coverage.md）；Tywaves / LCOV GUI → **FR114 / Epic 56**（仍 open）
-  status: deferred — Phase 13 contract approved (FR106); FR107+FR108+FR109 closed；FR110–114 pending
+  status: deferred — Phase 13 contract approved (FR106); FR107–FR110 closed；FR111–114 pending
   resolved: '2026-09-10'
   resolution: |
     Phase 13 Correct Course（sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen）+
     PRD/addendum 已批准；不再写「尚无合同」。Epic 49 / FR107 AT documented subset **已关闭**（Story 49.3）。
     Epic 50 / FR108 GPIO near-VIP **已关闭**（Story 50.3）。
     Epic 51 / FR109 FSM/state-visit (C3) **已关闭**（Story 51.3）。
-    其余 FR110–114 仍待各 epic 关闭后方可按 FR115 宣称。Phase 12 MVP 关闭证据仍有效（NFR44）。
+    Epic 52 / FR110 HLS commercial depth **已关闭**（Story 52.3；AD-25 2026-09-10）。
+    其余 FR111–114 仍待各 epic 关闭后方可按 FR115 宣称。Phase 12 MVP 关闭证据仍有效（NFR44）。

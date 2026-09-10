@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`cargo bitloom` / `bitloom::hls`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Story **52.2** delivers Q1+Q2 depth path. Epic 52 closeout → Story **52.3**.
+**Status:** **Epic 52 / FR110 closed** (Story **52.3**). Q1+Q2 depth path delivered in Story **52.2**. FR95/96 MVP remains closed (NFR44). Undeclared full HLS suite still needs a new contract (NFR47).
 
 ## Contract (NFR14 Q1–Q2)
 
@@ -47,5 +47,6 @@ MVP loop-unroll path unchanged: `--in-tree` without `--pipeline`.
 
 ```text
 cargo test -p bitloom --test fr110_hls_commercial_depth
+cargo test -p bitloom --test fr110_epic52_closeout
 cargo test -p bitloom --test fr95_in_tree_hls_schedule
 ```

@@ -10,7 +10,7 @@
 - AD-5 / FR47: toolchain may generate Rust functional-sim crates; Phase 12 SystemC TLM-2.0 **product path** (**FR101** / revised AD-5) — **Epic 46 closed** (LT-only MVP; AT deferred)
 - AD-18 / NFR35: cycle-accurate path still rejects **capturing** closures (and heap/`dyn`/etc.); elaborate-time **non-capturing** `Fn` (or equiv.) allowed only if dissolved to HIR before freeze — must not enter `tick` as a Rust closure object (see ARCHITECTURE-SPINE AD-18)
 - AD-20 / FR51: documented `Bundle` / `Vec<T,N>` (or equiv.) allowed on synthesizable path; width/dir fail before emit; FR22 surface thicken does not deliver composites (see ARCHITECTURE-SPINE AD-20)
-- AD-25 / FR95: in-tree `#[hls]` scheduling allowed as a product path (revised AD-25); external Bambu optional — **Epic 41 closed** (FR95/FR96 MVP)
+- AD-25 / FR95: in-tree `#[hls]` scheduling allowed as a product path (revised AD-25); external Bambu optional — **Epic 41 closed** (FR95/FR96 MVP); **FR110 / Epic 52 closed** (commercial depth Q1+Q2; AD-25 revised 2026-09-10)
 - AD-27 / FR28+FR46: FrozenHir/`.fir` → **compilable** Chisel Scala (mechanical OK); **FR97** adds idiomatic/maintainable acceptance (revised AD-27); no Scala `Parser.parse` requirement; historical NFR9 “no maintainable Chisel” is overturned — **Epic 42 closed** (FR97 MVP)
 - FR98 / Epic 43: UART/SPI/I2C/AXI4-Lite near-VIP first-class IP — **Epic 43 closed** (MVP; GPIO optional not included)
 - FR99 / Epic 44: keystroke full-elaborate Bitloom LSP (`bitloom-lsp`) — **Epic 44 closed** (FR99 MVP; FR90 rust-analyzer remains available and does not substitute)

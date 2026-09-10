@@ -12,7 +12,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR110 / Epic 52；NFR14、NFR44、NFR45、NFR46、NFR47；对照 FR95/FR96、FR35、AD-25 |
 | 记录日期 | 2026-09-10 |
-| 状态 | draft — Story 52.1 |
+| 状态 | **closed** — Story 52.3 / Epic 52（2026-09-10） |
 
 ### (a) 上游约束
 
@@ -69,15 +69,16 @@
 
 ### Epic 52 关闭条件（Story 52.3 勾选）
 
-- [ ] **52.2 / FR110：** 至少一类 Q* + ATDD + ≥1 夹具；负向/边界可读
-- [ ] **文档 / deferred / AD-25 交叉链**（区分 FR95/96 MVP vs FR110）
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；prelude 边界
-- [ ] **FR95/96 MVP 关闭仍有效**（NFR44）
+- [x] **52.2 / FR110：** 至少一类 Q* + ATDD + ≥1 夹具；负向/边界可读
+- [x] **文档 / deferred / AD-25 交叉链**（区分 FR95/96 MVP vs FR110）
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；prelude 边界
+- [x] **FR95/96 MVP 关闭仍有效**（NFR44）
 
 ---
 
 ## 门禁一句话
 
 **缺 NFR14（或缺 a–d）⇒ 不得将 52.2–52.3 标 `ready`。**  
-**不得以 FR95/96 MVP stub / 仅展开 / 外挂 Bambu stub 冒充 FR110 商业深度；不得仅改文档关闭。**
+**不得以 FR95/96 MVP stub / 仅展开 / 外挂 Bambu stub 冒充 FR110 商业深度；不得仅改文档关闭。**  
+**Epic 52 / FR110 已关闭（Story 52.3）：** Q1+Q2 pipeline/II 完成面；FR95/96 MVP 关闭仍有效；未列入质量门的调度全家桶仍须新合同（NFR47）。
