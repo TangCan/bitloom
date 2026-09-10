@@ -1,11 +1,12 @@
-//! First-class IP (FR37 / FR48 / FR82 / FR89 / FR98 / FR108): SyncFifo, UartTx,
-//! UartRx, SpiMaster, I2cMaster, Axi4LiteSlave, Gpio, black-box; plus FR77 overlay
-//! [`Crc8Lut`] (Epic 29.3).
+//! First-class IP (FR37 / FR48 / FR82 / FR89 / FR98 / FR108 / FR120): SyncFifo,
+//! UartTx, UartRx, SpiMaster, I2cMaster, Axi4LiteSlave, Gpio, GpioVip, black-box;
+//! plus FR77 overlay [`Crc8Lut`] (Epic 29.3).
 //!
 //! Epic 34 / FR82 deepens five classes to **non-stub** synthesizable baselines.
 //! Epic 38 / FR89 deepens UartTx programmable baud. Epic 43 / FR98 Stories
 //! 43.2–43.5 add UART/SPI/I2C/AXI near-VIP. Epic 50 / FR108 delivers GPIO near-VIP
-//! (Phase 12 optional G0 elevated). Those IP APIs take **no** generator closures.
+//! (Phase 12 optional G0 elevated). Epic 61 / FR120 delivers commercial VIP GPIO
+//! ([`GpioVip`] beyond P1–P4). Those IP APIs take **no** generator closures.
 //! Design crates reach IP via `bitloom_prelude::ip` only.
 //!
 //! **FR77 / Cap-R-63:** [`Crc8Lut`] accepts elaborate-time table closures
@@ -2304,6 +2305,141 @@ impl Elaboratable for Gpio {
     }
 }
 
+/// 8-bit GPIO commercial VIP bank (FR120 / Epic 61): FR108 P1–P4 plus C1–C3.
+///
+/// **Baseline (FR108):** `dir`, masked `wr_*`, `pad_in` → `pad_out`/`rd_data`.
+///
+/// **C1 rising-edge IRQ:** `pad_prev` samples `pad_in`; rising = `pad_in & ~prev`;
+/// `irq_status` sticky pending; `irq_clear` clears; `irq_out` = 1 iff
+/// `(irq_status & irq_en) != 0` (bank OR).
+///
+/// **C2 open-drain + OE:** per-bit `od`; `pad_oe = dir & ~(od & out)`;
+/// `pad_out = out & pad_oe` (OD drives low only; Hi-Z when `od & out`).
+///
+/// **C3 atomic set/clear:** after optional masked write, `set_en`/`set_data` then
+/// `clr_en`/`clr_data` (same-cycle priority: wr → set → clr).
+///
+/// Non-goals (NFR51): full SoC pad ring, commercial co-sim scoreboard, debounce /
+/// drive strength, level/falling/dual-edge IRQ modes, analog. FR98 / FR108 closes
+/// remain valid (NFR48). Kept in `ip.rs` (split optional, not FR120 close condition).
+pub struct GpioVip;
+
+impl Elaboratable for GpioVip {
+    fn elaborate() -> Result<FrozenHir, Diagnostics> {
+        let mut s = ElaborateSession::new("GpioVip");
+        s.begin_module("GpioVip", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("dir", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("wr_en", GroundType::UInt { width: 1 }, Span::default());
+        s.add_input("wr_data", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("wr_mask", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("set_en", GroundType::UInt { width: 1 }, Span::default());
+        s.add_input("set_data", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("clr_en", GroundType::UInt { width: 1 }, Span::default());
+        s.add_input("clr_data", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("od", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("pad_in", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("irq_en", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("irq_clear", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("pad_out", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("pad_oe", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("rd_data", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("irq_status", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("irq_out", GroundType::UInt { width: 1 }, Span::default());
+
+        s.declare_reg("out_r", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_reg("pad_prev_r", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_reg("irq_pend_r", GroundType::UInt { width: 8 }, Span::default());
+
+        for w in [
+            "c_ff",
+            "c0_8",
+            "c0_1",
+            "c1_1",
+            "not_mask",
+            "kept",
+            "newt",
+            "merged",
+            "after_wr",
+            "or_set",
+            "after_set",
+            "not_clr",
+            "and_clr",
+            "next_out",
+            "not_dir",
+            "from_out",
+            "from_pad",
+            "od_and_out",
+            "not_od_drive",
+            "not_prev",
+            "rising",
+            "pend_or",
+            "not_clear",
+            "next_pend",
+            "armed",
+        ] {
+            let width = if w.ends_with("_1") { 1 } else { 8 };
+            s.declare_wire(w, GroundType::UInt { width }, Span::default());
+        }
+
+        s.begin_combinational(Span::default());
+        s.assign_lit("c_ff", 0xff, Span::default());
+        s.assign_lit("c0_8", 0, Span::default());
+        s.assign_lit("c0_1", 0, Span::default());
+        s.assign_lit("c1_1", 1, Span::default());
+
+        // P3 masked write → C3 set → C3 clear (documented same-cycle priority)
+        s.assign_xor("not_mask", "wr_mask", "c_ff", Span::default());
+        s.assign_and("kept", "out_r", "not_mask", Span::default());
+        s.assign_and("newt", "wr_data", "wr_mask", Span::default());
+        s.assign_or("merged", "kept", "newt", Span::default());
+        s.assign_mux("after_wr", "wr_en", "merged", "out_r", Span::default());
+        s.assign_or("or_set", "after_wr", "set_data", Span::default());
+        s.assign_mux("after_set", "set_en", "or_set", "after_wr", Span::default());
+        s.assign_xor("not_clr", "clr_data", "c_ff", Span::default());
+        s.assign_and("and_clr", "after_set", "not_clr", Span::default());
+        s.assign_mux(
+            "next_out",
+            "clr_en",
+            "and_clr",
+            "after_set",
+            Span::default(),
+        );
+
+        // C2 open-drain OE + pad_out
+        s.assign_and("od_and_out", "od", "out_r", Span::default());
+        s.assign_xor("not_od_drive", "od_and_out", "c_ff", Span::default());
+        s.assign_and("pad_oe", "dir", "not_od_drive", Span::default());
+        s.assign_and("pad_out", "out_r", "pad_oe", Span::default());
+
+        // P1/P2 rd_data
+        s.assign_xor("not_dir", "dir", "c_ff", Span::default());
+        s.assign_and("from_out", "out_r", "dir", Span::default());
+        s.assign_and("from_pad", "pad_in", "not_dir", Span::default());
+        s.assign_or("rd_data", "from_out", "from_pad", Span::default());
+
+        // C1 rising-edge IRQ
+        s.assign_xor("not_prev", "pad_prev_r", "c_ff", Span::default());
+        s.assign_and("rising", "pad_in", "not_prev", Span::default());
+        s.assign_or("pend_or", "irq_pend_r", "rising", Span::default());
+        s.assign_xor("not_clear", "irq_clear", "c_ff", Span::default());
+        s.assign_and("next_pend", "pend_or", "not_clear", Span::default());
+        s.assign_net("irq_status", "irq_pend_r", Span::default());
+        s.assign_and("armed", "irq_pend_r", "irq_en", Span::default());
+        s.assign_mux("irq_out", "armed", "c1_1", "c0_1", Span::default());
+        s.end_process();
+
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_from("out_r", "next_out", Span::default());
+        s.assign_reg_d_from("pad_prev_r", "pad_in", Span::default());
+        s.assign_reg_d_from("irq_pend_r", "next_pend", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish()
+    }
+}
+
 /// Opaque vendor IP wrapper: ports only; no child FrozenHir body (FR37 black-box).
 ///
 /// **Boundary (FR82 / Epic 34):** retained as an opaque shell — Bitloom does **not**
@@ -2878,6 +3014,107 @@ mod tests {
     }
 
     #[test]
+    fn gpio_vip_elaborate_emit_commercial_ports() {
+        smoke_elaborate_emit_tick::<GpioVip>("GpioVip");
+        let hir = GpioVip::elaborate().unwrap();
+        let v = &emit(&hir).files[0].contents;
+        assert!(v.contains("module GpioVip"));
+        for p in [
+            "dir",
+            "wr_en",
+            "set_en",
+            "clr_en",
+            "od",
+            "irq_en",
+            "irq_clear",
+            "pad_oe",
+            "irq_status",
+            "irq_out",
+        ] {
+            assert!(v.contains(p), "missing commercial VIP port {p}");
+        }
+    }
+
+    #[test]
+    fn gpio_vip_set_clear_irq_open_drain_tick() {
+        let mut sim = Sim::new(GpioVip::elaborate().unwrap());
+        let mut pv = PortValues::default();
+        // reset
+        for (k, v) in [
+            ("rst", 1u64),
+            ("dir", 0xff),
+            ("wr_en", 0),
+            ("wr_data", 0),
+            ("wr_mask", 0),
+            ("set_en", 0),
+            ("set_data", 0),
+            ("clr_en", 0),
+            ("clr_data", 0),
+            ("od", 0),
+            ("pad_in", 0),
+            ("irq_en", 0),
+            ("irq_clear", 0),
+        ] {
+            pv.set(k, v);
+        }
+        sim.set_inputs(pv.clone());
+        sim.settle();
+        sim.tick();
+        pv.set("rst", 0);
+
+        // C3: atomic set 0x0f
+        pv.set("set_en", 1);
+        pv.set("set_data", 0x0f);
+        sim.set_inputs(pv.clone());
+        sim.settle();
+        sim.tick();
+        assert_eq!(sim.ports().get("pad_out"), Some(0x0f));
+        pv.set("set_en", 0);
+        // C3: clear low nibble → 0
+        pv.set("clr_en", 1);
+        pv.set("clr_data", 0x0f);
+        sim.set_inputs(pv.clone());
+        sim.settle();
+        sim.tick();
+        assert_eq!(sim.ports().get("pad_out"), Some(0x00));
+        pv.set("clr_en", 0);
+
+        // C2: open-drain — write 0x03, od=0x01 → bit0 Hi-Z (oe=0), bit1 drive
+        pv.set("wr_en", 1);
+        pv.set("wr_data", 0x03);
+        pv.set("wr_mask", 0xff);
+        pv.set("od", 0x01);
+        sim.set_inputs(pv.clone());
+        sim.settle();
+        sim.tick();
+        assert_eq!(sim.ports().get("pad_oe"), Some(0xfe)); // ~od&out for bit0
+        assert_eq!(sim.ports().get("pad_out"), Some(0x02));
+        pv.set("wr_en", 0);
+        pv.set("od", 0);
+
+        // C1: rising edge on bit0 with irq_en
+        pv.set("irq_en", 0x01);
+        pv.set("pad_in", 0);
+        sim.set_inputs(pv.clone());
+        sim.settle();
+        sim.tick();
+        pv.set("pad_in", 1);
+        sim.set_inputs(pv.clone());
+        sim.settle();
+        sim.tick();
+        assert_eq!(sim.ports().get("irq_status"), Some(0x01));
+        assert_eq!(sim.ports().get("irq_out"), Some(1));
+        // clear
+        pv.set("irq_clear", 0x01);
+        pv.set("pad_in", 1); // no new edge (prev already 1)
+        sim.set_inputs(pv.clone());
+        sim.settle();
+        sim.tick();
+        assert_eq!(sim.ports().get("irq_status"), Some(0x00));
+        assert_eq!(sim.ports().get("irq_out"), Some(0));
+    }
+
+    #[test]
     fn blackbox_elaborate_emit_tick_opaque() {
         smoke_elaborate_emit_tick::<ExtBlackBox>("ExtBlackBox");
         let hir = ExtBlackBox::elaborate().unwrap();
@@ -2899,6 +3136,7 @@ mod tests {
         let _ = I2cMaster::elaborate();
         let _ = Axi4LiteSlave::elaborate();
         let _ = Gpio::elaborate();
+        let _ = GpioVip::elaborate();
     }
 
     #[test]

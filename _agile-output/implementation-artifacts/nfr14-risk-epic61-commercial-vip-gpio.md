@@ -53,7 +53,7 @@
 
 | # | 协议/模式 | 断言/计时深度 | elaborate/emit/tick + ATDD 义务 |
 | --- | --- | --- | --- |
-| **C1** | **上升沿 IRQ** | 每脚：`pad_in` 相对上一拍上升沿置位 pending；`irq_en` 门控；`irq_clear` 清除；`irq_out` = OR(pending ∧ en)；至少 1 拍采样延迟可文档化 | 正向：边沿→pending→irq_out；负向：`irq_en=0` 抑制 `irq_out`；clear 无新边沿后 pending 清零 |
+| **C1** | **上升沿 IRQ** | 每脚：`pad_in` 相对上一拍上升沿置位 pending；`irq_en` 门控；`irq_clear` 清除；`irq_status`=pending；**`irq_out`（1-bit）** = `(irq_status & irq_en) != 0`（bank OR）；至少 1 拍采样延迟可文档化 | 正向：边沿→pending→irq_out；负向：`irq_en=0` 抑制 `irq_out`；clear 无新边沿后 pending 清零 |
 | **C2** | **开漏 + OE** | 每脚 `od`：开漏时仅在输出 0 时断言驱动；`pad_oe` 可读；push-pull（`od=0`）保持 FR108 `pad_out=out&dir` | 正向：`od=1,out=0` → OE 有效；`od=1,out=1` → OE 无效（Hi-Z 语义）；负向：`od=0` 不改变近 VIP pad_out 语义 |
 | **C3** | **原子 set/clear** | 超出 `wr_mask`：`set_en`/`set_data` 置位；`clr_en`/`clr_data` 清位；与掩码写可共存（文档优先级：同拍 set/clr 相对 wr 的合并序） | 正向：set/clear 改变 `out`；负向：en=0 不改；与 FR108 掩码写回归夹具并存 |
 | **C4** | **ATDD 深度** | 上表 C1–C3 各至少一类正向 + 一类负向/边界；公开品牌 Bitloom | `cargo test -p bitloom --test fr120_gpio_commercial_vip`（或等价）纳入 `just test` |

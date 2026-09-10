@@ -119,11 +119,16 @@ fn fr108_docs_boundaries_honest() {
         "public brand Bitloom in IP docs"
     );
     let lower = ip_readme.to_lowercase();
+    // FR108 alone must not be marketed as commercial VIP complete / full SoC pad.
+    // FR120 / Epic 61 may document commercial VIP GPIO when named explicitly.
+    let claims_fr108_as_commercial = (lower.contains("commercial gpio vip")
+        || lower.contains("gpio vip complete"))
+        && !ip_readme.contains("FR120")
+        && !ip_readme.contains("Epic 61")
+        && !ip_readme.contains("GpioVip");
     assert!(
-        !lower.contains("commercial gpio vip")
-            && !lower.contains("gpio vip complete")
-            && !lower.contains("full soc pad"),
-        "NFR47: ban commercial VIP GPIO / full SoC pad slogans"
+        !claims_fr108_as_commercial && !lower.contains("full soc pad"),
+        "NFR47/NFR51: ban FR108-as-commercial-VIP slogans and full SoC pad claims"
     );
     // Delivered protocol face vs non-goals
     assert!(
