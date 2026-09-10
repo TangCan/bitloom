@@ -173,6 +173,32 @@ fn fr97_mechanical_emit_fails_idiomatic_check() {
 }
 
 #[test]
+fn fr97_scoped_port_check_rejects_child_port_only_in_top() {
+    // Whole-file substring would still find Top's `val x = Input(`; scoped check must fail Child.
+    let hir = hierarchy_fixture();
+    let mut scala = emit_chisel_idiomatic(&hir).expect("idiomatic emit").files[0]
+        .contents
+        .clone();
+    // Remove Child's data port line only (Top keeps `val x = Input(`).
+    let child_port = "    val x = Input(UInt(8.W))\n";
+    let first = scala
+        .find(child_port)
+        .expect("Child port line must exist once before Top");
+    scala.replace_range(
+        first..first + child_port.len(),
+        "    // port x removed for scoped test\n",
+    );
+    let err = check_idiomatic_chisel(&scala, &hir)
+        .expect_err("Child port missing in Child class scope must fail");
+    assert_eq!(err.code, "rhdl::E0904");
+    let msg = format!("{err}");
+    assert!(
+        msg.contains("Child") || msg.contains("scoped") || msg.contains("作用域"),
+        "failure must cite module scope: {msg}"
+    );
+}
+
+#[test]
 fn fr97_docs_distinguish_mechanical_vs_idiomatic() {
     let root = workspace_root();
     let fr97 = fs::read_to_string(root.join("docs/fr97-idiomatic-chisel.md"))

@@ -17,7 +17,7 @@ Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**；当前完�
 5. 按键全设计 elaborate 的 netlist LSP → 现 **FR99**（**Epic 44 已关闭** — Story 44.4；`bitloom-lsp` 全设计 elaborate MVP）
 
 **Phase 12（2026-09-09）：** Correct Course `sprint-change-proposal-2026-09-09-phase12-path-b.md` + PRD addendum「Phase 12 字面绿」**已推翻**上述锁定（闸门 **FR94**）。  
-README 与本文件同源：原五项不再是永久非目标；其中 **#1（树内 HLS）已由 Epic 41 关闭**，**#2（idiomatic Chisel）已由 Epic 42 关闭**，**#3（默认 TLM≡CA / 自动形式等价）已由 Epic 45 / FR100（+FR102/FR103）关闭**，**#3b（SystemC TLM 产品）已由 Epic 46 / FR101 关闭**（LT-only MVP；「不承诺 SystemC TLM」不再是完成排除项；AT deferred），**#4（VIP / 全协议 IP）已由 Epic 43 / FR98 关闭**，**#5（按键全 elaborate LSP）已由 Epic 44 / FR99 关闭**；其余仍为交付目标（对应 FR 关闭后方可宣称 / **NFR42**）；ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 已于 Story **40.4** 修订（**NFR41**）。Epic 47 仍须经 NFR14 后标 ready——**本条目不把 47 标为已开工**。
+README 与本文件同源：原五项不再是永久非目标；其中 **#1（树内 HLS）已由 Epic 41 关闭**，**#2（idiomatic Chisel）已由 Epic 42 关闭**，**#3（默认 TLM≡CA / 自动形式等价）已由 Epic 45 / FR100（+FR102/FR103）关闭**，**#3b（SystemC TLM 产品）已由 Epic 46 / FR101 关闭**（LT-only MVP；「不承诺 SystemC TLM」不再是完成排除项；AT deferred），**#4（VIP / 全协议 IP）已由 Epic 43 / FR98 关闭**，**#5（按键全 elaborate LSP）已由 Epic 44 / FR99 关闭**；其余仍为交付目标（对应 FR 关闭后方可宣称 / **NFR42**）；ARCHITECTURE-SPINE **AD-5 / AD-25 / AD-27** 已于 Story **40.4** 修订（**NFR41**）。**Epic 40–47 均已关闭**（sprint `epic-40`…`epic-47` = done；`phase12Status: complete`）。
 
 PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 11 FR93 历史 + Phase 12 推翻）。
 
@@ -264,17 +264,19 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     评估完成 → action items 关闭；剩余拆分为可选 hygiene 故事。
 
 - source_spec: `_agile-output/implementation-artifacts/epic-29-retro-2026-09-09.md`
-  summary: bitloom-prelude `ip.rs` 体量监视与拆分预算（FR77 overlay + FR82 五类）
+  summary: bitloom-prelude `ip.rs` 体量监视与拆分预算（FR77 overlay + FR82 五类 + FR98 近 VIP）
   evidence: |
-    epic-29-retro-item-68；续 83/86；现行 ~1357 行单文件（SyncFifo/UartTx/SpiMaster/
-    I2cMaster/Axi4LiteSlave/ExtBlackBox/Crc8Lut + tests）
-  status: deferred — size watch + split budget
-  resolved: '2026-09-09'
+    epic-29-retro-item-68；续 83/86；epic-43-retro-item-111；
+    2026-09-09 评估 ~1357 行；2026-09-10 复测 **~2869 行**（Epic 43 net ~+1386）
+  status: deferred — size watch + split budget（past soft threshold；assess-and-defer）
+  resolved: '2026-09-10'
   resolution: |
-    本 sweep **不**拆 `ip.rs`（行为风险高于收益；五类 Elaboratable 紧耦合测试）。
-    触发拆分：单文件 ≥~1800 行，或新增第六类一级 IP / 大块 FR77 生成器时，
-    按 IP 类型 `mod` 拆（`ip/{sync_fifo,uart_tx,…}.rs`）且保持 `bitloom_prelude::ip::*` 再导出。
-    在此之前仅监视；禁止 silent 大 refactor。
+    2026-09-09：未拆（行为风险高于收益）。
+    2026-09-10（item-111）：已超原 ~1800 触发线，但本 sweep **仍不拆**——
+    五类 Elaboratable + FR98 近 VIP + Epic 45 双模型测试紧耦合；大拆分 churn 与
+    可选 hygiene 故事冲突。下次触发：新增第六类一级 IP / 大块生成器，或单独立项
+    hygiene 故事按 `ip/{sync_fifo,uart,…}.rs` 拆且保持 `bitloom_prelude::ip::*` 再导出。
+    禁止 silent 大 refactor。
 
 - source_spec: `_agile-output/implementation-artifacts/epic-31-retro-2026-09-09.md`
   summary: Standing NFR37 诚实边界（触及对应面时遵守；非立即实现）
@@ -323,9 +325,43 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     加深子集或改选分支须新合同 + NFR14，禁止静默扩大。
 
 - source_spec: `_agile-output/implementation-artifacts/42-2-idiomatic-chisel-发射与验收-fr97.md`
-  summary: `check_idiomatic_chisel` 按模块块作用域校验端口/IO Bundle（当前整文件子串）
-  evidence: 审查 edge-case；层次夹具下缺 Child class 仍会失败；加深作用域属后续硬化
+  summary: `check_idiomatic_chisel` 按模块块作用域校验端口/IO Bundle；空电路拒绝
+  evidence: |
+    原 deferred（整文件子串 + 空电路策略未钉）；epic-42-retro-item-107
+  status: closed — scoped port/IO + empty reject（sweep 2026-09-10）
+  resolved: '2026-09-10'
+  resolution: |
+    `module_class_span` 作用域校验；`modules.is_empty()` → E0904（无豁免）；
+    docs/fr97 已记；ATDD fr97_idiomatic_chisel scoped negative
 
-- source_spec: `_agile-output/implementation-artifacts/42-2-idiomatic-chisel-发射与验收-fr97.md`
-  summary: 空模块电路上 idiomatic emit 是否应 E0904（正常 elaborate 难达）
-  evidence: maybe-false；若出现空 FrozenHir 需实测后再钉拒绝策略
+<!-- action-items-sweep-2026-09-10: epics 40–47 Phase-12 open retro items disposition -->
+
+- source_spec: `_agile-output/implementation-artifacts/epic-40-retro-2026-09-10.md`
+  summary: Standing Phase-12 诚实 / 过程边界（Epic 40–47；触及对应面时遵守；非立即实现）
+  evidence: |
+    - item-99：NFR42 / FR94 — 对外「产品做完 / 字面全绿」须引 FR94–105 关闭证据；禁 FR87 合同绿冒充字面 B（docs/requirements/19 §19.7–19.9；本文件 Literal-green pointer）
+    - item-100：NFR41 — Epic 41–47 / 加深须引用修订 AD-5/25/27；未引用不得宣称 FR95/97/101 合法关闭（ARCHITECTURE-SPINE）
+    - item-102：FR95/FR96 — 树内 MVP / in-tree-mvp stub ≠ 商业 HLS；外挂 stub/BITLOOM_HLS_USE_REAL 不得单独关 FR95（docs/fr35-hls.md）
+    - item-106：FR97 — 机械 emit_chisel / FR28 ≠ idiomatic；须 emit_chisel_idiomatic + check_idiomatic_chisel（docs/fr97-idiomatic-chisel.md）
+    - item-110：FR98 — FR82 基线 / FR89 UartTx 子集 / 单类加深 ≠ VIP 全绿；近 VIP MVP ≠ 商业 VIP；不得口头宣称 GPIO VIP（docs/ip/README.md）
+    - item-114：FR99 — rust-analyzer（FR90）/ HTML（FR38/49）/ 浅层诊断 / FR91 Path B ≠ 按键全 elaborate；DesignFixture ≠ 任意 Cargo-graph 根（docs/fr99-bitloom-lsp.md）
+    - item-118：FR100/102/103 — FR92 记分板 / FR30 alone ≠ FR100；FR78/92 adapter ≠ FR102/103；Epic 45 ≠ FR101；MVP = F1-(i) 有界穷举；SyncFifo 手写 FL 诚实（docs/fr100-formal-equiv.md / fr103-ip-dual-model.md）
+    - item-122：FR101 — host Rust FL（FR47）≠ SystemC TLM；Epic 46 ≠ AT/nb_transport / 默认 TLM≡CA；MVP = LT-only（docs/fr101-systemc-tlm.md）
+    - item-126：FR104/105 — 静态 timing/VCD/GTKWave ≠ FR104；FR34 toggle alone / docs-only ≠ FR105；MVP = interactive.html I1–I3 + coverage v2 Mux；C3 FSM cropped；Tywaves 非本关闭面（docs/fr104-interactive-wave.md）
+    - item-101/104/108/112/115/119/123/127：epics.md frontmatter phase12Epic40–47Status → complete（与 phase12Status / sprint done 对齐）
+  status: deferred — standing contract when touching area
+  resolved: '2026-09-10'
+  resolution: |
+    编入本 ledger；公开 FR 文档已含对应诚实条。触碰相关 crate/文档/CI 叙事时对照；
+    加深子集须新合同 + NFR14，禁止静默扩大。
+
+- source_spec: `_agile-output/implementation-artifacts/epic-44-retro-2026-09-10.md`
+  summary: 可选产品加深（Phase 12「若产品需要…」）— 超出已满足 AC 的 MVP；单独立项
+  evidence: |
+    - item-117：超越 DesignFixture 的 Cargo-graph / 任意 .rs 设计根发现（44.4 deferred；非 FR99 AC）
+    - item-121：GeneratedFunctional MemRead ≡ tick；F1-(ii) SymbiYosys/SMT；GPIO VIP（45.4 deferred；非 FR103 AC）
+    - item-125：AT-style nb_transport_fw/bw（46.2/46.3 deferred；非 FR101 LT-only AC）
+    - item-129：C3 FSM/state-visit 覆盖率；Tywaves 级 IDE 波形；LCOV/第三方覆盖率 GUI（47.2/47.3 deferred；非 FR104/105 MVP AC）
+  status: deferred — optional product scope（explicit new contract required）
+  resolved: '2026-09-10'
+  resolution: 非缺陷；当前 epic AC 已满足。需要时开新故事+改文档/NFR14，禁止静默扩大 MVP。

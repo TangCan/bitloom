@@ -62,11 +62,16 @@ enum Commands {
         /// Ignored when `--in-tree` (in-tree never calls Bambu).
         #[arg(long, default_value_t = false)]
         emit_only: bool,
-        /// Dissolve a documented dataflow transform before emit (FR76):
+        /// Dissolve a documented dataflow transform before emit / schedule:
         /// `add` | `identity` | `add1` | `xor_a5`.
+        /// With `--in-tree`, this always runs the FR96 dissolve path
+        /// (`schedule_in_tree_from_transform`); success prints `fr96=true`.
+        /// Bare FR95 (no dissolve) → library `schedule_in_tree` / `run_hls_in_tree`.
         #[arg(long, default_value = "add")]
         dataflow: String,
         /// FR95: run in-tree schedule MVP (no Bambu). Optional `--unroll N` (default 4).
+        /// Note: CLI `--in-tree` always dissolves `--dataflow` first (FR96); bare FR95
+        /// without dissolve is library-only (`schedule_in_tree`).
         #[arg(long, default_value_t = false)]
         in_tree: bool,
         /// Loop-unroll trip count for `--in-tree` (FR95 documented subset).

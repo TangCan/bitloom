@@ -162,10 +162,50 @@ pub fn emit_chisel_idiomatic(hir: &FrozenHir) -> Result<Artifact, ChiselGenError
     emit_with_face(hir, EmitFace::Idiomatic)
 }
 
+/// Extract the brace-delimited `class {name} extends Module { … }` body (inclusive).
+/// Used so port / IO Bundle checks are scoped per module (not whole-file substring).
+fn module_class_span<'a>(scala: &'a str, module_name: &str) -> Option<&'a str> {
+    let header = format!("class {module_name} extends Module");
+    let start = scala.find(&header)?;
+    let after = &scala[start..];
+    let brace = after.find('{')?;
+    let bytes = after.as_bytes();
+    let mut depth = 0i32;
+    let mut i = brace;
+    while i < bytes.len() {
+        match bytes[i] {
+            b'{' => depth += 1,
+            b'}' => {
+                depth -= 1;
+                if depth == 0 {
+                    return Some(&after[..=i]);
+                }
+            }
+            _ => {}
+        }
+        i += 1;
+    }
+    None
+}
+
 /// Assert FR97 idiomatic acceptance criteria against emitted Scala + FrozenHir.
 ///
 /// Mechanical [`emit_chisel`] output must fail here (explicit downgrade / no silent claim).
+///
+/// **Empty circuit policy:** `hir.circuit().modules.is_empty()` → `Err(E0904)` (no exemption).
+/// Normal elaborate already rejects empty circuits at freeze; this is defense-in-depth for
+/// hand-built / mutated FrozenHir.
+///
+/// **Port / IO scope:** each module's ports and `IO(new Bundle)` are checked inside that
+/// module's class block (not via whole-file substring).
 pub fn check_idiomatic_chisel(scala: &str, hir: &FrozenHir) -> Result<(), IdiomaticCheckError> {
+    if hir.circuit().modules.is_empty() {
+        return Err(e0904(
+            "idiomatic check failed: empty circuit (no modules) — rejected; no empty-circuit exemption",
+            "idiomatic 验收失败：空电路（无模块）— 拒绝；无空电路豁免",
+        ));
+    }
+
     let lower = scala.to_lowercase();
 
     // Require contiguous positive claim — mechanical headers may mention "≠ idiomatic / FR97"
@@ -269,7 +309,7 @@ pub fn check_idiomatic_chisel(scala: &str, hir: &FrozenHir) -> Result<(), Idioma
     }
 
     for m in &hir.circuit().modules {
-        if !scala.contains(&format!("class {} extends Module", m.name)) {
+        let Some(mod_span) = module_class_span(scala, &m.name) else {
             return Err(e0904(
                 &format!(
                     "idiomatic check failed: missing Module class for HIR name `{}`",
@@ -280,11 +320,17 @@ pub fn check_idiomatic_chisel(scala: &str, hir: &FrozenHir) -> Result<(), Idioma
                     m.name
                 ),
             ));
-        }
-        if !scala.contains("IO(new Bundle") {
+        };
+        if !mod_span.contains("IO(new Bundle") {
             return Err(e0904(
-                "idiomatic check failed: missing IO(new Bundle) structure",
-                "idiomatic 验收失败：缺少 IO(new Bundle) 结构",
+                &format!(
+                    "idiomatic check failed: module `{}` missing IO(new Bundle) in its class scope",
+                    m.name
+                ),
+                &format!(
+                    "idiomatic 验收失败：模块 `{}` 的 class 作用域内缺少 IO(new Bundle)",
+                    m.name
+                ),
             ));
         }
         for p in &m.ports {
@@ -297,30 +343,31 @@ pub fn check_idiomatic_chisel(scala: &str, hir: &FrozenHir) -> Result<(), Idioma
                 PortDirection::InOut => "Analog",
             };
             let needle = format!("val {} = {dir}(", p.name);
-            if !scala.contains(&needle) {
+            if !mod_span.contains(&needle) {
                 return Err(e0904(
                     &format!(
-                        "idiomatic check failed: port `{}` not found as `val {} = {dir}(` (naming)",
-                        p.name, p.name
+                        "idiomatic check failed: port `{}` not found in module `{}` as `val {} = {dir}(` (scoped naming)",
+                        p.name, m.name, p.name
                     ),
                     &format!(
-                        "idiomatic 验收失败：端口 `{}` 未以 `val {} = {dir}(` 出现（命名）",
-                        p.name, p.name
+                        "idiomatic 验收失败：端口 `{}` 未在模块 `{}` 作用域内以 `val {} = {dir}(` 出现",
+                        p.name, m.name, p.name
                     ),
                 ));
             }
         }
         for stmt in &m.body {
             if let Stmt::Instance(inst) = stmt {
-                if !scala.contains(&format!("val {} = Module(new {})", inst.name, inst.module)) {
+                let needle = format!("val {} = Module(new {})", inst.name, inst.module);
+                if !mod_span.contains(&needle) {
                     return Err(e0904(
                         &format!(
-                            "idiomatic check failed: instance `{}` / module `{}` naming mismatch",
-                            inst.name, inst.module
+                            "idiomatic check failed: instance `{}` / module `{}` not found in parent `{}` class scope",
+                            inst.name, inst.module, m.name
                         ),
                         &format!(
-                            "idiomatic 验收失败：实例 `{}` / 模块 `{}` 命名不一致",
-                            inst.name, inst.module
+                            "idiomatic 验收失败：实例 `{}` / 模块 `{}` 未在父模块 `{}` class 作用域内出现",
+                            inst.name, inst.module, m.name
                         ),
                     ));
                 }

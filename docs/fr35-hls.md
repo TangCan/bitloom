@@ -26,11 +26,13 @@ Bitloom **supports** HLS as a product path（概述 §1.3.8）。公开品牌：
 
 ```bash
 # 树内 loop-unroll：写出 {fn}.schedule.json + {fn}.v，永不 spawn bambu
-# （CLI --dataflow 走 FR96 dissolve → FR95 schedule）
+# （CLI --in-tree 默认经 --dataflow dissolve → FR96 → FR95；常打印 fr96=true）
 cargo run -p bitloom -- hls --in-tree --function map_add1 --dataflow add1 --unroll 4 \
   --out-dir target/bitloom-hls-in-tree
-# 成功时打印 ok_schedule=… 与 ok_rtl=…（含 fr96=true）
+# 成功时打印 path=in-tree fr95=true fr96=true … 与 ok_schedule=… / ok_rtl=…
 ```
+
+**CLI ↔ 库 API：** `cargo bitloom hls --in-tree` **总是**先 dissolve `--dataflow`（FR96），再进树内 schedule——因此成功路径几乎总带 `fr96=true`。若需要**裸 FR95**（无闭包 dissolve、仅 `HlsDataflowOp`），使用库 API `schedule_in_tree` / `run_hls_in_tree`（见下）；CLI 当前无「跳过 dissolve」开关。
 
 库 API（裸 Op，无闭包 — FR95 only）：
 

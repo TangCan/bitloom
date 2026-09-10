@@ -76,14 +76,14 @@ correctCoursePhase12Approved: 2026-09-09
 phase12Contract: literal-green-path-b
 phase12Scope: Literal seven-stage full green (Path B) — overturn FR93; FR94–FR105 / NFR40–NFR43; Epic 40–47 (30 stories)
 phase12Note: Correct Course approved 2026-09-09-phase12-path-b. Research advised against Path B; product chose B1. Epic 40 must close before 41–47 ready. Sprint seeded backlog.
-phase12Epic40Status: ready-for-dev
-phase12Epic41Status: ready-for-dev
-phase12Epic42Status: ready-for-dev
-phase12Epic43Status: ready-for-dev
-phase12Epic44Status: ready-for-dev
-phase12Epic45Status: ready-for-dev
-phase12Epic46Status: ready-for-dev
-phase12Epic47Status: ready-for-dev
+phase12Epic40Status: complete
+phase12Epic41Status: complete
+phase12Epic42Status: complete
+phase12Epic43Status: complete
+phase12Epic44Status: complete
+phase12Epic45Status: complete
+phase12Epic46Status: complete
+phase12Epic47Status: complete
 phase12Validation: |
   FR94–105 all mapped to stories; no forward story deps detected; Epic 40 hard gate for 41–47;
   Architecture starter N/A; AD-5/25/27 revisions gated in Epic 40 (NFR41);

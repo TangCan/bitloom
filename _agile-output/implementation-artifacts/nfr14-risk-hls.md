@@ -3,6 +3,8 @@
 > **权威：** PRD `prd-rhdl-2026-08-19` **NFR14**；架构脊柱 **AD-28**（Phase 7 风险门禁）。  
 > **模板：** `nfr14-risk-record-template.md`（Story 19.1）。  
 > **门禁：** 无本有效记录（或缺字段 a–d）⇒ **不得**将 Epic 24 后续故事 **24.2–24.4** 标为 `ready`，亦不得开工实现。
+>
+> **历史门禁（「禁树内」）：** 下文「不得引入树内自研 scheduler」为 **Epic 24 当时** 的 AD-25 合同。**已被 AD-25 Path B 修订推翻**（Phase 12 / Story 40.4）；现行树内 FR95 完成面见 **Epic 41** / [`docs/fr35-hls.md`](../../docs/fr35-hls.md) / [`nfr14-risk-epic41-in-tree-hls.md`](nfr14-risk-epic41-in-tree-hls.md)。保留原文作历史证据，**不得**再当作现行产品禁令。
 
 ---
 

@@ -1010,91 +1010,91 @@ action_items:
     action: "NFR42 / FR94 宣称纪律：对外「产品做完 / 字面全绿」必须引用 FR94–105 关闭证据；禁止用 FR87 合同绿冒充字面
       B；字面项须对应 FR 关闭后方可勾选。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-40-retro-2026-09-10.md"
   - id: "epic-40-retro-item-100-nfr41-修订-ad-引用纪律-实现-epic-41-47-及后续加深-须在故"
     epic: 40
     action: "NFR41 / 修订 AD 引用纪律：实现 Epic 41–47（及后续加深）须在故事/NFR14 中引用已修订 AD-5/25/27（适用者）；不得在未引用修订
       AD 时宣称 FR95/97/101 等已合法关闭。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-40-retro-2026-09-10.md"
   - id: "epic-40-retro-item-101-同步-epics-md-frontmatter-将-phase12epic40s"
     epic: 40
     action: "同步 epics.md frontmatter：将 phase12Epic40Status–phase12Epic47Status 从 ready-for-dev
       改为与 sprint done / phase12Status: complete 一致（续 Phase 11 item-89/92/95/98 同形漂移）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-40-retro-2026-09-10.md"
   - id: "epic-41-retro-item-102-fr95-fr96-诚实边界-对外不得把树内-mvp-in-tree-mvp-r"
     epic: 41
     action: "FR95/FR96 诚实边界：对外不得把树内 MVP / in-tree-mvp RTL stub 写成商业级完整 HLS；外挂 stub/BITLOOM_HLS_USE_REAL
       仍不得单独关 FR95（续 NFR40/NFR42）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-41-retro-2026-09-10.md"
   - id: "epic-41-retro-item-103-澄清-cli-库-api-文档或-cli-帮助标明-in-tree-默认经-da"
     epic: 41
     action: "澄清 CLI ↔ 库 API：文档或 CLI 帮助标明 --in-tree 默认经 --dataflow dissolve（常打印 fr96=true）；若需裸
       FR95，使用库 API schedule_in_tree 或增加显式开关。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-41-retro-2026-09-10.md"
   - id: "epic-41-retro-item-104-续-epic-40-retro-item-101-同步-epics-md-fro"
     epic: 41
     action: "续 epic-40-retro-item-101：同步 epics.md frontmatter phase12Epic40Status–phase12Epic47Status
       与 sprint done / phase12Status: complete。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-41-retro-2026-09-10.md"
   - id: "epic-41-retro-item-105-历史-nfr14-epic-24-37-等-禁树内-文案-加-历史门禁-已被-a"
     epic: 41
     action: "历史 NFR14（Epic 24/37 等）「禁树内」文案：加「历史门禁 / 已被 AD-25 Path B 修订；现行见 Epic 41
       / docs/fr35-hls.md」指针。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-41-retro-2026-09-10.md"
   - id: "epic-42-retro-item-106-fr97-诚实边界-对外不得把机械-emit_chisel-fr28-可编译-写"
     epic: 42
     action: "FR97 诚实边界：对外不得把机械 emit_chisel / FR28「可编译」写成 idiomatic / FR97 已交付；须用 emit_chisel_idiomatic
       + check_idiomatic_chisel（续 NFR40/NFR42）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-42-retro-2026-09-10.md"
   - id: "epic-42-retro-item-107-硬化-check_idiomatic_chisel-按模块块作用域校验端口-io"
     epic: 42
     action: "硬化 check_idiomatic_chisel：按模块块作用域校验端口/IO Bundle（当前整文件子串）；并钉死空电路拒绝或显式豁免策略（续
       42.2 deferred）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-42-retro-2026-09-10.md"
   - id: "epic-42-retro-item-108-续-epic-40-retro-item-101-epic-41-retro-i"
     epic: 42
     action: "续 epic-40-retro-item-101 / epic-41-retro-item-104：同步 epics.md frontmatter
       phase12Epic40Status–phase12Epic47Status 与 sprint done / phase12Status: complete。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-42-retro-2026-09-10.md"
   - id: "epic-42-retro-item-109-nfr14-故事-commit-subject-惯例-门禁故事-subject"
     epic: 42
     action: "NFR14 故事 commit subject 惯例：门禁故事 subject 含 Story N.1（或 N.1），避免 git_evidence.py
       归因空（续 41.1/42.1）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-42-retro-2026-09-10.md"
   - id: "epic-43-retro-item-110-fr98-诚实边界-对外不得把-fr82-基线-fr89-uarttx-子集-单"
     epic: 43
     action: "FR98 诚实边界：对外不得把 FR82 基线 / FR89 UartTx 子集 / 单类加深写成 VIP / FR98 全绿；近 VIP
       MVP ≠ 商业 VIP 对拍；不得口头宣称 GPIO VIP（G0 未交付）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-43-retro-2026-09-10.md"
   - id: "epic-43-retro-item-111-评估拆分-crates-bitloom-prelude-src-ip-rs-现"
     epic: 43
     action: "评估拆分 crates/bitloom-prelude/src/ip.rs（现 ~2869 行；Epic 43 net +1386）为按
       IP 模块文件，降低与 Epic 45 一级 IP 双模型 churn 冲突。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-43-retro-2026-09-10.md"
   - id: "epic-43-retro-item-112-续-epic-40-retro-item-101-epic-41-retro-i"
     epic: 43
@@ -1102,14 +1102,14 @@ action_items:
       epics.md frontmatter phase12Epic40Status–phase12Epic47Status 与 sprint done /
       phase12Status: complete。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-43-retro-2026-09-10.md"
   - id: "epic-43-retro-item-113-nfr14-收口故事-commit-subject-惯例-门禁与收口-commi"
     epic: 43
     action: "NFR14 / 收口故事 commit subject 惯例：门禁与收口 commit subject 含 Story N.1 / Story
       N.5（或 N.1/N.5），避免 git_evidence.py 归因空（续 42 item-109；本 epic 43.1/43.5 复发）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-43-retro-2026-09-10.md"
   - id: "epic-44-retro-item-114-fr99-诚实边界-对外不得把宿主-rust-analyzer-fr90-htm"
     epic: 44
@@ -1117,7 +1117,7 @@ action_items:
       Path B 历史 defer 写成 FR99 / 按键全 elaborate 已绿；MVP DesignFixture ≠ 任意 .rs Cargo-graph
       设计根发现。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-44-retro-2026-09-10.md"
   - id: "epic-44-retro-item-115-续-epic-40-retro-item-101-epic-41-retro-i"
     epic: 44
@@ -1125,21 +1125,21 @@ action_items:
       / epic-43-retro-item-112：同步 epics.md frontmatter phase12Epic40Status–phase12Epic47Status
       与 sprint done / phase12Status: complete。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-44-retro-2026-09-10.md"
   - id: "epic-44-retro-item-116-nfr14-收口故事-commit-subject-惯例-门禁与收口-commi"
     epic: 44
     action: "NFR14 / 收口故事 commit subject 惯例：门禁与收口 commit subject 含 Story N.1 / Story
       N.4（或 N.1/N.4），避免 git_evidence.py 归因空（续 43 item-113；本 epic 44.1/44.4 复发）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-44-retro-2026-09-10.md"
   - id: "epic-44-retro-item-117-评估可选加深-超越文档钉死-designfixture-的-cargo-grap"
     epic: 44
     action: "评估可选加深：超越文档钉死 DesignFixture 的 Cargo-graph / 任意 .rs 设计根发现（故事 44.4 deferred；非
       FR99 AC 缺口）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-44-retro-2026-09-10.md"
   - id: "epic-45-retro-item-118-fr100-102-103-诚实边界-对外不得把-fr92-随机记分板-fr30"
     epic: 45
@@ -1147,7 +1147,7 @@ action_items:
       FR78/FR92 adapter 模板关闭 FR102/103；不得把 Epic 45 关闭冒充 FR101 SystemC TLM 产品；MVP =
       F1-(i) 有界穷举（≠ 全芯片无界 SMT）；SyncFifo 手写 FL 诚实（GeneratedFunctional MemRead 不足 alone）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-45-retro-2026-09-10.md"
   - id: "epic-45-retro-item-119-续-epic-40-retro-item-101-epic-41-retro-i"
     epic: 45
@@ -1155,21 +1155,21 @@ action_items:
       / epic-43-retro-item-112 / epic-44-retro-item-115：同步 epics.md frontmatter phase12Epic40Status–phase12Epic47Status
       与 sprint done / phase12Status: complete。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-45-retro-2026-09-10.md"
   - id: "epic-45-retro-item-120-nfr14-收口故事-commit-subject-惯例-门禁与收口-commi"
     epic: 45
     action: "NFR14 / 收口故事 commit subject 惯例：门禁与收口 commit subject 含 Story N.1 / Story
       N.4（或 N.1/N.4），避免 git_evidence.py 归因空（续 44 item-116；本 epic 45.1/45.4 复发）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-45-retro-2026-09-10.md"
   - id: "epic-45-retro-item-121-评估可选加深-generatedfunctional-memread-tick"
     epic: 45
     action: "评估可选加深：GeneratedFunctional MemRead ≡ tick（超出 SyncFifo 手写 FL）；F1-(ii)
       外部 SymbiYosys/SMT 产品支；GPIO VIP（故事 45.4 deferred；非 FR103 AC 缺口）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-45-retro-2026-09-10.md"
   - id: "epic-46-retro-item-122-fr101-诚实边界-对外不得把-host-rust-fl-fr47-emit_"
     epic: 46
@@ -1177,7 +1177,7 @@ action_items:
       TLM；不得把 Epic 46 关闭冒充 AT/nb_transport 或默认 TLM≡CA（FR100）；MVP = LT-only（b_transport
       + generic payload；AT deferred）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-46-retro-2026-09-10.md"
   - id: "epic-46-retro-item-123-续-epic-40-retro-item-101-epic-41-retro-i"
     epic: 46
@@ -1186,21 +1186,21 @@ action_items:
       epics.md frontmatter phase12Epic40Status–phase12Epic47Status 与 sprint done /
       phase12Status: complete。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-46-retro-2026-09-10.md"
   - id: "epic-46-retro-item-124-nfr14-收口故事-commit-subject-惯例-门禁与收口-commi"
     epic: 46
     action: "NFR14 / 收口故事 commit subject 惯例：门禁与收口 commit subject 含 Story N.1 / Story
       N.3（或 N.1/N.3），避免 git_evidence.py 归因空（续 45 item-120；本 epic 46.1/46.3 复发）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-46-retro-2026-09-10.md"
   - id: "epic-46-retro-item-125-评估可选加深-at-style-nb_transport_fw-bw-产品支-故"
     epic: 46
     action: "评估可选加深：AT-style nb_transport_fw/bw 产品支（故事 46.2/46.3 deferred；非 FR101
       LT-only AC 缺口）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-46-retro-2026-09-10.md"
   - id: "epic-47-retro-item-126-fr104-fr105-诚实边界-对外不得把静态-timing-html-基础"
     epic: 47
@@ -1208,7 +1208,7 @@ action_items:
       FR34 toggle alone 或 docs-only 写成 FR105；MVP = interactive.html I1–I3 + coverage
       v2 Mux 分支；C3 FSM cropped；Tywaves 级 IDE 波形非本关闭面。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-47-retro-2026-09-10.md"
   - id: "epic-47-retro-item-127-续-epic-40-retro-item-101-epic-41-retro-i"
     epic: 47
@@ -1218,7 +1218,7 @@ action_items:
       与 sprint done（phase12Status: complete 已写）。并清扫 deferred-work.md L20 仍写「47 须 NFR14
       后标 ready」的陈旧开篇句。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-47-retro-2026-09-10.md"
   - id: "epic-47-retro-item-128-nfr14-收口故事-commit-subject-惯例-门禁与收口-及实现-c"
     epic: 47
@@ -1226,12 +1226,12 @@ action_items:
       命中的故事标识——至少 Story N.M 且回顾时向 --stories 传短 id（47.1,47.2,47.3），或 subject 含 sprint
       键片段；避免对中文全键归因空（续 46 item-124；本 epic 三提交全空）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-47-retro-2026-09-10.md"
   - id: "epic-47-retro-item-129-评估可选加深-c3-fsm-state-visit-覆盖率-tywaves-级"
     epic: 47
     action: "评估可选加深：C3 FSM/state-visit 覆盖率；Tywaves 级 typed IDE 波形；LCOV/第三方覆盖率 GUI（故事
       47.2/47.3 deferred；非 FR104/105 MVP AC 缺口）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-47-retro-2026-09-10.md"

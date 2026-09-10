@@ -6,6 +6,8 @@
 > **前置：** Epic 36 合同绿文本已合入（软依赖）；Correct Course `sprint-change-proposal-2026-09-09.md` approved。  
 > **deferred：** `deferred-work.md` — CI 默认 Bambu stub；Epic 37 / FR88 **本阶段选 Path B**（关闭「可选夜间」；真机仍显式入口）。  
 > **门禁：** 无本有效记录（或缺字段 a–d）⇒ **不得**将 Epic 37 后续故事 **37.2–37.3** 标为 `ready`，亦不得开工实现。
+>
+> **历史门禁（「禁树内」）：** 下文 AD-25「HLS 仅外挂 / 不得引入树内调度」为 **Epic 37 当时** 合同。**已被 AD-25 Path B 修订推翻**；现行树内 FR95 见 **Epic 41** / [`docs/fr35-hls.md`](../../docs/fr35-hls.md) / [`nfr14-risk-epic41-in-tree-hls.md`](nfr14-risk-epic41-in-tree-hls.md)。保留原文作历史证据，**不得**再当作现行产品禁令。
 
 ---
 

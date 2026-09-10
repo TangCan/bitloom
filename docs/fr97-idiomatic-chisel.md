@@ -23,6 +23,8 @@
 
 自动化：`check_idiomatic_chisel(scala, &hir)` — 失败码 `rhdl::E0904`，英文 + 中文可读；**机械 `emit_chisel` 产出必须失败**（显式降级：继续用机械 API，产物不得标 FR97）。
 
+**作用域 / 空电路（2026-09-10 硬化）：** 端口命名与 `IO(new Bundle)` 按**各模块 class 块**校验（非整文件子串）；`hir` 无模块 → **拒绝**（无空电路豁免；正常 elaborate 在 freeze 已拦空电路）。
+
 ## API
 
 ```rust
