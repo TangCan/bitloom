@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 18:05
+last_updated: 09-10-2026 18:10
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -453,7 +453,7 @@ development_status:
   62-1-epic-62-nfr14-风险记录: done
   62-2-ad-25-修订-handshake-默认可综合路径-fr121: done
   62-3-fr121-收口与文档指针: done
-  epic-62-retrospective: optional
+  epic-62-retrospective: done
 
   epic-63: done
   63-1-epic-63-nfr14-风险记录: done
@@ -1704,3 +1704,30 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-61-retro-2026-09-10.md"
+  - id: "epic-62-retro-item-186-fr121-诚实边界-对外不得把-fr95-96-mvp-fr110-q1-q2"
+    epic: 62
+    action: "FR121 诚实边界：对外不得把 FR95/96 MVP / FR110 Q1+Q2 / in-tree-mvp stub / docs-only
+      / 未修订 AD-25 alone 写成 Handshake 默认可综合 / FR121 完成面（续 FR123）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-62-retro-2026-09-10.md"
+  - id: "epic-62-retro-item-187-触碰-bitloom-hls-hls-rs-路径时保持-fr95-96-与-fr"
+    epic: 62
+    action: "触碰 bitloom HLS/hls.rs 路径时保持 FR95/96 与 FR110 回归可用（NFR48）；捕获闭包须可读失败（AD-18）；不得
+      silent 标 fr121=true。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-62-retro-2026-09-10.md"
+  - id: "epic-62-retro-item-188-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 62
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-62-retro-2026-09-10.md"
+  - id: "epic-62-retro-item-189-可选工程卫生-若交付全-circt-handshake-方言-多时钟弹性缓冲全家"
+    epic: 62
+    action: "可选工程卫生：若交付全 CIRCT Handshake 方言 / 多时钟弹性缓冲全家桶，须新合同（NFR51）；当前 ready/valid
+      默认可综合为 FR121 完成面。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-62-retro-2026-09-10.md"
