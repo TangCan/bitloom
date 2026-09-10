@@ -90,9 +90,19 @@ enum Commands {
         /// Implies in-tree; takes precedence over `--pipeline` / loop-unroll.
         #[arg(long, default_value_t = false)]
         handshake: bool,
-        /// Handshake channel stages for `--handshake` (FR121; require ≥1).
+        /// Handshake channel stages for `--handshake` / `--circt-handshake` (require ≥1).
         #[arg(long, default_value_t = 1)]
         channels: u32,
+        /// FR129: CIRCT Handshake dialect + multi-clock elastic buffers.
+        /// Implies in-tree; takes precedence over `--handshake` / `--pipeline`.
+        #[arg(long, default_value_t = false)]
+        circt_handshake: bool,
+        /// Clock domains for `--circt-handshake` (FR129; require ≥2).
+        #[arg(long, default_value_t = 2)]
+        clock_domains: u32,
+        /// Elastic buffer depth for `--circt-handshake` (FR129; require ≥1).
+        #[arg(long, default_value_t = 1)]
+        elastic_depth: u32,
     },
     /// Import FIRRTL 6.0.0 `.fir` (Chisel→firtool output ok) into the same emit path as `build` (FR40 / FR46).
     Import {
@@ -597,9 +607,36 @@ fn main() {
             stages,
             handshake,
             channels,
+            circt_handshake,
+            clock_domains,
+            elastic_depth,
         } => {
-            if handshake || in_tree {
-                if handshake {
+            if circt_handshake || handshake || in_tree {
+                if circt_handshake {
+                    println!(
+                        "path=in-tree-circt-handshake fr129=true fr96=true circt_handshake=true channels={channels} clock_domains={clock_domains} elastic_depth={elastic_depth} dataflow={dataflow}"
+                    );
+                    match hls::parse_dataflow_alias(&dataflow).and_then(|op| {
+                        let art = hls::schedule_circt_handshake_from_transform(
+                            &function,
+                            &[],
+                            channels,
+                            clock_domains,
+                            elastic_depth,
+                            move || op,
+                        )?;
+                        hls::emit_in_tree_schedule(&art, &out_dir)
+                    }) {
+                        Ok((sched, rtl)) => {
+                            println!("ok_schedule={}", sched.display());
+                            println!("ok_rtl={}", rtl.display());
+                        }
+                        Err(e) => {
+                            eprintln!("error: {e}");
+                            std::process::exit(1);
+                        }
+                    }
+                } else if handshake {
                     println!(
                         "path=in-tree-handshake fr121=true fr96=true handshake=true channels={channels} dataflow={dataflow}"
                     );
