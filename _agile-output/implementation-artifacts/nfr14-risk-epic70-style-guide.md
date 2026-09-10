@@ -14,8 +14,9 @@
 ### (a) 上游约束
 
 - FR122 O1–O4 **仍有效**（NFR52）；alone ≠ FR130。
+- FR97 / FR111 关闭仍有效；alone ≠ FR130。
 - **默认不恢复** `Parser.parse`；若恢复须 Correct Course + 再修订 AD-27。
-- 品牌 Bitloom；设计依赖不变。
+- 公开品牌 **Bitloom** / `bitloom-*`；设计 crate 只依赖 `bitloom-prelude`。
 
 ### (b) 粗工期带
 
@@ -24,23 +25,26 @@
 ### (c) 禁止的静默降级清单
 
 - 不得缺本记录标 70.2–70.3 ready。
-- **不得仅 FR97 / FR111 / O1–O4。**
+- **不得仅 FR97。**
+- **不得仅 FR111。**
+- **不得仅 FR122 O1–O4 alone。**
 - **不得 docs-only。**
 - **不得静默恢复 Parser。**
 - 不得改写 FR122 关闭为失败（NFR52）。
+- 不得冒充 NFR14-crates。
 
 ### (d) 负责人
 
-- Richard — NFR14 / NFR54 / NFR52 / NFR55。
+- Richard — NFR14 / NFR54 / NFR52 / NFR55。消歧：NFR14-crates ≠ 本门禁。
 
-### Style Guide 深度（S1–S4）
+### Style Guide 深度（G1–G4 ≡ S1–S4）
 
 | ID | 钉死 |
 | --- | --- |
-| S1 | Style Guide 宣称头 + `scalafmt-style` |
-| S2 | `withClockAndReset` 纪律注释 + naming |
-| S3 | **不恢复** Parser（文档 + 验收谓词） |
-| S4 | `emit_chisel_style_guide_fr130` / `check_chisel_style_guide_fr130`；每模块 `// --- FR130 style-guide ---` |
+| G1 / S1 | Style Guide 宣称头 + `scalafmt-style` |
+| G2 / S2 | `withClockAndReset` 纪律注释 + naming |
+| G3 / S3 | **不恢复** Parser（文档 + 验收谓词） |
+| G4 / S4 | `emit_chisel_style_guide_fr130` / `check_chisel_style_guide_fr130`；每模块 `// --- FR130 style-guide ---` |
 
 ### AD-27
 

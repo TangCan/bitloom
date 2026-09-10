@@ -38,10 +38,10 @@ FR97 path unchanged: `emit_chisel_idiomatic` / `check_idiomatic_chisel`.
 - NFR14: `_agile-output/implementation-artifacts/nfr14-risk-epic63-official-style-chisel.md`
 - AD-27: revised 2026-09-10 for FR122 (default still no Parser)
 
-## Non-goals (NFR51)
+## Non-goals (NFR51 → Phase 15)
 
-- Restoring deprecated `Parser.parse`
-- Full Chisel Style Guide / community linter auto-compliance
+- Restoring deprecated `Parser.parse` (still forbidden by default)
+- Full Style Guide pack → **FR130** / [`fr130-style-guide.md`](fr130-style-guide.md)
 - Claiming mechanical / FR97 / FR111 alone is FR122
 
 ```text

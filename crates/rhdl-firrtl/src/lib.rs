@@ -7,9 +7,10 @@ use bitloom_hir::{
 
 mod chisel;
 pub use chisel::{
-    CHISEL_TARGET, ChiselGenError, FIRTOOL_TARGET, IdiomaticCheckError, check_idiomatic_chisel,
-    check_idiomatic_chisel_fr111, check_idiomatic_chisel_fr122, emit_chisel, emit_chisel_idiomatic,
-    emit_chisel_idiomatic_fr111, emit_chisel_idiomatic_fr122,
+    CHISEL_TARGET, ChiselGenError, FIRTOOL_TARGET, IdiomaticCheckError,
+    check_chisel_style_guide_fr130, check_idiomatic_chisel, check_idiomatic_chisel_fr111,
+    check_idiomatic_chisel_fr122, emit_chisel, emit_chisel_idiomatic, emit_chisel_idiomatic_fr111,
+    emit_chisel_idiomatic_fr122, emit_chisel_style_guide_fr130,
 };
 
 /// Emit `<abi_name>.fir` with FIRRTL version 6.0.0 header.
