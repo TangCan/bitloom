@@ -67,53 +67,23 @@ fn matrix_all_five_ip_apis_have_no_generator_closures() {
     let _ = I2cMaster::elaborate();
     let _ = Axi4LiteSlave::elaborate();
 
-    let src = fs::read_to_string(workspace_root().join("crates/bitloom-prelude/src/ip.rs"))
-        .expect("ip.rs");
-    let segments = [
-        (
-            "SyncFifo",
-            src.split("impl Elaboratable for SyncFifo")
-                .nth(1)
-                .and_then(|s| s.split("impl Elaboratable for UartTx").next())
-                .unwrap_or(""),
-        ),
-        (
-            "UartTx",
-            src.split("impl Elaboratable for UartTx")
-                .nth(1)
-                .and_then(|s| s.split("impl Elaboratable for UartRx").next())
-                .unwrap_or(""),
-        ),
-        (
-            "UartRx",
-            src.split("impl Elaboratable for UartRx")
-                .nth(1)
-                .and_then(|s| s.split("impl Elaboratable for SpiMaster").next())
-                .unwrap_or(""),
-        ),
-        (
-            "SpiMaster",
-            src.split("impl Elaboratable for SpiMaster")
-                .nth(1)
-                .and_then(|s| s.split("impl Elaboratable for I2cMaster").next())
-                .unwrap_or(""),
-        ),
-        (
-            "I2cMaster",
-            src.split("impl Elaboratable for I2cMaster")
-                .nth(1)
-                .and_then(|s| s.split("impl Elaboratable for Axi4LiteSlave").next())
-                .unwrap_or(""),
-        ),
-        (
-            "Axi4LiteSlave",
-            src.split("impl Elaboratable for Axi4LiteSlave")
-                .nth(1)
-                .and_then(|s| s.split("impl Elaboratable for ExtBlackBox").next())
-                .unwrap_or(""),
-        ),
+    let root = workspace_root().join("crates/bitloom-prelude/src/ip");
+    let files = [
+        ("SyncFifo", "sync_fifo.rs"),
+        ("UartTx", "uart.rs"),
+        ("UartRx", "uart.rs"),
+        ("SpiMaster", "spi.rs"),
+        ("I2cMaster", "i2c.rs"),
+        ("Axi4LiteSlave", "axi.rs"),
     ];
-    for (name, body) in segments {
+    for (name, file) in files {
+        let src = fs::read_to_string(root.join(file)).unwrap_or_else(|e| panic!("{file}: {e}"));
+        let needle = format!("impl Elaboratable for {name}");
+        let body = src
+            .split(&needle)
+            .nth(1)
+            .map(|s| s.split("impl Elaboratable for").next().unwrap_or(s))
+            .unwrap_or("");
         assert!(
             !body.is_empty() && !body.contains("Fn(") && !body.contains("dyn Fn"),
             "{name} elaborate must not accept generator closures (Epic 34; overlay = Epic 29)"

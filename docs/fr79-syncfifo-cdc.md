@@ -29,7 +29,7 @@ Epic 31 收口跟练：[`docs/tutorials/cdc-depth.md`](tutorials/cdc-depth.md)�
 
 - 不保证硅片亚稳态 / MTBF。
 - 非 `wr_clk`/`rd_clk` 双物理时钟产品矩阵；非任意 DEPTH/WIDTH 全家桶（Ask First）。
-- **不得**把本原语与 [`ip::SyncFifo`](../crates/bitloom-prelude/src/ip.rs) 混为同一完成话术。
+- **不得**把本原语与 [`ip::SyncFifo`](../crates/bitloom-prelude/src/ip/sync_fifo.rs) 混为同一完成话术。
 
 ## 最小用法
 

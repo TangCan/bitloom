@@ -97,18 +97,9 @@ fn fr82_ip_api_has_no_generator_closures() {
     // Elaboratable::elaborate() takes no Fn — Epic 29 owns closure customization.
     let _ = SyncFifo::elaborate();
     let _ = UartTx::elaborate();
-    let src = fs::read_to_string(workspace_root().join("crates/bitloom-prelude/src/ip.rs"))
-        .expect("ip.rs");
-    let fifo = src
-        .split("impl Elaboratable for SyncFifo")
-        .nth(1)
-        .and_then(|s| s.split("impl Elaboratable for UartTx").next())
-        .unwrap_or("");
-    let uart = src
-        .split("impl Elaboratable for UartTx")
-        .nth(1)
-        .and_then(|s| s.split("impl Elaboratable for SpiMaster").next())
-        .unwrap_or("");
+    let root = workspace_root().join("crates/bitloom-prelude/src/ip");
+    let fifo = fs::read_to_string(root.join("sync_fifo.rs")).expect("ip/sync_fifo.rs");
+    let uart = fs::read_to_string(root.join("uart.rs")).expect("ip/uart.rs");
     assert!(
         !fifo.contains("Fn(")
             && !fifo.contains("dyn Fn")

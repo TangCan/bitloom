@@ -33,7 +33,7 @@ use bitloom_prelude::Elaboratable;
 | --- | --- |
 | **类型** | `bitloom_prelude::ip::Crc8Lut` |
 | **骨架** | SyncReadMem depth-256×8；`addr` → 寄存器 `rdata`（Epic 27 `declare_sync_read_mem_with_init_fn`） |
-| **无闭包默认** | `Crc8Lut::elaborate()` / `elaborate_default()` → poly **`0x07`**（CRC-8/SMBUS-style，[`DEFAULT_POLY`](../../crates/bitloom-prelude/src/ip.rs)） |
+| **无闭包默认** | `Crc8Lut::elaborate()` / `elaborate_default()` → poly **`0x07`**（CRC-8/SMBUS-style，[`DEFAULT_POLY`](../../crates/bitloom-prelude/src/ip/crc.rs)） |
 | **闭包定制** | `Crc8Lut::elaborate_with_table_fn(violations, \|i\| …)` — elaborate 期消解为普通字表（Cap-R-63）；空 `violations` = 合法 `SynthesizableClosure`（D1）；非空 → 明确诊断（如 `rhdl::E0143`/`E0144`） |
 | **NFR36 / Cap-R-64** | freeze / emit / **viz** 无闭包 / `Fn` / `\|\|` 残留（Story **29.4** 抽检） |
 | **约束类（D1）** | 可综合腿 = **`SynthesizableClosure`**（FR74）；**不是** HLS `HlsFree` |
@@ -140,7 +140,7 @@ sim.settle();
 sim.tick();
 ```
 
-实现源码：[`crates/bitloom-prelude/src/ip.rs`](../../crates/bitloom-prelude/src/ip.rs)。  
+实现源码：[`crates/bitloom-prelude/src/ip/`](../../crates/bitloom-prelude/src/ip/)（FR131 按协议拆分；公开路径仍为 `bitloom_prelude::ip::*`）。  
 风险记录：[`nfr14-risk-epic34-ip-baseline.md`](../../_agile-output/implementation-artifacts/nfr14-risk-epic34-ip-baseline.md)。
 
 ## FR103 — 功能 + 周期双模型齐全（Epic 45）

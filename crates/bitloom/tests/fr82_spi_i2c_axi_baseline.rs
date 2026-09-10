@@ -152,23 +152,10 @@ fn fr82_spi_i2c_axi_api_has_no_generator_closures() {
     let _ = SpiMaster::elaborate();
     let _ = I2cMaster::elaborate();
     let _ = Axi4LiteSlave::elaborate();
-    let src = fs::read_to_string(workspace_root().join("crates/bitloom-prelude/src/ip.rs"))
-        .expect("ip.rs");
-    let spi = src
-        .split("impl Elaboratable for SpiMaster")
-        .nth(1)
-        .and_then(|s| s.split("impl Elaboratable for I2cMaster").next())
-        .unwrap_or("");
-    let i2c = src
-        .split("impl Elaboratable for I2cMaster")
-        .nth(1)
-        .and_then(|s| s.split("impl Elaboratable for Axi4LiteSlave").next())
-        .unwrap_or("");
-    let axi = src
-        .split("impl Elaboratable for Axi4LiteSlave")
-        .nth(1)
-        .and_then(|s| s.split("impl Elaboratable for ExtBlackBox").next())
-        .unwrap_or("");
+    let root = workspace_root().join("crates/bitloom-prelude/src/ip");
+    let spi = fs::read_to_string(root.join("spi.rs")).expect("spi.rs");
+    let i2c = fs::read_to_string(root.join("i2c.rs")).expect("i2c.rs");
+    let axi = fs::read_to_string(root.join("axi.rs")).expect("axi.rs");
     assert!(
         !spi.contains("Fn(")
             && !spi.contains("dyn Fn")

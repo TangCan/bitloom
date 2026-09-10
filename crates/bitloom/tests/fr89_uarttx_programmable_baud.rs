@@ -134,8 +134,8 @@ fn fr89_docs_ip_readme_documents_baud_subset_and_non_goals() {
 
 #[test]
 fn fr89_uarttx_api_has_no_generator_closures_and_baud_div() {
-    let src = fs::read_to_string(workspace_root().join("crates/bitloom-prelude/src/ip.rs"))
-        .expect("ip.rs");
+    let src = fs::read_to_string(workspace_root().join("crates/bitloom-prelude/src/ip/uart.rs"))
+        .expect("ip/uart.rs");
     let uart = src
         .split("impl Elaboratable for UartTx")
         .nth(1)
