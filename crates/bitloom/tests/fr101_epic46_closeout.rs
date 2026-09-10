@@ -95,7 +95,18 @@ fn fr101_deferred_readme_epic46_closed() {
     for (name, text) in [("README", &readme), ("deferred", &deferred)] {
         if text.contains("关闭前不得宣称") && text.contains("FR101") {
             let idx = text.find("FR101").expect("FR101");
-            let window = &text[idx.saturating_sub(200)..(idx + 400).min(text.len())];
+            let start = text
+                .char_indices()
+                .map(|(i, _)| i)
+                .take_while(|&i| i <= idx.saturating_sub(200))
+                .last()
+                .unwrap_or(0);
+            let end = text
+                .char_indices()
+                .map(|(i, _)| i)
+                .find(|&i| i >= (idx + 400).min(text.len()))
+                .unwrap_or(text.len());
+            let window = &text[start..end];
             assert!(
                 window.contains("已关闭")
                     || window.contains("已交付")
