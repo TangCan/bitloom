@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 14:12
+last_updated: 09-10-2026 15:15
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -284,7 +284,6 @@ development_status:
   35-4-formal-夹具-lsp-deferred-收口-fr85: done
   epic-35-retrospective: done
 
-  # Phase 11 — contract-green (Correct Course 2026-09-09)
   epic-36: done
   36-1-epic-36-nfr14-风险记录: done
   36-2-重写-doc-19-阶段五-七完成定义-fr87: done
@@ -293,30 +292,28 @@ development_status:
 
   epic-37: done
   37-1-epic-37-nfr14-风险记录: done
-  37-2-firtool-chisel-钉死运维与机械-chisel-诚实声明-fr88: done
+  37-2-firtool-chisel-钉死运维-机械-chisel-诚实声明-fr88: done
   37-3-可选夜间真机-bambu-或显式保持-stub-fr88: done
   epic-37-retrospective: done
 
   epic-38: done
   38-1-epic-38-nfr14-风险记录: done
   38-2-uarttx-显式加深子集实现-fr89: done
-  38-3-atdd-与边界收口-可选树外示例: done
+  38-3-atdd-边界收口-可选树外示例: done
   epic-38-retrospective: done
 
   epic-39: done
   39-1-epic-39-nfr14-风险记录: done
   39-2-宿主-ide-rust-analyzer-工作流-fr90: done
   39-3-浅层-bitloom-lsp-或显式-defer-fr91: done
-  39-4-多视图同刺激与-adapter-模板-fr92: done
+  39-4-多视图同刺激-adapter-模板-fr92: done
   epic-39-retrospective: done
 
-  # Phase 12 — literal seven-stage green Path B (Correct Course 2026-09-09-phase12-path-b)
-  # Gate: epic-40 must be done before 41–47 may leave backlog/ready
   epic-40: done
   40-1-epic-40-nfr14-风险记录: done
   40-2-correct-course-prd-推翻-fr93-fr94: done
-  40-3-重写-doc-19-字面绿定义-fr94: done
-  40-4-修订-ad-撤销-fr93-锁定-fr94: done
+  40-3-重写-doc-19-阶段五-七为字面绿定义-fr94: done
+  40-4-修订-ad-撤销-fr93-永久非目标锁定-fr94-nfr41: done
   epic-40-retrospective: done
 
   epic-41: done
@@ -328,7 +325,7 @@ development_status:
 
   epic-42: done
   42-1-epic-42-nfr14-风险记录: done
-  42-2-idiomatic-chisel-发射与验收-fr97: done
+  42-2-idiomatic-可维护-chisel-发射与验收-fr97: done
   42-3-fr97-收口与回归: done
   epic-42-retrospective: done
 
@@ -337,13 +334,13 @@ development_status:
   43-2-uart-全协议-近-vip-fr98: done
   43-3-spi-全协议-近-vip-fr98: done
   43-4-i2c-全协议-近-vip-fr98: done
-  43-5-axi-可选-gpio-fr98-收口: done
+  43-5-axi-及可选-gpio-fr98-收口: done
   epic-43-retrospective: done
 
   epic-44: done
   44-1-epic-44-nfr14-风险记录: done
-  44-2-bitloom-lsp-服务器-mvp-fr99: done
-  44-3-按键全-elaborate-诊断-符号-fr99: done
+  44-2-bitloom-lsp-服务器-mvp-编辑器接线-fr99: done
+  44-3-按键全设计-elaborate-诊断-符号-fr99: done
   44-4-fr99-收口与撤销-lsp-非目标: done
   epic-44-retrospective: done
 
@@ -351,33 +348,31 @@ development_status:
   45-1-epic-45-nfr14-风险记录: done
   45-2-自动-fl-rtl-形式等价产品路径-fr100: done
   45-3-多视图属性全矩阵-fr102: done
-  45-4-一级-ip-双模型齐全-epic45-收口-fr103: done
+  45-4-一级-ip-双模型齐全-epic-45-收口-fr103: done
   epic-45-retrospective: done
 
   epic-46: done
   46-1-epic-46-nfr14-风险记录: done
-  46-2-systemc-tlm-2-0-产品面-fr101: done
+  46-2-systemc-tlm-2-0-生成或集成产品面-fr101: done
   46-3-fr101-收口与撤销-不承诺-tlm: done
   epic-46-retrospective: done
 
   epic-47: done
   47-1-epic-47-nfr14-风险记录: done
   47-2-交互式富波形-fr104: done
-  47-3-仿真覆盖率扩展-fr105-收口: done
+  47-3-仿真覆盖率记录扩展-phase-12-故事收口-fr105: done
   epic-47-retrospective: done
 
-  # Phase 13 — MVP→commercial deepen (Correct Course 2026-09-10-phase13)
-  # Gate: epic-48 must be done before 49–56 may leave backlog/ready
   epic-48: done
   48-1-epic-48-nfr14-风险记录: done
-  48-2-correct-course-prd-批准-phase13-fr106: done
-  48-3-同步-readme-deferred-路线图-fr106-fr115: done
-  48-4-ad-指针与-epic-48-收口-fr106: done
+  48-2-correct-course-prd-批准-phase-13-fr106: done
+  48-3-同步-readme-deferred-路线图指针-fr106-fr115: done
+  48-4-ad-指针与-epic-48-收口-fr106-nfr46: done
   epic-48-retrospective: done
 
   epic-49: done
   49-1-epic-49-nfr14-风险记录: done
-  49-2-at-style-nb-transport-产品路径-fr107: done
+  49-2-at-style-nb_transport-产品路径-fr107: done
   49-3-fr107-收口与文档边界: done
   epic-49-retrospective: done
 
@@ -389,39 +384,82 @@ development_status:
 
   epic-51: done
   51-1-epic-51-nfr14-风险记录: done
-  51-2-fsm-state-visit-覆盖率-fr109: done
+  51-2-fsm-state-visit-记录器与夹具-fr109: done
   51-3-fr109-收口与-fr105-交叉链: done
   epic-51-retrospective: done
 
   epic-52: done
   52-1-epic-52-nfr14-风险记录: done
-  52-2-树内-hls-商业深度-fr110: done
+  52-2-树内-hls-加深实现与验收-fr110: done
   52-3-fr110-收口与-ad-25-交叉链: done
   epic-52-retrospective: done
 
   epic-53: done
   53-1-epic-53-nfr14-风险记录: done
-  53-2-idiomatic-chisel-可维护深度-fr111: done
+  53-2-idiomatic-加深发射-检查与-atdd-fr111: done
   53-3-fr111-收口与-ad-27-交叉链: done
   epic-53-retrospective: done
 
   epic-54: done
   54-1-epic-54-nfr14-风险记录: done
-  54-2-形式等价-双模型深度-fr112: done
+  54-2-选定加深路径实现与-atdd-fr112: done
   54-3-fr112-收口与交叉链: done
   epic-54-retrospective: done
 
   epic-55: done
   55-1-epic-55-nfr14-风险记录: done
-  55-2-lsp-设计根发现加深-fr113: done
+  55-2-设计根发现实现与-atdd-fr113: done
   55-3-fr113-收口与-fr99-交叉链: done
   epic-55-retrospective: done
 
   epic-56: done
   56-1-epic-56-nfr14-风险记录: done
-  56-2-富波形-覆盖率-gui-加深-fr114: done
-  56-3-fr114-收口与-phase13-指针: done
+  56-2-选定-gui-集成路径实现与验收-fr114: done
+  56-3-fr114-收口与-phase-13-故事清单指针: done
   epic-56-retrospective: done
+
+  epic-57: backlog
+  57-1-epic-57-nfr14-风险记录: backlog
+  57-2-correct-course-prd-批准-phase-14-fr116: backlog
+  57-3-同步-readme-deferred-路线图指针-fr116-fr123: backlog
+  57-4-ad-指针与-epic-57-收口-fr116-nfr50: backlog
+  epic-57-retrospective: optional
+
+  epic-58: backlog
+  58-1-epic-58-nfr14-风险记录: backlog
+  58-2-typed-ide-波形路径实现与验收-fr117: backlog
+  58-3-fr117-收口与文档指针: backlog
+  epic-58-retrospective: optional
+
+  epic-59: backlog
+  59-1-epic-59-nfr14-风险记录: backlog
+  59-2-syn-scan-发现路径实现与验收-fr118: backlog
+  59-3-fr118-收口与文档指针: backlog
+  epic-59-retrospective: optional
+
+  epic-60: backlog
+  60-1-epic-60-nfr14-风险记录: backlog
+  60-2-sby-smt-路径实现与验收-fr119: backlog
+  60-3-fr119-收口与文档指针: backlog
+  epic-60-retrospective: optional
+
+  epic-61: backlog
+  61-1-epic-61-nfr14-风险记录: backlog
+  61-2-商业-vip-gpio-实现与验收-fr120: backlog
+  61-3-fr120-收口与文档指针: backlog
+  epic-61-retrospective: optional
+
+  epic-62: backlog
+  62-1-epic-62-nfr14-风险记录: backlog
+  62-2-ad-25-修订-handshake-默认可综合路径-fr121: backlog
+  62-3-fr121-收口与文档指针: backlog
+  epic-62-retrospective: optional
+
+  epic-63: backlog
+  63-1-epic-63-nfr14-风险记录: backlog
+  63-2-ad-27-修订-若需-官方风格全家桶路径-fr122: backlog
+  63-3-fr122-收口与-phase-14-故事清单指针: backlog
+  epic-63-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1

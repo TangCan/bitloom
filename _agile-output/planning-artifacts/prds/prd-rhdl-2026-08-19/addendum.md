@@ -247,3 +247,33 @@
 
 **合同指针：** 详见 `epics.md` Phase 13 Inventory（FR106–FR115 / NFR44–NFR47）。
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen.md`
+
+## 2026-09-10 Update — Phase 14 NFR47 未选加深升格（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-10-phase14-nfr47-deferred-deepen.md` —
+在 Phase 13 MVP→商业加深 **已关闭**之后，正式 **Phase 14**「NFR47 未选加深升格」
+（Epic 57–63 · **FR116–FR123** / **NFR48–NFR51**）。
+
+**公开品牌（不变）：** **Bitloom**；crates.io / CLI **`bitloom`** / `bitloom-*`（设计 crate 仍只依赖
+`bitloom-prelude`）。禁止发布 `rhdl` / `rhdl-bits`。
+
+**与 Phase 12/13 的关系（必须同时读）：**
+- Phase 12 **FR94–FR105** 与 Phase 13 **FR106–FR115** 关闭证据 **仍有效**；**不得**改写为失败（**NFR48**）。
+- Phase 14 是 **新合同**下的加深（NFR47 deferred → 显式 FR），**不是**「Phase 13 AC 未达标」的补救叙事。
+- deferred 升格映射：
+  1. Tywaves 级 typed IDE 波形 → **FR117**
+  2. 无 metadata 全树 `#[bitloom::top]` syn-scan → **FR118**
+  3. SymbiYosys/SMT（原 FR112 分支 A）→ **FR119**
+  4. 商业 VIP GPIO 全家桶 → **FR120**
+  5. Handshake 默认可综合 → **FR121**
+  6. 官方风格 Chisel 全家桶 → **FR122**
+  （闸门 **FR116**；宣称纪律 **FR123**。）
+- 对外「Tywaves / syn-scan / SBY / VIP GPIO / Handshake / 官方风格全家桶」类表述：**仅**可在对应 FR116–122 关闭后，按 **FR123** 宣称；
+  **禁止**用 Phase 13 完成面冒充本批加深。
+
+**实现闸门：** Epic 57（Story 57.1–57.4 · **FR116**）关闭前，Epic 58–63 不得标 ready。  
+触及 **AD-25 / AD-27**（及 formal/SBY 路径）的加深须在实现 epic 引用修订 AD（**NFR50**）；README / deferred /
+脊柱指针由 Story **57.3–57.4** 落地。
+
+**合同指针：** 详见 `epics.md` Phase 14 Inventory（FR116–FR123 / NFR48–NFR51）。
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-10-phase14-nfr47-deferred-deepen.md`
