@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 13:55
+last_updated: 09-10-2026 13:53
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -403,7 +403,7 @@ development_status:
   53-1-epic-53-nfr14-风险记录: done
   53-2-idiomatic-chisel-可维护深度-fr111: done
   53-3-fr111-收口与-ad-27-交叉链: done
-  epic-53-retrospective: optional
+  epic-53-retrospective: done
 
   epic-54: done
   54-1-epic-54-nfr14-风险记录: done
@@ -1422,3 +1422,29 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-52-retro-2026-09-10.md"
+  - id: "epic-53-retro-item-150-fr111-诚实边界-对外不得把-fr97-mvp-单夹具-机械-emit_ch"
+    epic: 53
+    action: "FR111 诚实边界：对外不得把 FR97 MVP 单夹具 / 机械 emit_chisel alone 写成可维护加深 / FR111
+      完成面；宣称须引 FR111（续 FR115）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-53-retro-2026-09-10.md"
+  - id: "epic-53-retro-item-151-触碰-rhdl-firrtl-chisel-idiomatic-路径时保持-fr"
+    epic: 53
+    action: "触碰 rhdl-firrtl Chisel idiomatic 路径时保持 FR97 MVP emit/check 回归不破（NFR44）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-53-retro-2026-09-10.md"
+  - id: "epic-53-retro-item-152-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 53
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-53-retro-2026-09-10.md"
+  - id: "epic-53-retro-item-153-可选工程卫生-若后续交付官方风格全家桶或恢复废弃-parser-须新合同钉死-n"
+    epic: 53
+    action: "可选工程卫生：若后续交付官方风格全家桶或恢复废弃 Parser，须新合同钉死（NFR47）；当前 D1+D3 为 FR111 完成面（非
+      AC 缺口）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-53-retro-2026-09-10.md"
