@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 13:45
+last_updated: 09-10-2026 13:50
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -391,7 +391,7 @@ development_status:
   51-1-epic-51-nfr14-风险记录: done
   51-2-fsm-state-visit-覆盖率-fr109: done
   51-3-fr109-收口与-fr105-交叉链: done
-  epic-51-retrospective: optional
+  epic-51-retrospective: done
 
   epic-52: done
   52-1-epic-52-nfr14-风险记录: done
@@ -1370,3 +1370,29 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-50-retro-2026-09-10.md"
+  - id: "epic-51-retro-item-142-fr109-c3-诚实边界-对外不得把-fr105-mux-分支-v2-alon"
+    epic: 51
+    action: "FR109/C3 诚实边界：对外不得把 FR105 Mux 分支 v2 alone 或 FR34 toggle alone 写成 C3 /
+      FR109 完成面；不得以 Tywaves/LCOV GUI（FR114）冒充 FR109；宣称须引 FR109（续 FR115）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-51-retro-2026-09-10.md"
+  - id: "epic-51-retro-item-143-触碰-bitloom-sim-覆盖率路径时保持-fr105-mux-v2-fr3"
+    epic: 51
+    action: "触碰 bitloom-sim 覆盖率路径时保持 FR105 Mux v2 / FR34 toggle 回归不破（NFR44）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-51-retro-2026-09-10.md"
+  - id: "epic-51-retro-item-144-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 51
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-51-retro-2026-09-10.md"
+  - id: "epic-51-retro-item-145-可选工程卫生-若后续自动从设计提取-fsm-标签集-须新合同钉死-当前显式-re"
+    epic: 51
+    action: "可选工程卫生：若后续自动从设计提取 FSM 标签集，须新合同钉死；当前显式 register_fsm_states 为 FR109 完成面（非
+      AC 缺口）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-51-retro-2026-09-10.md"
