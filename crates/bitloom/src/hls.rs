@@ -121,6 +121,13 @@ pub enum InTreeScheduleKind {
     /// Handshake / dynamic dataflow default synthesizable semantics (**FR121**).
     /// `channels` = number of ready/valid channel stages (≥ 1).
     Handshake { channels: u32 },
+    /// CIRCT Handshake dialect + multi-clock elastic buffers (**FR129**).
+    /// Requires `channels >= 1`, `clock_domains >= 2`, `elastic_depth >= 1`.
+    CirctHandshake {
+        channels: u32,
+        clock_domains: u32,
+        elastic_depth: u32,
+    },
 }
 
 /// True when `kind` meets NFR14 FR110 default gates Q1+Q2 (`pipeline_stages >= 2` + II).
@@ -137,6 +144,18 @@ pub fn meets_fr110_commercial_depth(kind: &InTreeScheduleKind) -> bool {
 /// True when `kind` is the FR121 Handshake / dynamic-DF default synthesizable path.
 pub fn meets_fr121_handshake(kind: &InTreeScheduleKind) -> bool {
     matches!(kind, InTreeScheduleKind::Handshake { channels } if *channels >= 1)
+}
+
+/// True when `kind` meets FR129 CIRCT Handshake / multi-clock elastic gates.
+pub fn meets_fr129_circt_handshake(kind: &InTreeScheduleKind) -> bool {
+    matches!(
+        kind,
+        InTreeScheduleKind::CirctHandshake {
+            channels,
+            clock_domains,
+            elastic_depth
+        } if *channels >= 1 && *clock_domains >= 2 && *elastic_depth >= 1
+    )
 }
 
 /// One scheduled stage in an in-tree HLS artifact (FR95).
@@ -433,6 +452,12 @@ fn build_schedule_ir(
             lines.push("  \"handshake\": true,".into());
             lines.push("  \"semantics\": \"handshake-dynamic-df\",".into());
             lines.push("  \"path\": \"in-tree-handshake\",".into());
+        }
+        InTreeScheduleKind::CirctHandshake { .. } => {
+            lines.push("  \"fr129\": true,".into());
+            lines.push("  \"circt_handshake\": true,".into());
+            lines.push("  \"semantics\": \"circt-handshake-dialect\",".into());
+            lines.push("  \"path\": \"in-tree-circt-handshake\",".into());
         }
         _ => {
             lines.push("  \"fr95\": true,".into());
