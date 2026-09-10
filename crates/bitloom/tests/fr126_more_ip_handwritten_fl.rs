@@ -1,10 +1,9 @@
 //! ATDD Story 66.2 / FR126 — more IP handwritten FL (`GpioFunctional`).
 
+use bitloom_hir::PortValues;
 use bitloom_prelude::Elaboratable;
 use bitloom_prelude::ip::Gpio;
-use bitloom_sim::{
-    AbstractionView, GpioFunctional, IpDualModelMatrix, PortValues, gpio_dual_stimulus,
-};
+use bitloom_sim::{AbstractionView, GpioFunctional, IpDualModelMatrix, gpio_dual_stimulus};
 use std::fs;
 use std::path::PathBuf;
 
