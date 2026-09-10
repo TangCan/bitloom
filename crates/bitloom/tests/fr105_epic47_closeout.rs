@@ -85,7 +85,7 @@ fn fr105_deferred_readme_epic47_closed() {
 }
 
 #[test]
-fn fr105_sprint_epic47_done_no_epic48() {
+fn fr105_sprint_epic47_done_phase12_closed() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
         sprint.contains("47-3-仿真覆盖率扩展-fr105-收口: done")
@@ -96,10 +96,9 @@ fn fr105_sprint_epic47_done_no_epic48() {
         sprint.contains("epic-47: done") || sprint.contains("epic-47:done"),
         "epic-47 must be done"
     );
-    assert!(
-        !sprint.contains("epic-48:") && !sprint.contains("48-1-"),
-        "must not start Epic 48+"
-    );
+    // Phase 13 Correct Course (2026-09-10) may seed epic-48+; Phase 12 closeout
+    // no longer forbids starting Epic 48 under the new contract. Gate for 49–56
+    // remains Epic 48 done (see nfr14-risk-epic48 / Story 48.1).
     // Phase 12 epic keys 40–47 should be done (retros may stay optional)
     for epic in 40..=47 {
         let key = format!("epic-{epic}: done");

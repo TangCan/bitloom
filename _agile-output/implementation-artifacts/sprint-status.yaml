@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 10:45
+last_updated: 09-10-2026 10:55
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -368,8 +368,8 @@ development_status:
 
   # Phase 13 — MVP→commercial deepen (Correct Course 2026-09-10-phase13)
   # Gate: epic-48 must be done before 49–56 may leave backlog/ready
-  epic-48: backlog
-  48-1-epic-48-nfr14-风险记录: backlog
+  epic-48: in-progress
+  48-1-epic-48-nfr14-风险记录: done
   48-2-correct-course-prd-批准-phase13-fr106: backlog
   48-3-同步-readme-deferred-路线图-fr106-fr115: backlog
   48-4-ad-指针与-epic-48-收口-fr106: backlog
