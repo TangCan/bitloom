@@ -2,8 +2,11 @@
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-This page is the **FR119 product path** (Epic 60 / Story 60.2). Epic / FR119
-**closeout checkboxes** are Story **60.3**. It delivers a documented **SymbiYosys (`sby`)**
+**Status:** **Epic 60 / FR119 closed** (Story **60.3**). Product path delivered in Story **60.2**
+(`just formal-sby-check`). Phase 12 FR100 F1-(i) and Phase 13 FR112 branch B remain closed
+(NFR48). Branch C (more IP handwritten FL) stays **deferred** (NFR51).
+
+This page is the **FR119 completion surface**. It delivers a documented **SymbiYosys (`sby`)**
 binding with assume/assert fixtures. It is **beyond** FR100 F1-(i) bounded exhaustive,
 FR112 branch B MemRead≡tick, FR92 scoreboard, and FR85 Verilator lint.
 

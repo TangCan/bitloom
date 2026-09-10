@@ -13,7 +13,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR119 / Epic 60；NFR14、NFR48、NFR49、NFR50、NFR51；对照 FR100、FR112、FR92、FR85、FR107 |
 | 记录日期 | 2026-09-10 |
-| 状态 | **accepted** — Story **60.1** 门禁；实现 → 60.2；收口 → 60.3 |
+| 状态 | **closed** — Story **60.3** / Epic 60 / FR119 |
 | **选定绑定** | **(A) SymbiYosys（`sby`）绑定** |
 
 ### (a) 上游约束
@@ -81,17 +81,17 @@
 
 ### Epic 60 关闭条件（Story 60.3 勾选）
 
-- [ ] **60.2 / FR119：** 选定 (A) `sby` 路径可复现 + ATDD + ≥1 夹具；缺工具可读失败；pass/fail 可读；FR100/FR112-B 回归
-- [ ] **文档 / deferred / README / FR100·FR112 交叉链**（分支 C 仍 deferred）
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；prelude 边界
-- [ ] **FR100 / FR112 分支 B 关闭仍有效**（NFR48）
+- [x] **60.2 / FR119：** 选定 (A) `sby` 路径可复现 + ATDD + ≥1 夹具；缺工具可读失败；pass/fail 可读；FR100/FR112-B 回归
+- [x] **文档 / deferred / README / FR100·FR112 交叉链**（分支 C 仍 deferred）
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；prelude 边界
+- [x] **FR100 / FR112 分支 B 关闭仍有效**（NFR48）
 
 ---
 
 ## 门禁一句话
 
-**缺 NFR14（或缺 a–d / 未钉死 SymbiYosys 绑定与 assume/assert 义务）⇒ 不得将 60.2–60.3 标 `ready`。**  
+**缺 NFR14（或缺 a–d / 未钉死 SymbiYosys 绑定与 assume/assert 义务）⇒ 不得将 60.2–60.3 标 `ready`。**（历史门禁；Epic 60 / FR119 已于 Story 60.3 关闭。）  
 **FR119 完成面 = (A) SymbiYosys（`sby`）绑定可复现路径；不得以 FR92 / FR100 F1-(i) / FR112-B / FR85 Verilator alone / docs-only / FR107 关闭；缺工具不得 silent 成功；分支 C 仍 deferred。**
 
 ---

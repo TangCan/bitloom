@@ -78,9 +78,11 @@ fn fr118_docs_readme_deferred_closed() {
         "FR99 must cross-link FR118"
     );
     assert!(
-        deferred.contains("FR119")
-            && (deferred.contains("仍 deferred") || deferred.contains("FR119–122")),
-        "FR119–122 must remain deferred delivery"
+        deferred.contains("FR120")
+            && (deferred.contains("仍 deferred")
+                || deferred.contains("FR120–122")
+                || deferred.contains("FR120–FR122")),
+        "FR120–122 must remain deferred delivery"
     );
 }
 
@@ -121,7 +123,7 @@ fn fr118_sprint_epic59_done() {
         sprint.contains("59-2-syn-scan-发现路径实现与验收-fr118: done")
             || sprint.contains("59-2-syn-scan-发现路径实现与验收-fr118:done")
     );
-    // Epic 61–63 must not be prematurely closed; Epic 60 may be in-progress after 60.1.
+    // Epic 61–63 must not be prematurely closed; Epic 60 may be done after 60.3.
     for epic in 61..=63 {
         assert!(
             !sprint.contains(&format!("epic-{epic}: done"))
@@ -135,14 +137,12 @@ fn fr118_sprint_epic59_done() {
         );
     }
     assert!(
-        !sprint.contains("epic-60: done") && !sprint.contains("epic-60:done"),
-        "epic-60 must not be done yet during Epic 59 closeout guard"
-    );
-    assert!(
         sprint.contains("epic-60: backlog")
             || sprint.contains("epic-60:backlog")
             || sprint.contains("epic-60: in-progress")
-            || sprint.contains("epic-60:in-progress"),
-        "epic-60 must be backlog or in-progress"
+            || sprint.contains("epic-60:in-progress")
+            || sprint.contains("epic-60: done")
+            || sprint.contains("epic-60:done"),
+        "epic-60 must be backlog, in-progress, or done"
     );
 }

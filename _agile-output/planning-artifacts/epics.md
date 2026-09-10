@@ -88,7 +88,7 @@ phase14Note: >
 phase14Epic57Status: complete
 phase14Epic58Status: complete
 phase14Epic59Status: complete
-phase14Epic60Status: backlog
+phase14Epic60Status: complete
 phase14Epic61Status: backlog
 phase14Epic62Status: backlog
 phase14Epic63Status: backlog

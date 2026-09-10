@@ -14,7 +14,7 @@
 - AD-27 / FR28+FR46: FrozenHir/`.fir` → **compilable** Chisel Scala (mechanical OK); **FR97** adds idiomatic/maintainable acceptance (revised AD-27); no Scala `Parser.parse` requirement; historical NFR9 “no maintainable Chisel” is overturned — **Epic 42 closed** (FR97 MVP); **FR111 / Epic 53 closed** (deepen D1+D3; AD-27 revised 2026-09-10)
 - FR98 / Epic 43: UART/SPI/I2C/AXI4-Lite near-VIP first-class IP — **Epic 43 closed** (MVP; GPIO optional not included)
 - FR99 / Epic 44: keystroke full-elaborate Bitloom LSP (`bitloom-lsp`) — **Epic 44 closed** (FR99 MVP; FR90 rust-analyzer remains available and does not substitute); **FR113 / Epic 55 closed** (Cargo-graph + metadata `design_roots`); **FR118 / Epic 59 closed** (full-tree `#[bitloom::top]` syn-scan without metadata)
-- FR100 / FR102 / FR103 / Epic 45: formal FL≡RTL product + multi-view attribute matrix + first-class IP dual-model — **Epic 45 closed** (MVP); **FR112 / Epic 54 closed** (GeneratedFunctional MemRead≡tick deepen; A/C deferred)
+- FR100 / FR102 / FR103 / Epic 45: formal FL≡RTL product + multi-view attribute matrix + first-class IP dual-model — **Epic 45 closed** (MVP); **FR112 / Epic 54 closed** (GeneratedFunctional MemRead≡tick deepen; A/C deferred); **FR119 / Epic 60 closed** (SymbiYosys/`sby` F1-(ii); branch C more IP FL still deferred)
 - FR101 / Epic 46: SystemC TLM-2.0 product path — **Epic 46 closed** (LT-only MVP via `emit_systemc_tlm_lt` / `gen-tlm`; AT deferred; ≠ FR47 Rust FL)
 - FR104 / FR105 / Epic 47: interactive rich waveform + sim coverage extension — **Epic 47 closed** (FR104 `interactive.html`; FR105 coverage v2 Mux branch; C3 FSM cropped); **FR114 / Epic 56 closed** (LCOV + in-tree coverage GUI; Tywaves deferred)
 

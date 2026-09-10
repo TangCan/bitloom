@@ -16,8 +16,8 @@ Correct Course `sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen.
 ## Phase 14 pointer (FR116–123 / NFR48–NFR51) — NFR47 未选加深升格
 
 Correct Course `sprint-change-proposal-2026-09-10-phase14-nfr47-deferred-deepen.md` + PRD addendum「Phase 14」**已批准**（**Phase 14 contract approved**）。  
-闸门 **FR116 / Epic 57 已关闭**；实现 epic = Epic 58–63（**FR117 / Epic 58 已关闭** — 自研 typed；Tywaves A deferred；**FR118 / Epic 59 已关闭** — syn-scan；Epic 60–63 仍 deferred）。对外「Tywaves / syn-scan / SBY / VIP GPIO / Handshake / 官方风格全家桶」须引 **FR116–122**（**FR123**）；**FR117 关闭 ≠ 上游 Tywaves 一等宣称**（**NFR51**）；**禁止**用 Phase 13 商业加深冒充本批加深（**NFR48**）。
-Phase 12/13 关闭证据**仍有效**。原 NFR47 未选项（item-149/153/157/161/165 等）已升格为 **FR117–122**；**FR119–122** 实现关闭前仍 deferred 交付态（**FR117/FR118 已关闭**）。未列入本批者仍须另开合同（**NFR51**）。
+闸门 **FR116 / Epic 57 已关闭**；实现 epic = Epic 58–63（**FR117 / Epic 58 已关闭** — 自研 typed；Tywaves A deferred；**FR118 / Epic 59 已关闭** — syn-scan；**FR119 / Epic 60 已关闭** — SymbiYosys/`sby`；Epic 61–63 仍 deferred）。对外「Tywaves / syn-scan / SBY / VIP GPIO / Handshake / 官方风格全家桶」须引 **FR116–122**（**FR123**）；**FR117 关闭 ≠ 上游 Tywaves 一等宣称**（**NFR51**）；**FR119 关闭 ≠ 分支 C 更多 IP 手写 FL**（**NFR51**）；**禁止**用 Phase 13 商业加深冒充本批加深（**NFR48**）。
+Phase 12/13 关闭证据**仍有效**。原 NFR47 未选项（item-149/153/157/161/165 等）已升格为 **FR117–122**；**FR120–122** 实现关闭前仍 deferred 交付态（**FR117/FR118/FR119 已关闭**）。未列入本批者仍须另开合同（**NFR51**）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
@@ -373,7 +373,7 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   summary: 可选产品加深（Phase 12「若产品需要…」）— 已升格为 Phase 13 FR107–114
   evidence: |
     - item-117：**Cargo-graph + metadata design_roots → FR113 / Epic 55 已关闭**（Story 55.3；docs/fr113-lsp-design-root-discovery.md）；全树 `#[bitloom::top]` syn-scan → **FR118 / Epic 59 已关闭**（Story 59.3；docs/fr118-syn-scan-design-root-discovery.md）
-    - item-121：**GeneratedFunctional MemRead ≡ tick → FR112 / Epic 54 已关闭**（Story 54.3；docs/fr112-generated-functional-memread-equiv.md）；F1-(ii) SymbiYosys/SMT → **Phase 14 FR119 / Epic 60**；**GPIO 近 VIP → FR108 / Epic 50 已关闭**（Story 50.3；商业 VIP GPIO → **Phase 14 FR120 / Epic 61**）
+    - item-121：**GeneratedFunctional MemRead ≡ tick → FR112 / Epic 54 已关闭**（Story 54.3；docs/fr112-generated-functional-memread-equiv.md）；F1-(ii) SymbiYosys/SMT → **FR119 / Epic 60 已关闭**（Story 60.3；docs/fr119-symbiyosys-smt.md）；**GPIO 近 VIP → FR108 / Epic 50 已关闭**（Story 50.3；商业 VIP GPIO → **Phase 14 FR120 / Epic 61**）
     - item-125：AT-style nb_transport_fw/bw → **FR107 / Epic 49**（**已关闭** / Story 49.3；docs/fr107-systemc-tlm-at.md）
     - item-129：**C3 FSM/state-visit 覆盖率 → FR109 / Epic 51 已关闭**（Story 51.3；docs/fr109-fsm-state-visit-coverage.md）；**LCOV + 树内覆盖率 GUI → FR114 / Epic 56 已关闭**（Story 56.3；docs/fr114-lcov-coverage-gui.md）；**Tywaves typed IDE → FR117 / Epic 58 已关闭**（Story 58.3；自研 typed；Tywaves A deferred；docs/fr117-typed-ide-wave.md）
   status: deferred — Phase 13 contract approved (FR106); FR107–FR114 closed（Epic 48–56 实现故事齐）；未选加深子集已升格 Phase 14（FR117–122 / Epic 58–63；合同已批准；**FR117/Epic 58 已关闭**）
@@ -391,7 +391,7 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     Epic 58 / FR117 in-house typed IDE wave **已关闭**（Story 58.3；Tywaves A deferred）。
     Epic 59 / FR118 `#[bitloom::top]` syn-scan **已关闭**（Story 59.3）。
     **Phase 13 规划/实现故事已齐（Epic 48–56）。** 对外商业加深宣称按 **FR115**。Phase 12 MVP 关闭证据仍有效（NFR44）。
-    未选子集已由 Phase 14 Correct Course 升格（FR117–122）；**FR117/FR118 已关闭**；FR119–122 仍 deferred 交付。
+    未选子集已由 Phase 14 Correct Course 升格（FR117–122）；**FR117/FR118/FR119 已关闭**；FR120–122 仍 deferred 交付。
 <!-- action-items-sweep-2026-09-10-phase13: epics 48–56 open retro items disposition -->
 
 - source_spec: `_agile-output/implementation-artifacts/epic-48-retro-2026-09-10.md`
@@ -424,14 +424,15 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     - item-145：自动 FSM 标签集提取 — 仍须另开合同（**NFR51**）；当前显式 register_fsm_states = FR109 完成面
     - item-149：**Handshake / 动态数据流默认可综合 → Phase 14 FR121 / Epic 62**（合同已批准；实现关闭前仍 deferred；须修订 AD-25）；Q1+Q2 = FR110 完成面
     - item-153：**官方风格全家桶 / 恢复 Parser → Phase 14 FR122 / Epic 63**（合同已批准；默认仍不恢复 Parser；可能修订 AD-27）；D1+D3 = FR111 完成面
-    - item-157：**SymbiYosys/SMT → Phase 14 FR119 / Epic 60**（合同已批准）；更多 IP FL / emit MemRead 完整生成仍须另开合同（**NFR51**）；分支 B = FR112 完成面
+    - item-157：**SymbiYosys/SMT → FR119 / Epic 60 已关闭**（Story 60.3；docs/fr119-symbiyosys-smt.md）；更多 IP FL / emit MemRead 完整生成仍须另开合同（**NFR51**）；分支 B = FR112 完成面
     - item-161：**无 metadata 全树 syn-scan → FR118 / Epic 59 已关闭**（Story 59.3；docs/fr118-syn-scan-design-root-discovery.md）；Cargo-graph+metadata = FR113 完成面
     - item-165：**Tywaves typed IDE → FR117 / Epic 58 已关闭**（Story 58.3；自研 typed；Tywaves A deferred；docs/fr117-typed-ide-wave.md）；第三方 LCOV GUI 一等关闭仍须另开合同（**NFR51**）；LCOV+树内 GUI = FR114 完成面
     - frontmatter：epics.md phase13Epic50–56Status → complete（对齐 sprint done）
-  status: deferred — Phase 14 contract approved (FR116); **FR117/Epic 58 已关闭**；**FR118/Epic 59 已关闭**；FR119–FR122 仍 deferred（Epic 60–63）；item-137 implemented；未列入本批仍 NFR51
+  status: deferred — Phase 14 contract approved (FR116); **FR117/Epic 58 已关闭**；**FR118/Epic 59 已关闭**；**FR119/Epic 60 已关闭**；FR120–FR122 仍 deferred（Epic 61–63）；item-137 implemented；未列入本批仍 NFR51
   resolved: '2026-09-10'
   resolution: |
     item-137 品牌路径已落地；Phase 14 Correct Course 已批准升格 item-149/153/157(SBY)/161/165(Tywaves)。
     **FR117 / Epic 58 已关闭**（Story 58.3；自研 typed IDE；Tywaves A deferred）。
-    **FR118 / Epic 59 已关闭**（Story 59.3；`#[bitloom::top]` syn-scan）。FR119–122 实现关闭前仍 deferred 交付态。
+    **FR118 / Epic 59 已关闭**（Story 59.3；`#[bitloom::top]` syn-scan）。
+    **FR119 / Epic 60 已关闭**（Story 60.3；SymbiYosys/`sby`；分支 C 更多 IP 手写 FL 仍 deferred）。FR120–122 实现关闭前仍 deferred 交付态。
     自动 FSM 标签 / 更多 IP FL / 第三方 LCOV GUI / emit MemRead 完整生成仍须另开合同（NFR51）。
