@@ -117,8 +117,9 @@ fn fr105_recorder_mux_branch_and_toggle_fixture() {
 
     let report = sim.coverage_report();
     assert!(
-        report.starts_with("# bitloom-sim coverage v2"),
-        "R1: extended report must use coverage v2 header, got: {}",
+        report.starts_with("# bitloom-sim coverage v2")
+            || report.starts_with("# bitloom-sim coverage v3"),
+        "R1: coverage v2 (Mux) or v3 (with FSM); got: {}",
         report.lines().next().unwrap_or("")
     );
     assert!(

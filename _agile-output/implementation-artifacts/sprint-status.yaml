@@ -389,7 +389,7 @@ development_status:
 
   epic-51: in-progress
   51-1-epic-51-nfr14-风险记录: done
-  51-2-fsm-state-visit-覆盖率-fr109: backlog
+  51-2-fsm-state-visit-覆盖率-fr109: done
   51-3-fr109-收口与-fr105-交叉链: backlog
   epic-51-retrospective: optional
 

@@ -10,7 +10,7 @@ use bitloom_hir::{AssignExpr, AssignTarget, FrozenHir, GroundType, PortValues, P
 pub use bitloom_hir::PortValues as Values;
 
 mod coverage;
-pub use coverage::{Coverage, parse_branch_report, parse_report};
+pub use coverage::{Coverage, parse_branch_report, parse_report, parse_state_report};
 mod engine;
 pub use engine::TickEngine;
 mod equiv;
@@ -355,6 +355,20 @@ impl Sim {
 
     pub fn coverage_report(&self) -> String {
         self.coverage.report()
+    }
+
+    /// Register FSM state labels for FR109 / C3 state-visit coverage.
+    pub fn register_fsm_states<I, S>(&mut self, fsm: &str, states: I)
+    where
+        I: IntoIterator<Item = S>,
+        S: Into<String>,
+    {
+        self.coverage.register_fsm_states(fsm, states);
+    }
+
+    /// Record a visit to an FSM state (after [`Self::register_fsm_states`]).
+    pub fn sample_state_visit(&mut self, fsm: &str, state: &str) {
+        self.coverage.sample_state_visit(fsm, state);
     }
 
     fn tick_interpreter(&mut self) {
@@ -889,8 +903,9 @@ mod tests {
         sim.tick();
         let report = sim.coverage_report();
         assert!(
-            report.starts_with("# bitloom-sim coverage v2"),
-            "FR105 extends report header to v2 (toggle lines retained)"
+            report.starts_with("# bitloom-sim coverage v2")
+                || report.starts_with("# bitloom-sim coverage v3"),
+            "FR105/FR109 coverage header v2 (Mux) or v3 (with FSM)"
         );
         let (hits, misses) = parse_report(&report);
         assert!(
