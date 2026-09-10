@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 08:55
+last_updated: 09-10-2026 08:58
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -338,7 +338,7 @@ development_status:
   43-3-spi-全协议-近-vip-fr98: done
   43-4-i2c-全协议-近-vip-fr98: done
   43-5-axi-可选-gpio-fr98-收口: done
-  epic-43-retrospective: optional
+  epic-43-retrospective: done
 
   epic-44: done
   44-1-epic-44-nfr14-风险记录: done
@@ -1082,3 +1082,32 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-42-retro-2026-09-10.md"
+  - id: "epic-43-retro-item-110-fr98-诚实边界-对外不得把-fr82-基线-fr89-uarttx-子集-单"
+    epic: 43
+    action: "FR98 诚实边界：对外不得把 FR82 基线 / FR89 UartTx 子集 / 单类加深写成 VIP / FR98 全绿；近 VIP
+      MVP ≠ 商业 VIP 对拍；不得口头宣称 GPIO VIP（G0 未交付）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-43-retro-2026-09-10.md"
+  - id: "epic-43-retro-item-111-评估拆分-crates-bitloom-prelude-src-ip-rs-现"
+    epic: 43
+    action: "评估拆分 crates/bitloom-prelude/src/ip.rs（现 ~2869 行；Epic 43 net +1386）为按
+      IP 模块文件，降低与 Epic 45 一级 IP 双模型 churn 冲突。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-43-retro-2026-09-10.md"
+  - id: "epic-43-retro-item-112-续-epic-40-retro-item-101-epic-41-retro-i"
+    epic: 43
+    action: "续 epic-40-retro-item-101 / epic-41-retro-item-104 / epic-42-retro-item-108：同步
+      epics.md frontmatter phase12Epic40Status–phase12Epic47Status 与 sprint done /
+      phase12Status: complete。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-43-retro-2026-09-10.md"
+  - id: "epic-43-retro-item-113-nfr14-收口故事-commit-subject-惯例-门禁与收口-commi"
+    epic: 43
+    action: "NFR14 / 收口故事 commit subject 惯例：门禁与收口 commit subject 含 Story N.1 / Story
+      N.5（或 N.1/N.5），避免 git_evidence.py 归因空（续 42 item-109；本 epic 43.1/43.5 复发）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-43-retro-2026-09-10.md"
