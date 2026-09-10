@@ -99,7 +99,7 @@ phase15Scope: >
 phase15Epic64Status: complete
 phase15Epic65Status: complete
 phase15Epic66Status: complete
-phase15Epic67Status: backlog
+phase15Epic67Status: complete
 phase15Epic68Status: backlog
 phase15Epic69Status: backlog
 phase15Epic70Status: backlog

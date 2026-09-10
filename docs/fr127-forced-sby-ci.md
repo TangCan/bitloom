@@ -1,6 +1,6 @@
 # FR127 — Forced real `sby` in default CI
 
-**Product:** Bitloom. **Status:** in progress (Story 67.2).
+**Product:** Bitloom. **Status:** **Epic 67 / FR127 closed** (Story **67.3**).
 
 Beyond FR119 local-optional `just formal-sby-check` / docs alone.
 
