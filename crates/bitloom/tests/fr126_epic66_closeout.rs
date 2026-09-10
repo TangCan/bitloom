@@ -10,7 +10,8 @@ fn read(rel: &str) -> String {
 
 #[test]
 fn fr126_closeout() {
-    let nfr = read("_agile-output/implementation-artifacts/nfr14-risk-epic66-more-ip-handwritten-fl.md");
+    let nfr =
+        read("_agile-output/implementation-artifacts/nfr14-risk-epic66-more-ip-handwritten-fl.md");
     assert!(nfr.contains("- [x] **66.2 / FR126") && nfr.contains("closed"));
     let docs = read("docs/fr126-more-ip-handwritten-fl.md");
     assert!(docs.contains("closed") || docs.contains("已关闭"));

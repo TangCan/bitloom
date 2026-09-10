@@ -2,7 +2,9 @@
 
 **Product:** Bitloom (`bitloom_prelude::ip::GpioSocPad`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Product path delivered in Story **68.2** (Epic 68 close → Story **68.3**).
+**Status:** **Epic 68 / FR128 closed** (Story **68.3**). Product path delivered in Story **68.2**.
+
+FR120 `GpioVip` C1–C4 close **remains valid** (NFR52).
 
 Beyond FR120 `GpioVip` C1–C4: dual-bank pad ring, falling-edge IRQ, AXI-style CSR
 window, and scoreboard ATDD.
@@ -26,4 +28,5 @@ FR120 / FR108 / FR98 closes remain valid. Design crates still depend only on `bi
 
 ```text
 cargo test -p bitloom --test fr128_soc_pad
+cargo test -p bitloom --test fr128_epic68_closeout
 ```

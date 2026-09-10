@@ -136,12 +136,7 @@ fn fr88_ci_hls_smoke_has_no_continue_on_error() {
     let end = after[1..]
         .find("\n  ")
         .map(|i| i + 1)
-        .and_then(|i| {
-            after[i..]
-                .find('\n')
-                .map(|j| i + j)
-                .or(Some(after.len()))
-        })
+        .and_then(|i| after[i..].find('\n').map(|j| i + j).or(Some(after.len())))
         .unwrap_or_else(|| after.len().min(600));
     // Prefer cutting at next `\n  [a-z].*:` job header
     let mut job_end = after.len();

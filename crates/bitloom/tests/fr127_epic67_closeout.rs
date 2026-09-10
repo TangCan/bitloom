@@ -4,7 +4,12 @@ use std::fs;
 use std::path::PathBuf;
 
 fn read(rel: &str) -> String {
-    fs::read_to_string(PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..").join(rel)).unwrap()
+    fs::read_to_string(
+        PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../..")
+            .join(rel),
+    )
+    .unwrap()
 }
 
 #[test]
