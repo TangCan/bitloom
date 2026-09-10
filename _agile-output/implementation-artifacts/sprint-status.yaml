@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 14:00
+last_updated: 09-10-2026 14:05
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -421,7 +421,7 @@ development_status:
   56-1-epic-56-nfr14-风险记录: done
   56-2-富波形-覆盖率-gui-加深-fr114: done
   56-3-fr114-收口与-phase13-指针: done
-  epic-56-retrospective: optional
+  epic-56-retrospective: done
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1
@@ -1504,3 +1504,31 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-55-retro-2026-09-10.md"
+  - id: "epic-56-retro-item-162-fr114-诚实边界-对外不得把-fr104-interactive-html"
+    epic: 56
+    action: "FR114 诚实边界：对外不得把 FR104 interactive.html I1–I3 / FR105 Mux v2 / FR109
+      文本报告 / timing·VCD·GTKWave alone 写成 FR114 完成面；宣称须引 FR114 LCOV + 树内 coverage.html（续
+      FR115）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-56-retro-2026-09-10.md"
+  - id: "epic-56-retro-item-163-触碰-bitloom-sim-覆盖率-cli-coverage-路径时保持-fr"
+    epic: 56
+    action: "触碰 bitloom-sim 覆盖率 / CLI coverage 路径时保持 FR104 波路径与 FR105 Mux v2 默认可用（NFR44）；空覆盖不得
+      silent 宣称 FR114 绿。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-56-retro-2026-09-10.md"
+  - id: "epic-56-retro-item-164-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 56
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-56-retro-2026-09-10.md"
+  - id: "epic-56-retro-item-165-可选工程卫生-若后续交付子集-a-tywaves-级-typed-ide-波形"
+    epic: 56
+    action: "可选工程卫生：若后续交付子集 (A) Tywaves 级 typed IDE 波形，或把第三方 LCOV GUI 升为一等关闭条件，须新合同钉死（NFR47）；当前
+      LCOV + 树内 coverage GUI 为 FR114 完成面。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-56-retro-2026-09-10.md"
