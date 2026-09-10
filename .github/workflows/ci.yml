@@ -54,3 +54,17 @@ jobs:
           toolchain: "1.97.1"
       - name: HLS smoke (Bambu 2024.10 pin / CI stub)
         run: bash scripts/hls-smoke.sh
+
+  # FR127 / NFR54: required true SymbiYosys (sby) gate in default CI.
+  # Reuses FR119 `just formal-sby-check` (≠ local-optional alone).
+  # Do not use continue-on-error; missing tools must fail the job.
+  formal-sby:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install sby + yosys + z3 (FR127)
+        run: bash scripts/ci-install-sby.sh
+      - name: Required FR127 formal-sby-check
+        # Same path as `just formal-sby-check` (FR119 script; required here for FR127).
+        run: bash scripts/formal-sby-check.sh
