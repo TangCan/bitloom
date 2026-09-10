@@ -330,7 +330,7 @@ development_status:
   42-1-epic-42-nfr14-风险记录: done
   42-2-idiomatic-chisel-发射与验收-fr97: done
   42-3-fr97-收口与回归: done
-  epic-42-retrospective: optional
+  epic-42-retrospective: done
 
   epic-43: done
   43-1-epic-43-nfr14-风险记录: done
@@ -1054,3 +1054,31 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-41-retro-2026-09-10.md"
+  - id: "epic-42-retro-item-106-fr97-诚实边界-对外不得把机械-emit_chisel-fr28-可编译-写"
+    epic: 42
+    action: "FR97 诚实边界：对外不得把机械 emit_chisel / FR28「可编译」写成 idiomatic / FR97 已交付；须用 emit_chisel_idiomatic
+      + check_idiomatic_chisel（续 NFR40/NFR42）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-42-retro-2026-09-10.md"
+  - id: "epic-42-retro-item-107-硬化-check_idiomatic_chisel-按模块块作用域校验端口-io"
+    epic: 42
+    action: "硬化 check_idiomatic_chisel：按模块块作用域校验端口/IO Bundle（当前整文件子串）；并钉死空电路拒绝或显式豁免策略（续
+      42.2 deferred）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-42-retro-2026-09-10.md"
+  - id: "epic-42-retro-item-108-续-epic-40-retro-item-101-epic-41-retro-i"
+    epic: 42
+    action: "续 epic-40-retro-item-101 / epic-41-retro-item-104：同步 epics.md frontmatter
+      phase12Epic40Status–phase12Epic47Status 与 sprint done / phase12Status: complete。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-42-retro-2026-09-10.md"
+  - id: "epic-42-retro-item-109-nfr14-故事-commit-subject-惯例-门禁故事-subject"
+    epic: 42
+    action: "NFR14 故事 commit subject 惯例：门禁故事 subject 含 Story N.1（或 N.1），避免 git_evidence.py
+      归因空（续 41.1/42.1）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-42-retro-2026-09-10.md"
