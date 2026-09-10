@@ -9,7 +9,8 @@ It delivers a buildable/runnable SystemC TLM-2.0 path per NFR14
 
 「不承诺 SystemC TLM-2.0」is **no longer** a product completion exclusion
 (revised **AD-5** / Phase 12). Contracted MVP remains **LT-only**; AT
-(`nb_transport_*`) is **deferred** (risk-record L2), not delivered by this epic.
+(`nb_transport_*`) is delivered under **FR107** / Epic 49 (see
+[`fr107-systemc-tlm-at.md`](fr107-systemc-tlm-at.md)), not by this epic.
 
 ## Abstraction contract (L3)
 
@@ -18,8 +19,9 @@ It delivers a buildable/runnable SystemC TLM-2.0 path per NFR14
 - `tlm::tlm_generic_payload`
 - `b_transport` on `tlm_utils::simple_*_socket`
 
-**Out of MVP / deferred:** AT (`nb_transport_fw` / `nb_transport_bw`), full SoC
-VP, default TLM≡CA formal proof (that is **FR100** / Epic 45 — already closed).
+**Out of MVP / deferred from FR101:** AT (`nb_transport_fw` / `nb_transport_bw`)
+→ **FR107**; full SoC VP; default TLM≡CA formal proof (that is **FR100** / Epic 45 —
+already closed).
 
 ## Deliverables (D1–D4)
 

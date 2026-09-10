@@ -63,12 +63,12 @@ rhdl-builder / rhdl-macro / **bitloom-prelude**（对外名；目录可暂 `rhdl
 
 ### AD-5 — 双模型仿真 [ADOPTED]
 
-- **Binds:** rhdl-sim, 测试, 可选生成器；Phase 12 SystemC TLM 产品路径（**FR101**）
-- **Prevents:** 一 epic 只实现 `tick`、另一 epic 发明无对照的第二套仿真语义；把未关闭的 TLM 半成品冒充字面绿；用「默认 TLM≡CA 已证明」冒充 **FR100** 关闭
-- **Rule:** 周期精确仿真只从 `FrozenHir`（原生 `tick`）。`rhdl-sim` 必须能 dump VCD（同一记录器 API）。功能视图可为手写 `#[functional_model]` **或**工具链**生成的 Rust 功能模拟器 crate**（FR47；形态不强制 SystemC）。标 `#[functional_state]` 的字段不得进入 HIR/`freeze`。一致性用随机/对照/`equiv`，比较对象是 `PortValues`（AD-17）。**Phase 12 / Path B：** **允许**从工具链交付 **SystemC TLM-2.0 产品路径（PRD FR101 / Epic 46）**；实现形状由该 epic 钉死。Rust 功能模拟器（FR47）仍为合法功能视图。**默认 TLM≡CA 形式证明**属 **FR100**（Epic 45），不得因本 AD 允许 TLM 产品路径而自动宣称已关闭。阶段一 IP 仍是普通设计 crate。**NFR41：** 实现 FR101 的 epic 须引用本修订后 AD-5。
+- **Binds:** rhdl-sim, 测试, 可选生成器；Phase 12 SystemC TLM 产品路径（**FR101**）；Phase 13 AT 加深（**FR107**）
+- **Prevents:** 一 epic 只实现 `tick`、另一 epic 发明无对照的第二套仿真语义；把未关闭的 TLM 半成品冒充字面绿；用「默认 TLM≡CA 已证明」冒充 **FR100** 关闭；用 **FR101 LT-only** 冒充 **FR107 AT**
+- **Rule:** 周期精确仿真只从 `FrozenHir`（原生 `tick`）。`rhdl-sim` 必须能 dump VCD（同一记录器 API）。功能视图可为手写 `#[functional_model]` **或**工具链**生成的 Rust 功能模拟器 crate**（FR47；形态不强制 SystemC）。标 `#[functional_state]` 的字段不得进入 HIR/`freeze`。一致性用随机/对照/`equiv`，比较对象是 `PortValues`（AD-17）。**Phase 12 / Path B：** **允许**从工具链交付 **SystemC TLM-2.0 产品路径（PRD FR101 / Epic 46）**；实现形状由该 epic 钉死（现行 = **LT-only** `b_transport`）。**Phase 13：** **另允许** **AT-style** 产品支（**FR107 / Epic 49**）— `nb_transport_fw` / `nb_transport_bw` 或实现 epic 文档钉死的 AT 子集；**不得**以 LT-only / host Rust FL（FR47）冒充 AT 关闭。Rust 功能模拟器（FR47）仍为合法功能视图。**默认 TLM≡CA 形式证明**属 **FR100**（Epic 45），不得因本 AD 允许 TLM 产品路径而自动宣称已关闭。阶段一 IP 仍是普通设计 crate。**NFR41：** 实现 FR101 的 epic 须引用本修订后 AD-5。**NFR46：** 实现 FR107 的 epic 须引用本 Phase 13 修订后 AD-5。
 - **Revised:** 2026-08-21 — 允许生成 Rust 功能模拟器；废止「禁止一切 HIR→功能模拟器生成」的旧读法（PRD **FR47** 与 §0 **推翻表**；①C / Epic 19.2）。历史「禁止 HIR→TLM」不再作为阻断 FR47 的依据。
 - **Revised:** 2026-09-09 — Phase 12 Path B / **FR94** / **NFR41**：允许 SystemC TLM-2.0 产品路径（**FR101**）；废止「不承诺 / 不要求 SystemC TLM-2.0」作为阻断 FR101 的依据。
-
+- **Revised:** 2026-09-10 — Phase 13 / **FR107** / **NFR46**：允许 AT / `nb_transport_*`（或文档等价子集）为独立产品支；废止「仅 LT-only」作为阻断 FR107 的依据；LT（FR101）关闭证据仍有效（**NFR44**）。
 ### AD-6 — 依赖只准向下 [ADOPTED]
 
 - **Binds:** all crates

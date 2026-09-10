@@ -47,6 +47,10 @@ pub use systemc_tlm::{
     SYSTEMC_PIN_VERSION, SystemcToolchain, build_and_run_tlm_lt_smoke, emit_systemc_tlm_lt,
     generate_systemc_tlm_lt, resolve_systemc,
 };
+mod systemc_tlm_at;
+pub use systemc_tlm_at::{
+    build_and_run_tlm_at_smoke, emit_systemc_tlm_at, generate_systemc_tlm_at,
+};
 
 /// Simulator state for one FrozenHir circuit.
 pub struct Sim {
