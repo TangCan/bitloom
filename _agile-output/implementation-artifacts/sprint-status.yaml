@@ -405,10 +405,10 @@ development_status:
   53-3-fr111-收口与-ad-27-交叉链: done
   epic-53-retrospective: optional
 
-  epic-54: in-progress
+  epic-54: done
   54-1-epic-54-nfr14-风险记录: done
   54-2-形式等价-双模型深度-fr112: done
-  54-3-fr112-收口与交叉链: backlog
+  54-3-fr112-收口与交叉链: done
   epic-54-retrospective: optional
 
   epic-55: backlog

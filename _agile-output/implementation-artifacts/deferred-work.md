@@ -366,10 +366,10 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   summary: 可选产品加深（Phase 12「若产品需要…」）— 已升格为 Phase 13 FR107–114
   evidence: |
     - item-117：超越 DesignFixture 的 Cargo-graph / 任意 .rs 设计根发现 → **FR113 / Epic 55**（仍 open）
-    - item-121：GeneratedFunctional MemRead ≡ tick；F1-(ii) SymbiYosys/SMT → **FR112 / Epic 54**（仍 open）；**GPIO 近 VIP → FR108 / Epic 50 已关闭**（Story 50.3；商业 VIP GPIO 仍非目标）
+    - item-121：**GeneratedFunctional MemRead ≡ tick → FR112 / Epic 54 已关闭**（Story 54.3；docs/fr112-generated-functional-memread-equiv.md）；F1-(ii) SymbiYosys/SMT 仍 deferred（NFR47）；**GPIO 近 VIP → FR108 / Epic 50 已关闭**（Story 50.3；商业 VIP GPIO 仍非目标）
     - item-125：AT-style nb_transport_fw/bw → **FR107 / Epic 49**（**已关闭** / Story 49.3；docs/fr107-systemc-tlm-at.md）
     - item-129：**C3 FSM/state-visit 覆盖率 → FR109 / Epic 51 已关闭**（Story 51.3；docs/fr109-fsm-state-visit-coverage.md）；Tywaves / LCOV GUI → **FR114 / Epic 56**（仍 open）
-  status: deferred — Phase 13 contract approved (FR106); FR107–FR111 closed；FR112–114 pending
+  status: deferred — Phase 13 contract approved (FR106); FR107–FR112 closed；FR113–114 pending
   resolved: '2026-09-10'
   resolution: |
     Phase 13 Correct Course（sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen）+
@@ -378,4 +378,5 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     Epic 51 / FR109 FSM/state-visit (C3) **已关闭**（Story 51.3）。
     Epic 52 / FR110 HLS commercial depth **已关闭**（Story 52.3；AD-25 2026-09-10）。
     Epic 53 / FR111 idiomatic Chisel deepen **已关闭**（Story 53.3；AD-27 2026-09-10）。
-    其余 FR112–114 仍待各 epic 关闭后方可按 FR115 宣称。Phase 12 MVP 关闭证据仍有效（NFR44）。
+    Epic 54 / FR112 formal/dual-model depth **已关闭**（Story 54.3；branch B MemRead≡tick；A/C deferred）。
+    其余 FR113–114 仍待各 epic 关闭后方可按 FR115 宣称。Phase 12 MVP 关闭证据仍有效（NFR44）。

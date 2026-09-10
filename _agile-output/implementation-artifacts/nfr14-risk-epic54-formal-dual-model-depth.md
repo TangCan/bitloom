@@ -13,7 +13,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR112 / Epic 54；NFR14、NFR44、NFR45、NFR47；对照 FR100/FR102/FR103、FR92、FR30 |
 | 记录日期 | 2026-09-10 |
-| 状态 | draft — Story 54.1 |
+| 状态 | **closed** — Story **54.3** / Epic 54 / FR112 |
 | **选定加深分支** | **(B) GeneratedFunctional MemRead ≡ tick** |
 
 ### (a) 上游约束
@@ -68,11 +68,11 @@
 
 ### Epic 54 关闭条件（Story 54.3 勾选）
 
-- [ ] **54.2 / FR112：** 分支 B 可运行 + ATDD + ≥1 夹具；负向可读
-- [ ] **文档 / deferred / FR100·FR103 交叉链**（未选 A/C 保持 deferred）
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；prelude 边界
-- [ ] **FR100/103 MVP 关闭仍有效**（NFR44）
+- [x] **54.2 / FR112：** 分支 B 可运行 + ATDD + ≥1 夹具；负向可读
+- [x] **文档 / deferred / FR100·FR103 交叉链**（未选 A/C 保持 deferred）
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；prelude 边界
+- [x] **FR100/103 MVP 关闭仍有效**（NFR44）
 
 ---
 

@@ -2,7 +2,11 @@
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-This page is the **FR112 completion surface** for Epic 54 **branch (B)** (Story 54.2).
+**Status:** **Epic 54 / FR112 closed** (Story **54.3**). Branch **(B)** delivered in Story **54.2**.
+Phase 12 FR100 F1-(i) and FR103 SyncFifo handwritten FL MVP remain closed (NFR44).
+Branches (A) SymbiYosys and (C) more handwritten IP FL stay **deferred** (NFR47 — need new contract).
+
+This page is the **FR112 completion surface** for Epic 54 **branch (B)**.
 It deepens dual-model honesty **beyond** Phase 12 FR100 F1-(i) bounded exhaustive and
 FR103 SyncFifo handwritten FL MVP.
 
@@ -10,7 +14,7 @@ FR103 SyncFifo handwritten FL MVP.
 
 | Branch | Status |
 |--------|--------|
-| **(B) GeneratedFunctional MemRead ≡ tick** | **FR112 face** (this page) |
+| **(B) GeneratedFunctional MemRead ≡ tick** | **FR112 face — closed** (this page) |
 | (A) F1-(ii) SymbiYosys/SMT | **deferred** — needs new contract |
 | (C) More first-class IP handwritten FL | **deferred** — needs new contract |
 
@@ -32,6 +36,7 @@ fixture (latency-1 read): same PortValues after documented stimuli via
 
 ```text
 cargo test -p bitloom --test fr112_memread_equiv_tick
+cargo test -p bitloom --test fr112_epic54_closeout
 cargo test -p bitloom-sim --lib generate::tests::generated_functional_sync_read_mem_matches_tick
 ```
 
@@ -48,4 +53,8 @@ A deliberate FL that ignores MemRead latency (always drives `rdata=0`) must
 | [`fr103-ip-dual-model.md`](fr103-ip-dual-model.md) | SyncFifo handwritten FL MVP — still closed; ≠ FR112 alone |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic54-formal-dual-model-depth.md` |
 
-Epic 54 closeout checkboxes → Story 54.3.
+## Non-goals (NFR47)
+
+- F1-(ii) SymbiYosys/SMT product entry (branch A)
+- Expanding handwritten FL beyond SyncFifo for more IP classes (branch C)
+- Claiming FR100 F1-(i) or FR103 SyncFifo MVP alone closes FR112
