@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR116 / Epic 57；NFR14、NFR48、NFR49、NFR50、NFR51；对照 FR94–115 / NFR40–47；FR123 宣称门面 |
 | 记录日期 | 2026-09-10 |
-| 状态 | **open** — Story 57.1 done；Story 57.2 done（FR116 合同戳验收）；57.3–57.4 仍 backlog；Epic 58–63 仍 backlog（不得 ready） |
+| 状态 | **open** — Story 57.1–57.3 done；57.4 仍 backlog；Epic 58–63 仍 backlog（不得 ready） |
 
 ### Phase 12/13 关闭面 vs Phase 14 加深边界（NFR48 · 必读）
 
@@ -31,7 +31,7 @@
 
 - **Correct Course 批准（2026-09-10）：** `sprint-change-proposal-2026-09-10-phase14-nfr47-deferred-deepen.md` 批准 Phase 14 = Epic 57–63 · FR116–FR123 / NFR48–NFR51；不回滚 Phase 12/13。
 - **PRD addendum：** 「2026-09-10 Update — Phase 14 NFR47 未选加深升格」已落地；「Tywaves / syn-scan / SBY / VIP GPIO / Handshake / 官方风格全家桶」类宣称仅可引用 FR116–122 对应关闭证据（**FR123**）；**禁止**用 Phase 13 商业加深冒充本批未选加深完成面。
-- **仍待故事落地（本记录不开工）：** README / `deferred-work.md` 诚实面同步（→ **57.3**）；ARCHITECTURE-SPINE Deferred / AD 指针（→ **57.4** / **NFR50**）。Correct Course + addendum 已授权合同；正文差分由 57.3–57.4 落地。
+- **仍待故事落地（本记录不开工）：** ARCHITECTURE-SPINE Deferred / AD 指针（→ **57.4** / **NFR50**）。README / deferred 诚实面已由 **Story 57.3** 落地。Correct Course + addendum 已授权合同。
 - **FR117–122 加深范围摘要：**
   1. **FR117** — Tywaves 级 typed IDE 波形（超出 FR104 `interactive.html` / FR114 LCOV GUI）；Epic 58
   2. **FR118** — 无 metadata 全树 `#[bitloom::top]` syn-scan（超出 FR99 DesignFixture / FR113 Cargo-graph+metadata）；Epic 59
@@ -117,7 +117,7 @@
 ### Epic 57 关闭条件（Story 57.4 勾选）
 
 - [x] **FR116 / Correct Course + PRD：** Phase 14 批准文案验收 — Story 57.2
-- [ ] **README / deferred：** Phase 13 商业加深 vs Phase 14 加深区分 — Story 57.3
+- [x] **README / deferred：** Phase 13 商业加深 vs Phase 14 加深区分 — Story 57.3
 - [ ] **AD 指针：** Deferred / NFR50 门禁可执行 — Story 57.4
 - [ ] **NFR48–51：** 加深隔离与未选子集显式合同已登记
 - [ ] **禁止事项未触发：** 无改写 FR94–115 为失败；无未合 FR116 开 58–63；无静默扩大子集
