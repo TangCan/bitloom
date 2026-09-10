@@ -2,3 +2,7 @@
 **/target/
 **/*.rs.bk
 Cargo.lock
+
+# FR119 SymbiYosys workdirs (sby -f beside fixtures)
+crates/rhdl-formal/fixtures/fr119/fr119_pass/
+crates/rhdl-formal/fixtures/fr119/fr119_fail/

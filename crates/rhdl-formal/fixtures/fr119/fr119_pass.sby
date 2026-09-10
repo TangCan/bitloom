@@ -1,0 +1,16 @@
+# FR119 SymbiYosys pass fixture (BMC). Product: Bitloom.
+# Known-good band recorded in docs/fr119-symbiyosys-smt.md when sby is available.
+[options]
+mode bmc
+depth 8
+expect pass
+
+[engines]
+smtbmc z3
+
+[script]
+read -sv fr119_pass.sv
+prep -top fr119_pass
+
+[files]
+fr119_pass.sv

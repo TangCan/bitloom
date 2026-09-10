@@ -35,6 +35,12 @@
 
 **MUST NOT** close FR85 / claim FR39 depth done using `check_sva_text` / toy heuristics alone (NFR14 / NFR37).
 
+## FR119 SymbiYosys product path (≠ this page)
+
+F1-(ii) SymbiYosys formal binding is **FR119 / Epic 60** — see
+[`fr119-symbiyosys-smt.md`](fr119-symbiyosys-smt.md) (`just formal-sby-check`).
+Do **not** treat `formal-sva-check` / Verilator lint as the FR119 close.
+
 ## LSP (not this epic)
 
 LSP hover/goto remains **deferred** and is **not** an Epic 35 completion criterion — see [`fr38-viz-lsp.md`](fr38-viz-lsp.md).

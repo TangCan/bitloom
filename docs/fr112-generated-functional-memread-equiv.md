@@ -4,7 +4,8 @@
 
 **Status:** **Epic 54 / FR112 closed** (Story **54.3**). Branch **(B)** delivered in Story **54.2**.
 Phase 12 FR100 F1-(i) and FR103 SyncFifo handwritten FL MVP remain closed (NFR44).
-Branches (A) SymbiYosys and (C) more handwritten IP FL stay **deferred** (NFR47 — need new contract).
+Branches (A) SymbiYosys → **FR119 / Epic 60** ([`fr119-symbiyosys-smt.md`](fr119-symbiyosys-smt.md));
+(C) more handwritten IP FL stay **deferred** (NFR51 — need new contract).
 
 This page is the **FR112 completion surface** for Epic 54 **branch (B)**.
 It deepens dual-model honesty **beyond** Phase 12 FR100 F1-(i) bounded exhaustive and
@@ -15,8 +16,8 @@ FR103 SyncFifo handwritten FL MVP.
 | Branch | Status |
 |--------|--------|
 | **(B) GeneratedFunctional MemRead ≡ tick** | **FR112 face — closed** (this page) |
-| (A) F1-(ii) SymbiYosys/SMT | **deferred** — needs new contract |
-| (C) More first-class IP handwritten FL | **deferred** — needs new contract |
+| (A) F1-(ii) SymbiYosys/SMT | **FR119 / Epic 60** — [`fr119-symbiyosys-smt.md`](fr119-symbiyosys-smt.md) (≠ this page) |
+| (C) More first-class IP handwritten FL | **deferred** — needs new contract (NFR51) |
 
 **Forbidden closes:** FR92 scoreboard alone; FR78/FR92 adapter template alone;
 FR100 F1-(i) alone; FR103 SyncFifo MVP alone; ≠ FR107 SystemC AT; docs-only.
@@ -51,10 +52,11 @@ A deliberate FL that ignores MemRead latency (always drives `rdata=0`) must
 |-----|------|
 | [`fr100-formal-equiv.md`](fr100-formal-equiv.md) | Phase 12 F1-(i) MVP — still closed (NFR44); ≠ FR112 alone |
 | [`fr103-ip-dual-model.md`](fr103-ip-dual-model.md) | SyncFifo handwritten FL MVP — still closed; ≠ FR112 alone |
+| [`fr119-symbiyosys-smt.md`](fr119-symbiyosys-smt.md) | FR119 / Epic 60 SymbiYosys path (former branch A; ≠ this page) |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic54-formal-dual-model-depth.md` |
 
-## Non-goals (NFR47)
+## Non-goals (this FR112 page)
 
-- F1-(ii) SymbiYosys/SMT product entry (branch A)
-- Expanding handwritten FL beyond SyncFifo for more IP classes (branch C)
+- F1-(ii) SymbiYosys/SMT product entry — **not on this page**; delivered under **FR119** ([`fr119-symbiyosys-smt.md`](fr119-symbiyosys-smt.md))
+- Expanding handwritten FL beyond SyncFifo for more IP classes (branch C) — **deferred** (NFR51)
 - Claiming FR100 F1-(i) or FR103 SyncFifo MVP alone closes FR112

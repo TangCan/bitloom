@@ -72,7 +72,8 @@ Do **not** claim FR92 alone closes FR100.
 - FR102 attribute-macro full matrix → [`fr102-multiview-attribute-matrix.md`](fr102-multiview-attribute-matrix.md) (**Story 45.3 / closed**)
 - FR103 first-class IP dual-model completeness / Epic 45 closeout → [`fr103-ip-dual-model.md`](fr103-ip-dual-model.md) (**Story 45.4 / Epic 45 closed**)
 - SystemC TLM-2.0 product → FR101 / Epic 46 (**closed** — LT-only MVP)
-- External SymbiYosys as the sole F1 close for this MVP
+- External SymbiYosys **F1-(ii)** deepen → **FR119 / Epic 60** product path:
+  [`fr119-symbiyosys-smt.md`](fr119-symbiyosys-smt.md) (≠ this F1-(i) page)
 
 ## Cross-links
 

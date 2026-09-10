@@ -75,10 +75,13 @@ fn fr112_docs_readme_deferred_closed() {
         "FR103 must cross-link FR112"
     );
     assert!(
-        fr112.contains("deferred")
-            && (fr112.contains("SymbiYosys") || fr112.contains("F1-(ii)"))
-            && (fr112.contains("handwritten") || fr112.contains("(C)")),
-        "NFR47: A/C remain deferred"
+        (fr112.contains("FR119") || fr112.contains("fr119"))
+            && (fr112.contains("SymbiYosys") || fr112.contains("F1-(ii)")),
+        "branch A must point at FR119 SymbiYosys path"
+    );
+    assert!(
+        fr112.contains("deferred") && (fr112.contains("handwritten") || fr112.contains("(C)")),
+        "NFR51: branch C remains deferred"
     );
 }
 

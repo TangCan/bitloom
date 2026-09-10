@@ -1,0 +1,15 @@
+# FR119 SymbiYosys fail fixture (BMC). Expect assertion violation / non-pass.
+[options]
+mode bmc
+depth 8
+expect fail
+
+[engines]
+smtbmc z3
+
+[script]
+read -sv fr119_fail.sv
+prep -top fr119_fail
+
+[files]
+fr119_fail.sv

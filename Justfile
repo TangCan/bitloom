@@ -33,3 +33,8 @@ chisel-fr28-atdd:
 # Not part of default `just test`. Missing checker → non-zero (never silent success).
 formal-sva-check:
 	bash scripts/formal-sva-check.sh
+
+# FR119: SymbiYosys (sby) formal product path (F1-(ii); ≠ FR85 / FR100 / FR112-B).
+# Not part of default `just test`. Missing sby → non-zero (never silent success).
+formal-sby-check:
+	bash scripts/formal-sby-check.sh
