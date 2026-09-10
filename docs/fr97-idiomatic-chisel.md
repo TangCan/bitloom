@@ -13,6 +13,8 @@
 
 机械路径文档见 [`fr28-chisel-compilable.md`](fr28-chisel-compilable.md)（诚实句：可编译 ≠ idiomatic）。**不得**仅改文案把机械 emit 标成 FR97。
 
+**Phase 13 可维护加深（FR111）：** 多模块一致性 + 加严标记 → [`fr111-idiomatic-chisel-depth.md`](fr111-idiomatic-chisel-depth.md)（`emit_chisel_idiomatic_fr111` / `check_idiomatic_chisel_fr111`）。FR97 MVP alone ≠ FR111。
+
 ## Idiomatic 验收谓词（钉死）
 
 对齐 NFR14 Epic 42 风险记录；**未**采纳 Chisel 官方 Style Guide 全文——不得口头宣称「符合官方风格」。
