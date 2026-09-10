@@ -1,6 +1,6 @@
 # FR126 — More IP handwritten FL (branch C)
 
-**Product:** Bitloom. **Status:** in progress (Story 66.2).
+**Product:** Bitloom. **Status:** **Epic 66 / FR126 closed** (Story **66.3**). F1–F3 delivered in Story **66.2**.
 
 Beyond FR103 SyncFifo handwritten + GeneratedFunctional UART/SPI/I2C/AXI, and beyond FR112-B / FR119 alone.
 

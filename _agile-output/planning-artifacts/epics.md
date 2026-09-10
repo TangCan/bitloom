@@ -98,7 +98,7 @@ phase15Scope: >
   ip.rs 协议拆分卫生（及闸门/宣称 FR）。
 phase15Epic64Status: complete
 phase15Epic65Status: complete
-phase15Epic66Status: backlog
+phase15Epic66Status: complete
 phase15Epic67Status: backlog
 phase15Epic68Status: backlog
 phase15Epic69Status: backlog
