@@ -20,10 +20,12 @@ stimulus / equivalence paths. This is **beyond** FR78/FR92 adapter templates alo
 
 ### Why SyncFifo is handwritten
 
-`GeneratedFunctional` returns `0` for `MemRead` (mem semantics owned by
-cycle-accurate `Sim`). SyncFifo contains `declare_mem`. **Generated FL alone ≠
-SyncFifo dual-model completion.** Documented handwritten FL models depth-4 queue
-architectural ports (`full` / `empty` / `data_out`).
+FR103 nailed **handwritten** [`SyncFifoFunctional`] as the FIFO dual-model
+completion face (architectural PortValues). SyncFifo contains `declare_mem`.
+**FR112** deepens in-process **GeneratedFunctional MemRead ≡ tick** (SyncReadMem /
+Mem) — see [`fr112-generated-functional-memread-equiv.md`](fr112-generated-functional-memread-equiv.md).
+That deepen does **not** rewrite FR103: SyncFifo dual-model close remains the
+documented handwritten FL (not generated-alone).
 
 ## Product API (`bitloom-sim`)
 
@@ -75,7 +77,7 @@ a product completion exclusion.
 - SystemC TLM-2.0 product → FR101 / Epic 46 (**closed** separately; LT-only; AT deferred)
 - GPIO VIP (optional at FR98 G1; **near-VIP delivered as FR108 / Epic 50** — Story 50.3; commercial GPIO VIP still out of scope)
 - Full-chip unbounded formal proof
-- Expanding `GeneratedFunctional` MemRead ≡ tick (deferred; SyncFifo uses handwritten FL)
+- **FR112** GeneratedFunctional MemRead ≡ tick deepen → [`fr112-generated-functional-memread-equiv.md`](fr112-generated-functional-memread-equiv.md) (Epic 54; does not rewrite this FR103 SyncFifo handwritten face)
 
 ## Cross-links
 
@@ -84,6 +86,7 @@ a product completion exclusion.
 | [`ip/README.md`](ip/README.md) | First-class IP index (FR98 near-VIP) |
 | [`fr100-formal-equiv.md`](fr100-formal-equiv.md) | Formal FL≡RTL product |
 | [`fr102-multiview-attribute-matrix.md`](fr102-multiview-attribute-matrix.md) | Attribute matrix |
+| [`fr112-generated-functional-memread-equiv.md`](fr112-generated-functional-memread-equiv.md) | FR112 MemRead ≡ tick deepen |
 | [`fr47-dual-sim-generation.md`](fr47-dual-sim-generation.md) | Generated FL / cycle crates |
 | [`fr92-shared-stimulus-adapter.md`](fr92-shared-stimulus-adapter.md) | Shared stimulus (supporting) |
 | NFR14 Epic 45 | `_agile-output/implementation-artifacts/nfr14-risk-epic45-formal-equiv-dual-model.md` |

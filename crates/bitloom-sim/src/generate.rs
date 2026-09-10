@@ -11,14 +11,37 @@ use bitloom_hir::{AssignExpr, AssignTarget, FrozenHir, GroundType, ProcessKind, 
 use crate::AbstractionView;
 use bitloom_hir::PortValues;
 
-/// In-process functional model derived from FrozenHir (same semantics as the emitted crate).
+/// Sequential op collected from FrozenHir (order preserved; matches `Sim::tick_sequential`).
+#[derive(Debug, Clone)]
+enum SeqOp {
+    RegD {
+        name: String,
+        expr: AssignExpr,
+        has_en: bool,
+    },
+    MemWrite {
+        mem: String,
+        addr: String,
+        we: Option<String>,
+        expr: AssignExpr,
+    },
+}
+
+/// In-process functional model derived from FrozenHir (FR47 / FR112).
+///
+/// **FR112:** SyncReadMem / Mem `MemRead`+`MemWrite` semantics match cycle-accurate
+/// [`crate::Sim::tick`] (latency-1 sync read via `pending_mem_reads`). The emitted
+/// crate (`generate_functional_sim`) still stubs `MemRead` as `0` — use this
+/// in-process view / `check_generated_bridge` for MemRead≡tick.
 #[derive(Debug, Clone)]
 pub struct GeneratedFunctional {
     regs: BTreeMap<String, u64>,
+    mems: BTreeMap<String, Vec<u64>>,
+    mem_sync: BTreeMap<String, bool>,
+    pending_mem_reads: BTreeMap<String, u64>,
     reset_port: String,
     enable_port: Option<String>,
-    /// Sequential RegD updates: (reg_name, expr, has_enable).
-    seq: Vec<(String, AssignExpr, bool)>,
+    seq: Vec<SeqOp>,
     /// Combinational Net updates: (net_name, expr).
     comb: Vec<(String, AssignExpr)>,
 }
@@ -45,13 +68,31 @@ impl GeneratedFunctional {
 
         let mut regs = BTreeMap::new();
         let mut reg_has_en = BTreeMap::new();
+        let mut mems = BTreeMap::new();
+        let mut mem_sync = BTreeMap::new();
         for stmt in &m.body {
-            if let Stmt::RegDecl {
-                name, has_enable, ..
-            } = stmt
-            {
-                regs.insert(name.clone(), 0u64);
-                reg_has_en.insert(name.clone(), *has_enable);
+            match stmt {
+                Stmt::RegDecl {
+                    name, has_enable, ..
+                } => {
+                    regs.insert(name.clone(), 0u64);
+                    reg_has_en.insert(name.clone(), *has_enable);
+                }
+                Stmt::MemDecl {
+                    name,
+                    depth,
+                    init,
+                    sync_read,
+                    ..
+                } => {
+                    let words = match init {
+                        Some(v) => v.clone(),
+                        None => vec![0; *depth as usize],
+                    };
+                    mems.insert(name.clone(), words);
+                    mem_sync.insert(name.clone(), *sync_read);
+                }
+                _ => {}
             }
         }
 
@@ -62,9 +103,24 @@ impl GeneratedFunctional {
                 match p.kind {
                     ProcessKind::Sequential => {
                         for a in &p.assigns {
-                            if let AssignTarget::RegD(name) = &a.target {
-                                let has_en = reg_has_en.get(name).copied().unwrap_or(false);
-                                seq.push((name.clone(), a.expr.clone(), has_en));
+                            match &a.target {
+                                AssignTarget::RegD(name) => {
+                                    let has_en = reg_has_en.get(name).copied().unwrap_or(false);
+                                    seq.push(SeqOp::RegD {
+                                        name: name.clone(),
+                                        expr: a.expr.clone(),
+                                        has_en,
+                                    });
+                                }
+                                AssignTarget::MemWrite { mem, addr, we } => {
+                                    seq.push(SeqOp::MemWrite {
+                                        mem: mem.clone(),
+                                        addr: addr.clone(),
+                                        we: we.clone(),
+                                        expr: a.expr.clone(),
+                                    });
+                                }
+                                _ => {}
                             }
                         }
                     }
@@ -81,6 +137,9 @@ impl GeneratedFunctional {
 
         Self {
             regs,
+            mems,
+            mem_sync,
+            pending_mem_reads: BTreeMap::new(),
             reset_port,
             enable_port,
             seq,
@@ -92,6 +151,18 @@ impl GeneratedFunctional {
         inputs
             .get(name)
             .or_else(|| self.regs.get(name).copied())
+            .unwrap_or(0)
+    }
+
+    fn mem_is_sync(&self, name: &str) -> bool {
+        self.mem_sync.get(name).copied().unwrap_or(false)
+    }
+
+    fn eval_mem_read(&self, inputs: &PortValues, mem: &str, addr: &str) -> u64 {
+        let a = self.lookup(inputs, addr) as usize;
+        self.mems
+            .get(mem)
+            .and_then(|m| m.get(a).copied())
             .unwrap_or(0)
     }
 
@@ -115,8 +186,7 @@ impl GeneratedFunctional {
                     self.lookup(inputs, f)
                 }
             }
-            // Memories: functional path returns 0 (cycle-accurate Sim owns mem semantics).
-            AssignExpr::MemRead { .. } => 0,
+            AssignExpr::MemRead { mem, addr } => self.eval_mem_read(inputs, mem, addr),
         }
     }
 }
@@ -130,22 +200,65 @@ impl AbstractionView for GeneratedFunctional {
             .map(|p| inputs.get(p).unwrap_or(0) != 0)
             .unwrap_or(true);
 
-        if reset {
-            for v in self.regs.values_mut() {
-                *v = 0;
-            }
-        } else {
-            let mut next = BTreeMap::new();
-            for (name, expr, has_en) in &self.seq {
-                if *has_en && !enable {
-                    continue;
+        // Apply SyncReadMem pending from previous cycle (latency 1) — matches Sim.
+        let pending = std::mem::take(&mut self.pending_mem_reads);
+        for (name, val) in pending {
+            self.regs.insert(name, if reset { 0 } else { val });
+        }
+
+        let mut next_pending = BTreeMap::new();
+        let mut next_regs: BTreeMap<String, u64> = BTreeMap::new();
+        // Clone ops so MemWrite can mutate `mems` without borrowing `seq`.
+        let ops = self.seq.clone();
+
+        for op in &ops {
+            match op {
+                SeqOp::RegD { name, expr, has_en } => {
+                    if reset {
+                        next_regs.insert(name.clone(), 0);
+                        continue;
+                    }
+                    if *has_en && !enable {
+                        continue;
+                    }
+                    match expr {
+                        AssignExpr::MemRead { mem, addr } if self.mem_is_sync(mem) => {
+                            let val = self.eval_mem_read(inputs, mem, addr);
+                            next_pending.insert(name.clone(), val);
+                        }
+                        _ => {
+                            next_regs.insert(name.clone(), self.eval(inputs, expr));
+                        }
+                    }
                 }
-                next.insert(name.clone(), self.eval(inputs, expr));
-            }
-            for (k, v) in next {
-                self.regs.insert(k, v);
+                SeqOp::MemWrite {
+                    mem,
+                    addr,
+                    we,
+                    expr,
+                } => {
+                    if reset {
+                        continue;
+                    }
+                    if let Some(en) = we {
+                        if self.lookup(inputs, en) == 0 {
+                            continue;
+                        }
+                    }
+                    let a_idx = self.lookup(inputs, addr) as usize;
+                    let data = self.eval(inputs, expr);
+                    if let Some(bank) = self.mems.get_mut(mem) {
+                        if a_idx < bank.len() {
+                            bank[a_idx] = data;
+                        }
+                    }
+                }
             }
         }
+        for (k, v) in next_regs {
+            self.regs.insert(k, v);
+        }
+        self.pending_mem_reads = next_pending;
 
         let mut out = inputs.clone();
         for (name, expr) in &self.comb {
@@ -246,16 +359,19 @@ fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
     let seq_arms: String = model
         .seq
         .iter()
-        .map(|(name, expr, has_en)| {
-            let en_guard = if *has_en {
-                "            if !enable { /* hold */ } else {\n"
-            } else {
-                "            {\n"
-            };
-            format!(
-                "{en_guard}                next.insert({name:?}.into(), {});\n            }}\n",
-                render_expr(expr)
-            )
+        .filter_map(|op| match op {
+            SeqOp::RegD { name, expr, has_en } => {
+                let en_guard = if *has_en {
+                    "            if !enable { /* hold */ } else {\n"
+                } else {
+                    "            {\n"
+                };
+                Some(format!(
+                    "{en_guard}                next.insert({name:?}.into(), {});\n            }}\n",
+                    render_expr(expr)
+                ))
+            }
+            SeqOp::MemWrite { .. } => None,
         })
         .collect();
     let comb_arms: String = model
@@ -459,6 +575,44 @@ mod tests {
             check_mixed_both(&mut sim, &mut abs, pv.clone()).unwrap();
         }
         assert_eq!(sim.ports().get("data_out"), Some(3));
+    }
+
+    fn sync_read_mem_hir() -> FrozenHir {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("Srm", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("addr", GroundType::UInt { width: 4 }, Span::default());
+        s.add_input("wdata", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("we", GroundType::Bool, Span::default());
+        s.add_output("rdata", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_sync_read_mem("ram", 16, 8, Span::default());
+        s.declare_reg("q", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("rdata", "q", Span::default());
+        s.end_process();
+        s.begin_sequential(Span::default());
+        s.assign_mem_write("ram", "addr", "wdata", Span::default());
+        s.assign_reg_d_mem_read("q", "ram", "addr", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish().unwrap()
+    }
+
+    #[test]
+    fn generated_functional_sync_read_mem_matches_tick() {
+        let hir = sync_read_mem_hir();
+        let mut sim = Sim::new(hir.clone());
+        let mut abs = GeneratedFunctional::from_hir(&hir);
+        let mut pv = PortValues::default();
+        pv.set("rst", 0);
+        pv.set("addr", 3);
+        pv.set("wdata", 0xAB);
+        pv.set("we", 1);
+        check_mixed_both(&mut sim, &mut abs, pv.clone()).unwrap();
+        assert_eq!(sim.ports().get("rdata"), Some(0));
+        check_mixed_both(&mut sim, &mut abs, pv).unwrap();
+        assert_eq!(sim.ports().get("rdata"), Some(0xAB));
     }
 
     #[test]

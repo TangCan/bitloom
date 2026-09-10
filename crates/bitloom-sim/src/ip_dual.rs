@@ -2,7 +2,7 @@
 //!
 //! Cycle path = FrozenHir [`crate::Sim::tick`]. Functional path =
 //! [`crate::GeneratedFunctional`] (generation path) **or** handwritten
-//! [`SyncFifoFunctional`] when Mem makes generated FL incomplete.
+//! [`SyncFifoFunctional`] when FR103 nails architectural FL for Mem-based FIFO.
 //!
 //! Design crates stay on `bitloom-prelude`; this module lives in the toolchain.
 
@@ -15,8 +15,9 @@ use crate::{
 
 /// Depth-4 SyncFifo functional model (architectural PortValues).
 ///
-/// `GeneratedFunctional` returns 0 for `MemRead` and is **not** sufficient alone
-/// for SyncFifo dual-model close (see `docs/fr103-ip-dual-model.md`).
+/// FR103 completion face for FIFO. **FR112** separately deepens
+/// `GeneratedFunctional` MemRead≡tick; that path does not replace this
+/// handwritten SyncFifo FL (see `docs/fr103-ip-dual-model.md`).
 #[derive(Debug, Clone, Default)]
 pub struct SyncFifoFunctional {
     ram: [u64; 4],

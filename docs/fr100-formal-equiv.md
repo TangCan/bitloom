@@ -81,5 +81,6 @@ Do **not** claim FR92 alone closes FR100.
 | [`fr92-shared-stimulus-adapter.md`](fr92-shared-stimulus-adapter.md) | Shared stimulus (supporting) |
 | [`fr30-dual-view-equiv.md`](fr30-dual-view-equiv.md) | Bounded PortValues checker precedent |
 | [`fr47-dual-sim-generation.md`](fr47-dual-sim-generation.md) | Generated FL vs tick |
+| [`fr112-generated-functional-memread-equiv.md`](fr112-generated-functional-memread-equiv.md) | FR112 deepen: MemRead ≡ tick (≠ F1-(i) alone) |
 | [`fr39-formal-sva.md`](fr39-formal-sva.md) | SVA / FR85 external checker (≠ FR100) |
 | NFR14 Epic 45 | `_agile-output/implementation-artifacts/nfr14-risk-epic45-formal-equiv-dual-model.md` |
