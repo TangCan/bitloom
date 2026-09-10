@@ -40,8 +40,8 @@ fn fr113_docs_strategy_and_bans() {
         "must ban DesignFixture alone"
     );
     assert!(
-        text.contains("deferred") && (text.contains("syn") || text.contains("#[bitloom::top]")),
-        "full syn-scan must stay deferred"
+        text.contains("FR118") || (text.contains("fr118") && text.contains("syn")),
+        "full syn-scan elevated to FR118 — must cross-link"
     );
     assert!(
         text.contains("FR90") || text.contains("rust-analyzer"),

@@ -4,7 +4,8 @@
 
 **Status:** **Epic 55 / FR113 closed** (Story **55.3**). Discovery path delivered in Story **55.2**.
 Phase 12 FR99 DesignFixture MVP remains closed (NFR44). Full workspace `#[bitloom::top]`
-syn-scan without metadata stays **deferred** (NFR47 — needs new contract).
+syn-scan without metadata is **elevated to Phase 14 FR118 / Epic 59** — see
+[`fr118-syn-scan-design-root-discovery.md`](fr118-syn-scan-design-root-discovery.md).
 
 This page is the **FR113 completion surface**. It deepens keystroke elaborate **beyond**
 Phase 12 FR99 DesignFixture-only MVP.
@@ -15,7 +16,7 @@ Phase 12 FR99 DesignFixture-only MVP.
 |----------|--------|
 | **Cargo-graph + `[package.metadata.bitloom] design_roots`** | **FR113 face — closed** |
 | FR99 `DesignFixture` enum | Regression only — **alone ≠ FR113** |
-| Full workspace `#[bitloom::top]` syn-scan (no metadata) | **deferred** (NFR47) |
+| Full workspace `#[bitloom::top]` syn-scan (no metadata) | **FR118** — see [`fr118-syn-scan-design-root-discovery.md`](fr118-syn-scan-design-root-discovery.md) |
 
 ### Metadata contract
 
@@ -48,8 +49,8 @@ let r = analyze_on_did_save_at(Some(path));
 
 | Code | Meaning |
 |------|---------|
-| `bitloom-lsp.no-design-roots` | Prelude package(s) found but no metadata roots |
-| `bitloom-lsp.unknown-design-root` | Metadata id not in FR113 registry |
+| `bitloom-lsp.no-design-roots` | Prelude package(s) found but no metadata roots **and** no syn-scan tops |
+| `bitloom-lsp.unknown-design-root` | Metadata/syn-scan id not in registry |
 | `bitloom-lsp.discover-failed` | IO / Cargo.toml read failure |
 | `bitloom-lsp.timeout` / `oversized` | Same FR99 P3/P4 budgets |
 
@@ -66,6 +67,7 @@ let r = analyze_on_did_save_at(Some(path));
 cargo test -p bitloom --test fr113_lsp_design_root_discovery
 cargo test -p bitloom --test fr113_epic55_closeout
 cargo test -p bitloom --test fr99_bitloom_lsp_full_elaborate
+cargo test -p bitloom --test fr118_syn_scan_design_root_discovery
 ```
 
 ## Fixtures
@@ -74,17 +76,18 @@ cargo test -p bitloom --test fr99_bitloom_lsp_full_elaborate
 |------|------|
 | `crates/bitloom-lsp/fixtures/fr113_meta_ok` | Metadata `Fr113OkCounter` → Pass |
 | `crates/bitloom-lsp/fixtures/fr113_meta_fail` | Metadata fail root → readable elaborate Fail |
-| `crates/bitloom-lsp/fixtures/fr113_meta_none` | Prelude, no metadata → `no-design-roots` |
+| `crates/bitloom-lsp/fixtures/fr113_meta_none` | Prelude, no metadata, no top → `no-design-roots` |
 
 ## Cross-links
 
 | Doc | Role |
 |-----|------|
 | [`fr99-bitloom-lsp.md`](fr99-bitloom-lsp.md) | FR99 DesignFixture MVP — still closed (NFR44) |
+| [`fr118-syn-scan-design-root-discovery.md`](fr118-syn-scan-design-root-discovery.md) | FR118 syn-scan deepen |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic55-lsp-design-root-discovery.md` |
 
-## Non-goals (NFR47)
+## Non-goals (FR113 face)
 
-- Full workspace `#[bitloom::top]` syn-scan without metadata
 - Claiming DesignFixture MVP or rust-analyzer alone closes FR113
 - HTML visualization as LSP
+- Using FR118 syn-scan alone to rewrite FR113 close evidence (NFR48)

@@ -1,0 +1,10 @@
+[package]
+name = "fr118_syn_fail"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.97.1"
+publish = false
+description = "FR118 ATDD negative elaborate: no metadata; syn-scan fail root."
+
+[dependencies]
+bitloom-prelude = { path = "../../../bitloom-prelude" }

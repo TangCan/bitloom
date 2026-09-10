@@ -1,12 +1,13 @@
-//! FR113 — Cargo-graph + `[package.metadata.bitloom] design_roots` discovery.
+//! FR118 — Workspace `#[bitloom::top]` syn-scan + FR113 Cargo metadata discovery.
 //!
-//! Beyond FR99 [`crate::DesignFixture`]-only. Full workspace `#[bitloom::top]` syn-scan
-//! remains deferred (NFR47).
+//! - Packages with `[package.metadata.bitloom] design_roots` → FR113 metadata path.
+//! - Prelude packages **without** metadata → scan `src/**/*.rs` for `#[bitloom::top]` /
+//!   `#[rhdl::top]` (FR118). DesignFixture-only ≠ FR118.
 
 use std::fs;
 use std::path::{Path, PathBuf};
 
-/// One design root discovered from Cargo metadata (not a DesignFixture enum).
+/// One design root discovered from Cargo metadata and/or syn-scan (not a DesignFixture enum).
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct DiscoveredDesignRoot {
     pub package_name: String,
@@ -14,8 +15,8 @@ pub struct DiscoveredDesignRoot {
     pub root_id: String,
 }
 
-/// Walk `root` as a Cargo workspace or single package; return prelude-dependent
-/// packages' `[package.metadata.bitloom] design_roots` entries.
+/// Walk `root` as a Cargo workspace or single package; return design roots from
+/// metadata `design_roots` and/or `#[bitloom::top]` syn-scan (FR113 + FR118).
 pub fn discover_design_roots(root: impl AsRef<Path>) -> std::io::Result<Vec<DiscoveredDesignRoot>> {
     let root = root.as_ref();
     let cargo = root.join("Cargo.toml");
@@ -51,7 +52,19 @@ fn collect_package_roots(
             .map(|s| s.to_string_lossy().into_owned())
             .unwrap_or_else(|| "unknown".into())
     });
-    for root_id in design_roots_from_toml(&text) {
+    let meta_roots = design_roots_from_toml(&text);
+    if !meta_roots.is_empty() {
+        for root_id in meta_roots {
+            out.push(DiscoveredDesignRoot {
+                package_name: package_name.clone(),
+                package_dir: pkg_dir.to_path_buf(),
+                root_id,
+            });
+        }
+        return Ok(());
+    }
+    // FR118: no metadata → syn-scan `#[bitloom::top]` / `#[rhdl::top]`.
+    for root_id in syn_scan_top_names(pkg_dir)? {
         out.push(DiscoveredDesignRoot {
             package_name: package_name.clone(),
             package_dir: pkg_dir.to_path_buf(),
@@ -59,6 +72,135 @@ fn collect_package_roots(
         });
     }
     Ok(())
+}
+
+/// Scan package `src/` for types annotated with `#[bitloom::top]` or `#[rhdl::top]`.
+fn syn_scan_top_names(pkg_dir: &Path) -> std::io::Result<Vec<String>> {
+    let src = pkg_dir.join("src");
+    if !src.is_dir() {
+        return Ok(Vec::new());
+    }
+    let mut names = Vec::new();
+    walk_rs_files(&src, &mut |path| {
+        let text = fs::read_to_string(path)?;
+        for id in top_type_names_from_source(&text) {
+            if !names.contains(&id) {
+                names.push(id);
+            }
+        }
+        Ok(())
+    })?;
+    Ok(names)
+}
+
+fn walk_rs_files(
+    dir: &Path,
+    f: &mut dyn FnMut(&Path) -> std::io::Result<()>,
+) -> std::io::Result<()> {
+    for entry in fs::read_dir(dir)? {
+        let entry = entry?;
+        let path = entry.path();
+        if path.is_dir() {
+            walk_rs_files(&path, f)?;
+        } else if path.extension().and_then(|e| e.to_str()) == Some("rs") {
+            f(&path)?;
+        }
+    }
+    Ok(())
+}
+
+/// Recognize `#[bitloom::top]` / `#[rhdl::top]` (optional whitespace) then the next
+/// `struct` / `enum` / `type` identifier.
+fn top_type_names_from_source(src: &str) -> Vec<String> {
+    let mut out = Vec::new();
+    let mut i = 0;
+    while i < src.len() {
+        if let Some(after_attr) = match_top_attr(&src[i..]) {
+            let rest = &src[i + after_attr..];
+            if let Some(name) = next_type_name(rest) {
+                if !out.contains(&name) {
+                    out.push(name);
+                }
+            }
+            i += after_attr;
+            continue;
+        }
+        i = next_char_boundary(src, i + 1);
+    }
+    out
+}
+
+fn next_char_boundary(s: &str, mut i: usize) -> usize {
+    if i >= s.len() {
+        return s.len();
+    }
+    while i < s.len() && !s.is_char_boundary(i) {
+        i += 1;
+    }
+    i
+}
+
+fn match_top_attr(s: &str) -> Option<usize> {
+    let trimmed_start = s.len() - s.trim_start().len();
+    let s = s.trim_start();
+    if !s.starts_with("#[") {
+        return None;
+    }
+    let after = &s[2..];
+    let end = after.find(']')?;
+    let inner = after[..end].trim();
+    // Strip optional spaces: bitloom :: top / rhdl::top
+    let compact: String = inner.chars().filter(|c| !c.is_whitespace()).collect();
+    if compact == "bitloom::top" || compact == "rhdl::top" {
+        Some(trimmed_start + 2 + end + 1)
+    } else {
+        None
+    }
+}
+
+fn next_type_name(s: &str) -> Option<String> {
+    let mut rest = s.trim_start();
+    // Skip other attributes / doc comments between attr and item.
+    loop {
+        rest = rest.trim_start();
+        if rest.starts_with("#[") {
+            let end = rest.find(']')?;
+            rest = &rest[end + 1..];
+            continue;
+        }
+        if rest.starts_with("///") || rest.starts_with("//!") || rest.starts_with("//") {
+            rest = rest.split_once('\n').map(|(_, t)| t).unwrap_or("");
+            continue;
+        }
+        break;
+    }
+    rest = rest.trim_start();
+    if let Some(r) = rest.strip_prefix("pub") {
+        rest = r.trim_start();
+        if let Some(r) = rest.strip_prefix('(') {
+            let end = r.find(')')?;
+            rest = r[end + 1..].trim_start();
+        }
+    }
+    let rest = if let Some(r) = rest.strip_prefix("struct") {
+        r
+    } else if let Some(r) = rest.strip_prefix("enum") {
+        r
+    } else if let Some(r) = rest.strip_prefix("type") {
+        r
+    } else {
+        return None;
+    };
+    let rest = rest.trim_start();
+    let name: String = rest
+        .chars()
+        .take_while(|c| c.is_ascii_alphanumeric() || *c == '_')
+        .collect();
+    let first = name.chars().next()?;
+    if name.is_empty() || !(first.is_ascii_alphabetic() || first == '_') {
+        return None;
+    }
+    Some(name)
 }
 
 fn depends_on_bitloom_prelude(toml: &str) -> bool {
@@ -182,5 +324,41 @@ design_roots = ["Fr113OkCounter", "Other"]
             design_roots_from_toml(toml),
             vec!["Fr113OkCounter".to_string(), "Other".to_string()]
         );
+    }
+
+    #[test]
+    fn syn_scan_finds_bitloom_top_struct() {
+        let src = r#"
+#![allow(dead_code)]
+
+#[bitloom::top]
+struct Fr118OkCounter;
+
+fn other() {}
+"#;
+        assert_eq!(
+            top_type_names_from_source(src),
+            vec!["Fr118OkCounter".to_string()]
+        );
+    }
+
+    #[test]
+    fn syn_scan_finds_rhdl_top_and_skips_unannotated() {
+        let src = r#"
+struct NotATop;
+
+#[rhdl::top]
+pub enum Fr118Alt {}
+"#;
+        assert_eq!(
+            top_type_names_from_source(src),
+            vec!["Fr118Alt".to_string()]
+        );
+    }
+
+    #[test]
+    fn syn_scan_tolerates_utf8_in_comments() {
+        let src = "// FR113 negative fixture — prelude dep without metadata.\n#[bitloom::top]\nstruct A;\n";
+        assert_eq!(top_type_names_from_source(src), vec!["A".to_string()]);
     }
 }

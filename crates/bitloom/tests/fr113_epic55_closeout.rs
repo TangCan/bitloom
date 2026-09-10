@@ -71,8 +71,10 @@ fn fr113_docs_readme_deferred_closed() {
         "FR99 must cross-link FR113"
     );
     assert!(
-        fr113.contains("deferred") && (fr113.contains("syn") || fr113.contains("#[bitloom::top]")),
-        "NFR47: syn-scan remains deferred"
+        fr113.contains("FR118")
+            || (fr113.contains("fr118")
+                && (fr113.contains("syn") || fr113.contains("#[bitloom::top]"))),
+        "NFR47 elevate: syn-scan must point at FR118"
     );
 }
 

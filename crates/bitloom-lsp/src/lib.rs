@@ -260,15 +260,17 @@ pub fn analyze_on_did_save() -> AnalyzeResult {
     )
 }
 
-/// Resolve an elaborate session for a discovered metadata `root_id` (FR113 registry).
+/// Resolve an elaborate session for a discovered `root_id` (FR113 metadata / FR118 syn-scan registry).
 ///
-/// Root ids are documented entry names (文档等价 of `.rs`/type paths). Full
-/// `#[bitloom::top]` syn-scan without metadata remains deferred (NFR47).
+/// Root ids are documented entry names (文档等价 of `.rs`/type paths from metadata or
+/// `#[bitloom::top]` syn-scan).
 fn session_for_discovered_root_id(root_id: &str) -> Option<(ElaborateSession, usize)> {
     match root_id {
         "Fr113OkCounter" => Some((build_fr113_ok_counter(), 1)),
         "Fr113FailHwCapture" => Some((build_fr113_fail_hw_capture(), 1)),
         "Fr113Oversized" => Some((build_oversized(), MVP_MAX_MODULES + 1)),
+        "Fr118OkCounter" => Some((build_fr118_ok_counter(), 1)),
+        "Fr118FailHwCapture" => Some((build_fr118_fail_hw_capture(), 1)),
         _ => None,
     }
 }
@@ -306,6 +308,39 @@ fn build_fr113_fail_hw_capture() -> ElaborateSession {
     s
 }
 
+fn build_fr118_ok_counter() -> ElaborateSession {
+    let mut s = ElaborateSession::new("Fr118OkCounter");
+    s.begin_module("Fr118OkCounter", Span::default());
+    s.add_input("clk", GroundType::Clock, Span::default());
+    s.add_input("rst", GroundType::Reset, Span::default());
+    s.add_output("q", GroundType::UInt { width: 8 }, Span::default());
+    s.declare_reg("count", GroundType::UInt { width: 8 }, Span::default());
+    s.begin_combinational(Span::default());
+    s.assign_net("q", "count", Span::default());
+    s.end_process();
+    s.begin_sequential(Span::default());
+    s.assign_reg_d_inc("count", Span::default());
+    s.end_process();
+    s.end_module();
+    s
+}
+
+fn build_fr118_fail_hw_capture() -> ElaborateSession {
+    let mut s = ElaborateSession::new("Fr118FailCapture");
+    s.begin_module("Fr118FailCapture", Span::default());
+    s.add_input("clk", GroundType::Clock, Span::default());
+    s.add_input("rst", GroundType::Reset, Span::default());
+    s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+    s.declare_wire("w", GroundType::UInt { width: 8 }, Span::default());
+    s.assert_no_hw_capture(&[HwCaptureRef::wire("w")], Span::default());
+    s.declare_mem_with_init_fn("rom", 4, 8, |i| i as u64, Span::default());
+    s.begin_combinational(Span::default());
+    s.assign_net("y", "rom", Span::default());
+    s.end_process();
+    s.end_module();
+    s
+}
+
 /// Full-design elaborate for a Cargo-metadata discovered root (FR113).
 ///
 /// Does **not** take a [`DesignFixture`]. Unknown `root_id` → readable fail without
@@ -321,7 +356,7 @@ pub fn analyze_discovered_root(
             diagnostics: vec![MappedDiagnostic {
                 code: "bitloom-lsp.unknown-design-root".into(),
                 message: format!(
-                    "bitloom-lsp.unknown-design-root: package `{}` metadata root_id `{}` is not a registered FR113 elaborate entry",
+                    "bitloom-lsp.unknown-design-root: package `{}` root_id `{}` is not a registered FR113/FR118 elaborate entry",
                     root.package_name, root.root_id
                 ),
             }],
@@ -411,7 +446,7 @@ pub fn analyze_workspace_design_roots(
             diagnostics: vec![MappedDiagnostic {
                 code: "bitloom-lsp.no-design-roots".into(),
                 message: format!(
-                    "bitloom-lsp.no-design-roots: no `[package.metadata.bitloom] design_roots` under {} (FR113); DesignFixture-only ≠ FR113",
+                    "bitloom-lsp.no-design-roots: no metadata `design_roots` and no `#[bitloom::top]` syn-scan hits under {} (FR113/FR118); DesignFixture-only ≠ deepen",
                     workspace.display()
                 ),
             }],
@@ -439,8 +474,9 @@ pub fn analyze_workspace_design_roots(
     }
 }
 
-/// didSave path: prefer FR113 discovery when `path_hint` finds a Cargo package/workspace
-/// with metadata roots; otherwise fall back to FR99 [`analyze_on_did_save`].
+/// didSave path: prefer FR113/FR118 discovery when `path_hint` finds a Cargo
+/// package/workspace with metadata or syn-scan roots; otherwise fall back to FR99
+/// [`analyze_on_did_save`].
 pub fn analyze_on_did_save_at(path_hint: Option<&Path>) -> AnalyzeResult {
     if let Some(hint) = path_hint {
         if let Some(cargo_root) = find_cargo_root(hint) {
