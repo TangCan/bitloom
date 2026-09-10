@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 13:50
+last_updated: 09-10-2026 13:55
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -397,7 +397,7 @@ development_status:
   52-1-epic-52-nfr14-风险记录: done
   52-2-树内-hls-商业深度-fr110: done
   52-3-fr110-收口与-ad-25-交叉链: done
-  epic-52-retrospective: optional
+  epic-52-retrospective: done
 
   epic-53: done
   53-1-epic-53-nfr14-风险记录: done
@@ -1396,3 +1396,29 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-51-retro-2026-09-10.md"
+  - id: "epic-52-retro-item-146-fr110-诚实边界-对外不得把-fr95-96-mvp-in-tree-mvp"
+    epic: 52
+    action: "FR110 诚实边界：对外不得把 FR95/96 MVP / in-tree-mvp / 仅 loop-unroll 或外挂 Bambu
+      stub alone 写成商业完整 HLS / FR110 完成面；宣称须引 FR110（续 FR115）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-52-retro-2026-09-10.md"
+  - id: "epic-52-retro-item-147-触碰-bitloom-hls-路径时保持-fr95-96-树内-mvp-与外挂诚"
+    epic: 52
+    action: "触碰 bitloom HLS 路径时保持 FR95/96 树内 MVP 与外挂诚实路径回归不破（NFR44）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-52-retro-2026-09-10.md"
+  - id: "epic-52-retro-item-148-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 52
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-52-retro-2026-09-10.md"
+  - id: "epic-52-retro-item-149-可选工程卫生-若后续交付-allocation-binding-全优化套件或-h"
+    epic: 52
+    action: "可选工程卫生：若后续交付 allocation/binding/全优化套件或 Handshake 默认可综合语义，须新合同钉死（NFR47）；当前
+      Q1+Q2 为 FR110 完成面（非 AC 缺口）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-52-retro-2026-09-10.md"
