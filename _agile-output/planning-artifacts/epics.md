@@ -48,7 +48,37 @@ stepsCompleted:
   - step-02-design-epics-phase-12
   - step-03-create-stories-phase-12
   - step-04-final-validation-phase-12
+  - step-01-validate-prerequisites-phase-13
+  - step-02-design-epics-phase-13
+  - step-03-create-stories-phase-13-epic-48
+  - step-03-create-stories-phase-13
+  - step-04-final-validation-phase-13
 status: complete
+phase13Status: complete
+phase13Validation: |
+  FR106–115 all mapped to Epic 48–56 stories (28); no forward story deps detected;
+  Architecture starter N/A; Epic 48 hard gate for 49–56;
+  File-churn note: prelude/ip may be touched by Epic 50 then 54 — accepted risk-domain split;
+  Epic 51 vs 56 split retained for independent C3 recorder vs GUI acceptance.
+correctCoursePhase13Approved: 2026-09-10
+phase13Contract: mvp-to-commercial-deepen
+phase13Scope: >
+  Phase 12 MVP cropped / optional deepen — FR106–FR115 / NFR44–NFR47;
+  AT TLM, GPIO VIP, C3 FSM coverage, HLS/Chisel/formal commercial depth,
+  LSP root discovery, richer wave/coverage GUIs (from deferred-work optional + standing honesty).
+phase13Note: >
+  Correct Course approved 2026-09-10-phase13-mvp-commercial-deepen. Phase 12 Path B
+  literal-green MVP remains closed (FR94–105). Phase 13 does not reopen FR93 or claim
+  Phase 12 AC unmet. Epic 48 must close before 49–56 ready. Sprint seeded backlog.
+phase13Epic48Status: backlog
+phase13Epic49Status: backlog
+phase13Epic50Status: backlog
+phase13Epic51Status: backlog
+phase13Epic52Status: backlog
+phase13Epic53Status: backlog
+phase13Epic54Status: backlog
+phase13Epic55Status: backlog
+phase13Epic56Status: backlog
 phase1Status: complete
 phase2Status: complete
 phase3Status: complete
@@ -127,6 +157,26 @@ idCollisionNote: >
   (FR47 remains dual-view sim crate generation). English Phase-7 "closure" = 闭环, not Rust Fn.
   Phase-10 NEW IDs: FR79–FR86 / NFR37 (after FR78/NFR36). Depth FRs deepen existing FR23/28/33/36/37/39/48/51 — they do not renumber historical FRs.
   Phase-12 NEW IDs: FR94–FR105 / NFR40–NFR43 (after FR93/NFR39). Path B overturns FR93 permanent non-goals via FR94 gate.
+  Phase-13 NEW IDs: FR106–FR115 / NFR44–NFR47 (after FR105/NFR43). Deepen Phase-12 MVP cropped/optional surfaces; do not renumber FR94–105.
+excludedFromPhase13Rewrite:
+  - Phase 1–12 epics/stories (Epic 1–47 retained as historical complete; Phase 12 FR94–105 MVP close remains valid)
+phase13InputDocuments:
+  - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
+  - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md
+  - _agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
+  - _agile-output/planning-artifacts/sprint-change-proposal-2026-09-09-phase12-path-b.md
+  - _agile-output/implementation-artifacts/deferred-work.md
+  - _agile-output/implementation-artifacts/action-items-sweep-2026-09-10.md
+  - _agile-output/implementation-artifacts/epic-40-retro-2026-09-10.md
+  - _agile-output/implementation-artifacts/epic-41-retro-2026-09-10.md
+  - _agile-output/implementation-artifacts/epic-42-retro-2026-09-10.md
+  - _agile-output/implementation-artifacts/epic-43-retro-2026-09-10.md
+  - _agile-output/implementation-artifacts/epic-44-retro-2026-09-10.md
+  - _agile-output/implementation-artifacts/epic-45-retro-2026-09-10.md
+  - _agile-output/implementation-artifacts/epic-46-retro-2026-09-10.md
+  - _agile-output/implementation-artifacts/epic-47-retro-2026-09-10.md
+  - docs/fr95 / fr96 / fr97 / fr98 / fr100 / fr101 / fr104 / fr105 / docs/ip/README.md（诚实边界指针）
+uxDesignPhase13: none
 ---
 
 # rhdl - Epic Breakdown
@@ -135,7 +185,7 @@ idCollisionNote: >
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40+ · FR94–FR105 / NFR40–NFR43，requirements-extracted）。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48+ · FR106–FR115 / NFR44–NFR47，requirements-extracted）。无 UX。
 
 ## Requirements Inventory
 
@@ -4066,3 +4116,589 @@ So that FR105 关闭且 Phase 12 实现故事清单完整。
 **When** 实现覆盖率记录扩展（按 47.1 度量类型）+ 至少一夹具报告；更新 docs/deferred/README
 **Then** FR104/105 关闭条件可勾选；NFR14 勾选 Epic 47 关闭
 **And** 文首/状态页可声明：字面绿剩余门仅为各 epic 实现关闭（规划故事已齐）
+
+
+---
+
+## Phase 13 Requirements Inventory（追加 · 2026-09-10 · MVP→商业加深）
+
+**范围：** 在 **Phase 12 字面绿 MVP 已关闭**（FR94–105 / Epic 40–47）前提下，把下列 **显式裁剪 / optional product** 升格为可交付加深合同。  
+**不是：** 重开 FR93、宣称 Phase 12 AC 未满足、或用 FR87 合同绿冒充字面 B。  
+**依据：** 用户结项后继续加深指令；`deferred-work.md` standing honesty + optional product（item-117/121/125/129 等）；Epic 40–47 retro；`action-items-sweep-2026-09-10.md`。  
+**与 PRD 关系：** Correct Course + PRD/addendum **已批准** Phase 13（2026-09-10）。**实现闸门** = Epic 48（FR106）关闭前，Epic 49–56 不得标 ready。  
+**ID 注记：** 新编号 **FR106–FR115** / **NFR44–NFR47**（接 FR105 / NFR43）。不重编号 FR94–105。  
+**合同戳：** `correctCoursePhase13Approved: 2026-09-10`；提案 `sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen.md`。
+
+### Phase 13 Functional Requirements
+
+FR94–FR105: （历史）Phase 12 字面绿 MVP — 关闭证据仍有效；Phase 13 加深不得改写其「已关闭」声明为失败。
+
+FR106: **Phase 13 加深合同闸门** — Correct Course + PRD/addendum 批准「MVP→商业加深」范围；同步 README / `deferred-work.md` /（若需）ARCHITECTURE-SPINE；钉死与 Phase 12 MVP 关闭面的边界；**未完成则 FR107+ 故事不得 ready**。  
+FR107: **SystemC TLM-2.0 AT 产品支** — 交付 AT-style `nb_transport_fw`/`bw`（或风险记录钉死的 AT 合同子集）可构建/可运行路径；**不以** LT-only（FR101 MVP）冒充 AT 完成；须引用/修订 AD-5。  
+FR108: **GPIO 一级近 VIP / VIP 面** — 将 Phase 12 可选未交付 GPIO（FR98 G0）升格为风险记录必选条并交付 elaborate/emit/tick + ATDD；诚实边界仍禁止静默宣称商业 VIP 全家桶。  
+FR109: **FSM / state-visit 覆盖率（C3）** — 仿真覆盖率扩展覆盖 FSM/state-visit（Phase 12 FR105 C3 cropped 升格）；报告格式与夹具可检查；**不以** Mux 分支 v2 alone 关闭本 FR。  
+FR110: **树内 HLS 商业深度** — 超出 Phase 12 FR95/96 MVP（循环展开 / dissolve / in-tree-mvp stub）的可验收调度深度（风险记录钉死：流水阶段、资源约束、或真实调度质量门中至少一类）；**禁止**把 MVP stub 重标为商业完整 HLS。  
+FR111: **Idiomatic Chisel 可维护深度** — 超出 Phase 12 FR97 MVP 单夹具/结构黄金的可维护面（多模块风格一致性、命名/层次合同、或官方风格子集加严）；机械 `emit_chisel` 仍不得冒充本 FR。  
+FR112: **形式等价 / 双模型深度** — 超出 Phase 12 FR100 F1-(i) 有界穷举 MVP 与 FR103 SyncFifo 手写 FL 诚实面：至少一条风险记录选定的加深路径（例如 F1-(ii) SymbiYosys/SMT 绑定、或 GeneratedFunctional MemRead≡tick、或更多一级 IP 手写 FL）；**禁止** FR92 记分板 alone 关闭本 FR。  
+FR113: **LSP 设计根发现加深** — 超越文档钉死 DesignFixture：Cargo-graph / 任意 `.rs` 设计根发现（或等价）进入产品路径；FR90/HTML 仍不得冒充本 FR。  
+FR114: **富波形 / 覆盖率 GUI 加深** — Tywaves 级 typed IDE 波形，和/或 LCOV/第三方覆盖率 GUI 一等集成（风险记录钉死子集）；**不以**仅 `interactive.html` I1–I3 或 Mux v2 关闭本 FR。  
+FR115: **Phase 13 宣称与诚实门面** — 对外「商业加深 / 非 MVP」类宣称须引用 FR106–114 对应关闭证据；README/deferred 明确 Phase 12 MVP vs Phase 13 加深完成面。
+
+### Phase 13 Non-Functional Requirements
+
+NFR14: （继承）各实现 epic 标 ready 前须有风险记录。  
+NFR44: **加深 vs MVP 隔离** — Phase 13 关闭不得改写 Phase 12 FR94–105「已关闭」；加深完成面必须新 FR 勾选。  
+NFR45: **NFR14 分 epic 风险门** — Epic 48+ 每个实现 epic 开工前独立 NFR14（延续 NFR43 纪律）。  
+NFR46: **AD / 诚实同步** — 触及 AD-5/25/27（及 Phase 13 新 AD 修订）时须先修订脊柱再标 story ready；触碰面遵守 `deferred-work.md` standing honesty。  
+NFR47: **可选产品显式合同** — 原「optional product」项升格为本清单 FR 后，禁止静默扩大超出风险记录钉死的子集。
+
+### Phase 13 Additional Requirements (Architecture + Deferred)
+
+- 无 greenfield starter template。  
+- 设计 crate 仍只依赖 `bitloom-prelude`（AD-6），除非 FR106 另开合同。  
+- FR107 可能须进一步修订 **AD-5**（LT→AT）。FR110 可能触及 **AD-25**。FR111 可能触及 **AD-27**。  
+- `ip.rs` 体积（~2869 LOC）为工程风险：FR108 加深时评估拆分，但拆分本身不是本阶段 FR 关闭条件。  
+- Phase 1–12 故事保留 historical complete；不重写。  
+- UX：无。
+
+### Phase 13 UX Design Requirements
+
+无 UI。无 UX-DR。
+
+### Phase 13 FR Coverage Map
+
+FR106: Epic 48 — Phase 13 加深合同闸门  
+FR115: Epic 48 — Phase 13 宣称与诚实门面  
+FR107: Epic 49 — SystemC TLM-2.0 AT 产品支  
+FR108: Epic 50 — GPIO 一级近 VIP  
+FR109: Epic 51 — FSM / state-visit 覆盖率（C3）  
+FR110: Epic 52 — 树内 HLS 商业深度  
+FR111: Epic 53 — Idiomatic Chisel 可维护深度  
+FR112: Epic 54 — 形式等价 / 双模型深度  
+FR113: Epic 55 — LSP 设计根发现加深  
+FR114: Epic 56 — 富波形 / 覆盖率 GUI 加深  
+NFR44: Epic 48 — 加深 vs MVP 隔离（横切写入 49–56）  
+NFR45 / NFR14: Epic 48–56 — 各 epic 首故事风险门  
+NFR46: Epic 48 — AD / 诚实同步（横切；49/52/53 触及 AD-5/25/27）  
+NFR47: Epic 48 — 可选产品显式合同（横切）
+
+### Phase 13 Epic List
+
+### Epic 48: Phase 13 加深合同与诚实门面
+维护者/用户看到「MVP→商业加深」已获 Correct Course + PRD 批准；Phase 12 MVP 关闭面不被改写为失败；后续加深 epic 可合法开工。  
+**FRs covered:** FR106, FR115  
+**NFRs:** NFR14, NFR44, NFR45, NFR46, NFR47  
+**Depends on:** Phase 12 complete。不依赖 Epic 49–56。  
+**Gate:** Story 48.x（NFR14 + FR106）未完成前，49–56 不得标 ready。
+
+### Epic 49: SystemC TLM-2.0 AT 产品支
+系统级验证工程师获得可构建/可运行的 AT-style TLM 路径（`nb_transport` 或风险记录钉死子集），超出 FR101 LT-only MVP。  
+**FRs covered:** FR107  
+**NFRs:** NFR14, NFR44, NFR45, NFR46, NFR47  
+**Depends on:** 硬依赖 Epic 48；须引用/修订 AD-5。  
+**Standalone:** 关闭后即有 AT 产品面；不依赖 GPIO/HLS/形式加深。
+
+### Epic 50: GPIO 一级近 VIP
+IP 集成者获得 Phase 12 未交付的 GPIO 近 VIP 面（elaborate/emit/tick + ATDD），诚实边界仍禁止商业 VIP 全家桶口号。  
+**FRs covered:** FR108  
+**NFRs:** NFR14, NFR44, NFR45, NFR47  
+**Depends on:** 硬依赖 Epic 48；扩大 FR98 可选 G0。  
+**Note:** 可能触碰 `bitloom-prelude` `ip.rs`（体积风险）；与 Epic 54 风险域隔离，允许先后触碰同一文件。
+
+### Epic 51: FSM / state-visit 仿真覆盖率
+验证工程师获得 C3 FSM/state-visit 覆盖率记录与夹具报告，超出 FR105 Mux 分支 v2。  
+**FRs covered:** FR109  
+**NFRs:** NFR14, NFR44, NFR45, NFR47  
+**Depends on:** 硬依赖 Epic 48。  
+**Standalone:** 不依赖 Tywaves/LCOV（Epic 56）。
+
+### Epic 52: 树内 HLS 商业深度
+设计者获得超出 FR95/96 MVP（展开/dissolve/stub）的可验收树内调度深度（风险记录钉死质量门）。  
+**FRs covered:** FR110  
+**NFRs:** NFR14, NFR44, NFR45, NFR46, NFR47  
+**Depends on:** 硬依赖 Epic 48；须引用/修订 AD-25。
+
+### Epic 53: Idiomatic Chisel 可维护深度
+Chisel 互操作用户获得超出 FR97 MVP 单夹具的可维护 idiomatic 面（风格/层次/加严检查）。  
+**FRs covered:** FR111  
+**NFRs:** NFR14, NFR44, NFR45, NFR46, NFR47  
+**Depends on:** 硬依赖 Epic 48；须引用/修订 AD-27。
+
+### Epic 54: 形式等价 / 双模型深度
+验证工程师获得超出 FR100 F1-(i) / FR103 SyncFifo 诚实 MVP 的加深路径（SymbiYosys/SMT、MemRead≡tick 或更多手写 FL — 风险记录三选一钉死）。  
+**FRs covered:** FR112  
+**NFRs:** NFR14, NFR44, NFR45, NFR47  
+**Depends on:** 硬依赖 Epic 48。≠ FR107 SystemC AT。
+
+### Epic 55: LSP 设计根发现加深
+硬件设计者在按键 elaborate 路径上获得超越 DesignFixture 的 Cargo-graph / 任意 `.rs` 根发现。  
+**FRs covered:** FR113  
+**NFRs:** NFR14, NFR44, NFR45, NFR47  
+**Depends on:** 硬依赖 Epic 48；扩大 FR99 MVP。
+
+### Epic 56: 富波形 / 覆盖率 GUI 加深
+调试/验证工程师获得 Tywaves 级 typed IDE 波形和/或 LCOV/第三方覆盖率 GUI（风险记录钉死子集）。  
+**FRs covered:** FR114  
+**NFRs:** NFR14, NFR44, NFR45, NFR47  
+**Depends on:** 硬依赖 Epic 48。≠ Epic 51（C3 记录器可独立先关）。
+
+**File-churn note:** Epic 50 与 54 可能先后触碰 prelude IP / dual-model；Epic 51 与 56 同属仿真可观测性但交付物不同（记录器 vs GUI）— 保持拆分以便独立验收；若产品希望合并 51+56，可在审批时裁定。
+
+
+---
+
+## Epic 48: Phase 13 加深合同与诚实门面
+
+维护者/用户看到「MVP→商业加深」已获 Correct Course + PRD 批准；Phase 12 MVP 关闭面不被改写为失败；后续加深 epic 可合法开工。  
+**FRs covered:** FR106, FR115  
+**NFRs:** NFR14, NFR44, NFR45, NFR46, NFR47  
+**Depends on:** Phase 12 complete。不依赖 Epic 49–56。  
+**Gate:** Story 48.1 NFR14 未完成前，48.2–48.4 不得标 ready。**Epic 48 未关闭前，Epic 49–56 不得标 ready。**
+
+### Story 48.1: Epic 48 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 Phase 13「MVP→商业加深」填写 NFR14,
+So that 不以「Phase 12 字面绿已结」冒充商业加深已获授权。
+
+**Acceptance Criteria:**
+
+**Given** Phase 12 FR94–105 已关闭；`deferred-work.md` standing honesty / optional product；Epic 40–47 retro
+**When** 创建 Epic 48 风险记录
+**Then** 含：与 Phase 12 MVP 关闭面的边界（NFR44）；FR107–114 加深范围摘要；须同步的 AD（至少触及 AD-5/25/27 的说明）；禁止事项（至少：FR106 未合入不得开 49–56；不得改写 FR94–105「已关闭」为失败；不得静默扩大超出风险记录的子集）
+**And** 指定负责人（NFR14 / NFR44–47）
+**And** 无此记录则 48.2–48.4 不得标 ready
+
+### Story 48.2: Correct Course + PRD 批准 Phase 13（FR106）
+
+As a 产品负责人,
+I want PRD/addendum 经 Correct Course 明确批准「MVP→商业加深」,
+So that Phase 13 具备合同授权。
+
+**Acceptance Criteria:**
+
+**Given** Story 48.1；现 addendum 仅批准 Phase 12
+**When** 批准并落地 sprint-change-proposal（或等价）+ PRD/addendum Phase 13 段落
+**Then** 写明：Phase 13 = FR106–115 加深；Phase 12 MVP 关闭仍有效；新宣称须引 FR106–114（FR115 / NFR44）
+**And** 公开品牌仍为 Bitloom / `bitloom-*`
+**And** 列出 Epic 48–56 与 FR 映射指针（可指向 `epics.md`）
+
+### Story 48.3: 同步 README / deferred / 路线图指针（FR106 / FR115）
+
+As a 文档维护者,
+I want 公开状态页区分 Phase 12 MVP 关闭面与 Phase 13 加深面,
+So that 对外宣称不混淆。
+
+**Acceptance Criteria:**
+
+**Given** Story 48.2
+**When** 更新 README「状态与 deferred」、`deferred-work.md`、（若需）`docs/requirements/19` 交叉链
+**Then** 明确：Phase 12 FR94–105 = 字面绿 MVP 已关闭；Phase 13 = 商业/可选加深合同；optional 项升格为 FR107–114
+**And** 不得删除 Phase 12 关闭证据指针
+**And** 写明「商业加深 / 非 MVP」宣称仅在对应 FR 关闭后可勾选（FR115）
+
+### Story 48.4: AD 指针与 Epic 48 收口（FR106 / NFR46）
+
+As a 架构 / 维护者,
+I want 脊柱/AD 指针说明 Phase 13 加深须引用修订 AD，并勾选 Epic 48 关闭,
+So that 49–56 不被旧「仅 MVP」叙述挡死，且闸门可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 48.3
+**When** 视需要修订 ARCHITECTURE-SPINE 指针（或文档化「实现 epic 内修订 AD-5/25/27」门禁）并更新 NFR14
+**Then** NFR14 勾选 Epic 48 关闭；**Epic 49–56 此前不得标 ready**
+**And** 明确：各实现 epic 仍须在首故事引用适用已修订 AD（NFR46）
+
+
+## Epic 49: SystemC TLM-2.0 AT 产品支
+
+系统级验证工程师获得可构建/可运行的 AT-style TLM 路径（`nb_transport` 或风险记录钉死子集），超出 FR101 LT-only MVP。  
+**FRs covered:** FR107  
+**NFRs:** NFR14, NFR44, NFR45, NFR46, NFR47  
+**Depends on:** 硬依赖 Epic 48；须引用/修订 AD-5。  
+**Gate:** Story 49.1 NFR14 未完成前，49.2–49.3 不得标 ready。
+
+### Story 49.1: Epic 49 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 SystemC TLM AT 产品支填写 NFR14,
+So that 不以 FR101 LT-only MVP 冒充 AT 完成。
+
+**Acceptance Criteria:**
+
+**Given** Epic 48 已关闭；FR101 LT-only 已关闭；修订后/待修订 AD-5
+**When** 创建 Epic 49 风险记录
+**Then** 钉死：AT 交付物（`nb_transport_fw`/`bw` 或文档等价子集）；与 LT 路径关系；工具链依赖/版本；禁止事项（至少：不得仅文档口号关闭 FR107；不得把 LT-only / host Rust FL 标成 AT）
+**And** 负责人（NFR14 / NFR46）；无此记录则 49.2–49.3 不得标 ready
+
+### Story 49.2: AT-style nb_transport 产品路径（FR107）
+
+As a 系统级验证工程师,
+I want 可构建/可运行的 SystemC TLM AT 路径,
+So that 超出 FR101 LT-only 的合同交付可验收。
+
+**Acceptance Criteria:**
+
+**Given** Story 49.1
+**When** 按风险记录交付 AT 生成或一等集成（至少一夹具 + 文档化依赖/版本）
+**Then** ATDD 或 CI 可复现烟测通过；失败可读
+**And** 公开品牌 Bitloom；文档交叉链 AD-5（已修订则引用修订版）
+**And** 明确 ≠ FR47 Rust FL、≠ 仅 LT `b_transport` MVP
+
+### Story 49.3: FR107 收口与文档边界
+
+As a 维护者,
+I want 文档/回归收口并勾选 Epic 49 关闭,
+So that AT 产品支字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 49.2
+**When** 更新 `docs/fr101-systemc-tlm.md`（或 `docs/fr107-*`）/ README / deferred；保留 LT 回归
+**Then** FR107 关闭条件可勾选；NFR14 勾选 Epic 49 关闭
+**And** 诚实写明：AT 子集边界；未列入的 timing/quantum 扩展仍须新合同（NFR47）
+
+
+## Epic 50: GPIO 一级近 VIP
+
+IP 集成者获得 Phase 12 未交付的 GPIO 近 VIP 面（elaborate/emit/tick + ATDD），诚实边界仍禁止商业 VIP 全家桶口号。  
+**FRs covered:** FR108  
+**NFRs:** NFR14, NFR44, NFR45, NFR47  
+**Depends on:** 硬依赖 Epic 48；扩大 FR98 可选 G0。  
+**Gate:** Story 50.1 NFR14 未完成前，50.2–50.3 不得标 ready。
+
+### Story 50.1: Epic 50 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 GPIO 近 VIP 填写 NFR14 并钉死验收清单,
+So that 不以「FR98 四类已关」冒充 GPIO 已交付。
+
+**Acceptance Criteria:**
+
+**Given** Epic 48 已关闭；FR98 UART/SPI/I2C/AXI 近 VIP 已关闭；G0 可选未交付诚实记录
+**When** 创建 Epic 50 风险记录
+**Then** 列出 GPIO「近 VIP」必选条（方向/读写/掩码或文档等价子集）；禁止事项（至少：不得口头宣称商业 VIP GPIO；不得无 ATDD 关闭 FR108）
+**And** 负责人（NFR14 / NFR47）；评估是否拆分 `ip.rs`（非关闭条件，写入风险）；无此记录则 50.2–50.3 不得标 ready
+
+### Story 50.2: GPIO 近 VIP 实现与 ATDD（FR108）
+
+As a IP 集成者,
+I want GPIO 达到风险记录验收条并可 elaborate/emit/tick,
+So that FR98 可选缺口被合同关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 50.1
+**When** 实现 GPIO 清单项 + elaborate/emit/tick + ATDD
+**Then** 文档边界诚实（已交付协议面 vs 非目标）
+**And** 公开品牌 Bitloom；既有 UART/SPI/I2C/AXI 近 VIP 回归不破
+
+### Story 50.3: FR108 收口与 FR98 交叉链
+
+As a 维护者,
+I want 更新 docs/ip 与 deferred 并勾选 Epic 50 关闭,
+So that GPIO 加深字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 50.2
+**When** 更新 `docs/ip/README.md` / deferred /（若需）FR98 交叉链
+**Then** FR108 关闭条件可勾选；NFR14 勾选 Epic 50 关闭
+**And** 明确：FR98 Phase 12 MVP 关闭仍有效；GPIO 为 Phase 13 加深完成面
+
+
+## Epic 51: FSM / state-visit 仿真覆盖率
+
+验证工程师获得 C3 FSM/state-visit 覆盖率记录与夹具报告，超出 FR105 Mux 分支 v2。  
+**FRs covered:** FR109  
+**NFRs:** NFR14, NFR44, NFR45, NFR47  
+**Depends on:** 硬依赖 Epic 48。  
+**Gate:** Story 51.1 NFR14 未完成前，51.2–51.3 不得标 ready。
+
+### Story 51.1: Epic 51 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FSM/state-visit 覆盖率填写 NFR14,
+So that 不以 FR105 Mux v2 alone 冒充 C3 完成。
+
+**Acceptance Criteria:**
+
+**Given** Epic 48 已关闭；FR105 Mux 分支 v2 已关闭且 C3 曾 cropped
+**When** 创建 Epic 51 风险记录
+**Then** 钉死：FSM/state-visit 度量类型与报告格式；夹具范围；禁止事项（至少：不得仅改文档关闭 FR109；不得把 Mux v2 / FR34 toggle alone 写成 C3）
+**And** 负责人（NFR14 / NFR47）；无此记录则 51.2–51.3 不得标 ready
+
+### Story 51.2: FSM/state-visit 记录器与夹具（FR109）
+
+As a 验证工程师,
+I want 仿真路径记录 FSM/state-visit 并产出可检查报告,
+So that Phase 12 cropped 的 C3 面可验收。
+
+**Acceptance Criteria:**
+
+**Given** Story 51.1
+**When** 实现覆盖率记录扩展（按风险记录类型）+ 至少一夹具报告
+**Then** ATDD 证明相对仅 Mux v2 路径，本路径执行 C3 合同
+**And** 失败/未覆盖可读；公开品牌 Bitloom
+**And** FR105 Mux v2 回归保留
+
+### Story 51.3: FR109 收口与 FR105 交叉链
+
+As a 维护者,
+I want 更新覆盖率文档并勾选 Epic 51 关闭,
+So that C3 加深字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 51.2
+**When** 更新 `docs/fr105-sim-coverage-ext.md`（或 `docs/fr109-*`）/ deferred / README 交叉链
+**Then** FR109 关闭条件可勾选；NFR14 勾选 Epic 51 关闭
+**And** 明确：FR105 MVP（Mux v2）仍关闭；C3 为 Phase 13 加深；Tywaves/LCOV GUI 仍属 Epic 56（若未开则保持 deferred）
+
+
+## Epic 52: 树内 HLS 商业深度
+
+设计者获得超出 FR95/96 MVP（展开/dissolve/stub）的可验收树内调度深度（风险记录钉死质量门）。  
+**FRs covered:** FR110  
+**NFRs:** NFR14, NFR44, NFR45, NFR46, NFR47  
+**Depends on:** 硬依赖 Epic 48；须引用/修订 AD-25。  
+**Gate:** Story 52.1 NFR14 未完成前，52.2–52.3 不得标 ready。
+
+### Story 52.1: Epic 52 NFR14 风险记录
+
+As a 实现负责人,
+I want 为树内 HLS 商业深度填写 NFR14,
+So that 不以 FR95/96 MVP / in-tree-mvp stub 冒充商业完整 HLS。
+
+**Acceptance Criteria:**
+
+**Given** Epic 48 已关闭；FR95/96 MVP 已关闭；AD-25（修订后）
+**When** 创建 Epic 52 风险记录
+**Then** 钉死至少一类可验收质量门（流水阶段数、资源/II 约束、或对照基线调度质量度量）；与 MVP 边界；禁止事项（至少：不得把 MVP stub/仅展开重标为商业完整；外挂 Bambu stub 不得单独关 FR110）
+**And** 负责人（NFR14 / NFR46）；无此记录则 52.2–52.3 不得标 ready
+
+### Story 52.2: 树内 HLS 加深实现与验收（FR110）
+
+As a 硬件设计者,
+I want 树内 `#[hls]`（或等价）路径达到风险记录质量门,
+So that 调度深度超出 Phase 12 MVP。
+
+**Acceptance Criteria:**
+
+**Given** Story 52.1
+**When** 实现或升级树内调度/变换，使至少一夹具满足质量门，并有自动化断言
+**Then** 文档区分：FR95/96 MVP vs FR110 加深完成面
+**And** 至少一个负向/边界：未达质量门时失败可读或明确降级（不得 silent 宣称）
+**And** 公开品牌 Bitloom；既有 FR95/96 回归不破
+
+### Story 52.3: FR110 收口与 AD-25 交叉链
+
+As a 维护者,
+I want 更新 HLS 文档并勾选 Epic 52 关闭,
+So that 商业深度字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 52.2
+**When** 更新 `docs/fr35-hls.md`（或 `docs/fr110-*`）/ deferred / README；引用适用 AD-25
+**Then** FR110 关闭条件可勾选；NFR14 勾选 Epic 52 关闭
+**And** 明确：Phase 12 FR95/96 关闭仍有效；未列入质量门的调度全家桶仍须新合同（NFR47）
+
+
+## Epic 53: Idiomatic Chisel 可维护深度
+
+Chisel 互操作用户获得超出 FR97 MVP 单夹具的可维护 idiomatic 面（风格/层次/加严检查）。  
+**FRs covered:** FR111  
+**NFRs:** NFR14, NFR44, NFR45, NFR46, NFR47  
+**Depends on:** 硬依赖 Epic 48；须引用/修订 AD-27。  
+**Gate:** Story 53.1 NFR14 未完成前，53.2–53.3 不得标 ready。
+
+### Story 53.1: Epic 53 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 idiomatic Chisel 可维护深度填写 NFR14,
+So that 不以 FR97 MVP 单夹具 / 机械 emit 冒充可维护全家桶。
+
+**Acceptance Criteria:**
+
+**Given** Epic 48 已关闭；FR97 MVP 已关闭；AD-27（修订后）
+**When** 创建 Epic 53 风险记录
+**Then** 钉死加深验收条（至少一类：多模块风格一致性、命名/层次合同、或官方风格子集加严）；与 MVP 边界；禁止事项（至少：不得仅文案把机械 emit 标成 FR111；不得要求无合同恢复废弃 Parser）
+**And** 负责人（NFR14 / NFR46）；无此记录则 53.2–53.3 不得标 ready
+
+### Story 53.2: Idiomatic 加深发射/检查与 ATDD（FR111）
+
+As a Chisel 互操作用户,
+I want FrozenHir/`.fir` 路径满足风险记录加深验收条,
+So that 可维护面超出 Phase 12 MVP。
+
+**Acceptance Criteria:**
+
+**Given** Story 53.1
+**When** 升级 emit/check（或等价往返），使至少一加深夹具通过自动化断言
+**Then** 文档区分：FR97 MVP vs FR111 加深完成面；机械 `emit_chisel` 仍诚实
+**And** 至少一个负向/边界：不满足加深条时失败可读或明确降级
+**And** 公开品牌 Bitloom；FR97 回归不破
+
+### Story 53.3: FR111 收口与 AD-27 交叉链
+
+As a 维护者,
+I want 更新 Chisel 文档并勾选 Epic 53 关闭,
+So that 可维护深度字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 53.2
+**When** 更新 `docs/fr97-idiomatic-chisel.md`（或 `docs/fr111-*`）/ fr28 / deferred；引用适用 AD-27
+**Then** FR111 关闭条件可勾选；NFR14 勾选 Epic 53 关闭
+**And** 明确：Phase 12 FR97 关闭仍有效；未列入风格全家桶仍须新合同（NFR47）
+
+
+## Epic 54: 形式等价 / 双模型深度
+
+验证工程师获得超出 FR100 F1-(i) / FR103 SyncFifo 诚实 MVP 的加深路径（SymbiYosys/SMT、MemRead≡tick 或更多手写 FL — 风险记录三选一钉死）。  
+**FRs covered:** FR112  
+**NFRs:** NFR14, NFR44, NFR45, NFR47  
+**Depends on:** 硬依赖 Epic 48。≠ FR107 SystemC AT。  
+**Gate:** Story 54.1 NFR14 未完成前，54.2–54.3 不得标 ready。
+
+### Story 54.1: Epic 54 NFR14 风险记录
+
+As a 实现负责人,
+I want 为形式等价/双模型深度填写 NFR14 并钉死加深分支,
+So that 不以 FR92 记分板 / FR100 F1-(i) alone 冒充 FR112。
+
+**Acceptance Criteria:**
+
+**Given** Epic 48 已关闭；FR100/102/103 MVP 已关闭
+**When** 创建 Epic 54 风险记录
+**Then** **三选一（或显式组合）钉死**加深路径：（A）F1-(ii) SymbiYosys/SMT 绑定产品入口；（B）GeneratedFunctional MemRead≡tick；（C）更多一级 IP 手写 FL 完整面；写明证明义务/夹具/工具依赖
+**And** 禁止事项（至少：不得 FR92 alone 关闭；不得仅模板 adapter 关闭；≠ SystemC AT）
+**And** 负责人（NFR14 / NFR47）；无此记录则 54.2–54.3 不得标 ready
+
+### Story 54.2: 选定加深路径实现与 ATDD（FR112）
+
+As a 验证工程师,
+I want 风险记录选定的加深路径可运行并可复现关闭,
+So that 形式/双模型深度超出 Phase 12 MVP。
+
+**Acceptance Criteria:**
+
+**Given** Story 54.1 已钉死分支
+**When** 交付文档化流程 + 可运行夹具 + ATDD（失败可读）
+**Then** 文档明确本路径为 FR112 完成面（超出 FR100/103 MVP）
+**And** 公开品牌 Bitloom；FR100/103 回归不破
+**And** 未选分支保持 deferred（NFR47），不得 silent 宣称已交付
+
+### Story 54.3: FR112 收口与交叉链
+
+As a 维护者,
+I want 更新形式等价/双模型文档并勾选 Epic 54 关闭,
+So that 加深字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 54.2
+**When** 更新 `docs/fr100-formal-equiv.md` / `docs/fr103-ip-dual-model.md`（或 `docs/fr112-*`）/ deferred
+**Then** FR112 关闭条件可勾选；NFR14 勾选 Epic 54 关闭
+**And** 明确：Phase 12 FR100/103 关闭仍有效；未选加深分支须新合同
+
+
+## Epic 55: LSP 设计根发现加深
+
+硬件设计者在按键 elaborate 路径上获得超越 DesignFixture 的 Cargo-graph / 任意 `.rs` 根发现。  
+**FRs covered:** FR113  
+**NFRs:** NFR14, NFR44, NFR45, NFR47  
+**Depends on:** 硬依赖 Epic 48；扩大 FR99 MVP。  
+**Gate:** Story 55.1 NFR14 未完成前，55.2–55.3 不得标 ready。
+
+### Story 55.1: Epic 55 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 LSP 设计根发现填写 NFR14,
+So that 不以 FR99 DesignFixture MVP / rust-analyzer 冒充任意根发现完成。
+
+**Acceptance Criteria:**
+
+**Given** Epic 48 已关闭；FR99 bitloom-lsp MVP 已关闭
+**When** 创建 Epic 55 风险记录
+**Then** 钉死：发现策略（Cargo-graph 和/或任意 `.rs` 设计根，或文档等价）；性能/范围边界；与 FR90 分工；禁止事项（至少：不得把 HTML 可视化计入；不得仅浅层诊断关闭 FR113；不得半成品二进制交差）
+**And** 负责人（NFR14 / NFR47）；无此记录则 55.2–55.3 不得标 ready
+
+### Story 55.2: 设计根发现实现与 ATDD（FR113）
+
+As a 硬件设计者,
+I want bitloom-lsp 在编辑/保存路径上发现并 elaborate 非仅 DesignFixture 的设计根,
+So that 按键全 elaborate 可用面扩大。
+
+**Acceptance Criteria:**
+
+**Given** Story 55.1
+**When** 实现风险记录策略 + 可复现夹具（至少一非 DesignFixture-only 工程）
+**Then** ATDD/集成测证明相对仅 DesignFixture MVP，本路径执行加深合同
+**And** 失败诊断可读；超时/过大设计行为按风险记录文档化
+**And** 公开品牌 Bitloom；FR99 MVP 回归不破；≠ 仅 rust-analyzer（FR90）
+
+### Story 55.3: FR113 收口与 FR99 交叉链
+
+As a 维护者,
+I want 更新 LSP 文档并勾选 Epic 55 关闭,
+So that 设计根发现加深字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 55.2
+**When** 更新 `docs/fr99-bitloom-lsp.md`（或 `docs/fr113-*`）/ deferred / README
+**Then** FR113 关闭条件可勾选；NFR14 勾选 Epic 55 关闭
+**And** 明确：Phase 12 FR99 关闭仍有效；未列入发现策略仍须新合同（NFR47）
+
+
+## Epic 56: 富波形 / 覆盖率 GUI 加深
+
+调试/验证工程师获得 Tywaves 级 typed IDE 波形和/或 LCOV/第三方覆盖率 GUI（风险记录钉死子集）。  
+**FRs covered:** FR114  
+**NFRs:** NFR14, NFR44, NFR45, NFR47  
+**Depends on:** 硬依赖 Epic 48。≠ Epic 51（C3 记录器可独立先关）。  
+**Gate:** Story 56.1 NFR14 未完成前，56.2–56.3 不得标 ready。
+
+### Story 56.1: Epic 56 NFR14 风险记录
+
+As a 实现负责人,
+I want 为富波形/覆盖率 GUI 加深填写 NFR14 并钉死子集,
+So that 不以 interactive.html I1–I3 / Mux v2 alone 冒充 Tywaves/LCOV 完成。
+
+**Acceptance Criteria:**
+
+**Given** Epic 48 已关闭；FR104/105 MVP 已关闭
+**When** 创建 Epic 56 风险记录
+**Then** **至少钉死一类**加深交付：（A）Tywaves 级 typed IDE 波形一等集成或自研等价；（B）LCOV/第三方覆盖率 GUI 一等集成；可两者皆选但须写清范围
+**And** 禁止事项（至少：不得仅静态 timing/VCD/「请开 GTKWave」关闭；不得仅 docs-only；不得把 FR104 I1–I3 或 FR105 Mux v2 alone 写成 FR114）
+**And** 负责人（NFR14 / NFR47）；无此记录则 56.2–56.3 不得标 ready
+
+### Story 56.2: 选定 GUI/集成路径实现与验收（FR114）
+
+As a 调试 / 验证工程师,
+I want 风险记录选定的波形或覆盖率 GUI 路径可复现使用,
+So that 可观测性超出 Phase 12 MVP。
+
+**Acceptance Criteria:**
+
+**Given** Story 56.1 已钉死子集
+**When** 交付产品路径（自研或文档化一等集成）+ 夹具/步骤；ATDD 或文档化手动验收清单可检查
+**Then** 公开品牌 Bitloom；VCD / `interactive.html` / Mux v2 默认路径仍可用（不回归）
+**And** 未选子集保持 deferred（NFR47），不得 silent 宣称
+
+### Story 56.3: FR114 收口与 Phase 13 故事清单指针
+
+As a 维护者,
+I want 文档/deferred 收口并勾选 Epic 56 关闭,
+So that GUI 加深字面条可检查关闭，且 Phase 13 实现故事清单完整。
+
+**Acceptance Criteria:**
+
+**Given** Story 56.2
+**When** 更新 `docs/fr104-interactive-wave.md` / `docs/fr105-sim-coverage-ext.md`（或 `docs/fr114-*`）/ README / deferred
+**Then** FR114 关闭条件可勾选；NFR14 勾选 Epic 56 关闭
+**And** 文首/状态页可声明：Phase 13 规划故事已齐（Epic 48–56）；剩余门为各 epic 实现关闭态
+**And** 明确：Phase 12 FR104/105 关闭仍有效

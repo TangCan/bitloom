@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 09:15
+last_updated: 09-10-2026 10:45
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -365,6 +365,63 @@ development_status:
   47-2-交互式富波形-fr104: done
   47-3-仿真覆盖率扩展-fr105-收口: done
   epic-47-retrospective: done
+
+  # Phase 13 — MVP→commercial deepen (Correct Course 2026-09-10-phase13)
+  # Gate: epic-48 must be done before 49–56 may leave backlog/ready
+  epic-48: backlog
+  48-1-epic-48-nfr14-风险记录: backlog
+  48-2-correct-course-prd-批准-phase13-fr106: backlog
+  48-3-同步-readme-deferred-路线图-fr106-fr115: backlog
+  48-4-ad-指针与-epic-48-收口-fr106: backlog
+  epic-48-retrospective: optional
+
+  epic-49: backlog
+  49-1-epic-49-nfr14-风险记录: backlog
+  49-2-at-style-nb-transport-产品路径-fr107: backlog
+  49-3-fr107-收口与文档边界: backlog
+  epic-49-retrospective: optional
+
+  epic-50: backlog
+  50-1-epic-50-nfr14-风险记录: backlog
+  50-2-gpio-近-vip-实现与-atdd-fr108: backlog
+  50-3-fr108-收口与-fr98-交叉链: backlog
+  epic-50-retrospective: optional
+
+  epic-51: backlog
+  51-1-epic-51-nfr14-风险记录: backlog
+  51-2-fsm-state-visit-覆盖率-fr109: backlog
+  51-3-fr109-收口与-fr105-交叉链: backlog
+  epic-51-retrospective: optional
+
+  epic-52: backlog
+  52-1-epic-52-nfr14-风险记录: backlog
+  52-2-树内-hls-商业深度-fr110: backlog
+  52-3-fr110-收口与-ad-25-交叉链: backlog
+  epic-52-retrospective: optional
+
+  epic-53: backlog
+  53-1-epic-53-nfr14-风险记录: backlog
+  53-2-idiomatic-chisel-可维护深度-fr111: backlog
+  53-3-fr111-收口与-ad-27-交叉链: backlog
+  epic-53-retrospective: optional
+
+  epic-54: backlog
+  54-1-epic-54-nfr14-风险记录: backlog
+  54-2-形式等价-双模型深度-fr112: backlog
+  54-3-fr112-收口与交叉链: backlog
+  epic-54-retrospective: optional
+
+  epic-55: backlog
+  55-1-epic-55-nfr14-风险记录: backlog
+  55-2-lsp-设计根发现加深-fr113: backlog
+  55-3-fr113-收口与-fr99-交叉链: backlog
+  epic-55-retrospective: optional
+
+  epic-56: backlog
+  56-1-epic-56-nfr14-风险记录: backlog
+  56-2-富波形-覆盖率-gui-加深-fr114: backlog
+  56-3-fr114-收口与-phase13-指针: backlog
+  epic-56-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1

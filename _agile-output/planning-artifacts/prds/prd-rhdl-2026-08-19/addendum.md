@@ -215,3 +215,35 @@
 **合同指针：** 详见 `epics.md` Phase 12 Inventory（FR94–FR105 / NFR40–NFR43）。
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-09-phase12-path-b.md`
 - 调研（反建议字面；已被本决议否决为排期默认）：`research/technical-doc19-seven-stage-full-green-product-pla-2026-09-09/research.md`
+
+## 2026-09-10 Update — Phase 13 MVP→商业加深（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen.md` —
+在 Phase 12 字面绿 **MVP 已关闭**之后，正式 **Phase 13**「MVP→商业加深」
+（Epic 48–56 · **FR106–FR115** / **NFR44–NFR47**）。
+
+**公开品牌（不变）：** **Bitloom**；crates.io / CLI **`bitloom`** / `bitloom-*`（设计 crate 仍只依赖
+`bitloom-prelude`）。禁止发布 `rhdl` / `rhdl-bits`。
+
+**与 Phase 12 的关系（必须同时读）：**
+- Phase 12 **FR94–FR105 / NFR40–NFR43** 关闭证据 **仍有效**；**不得**改写为失败（**NFR44**）。
+- Phase 13 是 **新合同**下的加深（optional product → 显式 FR），**不是**「Phase 12 AC 未达标」的补救叙事。
+- deferred optional 升格映射：
+  1. SystemC TLM AT / `nb_transport` → **FR107**
+  2. GPIO 近 VIP → **FR108**
+  3. FSM / state-visit 覆盖率（C3）→ **FR109**
+  4. 树内 HLS 商业深度 → **FR110**
+  5. Idiomatic Chisel 可维护深度 → **FR111**
+  6. 形式等价 / 双模型深度 → **FR112**
+  7. LSP 设计根发现加深 → **FR113**
+  8. Tywaves / LCOV GUI → **FR114**
+  （闸门 **FR106**；宣称纪律 **FR115**。）
+- 对外「商业加深 / 非 MVP」类表述：**仅**可在对应 FR106–114 关闭后，按 **FR115** 宣称；
+  **禁止**用 Phase 12 MVP 冒充商业完整面。
+
+**实现闸门：** Epic 48（Story 48.1–48.4 · **FR106**）关闭前，Epic 49–56 不得标 ready。  
+触及 **AD-5 / AD-25 / AD-27** 的加深须在实现 epic 引用修订 AD（**NFR46**）；README / deferred /
+脊柱指针由 Story **48.3–48.4** 落地。
+
+**合同指针：** 详见 `epics.md` Phase 13 Inventory（FR106–FR115 / NFR44–NFR47）。
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen.md`
