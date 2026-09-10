@@ -121,8 +121,8 @@ fn fr118_sprint_epic59_done() {
         sprint.contains("59-2-syn-scan-发现路径实现与验收-fr118: done")
             || sprint.contains("59-2-syn-scan-发现路径实现与验收-fr118:done")
     );
-    // Epic 60–63 must not be prematurely closed.
-    for epic in 60..=63 {
+    // Epic 61–63 must not be prematurely closed; Epic 60 may be in-progress after 60.1.
+    for epic in 61..=63 {
         assert!(
             !sprint.contains(&format!("epic-{epic}: done"))
                 && !sprint.contains(&format!("epic-{epic}:done")),
@@ -134,4 +134,15 @@ fn fr118_sprint_epic59_done() {
             "epic-{epic} must remain backlog"
         );
     }
+    assert!(
+        !sprint.contains("epic-60: done") && !sprint.contains("epic-60:done"),
+        "epic-60 must not be done yet during Epic 59 closeout guard"
+    );
+    assert!(
+        sprint.contains("epic-60: backlog")
+            || sprint.contains("epic-60:backlog")
+            || sprint.contains("epic-60: in-progress")
+            || sprint.contains("epic-60:in-progress"),
+        "epic-60 must be backlog or in-progress"
+    );
 }
