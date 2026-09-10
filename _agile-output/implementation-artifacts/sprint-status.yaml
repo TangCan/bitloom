@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 08:50
+last_updated: 09-10-2026 08:55
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -324,7 +324,7 @@ development_status:
   41-2-树内-hls-调度-mvp-fr95: done
   41-3-hls-闭包数据流变换-fr96: done
   41-4-fr95-fr96-收口与回归: done
-  epic-41-retrospective: optional
+  epic-41-retrospective: done
 
   epic-42: done
   42-1-epic-42-nfr14-风险记录: done
@@ -1026,3 +1026,31 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-40-retro-2026-09-10.md"
+  - id: "epic-41-retro-item-102-fr95-fr96-诚实边界-对外不得把树内-mvp-in-tree-mvp-r"
+    epic: 41
+    action: "FR95/FR96 诚实边界：对外不得把树内 MVP / in-tree-mvp RTL stub 写成商业级完整 HLS；外挂 stub/BITLOOM_HLS_USE_REAL
+      仍不得单独关 FR95（续 NFR40/NFR42）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-41-retro-2026-09-10.md"
+  - id: "epic-41-retro-item-103-澄清-cli-库-api-文档或-cli-帮助标明-in-tree-默认经-da"
+    epic: 41
+    action: "澄清 CLI ↔ 库 API：文档或 CLI 帮助标明 --in-tree 默认经 --dataflow dissolve（常打印 fr96=true）；若需裸
+      FR95，使用库 API schedule_in_tree 或增加显式开关。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-41-retro-2026-09-10.md"
+  - id: "epic-41-retro-item-104-续-epic-40-retro-item-101-同步-epics-md-fro"
+    epic: 41
+    action: "续 epic-40-retro-item-101：同步 epics.md frontmatter phase12Epic40Status–phase12Epic47Status
+      与 sprint done / phase12Status: complete。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-41-retro-2026-09-10.md"
+  - id: "epic-41-retro-item-105-历史-nfr14-epic-24-37-等-禁树内-文案-加-历史门禁-已被-a"
+    epic: 41
+    action: "历史 NFR14（Epic 24/37 等）「禁树内」文案：加「历史门禁 / 已被 AD-25 Path B 修订；现行见 Epic 41
+      / docs/fr35-hls.md」指针。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-41-retro-2026-09-10.md"
