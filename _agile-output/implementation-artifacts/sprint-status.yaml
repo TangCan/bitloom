@@ -399,10 +399,10 @@ development_status:
   52-3-fr110-收口与-ad-25-交叉链: done
   epic-52-retrospective: optional
 
-  epic-53: in-progress
+  epic-53: done
   53-1-epic-53-nfr14-风险记录: done
   53-2-idiomatic-chisel-可维护深度-fr111: done
-  53-3-fr111-收口与-ad-27-交叉链: backlog
+  53-3-fr111-收口与-ad-27-交叉链: done
   epic-53-retrospective: optional
 
   epic-54: backlog

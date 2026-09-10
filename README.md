@@ -166,7 +166,7 @@ mod sim {
 | C ABI cdylib | [`docs/fr33-c-abi.md`](docs/fr33-c-abi.md) |
 | 仿真覆盖率（FR34 基线 + **FR105** 扩展 + **FR109** C3） | [`docs/fr34-sim-coverage.md`](docs/fr34-sim-coverage.md) · [`docs/fr105-sim-coverage-ext.md`](docs/fr105-sim-coverage-ext.md)（Mux 分支；**Epic 47 已关闭**）· [`docs/fr109-fsm-state-visit-coverage.md`](docs/fr109-fsm-state-visit-coverage.md)（FSM/state-visit；**Epic 51 已关闭** / Story 51.3） |
 | Chisel 可编译生成（FR28 / FR88）+ Mem Path A（FR81） | [`docs/fr28-chisel-compilable.md`](docs/fr28-chisel-compilable.md)（**可编译 ≠ idiomatic**；[钉死运维清单](docs/fr28-chisel-compilable.md#firtool--chisel-钉死运维清单fr88--nfr3--nfr12)）· FR71：`just chisel-fr28-jvm` · 可选 Mem：`just chisel-fr81-mem-jvm` · [维护者合并清单](docs/fr28-chisel-compilable.md#维护者合并前检查清单fr28--emit_chisel) |
-| Idiomatic / 可维护 Chisel（**FR97** · Epic 42 已关闭） | [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md)（`emit_chisel_idiomatic` + `check_idiomatic_chisel`；机械面不得单独关闭 FR97） |
+| Idiomatic / 可维护 Chisel（**FR97** · Epic 42 已关闭；**FR111** 加深 · Epic 53 已关闭） | [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md) · [`docs/fr111-idiomatic-chisel-depth.md`](docs/fr111-idiomatic-chisel-depth.md)（`emit_chisel_idiomatic_fr111`；机械面不得单独关闭 FR97/FR111） |
 | Chisel / `.fir` 反向导入（FR46） | [`docs/fr46-chisel-import.md`](docs/fr46-chisel-import.md) |
 | `import` CLI + 混合夹具 | [`docs/fr40-cli-verbs.md`](docs/fr40-cli-verbs.md) · [`examples/chisel_mixed`](examples/chisel_mixed) |
 | HLS 产品路径（**支持** · FR35/FR50/FR95/FR96 + **FR110** 深度） | [`docs/fr35-hls.md`](docs/fr35-hls.md) · [`docs/fr110-hls-commercial-depth.md`](docs/fr110-hls-commercial-depth.md)（pipeline/II；**Epic 52 已关闭** / Story 52.3）· 烟测 [`scripts/hls-smoke.sh`](scripts/hls-smoke.sh) |
@@ -269,7 +269,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 PRD 才能推翻」。**Correct Course + FR94（2026-09-09 Path B）已批准推翻**该锁定。下列项现为 Phase 12 **交付目标**（**须由对应 FR 关闭后方可宣称完成** / NFR42）；实现 epic 须引用已修订 AD（**NFR41**）。同源：PRD addendum「Phase 12 字面绿」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
 1. **树内 / 自研 HLS 调度器** → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付；修订后 **AD-25**）；**商业深度 → FR110 / Epic 52 已关闭**（Story 52.3）；外挂 Bambu 等可保留为可选，不得单独满足 FR95/FR110
-2. **FIRRTL→idiomatic Scala / idiomatic Chisel** → **FR97**（**Epic 42 已关闭** — MVP 已交付；修订后 **AD-27**）；机械可编译仍满足 FR28/FR46，不得冒充 FR97；完成面见 [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md)
+2. **FIRRTL→idiomatic Scala / idiomatic Chisel** → **FR97**（**Epic 42 已关闭** — MVP 已交付；修订后 **AD-27**）；**可维护加深 → FR111 / Epic 53 已关闭**（Story 53.3）；机械可编译仍满足 FR28/FR46，不得冒充 FR97/FR111；完成面见 [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md) / [`docs/fr111-idiomatic-chisel-depth.md`](docs/fr111-idiomatic-chisel-depth.md)
 3. 默认 **TLM≡CA 形式证明** → **FR100**（**Epic 45 已关闭** — FR100 形式等价产品 + FR102 属性全矩阵 + FR103 一级 IP 双模型 MVP；见 [`docs/fr100-formal-equiv.md`](docs/fr100-formal-equiv.md)、[`docs/fr103-ip-dual-model.md`](docs/fr103-ip-dual-model.md)）；**SystemC TLM-2.0 产品** → **FR101**（**Epic 46 已关闭** — LT-only MVP / Story 46.3；修订后 **AD-5**；**AT 加深 → Phase 13 FR107 / Epic 49**；见 [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md)）
 4. **VIP 级全协议 IP** → **FR98**（**Epic 43 已关闭** — UART/SPI/I2C/AXI4-Lite 近 VIP MVP 已交付；**GPIO 近 VIP → Phase 13 FR108 / Epic 50 已关闭** / Story 50.3；边界见 [`docs/ip/README.md`](docs/ip/README.md)）
 5. **按键全设计 elaborate** 的 netlist LSP → **FR99**（**Epic 44 已关闭** — `bitloom-lsp` 全设计 elaborate 诊断/符号 MVP；**根发现加深 → Phase 13 FR113 / Epic 55**；见 [`docs/fr99-bitloom-lsp.md`](docs/fr99-bitloom-lsp.md)）
@@ -284,7 +284,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | GPIO 近 VIP | FR108 / 50 | vs FR98 G0 可选 — **Epic 50 已关闭**（Story 50.3） |
 | FSM / state-visit 覆盖率（C3） | FR109 / 51 | vs FR105 Mux v2 — **Epic 51 已关闭**（Story 51.3） |
 | 树内 HLS 商业深度 | FR110 / 52 | vs FR95/96 MVP stub — **Epic 52 已关闭**（Story 52.3） |
-| Idiomatic Chisel 可维护深度 | FR111 / 53 | vs FR97 MVP |
+| Idiomatic Chisel 可维护深度 | FR111 / 53 | vs FR97 MVP — **Epic 53 已关闭**（Story 53.3） |
 | 形式等价 / 双模型深度 | FR112 / 54 | vs FR100/103 MVP |
 | LSP 设计根发现加深 | FR113 / 55 | vs FR99 DesignFixture |
 | Tywaves / LCOV GUI | FR114 / 56 | vs FR104/105 MVP |

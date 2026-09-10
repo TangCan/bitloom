@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`rhdl_firrtl` / Chisel emit). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Story **53.2** delivers D1+D3 deepen path. Epic 53 closeout → Story **53.3**.
+**Status:** **Epic 53 / FR111 closed** (Story **53.3**). D1+D3 deepen path delivered in Story **53.2**. FR97 MVP remains closed (NFR44). Undeclared full style suite still needs a new contract (NFR47).
 
 ## Contract (NFR14 D1 + D3)
 
@@ -40,5 +40,6 @@ FR97 path unchanged: `emit_chisel_idiomatic` / `check_idiomatic_chisel`.
 
 ```text
 cargo test -p bitloom --test fr111_idiomatic_chisel_depth
+cargo test -p bitloom --test fr111_epic53_closeout
 cargo test -p bitloom --test fr97_idiomatic_chisel
 ```
