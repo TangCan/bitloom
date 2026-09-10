@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 13:53
+last_updated: 09-10-2026 13:56
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -409,7 +409,7 @@ development_status:
   54-1-epic-54-nfr14-风险记录: done
   54-2-形式等价-双模型深度-fr112: done
   54-3-fr112-收口与交叉链: done
-  epic-54-retrospective: optional
+  epic-54-retrospective: done
 
   epic-55: done
   55-1-epic-55-nfr14-风险记录: done
@@ -1448,3 +1448,30 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-53-retro-2026-09-10.md"
+  - id: "epic-54-retro-item-154-fr112-诚实边界-对外不得把-fr92-记分板-fr100-f1-i-fr1"
+    epic: 54
+    action: "FR112 诚实边界：对外不得把 FR92 记分板 / FR100 F1-(i) / FR103 SyncFifo MVP alone 写成形式等价加深
+      / FR112 完成面；宣称须引 FR112 分支 B（续 FR115）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-54-retro-2026-09-10.md"
+  - id: "epic-54-retro-item-155-触碰-bitloom-sim-generatedfunctional-emit"
+    epic: 54
+    action: "触碰 bitloom-sim GeneratedFunctional / emit 路径时保持 FR100 F1-(i) 与 FR103
+      SyncFifo 双模型回归不破（NFR44）；发射 crate MemRead stub 须保持文档诚实。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-54-retro-2026-09-10.md"
+  - id: "epic-54-retro-item-156-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 54
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-54-retro-2026-09-10.md"
+  - id: "epic-54-retro-item-157-可选工程卫生-若后续交付分支-a-symbiyosys-smt-或分支-c-更多"
+    epic: 54
+    action: "可选工程卫生：若后续交付分支 A（SymbiYosys/SMT）或分支 C（更多 IP 手写 FL），或把 emit crate MemRead
+      stub 升为完整生成，须新合同钉死（NFR47）；当前分支 B in-process MemRead≡tick 为 FR112 完成面（非 AC 缺口）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-54-retro-2026-09-10.md"
