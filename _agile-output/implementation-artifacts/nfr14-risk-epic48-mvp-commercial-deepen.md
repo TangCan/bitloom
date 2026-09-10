@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR106 / Epic 48；NFR14、NFR44、NFR45、NFR46、NFR47；对照 FR94–105 / NFR40–43 |
 | 记录日期 | 2026-09-10 |
-| 状态 | draft — Story 48.1；Epic 48 未关闭；Epic 49–56 仍 backlog |
+| 状态 | closed — Story 48.4 勾选完成；Epic 48 关闭；Epic 49–56 仍 backlog（各 epic 自有 NFR14 后方可 ready） |
 
 ### Phase 12 MVP vs Phase 13 加深边界（NFR44 · 必读）
 
@@ -119,13 +119,13 @@
 
 ### Epic 48 关闭条件（Story 48.4 勾选）
 
-- [ ] **FR106 / Correct Course + PRD：** Phase 13 批准文案验收 — Story 48.2
-- [ ] **README / deferred：** Phase 12 MVP vs Phase 13 加深区分 — Story 48.3
-- [ ] **AD 指针：** Deferred / NFR46 门禁可执行 — Story 48.4
-- [ ] **NFR44–47：** 加深隔离与可选显式合同已登记
-- [ ] **禁止事项未触发：** 无改写 FR94–105 为失败；无未合 FR106 开 49–56；无静默扩大子集
-- [ ] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
-- [ ] **Epic 49–56：** 本 epic 关闭前不得标 ready（关闭后仍 backlog，直至各自 NFR14）
+- [x] **FR106 / Correct Course + PRD：** Phase 13 批准文案验收 — Story 48.2
+- [x] **README / deferred：** Phase 12 MVP vs Phase 13 加深区分 — Story 48.3
+- [x] **AD 指针：** Deferred / NFR46 门禁可执行 — Story 48.4
+- [x] **NFR44–47：** 加深隔离与可选显式合同已登记
+- [x] **禁止事项未触发：** 无改写 FR94–105 为失败；无未合 FR106 开 49–56；无静默扩大子集
+- [x] **品牌 / 依赖：** 仍为 Bitloom；设计 crate 只依赖 `bitloom-prelude`
+- [x] **Epic 49–56：** 本 epic 关闭前不得标 ready（关闭后仍 backlog，直至各自 NFR14）
 
 ---
 

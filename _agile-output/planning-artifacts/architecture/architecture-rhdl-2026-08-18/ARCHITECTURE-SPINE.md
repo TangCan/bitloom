@@ -341,10 +341,11 @@ flowchart LR
 ## Deferred
 
 - **所有权作声音性证明**：永不作为 freeze 门控；若做，独立 epic。
-- **SystemC TLM-2.0 实现形状**：产品合同见 **FR101** / AD-5（允许产品路径）；crate 切分与发射细节由 Epic 46 钉死，不在此预钉。
-- **Chisel idiomatic 验收谓词细节**：产品合同见 **FR97** / AD-27；机械可编译仍满足 FR28/FR46；idiomatic 谓词由 Epic 42 钉死。
+- **SystemC TLM-2.0 实现形状：** 产品合同见 **FR101** / AD-5（LT-only MVP 已关闭 / Epic 46）；**AT / `nb_transport` 加深**见 **FR107** / Epic 49（须引用/进一步修订 AD-5；**NFR46**）。crate 切分与发射细节由实现 epic 钉死，不在此预钉。
+- **Chisel idiomatic 验收谓词细节：** 产品合同见 **FR97** / AD-27（MVP 已关闭 / Epic 42）；**可维护加深**见 **FR111** / Epic 53（须引用/进一步修订 AD-27；**NFR46**）。
+- **树内 HLS 调度深度：** 产品合同见 **FR95/96** / AD-25（MVP 已关闭 / Epic 41）；**商业调度深度**见 **FR110** / Epic 52（须引用/进一步修订 AD-25；**NFR46**）。
 - **手写 `#[bridge]` / `#[abstraction]` / mixed `both`；形式化等价引擎细节；C ABI / cdylib；覆盖率**（产品 FR 已定，脊柱不钉实现形状）。
-- **IP / 可视化 / LSP / 黑盒 / formal/SVA / float / Analog** 的**实现形状**（产品 FR 已定；不在此钉 crate 切分）。
+- **IP / 可视化 / LSP / 黑盒 / formal/SVA / float / Analog** 的**实现形状**（产品 FR 已定；不在此钉 crate 切分）。GPIO 近 VIP 加深见 **FR108**；LSP 根发现加深见 **FR113**；FSM/state-visit 与 Tywaves/LCOV 见 **FR109** / **FR114**。
 - **interp vs 编译版 `tick` 引擎**（产品 FR32；脊柱不选引擎）。
 - **`cargo bitloom` 其余动词**形态细节（FR40；`import`/`visualize`/`wave` 为 Phase 7 必需能力，名称可调）。
 - **macos / windows / linux-aarch64 firtool 资产**（NFR11；机制同 AD-9）。
@@ -352,4 +353,5 @@ flowchart LR
 - **更高 MSRV（>1.97.1）**：须另改 PRD/NFR13；当前 NFR13 = **1.97.1**。
 - **AD-22 phantom 选型的替代**：若推翻，须修订 AD-22，不得 silently 分叉。
 - **AD-27 Scala 生成器所在 crate**：`[ASSUMPTION]` 可 firrtl 或 CLI。
-- **产品「全绿 / 七阶段字面完成」标签（现行）：** Phase 12 **FR94–FR105** / **NFR40–NFR43**（Correct Course 2026-09-09 Path B）。Phase 11 **FR87 / NFR38** 为历史合同绿里程碑。原 **FR93** 五条永久非目标**已被 FR94 推翻**，交付映射：树内 HLS→FR95/96；idiomatic Chisel→FR97；TLM≡CA→FR100；TLM 产品→FR101；VIP 全协议 IP→FR98；按键全 elaborate LSP→FR99。实现 epic 须引用已修订 AD（**NFR41**）；字面宣称须对应 FR 关闭（**NFR42**）。
+- **产品「全绿 / 七阶段字面完成」标签（Phase 12 MVP 已关闭）：** Phase 12 **FR94–FR105** / **NFR40–NFR43**（Correct Course 2026-09-09 Path B；Epic 40–47 done）。Phase 11 **FR87 / NFR38** 为历史合同绿里程碑。原 **FR93** 五条永久非目标**已被 FR94 推翻**。
+- **Phase 13「MVP→商业加深」合同（现行加深面）：** **FR106–FR115** / **NFR44–NFR47**（Correct Course 2026-09-10）。Phase 12 MVP 关闭证据**仍有效**（**NFR44**），不得改写为失败。「商业加深 / 非 MVP」宣称须对应 FR106–114 关闭（**FR115**）。实现 epic（49–56）须在首故事引用适用已修订 AD（**NFR46**）；Epic 48（FR106）为硬闸门。
