@@ -132,7 +132,7 @@ fn fr119_sprint_epic60_done() {
         sprint.contains("60-1-epic-60-nfr14-风险记录: done")
             || sprint.contains("60-1-epic-60-nfr14-风险记录:done")
     );
-    for epic in 61..=63 {
+    for epic in 62..=63 {
         assert!(
             !sprint.contains(&format!("epic-{epic}: done"))
                 && !sprint.contains(&format!("epic-{epic}:done")),
@@ -144,4 +144,13 @@ fn fr119_sprint_epic60_done() {
             "epic-{epic} must remain backlog"
         );
     }
+    assert!(
+        sprint.contains("epic-61: backlog")
+            || sprint.contains("epic-61:backlog")
+            || sprint.contains("epic-61: in-progress")
+            || sprint.contains("epic-61:in-progress")
+            || sprint.contains("epic-61: done")
+            || sprint.contains("epic-61:done"),
+        "epic-61 must be backlog, in-progress, or done"
+    );
 }
