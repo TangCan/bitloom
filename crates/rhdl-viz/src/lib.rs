@@ -323,6 +323,52 @@ pub fn typed_wave_json(title: &str, samples: &[WaveSample], typed: &[TypedSignal
     json
 }
 
+/// Upstream Tywaves-shaped sidecar (`wave.tywaves.json`) — FR125 first-class dump.
+///
+/// Distinct from FR117 `wave.typed.json`: carries `schemaVersion`,
+/// `data-bitloom-tywaves` marker field, and `viewer: "tywaves"` so an upstream
+/// (or stub) viewer can consume Bitloom typed waves without claiming FR117 alone.
+pub fn tywaves_wave_json(title: &str, samples: &[WaveSample], typed: &[TypedSignal]) -> String {
+    let base = typed_wave_json(title, samples, typed);
+    // Rewrite FR117 product header into FR125 Tywaves contract header.
+    let mut out = String::from(
+        "{\n  \"product\": \"Bitloom\",\n  \"fr\": \"FR125\",\n  \"viewer\": \"tywaves\",\n\
+         \"schemaVersion\": \"bitloom-tywaves-1\",\n  \"marker\": \"data-bitloom-tywaves\",\n",
+    );
+    if let Some(rest) = base.strip_prefix("{\n  \"product\": \"Bitloom\",\n  \"fr\": \"FR117\",\n")
+    {
+        out.push_str(rest);
+    } else {
+        // Fallback: still emit a valid FR125 envelope.
+        out.push_str(&format!(
+            "  \"title\": \"{}\",\n  \"signals\": [],\n  \"times\": [],\n  \"values\": {{}}\n}}\n",
+            escape_js_string(title)
+        ));
+    }
+    out
+}
+
+/// Shell launcher for upstream Tywaves viewer (FR125 T2).
+pub fn tywaves_launch_sh(tywaves_json_rel: &str) -> String {
+    format!(
+        "#!/usr/bin/env bash\n\
+         # Bitloom FR125 — launch upstream Tywaves (or BITLOOM_TYWAVES_BIN stub)\n\
+         set -euo pipefail\n\
+         ROOT=\"$(cd \"$(dirname \"$0\")\" && pwd)\"\n\
+         DUMP=\"$ROOT/{tywaves_json_rel}\"\n\
+         BIN=\"${{BITLOOM_TYWAVES_BIN:-}}\"\n\
+         if [[ -z \"$BIN\" ]]; then\n\
+           echo \"bitloom.tywaves-missing: set BITLOOM_TYWAVES_BIN to upstream Tywaves viewer\" >&2\n\
+           exit 2\n\
+         fi\n\
+         if [[ ! -x \"$BIN\" ]]; then\n\
+           echo \"bitloom.tywaves-missing: BITLOOM_TYWAVES_BIN not executable: $BIN\" >&2\n\
+           exit 2\n\
+         fi\n\
+         exec \"$BIN\" \"$DUMP\"\n"
+    )
+}
+
 /// Typed IDE waveform HTML (FR117 subset B): type/kind hierarchy beyond FR104 I1–I3.
 ///
 /// Empty `typed` → explicit empty marker (must not silent-claim FR117).

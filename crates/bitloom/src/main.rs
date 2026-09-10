@@ -163,7 +163,7 @@ enum Commands {
         out_dir: PathBuf,
     },
     /// Tick a `.fir` design, dump VCD, timing HTML (FR38/49), interactive wave (FR104),
-    /// and typed IDE wave (FR117 subset B).
+    /// typed IDE wave (FR117 subset B), and optionally upstream Tywaves sidecar (FR125).
     Wave {
         /// Path to a `.fir` file with `FIRRTL version 6.0.0` header.
         #[arg(long)]
@@ -177,6 +177,9 @@ enum Commands {
         /// Also attempt FST via `vcd2fst` (optional; VCD+HTML always written).
         #[arg(long, default_value_t = false)]
         fst: bool,
+        /// Also emit FR125 upstream Tywaves sidecar (`wave.tywaves.json` + `tywaves.launch.sh`).
+        #[arg(long, default_value_t = false)]
+        tywaves: bool,
     },
     /// Tick a Mux demo (or `.fir`) and write FR114 `coverage.lcov` + `coverage.html`.
     Coverage {
@@ -911,7 +914,8 @@ fn main() {
             out_dir,
             ticks,
             fst,
-        } => match run_wave(&input, &out_dir, ticks, fst) {
+            tywaves,
+        } => match run_wave(&input, &out_dir, ticks, fst, tywaves) {
             Ok(()) => {}
             Err(e) => {
                 eprintln!("error: {e}");
@@ -981,8 +985,15 @@ fn run_visualize(input: &Path, out_dir: &Path) -> Result<PathBuf, String> {
 }
 
 /// Product entry: tick → VCD + timing.html + interactive.html (FR38/49 + FR104)
-/// + typed-wave.html / wave.typed.json (FR117 subset B).
-fn run_wave(input: &Path, out_dir: &Path, ticks: u64, want_fst: bool) -> Result<(), String> {
+/// + typed-wave.html / wave.typed.json (FR117 subset B)
+/// + optional wave.tywaves.json / tywaves.launch.sh (FR125).
+fn run_wave(
+    input: &Path,
+    out_dir: &Path,
+    ticks: u64,
+    want_fst: bool,
+    want_tywaves: bool,
+) -> Result<(), String> {
     use bitloom_hir::PortValues;
     use bitloom_sim::Sim;
 
@@ -1076,12 +1087,81 @@ fn run_wave(input: &Path, out_dir: &Path, ticks: u64, want_fst: bool) -> Result<
     println!("wrote {}", interactive_path.display());
     println!("wrote {}", typed_path.display());
     println!("wrote {}", typed_json_path.display());
-    println!(
-        "open {} in a browser for FR117 typed IDE wave (interactive.html is FR104 I1–I3; \
-         GTKWave optional for {}; Tywaves subset A deferred)",
-        typed_path.display(),
-        vcd_path.display()
-    );
+
+    if want_tywaves {
+        let tywaves_json = rhdl_viz::tywaves_wave_json(&title, &samples, &typed);
+        if !tywaves_json.contains("data-bitloom-tywaves")
+            || !tywaves_json.contains("\"fr\": \"FR125\"")
+            || !tywaves_json.contains("schemaVersion")
+        {
+            return Err("wave.tywaves.json missing FR125 Tywaves contract fields".into());
+        }
+        let tywaves_path = out_dir.join("wave.tywaves.json");
+        fs::write(&tywaves_path, &tywaves_json)
+            .map_err(|e| format!("write {}: {e}", tywaves_path.display()))?;
+        let launch = rhdl_viz::tywaves_launch_sh("wave.tywaves.json");
+        let launch_path = out_dir.join("tywaves.launch.sh");
+        fs::write(&launch_path, &launch)
+            .map_err(|e| format!("write {}: {e}", launch_path.display()))?;
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            let mut perms = fs::metadata(&launch_path)
+                .map_err(|e| format!("stat {}: {e}", launch_path.display()))?
+                .permissions();
+            perms.set_mode(0o755);
+            fs::set_permissions(&launch_path, perms)
+                .map_err(|e| format!("chmod {}: {e}", launch_path.display()))?;
+        }
+        println!("wrote {}", tywaves_path.display());
+        println!("wrote {}", launch_path.display());
+
+        let force_missing = std::env::var_os("BITLOOM_TYWAVES_FORCE_MISSING").is_some();
+        let bin = std::env::var_os("BITLOOM_TYWAVES_BIN");
+        if force_missing
+            || bin
+                .as_ref()
+                .map(|b| !Path::new(b).is_file())
+                .unwrap_or(false)
+        {
+            return Err(
+                "bitloom.tywaves-missing: upstream Tywaves viewer unavailable \
+                 (set BITLOOM_TYWAVES_BIN to an executable, or unset \
+                 BITLOOM_TYWAVES_FORCE_MISSING); sidecar written but FR125 live \
+                 open must not silent-succeed"
+                    .into(),
+            );
+        }
+        if let Some(bin) = bin {
+            let status = Command::new(&bin)
+                .arg(&tywaves_path)
+                .status()
+                .map_err(|e| format!("bitloom.tywaves-missing: spawn {:?}: {e}", bin))?;
+            if !status.success() {
+                return Err(format!(
+                    "bitloom.tywaves: upstream viewer exited non-zero ({status})"
+                ));
+            }
+            println!(
+                "FR125: launched upstream Tywaves via BITLOOM_TYWAVES_BIN ({})",
+                Path::new(&bin).display()
+            );
+        } else {
+            println!(
+                "FR125: wrote Tywaves sidecar {}; set BITLOOM_TYWAVES_BIN and re-run \
+                 --tywaves (or exec {}) to live-open upstream viewer",
+                tywaves_path.display(),
+                launch_path.display()
+            );
+        }
+    } else {
+        println!(
+            "open {} in a browser for FR117 typed IDE wave (interactive.html is FR104 I1–I3; \
+             GTKWave optional for {}; pass --tywaves for FR125 upstream Tywaves sidecar)",
+            typed_path.display(),
+            vcd_path.display()
+        );
+    }
     Ok(())
 }
 
