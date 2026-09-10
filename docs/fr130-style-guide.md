@@ -2,7 +2,9 @@
 
 **Product:** Bitloom (`rhdl_firrtl` / Chisel emit). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Product path + AD-27 revise delivered in Story **70.2** (Epic 70 close → Story **70.3**).
+**Status:** **Epic 70 / FR130 closed** (Story **70.3**). Product path + AD-27 revise delivered in Story **70.2**.
+
+FR122 O1–O4 close **remains valid** (NFR52). **Parser.parse not restored.**
 
 Beyond FR122 O1–O4: Style Guide markers (`scalafmt-style`, `withClockAndReset`, per-module
 `FR130 style-guide`). **Parser.parse is not restored.**
@@ -26,4 +28,5 @@ FR122 / FR111 / FR97 closes remain valid.
 
 ```text
 cargo test -p bitloom --test fr130_style_guide
+cargo test -p bitloom --test fr130_epic70_closeout
 ```
