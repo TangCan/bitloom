@@ -256,9 +256,11 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS（树内 FR95/FR96 MVP + 外挂 Bambu 可选）**、**Idiomatic Chisel（FR97 · Epic 42）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
 
-**路线图阶段五–七「绿 / 全绿」当前按 Phase 12 字面绿验收（FR94–105 / NFR42）：字面项须由对应 FR 关闭后方可勾选。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9。Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**，**禁止**用合同绿冒充字面全绿。延期与边界 ledger：[`_agile-output/implementation-artifacts/deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+**路线图阶段五–七「绿 / 全绿」字面绿 MVP 按 Phase 12 验收（FR94–105 / NFR42）：字面项须由对应 FR 关闭后方可勾选；Phase 12 Epic 40–47 已关闭。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9。Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**，**禁止**用合同绿冒充字面全绿。
 
-**Phase 12 规划/实现故事已齐（Epic 40–47）。字面绿剩余门仅为各 epic 的实现关闭态**（optional retrospectives 可不阻塞）。Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。
+**Phase 13（MVP→商业加深 · FR106–FR115 / NFR44–NFR47）：** Correct Course 已批准（2026-09-10）。Phase 12 MVP 关闭证据**仍有效**（**NFR44**），**不得**改写为失败。对外「商业加深 / 非 MVP」类宣称**仅**可在对应 **FR106–114** 关闭后按 **FR115** 勾选；**禁止**用 Phase 12 MVP 冒充商业完整面。加深 epic = Epic 48–56（闸门 Epic 48 / FR106）。延期与边界 ledger：[`_agile-output/implementation-artifacts/deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+
+**Phase 12 规划/实现故事已齐（Epic 40–47 已关闭）。** Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。Phase 13 加深面见下节与 deferred optional→FR 升格。
 
 ### 永久非目标（FR93）— 历史；已被 Phase 12 推翻
 
@@ -266,15 +268,30 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 1. **树内 / 自研 HLS 调度器** → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付；修订后 **AD-25**）；外挂 Bambu 等可保留为可选，不得单独满足 FR95
 2. **FIRRTL→idiomatic Scala / idiomatic Chisel** → **FR97**（**Epic 42 已关闭** — MVP 已交付；修订后 **AD-27**）；机械可编译仍满足 FR28/FR46，不得冒充 FR97；完成面见 [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md)
-3. 默认 **TLM≡CA 形式证明** → **FR100**（**Epic 45 已关闭** — FR100 形式等价产品 + FR102 属性全矩阵 + FR103 一级 IP 双模型 MVP；见 [`docs/fr100-formal-equiv.md`](docs/fr100-formal-equiv.md)、[`docs/fr103-ip-dual-model.md`](docs/fr103-ip-dual-model.md)）；**SystemC TLM-2.0 产品** → **FR101**（**Epic 46 已关闭** — LT-only MVP / Story 46.3；修订后 **AD-5**；AT deferred；见 [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md)）
-4. **VIP 级全协议 IP** → **FR98**（**Epic 43 已关闭** — UART/SPI/I2C/AXI4-Lite 近 VIP MVP 已交付；GPIO 可选未纳入；边界见 [`docs/ip/README.md`](docs/ip/README.md)）
-5. **按键全设计 elaborate** 的 netlist LSP → **FR99**（**Epic 44 已关闭** — `bitloom-lsp` 全设计 elaborate 诊断/符号 MVP；见 [`docs/fr99-bitloom-lsp.md`](docs/fr99-bitloom-lsp.md)）
+3. 默认 **TLM≡CA 形式证明** → **FR100**（**Epic 45 已关闭** — FR100 形式等价产品 + FR102 属性全矩阵 + FR103 一级 IP 双模型 MVP；见 [`docs/fr100-formal-equiv.md`](docs/fr100-formal-equiv.md)、[`docs/fr103-ip-dual-model.md`](docs/fr103-ip-dual-model.md)）；**SystemC TLM-2.0 产品** → **FR101**（**Epic 46 已关闭** — LT-only MVP / Story 46.3；修订后 **AD-5**；**AT 加深 → Phase 13 FR107 / Epic 49**；见 [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md)）
+4. **VIP 级全协议 IP** → **FR98**（**Epic 43 已关闭** — UART/SPI/I2C/AXI4-Lite 近 VIP MVP 已交付；**GPIO 加深 → Phase 13 FR108 / Epic 50**；边界见 [`docs/ip/README.md`](docs/ip/README.md)）
+5. **按键全设计 elaborate** 的 netlist LSP → **FR99**（**Epic 44 已关闭** — `bitloom-lsp` 全设计 elaborate 诊断/符号 MVP；**根发现加深 → Phase 13 FR113 / Epic 55**；见 [`docs/fr99-bitloom-lsp.md`](docs/fr99-bitloom-lsp.md)）
+
+### Phase 13 加深面（合同已批准；实现按 FR 关闭）
+
+下列原 Phase 12 **optional product** 已由 Correct Course + **FR106** 升格为 Phase 13 显式 FR（Epic 48–56）。关闭前仍为未交付加深面；关闭后方可按 **FR115** 宣称。同源：PRD addendum「Phase 13」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+
+| 加深面 | FR / Epic | 相对 Phase 12 MVP |
+| --- | --- | --- |
+| SystemC TLM AT / `nb_transport` | FR107 / 49 | vs FR101 LT-only |
+| GPIO 近 VIP | FR108 / 50 | vs FR98 G0 可选 |
+| FSM / state-visit 覆盖率（C3） | FR109 / 51 | vs FR105 Mux v2 |
+| 树内 HLS 商业深度 | FR110 / 52 | vs FR95/96 MVP stub |
+| Idiomatic Chisel 可维护深度 | FR111 / 53 | vs FR97 MVP |
+| 形式等价 / 双模型深度 | FR112 / 54 | vs FR100/103 MVP |
+| LSP 设计根发现加深 | FR113 / 55 | vs FR99 DesignFixture |
+| Tywaves / LCOV GUI | FR114 / 56 | vs FR104/105 MVP |
 
 **明确 deferred / 未承诺为产品完整面（可延期；上列五项已不再是永久非目标）：**
 
 - 完整 / 按键全 elaborate Bitloom LSP（**FR99 / Epic 44 已关闭**。Epic 39 **FR91 Path B** 显式 defer 仅为**历史**关闭路径，**不得**再当作 Phase 12 完成口径。宿主 rust-analyzer（FR90）仍可用，**不替代** FR99。层次/时序 HTML **≠ LSP**；见 [`docs/fr99-bitloom-lsp.md`](docs/fr99-bitloom-lsp.md)、[`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md)、[`docs/fr38-viz-lsp.md`](docs/fr38-viz-lsp.md)）
 - 部分 CLI 动词（`check` / `build-sim`）
 - crates.io 名 `rhdl` / `rhdl-bits`（禁止）
-- 自动等价证明 / SystemC TLM-2.0 产品（**FR100 / Epic 45 已关闭** — 形式等价产品 + IP 双模型；**FR101 / Epic 46 已关闭** — LT-only MVP；「不承诺 SystemC TLM」不再是完成排除项；AT deferred；见 [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md) / doc-19）
+- 自动等价证明 / SystemC TLM-2.0 产品（**FR100 / Epic 45 已关闭** — 形式等价产品 + IP 双模型；**FR101 / Epic 46 已关闭** — LT-only MVP；「不承诺 SystemC TLM」不再是完成排除项；AT → **FR107**；见 [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md) / doc-19）
 
 详见 [`docs/semver-0x-policy.md`](docs/semver-0x-policy.md) 与 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。

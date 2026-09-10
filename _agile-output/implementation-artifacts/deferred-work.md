@@ -1,10 +1,16 @@
 # Deferred work
 
-## Literal-green pointer (FR94–105 / NFR42) — 当前完成合同
+## Literal-green pointer (FR94–105 / NFR42) — Phase 12 MVP 已关闭
 
 阶段五–七「字面绿」勾选定义见
 [`docs/requirements/19. 实施路线图.md`](../../docs/requirements/19.%20实施路线图.md) §19.7–19.9（**Story 40.3 已落地**）：字面项须由对应 FR 关闭后方可勾选。  
-Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**；当前完成合同为 Phase 12 字面绿（addendum「Phase 12 字面绿」/ FR94–105）。
+Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**；Phase 12 字面绿 MVP（FR94–105 / Epic 40–47）**已关闭**。
+
+## Phase 13 pointer (FR106–115 / NFR44–NFR47) — MVP→商业加深
+
+Correct Course `sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen.md` + PRD addendum「Phase 13」**已批准**。  
+加深 epic = Epic 48–56；闸门 **FR106 / Epic 48**。对外「商业加深」须引 **FR106–114**（**FR115**）；**禁止**用 Phase 12 MVP 冒充商业完整面（**NFR44**）。  
+原 optional product（item-117/121/125/129）已升格为 **FR107–114**（实现关闭前仍 deferred 交付态）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
@@ -356,12 +362,15 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     加深子集须新合同 + NFR14，禁止静默扩大。
 
 - source_spec: `_agile-output/implementation-artifacts/epic-44-retro-2026-09-10.md`
-  summary: 可选产品加深（Phase 12「若产品需要…」）— 超出已满足 AC 的 MVP；单独立项
+  summary: 可选产品加深（Phase 12「若产品需要…」）— 已升格为 Phase 13 FR107–114
   evidence: |
-    - item-117：超越 DesignFixture 的 Cargo-graph / 任意 .rs 设计根发现（44.4 deferred；非 FR99 AC）
-    - item-121：GeneratedFunctional MemRead ≡ tick；F1-(ii) SymbiYosys/SMT；GPIO VIP（45.4 deferred；非 FR103 AC）
-    - item-125：AT-style nb_transport_fw/bw（46.2/46.3 deferred；非 FR101 LT-only AC）
-    - item-129：C3 FSM/state-visit 覆盖率；Tywaves 级 IDE 波形；LCOV/第三方覆盖率 GUI（47.2/47.3 deferred；非 FR104/105 MVP AC）
-  status: deferred — optional product scope（explicit new contract required）
+    - item-117：超越 DesignFixture 的 Cargo-graph / 任意 .rs 设计根发现 → **FR113 / Epic 55**
+    - item-121：GeneratedFunctional MemRead ≡ tick；F1-(ii) SymbiYosys/SMT；GPIO VIP → **FR112 / Epic 54**（及 GPIO → **FR108 / Epic 50**）
+    - item-125：AT-style nb_transport_fw/bw → **FR107 / Epic 49**
+    - item-129：C3 FSM/state-visit 覆盖率 → **FR109 / Epic 51**；Tywaves / LCOV GUI → **FR114 / Epic 56**
+  status: deferred — Phase 13 contract approved (FR106); implementation pending FR close
   resolved: '2026-09-10'
-  resolution: 非缺陷；当前 epic AC 已满足。需要时开新故事+改文档/NFR14，禁止静默扩大 MVP。
+  resolution: |
+    Phase 13 Correct Course（sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen）+
+    PRD/addendum 已批准；不再写「尚无合同」。关闭前仍为未交付加深面；须各 epic NFR14（NFR45）+
+    对应 FR 关闭后方可按 FR115 宣称。Phase 12 MVP 关闭证据仍有效（NFR44）。

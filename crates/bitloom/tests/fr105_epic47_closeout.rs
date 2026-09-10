@@ -79,8 +79,12 @@ fn fr105_deferred_readme_epic47_closed() {
             || readme.contains("remaining")
             || doc19.contains("剩余门")
             || fr105.contains("剩余门")
-            || readme.contains("各 epic") && readme.contains("关闭"),
-        "status surface must declare remaining literal-green gate is epic implementation close"
+            || (readme.contains("各 epic") && readme.contains("关闭"))
+            || (readme.contains("Epic 40–47") || readme.contains("Epic 40-47"))
+                && (readme.contains("已关闭") || readme.contains("Phase 13"))
+            || doc19.contains("Epic 40–47 已关闭")
+            || doc19.contains("Phase 13 加深"),
+        "status surface must declare Phase 12 epic close and/or Phase 13 deepen pointer"
     );
 }
 
