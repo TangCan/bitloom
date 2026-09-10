@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 08:58
+last_updated: 09-10-2026 09:00
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -345,7 +345,7 @@ development_status:
   44-2-bitloom-lsp-服务器-mvp-fr99: done
   44-3-按键全-elaborate-诊断-符号-fr99: done
   44-4-fr99-收口与撤销-lsp-非目标: done
-  epic-44-retrospective: optional
+  epic-44-retrospective: done
 
   epic-45: done
   45-1-epic-45-nfr14-风险记录: done
@@ -1111,3 +1111,33 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-43-retro-2026-09-10.md"
+  - id: "epic-44-retro-item-114-fr99-诚实边界-对外不得把宿主-rust-analyzer-fr90-htm"
+    epic: 44
+    action: "FR99 诚实边界：对外不得把宿主 rust-analyzer（FR90）、HTML 可视化（FR38/FR49）、仅浅层诊断、或 FR91
+      Path B 历史 defer 写成 FR99 / 按键全 elaborate 已绿；MVP DesignFixture ≠ 任意 .rs Cargo-graph
+      设计根发现。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-44-retro-2026-09-10.md"
+  - id: "epic-44-retro-item-115-续-epic-40-retro-item-101-epic-41-retro-i"
+    epic: 44
+    action: "续 epic-40-retro-item-101 / epic-41-retro-item-104 / epic-42-retro-item-108
+      / epic-43-retro-item-112：同步 epics.md frontmatter phase12Epic40Status–phase12Epic47Status
+      与 sprint done / phase12Status: complete。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-44-retro-2026-09-10.md"
+  - id: "epic-44-retro-item-116-nfr14-收口故事-commit-subject-惯例-门禁与收口-commi"
+    epic: 44
+    action: "NFR14 / 收口故事 commit subject 惯例：门禁与收口 commit subject 含 Story N.1 / Story
+      N.4（或 N.1/N.4），避免 git_evidence.py 归因空（续 43 item-113；本 epic 44.1/44.4 复发）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-44-retro-2026-09-10.md"
+  - id: "epic-44-retro-item-117-评估可选加深-超越文档钉死-designfixture-的-cargo-grap"
+    epic: 44
+    action: "评估可选加深：超越文档钉死 DesignFixture 的 Cargo-graph / 任意 .rs 设计根发现（故事 44.4 deferred；非
+      FR99 AC 缺口）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-44-retro-2026-09-10.md"
