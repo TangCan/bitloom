@@ -22,10 +22,10 @@ Phase 12/13 关闭证据**仍有效**。原 NFR47 未选项（item-149/153/157/1
 ## Phase 15 pointer (FR124–132 / NFR52–NFR55) — NFR51 剩余升格
 
 Correct Course `sprint-change-proposal-2026-09-10-phase15-nfr51-leftover-deepen.md` + PRD addendum「Phase 15」**已批准**（**Phase 15 contract approved**）。  
-闸门 **FR124 / Epic 64 已关闭**（Story 64.4）；实现 epic = Epic 65–71（**FR125 / Epic 65 已关闭** — 上游 Tywaves 一等；**FR126 / Epic 66 已关闭** — 更多 IP 手写 FL / `GpioFunctional`；**FR127 / Epic 67 已关闭** — 默认 CI 真 sby；**FR128 / Epic 68 已关闭** — 全 SoC pad / `GpioSocPad`；CIRCT Handshake→**FR129**；Style Guide/Parser→**FR130**；**FR131 / Epic 71 已关闭** — `ip.rs` 按协议拆分；宣称→**FR132**）。  
+闸门 **FR124 / Epic 64 已关闭**（Story 64.4）；实现 epic = Epic 65–71（**FR125 / Epic 65 已关闭** — 上游 Tywaves 一等；**FR126 / Epic 66 已关闭** — 更多 IP 手写 FL / `GpioFunctional`；**FR127 / Epic 67 已关闭** — 默认 CI 真 sby；**FR128 / Epic 68 已关闭** — 全 SoC pad / `GpioSocPad`；**FR129 / Epic 69 已关闭** — CIRCT Handshake / 多时钟弹性缓冲；Style Guide/Parser→**FR130**；**FR131 / Epic 71 已关闭** — `ip.rs` 按协议拆分；宣称→**FR132**）。  
 **禁止**用 Phase 14 完成面冒充本批加深（**NFR52**）。软序：建议 **Epic 71 → Epic 68**（二者均已关闭）。  
 Phase 12–14 关闭证据**仍有效**。未列入本批者（自动 FSM 标签、第三方 LCOV GUI 一等、emit MemRead 完整生成、非 Cargo monorepo 任意路径扫描）仍须另开合同（**NFR55**）。各实现 epic 仍须独立 NFR14（**NFR53**）；未关闭前不得宣称对应 FR。
-**Phase 15 规划故事已齐（Epic 64–71）；** 剩余门为各 epic 实现关闭态（Epic 65–68、71 已关闭；69–70 仍须实现）。
+**Phase 15 规划故事已齐（Epic 64–71）；** 剩余门为各 epic 实现关闭态（Epic 65–69、71 已关闭；70 仍须实现）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
@@ -477,7 +477,7 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     - item-177：非 Cargo 包 / 全 monorepo 任意路径扫描 — 仍须另开合同（**NFR51**）；workspace 包内 syn-scan = FR118 完成面
     - item-181：分支 C 更多 IP FL / 默认 CI 强制真 sby 镜像 — 仍须另开合同（**NFR51**）；(A) sby 绑定 = FR119 完成面
     - item-185：ip.rs ~3213 LOC — **assess-and-defer**（本 sweep 不拆；FR98/FR108/FR120 耦合；需独立 hygiene 故事）
-    - item-189：全 CIRCT Handshake 方言 / 多时钟弹性缓冲全家桶 — 仍须另开合同（**NFR51**）；ready/valid 默认可综合 = FR121 完成面
+    - item-189：全 CIRCT Handshake 方言 / 多时钟弹性缓冲全家桶 — **FR129 / Epic 69 已关闭**（Story 69.3；AD-25 修订；C1–C4）；ready/valid 默认可综合 = FR121 完成面仍有效；完整 CIRCT/MLIR lower 全家桶仍 NFR55
     - item-193：完整 Style Guide 全文 / 恢复废弃 Parser — 仍须另开合同（**NFR51**）；O1–O4 = FR122 完成面；FR123 宣称纪律仍有效
     - frontmatter：epics.md `phase14Status` → complete（对齐 Epic 57–63 done）
   status: deferred — optional hygiene / NFR51（item-169 process-landed this sweep）

@@ -2,7 +2,9 @@
 
 **Product:** Bitloom (`cargo bitloom` / `bitloom::hls`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Product path + AD-25 revise delivered in Story **69.2** (Epic 69 close → Story **69.3**).
+**Status:** **Epic 69 / FR129 closed** (Story **69.3**). Product path + AD-25 revise delivered in Story **69.2**.
+
+FR121 ready/valid close **remains valid** (NFR52).
 
 Beyond FR121 ready/valid alone: CIRCT Handshake dialect IR markers and multi-clock
 elastic buffers.
@@ -50,4 +52,5 @@ FR121 path unchanged: `--handshake`.
 
 ```text
 cargo test -p bitloom --test fr129_circt_handshake
+cargo test -p bitloom --test fr129_epic69_closeout
 ```

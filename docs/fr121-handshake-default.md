@@ -43,11 +43,10 @@ Static FR95/FR110 paths unchanged: `--in-tree` / `--in-tree --pipeline`.
 - NFR14: `_agile-output/implementation-artifacts/nfr14-risk-epic62-handshake-default.md`
 - AD-25: ARCHITECTURE-SPINE (Story 62.2 revised for FR121)
 
-## Non-goals (NFR51)
+## Non-goals (NFR51 → Phase 15)
 
-- Full CIRCT Handshake dialect / MLIR lower suite
+- Full CIRCT Handshake dialect / multi-clock elastic → **FR129** / [`fr129-circt-handshake.md`](fr129-circt-handshake.md) (**Epic 69 closed**)
 - Full allocation/binding commercial HLS optimizer suite
-- Multi-clock Handshake networks / auto elastic buffers
 - Forcing Handshake as the only legal path (FR95/FR110 must remain regressable)
 
 ```text
