@@ -123,19 +123,31 @@ fn fr118_sprint_epic59_done() {
         sprint.contains("59-2-syn-scan-发现路径实现与验收-fr118: done")
             || sprint.contains("59-2-syn-scan-发现路径实现与验收-fr118:done")
     );
-    // Epic 62–63 must not be prematurely closed; Epic 61 may be in-progress; Epic 60 may be done.
-    for epic in 62..=63 {
+    // Epic 63 stays backlog; Epic 62 may advance after 62.1; Epic 61/60 may be done.
+    assert!(
+        sprint.contains("epic-62: backlog")
+            || sprint.contains("epic-62:backlog")
+            || sprint.contains("epic-62: in-progress")
+            || sprint.contains("epic-62:in-progress")
+            || sprint.contains("epic-62: done")
+            || sprint.contains("epic-62:done"),
+        "epic-62 must be backlog, in-progress, or done"
+    );
+    if !sprint.contains("epic-62: backlog") && !sprint.contains("epic-62:backlog") {
         assert!(
-            !sprint.contains(&format!("epic-{epic}: done"))
-                && !sprint.contains(&format!("epic-{epic}:done")),
-            "epic-{epic} must not be done yet"
-        );
-        assert!(
-            sprint.contains(&format!("epic-{epic}: backlog"))
-                || sprint.contains(&format!("epic-{epic}:backlog")),
-            "epic-{epic} must remain backlog"
+            sprint.contains("62-1-epic-62-nfr14-风险记录: done")
+                || sprint.contains("62-1-epic-62-nfr14-风险记录:done"),
+            "leaving epic-62 backlog requires Story 62.1 NFR14 done (gate)"
         );
     }
+    assert!(
+        !sprint.contains("epic-63: done") && !sprint.contains("epic-63:done"),
+        "epic-63 must not be done yet"
+    );
+    assert!(
+        sprint.contains("epic-63: backlog") || sprint.contains("epic-63:backlog"),
+        "epic-63 must remain backlog"
+    );
     assert!(
         sprint.contains("epic-61: backlog")
             || sprint.contains("epic-61:backlog")

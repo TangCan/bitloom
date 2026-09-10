@@ -192,21 +192,32 @@ fn fr117_tywaves_a_remains_deferred() {
     for fr in ["FR118", "FR119", "FR120", "FR121", "FR122"] {
         assert!(deferred.contains(fr), "deferred must still mention {fr}");
     }
-    // Sprint: Epic 62–63 stay backlog; Epic 61 may be done.
+    // Sprint: Epic 63 stays backlog; Epic 62 may advance after 62.1 NFR14; Epic 61 may be done.
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
-    for epic in 62..=63 {
-        let done = format!("epic-{epic}: done");
-        let done2 = format!("epic-{epic}:done");
+    assert!(
+        sprint.contains("epic-62: backlog")
+            || sprint.contains("epic-62:backlog")
+            || sprint.contains("epic-62: in-progress")
+            || sprint.contains("epic-62:in-progress")
+            || sprint.contains("epic-62: done")
+            || sprint.contains("epic-62:done"),
+        "epic-62 must be backlog, in-progress, or done"
+    );
+    if !sprint.contains("epic-62: backlog") && !sprint.contains("epic-62:backlog") {
         assert!(
-            !sprint.contains(&done) && !sprint.contains(&done2),
-            "epic-{epic} must not be done yet"
-        );
-        assert!(
-            sprint.contains(&format!("epic-{epic}: backlog"))
-                || sprint.contains(&format!("epic-{epic}:backlog")),
-            "epic-{epic} must remain backlog"
+            sprint.contains("62-1-epic-62-nfr14-风险记录: done")
+                || sprint.contains("62-1-epic-62-nfr14-风险记录:done"),
+            "leaving epic-62 backlog requires Story 62.1 NFR14 done (gate)"
         );
     }
+    assert!(
+        !sprint.contains("epic-63: done") && !sprint.contains("epic-63:done"),
+        "epic-63 must not be done yet"
+    );
+    assert!(
+        sprint.contains("epic-63: backlog") || sprint.contains("epic-63:backlog"),
+        "epic-63 must remain backlog"
+    );
     assert!(
         sprint.contains("epic-61: backlog")
             || sprint.contains("epic-61:backlog")
