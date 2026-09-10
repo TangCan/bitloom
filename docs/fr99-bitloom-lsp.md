@@ -110,4 +110,5 @@ Design crates still depend **only** on [`bitloom-prelude`](../crates/bitloom-pre
 
 - Host IDE (FR90): [`fr90-host-ide-rust-analyzer.md`](fr90-host-ide-rust-analyzer.md)
 - Hierarchy HTML ≠ LSP: [`fr38-viz-lsp.md`](fr38-viz-lsp.md)
+- FR113 design-root discovery deepen: [`fr113-lsp-design-root-discovery.md`](fr113-lsp-design-root-discovery.md) (Epic 55; beyond DesignFixture)
 - NFR14 Epic 44 gate (P1–P6): `_agile-output/implementation-artifacts/nfr14-risk-epic44-full-elaborate-lsp.md`

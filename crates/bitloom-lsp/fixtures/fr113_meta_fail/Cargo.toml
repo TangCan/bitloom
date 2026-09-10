@@ -1,0 +1,13 @@
+[package]
+name = "fr113_meta_fail"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.97.1"
+publish = false
+description = "FR113 ATDD: metadata root that fails elaborate (readable)."
+
+[dependencies]
+bitloom-prelude = { path = "../../../bitloom-prelude" }
+
+[package.metadata.bitloom]
+design_roots = ["Fr113FailHwCapture"]

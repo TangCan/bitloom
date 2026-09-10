@@ -1,11 +1,13 @@
-//! Bitloom language-server binary (FR99 / Stories 44.2 + 44.3).
+//! Bitloom language-server binary (FR99 / FR113).
 //!
 //! Stdio LSP with initialize / capabilities, plus didSave full-design elaborate
-//! diagnostics and document symbols. Public brand: **Bitloom**. Unrelated to `samitbasu/rhdl`.
+//! diagnostics and document symbols. FR113 prefers Cargo metadata design roots when
+//! the saved path sits in a discovered package. Public brand: **Bitloom**.
 
+use std::path::PathBuf;
 use std::sync::Mutex;
 
-use bitloom_lsp::{AnalyzeResult, analyze_on_did_save};
+use bitloom_lsp::{AnalyzeResult, analyze_on_did_save, analyze_on_did_save_at};
 use tower_lsp_server::jsonrpc::Result;
 use tower_lsp_server::ls_types::*;
 use tower_lsp_server::{Client, LanguageServer, LspService, Server};
@@ -14,6 +16,13 @@ fn mvp_root_uri() -> Uri {
     "file:///bitloom/fr99-mvp-root"
         .parse()
         .expect("mvp root uri")
+}
+
+fn path_from_uri(uri: &Uri) -> Option<PathBuf> {
+    let s = uri.as_str();
+    let path = s.strip_prefix("file://")?;
+    let path = path.strip_prefix("//localhost").unwrap_or(path);
+    Some(PathBuf::from(path))
 }
 
 #[derive(Debug)]
@@ -72,7 +81,7 @@ impl LanguageServer for BitloomLsp {
         self.client
             .log_message(
                 MessageType::INFO,
-                "Bitloom LSP ready (FR99 Story 44.3: didSave → full-design elaborate)",
+                "Bitloom LSP ready (FR99 + FR113: didSave → discover metadata roots or DesignFixture)",
             )
             .await;
     }
@@ -82,8 +91,8 @@ impl LanguageServer for BitloomLsp {
     }
 
     async fn did_save(&self, params: DidSaveTextDocumentParams) {
-        // P1 trigger: textDocument/didSave → full-design elaborate of documented MVP root.
-        let result = analyze_on_did_save();
+        let hint = path_from_uri(&params.text_document.uri);
+        let result = analyze_on_did_save_at(hint.as_deref());
         if let Ok(mut g) = self.last.lock() {
             *g = Some(result.clone());
         }

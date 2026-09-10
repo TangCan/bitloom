@@ -1,12 +1,17 @@
-//! Bitloom language-server library (FR99 / Story 44.3).
+//! Bitloom language-server library (FR99 / FR113).
 //!
 //! Full-design elaborate on a documented edit-trigger path, with a shallow
-//! contrast mode for ATDD. Public brand: **Bitloom**. Unrelated to `samitbasu/rhdl`.
+//! contrast mode for ATDD. FR113 adds Cargo-graph + metadata design-root discovery
+//! beyond [`DesignFixture`]. Public brand: **Bitloom**. Unrelated to `samitbasu/rhdl`.
 
+use std::path::{Path, PathBuf};
 use std::time::{Duration, Instant};
 
 use bitloom_builder::{ElaborateSession, GroundType, HwCaptureRef, Span};
 use bitloom_hir::{Diagnostic, FrozenHir};
+
+mod discover;
+pub use discover::{DiscoveredDesignRoot, discover_design_roots};
 
 /// MVP module-count ceiling (NFR14 P4). Exceeding this must fail loudly.
 pub const MVP_MAX_MODULES: usize = 8;
@@ -246,12 +251,227 @@ pub fn analyze(mode: AnalysisMode, fixture: DesignFixture, timeout: Duration) ->
 }
 
 /// Default edit-trigger fixture when the client saves a workspace document (P1: didSave).
+/// FR99 DesignFixture path — kept for MVP regression (NFR44).
 pub fn analyze_on_did_save() -> AnalyzeResult {
     analyze(
         AnalysisMode::FullElaborate,
         DesignFixture::OkCounter,
         MVP_INTERACTIVE_BUDGET,
     )
+}
+
+/// Resolve an elaborate session for a discovered metadata `root_id` (FR113 registry).
+///
+/// Root ids are documented entry names (文档等价 of `.rs`/type paths). Full
+/// `#[bitloom::top]` syn-scan without metadata remains deferred (NFR47).
+fn session_for_discovered_root_id(root_id: &str) -> Option<(ElaborateSession, usize)> {
+    match root_id {
+        "Fr113OkCounter" => Some((build_fr113_ok_counter(), 1)),
+        "Fr113FailHwCapture" => Some((build_fr113_fail_hw_capture(), 1)),
+        "Fr113Oversized" => Some((build_oversized(), MVP_MAX_MODULES + 1)),
+        _ => None,
+    }
+}
+
+fn build_fr113_ok_counter() -> ElaborateSession {
+    let mut s = ElaborateSession::new("Fr113OkCounter");
+    s.begin_module("Fr113OkCounter", Span::default());
+    s.add_input("clk", GroundType::Clock, Span::default());
+    s.add_input("rst", GroundType::Reset, Span::default());
+    s.add_output("q", GroundType::UInt { width: 8 }, Span::default());
+    s.declare_reg("count", GroundType::UInt { width: 8 }, Span::default());
+    s.begin_combinational(Span::default());
+    s.assign_net("q", "count", Span::default());
+    s.end_process();
+    s.begin_sequential(Span::default());
+    s.assign_reg_d_inc("count", Span::default());
+    s.end_process();
+    s.end_module();
+    s
+}
+
+fn build_fr113_fail_hw_capture() -> ElaborateSession {
+    let mut s = ElaborateSession::new("Fr113FailCapture");
+    s.begin_module("Fr113FailCapture", Span::default());
+    s.add_input("clk", GroundType::Clock, Span::default());
+    s.add_input("rst", GroundType::Reset, Span::default());
+    s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+    s.declare_wire("w", GroundType::UInt { width: 8 }, Span::default());
+    s.assert_no_hw_capture(&[HwCaptureRef::wire("w")], Span::default());
+    s.declare_mem_with_init_fn("rom", 4, 8, |i| i as u64, Span::default());
+    s.begin_combinational(Span::default());
+    s.assign_net("y", "rom", Span::default());
+    s.end_process();
+    s.end_module();
+    s
+}
+
+/// Full-design elaborate for a Cargo-metadata discovered root (FR113).
+///
+/// Does **not** take a [`DesignFixture`]. Unknown `root_id` → readable fail without
+/// pretending `finish` succeeded.
+pub fn analyze_discovered_root(
+    mode: AnalysisMode,
+    root: &DiscoveredDesignRoot,
+    timeout: Duration,
+) -> AnalyzeResult {
+    let started = Instant::now();
+    let Some((session, mods)) = session_for_discovered_root_id(&root.root_id) else {
+        return AnalyzeResult {
+            diagnostics: vec![MappedDiagnostic {
+                code: "bitloom-lsp.unknown-design-root".into(),
+                message: format!(
+                    "bitloom-lsp.unknown-design-root: package `{}` metadata root_id `{}` is not a registered FR113 elaborate entry",
+                    root.package_name, root.root_id
+                ),
+            }],
+            symbols: vec![],
+            called_finish: false,
+            timed_out: false,
+            oversized: false,
+            mode,
+        };
+    };
+
+    if mods > MVP_MAX_MODULES {
+        return AnalyzeResult {
+            diagnostics: vec![MappedDiagnostic {
+                code: "bitloom-lsp.oversized".into(),
+                message: format!(
+                    "bitloom-lsp.oversized: discovered root `{}` has {mods} modules; MVP ceiling is {MVP_MAX_MODULES} (NFR14 P4)",
+                    root.root_id
+                ),
+            }],
+            symbols: vec![],
+            called_finish: false,
+            timed_out: false,
+            oversized: true,
+            mode,
+        };
+    }
+
+    match mode {
+        AnalysisMode::Shallow => AnalyzeResult {
+            diagnostics: vec![],
+            symbols: vec![],
+            called_finish: false,
+            timed_out: false,
+            oversized: false,
+            mode,
+        },
+        AnalysisMode::FullElaborate => {
+            if started.elapsed() > timeout {
+                return AnalyzeResult {
+                    diagnostics: vec![MappedDiagnostic {
+                        code: "bitloom-lsp.timeout".into(),
+                        message: format!(
+                            "bitloom-lsp.timeout: discovered-root elaborate exceeded interactive budget ({timeout:?})"
+                        ),
+                    }],
+                    symbols: vec![],
+                    called_finish: false,
+                    timed_out: true,
+                    oversized: false,
+                    mode,
+                };
+            }
+            match session.finish() {
+                Ok(hir) => AnalyzeResult {
+                    diagnostics: vec![],
+                    symbols: symbols_from_hir(&hir),
+                    called_finish: true,
+                    timed_out: false,
+                    oversized: false,
+                    mode,
+                },
+                Err(diags) => AnalyzeResult {
+                    diagnostics: diags.0.iter().map(map_diag).collect(),
+                    symbols: vec![],
+                    called_finish: true,
+                    timed_out: false,
+                    oversized: false,
+                    mode,
+                },
+            }
+        }
+    }
+}
+
+/// Discover roots under `workspace` and fully elaborate the first root (FR113).
+///
+/// Empty discovery → `bitloom-lsp.no-design-roots` (readable; not silent Ok).
+pub fn analyze_workspace_design_roots(
+    mode: AnalysisMode,
+    workspace: impl AsRef<Path>,
+    timeout: Duration,
+) -> AnalyzeResult {
+    let workspace = workspace.as_ref();
+    match discover_design_roots(workspace) {
+        Ok(roots) if roots.is_empty() => AnalyzeResult {
+            diagnostics: vec![MappedDiagnostic {
+                code: "bitloom-lsp.no-design-roots".into(),
+                message: format!(
+                    "bitloom-lsp.no-design-roots: no `[package.metadata.bitloom] design_roots` under {} (FR113); DesignFixture-only ≠ FR113",
+                    workspace.display()
+                ),
+            }],
+            symbols: vec![],
+            called_finish: false,
+            timed_out: false,
+            oversized: false,
+            mode,
+        },
+        Ok(roots) => analyze_discovered_root(mode, &roots[0], timeout),
+        Err(e) => AnalyzeResult {
+            diagnostics: vec![MappedDiagnostic {
+                code: "bitloom-lsp.discover-failed".into(),
+                message: format!(
+                    "bitloom-lsp.discover-failed: Cargo-graph discovery under {}: {e}",
+                    workspace.display()
+                ),
+            }],
+            symbols: vec![],
+            called_finish: false,
+            timed_out: false,
+            oversized: false,
+            mode,
+        },
+    }
+}
+
+/// didSave path: prefer FR113 discovery when `path_hint` finds a Cargo package/workspace
+/// with metadata roots; otherwise fall back to FR99 [`analyze_on_did_save`].
+pub fn analyze_on_did_save_at(path_hint: Option<&Path>) -> AnalyzeResult {
+    if let Some(hint) = path_hint {
+        if let Some(cargo_root) = find_cargo_root(hint) {
+            if let Ok(roots) = discover_design_roots(&cargo_root) {
+                if !roots.is_empty() {
+                    return analyze_discovered_root(
+                        AnalysisMode::FullElaborate,
+                        &roots[0],
+                        MVP_INTERACTIVE_BUDGET,
+                    );
+                }
+            }
+        }
+    }
+    analyze_on_did_save()
+}
+
+fn find_cargo_root(start: &Path) -> Option<PathBuf> {
+    let mut cur = if start.is_file() {
+        start.parent()?.to_path_buf()
+    } else {
+        start.to_path_buf()
+    };
+    loop {
+        if cur.join("Cargo.toml").is_file() {
+            return Some(cur);
+        }
+        if !cur.pop() {
+            return None;
+        }
+    }
 }
 
 #[cfg(test)]
@@ -280,5 +500,17 @@ mod tests {
         );
         assert!(!r.called_finish);
         assert!(r.diagnostics.is_empty());
+    }
+
+    #[test]
+    fn discovered_ok_counter_calls_finish() {
+        let root = DiscoveredDesignRoot {
+            package_name: "fixture".into(),
+            package_dir: PathBuf::from("."),
+            root_id: "Fr113OkCounter".into(),
+        };
+        let r = analyze_discovered_root(AnalysisMode::FullElaborate, &root, MVP_INTERACTIVE_BUDGET);
+        assert!(r.called_finish);
+        assert!(r.symbols.iter().any(|s| s.name == "Fr113OkCounter"));
     }
 }

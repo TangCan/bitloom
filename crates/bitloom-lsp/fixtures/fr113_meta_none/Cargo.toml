@@ -1,0 +1,10 @@
+[package]
+name = "fr113_meta_none"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.97.1"
+publish = false
+description = "FR113 ATDD negative: bitloom-prelude but no design_roots metadata."
+
+[dependencies]
+bitloom-prelude = { path = "../../../bitloom-prelude" }
