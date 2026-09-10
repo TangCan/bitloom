@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 17:30
+last_updated: 09-10-2026 17:45
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -423,7 +423,7 @@ development_status:
   57-2-correct-course-prd-批准-phase-14-fr116: done
   57-3-同步-readme-deferred-路线图指针-fr116-fr123: done
   57-4-ad-指针与-epic-57-收口-fr116-nfr50: done
-  epic-57-retrospective: optional
+  epic-57-retrospective: done
 
   epic-58: done
   58-1-epic-58-nfr14-风险记录: done
@@ -1570,3 +1570,30 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-56-retro-2026-09-10.md"
+  - id: "epic-57-retro-item-166-fr116-fr123-诚实边界-对外不得把-phase-13-fr106-11"
+    epic: 57
+    action: "FR116/FR123 诚实边界：对外不得把 Phase 13 FR106–115 商业加深 alone 写成 NFR47 未选加深 /
+      Phase 14 完成面；Tywaves/syn-scan/SBY/VIP GPIO/Handshake/官方风格全家桶宣称须引对应 FR117–122
+      关闭证据（续 FR123）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-57-retro-2026-09-10.md"
+  - id: "epic-57-retro-item-167-触碰-phase-14-合同-文档路径时保持-phase-12-fr94-105"
+    epic: 57
+    action: "触碰 Phase 14 合同/文档路径时保持 Phase 12 FR94–105 与 Phase 13 FR106–115 关闭证据指针有效（NFR48）；不得改写为失败。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-57-retro-2026-09-10.md"
+  - id: "epic-57-retro-item-168-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 57
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-57-retro-2026-09-10.md"
+  - id: "epic-57-retro-item-169-可选工程卫生-后续实现-epic-58-63-首故事须引用适用已修订-ad-工具"
+    epic: 57
+    action: "可选工程卫生：后续实现 epic（58–63）首故事须引用适用已修订 AD/工具链（NFR50）；未列入 NFR14 的 deferred
+      仍须另开合同（NFR51）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-57-retro-2026-09-10.md"
