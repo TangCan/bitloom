@@ -2,7 +2,8 @@
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-This page is the **FR107 product completion surface** (Epic 49 / Story **49.2**).
+This page is the **FR107 product completion surface**. **Epic 49 / FR107 is
+closed** (Story **49.3** closeout; product face delivered in Story **49.2**).
 It delivers a buildable/runnable SystemC TLM-2.0 **AT-style** path per NFR14
 (`nfr14-risk-epic49-systemc-tlm-at.md` A1–A4), **beyond** FR101 LT-only MVP.
 
@@ -62,12 +63,13 @@ Rust FL (**FR47**) is **not** SystemC TLM AT. FR101 LT closeout stays valid.
 | `emit_systemc_tlm_lt` / FR101 | LT `b_transport` | **No** |
 | `emit_functional_crate` / FR47 | Host Rust FL | **No** |
 | Docs slogan only | Docs | **No** |
-| This page + `emit_systemc_tlm_at` | AT documented subset | **Yes** (when Epic 49 closes) |
+| This page + `emit_systemc_tlm_at` | AT documented subset | **Yes** (Epic 49 **closed**) |
 
 ## Recipe
 
 ```text
 cargo test -p bitloom --test fr107_systemc_tlm_at
+cargo test -p bitloom --test fr107_epic49_closeout
 ```
 
 ## Cross-links

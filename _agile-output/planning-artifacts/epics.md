@@ -71,7 +71,7 @@ phase13Note: >
   literal-green MVP remains closed (FR94–105). Phase 13 does not reopen FR93 or claim
   Phase 12 AC unmet. Epic 48 must close before 49–56 ready. Sprint seeded backlog.
 phase13Epic48Status: complete
-phase13Epic49Status: backlog
+phase13Epic49Status: complete
 phase13Epic50Status: backlog
 phase13Epic51Status: backlog
 phase13Epic52Status: backlog

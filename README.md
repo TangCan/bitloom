@@ -178,7 +178,8 @@ mod sim {
 | 宿主 IDE / rust-analyzer（FR90） | [`docs/fr90-host-ide-rust-analyzer.md`](docs/fr90-host-ide-rust-analyzer.md) · 夹具 [`examples/counter_ports`](examples/counter_ports) |
 | 多视图同刺激 + adapter 模板（FR92） | [`docs/fr92-shared-stimulus-adapter.md`](docs/fr92-shared-stimulus-adapter.md) · `SharedStimulusScoreboard` · FR78 adapter |
 | 自动 FL≡RTL / 形式等价产品（**FR100**） | [`docs/fr100-formal-equiv.md`](docs/fr100-formal-equiv.md) · `FormalEquivProduct`（超出 FR92 记分板）；**Epic 45 已关闭** |
-| SystemC TLM-2.0 产品路径（**FR101**） | [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md) · `emit_systemc_tlm_lt` / `cargo bitloom gen-tlm`（LT-only MVP；**Epic 46 已关闭** / Story 46.3；AT deferred） |
+| SystemC TLM-2.0 产品路径（**FR101**） | [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md) · `emit_systemc_tlm_lt` / `cargo bitloom gen-tlm`（LT-only MVP；**Epic 46 已关闭**） |
+| SystemC TLM-2.0 AT 产品支（**FR107**） | [`docs/fr107-systemc-tlm-at.md`](docs/fr107-systemc-tlm-at.md) · `emit_systemc_tlm_at` / `cargo bitloom gen-tlm-at`（AT `nb_transport_fw` 子集；**Epic 49 已关闭** / Story 49.3；∥ FR101 LT） |
 | 多视图属性全矩阵（**FR102**） | [`docs/fr102-multiview-attribute-matrix.md`](docs/fr102-multiview-attribute-matrix.md) · 超出仅 adapter 模板 |
 | 一级 IP 双模型齐全（**FR103**） | [`docs/fr103-ip-dual-model.md`](docs/fr103-ip-dual-model.md) · `IpDualModelMatrix`；FIFO/UART/SPI/I2C/AXI |
 | 时序 / 波形产品入口 | [`docs/fr38-wave.md`](docs/fr38-wave.md) |
@@ -278,7 +279,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 | 加深面 | FR / Epic | 相对 Phase 12 MVP |
 | --- | --- | --- |
-| SystemC TLM AT / `nb_transport` | FR107 / 49 | vs FR101 LT-only |
+| SystemC TLM AT / `nb_transport` | FR107 / 49 | vs FR101 LT-only — **Epic 49 已关闭**（Story 49.3） |
 | GPIO 近 VIP | FR108 / 50 | vs FR98 G0 可选 |
 | FSM / state-visit 覆盖率（C3） | FR109 / 51 | vs FR105 Mux v2 |
 | 树内 HLS 商业深度 | FR110 / 52 | vs FR95/96 MVP stub |

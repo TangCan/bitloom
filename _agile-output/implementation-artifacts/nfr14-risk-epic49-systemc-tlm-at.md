@@ -12,7 +12,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR107 / Epic 49；NFR14、NFR44、NFR45、NFR46、NFR47；对照 FR101 / FR47 / AD-5 |
 | 记录日期 | 2026-09-10 |
-| 状态 | draft — Story 49.1 |
+| 状态 | **closed** — Story 49.3（FR107 / Epic 49 收口；AT documented subset；LT 回归保留） |
 
 ### (a) 上游约束
 
@@ -54,10 +54,10 @@
 
 ### Epic 49 关闭条件（Story 49.3 勾选）
 
-- [ ] **49.2 / FR107：** AT 产品路径可检查
-- [ ] **文档 / deferred：** 边界诚实；LT 回归保留
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；prelude 边界
+- [x] **49.2 / FR107：** AT 产品路径可检查
+- [x] **文档 / deferred：** 边界诚实；LT 回归保留
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；prelude 边界
 
 ---
 
