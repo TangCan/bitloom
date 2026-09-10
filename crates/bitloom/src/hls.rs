@@ -109,11 +109,22 @@ pub struct DissolvedHlsDataflow {
 pub enum InTreeScheduleKind {
     /// Fully unroll a counted loop of `trip_count` iterations (Story 41.2 demo).
     LoopUnroll { trip_count: u32 },
-    /// Simple initiation-interval pipeline (optional second documented mode).
+    /// Simple initiation-interval pipeline (FR95 secondary; **FR110** when `stages >= 2`).
     Pipeline {
         initiation_interval: u32,
         stages: u32,
     },
+}
+
+/// True when `kind` meets NFR14 FR110 default gates Q1+Q2 (`pipeline_stages >= 2` + II).
+pub fn meets_fr110_commercial_depth(kind: &InTreeScheduleKind) -> bool {
+    matches!(
+        kind,
+        InTreeScheduleKind::Pipeline {
+            initiation_interval,
+            stages
+        } if *initiation_interval >= 1 && *stages >= 2
+    )
 }
 
 /// One scheduled stage in an in-tree HLS artifact (FR95).
@@ -422,7 +433,12 @@ fn build_schedule_ir(
         } => {
             lines.push(format!("  \"kind\": \"pipeline\","));
             lines.push(format!("  \"initiation_interval\": {initiation_interval},"));
+            // Q2 alias required by FR110 / NFR14
+            lines.push(format!("  \"ii\": {initiation_interval},"));
             lines.push(format!("  \"pipeline_stages\": {n},"));
+            if *n >= 2 {
+                lines.push("  \"fr110\": true,".into());
+            }
         }
     }
     lines.push(format!("  \"stage_count\": {},", stages.len()));
@@ -449,10 +465,25 @@ fn build_rtl_stub(fn_name: &str, kind: &InTreeScheduleKind, stages: &[ScheduleSt
         InTreeScheduleKind::Pipeline {
             initiation_interval,
             stages: n,
-        } => format!("pipeline II={initiation_interval} stages={n}"),
+        } => {
+            let depth = if *n >= 2 {
+                "FR110 commercial-depth"
+            } else {
+                "FR95 secondary"
+            };
+            format!("pipeline II={initiation_interval} stages={n} ({depth})")
+        }
     };
     let mut body = String::new();
-    body.push_str("  // FR95 in-tree-mvp: combinatorial unroll/pipeline sketch (not commercial HLS quality)\n");
+    let honesty = if matches!(
+        kind,
+        InTreeScheduleKind::Pipeline { stages, .. } if *stages >= 2
+    ) {
+        "  // FR110 in-tree depth: multi-stage pipeline + II (not a full commercial HLS compiler)\n"
+    } else {
+        "  // FR95 in-tree-mvp: combinatorial unroll/pipeline sketch (not commercial HLS quality)\n"
+    };
+    body.push_str(honesty);
     let mut cur = "x".to_string();
     for st in stages {
         let next = format!("s{}", st.index);
@@ -525,6 +556,29 @@ pub fn schedule_in_tree(
         schedule_ir,
         rtl_stub,
     })
+}
+
+/// FR110 commercial-depth schedule: Pipeline with `stages >= 2` and II ≥ 1 (Q1+Q2).
+///
+/// Rejects shallower pipelines so callers cannot silent-claim FR110.
+pub fn schedule_in_tree_fr110(
+    fn_name: &str,
+    op: HlsDataflowOp,
+    initiation_interval: u32,
+    pipeline_stages: u32,
+) -> Result<InTreeScheduleArtifact, HlsError> {
+    let kind = InTreeScheduleKind::Pipeline {
+        initiation_interval,
+        stages: pipeline_stages,
+    };
+    if !meets_fr110_commercial_depth(&kind) {
+        return Err(HlsError::Message(format!(
+            "FR110 commercial depth: require pipeline with ii>=1 and pipeline_stages>=2 \
+             (got ii={initiation_interval} stages={pipeline_stages}); \
+             FR95 MVP loop-unroll / single-stage pipeline alone ≠ FR110"
+        )));
+    }
+    schedule_in_tree(fn_name, op, kind)
 }
 
 /// FR96: dissolve/inline a dataflow-transform closure, then enter the FR95 in-tree schedule.

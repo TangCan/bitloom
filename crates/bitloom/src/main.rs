@@ -77,6 +77,15 @@ enum Commands {
         /// Loop-unroll trip count for `--in-tree` (FR95 documented subset).
         #[arg(long, default_value_t = 4)]
         unroll: u32,
+        /// FR110: with `--in-tree`, use pipeline schedule (commercial depth) instead of loop-unroll.
+        #[arg(long, default_value_t = false)]
+        pipeline: bool,
+        /// Initiation interval for `--in-tree --pipeline` (FR110 / Q2).
+        #[arg(long, default_value_t = 1)]
+        ii: u32,
+        /// Pipeline stage count for `--in-tree --pipeline` (FR110 / Q1; require ≥2 for `fr110`).
+        #[arg(long, default_value_t = 2)]
+        stages: u32,
     },
     /// Import FIRRTL 6.0.0 `.fir` (Chisel→firtool output ok) into the same emit path as `build` (FR40 / FR46).
     Import {
@@ -560,21 +569,33 @@ fn main() {
             dataflow,
             in_tree,
             unroll,
+            pipeline,
+            ii,
+            stages,
         } => {
             if in_tree {
-                println!(
-                    "path=in-tree fr95=true fr96=true kind=loop-unroll trip_count={unroll} dataflow={dataflow}"
-                );
+                let kind = if pipeline {
+                    hls::InTreeScheduleKind::Pipeline {
+                        initiation_interval: ii,
+                        stages,
+                    }
+                } else {
+                    hls::InTreeScheduleKind::LoopUnroll { trip_count: unroll }
+                };
+                let fr110 = hls::meets_fr110_commercial_depth(&kind);
+                if pipeline {
+                    println!(
+                        "path=in-tree fr95=true fr96=true fr110={fr110} kind=pipeline ii={ii} pipeline_stages={stages} dataflow={dataflow}"
+                    );
+                } else {
+                    println!(
+                        "path=in-tree fr95=true fr96=true kind=loop-unroll trip_count={unroll} dataflow={dataflow}"
+                    );
+                }
                 // FR96: CLI `--in-tree --dataflow` dissolves the transform alias as a
-                // closure unit before entering the FR95 schedule path (no Bambu).
+                // closure unit before entering the FR95/FR110 schedule path (no Bambu).
                 match hls::parse_dataflow_alias(&dataflow).and_then(|op| {
-                    hls::run_hls_in_tree_from_transform(
-                        &function,
-                        &[],
-                        hls::InTreeScheduleKind::LoopUnroll { trip_count: unroll },
-                        move || op,
-                        &out_dir,
-                    )
+                    hls::run_hls_in_tree_from_transform(&function, &[], kind, move || op, &out_dir)
                 }) {
                     Ok((sched, rtl)) => {
                         println!("ok_schedule={}", sched.display());

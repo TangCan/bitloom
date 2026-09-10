@@ -9,7 +9,7 @@ Bitloom **supports** HLS as a product path（概述 §1.3.8）。公开品牌：
 | **树内** `schedule_in_tree` / `cargo bitloom hls --in-tree`（loop-unroll MVP） | **FR95 完成面** | **是**（须可检查 schedule IR / 可选 RTL stub；**不**调用 Bambu） |
 | **外挂** 发射宿主 C → 钉死 **PandA Bambu**（stub / `BITLOOM_HLS_USE_REAL`） | **FR35 / FR76 / FR86** 可选/对照诚实路径 | **否**（不得单独满足 FR95） |
 
-> **诚实边界：** 树内 MVP 是文档化子集（当前演示：**loop-unroll**；可选 pipeline II），产出可检查的 schedule IR 与诚实标注 `in-tree-mvp` 的 RTL stub——**不是**商业级完整 HLS 编译器。外挂 stub 绿 ≠ 调度质量，亦 ≠ FR95。**FR96** 在调度前将闭包 dissolve/inline 为数据流变换并进入树内 FR95 路径（≠ 仅外挂 FR76 dissolve）。
+> **诚实边界：** 树内 MVP 是文档化子集（当前演示：**loop-unroll**；可选 pipeline II），产出可检查的 schedule IR 与诚实标注 `in-tree-mvp` 的 RTL stub——**不是**商业级完整 HLS 编译器。外挂 stub 绿 ≠ 调度质量，亦 ≠ FR95。**FR96** 在调度前将闭包 dissolve/inline 为数据流变换并进入树内 FR95 路径（≠ 仅外挂 FR76 dissolve）。**商业深度（流水阶段 / II）→ Phase 13 FR110** — [`fr110-hls-commercial-depth.md`](fr110-hls-commercial-depth.md)。
 
 ## 钉死后端（外挂路径）
 
