@@ -277,3 +277,34 @@
 
 **合同指针：** 详见 `epics.md` Phase 14 Inventory（FR116–FR123 / NFR48–NFR51）。
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-10-phase14-nfr47-deferred-deepen.md`
+
+## 2026-09-10 Update — Phase 15 NFR51 剩余升格（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-10-phase15-nfr51-leftover-deepen.md` —
+在 Phase 14 NFR47 未选加深升格 **已关闭**之后，正式 **Phase 15**「NFR51 剩余升格」
+（Epic 64–71 · **FR124–FR132** / **NFR52–NFR55**）。
+
+**公开品牌（不变）：** **Bitloom**；crates.io / CLI **`bitloom`** / `bitloom-*`（设计 crate 仍只依赖
+`bitloom-prelude`）。禁止发布 `rhdl` / `rhdl-bits`。
+
+**与 Phase 12–14 的关系（必须同时读）：**
+- Phase 12 **FR94–FR105**、Phase 13 **FR106–FR115** 与 Phase 14 **FR116–FR123** 关闭证据 **仍有效**；**不得**改写为失败（**NFR52**）。
+- Phase 15 是 **新合同**下的加深（NFR51 deferred → 显式 FR），**不是**「Phase 14 AC 未达标」的补救叙事。
+- deferred 升格映射：
+  1. 上游 Tywaves 一等集成 → **FR125**
+  2. 更多 IP 手写 FL（formal 分支 C）→ **FR126**
+  3. 默认 CI 强制真 sby → **FR127**
+  4. 全 SoC pad / 商业对拍深度 → **FR128**
+  5. CIRCT Handshake / 多时钟弹性缓冲全家桶 → **FR129**
+  6. 完整 Style Guide ± Parser 恢复 → **FR130**
+  7. `ip.rs` 按协议拆分卫生 → **FR131**
+  （闸门 **FR124**；宣称纪律 **FR132**。）
+- 对外「Tywaves 一等 / 更多 IP FL / 强制 sby CI / 全 SoC pad / CIRCT Handshake / Style Guide·Parser / ip.rs 拆分」类表述：**仅**可在对应 FR124–131 关闭后，按 **FR132** 宣称；
+  **禁止**用 Phase 14 完成面冒充本批加深。
+
+**实现闸门：** Epic 64（Story 64.1–64.4 · **FR124**）关闭前，Epic 65–71 不得标 ready。  
+触及 **AD-25 / AD-27**（及 CI formal/sby）的加深须在实现 epic 引用修订 AD（**NFR54**）；README / deferred /
+脊柱指针由 Story **64.3–64.4** 落地。软实现序：建议 **Epic 71 先于 Epic 68**（同触 `ip.rs`）。
+
+**合同指针：** 详见 `epics.md` Phase 15 Inventory（FR124–FR132 / NFR52–NFR55）。
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-10-phase15-nfr51-leftover-deepen.md`

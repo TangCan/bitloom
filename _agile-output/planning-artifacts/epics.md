@@ -64,7 +64,54 @@ stepsCompleted:
   - step-03-create-stories-phase-14-epic-63
   - step-03-create-stories-phase-14
   - step-04-final-validation-phase-14
+  - step-01-validate-prerequisites-phase-15
+  - step-02-design-epics-phase-15
+  - step-03-create-stories-phase-15-epic-64
+  - step-03-create-stories-phase-15-epic-65
+  - step-03-create-stories-phase-15-epic-66
+  - step-03-create-stories-phase-15-epic-67
+  - step-03-create-stories-phase-15-epic-68
+  - step-03-create-stories-phase-15-epic-69
+  - step-03-create-stories-phase-15-epic-70
+  - step-03-create-stories-phase-15-epic-71
+  - step-03-create-stories-phase-15
+  - step-04-final-validation-phase-15
 status: complete
+phase15Status: planning-complete
+phase15Validation: |
+  FR124–132 mapped to Epic 64–71 stories (25); Epic 64 hard gate for 65–71;
+  no forward story deps within epics; Architecture starter N/A;
+  File-churn: Epic 68+71 ip.rs (soft order 71→68 accepted); Epic 69/70 AD-25/27;
+  Epic 65–67 wave/formal/CI split; Correct Course approved 2026-09-10 (Story 64.2 may cite proposal).
+  create-epics-and-stories Phase 15 validated 2026-09-10 — sprint seeded; start Epic 64.
+phase15Note: >
+  Correct Course approved 2026-09-10-phase15-nfr51-leftover-deepen. Phase 12–14
+  closing faces remain valid (NFR52). Epic 64 hard gate for 65–71; soft order
+  71→68 (ip.rs). Sprint seeded backlog. Remaining honesty gate is FR132 claim
+  discipline; NFR55 non-goals stay deferred.
+correctCoursePhase15Approved: 2026-09-10
+phase15Contract: nfr51-leftover-deepen-tywaves-ipfl-sbyci-socpad-circt-styleguide-iprsplit
+phase15Scope: >
+  Phase 14 NFR51 明示剩余升格 — FR124–FR132 / NFR52–NFR55；
+  上游 Tywaves 一等；更多 IP 手写 FL；默认 CI 强制真 sby；
+  全 SoC pad；CIRCT Handshake 全家桶；完整 Style Guide/Parser；
+  ip.rs 协议拆分卫生（及闸门/宣称 FR）。
+phase15Epic64Status: backlog
+phase15Epic65Status: backlog
+phase15Epic66Status: backlog
+phase15Epic67Status: backlog
+phase15Epic68Status: backlog
+phase15Epic69Status: backlog
+phase15Epic70Status: backlog
+phase15Epic71Status: backlog
+phase15InputDocuments:
+  - prds/prd-rhdl-2026-08-19/prd.md
+  - prds/prd-rhdl-2026-08-19/addendum.md
+  - architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
+  - sprint-change-proposal-2026-09-10-phase14-nfr47-deferred-deepen.md
+  - sprint-change-proposal-2026-09-10-phase15-nfr51-leftover-deepen.md
+  - ../implementation-artifacts/deferred-work.md
+  - ../implementation-artifacts/action-items-sweep-2026-09-10-phase14.md
 phase14Status: complete
 correctCoursePhase14Approved: 2026-09-10
 phase14Validation: |
@@ -224,8 +271,7 @@ phase13InputDocuments:
   - _agile-output/implementation-artifacts/epic-46-retro-2026-09-10.md
   - _agile-output/implementation-artifacts/epic-47-retro-2026-09-10.md
   - docs/fr95 / fr96 / fr97 / fr98 / fr100 / fr101 / fr104 / fr105 / docs/ip/README.md（诚实边界指针）
-uxDesignPhase13: none
----
+uxDesignPhase13: none---
 
 # rhdl - Epic Breakdown
 
@@ -233,7 +279,7 @@ uxDesignPhase13: none
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48–56 · FR106–FR115 / NFR44–NFR47，**complete**）。阶段十四：NFR47 未选加深升格（Epic 57–63 · FR116–FR123 / NFR48–NFR51，**complete**）。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48–56 · FR106–FR115 / NFR44–NFR47，**complete**）。阶段十四：NFR47 未选加深升格（Epic 57–63 · FR116–FR123 / NFR48–NFR51，**complete**）。阶段十五：NFR51 剩余升格（Epic 64–71 · FR124–FR132 / NFR52–NFR55，**planning-complete**；Correct Course **approved**）。无 UX。
 
 ## Requirements Inventory
 
@@ -541,7 +587,6 @@ So that 模块级 IP 能进 RHDL，且 last-connect 不会破坏唯一驱动。
 **Then** 模块层次、公开端口名/宽/向、实例图、ground 运算、寄存器相等（FR18）
 **And** 导入路径把 last-connect 规范化为唯一驱动后再 freeze；不得在 HIR 中留下多驱动（FR19）
 **And** 导入子集拒绝 property、CHIRRTL 特有 mem、Analog/InOut；`import` 与 `elaborate` 共用同一私有 freeze
-
 ---
 
 ## Phase 2 Requirements Inventory
@@ -5231,3 +5276,539 @@ So that 官方风格全家桶可检查关闭，且 Phase 14 实现故事清单�
 **Then** FR122 关闭条件可勾选；NFR14 勾选 Epic 63 关闭
 **And** 文首/状态页可声明：Phase 14 规划故事已齐（Epic 57–63）；剩余门为各 epic 实现关闭态
 **And** 明确：FR97 / FR111 关闭仍有效
+
+---
+
+## Phase 15 Requirements Inventory（追加 · 2026-09-10 · NFR51 剩余升格）
+
+**范围：** 在 **Phase 14 已关闭**（FR116–123 / Epic 57–63）前提下，把 `deferred-work.md` Phase-14 sweep 中仍标 **NFR51 deferred** 的明示剩余升格为可交付加深合同。用户点名主题：
+
+1. 上游 Tywaves 一等集成  
+2. 更多 IP 手写 FL（formal 分支 C）  
+3. 默认 CI 强制真 sby  
+4. 全 SoC pad / 商业对拍深度  
+5. CIRCT Handshake 方言 / 多时钟弹性缓冲全家桶  
+6. 完整 Style Guide 全文 ± Parser 恢复  
+7. `ip.rs` 按协议拆分卫生  
+
+**不是：** 宣称 Phase 12–14 AC 未满足；用 FR117 自研 typed alone / FR119-(A) alone / FR120 C1–C4 alone / FR121 ready/valid alone / FR122 O1–O4 alone 冒充本阶段完成面。  
+**依据：** 用户 2026-09-10 结项后继续加深指令；`deferred-work.md` Phase-14 sweep（item-173/177/181/185/189/193 等）；ARCHITECTURE-SPINE AD-25/27「须新合同」边界；`action-items-sweep-2026-09-10-phase14.md`。  
+**与 PRD 关系：** Correct Course + PRD/addendum「Phase 15」**已批准**（2026-09-10；`correctCoursePhase15Approved: 2026-09-10`）；**实现闸门** = Epic 64（FR124）关闭前，Epic 65–71 不得标 ready。  
+**ID 注记：** 新编号 **FR124–FR132** / **NFR52–NFR55**（接 FR123 / NFR51）。不重编号 FR94–123。
+**合同戳：** `correctCoursePhase15Approved: 2026-09-10`；提案 `sprint-change-proposal-2026-09-10-phase15-nfr51-leftover-deepen.md`。
+
+### Phase 15 Functional Requirements
+
+FR116–FR123: （历史）Phase 14 加深 — 关闭证据仍有效；Phase 15 不得改写为失败。
+
+FR124: **Phase 15 加深合同闸门** — Correct Course + PRD/addendum 批准「NFR51 剩余升格」范围；同步 README / `deferred-work.md` /（若需）ARCHITECTURE-SPINE；钉死与 Phase 12–14 关闭面的边界；**未完成则 FR125+ 故事不得 ready**。  
+FR125: **上游 Tywaves 一等集成** — 交付上游 Tywaves（或风险记录钉死的一等集成形状）typed IDE 波形产品路径；**不以** FR104 `interactive.html`、FR114 LCOV/`coverage.html`、或 FR117 自研 `typed-wave` alone 关闭本 FR。  
+FR126: **更多 IP 手写 FL（原 formal 分支 C）** — 在 FR103/FR112-B / FR119-(A) 之外，交付风险记录钉死的更多 IP 手写功能模型 ≡ tick（或等价）产品路径；**不以** FR92 记分板、FR100 F1-(i)、FR112 MemRead≡tick、或 FR119 sby 绑定 alone 关闭本 FR。  
+FR127: **默认 CI 强制真 sby** — 在默认 CI（或文档钉死的 required job）中强制可复现真 `sby`/镜像门禁；缺工具须非零失败可读；**不以** 本机可选 `just formal-sby-check` / FR119 文档路径 alone 关闭本 FR。  
+FR128: **全 SoC pad / 商业对拍深度** — 超出 FR120 `GpioVip` C1–C4 的全 SoC pad / 商业对拍（或风险记录钉死的协议与断言深度）；**不以** FR108 近 VIP 或 FR120 C1–C4 alone 关闭本 FR。  
+FR129: **CIRCT Handshake 方言 / 多时钟弹性缓冲全家桶** — 超出 FR121 ready/valid 默认可综合的 CIRCT Handshake 方言与/或多时钟弹性缓冲全家桶；须评估/修订 **AD-25**；**不以** FR95/96、FR110、或 FR121 alone 关闭本 FR。  
+FR130: **完整 Style Guide 全文 ± Parser 恢复** — 超出 FR122 O1–O4 的完整 Style Guide 验收面；若恢复废弃 Scala `Parser.parse`，**必须** Correct Course + 修订 **AD-27**；**不以** FR97/FR111/FR122 O1–O4 alone 关闭本 FR。  
+FR131: **`ip.rs` 按协议拆分卫生** — 在保持 FR98/FR108/FR120 回归下，将 `bitloom-prelude` `ip.rs`（现 ~3213 LOC）按协议拆为可维护模块；拆分本身为关闭条件；**不以**「仅评估 defer」关闭本 FR。  
+FR132: **Phase 15 宣称与诚实门面** — 对外「Tywaves 一等 / 更多 IP FL / 强制 sby CI / 全 SoC pad / CIRCT Handshake / Style Guide·Parser / ip.rs 拆分」类宣称须引用 FR124–131 对应关闭证据；README/deferred 明确 Phase 14 vs Phase 15 完成面。
+
+### Phase 15 Non-Functional Requirements
+
+NFR14: （继承）各实现 epic 标 ready 前须有风险记录。  
+NFR52: **加深 vs 既有关闭面隔离** — Phase 15 关闭不得改写 Phase 12 FR94–105、Phase 13 FR106–115 或 Phase 14 FR116–123「已关闭」；加深完成面必须新 FR 勾选。  
+NFR53: **NFR14 分 epic 风险门** — Phase 15 每个实现 epic 开工前独立 NFR14（延续 NFR49 纪律）。  
+NFR54: **AD / 诚实同步** — 触及 AD-25/27（及 Phase 15 新 AD 修订，尤其 FR129→AD-25、FR130→AD-27、FR127→CI/formal 运维）时须先修订脊柱/CI 合同再标 story ready；触碰面遵守 `deferred-work.md` standing honesty。  
+NFR55: **未选子集显式合同** — 升格后的 FR 禁止静默扩大超出风险记录钉死的子集；未列入本清单的 deferred（如：自动 FSM 标签提取、第三方 LCOV GUI 一等关闭、emit MemRead stub→完整生成、非 Cargo 全 monorepo 任意路径扫描）仍须另开合同。
+
+### Phase 15 Additional Requirements (Architecture + Deferred)
+
+- 无 greenfield starter template。  
+- 设计 crate 仍只依赖 `bitloom-prelude`（AD-6），除非 FR124 另开合同。  
+- FR129 **可能**再修订 **AD-25**（CIRCT/多时钟深度超出 ready/valid）。FR130 **若恢复 Parser** **必须**修订 **AD-27**；默认仍禁止静默恢复。  
+- FR128 与 FR131 均重触 `ip.rs`：实现顺序上建议先拆分（FR131）再加深 SoC pad（FR128），或合并为同一 epic 内有序故事（见 Epic List 讨论）。  
+- Phase 1–14 故事保留 historical complete；不重写。  
+- UX：无独立 UX 合同；FR125 Tywaves 交互验收以产品文档/夹具 + ATDD（或文档化手动清单）为准。
+
+### Phase 15 UX Design Requirements
+
+无独立 UX-DR（无 `ux-designs/` spine）。FR125 的 IDE/波形交互细则在 Epic NFR14 风险记录与产品文档中钉死。
+
+### Phase 15 FR Coverage Map
+
+FR124: Epic 64 — Phase 15 加深合同闸门  
+FR132: Epic 64 — Phase 15 宣称与诚实门面  
+FR125: Epic 65 — 上游 Tywaves 一等集成  
+FR126: Epic 66 — 更多 IP 手写 FL（formal 分支 C）  
+FR127: Epic 67 — 默认 CI 强制真 sby  
+FR128: Epic 68 — 全 SoC pad / 商业对拍深度  
+FR129: Epic 69 — CIRCT Handshake / 多时钟弹性缓冲全家桶  
+FR130: Epic 70 — 完整 Style Guide ± Parser 恢复  
+FR131: Epic 71 — `ip.rs` 按协议拆分卫生  
+NFR52: Epic 64 — 加深 vs 既有关闭面隔离（横切写入 65–71）  
+NFR53 / NFR14: Epic 64–71 — 各 epic 首故事风险门  
+NFR54: Epic 64 — AD / 诚实同步（横切；69/70/67 触及 AD-25/27/CI）  
+NFR55: Epic 64 — 未选子集显式合同（横切）
+
+### Phase 15 Epic List
+
+### Epic 64: Phase 15 加深合同与诚实门面
+维护者/用户看到「NFR51 剩余升格」已获 Correct Course + PRD 批准；Phase 12–14 关闭面不被改写为失败；后续加深 epic 可合法开工。  
+**FRs covered:** FR124, FR132  
+**NFRs:** NFR14, NFR52, NFR53, NFR54, NFR55  
+**Depends on:** Phase 14 complete。不依赖 Epic 65–71。  
+**Gate:** Story 64.x（NFR14 + FR124）未完成前，65–71 不得标 ready。
+
+### Epic 65: 上游 Tywaves 一等集成
+调试 / 验证工程师获得上游 Tywaves（或风险记录钉死的一等集成形状）typed IDE 波形产品路径，超出 FR117 自研 `typed-wave`。  
+**FRs covered:** FR125  
+**NFRs:** NFR14, NFR52, NFR53, NFR55  
+**Depends on:** 硬依赖 Epic 64。  
+**Standalone:** FR104 / FR114 / FR117 关闭仍有效（NFR52）。
+
+### Epic 66: 更多 IP 手写 FL
+验证工程师获得超出 FR103/FR112-B / FR119-(A) 的更多 IP 手写功能模型 ≡ tick（或等价）产品路径。  
+**FRs covered:** FR126  
+**NFRs:** NFR14, NFR52, NFR53, NFR55  
+**Depends on:** 硬依赖 Epic 64。≠ 改写 FR119 关闭证据。
+
+### Epic 67: 默认 CI 强制真 sby
+维护者在默认 CI（或 required job）中获得可复现真 `sby` 门禁；缺工具可读失败。  
+**FRs covered:** FR127  
+**NFRs:** NFR14, NFR52, NFR53, NFR54, NFR55  
+**Depends on:** 硬依赖 Epic 64。≠ 仅本机可选 `just formal-sby-check`。
+
+### Epic 68: 全 SoC pad / 商业对拍深度
+IP 集成者获得超出 FR120 `GpioVip` C1–C4 的全 SoC pad / 商业对拍完成面。  
+**FRs covered:** FR128  
+**NFRs:** NFR14, NFR52, NFR53, NFR55  
+**Depends on:** 硬依赖 Epic 64。**建议实现序：** Epic 71 之后（同触 `ip.rs`）；非硬闸门。
+
+### Epic 69: CIRCT Handshake / 多时钟弹性缓冲全家桶
+HLS 设计者获得超出 FR121 ready/valid 的 CIRCT Handshake 方言与/或多时钟弹性缓冲全家桶；须评估/修订 AD-25。  
+**FRs covered:** FR129  
+**NFRs:** NFR14, NFR52, NFR53, NFR54, NFR55  
+**Depends on:** 硬依赖 Epic 64；须引用/修订 AD-25。
+
+### Epic 70: 完整 Style Guide ± Parser 恢复
+Chisel 互操作用户获得超出 FR122 O1–O4 的完整 Style Guide 验收面；若恢复 Parser 须修订 AD-27。  
+**FRs covered:** FR130  
+**NFRs:** NFR14, NFR52, NFR53, NFR54, NFR55  
+**Depends on:** 硬依赖 Epic 64；触及 AD-27。
+
+### Epic 71: `ip.rs` 按协议拆分卫生
+维护者在保持 FR98/FR108/FR120 回归下，将 `ip.rs` 按协议拆为可维护模块。  
+**FRs covered:** FR131  
+**NFRs:** NFR14, NFR52, NFR53, NFR55  
+**Depends on:** 硬依赖 Epic 64。**建议实现序：** 先于 Epic 68。
+
+**File-churn note:** Epic 68+71 同触 `ip.rs`（分列；建议 71→68）；Epic 69/70 分别可能修订 AD-25/27；Epic 65–67 分属 wave/formal/CI — 保持拆分以便独立验收。
+
+---
+
+## Epic 64: Phase 15 加深合同与诚实门面
+
+维护者/用户看到「NFR51 剩余升格」已获 Correct Course + PRD 批准；Phase 12–14 关闭面不被改写为失败；后续加深 epic 可合法开工。  
+**FRs covered:** FR124, FR132  
+**NFRs:** NFR14, NFR52, NFR53, NFR54, NFR55  
+**Depends on:** Phase 14 complete。不依赖 Epic 65–71。  
+**Gate:** Story 64.1 NFR14 未完成前，64.2–64.4 不得标 ready。**Epic 64 未关闭前，Epic 65–71 不得标 ready。**
+
+### Story 64.1: Epic 64 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 Phase 15「NFR51 剩余升格」填写 NFR14,
+So that 不以「Phase 14 已结」冒充本批加深已获授权。
+
+**Acceptance Criteria:**
+
+**Given** Phase 12–14 FR94–123 已关闭；`deferred-work.md` NFR51 deferred 条（Tywaves 一等 / 更多 IP FL / 强制 sby CI / 全 SoC pad / CIRCT Handshake / Style Guide·Parser / ip.rs 拆分）
+**When** 创建 Epic 64 风险记录
+**Then** 含：与 Phase 12–14 关闭面的边界（NFR52）；FR125–131 加深范围摘要；须同步的 AD/CI（至少 AD-25/27；sby CI 运维）；禁止事项（至少：FR124 未合入不得开 65–71；不得改写 FR94–123「已关闭」为失败；不得静默扩大超出风险记录的子集）
+**And** 指定负责人（NFR14 / NFR52–55）
+**And** 无此记录则 64.2–64.4 不得标 ready
+
+### Story 64.2: Correct Course + PRD 批准 Phase 15（FR124）
+
+As a 产品负责人,
+I want PRD/addendum 经 Correct Course 明确批准「NFR51 剩余升格」,
+So that Phase 15 具备合同授权。
+
+**Acceptance Criteria:**
+
+**Given** Story 64.1；现 addendum 已批准至 Phase 14
+**When** 批准并落地 sprint-change-proposal（或等价）+ PRD/addendum Phase 15 段落
+**Then** 写明：Phase 15 = FR124–132 加深；Phase 12–14 关闭仍有效；新宣称须引 FR124–131（FR132 / NFR52）
+**And** 公开品牌仍为 Bitloom / `bitloom-*`
+**And** 列出 Epic 64–71 与 FR 映射指针（可指向 `epics.md`）
+
+### Story 64.3: 同步 README / deferred / 路线图指针（FR124 / FR132）
+
+As a 文档维护者,
+I want 公开状态页区分 Phase 14 完成面与 Phase 15 加深面,
+So that 对外宣称不混淆。
+
+**Acceptance Criteria:**
+
+**Given** Story 64.2 合同已批准
+**When** 更新 README「状态与 deferred」、`deferred-work.md`、（若需）doc-19 指针
+**Then** 明确 Phase 14 vs Phase 15 完成面与 FR124–132 映射
+**And** 不得把 FR117/119/120/121/122 alone 写成 Phase 15 完成面
+**And** 公开品牌 Bitloom
+
+### Story 64.4: AD 指针与 Epic 64 收口（FR124 / NFR54）
+
+As a 架构维护者,
+I want 脊柱/AGENTS 指针与 Epic 64 关闭勾选就绪,
+So that 后续实现 epic 有合法 AD/CI 引用面。
+
+**Acceptance Criteria:**
+
+**Given** Story 64.2–64.3
+**When** 更新 ARCHITECTURE-SPINE / AGENTS（若需）Phase 15 指针，并勾选 Epic 64 / FR124 / FR132 关闭条件
+**Then** NFR14 勾选 Epic 64 关闭；文首可声明 Phase 15 闸门已开
+**And** 明确：Epic 65–71 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭
+**And** Phase 12–14 关闭证据仍有效（NFR52）
+
+
+## Epic 65: 上游 Tywaves 一等集成
+
+调试 / 验证工程师获得上游 Tywaves（或风险记录钉死的一等集成形状）typed IDE 波形产品路径，超出 FR117 自研 `typed-wave`。  
+**FRs covered:** FR125  
+**NFRs:** NFR14, NFR52, NFR53, NFR55  
+**Depends on:** 硬依赖 Epic 64。  
+**Gate:** Story 65.1 NFR14 未完成前，65.2–65.3 不得标 ready。
+
+### Story 65.1: Epic 65 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR125 上游 Tywaves 一等集成填写 NFR14,
+So that 不以 FR117 自研 typed-wave 冒充上游一等完成面。
+
+**Acceptance Criteria:**
+
+**Given** Epic 64 已关闭；FR117 自研 typed 已关闭；Tywaves A 仍 deferred
+**When** 创建 Epic 65 风险记录
+**Then** 钉死：上游集成形状（版本/插件/元数据契约）、验收谓词、失败语义；与 FR117 边界
+**And** 禁止事项（至少：不得仅 FR104；不得仅 FR114；不得仅 FR117 自研；不得 docs-only）
+**And** 负责人（NFR14 / NFR52 / NFR55）；无此记录则 65.2–65.3 不得标 ready
+
+### Story 65.2: 上游 Tywaves 一等路径实现与验收（FR125）
+
+As a 调试工程师,
+I want 上游 Tywaves（或风险记录钉死的一等形状）可用,
+So that typed IDE 波形达到上游一等集成面。
+
+**Acceptance Criteria:**
+
+**Given** Story 65.1 已钉死集成形状
+**When** 交付产品路径 + ATDD/夹具（或文档化手动清单）
+**Then** 验收覆盖风险记录谓词；FR104/FR114/FR117 回归不破（NFR52）
+**And** 缺上游/元数据不得 silent 宣称 FR125 绿；公开品牌 Bitloom
+
+### Story 65.3: FR125 收口与文档指针
+
+As a 维护者,
+I want 文档/deferred 收口并勾选 Epic 65 关闭,
+So that Tywaves 一等字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 65.2
+**When** 更新 `docs/fr125-*`（或扩展 fr117）/ deferred
+**Then** FR125 关闭条件可勾选；NFR14 勾选 Epic 65 关闭
+**And** 明确：FR117 自研关闭仍有效；未列子集仍 NFR55
+
+
+## Epic 66: 更多 IP 手写 FL
+
+验证工程师获得超出 FR103/FR112-B / FR119-(A) 的更多 IP 手写功能模型 ≡ tick（或等价）产品路径。  
+**FRs covered:** FR126  
+**NFRs:** NFR14, NFR52, NFR53, NFR55  
+**Depends on:** 硬依赖 Epic 64。  
+**Gate:** Story 66.1 NFR14 未完成前，66.2–66.3 不得标 ready。
+
+### Story 66.1: Epic 66 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR126 更多 IP 手写 FL 填写 NFR14,
+So that 不以 FR112-B 或 FR119 alone 冒充分支 C 完成面。
+
+**Acceptance Criteria:**
+
+**Given** Epic 64 已关闭；FR103/FR112-B/FR119 已关闭
+**When** 创建 Epic 66 风险记录
+**Then** 钉死：新增 IP 清单与 FL≡tick（或等价）验收谓词、与 GeneratedFunctional/手写边界
+**And** 禁止事项（至少：不得仅 FR92；不得仅 FR100 F1-(i)；不得仅 MemRead≡tick；不得仅 sby 绑定）
+**And** 负责人；无此记录则 66.2–66.3 不得标 ready
+
+### Story 66.2: 更多 IP 手写 FL 路径实现与验收（FR126）
+
+As a 验证工程师,
+I want 风险记录钉死的更多 IP FL 对照路径可用,
+So that formal/双模型面超出既有分支。
+
+**Acceptance Criteria:**
+
+**Given** Story 66.1
+**When** 交付 FL/夹具 + ATDD
+**Then** 验收覆盖钉死 IP；FR100/112/119 回归不破（NFR52）
+**And** 未列入 IP 仍 deferred（NFR55）；公开品牌 Bitloom
+
+### Story 66.3: FR126 收口与文档指针
+
+As a 维护者,
+I want 文档/deferred 收口并勾选 Epic 66 关闭,
+So that 更多 IP FL 字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 66.2
+**When** 更新 `docs/fr126-*`（或扩展 fr103/fr112）/ deferred
+**Then** FR126 关闭条件可勾选；NFR14 勾选 Epic 66 关闭
+**And** 明确：FR112-B / FR119 关闭仍有效
+
+
+## Epic 67: 默认 CI 强制真 sby
+
+维护者在默认 CI（或 required job）中获得可复现真 `sby` 门禁；缺工具可读失败。  
+**FRs covered:** FR127  
+**NFRs:** NFR14, NFR52, NFR53, NFR54, NFR55  
+**Depends on:** 硬依赖 Epic 64。  
+**Gate:** Story 67.1 NFR14 未完成前，67.2–67.3 不得标 ready。
+
+### Story 67.1: Epic 67 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR127 默认 CI 强制真 sby 填写 NFR14,
+So that 不以本机可选 formal-sby-check 冒充 CI 强制完成面。
+
+**Acceptance Criteria:**
+
+**Given** Epic 64 已关闭；FR119 产品路径已关闭
+**When** 创建 Epic 67 风险记录
+**Then** 钉死：CI 作业形状（镜像/缓存/超时）、缺 sby 失败语义、与 FR119 本机路径边界
+**And** 禁止事项（至少：不得仅文档；不得 silent skip 当 required；不得改写 FR119 关闭为失败）
+**And** 负责人（含 NFR54 CI 运维）；无此记录则 67.2–67.3 不得标 ready
+
+### Story 67.2: 默认 CI 真 sby 门禁实现与验收（FR127）
+
+As a 维护者,
+I want required CI job 强制真 sby（或风险记录钉死的等价）,
+So that 形式路径在默认流水线可复现。
+
+**Acceptance Criteria:**
+
+**Given** Story 67.1
+**When** 落地 CI 配置 + ATDD/夹具（或契约测试证明缺工具非零）
+**Then** required 路径行为与风险记录一致；FR119 本机路径仍可用（NFR52）
+**And** 公开品牌 Bitloom
+
+### Story 67.3: FR127 收口与文档指针
+
+As a 维护者,
+I want 文档/deferred/CI 指针收口并勾选 Epic 67 关闭,
+So that 强制 sby CI 字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 67.2
+**When** 更新 `docs/fr127-*`（或扩展 fr119）/ deferred / CI README
+**Then** FR127 关闭条件可勾选；NFR14 勾选 Epic 67 关闭
+**And** 明确：FR119 关闭仍有效
+
+
+## Epic 68: 全 SoC pad / 商业对拍深度
+
+IP 集成者获得超出 FR120 `GpioVip` C1–C4 的全 SoC pad / 商业对拍完成面。  
+**FRs covered:** FR128  
+**NFRs:** NFR14, NFR52, NFR53, NFR55  
+**Depends on:** 硬依赖 Epic 64。建议实现序：Epic 71 之后。  
+**Gate:** Story 68.1 NFR14 未完成前，68.2–68.3 不得标 ready。
+
+### Story 68.1: Epic 68 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR128 全 SoC pad / 商业对拍填写 NFR14,
+So that 不以 FR120 C1–C4 冒充全 SoC 完成面。
+
+**Acceptance Criteria:**
+
+**Given** Epic 64 已关闭；FR120 已关闭
+**When** 创建 Epic 68 风险记录
+**Then** 钉死：pad/对拍协议与断言深度、验收夹具形状、与 FR120 边界
+**And** 禁止事项（至少：不得仅 FR108；不得仅 GpioVip C1–C4；不得 docs-only）
+**And** 负责人；无此记录则 68.2–68.3 不得标 ready
+
+### Story 68.2: 全 SoC pad 路径实现与验收（FR128）
+
+As an IP 集成者,
+I want 风险记录钉死的全 SoC pad / 对拍路径可用,
+So that GPIO 商业面超出 FR120。
+
+**Acceptance Criteria:**
+
+**Given** Story 68.1
+**When** 交付 prelude/IP 路径 + ATDD
+**Then** 验收覆盖钉死深度；FR98/FR108/FR120 回归不破（NFR52）
+**And** 未列入协议仍 deferred（NFR55）；公开品牌 Bitloom
+
+### Story 68.3: FR128 收口与文档指针
+
+As a 维护者,
+I want 文档/deferred 收口并勾选 Epic 68 关闭,
+So that 全 SoC pad 字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 68.2
+**When** 更新 `docs/fr128-*`（或扩展 fr120/ip README）/ deferred
+**Then** FR128 关闭条件可勾选；NFR14 勾选 Epic 68 关闭
+**And** 明确：FR120 关闭仍有效
+
+
+## Epic 69: CIRCT Handshake / 多时钟弹性缓冲全家桶
+
+HLS 设计者获得超出 FR121 ready/valid 的 CIRCT Handshake 方言与/或多时钟弹性缓冲全家桶；须评估/修订 AD-25。  
+**FRs covered:** FR129  
+**NFRs:** NFR14, NFR52, NFR53, NFR54, NFR55  
+**Depends on:** 硬依赖 Epic 64；须引用/修订 AD-25。  
+**Gate:** Story 69.1 NFR14 未完成前，69.2–69.3 不得标 ready。
+
+### Story 69.1: Epic 69 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR129 CIRCT Handshake 全家桶填写 NFR14,
+So that 不以 FR121 ready/valid 冒充 CIRCT/多时钟完成面。
+
+**Acceptance Criteria:**
+
+**Given** Epic 64 已关闭；FR121 已关闭；现行 AD-25 允许 ready/valid 默认语义
+**When** 创建 Epic 69 风险记录
+**Then** 钉死：CIRCT 方言/多时钟弹性缓冲子集、验收谓词、**须否/如何修订 AD-25**
+**And** 禁止事项（至少：不得仅 FR95/96；不得仅 FR110；不得仅 FR121；不得 docs-only；不得未评估 AD 即宣称全家桶）
+**And** 负责人（NFR14 / NFR54）；无此记录则 69.2–69.3 不得标 ready
+
+### Story 69.2: AD-25 修订（若需）+ CIRCT Handshake 路径（FR129）
+
+As a HLS 设计者,
+I want 风险记录钉死的 CIRCT/多时钟路径可用,
+So that Handshake 完成面超出 ready/valid。
+
+**Acceptance Criteria:**
+
+**Given** Story 69.1
+**When** 视需要修订 AD-25 并交付产品路径 + ATDD
+**Then** 行为与风险记录一致；FR95/96/FR110/FR121 回归不破（NFR52）
+**And** 未列入子集仍 deferred（NFR55）；公开品牌 Bitloom
+
+### Story 69.3: FR129 收口与文档指针
+
+As a 维护者,
+I want 文档/deferred/AD-25 戳收口并勾选 Epic 69 关闭,
+So that CIRCT Handshake 全家桶字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 69.2
+**When** 更新 `docs/fr129-*`（或扩展 fr121/hls）/ deferred / AD-25
+**Then** FR129 关闭条件可勾选；NFR14 勾选 Epic 69 关闭
+**And** 明确：FR121 关闭仍有效
+
+
+## Epic 70: 完整 Style Guide ± Parser 恢复
+
+Chisel 互操作用户获得超出 FR122 O1–O4 的完整 Style Guide 验收面；若恢复 Parser 须修订 AD-27。  
+**FRs covered:** FR130  
+**NFRs:** NFR14, NFR52, NFR53, NFR54, NFR55  
+**Depends on:** 硬依赖 Epic 64；触及 AD-27。  
+**Gate:** Story 70.1 NFR14 未完成前，70.2–70.3 不得标 ready。
+
+### Story 70.1: Epic 70 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR130 完整 Style Guide / Parser 填写 NFR14,
+So that 不以 FR122 O1–O4 冒充完整 Style Guide 完成面。
+
+**Acceptance Criteria:**
+
+**Given** Epic 64 已关闭；FR122 O1–O4 已关闭；AD-27 默认禁止 Parser
+**When** 创建 Epic 70 风险记录
+**Then** 钉死：Style Guide 规则全集（相对 O1–O4 增量）、是否恢复 Parser、**若恢复则必须修订 AD-27**、验收谓词
+**And** 禁止事项（至少：不得仅 FR97；不得仅 FR111；不得仅 O1–O4；不得 docs-only；不得静默恢复 Parser）
+**And** 负责人（NFR14 / NFR54）；无此记录则 70.2–70.3 不得标 ready
+
+### Story 70.2: AD-27 修订（若需）+ Style Guide / Parser 路径（FR130）
+
+As a Chisel 互操作用户,
+I want 风险记录钉死的完整 Style Guide（及可选 Parser）路径可用,
+So that idiomatic 面超出 FR122。
+
+**Acceptance Criteria:**
+
+**Given** Story 70.1
+**When** 视需要修订 AD-27 并交付 emit/check + ATDD
+**Then** 验收覆盖钉死规则集；FR97/FR111/FR122 回归不破（NFR52）
+**And** Parser 仅在 70.1 显式选择且 AD 已修订时启用；公开品牌 Bitloom
+
+### Story 70.3: FR130 收口与文档指针
+
+As a 维护者,
+I want 文档/deferred/AD-27 戳收口并勾选 Epic 70 关闭,
+So that Style Guide/Parser 字面条可检查关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 70.2
+**When** 更新 `docs/fr130-*`（或扩展 fr122）/ deferred / AD-27
+**Then** FR130 关闭条件可勾选；NFR14 勾选 Epic 70 关闭
+**And** 明确：FR122 关闭仍有效
+
+
+## Epic 71: `ip.rs` 按协议拆分卫生
+
+维护者在保持 FR98/FR108/FR120 回归下，将 `ip.rs` 按协议拆为可维护模块。  
+**FRs covered:** FR131  
+**NFRs:** NFR14, NFR52, NFR53, NFR55  
+**Depends on:** 硬依赖 Epic 64。建议实现序：先于 Epic 68。  
+**Gate:** Story 71.1 NFR14 未完成前，71.2–71.3 不得标 ready。
+
+### Story 71.1: Epic 71 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR131 `ip.rs` 协议拆分填写 NFR14,
+So that 拆分有边界且不以「仅评估」冒充关闭。
+
+**Acceptance Criteria:**
+
+**Given** Epic 64 已关闭；`ip.rs` ~3213 LOC；FR98/108/120 已关闭
+**When** 创建 Epic 71 风险记录
+**Then** 钉死：按协议模块切分图、公开 API 稳定性、回归义务（至少 FR98 四类 + FR108 + FR120）
+**And** 禁止事项（至少：不得仅文档评估；不得破坏双模型/近 VIP；不得 silent 改导出）
+**And** 负责人；无此记录则 71.2–71.3 不得标 ready
+
+### Story 71.2: `ip.rs` 按协议拆分实现与验收（FR131）
+
+As a 维护者,
+I want `ip.rs` 按风险记录切分为可维护模块,
+So that IP 面可独立演进且回归保持。
+
+**Acceptance Criteria:**
+
+**Given** Story 71.1
+**When** 落地模块拆分 + ATDD/既有 IP 测试绿
+**Then** 切分与风险记录一致；FR98/FR108/FR120 回归不破（NFR52）
+**And** 公开品牌 Bitloom；设计 crate 仍只依赖 `bitloom-prelude`
+
+### Story 71.3: FR131 收口与 Phase 15 故事清单指针
+
+As a 维护者,
+I want 文档/deferred 收口并勾选 Epic 71 关闭,
+So that ip.rs 拆分可检查关闭，且 Phase 15 实现故事清单完整。
+
+**Acceptance Criteria:**
+
+**Given** Story 71.2
+**When** 更新 `docs/fr131-*`（或 ip README）/ deferred
+**Then** FR131 关闭条件可勾选；NFR14 勾选 Epic 71 关闭
+**And** 文首/状态页可声明：Phase 15 规划故事已齐（Epic 64–71）；剩余门为 Correct Course（若仍 pending）与各 epic 实现关闭态
+**And** 明确：拆分本身已关闭；未列入协议加深仍属 FR128/NFR55
+

@@ -3,7 +3,7 @@ title: Bitloom 阶段二 PRD — 2026-08-21 概述字面升格修订
 status: final
 created: 2026-08-19
 updated: 2026-09-10
-amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08; phase11-contract-green-2026-09-09; phase12-literal-green-path-b-2026-09-09; phase13-mvp-commercial-deepen-2026-09-10; phase14-nfr47-deferred-deepen-2026-09-10
+amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08; phase11-contract-green-2026-09-09; phase12-literal-green-path-b-2026-09-09; phase13-mvp-commercial-deepen-2026-09-10; phase14-nfr47-deferred-deepen-2026-09-10; phase15-nfr51-leftover-deepen-2026-09-10
 ---
 
 # PRD: Bitloom 阶段二及愿景闭环（later-product → FR + 概述字面升格）
@@ -22,6 +22,8 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 
 *2026-09-10 追加（`phase14-nfr47-deferred-deepen`）：Phase 14 NFR47 未选加深升格 **FR116–FR123** / **NFR48–NFR51** — Phase 12/13 关闭仍有效；加深宣称仅引用 FR116–122（见 addendum「Phase 14」）。*
 
+*2026-09-10 追加（`phase15-nfr51-leftover-deepen`）：Phase 15 NFR51 剩余升格 **FR124–FR132** / **NFR52–NFR55** — Phase 12–14 关闭仍有效；加深宣称仅引用 FR124–131（见 addendum「Phase 15」）。*
+
 ## 0. Document Purpose
 
 本 PRD 面向 PM、架构与 epic 拆解。
@@ -36,6 +38,7 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 - **2026-09-09 Phase 12 字面绿（Path B）：** **FR94–FR105** / **NFR40–NFR43** — 推翻 FR93；字面七阶段全绿 MVP 关闭面仍有效；FR87 合同绿为历史里程碑（见 addendum「Phase 12 字面绿」）。
 - **2026-09-10 Phase 13 MVP→商业加深：** **FR106–FR115** / **NFR44–NFR47** — 不回滚 FR94–105；加深完成面须新 FR 勾选（见 addendum「Phase 13」）。
 - **2026-09-10 Phase 14 NFR47 未选加深升格：** **FR116–FR123** / **NFR48–NFR51** — 不回滚 FR94–115；加深完成面须新 FR 勾选（见 addendum「Phase 14」）。
+- **2026-09-10 Phase 15 NFR51 剩余升格：** **FR124–FR132** / **NFR52–NFR55** — 不回滚 FR94–123；加深完成面须新 FR 勾选（见 addendum「Phase 15」）。
 - **身份 supersession：** 公开产品名 **Bitloom**，crates.io / CLI **`bitloom`**（阶段三 FR41）；禁止发布 `rhdl` / `rhdl-bits`。正文不再以 `rhdl-rs` 为发布名。[ASSUMPTION] 概述仍写 RHDL；合同以 Bitloom 为准，概述另开任务对齐。
 - `later-product.md` 仍为索引，不承载无 ID 需求。
 

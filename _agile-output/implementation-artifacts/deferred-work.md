@@ -17,7 +17,14 @@ Correct Course `sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen.
 
 Correct Course `sprint-change-proposal-2026-09-10-phase14-nfr47-deferred-deepen.md` + PRD addendum「Phase 14」**已批准**（**Phase 14 contract approved**）。  
 闸门 **FR116 / Epic 57 已关闭**；实现 epic = Epic 58–63（**FR117 / Epic 58 已关闭** — 自研 typed；Tywaves A deferred；**FR118 / Epic 59 已关闭** — syn-scan；**FR119 / Epic 60 已关闭** — SymbiYosys/`sby`；**FR120 / Epic 61 已关闭** — 商业 VIP GPIO / `GpioVip`；**FR121 / Epic 62 已关闭** — Handshake 默认可综合；**FR122 / Epic 63 已关闭** — 官方风格 Chisel 全家桶）。**Phase 14 规划/实现故事已齐（Epic 57–63 已关闭）。** 对外「Tywaves / syn-scan / SBY / VIP GPIO / Handshake / 官方风格全家桶」须引 **FR116–122**（**FR123**）；**FR117 关闭 ≠ 上游 Tywaves 一等宣称**（**NFR51**）；**FR119 关闭 ≠ 分支 C 更多 IP 手写 FL**（**NFR51**）；**FR120 关闭 ≠ 全 SoC pad / 商业对拍 / 非上升沿 IRQ 全家桶**（**NFR51**）；**FR121 关闭 ≠ CIRCT Handshake 方言 / allocation 全家桶**（**NFR51**）；**FR122 关闭 ≠ 完整 Style Guide / Parser 恢复**（**NFR51**）；**禁止**用 Phase 13 商业加深冒充本批加深（**NFR48**）。
-Phase 12/13 关闭证据**仍有效**。原 NFR47 未选项（item-149/153/157/161/165 等）已升格为 **FR117–122**；**FR117/FR118/FR119/FR120/FR121/FR122 已关闭**。未列入本批者仍须另开合同（**NFR51**）。
+Phase 12/13 关闭证据**仍有效**。原 NFR47 未选项（item-149/153/157/161/165 等）已升格为 **FR117–122**；**FR117/FR118/FR119/FR120/FR121/FR122 已关闭**。原 NFR51 明示剩余已另开 **Phase 15** 合同（见下）。
+
+## Phase 15 pointer (FR124–132 / NFR52–NFR55) — NFR51 剩余升格
+
+Correct Course `sprint-change-proposal-2026-09-10-phase15-nfr51-leftover-deepen.md` + PRD addendum「Phase 15」**已批准**（**Phase 15 contract approved**）。  
+闸门 **FR124 / Epic 64**（实现关闭前加深 epic 不得 ready）；实现 epic = Epic 65–71（上游 Tywaves→**FR125**；更多 IP FL→**FR126**；强制 sby CI→**FR127**；全 SoC pad→**FR128**；CIRCT Handshake→**FR129**；Style Guide/Parser→**FR130**；ip.rs 拆分→**FR131**；宣称→**FR132**）。  
+**禁止**用 Phase 14 完成面冒充本批加深（**NFR52**）。软序：建议 **Epic 71 → Epic 68**。  
+Phase 12–14 关闭证据**仍有效**。未列入本批者（自动 FSM 标签、第三方 LCOV GUI 一等、emit MemRead 完整生成、非 Cargo monorepo 任意路径扫描）仍须另开合同（**NFR55**）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
