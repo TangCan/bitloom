@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-09-2026 21:45
+last_updated: 09-10-2026 08:50
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -317,7 +317,7 @@ development_status:
   40-2-correct-course-prd-推翻-fr93-fr94: done
   40-3-重写-doc-19-字面绿定义-fr94: done
   40-4-修订-ad-撤销-fr93-锁定-fr94: done
-  epic-40-retrospective: optional
+  epic-40-retrospective: done
 
   epic-41: done
   41-1-epic-41-nfr14-风险记录: done
@@ -1005,3 +1005,24 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-39-retro-2026-09-09.md"
+  - id: "epic-40-retro-item-99-nfr42-fr94-宣称纪律-对外-产品做完-字面全绿-必须引用-fr94-1"
+    epic: 40
+    action: "NFR42 / FR94 宣称纪律：对外「产品做完 / 字面全绿」必须引用 FR94–105 关闭证据；禁止用 FR87 合同绿冒充字面
+      B；字面项须对应 FR 关闭后方可勾选。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-40-retro-2026-09-10.md"
+  - id: "epic-40-retro-item-100-nfr41-修订-ad-引用纪律-实现-epic-41-47-及后续加深-须在故"
+    epic: 40
+    action: "NFR41 / 修订 AD 引用纪律：实现 Epic 41–47（及后续加深）须在故事/NFR14 中引用已修订 AD-5/25/27（适用者）；不得在未引用修订
+      AD 时宣称 FR95/97/101 等已合法关闭。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-40-retro-2026-09-10.md"
+  - id: "epic-40-retro-item-101-同步-epics-md-frontmatter-将-phase12epic40s"
+    epic: 40
+    action: "同步 epics.md frontmatter：将 phase12Epic40Status–phase12Epic47Status 从 ready-for-dev
+      改为与 sprint done / phase12Status: complete 一致（续 Phase 11 item-89/92/95/98 同形漂移）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-40-retro-2026-09-10.md"
