@@ -308,7 +308,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 **FR123 宣称纪律：** 「Tywaves / syn-scan / SBY / VIP GPIO / Handshake / 官方风格全家桶」**仅**在对应 **FR116–122** 关闭后方可勾选；**禁止**用 Phase 13 完成面冒充。**FR117 已关闭**仅授权宣称 **自研 typed IDE 波形（子集 B）**；**不得**据此宣称上游 Tywaves 一等集成（→ **FR125 / Phase 15**）。**FR118 已关闭**授权宣称无 metadata workspace `#[bitloom::top]` syn-scan（≠ DesignFixture / metadata alone）。**FR119 已关闭**授权宣称 SymbiYosys/`sby` F1-(ii) 形式路径（≠ FR100 F1-(i) / FR112-B / FR85 alone）；**分支 C 更多 IP 手写 FL → FR126**。**FR120 已关闭**授权宣称商业 VIP GPIO（`GpioVip` C1–C4；≠ FR108 P1–P4 alone / FR98 四类 alone）；**全 SoC pad → FR128**。**FR121 已关闭**授权宣称 Handshake / 动态数据流默认可综合（ready/valid；≠ FR95/96 MVP alone / FR110 alone）；**CIRCT Handshake 全家桶 → FR129**。**FR122 已关闭**授权宣称官方风格 Chisel 全家桶（O1–O4；≠ FR97 alone / FR111 D1+D3 alone / 机械 emit）；**完整 Style Guide / Parser → FR130**。强制 sby CI → **FR127**；`ip.rs` 拆分 → **FR131**。未列入 Phase 15 的 deferred 仍须另开合同（**NFR55**）。
 
-### Phase 15 加深面（合同已批准；闸门 Epic 64 / FR124 已关闭；Epic 65–71 / FR125–FR131 仍须各自实现关闭）
+### Phase 15 加深面（合同已批准；闸门 Epic 64 / FR124 已关闭；Phase 15 规划故事已齐 Epic 64–71；Epic 65–67、71 / FR125–127、FR131 已关闭；Epic 68–70 仍须实现关闭）
 
 下列原 Phase 14 **NFR51 明示剩余**已由 Correct Course + **FR124** 升格为 Phase 15 显式 FR（Epic 64–71）。对外宣称按 **FR132**。同源：PRD addendum「Phase 15」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。**不得**把 FR117/119/120/121/122 alone 写成 Phase 15 完成面。
 
@@ -320,7 +320,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 全 SoC pad / 商业对拍 | FR128 / 68 | vs FR120 GpioVip C1–C4 |
 | CIRCT Handshake / 多时钟 | FR129 / 69 | vs FR121 ready/valid（须 AD-25） |
 | 完整 Style Guide ± Parser | FR130 / 70 | vs FR122 O1–O4（可能 AD-27） |
-| `ip.rs` 按协议拆分 | FR131 / 71 | 拆分本身；软序先于 FR128 |
+| `ip.rs` 按协议拆分 | FR131 / 71 | 拆分本身；软序先于 FR128 — **Epic 71 已关闭**（Story 71.3；`ip/` 协议模块） |
 
 **FR132 宣称纪律：** 「上游 Tywaves 一等 / 更多 IP FL / 强制 sby CI / 全 SoC pad / CIRCT Handshake / Style Guide·Parser / ip.rs 拆分」**仅**在对应 **FR124–131** 关闭后方可勾选；**禁止**用 Phase 14 完成面冒充。公开品牌 **Bitloom**。
 

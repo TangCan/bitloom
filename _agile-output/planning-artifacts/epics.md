@@ -103,7 +103,7 @@ phase15Epic67Status: complete
 phase15Epic68Status: backlog
 phase15Epic69Status: backlog
 phase15Epic70Status: backlog
-phase15Epic71Status: backlog
+phase15Epic71Status: complete
 phase15InputDocuments:
   - prds/prd-rhdl-2026-08-19/prd.md
   - prds/prd-rhdl-2026-08-19/addendum.md
