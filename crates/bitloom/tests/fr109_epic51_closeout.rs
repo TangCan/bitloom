@@ -109,7 +109,9 @@ fn fr109_sprint_epic51_done() {
     );
     assert!(sprint.contains("epic-51: done") || sprint.contains("epic-51:done"));
     assert!(
-        sprint.contains("51-2-fsm-state-visit-覆盖率-fr109: done")
+        sprint.contains("51-2-fsm-state-visit-记录器与夹具-fr109: done")
+            || sprint.contains("51-2-fsm-state-visit-记录器与夹具-fr109:done")
+            || sprint.contains("51-2-fsm-state-visit-覆盖率-fr109: done")
             || sprint.contains("51-2-fsm-state-visit-覆盖率-fr109:done")
     );
 }

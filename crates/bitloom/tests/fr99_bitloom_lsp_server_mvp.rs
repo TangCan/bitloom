@@ -179,11 +179,14 @@ fn fr99_bitloom_lsp_brand_and_not_rust_analyzer_alone() {
 fn fr99_bitloom_lsp_mvp_scope_guards() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
-        sprint.contains("44-2-bitloom-lsp-服务器-mvp-fr99: done"),
+        sprint.contains("44-2-bitloom-lsp-服务器-mvp-编辑器接线-fr99: done")
+            || sprint.contains("44-2-bitloom-lsp-服务器-mvp-fr99: done"),
         "sprint must mark 44-2 done"
     );
     assert!(
-        sprint.contains("44-3-按键全-elaborate-诊断-符号-fr99: done")
+        sprint.contains("44-3-按键全设计-elaborate-诊断-符号-fr99: done")
+            || sprint.contains("44-3-按键全设计-elaborate-诊断-符号-fr99: backlog")
+            || sprint.contains("44-3-按键全-elaborate-诊断-符号-fr99: done")
             || sprint.contains("44-3-按键全-elaborate-诊断-符号-fr99: backlog"),
         "44-3 must be tracked (backlog during 44.2-only; done after 44.3)"
     );

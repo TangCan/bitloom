@@ -102,7 +102,9 @@ fn fr103_sprint_epic45_done_epic46_gated_epic47_gated() {
         "sprint must mark epic-45 done"
     );
     assert!(
-        sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: done")
+        sprint.contains("45-4-一级-ip-双模型齐全-epic-45-收口-fr103: done")
+            || sprint.contains("45-4-一级-ip-双模型齐全-epic-45-收口-fr103:done")
+            || sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: done")
             || sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103:done"),
         "sprint must mark story 45-4 done"
     );

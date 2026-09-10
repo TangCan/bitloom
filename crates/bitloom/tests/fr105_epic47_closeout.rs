@@ -92,7 +92,9 @@ fn fr105_deferred_readme_epic47_closed() {
 fn fr105_sprint_epic47_done_phase12_closed() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
-        sprint.contains("47-3-仿真覆盖率扩展-fr105-收口: done")
+        sprint.contains("47-3-仿真覆盖率记录扩展-phase-12-故事收口-fr105: done")
+            || sprint.contains("47-3-仿真覆盖率记录扩展-phase-12-故事收口-fr105:done")
+            || sprint.contains("47-3-仿真覆盖率扩展-fr105-收口: done")
             || sprint.contains("47-3-仿真覆盖率扩展-fr105-收口:done"),
         "47-3 must be done"
     );

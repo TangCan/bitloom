@@ -188,7 +188,8 @@ fn fr99_full_elaborate_trigger_docs() {
 fn fr99_full_elaborate_scope_guards() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
-        sprint.contains("44-3-按键全-elaborate-诊断-符号-fr99: done"),
+        sprint.contains("44-3-按键全设计-elaborate-诊断-符号-fr99: done")
+            || sprint.contains("44-3-按键全-elaborate-诊断-符号-fr99: done"),
         "sprint must mark 44-3 done"
     );
     assert!(

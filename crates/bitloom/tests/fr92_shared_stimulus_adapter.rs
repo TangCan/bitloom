@@ -182,7 +182,8 @@ fn fr92_nfr14_and_sprint_epic39_closed() {
 
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
-        sprint.contains("39-4-多视图同刺激与-adapter-模板-fr92: done"),
+        sprint.contains("39-4-多视图同刺激-adapter-模板-fr92: done")
+            || sprint.contains("39-4-多视图同刺激与-adapter-模板-fr92: done"),
         "sprint must mark 39-4 done"
     );
     assert!(

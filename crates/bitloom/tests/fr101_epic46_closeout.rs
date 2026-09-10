@@ -157,7 +157,9 @@ fn fr101_sprint_epic46_done_epic47_gated() {
         "sprint must mark story 46-3 done"
     );
     assert!(
-        sprint.contains("46-2-systemc-tlm-2-0-产品面-fr101: done")
+        sprint.contains("46-2-systemc-tlm-2-0-生成或集成产品面-fr101: done")
+            || sprint.contains("46-2-systemc-tlm-2-0-生成或集成产品面-fr101:done")
+            || sprint.contains("46-2-systemc-tlm-2-0-产品面-fr101: done")
             || sprint.contains("46-2-systemc-tlm-2-0-产品面-fr101:done"),
         "sprint must keep 46-2 done"
     );

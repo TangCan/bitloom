@@ -77,7 +77,12 @@ fn fr104_sprint_47_2_done_epic47_closed_ok() {
         "47-2 must be done"
     );
     assert!(
-        text.contains("47-3-仿真覆盖率扩展-fr105-收口: done")
+        text.contains("47-3-仿真覆盖率记录扩展-phase-12-故事收口-fr105: done")
+            || text.contains("47-3-仿真覆盖率记录扩展-phase-12-故事收口-fr105:done")
+            || text.contains("47-3-仿真覆盖率记录扩展-phase-12-故事收口-fr105: backlog")
+            || text.contains("47-3-仿真覆盖率记录扩展-phase-12-故事收口-fr105: in-progress")
+            || text.contains("47-3-仿真覆盖率记录扩展-phase-12-故事收口-fr105: ready-for-dev")
+            || text.contains("47-3-仿真覆盖率扩展-fr105-收口: done")
             || text.contains("47-3-仿真覆盖率扩展-fr105-收口:done")
             || text.contains("47-3-仿真覆盖率扩展-fr105-收口: backlog")
             || text.contains("47-3-仿真覆盖率扩展-fr105-收口: in-progress")

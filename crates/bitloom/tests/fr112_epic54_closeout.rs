@@ -100,7 +100,9 @@ fn fr112_sprint_epic54_done() {
     );
     assert!(sprint.contains("epic-54: done") || sprint.contains("epic-54:done"));
     assert!(
-        sprint.contains("54-2-形式等价-双模型深度-fr112: done")
+        sprint.contains("54-2-选定加深路径实现与-atdd-fr112: done")
+            || sprint.contains("54-2-选定加深路径实现与-atdd-fr112:done")
+            || sprint.contains("54-2-形式等价-双模型深度-fr112: done")
             || sprint.contains("54-2-形式等价-双模型深度-fr112:done")
     );
 }

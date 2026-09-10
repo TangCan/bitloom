@@ -74,7 +74,9 @@ fn fr106_nfr14_epic48_close_conditions_checked() {
 fn fr106_sprint_epic48_done() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
-        sprint.contains("48-4-ad-指针与-epic-48-收口-fr106: done")
+        sprint.contains("48-4-ad-指针与-epic-48-收口-fr106-nfr46: done")
+            || sprint.contains("48-4-ad-指针与-epic-48-收口-fr106-nfr46:done")
+            || sprint.contains("48-4-ad-指针与-epic-48-收口-fr106: done")
             || sprint.contains("48-4-ad-指针与-epic-48-收口-fr106:done"),
         "48-4 must be done"
     );

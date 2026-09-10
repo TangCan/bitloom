@@ -107,12 +107,18 @@ fn fr114_fr104_fr105_mvp_still_valid() {
 fn fr114_sprint_epic56_done_phase13_epics_closed() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
-        sprint.contains("56-3-fr114-收口与-phase13-指针: done")
+        sprint.contains("56-3-fr114-收口与-phase-13-故事清单指针: done")
+            || sprint.contains("56-3-fr114-收口与-phase-13-故事清单指针:done")
+            // legacy pre-rename key (Phase 14 sprint-key refresh)
+            || sprint.contains("56-3-fr114-收口与-phase13-指针: done")
             || sprint.contains("56-3-fr114-收口与-phase13-指针:done")
     );
     assert!(sprint.contains("epic-56: done") || sprint.contains("epic-56:done"));
     assert!(
-        sprint.contains("56-2-富波形-覆盖率-gui-加深-fr114: done")
+        sprint.contains("56-2-选定-gui-集成路径实现与验收-fr114: done")
+            || sprint.contains("56-2-选定-gui-集成路径实现与验收-fr114:done")
+            // legacy pre-rename key
+            || sprint.contains("56-2-富波形-覆盖率-gui-加深-fr114: done")
             || sprint.contains("56-2-富波形-覆盖率-gui-加深-fr114:done")
     );
     for epic in 48..=56 {

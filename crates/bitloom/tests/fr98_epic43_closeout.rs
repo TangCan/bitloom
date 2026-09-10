@@ -99,7 +99,9 @@ fn fr98_sprint_epic43_done_epic44_gated() {
         "sprint must mark epic-43 done"
     );
     assert!(
-        sprint.contains("43-5-axi-可选-gpio-fr98-收口: done")
+        sprint.contains("43-5-axi-及可选-gpio-fr98-收口: done")
+            || sprint.contains("43-5-axi-及可选-gpio-fr98-收口:done")
+            || sprint.contains("43-5-axi-可选-gpio-fr98-收口: done")
             || sprint.contains("43-5-axi-可选-gpio-fr98-收口:done"),
         "sprint must mark story 43-5 done"
     );

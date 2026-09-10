@@ -103,7 +103,9 @@ fn fr111_sprint_epic53_done() {
     );
     assert!(sprint.contains("epic-53: done") || sprint.contains("epic-53:done"));
     assert!(
-        sprint.contains("53-2-idiomatic-chisel-可维护深度-fr111: done")
+        sprint.contains("53-2-idiomatic-加深发射-检查与-atdd-fr111: done")
+            || sprint.contains("53-2-idiomatic-加深发射-检查与-atdd-fr111:done")
+            || sprint.contains("53-2-idiomatic-chisel-可维护深度-fr111: done")
             || sprint.contains("53-2-idiomatic-chisel-可维护深度-fr111:done")
     );
 }

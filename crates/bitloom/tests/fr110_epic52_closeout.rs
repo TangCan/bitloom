@@ -103,7 +103,9 @@ fn fr110_sprint_epic52_done() {
     );
     assert!(sprint.contains("epic-52: done") || sprint.contains("epic-52:done"));
     assert!(
-        sprint.contains("52-2-树内-hls-商业深度-fr110: done")
+        sprint.contains("52-2-树内-hls-加深实现与验收-fr110: done")
+            || sprint.contains("52-2-树内-hls-加深实现与验收-fr110:done")
+            || sprint.contains("52-2-树内-hls-商业深度-fr110: done")
             || sprint.contains("52-2-树内-hls-商业深度-fr110:done")
     );
 }

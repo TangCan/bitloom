@@ -160,7 +160,10 @@ fn fr91_no_half_built_lsp_binary() {
         );
         let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
         assert!(
-            sprint.contains("44-2-bitloom-lsp-服务器-mvp-fr99: done")
+            sprint.contains("44-2-bitloom-lsp-服务器-mvp-编辑器接线-fr99: done")
+                || sprint.contains("44-2-bitloom-lsp-服务器-mvp-编辑器接线-fr99: ready-for-dev")
+                || sprint.contains("44-2-bitloom-lsp-服务器-mvp-编辑器接线-fr99: in-progress")
+                || sprint.contains("44-2-bitloom-lsp-服务器-mvp-fr99: done")
                 || sprint.contains("44-2-bitloom-lsp-服务器-mvp-fr99: ready-for-dev")
                 || sprint.contains("44-2-bitloom-lsp-服务器-mvp-fr99: in-progress"),
             "bitloom-lsp must be tracked under Epic 44 story 44-2 (not a silent Epic 39 Path B violation)"

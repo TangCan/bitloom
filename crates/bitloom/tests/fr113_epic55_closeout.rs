@@ -94,7 +94,9 @@ fn fr113_sprint_epic55_done() {
     );
     assert!(sprint.contains("epic-55: done") || sprint.contains("epic-55:done"));
     assert!(
-        sprint.contains("55-2-lsp-设计根发现加深-fr113: done")
+        sprint.contains("55-2-设计根发现实现与-atdd-fr113: done")
+            || sprint.contains("55-2-设计根发现实现与-atdd-fr113:done")
+            || sprint.contains("55-2-lsp-设计根发现加深-fr113: done")
             || sprint.contains("55-2-lsp-设计根发现加深-fr113:done")
     );
 }

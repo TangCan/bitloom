@@ -200,7 +200,10 @@ fn fr101_sprint_46_2_done_epic_may_close_after_46_3() {
     let text = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     let s2 = text
         .lines()
-        .find(|l| l.contains("46-2-systemc-tlm-2-0-产品面-fr101:"))
+        .find(|l| {
+            l.contains("46-2-systemc-tlm-2-0-生成或集成产品面-fr101:")
+                || l.contains("46-2-systemc-tlm-2-0-产品面-fr101:")
+        })
         .expect("46-2 key");
     assert!(
         s2.contains("done"),

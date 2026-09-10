@@ -223,7 +223,11 @@ fn fr102_sprint_45_3_done_epic_open() {
     );
     // 45-4 / epic-45 may be done after Story 45.4 closeout.
     assert!(
-        sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: backlog")
+        sprint.contains("45-4-一级-ip-双模型齐全-epic-45-收口-fr103: backlog")
+            || sprint.contains("45-4-一级-ip-双模型齐全-epic-45-收口-fr103: ready-for-dev")
+            || sprint.contains("45-4-一级-ip-双模型齐全-epic-45-收口-fr103: in-progress")
+            || sprint.contains("45-4-一级-ip-双模型齐全-epic-45-收口-fr103: done")
+            || sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: backlog")
             || sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: ready-for-dev")
             || sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: in-progress")
             || sprint.contains("45-4-一级-ip-双模型齐全-epic45-收口-fr103: done"),

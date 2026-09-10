@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR116 / Epic 57；NFR14、NFR48、NFR49、NFR50、NFR51；对照 FR94–115 / NFR40–47；FR123 宣称门面 |
 | 记录日期 | 2026-09-10 |
-| 状态 | **open** — Story 57.1；Epic 57 闸门；57.2–57.4 仍 backlog；Epic 58–63 仍 backlog（不得 ready） |
+| 状态 | **open** — Story 57.1 done；Story 57.2 done（FR116 合同戳验收）；57.3–57.4 仍 backlog；Epic 58–63 仍 backlog（不得 ready） |
 
 ### Phase 12/13 关闭面 vs Phase 14 加深边界（NFR48 · 必读）
 
@@ -116,7 +116,7 @@
 
 ### Epic 57 关闭条件（Story 57.4 勾选）
 
-- [ ] **FR116 / Correct Course + PRD：** Phase 14 批准文案验收 — Story 57.2
+- [x] **FR116 / Correct Course + PRD：** Phase 14 批准文案验收 — Story 57.2
 - [ ] **README / deferred：** Phase 13 商业加深 vs Phase 14 加深区分 — Story 57.3
 - [ ] **AD 指针：** Deferred / NFR50 门禁可执行 — Story 57.4
 - [ ] **NFR48–51：** 加深隔离与未选子集显式合同已登记
