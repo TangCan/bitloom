@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 17:45
+last_updated: 09-10-2026 17:50
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -429,7 +429,7 @@ development_status:
   58-1-epic-58-nfr14-风险记录: done
   58-2-typed-ide-波形路径实现与验收-fr117: done
   58-3-fr117-收口与文档指针: done
-  epic-58-retrospective: optional
+  epic-58-retrospective: done
 
   epic-59: done
   59-1-epic-59-nfr14-风险记录: done
@@ -1597,3 +1597,31 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-57-retro-2026-09-10.md"
+  - id: "epic-58-retro-item-170-fr117-诚实边界-对外不得把-fr104-interactive-html"
+    epic: 58
+    action: "FR117 诚实边界：对外不得把 FR104 interactive.html I1–I3 / FR114 LCOV·coverage.html
+      / timing·VCD·GTKWave alone 写成 Tywaves 级 typed IDE 波形 / FR117 完成面；宣称须引自研 typed-wave
+      路径（续 FR123）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-58-retro-2026-09-10.md"
+  - id: "epic-58-retro-item-171-触碰-rhdl-viz-cli-typed-wave-路径时保持-fr104-波"
+    epic: 58
+    action: "触碰 rhdl-viz / CLI typed-wave 路径时保持 FR104 波路径与 FR114 LCOV GUI 默认可用（NFR48）；缺
+      typed 元数据不得 silent 宣称 FR117 绿。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-58-retro-2026-09-10.md"
+  - id: "epic-58-retro-item-172-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 58
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-58-retro-2026-09-10.md"
+  - id: "epic-58-retro-item-173-可选工程卫生-若后续交付子集-a-tywaves-一等集成-须新合同钉死-nfr"
+    epic: 58
+    action: "可选工程卫生：若后续交付子集 (A) Tywaves 一等集成，须新合同钉死（NFR51）；当前自研 typed IDE 波形为 FR117
+      完成面。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-58-retro-2026-09-10.md"
