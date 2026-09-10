@@ -16,7 +16,7 @@ This page is the **FR114 completion surface**. It deepens observability **beyond
 | Subset | Status |
 |--------|--------|
 | **(B) LCOV + in-tree coverage GUI** | **FR114 face — closed** (this page) |
-| (A) Tywaves-class typed IDE waveform | **deferred** — needs new contract |
+| (A) Tywaves-class typed IDE waveform | **deferred** at Epic 56 — **Phase 14 FR117** in-house subset B → [`fr117-typed-ide-wave.md`](fr117-typed-ide-wave.md); Tywaves A still deferred (NFR51) |
 
 **Forbidden closes:** static `timing.html` / VCD /「请开 GTKWave」alone; FR104 I1–I3 alone;
 FR105 Mux v2 alone; FR109 text report alone; docs-only.
@@ -69,5 +69,5 @@ cargo bitloom coverage --out-dir target/cov
 
 ## Non-goals (NFR47)
 
-- Tywaves-class typed IDE waveform (subset A)
+- Tywaves-class first-class integration remains deferred; Phase 14 delivers **in-house typed IDE wave** under FR117 — see [`fr117-typed-ide-wave.md`](fr117-typed-ide-wave.md)
 - Claiming FR104 I1–I3 or FR105 Mux v2 alone closes FR114

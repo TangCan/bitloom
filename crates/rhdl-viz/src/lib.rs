@@ -6,7 +6,7 @@
 
 use std::collections::BTreeMap;
 
-use bitloom_hir::{FrozenHir, Stmt};
+use bitloom_hir::{FrozenHir, GroundType, PortDirection, Stmt};
 
 /// One time-step of signal values for the product timing view.
 #[derive(Clone, Debug, Default)]
@@ -184,12 +184,230 @@ pub fn interactive_wave_html(title: &str, samples: &[WaveSample]) -> String {
 }
 
 const INTERACTIVE_WAVE_JS: &str = include_str!("interactive_wave.js");
+const TYPED_WAVE_JS: &str = include_str!("typed_wave.js");
 
 fn escape_js_string(s: &str) -> String {
     s.replace('\\', "\\\\")
         .replace('"', "\\\"")
         .replace('\n', "\\n")
         .replace('\r', "\\r")
+}
+
+/// Structured signal metadata for FR117 typed IDE waveform (subset B).
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct TypedSignal {
+    pub name: String,
+    /// Human-readable type, e.g. `UInt<8>`, `Clock`.
+    pub ty: String,
+    /// Role: `port:input`, `port:output`, `port:inout`, `reg`, `wire`.
+    pub kind: String,
+    pub module: String,
+    pub width: u32,
+}
+
+fn format_ground_type(ty: &GroundType) -> String {
+    match ty {
+        GroundType::UInt { width } => format!("UInt<{width}>"),
+        GroundType::SInt { width } => format!("SInt<{width}>"),
+        GroundType::Clock => "Clock".into(),
+        GroundType::Reset => "Reset".into(),
+        GroundType::Bool => "Bool".into(),
+        GroundType::Analog => "Analog".into(),
+    }
+}
+
+fn width_of_ty(ty: &GroundType) -> u32 {
+    match ty {
+        GroundType::UInt { width } | GroundType::SInt { width } => *width,
+        GroundType::Clock | GroundType::Reset | GroundType::Bool | GroundType::Analog => 1,
+    }
+}
+
+fn port_kind(dir: PortDirection) -> &'static str {
+    match dir {
+        PortDirection::Input => "port:input",
+        PortDirection::Output => "port:output",
+        PortDirection::InOut => "port:inout",
+    }
+}
+
+/// Extract typed signal hierarchy from FrozenHir (ports / wires / regs).
+pub fn typed_signals_from_hir(hir: &FrozenHir) -> Vec<TypedSignal> {
+    let mut out = Vec::new();
+    for m in &hir.circuit().modules {
+        for p in &m.ports {
+            out.push(TypedSignal {
+                name: p.name.clone(),
+                ty: format_ground_type(&p.ty),
+                kind: port_kind(p.direction).into(),
+                module: m.name.clone(),
+                width: width_of_ty(&p.ty),
+            });
+        }
+        for stmt in &m.body {
+            match stmt {
+                Stmt::WireDecl { name, ty, .. } => out.push(TypedSignal {
+                    name: name.clone(),
+                    ty: format_ground_type(ty),
+                    kind: "wire".into(),
+                    module: m.name.clone(),
+                    width: width_of_ty(ty),
+                }),
+                Stmt::RegDecl { name, ty, .. } => out.push(TypedSignal {
+                    name: name.clone(),
+                    ty: format_ground_type(ty),
+                    kind: "reg".into(),
+                    module: m.name.clone(),
+                    width: width_of_ty(ty),
+                }),
+                _ => {}
+            }
+        }
+    }
+    out
+}
+
+/// Machine-readable typed wave sidecar (`wave.typed.json`).
+pub fn typed_wave_json(title: &str, samples: &[WaveSample], typed: &[TypedSignal]) -> String {
+    let mut times: Vec<u64> = samples.iter().map(|s| s.time).collect();
+    times.sort_unstable();
+    times.dedup();
+
+    let mut json = String::from("{\n  \"product\": \"Bitloom\",\n  \"fr\": \"FR117\",\n");
+    json.push_str(&format!(
+        "  \"title\": \"{}\",\n  \"signals\": [\n",
+        escape_js_string(title)
+    ));
+    for (i, s) in typed.iter().enumerate() {
+        if i > 0 {
+            json.push_str(",\n");
+        }
+        json.push_str(&format!(
+            "    {{\"name\":\"{}\",\"ty\":\"{}\",\"kind\":\"{}\",\"module\":\"{}\",\"width\":{}}}",
+            escape_js_string(&s.name),
+            escape_js_string(&s.ty),
+            escape_js_string(&s.kind),
+            escape_js_string(&s.module),
+            s.width
+        ));
+    }
+    json.push_str("\n  ],\n  \"times\": [");
+    for (i, t) in times.iter().enumerate() {
+        if i > 0 {
+            json.push(',');
+        }
+        json.push_str(&t.to_string());
+    }
+    json.push_str("],\n  \"values\": {\n");
+    let names: Vec<&str> = typed.iter().map(|s| s.name.as_str()).collect();
+    for (ni, name) in names.iter().enumerate() {
+        if ni > 0 {
+            json.push_str(",\n");
+        }
+        json.push_str(&format!("    \"{}\": [", escape_js_string(name)));
+        for (ti, t) in times.iter().enumerate() {
+            if ti > 0 {
+                json.push(',');
+            }
+            let v = samples
+                .iter()
+                .find(|s| s.time == *t)
+                .and_then(|s| s.values.get(*name))
+                .copied()
+                .unwrap_or(0);
+            json.push_str(&v.to_string());
+        }
+        json.push(']');
+    }
+    json.push_str("\n  }\n}\n");
+    json
+}
+
+/// Typed IDE waveform HTML (FR117 subset B): type/kind hierarchy beyond FR104 I1–I3.
+///
+/// Empty `typed` → explicit empty marker (must not silent-claim FR117).
+pub fn typed_wave_html(title: &str, samples: &[WaveSample], typed: &[TypedSignal]) -> String {
+    let mut out = String::from(
+        "<!DOCTYPE html><html><head><meta charset=\"utf-8\">\
+         <title>Bitloom typed IDE wave</title>\n\
+         <style>\n\
+         body{font-family:system-ui,sans-serif;margin:1rem;line-height:1.4;background:#f4f7fa;color:#122}\n\
+         .brand{color:#0b3d5c;font-weight:700;letter-spacing:.02em}\n\
+         .layout{display:grid;grid-template-columns:minmax(14rem,22rem) 1fr;gap:1rem;align-items:start}\n\
+         @media (max-width:800px){.layout{grid-template-columns:1fr}}\n\
+         .panel{background:#fff;border:1px solid #c5d0da;border-radius:4px;padding:.75rem}\n\
+         #signal-tree{list-style:none;padding-left:0;margin:0;max-height:28rem;overflow:auto}\n\
+         #signal-tree ul{list-style:none;padding-left:1rem;margin:.25rem 0}\n\
+         .mod-label{font-weight:600;color:#0b3d5c}\n\
+         .sig-btn{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;width:100%;\
+         text-align:left;border:0;background:transparent;padding:.35rem .25rem;cursor:pointer}\n\
+         .sig-node.selected{background:#e8f1f8}\n\
+         .sig-type{font-family:ui-monospace,monospace;font-size:.85rem;color:#0b5;background:#eef8f0;\
+         padding:.1rem .35rem;border-radius:3px}\n\
+         .sig-kind{font-size:.75rem;color:#567}\n\
+         #typed-wave-canvas{display:block;width:100%;max-width:100%;background:#fff;\
+         border:1px solid #c5d0da;border-radius:4px}\n\
+         .hint{font-size:.85rem;color:#456}\n\
+         .toolbar{margin:0 0 .5rem}\n\
+         .toolbar input[type=search]{min-width:12rem;padding:.35rem .5rem}\n\
+         #signal-meta dl{display:grid;grid-template-columns:6rem 1fr;gap:.25rem .5rem;margin:0}\n\
+         #signal-meta dt{font-weight:600;color:#456}\n\
+         #signal-meta dd{margin:0}\n\
+         </style></head><body>\n",
+    );
+    out.push_str("<p class=\"brand\">Bitloom</p>\n");
+    out.push_str(&format!(
+        "<h1>Typed IDE wave — {}</h1>\n",
+        escape_html(title)
+    ));
+    out.push_str(
+        "<p class=\"hint\">FR117 typed IDE waveform (NFR14 subset <strong>B</strong> — in-house). \
+         Signal tree carries <strong>type / kind / module</strong> semantics beyond FR104 \
+         <code>interactive.html</code> I1–I3 name-only timeline. \
+         Not Tywaves (subset A deferred). Not FR114 coverage GUI. \
+         Sibling <code>wave.vcd</code> / <code>interactive.html</code> remain (NFR48).</p>\n",
+    );
+
+    if typed.is_empty() {
+        out.push_str(
+            "<div id=\"root\" data-bitloom-typed-wave=\"empty\" class=\"typed-meta-missing\">\
+             <p><em>(no typed signals)</em> — typed meta missing; must not silent-claim FR117.</p>\
+             </div>\n</body></html>\n",
+        );
+        return out;
+    }
+
+    let payload = typed_wave_json(title, samples, typed);
+    // Strip outer newlines for script JSON embed — reuse compact form from payload
+    out.push_str(
+        "<div id=\"root\" class=\"bitloom-typed-wave\" data-bitloom-typed-wave=\"1\">\n\
+         <div class=\"toolbar\">\n\
+         <label for=\"typed-search\">Filter typed signals </label>\n\
+         <input type=\"search\" id=\"typed-search\" placeholder=\"name / type / kind / module\" \
+          aria-label=\"typed signal filter\" />\n\
+         </div>\n\
+         <div class=\"layout\">\n\
+         <div class=\"panel hierarchy typed-tree\">\n\
+         <h2>Typed signal hierarchy</h2>\n\
+         <ul id=\"signal-tree\" class=\"signal-tree\"></ul>\n\
+         <h2>Selected metadata</h2>\n\
+         <div id=\"signal-meta\"></div>\n\
+         </div>\n\
+         <div class=\"panel\">\n\
+         <h2>Value timeline</h2>\n\
+         <canvas id=\"typed-wave-canvas\" width=\"720\" height=\"280\" \
+          role=\"img\" aria-label=\"typed waveform timeline\"></canvas>\n\
+         </div>\n\
+         </div>\n\
+         </div>\n",
+    );
+    out.push_str("<script id=\"typed-wave-data\" type=\"application/json\">");
+    out.push_str(&payload);
+    out.push_str("</script>\n<script>\n");
+    out.push_str(TYPED_WAVE_JS);
+    out.push_str("\n</script>\n");
+    out.push_str("<p>Unrelated to <code>samitbasu/rhdl</code>.</p>\n</body></html>\n");
+    out
 }
 
 /// Browsable timing / wave HTML (product path — not GTKWave-only).
@@ -463,5 +681,36 @@ b10 y
         assert!(html.contains("wave-canvas") || html.contains("<canvas"));
         assert!(html.contains("zoom") || html.contains("Zoom"));
         assert!(html.contains("signal-search") || html.contains("search"));
+    }
+
+    #[test]
+    fn typed_wave_html_exposes_types_beyond_names() {
+        let mut s = ElaborateSession::new("Top");
+        s.begin_module("Top", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("x", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+        s.end_module();
+        let hir = s.finish().unwrap();
+        let typed = typed_signals_from_hir(&hir);
+        assert!(typed.iter().any(|t| t.ty.contains("UInt") && t.name == "x"));
+        assert!(typed.iter().any(|t| t.ty == "Clock"));
+
+        let samples = vec![WaveSample {
+            time: 0,
+            values: BTreeMap::from([("clk".into(), 0), ("x".into(), 1)]),
+        }];
+        let html = typed_wave_html("demo", &samples, &typed);
+        assert!(html.contains("data-bitloom-typed-wave=\"1\""));
+        assert!(html.contains("signal-tree") || html.contains("Typed signal hierarchy"));
+        assert!(html.contains("UInt<8>") || html.contains("data-signal-type"));
+        assert!(html.contains("Bitloom"));
+
+        let empty = typed_wave_html("demo", &samples, &[]);
+        assert!(empty.contains("data-bitloom-typed-wave=\"empty\""));
+
+        let json = typed_wave_json("demo", &samples, &typed);
+        assert!(json.contains("\"ty\"") && json.contains("\"signals\""));
     }
 }

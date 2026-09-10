@@ -155,12 +155,13 @@ enum Commands {
         #[arg(long, default_value = ".")]
         out_dir: PathBuf,
     },
-    /// Tick a `.fir` design, dump VCD, timing HTML (FR38/49), and interactive wave (FR104).
+    /// Tick a `.fir` design, dump VCD, timing HTML (FR38/49), interactive wave (FR104),
+    /// and typed IDE wave (FR117 subset B).
     Wave {
         /// Path to a `.fir` file with `FIRRTL version 6.0.0` header.
         #[arg(long)]
         input: PathBuf,
-        /// Directory for `wave.vcd` + `timing.html` + `interactive.html`.
+        /// Directory for `wave.vcd` + `timing.html` + `interactive.html` + `typed-wave.html`.
         #[arg(long, default_value = ".")]
         out_dir: PathBuf,
         /// Number of ticks after reset.
@@ -940,7 +941,8 @@ fn run_visualize(input: &Path, out_dir: &Path) -> Result<PathBuf, String> {
     Ok(path)
 }
 
-/// Product entry: tick → VCD + timing.html + interactive.html (FR38/49 + FR104).
+/// Product entry: tick → VCD + timing.html + interactive.html (FR38/49 + FR104)
+/// + typed-wave.html / wave.typed.json (FR117 subset B).
 fn run_wave(input: &Path, out_dir: &Path, ticks: u64, want_fst: bool) -> Result<(), String> {
     use bitloom_hir::PortValues;
     use bitloom_sim::Sim;
@@ -948,6 +950,7 @@ fn run_wave(input: &Path, out_dir: &Path, ticks: u64, want_fst: bool) -> Result<
     let text = fs::read_to_string(input).map_err(|e| format!("read {}: {e}", input.display()))?;
     let hir = rhdl_firrtl::import(&text).map_err(|d| d.to_string())?;
     let title = hir.abi_name.clone();
+    let typed = rhdl_viz::typed_signals_from_hir(&hir);
     fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
 
     let vcd_path = out_dir.join("wave.vcd");
@@ -1007,12 +1010,37 @@ fn run_wave(input: &Path, out_dir: &Path, ticks: u64, want_fst: bool) -> Result<
     fs::write(&interactive_path, &interactive)
         .map_err(|e| format!("write {}: {e}", interactive_path.display()))?;
 
+    if typed.is_empty() {
+        return Err(
+            "bitloom.typed-wave-empty: no typed signal metadata from HIR; cannot claim FR117"
+                .into(),
+        );
+    }
+    let typed_html = rhdl_viz::typed_wave_html(&title, &samples, &typed);
+    if !typed_html.contains("data-bitloom-typed-wave=\"1\"") {
+        return Err("typed-wave.html missing FR117 marker".into());
+    }
+    let typed_path = out_dir.join("typed-wave.html");
+    fs::write(&typed_path, &typed_html)
+        .map_err(|e| format!("write {}: {e}", typed_path.display()))?;
+
+    let typed_json = rhdl_viz::typed_wave_json(&title, &samples, &typed);
+    if !typed_json.contains("\"ty\"") || !typed_json.contains("\"signals\"") {
+        return Err("wave.typed.json missing typed signal fields".into());
+    }
+    let typed_json_path = out_dir.join("wave.typed.json");
+    fs::write(&typed_json_path, &typed_json)
+        .map_err(|e| format!("write {}: {e}", typed_json_path.display()))?;
+
     println!("wrote {}", vcd_path.display());
     println!("wrote {}", timing_path.display());
     println!("wrote {}", interactive_path.display());
+    println!("wrote {}", typed_path.display());
+    println!("wrote {}", typed_json_path.display());
     println!(
-        "open {} in a browser for FR104 interactive wave (timing.html is static FR38/49; GTKWave optional for {})",
-        interactive_path.display(),
+        "open {} in a browser for FR117 typed IDE wave (interactive.html is FR104 I1–I3; \
+         GTKWave optional for {}; Tywaves subset A deferred)",
+        typed_path.display(),
         vcd_path.display()
     );
     Ok(())
