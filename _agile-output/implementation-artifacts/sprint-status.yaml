@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 09:00
+last_updated: 09-10-2026 09:05
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -352,7 +352,7 @@ development_status:
   45-2-自动-fl-rtl-形式等价产品路径-fr100: done
   45-3-多视图属性全矩阵-fr102: done
   45-4-一级-ip-双模型齐全-epic45-收口-fr103: done
-  epic-45-retrospective: optional
+  epic-45-retrospective: done
 
   epic-46: done
   46-1-epic-46-nfr14-风险记录: done
@@ -1141,3 +1141,33 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-44-retro-2026-09-10.md"
+  - id: "epic-45-retro-item-118-fr100-102-103-诚实边界-对外不得把-fr92-随机记分板-fr30"
+    epic: 45
+    action: "FR100/102/103 诚实边界：对外不得把 FR92 随机记分板 / FR30 bounded checker alone 写成 FR100；不得仅以
+      FR78/FR92 adapter 模板关闭 FR102/103；不得把 Epic 45 关闭冒充 FR101 SystemC TLM 产品；MVP =
+      F1-(i) 有界穷举（≠ 全芯片无界 SMT）；SyncFifo 手写 FL 诚实（GeneratedFunctional MemRead 不足 alone）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-45-retro-2026-09-10.md"
+  - id: "epic-45-retro-item-119-续-epic-40-retro-item-101-epic-41-retro-i"
+    epic: 45
+    action: "续 epic-40-retro-item-101 / epic-41-retro-item-104 / epic-42-retro-item-108
+      / epic-43-retro-item-112 / epic-44-retro-item-115：同步 epics.md frontmatter phase12Epic40Status–phase12Epic47Status
+      与 sprint done / phase12Status: complete。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-45-retro-2026-09-10.md"
+  - id: "epic-45-retro-item-120-nfr14-收口故事-commit-subject-惯例-门禁与收口-commi"
+    epic: 45
+    action: "NFR14 / 收口故事 commit subject 惯例：门禁与收口 commit subject 含 Story N.1 / Story
+      N.4（或 N.1/N.4），避免 git_evidence.py 归因空（续 44 item-116；本 epic 45.1/45.4 复发）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-45-retro-2026-09-10.md"
+  - id: "epic-45-retro-item-121-评估可选加深-generatedfunctional-memread-tick"
+    epic: 45
+    action: "评估可选加深：GeneratedFunctional MemRead ≡ tick（超出 SyncFifo 手写 FL）；F1-(ii)
+      外部 SymbiYosys/SMT 产品支；GPIO VIP（故事 45.4 deferred；非 FR103 AC 缺口）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-45-retro-2026-09-10.md"
