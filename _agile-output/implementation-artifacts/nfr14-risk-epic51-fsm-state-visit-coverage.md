@@ -12,7 +12,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR109 / Epic 51；NFR14、NFR44、NFR45、NFR47；对照 FR105 C2/C3、FR34 |
 | 记录日期 | 2026-09-10 |
-| 状态 | draft — Story 51.1 |
+| 状态 | **closed** — Story 51.3 / Epic 51（2026-09-10） |
 
 ### (a) 上游约束
 
@@ -66,16 +66,17 @@
 
 ### Epic 51 关闭条件（Story 51.3 勾选）
 
-- [ ] **51.2 / FR109：** M1–M4 + ATDD + ≥1 夹具报告
-- [ ] **文档 / deferred / FR105 交叉链**
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；prelude 边界
-- [ ] **FR105 Mux v2 MVP 关闭仍有效**（NFR44）
-- [ ] **Tywaves/LCOV GUI 仍属 Epic 56**（未开则 deferred）
+- [x] **51.2 / FR109：** M1–M4 + ATDD + ≥1 夹具报告
+- [x] **文档 / deferred / FR105 交叉链**
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；prelude 边界
+- [x] **FR105 Mux v2 MVP 关闭仍有效**（NFR44）
+- [x] **Tywaves/LCOV GUI 仍属 Epic 56**（未开则 deferred）
 
 ---
 
 ## 门禁一句话
 
 **缺 NFR14（或缺 a–d）⇒ 不得将 51.2–51.3 标 `ready`。**  
-**不得以 FR105 Mux v2 或 FR34 toggle alone 冒充 C3（FR109）已交付；不得仅改文档关闭。**
+**不得以 FR105 Mux v2 或 FR34 toggle alone 冒充 C3（FR109）已交付；不得仅改文档关闭。**  
+**Epic 51 / FR109 已关闭（Story 51.3）：** C3 state-visit 完成面；FR105 Mux v2 MVP 关闭仍有效；Tywaves/LCOV GUI → Epic 56。

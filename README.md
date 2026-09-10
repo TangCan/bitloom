@@ -164,7 +164,7 @@ mod sim {
 | 可选 FST | [`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md) |
 | tick 引擎 | [`docs/fr32-tick-engines.md`](docs/fr32-tick-engines.md) |
 | C ABI cdylib | [`docs/fr33-c-abi.md`](docs/fr33-c-abi.md) |
-| 仿真覆盖率（FR34 基线 + **FR105** 扩展） | [`docs/fr34-sim-coverage.md`](docs/fr34-sim-coverage.md) · [`docs/fr105-sim-coverage-ext.md`](docs/fr105-sim-coverage-ext.md)（Mux 分支；**Epic 47 已关闭**） |
+| 仿真覆盖率（FR34 基线 + **FR105** 扩展 + **FR109** C3） | [`docs/fr34-sim-coverage.md`](docs/fr34-sim-coverage.md) · [`docs/fr105-sim-coverage-ext.md`](docs/fr105-sim-coverage-ext.md)（Mux 分支；**Epic 47 已关闭**）· [`docs/fr109-fsm-state-visit-coverage.md`](docs/fr109-fsm-state-visit-coverage.md)（FSM/state-visit；**Epic 51 已关闭** / Story 51.3） |
 | Chisel 可编译生成（FR28 / FR88）+ Mem Path A（FR81） | [`docs/fr28-chisel-compilable.md`](docs/fr28-chisel-compilable.md)（**可编译 ≠ idiomatic**；[钉死运维清单](docs/fr28-chisel-compilable.md#firtool--chisel-钉死运维清单fr88--nfr3--nfr12)）· FR71：`just chisel-fr28-jvm` · 可选 Mem：`just chisel-fr81-mem-jvm` · [维护者合并清单](docs/fr28-chisel-compilable.md#维护者合并前检查清单fr28--emit_chisel) |
 | Idiomatic / 可维护 Chisel（**FR97** · Epic 42 已关闭） | [`docs/fr97-idiomatic-chisel.md`](docs/fr97-idiomatic-chisel.md)（`emit_chisel_idiomatic` + `check_idiomatic_chisel`；机械面不得单独关闭 FR97） |
 | Chisel / `.fir` 反向导入（FR46） | [`docs/fr46-chisel-import.md`](docs/fr46-chisel-import.md) |
@@ -281,7 +281,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | --- | --- | --- |
 | SystemC TLM AT / `nb_transport` | FR107 / 49 | vs FR101 LT-only — **Epic 49 已关闭**（Story 49.3） |
 | GPIO 近 VIP | FR108 / 50 | vs FR98 G0 可选 — **Epic 50 已关闭**（Story 50.3） |
-| FSM / state-visit 覆盖率（C3） | FR109 / 51 | vs FR105 Mux v2 |
+| FSM / state-visit 覆盖率（C3） | FR109 / 51 | vs FR105 Mux v2 — **Epic 51 已关闭**（Story 51.3） |
 | 树内 HLS 商业深度 | FR110 / 52 | vs FR95/96 MVP stub |
 | Idiomatic Chisel 可维护深度 | FR111 / 53 | vs FR97 MVP |
 | 形式等价 / 双模型深度 | FR112 / 54 | vs FR100/103 MVP |

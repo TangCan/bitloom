@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`cargo bitloom` / `bitloom-sim`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Story **51.2** delivers recorder + fixture (M1–M4). Epic 51 closeout → Story **51.3**.
+**Status:** **Epic 51 / FR109 closed** (Story **51.3**). Recorder + fixture delivered in Story **51.2**. FR105 Mux v2 MVP remains closed (NFR44). Tywaves/LCOV GUI → **FR114 / Epic 56**.
 
 ## Contract (NFR14 M1–M4)
 
@@ -55,5 +55,6 @@ Parsers: `parse_state_report` (alongside `parse_report` / `parse_branch_report`)
 
 ```text
 cargo test -p bitloom --test fr109_fsm_state_visit_coverage
+cargo test -p bitloom --test fr109_epic51_closeout
 cargo test -p bitloom --test fr105_sim_coverage_ext
 ```
