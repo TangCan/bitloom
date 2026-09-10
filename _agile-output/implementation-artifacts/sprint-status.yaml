@@ -370,7 +370,7 @@ development_status:
   # Gate: epic-48 must be done before 49–56 may leave backlog/ready
   epic-48: in-progress
   48-1-epic-48-nfr14-风险记录: done
-  48-2-correct-course-prd-批准-phase13-fr106: backlog
+  48-2-correct-course-prd-批准-phase13-fr106: done
   48-3-同步-readme-deferred-路线图-fr106-fr115: backlog
   48-4-ad-指针与-epic-48-收口-fr106: backlog
   epic-48-retrospective: optional
