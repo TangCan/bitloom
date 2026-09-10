@@ -57,7 +57,7 @@ jobs:
 
   # FR127 / NFR54: required true SymbiYosys (sby) gate in default CI.
   # Reuses FR119 `just formal-sby-check` (≠ local-optional alone).
-  # Do not use continue-on-error; missing tools must fail the job.
+  # Failures are never ignored; missing tools must fail the job.
   formal-sby:
     runs-on: ubuntu-latest
     timeout-minutes: 20

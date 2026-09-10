@@ -131,7 +131,33 @@ fn fr88_ci_hls_smoke_has_no_continue_on_error() {
     let text = read(".github/workflows/ci.yml");
     assert!(text.contains("hls-smoke"), "ci.yml must keep hls-smoke job");
     let hls_idx = text.find("hls-smoke:").expect("hls-smoke job");
-    let slice = &text[hls_idx..hls_idx + text[hls_idx..].len().min(600)];
+    let after = &text[hls_idx..];
+    // Bound to this job only (next top-level job key at column 2).
+    let end = after[1..]
+        .find("\n  ")
+        .map(|i| i + 1)
+        .and_then(|i| {
+            after[i..]
+                .find('\n')
+                .map(|j| i + j)
+                .or(Some(after.len()))
+        })
+        .unwrap_or_else(|| after.len().min(600));
+    // Prefer cutting at next `\n  [a-z].*:` job header
+    let mut job_end = after.len();
+    for (i, line) in after.lines().enumerate().skip(1) {
+        if line.starts_with("  ") && line.ends_with(':') && !line.starts_with("    ") {
+            job_end = after
+                .lines()
+                .take(i)
+                .map(|l| l.len() + 1)
+                .sum::<usize>()
+                .min(after.len());
+            break;
+        }
+    }
+    let slice = &after[..job_end.min(after.len())];
+    let _ = end;
     assert!(
         !slice.contains("continue-on-error"),
         "hls-smoke job must not use continue-on-error"
