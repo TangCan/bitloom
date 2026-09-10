@@ -51,6 +51,7 @@ ATDD: `cargo test -p bitloom --test fr104_interactive_wave`
 
 - Baseline wave entry: [`fr38-wave.md`](fr38-wave.md)
 - Coverage extension (FR105): [`fr105-sim-coverage-ext.md`](fr105-sim-coverage-ext.md)
+- FR114 LCOV + coverage GUI: [`fr114-lcov-coverage-gui.md`](fr114-lcov-coverage-gui.md) (**Epic 56 closed** / Story 56.3)
 - NFR14 gate: `_agile-output/implementation-artifacts/nfr14-risk-epic47-waveform-coverage.md`
 
 ## Non-goals (this story)

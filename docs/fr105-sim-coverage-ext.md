@@ -46,6 +46,7 @@ cargo test -p bitloom --test fr105_epic47_closeout
 
 - Baseline toggle: [`fr34-sim-coverage.md`](fr34-sim-coverage.md)
 - Interactive waveform (FR104): [`fr104-interactive-wave.md`](fr104-interactive-wave.md)
+- FR114 LCOV + coverage GUI: [`fr114-lcov-coverage-gui.md`](fr114-lcov-coverage-gui.md) (**Epic 56 closed** / Story 56.3)
 - NFR14 gate: `_agile-output/implementation-artifacts/nfr14-risk-epic47-waveform-coverage.md`
 
 ## Non-goals (this story / MVP crop)

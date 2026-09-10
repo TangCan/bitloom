@@ -2,15 +2,20 @@
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-This page is the **FR114 completion surface** for Epic 56 **subset (B)** (Story 56.2).
-It deepens observability **beyond** Phase 12 FR104 `interactive.html` I1–I3 and FR105
-Mux v2 text reports.
+**Status:** **Epic 56 / FR114 closed** (Story **56.3**). Subset **(B)** delivered in Story **56.2**.
+Phase 12 FR104/FR105 MVP remain closed (NFR44). Subset **(A) Tywaves** stays **deferred** (NFR47).
+
+**Phase 13:** Planning/implementation stories for Epic **48–56** are complete; remaining gates are
+per-epic close evidence (this epic closed) and **FR115** claim discipline for commercial deepen.
+
+This page is the **FR114 completion surface**. It deepens observability **beyond** Phase 12 FR104
+`interactive.html` I1–I3 and FR105 Mux v2 text reports.
 
 ## Selected deepen subset (NFR14)
 
 | Subset | Status |
 |--------|--------|
-| **(B) LCOV + in-tree coverage GUI** | **FR114 face** (this page) |
+| **(B) LCOV + in-tree coverage GUI** | **FR114 face — closed** (this page) |
 | (A) Tywaves-class typed IDE waveform | **deferred** — needs new contract |
 
 **Forbidden closes:** static `timing.html` / VCD /「请开 GTKWave」alone; FR104 I1–I3 alone;
@@ -44,6 +49,7 @@ Empty coverage → readable error `bitloom-sim.coverage-empty` (must not silent-
 
 ```text
 cargo test -p bitloom --test fr114_lcov_coverage_gui
+cargo test -p bitloom --test fr114_epic56_closeout
 cargo bitloom coverage --out-dir target/cov
 ```
 
@@ -61,4 +67,7 @@ cargo bitloom coverage --out-dir target/cov
 | [`fr109-fsm-state-visit-coverage.md`](fr109-fsm-state-visit-coverage.md) | C3 recorder — closed; text alone ≠ FR114 |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic56-waveform-coverage-gui.md` |
 
-Epic 56 closeout → Story 56.3.
+## Non-goals (NFR47)
+
+- Tywaves-class typed IDE waveform (subset A)
+- Claiming FR104 I1–I3 or FR105 Mux v2 alone closes FR114

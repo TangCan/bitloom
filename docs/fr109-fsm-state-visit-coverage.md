@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`cargo bitloom` / `bitloom-sim`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 51 / FR109 closed** (Story **51.3**). Recorder + fixture delivered in Story **51.2**. FR105 Mux v2 MVP remains closed (NFR44). Tywaves/LCOV GUI → **FR114 / Epic 56**.
+**Status:** **Epic 51 / FR109 closed** (Story **51.3**). Recorder + fixture delivered in Story **51.2**. FR105 Mux v2 MVP remains closed (NFR44). Tywaves typed IDE → deferred（NFR47）；**LCOV + 树内 GUI → FR114 / Epic 56 已关闭**（Story 56.3）。
 
 ## Contract (NFR14 M1–M4)
 

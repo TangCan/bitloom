@@ -417,10 +417,10 @@ development_status:
   55-3-fr113-收口与-fr99-交叉链: done
   epic-55-retrospective: optional
 
-  epic-56: in-progress
+  epic-56: done
   56-1-epic-56-nfr14-风险记录: done
   56-2-富波形-覆盖率-gui-加深-fr114: done
-  56-3-fr114-收口与-phase13-指针: backlog
+  56-3-fr114-收口与-phase13-指针: done
   epic-56-retrospective: optional
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"

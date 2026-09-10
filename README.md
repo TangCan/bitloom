@@ -260,9 +260,9 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **路线图阶段五–七「绿 / 全绿」字面绿 MVP 按 Phase 12 验收（FR94–105 / NFR42）：字面项须由对应 FR 关闭后方可勾选；Phase 12 Epic 40–47 已关闭。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9。Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**，**禁止**用合同绿冒充字面全绿。
 
-**Phase 13（MVP→商业加深 · FR106–FR115 / NFR44–NFR47）：** Correct Course 已批准（2026-09-10）。Phase 12 MVP 关闭证据**仍有效**（**NFR44**），**不得**改写为失败。对外「商业加深 / 非 MVP」类宣称**仅**可在对应 **FR106–114** 关闭后按 **FR115** 勾选；**禁止**用 Phase 12 MVP 冒充商业完整面。加深 epic = Epic 48–56（闸门 Epic 48 / FR106）。延期与边界 ledger：[`_agile-output/implementation-artifacts/deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+**Phase 13（MVP→商业加深 · FR106–FR115 / NFR44–NFR47）：** Correct Course 已批准（2026-09-10）。Phase 12 MVP 关闭证据**仍有效**（**NFR44**），**不得**改写为失败。**Phase 13 规划/实现故事已齐（Epic 48–56 已关闭）。** 对外「商业加深 / 非 MVP」类宣称按 **FR115** 勾选（对应 **FR106–114** 均已关闭）；**禁止**用 Phase 12 MVP 冒充商业完整面。延期与边界 ledger：[`_agile-output/implementation-artifacts/deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
-**Phase 12 规划/实现故事已齐（Epic 40–47 已关闭）。** Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。Phase 13 加深面见下节与 deferred optional→FR 升格。
+**Phase 12 规划/实现故事已齐（Epic 40–47 已关闭）。** Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。
 
 ### 永久非目标（FR93）— 历史；已被 Phase 12 推翻
 
@@ -274,9 +274,9 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 4. **VIP 级全协议 IP** → **FR98**（**Epic 43 已关闭** — UART/SPI/I2C/AXI4-Lite 近 VIP MVP 已交付；**GPIO 近 VIP → Phase 13 FR108 / Epic 50 已关闭** / Story 50.3；边界见 [`docs/ip/README.md`](docs/ip/README.md)）
 5. **按键全设计 elaborate** 的 netlist LSP → **FR99**（**Epic 44 已关闭** — `bitloom-lsp` 全设计 elaborate 诊断/符号 MVP；**根发现加深 → Phase 13 FR113 / Epic 55 已关闭** / Story 55.3；见 [`docs/fr99-bitloom-lsp.md`](docs/fr99-bitloom-lsp.md)、[`docs/fr113-lsp-design-root-discovery.md`](docs/fr113-lsp-design-root-discovery.md)）
 
-### Phase 13 加深面（合同已批准；实现按 FR 关闭）
+### Phase 13 加深面（合同已批准；Epic 48–56 实现已关闭）
 
-下列原 Phase 12 **optional product** 已由 Correct Course + **FR106** 升格为 Phase 13 显式 FR（Epic 48–56）。关闭前仍为未交付加深面；关闭后方可按 **FR115** 宣称。同源：PRD addendum「Phase 13」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+下列原 Phase 12 **optional product** 已由 Correct Course + **FR106** 升格为 Phase 13 显式 FR（Epic 48–56）。**全部加深 FR（FR107–114）已关闭**；对外商业加深宣称按 **FR115**。同源：PRD addendum「Phase 13」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
 | 加深面 | FR / Epic | 相对 Phase 12 MVP |
 | --- | --- | --- |
@@ -287,7 +287,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | Idiomatic Chisel 可维护深度 | FR111 / 53 | vs FR97 MVP — **Epic 53 已关闭**（Story 53.3） |
 | 形式等价 / 双模型深度 | FR112 / 54 | vs FR100/103 MVP — **Epic 54 已关闭**（Story 54.3） |
 | LSP 设计根发现加深 | FR113 / 55 | vs FR99 DesignFixture — **Epic 55 已关闭**（Story 55.3） |
-| Tywaves / LCOV GUI | FR114 / 56 | vs FR104/105 MVP |
+| Tywaves / LCOV GUI | FR114 / 56 | vs FR104/105 MVP — **Epic 56 已关闭**（Story 56.3；LCOV+树内 GUI；Tywaves deferred） |
 
 **明确 deferred / 未承诺为产品完整面（可延期；上列五项已不再是永久非目标）：**
 

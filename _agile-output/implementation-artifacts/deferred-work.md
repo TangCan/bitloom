@@ -368,8 +368,8 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     - item-117：**Cargo-graph + metadata design_roots → FR113 / Epic 55 已关闭**（Story 55.3；docs/fr113-lsp-design-root-discovery.md）；全树 `#[bitloom::top]` syn-scan 仍 deferred（NFR47）
     - item-121：**GeneratedFunctional MemRead ≡ tick → FR112 / Epic 54 已关闭**（Story 54.3；docs/fr112-generated-functional-memread-equiv.md）；F1-(ii) SymbiYosys/SMT 仍 deferred（NFR47）；**GPIO 近 VIP → FR108 / Epic 50 已关闭**（Story 50.3；商业 VIP GPIO 仍非目标）
     - item-125：AT-style nb_transport_fw/bw → **FR107 / Epic 49**（**已关闭** / Story 49.3；docs/fr107-systemc-tlm-at.md）
-    - item-129：**C3 FSM/state-visit 覆盖率 → FR109 / Epic 51 已关闭**（Story 51.3；docs/fr109-fsm-state-visit-coverage.md）；Tywaves / LCOV GUI → **FR114 / Epic 56**（仍 open）
-  status: deferred — Phase 13 contract approved (FR106); FR107–FR113 closed；FR114 pending
+    - item-129：**C3 FSM/state-visit 覆盖率 → FR109 / Epic 51 已关闭**（Story 51.3；docs/fr109-fsm-state-visit-coverage.md）；**LCOV + 树内覆盖率 GUI → FR114 / Epic 56 已关闭**（Story 56.3；docs/fr114-lcov-coverage-gui.md）；Tywaves typed IDE 仍 deferred（NFR47）
+  status: deferred — Phase 13 contract approved (FR106); FR107–FR114 closed（Epic 48–56 实现故事齐）；未选加深子集（如 Tywaves / syn-scan / SymbiYosys）仍须新合同（NFR47）
   resolved: '2026-09-10'
   resolution: |
     Phase 13 Correct Course（sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen）+
@@ -380,4 +380,6 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     Epic 53 / FR111 idiomatic Chisel deepen **已关闭**（Story 53.3；AD-27 2026-09-10）。
     Epic 54 / FR112 formal/dual-model depth **已关闭**（Story 54.3；branch B MemRead≡tick；A/C deferred）。
     Epic 55 / FR113 LSP design-root discovery **已关闭**（Story 55.3；Cargo metadata design_roots；syn-scan deferred）。
-    其余 FR114 仍待 epic 关闭后方可按 FR115 宣称。Phase 12 MVP 关闭证据仍有效（NFR44）。
+    Epic 56 / FR114 LCOV + in-tree coverage GUI **已关闭**（Story 56.3；Tywaves deferred）。
+    **Phase 13 规划/实现故事已齐（Epic 48–56）。** 对外商业加深宣称按 **FR115**。Phase 12 MVP 关闭证据仍有效（NFR44）。
+    未选子集（Tywaves / 全树 syn-scan / SymbiYosys 等）仍须新合同（NFR47）。
