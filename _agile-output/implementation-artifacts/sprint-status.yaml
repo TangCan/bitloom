@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 13:45
+last_updated: 09-10-2026 13:41
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -379,7 +379,7 @@ development_status:
   49-1-epic-49-nfr14-风险记录: done
   49-2-at-style-nb-transport-产品路径-fr107: done
   49-3-fr107-收口与文档边界: done
-  epic-49-retrospective: optional
+  epic-49-retrospective: done
 
   epic-50: done
   50-1-epic-50-nfr14-风险记录: done
@@ -1319,3 +1319,29 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-48-retro-2026-09-10.md"
+  - id: "epic-49-retro-item-134-fr107-at-诚实边界-对外不得把-at-documented-subset"
+    epic: 49
+    action: "FR107/AT 诚实边界：对外不得把 AT documented subset（collapsed nb_transport_fw）写成全
+      AT/PEQ/quantum 全家桶；不得以 FR101 LT / Rust FL 冒充 FR107；宣称须引 FR107（续 FR115）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-49-retro-2026-09-10.md"
+  - id: "epic-49-retro-item-135-保持-at-lt-gen-tlm-emit_systemc_tlm_lt-回归不"
+    epic: 49
+    action: "保持 AT ∥ LT：gen-tlm / emit_systemc_tlm_lt 回归不得因 AT 路径被改写或删除（NFR44）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-49-retro-2026-09-10.md"
+  - id: "epic-49-retro-item-136-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 49
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-49-retro-2026-09-10.md"
+  - id: "epic-49-retro-item-137-可选品牌卫生-将-cli-host-暂存目录-target-rhdl-gen-t"
+    epic: 49
+    action: "可选品牌卫生：将 CLI host 暂存目录 target/rhdl-gen-tlm-*-host 对齐为 bitloom-gen-tlm-*-host（非
+      FR107 AC 缺口）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-49-retro-2026-09-10.md"
