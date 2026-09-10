@@ -1,12 +1,12 @@
-//! First-class IP (FR37 / FR48 / FR82 / FR89 / FR98): SyncFifo, UartTx, UartRx,
-//! SpiMaster, I2cMaster, Axi4LiteSlave, black-box; plus FR77 overlay [`Crc8Lut`]
-//! (Epic 29.3).
+//! First-class IP (FR37 / FR48 / FR82 / FR89 / FR98 / FR108): SyncFifo, UartTx,
+//! UartRx, SpiMaster, I2cMaster, Axi4LiteSlave, Gpio, black-box; plus FR77 overlay
+//! [`Crc8Lut`] (Epic 29.3).
 //!
 //! Epic 34 / FR82 deepens five classes to **non-stub** synthesizable baselines.
 //! Epic 38 / FR89 deepens UartTx programmable baud. Epic 43 / FR98 Stories
-//! 43.2–43.5 add UART/SPI/I2C/AXI near-VIP (GPIO optional, not required).
-//! Those IP APIs take **no** generator closures. Design crates reach IP via
-//! `bitloom_prelude::ip` only.
+//! 43.2–43.5 add UART/SPI/I2C/AXI near-VIP. Epic 50 / FR108 delivers GPIO near-VIP
+//! (Phase 12 optional G0 elevated). Those IP APIs take **no** generator closures.
+//! Design crates reach IP via `bitloom_prelude::ip` only.
 //!
 //! **FR77 / Cap-R-63:** [`Crc8Lut`] accepts elaborate-time table closures
 //! (`elaborate_with_table_fn`) on top of the Epic 27 Mem-init path; default poly
@@ -2253,6 +2253,57 @@ impl Elaboratable for Axi4LiteSlave {
     }
 }
 
+/// 8-bit GPIO bank near-VIP (FR108 / Epic 50): direction, masked write, pad R/W.
+///
+/// Ports: `dir` (1=out), `wr_en`/`wr_data`/`wr_mask`, `pad_in` → `pad_out`/`rd_data`.
+/// `rd_data = (out & dir) | (pad_in & ~dir)`; `pad_out = out & dir`.
+///
+/// Non-goals (NFR47): commercial VIP co-sim, IRQ controller, full SoC pad ring,
+/// undeclared open-drain/analog. FR98 UART/SPI/I2C/AXI MVP closes remain valid.
+pub struct Gpio;
+
+impl Elaboratable for Gpio {
+    fn elaborate() -> Result<FrozenHir, Diagnostics> {
+        let mut s = ElaborateSession::new("Gpio");
+        s.begin_module("Gpio", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("dir", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("wr_en", GroundType::UInt { width: 1 }, Span::default());
+        s.add_input("wr_data", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("wr_mask", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("pad_in", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("pad_out", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("rd_data", GroundType::UInt { width: 8 }, Span::default());
+
+        s.declare_reg("out_r", GroundType::UInt { width: 8 }, Span::default());
+        for w in [
+            "c_ff", "not_mask", "kept", "newt", "merged", "not_dir", "from_out", "from_pad",
+        ] {
+            s.declare_wire(w, GroundType::UInt { width: 8 }, Span::default());
+        }
+
+        s.begin_combinational(Span::default());
+        s.assign_lit("c_ff", 0xff, Span::default());
+        s.assign_and("pad_out", "out_r", "dir", Span::default());
+        s.assign_xor("not_dir", "dir", "c_ff", Span::default());
+        s.assign_and("from_out", "out_r", "dir", Span::default());
+        s.assign_and("from_pad", "pad_in", "not_dir", Span::default());
+        s.assign_or("rd_data", "from_out", "from_pad", Span::default());
+        s.assign_xor("not_mask", "wr_mask", "c_ff", Span::default());
+        s.assign_and("kept", "out_r", "not_mask", Span::default());
+        s.assign_and("newt", "wr_data", "wr_mask", Span::default());
+        s.assign_or("merged", "kept", "newt", Span::default());
+        s.end_process();
+
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_mux("out_r", "wr_en", "merged", "out_r", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish()
+    }
+}
+
 /// Opaque vendor IP wrapper: ports only; no child FrozenHir body (FR37 black-box).
 ///
 /// **Boundary (FR82 / Epic 34):** retained as an opaque shell — Bitloom does **not**
@@ -2773,6 +2824,60 @@ mod tests {
     }
 
     #[test]
+    fn gpio_elaborate_emit_tick_ports() {
+        smoke_elaborate_emit_tick::<Gpio>("Gpio");
+        let hir = Gpio::elaborate().unwrap();
+        let v = &emit(&hir).files[0].contents;
+        assert!(v.contains("module Gpio"));
+        for p in [
+            "dir", "wr_en", "wr_data", "wr_mask", "pad_in", "pad_out", "rd_data",
+        ] {
+            assert!(v.contains(p), "missing port {p}");
+        }
+    }
+
+    #[test]
+    fn gpio_masked_write_and_direction_readback() {
+        let mut sim = Sim::new(Gpio::elaborate().unwrap());
+        let mut pv = PortValues::default();
+        pv.set("rst", 1);
+        pv.set("dir", 0xff);
+        pv.set("wr_en", 0);
+        pv.set("wr_data", 0);
+        pv.set("wr_mask", 0);
+        pv.set("pad_in", 0);
+        sim.set_inputs(pv.clone());
+        sim.settle();
+        sim.tick();
+        pv.set("rst", 0);
+        // Full write 0xA5 with mask 0xFF, all outputs
+        pv.set("wr_en", 1);
+        pv.set("wr_data", 0xa5);
+        pv.set("wr_mask", 0xff);
+        sim.set_inputs(pv.clone());
+        sim.settle();
+        sim.tick();
+        assert_eq!(sim.ports().get("pad_out"), Some(0xa5));
+        assert_eq!(sim.ports().get("rd_data"), Some(0xa5));
+        // Masked write: low nibble only → 0xA5 becomes 0xAB
+        pv.set("wr_data", 0x0b);
+        pv.set("wr_mask", 0x0f);
+        sim.set_inputs(pv.clone());
+        sim.settle();
+        sim.tick();
+        assert_eq!(sim.ports().get("pad_out"), Some(0xab));
+        // Input direction on high nibble: pad_in 0x50 → rd_data 0x5B
+        pv.set("wr_en", 0);
+        pv.set("dir", 0x0f);
+        pv.set("pad_in", 0x50);
+        sim.set_inputs(pv);
+        sim.settle();
+        sim.tick();
+        assert_eq!(sim.ports().get("pad_out"), Some(0x0b));
+        assert_eq!(sim.ports().get("rd_data"), Some(0x5b));
+    }
+
+    #[test]
     fn blackbox_elaborate_emit_tick_opaque() {
         smoke_elaborate_emit_tick::<ExtBlackBox>("ExtBlackBox");
         let hir = ExtBlackBox::elaborate().unwrap();
@@ -2793,6 +2898,7 @@ mod tests {
         let _ = SpiMaster::elaborate();
         let _ = I2cMaster::elaborate();
         let _ = Axi4LiteSlave::elaborate();
+        let _ = Gpio::elaborate();
     }
 
     #[test]

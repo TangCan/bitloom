@@ -383,7 +383,7 @@ development_status:
 
   epic-50: in-progress
   50-1-epic-50-nfr14-风险记录: done
-  50-2-gpio-近-vip-实现与-atdd-fr108: backlog
+  50-2-gpio-近-vip-实现与-atdd-fr108: done
   50-3-fr108-收口与-fr98-交叉链: backlog
   epic-50-retrospective: optional
 

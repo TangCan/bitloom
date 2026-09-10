@@ -55,8 +55,8 @@
 
 ### `ip.rs` 体积风险（非关闭条件）
 
-- 现状：`bitloom-prelude` `ip.rs` 体积大（Phase 13 inventory ~2869 LOC 量级）。
-- **评估：** 50.2 实现时评估是否拆分 GPIO 至独立模块文件；**拆分本身不是 FR108 关闭条件**，仅写入本风险。
+- 现状：`bitloom-prelude` `ip.rs` 体积大（Phase 13 inventory ~2869 LOC 量级；Story 50.2 后继续增长）。
+- **评估（50.2）：** GPIO 仍落地于同一 `ip.rs`（与 UART/SPI/I2C/AXI 一致），**未**拆分独立模块文件；拆分本身不是 FR108 关闭条件。
 
 ### Epic 50 关闭条件（Story 50.3 勾选）
 

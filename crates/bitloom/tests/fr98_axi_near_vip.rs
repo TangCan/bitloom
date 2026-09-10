@@ -198,8 +198,11 @@ fn fr98_docs_ip_axi_near_vip_boundaries() {
     );
     assert!(
         ip.contains("GPIO")
-            && (ip.contains("可选") || ip.contains("未交付") || ip.contains("optional")),
-        "G1: docs must note GPIO optional / not delivered"
+            && (ip.contains("可选")
+                || ip.contains("未交付")
+                || ip.contains("optional")
+                || ip.contains("FR108")),
+        "G1: docs must note GPIO FR98-optional status and/or FR108 delivery"
     );
     assert!(
         !ip.contains("忽略 addr/wstrb") || ip.contains("FR82"),
