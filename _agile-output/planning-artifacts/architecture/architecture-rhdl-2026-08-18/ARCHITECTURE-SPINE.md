@@ -346,7 +346,7 @@ flowchart LR
 - **所有权作声音性证明**：永不作为 freeze 门控；若做，独立 epic。
 - **SystemC TLM-2.0 实现形状：** 产品合同见 **FR101** / AD-5（LT-only MVP 已关闭 / Epic 46）；**AT / `nb_transport` 加深**见 **FR107** / Epic 49（须引用/进一步修订 AD-5；**NFR46**）。crate 切分与发射细节由实现 epic 钉死，不在此预钉。
 - **Chisel idiomatic 验收谓词细节：** 产品合同见 **FR97** / AD-27（MVP 已关闭 / Epic 42）；**可维护加深**见 **FR111** / Epic 53（**已关闭** / Story 53.3；AD-27 2026-09-10 修订；**NFR46**）。
-- **树内 HLS 调度深度：** 产品合同见 **FR95/96** / AD-25（MVP 已关闭 / Epic 41）；**商业调度深度**见 **FR110** / Epic 52（**已关闭** / Story 52.3；AD-25 2026-09-10 修订；**NFR46**）。**Handshake / 动态数据流默认可综合**见 **FR121** / Epic 62（AD-25 **2026-09-10 FR121 修订**已落地 / Story 62.2；**NFR50**；收口 → Story 62.3）。
+- **树内 HLS 调度深度：** 产品合同见 **FR95/96** / AD-25（MVP 已关闭 / Epic 41）；**商业调度深度**见 **FR110** / Epic 52（**已关闭** / Story 52.3；AD-25 2026-09-10 修订；**NFR46**）。**Handshake / 动态数据流默认可综合**见 **FR121** / Epic 62（**已关闭** / Story 62.3；AD-25 **2026-09-10 FR121 修订**；**NFR50**）。
 - **手写 `#[bridge]` / `#[abstraction]` / mixed `both`；形式化等价引擎细节；C ABI / cdylib；覆盖率**（产品 FR 已定，脊柱不钉实现形状）。
 - **IP / 可视化 / LSP / 黑盒 / formal/SVA / float / Analog** 的**实现形状**（产品 FR 已定；不在此钉 crate 切分）。GPIO 近 VIP 加深见 **FR108**；商业 VIP GPIO 全家桶见 **FR120**；LSP 根发现加深见 **FR113**；无 metadata syn-scan 见 **FR118**；FSM/state-visit 与 LCOV 见 **FR109** / **FR114**；Tywaves 级 typed IDE 波形见 **FR117**；**SymbiYosys/SMT formal** 见 **FR119** / Epic 60（工具链形状由实现 epic + NFR14 钉死；**NFR50**）。
 - **Chisel 官方风格全家桶：** 产品合同见 **FR97** / **FR111** / AD-27（MVP + D1+D3 已关闭）；**官方/idiomatic 风格全家桶**见 **FR122** / Epic 63（须在实现 epic 内视需要进一步修订 **AD-27**；默认仍不恢复 Scala `Parser.parse`；**NFR50**）。

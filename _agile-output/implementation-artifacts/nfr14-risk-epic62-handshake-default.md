@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR121 / Epic 62；NFR14、NFR48、NFR49、NFR50、NFR51；对照 FR95/FR96、FR110、AD-25、AD-18 |
 | 记录日期 | 2026-09-10 |
-| 状态 | **open** — Story 62.1（门禁）；关闭勾选 → Story 62.3 |
+| 状态 | **closed** — Story 62.3 / Epic 62（2026-09-10） |
 
 ### (a) 上游约束
 
@@ -79,11 +79,11 @@
 
 ### Epic 62 关闭条件（Story 62.3 勾选）
 
-- [ ] **62.2 / FR121：** H1–H4 + 修订 AD-25 + ATDD；FR95/96/FR110 回归不破
-- [ ] **文档 / deferred / HLS 文档 / AD-25 修订戳**
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；prelude 边界
-- [ ] **FR95/96 / FR110 关闭仍有效**（NFR48）
+- [x] **62.2 / FR121：** H1–H4 + 修订 AD-25 + ATDD；FR95/96/FR110 回归不破
+- [x] **文档 / deferred / HLS 文档 / AD-25 修订戳**
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；prelude 边界
+- [x] **FR95/96 / FR110 关闭仍有效**（NFR48）
 
 ---
 
@@ -91,4 +91,5 @@
 
 **缺 NFR14（或缺 a–d / H1–H4）⇒ 不得将 62.2–62.3 标 `ready`。**  
 **不得以 loop-unroll / in-tree-mvp stub / FR110 alone / docs-only / 未修订 AD-25 冒充 Handshake 默认可综合。**  
-**未列入协议保持 deferred（NFR51）。**
+**未列入协议保持 deferred（NFR51）。**  
+**Epic 62 / FR121 已关闭（Story 62.3）：** Handshake 默认可综合（ready/valid；AD-25 修订）；FR95/96 / FR110 关闭仍有效；全优化 / CIRCT Handshake 方言全家桶仍 deferred。

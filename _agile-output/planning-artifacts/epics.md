@@ -90,7 +90,7 @@ phase14Epic58Status: complete
 phase14Epic59Status: complete
 phase14Epic60Status: complete
 phase14Epic61Status: complete
-phase14Epic62Status: backlog
+phase14Epic62Status: complete
 phase14Epic63Status: backlog
 phase14InputDocuments:
   - prds/prd-rhdl-2026-08-19/prd.md

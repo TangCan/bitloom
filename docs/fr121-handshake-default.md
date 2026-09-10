@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`cargo bitloom` / `bitloom::hls`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Product path delivered in Story **62.2** (AD-25 revised). Epic 62 / FR121 closeout → Story **62.3**. FR95/96 MVP and FR110 Q1+Q2 remain closed (NFR48). Full allocation/binding suite still needs a new contract (NFR51).
+**Status:** **Epic 62 / FR121 closed** (Story **62.3**). Product path + AD-25 revise delivered in Story **62.2**. FR95/96 MVP and FR110 Q1+Q2 remain closed (NFR48). Full allocation/binding suite still needs a new contract (NFR51).
 
 ## Contract (NFR14 H1–H4)
 
@@ -52,4 +52,5 @@ Static FR95/FR110 paths unchanged: `--in-tree` / `--in-tree --pipeline`.
 
 ```text
 cargo test -p bitloom --test fr121_handshake_default
+cargo test -p bitloom --test fr121_epic62_closeout
 ```
