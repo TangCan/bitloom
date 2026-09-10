@@ -73,7 +73,7 @@ a product completion exclusion.
 ## Non-goals (this story)
 
 - SystemC TLM-2.0 product → FR101 / Epic 46 (**closed** separately; LT-only; AT deferred)
-- GPIO VIP (optional; FR98 G1)
+- GPIO VIP (optional at FR98 G1; **near-VIP delivered as FR108 / Epic 50** — Story 50.3; commercial GPIO VIP still out of scope)
 - Full-chip unbounded formal proof
 - Expanding `GeneratedFunctional` MemRead ≡ tick (deferred; SyncFifo uses handwritten FL)
 

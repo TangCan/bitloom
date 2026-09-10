@@ -381,10 +381,10 @@ development_status:
   49-3-fr107-收口与文档边界: done
   epic-49-retrospective: optional
 
-  epic-50: in-progress
+  epic-50: done
   50-1-epic-50-nfr14-风险记录: done
   50-2-gpio-近-vip-实现与-atdd-fr108: done
-  50-3-fr108-收口与-fr98-交叉链: backlog
+  50-3-fr108-收口与-fr98-交叉链: done
   epic-50-retrospective: optional
 
   epic-51: backlog

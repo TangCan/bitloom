@@ -67,7 +67,7 @@ ATDD：`cargo test -p bitloom --test fr77_ip_generator_closure`。
 | **AXI** | 握手镜像 stub | **非 stub（文档最小子集）：** AXI4-Lite 单寄存器握手玩具；**FR98 / Epic 43.5：** 近 VIP 加深（多寄存器 / addr / wstrb） |
 | **黑盒** | 仅端口 | **保留：** 不内联 vendor HIR；见下节 |
 
-**决策表（NFR37）：** Story 34.3 **未**书面降级任一类——SPI / I2C / AXI 均以合同化最小子集交付。**Epic 43 / FR98** 已将 UART/SPI/I2C/AXI4-Lite 加深至近 VIP（见上表）；**Epic 50 / FR108** 交付 GPIO 近 VIP（方向 / 读写 / 掩码）。Full AXI / 互联 / 商业 VIP 对拍仍为明确非目标。不得静默声称「Full AXI 互联完成」或「商业 GPIO VIP」。
+**决策表（NFR37）：** Story 34.3 **未**书面降级任一类——SPI / I2C / AXI 均以合同化最小子集交付。**Epic 43 / FR98** 已将 UART/SPI/I2C/AXI4-Lite 加深至近 VIP（见上表）；**Epic 50 / FR108 已关闭**（Story 50.3）交付 GPIO 近 VIP（方向 / 读写 / 掩码）。Full AXI / 互联 / 商业 VIP 对拍仍为明确非目标。不得静默声称「Full AXI 互联完成」或「商业 GPIO VIP」。
 
 ## 五类 + GPIO + 黑盒
 
@@ -79,7 +79,7 @@ ATDD：`cargo test -p bitloom --test fr77_ip_generator_closure`。
 | **SPI** | `bitloom_prelude::ip::SpiMaster` | `cargo test -p bitloom-prelude --lib spi_master`；`cargo test -p bitloom --test fr98_spi_near_vip` | **FR98 / Epic 43.3 近 VIP：** 可配置 **CPOL/CPHA（四模式）**；Master **多字节**（`byte_count`，`0`≡1）；半周期 `sclk`（idle=`cpol`）；MSB-first；`rx_data`/`rx_valid`；整帧 `cs_n` 有效。对照 FR82 Mode-0-ish。**明确非目标：** DMA、多 CS 阵列、slave、LSB-first、非 8×N 字长、商业 VIP 对拍 |
 | **I2C** | `bitloom_prelude::ip::I2cMaster` | `cargo test -p bitloom-prelude --lib i2c_master`；`cargo test -p bitloom --test fr98_i2c_near_vip` | **FR98 / Epic 43.4 近 VIP：** ACK/NACK 驱动 Master **写** + **读**；START / 7-bit `addr` + `rw` / 数据 / STOP；半周期 `scl`（idle 高）；`rx_data`/`rx_valid`；`ack_error` 于 NACK。对照 FR82 SCL 恒高玩具。**明确非目标：** clock stretch、多主、10-bit、slave、SMBus PEC、商业 VIP 对拍 |
 | **AXI** | `bitloom_prelude::ip::Axi4LiteSlave` | `cargo test -p bitloom-prelude --lib axi4_lite`；`cargo test -p bitloom --test fr98_axi_near_vip` | **FR98 / Epic 43.5 近 VIP：** AXI4-Lite 从窗口字址 `0x00/0x04/0x08/0x0C`（ADDR=8, DATA=32）；正确 **AW/W/B** 与 **AR/R** 握手；**addr 译码** + **wstrb** 字节合并；未映射写忽略 / 读 0。对照 FR82 单寄存器忽略 addr/wstrb 玩具。**明确非目标：** Full AXI（burst/ID/QoS）、互联、多从阵列、商业 VIP 对拍。**GPIO：** FR98 关闭时为**可选**（G0/G1；未纳入不构成 FR98 失败）；**FR108 / Epic 50** 升格交付近 VIP（见下行） |
-| **GPIO** | `bitloom_prelude::ip::Gpio` | `cargo test -p bitloom-prelude --lib gpio`；`cargo test -p bitloom --test fr108_gpio_near_vip` | **FR108 / Epic 50.2 近 VIP：** 8-bit bank；`dir`（1=out）；`wr_en`/`wr_data`/`wr_mask`；`pad_in`→`pad_out`/`rd_data`（`rd = (out&dir)\|(pad_in&~dir)`）。**明确非目标（NFR47）：** 商业 VIP 对拍、中断控制器、全 SoC pad 环、未列入的开漏/模拟。Story **50.3** 勾选 Epic 50 / FR98 交叉链收口 |
+| **GPIO** | `bitloom_prelude::ip::Gpio` | `cargo test -p bitloom-prelude --lib gpio`；`cargo test -p bitloom --test fr108_gpio_near_vip`；`cargo test -p bitloom --test fr108_epic50_closeout` | **FR108 / Epic 50 已关闭**（Story 50.3）：8-bit bank 近 VIP — `dir`（1=out）；`wr_en`/`wr_data`/`wr_mask`；`pad_in`→`pad_out`/`rd_data`。**FR98 交叉链：** FR98 关闭时 GPIO 为**可选**（G0/G1）；本面为 Phase 13 加深完成面；FR98 MVP 关闭仍有效（NFR44）。**明确非目标（NFR47）：** 商业 VIP 对拍、中断控制器、全 SoC pad 环、未列入的开漏/模拟 |
 | **黑盒** | `bitloom_prelude::ip::ExtBlackBox` + `vendor_blackbox_v()` | `cargo test -p bitloom-prelude --lib blackbox` | 仅端口；不内联子 HIR；vendor `.v` 旁路 |
 | **CRC LUT（FR77）** | `bitloom_prelude::ip::Crc8Lut` | `cargo test -p bitloom --test fr77_ip_generator_closure` | 闭包定制 overlay；默认 poly `0x07`；非全 CRC 引擎 / 流式 CRC |
 

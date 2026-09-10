@@ -12,7 +12,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR108 / Epic 50；NFR14、NFR44、NFR45、NFR47；对照 FR98 G0/G1 |
 | 记录日期 | 2026-09-10 |
-| 状态 | draft — Story 50.1 |
+| 状态 | **closed** — Story 50.3 / Epic 50（2026-09-10） |
 
 ### (a) 上游约束
 
@@ -60,15 +60,16 @@
 
 ### Epic 50 关闭条件（Story 50.3 勾选）
 
-- [ ] **50.2 / FR108：** P1–P4 + ATDD
-- [ ] **文档 / deferred / FR98 交叉链**
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；prelude 边界
-- [ ] **FR98 MVP 关闭仍有效**（NFR44）
+- [x] **50.2 / FR108：** P1–P4 + ATDD
+- [x] **文档 / deferred / FR98 交叉链**
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；prelude 边界
+- [x] **FR98 MVP 关闭仍有效**（NFR44）
 
 ---
 
 ## 门禁一句话
 
 **缺 NFR14（或缺 a–d）⇒ 不得将 50.2–50.3 标 `ready`。**  
-**不得以 FR98 四类近 VIP 冒充 GPIO（FR108）已交付；不得口头商业 VIP GPIO。**
+**不得以 FR98 四类近 VIP 冒充 GPIO（FR108）已交付；不得口头商业 VIP GPIO。**  
+**Epic 50 / FR108 已关闭（Story 50.3）：** 近 VIP 完成面；FR98 Phase 12 MVP 关闭仍有效；商业 VIP GPIO 仍为 NFR47 非目标。

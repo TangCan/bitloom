@@ -19,7 +19,7 @@ Correct Course `sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen.
 1. 树内 / 自研 HLS 调度器 → **FR95** / **FR96**（**Epic 41 已关闭** — MVP 已交付 / Story 41.4；修订后 **AD-25**）；外挂不得单独满足 FR95
 2. FIRRTL→idiomatic Scala → **FR97**（**Epic 42 已关闭** — MVP 已交付 / Story 42.3；修订后 **AD-27**）；机械 FR28/FR46 不得冒充 FR97
 3. 默认 TLM≡CA 形式证明 → 现 **FR100**（**Epic 45 已关闭** — FR100 + FR102 + FR103 MVP / Story 45.4；见 `docs/fr100-formal-equiv.md`、`docs/fr103-ip-dual-model.md`）；SystemC TLM 产品 → **FR101**（**Epic 46 已关闭** — LT-only MVP / Story 46.3；修订后 **AD-5**；AT deferred；见 `docs/fr101-systemc-tlm.md`）
-4. VIP 级全协议 IP → 现 **FR98**（**Epic 43 已关闭** — UART/SPI/I2C/AXI4-Lite 近 VIP MVP；GPIO 可选未纳入；Story 43.5）
+4. VIP 级全协议 IP → 现 **FR98**（**Epic 43 已关闭** — UART/SPI/I2C/AXI4-Lite 近 VIP MVP；GPIO 可选未纳入；Story 43.5）；**GPIO 近 VIP → FR108 / Epic 50 已关闭**（Story 50.3）
 5. 按键全设计 elaborate 的 netlist LSP → 现 **FR99**（**Epic 44 已关闭** — Story 44.4；`bitloom-lsp` 全设计 elaborate MVP）
 
 **Phase 12（2026-09-09）：** Correct Course `sprint-change-proposal-2026-09-09-phase12-path-b.md` + PRD addendum「Phase 12 字面绿」**已推翻**上述锁定（闸门 **FR94**）。  
@@ -160,9 +160,10 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     - UartRx：**FR98 / Epic 43.2** 近 VIP 8N1 RX（与 TX 全双工双例化）；小数分频 / 流控 / IrDA / parity 仍非目标
     - SpiMaster：**FR98 / Epic 43.3** 近 VIP — CPOL/CPHA 四模式、多字节 `cs_n` 帧、半周期 sclk、`rx_data`；DMA / 多 CS / slave 仍非目标
     - I2cMaster：**FR98 / Epic 43.4** 近 VIP — ACK/NACK 写+读、7-bit addr、半周期 SCL、`rx_data`/`ack_error`；stretch / 多主 / 10-bit / slave 仍非目标
-    - 全协议四类 VIP：UART+SPI+I2C+AXI4-Lite 近 VIP 已由 Epic 43 / FR98 关闭（Story 43.5）；GPIO 可选未纳入
+    - 全协议四类 VIP：UART+SPI+I2C+AXI4-Lite 近 VIP 已由 Epic 43 / FR98 关闭（Story 43.5）；GPIO 可选未纳入（FR98 G0/G1）
+    - **GPIO 近 VIP：** **FR108 / Epic 50 已关闭**（Story 50.3；`bitloom_prelude::ip::Gpio`；商业 VIP GPIO 仍非目标）
     - Axi4LiteSlave：**FR98 近 VIP** 多寄存器 + addr/wstrb；非 Full AXI / 互联 / 商业 VIP
-  status: done — 五类 FR82 基线 + Epic 43 / FR98 四类近 VIP；边界 `docs/ip/README.md`
+  status: done — 五类 FR82 基线 + Epic 43 / FR98 四类近 VIP + Epic 50 / FR108 GPIO；边界 `docs/ip/README.md`
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
   summary: UART/SPI/I2C「全协议」仍非默认交付；Epic 34 仅合同化最小可综合基线（非 VIP 级）
@@ -365,12 +366,13 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   summary: 可选产品加深（Phase 12「若产品需要…」）— 已升格为 Phase 13 FR107–114
   evidence: |
     - item-117：超越 DesignFixture 的 Cargo-graph / 任意 .rs 设计根发现 → **FR113 / Epic 55**（仍 open）
-    - item-121：GeneratedFunctional MemRead ≡ tick；F1-(ii) SymbiYosys/SMT；GPIO VIP → **FR112 / Epic 54**（及 GPIO → **FR108 / Epic 50**）（仍 open）
+    - item-121：GeneratedFunctional MemRead ≡ tick；F1-(ii) SymbiYosys/SMT → **FR112 / Epic 54**（仍 open）；**GPIO 近 VIP → FR108 / Epic 50 已关闭**（Story 50.3；商业 VIP GPIO 仍非目标）
     - item-125：AT-style nb_transport_fw/bw → **FR107 / Epic 49**（**已关闭** / Story 49.3；docs/fr107-systemc-tlm-at.md）
     - item-129：C3 FSM/state-visit 覆盖率 → **FR109 / Epic 51**；Tywaves / LCOV GUI → **FR114 / Epic 56**（仍 open）
-  status: deferred — Phase 13 contract approved (FR106); FR107 closed；FR108–114 pending
+  status: deferred — Phase 13 contract approved (FR106); FR107+FR108 closed；FR109–114 pending
   resolved: '2026-09-10'
   resolution: |
     Phase 13 Correct Course（sprint-change-proposal-2026-09-10-phase13-mvp-commercial-deepen）+
     PRD/addendum 已批准；不再写「尚无合同」。Epic 49 / FR107 AT documented subset **已关闭**（Story 49.3）。
-    其余 FR108–114 仍待各 epic 关闭后方可按 FR115 宣称。Phase 12 MVP 关闭证据仍有效（NFR44）。
+    Epic 50 / FR108 GPIO near-VIP **已关闭**（Story 50.3）。
+    其余 FR109–114 仍待各 epic 关闭后方可按 FR115 宣称。Phase 12 MVP 关闭证据仍有效（NFR44）。
