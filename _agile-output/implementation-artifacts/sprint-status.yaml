@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 18:10
+last_updated: 09-10-2026 18:15
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -459,7 +459,7 @@ development_status:
   63-1-epic-63-nfr14-风险记录: done
   63-2-ad-27-修订-若需-官方风格全家桶路径-fr122: done
   63-3-fr122-收口与-phase-14-故事清单指针: done
-  epic-63-retrospective: optional
+  epic-63-retrospective: done
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1
@@ -1731,3 +1731,30 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-62-retro-2026-09-10.md"
+  - id: "epic-63-retro-item-190-fr122-诚实边界-对外不得把-fr97-mvp-fr111-d1-d3-机械"
+    epic: 63
+    action: "FR122 诚实边界：对外不得把 FR97 MVP / FR111 D1+D3 / 机械 emit_chisel / docs-only
+      alone 写成官方风格全家桶 / FR122 完成面；宣称须引 O1–O4（续 FR123）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-63-retro-2026-09-10.md"
+  - id: "epic-63-retro-item-191-触碰-rhdl-firrtl-chisel-idiomatic-路径时保持-fr"
+    epic: 63
+    action: "触碰 rhdl-firrtl Chisel idiomatic 路径时保持 FR97/FR111 回归可用（NFR48）；默认不得恢复 Scala
+      Parser.parse 作为产品关闭条件。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-63-retro-2026-09-10.md"
+  - id: "epic-63-retro-item-192-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 63
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-63-retro-2026-09-10.md"
+  - id: "epic-63-retro-item-193-可选工程卫生-若交付完整-style-guide-全文或恢复废弃-parser"
+    epic: 63
+    action: "可选工程卫生：若交付完整 Style Guide 全文或恢复废弃 Parser，须新合同钉死（NFR51）；当前 O1–O4 为 FR122
+      完成面；Phase 14 关闭后 FR123 宣称纪律仍有效。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-63-retro-2026-09-10.md"
