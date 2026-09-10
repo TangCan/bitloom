@@ -141,11 +141,19 @@ fn fr121_sprint_epic62_done() {
             || sprint.contains("62-1-epic-62-nfr14-风险记录:done")
     );
     assert!(
-        !sprint.contains("epic-63: done") && !sprint.contains("epic-63:done"),
-        "epic-63 must not be done yet"
+        sprint.contains("epic-63: backlog")
+            || sprint.contains("epic-63:backlog")
+            || sprint.contains("epic-63: in-progress")
+            || sprint.contains("epic-63:in-progress")
+            || sprint.contains("epic-63: done")
+            || sprint.contains("epic-63:done"),
+        "epic-63 must be backlog, in-progress, or done"
     );
-    assert!(
-        sprint.contains("epic-63: backlog") || sprint.contains("epic-63:backlog"),
-        "epic-63 must remain backlog"
-    );
+    if !sprint.contains("epic-63: backlog") && !sprint.contains("epic-63:backlog") {
+        assert!(
+            sprint.contains("63-1-epic-63-nfr14-风险记录: done")
+                || sprint.contains("63-1-epic-63-nfr14-风险记录:done"),
+            "leaving epic-63 backlog requires Story 63.1 NFR14 done (gate)"
+        );
+    }
 }
