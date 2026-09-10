@@ -345,9 +345,10 @@ flowchart LR
 - **所有权作声音性证明**：永不作为 freeze 门控；若做，独立 epic。
 - **SystemC TLM-2.0 实现形状：** 产品合同见 **FR101** / AD-5（LT-only MVP 已关闭 / Epic 46）；**AT / `nb_transport` 加深**见 **FR107** / Epic 49（须引用/进一步修订 AD-5；**NFR46**）。crate 切分与发射细节由实现 epic 钉死，不在此预钉。
 - **Chisel idiomatic 验收谓词细节：** 产品合同见 **FR97** / AD-27（MVP 已关闭 / Epic 42）；**可维护加深**见 **FR111** / Epic 53（**已关闭** / Story 53.3；AD-27 2026-09-10 修订；**NFR46**）。
-- **树内 HLS 调度深度：** 产品合同见 **FR95/96** / AD-25（MVP 已关闭 / Epic 41）；**商业调度深度**见 **FR110** / Epic 52（**已关闭** / Story 52.3；AD-25 2026-09-10 修订；**NFR46**）。
+- **树内 HLS 调度深度：** 产品合同见 **FR95/96** / AD-25（MVP 已关闭 / Epic 41）；**商业调度深度**见 **FR110** / Epic 52（**已关闭** / Story 52.3；AD-25 2026-09-10 修订；**NFR46**）。**Handshake / 动态数据流默认可综合**见 **FR121** / Epic 62（须在实现 epic 内修订 **AD-25**；**NFR50**）。
 - **手写 `#[bridge]` / `#[abstraction]` / mixed `both`；形式化等价引擎细节；C ABI / cdylib；覆盖率**（产品 FR 已定，脊柱不钉实现形状）。
-- **IP / 可视化 / LSP / 黑盒 / formal/SVA / float / Analog** 的**实现形状**（产品 FR 已定；不在此钉 crate 切分）。GPIO 近 VIP 加深见 **FR108**；LSP 根发现加深见 **FR113**；FSM/state-visit 与 Tywaves/LCOV 见 **FR109** / **FR114**。
+- **IP / 可视化 / LSP / 黑盒 / formal/SVA / float / Analog** 的**实现形状**（产品 FR 已定；不在此钉 crate 切分）。GPIO 近 VIP 加深见 **FR108**；商业 VIP GPIO 全家桶见 **FR120**；LSP 根发现加深见 **FR113**；无 metadata syn-scan 见 **FR118**；FSM/state-visit 与 LCOV 见 **FR109** / **FR114**；Tywaves 级 typed IDE 波形见 **FR117**；**SymbiYosys/SMT formal** 见 **FR119** / Epic 60（工具链形状由实现 epic + NFR14 钉死；**NFR50**）。
+- **Chisel 官方风格全家桶：** 产品合同见 **FR97** / **FR111** / AD-27（MVP + D1+D3 已关闭）；**官方/idiomatic 风格全家桶**见 **FR122** / Epic 63（须在实现 epic 内视需要进一步修订 **AD-27**；默认仍不恢复 Scala `Parser.parse`；**NFR50**）。
 - **interp vs 编译版 `tick` 引擎**（产品 FR32；脊柱不选引擎）。
 - **`cargo bitloom` 其余动词**形态细节（FR40；`import`/`visualize`/`wave` 为 Phase 7 必需能力，名称可调）。
 - **macos / windows / linux-aarch64 firtool 资产**（NFR11；机制同 AD-9）。
@@ -356,4 +357,5 @@ flowchart LR
 - **AD-22 phantom 选型的替代**：若推翻，须修订 AD-22，不得 silently 分叉。
 - **AD-27 Scala 生成器所在 crate**：`[ASSUMPTION]` 可 firrtl 或 CLI。
 - **产品「全绿 / 七阶段字面完成」标签（Phase 12 MVP 已关闭）：** Phase 12 **FR94–FR105** / **NFR40–NFR43**（Correct Course 2026-09-09 Path B；Epic 40–47 done）。Phase 11 **FR87 / NFR38** 为历史合同绿里程碑。原 **FR93** 五条永久非目标**已被 FR94 推翻**。
-- **Phase 13「MVP→商业加深」合同（现行加深面）：** **FR106–FR115** / **NFR44–NFR47**（Correct Course 2026-09-10）。Phase 12 MVP 关闭证据**仍有效**（**NFR44**），不得改写为失败。「商业加深 / 非 MVP」宣称须对应 FR106–114 关闭（**FR115**）。实现 epic（49–56）须在首故事引用适用已修订 AD（**NFR46**）；Epic 48（FR106）为硬闸门。
+- **Phase 13「MVP→商业加深」合同（已关闭）：** **FR106–FR115** / **NFR44–NFR47**（Correct Course 2026-09-10；Epic 48–56 done）。Phase 12 MVP 关闭证据**仍有效**（**NFR44**），不得改写为失败。「商业加深 / 非 MVP」宣称须对应 FR106–114 关闭（**FR115**）。实现 epic（49–56）须在首故事引用适用已修订 AD（**NFR46**）；Epic 48（FR106）为硬闸门。
+- **Phase 14「NFR47 未选加深升格」合同（现行加深面）：** **FR116–FR123** / **NFR48–NFR51**（Correct Course 2026-09-10）。Phase 12/13 关闭证据**仍有效**（**NFR48**），不得改写为失败。「Tywaves / syn-scan / SBY / VIP GPIO / Handshake / 官方风格全家桶」宣称须对应 FR116–122 关闭（**FR123**）。实现 epic（58–63）须在首故事引用适用已修订 AD（至少 **AD-25**→**FR121**、**AD-27**→**FR122**、formal/SBY→**FR119**；**NFR50**）；Epic 57（FR116）为硬闸门。

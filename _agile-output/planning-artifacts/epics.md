@@ -82,7 +82,7 @@ phase14Note: >
   Correct Course approved 2026-09-10-phase14-nfr47-deferred-deepen. Phase 12/13
   closing faces remain valid (NFR48). Epic 57 must close before 58–63 ready.
   create-epics-and-stories Phase 14 complete; sprint seeded backlog.
-phase14Epic57Status: backlog
+phase14Epic57Status: complete
 phase14Epic58Status: backlog
 phase14Epic59Status: backlog
 phase14Epic60Status: backlog
