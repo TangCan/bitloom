@@ -71,7 +71,7 @@ fn fr106_nfr14_epic48_close_conditions_checked() {
 }
 
 #[test]
-fn fr106_sprint_epic48_done_49_plus_backlog() {
+fn fr106_sprint_epic48_done() {
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
         sprint.contains("48-4-ad-指针与-epic-48-收口-fr106: done")
@@ -82,19 +82,9 @@ fn fr106_sprint_epic48_done_49_plus_backlog() {
         sprint.contains("epic-48: done") || sprint.contains("epic-48:done"),
         "epic-48 must be done"
     );
-    // 49–56 may exist as backlog but must not be ready/in-progress/done yet
-    for epic in 49..=56 {
-        let ready = format!("epic-{epic}: ready");
-        let in_prog = format!("epic-{epic}: in-progress");
-        let done = format!("epic-{epic}: done");
-        assert!(
-            !sprint.contains(&ready) && !sprint.contains(&in_prog) && !sprint.contains(&done),
-            "Epic {epic} must remain backlog until its own NFR14 after Epic 48 close"
-        );
-        let backlog = format!("epic-{epic}: backlog");
-        assert!(
-            sprint.contains(&backlog),
-            "Epic {epic} should remain seeded as backlog"
-        );
-    }
+    // After Epic 48 close, Epic 49–56 may leave backlog under their own NFR14.
+    assert!(
+        sprint.contains("epic-49:") || sprint.contains("49-1-"),
+        "Phase 13 deepen epics should remain seeded after Epic 48 close"
+    );
 }
