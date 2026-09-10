@@ -193,7 +193,7 @@ fn fr117_tywaves_a_remains_deferred() {
     for fr in ["FR118", "FR119", "FR120", "FR121", "FR122"] {
         assert!(deferred.contains(fr), "deferred must still mention {fr}");
     }
-    // Sprint: Epic 59–63 stay backlog (not done).
+    // Sprint: Epic 59–63 not done yet; 60–63 stay backlog; 59 may be in-progress once started.
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     for epic in 59..=63 {
         let done = format!("epic-{epic}: done");
@@ -202,6 +202,15 @@ fn fr117_tywaves_a_remains_deferred() {
             !sprint.contains(&done) && !sprint.contains(&done2),
             "epic-{epic} must not be done yet"
         );
+    }
+    assert!(
+        sprint.contains("epic-59: backlog")
+            || sprint.contains("epic-59:backlog")
+            || sprint.contains("epic-59: in-progress")
+            || sprint.contains("epic-59:in-progress"),
+        "epic-59 must be backlog or in-progress (not done)"
+    );
+    for epic in 60..=63 {
         assert!(
             sprint.contains(&format!("epic-{epic}: backlog"))
                 || sprint.contains(&format!("epic-{epic}:backlog")),
