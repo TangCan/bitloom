@@ -102,8 +102,76 @@ pub fn sync_fifo_dual_stimulus() -> Vec<PortValues> {
     out
 }
 
+/// Handwritten `Gpio` FL (FR126) — beyond FR103 SyncFifo / GeneratedFunctional UART–AXI.
+///
+/// Models architectural ports `pad_out` / `rd_data` ≡ `Sim::tick` on
+/// [`gpio_dual_stimulus`]. Not GeneratedFunctional; not FR112 MemRead≡tick;
+/// not FR119 sby alone.
+#[derive(Debug, Clone, Default)]
+pub struct GpioFunctional {
+    out_r: u64,
+}
+
+impl GpioFunctional {
+    pub fn new() -> Self {
+        Self::default()
+    }
+}
+
+impl AbstractionView for GpioFunctional {
+    fn cycle(&mut self, inputs: &PortValues) -> PortValues {
+        let rst = inputs.get("rst").unwrap_or(0) != 0;
+        let dir = inputs.get("dir").unwrap_or(0) & 0xff;
+        let wr_en = inputs.get("wr_en").unwrap_or(0) != 0;
+        let wr_data = inputs.get("wr_data").unwrap_or(0) & 0xff;
+        let wr_mask = inputs.get("wr_mask").unwrap_or(0) & 0xff;
+        let pad_in = inputs.get("pad_in").unwrap_or(0) & 0xff;
+
+        if rst {
+            self.out_r = 0;
+        } else if wr_en {
+            let kept = self.out_r & (!wr_mask & 0xff);
+            let newt = wr_data & wr_mask;
+            self.out_r = (kept | newt) & 0xff;
+        }
+
+        let pad_out = self.out_r & dir;
+        let rd_data = (self.out_r & dir) | (pad_in & (!dir & 0xff));
+
+        let mut out = inputs.clone();
+        out.set("pad_out", pad_out);
+        out.set("rd_data", rd_data);
+        out
+    }
+}
+
+/// Documented Gpio dual-model stimulus (reset, masked write, pad read) — FR126.
+pub fn gpio_dual_stimulus() -> Vec<PortValues> {
+    let mut out = Vec::new();
+    let mut frame = |rst: u64, dir: u64, wr_en: u64, wr_data: u64, wr_mask: u64, pad_in: u64| {
+        let mut pv = PortValues::default();
+        pv.set("rst", rst);
+        pv.set("dir", dir);
+        pv.set("wr_en", wr_en);
+        pv.set("wr_data", wr_data);
+        pv.set("wr_mask", wr_mask);
+        pv.set("pad_in", pad_in);
+        out.push(pv);
+    };
+    frame(1, 0xff, 0, 0, 0, 0);
+    frame(0, 0xff, 1, 0xa5, 0xff, 0);
+    frame(0, 0xff, 0, 0, 0, 0);
+    frame(0, 0x0f, 0, 0, 0, 0xf0); // lower nybble out, upper from pad
+    frame(0, 0x0f, 1, 0x03, 0x0f, 0xf0);
+    frame(0, 0x0f, 0, 0, 0, 0xaa);
+    out
+}
+
 /// Architectural ports compared for SyncFifo dual-model (avoid internal wires).
 const SYNC_FIFO_ARCH_PORTS: &[&str] = &["full", "empty", "data_out"];
+
+/// Architectural ports for Gpio handwritten FL (FR126).
+const GPIO_ARCH_PORTS: &[&str] = &["pad_out", "rd_data"];
 
 /// FR103 product entry: co-verify functional + cycle models for the NFR14 IP set.
 #[derive(Debug, Clone, Default)]
@@ -153,6 +221,27 @@ impl IpDualModelMatrix {
             if let Err(mismatches) =
                 compare_named_ports(sim.ports(), &abs_out, SYNC_FIFO_ARCH_PORTS)
             {
+                return EquivStatus::Fail {
+                    cycle: cycles,
+                    mismatches,
+                };
+            }
+            cycles += 1;
+        }
+        EquivStatus::Pass { cycles }
+    }
+
+    /// FR126: handwritten `Gpio` FL ≡ tick on [`gpio_dual_stimulus`].
+    pub fn verify_gpio_handwritten(&self, hir: FrozenHir) -> EquivStatus {
+        let mut sim = Sim::new(hir);
+        let mut fl = GpioFunctional::new();
+        let mut cycles = 0usize;
+        for inputs in gpio_dual_stimulus() {
+            sim.set_inputs(inputs.clone());
+            sim.settle();
+            sim.tick();
+            let abs_out = fl.cycle(&inputs);
+            if let Err(mismatches) = compare_named_ports(sim.ports(), &abs_out, GPIO_ARCH_PORTS) {
                 return EquivStatus::Fail {
                     cycle: cycles,
                     mismatches,

@@ -27,7 +27,10 @@ mod formal_equiv;
 pub use formal_equiv::FormalEquivProduct;
 
 mod ip_dual;
-pub use ip_dual::{IpDualModelMatrix, SyncFifoFunctional, sync_fifo_dual_stimulus};
+pub use ip_dual::{
+    GpioFunctional, IpDualModelMatrix, SyncFifoFunctional, gpio_dual_stimulus,
+    sync_fifo_dual_stimulus,
+};
 
 mod generate;
 pub use generate::{
