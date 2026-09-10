@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 10:55
+last_updated: 09-10-2026 13:45
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -373,7 +373,7 @@ development_status:
   48-2-correct-course-prd-批准-phase13-fr106: done
   48-3-同步-readme-deferred-路线图-fr106-fr115: done
   48-4-ad-指针与-epic-48-收口-fr106: done
-  epic-48-retrospective: optional
+  epic-48-retrospective: done
 
   epic-49: done
   49-1-epic-49-nfr14-风险记录: done
@@ -1292,3 +1292,30 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-47-retro-2026-09-10.md"
+  - id: "epic-48-retro-item-130-fr106-fr115-诚实边界-对外不得把-phase-12-fr94-105"
+    epic: 48
+    action: "FR106/FR115 诚实边界：对外不得把 Phase 12 FR94–105 MVP 写成「商业加深已完成」；不得把 Epic 48
+      闸门关闭冒充 FR107–114 任一加深 FR 关闭；宣称须引对应 FR（FR115）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-48-retro-2026-09-10.md"
+  - id: "epic-48-retro-item-131-闸门-closeout-atdd-惯例-epic-n-关闭后允许-epic-n"
+    epic: 48
+    action: "闸门 closeout ATDD 惯例：Epic N 关闭后允许 Epic N+1 离开永久 backlog 冻结（断言「关闭前不得 ready；关闭后仍
+      backlog 直至各自 NFR14」），避免再出现需 e85bc69 类事后放宽。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-48-retro-2026-09-10.md"
+  - id: "epic-48-retro-item-132-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 48
+    action: "续保持 commit subject Story N.M + retro --stories 短 id，使 git_evidence.py
+      归因可用（本 epic 已验证；对照 Epic 47 归因空）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-48-retro-2026-09-10.md"
+  - id: "epic-48-retro-item-133-后续加深-epic-49-56-首故事须引用适用已修订-ad-nfr46-不得静"
+    epic: 48
+    action: "后续加深 epic（49–56）首故事须引用适用已修订 AD（NFR46）；不得静默扩大各 epic NFR14 子集（NFR47）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-48-retro-2026-09-10.md"
