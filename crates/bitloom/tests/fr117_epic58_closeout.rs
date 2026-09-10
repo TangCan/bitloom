@@ -181,18 +181,18 @@ fn fr117_tywaves_a_remains_deferred() {
         readme.contains("不得") && (readme.contains("Tywaves") || readme.contains("上游")),
         "README must forbid claiming upstream Tywaves from FR117 close"
     );
-    // FR120–122 remain deferred delivery (FR118/FR119 may now be closed).
+    // FR121–122 remain deferred delivery (FR118/FR119/FR120 may now be closed).
     assert!(
-        deferred.contains("FR120")
+        deferred.contains("FR121")
             && (deferred.contains("仍 deferred")
-                || deferred.contains("FR120–122")
-                || deferred.contains("FR120–FR122")),
-        "deferred must keep FR120–122 as remaining deferred delivery"
+                || deferred.contains("FR121–122")
+                || deferred.contains("FR121–FR122")),
+        "deferred must keep FR121–122 as remaining deferred delivery"
     );
     for fr in ["FR118", "FR119", "FR120", "FR121", "FR122"] {
         assert!(deferred.contains(fr), "deferred must still mention {fr}");
     }
-    // Sprint: Epic 62–63 stay backlog; Epic 61 may be in-progress; Epic 59/60 may be done.
+    // Sprint: Epic 62–63 stay backlog; Epic 61 may be done.
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     for epic in 62..=63 {
         let done = format!("epic-{epic}: done");

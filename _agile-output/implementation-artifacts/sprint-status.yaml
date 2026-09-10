@@ -443,10 +443,10 @@ development_status:
   60-3-fr119-收口与文档指针: done
   epic-60-retrospective: optional
 
-  epic-61: in-progress
+  epic-61: done
   61-1-epic-61-nfr14-风险记录: done
   61-2-商业-vip-gpio-实现与验收-fr120: done
-  61-3-fr120-收口与文档指针: backlog
+  61-3-fr120-收口与文档指针: done
   epic-61-retrospective: optional
 
   epic-62: backlog

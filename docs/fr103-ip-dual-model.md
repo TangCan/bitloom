@@ -75,7 +75,7 @@ a product completion exclusion.
 ## Non-goals (this story)
 
 - SystemC TLM-2.0 product → FR101 / Epic 46 (**closed** separately; LT-only; AT deferred)
-- GPIO VIP (optional at FR98 G1; **near-VIP delivered as FR108 / Epic 50** — Story 50.3; commercial GPIO VIP still out of scope)
+- GPIO VIP (optional at FR98 G1; **near-VIP delivered as FR108 / Epic 50** — Story 50.3; **commercial VIP delivered as FR120 / Epic 61** — Story 61.3 / [`fr120-commercial-vip-gpio.md`](fr120-commercial-vip-gpio.md); full SoC pad / co-sim scoreboard still deferred)
 - Full-chip unbounded formal proof
 - **FR112** GeneratedFunctional MemRead ≡ tick deepen → [`fr112-generated-functional-memread-equiv.md`](fr112-generated-functional-memread-equiv.md) (**Epic 54 closed** / Story 54.3; does not rewrite this FR103 SyncFifo handwritten face)
 

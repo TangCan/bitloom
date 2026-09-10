@@ -78,11 +78,11 @@ fn fr118_docs_readme_deferred_closed() {
         "FR99 must cross-link FR118"
     );
     assert!(
-        deferred.contains("FR120")
+        deferred.contains("FR121")
             && (deferred.contains("仍 deferred")
-                || deferred.contains("FR120–122")
-                || deferred.contains("FR120–FR122")),
-        "FR120–122 must remain deferred delivery"
+                || deferred.contains("FR121–122")
+                || deferred.contains("FR121–FR122")),
+        "FR121–122 must remain deferred delivery"
     );
 }
 

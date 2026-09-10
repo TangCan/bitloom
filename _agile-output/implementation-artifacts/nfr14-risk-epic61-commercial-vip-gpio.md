@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR120 / Epic 61；NFR14、NFR48、NFR49、NFR51；对照 FR98 / FR108 / NFR47→Phase 14 升格 |
 | 记录日期 | 2026-09-10 |
-| 状态 | **open** — Story 61.1；关闭勾选 → Story 61.3 |
+| 状态 | **closed** — Story 61.3 / Epic 61（2026-09-10） |
 
 ### (a) 上游约束
 
@@ -82,11 +82,11 @@
 
 ### Epic 61 关闭条件（Story 61.3 勾选）
 
-- [ ] **61.2 / FR120：** C1–C4 + ATDD；FR98/FR108 回归不破
-- [ ] **文档 / deferred / IP README / 未覆盖协议诚实披露**
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；prelude 边界
-- [ ] **FR98 / FR108 关闭仍有效**（NFR48）
+- [x] **61.2 / FR120：** C1–C4 + ATDD；FR98/FR108 回归不破
+- [x] **文档 / deferred / IP README / 未覆盖协议诚实披露**
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；prelude 边界
+- [x] **FR98 / FR108 关闭仍有效**（NFR48）
 
 ---
 
@@ -94,4 +94,5 @@
 
 **缺 NFR14（或缺 a–d / C1–C4 清单）⇒ 不得将 61.2–61.3 标 `ready`。**  
 **不得以 FR108 alone / FR98 alone / 口头商业 VIP 无夹具 / docs-only 关闭 FR120。**  
-**未列入协议保持 deferred（NFR51）。**
+**未列入协议保持 deferred（NFR51）。**  
+**Epic 61 / FR120 已关闭（Story 61.3）：** 商业 VIP GPIO（`GpioVip` C1–C4）；FR98/FR108 关闭仍有效；全 SoC pad / 商业对拍 / debounce·驱动强度 / 非上升沿 IRQ 全家桶仍 deferred。

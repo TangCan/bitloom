@@ -83,11 +83,11 @@ fn fr119_docs_readme_deferred_closed() {
         "branch C more IP FL must remain deferred"
     );
     assert!(
-        deferred.contains("FR120")
+        deferred.contains("FR121")
             && (deferred.contains("仍 deferred")
-                || deferred.contains("FR120–122")
-                || deferred.contains("FR120–FR122")),
-        "FR120–122 must remain deferred delivery"
+                || deferred.contains("FR121–122")
+                || deferred.contains("FR121–FR122")),
+        "FR121–122 must remain deferred delivery"
     );
 }
 

@@ -291,20 +291,20 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | LSP 设计根发现加深 | FR113 / 55 | vs FR99 DesignFixture — **Epic 55 已关闭**（Story 55.3） |
 | Tywaves / LCOV GUI | FR114 / 56 | vs FR104/105 MVP — **Epic 56 已关闭**（Story 56.3；LCOV+树内 GUI；typed IDE → **FR117 / Epic 58 已关闭**；Tywaves A deferred） |
 
-### Phase 14 加深面（合同已批准；闸门 Epic 57 已关闭；FR117/Epic 58、FR118/Epic 59、FR119/Epic 60 已关闭；Epic 61–63 仍 deferred）
+### Phase 14 加深面（合同已批准；闸门 Epic 57 已关闭；FR117/Epic 58、FR118/Epic 59、FR119/Epic 60、FR120/Epic 61 已关闭；Epic 62–63 仍 deferred）
 
-下列原 Phase 13 **NFR47 未选加深**已由 Correct Course + **FR116** 升格为 Phase 14 显式 FR（Epic 57–63）。**FR117 / Epic 58 已关闭**（自研 typed IDE 波形；Tywaves A deferred）；**FR118 / Epic 59 已关闭**（无 metadata `#[bitloom::top]` syn-scan）；**FR119 / Epic 60 已关闭**（SymbiYosys/`sby` F1-(ii)；分支 C 更多 IP 手写 FL 仍 deferred）；**FR120–122 实现关闭前仍为 deferred 交付态**；对外宣称按 **FR123**。同源：PRD addendum「Phase 14」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+下列原 Phase 13 **NFR47 未选加深**已由 Correct Course + **FR116** 升格为 Phase 14 显式 FR（Epic 57–63）。**FR117 / Epic 58 已关闭**（自研 typed IDE 波形；Tywaves A deferred）；**FR118 / Epic 59 已关闭**（无 metadata `#[bitloom::top]` syn-scan）；**FR119 / Epic 60 已关闭**（SymbiYosys/`sby` F1-(ii)；分支 C 更多 IP 手写 FL 仍 deferred）；**FR120 / Epic 61 已关闭**（商业 VIP GPIO / `GpioVip` C1–C4；全 SoC pad 等仍 deferred）；**FR121–122 实现关闭前仍为 deferred 交付态**；对外宣称按 **FR123**。同源：PRD addendum「Phase 14」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
 | 加深面 | FR / Epic | 相对 Phase 13 关闭面 |
 | --- | --- | --- |
 | Tywaves 级 typed IDE 波形 | FR117 / 58 | vs FR104 / FR114 LCOV+树内 GUI — **Epic 58 已关闭**（Story 58.3；自研 typed；Tywaves A deferred） |
 | 无 metadata 全树 `#[bitloom::top]` syn-scan | FR118 / 59 | vs FR99 DesignFixture / FR113 Cargo-graph+metadata — **Epic 59 已关闭**（Story 59.3） |
 | SymbiYosys/SMT 形式路径 | FR119 / 60 | vs FR100 F1-(i) / FR112 分支 B — **Epic 60 已关闭**（Story 60.3；`just formal-sby-check`） |
-| 商业 VIP GPIO 全家桶 | FR120 / 61 | vs FR98 四类近 VIP / FR108 P1–P4 |
+| 商业 VIP GPIO 全家桶 | FR120 / 61 | vs FR98 四类近 VIP / FR108 P1–P4 — **Epic 61 已关闭**（Story 61.3；`GpioVip`；见 [`docs/fr120-commercial-vip-gpio.md`](docs/fr120-commercial-vip-gpio.md)） |
 | Handshake / 动态数据流默认可综合 | FR121 / 62 | vs FR95/96 / FR110（须修订 AD-25） |
 | 官方风格 Chisel 全家桶 | FR122 / 63 | vs FR97 / FR111 D1+D3（可能修订 AD-27） |
 
-**FR123 宣称纪律：** 「Tywaves / syn-scan / SBY / VIP GPIO / Handshake / 官方风格全家桶」**仅**在对应 **FR116–122** 关闭后方可勾选；**禁止**用 Phase 13 完成面冒充。**FR117 已关闭**仅授权宣称 **自研 typed IDE 波形（子集 B）**；**不得**据此宣称上游 Tywaves 一等集成（子集 A 仍 **NFR51 deferred**）。**FR118 已关闭**授权宣称无 metadata workspace `#[bitloom::top]` syn-scan（≠ DesignFixture / metadata alone）。**FR119 已关闭**授权宣称 SymbiYosys/`sby` F1-(ii) 形式路径（≠ FR100 F1-(i) / FR112-B / FR85 alone）；**分支 C 更多 IP 手写 FL 仍 deferred（NFR51）**。未列入本批的 deferred（自动 FSM 标签、更多 IP FL、第三方 LCOV GUI、emit MemRead 完整生成等）仍须另开合同（**NFR51**）。
+**FR123 宣称纪律：** 「Tywaves / syn-scan / SBY / VIP GPIO / Handshake / 官方风格全家桶」**仅**在对应 **FR116–122** 关闭后方可勾选；**禁止**用 Phase 13 完成面冒充。**FR117 已关闭**仅授权宣称 **自研 typed IDE 波形（子集 B）**；**不得**据此宣称上游 Tywaves 一等集成（子集 A 仍 **NFR51 deferred**）。**FR118 已关闭**授权宣称无 metadata workspace `#[bitloom::top]` syn-scan（≠ DesignFixture / metadata alone）。**FR119 已关闭**授权宣称 SymbiYosys/`sby` F1-(ii) 形式路径（≠ FR100 F1-(i) / FR112-B / FR85 alone）；**分支 C 更多 IP 手写 FL 仍 deferred（NFR51）**。**FR120 已关闭**授权宣称商业 VIP GPIO（`GpioVip` C1–C4；≠ FR108 P1–P4 alone / FR98 四类 alone）；**全 SoC pad 环 / 商业对拍记分板 / debounce·驱动强度 / 非上升沿 IRQ 全家桶仍 deferred（NFR51）**。未列入本批的 deferred（自动 FSM 标签、更多 IP FL、第三方 LCOV GUI、emit MemRead 完整生成等）仍须另开合同（**NFR51**）。
 
 **明确 deferred / 未承诺为产品完整面（可延期；上列五项已不再是永久非目标）：**
 
