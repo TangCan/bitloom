@@ -83,7 +83,7 @@ cargo test -p bitloom --test fr118_syn_scan_design_root_discovery
 | Doc | Role |
 |-----|------|
 | [`fr99-bitloom-lsp.md`](fr99-bitloom-lsp.md) | FR99 DesignFixture MVP — still closed (NFR44) |
-| [`fr118-syn-scan-design-root-discovery.md`](fr118-syn-scan-design-root-discovery.md) | FR118 syn-scan deepen |
+| [`fr118-syn-scan-design-root-discovery.md`](fr118-syn-scan-design-root-discovery.md) | FR118 syn-scan deepen — **Epic 59 closed** (Story 59.3) |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic55-lsp-design-root-discovery.md` |
 
 ## Non-goals (FR113 face)

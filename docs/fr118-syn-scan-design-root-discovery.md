@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`bitloom-lsp`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Product path delivered in Story **59.2**. Epic 59 / FR118 closeout is Story **59.3**.
+**Status:** **Epic 59 / FR118 closed** (Story **59.3**). Product path delivered in Story **59.2**.
 Phase 12 FR99 DesignFixture MVP and Phase 13 FR113 Cargo-graph+metadata remain closed (NFR48).
 
 This page is the **FR118 completion surface**. It deepens design-root discovery **beyond**
@@ -12,7 +12,7 @@ FR99 DesignFixture-only and FR113 metadata `design_roots`.
 
 | Strategy | Status |
 |----------|--------|
-| **Workspace `#[bitloom::top]` syn-scan** (no metadata) | **FR118 face** (this page) |
+| **Workspace `#[bitloom::top]` syn-scan** (no metadata) | **FR118 face — closed** (this page) |
 | Cargo-graph + `[package.metadata.bitloom] design_roots` | FR113 — **still closed**; coexistence |
 | FR99 `DesignFixture` enum | Regression only — **alone ≠ FR118** |
 
@@ -59,6 +59,7 @@ let r = analyze_discovered_root(AnalysisMode::FullElaborate, &roots[0], MVP_INTE
 
 ```text
 cargo test -p bitloom --test fr118_syn_scan_design_root_discovery
+cargo test -p bitloom --test fr118_epic59_closeout
 cargo test -p bitloom --test fr113_lsp_design_root_discovery
 cargo test -p bitloom --test fr99_bitloom_lsp_full_elaborate
 ```

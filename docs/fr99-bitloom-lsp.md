@@ -111,4 +111,5 @@ Design crates still depend **only** on [`bitloom-prelude`](../crates/bitloom-pre
 - Host IDE (FR90): [`fr90-host-ide-rust-analyzer.md`](fr90-host-ide-rust-analyzer.md)
 - Hierarchy HTML ≠ LSP: [`fr38-viz-lsp.md`](fr38-viz-lsp.md)
 - FR113 design-root discovery deepen: [`fr113-lsp-design-root-discovery.md`](fr113-lsp-design-root-discovery.md) (**Epic 55 closed** / Story 55.3; beyond DesignFixture)
+- FR118 syn-scan (no metadata): [`fr118-syn-scan-design-root-discovery.md`](fr118-syn-scan-design-root-discovery.md) (**Epic 59 closed** / Story 59.3; FR99 MVP still closed)
 - NFR14 Epic 44 gate (P1–P6): `_agile-output/implementation-artifacts/nfr14-risk-epic44-full-elaborate-lsp.md`

@@ -181,40 +181,40 @@ fn fr117_tywaves_a_remains_deferred() {
         readme.contains("不得") && (readme.contains("Tywaves") || readme.contains("上游")),
         "README must forbid claiming upstream Tywaves from FR117 close"
     );
-    // FR118–122 remain deferred delivery (not closed like FR117).
+    // FR119–122 remain deferred delivery (FR118 may now be closed with Epic 59).
     assert!(
-        deferred.contains("FR118–FR122 仍 deferred")
-            || deferred.contains("FR118–122")
-            || (deferred.contains("FR118")
+        deferred.contains("FR119–FR122 仍 deferred")
+            || deferred.contains("FR119–122")
+            || (deferred.contains("FR119")
                 && deferred.contains("仍 deferred")
-                && deferred.contains("Epic 59")),
-        "deferred must keep FR118–122 as remaining deferred delivery"
+                && (deferred.contains("Epic 60") || deferred.contains("Epic 60–63"))),
+        "deferred must keep FR119–122 as remaining deferred delivery"
     );
     for fr in ["FR118", "FR119", "FR120", "FR121", "FR122"] {
         assert!(deferred.contains(fr), "deferred must still mention {fr}");
     }
-    // Sprint: Epic 59–63 not done yet; 60–63 stay backlog; 59 may be in-progress once started.
+    // Sprint: Epic 60–63 stay backlog; Epic 59 may be done after Story 59.3.
     let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
-    for epic in 59..=63 {
+    for epic in 60..=63 {
         let done = format!("epic-{epic}: done");
         let done2 = format!("epic-{epic}:done");
         assert!(
             !sprint.contains(&done) && !sprint.contains(&done2),
             "epic-{epic} must not be done yet"
         );
-    }
-    assert!(
-        sprint.contains("epic-59: backlog")
-            || sprint.contains("epic-59:backlog")
-            || sprint.contains("epic-59: in-progress")
-            || sprint.contains("epic-59:in-progress"),
-        "epic-59 must be backlog or in-progress (not done)"
-    );
-    for epic in 60..=63 {
         assert!(
             sprint.contains(&format!("epic-{epic}: backlog"))
                 || sprint.contains(&format!("epic-{epic}:backlog")),
             "epic-{epic} must remain backlog"
         );
     }
+    assert!(
+        sprint.contains("epic-59: backlog")
+            || sprint.contains("epic-59:backlog")
+            || sprint.contains("epic-59: in-progress")
+            || sprint.contains("epic-59:in-progress")
+            || sprint.contains("epic-59: done")
+            || sprint.contains("epic-59:done"),
+        "epic-59 must be backlog, in-progress, or done"
+    );
 }

@@ -13,7 +13,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR118 / Epic 59；NFR14、NFR48、NFR49、NFR51；对照 FR99、FR113、FR90 |
 | 记录日期 | 2026-09-10 |
-| 状态 | **accepted** — Story **59.1**；关闭勾选留给 Story **59.3** |
+| 状态 | **closed** — Story **59.3** / Epic 59 / FR118 |
 | **选定发现策略** | **Workspace `#[bitloom::top]` syn-scan**（无 metadata 时扫描 `.rs`；与 Cargo-graph+metadata 共存） |
 
 ### (a) 上游约束
@@ -72,15 +72,15 @@
 
 ### Epic 59 关闭条件（Story 59.3 勾选）
 
-- [ ] **59.2 / FR118：** syn-scan 产品路径可运行 + ATDD + 无 metadata 正例夹具；失败可读；FR99/FR113 回归；shallow ≠ finish
-- [ ] **文档 / deferred / README / FR99·FR113 交叉链**
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；prelude 边界
-- [ ] **FR99 MVP 与 FR113 关闭仍有效**（NFR48）
+- [x] **59.2 / FR118：** syn-scan 产品路径可运行 + ATDD + 无 metadata 正例夹具；失败可读；FR99/FR113 回归；shallow ≠ finish
+- [x] **文档 / deferred / README / FR99·FR113 交叉链**
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；prelude 边界
+- [x] **FR99 MVP 与 FR113 关闭仍有效**（NFR48）
 
 ---
 
 ## 门禁一句话
 
-**缺 NFR14（或缺 a–d / 未钉死 syn-scan 策略）⇒ 不得将 59.2–59.3 标 `ready`。**  
+**缺 NFR14（或缺 a–d / 未钉死 syn-scan 策略）⇒ 不得将 59.2–59.3 标 `ready`。**（历史门禁；Epic 59 / FR118 已于 Story 59.3 关闭。）  
 **FR118 完成面 = 无 metadata 时 workspace `#[bitloom::top]` syn-scan；不得以 DesignFixture / metadata `design_roots` / shallow finish / docs-only alone 关闭。**
