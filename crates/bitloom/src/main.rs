@@ -170,6 +170,18 @@ enum Commands {
         #[arg(long, default_value_t = false)]
         fst: bool,
     },
+    /// Tick a Mux demo (or `.fir`) and write FR114 `coverage.lcov` + `coverage.html`.
+    Coverage {
+        /// Optional `.fir` input; when omitted, uses the built-in Mux coverage demo DUT.
+        #[arg(long)]
+        input: Option<PathBuf>,
+        /// Directory for `coverage.lcov` + `coverage.html`.
+        #[arg(long, default_value = ".")]
+        out_dir: PathBuf,
+        /// Number of ticks after reset (Mux demo).
+        #[arg(long, default_value_t = 4)]
+        ticks: u64,
+    },
 }
 
 #[derive(Subcommand)]
@@ -864,6 +876,17 @@ fn main() {
                 std::process::exit(1);
             }
         },
+        Commands::Coverage {
+            input,
+            out_dir,
+            ticks,
+        } => match run_coverage(input.as_deref(), &out_dir, ticks) {
+            Ok(()) => {}
+            Err(e) => {
+                eprintln!("error: {e}");
+                std::process::exit(1);
+            }
+        },
     }
 }
 
@@ -989,6 +1012,75 @@ fn run_wave(input: &Path, out_dir: &Path, ticks: u64, want_fst: bool) -> Result<
         "open {} in a browser for FR104 interactive wave (timing.html is static FR38/49; GTKWave optional for {})",
         interactive_path.display(),
         vcd_path.display()
+    );
+    Ok(())
+}
+
+/// Product entry: tick → `coverage.lcov` + `coverage.html` (FR114).
+fn run_coverage(input: Option<&Path>, out_dir: &Path, ticks: u64) -> Result<(), String> {
+    use bitloom_builder::{ElaborateSession, GroundType, Span};
+    use bitloom_hir::PortValues;
+    use bitloom_sim::Sim;
+
+    let hir = if let Some(path) = input {
+        let text = fs::read_to_string(path).map_err(|e| format!("read {}: {e}", path.display()))?;
+        rhdl_firrtl::import(&text).map_err(|d| d.to_string())?
+    } else {
+        let mut s = ElaborateSession::new("Fr114Mux");
+        s.begin_module("Fr114Mux", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("sel", GroundType::Bool, Span::default());
+        s.add_input("a", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("b", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_mux("y", "sel", "a", "b", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish().map_err(|d| d.to_string())?
+    };
+
+    fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
+    let mut sim = Sim::new(hir);
+    let mut pv = PortValues::default();
+    pv.set("rst", 1);
+    pv.set("clk", 0);
+    pv.set("sel", 0);
+    pv.set("a", 1);
+    pv.set("b", 2);
+    sim.set_inputs(pv.clone());
+    sim.tick();
+
+    pv.set("rst", 0);
+    for i in 0..ticks {
+        pv.set("sel", 0);
+        pv.set("a", i.wrapping_add(1));
+        pv.set("b", 2);
+        pv.set("clk", i & 1);
+        sim.set_inputs(pv.clone());
+        sim.tick();
+    }
+
+    let (lcov, html) = sim
+        .write_coverage_artifacts(out_dir)
+        .map_err(|e| format!("FR114 coverage artifacts: {e}"))?;
+    let lcov_text =
+        fs::read_to_string(&lcov).map_err(|e| format!("read {}: {e}", lcov.display()))?;
+    if !lcov_text.contains("end_of_record") || !lcov_text.contains("DA:") {
+        return Err("coverage.lcov missing LCOV markers".into());
+    }
+    let html_text =
+        fs::read_to_string(&html).map_err(|e| format!("read {}: {e}", html.display()))?;
+    if !html_text.contains("data-bitloom-coverage-gui") {
+        return Err("coverage.html missing FR114 GUI marker".into());
+    }
+    println!("wrote {}", lcov.display());
+    println!("wrote {}", html.display());
+    println!(
+        "open {} in a browser for FR114 coverage GUI (LCOV at {}; ≠ Tywaves; ≠ FR104 wave)",
+        html.display(),
+        lcov.display()
     );
     Ok(())
 }

@@ -10,7 +10,9 @@ use bitloom_hir::{AssignExpr, AssignTarget, FrozenHir, GroundType, PortValues, P
 pub use bitloom_hir::PortValues as Values;
 
 mod coverage;
-pub use coverage::{Coverage, parse_branch_report, parse_report, parse_state_report};
+pub use coverage::{
+    Coverage, parse_branch_report, parse_report, parse_state_report, write_coverage_artifacts,
+};
 mod engine;
 pub use engine::TickEngine;
 mod equiv;
@@ -355,6 +357,16 @@ impl Sim {
 
     pub fn coverage_report(&self) -> String {
         self.coverage.report()
+    }
+
+    /// Borrow the live coverage recorder (FR105/FR109/FR114).
+    pub fn coverage(&self) -> &Coverage {
+        &self.coverage
+    }
+
+    /// Write FR114 `coverage.lcov` + `coverage.html` under `out_dir`.
+    pub fn write_coverage_artifacts(&self, out_dir: &Path) -> io::Result<(PathBuf, PathBuf)> {
+        write_coverage_artifacts(&self.coverage, out_dir)
     }
 
     /// Register FSM state labels for FR109 / C3 state-visit coverage.

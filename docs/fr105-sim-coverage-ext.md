@@ -51,7 +51,7 @@ cargo test -p bitloom --test fr105_epic47_closeout
 ## Non-goals (this story / MVP crop)
 
 - **C3 FSM / state-visit coverage** — cropped for Phase 12 MVP in 47.3; **delivered via FR109 / Epic 51** (Story 51.2; see [`fr109-fsm-state-visit-coverage.md`](fr109-fsm-state-visit-coverage.md))
-- LCOV / third-party coverage GUI
+- LCOV / third-party coverage GUI — **Phase 13 FR114** (see [`fr114-lcov-coverage-gui.md`](fr114-lcov-coverage-gui.md))
 - Removing FR34 toggle sampling
 - Weakening FR104 `interactive.html`
 - Starting Epic 48+ (historical; Phase 13 contract supersedes)

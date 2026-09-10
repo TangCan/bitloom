@@ -55,5 +55,5 @@ ATDD: `cargo test -p bitloom --test fr104_interactive_wave`
 
 ## Non-goals (this story)
 
-- Tywaves-class typed source-level IDE waveform
+- Tywaves-class typed source-level IDE waveform — **Phase 13 FR114 subset A deferred**; LCOV+GUI → [`fr114-lcov-coverage-gui.md`](fr114-lcov-coverage-gui.md)
 - Removing default VCD or static `timing.html`
