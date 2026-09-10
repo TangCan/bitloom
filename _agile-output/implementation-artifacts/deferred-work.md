@@ -440,3 +440,40 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     **FR122 / Epic 63 已关闭**（Story 63.3；官方风格全家桶 O1–O4；AD-27 修订；Parser 未恢复；完整 Style Guide 仍 deferred）。
     **Phase 14 规划/实现故事已齐（Epic 57–63）。**
     自动 FSM 标签 / 更多 IP FL / 第三方 LCOV GUI / emit MemRead 完整生成仍须另开合同（NFR51）。
+
+<!-- action-items-sweep-2026-09-10-phase14: epics 57–63 open retro items disposition -->
+
+- source_spec: `_agile-output/implementation-artifacts/epic-57-retro-2026-09-10.md`
+  summary: Standing Phase-14 诚实 / NFR48 / 过程边界（Epic 57–63；触及对应面时遵守；非立即实现）
+  evidence: |
+    - item-166：FR116/FR123 — Phase 13 FR106–115 alone ≠ NFR47 未选加深 / Phase 14 完成面；对外须引 FR116–122
+    - item-170：FR117 — FR104 I1–I3 / FR114 LCOV·coverage.html / VCD·GTKWave alone ≠ Tywaves 级 typed IDE；完成面 = 自研 typed-wave（Tywaves A deferred）
+    - item-174：FR118 — FR99 DesignFixture / FR113 metadata design_roots / shallow alone ≠ 无 metadata 全树 syn-scan
+    - item-178：FR119 — FR92 / FR100 F1-(i) / FR112-B / FR85 / FR107 alone ≠ SymbiYosys F1-(ii) 产品路径
+    - item-182：FR120 — FR108 P1–P4 / Gpio 近 VIP / FR98 四类 alone ≠ 商业 VIP GPIO；宣称须引 GpioVip C1–C4
+    - item-186：FR121 — FR95/96 MVP / FR110 Q1+Q2 / in-tree-mvp / docs-only / 未修订 AD-25 alone ≠ Handshake 默认可综合
+    - item-190：FR122 — FR97 MVP / FR111 D1+D3 / 机械 emit_chisel / docs-only alone ≠ 官方风格全家桶 O1–O4
+    - item-167/171/175/179/183/187/191：NFR48 — 触碰面保持 Phase 12/13 关闭证据与对应 MVP/加深回归；缺工具/元数据不得 silent 宣称加深绿
+    - item-168/172/176/180/184/188/192：commit subject Story N.M → process note（续 Phase 12/13）
+  status: deferred — standing contract when touching area
+  resolved: '2026-09-10'
+  resolution: |
+    编入本 ledger；公开 FR 文档已含对应诚实条。触碰相关 crate/文档/CI 叙事时对照；
+    未列入 NFR14 的加深须新合同 + NFR14，禁止静默扩大（NFR51）。
+
+- source_spec: `_agile-output/implementation-artifacts/epic-58-retro-2026-09-10.md`
+  summary: Phase-14 可选卫生 / NFR51 未选加深（评估后 defer；部分已在实现中落地）
+  evidence: |
+    - item-169：**已落地（过程）** — Epic 58–63 首故事 NFR14 已引用适用修订 AD / NFR50–51（见 `58-1`…`63-1` 风险记录）
+    - item-173：子集 (A) Tywaves 一等集成 — 仍须另开合同（**NFR51**）；自研 typed = FR117 完成面
+    - item-177：非 Cargo 包 / 全 monorepo 任意路径扫描 — 仍须另开合同（**NFR51**）；workspace 包内 syn-scan = FR118 完成面
+    - item-181：分支 C 更多 IP FL / 默认 CI 强制真 sby 镜像 — 仍须另开合同（**NFR51**）；(A) sby 绑定 = FR119 完成面
+    - item-185：ip.rs ~3213 LOC — **assess-and-defer**（本 sweep 不拆；FR98/FR108/FR120 耦合；需独立 hygiene 故事）
+    - item-189：全 CIRCT Handshake 方言 / 多时钟弹性缓冲全家桶 — 仍须另开合同（**NFR51**）；ready/valid 默认可综合 = FR121 完成面
+    - item-193：完整 Style Guide 全文 / 恢复废弃 Parser — 仍须另开合同（**NFR51**）；O1–O4 = FR122 完成面；FR123 宣称纪律仍有效
+    - frontmatter：epics.md `phase14Status` → complete（对齐 Epic 57–63 done）
+  status: deferred — optional hygiene / NFR51（item-169 process-landed this sweep）
+  resolved: '2026-09-10'
+  resolution: |
+    item-169 过程证据已齐；ip.rs 评估不拆；其余未选加深写入本 ledger，禁止静默扩大关闭面。
+    **Phase 14 规划/实现/retro 已齐（Epic 57–63）。**

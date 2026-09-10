@@ -65,7 +65,7 @@ stepsCompleted:
   - step-03-create-stories-phase-14
   - step-04-final-validation-phase-14
 status: complete
-phase14Status: planning-complete
+phase14Status: complete
 correctCoursePhase14Approved: 2026-09-10
 phase14Validation: |
   FR116–123 mapped to Epic 57–63 stories (22); Epic 57 hard gate for 58–63;
@@ -81,9 +81,9 @@ phase14Scope: >
 phase14Note: >
   Correct Course approved 2026-09-10-phase14-nfr47-deferred-deepen. Phase 12/13
   closing faces remain valid (NFR48). Epic 57–63 closed (FR116–FR122). Phase 14
-  planning/implementation stories complete (Epic 57–63). Remaining honesty gate is
-  FR123 claim discipline; NFR51 non-goals stay deferred.
-  create-epics-and-stories Phase 14 complete; sprint seeded.
+  stories + retros complete; action-items sweep 2026-09-10-phase14 closed items
+  166–193. Remaining honesty gate is FR123 claim discipline; NFR51 non-goals
+  stay deferred.
 phase14Epic57Status: complete
 phase14Epic58Status: complete
 phase14Epic59Status: complete
@@ -233,7 +233,7 @@ uxDesignPhase13: none
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48–56 · FR106–FR115 / NFR44–NFR47，**complete**）。阶段十四：NFR47 未选加深升格（Epic 57–63 · FR116–FR123 / NFR48–NFR51，**planning-complete**）。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48–56 · FR106–FR115 / NFR44–NFR47，**complete**）。阶段十四：NFR47 未选加深升格（Epic 57–63 · FR116–FR123 / NFR48–NFR51，**complete**）。无 UX。
 
 ## Requirements Inventory
 
