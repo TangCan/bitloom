@@ -2,13 +2,17 @@
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Story **58.2** product path (NFR14 subset **B**). Epic 58 / FR117 closeout → Story **58.3** (not this page alone).
+**Status:** **Epic 58 / FR117 closed** (Story **58.3**). Subset **(B)** delivered in Story **58.2**.
+Phase 12 FR104/FR105 and Phase 13 FR114 remain closed (NFR48). Subset **(A) Tywaves** stays **deferred** (NFR51).
+
+This page is the **FR117 completion surface**. It deepens observability **beyond** FR104
+`interactive.html` I1–I3 and FR114 LCOV/`coverage.html`.
 
 ## Selected deepen subset (NFR14)
 
 | Subset | Status |
 |--------|--------|
-| **(B) In-house equivalent typed IDE waveform** | **FR117 face — this page** |
+| **(B) In-house equivalent typed IDE waveform** | **FR117 face — closed** (this page) |
 | (A) Tywaves first-class integration | **deferred** (NFR51) |
 
 **Forbidden closes:** FR104 `interactive.html` I1–I3 alone; static VCD /「请开 GTKWave」alone; FR114 LCOV/`coverage.html` alone; docs-only.
@@ -40,14 +44,16 @@ Open `typed-wave.html` in a browser (Cursor/VS Code Simple Browser or system bro
 
 ## Manual acceptance checklist
 
-- [ ] `cargo bitloom wave …` succeeds and prints path to `typed-wave.html` + `wave.typed.json`
-- [ ] Opening `typed-wave.html` shows Bitloom brand + typed signal tree (not I1–I3-only canvas)
-- [ ] Selected signal metadata shows a concrete type string (not name-only)
-- [ ] Sibling `interactive.html`, `wave.vcd`, and `timing.html` still exist (NFR48)
-- [ ] Docs state Tywaves (A) remains **deferred** (NFR51)
-- [ ] Must not claim Epic 58 / FR117 closed until Story 58.3
+Satisfied by Story **58.2** ATDD + Story **58.3** closeout (re-run locally if needed):
 
-ATDD: `cargo test -p bitloom --test fr117_typed_ide_wave`
+- [x] `cargo bitloom wave …` succeeds and prints path to `typed-wave.html` + `wave.typed.json`
+- [x] Opening `typed-wave.html` shows Bitloom brand + typed signal tree (not I1–I3-only canvas)
+- [x] Selected signal metadata shows a concrete type string (not name-only)
+- [x] Sibling `interactive.html`, `wave.vcd`, and `timing.html` still exist (NFR48)
+- [x] Docs state Tywaves (A) remains **deferred** (NFR51)
+- [x] Epic 58 / FR117 closed on subset B only (Story 58.3); Tywaves A not claimed
+
+ATDD: `cargo test -p bitloom --test fr117_typed_ide_wave` · closeout `cargo test -p bitloom --test fr117_epic58_closeout`
 
 ## Non-regression (NFR48)
 
@@ -64,8 +70,8 @@ cargo bitloom coverage --out-dir target/cov            # coverage.lcov + coverag
 | [`fr114-lcov-coverage-gui.md`](fr114-lcov-coverage-gui.md) | FR114 LCOV GUI — still closed; ≠ FR117 alone |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic58-tywaves-typed-ide-waveform.md` |
 
-## Non-goals (this story)
+## Non-goals
 
-- Tywaves / Chisel typed viewer first-class integration (subset A — deferred)
-- Epic 58 / FR117 documentation closeout (→ Story 58.3)
+- Tywaves / Chisel typed viewer first-class integration (subset A — **deferred**, NFR51)
 - Removing default VCD, `interactive.html`, or FR114 coverage path
+- Silent claim that subset A is delivered

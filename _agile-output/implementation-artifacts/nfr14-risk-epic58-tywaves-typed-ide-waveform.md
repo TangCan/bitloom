@@ -15,7 +15,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR117 / Epic 58；NFR14、NFR48、NFR49、NFR51；对照 FR104、FR105、FR114、FR34 |
 | 记录日期 | 2026-09-10 |
-| 状态 | **accepted** — Story **58.1**（门禁）；Epic 58 / FR117 关闭 → **58.3** |
+| 状态 | **closed** — Story **58.3**（Epic 58 / FR117 收口；子集 B 已交付；A 仍 deferred） |
 | **选定加深子集** | **(B) 自研等价 typed IDE 波形** |
 
 ### (a) 上游约束
@@ -73,25 +73,25 @@
 - 上游 Tywaves（Chisel/CIRCT debug 方言 viewer）一等集成：**不做**为本 epic 关闭条件。
 - 若未来改选 (A)，须新合同或修订本记录，并写清 Tywaves/ChiselSim 钉死版本与失败可读性。
 
-### Epic 58 故事分工（本记录不开工实现）
+### Epic 58 故事分工（历史；Epic 已关闭）
 
 | 故事 | 交付 | 本记录角色 |
 | --- | --- | --- |
-| **58.1** | 本 NFR14 + ATDD；钉死子集 B；禁止项 | **本故事** |
-| **58.2** | 子集 B 产品路径 + 夹具/ATDD 或手动清单 | Gate：须本记录后才可 ready |
-| **58.3** | `docs/fr117-*`（或扩展）/ README / deferred 收口；勾选关闭 | Gate：须本记录后才可 ready |
+| **58.1** | 本 NFR14 + ATDD；钉死子集 B；禁止项 | **done** |
+| **58.2** | 子集 B 产品路径 + 夹具/ATDD 或手动清单 | **done** |
+| **58.3** | `docs/fr117-*`（或扩展）/ README / deferred 收口；勾选关闭 | **done**（本收口） |
 
 ### Epic 58 关闭条件（Story 58.3 勾选）
 
-- [ ] **58.2 / FR117：** 子集 B 可运行 + ATDD/验收清单 + ≥1 夹具；负向可读
-- [ ] **文档 / deferred / FR104·FR114 交叉链**（未选 A 保持 deferred）
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；prelude 边界
-- [ ] **FR104/114 关闭仍有效**（NFR48）
+- [x] **58.2 / FR117：** 子集 B 可运行 + ATDD/验收清单 + ≥1 夹具；负向可读
+- [x] **文档 / deferred / FR104·FR114 交叉链**（未选 A 保持 deferred）
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；prelude 边界
+- [x] **FR104/114 关闭仍有效**（NFR48）
 
 ---
 
 ## 门禁一句话
 
-**缺 NFR14（或缺 a–d / 未钉死 A/B 子集）⇒ 不得将 58.2–58.3 标 `ready`。**  
+**（历史门禁，Epic 58 已于 Story 58.3 关闭）** 缺 NFR14（或缺 a–d / 未钉死 A/B 子集）曾禁止将 58.2–58.3 标 `ready`。  
 **FR117 完成面 = (B) 自研等价 typed IDE 波形；不得以 FR104 I1–I3 / VCD·GTKWave / FR114 LCOV alone / docs-only 关闭；A 未交付不得 silent 宣称。**

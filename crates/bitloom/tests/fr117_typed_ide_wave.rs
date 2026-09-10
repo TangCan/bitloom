@@ -196,7 +196,7 @@ fn fr117_nfr48_fr104_and_fr114_paths_still_documented() {
 }
 
 #[test]
-fn fr117_sprint_58_2_in_progress_or_done_keeps_58_3_backlog() {
+fn fr117_sprint_58_2_done_allows_58_3_and_epic58_done() {
     let text = read("_agile-output/implementation-artifacts/sprint-status.yaml");
     assert!(
         text.contains("58-2-typed-ide-波形路径实现与验收-fr117: done")
@@ -204,12 +204,26 @@ fn fr117_sprint_58_2_in_progress_or_done_keeps_58_3_backlog() {
             || text.contains("58-2-typed-ide-波形路径实现与验收-fr117: ready-for-dev"),
         "58-2 must be tracked"
     );
+    let story_done = text.contains("58-3-fr117-收口与文档指针: done")
+        || text.contains("58-3-fr117-收口与文档指针:done");
+    let story_open = text.contains("58-3-fr117-收口与文档指针: backlog")
+        || text.contains("58-3-fr117-收口与文档指针: in-progress")
+        || text.contains("58-3-fr117-收口与文档指针: ready-for-dev");
     assert!(
-        text.contains("58-3-fr117-收口与文档指针: backlog"),
-        "58.3 must stay backlog until Story 58.3"
+        story_done || story_open,
+        "58.3 must be backlog/in-progress during 58.2 or done after closeout"
     );
+    let epic_done = text.contains("epic-58: done") || text.contains("epic-58:done");
+    let epic_open = text.contains("epic-58: in-progress") || text.contains("epic-58:in-progress");
     assert!(
-        text.contains("epic-58: in-progress") || text.contains("epic-58:in-progress"),
-        "epic-58 must remain in-progress (not closed by 58.2)"
+        epic_done || epic_open,
+        "epic-58 must be in-progress during 58.2 or done after Story 58.3"
     );
+    // After closeout, story and epic stamps must stay coupled.
+    if story_done || epic_done {
+        assert!(
+            story_done && epic_done,
+            "when either 58-3 or epic-58 is done, both must be done"
+        );
+    }
 }
