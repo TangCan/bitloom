@@ -411,10 +411,10 @@ development_status:
   54-3-fr112-收口与交叉链: done
   epic-54-retrospective: optional
 
-  epic-55: in-progress
+  epic-55: done
   55-1-epic-55-nfr14-风险记录: done
   55-2-lsp-设计根发现加深-fr113: done
-  55-3-fr113-收口与-fr99-交叉链: backlog
+  55-3-fr113-收口与-fr99-交叉链: done
   epic-55-retrospective: optional
 
   epic-56: backlog

@@ -13,7 +13,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR113 / Epic 55；NFR14、NFR44、NFR45、NFR47；对照 FR99、FR90、FR38 |
 | 记录日期 | 2026-09-10 |
-| 状态 | draft — Story 55.1 |
+| 状态 | **closed** — Story **55.3** / Epic 55 / FR113 |
 | **选定发现策略** | **Cargo-graph + `[package.metadata.bitloom] design_roots`**（超越 DesignFixture-only） |
 
 ### (a) 上游约束
@@ -70,11 +70,11 @@
 
 ### Epic 55 关闭条件（Story 55.3 勾选）
 
-- [ ] **55.2 / FR113：** 选定发现策略可运行 + ATDD + ≥1 非 DesignFixture-only 夹具；负向/超时可读
-- [ ] **文档 / deferred / FR99 交叉链**（未选全树 syn-scan 保持 deferred）
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；prelude 边界
-- [ ] **FR99 MVP 关闭仍有效**（NFR44）
+- [x] **55.2 / FR113：** 选定发现策略可运行 + ATDD + ≥1 非 DesignFixture-only 夹具；负向/超时可读
+- [x] **文档 / deferred / FR99 交叉链**（未选全树 syn-scan 保持 deferred）
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；prelude 边界
+- [x] **FR99 MVP 关闭仍有效**（NFR44）
 
 ---
 

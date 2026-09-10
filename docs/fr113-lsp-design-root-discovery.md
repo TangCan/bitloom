@@ -2,14 +2,18 @@
 
 **Product:** Bitloom (`bitloom-lsp`). Unrelated to `samitbasu/rhdl`.
 
-This page is the **FR113 completion surface** for Epic 55 (Story 55.2).
-It deepens keystroke elaborate **beyond** Phase 12 FR99 DesignFixture-only MVP.
+**Status:** **Epic 55 / FR113 closed** (Story **55.3**). Discovery path delivered in Story **55.2**.
+Phase 12 FR99 DesignFixture MVP remains closed (NFR44). Full workspace `#[bitloom::top]`
+syn-scan without metadata stays **deferred** (NFR47 — needs new contract).
+
+This page is the **FR113 completion surface**. It deepens keystroke elaborate **beyond**
+Phase 12 FR99 DesignFixture-only MVP.
 
 ## Selected discovery strategy (NFR14)
 
 | Strategy | Status |
 |----------|--------|
-| **Cargo-graph + `[package.metadata.bitloom] design_roots`** | **FR113 face** |
+| **Cargo-graph + `[package.metadata.bitloom] design_roots`** | **FR113 face — closed** |
 | FR99 `DesignFixture` enum | Regression only — **alone ≠ FR113** |
 | Full workspace `#[bitloom::top]` syn-scan (no metadata) | **deferred** (NFR47) |
 
@@ -60,6 +64,7 @@ let r = analyze_on_did_save_at(Some(path));
 
 ```text
 cargo test -p bitloom --test fr113_lsp_design_root_discovery
+cargo test -p bitloom --test fr113_epic55_closeout
 cargo test -p bitloom --test fr99_bitloom_lsp_full_elaborate
 ```
 
@@ -78,4 +83,8 @@ cargo test -p bitloom --test fr99_bitloom_lsp_full_elaborate
 | [`fr99-bitloom-lsp.md`](fr99-bitloom-lsp.md) | FR99 DesignFixture MVP — still closed (NFR44) |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic55-lsp-design-root-discovery.md` |
 
-Epic 55 closeout → Story 55.3.
+## Non-goals (NFR47)
+
+- Full workspace `#[bitloom::top]` syn-scan without metadata
+- Claiming DesignFixture MVP or rust-analyzer alone closes FR113
+- HTML visualization as LSP
