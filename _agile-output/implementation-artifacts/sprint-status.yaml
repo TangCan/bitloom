@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 09:05
+last_updated: 09-10-2026 09:15
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -358,7 +358,7 @@ development_status:
   46-1-epic-46-nfr14-风险记录: done
   46-2-systemc-tlm-2-0-产品面-fr101: done
   46-3-fr101-收口与撤销-不承诺-tlm: done
-  epic-46-retrospective: optional
+  epic-46-retrospective: done
 
   epic-47: done
   47-1-epic-47-nfr14-风险记录: done
@@ -1171,3 +1171,34 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-45-retro-2026-09-10.md"
+  - id: "epic-46-retro-item-122-fr101-诚实边界-对外不得把-host-rust-fl-fr47-emit_"
+    epic: 46
+    action: "FR101 诚实边界：对外不得把 host Rust FL（FR47）/emit_functional_crate 写成 SystemC
+      TLM；不得把 Epic 46 关闭冒充 AT/nb_transport 或默认 TLM≡CA（FR100）；MVP = LT-only（b_transport
+      + generic payload；AT deferred）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-46-retro-2026-09-10.md"
+  - id: "epic-46-retro-item-123-续-epic-40-retro-item-101-epic-41-retro-i"
+    epic: 46
+    action: "续 epic-40-retro-item-101 / epic-41-retro-item-104 / epic-42-retro-item-108
+      / epic-43-retro-item-112 / epic-44-retro-item-115 / epic-45-retro-item-119：同步
+      epics.md frontmatter phase12Epic40Status–phase12Epic47Status 与 sprint done /
+      phase12Status: complete。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-46-retro-2026-09-10.md"
+  - id: "epic-46-retro-item-124-nfr14-收口故事-commit-subject-惯例-门禁与收口-commi"
+    epic: 46
+    action: "NFR14 / 收口故事 commit subject 惯例：门禁与收口 commit subject 含 Story N.1 / Story
+      N.3（或 N.1/N.3），避免 git_evidence.py 归因空（续 45 item-120；本 epic 46.1/46.3 复发）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-46-retro-2026-09-10.md"
+  - id: "epic-46-retro-item-125-评估可选加深-at-style-nb_transport_fw-bw-产品支-故"
+    epic: 46
+    action: "评估可选加深：AT-style nb_transport_fw/bw 产品支（故事 46.2/46.3 deferred；非 FR101
+      LT-only AC 缺口）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-46-retro-2026-09-10.md"
