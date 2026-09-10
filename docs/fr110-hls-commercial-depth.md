@@ -39,10 +39,10 @@ MVP loop-unroll path unchanged: `--in-tree` without `--pipeline`.
 - NFR14: `_agile-output/implementation-artifacts/nfr14-risk-epic52-hls-commercial-depth.md`
 - AD-25: ARCHITECTURE-SPINE (Story 52.3 may revise)
 
-## Non-goals (NFR47)
+## Non-goals (NFR47 → Phase 14)
 
 - Full commercial HLS compiler suite
-- Handshake / dynamic dataflow as default synthesizable semantics
+- Handshake / dynamic dataflow as default synthesizable semantics → **FR121** / [`fr121-handshake-default.md`](fr121-handshake-default.md) (not FR110)
 - Closing FR110 via Bambu stub green alone
 
 ```text

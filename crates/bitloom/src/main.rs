@@ -86,6 +86,13 @@ enum Commands {
         /// Pipeline stage count for `--in-tree --pipeline` (FR110 / Q1; require ≥2 for `fr110`).
         #[arg(long, default_value_t = 2)]
         stages: u32,
+        /// FR121: Handshake / dynamic-DF default synthesizable path (ready/valid).
+        /// Implies in-tree; takes precedence over `--pipeline` / loop-unroll.
+        #[arg(long, default_value_t = false)]
+        handshake: bool,
+        /// Handshake channel stages for `--handshake` (FR121; require ≥1).
+        #[arg(long, default_value_t = 1)]
+        channels: u32,
     },
     /// Import FIRRTL 6.0.0 `.fir` (Chisel→firtool output ok) into the same emit path as `build` (FR40 / FR46).
     Import {
@@ -585,38 +592,70 @@ fn main() {
             pipeline,
             ii,
             stages,
+            handshake,
+            channels,
         } => {
-            if in_tree {
-                let kind = if pipeline {
-                    hls::InTreeScheduleKind::Pipeline {
-                        initiation_interval: ii,
-                        stages,
+            if handshake || in_tree {
+                if handshake {
+                    println!(
+                        "path=in-tree-handshake fr121=true fr96=true handshake=true channels={channels} dataflow={dataflow}"
+                    );
+                    match hls::parse_dataflow_alias(&dataflow).and_then(|op| {
+                        let art = hls::schedule_handshake_from_transform(
+                            &function,
+                            &[],
+                            channels,
+                            move || op,
+                        )?;
+                        hls::emit_in_tree_schedule(&art, &out_dir)
+                    }) {
+                        Ok((sched, rtl)) => {
+                            println!("ok_schedule={}", sched.display());
+                            println!("ok_rtl={}", rtl.display());
+                        }
+                        Err(e) => {
+                            eprintln!("error: {e}");
+                            std::process::exit(1);
+                        }
                     }
                 } else {
-                    hls::InTreeScheduleKind::LoopUnroll { trip_count: unroll }
-                };
-                let fr110 = hls::meets_fr110_commercial_depth(&kind);
-                if pipeline {
-                    println!(
-                        "path=in-tree fr95=true fr96=true fr110={fr110} kind=pipeline ii={ii} pipeline_stages={stages} dataflow={dataflow}"
-                    );
-                } else {
-                    println!(
-                        "path=in-tree fr95=true fr96=true kind=loop-unroll trip_count={unroll} dataflow={dataflow}"
-                    );
-                }
-                // FR96: CLI `--in-tree --dataflow` dissolves the transform alias as a
-                // closure unit before entering the FR95/FR110 schedule path (no Bambu).
-                match hls::parse_dataflow_alias(&dataflow).and_then(|op| {
-                    hls::run_hls_in_tree_from_transform(&function, &[], kind, move || op, &out_dir)
-                }) {
-                    Ok((sched, rtl)) => {
-                        println!("ok_schedule={}", sched.display());
-                        println!("ok_rtl={}", rtl.display());
+                    let kind = if pipeline {
+                        hls::InTreeScheduleKind::Pipeline {
+                            initiation_interval: ii,
+                            stages,
+                        }
+                    } else {
+                        hls::InTreeScheduleKind::LoopUnroll { trip_count: unroll }
+                    };
+                    let fr110 = hls::meets_fr110_commercial_depth(&kind);
+                    if pipeline {
+                        println!(
+                            "path=in-tree fr95=true fr96=true fr110={fr110} kind=pipeline ii={ii} pipeline_stages={stages} dataflow={dataflow}"
+                        );
+                    } else {
+                        println!(
+                            "path=in-tree fr95=true fr96=true kind=loop-unroll trip_count={unroll} dataflow={dataflow}"
+                        );
                     }
-                    Err(e) => {
-                        eprintln!("error: {e}");
-                        std::process::exit(1);
+                    // FR96: CLI `--in-tree --dataflow` dissolves the transform alias as a
+                    // closure unit before entering the FR95/FR110 schedule path (no Bambu).
+                    match hls::parse_dataflow_alias(&dataflow).and_then(|op| {
+                        hls::run_hls_in_tree_from_transform(
+                            &function,
+                            &[],
+                            kind,
+                            move || op,
+                            &out_dir,
+                        )
+                    }) {
+                        Ok((sched, rtl)) => {
+                            println!("ok_schedule={}", sched.display());
+                            println!("ok_rtl={}", rtl.display());
+                        }
+                        Err(e) => {
+                            eprintln!("error: {e}");
+                            std::process::exit(1);
+                        }
                     }
                 }
             } else {

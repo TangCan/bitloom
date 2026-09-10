@@ -1,4 +1,4 @@
-//! Product HLS front-end (AD-25 revised / FR35 / FR50 / FR76 / **FR95** / **FR96**).
+//! Product HLS front-end (AD-25 revised / FR35 / FR50 / FR76 / **FR95** / **FR96** / **FR110** / **FR121**).
 //!
 //! - **FR35 / FR76 external path:** emit host C and call pinned Bambu (optional/对照).
 //! - **FR95 in-tree path:** documented-subset scheduling/allocation inside bitloom
@@ -6,10 +6,14 @@
 //! - **FR96:** dissolve/inline dataflow-transform closures **before** in-tree schedule
 //!   (`schedule_in_tree_from_transform`) — feeds the FR95 path; capturing closures reject
 //!   readably (AD-18).
+//! - **FR121:** Handshake / dynamic dataflow as **documented default synthesizable** semantics
+//!   (`schedule_handshake_default` / ready-valid channels) — AD-25 revised; alone satisfies FR121
+//!   (not FR95 MVP or FR110 alone).
 //!
 //! Story 29.2: HLS dataflow closures dissolve to C ops **before** external schedule/lower.
 //! Story 41.2: in-tree loop-unroll schedule IR + optional RTL stub.
 //! Story 41.3: closure transform → FR95 in-tree schedule (FR96).
+//! Story 62.2: Handshake default synthesizable path (FR121).
 
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -104,7 +108,7 @@ pub struct DissolvedHlsDataflow {
     pub c_source: String,
 }
 
-/// FR95 in-tree schedule kind (documented MVP subset; AD-25 revised).
+/// FR95 / FR121 in-tree schedule kind (AD-25 revised).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum InTreeScheduleKind {
     /// Fully unroll a counted loop of `trip_count` iterations (Story 41.2 demo).
@@ -114,6 +118,9 @@ pub enum InTreeScheduleKind {
         initiation_interval: u32,
         stages: u32,
     },
+    /// Handshake / dynamic dataflow default synthesizable semantics (**FR121**).
+    /// `channels` = number of ready/valid channel stages (≥ 1).
+    Handshake { channels: u32 },
 }
 
 /// True when `kind` meets NFR14 FR110 default gates Q1+Q2 (`pipeline_stages >= 2` + II).
@@ -125,6 +132,11 @@ pub fn meets_fr110_commercial_depth(kind: &InTreeScheduleKind) -> bool {
             stages
         } if *initiation_interval >= 1 && *stages >= 2
     )
+}
+
+/// True when `kind` is the FR121 Handshake / dynamic-DF default synthesizable path.
+pub fn meets_fr121_handshake(kind: &InTreeScheduleKind) -> bool {
+    matches!(kind, InTreeScheduleKind::Handshake { channels } if *channels >= 1)
 }
 
 /// One scheduled stage in an in-tree HLS artifact (FR95).
@@ -415,23 +427,33 @@ fn build_schedule_ir(
 ) -> String {
     let mut lines = Vec::new();
     lines.push("{".into());
-    lines.push(format!("  \"fr95\": true,"));
-    if fr96 {
-        lines.push(format!("  \"fr96\": true,"));
-        lines.push(format!("  \"dataflow_transform\": \"dissolved\","));
+    match kind {
+        InTreeScheduleKind::Handshake { .. } => {
+            lines.push("  \"fr121\": true,".into());
+            lines.push("  \"handshake\": true,".into());
+            lines.push("  \"semantics\": \"handshake-dynamic-df\",".into());
+            lines.push("  \"path\": \"in-tree-handshake\",".into());
+        }
+        _ => {
+            lines.push("  \"fr95\": true,".into());
+            lines.push("  \"path\": \"in-tree\",".into());
+        }
     }
-    lines.push(format!("  \"path\": \"in-tree\","));
+    if fr96 {
+        lines.push("  \"fr96\": true,".into());
+        lines.push("  \"dataflow_transform\": \"dissolved\",".into());
+    }
     lines.push(format!("  \"fn_name\": \"{fn_name}\","));
     match kind {
         InTreeScheduleKind::LoopUnroll { trip_count } => {
-            lines.push(format!("  \"kind\": \"loop-unroll\","));
+            lines.push("  \"kind\": \"loop-unroll\",".into());
             lines.push(format!("  \"trip_count\": {trip_count},"));
         }
         InTreeScheduleKind::Pipeline {
             initiation_interval,
             stages: n,
         } => {
-            lines.push(format!("  \"kind\": \"pipeline\","));
+            lines.push("  \"kind\": \"pipeline\",".into());
             lines.push(format!("  \"initiation_interval\": {initiation_interval},"));
             // Q2 alias required by FR110 / NFR14
             lines.push(format!("  \"ii\": {initiation_interval},"));
@@ -439,6 +461,10 @@ fn build_schedule_ir(
             if *n >= 2 {
                 lines.push("  \"fr110\": true,".into());
             }
+        }
+        InTreeScheduleKind::Handshake { channels } => {
+            lines.push("  \"kind\": \"handshake\",".into());
+            lines.push(format!("  \"channels\": {channels},"));
         }
     }
     lines.push(format!("  \"stage_count\": {},", stages.len()));
@@ -458,6 +484,9 @@ fn build_schedule_ir(
 }
 
 fn build_rtl_stub(fn_name: &str, kind: &InTreeScheduleKind, stages: &[ScheduleStage]) -> String {
+    if let InTreeScheduleKind::Handshake { channels } = kind {
+        return build_handshake_rtl_stub(fn_name, *channels, stages);
+    }
     let kind_note = match kind {
         InTreeScheduleKind::LoopUnroll { trip_count } => {
             format!("loop-unroll trip_count={trip_count}")
@@ -473,6 +502,7 @@ fn build_rtl_stub(fn_name: &str, kind: &InTreeScheduleKind, stages: &[ScheduleSt
             };
             format!("pipeline II={initiation_interval} stages={n} ({depth})")
         }
+        InTreeScheduleKind::Handshake { .. } => unreachable!(),
     };
     let mut body = String::new();
     let honesty = if matches!(
@@ -503,10 +533,42 @@ fn build_rtl_stub(fn_name: &str, kind: &InTreeScheduleKind, stages: &[ScheduleSt
     )
 }
 
+fn build_handshake_rtl_stub(fn_name: &str, channels: u32, stages: &[ScheduleStage]) -> String {
+    let mut body = String::new();
+    let mut cur = "x_data".to_string();
+    for st in stages {
+        let next = format!("s{}", st.index);
+        let expr = verilog_expr(&st.op, &cur);
+        body.push_str(&format!("  wire [31:0] {next} = {expr};\n"));
+        cur = next;
+    }
+    format!(
+        "// generated by bitloom FR121 Handshake default synthesizable (channels={channels}); no Bambu\n\
+         // ready/valid dynamic dataflow channels (documented default synthesizable DF semantics)\n\
+         module {fn_name}(\n\
+           input  wire        clk,\n\
+           input  wire        rst_n,\n\
+           input  wire [31:0] x_data,\n\
+           input  wire        x_valid,\n\
+           output wire        x_ready,\n\
+           output wire [31:0] y_data,\n\
+           output wire        y_valid,\n\
+           input  wire        y_ready\n\
+         );\n\
+           // FR121: Handshake / dynamic-DF (not in-tree-mvp static schedule alone)\n\
+         {body}\
+           assign x_ready = y_ready;\n\
+           assign y_valid = x_valid;\n\
+           assign y_data  = {cur};\n\
+         endmodule\n"
+    )
+}
+
 /// FR95 in-tree scheduling MVP: produce a checkable schedule without calling Bambu.
 ///
-/// Documented subset: [`InTreeScheduleKind::LoopUnroll`] (primary) and
-/// [`InTreeScheduleKind::Pipeline`] (secondary).
+/// Documented subset: [`InTreeScheduleKind::LoopUnroll`] (primary),
+/// [`InTreeScheduleKind::Pipeline`] (secondary), and
+/// [`InTreeScheduleKind::Handshake`] (**FR121**).
 pub fn schedule_in_tree(
     fn_name: &str,
     op: HlsDataflowOp,
@@ -536,6 +598,16 @@ pub fn schedule_in_tree(
                 ));
             }
             stages
+        }
+        InTreeScheduleKind::Handshake { channels } => {
+            if channels == 0 {
+                return Err(HlsError::Message(
+                    "FR121 Handshake: channels (通道) must be >= 1; zero-channel is not a valid \
+                     default synthesizable Handshake path"
+                        .into(),
+                ));
+            }
+            channels
         }
     };
 
@@ -579,6 +651,52 @@ pub fn schedule_in_tree_fr110(
         )));
     }
     schedule_in_tree(fn_name, op, kind)
+}
+
+/// FR121 Handshake default synthesizable schedule (ready/valid dynamic DF).
+///
+/// Rejects `channels == 0` so callers cannot silent-claim FR121.
+pub fn schedule_handshake_default(
+    fn_name: &str,
+    op: HlsDataflowOp,
+    channels: u32,
+) -> Result<InTreeScheduleArtifact, HlsError> {
+    let kind = InTreeScheduleKind::Handshake { channels };
+    if !meets_fr121_handshake(&kind) {
+        return Err(HlsError::Message(format!(
+            "FR121 Handshake: require channels>=1 (got channels={channels}); \
+             FR95 MVP loop-unroll / FR110 pipeline alone ≠ FR121"
+        )));
+    }
+    if fn_name.is_empty() {
+        return Err(HlsError::Message(
+            "FR121 Handshake schedule: fn_name must be non-empty".into(),
+        ));
+    }
+    schedule_in_tree(fn_name, op, kind)
+}
+
+/// FR121 + AD-18: dissolve dataflow transform, then Handshake schedule.
+///
+/// Capturing closures fail in [`dissolve_dataflow_transform`] **before** schedule.
+pub fn schedule_handshake_from_transform<F>(
+    fn_name: &str,
+    violations: &[HlsDataflowClosureViolation],
+    channels: u32,
+    transform: F,
+) -> Result<InTreeScheduleArtifact, HlsError>
+where
+    F: FnOnce() -> HlsDataflowOp,
+{
+    let dissolved = dissolve_dataflow_transform(fn_name, violations, transform)?;
+    let mut artifact = schedule_handshake_default(&dissolved.fn_name, dissolved.op, channels)?;
+    artifact.schedule_ir =
+        build_schedule_ir(&artifact.fn_name, &artifact.kind, &artifact.stages, true);
+    artifact.rtl_stub = format!(
+        "// FR96: dataflow transform dissolved before FR121 Handshake schedule (AD-18)\n{}",
+        artifact.rtl_stub
+    );
+    Ok(artifact)
 }
 
 /// FR96: dissolve/inline a dataflow-transform closure, then enter the FR95 in-tree schedule.
