@@ -17,6 +17,7 @@
 - FR100 / FR102 / FR103 / Epic 45: formal FL≡RTL product + multi-view attribute matrix + first-class IP dual-model — **Epic 45 closed** (MVP); **FR112 / Epic 54 closed** (GeneratedFunctional MemRead≡tick deepen; A/C deferred); **FR119 / Epic 60 closed** (SymbiYosys/`sby` F1-(ii); branch C more IP FL still deferred)
 - FR101 / Epic 46: SystemC TLM-2.0 product path — **Epic 46 closed** (LT-only MVP via `emit_systemc_tlm_lt` / `gen-tlm`; AT deferred; ≠ FR47 Rust FL)
 - FR104 / FR105 / Epic 47: interactive rich waveform + sim coverage extension — **Epic 47 closed** (FR104 `interactive.html`; FR105 coverage v2 Mux branch; C3 FSM cropped); **FR114 / Epic 56 closed** (LCOV + in-tree coverage GUI; Tywaves deferred)
+- **Phase 15 / FR124–FR132:** NFR51 leftover deepen contract (Correct Course 2026-09-10) — **Epic 64 / FR124+FR132 gate closed** (Story 64.4); Phase 12–14 closes remain valid (**NFR52**); deepen epics 65–71 still need per-epic NFR14 (**NFR53**); AD-25→FR129 / AD-27→FR130 / CI sby→FR127 (**NFR54**); claims only via FR132
 
 ## Process
 

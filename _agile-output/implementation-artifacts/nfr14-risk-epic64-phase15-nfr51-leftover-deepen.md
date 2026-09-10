@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR124 / Epic 64；NFR14、NFR52、NFR53、NFR54、NFR55；对照 FR94–123 / NFR40–51；FR132 宣称门面 |
 | 记录日期 | 2026-09-10 |
-| 状态 | accepted — Story 64.1；Epic 64 关闭勾选见 Story 64.4 |
+| 状态 | closed — Story 64.4 勾选完成；Epic 64 关闭；Epic 65–71 仍 backlog（各 epic 自有 NFR14 后方可 ready） |
 
 ### Phase 12–14 关闭面 vs Phase 15 加深边界（NFR52 · 必读）
 
@@ -119,10 +119,14 @@
 
 ### Epic 64 关闭条件（Story 64.4 勾选）
 
-- [ ] **FR124 / Correct Course + PRD：** Phase 15 批准文案验收 — Story 64.2
-- [ ] **README / deferred：** Phase 14 vs Phase 15 加深区分 — Story 64.3
-- [ ] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 15 指针 — Story 64.4
-- [ ] **NFR52–55：** 边界与诚实义务写入本记录并保持
-- [ ] **禁止事项未触发：** 65–71 在 Epic 64 关闭前未标 ready
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
-- [ ] **Epic 65–71：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭
+- [x] **FR124 / Correct Course + PRD：** Phase 15 批准文案验收 — Story 64.2
+- [x] **README / deferred：** Phase 14 vs Phase 15 加深区分 — Story 64.3
+- [x] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 15 指针 — Story 64.4
+- [x] **NFR52–55：** 边界与诚实义务写入本记录并保持
+- [x] **禁止事项未触发：** 65–71 在 Epic 64 关闭前未标 ready
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
+- [x] **Epic 65–71：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭
+
+### Epic 64 关闭声明
+
+**Phase 15 闸门已开（FR124 / FR132）：** Correct Course + PRD/addendum + README/deferred + 脊柱/AGENTS 指针齐备。Epic 65–71 **可以**离开永久冻结，但仍为 `backlog` 直至各 epic 自有 NFR14（NFR53）。Phase 12–14 关闭证据仍有效（NFR52）。未实现前不得宣称 FR125–131 关闭。

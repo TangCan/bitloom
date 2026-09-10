@@ -461,11 +461,11 @@ development_status:
   63-3-fr122-收口与-phase-14-故事清单指针: done
   epic-63-retrospective: done
 
-  epic-64: in-progress
+  epic-64: done
   64-1-epic-64-nfr14-风险记录: done
   64-2-correct-course-prd-批准-phase-15-fr124: done
   64-3-同步-readme-deferred-路线图指针-fr124-fr132: done
-  64-4-ad-指针与-epic-64-收口-fr124-nfr54: backlog
+  64-4-ad-指针与-epic-64-收口-fr124-nfr54: done
   epic-64-retrospective: optional
 
   epic-65: backlog

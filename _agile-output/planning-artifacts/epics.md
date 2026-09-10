@@ -96,7 +96,7 @@ phase15Scope: >
   上游 Tywaves 一等；更多 IP 手写 FL；默认 CI 强制真 sby；
   全 SoC pad；CIRCT Handshake 全家桶；完整 Style Guide/Parser；
   ip.rs 协议拆分卫生（及闸门/宣称 FR）。
-phase15Epic64Status: backlog
+phase15Epic64Status: complete
 phase15Epic65Status: backlog
 phase15Epic66Status: backlog
 phase15Epic67Status: backlog
