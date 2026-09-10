@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR122 / Epic 63；NFR14、NFR48、NFR49、NFR50、NFR51；对照 FR97、FR111、FR28/FR46、AD-27 |
 | 记录日期 | 2026-09-10 |
-| 状态 | **open** — Story 63.1 钉死；关闭勾选在 Story 63.3 |
+| 状态 | **closed** — Story 63.3 / Epic 63（2026-09-10） |
 
 ### (a) 上游约束
 
@@ -82,11 +82,11 @@
 
 ### Epic 63 关闭条件（Story 63.3 勾选）
 
-- [ ] **63.2 / FR122：** O1–O4 +（视需）修订 AD-27 + ATDD；FR97/FR111 回归不破
-- [ ] **文档 / deferred / README / AD-27 修订戳**
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；prelude 边界
-- [ ] **FR97 / FR111 关闭仍有效**（NFR48）
+- [x] **63.2 / FR122：** O1–O4 +（视需）修订 AD-27 + ATDD；FR97/FR111 回归不破
+- [x] **文档 / deferred / README / AD-27 修订戳**
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；prelude 边界
+- [x] **FR97 / FR111 关闭仍有效**（NFR48）
 
 ---
 
@@ -94,4 +94,5 @@
 
 **缺 NFR14（或缺 a–d / O1–O4）⇒ 不得将 63.2–63.3 标 `ready`。**  
 **不得以 FR97 alone / FR111 alone / 机械 emit / docs-only 冒充官方风格全家桶；默认不恢复 Parser。**  
-**未列入协议保持 deferred（NFR51）。**
+**未列入协议保持 deferred（NFR51）。**  
+**Epic 63 / FR122 已关闭（Story 63.3）：** 官方风格全家桶（O1–O4；AD-27 修订）；FR97/FR111 关闭仍有效；完整 Style Guide / Parser 恢复仍 deferred。

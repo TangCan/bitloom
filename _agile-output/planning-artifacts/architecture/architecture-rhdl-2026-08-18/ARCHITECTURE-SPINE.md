@@ -350,7 +350,7 @@ flowchart LR
 - **树内 HLS 调度深度：** 产品合同见 **FR95/96** / AD-25（MVP 已关闭 / Epic 41）；**商业调度深度**见 **FR110** / Epic 52（**已关闭** / Story 52.3；AD-25 2026-09-10 修订；**NFR46**）。**Handshake / 动态数据流默认可综合**见 **FR121** / Epic 62（**已关闭** / Story 62.3；AD-25 **2026-09-10 FR121 修订**；**NFR50**）。
 - **手写 `#[bridge]` / `#[abstraction]` / mixed `both`；形式化等价引擎细节；C ABI / cdylib；覆盖率**（产品 FR 已定，脊柱不钉实现形状）。
 - **IP / 可视化 / LSP / 黑盒 / formal/SVA / float / Analog** 的**实现形状**（产品 FR 已定；不在此钉 crate 切分）。GPIO 近 VIP 加深见 **FR108**；商业 VIP GPIO 全家桶见 **FR120**；LSP 根发现加深见 **FR113**；无 metadata syn-scan 见 **FR118**；FSM/state-visit 与 LCOV 见 **FR109** / **FR114**；Tywaves 级 typed IDE 波形见 **FR117**；**SymbiYosys/SMT formal** 见 **FR119** / Epic 60（工具链形状由实现 epic + NFR14 钉死；**NFR50**）。
-- **Chisel 官方风格全家桶：** 产品合同见 **FR97** / **FR111** / AD-27（MVP + D1+D3 已关闭）；**官方/idiomatic 风格全家桶**见 **FR122** / Epic 63（AD-27 **2026-09-10 FR122 修订**；默认仍不恢复 Scala `Parser.parse`；**NFR50**；实现关闭前仍为加深交付面）。
+- **Chisel 官方风格全家桶：** 产品合同见 **FR97** / **FR111** / **FR122** / AD-27（MVP + D1+D3 + 官方风格全家桶 **已关闭** / Epic 42/53/63；AD-27 **2026-09-10 FR122 修订**；默认仍不恢复 Scala `Parser.parse`；完整 Style Guide 仍 **NFR51**）。
 - **interp vs 编译版 `tick` 引擎**（产品 FR32；脊柱不选引擎）。
 - **`cargo bitloom` 其余动词**形态细节（FR40；`import`/`visualize`/`wave` 为 Phase 7 必需能力，名称可调）。
 - **macos / windows / linux-aarch64 firtool 资产**（NFR11；机制同 AD-9）。

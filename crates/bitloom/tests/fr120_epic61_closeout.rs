@@ -86,10 +86,11 @@ fn fr120_docs_readme_deferred_closed() {
     );
     assert!(
         deferred.contains("FR122")
-            && (deferred.contains("仍 deferred")
+            && (deferred.contains("已关闭")
+                || deferred.contains("closed")
                 || deferred.contains("Epic 63")
-                || deferred.contains("FR122")),
-        "FR122 must remain deferred delivery"
+                || deferred.contains("仍 deferred")),
+        "deferred must still track FR122 (closed or deferred)"
     );
 }
 

@@ -181,13 +181,14 @@ fn fr117_tywaves_a_remains_deferred() {
         readme.contains("不得") && (readme.contains("Tywaves") || readme.contains("上游")),
         "README must forbid claiming upstream Tywaves from FR117 close"
     );
-    // FR122 remains deferred delivery (FR118/FR119/FR120/FR121 may now be closed).
+    // FR122 may be closed (Epic 63) or still tracked in deferred ledger.
     assert!(
         deferred.contains("FR122")
-            && (deferred.contains("仍 deferred")
+            && (deferred.contains("已关闭")
+                || deferred.contains("closed")
                 || deferred.contains("Epic 63")
-                || deferred.contains("FR122")),
-        "deferred must keep FR122 as remaining deferred delivery"
+                || deferred.contains("仍 deferred")),
+        "deferred must still track FR122 (closed or deferred)"
     );
     for fr in ["FR118", "FR119", "FR120", "FR121", "FR122"] {
         assert!(deferred.contains(fr), "deferred must still mention {fr}");

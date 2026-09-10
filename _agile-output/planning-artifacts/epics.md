@@ -80,10 +80,9 @@ phase14Scope: >
   官方风格 Chisel 全家桶（及闸门/宣称 FR）。
 phase14Note: >
   Correct Course approved 2026-09-10-phase14-nfr47-deferred-deepen. Phase 12/13
-  closing faces remain valid (NFR48). Epic 57 closed (FR116). Epic 58 / FR117
-  closed (Story 58.3; in-house typed; Tywaves A deferred). Epic 59 / FR118
-  closed (Story 59.3; #[bitloom::top] syn-scan). Epic 60–63 remain backlog
-  until each epic's own NFR14 / create-story.
+  closing faces remain valid (NFR48). Epic 57–63 closed (FR116–FR122). Phase 14
+  planning/implementation stories complete (Epic 57–63). Remaining honesty gate is
+  FR123 claim discipline; NFR51 non-goals stay deferred.
   create-epics-and-stories Phase 14 complete; sprint seeded.
 phase14Epic57Status: complete
 phase14Epic58Status: complete
@@ -91,7 +90,7 @@ phase14Epic59Status: complete
 phase14Epic60Status: complete
 phase14Epic61Status: complete
 phase14Epic62Status: complete
-phase14Epic63Status: backlog
+phase14Epic63Status: complete
 phase14InputDocuments:
   - prds/prd-rhdl-2026-08-19/prd.md
   - prds/prd-rhdl-2026-08-19/addendum.md
