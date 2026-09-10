@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 17:50
+last_updated: 09-10-2026 17:55
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -435,7 +435,7 @@ development_status:
   59-1-epic-59-nfr14-风险记录: done
   59-2-syn-scan-发现路径实现与验收-fr118: done
   59-3-fr118-收口与文档指针: done
-  epic-59-retrospective: optional
+  epic-59-retrospective: done
 
   epic-60: done
   60-1-epic-60-nfr14-风险记录: done
@@ -1625,3 +1625,30 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-58-retro-2026-09-10.md"
+  - id: "epic-59-retro-item-174-fr118-诚实边界-对外不得把-fr99-designfixture-fr11"
+    epic: 59
+    action: "FR118 诚实边界：对外不得把 FR99 DesignFixture / FR113 metadata design_roots / shallow
+      finish alone 写成无 metadata 全树 syn-scan / FR118 完成面（续 FR123）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-59-retro-2026-09-10.md"
+  - id: "epic-59-retro-item-175-触碰-bitloom-lsp-discover-路径时保持-fr99-desig"
+    epic: 59
+    action: "触碰 bitloom-lsp discover 路径时保持 FR99 DesignFixture 与 FR113 metadata 路径默认可用（NFR48）；无
+      top / 扫描失败须可读，不得 silent 宣称 FR118 绿。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-59-retro-2026-09-10.md"
+  - id: "epic-59-retro-item-176-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 59
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-59-retro-2026-09-10.md"
+  - id: "epic-59-retro-item-177-可选工程卫生-若扩大至非-cargo-包-全-monorepo-任意路径扫描-须"
+    epic: 59
+    action: "可选工程卫生：若扩大至非 Cargo 包 / 全 monorepo 任意路径扫描，须新合同（NFR51）；当前 workspace 包内
+      #[bitloom::top] syn-scan 为 FR118 完成面。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-59-retro-2026-09-10.md"
