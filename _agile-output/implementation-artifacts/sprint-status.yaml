@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 09:10
+last_updated: 09-11-2026 09:15
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -472,7 +472,7 @@ development_status:
   65-1-epic-65-nfr14-风险记录: done
   65-2-上游-tywaves-一等路径实现与验收-fr125: done
   65-3-fr125-收口与文档指针: done
-  epic-65-retrospective: optional
+  epic-65-retrospective: done
 
   epic-66: done
   66-1-epic-66-nfr14-风险记录: done
@@ -1831,3 +1831,29 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-64-retro-2026-09-11.md"
+  - id: "epic-65-retro-item-198-fr125-诚实边界-对外不得把-fr104-fr114-fr117-typed"
+    epic: 65
+    action: "FR125 诚实边界：对外不得把 FR104 / FR114 / FR117 typed-wave alone 写成上游 Tywaves
+      一等 / FR125 完成面；宣称须引 T1–T4。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-65-retro-2026-09-11.md"
+  - id: "epic-65-retro-item-199-触碰-wave-tywaves-路径时保持-fr104-117-回归可用-nfr"
+    epic: 65
+    action: "触碰 wave / Tywaves 路径时保持 FR104/117 回归可用（NFR52）；Tywaves 运行时不得进入设计 crate
+      依赖。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-65-retro-2026-09-11.md"
+  - id: "epic-65-retro-item-200-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 65
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-65-retro-2026-09-11.md"
+  - id: "epic-65-retro-item-201-可选工程卫生-若交付真实上游-gui-安装包-ide-插件深度-须新合同钉死-n"
+    epic: 65
+    action: "可选工程卫生：若交付真实上游 GUI 安装包/IDE 插件深度，须新合同钉死（NFR55）；当前 T1–T4 为 FR125 完成面。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-65-retro-2026-09-11.md"
