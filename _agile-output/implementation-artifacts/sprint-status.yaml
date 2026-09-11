@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 18:34
+last_updated: 09-11-2026 18:36
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -577,7 +577,7 @@ development_status:
   82-1-epic-82-nfr14-风险记录: done
   82-2-阻塞毛刺处理或-skip-文档化-fr145: done
   82-3-fr145-收口与文档指针: done
-  epic-82-retrospective: optional
+  epic-82-retrospective: done
 
   epic-83: done
   83-1-epic-83-nfr14-风险记录: done
@@ -2339,3 +2339,23 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-81-retro-2026-09-11.md"
+  - id: "epic-82-retro-item-264-fr145-skip-honesty-skip-surface-has-no-d"
+    epic: 82
+    action: "FR145-skip honesty: skip ≠ surface has no drift; known PortField etc.
+      cite skip doc and treat as 1.0 major."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-82-retro-2026-09-11.md"
+  - id: "epic-82-retro-item-265-if-a-true-blocker-appears-later-open-a-n"
+    epic: 82
+    action: "If a true blocker appears later, open a new hygiene contract; do not
+      silently ignore."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-82-retro-2026-09-11.md"
+  - id: "epic-82-retro-item-266-keep-commit-subjects-story-n-m"
+    epic: 82
+    action: "Keep commit subjects Story N.M."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-82-retro-2026-09-11.md"
