@@ -116,7 +116,7 @@ phase17Scope: >
   可选预 1.0 卫生；发布 1.0.0；宣称诚实门面（及闸门 FR）。
 phase17Epic79Status: complete
 phase17Epic80Status: complete
-phase17Epic81Status: backlog
+phase17Epic81Status: complete
 phase17Epic82Status: backlog
 phase17Epic83Status: backlog
 phase17InputDocuments:

@@ -566,15 +566,15 @@ development_status:
   80-3-fr142-收口与文档指针: done
   epic-80-retrospective: optional
 
-  epic-81: in-progress
+  epic-81: done
   81-1-epic-81-nfr14-风险记录: done
   81-2-semver-1-0-政策成文-fr143: done
   81-3-表面-crate-semver-ci-门禁-fr144: done
-  81-4-fr143-fr144-收口与文档指针: ready-for-dev
+  81-4-fr143-fr144-收口与文档指针: done
   epic-81-retrospective: optional
 
   epic-82: backlog
-  82-1-epic-82-nfr14-风险记录: backlog
+  82-1-epic-82-nfr14-风险记录: ready-for-dev
   82-2-阻塞毛刺处理或-skip-文档化-fr145: backlog
   82-3-fr145-收口与文档指针: backlog
   epic-82-retrospective: optional

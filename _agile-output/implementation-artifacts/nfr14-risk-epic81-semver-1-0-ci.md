@@ -12,7 +12,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR143 / FR144 / Epic 81；对照 NFR15 / Q5 MSRV |
 | 记录日期 | 2026-09-11 |
-| 状态 | accepted — Story 81.1 |
+| 状态 | closed — Story 81.4 勾选完成；Epic 81 关闭；Epic 82–83 仍须各自 NFR14 |
 | **选定** | 政策 `docs/semver-1-0-policy.md` + `just semver-check` / CI `semver-check`（`cargo-semver-checks`） |
 
 ### (a) 上游约束
@@ -45,8 +45,12 @@
 
 ### Epic 81 关闭条件（Story 81.4 勾选）
 
-- [ ] **SemVer 1.0 政策成文** — Story 81.2
-- [ ] **semver CI / just 门禁** — Story 81.3
-- [ ] **README / deferred 指针** — Story 81.4
-- [ ] **禁止事项未触发**
-- [ ] **品牌：** Bitloom
+- [x] **SemVer 1.0 政策成文** — Story 81.2
+- [x] **semver CI / just 门禁** — Story 81.3
+- [x] **README / deferred 指针** — Story 81.4
+- [x] **禁止事项未触发**
+- [x] **品牌：** Bitloom
+
+### Epic 81 关闭声明
+
+**FR143 / FR144 已关闭：** `docs/semver-1-0-policy.md` + `just semver-check` / CI `semver-check` 就位。Epic 82–83 可在各自 NFR14 后标 ready。Phase 12–16 关闭证据仍有效（NFR60）。未实现前不得宣称 FR145/FR146 关闭；发版属 Epic 83。
