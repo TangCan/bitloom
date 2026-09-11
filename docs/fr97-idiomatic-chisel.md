@@ -32,7 +32,7 @@
 ## API
 
 ```rust
-use rhdl_firrtl::{emit_chisel, emit_chisel_idiomatic, check_idiomatic_chisel};
+use bitloom_firrtl::{emit_chisel, emit_chisel_idiomatic, check_idiomatic_chisel};
 
 // 机械（FR28）— 显式降级面
 let mechanical = emit_chisel(&frozen)?;

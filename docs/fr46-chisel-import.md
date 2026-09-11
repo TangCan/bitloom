@@ -11,13 +11,13 @@
 本工具链**不**解析 Chisel Scala 源码，也**不**恢复已删除的 Scala `Parser.parse`。产品路径：
 
 1. Chisel 设计在钉死栈下编译 / `emit` → FIRRTL 文本（经 firtool），或直接提供兼容子集的 `.fir`
-2. `rhdl_firrtl::import(.fir)` → `FrozenHir`
+2. `bitloom_firrtl::import(.fir)` → `FrozenHir`
 3. 同一后端：`emit`（FIRRTL）/ `bitloom_vlog::emit` / `emit_chisel` / `bitloom-sim` `tick`
 
 ```rust
-let hir = rhdl_firrtl::import(fir_text)?;
-rhdl_firrtl::ports_roundtrip_ok(&original, &hir)?;
-rhdl_firrtl::instance_graph_roundtrip_ok(&original, &hir)?;
+let hir = bitloom_firrtl::import(fir_text)?;
+bitloom_firrtl::ports_roundtrip_ok(&original, &hir)?;
+bitloom_firrtl::instance_graph_roundtrip_ok(&original, &hir)?;
 let _ = bitloom_vlog::emit(&hir);
 ```
 

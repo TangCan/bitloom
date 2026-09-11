@@ -118,7 +118,7 @@ fn fr73_factory_batches_instances_emit_hierarchy_and_connects() {
         );
     }
 
-    let fir = rhdl_firrtl::emit(&frozen);
+    let fir = bitloom_firrtl::emit(&frozen);
     let fir = fir
         .files
         .iter()

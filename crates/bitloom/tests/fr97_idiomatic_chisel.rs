@@ -8,7 +8,7 @@ use std::fs;
 use std::path::PathBuf;
 
 use bitloom_builder::{ElaborateSession, GroundType, Span};
-use rhdl_firrtl::{
+use bitloom_firrtl::{
     CHISEL_TARGET, FIRTOOL_TARGET, check_idiomatic_chisel, emit_chisel, emit_chisel_idiomatic,
 };
 

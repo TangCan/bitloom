@@ -70,7 +70,7 @@ fn fr73_closure_built_lut_visible_in_verilog_and_firrtl() {
         "closure-built table not visible in .v:\n{vlog}"
     );
 
-    let fir = rhdl_firrtl::emit(&frozen);
+    let fir = bitloom_firrtl::emit(&frozen);
     let fir = &fir.files[0].contents;
     assert!(
         fir.contains("mem rom") || fir.contains("mem rom :"),

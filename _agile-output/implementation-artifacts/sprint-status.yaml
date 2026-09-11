@@ -595,8 +595,8 @@ development_status:
 
   epic-85: in-progress
   85-1-epic-85-nfr14-风险记录: done
-  85-2-bitloom-firrtl-可发布-fr149: ready-for-dev
-  85-3-bitloom-viz-可发布-fr150: backlog
+  85-2-bitloom-firrtl-可发布-fr149: done
+  85-3-bitloom-viz-可发布-fr150: ready-for-dev
   85-4-bitloom-lsp-发布策略-b-fr152: backlog
   85-5-发布-bitloom-cli-1-0-0-fr151: backlog
   85-6-fr149-152-收口与文档指针: backlog

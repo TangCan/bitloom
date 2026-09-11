@@ -12,4 +12,4 @@ bitloom-prelude = { workspace = true }
 
 [dev-dependencies]
 bitloom-vlog = { workspace = true }
-rhdl-firrtl = { workspace = true }
+bitloom-firrtl = { workspace = true }

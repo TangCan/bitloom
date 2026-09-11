@@ -85,7 +85,7 @@ fn matrix_positive_comb_and_seq_inline_pass_with_nfr36_emit() {
     let comb_hir = comb.finish().expect("legal comb inline must pass");
 
     let v = bitloom_vlog::emit(&comb_hir).files[0].contents.clone();
-    let fir = rhdl_firrtl::emit(&comb_hir).files[0].contents.clone();
+    let fir = bitloom_firrtl::emit(&comb_hir).files[0].contents.clone();
     assert_no_closure_ir("matrix/comb/verilog", &v);
     assert_no_closure_ir("matrix/comb/firrtl", &fir);
 

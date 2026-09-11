@@ -986,7 +986,7 @@ fn run_import(
     also_chisel: bool,
 ) -> Result<(), String> {
     let text = fs::read_to_string(input).map_err(|e| format!("read {}: {e}", input.display()))?;
-    let hir = rhdl_firrtl::import(&text).map_err(|d| d.to_string())?;
+    let hir = bitloom_firrtl::import(&text).map_err(|d| d.to_string())?;
     fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
     let art = bitloom_vlog::emit(&hir);
     for f in &art.files {
@@ -995,7 +995,7 @@ fn run_import(
         println!("wrote {}", path.display());
     }
     if also_fir {
-        let fir = rhdl_firrtl::emit(&hir);
+        let fir = bitloom_firrtl::emit(&hir);
         for f in &fir.files {
             let path = out_dir.join(&f.path);
             fs::write(&path, &f.contents).map_err(|e| format!("write {}: {e}", path.display()))?;
@@ -1003,7 +1003,7 @@ fn run_import(
         }
     }
     if also_chisel {
-        let chisel = rhdl_firrtl::emit_chisel(&hir).map_err(|e| e.to_string())?;
+        let chisel = bitloom_firrtl::emit_chisel(&hir).map_err(|e| e.to_string())?;
         for f in &chisel.files {
             let path = out_dir.join(&f.path);
             fs::write(&path, &f.contents).map_err(|e| format!("write {}: {e}", path.display()))?;
@@ -1016,7 +1016,7 @@ fn run_import(
 /// Product entry: FrozenHir → hierarchy HTML (`hierarchy.html`).
 fn run_visualize(input: &Path, out_dir: &Path) -> Result<PathBuf, String> {
     let text = fs::read_to_string(input).map_err(|e| format!("read {}: {e}", input.display()))?;
-    let hir = rhdl_firrtl::import(&text).map_err(|d| d.to_string())?;
+    let hir = bitloom_firrtl::import(&text).map_err(|d| d.to_string())?;
     fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
     let html = rhdl_viz::to_html(&hir);
     if !html.contains("Instance hierarchy") || !html.contains("Modules and ports") {
@@ -1045,7 +1045,7 @@ fn run_wave(
     let want_tywaves = want_tywaves || want_tywaves_gui;
 
     let text = fs::read_to_string(input).map_err(|e| format!("read {}: {e}", input.display()))?;
-    let hir = rhdl_firrtl::import(&text).map_err(|d| d.to_string())?;
+    let hir = bitloom_firrtl::import(&text).map_err(|d| d.to_string())?;
     let title = hir.abi_name.clone();
     let typed = rhdl_viz::typed_signals_from_hir(&hir);
     fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
@@ -1300,7 +1300,7 @@ fn run_coverage(input: Option<&Path>, out_dir: &Path, ticks: u64) -> Result<(), 
 
     let hir = if let Some(path) = input {
         let text = fs::read_to_string(path).map_err(|e| format!("read {}: {e}", path.display()))?;
-        rhdl_firrtl::import(&text).map_err(|d| d.to_string())?
+        bitloom_firrtl::import(&text).map_err(|d| d.to_string())?
     } else {
         let mut s = ElaborateSession::new("Fr114Mux");
         s.begin_module("Fr114Mux", Span::default());

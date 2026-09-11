@@ -1,6 +1,6 @@
 # FR122 — Official-style Chisel full pack
 
-**Product:** Bitloom (`rhdl_firrtl` / Chisel emit). Unrelated to `samitbasu/rhdl`.
+**Product:** Bitloom (`bitloom_firrtl` / Chisel emit). Unrelated to `samitbasu/rhdl`.
 
 **Status:** **Epic 63 / FR122 closed** (Story **63.3**). O1–O4 + AD-27 revise delivered in Story **63.2**. FR97 / FR111 remain closed (NFR48). **Parser.parse not restored.** Full Style Guide / community linter suite still needs a new contract (NFR51).
 
@@ -19,7 +19,7 @@
 ## API
 
 ```rust
-use rhdl_firrtl::{
+use bitloom_firrtl::{
     emit_chisel_idiomatic_fr122, check_idiomatic_chisel_fr122,
 };
 

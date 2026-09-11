@@ -94,7 +94,7 @@ fn matrix_fr77_ip_viz_verilog_firrtl_transparent() {
     let v = bitloom_vlog::emit(&hir).files[0].contents.clone();
     assert_no_closure_ir("matrix/fr77/verilog", &v);
 
-    let fir = rhdl_firrtl::emit(&hir).files[0].contents.clone();
+    let fir = bitloom_firrtl::emit(&hir).files[0].contents.clone();
     assert_no_closure_ir("matrix/fr77/firrtl", &fir);
 
     // Cap-R-64: product viz (FR38 hierarchy HTML) must stay closure-opaque.

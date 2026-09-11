@@ -104,7 +104,7 @@ fn fr77_custom_table_fn_proves_customization_emit_and_tick() {
     assert!(v.contains(&format!("lut[1] = {};", expected[1])));
     assert_no_closure_ir("custom/.v", &v);
 
-    let fir = rhdl_firrtl::emit(&hir).files[0].contents.clone();
+    let fir = bitloom_firrtl::emit(&hir).files[0].contents.clone();
     assert!(fir.contains("mem-init lut"), "fir:\n{fir}");
     assert_no_closure_ir("custom/.fir", &fir);
 

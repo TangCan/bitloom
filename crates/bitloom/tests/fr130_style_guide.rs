@@ -4,7 +4,7 @@ use std::fs;
 use std::path::PathBuf;
 
 use bitloom_builder::{ElaborateSession, GroundType, Span};
-use rhdl_firrtl::{
+use bitloom_firrtl::{
     check_chisel_style_guide_fr130, check_idiomatic_chisel_fr122, emit_chisel_idiomatic_fr122,
     emit_chisel_style_guide_fr130,
 };

@@ -4,8 +4,8 @@
 //! drift, or E0901 is deleted for out-of-subset MemDecl.
 
 use bitloom_builder::{ElaborateSession, GroundType, Span};
+use bitloom_firrtl::{CHISEL_TARGET, FIRTOOL_TARGET, emit_chisel};
 use bitloom_hir::{BuilderOwnedHir, Module, Port, PortDirection, Stmt, seal_from_builder};
-use rhdl_firrtl::{CHISEL_TARGET, FIRTOOL_TARGET, emit_chisel};
 
 fn pins_locked(scala: &str) {
     assert_eq!(CHISEL_TARGET, "7.14.0");

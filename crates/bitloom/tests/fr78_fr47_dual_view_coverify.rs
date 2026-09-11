@@ -202,7 +202,7 @@ fn fr78_fr47_generate_paths_smoke_and_nfr36() {
     );
 
     let v = bitloom_vlog::emit(&hir).files[0].contents.clone();
-    let fir = rhdl_firrtl::emit(&hir).files[0].contents.clone();
+    let fir = bitloom_firrtl::emit(&hir).files[0].contents.clone();
     assert_no_closure_ir("verilog emit", &v);
     assert_no_closure_ir("firrtl emit", &fir);
 }

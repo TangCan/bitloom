@@ -172,8 +172,8 @@ fn fr73_crc_closure_matches_handwritten_emit_and_tick() {
         "Verilog initial blocks must match (FR73 golden)"
     );
 
-    let fir_fn = rhdl_firrtl::emit(&via_fn).files[0].contents.clone();
-    let fir_vec = rhdl_firrtl::emit(&via_vec).files[0].contents.clone();
+    let fir_fn = bitloom_firrtl::emit(&via_fn).files[0].contents.clone();
+    let fir_vec = bitloom_firrtl::emit(&via_vec).files[0].contents.clone();
     let words = "0, 7, 14, 9, 28, 27, 18, 21, 56, 63, 54, 49, 36, 35, 42, 45";
     assert!(
         fir_fn.contains("mem-init crc") && fir_fn.contains(words),
@@ -190,7 +190,7 @@ fn fr73_crc_closure_matches_handwritten_emit_and_tick() {
     assert_no_closure_ir("firrtl/vec", &fir_vec);
 
     // Optional Chisel (FR81 Path A): async Mem+init lowers; must not leave closure IR in Scala.
-    let scala = rhdl_firrtl::emit_chisel(&via_fn)
+    let scala = bitloom_firrtl::emit_chisel(&via_fn)
         .expect("Path A Mem init must emit")
         .files[0]
         .contents

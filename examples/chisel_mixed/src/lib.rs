@@ -45,7 +45,7 @@ mod tests {
         // Same external hierarchy fixture used by FR46 library ATDD (firtool-style connects).
         let fir = include_str!("../../../crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
         assert!(fir.contains("y <= u0.y"));
-        let fir_hir = rhdl_firrtl::import(fir).expect("import Chisel/.fir side");
+        let fir_hir = bitloom_firrtl::import(fir).expect("import Chisel/.fir side");
         let fir_v = bitloom_vlog::emit(&fir_hir);
         assert!(
             fir_v
@@ -58,12 +58,12 @@ mod tests {
 
         // Both also re-emit FIRRTL 6.0.0 (AD-3 path shared with import CLI).
         assert!(
-            rhdl_firrtl::emit(&bitloom_hir).files[0]
+            bitloom_firrtl::emit(&bitloom_hir).files[0]
                 .contents
                 .starts_with("FIRRTL version 6.0.0")
         );
         assert!(
-            rhdl_firrtl::emit(&fir_hir).files[0]
+            bitloom_firrtl::emit(&fir_hir).files[0]
                 .contents
                 .starts_with("FIRRTL version 6.0.0")
         );
@@ -78,7 +78,7 @@ mod tests {
             "runtime deps must include bitloom-prelude"
         );
         assert!(
-            !deps.contains("rhdl-firrtl") && !deps.contains("bitloom-vlog"),
+            !deps.contains("bitloom-firrtl") && !deps.contains("bitloom-vlog"),
             "design [dependencies] must not pull toolchain crates"
         );
     }

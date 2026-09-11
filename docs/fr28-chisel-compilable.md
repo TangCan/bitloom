@@ -7,7 +7,7 @@
 **钉死版本对（AD-9 / NFR12）：** Chisel **7.14.0** ↔ firtool **1.155.0**。升钉须上游正式配对并更新脊柱 Stack / AD-9 / 本页运维清单；**禁止**私自升版交差。
 
 ```rust
-let art = rhdl_firrtl::emit_chisel(&frozen)?;
+let art = bitloom_firrtl::emit_chisel(&frozen)?;
 // 或 .fir → import → emit_chisel
 ```
 
@@ -48,7 +48,7 @@ README 交叉入口：[firtool（NFR3）](../README.md#firtoolnfr3) · 合同表
 
 合并触及 `emit_chisel`、`scripts/chisel-fr28-*`、黄金 `.scala`、或 FR28/FR81 文档的 PR 前，维护者应勾选：
 
-- [ ] `cargo test -p rhdl-firrtl -- chisel_fr28`（Rust 谓词）绿；触及 Mem 时另跑 `cargo test -p bitloom --test fr81_path_a_mem_chisel_emit` / `fr81_mem_chisel_atdd_fr71`
+- [ ] `cargo test -p bitloom-firrtl -- chisel_fr28`（Rust 谓词）绿；触及 Mem 时另跑 `cargo test -p bitloom --test fr81_path_a_mem_chisel_emit` / `fr81_mem_chisel_atdd_fr71`
 - [ ] 本机有 Java ≥ 17 + sbt 时：`just chisel-fr28-jvm` 绿（与 CI 同路径）；Mem 变更另跑 `just chisel-fr81-mem-jvm`
 - [ ] 若本机无 JDK17+sbt：确认默认 CI 的 `fr28-chisel-jvm` job 将覆盖 **counter** 真编译；**不要**用 `BITLOOM_CHISEL_JVM_SKIP=1` 冒充通过
 - [ ] 未把 FR28 改回「尽力失败 / skip=0 即合同」；未删除子集外 E0901 冒充全表面 Mem 支持

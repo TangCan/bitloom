@@ -1,6 +1,6 @@
 # FR130 — Full Style Guide pack (no Parser restore)
 
-**Product:** Bitloom (`rhdl_firrtl` / Chisel emit). Unrelated to `samitbasu/rhdl`.
+**Product:** Bitloom (`bitloom_firrtl` / Chisel emit). Unrelated to `samitbasu/rhdl`.
 
 **Status:** **Epic 70 / FR130 closed** (Story **70.3**). Product path + AD-27 revise delivered in Story **70.2**.
 

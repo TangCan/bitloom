@@ -161,7 +161,7 @@ fn fr75_seq_inline_counter_matches_handwritten_tick() {
     assert_no_closure_ir("verilog/fn", &v_fn);
     assert_no_closure_ir("verilog/hand", &v_hand);
 
-    let fir_fn = rhdl_firrtl::emit(&via_fn).files[0].contents.clone();
+    let fir_fn = bitloom_firrtl::emit(&via_fn).files[0].contents.clone();
     assert_no_closure_ir("firrtl/fn", &fir_fn);
 
     let mut sim_fn = Sim::new(via_fn);

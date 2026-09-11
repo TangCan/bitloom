@@ -1,11 +1,17 @@
 [package]
-name = "rhdl-firrtl"
+name = "bitloom-firrtl"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-publish = false
-description = "FrozenHir ↔ FIRRTL 6.0.0 text"
+publish = true
+description = "FrozenHir ↔ FIRRTL 6.0.0 text for Bitloom (crates.io: bitloom-firrtl). Unrelated to samitbasu/rhdl."
+authors = ["Bitloom contributors"]
+keywords = ["hdl", "rtl", "firrtl", "bitloom"]
+categories = ["compilers", "development-tools"]
+repository = "https://github.com/TangCan/bitloom"
+homepage = "https://github.com/TangCan/bitloom"
+documentation = "https://docs.rs/bitloom-firrtl"
 
 [dependencies]
 bitloom-hir = { workspace = true }

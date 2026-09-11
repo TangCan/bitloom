@@ -32,7 +32,7 @@ done
 | bitloom-vlog | blocked | needs `bitloom-hir` **1.0.0** on crates.io first |
 | bitloom-prelude | blocked | needs builder/hir **1.0.0** on crates.io first |
 | bitloom-sim | blocked | needs hir **1.0.0** on crates.io first |
-| bitloom | blocked | needs versioned/`publish=true` path for `rhdl-firrtl` / `rhdl-viz` (still `publish = false`) **or** sequential after deps; tracked as manual publish follow-up |
+| bitloom | blocked | needs versioned/`publish=true` path for `bitloom-firrtl` / `rhdl-viz` (still `publish = false`) **or** sequential after deps; tracked as manual publish follow-up |
 
 **FR146 acceptance path used:** version bump + CHANGELOG + annotated tag + successful dry-run of publishable leaves + this checklist for sequential crates.io upload. Live `cargo publish` may follow when credentials and dependency publishes are available; absence of live upload does **not** undo the SemVer **1.0.0** tree state.
 

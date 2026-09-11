@@ -80,7 +80,7 @@ Breaking changes in these crates do **not** by themselves require a Bitloom **1.
 | Item | Note |
 | --- | --- |
 | `bitloom-lsp` / LSP | Product exists; not part of 1.0 SemVer surface promise |
-| `rhdl-*` workspace crates (`rhdl-firrtl`, `rhdl-formal`, …) | Internal / non-Bitloom publish names; never 1.0 surface |
+| `bitloom-firrtl` (FR149) / remaining `rhdl-*` (`rhdl-formal`, …) | firrtl is `bitloom-*` publishable but **not** in 1.0 SemVer surface promise; other `rhdl-*` stay unpublished internal names |
 | Undocumented internal `pub` APIs | Forbidden from silent promotion to in-surface |
 | NFR59 deferred deepen | Remains deferred; 1.0 ≠ clear NFR59 |
 

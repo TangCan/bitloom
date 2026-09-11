@@ -133,8 +133,8 @@ fn fr75_comb_inline_matches_handwritten_emit_and_tick() {
     assert_no_closure_ir("verilog/fn", &v_fn);
     assert_no_closure_ir("verilog/hand", &v_hand);
 
-    let fir_fn = rhdl_firrtl::emit(&via_fn).files[0].contents.clone();
-    let fir_hand = rhdl_firrtl::emit(&via_hand).files[0].contents.clone();
+    let fir_fn = bitloom_firrtl::emit(&via_fn).files[0].contents.clone();
+    let fir_hand = bitloom_firrtl::emit(&via_hand).files[0].contents.clone();
     assert_no_closure_ir("firrtl/fn", &fir_fn);
     assert_no_closure_ir("firrtl/hand", &fir_hand);
 

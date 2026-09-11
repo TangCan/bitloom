@@ -1,6 +1,6 @@
 # FR111 — Idiomatic Chisel maintainability depth
 
-**Product:** Bitloom (`rhdl_firrtl` / Chisel emit). Unrelated to `samitbasu/rhdl`.
+**Product:** Bitloom (`bitloom_firrtl` / Chisel emit). Unrelated to `samitbasu/rhdl`.
 
 **Status:** **Epic 53 / FR111 closed** (Story **53.3**). D1+D3 deepen path delivered in Story **53.2**. FR97 MVP remains closed (NFR44). Official-style full pack → **FR122** / [`fr122-official-style-chisel.md`](fr122-official-style-chisel.md) (Epic 63).
 
@@ -16,7 +16,7 @@
 ## API
 
 ```rust
-use rhdl_firrtl::{
+use bitloom_firrtl::{
     emit_chisel_idiomatic_fr111, check_idiomatic_chisel_fr111,
 };
 
