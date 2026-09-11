@@ -533,7 +533,7 @@ development_status:
   75-1-epic-75-nfr14-风险记录: done
   75-2-多外设-全芯片-pad-环实现与验收-fr136: done
   75-3-fr136-收口与文档指针: done
-  epic-75-retrospective: optional
+  epic-75-retrospective: done
 
   epic-76: done
   76-1-epic-76-nfr14-风险记录: done
@@ -2133,3 +2133,28 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-74-retro-2026-09-11.md"
+  - id: "epic-75-retro-item-238-fr136-诚实边界-对外不得把-fr128-gpiosocpad-d1-d4"
+    epic: 75
+    action: "FR136 诚实边界：对外不得把 FR128 GpioSocPad D1–D4 alone / FR120 C1–C4 alone / FR108
+      alone（或 docs-only）写成 FR136 完成；未列入更广 pad/外设须引 NFR59 新合同；宣称须引 Epic 75 关闭证据。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-75-retro-2026-09-11.md"
+  - id: "epic-75-retro-item-239-触碰-pad-soc-环路径时保持-phase-12-15-关闭面有效-nfr5"
+    epic: 75
+    action: "触碰 pad / SoC 环路径时保持 Phase 12–15 关闭面有效（NFR56）；不得改写 FR98/108/120/128「已关闭」为失败。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-75-retro-2026-09-11.md"
+  - id: "epic-75-retro-item-240-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 75
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-75-retro-2026-09-11.md"
+  - id: "epic-75-retro-item-241-可选工程卫生-epic-76-各须本-epic-nfr14-nfr57-未列入更"
+    epic: 75
+    action: "可选工程卫生：Epic 76+ 各须本 epic NFR14（NFR57）；未列入更广 pad·外设 / 驱动强度等仍须显式合同（NFR59），不得因「终局」口号静默扩大。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-75-retro-2026-09-11.md"
