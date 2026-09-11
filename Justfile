@@ -43,3 +43,8 @@ formal-sby-check:
 # Not part of default `just test`. Missing/mismatched firtool → non-zero (never silent skip).
 circt-external-check:
 	bash scripts/circt-external-check.sh
+
+# FR138: Parser restore product path (BitloomFirrtlParser.parse ≡ Parser.parse; AD-9 firtool -parse-only).
+# Not part of default `just test`. Missing/mismatched firtool → non-zero (never silent skip).
+parser-restore-check:
+	bash scripts/parser-restore-check.sh
