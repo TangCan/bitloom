@@ -24,8 +24,8 @@ Phase 12/13 关闭证据**仍有效**。原 NFR47 未选项（item-149/153/157/1
 Correct Course `sprint-change-proposal-2026-09-10-phase15-nfr51-leftover-deepen.md` + PRD addendum「Phase 15」**已批准**（**Phase 15 contract approved**）。  
 闸门 **FR124 / Epic 64 已关闭**（Story 64.4）；实现 epic = Epic 65–71（**FR125 / Epic 65 已关闭** — 上游 Tywaves 一等；**FR126 / Epic 66 已关闭** — 更多 IP 手写 FL / `GpioFunctional`；**FR127 / Epic 67 已关闭** — 默认 CI 真 sby；**FR128 / Epic 68 已关闭** — 全 SoC pad / `GpioSocPad`；**FR129 / Epic 69 已关闭** — CIRCT Handshake / 多时钟弹性缓冲；**FR130 / Epic 70 已关闭** — Style Guide（未恢复 Parser）；**FR131 / Epic 71 已关闭** — `ip.rs` 按协议拆分；宣称→**FR132**）。  
 **禁止**用 Phase 14 完成面冒充本批加深（**NFR52**）。软序：建议 **Epic 71 → Epic 68**（二者均已关闭）。  
-Phase 12–14 关闭证据**仍有效**。未列入本批者（自动 FSM 标签、第三方 LCOV GUI 一等、emit MemRead 完整生成、非 Cargo monorepo 任意路径扫描）仍须另开合同（**NFR55**）。各实现 epic 仍须独立 NFR14（**NFR53**）；未关闭前不得宣称对应 FR。
-**Phase 15 规划故事已齐（Epic 64–71）；** 剩余门为各 epic 实现关闭态（Epic 65–71 实现故事均已关闭）。
+Phase 12–14 关闭证据**仍有效**。未列入本批者（自动 FSM 标签、第三方 LCOV GUI 一等、emit MemRead 完整生成、非 Cargo monorepo 任意路径扫描、真实上游 Tywaves GUI/IDE 插件深度、更多 IP 手写 FL、多外设/全芯片 pad 环、完整外部 CIRCT 编译/仿真门禁、恢复废弃 Parser、再细拆 VIP/SocPad 或跨 crate 搬迁）仍须另开合同（**NFR55**）。各实现 epic 仍须独立 NFR14（**NFR53**）；未关闭前不得宣称对应 FR。
+**Phase 15 规划/实现/retro/action-items 已齐（Epic 64–71）；** 见 `action-items-sweep-2026-09-11-phase15.md`（items 194–225）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
@@ -485,3 +485,42 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   resolution: |
     item-169 过程证据已齐；ip.rs 评估不拆；其余未选加深写入本 ledger，禁止静默扩大关闭面。
     **Phase 14 规划/实现/retro 已齐（Epic 57–63）。**
+    **升级注（2026-09-11）：** item-173 → FR125；item-181 → FR126/FR127；item-185 → FR131（`ip/` 拆分）；
+    item-189/193 完成面已由 FR129/FR130 覆盖；仍 NFR55 的部分见 Phase 15 ledger。
+
+- source_spec: `_agile-output/implementation-artifacts/epic-64-retro-2026-09-11.md`（及 epic-65–71 retros）
+  summary: Standing Phase-15 诚实 / NFR52 / 过程边界（Epic 64–71；触及对应面时遵守；非立即实现）
+  evidence: |
+    - item-194：FR124/FR132 — Phase 15 闸门关闭 alone ≠ FR125–131 产品完成；宣称须引对应 epic
+    - item-198：FR125 — FR104 / FR114 / FR117 typed-wave alone ≠ 上游 Tywaves 一等；完成面 = T1–T4
+    - item-202：FR126 — FR92 / FR100 F1-(i) / FR112 / FR119 alone ≠ 更多 IP 手写 FL；完成面 = F1–F3（Gpio）
+    - item-206：FR127 — 本机可选 just formal-sby-check / FR119 文档 alone ≠ 默认 CI 强制真 sby；完成面 = S1–S4
+    - item-210：FR128 — FR108 / GpioVip C1–C4 alone ≠ 全 SoC pad；完成面 = GpioSocPad D1–D4
+    - item-214：FR129 — FR95/96 / FR110 / FR121 ready/valid alone ≠ CIRCT Handshake 全家桶；完成面 = C1–C4 + AD-25
+    - item-218：FR130 — FR97 / FR111 / FR122 O1–O4 alone ≠ 完整 Style Guide；完成面 = S1–S4（Parser 未恢复）
+    - item-222：FR131 — 仅评估 defer / FR128 SoC pad alone ≠ ip.rs 协议拆分；完成面 = P1–P4
+    - item-195/199/203/207/211/215/219/223：NFR52 — 触碰面保持 Phase 12–14 关闭证据与对应 MVP/加深回归；缺工具不得 silent 绿
+    - item-196/200/204/208/212/216/220/224：commit subject Story N.M → process note（续 Phase 12–14）
+  status: deferred — standing contract when touching area
+  resolved: '2026-09-11'
+  resolution: |
+    编入本 ledger；公开 FR 文档已含对应诚实条。触碰相关 crate/文档/CI 叙事时对照；
+    未列入 NFR14 的加深须新合同 + NFR14，禁止静默扩大（NFR55）。
+
+- source_spec: `_agile-output/implementation-artifacts/epic-65-retro-2026-09-11.md`（及 epic-66–71 retros）
+  summary: Phase-15 可选卫生 / NFR55 未选加深（评估后 defer；部分过程已落地）
+  evidence: |
+    - item-197：**已落地（过程）** — Epic 65–71 各有本 epic NFR14；未选子集仍须显式合同（NFR55）
+    - item-201：真实上游 GUI 安装包 / IDE 插件深度 — 仍须另开合同（**NFR55**）；T1–T4 = FR125 完成面
+    - item-205：更多 IP 手写 FL（超 Gpio）— 仍须另开合同（**NFR55**）；选定 Gpio = FR126 完成面
+    - item-209：监控 GHA formal-sby 安装时长/镜像漂移 — 卫生跟踪（**NFR54**）；改安装策略须更新文档与 ATDD
+    - item-213：多外设 / 全芯片 pad 环 — 仍须另开合同（**NFR55**）；GpioSocPad D1–D4 = FR128 完成面
+    - item-217：完整外部 CIRCT 编译/仿真门禁 — 仍须另开合同（**NFR55**）；C1–C4 = FR129 完成面
+    - item-221：恢复废弃 Parser — 须 Correct Course + 再修订 AD-27（**NFR54/NFR55**）；S1–S4 且 Parser 未恢复 = FR130
+    - item-225：再细拆 VIP/SocPad 或跨 crate 搬迁 — 仍须另开合同（**NFR55**）；P1–P4 = FR131 完成面；FR132 宣称纪律仍有效
+    - frontmatter：epics.md `phase15Status` → complete（对齐 Epic 64–71 done）
+  status: deferred — optional hygiene / NFR55（item-197 process-landed this sweep）
+  resolved: '2026-09-11'
+  resolution: |
+    item-197 过程证据已齐；其余未选加深写入本 ledger，禁止静默扩大关闭面。
+    **Phase 15 规划/实现/retro/action-items 已齐（Epic 64–71）。**

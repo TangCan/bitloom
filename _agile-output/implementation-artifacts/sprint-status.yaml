@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 09:45
+last_updated: 09-11-2026 09:18
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -1811,204 +1811,204 @@ action_items:
     epic: 64
     action: "FR124/FR132 诚实边界：对外不得把 Phase 15 闸门关闭写成 FR125–131 产品完成；宣称须引对应 epic 关闭证据。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-64-retro-2026-09-11.md"
   - id: "epic-64-retro-item-195-触碰-phase-15-加深路径时保持-phase-12-14-关闭面有效-nf"
     epic: 64
     action: "触碰 Phase 15 加深路径时保持 Phase 12–14 关闭面有效（NFR52）；不得改写 FR94–123「已关闭」为失败。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-64-retro-2026-09-11.md"
   - id: "epic-64-retro-item-196-续保持-commit-subject-story-n-m-retro-stori"
     epic: 64
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-64-retro-2026-09-11.md"
   - id: "epic-64-retro-item-197-可选工程卫生-epic-65-71-各须本-epic-nfr14-未选子集须显式"
     epic: 64
     action: "可选工程卫生：Epic 65–71 各须本 epic NFR14；未选子集须显式合同（NFR55），不得静默扩大。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-64-retro-2026-09-11.md"
   - id: "epic-65-retro-item-198-fr125-诚实边界-对外不得把-fr104-fr114-fr117-typed"
     epic: 65
     action: "FR125 诚实边界：对外不得把 FR104 / FR114 / FR117 typed-wave alone 写成上游 Tywaves
       一等 / FR125 完成面；宣称须引 T1–T4。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-65-retro-2026-09-11.md"
   - id: "epic-65-retro-item-199-触碰-wave-tywaves-路径时保持-fr104-117-回归可用-nfr"
     epic: 65
     action: "触碰 wave / Tywaves 路径时保持 FR104/117 回归可用（NFR52）；Tywaves 运行时不得进入设计 crate
       依赖。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-65-retro-2026-09-11.md"
   - id: "epic-65-retro-item-200-续保持-commit-subject-story-n-m-retro-stori"
     epic: 65
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-65-retro-2026-09-11.md"
   - id: "epic-65-retro-item-201-可选工程卫生-若交付真实上游-gui-安装包-ide-插件深度-须新合同钉死-n"
     epic: 65
     action: "可选工程卫生：若交付真实上游 GUI 安装包/IDE 插件深度，须新合同钉死（NFR55）；当前 T1–T4 为 FR125 完成面。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-65-retro-2026-09-11.md"
   - id: "epic-66-retro-item-202-fr126-诚实边界-对外不得把-fr92-fr100-f1-i-fr112-f"
     epic: 66
     action: "FR126 诚实边界：对外不得把 FR92 / FR100 F1-(i) / FR112 / FR119 alone 写成更多 IP 手写
       FL / FR126 完成面；宣称须引 F1–F3（选定 Gpio）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-66-retro-2026-09-11.md"
   - id: "epic-66-retro-item-203-触碰-bitloom-sim-dual-model-ip-fl-路径时保持-fr"
     epic: 66
     action: "触碰 bitloom-sim dual-model / IP FL 路径时保持 FR103/112/119 回归可用（NFR52）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-66-retro-2026-09-11.md"
   - id: "epic-66-retro-item-204-续保持-commit-subject-story-n-m-含-fix-前缀仍可归"
     epic: 66
     action: "续保持 commit subject Story N.M（含 fix 前缀仍可归因）+ retro --stories 短 id。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-66-retro-2026-09-11.md"
   - id: "epic-66-retro-item-205-可选工程卫生-若交付更多-ip-手写-fl-须新合同钉死-nfr55-当前选定面"
     epic: 66
     action: "可选工程卫生：若交付更多 IP 手写 FL，须新合同钉死（NFR55）；当前选定面为 Gpio。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-66-retro-2026-09-11.md"
   - id: "epic-67-retro-item-206-fr127-诚实边界-对外不得把本机可选-just-formal-sby-che"
     epic: 67
     action: "FR127 诚实边界：对外不得把本机可选 just formal-sby-check / FR119 文档 alone 写成默认 CI 强制真
       sby / FR127 完成面；宣称须引 S1–S4。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-67-retro-2026-09-11.md"
   - id: "epic-67-retro-item-207-触碰-formal-ci-路径时保持-fr119-本地路径可用-nfr52-缺工"
     epic: 67
     action: "触碰 formal/CI 路径时保持 FR119 本地路径可用（NFR52）；缺工具须非零可读，不得 continue-on-error
       静默跳过。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-67-retro-2026-09-11.md"
   - id: "epic-67-retro-item-208-续保持-commit-subject-story-n-m-retro-stori"
     epic: 67
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-67-retro-2026-09-11.md"
   - id: "epic-67-retro-item-209-可选工程卫生-监控-gha-formal-sby-安装时长-镜像漂移-若改安装策"
     epic: 67
     action: "可选工程卫生：监控 GHA formal-sby 安装时长/镜像漂移；若改安装策略须更新文档与 ATDD（NFR54）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-67-retro-2026-09-11.md"
   - id: "epic-68-retro-item-210-fr128-诚实边界-对外不得把-fr108-gpiovip-c1-c4-alo"
     epic: 68
     action: "FR128 诚实边界：对外不得把 FR108 / GpioVip C1–C4 alone 写成全 SoC pad / FR128 完成面；宣称须引
       D1–D4。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-68-retro-2026-09-11.md"
   - id: "epic-68-retro-item-211-触碰-bitloom-prelude-ip-gpio-路径时保持-fr98-10"
     epic: 68
     action: "触碰 bitloom-prelude ip/gpio 路径时保持 FR98/108/120 回归可用（NFR52）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-68-retro-2026-09-11.md"
   - id: "epic-68-retro-item-212-续保持-commit-subject-story-n-m-retro-stori"
     epic: 68
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-68-retro-2026-09-11.md"
   - id: "epic-68-retro-item-213-可选工程卫生-若交付多外设-全芯片-pad-环-须新合同钉死-nfr55-当前完"
     epic: 68
     action: "可选工程卫生：若交付多外设/全芯片 pad 环，须新合同钉死（NFR55）；当前完成面为 GpioSocPad D1–D4。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-68-retro-2026-09-11.md"
   - id: "epic-69-retro-item-214-fr129-诚实边界-对外不得把-fr95-96-fr110-fr121-rea"
     epic: 69
     action: "FR129 诚实边界：对外不得把 FR95/96 / FR110 / FR121 ready/valid alone 写成 CIRCT Handshake
       全家桶 / FR129 完成面；宣称须引 C1–C4 + AD-25 修订。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-69-retro-2026-09-11.md"
   - id: "epic-69-retro-item-215-触碰-bitloom-hls-handshake-路径时保持-fr95-110"
     epic: 69
     action: "触碰 bitloom HLS / Handshake 路径时保持 FR95/110/121 回归可用（NFR52）；调度前仍须 AD-18
       溶解。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-69-retro-2026-09-11.md"
   - id: "epic-69-retro-item-216-续保持-commit-subject-story-n-m-同故事多提交时优先-f"
     epic: 69
     action: "续保持 commit subject Story N.M；同故事多提交时优先 fix Story N.M 前缀以利归因。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-69-retro-2026-09-11.md"
   - id: "epic-69-retro-item-217-可选工程卫生-若交付完整外部-circt-编译-仿真门禁-须新合同钉死-nfr5"
     epic: 69
     action: "可选工程卫生：若交付完整外部 CIRCT 编译/仿真门禁，须新合同钉死（NFR55）；当前 C1–C4 为 FR129 完成面。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-69-retro-2026-09-11.md"
   - id: "epic-70-retro-item-218-fr130-诚实边界-对外不得把-fr97-fr111-fr122-o1-o4"
     epic: 70
     action: "FR130 诚实边界：对外不得把 FR97 / FR111 / FR122 O1–O4 alone 写成完整 Style Guide /
       FR130 完成面；宣称须引 S1–S4。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-70-retro-2026-09-11.md"
   - id: "epic-70-retro-item-219-触碰-rhdl-firrtl-chisel-路径时保持-fr97-111-122"
     epic: 70
     action: "触碰 rhdl-firrtl Chisel 路径时保持 FR97/111/122 回归可用（NFR52）；默认不得恢复 Scala Parser.parse
       作为产品关闭条件。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-70-retro-2026-09-11.md"
   - id: "epic-70-retro-item-220-续保持-commit-subject-story-n-m-retro-stori"
     epic: 70
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-70-retro-2026-09-11.md"
   - id: "epic-70-retro-item-221-可选工程卫生-若恢复废弃-parser-须-correct-course-再修订"
     epic: 70
     action: "可选工程卫生：若恢复废弃 Parser，须 Correct Course + 再修订 AD-27（NFR54/NFR55）；当前 S1–S4
       且 Parser 未恢复为 FR130 完成面。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-70-retro-2026-09-11.md"
   - id: "epic-71-retro-item-222-fr131-诚实边界-对外不得把仅评估-defer-或-fr128-soc-pa"
     epic: 71
     action: "FR131 诚实边界：对外不得把仅评估 defer 或 FR128 SoC pad alone 写成 ip.rs 协议拆分 / FR131
       完成面；宣称须引 P1–P4。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-71-retro-2026-09-11.md"
   - id: "epic-71-retro-item-223-触碰-bitloom-prelude-ip-时保持-fr98-108-120-及"
     epic: 71
     action: "触碰 bitloom-prelude ip/ 时保持 FR98/108/120（及 FR128 GpioSocPad）回归与稳定 bitloom_prelude::ip::*
       公开路径（NFR52）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-71-retro-2026-09-11.md"
   - id: "epic-71-retro-item-224-续保持-commit-subject-story-n-m-retro-stori"
     epic: 71
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-71-retro-2026-09-11.md"
   - id: "epic-71-retro-item-225-可选工程卫生-若再细拆-vip-socpad-或跨-crate-搬迁-须新合同钉"
     epic: 71
     action: "可选工程卫生：若再细拆 VIP/SocPad 或跨 crate 搬迁，须新合同钉死（NFR55）；Phase 15 关闭后 FR132 宣称纪律仍有效。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-71-retro-2026-09-11.md"

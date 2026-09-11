@@ -77,18 +77,18 @@ stepsCompleted:
   - step-03-create-stories-phase-15
   - step-04-final-validation-phase-15
 status: complete
-phase15Status: planning-complete
+phase15Status: complete
 phase15Validation: |
   FR124–132 mapped to Epic 64–71 stories (25); Epic 64 hard gate for 65–71;
   no forward story deps within epics; Architecture starter N/A;
   File-churn: Epic 68+71 ip.rs (soft order 71→68 accepted); Epic 69/70 AD-25/27;
   Epic 65–67 wave/formal/CI split; Correct Course approved 2026-09-10 (Story 64.2 may cite proposal).
   create-epics-and-stories Phase 15 validated 2026-09-10 — sprint seeded; start Epic 64.
+  Implementation + retros + action-items sweep 2026-09-11 — phase15Status complete.
 phase15Note: >
   Correct Course approved 2026-09-10-phase15-nfr51-leftover-deepen. Phase 12–14
-  closing faces remain valid (NFR52). Epic 64 hard gate for 65–71; soft order
-  71→68 (ip.rs). Sprint seeded backlog. Remaining honesty gate is FR132 claim
-  discipline; NFR55 non-goals stay deferred.
+  closing faces remain valid (NFR52). Epic 64–71 done; action-items 194–225 cleared
+  (sweep 2026-09-11). FR132 claim discipline stands; NFR55 non-goals stay deferred.
 correctCoursePhase15Approved: 2026-09-10
 phase15Contract: nfr51-leftover-deepen-tywaves-ipfl-sbyci-socpad-circt-styleguide-iprsplit
 phase15Scope: >
