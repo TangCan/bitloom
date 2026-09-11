@@ -32,9 +32,9 @@ Phase 12–14 关闭证据**仍有效**。原 NFR55 明示剩余（真实上游 
 Correct Course `sprint-change-proposal-2026-09-11-phase16-nfr55-final-closeout.md` + PRD addendum「Phase 16」**已批准**（**Phase 16 contract approved** 2026-09-11）。  
 闸门 **FR133 / Epic 72 已关闭**（Story 72.4）；实现 epic = Epic 73–78（**FR134 / Epic 73 已关闭** — 真实上游 Tywaves GUI/IDE G1–G4 `--tywaves-gui`；**FR135 / Epic 74 已关闭** — 更多 IP 手写 FL / `UartTxFunctional`（超 Gpio）；**FR136 / Epic 75 已关闭** — 多外设 / 全芯片 pad 环 / `ChipPadRing`；**FR137 / Epic 76 已关闭** — 外部 CIRCT 编译门禁；**FR138 / Epic 77 已关闭** — Parser 恢复 / `BitloomFirrtlParser.parse` + AD-27 再修订；**FR139 / Epic 78 已关闭** — VIP/SocPad 再细拆 C1 `ip/gpio/{base,vip,socpad}`（C2 未选）；宣称→**FR140**）。  
 **禁止**用 Phase 15 完成面（含 **FR125–131 alone**）冒充本批 / 终局完成面（**NFR56** / **FR140**）。软序 **Epic 78 → Epic 74/75** 已满足（FR139 + FR135 + FR136 已关闭）。  
-Phase 12–15 关闭证据**仍有效**。未列入本批者（自动 FSM 标签提取、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生）及**更深 IP 布局**、**更深 GUI/IDE 子集**、**未列入协议手写 FL**、**未列更广 pad/外设**、**更广 CIRCT/MLIR lower / 仿真门禁加深**、**更深 Chisel/Parser 生态**仍须另开合同（**NFR59**）。Phase 16 规划故事 Epic 72–78 **全部已关闭**（**NFR57**）；optional retros 可留。  
+Phase 12–15 关闭证据**仍有效**。未列入本批者（自动 FSM 标签提取、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生）及**更深 IP 布局**、**更深 GUI/IDE 子集**、**未列入协议手写 FL**、**未列更广 pad/外设**、**更广 CIRCT/MLIR lower / 仿真门禁加深**、**更深 Chisel/Parser 生态**仍须另开合同（**NFR59**）。Phase 16 规划故事 Epic 72–78 **全部已关闭**（**NFR57**）。  
 终局口径 = 本批关闭 + 诚实 NFR59 deferred；**不等于**冲 1.0；终局宣称须引 **FR133–139**（**FR140**）。公开品牌 **Bitloom**。  
-**Phase 16 规划故事已齐（Epic 72–78）；** 实现关闭态：**Epic 72** + **Epic 73** + **Epic 74** + **Epic 75** + **Epic 76** + **Epic 77** + **Epic 78** 全部已关闭。README「状态与 deferred」同源（Story 72.3–72.4 / **73.3** / **74.3** / **75.3** / **76.3** / **77.3** / **78.3**）。
+**Phase 16 规划/实现/retro/action-items 已齐（Epic 72–78）；** 见 `action-items-sweep-2026-09-11-phase16.md`（items 226–253）。实现关闭态：**Epic 72** + **Epic 73** + **Epic 74** + **Epic 75** + **Epic 76** + **Epic 77** + **Epic 78** 全部已关闭。README「状态与 deferred」同源（Story 72.3–72.4 / **73.3** / **74.3** / **75.3** / **76.3** / **77.3** / **78.3**）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
@@ -533,3 +533,40 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   resolution: |
     item-197 过程证据已齐；其余未选加深写入本 ledger，禁止静默扩大关闭面。
     **Phase 15 规划/实现/retro/action-items 已齐（Epic 64–71）。**
+    **升级注（2026-09-11 Phase 16）：** item-201 → FR134；item-205 → FR135；item-213 → FR136；
+    item-217 → FR137；item-221 → FR138；item-225 → FR139；仍 NFR59 的部分见 Phase 16 ledger。
+
+- source_spec: `_agile-output/implementation-artifacts/epic-72-retro-2026-09-11.md`（及 epic-73–78 retros）
+  summary: Standing Phase-16 诚实 / NFR56 / 过程边界（Epic 72–78；触及对应面时遵守；非立即实现）
+  evidence: |
+    - item-226：FR133/FR140 — Phase 16 闸门关闭 alone ≠ FR134–139 产品完成；宣称须引对应 epic；禁 Phase 15 alone 冒充终局
+    - item-230：FR134 — FR104 / FR114 / FR117 / FR125 T1–T4 alone ≠ 上游 Tywaves GUI/IDE；完成面 = G1–G4
+    - item-234：FR135 — FR126 Gpio / GeneratedFunctional / SyncFifo·FR103 / FR92 / FR100 / FR112 / FR119 alone ≠ 更多 IP 手写 FL；完成面 = UartTx F1–F3
+    - item-238：FR136 — FR128 GpioSocPad D1–D4 / FR120 C1–C4 / FR108 alone ≠ 全芯片 pad 环；完成面 = ChipPadRing R1–R4
+    - item-242：FR137 — FR129 C1–C4 / FR121 / FR110 / FR95·96 alone ≠ 外部 CIRCT 编译门禁；完成面 = E1–E4
+    - item-246：FR138 — FR130 Style Guide / FR97 / FR111 / FR122 O1–O4 alone ≠ Parser 恢复；完成面 = BitloomFirrtlParser + AD-27
+    - item-250：FR139 — FR131 P1–P4 / FR128 / FR120 alone ≠ VIP/SocPad 再细拆；完成面 = C1（C2 未选）；宣称→FR140
+    - item-227/231/235/239/243/247/251：NFR56 — 触碰面保持 Phase 12–15 关闭证据与对应回归；升钉 firtool/Chisel/跨 crate 须先修订 AD
+    - item-228/232/236/240/244/248/252：commit subject Story N.M → process note（续 Phase 12–15）
+  status: deferred — standing contract when touching area
+  resolved: '2026-09-11'
+  resolution: |
+    编入本 ledger；公开 FR 文档 / AGENTS / closeout ATDD 已含对应诚实条。触碰相关 crate/文档/CI 叙事时对照；
+    未列入 NFR14 的加深须新合同 + NFR14，禁止静默扩大（NFR59）。
+
+- source_spec: `_agile-output/implementation-artifacts/epic-73-retro-2026-09-11.md`（及 epic-74–78 retros）
+  summary: Phase-16 可选卫生 / NFR59 未选加深（评估后 defer；部分过程已落地）
+  evidence: |
+    - item-229：**已落地（过程）** — Epic 73–78 各有本 epic NFR14；未选子集仍须显式合同（NFR59）
+    - item-233：Epic 74+ NFR14 过程已齐；更深 GUI/IDE 子集仍须另开合同（**NFR59**）；G1–G4 = FR134 完成面
+    - item-237：Epic 75+ NFR14 过程已齐；未列入协议手写 FL 仍须另开合同（**NFR59**）；UartTx F1–F3 = FR135 完成面
+    - item-241：Epic 76+ NFR14 过程已齐；未列更广 pad/外设仍须另开合同（**NFR59**）；ChipPadRing R1–R4 = FR136 完成面
+    - item-245：Epic 77+ NFR14 过程已齐；更广 CIRCT/MLIR lower / 仿真门禁加深仍须另开合同（**NFR59**）；E1–E4 = FR137 完成面
+    - item-249：Epic 78 NFR14 过程已齐；更深 Chisel/Parser 生态仍须另开合同（**NFR59**）；Parser + AD-27 = FR138 完成面
+    - item-253：Phase 16 retros 已全部跑完；更深 IP 布局 / GUI·IDE / 未列协议 / 更广 CIRCT·MLIR / 更深 Chisel·Parser 仍 **NFR59**；FR140 宣称纪律仍有效
+    - frontmatter：epics.md `phase16Status` → complete（对齐 Epic 72–78 done）
+  status: deferred — optional hygiene / NFR59（item-229 process-landed this sweep）
+  resolved: '2026-09-11'
+  resolution: |
+    item-229 过程证据已齐；其余未选加深写入本 ledger，禁止静默扩大关闭面。
+    **Phase 16 规划/实现/retro/action-items 已齐（Epic 72–78）。**

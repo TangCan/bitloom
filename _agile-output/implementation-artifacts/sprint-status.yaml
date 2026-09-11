@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 16:05
+last_updated: 09-11-2026 08:14
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -2061,51 +2061,51 @@ action_items:
       / 更多 IP FL / 全芯片 pad / 外部 CIRCT / Parser / 跨 crate 类宣称须引对应 epic 关闭证据；禁止用 Phase
       15（FR125–131 alone）冒充终局完成面。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-72-retro-2026-09-11.md"
   - id: "epic-72-retro-item-227-触碰-phase-16-加深路径时保持-phase-12-15-关闭面有效-nf"
     epic: 72
     action: "触碰 Phase 16 加深路径时保持 Phase 12–15 关闭面有效（NFR56）；不得改写 FR94–132「已关闭」为失败。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-72-retro-2026-09-11.md"
   - id: "epic-72-retro-item-228-续保持-commit-subject-story-n-m-retro-stori"
     epic: 72
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-72-retro-2026-09-11.md"
   - id: "epic-72-retro-item-229-可选工程卫生-epic-73-78-各须本-epic-nfr14-nfr57-a"
     epic: 72
     action: "可选工程卫生：Epic 73–78 各须本 epic NFR14（NFR57）；AD-27 / CIRCT / crate 实质修订归 NFR58
       对应 epic；未选子集须显式合同（NFR59），不得因「终局」口号静默扩大。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-72-retro-2026-09-11.md"
   - id: "epic-73-retro-item-230-fr134-诚实边界-对外不得把-fr104-fr114-fr117-fr125"
     epic: 73
     action: "FR134 诚实边界：对外不得把 FR104 / FR114 / FR117 / FR125 T1–T4 alone（或 docs-only）写成
       FR134 完成；更深 GUI/IDE 子集须引 NFR59 新合同；宣称须引 Epic 73 关闭证据。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-73-retro-2026-09-11.md"
   - id: "epic-73-retro-item-231-触碰-wave-tywaves-路径时保持-phase-12-15-关闭面有效"
     epic: 73
     action: "触碰 wave / Tywaves 路径时保持 Phase 12–15 关闭面有效（NFR56）；不得改写 FR104/114/117/125「已关闭」为失败。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-73-retro-2026-09-11.md"
   - id: "epic-73-retro-item-232-续保持-commit-subject-story-n-m-retro-stori"
     epic: 73
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-73-retro-2026-09-11.md"
   - id: "epic-73-retro-item-233-可选工程卫生-epic-74-各须本-epic-nfr14-nfr57-未列入更"
     epic: 73
     action: "可选工程卫生：Epic 74+ 各须本 epic NFR14（NFR57）；未列入更深 GUI/IDE / 未列协议等仍须显式合同（NFR59），不得因「终局」口号静默扩大。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-73-retro-2026-09-11.md"
   - id: "epic-74-retro-item-234-fr135-诚实边界-对外不得把-fr126-gpio-alone-genera"
     epic: 74
@@ -2113,50 +2113,50 @@ action_items:
       alone / FR92 / FR100 F1-(i) / FR112 / FR119 alone（或 docs-only）写成 FR135 完成；未列入协议手写
       FL 须引 NFR59 新合同；宣称须引 Epic 74 关闭证据。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-74-retro-2026-09-11.md"
   - id: "epic-74-retro-item-235-触碰-ip-双模型-手写-fl-路径时保持-phase-12-15-关闭面有效"
     epic: 74
     action: "触碰 IP 双模型 / 手写 FL 路径时保持 Phase 12–15 关闭面有效（NFR56）；不得改写 FR103/112/119/126「已关闭」为失败。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-74-retro-2026-09-11.md"
   - id: "epic-74-retro-item-236-续保持-commit-subject-story-n-m-retro-stori"
     epic: 74
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-74-retro-2026-09-11.md"
   - id: "epic-74-retro-item-237-可选工程卫生-epic-75-各须本-epic-nfr14-nfr57-未列入协"
     epic: 74
     action: "可选工程卫生：Epic 75+ 各须本 epic NFR14（NFR57）；未列入协议 / 更深 pad·VIP 等仍须显式合同（NFR59），不得因「终局」口号静默扩大。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-74-retro-2026-09-11.md"
   - id: "epic-75-retro-item-238-fr136-诚实边界-对外不得把-fr128-gpiosocpad-d1-d4"
     epic: 75
     action: "FR136 诚实边界：对外不得把 FR128 GpioSocPad D1–D4 alone / FR120 C1–C4 alone / FR108
       alone（或 docs-only）写成 FR136 完成；未列入更广 pad/外设须引 NFR59 新合同；宣称须引 Epic 75 关闭证据。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-75-retro-2026-09-11.md"
   - id: "epic-75-retro-item-239-触碰-pad-soc-环路径时保持-phase-12-15-关闭面有效-nfr5"
     epic: 75
     action: "触碰 pad / SoC 环路径时保持 Phase 12–15 关闭面有效（NFR56）；不得改写 FR98/108/120/128「已关闭」为失败。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-75-retro-2026-09-11.md"
   - id: "epic-75-retro-item-240-续保持-commit-subject-story-n-m-retro-stori"
     epic: 75
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-75-retro-2026-09-11.md"
   - id: "epic-75-retro-item-241-可选工程卫生-epic-76-各须本-epic-nfr14-nfr57-未列入更"
     epic: 75
     action: "可选工程卫生：Epic 76+ 各须本 epic NFR14（NFR57）；未列入更广 pad·外设 / 驱动强度等仍须显式合同（NFR59），不得因「终局」口号静默扩大。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-75-retro-2026-09-11.md"
   - id: "epic-76-retro-item-242-fr137-诚实边界-对外不得把-fr129-c1-c4-alone-fr121"
     epic: 76
@@ -2164,26 +2164,26 @@ action_items:
       alone（或 docs-only / continue-on-error 静默跳过）写成 FR137 完成；未列入更广 CIRCT/MLIR lower
       与仿真门禁加深须引 NFR59 新合同；宣称须引 Epic 76 关闭证据。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-76-retro-2026-09-11.md"
   - id: "epic-76-retro-item-243-触碰外部-circt-firtool-运维路径时保持-phase-12-15-关"
     epic: 76
     action: "触碰外部 CIRCT / firtool 运维路径时保持 Phase 12–15 关闭面有效（NFR56）；不得改写 FR95/110/121/129「已关闭」为失败；升钉
       firtool 须先 Chisel 配对并修订 AD-9（NFR12 / NFR58）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-76-retro-2026-09-11.md"
   - id: "epic-76-retro-item-244-续保持-commit-subject-story-n-m-retro-stori"
     epic: 76
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-76-retro-2026-09-11.md"
   - id: "epic-76-retro-item-245-可选工程卫生-epic-77-各须本-epic-nfr14-nfr57-未列入更"
     epic: 76
     action: "可选工程卫生：Epic 77+ 各须本 epic NFR14（NFR57）；未列入更广 CIRCT·MLIR lower / 仿真门禁加深仍须显式合同（NFR59），不得因「终局」口号静默扩大。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-76-retro-2026-09-11.md"
   - id: "epic-77-retro-item-246-fr138-诚实边界-对外不得把-fr130-style-guide-alone"
     epic: 77
@@ -2191,26 +2191,26 @@ action_items:
       FR122 O1–O4 alone（或 docs-only / 未修订 AD-27）写成 FR138 完成；未列入更深 Chisel/Parser 生态须引
       NFR59 新合同；宣称须引 Epic 77 关闭证据。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-77-retro-2026-09-11.md"
   - id: "epic-77-retro-item-247-触碰-parser-chisel-互操作路径时保持-phase-12-15-关闭"
     epic: 77
     action: "触碰 Parser / Chisel 互操作路径时保持 Phase 12–15 关闭面有效（NFR56）；不得改写 FR97/111/122/130「已关闭」为失败；升钉
       firtool/Chisel 须先配对并修订 AD-9 / AD-27（NFR12 / NFR58）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-77-retro-2026-09-11.md"
   - id: "epic-77-retro-item-248-续保持-commit-subject-story-n-m-retro-stori"
     epic: 77
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-77-retro-2026-09-11.md"
   - id: "epic-77-retro-item-249-可选工程卫生-epic-78-各须本-epic-nfr14-nfr57-未列入更"
     epic: 77
     action: "可选工程卫生：Epic 78+ 各须本 epic NFR14（NFR57）；未列入更深 Chisel·Parser 生态仍须显式合同（NFR59），不得因「终局」口号静默扩大。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-77-retro-2026-09-11.md"
   - id: "epic-78-retro-item-250-fr139-诚实边界-对外不得把-fr131-p1-p4-alone-fr128"
     epic: 78
@@ -2218,25 +2218,25 @@ action_items:
       / silent 改导出）写成 FR139 完成；C2 未选不得宣称跨 crate；未列入更深 IP 布局须引 NFR59 新合同；宣称须引 Epic
       78 关闭证据（FR140）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-78-retro-2026-09-11.md"
   - id: "epic-78-retro-item-251-触碰-bitloom-prelude-ip-时保持-phase-12-15-关闭"
     epic: 78
     action: "触碰 bitloom-prelude ip/ 时保持 Phase 12–15 关闭面有效（NFR56）；不得改写 FR98/108/120/128/131「已关闭」为失败；若日后勾选
       C2 跨 crate 须先修订 AD-6 / 迁移说明 / 脊柱（NFR58）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-78-retro-2026-09-11.md"
   - id: "epic-78-retro-item-252-续保持-commit-subject-story-n-m-retro-stori"
     epic: 78
     action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-78-retro-2026-09-11.md"
   - id: "epic-78-retro-item-253-phase-16-可选-retrospective-已全部跑完-未列入更深-ip"
     epic: 78
     action: "Phase 16 可选 retrospective 已全部跑完；未列入更深 IP 布局 / GUI·IDE 子集 / 未列协议 / 更广
       CIRCT·MLIR / 更深 Chisel·Parser 生态仍须显式合同（NFR59），不得因「终局」口号静默扩大。"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-78-retro-2026-09-11.md"
