@@ -2,8 +2,9 @@
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Story **73.2** product path (G1–G4). Epic close → Story **73.3**.
-FR125 T1–T4 remains closed (NFR56) and is **not** this face alone.
+**Status:** **Epic 73 / FR134 closed** (Story **73.3**). Product path delivered in Story **73.2** (G1–G4).
+
+Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72**（闸门 FR133）、**Epic 73**（本 FR）、**Epic 78**（FR139）**已关闭**；**Epic 74–77** 仍须各自实现关闭。FR125 T1–T4 **仍有效**（NFR56）and is **not** this face alone. 未列入更深 GUI/IDE 子集仍属 **NFR59**。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
 
 Beyond FR125 `wave.tywaves.json` / `BITLOOM_TYWAVES_BIN` single-binary launch.  
 **Forbidden closes:** FR104 alone; FR114 alone; FR117 typed-wave alone; FR125 T1–T4 alone; docs-only.
@@ -56,10 +57,15 @@ Tywaves runtime must **not** enter design-crate (`bitloom-prelude`) dependencies
 
 FR117 `typed-wave.html`, FR104 `interactive.html`, and FR125 sidecar still emit.  
 Those closes remain valid; FR134 is the GUI/IDE depth claim face.
+FR125 T1–T4 remains closed and valid (≠ this FR alone).
 
 ## Non-goals (NFR59)
 
 Replacing default VCD / `typed-wave.html` as the only wave surface; full ChiselSim coupling;
 extra IDE-store multi-target publish beyond the G1-pinned Surfer marketplace id.
+Further GUI/IDE subsets not listed in G1–G4 remain **NFR59** (≠ FR134 alone).
 
-ATDD: `cargo test -p bitloom --test fr134_tywaves_gui_ide`
+```text
+cargo test -p bitloom --test fr134_tywaves_gui_ide
+cargo test -p bitloom --test fr134_epic73_closeout
+```

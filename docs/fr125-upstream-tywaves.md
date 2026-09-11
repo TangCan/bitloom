@@ -40,8 +40,9 @@ BITLOOM_TYWAVES_BIN=/path/to/tywaves-or-stub \
 FR117 `typed-wave.html` / `wave.typed.json` and FR104 `interactive.html` still emit.  
 FR117 close remains valid; FR125 is the upstream Tywaves claim face.
 
-## Non-goals (NFR55)
+## Non-goals (NFR55 → Phase 16)
 
-IDE marketplace plugins; replacing default VCD/typed-wave path; ChiselSim full coupling.
+IDE marketplace plugins / 真实上游 GUI 安装包深度 → **FR134 / Epic 73 已关闭**（Story 73.3；G1–G4）；T1–T4 **仍有效**（alone ≠ FR134）。
+更深 GUI/IDE 子集（替换默认 VCD/typed-wave；完整 ChiselSim 耦合；额外 IDE 商店多端）仍 **NFR59**。
 
 ATDD: `cargo test -p bitloom --test fr125_upstream_tywaves`

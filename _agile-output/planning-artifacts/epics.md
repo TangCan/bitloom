@@ -116,7 +116,7 @@ phase16Scope: >
   多外设/全芯片 pad 环；完整外部 CIRCT 编译/仿真门禁；恢复废弃 Parser；
   VIP/SocPad 再细拆或跨 crate（及闸门/宣称 FR）。
 phase16Epic72Status: complete
-phase16Epic73Status: backlog
+phase16Epic73Status: complete
 phase16Epic74Status: backlog
 phase16Epic75Status: backlog
 phase16Epic76Status: backlog
