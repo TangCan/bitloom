@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 15:45
+last_updated: 09-11-2026 15:50
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -515,7 +515,7 @@ development_status:
   72-2-correct-course-prd-批准-phase-16-fr133: done
   72-3-同步-readme-deferred-路线图指针-fr133-fr140: done
   72-4-ad-指针与-epic-72-收口-fr133-fr140-nfr58: done
-  epic-72-retrospective: optional
+  epic-72-retrospective: done
 
   epic-73: done
   73-1-epic-73-nfr14-风险记录: done
@@ -2055,3 +2055,30 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-71-retro-2026-09-11.md"
+  - id: "epic-72-retro-item-226-fr133-fr140-诚实边界-对外不得把-phase-16-闸门关闭写成-f"
+    epic: 72
+    action: "FR133/FR140 诚实边界：对外不得把 Phase 16 闸门关闭写成 FR134–139 产品完成；终局 / Tywaves GUI·IDE
+      / 更多 IP FL / 全芯片 pad / 外部 CIRCT / Parser / 跨 crate 类宣称须引对应 epic 关闭证据；禁止用 Phase
+      15（FR125–131 alone）冒充终局完成面。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-72-retro-2026-09-11.md"
+  - id: "epic-72-retro-item-227-触碰-phase-16-加深路径时保持-phase-12-15-关闭面有效-nf"
+    epic: 72
+    action: "触碰 Phase 16 加深路径时保持 Phase 12–15 关闭面有效（NFR56）；不得改写 FR94–132「已关闭」为失败。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-72-retro-2026-09-11.md"
+  - id: "epic-72-retro-item-228-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 72
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-72-retro-2026-09-11.md"
+  - id: "epic-72-retro-item-229-可选工程卫生-epic-73-78-各须本-epic-nfr14-nfr57-a"
+    epic: 72
+    action: "可选工程卫生：Epic 73–78 各须本 epic NFR14（NFR57）；AD-27 / CIRCT / crate 实质修订归 NFR58
+      对应 epic；未选子集须显式合同（NFR59），不得因「终局」口号静默扩大。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-72-retro-2026-09-11.md"
