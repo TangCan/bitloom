@@ -593,9 +593,9 @@ development_status:
   84-4-ad-指针与-epic-84-收口-fr148-nfr66: done
   epic-84-retrospective: optional
 
-  epic-85: backlog
-  85-1-epic-85-nfr14-风险记录: ready-for-dev
-  85-2-bitloom-firrtl-可发布-fr149: backlog
+  epic-85: in-progress
+  85-1-epic-85-nfr14-风险记录: done
+  85-2-bitloom-firrtl-可发布-fr149: ready-for-dev
   85-3-bitloom-viz-可发布-fr150: backlog
   85-4-bitloom-lsp-发布策略-b-fr152: backlog
   85-5-发布-bitloom-cli-1-0-0-fr151: backlog

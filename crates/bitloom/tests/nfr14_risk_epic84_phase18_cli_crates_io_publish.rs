@@ -232,11 +232,24 @@ fn nfr14_risk_epic84_phase18_cli_crates_io_publish_has_required_fields() {
         sprint.contains("epic-83: done") || sprint.contains("epic-83:done"),
         "Phase 17 Epic 83 must be done before Epic 84 NFR14"
     );
+    let epic85 = yaml_value_for_key(&sprint, "epic-85").unwrap_or_default();
+    let epic86 = yaml_value_for_key(&sprint, "epic-86").unwrap_or_default();
     assert!(
-        yaml_value_for_key(&sprint, "epic-85").as_deref() == Some("backlog")
-            && yaml_value_for_key(&sprint, "epic-86").as_deref() == Some("backlog"),
-        "Epic 85–86 epic keys remain backlog until their NFR14 stories advance (85.1 may be ready-for-dev)"
+        epic85 == "backlog" || epic85 == "in-progress" || epic85 == "done",
+        "epic-85 must be backlog|in-progress|done after Epic 84 gate (got {epic85})"
     );
+    let epic85_done = epic85 == "done";
+    if !epic85_done {
+        assert_eq!(
+            epic86, "backlog",
+            "epic-86 stays backlog until Epic 85 closes (got {epic86})"
+        );
+    } else {
+        assert!(
+            epic86 == "backlog" || epic86 == "in-progress" || epic86 == "done",
+            "epic-86 must be backlog|in-progress|done after Epic 85 (got {epic86})"
+        );
+    }
     let epic84_done_gate = sprint.contains("epic-84: done") || sprint.contains("epic-84:done");
     if !epic84_done_gate {
         for line in sprint.lines() {

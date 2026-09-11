@@ -125,18 +125,27 @@ fn fr148_sprint_epic84_done() {
             "expected seeded Phase 18 epic key containing {epic}"
         );
     }
-    // After gate closes, 85.1 may be ready-for-dev; 85.2+ must stay backlog until 85.1 NFR14.
+    // After gate closes, 85.1 may be ready-for-dev; 85.2+ ready only after 85.1 NFR14 done.
+    // Epic 86 stories ready only after Epic 85 done.
+    let s85_1_done = sprint.lines().any(|l| {
+        let t = l.trim();
+        t.starts_with("85-1-") && (t.ends_with(": done") || t.contains(": done"))
+    });
+    let epic85_done = sprint.contains("epic-85: done") || sprint.contains("epic-85:done");
     for line in sprint.lines() {
         let t = line.trim();
+        if t.starts_with("86-") && t.contains("ready-for-dev") && !epic85_done {
+            panic!("Epic 86 must stay backlog until epic-85 done: {t}");
+        }
         if (t.starts_with("85-2-")
             || t.starts_with("85-3-")
             || t.starts_with("85-4-")
             || t.starts_with("85-5-")
-            || t.starts_with("85-6-")
-            || t.starts_with("86-"))
+            || t.starts_with("85-6-"))
             && t.contains("ready-for-dev")
+            && !s85_1_done
         {
-            panic!("85.2+ / Epic 86 must stay backlog until per-epic NFR14: {t}");
+            panic!("85.2+ must stay backlog until 85.1 NFR14 is done: {t}");
         }
     }
 }
