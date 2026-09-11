@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR148 / Epic 84；NFR14、NFR64、NFR65、NFR66、NFR67；对照 FR141–147 / NFR60–63；FR149–153 实现面 |
 | 记录日期 | 2026-09-11 |
-| 状态 | open — Story 84.1；Epic 84 未关闭；84.2–84.4 待办；Epic 85–86 仍 backlog（Epic 84 关闭后方可 ready） |
+| 状态 | closed — Story 84.4 勾选完成；Epic 84 关闭；Phase 18 闸门已开；Epic 85–86 仍须各自 NFR14（85.1 可 ready-for-dev；85.2+ 仍 backlog 直至 85.1）；实发属 Epic 85 / FR151 |
 | **选定** | 在保留 Phase 17 关闭面的前提下，授权 Phase 18「CLI / 依赖 crate crates.io 可发布」合同闸门（FR148）；实现属 Epic 85–86 |
 
 ### Phase 17 关闭面 vs Phase 18 CLI 可发布边界（NFR64 · 必读）
@@ -120,12 +120,12 @@
 
 ### Epic 84 关闭条件（Story 84.4 勾选）
 
-- [ ] **FR148 / Correct Course + PRD：** Phase 18 批准文案验收 — Story 84.2
-- [ ] **README / deferred：** Phase 17 vs Phase 18 CLI 合同区分 — Story 84.3
-- [ ] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 18 指针 — Story 84.4
-- [ ] **NFR64–67：** 边界与诚实义务写入本记录并保持
-- [ ] **禁止事项未触发：** 85–86 在 Epic 84 关闭前未标 ready
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`；禁 publish `rhdl`/`rhdl-bits`
-- [ ] **Epic 85–86：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭
+- [x] **FR148 / Correct Course + PRD：** Phase 18 批准文案验收 — Story 84.2
+- [x] **README / deferred：** Phase 17 vs Phase 18 CLI 合同区分 — Story 84.3
+- [x] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 18 指针 — Story 84.4
+- [x] **NFR64–67：** 边界与诚实义务写入本记录并保持
+- [x] **禁止事项未触发：** 85–86 在 Epic 84 关闭前未标 ready
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`；禁 publish `rhdl`/`rhdl-bits`
+- [x] **Epic 85–86：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭
 
-**Epic 84 未关闭：** 不得宣称 FR148 已关闭；不得将 Epic 85–86 标 ready；**不得**静默吞并 NFR59（NFR67）。
+**Phase 18 闸门已开（Story 84.4）：** Epic 85–86 可在各自 NFR14 后标 ready；软序 `84 → 85 → 86`；**不得**宣称 FR149–153 已关闭直至对应 epic 关闭；**不得**静默吞并 NFR59（NFR67）；**不得**在 FR151 前暗示 `cargo install bitloom` 已可用。

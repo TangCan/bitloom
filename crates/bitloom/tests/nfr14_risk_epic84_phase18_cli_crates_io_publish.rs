@@ -49,15 +49,30 @@ fn nfr14_risk_epic84_phase18_cli_crates_io_publish_has_required_fields() {
         "risk record must include labeled field (d) 负责人"
     );
 
-    // Story 84.1: risk record open / in-progress — not Epic 84 closed
+    // Story 84.1: risk record open until Epic 84 closeout; after 84.4 may be closed.
     let status_open = text.contains("状态")
         && (text.contains("open") || text.contains("in-progress") || text.contains("进行中"))
         && !text.contains("closed — Story 84.4")
         && !text.contains("closed — Epic 84");
+    let status_closed = text.contains("closed — Story 84.4")
+        || (text.contains("closed") && text.contains("Epic 84") && text.contains("闸门已开"));
     assert!(
-        status_open,
-        "Story 84.1 risk record status must be open/in-progress (not Epic 84 closed)"
+        status_open || status_closed,
+        "Story 84.1 risk record status must be open/in-progress or closed after Story 84.4"
     );
+
+    let sprint_early = fs::read_to_string(
+        workspace_root().join("_agile-output/implementation-artifacts/sprint-status.yaml"),
+    )
+    .expect("sprint-status.yaml");
+    let epic84_done =
+        sprint_early.contains("epic-84: done") || sprint_early.contains("epic-84:done");
+    if !epic84_done {
+        assert!(
+            status_open,
+            "before epic-84 done, risk record must remain open/in-progress"
+        );
+    }
 
     // NFR64: Phase 17 closed faces must not be rewritten
     assert!(
@@ -220,6 +235,15 @@ fn nfr14_risk_epic84_phase18_cli_crates_io_publish_has_required_fields() {
     assert!(
         yaml_value_for_key(&sprint, "epic-85").as_deref() == Some("backlog")
             && yaml_value_for_key(&sprint, "epic-86").as_deref() == Some("backlog"),
-        "Epic 85–86 must remain backlog while Epic 84 gate is open"
+        "Epic 85–86 epic keys remain backlog until their NFR14 stories advance (85.1 may be ready-for-dev)"
     );
+    let epic84_done_gate = sprint.contains("epic-84: done") || sprint.contains("epic-84:done");
+    if !epic84_done_gate {
+        for line in sprint.lines() {
+            let t = line.trim();
+            if (t.starts_with("85-") || t.starts_with("86-")) && t.contains("ready-for-dev") {
+                panic!("Epic 85–86 stories must not be ready-for-dev before epic-84 done: {t}");
+            }
+        }
+    }
 }

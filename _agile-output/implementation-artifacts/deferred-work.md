@@ -48,7 +48,7 @@ README「状态与 deferred」同源（Story 79.3 / 83.x）。
 ## Phase 18 pointer (FR148–153 / NFR64–NFR67) — CLI / 依赖 crate crates.io 可发布收口
 
 Correct Course `sprint-change-proposal-2026-09-11-phase18-cli-crates-io-publish.md` + PRD addendum「Phase 18」**已批准**（**Phase 18 contract approved** 2026-09-11；`correctCoursePhase18Approved: 2026-09-11`）。  
-闸门 **FR148 / Epic 84**（未关闭前 Epic 85–86 不得 ready）；实现映射：**FR149** `bitloom-firrtl`；**FR150** `bitloom-viz`；**FR151** CLI 上架；**FR152** lsp 策略 (b)；**FR153** SemVer/发版诚实（Epic 85–86）。  
+闸门 **FR148 / Epic 84**（**已关闭** / Story 84.4；Phase 18 闸门已开）；实现映射：**FR149** `bitloom-firrtl`；**FR150** `bitloom-viz`；**FR151** CLI 上架；**FR152** lsp 策略 (b)；**FR153** SemVer/发版诚实（Epic 85–86；各 epic 仍须自有 NFR14）。  
 **禁止**在 FR151 关闭前暗示 `cargo install bitloom` 已可用（**NFR64** / 宣称纪律）。软序 **84 → 85 → 86**。  
 Phase 12–17 关闭证据**仍有效**。NFR59 仍 deferred（**NFR67**）；CLI 上架 ≠ 清空 NFR59。Q1–Q5：rename→`bitloom-firrtl`/`bitloom-viz`；FR152(b)；不以 NFR59 为前提；保持 MSRV。公开品牌 **Bitloom**。库 crate 已 **1.0.0**；CLI 仍待 **FR151**。  
 README「状态与 deferred」同源（Story 84.3）。

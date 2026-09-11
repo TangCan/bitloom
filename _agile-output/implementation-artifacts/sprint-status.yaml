@@ -586,15 +586,15 @@ development_status:
   epic-83-retrospective: done
   # === Phase 18: CLI crates.io publishability (FR148–153) ===
   # Soft order: 84 → 85 → 86; Epic 84 hard gate before 85–86 ready
-  epic-84: in-progress
+  epic-84: done
   84-1-epic-84-nfr14-风险记录: done
   84-2-correct-course-prd-批准-phase-18-fr148: done
   84-3-同步-readme-deferred-路线图指针-fr148: done
-  84-4-ad-指针与-epic-84-收口-fr148-nfr66: ready-for-dev
+  84-4-ad-指针与-epic-84-收口-fr148-nfr66: done
   epic-84-retrospective: optional
 
   epic-85: backlog
-  85-1-epic-85-nfr14-风险记录: backlog
+  85-1-epic-85-nfr14-风险记录: ready-for-dev
   85-2-bitloom-firrtl-可发布-fr149: backlog
   85-3-bitloom-viz-可发布-fr150: backlog
   85-4-bitloom-lsp-发布策略-b-fr152: backlog

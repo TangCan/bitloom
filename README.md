@@ -278,7 +278,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **Phase 17（公开 API 稳定门 / Bitloom 1.0 · FR141–FR147 / NFR60–NFR63）：** Correct Course 已批准（2026-09-11）。Phase 12–16 关闭证据**仍有效**（**NFR60**）。闸门 **FR141** / Epic 79–83 **已关闭**；**Epic 83 / FR146：** workspace **1.0.0** + tag `v1.0.0` + CHANGELOG；库 crate 已上 crates.io **1.0.0**（见 [`docs/fr146-bitloom-1-0-0-release.md`](docs/fr146-bitloom-1-0-0-release.md)）。对外「1.0 / 公开 API 稳定」按 **FR147**。**禁止**用 Phase 16 终局 alone 冒充 1.0。**NFR59** 仍 deferred（**NFR63**）。**CLI 上架 ≠ Phase 17 完成面**（→ **Phase 18 / FR148–153**）。公开表面：[`docs/public-api-1-0-surface.md`](docs/public-api-1-0-surface.md)。
 
-**Phase 18（CLI / 依赖 crate crates.io 可发布 · FR148–FR153 / NFR64–NFR67）：** Correct Course 已批准（2026-09-11）。Phase 12–17 关闭证据**仍有效**（**NFR64**），**不得**改写为失败。闸门 **FR148** / Epic 84（未关闭前 Epic 85–86 不得 ready）。实现映射：`bitloom-firrtl` **FR149**；`bitloom-viz` **FR150**；CLI 上架 **FR151**；lsp 策略 **FR152(b)**；发版后诚实 / SemVer 跟进 **FR153**。**禁止**在 FR151 关闭前暗示 `cargo install bitloom` 已可用。**口径：** CLI 上架 ≠ 清空 NFR59（**NFR67**）。公开品牌 **Bitloom**。同源：[`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md) Phase 18 pointer。
+**Phase 18（CLI / 依赖 crate crates.io 可发布 · FR148–FR153 / NFR64–NFR67）：** Correct Course 已批准（2026-09-11）。Phase 12–17 关闭证据**仍有效**（**NFR64**），**不得**改写为失败。闸门 **FR148** / Epic 84 **已关闭**（Story 84.4；Phase 18 闸门已开）。实现映射：`bitloom-firrtl` **FR149**；`bitloom-viz` **FR150**；CLI 上架 **FR151**；lsp 策略 **FR152(b)**；发版后诚实 / SemVer 跟进 **FR153**（Epic 85–86 仍须各自 NFR14）。**禁止**在 FR151 关闭前暗示 `cargo install bitloom` 已可用。**口径：** CLI 上架 ≠ 清空 NFR59（**NFR67**）。公开品牌 **Bitloom**。同源：[`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md) Phase 18 pointer。
 
 **Phase 12 规划/实现故事已齐（Epic 40–47 已关闭）。** Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。
 
@@ -367,7 +367,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 **FR147 宣称纪律：** 「1.0 / 公开 API 稳定」**仅**在对应 **FR141–146** 关闭后方可勾选 — **Phase 17 / Epic 79–83 已关闭**（FR146：`v1.0.0` / [`docs/fr146-bitloom-1-0-0-release.md`](docs/fr146-bitloom-1-0-0-release.md)）。**禁止**用 Phase 16 终局 alone 冒充。1.0 口径 = 对 FR142 钉死表面的 SemVer major 承诺 + 诚实 **NFR59** deferred（**NFR63**）；**不等于**清空 NFR59。公开品牌 **Bitloom**。**不等于** CLI 已可 `cargo install`（→ Phase 18）。
 
-### Phase 18 CLI 可发布（合同已批准；闸门 Epic 84 / FR148；Epic 85–86 实现）
+### Phase 18 CLI 可发布（合同已批准；闸门 Epic 84 / FR148 已关闭；Epic 85–86 实现）
 
 下列 **CLI / 依赖 crate crates.io 可发布** 项已由 Correct Course + **FR148** 升格为 Phase 18 显式 FR（Epic 84–86）。对外「CLI 已可从 crates.io 安装」类宣称须对应 **FR148–153** 关闭后方可勾选。同源：PRD addendum「Phase 18」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。**不得**把 Phase 17 库 1.0 alone 写成 CLI 已上架。
 

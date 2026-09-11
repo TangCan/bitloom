@@ -101,6 +101,7 @@ phase18Status: planning-complete
 correctCoursePhase18Approved: 2026-09-11
 phase18WorkflowComplete: 2026-09-11
 phase18Epic84Stories: 4
+phase18Epic84Status: complete
 phase18Epic85Stories: 6
 phase18Epic86Stories: 3
 phase18StoryCount: 13
@@ -108,9 +109,9 @@ phase18Validation: |
   FR148–153 mapped to Epic 84–86 stories (13); Epic 84 hard gate for 85–86;
   no forward story deps within epics; Architecture starter N/A;
   File-churn: Epic 85 owns rename/publish/CLI (ordered stories); Epic 86 docs/semver only;
-  Correct Course pending until Story 84.2 (same pattern as Phase 17).
+  Correct Course approved 2026-09-11; Story 84.2 verified stamps; Epic 84 closed Story 84.4;
   create-epics-and-stories Phase 18 validated 2026-09-11 — planning complete;
-  next: Correct Course + sprint seed; start Epic 84.
+  next: Epic 85 NFR14 (85.1) then rename/publish stories.
 phase18Note: >
   Phase 18 draft from create-epics Step 1 (2026-09-11): bitloom CLI crates.io
   publishability leftover after FR146 library upload. Defaults on unanswered Qs:
