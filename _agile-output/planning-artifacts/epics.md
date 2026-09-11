@@ -87,7 +87,47 @@ stepsCompleted:
   - step-03-create-stories-phase-16-epic-78
   - step-03-create-stories-phase-16
   - step-04-final-validation-phase-16
+  - step-01-validate-prerequisites-phase-17
+  - step-02-design-epics-phase-17
+  - step-03-create-stories-phase-17
+  - step-04-final-validation-phase-17
 status: complete
+phase17Status: planning-complete
+phase17Validation: |
+  FR141–147 mapped to Epic 79–83 stories (17); Epic 79 hard gate for 80–83;
+  no forward story deps within epics; Architecture starter N/A;
+  Correct Course approved 2026-09-11 (Story 79.2 cites proposal + Q1–Q5 defaults).
+  create-epics-and-stories Phase 17 validated 2026-09-11 — sprint seeded; start Epic 79.
+phase17Note: >
+  Correct Course approved 2026-09-11-phase17-api-stability-1-0. Phase 12–16
+  closing faces remain valid (NFR60). Q1 bitloom-sim IN; Q2 hir/builder/vlog
+  publish OK not in 1.0 promise; Q3 Epic 82 skip-if-no-blockers; Q4 no NFR59
+  prerequisite; Q5 keep MSRV. FR147 claim discipline; NFR59/NFR63 stand.
+correctCoursePhase17Approved: 2026-09-11
+phase17Epic79Stories: 4
+phase17Epic80Stories: 3
+phase17Epic81Stories: 4
+phase17Epic82Stories: 3
+phase17Epic83Stories: 3
+phase17StoryCount: 17
+phase17Contract: api-stability-gate-bitloom-1-0
+phase17Scope: >
+  公开 API 表面钉死；SemVer 1.0 政策；cargo-semver-checks（或等价）CI；
+  可选预 1.0 卫生；发布 1.0.0；宣称诚实门面（及闸门 FR）。
+phase17Epic79Status: backlog
+phase17Epic80Status: backlog
+phase17Epic81Status: backlog
+phase17Epic82Status: backlog
+phase17Epic83Status: backlog
+phase17InputDocuments:
+  - prds/prd-rhdl-2026-08-19/prd.md
+  - prds/prd-rhdl-2026-08-19/addendum.md
+  - architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
+  - ../implementation-artifacts/deferred-work.md
+  - docs/semver-0x-policy.md
+  - epics.md
+  - sprint-change-proposal-2026-09-11-phase16-nfr55-final-closeout.md
+  - sprint-change-proposal-2026-09-11-phase17-api-stability-1-0.md
 phase16Status: complete
 phase16Validation: |
   FR133–140 mapped to Epic 72–78 stories (22); Epic 72 hard gate for 73–78;
@@ -335,7 +375,7 @@ uxDesignPhase13: none---
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48–56 · FR106–FR115 / NFR44–NFR47，**complete**）。阶段十四：NFR47 未选加深升格（Epic 57–63 · FR116–FR123 / NFR48–NFR51，**complete**）。阶段十五：NFR51 剩余升格（Epic 64–71 · FR124–FR132 / NFR52–NFR55，**complete**）。阶段十六：产品终局结项 / NFR55 升格（Epic 72–78 · FR133–FR140 / NFR56–NFR59，**planning-complete**；Correct Course **approved** 2026-09-11）。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48–56 · FR106–FR115 / NFR44–NFR47，**complete**）。阶段十四：NFR47 未选加深升格（Epic 57–63 · FR116–FR123 / NFR48–NFR51，**complete**）。阶段十五：NFR51 剩余升格（Epic 64–71 · FR124–FR132 / NFR52–NFR55，**complete**）。阶段十六：产品终局结项 / NFR55 升格（Epic 72–78 · FR133–FR140 / NFR56–NFR59，**complete**）。阶段十七：公开 API 稳定门 / Bitloom 1.0（Epic 79–83 · FR141–FR147 / NFR60–NFR63，**planning-complete**；Correct Course **approved** 2026-09-11）。无 UX。
 
 ## Requirements Inventory
 
@@ -6361,3 +6401,381 @@ So that 再细拆/跨 crate 可检查关闭，且 Phase 16 规划故事清单完
 **Then** FR139 关闭条件可勾选；NFR14 勾选 Epic 78 关闭
 **And** 文首/状态页可声明：Phase 16 规划故事已齐（Epic 72–78）；剩余门为 Correct Course（若仍 pending）与各 epic 实现关闭态
 **And** 明确：本拆分/搬迁已关闭；未列入更深 IP 布局仍 NFR59；终局宣称须引 FR133–139（FR140）
+
+
+## Phase 17 Inventory — 公开 API 稳定门（Bitloom 1.0）
+
+**定位：** 在 Phase 16（FR133–140 / NFR56–59）**合同与实现已关闭**之后，另立 **公开 API 稳定门**，使维护者可对钉死表面合法发布 SemVer **1.0.0**（≠ 清空 NFR59；≠ 用 Phase 16 终局冒充 1.0）。  
+**是：**  
+1. 钉死 1.0 公开表面清单（crate × CLI/API）  
+2. SemVer 1.0 政策（升格结项期 0.x 约束）  
+3. 破坏性变更 CI 门禁（`cargo-semver-checks` 或等价）  
+4. 可选预 1.0 表面卫生（阻塞稳定承诺的毛刺）  
+5. 发布 `1.0.0` + tag + CHANGELOG  
+6. 1.0 宣称诚实门面  
+
+**不是：** 宣称 Phase 12–16 AC 未满足；先清空 NFR59 再 1.0；静默把 `hir`/`builder`/`vlog` 纳入稳定承诺；批准瞬间 `cargo publish`。  
+**依据：** 用户 2026-09-11 批准 `sprint-change-proposal-2026-09-11-phase17-api-stability-1-0.md`（Q1–Q5 草案默认）；NFR15 / `docs/semver-0x-policy.md`；Phase 16 结项分析（终局 ≠ 1.0）。  
+**与 PRD 关系：** Correct Course + PRD/addendum「Phase 17」**已批准**（2026-09-11；`correctCoursePhase17Approved: 2026-09-11`）；**实现闸门** = Epic 79（FR141）关闭前，Epic 80–83 不得标 ready。  
+**ID 注记：** 新编号 **FR141–FR147** / **NFR60–NFR63**（接 FR140 / NFR59）。不重编号 FR94–140。  
+**合同戳：** `correctCoursePhase17Approved: 2026-09-11`；提案 `sprint-change-proposal-2026-09-11-phase17-api-stability-1-0.md`。  
+**批准默认：** Q1 `bitloom-sim` IN；Q2 hir/builder/vlog publish OK、不进 1.0 承诺；Q3 Epic 82 skip-if-no-blockers；Q4 不以 NFR59 为前提；Q5 保持现行 MSRV。
+
+### Phase 17 Functional Requirements
+
+FR133–FR140: （历史）Phase 16 终局 — 关闭证据仍有效；Phase 17 不得改写为失败。
+
+FR141: **Phase 17 稳定门合同闸门** — Correct Course + PRD/addendum 批准「公开 API 稳定门 / Bitloom 1.0」范围；同步 README / `deferred-work.md` /（若需）ARCHITECTURE-SPINE；钉死与 Phase 12–16 关闭面的边界；**未完成则 FR142+ 故事不得 ready**。  
+FR142: **公开 API 表面清单** — 成文清单（建议路径 `docs/public-api-1-0-surface.md`）：crate × 模块/类型/CLI 动词；in-surface / out-of-surface；设计 crate → `bitloom-prelude` 边界不变；默认纳入：`bitloom` CLI 文档化子命令、`bitloom-prelude` 主路径、`bitloom-macro` 文档化属性、`bitloom-sim` 公开 API；默认不纳入稳定承诺：`bitloom-hir` / `bitloom-builder` / `bitloom-vlog`、LSP 等。  
+FR143: **SemVer 1.0 政策** — 成文（建议 `docs/semver-1-0-policy.md` 或升格既有政策）：表面内 breaking → major；MSRV/弃用窗口；与 NFR15 关系（结项曾停 0.x；本 FR 授权对表面升 1.0）；关闭 sprint ≠ 自动 major。  
+FR144: **破坏性变更 CI 门禁** — 对表面 crate 跑 `cargo-semver-checks`（或文档等价路径如 `just semver-check`）；失败非零；禁止 continue-on-error。  
+FR145: **预 1.0 表面卫生（可选）** — 仅处理 FR142 清单标出的、阻塞稳定承诺的 breaking 毛刺；**≠** NFR59 产品加深；清单无阻塞项时可 skip 并文档化。  
+FR146: **发布 Bitloom 1.0.0** — 表面承诺 crate 版本 1.0.0；publish（或 dry-run+手动清单）+ annotated tag `v1.0.0` + CHANGELOG；`cargo doc` 绿。  
+FR147: **1.0 宣称诚实门面** — 对外「1.0 / 公开 API 稳定」须引 FR141–146；**禁止**用 Phase 16 终局 alone 冒充 1.0；NFR59 仍须诚实列出。
+
+### Phase 17 Non-Functional Requirements
+
+NFR14: （继承）各实现 epic 标 ready 前须有风险记录。  
+NFR60: **稳定门 vs 既有关闭面隔离** — Phase 17 关闭不得改写 Phase 12–16「已关闭」；1.0 完成面必须新 FR 勾选。  
+NFR61: **NFR14 分 epic 风险门** — Phase 17 每个实现 epic 开工前独立 NFR14。  
+NFR62: **政策 / CI / publish 诚实同步** — 触及 publish 表面、SemVer 政策、CI 门禁时须先修订文档/脊柱/CI 合同。  
+NFR63: **不得静默吞并 NFR59** — 1.0 **不得**暗示 NFR59 已关闭；更深产品加深仍须新合同。
+
+### Phase 17 Additional Requirements (Architecture + SemVer + Closeout)
+
+- 无 greenfield starter template。  
+- 设计 crate 仍只依赖 `bitloom-prelude`（AD-6）。  
+- 1.0 = 对 FR142 表面的 SemVer major 承诺；内部实现可继续演进若表面兼容。  
+- Phase 1–16 故事保留 historical complete；不重写。  
+- UX：无独立 UX 合同。
+
+### Phase 17 UX Design Requirements
+
+无独立 UX-DR。
+
+### Phase 17 FR Coverage Map
+
+FR141: Epic 79 — Phase 17 稳定门合同闸门  
+FR147: Epic 79 — 1.0 宣称诚实门面  
+FR142: Epic 80 — 公开 API 表面清单  
+FR143: Epic 81 — SemVer 1.0 政策  
+FR144: Epic 81 — 破坏性变更 CI 门禁  
+FR145: Epic 82 — 预 1.0 表面卫生（可选）  
+FR146: Epic 83 — 发布 Bitloom 1.0.0  
+NFR60: Epic 79 — 隔离（横切写入 80–83）  
+NFR61 / NFR14: Epic 79–83 — 各 epic 首故事风险门  
+NFR62: Epic 79 / 81 / 83 — 政策·CI·publish 诚实同步  
+NFR63: Epic 79 — 不得吞并 NFR59（横切）
+
+### Phase 17 Epic List
+
+### Epic 79: Phase 17 稳定门合同与诚实门面
+维护者/用户看到「公开 API 稳定门 / Bitloom 1.0」已获 Correct Course + PRD 批准；Phase 12–16 关闭面不被改写为失败；后续稳定门 epic 可合法开工；对外宣称纪律（FR147）与 NFR59/NFR63 诚实面就位。  
+**FRs covered:** FR141, FR147  
+**NFRs:** NFR14, NFR60, NFR61, NFR62, NFR63  
+**Depends on:** Phase 16 complete。不依赖 Epic 80–83。  
+**Gate:** Story 79.x（NFR14 + FR141）未完成前，80–83 不得标 ready。
+
+### Epic 80: 公开 API 表面清单钉死
+维护者获得成文、可 ATDD 的 1.0 公开表面清单（含 Q1–Q2 默认分区）。  
+**FRs covered:** FR142  
+**NFRs:** NFR14, NFR60, NFR61, NFR63  
+**Depends on:** 硬依赖 Epic 79。
+
+### Epic 81: SemVer 1.0 政策与破坏性变更 CI
+维护者获得 1.0 SemVer 政策文档 + 表面 crate 的 semver CI 门禁。  
+**FRs covered:** FR143, FR144  
+**NFRs:** NFR14, NFR60, NFR61, NFR62  
+**Depends on:** 硬依赖 Epic 80。
+
+### Epic 82: 预 1.0 表面卫生（可选）
+维护者处理 FR142 清单标出的阻塞 breaking；若无阻塞项则 skip 并文档化。  
+**FRs covered:** FR145  
+**NFRs:** NFR14, NFR60, NFR61, NFR63  
+**Depends on:** 硬依赖 Epic 80；可与 Epic 81 软并行。  
+**Skip path:** 清单无阻塞项 → Story 82.2 可记 skip + 理由，仍可关 Epic 82。
+
+### Epic 83: 发布 Bitloom 1.0.0
+维护者完成表面承诺 crate 的 1.0.0 发版、tag、CHANGELOG；README 声明 1.0 表面并保留 NFR59。  
+**FRs covered:** FR146  
+**NFRs:** NFR14, NFR60, NFR61, NFR62, NFR63  
+**Depends on:** 硬依赖 Epic 81；若开 Epic 82 实现路径则须 82 关闭（skip 亦算关闭）。
+
+**实施软序（非硬依赖）：** `79 → 80 → 81 ‖ 82 → 83`（`‖` = 82 可与 81 软并行；无阻塞时可先 skip 82）。
+
+
+
+## Epic 79: Phase 17 稳定门合同与诚实门面
+
+维护者/用户看到「公开 API 稳定门 / Bitloom 1.0」已获 Correct Course + PRD 批准；Phase 12–16 关闭面不被改写为失败；后续稳定门 epic 可合法开工；对外宣称纪律（FR147）与 NFR59/NFR63 诚实面就位。  
+**FRs covered:** FR141, FR147  
+**NFRs:** NFR14, NFR60, NFR61, NFR62, NFR63  
+**Depends on:** Phase 16 complete。不依赖 Epic 80–83。  
+**Gate:** Story 79.1 NFR14 未完成前，79.2–79.4 不得标 ready。**Epic 79 未关闭前，Epic 80–83 不得标 ready。**
+
+### Story 79.1: Epic 79 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 Phase 17「公开 API 稳定门 / Bitloom 1.0」填写 NFR14,
+So that 不以「Phase 16 已结」冒充 1.0 已获授权。
+
+**Acceptance Criteria:**
+
+**Given** Phase 12–16 FR94–140 已关闭；NFR15 / `docs/semver-0x-policy.md`；Correct Course Phase 17 提案
+**When** 创建 Epic 79 风险记录
+**Then** 含：与 Phase 12–16 关闭面的边界（NFR60）；FR142–146 范围摘要；Q1–Q5 批准默认；禁止事项（至少：FR141 未合入不得开 80–83；不得改写 FR94–140「已关闭」为失败；不得用 Phase 16 alone 宣称 1.0；不得静默吞并 NFR59）
+**And** 指定负责人（NFR14 / NFR60–63）
+**And** 无此记录则 79.2–79.4 不得标 ready
+
+### Story 79.2: Correct Course + PRD 批准 Phase 17（FR141）
+
+As a 产品负责人,
+I want PRD/addendum 经 Correct Course 明确批准「公开 API 稳定门 / Bitloom 1.0」,
+So that Phase 17 具备合同授权。
+
+**Acceptance Criteria:**
+
+**Given** Story 79.1；现 addendum 已批准至 Phase 16
+**When** 批准并落地 sprint-change-proposal（或等价）+ PRD/addendum Phase 17 段落
+**Then** 写明：Phase 17 = FR141–147 稳定门；Phase 12–16 关闭仍有效；新宣称须引 FR141–146（FR147 / NFR60）；1.0 ≠ 清空 NFR59；Q1–Q5 默认
+**And** 公开品牌仍为 Bitloom / `bitloom-*`
+**And** 列出 Epic 79–83 与 FR 映射指针（可指向 `epics.md`）
+**And** `correctCoursePhase17Approved` 戳可验证
+
+### Story 79.3: 同步 README / deferred / 路线图指针（FR141 / FR147）
+
+As a 文档维护者,
+I want 公开状态页区分 Phase 16 终局面与 Phase 17 1.0 稳定门,
+So that 对外宣称不混淆。
+
+**Acceptance Criteria:**
+
+**Given** Story 79.2 合同已批准
+**When** 更新 README「状态与 deferred」、`deferred-work.md`、（若需）doc-19 指针
+**Then** 明确 Phase 16 vs Phase 17 完成面与 FR141–147 映射
+**And** 不得把 Phase 16 终局 alone 写成 1.0 / 公开 API 稳定
+**And** 诚实列出 NFR59 仍 deferred 项
+**And** 公开品牌 Bitloom
+
+### Story 79.4: AD 指针与 Epic 79 收口（FR141 / FR147 / NFR62）
+
+As a 架构维护者,
+I want 脊柱/AGENTS 指针与 Epic 79 关闭勾选就绪,
+So that 后续实现 epic 有合法政策/CI 引用面。
+
+**Acceptance Criteria:**
+
+**Given** Story 79.2–79.3
+**When** 更新 ARCHITECTURE-SPINE / AGENTS（若需）Phase 17 指针，并勾选 Epic 79 / FR141 / FR147 关闭条件
+**Then** NFR14 勾选 Epic 79 关闭；文首可声明 Phase 17 闸门已开
+**And** 明确：Epic 80–83 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭；发版属 Epic 83
+**And** Phase 12–16 关闭证据仍有效（NFR60）
+
+
+## Epic 80: 公开 API 表面清单钉死
+
+维护者获得成文、可 ATDD 的 1.0 公开表面清单（含 Q1–Q2 默认分区）。  
+**FRs covered:** FR142  
+**NFRs:** NFR14, NFR60, NFR61, NFR63  
+**Depends on:** 硬依赖 Epic 79。  
+**Gate:** Story 80.1 未完成前，80.2–80.3 不得标 ready。
+
+### Story 80.1: Epic 80 NFR14 风险记录
+
+As a 实现负责人,
+I want 为「公开 API 表面清单」填写 NFR14,
+So that 划界争议与错误纳入/排除有可追溯面。
+
+**Acceptance Criteria:**
+
+**Given** Epic 79 已关闭
+**When** 创建 Epic 80 风险记录
+**Then** 含：建议纳入/排除表（含 Q1 sim IN、Q2 hir/builder/vlog 非承诺）；设计 crate → prelude 边界；ATDD 策略；禁止把未文档化内部 API 写入 in-surface
+**And** 无此记录则 80.2–80.3 不得标 ready
+
+### Story 80.2: 成文公开表面清单与 ATDD（FR142）
+
+As a 维护者,
+I want `docs/public-api-1-0-surface.md`（或等价）与锁文件/ATDD,
+So that 1.0 承诺边界可检查。
+
+**Acceptance Criteria:**
+
+**Given** Story 80.1
+**When** 落地表面清单 + 测试/夹具断言必填节与 in/out 分区
+**Then** 文档含：`bitloom` / `bitloom-prelude` / `bitloom-macro` / `bitloom-sim` in-surface 要点；hir/builder/vlog 与 LSP 等 out-of-promise（或 out-of-surface）
+**And** 设计 crate 仅依赖 `bitloom-prelude` 边界写明
+**And** ATDD 失败当缺节或分区缺失
+
+### Story 80.3: FR142 收口与文档指针
+
+As a 文档维护者,
+I want FR142 关闭勾选与指针就绪,
+So that Epic 81–83 可引用钉死表面。
+
+**Acceptance Criteria:**
+
+**Given** Story 80.2
+**When** 更新 deferred/README 指针并勾选 Epic 80 / FR142
+**Then** NFR14 勾选 Epic 80 关闭
+**And** 明确：表面修订须走变更流程；不得静默扩大承诺
+
+
+## Epic 81: SemVer 1.0 政策与破坏性变更 CI
+
+维护者获得 1.0 SemVer 政策文档 + 表面 crate 的 semver CI 门禁。  
+**FRs covered:** FR143, FR144  
+**NFRs:** NFR14, NFR60, NFR61, NFR62  
+**Depends on:** 硬依赖 Epic 80。  
+**Gate:** Story 81.1 未完成前，81.2–81.4 不得标 ready。
+
+### Story 81.1: Epic 81 NFR14 风险记录
+
+As a 实现负责人,
+I want 为「1.0 政策 + semver CI」填写 NFR14,
+So that 工具误报、过早冻结与 CI 缺工具语义可管理。
+
+**Acceptance Criteria:**
+
+**Given** Epic 80 已关闭；表面清单路径已知
+**When** 创建 Epic 81 风险记录
+**Then** 含：政策文件路径；CI 工具选择（`cargo-semver-checks` 或等价）；缺工具失败语义；MSRV 保持现行（Q5）；与 NFR15/0.x 政策关系
+**And** 无此记录则 81.2–81.4 不得标 ready
+
+### Story 81.2: SemVer 1.0 政策成文（FR143）
+
+As a 维护者,
+I want `docs/semver-1-0-policy.md`（或升格既有政策）,
+So that 表面内 breaking → major 有书面合同。
+
+**Acceptance Criteria:**
+
+**Given** Story 81.1
+**When** 落地 1.0 政策文档并交叉链 `semver-0x-policy.md` / 表面清单
+**Then** 写明：表面内 breaking → major；弃用窗口；MSRV 政策；关闭 sprint ≠ 自动 major；本 FR 授权对表面升 1.0
+**And** 公开品牌 Bitloom
+
+### Story 81.3: 表面 crate semver CI 门禁（FR144）
+
+As a 维护者,
+I want CI required job（或 `just semver-check`）对表面 crate 跑破坏性变更检查,
+So that 违规变更非零失败。
+
+**Acceptance Criteria:**
+
+**Given** Story 81.2；FR142 表面 crate 列表
+**When** 接入 `cargo-semver-checks`（或文档等价）到 CI / just
+**Then** 失败非零；禁止 continue-on-error
+**And** 缺工具或违规有可读诊断
+**And** 文档指出如何本地复现
+
+### Story 81.4: FR143/FR144 收口与文档指针
+
+As a 文档维护者,
+I want Epic 81 关闭勾选就绪,
+So that Epic 82/83 可依赖政策与门禁。
+
+**Acceptance Criteria:**
+
+**Given** Story 81.2–81.3
+**When** 更新指针并勾选 Epic 81 / FR143 / FR144
+**Then** NFR14 勾选 Epic 81 关闭
+**And** Phase 12–16 关闭面仍有效（NFR60）
+
+
+## Epic 82: 预 1.0 表面卫生（可选）
+
+维护者处理 FR142 清单标出的阻塞 breaking；若无阻塞项则 skip 并文档化。  
+**FRs covered:** FR145  
+**NFRs:** NFR14, NFR60, NFR61, NFR63  
+**Depends on:** 硬依赖 Epic 80；可与 Epic 81 软并行。  
+**Gate:** Story 82.1 未完成前，82.2–82.3 不得标 ready。
+
+### Story 82.1: Epic 82 NFR14 风险记录
+
+As a 实现负责人,
+I want 为「预 1.0 卫生」填写 NFR14,
+So that 卫生范围不滑向 NFR59 产品加深。
+
+**Acceptance Criteria:**
+
+**Given** Epic 80 已关闭（Epic 81 可并行或已关）
+**When** 创建 Epic 82 风险记录
+**Then** 含：阻塞项候选来源（表面清单 / semver-checks 基线）；skip 条件；禁止事项（≠ NFR59；≠ 无清单扩大重构）
+**And** 无此记录则 82.2–82.3 不得标 ready
+
+### Story 82.2: 阻塞毛刺处理或 skip 文档化（FR145）
+
+As a 维护者,
+I want 处理清单标出的阻塞 breaking，或书面 skip,
+So that 发版前表面可承诺。
+
+**Acceptance Criteria:**
+
+**Given** Story 82.1
+**When** 实现必要修复 **或** 写入 skip 理由（无阻塞项）
+**Then** 若实现：变更限于表面卫生；测试绿  
+**And** 若 skip：文档明确「无阻塞 breaking；FR145 skip」且可检查  
+**And** 不得借机关闭 NFR59 项
+
+### Story 82.3: FR145 收口与文档指针
+
+As a 文档维护者,
+I want Epic 82 关闭勾选就绪（含 skip 路径）,
+So that Epic 83 可开工。
+
+**Acceptance Criteria:**
+
+**Given** Story 82.2
+**When** 更新指针并勾选 Epic 82 / FR145（或 FR145-skip）
+**Then** NFR14 勾选 Epic 82 关闭
+
+
+## Epic 83: 发布 Bitloom 1.0.0
+
+维护者完成表面承诺 crate 的 1.0.0 发版、tag、CHANGELOG；README 声明 1.0 表面并保留 NFR59。  
+**FRs covered:** FR146  
+**NFRs:** NFR14, NFR60, NFR61, NFR62, NFR63  
+**Depends on:** 硬依赖 Epic 81；Epic 82 已关闭（实现或 skip）。  
+**Gate:** Story 83.1 未完成前，83.2–83.3 不得标 ready。
+
+### Story 83.1: Epic 83 NFR14 风险记录
+
+As a 实现负责人,
+I want 为「发布 1.0.0」填写 NFR14,
+So that crates.io / tag / 凭证与回滚风险可控。
+
+**Acceptance Criteria:**
+
+**Given** Epic 81 与 Epic 82 已关闭
+**When** 创建 Epic 83 风险记录
+**Then** 含：待升 1.0.0 的表面 crate 列表；publish 顺序；tag/CHANGELOG；dry-run 策略；失败回滚；禁止未关 FR141–145（含 145-skip）即 publish
+**And** 无此记录则 83.2–83.3 不得标 ready
+
+### Story 83.2: 发版 1.0.0 + tag + CHANGELOG（FR146）
+
+As a 维护者,
+I want 表面承诺 crate 达 1.0.0 并完成 tag/CHANGELOG,
+So that Bitloom 合法进入 1.0。
+
+**Acceptance Criteria:**
+
+**Given** Story 83.1；semver CI 绿；`cargo doc` 绿
+**When** 升版本、CHANGELOG、annotated tag `v1.0.0`、publish（或合同允许的 dry-run+手动清单完成态）
+**Then** 表面承诺 crate 版本为 1.0.0；tag 指向发版提交
+**And** README 声明 1.0 表面指针并保留 NFR59 列表
+**And** 公开品牌 Bitloom
+
+### Story 83.3: FR146 收口与 Phase 17 故事清单指针
+
+As a 文档维护者,
+I want 文档/deferred 收口并勾选 Epic 83 关闭,
+So that Phase 17 规划与实现故事清单完整。
+
+**Acceptance Criteria:**
+
+**Given** Story 83.2
+**When** 更新状态页/deferred 并勾选 Epic 83 / FR146
+**Then** NFR14 勾选 Epic 83 关闭
+**And** 文首/状态页可声明：Phase 17 故事已齐（Epic 79–83）；1.0 宣称须引 FR141–146（FR147）
+**And** 明确：NFR59 仍 deferred（NFR63）；更深加深须新合同

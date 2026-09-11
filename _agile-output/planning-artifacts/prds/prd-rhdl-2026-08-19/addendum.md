@@ -339,3 +339,35 @@
 
 **合同指针：** 详见 `epics.md` Phase 16 Inventory（FR133–FR140 / NFR56–NFR59）。
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-11-phase16-nfr55-final-closeout.md`
+
+## 2026-09-11 Update — Phase 17 公开 API 稳定门 / Bitloom 1.0（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-11-phase17-api-stability-1-0.md` —
+在 Phase 16 产品终局结项 **已关闭**之后，正式 **Phase 17**「公开 API 稳定门」（Epic 79–83 · **FR141–FR147** / **NFR60–NFR63**），
+使维护者可对 **钉死表面** 合法发布 SemVer **1.0.0**。
+
+**批准默认（Q1–Q5）：**
+1. **`bitloom-sim` 纳入** 1.0 表面（`tick` / VCD / 公开双模型 API）。
+2. **`bitloom-hir` / `bitloom-builder` / `bitloom-vlog`：** 可继续 crates.io publish，**不**进入 1.0 稳定承诺。
+3. **Epic 82（FR145）** 可按 Epic 80 清单 **skip**（无阻塞 breaking 时）。
+4. **不以**先消化 **NFR59** 为 1.0 前提。
+5. **MSRV** 默认保持现行；上调另开并写入 1.0 政策。
+
+**公开品牌（不变）：** **Bitloom**；crates.io / CLI **`bitloom`** / `bitloom-*`；设计 crate 仍只依赖
+`bitloom-prelude`（AD-6）。禁止发布 `rhdl` / `rhdl-bits`。
+
+**与 Phase 12–16 的关系（必须同时读）：**
+- Phase 12–16（FR94–140）关闭证据 **仍有效**；**不得**改写为失败（**NFR60**）。
+- Phase 17 是 **新合同**下的稳定门，**不是**「Phase 16 AC 未达标」的补救叙事。
+- 映射：闸门 **FR141**；表面清单 **FR142**；SemVer 1.0 政策 **FR143**；破坏性变更 CI **FR144**；
+  预 1.0 卫生 **FR145**（可选）；发版 **FR146**；宣称纪律 **FR147**。
+- 对外「1.0 / 公开 API 稳定」类表述：**仅**可在对应 FR141–146 关闭后，按 **FR147** 宣称；
+  **禁止**用 Phase 16 终局 alone 冒充 1.0。
+- **1.0 口径：** 对 FR142 钉死表面承诺 major 稳定；**不等于**清空 NFR59 / 永不变更内部实现（**NFR63**）。
+
+**实现闸门：** Epic 79（Story 79.1–79.4 · **FR141**）关闭前，Epic 80–83 不得标 ready。  
+顺序：**79 → 80 → 81 →（82 按需）→ 83**。README / deferred / 脊柱指针由 Story **79.3–79.4** 落地。
+**不**在本合同批准瞬间执行 `cargo publish`——发版属 **FR146 / Epic 83**。
+
+**合同指针：** 详见 `epics.md` Phase 17 Inventory（FR141–FR147 / NFR60–NFR63）。
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-11-phase17-api-stability-1-0.md`
