@@ -30,8 +30,11 @@ fn fr135_closeout() {
         "docs/fr135-* must declare FR135 closed"
     );
     assert!(
-        docs.contains("Epic 77") && (docs.contains("仍须") || docs.contains("仍开")),
-        "docs/fr135-* must keep Epic 77 open honesty"
+        docs.contains("Epic 77")
+            && (docs.contains("已关闭") || docs.contains("closed"))
+            && !docs.contains("Epic 77** 仍须")
+            && !docs.contains("**Epic 77** 仍须"),
+        "docs/fr135-* must declare Epic 77 closed (Phase 16 all-closed honesty)"
     );
     let readme = read("README.md");
     assert!(
@@ -48,16 +51,15 @@ fn fr135_closeout() {
             && (readme.contains("规划故事已齐") || readme.contains("Epic 72–78")),
         "README must keep Phase 16 planning story-list pointer (Epic 72–78)"
     );
-    // Progress honesty: 72+73+74+75+76+78 done; Epic 77 still open (not silently all-done)
+    // Progress honesty: Epic 72–78 all closed for planning stories
     assert!(
         (readme.contains("Epic 72") && readme.contains("已关闭"))
             || readme.contains("闸门 Epic 72 / FR133 已关闭"),
         "README must keep Epic 72 gate closed"
     );
     assert!(
-        readme.contains("77")
-            && (readme.contains("仍须") || readme.contains("仍开") || readme.contains("still")),
-        "README must not pretend Epic 77 is closed"
+        readme.contains("Epic 77 已关闭"),
+        "README must declare Epic 77 closed with Phase 16 all-closed honesty"
     );
     let agents = read("AGENTS.md");
     assert!(
@@ -65,12 +67,8 @@ fn fr135_closeout() {
         "AGENTS.md must declare Epic 74 / FR135 closed"
     );
     assert!(
-        (agents.contains("Epic 77") || agents.contains("77"))
-            && (agents.contains("still")
-                || agents.contains("仍须")
-                || agents.contains("仍开")
-                || agents.contains("still need")),
-        "AGENTS.md must keep Epic 77 still-open honesty"
+        agents.contains("FR138") && agents.contains("Epic 77") && agents.contains("closed"),
+        "AGENTS.md must declare Epic 77 / FR138 closed"
     );
     let deferred = read("_agile-output/implementation-artifacts/deferred-work.md");
     assert!(

@@ -30,11 +30,11 @@ Phase 12–14 关闭证据**仍有效**。原 NFR55 明示剩余（真实上游 
 ## Phase 16 pointer (FR133–140 / NFR56–NFR59) — 产品终局结项（NFR55 升格）
 
 Correct Course `sprint-change-proposal-2026-09-11-phase16-nfr55-final-closeout.md` + PRD addendum「Phase 16」**已批准**（**Phase 16 contract approved** 2026-09-11）。  
-闸门 **FR133 / Epic 72 已关闭**（Story 72.4）；实现 epic = Epic 73–78（**FR134 / Epic 73 已关闭** — 真实上游 Tywaves GUI/IDE G1–G4 `--tywaves-gui`；**FR135 / Epic 74 已关闭** — 更多 IP 手写 FL / `UartTxFunctional`（超 Gpio）；**FR136 / Epic 75 已关闭** — 多外设 / 全芯片 pad 环 / `ChipPadRing`；**FR137 / Epic 76 已关闭** — 外部 CIRCT 编译门禁；**FR138** Parser + AD-27；**FR139 / Epic 78 已关闭** — VIP/SocPad 再细拆 C1 `ip/gpio/{base,vip,socpad}`（C2 未选）；宣称→**FR140**）。  
+闸门 **FR133 / Epic 72 已关闭**（Story 72.4）；实现 epic = Epic 73–78（**FR134 / Epic 73 已关闭** — 真实上游 Tywaves GUI/IDE G1–G4 `--tywaves-gui`；**FR135 / Epic 74 已关闭** — 更多 IP 手写 FL / `UartTxFunctional`（超 Gpio）；**FR136 / Epic 75 已关闭** — 多外设 / 全芯片 pad 环 / `ChipPadRing`；**FR137 / Epic 76 已关闭** — 外部 CIRCT 编译门禁；**FR138 / Epic 77 已关闭** — Parser 恢复 / `BitloomFirrtlParser.parse` + AD-27 再修订；**FR139 / Epic 78 已关闭** — VIP/SocPad 再细拆 C1 `ip/gpio/{base,vip,socpad}`（C2 未选）；宣称→**FR140**）。  
 **禁止**用 Phase 15 完成面（含 **FR125–131 alone**）冒充本批 / 终局完成面（**NFR56** / **FR140**）。软序 **Epic 78 → Epic 74/75** 已满足（FR139 + FR135 + FR136 已关闭）。  
-Phase 12–15 关闭证据**仍有效**。未列入本批者（自动 FSM 标签提取、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生）及**更深 IP 布局**、**更深 GUI/IDE 子集**、**未列入协议手写 FL**、**未列更广 pad/外设**、**更广 CIRCT/MLIR lower / 仿真门禁加深**仍须另开合同（**NFR59**）。各实现 epic 仍须独立 NFR14（**NFR57**）；未关闭前不得宣称对应 FR。  
+Phase 12–15 关闭证据**仍有效**。未列入本批者（自动 FSM 标签提取、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生）及**更深 IP 布局**、**更深 GUI/IDE 子集**、**未列入协议手写 FL**、**未列更广 pad/外设**、**更广 CIRCT/MLIR lower / 仿真门禁加深**、**更深 Chisel/Parser 生态**仍须另开合同（**NFR59**）。Phase 16 规划故事 Epic 72–78 **全部已关闭**（**NFR57**）；optional retros 可留。  
 终局口径 = 本批关闭 + 诚实 NFR59 deferred；**不等于**冲 1.0；终局宣称须引 **FR133–139**（**FR140**）。公开品牌 **Bitloom**。  
-**Phase 16 规划故事已齐（Epic 72–78）；** 实现关闭态：**Epic 72** + **Epic 73** + **Epic 74** + **Epic 75** + **Epic 76** + **Epic 78** 已关闭；**Epic 77** 仍须各自实现关闭。README「状态与 deferred」同源（Story 72.3–72.4 / **73.3** / **74.3** / **75.3** / **76.3** / **78.3**）。
+**Phase 16 规划故事已齐（Epic 72–78）；** 实现关闭态：**Epic 72** + **Epic 73** + **Epic 74** + **Epic 75** + **Epic 76** + **Epic 77** + **Epic 78** 全部已关闭。README「状态与 deferred」同源（Story 72.3–72.4 / **73.3** / **74.3** / **75.3** / **76.3** / **77.3** / **78.3**）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
@@ -525,7 +525,7 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
     - item-209：监控 GHA formal-sby 安装时长/镜像漂移 — 卫生跟踪（**NFR54**）；改安装策略须更新文档与 ATDD
     - item-213：**多外设 / 全芯片 pad 环 → FR136 / Epic 75 已关闭**（Story 75.3；`ChipPadRing` R1–R4）；GpioSocPad D1–D4 = FR128 完成面仍有效；未列更广 pad/外设仍 **NFR59**
     - item-217：**完整外部 CIRCT 编译门禁 → FR137 / Epic 76 已关闭**（Story 76.3；E1–E4 编译门禁 MVP）；C1–C4 = FR129 完成面仍有效；仿真门禁加深 / 更广 CIRCT/MLIR lower 仍 **NFR59**
-    - item-221：恢复废弃 Parser — 须 Correct Course + 再修订 AD-27（**NFR54/NFR55**）；S1–S4 且 Parser 未恢复 = FR130
+    - item-221：**恢复废弃 Parser → FR138 / Epic 77 已关闭**（Story 77.3；`BitloomFirrtlParser.parse` P1–P4 + AD-27 再修订）；S1–S4 Style Guide = FR130 完成面仍有效；更深 Chisel/Parser 生态仍 **NFR59**
     - item-225：再细拆 VIP/SocPad 或跨 crate 搬迁 — **FR139 / Epic 78 已关闭**（Story 78.3；C1）；P1–P4 = FR131 完成面仍有效；更深 IP 布局仍 **NFR59**；FR132/FR140 宣称纪律仍有效
     - frontmatter：epics.md `phase15Status` → complete（对齐 Epic 64–71 done）
   status: deferred — optional hygiene / NFR55（item-197 process-landed this sweep）

@@ -4,7 +4,7 @@
 
 **Status:** **Epic 73 / FR134 closed** (Story **73.3**). Product path delivered in Story **73.2** (G1–G4).
 
-Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72**（闸门 FR133）、**Epic 73**（本 FR）、**Epic 74**（FR135）、**Epic 75**（FR136）、**Epic 76**（FR137）、**Epic 78**（FR139）**已关闭**；**Epic 77** 仍须各自实现关闭。FR125 T1–T4 **仍有效**（NFR56）and is **not** this face alone. 未列入更深 GUI/IDE 子集仍属 **NFR59**。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
+Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72–78 全部已关闭**（含本 FR / Epic 73；**FR138 / Epic 77 已关闭**）。FR125 T1–T4 **仍有效**（NFR56）and is **not** this face alone. 未列入更深 GUI/IDE 子集仍属 **NFR59**。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
 
 Beyond FR125 `wave.tywaves.json` / `BITLOOM_TYWAVES_BIN` single-binary launch.  
 **Forbidden closes:** FR104 alone; FR114 alone; FR117 typed-wave alone; FR125 T1–T4 alone; docs-only.

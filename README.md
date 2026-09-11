@@ -266,7 +266,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **Phase 15（NFR51 剩余升格 · FR124–FR132 / NFR52–NFR55）：** Correct Course 已批准（2026-09-10）。Phase 12–14 关闭证据**仍有效**（**NFR52**），**不得**改写为失败。Phase 15 = 将原 NFR51 明示剩余升格为显式合同（闸门 **FR124** / Epic 64 **已关闭**；实现 Epic 65–71 **全部已关闭**：**FR125–FR131**），**不是**「Phase 14 AC 未达标」补救。**Phase 15 规划/实现故事已齐（Epic 64–71）。** 对外「上游 Tywaves 一等 / 更多 IP FL / 强制 sby CI / 全 SoC pad / CIRCT Handshake / Style Guide·Parser / ip.rs 拆分」类宣称按 **FR132** 勾选（对应 **FR124–131** 关闭后方可）；**禁止**用 Phase 14 完成面（含 FR117/119/120/121/122 alone）冒充本批加深。原 NFR55 明示剩余已另开 **Phase 16** 合同（见下）。
 
-**Phase 16（产品终局结项 / NFR55 升格 · FR133–FR140 / NFR56–NFR59）：** Correct Course 已批准（2026-09-11）。Phase 12–15 关闭证据**仍有效**（**NFR56**），**不得**改写为失败。Phase 16 = 将原 NFR55 明示剩余升格为显式终局加深合同（闸门 **FR133** / Epic 72 **已关闭**；**Phase 16 规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 73 / FR134 已关闭**；**Epic 74 / FR135 已关闭**；**Epic 75 / FR136 已关闭**；**Epic 76 / FR137 已关闭**；**Epic 78 / FR139 已关闭**；**Epic 77 · FR138 仍须**各自 NFR14 / 实现关闭），**不是**「Phase 15 AC 未达标」补救，**也不等于**冲 1.0 / backlog 永久空。对外「终局 / Tywaves GUI·IDE / 更多 IP FL / 全芯片 pad / 外部 CIRCT 门禁 / Parser 恢复 / IP 跨 crate」类宣称按 **FR140** 勾选（对应 **FR133–139** 关闭后方可）；**禁止**用 Phase 15 完成面（含 **FR125–131 alone**）冒充本批 / 终局完成面。未列入本批的 deferred（含更深 IP 布局 / 更深 GUI·IDE 子集 / 未列入协议手写 FL / 更广 CIRCT·MLIR lower / 仿真门禁加深）仍须另开合同（**NFR59**）。
+**Phase 16（产品终局结项 / NFR55 升格 · FR133–FR140 / NFR56–NFR59）：** Correct Course 已批准（2026-09-11）。Phase 12–15 关闭证据**仍有效**（**NFR56**），**不得**改写为失败。Phase 16 = 将原 NFR55 明示剩余升格为显式终局加深合同（闸门 **FR133** / Epic 72 **已关闭**；**Phase 16 规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 73 / FR134 已关闭**；**Epic 74 / FR135 已关闭**；**Epic 75 / FR136 已关闭**；**Epic 76 / FR137 已关闭**；**Epic 77 / FR138 已关闭**；**Epic 78 / FR139 已关闭**），**不是**「Phase 15 AC 未达标」补救，**也不等于**冲 1.0 / backlog 永久空。对外「终局 / Tywaves GUI·IDE / 更多 IP FL / 全芯片 pad / 外部 CIRCT 门禁 / Parser 恢复 / IP 跨 crate」类宣称按 **FR140** 勾选（对应 **FR133–139** 关闭后方可）；**禁止**用 Phase 15 完成面（含 **FR125–131 alone**）冒充本批 / 终局完成面。未列入本批的 deferred（含更深 IP 布局 / 更深 GUI·IDE 子集 / 未列入协议手写 FL / 更广 CIRCT·MLIR lower / 仿真门禁加深 / 更深 Chisel·Parser 生态）仍须另开合同（**NFR59**）。
 
 **Phase 12 规划/实现故事已齐（Epic 40–47 已关闭）。** Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。
 
@@ -326,7 +326,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 **FR132 宣称纪律：** 「上游 Tywaves 一等 / 更多 IP FL / 强制 sby CI / 全 SoC pad / CIRCT Handshake / Style Guide·Parser / ip.rs 拆分」**仅**在对应 **FR124–131** 关闭后方可勾选；**禁止**用 Phase 14 完成面冒充。**不得**把 **FR125–131 alone** 写成 Phase 16 / 终局完成面（→ **FR133–140 / Phase 16**）。公开品牌 **Bitloom**。
 
-### Phase 16 加深面（合同已批准；闸门 Epic 72 / FR133 已关闭；Phase 16 规划故事已齐 Epic 72–78；Epic 73 / FR134 已关闭；Epic 74 / FR135 已关闭；Epic 75 / FR136 已关闭；Epic 76 / FR137 已关闭；Epic 78 / FR139 已关闭；Epic 77 仍须各自实现关闭）
+### Phase 16 加深面（合同已批准；闸门 Epic 72 / FR133 已关闭；Phase 16 规划故事已齐 Epic 72–78；Epic 73 / FR134 已关闭；Epic 74 / FR135 已关闭；Epic 75 / FR136 已关闭；Epic 76 / FR137 已关闭；Epic 77 / FR138 已关闭；Epic 78 / FR139 已关闭）
 
 下列原 Phase 15 **NFR55 明示剩余**已由 Correct Course + **FR133** 升格为 Phase 16 显式 FR（Epic 72–78）。对外宣称按 **FR140**。同源：PRD addendum「Phase 16」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。**不得**把 FR125–131 alone 写成 Phase 16 / 终局完成面。
 
@@ -336,7 +336,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 更多 IP 手写 FL（超出 GpioFunctional） | FR135 / 74 | vs FR126 `GpioFunctional` — **Epic 74 已关闭**（Story 74.3；`UartTxFunctional` F1–F3） |
 | 全芯片 pad / 多外设对拍 | FR136 / 75 | vs FR128 `GpioSocPad` D1–D4 — **Epic 75 已关闭**（Story 75.3；`ChipPadRing` R1–R4） |
 | 外部 CIRCT 真机门禁 | FR137 / 76 | vs FR129 树内 `schedule_circt_handshake` — **Epic 76 已关闭**（Story 76.3；编译门禁 MVP `just circt-external-check` / CI `circt-external`；[`docs/fr137-external-circt-gate.md`](docs/fr137-external-circt-gate.md)） |
-| 恢复 Parser + AD-27 再修订 | FR138 / 77 | vs FR130 Style Guide（Parser 未恢复）— 仍须实现关闭 |
+| 恢复 Parser + AD-27 再修订 | FR138 / 77 | vs FR130 Style Guide（Parser 未恢复）— **Epic 77 已关闭**（Story 77.3；`BitloomFirrtlParser.parse` P1–P4；[`docs/fr138-parser-restore.md`](docs/fr138-parser-restore.md)） |
 | VIP/SocPad 再拆 / IP 跨 crate | FR139 / 78 | vs FR131 `ip/` 协议模块 — **Epic 78 已关闭**（Story 78.3；C1 `ip/gpio/{base,vip,socpad}`；C2 未选） |
 
 **FR140 宣称纪律：** 「终局 / Tywaves GUI·IDE / 更多 IP FL / 全芯片 pad / 外部 CIRCT 门禁 / Parser 恢复 / IP 跨 crate」**仅**在对应 **FR133–139** 关闭后方可勾选；**禁止**用 Phase 15 完成面（含 FR125–131 alone）冒充。终局口径 = 本批关闭 + 诚实 **NFR59** deferred；**不等于**冲 1.0。公开品牌 **Bitloom**。
@@ -351,6 +351,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 - 更深 GUI/IDE 子集（替换默认 VCD/`typed-wave.html` 唯一波形面；完整 ChiselSim 耦合；G1 外额外 IDE 商店多端发布）— ≠ FR134 G1–G4 alone
 - 未列入协议手写 FL（`UartRx` / SPI / I2C / AXI 等）— ≠ FR135 `UartTx` alone；FR126 Gpio 仍有效
 - 更广 CIRCT/MLIR lower / 仿真门禁加深 — ≠ FR137 编译门禁 MVP alone；FR129 C1–C4 仍有效
+- 更深 Chisel/Parser 生态（社区 Style Guide/linter 全家桶；任意 Chisel HEAD Parser 回迁）— ≠ FR138 P1–P4 alone；FR130 Style Guide 仍有效
 
 **明确 deferred / 未承诺为产品完整面（可延期；上列五项已不再是永久非目标）：**
 

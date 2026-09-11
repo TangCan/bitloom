@@ -2,7 +2,9 @@
 
 **Product:** Bitloom (`bitloom` CLI / FIRRTL interop). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Product path + **AD-27 revise** delivered in Story **77.2** (Epic 77 closeout → **77.3**).
+**Status:** **Epic 77 / FR138 closed** (Story **77.3**). Product path + **AD-27 revise** delivered in Story **77.2** (P1–P4).
+
+Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72–78 全部已关闭**（含本 FR / Epic 77）。FR130 Style Guide S1–S4 **仍有效**（NFR56）and is **not** this face alone（Style Guide alone ≠ FR138）。未列更深 Chisel/Parser 生态（社区 Style Guide/linter 全家桶、任意 Chisel HEAD Parser 回迁等）仍属 **NFR59**。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
 
 ## Product-equivalent API (P1)
 
@@ -57,14 +59,12 @@ Silent skip is forbidden.
 - ARCHITECTURE-SPINE **AD-27** revised **2026-09-11** to allow FR138 Parser / `BitloomFirrtlParser.parse` as a product close condition.
 - Correct Course trail reused: `correctCoursePhase16Approved: 2026-09-11`
   (`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-11-phase16-nfr55-final-closeout.md`).
-- **Must not** claim FR138 closed without the AD-27 revise.
+- Close condition = **P1–P4** (API/workflow/pairing + AD-27 revise + failure semantics + ATDD) — delivered in 77.2; docs/NFR14 closeout in 77.3.
 
 ## Forbidden closes (P4)
 
 ≠ **FR130** Style Guide alone (S3 Parser not restored for that FR — close remains valid; NFR56).
 ≠ **FR122** O1–O4 alone; ≠ **FR111** alone; ≠ **FR97** alone; ≠ **docs-only**.
-
-FR138 close condition = **P1–P4** (API/workflow/pairing + AD-27 revise + failure semantics + ATDD).
 
 ## Non-regression (NFR56)
 
@@ -72,5 +72,6 @@ FR97 / FR111 / FR122 / FR130 closes remain valid. FR130 Style Guide S1–S4 (inc
 
 ```text
 cargo test -p bitloom --test fr138_parser_restore_ad27
+cargo test -p bitloom --test fr138_epic77_closeout
 BITLOOM_PARSER_FORCE_MISSING=1 just parser-restore-check   # expect non-zero
 ```

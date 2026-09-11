@@ -4,7 +4,7 @@
 
 **Status:** **Epic 74 / FR135 closed** (Story **74.3**). F1–F3 delivered in Story **74.2** (`UartTxFunctional` ≡ tick).
 
-Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72**（闸门 FR133）、**Epic 73**（FR134）、**Epic 74**（本 FR）、**Epic 75**（FR136）、**Epic 76**（FR137）、**Epic 78**（FR139）**已关闭**；**Epic 77** 仍须各自实现关闭。FR126 Gpio F1–F3 **仍有效**（NFR56）and is **not** this face alone. 未列入协议手写 FL 仍属 **NFR59**。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
+Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72–78 全部已关闭**（含本 FR / Epic 74；**FR138 / Epic 77 已关闭**）。FR126 Gpio F1–F3 **仍有效**（NFR56）and is **not** this face alone. 未列入协议手写 FL 仍属 **NFR59**。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
 
 Beyond FR126 `GpioFunctional`, FR103 SyncFifo handwritten, and FR103 UART/SPI/I2C/AXI **GeneratedFunctional**. See also [`docs/fr126-more-ip-handwritten-fl.md`](fr126-more-ip-handwritten-fl.md).
 

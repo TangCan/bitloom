@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR138 / Epic 77；对照 FR130 / FR122 / FR111 / FR97 |
 | 记录日期 | 2026-09-11 |
-| 状态 | **accepted** — Story **77.1**（P1–P4 形状锁定；实现 / AD-27 修订 → 77.2；收口 → 77.3） |
+| 状态 | **closed** — Story **77.3**（P1–P4 + AD-27 修订已于 77.2；文档/deferred/NFR14 收口） |
 | **选定加深子集** | **恢复 Scala `Parser.parse`（或文档等价）为产品关闭条件 + 再修订 AD-27（P1–P4）** |
 
 ### (a) 上游约束
@@ -108,8 +108,8 @@
 
 ### Epic 77 关闭条件（77.3 勾选）
 
-- [ ] **77.2 / FR138：** P1–P4 产品路径 + ATDD + **AD-27 再修订**（NFR58）+ Correct Course 痕迹
-- [ ] **文档 / deferred / Phase 16 故事清单指针**
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；设计 crate → `bitloom-prelude`
-- [ ] **FR130 / FR122 / FR111 / FR97 关闭仍有效**（NFR56）
+- [x] **77.2 / FR138：** P1–P4 产品路径 + ATDD + **AD-27 再修订**（NFR58）+ Correct Course 痕迹
+- [x] **文档 / deferred / Phase 16 故事清单指针**
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **FR130 / FR122 / FR111 / FR97 关闭仍有效**（NFR56）

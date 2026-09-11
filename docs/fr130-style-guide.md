@@ -7,7 +7,7 @@
 FR122 O1–O4 close **remains valid** (NFR52). **Parser.parse not restored** for the FR130 Style Guide close face.
 
 Beyond FR122 O1–O4: Style Guide markers (`scalafmt-style`, `withClockAndReset`, per-module
-`FR130 style-guide`). **Parser.parse is not restored** as part of FR130 (S3). Phase 16 **FR138** restores Parser as a **separate product close condition** (`BitloomFirrtlParser.parse` ≡ historical `Parser.parse`; see [fr138-parser-restore.md](fr138-parser-restore.md)); FR130 alone ≠ FR138.
+`FR130 style-guide`). **Parser.parse is not restored** as part of FR130 (S3). Phase 16 **FR138 / Epic 77 closed** restores Parser as a **separate product close condition** (`BitloomFirrtlParser.parse` ≡ historical `Parser.parse`; see [fr138-parser-restore.md](fr138-parser-restore.md)); FR130 Style Guide close **remains valid** (NFR56); FR130 alone ≠ FR138.
 
 ## Contract (NFR14 S1–S4)
 
