@@ -560,10 +560,10 @@ development_status:
   79-4-ad-指针与-epic-79-收口-fr141-fr147-nfr62: done
   epic-79-retrospective: optional
 
-  epic-80: in-progress
+  epic-80: done
   80-1-epic-80-nfr14-风险记录: done
   80-2-成文公开表面清单与-atdd-fr142: done
-  80-3-fr142-收口与文档指针: backlog
+  80-3-fr142-收口与文档指针: done
   epic-80-retrospective: optional
 
   epic-81: backlog

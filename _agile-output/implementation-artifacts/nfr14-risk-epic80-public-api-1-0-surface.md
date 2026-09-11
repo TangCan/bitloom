@@ -13,7 +13,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR142 / Epic 80；对照 FR141 / FR147 / NFR15 / Q1–Q2 |
 | 记录日期 | 2026-09-11 |
-| 状态 | accepted — Story 80.1；80.2–80.3 待本记录后 ready |
+| 状态 | closed — Story 80.3 勾选完成；Epic 80 / FR142 关闭；表面修订须走变更流程，不得静默扩大承诺 |
 | **选定交付** | 成文 `docs/public-api-1-0-surface.md` + ATDD（in/out 分区） |
 
 ### (a) 上游约束
@@ -63,7 +63,9 @@
 
 ### Epic 80 关闭条件（Story 80.3 勾选）
 
-- [ ] **表面清单成文 + ATDD** — Story 80.2
-- [ ] **README / deferred 指针** — Story 80.3
-- [ ] **禁止事项未触发**（未文档化 API 未入 in-surface；NFR59 未吞并）
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
+- [x] **表面清单成文 + ATDD** — Story 80.2
+- [x] **README / deferred 指针** — Story 80.3
+- [x] **禁止事项未触发**（未文档化 API 未入 in-surface；NFR59 未吞并）
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
+
+**关闭声明：** FR142 表面钉死于 `docs/public-api-1-0-surface.md`。后续表面修订须显式更新该文档 + 故事；**不得静默扩大** in-surface 承诺。Epic 81–83 可引用本关闭面。

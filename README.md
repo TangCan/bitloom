@@ -268,7 +268,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **Phase 16（产品终局结项 / NFR55 升格 · FR133–FR140 / NFR56–NFR59）：** Correct Course 已批准（2026-09-11）。Phase 12–15 关闭证据**仍有效**（**NFR56**），**不得**改写为失败。Phase 16 = 将原 NFR55 明示剩余升格为显式终局加深合同（闸门 **FR133** / Epic 72 **已关闭**；**Phase 16 规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 73 / FR134 已关闭**；**Epic 74 / FR135 已关闭**；**Epic 75 / FR136 已关闭**；**Epic 76 / FR137 已关闭**；**Epic 77 / FR138 已关闭**；**Epic 78 / FR139 已关闭**），**不是**「Phase 15 AC 未达标」补救，**也不等于**冲 1.0 / backlog 永久空。对外「终局 / Tywaves GUI·IDE / 更多 IP FL / 全芯片 pad / 外部 CIRCT 门禁 / Parser 恢复 / IP 跨 crate」类宣称按 **FR140** 勾选（对应 **FR133–139** 关闭后方可）；**禁止**用 Phase 15 完成面（含 **FR125–131 alone**）冒充本批 / 终局完成面。未列入本批的 deferred（含更深 IP 布局 / 更深 GUI·IDE 子集 / 未列入协议手写 FL / 更广 CIRCT·MLIR lower / 仿真门禁加深 / 更深 Chisel·Parser 生态）仍须另开合同（**NFR59**）。**禁止**用 Phase 16 终局 alone 冒充 **1.0 / 公开 API 稳定**（→ **Phase 17 / FR141–147**）。
 
-**Phase 17（公开 API 稳定门 / Bitloom 1.0 · FR141–FR147 / NFR60–NFR63）：** Correct Course 已批准（2026-09-11）。Phase 12–16 关闭证据**仍有效**（**NFR60**），**不得**改写为失败。Phase 17 = 钉死公开表面、SemVer 1.0 政策、破坏性变更 CI、可选预 1.0 卫生、发布 1.0.0 与宣称纪律（闸门 **FR141** / Epic 79 **已关闭** / Story 79.4；实现 Epic 80–83 仍须各自 NFR14 后方可 ready），**不是**「Phase 16 AC 未达标」补救，**也不等于**清空 **NFR59**（**NFR63**）。对外「1.0 / 公开 API 稳定」类宣称按 **FR147** 勾选（对应 **FR141–146** 关闭后方可）；**禁止**用 Phase 16 终局 alone 冒充 1.0。当前仍为 **0.x** 直至 **FR146 / Epic 83**。
+**Phase 17（公开 API 稳定门 / Bitloom 1.0 · FR141–FR147 / NFR60–NFR63）：** Correct Course 已批准（2026-09-11）。Phase 12–16 关闭证据**仍有效**（**NFR60**），**不得**改写为失败。Phase 17 = 钉死公开表面、SemVer 1.0 政策、破坏性变更 CI、可选预 1.0 卫生、发布 1.0.0 与宣称纪律（闸门 **FR141** / Epic 79 **已关闭** / Story 79.4；**Epic 80 / FR142 已关闭** — [`docs/public-api-1-0-surface.md`](docs/public-api-1-0-surface.md)；实现 Epic 81–83 仍须各自 NFR14 后方可 ready），**不是**「Phase 16 AC 未达标」补救，**也不等于**清空 **NFR59**（**NFR63**）。对外「1.0 / 公开 API 稳定」类宣称按 **FR147** 勾选（对应 **FR141–146** 关闭后方可）；**禁止**用 Phase 16 终局 alone 冒充 1.0。当前仍为 **0.x** 直至 **FR146 / Epic 83**。
 
 **Phase 12 规划/实现故事已齐（Epic 40–47 已关闭）。** Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。
 
@@ -349,7 +349,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 | 稳定门面 | FR / Epic | 相对 Phase 16 关闭面 |
 | --- | --- | --- |
-| 公开 API 表面清单 | FR142 / 80 | vs Phase 16 终局完成面；钉死 in/out-of-surface（含 Q1 `bitloom-sim` IN；Q2 hir/builder/vlog publish OK 不进 1.0 承诺） |
+| 公开 API 表面清单 | FR142 / 80 | vs Phase 16 终局完成面；钉死 in/out-of-surface（含 Q1 `bitloom-sim` IN；Q2 hir/builder/vlog publish OK 不进 1.0 承诺）— **Epic 80 已关闭**（Story 80.3；[`docs/public-api-1-0-surface.md`](docs/public-api-1-0-surface.md)） |
 | SemVer 1.0 政策 | FR143 / 81 | vs `docs/semver-0x-policy.md` / NFR15；表面内 breaking → major |
 | 破坏性变更 CI 门禁 | FR144 / 81 | `cargo-semver-checks`（或 `just semver-check` 等价）；失败非零 |
 | 预 1.0 表面卫生（可选） | FR145 / 82 | 仅阻塞 breaking；无阻塞可 skip（Q3） |
