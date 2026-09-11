@@ -34,7 +34,16 @@ Correct Course `sprint-change-proposal-2026-09-11-phase16-nfr55-final-closeout.m
 **禁止**用 Phase 15 完成面（含 **FR125–131 alone**）冒充本批 / 终局完成面（**NFR56** / **FR140**）。软序 **Epic 78 → Epic 74/75** 已满足（FR139 + FR135 + FR136 已关闭）。  
 Phase 12–15 关闭证据**仍有效**。未列入本批者（自动 FSM 标签提取、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生）及**更深 IP 布局**、**更深 GUI/IDE 子集**、**未列入协议手写 FL**、**未列更广 pad/外设**、**更广 CIRCT/MLIR lower / 仿真门禁加深**、**更深 Chisel/Parser 生态**仍须另开合同（**NFR59**）。Phase 16 规划故事 Epic 72–78 **全部已关闭**（**NFR57**）。  
 终局口径 = 本批关闭 + 诚实 NFR59 deferred；**不等于**冲 1.0；终局宣称须引 **FR133–139**（**FR140**）。公开品牌 **Bitloom**。  
-**Phase 16 规划/实现/retro/action-items 已齐（Epic 72–78）；** 见 `action-items-sweep-2026-09-11-phase16.md`（items 226–253）。实现关闭态：**Epic 72** + **Epic 73** + **Epic 74** + **Epic 75** + **Epic 76** + **Epic 77** + **Epic 78** 全部已关闭。README「状态与 deferred」同源（Story 72.3–72.4 / **73.3** / **74.3** / **75.3** / **76.3** / **77.3** / **78.3**）。
+**Phase 16 规划/实现/retro/action-items 已齐（Epic 72–78）；** 见 `action-items-sweep-2026-09-11-phase16.md`（items 226–253）。实现关闭态：**Epic 72** + **Epic 73** + **Epic 74** + **Epic 75** + **Epic 76** + **Epic 77** + **Epic 78** 全部已关闭。README「状态与 deferred」同源（Story 72.3–72.4 / **73.3** / **74.3** / **75.3** / **76.3** / **77.3** / **78.3**）。  
+**禁止**用 Phase 16 终局 alone 冒充 **1.0 / 公开 API 稳定**（→ **Phase 17**）。
+
+## Phase 17 pointer (FR141–147 / NFR60–NFR63) — 公开 API 稳定门 / Bitloom 1.0
+
+Correct Course `sprint-change-proposal-2026-09-11-phase17-api-stability-1-0.md` + PRD addendum「Phase 17」**已批准**（**Phase 17 contract approved** 2026-09-11；`correctCoursePhase17Approved: 2026-09-11`）。  
+闸门 **FR141 / Epic 79**（Story 79.1–79.4；**进行中**）；实现 epic = Epic 80–83（**FR142** 表面清单；**FR143** SemVer 1.0 政策；**FR144** semver CI；**FR145** 可选卫生 / skip；**FR146** 发版 1.0.0；宣称→**FR147**）。  
+**禁止**用 Phase 16 终局 alone 冒充 1.0 / 公开 API 稳定（**NFR60** / **FR147**）。硬闸门：Epic 79 关闭前 Epic 80–83 不得标 ready。软序 **79 → 80 → 81 ‖ 82 → 83**。  
+Phase 12–16 关闭证据**仍有效**。NFR59 仍 deferred（自动 FSM 标签提取、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生，及更深 IP/GUI/协议/CIRCT/Chisel 子集）；**1.0 ≠ 清空 NFR59**（**NFR63**）。Q1–Q5：`bitloom-sim` IN；hir/builder/vlog publish OK 不进 1.0 承诺；Epic 82 skip-if-no-blockers；不以 NFR59 为 1.0 前提；保持 MSRV。公开品牌 **Bitloom**。当前仍为 **0.x** 直至 **FR146**。  
+README「状态与 deferred」同源（Story 79.3）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
