@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 15:55
+last_updated: 09-11-2026 16:00
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -545,7 +545,7 @@ development_status:
   77-1-epic-77-nfr14-风险记录: done
   77-2-parser-恢复实现与-ad-27-修订验收-fr138: done
   77-3-fr138-收口与文档指针: done
-  epic-77-retrospective: optional
+  epic-77-retrospective: done
 
   epic-78: done
   78-1-epic-78-nfr14-风险记录: done
@@ -2185,3 +2185,30 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-76-retro-2026-09-11.md"
+  - id: "epic-77-retro-item-246-fr138-诚实边界-对外不得把-fr130-style-guide-alone"
+    epic: 77
+    action: "FR138 诚实边界：对外不得把 FR130 Style Guide alone / FR97 alone / FR111 alone /
+      FR122 O1–O4 alone（或 docs-only / 未修订 AD-27）写成 FR138 完成；未列入更深 Chisel/Parser 生态须引
+      NFR59 新合同；宣称须引 Epic 77 关闭证据。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-77-retro-2026-09-11.md"
+  - id: "epic-77-retro-item-247-触碰-parser-chisel-互操作路径时保持-phase-12-15-关闭"
+    epic: 77
+    action: "触碰 Parser / Chisel 互操作路径时保持 Phase 12–15 关闭面有效（NFR56）；不得改写 FR97/111/122/130「已关闭」为失败；升钉
+      firtool/Chisel 须先配对并修订 AD-9 / AD-27（NFR12 / NFR58）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-77-retro-2026-09-11.md"
+  - id: "epic-77-retro-item-248-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 77
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-77-retro-2026-09-11.md"
+  - id: "epic-77-retro-item-249-可选工程卫生-epic-78-各须本-epic-nfr14-nfr57-未列入更"
+    epic: 77
+    action: "可选工程卫生：Epic 78+ 各须本 epic NFR14（NFR57）；未列入更深 Chisel·Parser 生态仍须显式合同（NFR59），不得因「终局」口号静默扩大。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-77-retro-2026-09-11.md"
