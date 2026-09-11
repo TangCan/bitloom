@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR137 / Epic 76；对照 FR129 / FR121 / FR110 / FR95 / FR96 |
 | 记录日期 | 2026-09-11 |
-| 状态 | **76.2 implemented**（编译门禁 MVP + CI/`just`；仿真未选）— Epic 关闭勾选 → Story **76.3** |
+| 状态 | **closed** — Story **76.3**（E1–E4 @ 76.2；文档/deferred/Phase 16 指针收口） |
 | **选定加深子集** | **外部 CIRCT 编译与/或仿真门禁（E1–E4）** |
 
 ### (a) 上游约束
@@ -102,12 +102,12 @@
 
 ### 未列入（NFR59）
 
-- 完整 CIRCT/MLIR lower 全家桶；全 allocation/binding 优化套件；任意时钟拓扑自动综合；未配对 firtool-1.156.0+；macos/windows/linux-aarch64 firtool 资产（NFR11）；以 FR129 C1–C4 alone 宣称外部门禁完成。
+- 完整 CIRCT/MLIR lower 全家桶；**仿真门禁加深**（本 epic 选定 = 编译门禁 MVP）；全 allocation/binding 优化套件；任意时钟拓扑自动综合；未配对 firtool-1.156.0+；macos/windows/linux-aarch64 firtool 资产（NFR11）；以 FR129 C1–C4 alone 宣称外部门禁完成。
 
 ### Epic 76 关闭条件（76.3 勾选）
 
-- [ ] **76.2 / FR137：** E1–E4 产品路径 + ATDD（外部工具渠道 + 编译/仿真门禁 + 缺工具失败）+ **NFR58** 运维同步
-- [ ] **文档 / deferred / Phase 16 故事清单指针**
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；设计 crate → `bitloom-prelude`
-- [ ] **FR129 / FR121 / FR110 / FR95 / FR96 关闭仍有效**（NFR56）
+- [x] **76.2 / FR137：** E1–E4 产品路径 + ATDD（外部工具渠道 + **编译**门禁 MVP + 缺工具失败；仿真未选 → NFR59）+ **NFR58** 运维同步
+- [x] **文档 / deferred / Phase 16 故事清单指针**
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **FR129 / FR121 / FR110 / FR95 / FR96 关闭仍有效**（NFR56）

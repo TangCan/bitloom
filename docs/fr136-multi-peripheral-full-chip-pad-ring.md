@@ -4,7 +4,7 @@
 
 **Status:** **Epic 75 / FR136 closed** (Story **75.3**). R1–R4 delivered in Story **75.2** (`ChipPadRing`).
 
-Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72**（闸门 FR133）、**Epic 73**（FR134）、**Epic 74**（FR135）、**Epic 75**（本 FR）、**Epic 78**（FR139）**已关闭**；**Epic 76–77** 仍须各自实现关闭。FR128 `GpioSocPad` D1–D4 **仍有效**（NFR56）and is **not** this face alone. 未列更广 pad/外设仍属 **NFR59**。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
+Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72**（闸门 FR133）、**Epic 73**（FR134）、**Epic 74**（FR135）、**Epic 75**（本 FR）、**Epic 76**（FR137）、**Epic 78**（FR139）**已关闭**；**Epic 77** 仍须各自实现关闭。FR128 `GpioSocPad` D1–D4 **仍有效**（NFR56）and is **not** this face alone. 未列更广 pad/外设仍属 **NFR59**。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
 
 See also [`docs/fr128-soc-pad.md`](fr128-soc-pad.md).
 
