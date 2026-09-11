@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 18:32
+last_updated: 09-11-2026 18:34
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -571,7 +571,7 @@ development_status:
   81-2-semver-1-0-政策成文-fr143: done
   81-3-表面-crate-semver-ci-门禁-fr144: done
   81-4-fr143-fr144-收口与文档指针: done
-  epic-81-retrospective: optional
+  epic-81-retrospective: done
 
   epic-82: done
   82-1-epic-82-nfr14-风险记录: done
@@ -2319,3 +2319,23 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-80-retro-2026-09-11.md"
+  - id: "epic-81-retro-item-261-fr143-fr144-honesty-semver-guarantee-cov"
+    epic: 81
+    action: "FR143/FR144 honesty: SemVer guarantee covers only surface-doc crates;
+      CI green ≠ crates.io 1.0.0 published."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-81-retro-2026-09-11.md"
+  - id: "epic-81-retro-item-262-keep-major-semantics-for-first-release-v"
+    epic: 81
+    action: "Keep major semantics for first release vs 0.x; document BITLOOM_SEMVER_ASSUME_PUBLISHED
+      switch after live publish."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-81-retro-2026-09-11.md"
+  - id: "epic-81-retro-item-263-keep-commit-subjects-story-n-m"
+    epic: 81
+    action: "Keep commit subjects Story N.M."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-81-retro-2026-09-11.md"
