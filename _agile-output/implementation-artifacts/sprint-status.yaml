@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-10-2026 22:15
+last_updated: 09-11-2026 09:10
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -466,7 +466,7 @@ development_status:
   64-2-correct-course-prd-批准-phase-15-fr124: done
   64-3-同步-readme-deferred-路线图指针-fr124-fr132: done
   64-4-ad-指针与-epic-64-收口-fr124-nfr54: done
-  epic-64-retrospective: optional
+  epic-64-retrospective: done
 
   epic-65: done
   65-1-epic-65-nfr14-风险记录: done
@@ -1807,3 +1807,27 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-63-retro-2026-09-10.md"
+  - id: "epic-64-retro-item-194-fr124-fr132-诚实边界-对外不得把-phase-15-闸门关闭写成-f"
+    epic: 64
+    action: "FR124/FR132 诚实边界：对外不得把 Phase 15 闸门关闭写成 FR125–131 产品完成；宣称须引对应 epic 关闭证据。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-64-retro-2026-09-11.md"
+  - id: "epic-64-retro-item-195-触碰-phase-15-加深路径时保持-phase-12-14-关闭面有效-nf"
+    epic: 64
+    action: "触碰 Phase 15 加深路径时保持 Phase 12–14 关闭面有效（NFR52）；不得改写 FR94–123「已关闭」为失败。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-64-retro-2026-09-11.md"
+  - id: "epic-64-retro-item-196-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 64
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-64-retro-2026-09-11.md"
+  - id: "epic-64-retro-item-197-可选工程卫生-epic-65-71-各须本-epic-nfr14-未选子集须显式"
+    epic: 64
+    action: "可选工程卫生：Epic 65–71 各须本 epic NFR14；未选子集须显式合同（NFR55），不得静默扩大。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-64-retro-2026-09-11.md"
