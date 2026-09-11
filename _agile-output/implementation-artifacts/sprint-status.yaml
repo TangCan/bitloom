@@ -531,7 +531,7 @@ development_status:
 
   epic-75: in-progress
   75-1-epic-75-nfr14-风险记录: done
-  75-2-多外设-全芯片-pad-环实现与验收-fr136: backlog
+  75-2-多外设-全芯片-pad-环实现与验收-fr136: done
   75-3-fr136-收口与文档指针: backlog
   epic-75-retrospective: optional
 

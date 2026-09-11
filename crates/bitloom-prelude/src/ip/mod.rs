@@ -17,6 +17,8 @@
 //! **FR131:** split by protocol; re-exported as `bitloom_prelude::ip::*`.
 //! **FR139:** GPIO VIP/SocPad further split under `ip/gpio/{base,vip,socpad}`;
 //! public paths unchanged (no cross-crate; AD-6 / C2 not selected).
+//! **FR136:** [`ChipPadRing`] multi-peripheral / full-chip pad ring under
+//! `ip/gpio/chip_ring` (beyond [`GpioSocPad`] alone).
 
 mod axi;
 mod blackbox;
