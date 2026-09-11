@@ -575,8 +575,8 @@ development_status:
 
   epic-82: in-progress
   82-1-epic-82-nfr14-风险记录: done
-  82-2-阻塞毛刺处理或-skip-文档化-fr145: ready-for-dev
-  82-3-fr145-收口与文档指针: backlog
+  82-2-阻塞毛刺处理或-skip-文档化-fr145: done
+  82-3-fr145-收口与文档指针: ready-for-dev
   epic-82-retrospective: optional
 
   epic-83: backlog
