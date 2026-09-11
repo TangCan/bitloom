@@ -355,7 +355,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 预 1.0 表面卫生（可选） | FR145 / 82 | 仅阻塞 breaking；无阻塞可 skip（Q3）— **Epic 82 已关闭**（Story 82.3；**FR145-skip** — [`docs/fr145-pre-1-0-hygiene-skip.md`](docs/fr145-pre-1-0-hygiene-skip.md)） |
 | 发布 Bitloom 1.0.0 | FR146 / 83 | 版本 / tag `v1.0.0` / CHANGELOG / publish 或 dry-run+清单 — **Story 83.2 已落地**（[`docs/fr146-bitloom-1-0-0-release.md`](docs/fr146-bitloom-1-0-0-release.md)；Epic 83 收口→83.3） |
 
-**FR147 宣称纪律：** 「1.0 / 公开 API 稳定」**仅**在对应 **FR141–146** 关闭后方可勾选；**禁止**用 Phase 16 终局 alone 冒充。1.0 口径 = 对 FR142 钉死表面的 SemVer major 承诺 + 诚实 **NFR59** deferred（**NFR63**）；**不等于**清空 NFR59。公开品牌 **Bitloom**。当前仍为 **0.x** 直至 **FR146**。
+**FR147 宣称纪律：** 「1.0 / 公开 API 稳定」**仅**在对应 **FR141–146** 关闭后方可勾选 — **Phase 17 / Epic 79–83 已关闭**（FR146：`v1.0.0` / [`docs/fr146-bitloom-1-0-0-release.md`](docs/fr146-bitloom-1-0-0-release.md)）。**禁止**用 Phase 16 终局 alone 冒充。1.0 口径 = 对 FR142 钉死表面的 SemVer major 承诺 + 诚实 **NFR59** deferred（**NFR63**）；**不等于**清空 NFR59。公开品牌 **Bitloom**。crates.io 全序 upload 可按 FR146 清单续作。
 
 **NFR59 仍 deferred（须另开合同；不得因「终局结项」或「1.0」口号静默吞并；NFR63）：**
 

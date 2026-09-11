@@ -12,7 +12,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR146 / Epic 83；对照 FR142 表面 / FR147 |
 | 记录日期 | 2026-09-11 |
-| 状态 | accepted — Story 83.1 |
+| 状态 | closed — Story 83.3；FR146；Epic 83 / Phase 17 关闭 |
 | **选定** | 升 workspace **1.0.0**；CHANGELOG；annotated tag `v1.0.0`；`cargo publish --dry-run` + 手动 publish 清单；真实 crates.io publish **可延后**若缺凭证 |
 
 ### (a) 上游约束
@@ -45,7 +45,11 @@
 
 ### Epic 83 关闭条件（Story 83.3 勾选）
 
-- [ ] **发版 1.0.0 + tag + CHANGELOG** — Story 83.2
-- [ ] **README / deferred / Phase 17 指针** — Story 83.3
-- [ ] **禁止事项未触发**
-- [ ] **品牌：** Bitloom
+- [x] **发版 1.0.0 + tag + CHANGELOG** — Story 83.2（`v1.0.0` / `docs/fr146-bitloom-1-0-0-release.md`）
+- [x] **README / deferred / Phase 17 指针** — Story 83.3
+- [x] **禁止事项未触发**
+- [x] **品牌：** Bitloom
+
+### Epic 83 / Phase 17 关闭声明
+
+**FR146 已关闭：** workspace **1.0.0** + annotated tag **`v1.0.0`** + CHANGELOG + dry-run/清单。对外「1.0 / 公开 API 稳定」可按 **FR147** 引用 **FR141–146**。**NFR59** 仍 deferred（**NFR63**）。crates.io 全序 upload 见清单 follow-up。Phase 17 规划/实现故事已齐（Epic 79–83）。
