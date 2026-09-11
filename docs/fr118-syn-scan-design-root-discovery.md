@@ -58,10 +58,10 @@ let r = analyze_discovered_root(AnalysisMode::FullElaborate, &roots[0], MVP_INTE
 ## Recipe
 
 ```text
-cargo test -p bitloom --test fr118_syn_scan_design_root_discovery
+cargo test -p bitloom-lsp --test fr118_syn_scan_design_root_discovery
 cargo test -p bitloom --test fr118_epic59_closeout
-cargo test -p bitloom --test fr113_lsp_design_root_discovery
-cargo test -p bitloom --test fr99_bitloom_lsp_full_elaborate
+cargo test -p bitloom-lsp --test fr113_lsp_design_root_discovery
+cargo test -p bitloom-lsp --test fr99_bitloom_lsp_full_elaborate
 ```
 
 ## Fixtures

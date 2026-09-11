@@ -1,6 +1,6 @@
 //! ATDD: FR113 Cargo-graph + metadata design_roots discovery (Story 55.2).
 //!
-//! cargo test -p bitloom --test fr113_lsp_design_root_discovery
+//! cargo test -p bitloom-lsp --test fr113_lsp_design_root_discovery
 
 use std::fs;
 use std::path::PathBuf;

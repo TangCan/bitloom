@@ -64,10 +64,10 @@ let r = analyze_on_did_save_at(Some(path));
 ## Recipe
 
 ```text
-cargo test -p bitloom --test fr113_lsp_design_root_discovery
+cargo test -p bitloom-lsp --test fr113_lsp_design_root_discovery
 cargo test -p bitloom --test fr113_epic55_closeout
-cargo test -p bitloom --test fr99_bitloom_lsp_full_elaborate
-cargo test -p bitloom --test fr118_syn_scan_design_root_discovery
+cargo test -p bitloom-lsp --test fr99_bitloom_lsp_full_elaborate
+cargo test -p bitloom-lsp --test fr118_syn_scan_design_root_discovery
 ```
 
 ## Fixtures

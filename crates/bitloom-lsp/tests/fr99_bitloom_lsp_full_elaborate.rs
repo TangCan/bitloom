@@ -2,7 +2,7 @@
 //! diagnostics + symbols on Bitloom LSP, distinguishable from shallow/non-elaborate.
 //!
 //! ```text
-//! cargo test -p bitloom --test fr99_bitloom_lsp_full_elaborate
+//! cargo test -p bitloom-lsp --test fr99_bitloom_lsp_full_elaborate
 //! ```
 
 use std::fs;

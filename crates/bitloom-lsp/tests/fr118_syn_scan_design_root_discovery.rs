@@ -1,6 +1,6 @@
 //! ATDD: FR118 workspace #[bitloom::top] syn-scan discovery (Story 59.2).
 //!
-//! cargo test -p bitloom --test fr118_syn_scan_design_root_discovery
+//! cargo test -p bitloom-lsp --test fr118_syn_scan_design_root_discovery
 
 use std::fs;
 use std::path::PathBuf;

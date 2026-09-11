@@ -96,7 +96,7 @@ MVP does **not** require fine-grained incremental elaborate; full recompute on e
 cargo test -p bitloom --test fr99_bitloom_lsp_server_mvp fr99_bitloom_lsp_initialize_session -- --nocapture
 
 # 44.3 full vs shallow elaborate + diagnostics/symbols
-cargo test -p bitloom --test fr99_bitloom_lsp_full_elaborate -- --nocapture
+cargo test -p bitloom-lsp --test fr99_bitloom_lsp_full_elaborate -- --nocapture
 
 # 44.4 Epic 44 / FR99 closeout
 cargo test -p bitloom --test fr99_epic44_closeout -- --nocapture
