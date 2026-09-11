@@ -335,7 +335,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 真实上游 Tywaves GUI / IDE 插件 | FR134 / 73 | vs FR125 `--tywaves` / JSON — **Epic 73 已关闭**（Story 73.3；G1–G4 `--tywaves-gui` / GUI·IDE manifest） |
 | 更多 IP 手写 FL（超出 GpioFunctional） | FR135 / 74 | vs FR126 `GpioFunctional` — **Epic 74 已关闭**（Story 74.3；`UartTxFunctional` F1–F3） |
 | 全芯片 pad / 多外设对拍 | FR136 / 75 | vs FR128 `GpioSocPad` D1–D4 — **Epic 75 已关闭**（Story 75.3；`ChipPadRing` R1–R4） |
-| 外部 CIRCT 真机门禁 | FR137 / 76 | vs FR129 树内 `schedule_circt_handshake` — 仍须实现关闭 |
+| 外部 CIRCT 真机门禁 | FR137 / 76 | vs FR129 树内 `schedule_circt_handshake` — Story **76.2** 编译门禁 MVP（`just circt-external-check` / CI `circt-external`；[`docs/fr137-external-circt-gate.md`](docs/fr137-external-circt-gate.md)；Epic 关闭 → 76.3） |
 | 恢复 Parser + AD-27 再修订 | FR138 / 77 | vs FR130 Style Guide（Parser 未恢复）— 仍须实现关闭 |
 | VIP/SocPad 再拆 / IP 跨 crate | FR139 / 78 | vs FR131 `ip/` 协议模块 — **Epic 78 已关闭**（Story 78.3；C1 `ip/gpio/{base,vip,socpad}`；C2 未选） |
 

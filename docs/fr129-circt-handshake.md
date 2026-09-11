@@ -41,6 +41,7 @@ FR121 path unchanged: `--handshake`.
 ## Cross-links
 
 - FR121: [`fr121-handshake-default.md`](fr121-handshake-default.md)
+- FR137 external CIRCT **compile** gate (≠ this in-tree C1–C4 alone): [`fr137-external-circt-gate.md`](fr137-external-circt-gate.md) — `just circt-external-check` / CI `circt-external`
 - NFR14: `_agile-output/implementation-artifacts/nfr14-risk-epic69-circt-handshake.md`
 - AD-25: ARCHITECTURE-SPINE (Story 69.2 revised for FR129)
 

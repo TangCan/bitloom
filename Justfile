@@ -38,3 +38,8 @@ formal-sva-check:
 # Not part of default `just test`. Missing sby → non-zero (never silent success).
 formal-sby-check:
 	bash scripts/formal-sby-check.sh
+
+# FR137: external CIRCT compile gate (firtool-1.155.0 / AD-9; ≠ FR129 in-tree alone).
+# Not part of default `just test`. Missing/mismatched firtool → non-zero (never silent skip).
+circt-external-check:
+	bash scripts/circt-external-check.sh
