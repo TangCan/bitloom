@@ -121,7 +121,7 @@ phase16Epic74Status: backlog
 phase16Epic75Status: backlog
 phase16Epic76Status: backlog
 phase16Epic77Status: backlog
-phase16Epic78Status: backlog
+phase16Epic78Status: complete
 phase16InputDocuments:
   - prds/prd-rhdl-2026-08-19/prd.md
   - prds/prd-rhdl-2026-08-19/addendum.md
