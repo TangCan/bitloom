@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 09:20
+last_updated: 09-11-2026 09:25
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -484,7 +484,7 @@ development_status:
   67-1-epic-67-nfr14-风险记录: done
   67-2-默认-ci-真-sby-门禁实现与验收-fr127: done
   67-3-fr127-收口与文档指针: done
-  epic-67-retrospective: optional
+  epic-67-retrospective: done
 
   epic-68: done
   68-1-epic-68-nfr14-风险记录: done
@@ -1882,3 +1882,29 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-66-retro-2026-09-11.md"
+  - id: "epic-67-retro-item-206-fr127-诚实边界-对外不得把本机可选-just-formal-sby-che"
+    epic: 67
+    action: "FR127 诚实边界：对外不得把本机可选 just formal-sby-check / FR119 文档 alone 写成默认 CI 强制真
+      sby / FR127 完成面；宣称须引 S1–S4。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-67-retro-2026-09-11.md"
+  - id: "epic-67-retro-item-207-触碰-formal-ci-路径时保持-fr119-本地路径可用-nfr52-缺工"
+    epic: 67
+    action: "触碰 formal/CI 路径时保持 FR119 本地路径可用（NFR52）；缺工具须非零可读，不得 continue-on-error
+      静默跳过。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-67-retro-2026-09-11.md"
+  - id: "epic-67-retro-item-208-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 67
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-67-retro-2026-09-11.md"
+  - id: "epic-67-retro-item-209-可选工程卫生-监控-gha-formal-sby-安装时长-镜像漂移-若改安装策"
+    epic: 67
+    action: "可选工程卫生：监控 GHA formal-sby 安装时长/镜像漂移；若改安装策略须更新文档与 ATDD（NFR54）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-67-retro-2026-09-11.md"
