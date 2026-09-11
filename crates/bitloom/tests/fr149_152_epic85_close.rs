@@ -61,15 +61,30 @@ fn fr149_152_sprint_epic85_done_86_1_ready() {
             || sprint.contains("85-6-fr149-152-收口与文档指针:done")
     );
     assert!(sprint.contains("epic-85: done") || sprint.contains("epic-85:done"));
-    assert_eq!(
-        yaml_value_for_key(&sprint, "86-1-epic-86-nfr14-风险记录").as_deref(),
-        Some("ready-for-dev"),
-        "86.1 must be ready-for-dev after Epic 85 close"
+    let s86_1 = yaml_value_for_key(&sprint, "86-1-epic-86-nfr14-风险记录");
+    assert!(
+        matches!(
+            s86_1.as_deref(),
+            Some("ready-for-dev") | Some("in-progress") | Some("done")
+        ),
+        "86.1 must be ready-for-dev (or later) after Epic 85 close; got {s86_1:?}"
     );
-    assert_eq!(
-        yaml_value_for_key(&sprint, "86-2-semver-assume-published-与发版诚实更新-fr153").as_deref(),
-        Some("backlog")
-    );
+    let s86_2 = yaml_value_for_key(&sprint, "86-2-semver-assume-published-与发版诚实更新-fr153");
+    if s86_1.as_deref() != Some("done") {
+        assert_eq!(
+            s86_2.as_deref(),
+            Some("backlog"),
+            "86.2 stays backlog until 86.1 done"
+        );
+    } else {
+        assert!(
+            matches!(
+                s86_2.as_deref(),
+                Some("backlog") | Some("ready-for-dev") | Some("in-progress") | Some("done")
+            ),
+            "86.2 may advance after 86.1 done; got {s86_2:?}"
+        );
+    }
 }
 
 #[test]
