@@ -46,7 +46,12 @@ detect_release_type() {
   ver="$(
     grep -m1 '^version' Cargo.toml 2>/dev/null | sed -E 's/.*"([^"]+)".*/\1/' || true
   )"
+  # Pre-1.0: allow major-level drift vs crates.io 0.x.
+  # First 1.0.0 release still compares against crates.io 0.x → major until
+  # BITLOOM_SEMVER_ASSUME_PUBLISHED=1 (set after 1.0.0 is on crates.io).
   if [[ "$ver" =~ ^0\. ]]; then
+    echo "major"
+  elif [[ "$ver" == "1.0.0" && "${BITLOOM_SEMVER_ASSUME_PUBLISHED:-0}" != "1" ]]; then
     echo "major"
   else
     echo "minor"

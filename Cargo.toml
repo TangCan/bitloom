@@ -45,15 +45,15 @@ default-members = [
 edition = "2024"
 rust-version = "1.97.1"
 license = "MIT OR Apache-2.0"
-version = "0.1.2"
+version = "1.0.0"
 
 [workspace.dependencies]
-bitloom-hir = { path = "crates/bitloom-hir", version = "0.1.2" }
-bitloom-builder = { path = "crates/bitloom-builder", version = "0.1.2" }
-bitloom-macro = { path = "crates/bitloom-macro", version = "0.1.2" }
-bitloom-prelude = { path = "crates/bitloom-prelude", version = "0.1.2" }
-bitloom-vlog = { path = "crates/bitloom-vlog", version = "0.1.2" }
-bitloom-sim = { path = "crates/bitloom-sim", version = "0.1.2" }
+bitloom-hir = { path = "crates/bitloom-hir", version = "1.0.0" }
+bitloom-builder = { path = "crates/bitloom-builder", version = "1.0.0" }
+bitloom-macro = { path = "crates/bitloom-macro", version = "1.0.0" }
+bitloom-prelude = { path = "crates/bitloom-prelude", version = "1.0.0" }
+bitloom-vlog = { path = "crates/bitloom-vlog", version = "1.0.0" }
+bitloom-sim = { path = "crates/bitloom-sim", version = "1.0.0" }
 rhdl-cabi = { path = "crates/rhdl-cabi" }
 rhdl-hls = { path = "crates/rhdl-hls" }
 rhdl-formal = { path = "crates/rhdl-formal" }
