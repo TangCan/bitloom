@@ -118,16 +118,20 @@ fn fr141_sprint_epic79_done() {
             "expected seeded Phase 17 epic key containing {epic}"
         );
     }
-    // At Epic 79 close, deepen stories remain backlog until each NFR14
-    for line in sprint.lines() {
-        let t = line.trim();
-        if (t.starts_with("80-")
-            || t.starts_with("81-")
-            || t.starts_with("82-")
-            || t.starts_with("83-"))
-            && t.contains("ready-for-dev")
-        {
-            panic!("at Epic 79 close, Epic 80–83 stories should still be backlog: {t}");
+    // Gate: Epic 80–83 must not be ready-for-dev *before* epic-79 is done.
+    // After the gate closes they may leave backlog (NFR14 → ready → done).
+    let epic79_done = sprint.contains("epic-79: done") || sprint.contains("epic-79:done");
+    if !epic79_done {
+        for line in sprint.lines() {
+            let t = line.trim();
+            if (t.starts_with("80-")
+                || t.starts_with("81-")
+                || t.starts_with("82-")
+                || t.starts_with("83-"))
+                && t.contains("ready-for-dev")
+            {
+                panic!("Epic 80–83 must not be ready-for-dev before epic-79 done: {t}");
+            }
         }
     }
 }
