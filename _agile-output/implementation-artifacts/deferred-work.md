@@ -24,8 +24,17 @@ Phase 12/13 关闭证据**仍有效**。原 NFR47 未选项（item-149/153/157/1
 Correct Course `sprint-change-proposal-2026-09-10-phase15-nfr51-leftover-deepen.md` + PRD addendum「Phase 15」**已批准**（**Phase 15 contract approved**）。  
 闸门 **FR124 / Epic 64 已关闭**（Story 64.4）；实现 epic = Epic 65–71（**FR125 / Epic 65 已关闭** — 上游 Tywaves 一等；**FR126 / Epic 66 已关闭** — 更多 IP 手写 FL / `GpioFunctional`；**FR127 / Epic 67 已关闭** — 默认 CI 真 sby；**FR128 / Epic 68 已关闭** — 全 SoC pad / `GpioSocPad`；**FR129 / Epic 69 已关闭** — CIRCT Handshake / 多时钟弹性缓冲；**FR130 / Epic 70 已关闭** — Style Guide（未恢复 Parser）；**FR131 / Epic 71 已关闭** — `ip.rs` 按协议拆分；宣称→**FR132**）。  
 **禁止**用 Phase 14 完成面冒充本批加深（**NFR52**）。软序：建议 **Epic 71 → Epic 68**（二者均已关闭）。  
-Phase 12–14 关闭证据**仍有效**。未列入本批者（自动 FSM 标签、第三方 LCOV GUI 一等、emit MemRead 完整生成、非 Cargo monorepo 任意路径扫描、真实上游 Tywaves GUI/IDE 插件深度、更多 IP 手写 FL、多外设/全芯片 pad 环、完整外部 CIRCT 编译/仿真门禁、恢复废弃 Parser、再细拆 VIP/SocPad 或跨 crate 搬迁）仍须另开合同（**NFR55**）。各实现 epic 仍须独立 NFR14（**NFR53**）；未关闭前不得宣称对应 FR。
-**Phase 15 规划/实现/retro/action-items 已齐（Epic 64–71）；** 见 `action-items-sweep-2026-09-11-phase15.md`（items 194–225）。
+Phase 12–14 关闭证据**仍有效**。原 NFR55 明示剩余（真实上游 Tywaves GUI/IDE、更多 IP FL、多外设/全芯片 pad、外部 CIRCT 门禁、恢复 Parser、再细拆 VIP/SocPad）已另开 **Phase 16** 合同（见下）。其余未列入者（自动 FSM 标签、第三方 LCOV GUI 一等、emit MemRead 完整生成、非 Cargo monorepo 任意路径扫描等）仍须另开合同（现归 **NFR59**）。各实现 epic 仍须独立 NFR14（**NFR53**）；未关闭前不得宣称对应 FR。
+**Phase 15 规划/实现/retro/action-items 已齐（Epic 64–71）；** 见 `action-items-sweep-2026-09-11-phase15.md`（items 194–225）。原 NFR55 明示剩余已另开 **Phase 16** 合同（见下）。
+
+## Phase 16 pointer (FR133–140 / NFR56–NFR59) — 产品终局结项（NFR55 升格）
+
+Correct Course `sprint-change-proposal-2026-09-11-phase16-nfr55-final-closeout.md` + PRD addendum「Phase 16」**已批准**（**Phase 16 contract approved** 2026-09-11）。  
+闸门 **FR133 / Epic 72**（Story 72.1–72.4）；实现 epic = Epic 73–78（**FR134** Tywaves GUI/IDE；**FR135** 更多 IP FL；**FR136** 全芯片 pad；**FR137** 外部 CIRCT 门禁；**FR138** Parser + AD-27；**FR139** VIP/SocPad 再拆/跨 crate；宣称→**FR140**）。  
+**禁止**用 Phase 15 完成面冒充本批加深（**NFR56**）。软序：建议 **Epic 78 → Epic 74/75**。  
+Phase 12–15 关闭证据**仍有效**。未列入本批者（自动 FSM 标签、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生）仍须另开合同（**NFR59**）。各实现 epic 仍须独立 NFR14（**NFR57**）；未关闭前不得宣称对应 FR。  
+终局口径 = 本批关闭 + 诚实 NFR59 deferred；**不等于**冲 1.0。  
+**Phase 16 规划故事已齐（Epic 72–78）；** sprint 已播种 backlog；剩余门为各 epic 实现关闭态。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 

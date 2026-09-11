@@ -308,3 +308,34 @@
 
 **合同指针：** 详见 `epics.md` Phase 15 Inventory（FR124–FR132 / NFR52–NFR55）。
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-10-phase15-nfr51-leftover-deepen.md`
+
+## 2026-09-11 Update — Phase 16 产品终局结项（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-11-phase16-nfr55-final-closeout.md` —
+在 Phase 15 NFR51 剩余升格 **已关闭**之后，正式 **Phase 16**「产品终局结项 / NFR55 未选加深升格」
+（Epic 72–78 · **FR133–FR140** / **NFR56–NFR59**）。
+
+**公开品牌（不变）：** **Bitloom**；crates.io / CLI **`bitloom`** / `bitloom-*`（设计 crate 仍只依赖
+`bitloom-prelude`，除非 FR139 另开）。禁止发布 `rhdl` / `rhdl-bits`。
+
+**与 Phase 12–15 的关系（必须同时读）：**
+- Phase 12 **FR94–FR105**、Phase 13 **FR106–FR115**、Phase 14 **FR116–FR123** 与 Phase 15 **FR124–FR132** 关闭证据 **仍有效**；**不得**改写为失败（**NFR56**）。
+- Phase 16 是 **新合同**下的加深（NFR55 deferred → 显式 FR），**不是**「Phase 15 AC 未达标」的补救叙事。
+- deferred 升格映射：
+  1. 真实上游 Tywaves GUI / IDE 插件深度 → **FR134**
+  2. 更多 IP 手写 FL（超 Gpio）→ **FR135**
+  3. 多外设 / 全芯片 pad 环 → **FR136**
+  4. 完整外部 CIRCT 编译 / 仿真门禁 → **FR137**
+  5. 恢复废弃 Scala `Parser.parse`（须再修订 AD-27）→ **FR138**
+  6. VIP/SocPad 再细拆或跨 crate → **FR139**
+  （闸门 **FR133**；宣称纪律 **FR140**。）
+- 对外「终局 / Tywaves GUI·IDE / 更多 IP FL / 全芯片 pad / 外部 CIRCT 门禁 / Parser 恢复 / IP 跨 crate」类表述：**仅**可在对应 FR133–139 关闭后，按 **FR140** 宣称；
+  **禁止**用 Phase 15 完成面冒充本批加深。
+- **终局口径：** 本批 FR 关闭 + 诚实列出 NFR59 deferred；**不等于**冲 1.0 或 backlog 永久空（NFR15）。
+
+**实现闸门：** Epic 72（Story 72.1–72.4 · **FR133**）关闭前，Epic 73–78 不得标 ready。  
+触及 **AD-27**（FR138 **必须**再修订）及外部 CIRCT/crate 边界须在实现 epic 引用（**NFR58**）；README / deferred /
+脊柱指针由 Story **72.3–72.4** 落地。软实现序：建议 **Epic 78 先于 Epic 74/75**（同触 `ip/`）。
+
+**合同指针：** 详见 `epics.md` Phase 16 Inventory（FR133–FR140 / NFR56–NFR59）。
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-11-phase16-nfr55-final-closeout.md`
