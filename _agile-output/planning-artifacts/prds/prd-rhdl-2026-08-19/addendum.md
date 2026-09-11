@@ -371,3 +371,36 @@
 
 **合同指针：** 详见 `epics.md` Phase 17 Inventory（FR141–FR147 / NFR60–NFR63）。
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-11-phase17-api-stability-1-0.md`
+
+## 2026-09-11 Update — Phase 18 CLI / 依赖 crate crates.io 可发布收口（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-11-phase18-cli-crates-io-publish.md` —
+在 Phase 17 公开 API 稳定门 **已关闭**且库 crate **1.0.0** 已上 crates.io 之后，正式 **Phase 18**
+「CLI / 依赖 crate crates.io 可发布」（Epic 84–86 · **FR148–FR153** / **NFR64–NFR67**），
+收口 FR146 明示的 **`bitloom` CLI** 手工 follow-up。
+
+**批准默认（Q1–Q5）：**
+1. **`rhdl-firrtl` → `bitloom-firrtl`**（AD-2；`publish=true`；禁止以 `rhdl-firrtl` 为 crates.io 名）。
+2. **`rhdl-viz` → `bitloom-viz`**（同上）。
+3. **FR152 (b)：** `bitloom-lsp` 默认可保持 `publish=false`，**必须**不挡 `bitloom` 打包；(a) 另开合同。
+4. **不以**先消化 **NFR59** 为 CLI 上架前提。
+5. **MSRV** 默认保持现行；新包与工作区 **1.0.0** 对齐（除非故事另决）。
+
+**公开品牌（不变）：** **Bitloom**；crates.io / CLI **`bitloom`** / `bitloom-*`；设计 crate 仍只依赖
+`bitloom-prelude`（AD-6）。禁止发布 `rhdl` / `rhdl-bits`。
+
+**与 Phase 12–17 的关系（必须同时读）：**
+- Phase 12–17（FR94–147）关闭证据 **仍有效**；**不得**改写为失败（**NFR64**）。
+- Phase 18 是 **新合同**下的 CLI 发布收口，**不是**「Phase 17 / 1.0 失败」的补救叙事。
+- 映射：闸门 **FR148**；`bitloom-firrtl` **FR149**；`bitloom-viz` **FR150**；CLI 上架 **FR151**；
+  lsp 策略 **FR152**；发版后诚实 / SemVer 跟进 **FR153**。
+- 对外「CLI 已可从 crates.io 安装」类表述：**仅**可在对应 FR148–153 关闭后宣称；
+  **禁止**在 FR151 关闭前暗示 `cargo install bitloom` 已可用。
+- **口径：** CLI 上架 ≠ 清空 NFR59 / 扩大 FR142 表面（**NFR67**）。
+
+**实现闸门：** Epic 84（Story 84.1–84.4 · **FR148**）关闭前，Epic 85–86 不得标 ready。  
+顺序：**84 → 85 → 86**。README / deferred / 脊柱指针由 Story **84.3–84.4** 落地；实发属 Epic **85**。  
+**不**在本合同批准瞬间强制 `cargo publish`。
+
+**合同指针：** 详见 `epics.md` Phase 18 Inventory（FR148–FR153 / NFR64–NFR67）。
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-11-phase18-cli-crates-io-publish.md`

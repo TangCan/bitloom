@@ -3,7 +3,7 @@ title: Bitloom 阶段二 PRD — 2026-08-21 概述字面升格修订
 status: final
 created: 2026-08-19
 updated: 2026-09-11
-amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08; phase11-contract-green-2026-09-09; phase12-literal-green-path-b-2026-09-09; phase13-mvp-commercial-deepen-2026-09-10; phase14-nfr47-deferred-deepen-2026-09-10; phase15-nfr51-leftover-deepen-2026-09-10; phase16-nfr55-final-closeout-2026-09-11; phase17-api-stability-1-0-2026-09-11
+amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08; phase11-contract-green-2026-09-09; phase12-literal-green-path-b-2026-09-09; phase13-mvp-commercial-deepen-2026-09-10; phase14-nfr47-deferred-deepen-2026-09-10; phase15-nfr51-leftover-deepen-2026-09-10; phase16-nfr55-final-closeout-2026-09-11; phase17-api-stability-1-0-2026-09-11; phase18-cli-crates-io-publish-2026-09-11
 ---
 
 # PRD: Bitloom 阶段二及愿景闭环（later-product → FR + 概述字面升格）
@@ -28,6 +28,8 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 
 *2026-09-11 追加（`phase17-api-stability-1-0`）：Phase 17 公开 API 稳定门 **FR141–FR147** / **NFR60–NFR63** — Phase 12–16 关闭仍有效；1.0 / 公开 API 稳定宣称仅引用 FR141–146（见 addendum「Phase 17」）。*
 
+*2026-09-11 追加（`phase18-cli-crates-io-publish`）：Phase 18 CLI / 依赖 crate crates.io 可发布 **FR148–FR153** / **NFR64–NFR67** — Phase 12–17 关闭仍有效；CLI 上架宣称仅引用 FR148–153（见 addendum「Phase 18」）。*
+
 ## 0. Document Purpose
 
 本 PRD 面向 PM、架构与 epic 拆解。
@@ -45,6 +47,7 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 - **2026-09-10 Phase 15 NFR51 剩余升格：** **FR124–FR132** / **NFR52–NFR55** — 不回滚 FR94–123；加深完成面须新 FR 勾选（见 addendum「Phase 15」）。
 - **2026-09-11 Phase 16 产品终局结项：** **FR133–FR140** / **NFR56–NFR59** — 不回滚 FR94–132；终局加深完成面须新 FR 勾选（见 addendum「Phase 16」）。
 - **2026-09-11 Phase 17 公开 API 稳定门（Bitloom 1.0）：** **FR141–FR147** / **NFR60–NFR63** — 不回滚 FR94–140；1.0 ≠ 清空 NFR59；稳定宣称须新 FR 勾选（见 addendum「Phase 17」）。
+- **2026-09-11 Phase 18 CLI crates.io 可发布收口：** **FR148–FR153** / **NFR64–NFR67** — 不回滚 FR141–147；CLI 上架 ≠ 清空 NFR59；宣称须新 FR 勾选（见 addendum「Phase 18」）。
 - **身份 supersession：** 公开产品名 **Bitloom**，crates.io / CLI **`bitloom`**（阶段三 FR41）；禁止发布 `rhdl` / `rhdl-bits`。正文不再以 `rhdl-rs` 为发布名。[ASSUMPTION] 概述仍写 RHDL；合同以 Bitloom 为准，概述另开任务对齐。
 - `later-product.md` 仍为索引，不承载无 ID 需求。
 

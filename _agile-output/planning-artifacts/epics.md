@@ -91,8 +91,44 @@ stepsCompleted:
   - step-02-design-epics-phase-17
   - step-03-create-stories-phase-17
   - step-04-final-validation-phase-17
-status: complete
+  - step-01-validate-prerequisites-phase-18
+  - step-02-design-epics-phase-18
+  - step-03-create-stories-phase-18
+  - step-04-final-validation-phase-18
+status: in-progress
 phase17Status: complete
+phase18Status: planning-complete
+correctCoursePhase18Approved: 2026-09-11
+phase18WorkflowComplete: 2026-09-11
+phase18Epic84Stories: 4
+phase18Epic85Stories: 6
+phase18Epic86Stories: 3
+phase18StoryCount: 13
+phase18Validation: |
+  FR148–153 mapped to Epic 84–86 stories (13); Epic 84 hard gate for 85–86;
+  no forward story deps within epics; Architecture starter N/A;
+  File-churn: Epic 85 owns rename/publish/CLI (ordered stories); Epic 86 docs/semver only;
+  Correct Course pending until Story 84.2 (same pattern as Phase 17).
+  create-epics-and-stories Phase 18 validated 2026-09-11 — planning complete;
+  next: Correct Course + sprint seed; start Epic 84.
+phase18Note: >
+  Phase 18 draft from create-epics Step 1 (2026-09-11): bitloom CLI crates.io
+  publishability leftover after FR146 library upload. Defaults on unanswered Qs:
+  rename rhdl-firrtl/viz → bitloom-firrtl/viz (AD-2); FR152 option (b) lsp may
+  stay publish=false if it does not block bitloom publish; FR148 requires Correct
+  Course + PRD stamp before implementation ready (same pattern as Phase 17).
+phase18Contract: cli-crates-io-publishability
+phase18Scope: >
+  Gate; publishable bitloom-firrtl + bitloom-viz; bitloom CLI 1.0.0 on crates.io;
+  bitloom-lsp publish policy; post-publish honesty / SemVer assume-published.
+phase18InputDocuments:
+  - prds/prd-rhdl-2026-08-19/prd.md
+  - prds/prd-rhdl-2026-08-19/addendum.md
+  - architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
+  - docs/fr146-bitloom-1-0-0-release.md
+  - docs/public-api-1-0-surface.md
+  - docs/semver-1-0-policy.md
+  - epics.md
 phase17Validation: |
   FR141–147 mapped to Epic 79–83 stories (17); Epic 79 hard gate for 80–83;
   no forward story deps within epics; Architecture starter N/A;
@@ -377,7 +413,7 @@ uxDesignPhase13: none---
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48–56 · FR106–FR115 / NFR44–NFR47，**complete**）。阶段十四：NFR47 未选加深升格（Epic 57–63 · FR116–FR123 / NFR48–NFR51，**complete**）。阶段十五：NFR51 剩余升格（Epic 64–71 · FR124–FR132 / NFR52–NFR55，**complete**）。阶段十六：产品终局结项 / NFR55 升格（Epic 72–78 · FR133–FR140 / NFR56–NFR59，**complete**）。阶段十七：公开 API 稳定门 / Bitloom 1.0（Epic 79–83 · FR141–FR147 / NFR60–NFR63，**complete**；Correct Course **approved** 2026-09-11；`v1.0.0`）。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48–56 · FR106–FR115 / NFR44–NFR47，**complete**）。阶段十四：NFR47 未选加深升格（Epic 57–63 · FR116–FR123 / NFR48–NFR51，**complete**）。阶段十五：NFR51 剩余升格（Epic 64–71 · FR124–FR132 / NFR52–NFR55，**complete**）。阶段十六：产品终局结项 / NFR55 升格（Epic 72–78 · FR133–FR140 / NFR56–NFR59，**complete**）。阶段十七：公开 API 稳定门 / Bitloom 1.0（Epic 79–83 · FR141–FR147 / NFR60–NFR63，**complete**；Correct Course **approved** 2026-09-11；`v1.0.0`）。阶段十八：CLI / 依赖 crate crates.io 可发布（Epic 84–86 · FR148–FR153 / NFR64–NFR67；Correct Course **approved** 2026-09-11；规划齐 / sprint seeded）。无 UX。
 
 ## Requirements Inventory
 
@@ -6781,3 +6817,294 @@ So that Phase 17 规划与实现故事清单完整。
 **Then** NFR14 勾选 Epic 83 关闭
 **And** 文首/状态页可声明：Phase 17 故事已齐（Epic 79–83）；1.0 宣称须引 FR141–146（FR147）
 **And** 明确：NFR59 仍 deferred（NFR63）；更深加深须新合同
+
+## Phase 18 Inventory — CLI / 依赖 crate crates.io 可发布收口
+
+**定位：** Phase 17（FR141–147）**合同与库 crate 1.0.0 上架已关闭**之后，收口 FR146 明示的 **`bitloom` CLI 手工 follow-up**：使维护者/用户可从 crates.io **`cargo install bitloom`**（或等价）获得公开 CLI，且依赖包符合 **AD-2**（对外 `bitloom-*`，禁止 `rhdl`/`rhdl-bits`）。  
+**是：**  
+1. Phase 18 合同闸门（Correct Course + PRD/addendum）  
+2. `rhdl-firrtl` → 可发布 **`bitloom-firrtl`**  
+3. `rhdl-viz` → 可发布 **`bitloom-viz`**  
+4. `bitloom` CLI 具备 version 依赖并成功 `cargo publish`  
+5. `bitloom-lsp` 发布策略钉死（默认可不挡 CLI：publish=false 亦可，只要不 path-block）  
+6. 发版后诚实面 / SemVer assume-published 跟进  
+
+**不是：** 改写 Phase 17「已关闭」；清空 NFR59；把 LSP 产品加深升格为本批必做；批准瞬间无闸门直接改 publish。  
+**依据：** FR146 清单 CLI 阻塞；2026-09-11 live publish 失败（`rhdl-firrtl` 无 version / `publish=false`）；AD-2；`docs/public-api-1-0-surface.md`（CLI in-surface；`rhdl-*` 非表面名）。  
+**与 PRD 关系：** Correct Course + PRD/addendum「Phase 18」**已批准**（2026-09-11；`correctCoursePhase18Approved: 2026-09-11`）；**实现闸门** = Epic 84（FR148）关闭前，后续 epic 不得 ready。  
+**ID 注记：** **FR148–FR153** / **NFR64–NFR67**（接 FR147 / NFR63）。不重编号 FR141–147。  
+**批准默认（用户 Step 1→C 未改口）：** rename→`bitloom-firrtl`/`bitloom-viz`；FR152 **(b)** lsp 可保持 `publish=false` 若不挡 CLI；FR148 须 Correct Course + PRD 戳。
+
+### Phase 18 Functional Requirements
+
+FR141–FR147: （历史）Phase 17 — 关闭证据仍有效；Phase 18 不得改写为失败。
+
+FR148: **Phase 18 合同闸门** — Correct Course + PRD/addendum 批准「CLI / 依赖 crate crates.io 可发布」范围；同步 README / `deferred-work.md` /（若需）ARCHITECTURE-SPINE；钉死与 Phase 17 关闭面及 NFR59 的边界；**未完成则 FR149+ 故事不得 ready**。  
+FR149: **bitloom-firrtl 可发布** — 将现 `rhdl-firrtl`（`publish=false`、无 registry version）改为对外可 publish 的 **`bitloom-firrtl`**（AD-2；禁止 `rhdl`/`rhdl-bits`）；workspace/version 对齐；`cargo publish` dry-run+实发可勾选。  
+FR150: **bitloom-viz 可发布** — 同理处理现 `rhdl-viz` → **`bitloom-viz`**。  
+FR151: **bitloom CLI 1.0.0 上架** — `bitloom` 对 firrtl/viz（及其它 registry 依赖）具备 version 需求；`cargo publish -p bitloom` 成功；`cargo install bitloom` / `cargo bitloom` 文档路径可验证。  
+FR152: **bitloom-lsp 发布策略** — 成文并落地 **(b) 默认**：保持 `publish=false` **且不挡** `bitloom` 打包（消除挡 publish 的 path-only 需求）；**(a)** 可选升格为 publish=true + version（非本批默认）。不得 silent 留下 path-only 挡 publish。  
+FR153: **发版后诚实与 SemVer 跟进** — 更新 `docs/fr146-*` / Release / README；`BITLOOM_SEMVER_ASSUME_PUBLISHED`（或等价）与「CLI 已上架」宣称边界（≠ 清空 NFR59；≠ 静默扩大 FR142 表面）。
+
+### Phase 18 Non-Functional Requirements
+
+NFR14: （继承）各实现 epic 标 ready 前须有风险记录。  
+NFR64: **Phase 18 vs Phase 17 关闭面隔离** — 不得改写 FR141–147「已关闭」；CLI 上架是新完成面。  
+NFR65: **NFR14 分 epic 风险门** — Phase 18 每个实现 epic 开工前独立 NFR14。  
+NFR66: **AD-2 / 品牌** — 对外包名 `bitloom-*`；禁止 publish `rhdl` / `rhdl-bits`；目录可暂留 `rhdl-*`。  
+NFR67: **不得静默吞并 NFR59** — 亦不得把 LSP 一等深化冒充本批必做（除非显式勾选 FR152(a)）。
+
+### Phase 18 Additional Requirements (Architecture)
+
+- 无 greenfield starter template。  
+- AD-6：设计 crate 仍只依赖 `bitloom-prelude`。  
+- 库 crate `bitloom-{macro,hir,builder,vlog,sim,prelude}` **1.0.0 已在 crates.io**；本批目标补齐 **CLI**。  
+- UX：无独立 UX 合同。
+
+### Phase 18 UX Design Requirements
+
+无独立 UX-DR。
+
+### Phase 18 FR Coverage Map
+
+FR148: Epic 84 — Phase 18 合同闸门  
+FR149: Epic 85 — bitloom-firrtl 可发布  
+FR150: Epic 85 — bitloom-viz 可发布  
+FR151: Epic 85 — bitloom CLI 1.0.0 上架  
+FR152: Epic 85 — bitloom-lsp 发布策略 (b)  
+FR153: Epic 86 — 发版后诚实与 SemVer 跟进  
+NFR64: Epic 84 — 隔离（横切写入 85–86）  
+NFR65 / NFR14: Epic 84–86 — 各 epic 首故事风险门  
+NFR66: Epic 85 — AD-2 品牌 / bitloom-* 包名  
+NFR67: Epic 84 / 86 — 不得吞并 NFR59
+
+### Phase 18 Epic List
+
+### Epic 84: Phase 18 合同闸门与诚实边界
+维护者/用户看到「CLI / 依赖 crate crates.io 可发布」已获 Correct Course + PRD 批准；Phase 17 关闭面不被改写；后续实现 epic 可合法开工；NFR59/NFR67 诚实面就位。  
+**FRs covered:** FR148  
+**NFRs:** NFR14, NFR64, NFR65, NFR66, NFR67  
+**Depends on:** Phase 17 complete。不依赖 Epic 85–86。  
+**Gate:** Story 84.x（NFR14 + FR148）未完成前，85–86 不得标 ready。
+
+### Epic 85: 从 crates.io 安装 Bitloom CLI
+用户/维护者可从 crates.io 安装并运行公开 CLI；`bitloom-firrtl` / `bitloom-viz` 可发布；`bitloom-lsp` 策略不挡打包；`bitloom` 1.0.0 上架。  
+**FRs covered:** FR149, FR150, FR151, FR152  
+**NFRs:** NFR14, NFR64, NFR65, NFR66, NFR67  
+**Depends on:** 硬依赖 Epic 84。  
+**Story soft order:** firrtl → viz → lsp 策略 → CLI publish。
+
+### Epic 86: 发版后诚实面与 SemVer 跟进
+维护者更新发版清单/Release/README 与 SemVer assume-published；对外「CLI 已上架」诚实且不扩大 FR142 / 不清空 NFR59。  
+**FRs covered:** FR153  
+**NFRs:** NFR14, NFR64, NFR65, NFR67  
+**Depends on:** 硬依赖 Epic 85。
+
+**实施软序：** `84 → 85 → 86`
+
+## Epic 84: Phase 18 合同闸门与诚实边界
+
+维护者/用户看到「CLI / 依赖 crate crates.io 可发布」已获 Correct Course + PRD 批准；Phase 17 关闭面不被改写；后续实现 epic 可合法开工；NFR59/NFR67 诚实面就位。  
+**FRs covered:** FR148  
+**NFRs:** NFR14, NFR64, NFR65, NFR66, NFR67  
+**Depends on:** Phase 17 complete。不依赖 Epic 85–86。  
+**Gate:** Story 84.1 NFR14 未完成前，84.2–84.4 不得标 ready。**Epic 84 未关闭前，Epic 85–86 不得标 ready。**
+
+### Story 84.1: Epic 84 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 Phase 18「CLI crates.io 可发布」填写 NFR14,
+So that 不以「库 crate 已 1.0 上架」冒充 CLI 发布合同已授权。
+
+**Acceptance Criteria:**
+
+**Given** Phase 17 FR141–147 已关闭；库 crate 1.0.0 已在 crates.io；FR146 清单仍记 CLI follow-up；AD-2
+**When** 创建 Epic 84 风险记录
+**Then** 含：与 Phase 17 关闭面边界（NFR64）；FR149–153 范围摘要；批准默认（rename→bitloom-firrtl/viz；FR152(b)；FR148 闸门）；禁止事项（至少：FR148 未合入不得开 85–86；不得改写 FR141–147「已关闭」；不得 publish `rhdl`/`rhdl-bits`；不得静默吞并 NFR59；不得把 LSP 加深冒充本批必做）
+**And** 指定负责人（NFR14 / NFR64–67）
+**And** 无此记录则 84.2–84.4 不得标 ready
+
+### Story 84.2: Correct Course + PRD 批准 Phase 18（FR148）
+
+As a 产品负责人,
+I want PRD/addendum 经 Correct Course 明确批准「CLI / 依赖 crate crates.io 可发布」,
+So that Phase 18 具备合同授权。
+
+**Acceptance Criteria:**
+
+**Given** Story 84.1；现 addendum 已批准至 Phase 17
+**When** 批准并落地 sprint-change-proposal（或等价）+ PRD/addendum Phase 18 段落
+**Then** 写明：Phase 18 = FR148–153；Phase 17 关闭仍有效；CLI 上架 ≠ 清空 NFR59；Q 默认（rename bitloom-*；FR152(b)）
+**And** 公开品牌仍为 Bitloom / `bitloom-*`
+**And** 列出 Epic 84–86 与 FR 映射指针（可指向 `epics.md`）
+**And** `correctCoursePhase18Approved` 戳可验证
+
+### Story 84.3: 同步 README / deferred / 路线图指针（FR148）
+
+As a 文档维护者,
+I want 公开状态页区分「库 1.0 已上架」与「CLI 可发布合同」,
+So that 对外不暗示 `cargo install bitloom` 已可用（在 FR151 关闭前）。
+
+**Acceptance Criteria:**
+
+**Given** Story 84.2 合同已批准
+**When** 更新 README「状态与 deferred」、`deferred-work.md`、（若需）Release 说明指针
+**Then** 明确 Phase 17 vs Phase 18 完成面与 FR148–153 映射
+**And** 诚实写出：库 crate 已 1.0.0；CLI 仍待 FR151；NFR59 仍 deferred
+**And** 公开品牌 Bitloom
+
+### Story 84.4: AD 指针与 Epic 84 收口（FR148 / NFR66）
+
+As a 架构维护者,
+I want 脊柱/AGENTS 指针与 Epic 84 关闭勾选就绪,
+So that 后续实现 epic 有合法 AD-2 / 发布名引用面。
+
+**Acceptance Criteria:**
+
+**Given** Story 84.3
+**When** 更新 ARCHITECTURE-SPINE / AGENTS（若需）Phase 18 指针并勾选 Epic 84 关闭
+**Then** 引用 AD-2（对外 `bitloom-*`；禁 `rhdl`/`rhdl-bits`）；NFR64/NFR67 诚实面保留
+**And** NFR14 勾选 Epic 84 关闭
+**And** 文首/状态可声明：Epic 84 关闭后方可 ready Epic 85–86
+
+## Epic 85: 从 crates.io 安装 Bitloom CLI
+
+用户/维护者可从 crates.io 安装并运行公开 CLI；`bitloom-firrtl` / `bitloom-viz` 可发布；`bitloom-lsp` 策略不挡打包；`bitloom` 1.0.0 上架。  
+**FRs covered:** FR149, FR150, FR151, FR152  
+**NFRs:** NFR14, NFR64, NFR65, NFR66, NFR67  
+**Depends on:** 硬依赖 Epic 84。  
+**Gate:** Story 85.1 NFR14 未完成前，85.2–85.6 不得标 ready。
+
+### Story 85.1: Epic 85 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 CLI 全路径可发布填写 NFR14,
+So that rename/publish 不破坏 AD-2/AD-6 与既有 1.0 库面。
+
+**Acceptance Criteria:**
+
+**Given** Epic 84 已关闭；库 crate 1.0.0 已在 crates.io
+**When** 创建 Epic 85 风险记录
+**Then** 含：FR149–152 范围；rename 迁移风险（依赖图、文档、CI）；禁止事项（至少：不得 publish `rhdl`/`rhdl-bits`；不得改写设计 crate→prelude 边界；不得静默扩大 FR142；不得留下 path-only 挡 `bitloom` publish）
+**And** 无此记录则 85.2–85.6 不得标 ready
+
+### Story 85.2: bitloom-firrtl 可发布（FR149）
+
+As a 维护者,
+I want 将现 `rhdl-firrtl` 变为可 crates.io 发布的 `bitloom-firrtl`,
+So that CLI 可声明 version 依赖且符合 AD-2。
+
+**Acceptance Criteria:**
+
+**Given** Story 85.1；`bitloom-hir` 1.0.0 已在 crates.io
+**When** 完成包名/workspace/依赖迁移，`publish = true`，version 对齐工作区
+**Then** `cargo publish -p bitloom-firrtl --dry-run` 成功；实发 1.0.0（或合同版本）可勾选
+**And** 仓库内引用更新为 `bitloom-firrtl`（目录可暂留 `rhdl-firrtl`）
+**And** 禁止以 `rhdl-firrtl` 为 crates.io 发布名
+**And** ATDD/文档指针可验证（建议 `docs/fr149-bitloom-firrtl-publish.md` 或等价）
+
+### Story 85.3: bitloom-viz 可发布（FR150）
+
+As a 维护者,
+I want 将现 `rhdl-viz` 变为可 crates.io 发布的 `bitloom-viz`,
+So that CLI 第二依赖同样可 version 化上架。
+
+**Acceptance Criteria:**
+
+**Given** Story 85.2（或至少 hir 1.0.0 可用）；Story 85.1
+**When** 完成包名/workspace/依赖迁移，`publish = true`
+**Then** `cargo publish -p bitloom-viz --dry-run` 成功；实发可勾选
+**And** 仓库内引用更新为 `bitloom-viz`
+**And** 禁止以 `rhdl-viz` 为 crates.io 发布名
+**And** 文档/ATDD 指针可验证
+
+### Story 85.4: bitloom-lsp 发布策略 (b)（FR152）
+
+As a 维护者,
+I want 钉死 lsp 不挡 `bitloom` 打包的策略,
+So that path-only / `publish=false` 不阻断 CLI 上架。
+
+**Acceptance Criteria:**
+
+**Given** Story 85.1
+**When** 成文策略 **(b)** 并调整 `bitloom` 的 lsp 依赖（例如仅 workspace 测试路径、optional、或可省略的 dev 策略）使 `cargo publish -p bitloom` 不再因 lsp path 失败
+**Then** 文档写明：lsp 默认不上架；若日后 (a) 须新合同
+**And** 不得 silent 保留挡 publish 的 path-only 需求
+**And** ATDD 可断言 publish 打包不要求 `bitloom-lsp` 在 registry
+
+### Story 85.5: 发布 bitloom CLI 1.0.0（FR151）
+
+As a 用户/维护者,
+I want 从 crates.io 安装 Bitloom CLI,
+So that `cargo install bitloom` / `cargo bitloom` 公开路径可用。
+
+**Acceptance Criteria:**
+
+**Given** Story 85.2–85.4；`bitloom-firrtl` / `bitloom-viz`（及既有库依赖）已在 crates.io 满足 version 需求
+**When** `bitloom` 依赖全部为 version 需求且 `cargo publish -p bitloom` 成功（版本 1.0.0 或合同对齐）
+**Then** `cargo install bitloom`（或文档等价）可安装 `cargo-bitloom`
+**And** 表面文档中 CLI 子命令仍属 FR142 in-surface；本故事不扩大表面清单
+**And** ATDD/清单可勾选 FR151
+
+### Story 85.6: FR149–152 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred 收口并勾选 Epic 85 关闭,
+So that CLI 可发布实现面可宣称。
+
+**Acceptance Criteria:**
+
+**Given** Story 85.5
+**When** 更新 `docs/fr146-*` / Phase 18 文档指针 / deferred 并勾选 Epic 85
+**Then** NFR14 勾选 Epic 85 关闭
+**And** 明确：FR153（诚实/SemVer 跟进）仍属 Epic 86
+**And** 公开品牌 Bitloom
+
+## Epic 86: 发版后诚实面与 SemVer 跟进
+
+维护者更新发版清单/Release/README 与 SemVer assume-published；对外「CLI 已上架」诚实且不扩大 FR142 / 不清空 NFR59。  
+**FRs covered:** FR153  
+**NFRs:** NFR14, NFR64, NFR65, NFR67  
+**Depends on:** 硬依赖 Epic 85。  
+**Gate:** Story 86.1 NFR14 未完成前，86.2–86.3 不得标 ready。
+
+### Story 86.1: Epic 86 NFR14 风险记录
+
+As a 实现负责人,
+I want 为发版后诚实面填写 NFR14,
+So that 文档/SemVer 开关不误报完成面。
+
+**Acceptance Criteria:**
+
+**Given** Epic 85 已关闭；`bitloom` 已在 crates.io
+**When** 创建 Epic 86 风险记录
+**Then** 含：FR153 范围；禁止事项（至少：不得暗示 NFR59 已清；不得静默扩大 FR142；不得在未上架时写「CLI 已可 install」——本 epic 时已上架则须与证据一致）
+**And** 无此记录则 86.2–86.3 不得标 ready
+
+### Story 86.2: SemVer assume-published 与发版诚实更新（FR153）
+
+As a 维护者,
+I want 更新 SemVer 检查默认与发版文档/Release,
+So that CI/文档反映「1.0.0 已在 crates.io（含 CLI）」的真实状态。
+
+**Acceptance Criteria:**
+
+**Given** Story 86.1
+**When** 落地 `BITLOOM_SEMVER_ASSUME_PUBLISHED`（或移除 1.0.0 特例）并更新 `docs/fr146-*` / GitHub Release / README 相关句
+**Then** `just semver-check`（或文档路径）在已发布前提下默认行为正确
+**And** 文案区分：库+CLI 上架状态；NFR59 仍 deferred
+**And** ATDD 可验证关键指针
+
+### Story 86.3: FR153 收口与 Phase 18 故事清单指针
+
+As a 文档维护者,
+I want 文档/deferred 收口并勾选 Epic 86 / Phase 18,
+So that Phase 18 规划与实现故事清单完整。
+
+**Acceptance Criteria:**
+
+**Given** Story 86.2
+**When** 更新状态页/deferred 并勾选 Epic 86 / FR153
+**Then** NFR14 勾选 Epic 86 关闭
+**And** 文首/状态页可声明：Phase 18 故事已齐（Epic 84–86）；CLI crates.io 宣称须引 FR148–153
+**And** 明确：NFR59 仍 deferred（NFR67）；更深加深须新合同

@@ -42,8 +42,16 @@ Phase 12–15 关闭证据**仍有效**。未列入本批者（自动 FSM 标签
 Correct Course `sprint-change-proposal-2026-09-11-phase17-api-stability-1-0.md` + PRD addendum「Phase 17」**已批准**（**Phase 17 contract approved** 2026-09-11；`correctCoursePhase17Approved: 2026-09-11`）。  
 闸门 **FR141 / Epic 79 已关闭**（Story 79.4）；实现 epic = Epic 80–83（**FR142 / Epic 80 已关闭**；**FR143+FR144 / Epic 81 已关闭**；**FR145 / Epic 82 已关闭** — FR145-skip；**FR146 / Epic 83 已关闭** — workspace **1.0.0** / tag `v1.0.0` / `docs/fr146-bitloom-1-0-0-release.md`；宣称→**FR147**）。
 **禁止**用 Phase 16 终局 alone 冒充 1.0 / 公开 API 稳定（**NFR60** / **FR147**）。**Phase 17 实现故事已齐（Epic 79–83）。** 软序 **79 → 80 → 81 ‖ 82 → 83** 已完成。表面修订须更新 `docs/public-api-1-0-surface.md`，**不得静默扩大**承诺。NFR59 仍 deferred（**NFR63**）。
-Phase 12–16 关闭证据**仍有效**。NFR59 仍 deferred（自动 FSM 标签提取、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生，及更深 IP/GUI/协议/CIRCT/Chisel 子集）；**1.0 ≠ 清空 NFR59**（**NFR63**）。Q1–Q5：`bitloom-sim` IN；hir/builder/vlog publish OK 不进 1.0 承诺；Epic 82 skip-if-no-blockers；不以 NFR59 为 1.0 前提；保持 MSRV。公开品牌 **Bitloom**。当前仍为 **0.x** 直至 **FR146**。  
-README「状态与 deferred」同源（Story 79.3）。
+Phase 12–16 关闭证据**仍有效**。NFR59 仍 deferred（自动 FSM 标签提取、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生，及更深 IP/GUI/协议/CIRCT/Chisel 子集）；**1.0 ≠ 清空 NFR59**（**NFR63**）。Q1–Q5：`bitloom-sim` IN；hir/builder/vlog publish OK 不进 1.0 承诺；Epic 82 skip-if-no-blockers；不以 NFR59 为 1.0 前提；保持 MSRV。公开品牌 **Bitloom**。**FR146 已关闭**（workspace/`v1.0.0`；库 crate 已上 crates.io）；**CLI 上架 → Phase 18**。  
+README「状态与 deferred」同源（Story 79.3 / 83.x）。
+
+## Phase 18 pointer (FR148–153 / NFR64–NFR67) — CLI / 依赖 crate crates.io 可发布收口
+
+Correct Course `sprint-change-proposal-2026-09-11-phase18-cli-crates-io-publish.md` + PRD addendum「Phase 18」**已批准**（**Phase 18 contract approved** 2026-09-11；`correctCoursePhase18Approved: 2026-09-11`）。  
+闸门 **FR148 / Epic 84**（未关闭前 Epic 85–86 不得 ready）；实现 epic = Epic 85–86（FR149–153）。  
+**禁止**在 FR151 关闭前暗示 `cargo install bitloom` 已可用（**NFR64** / 宣称纪律）。软序 **84 → 85 → 86**。  
+Phase 12–17 关闭证据**仍有效**。NFR59 仍 deferred（**NFR67**）。Q1–Q5：rename→`bitloom-firrtl`/`bitloom-viz`；FR152(b)；不以 NFR59 为前提；保持 MSRV。公开品牌 **Bitloom**。  
+README「状态与 deferred」同源（Story 84.3）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
