@@ -264,7 +264,9 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **Phase 14（NFR47 未选加深升格 · FR116–FR123 / NFR48–NFR51）：** Correct Course 已批准（2026-09-10）。Phase 12/13 关闭证据**仍有效**（**NFR48**），**不得**改写为失败。Phase 14 = 将原 NFR47 未选加深子集升格为显式合同（闸门 **FR116** / Epic 57 **已关闭**；实现 Epic 58–63 **全部已关闭**：**FR117–FR122**），**不是**「Phase 13 AC 未达标」补救。**Phase 14 规划/实现故事已齐（Epic 57–63）。** 对外「Tywaves / syn-scan / SBY / VIP GPIO / Handshake / 官方风格全家桶」类宣称按 **FR123** 勾选（对应 **FR116–122** 关闭后方可）；**禁止**用 Phase 13 商业加深完成面冒充本批加深。原 NFR51 明示剩余已另开 **Phase 15** 合同（见下）。
 
-**Phase 15（NFR51 剩余升格 · FR124–FR132 / NFR52–NFR55）：** Correct Course 已批准（2026-09-10）。Phase 12–14 关闭证据**仍有效**（**NFR52**），**不得**改写为失败。Phase 15 = 将原 NFR51 明示剩余升格为显式合同（闸门 **FR124** / Epic 64；实现 Epic 65–71 · **FR125–FR131**），**不是**「Phase 14 AC 未达标」补救。对外「上游 Tywaves 一等 / 更多 IP FL / 强制 sby CI / 全 SoC pad / CIRCT Handshake / Style Guide·Parser / ip.rs 拆分」类宣称按 **FR132** 勾选（对应 **FR124–131** 关闭后方可）；**禁止**用 Phase 14 完成面（含 FR117/119/120/121/122 alone）冒充本批加深。
+**Phase 15（NFR51 剩余升格 · FR124–FR132 / NFR52–NFR55）：** Correct Course 已批准（2026-09-10）。Phase 12–14 关闭证据**仍有效**（**NFR52**），**不得**改写为失败。Phase 15 = 将原 NFR51 明示剩余升格为显式合同（闸门 **FR124** / Epic 64 **已关闭**；实现 Epic 65–71 **全部已关闭**：**FR125–FR131**），**不是**「Phase 14 AC 未达标」补救。**Phase 15 规划/实现故事已齐（Epic 64–71）。** 对外「上游 Tywaves 一等 / 更多 IP FL / 强制 sby CI / 全 SoC pad / CIRCT Handshake / Style Guide·Parser / ip.rs 拆分」类宣称按 **FR132** 勾选（对应 **FR124–131** 关闭后方可）；**禁止**用 Phase 14 完成面（含 FR117/119/120/121/122 alone）冒充本批加深。原 NFR55 明示剩余已另开 **Phase 16** 合同（见下）。
+
+**Phase 16（产品终局结项 / NFR55 升格 · FR133–FR140 / NFR56–NFR59）：** Correct Course 已批准（2026-09-11）。Phase 12–15 关闭证据**仍有效**（**NFR56**），**不得**改写为失败。Phase 16 = 将原 NFR55 明示剩余升格为显式终局加深合同（闸门 **FR133** / Epic 72；实现 Epic 73–78 · **FR134–FR139**），**不是**「Phase 15 AC 未达标」补救，**也不等于**冲 1.0 / backlog 永久空。对外「终局 / Tywaves GUI·IDE / 更多 IP FL / 全芯片 pad / 外部 CIRCT 门禁 / Parser 恢复 / IP 跨 crate」类宣称按 **FR140** 勾选（对应 **FR133–139** 关闭后方可）；**禁止**用 Phase 15 完成面（含 **FR125–131 alone**）冒充本批 / 终局完成面。未列入本批的 deferred 仍须另开合同（**NFR59**）。
 
 **Phase 12 规划/实现故事已齐（Epic 40–47 已关闭）。** Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。
 
@@ -322,7 +324,30 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 完整 Style Guide ± Parser | FR130 / 70 | vs FR122 O1–O4（可能 AD-27）— **Epic 70 已关闭**（Story 70.3；Style Guide；Parser 未恢复） |
 | `ip.rs` 按协议拆分 | FR131 / 71 | 拆分本身；软序先于 FR128 — **Epic 71 已关闭**（Story 71.3；`ip/` 协议模块） |
 
-**FR132 宣称纪律：** 「上游 Tywaves 一等 / 更多 IP FL / 强制 sby CI / 全 SoC pad / CIRCT Handshake / Style Guide·Parser / ip.rs 拆分」**仅**在对应 **FR124–131** 关闭后方可勾选；**禁止**用 Phase 14 完成面冒充。公开品牌 **Bitloom**。
+**FR132 宣称纪律：** 「上游 Tywaves 一等 / 更多 IP FL / 强制 sby CI / 全 SoC pad / CIRCT Handshake / Style Guide·Parser / ip.rs 拆分」**仅**在对应 **FR124–131** 关闭后方可勾选；**禁止**用 Phase 14 完成面冒充。**不得**把 **FR125–131 alone** 写成 Phase 16 / 终局完成面（→ **FR133–140 / Phase 16**）。公开品牌 **Bitloom**。
+
+### Phase 16 加深面（合同已批准；闸门 Epic 72 / FR133；Phase 16 规划故事已齐 Epic 72–78；实现 Epic 73–78 未关闭前不得宣称对应 FR）
+
+下列原 Phase 15 **NFR55 明示剩余**已由 Correct Course + **FR133** 升格为 Phase 16 显式 FR（Epic 72–78）。对外宣称按 **FR140**。同源：PRD addendum「Phase 16」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。**不得**把 FR125–131 alone 写成 Phase 16 / 终局完成面。
+
+| 加深面 | FR / Epic | 相对 Phase 15 关闭面 |
+| --- | --- | --- |
+| 真实上游 Tywaves GUI / IDE 插件 | FR134 / 73 | vs FR125 `--tywaves` / JSON — 闸门后实现 |
+| 更多 IP 手写 FL（超出 GpioFunctional） | FR135 / 74 | vs FR126 `GpioFunctional` — 闸门后实现 |
+| 全芯片 pad / 多外设对拍 | FR136 / 75 | vs FR128 `GpioSocPad` D1–D4 — 闸门后实现 |
+| 外部 CIRCT 真机门禁 | FR137 / 76 | vs FR129 树内 `schedule_circt_handshake` — 闸门后实现 |
+| 恢复 Parser + AD-27 再修订 | FR138 / 77 | vs FR130 Style Guide（Parser 未恢复）— 闸门后实现 |
+| VIP/SocPad 再拆 / IP 跨 crate | FR139 / 78 | vs FR131 `ip/` 协议模块 — 闸门后实现 |
+
+**FR140 宣称纪律：** 「终局 / Tywaves GUI·IDE / 更多 IP FL / 全芯片 pad / 外部 CIRCT 门禁 / Parser 恢复 / IP 跨 crate」**仅**在对应 **FR133–139** 关闭后方可勾选；**禁止**用 Phase 15 完成面（含 FR125–131 alone）冒充。终局口径 = 本批关闭 + 诚实 **NFR59** deferred；**不等于**冲 1.0。公开品牌 **Bitloom**。
+
+**NFR59 仍 deferred（须另开合同；不得因「终局结项」口号静默吞并）：**
+
+- 自动 FSM 标签提取
+- 第三方 LCOV GUI 一等集成
+- emit MemRead stub → 完整生成
+- 非 Cargo 全 monorepo 任意路径扫描
+- GHA `formal-sby` 镜像卫生跟踪
 
 **明确 deferred / 未承诺为产品完整面（可延期；上列五项已不再是永久非目标）：**
 
