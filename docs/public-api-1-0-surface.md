@@ -7,7 +7,7 @@
 
 ## Purpose
 
-Pin the **in-surface** vs **out-of-promise / out-of-surface** partition for SemVer **1.0** major stability. Breaking changes **inside** in-surface require a **major** bump once 1.0.0 is published (see future `docs/semver-1-0-policy.md` / FR143).
+Pin the **in-surface** vs **out-of-promise / out-of-surface** partition for SemVer **1.0** major stability. Breaking changes **inside** in-surface require a **major** bump once 1.0.0 is published (see [`docs/semver-1-0-policy.md`](semver-1-0-policy.md) / FR143).
 
 ## Design crate dependency boundary (AD-6)
 
