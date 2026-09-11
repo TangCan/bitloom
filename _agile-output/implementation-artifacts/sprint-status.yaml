@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 18:38
+last_updated: 09-11-2026 10:20
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -2277,112 +2277,112 @@ action_items:
     action: "FR141/FR147 honesty: Phase 16 finality is not Bitloom 1.0 shipped; Epic
       79 close only unblocks 80–83; claims need FR147 / later close evidence."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-79-retro-2026-09-11.md"
   - id: "epic-79-retro-item-255-keep-phase-12-16-closing-faces-valid-nfr"
     epic: 79
     action: "Keep Phase 12–16 closing faces valid (NFR60); do not rewrite closed FRs
       as failed because of Phase 17."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-79-retro-2026-09-11.md"
   - id: "epic-79-retro-item-256-keep-commit-subjects-story-n-m-and-retro"
     epic: 79
     action: "Keep commit subjects Story N.M and retro --stories short ids."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-79-retro-2026-09-11.md"
   - id: "epic-79-retro-item-257-nfr59-deeper-unlisted-work-still-needs-e"
     epic: 79
     action: "NFR59 / deeper unlisted work still needs explicit contract (NFR63); do
       not silently expand via 1.0 gate slogans."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-79-retro-2026-09-11.md"
   - id: "epic-80-retro-item-258-fr142-honesty-1-0-stable-surface-must-ci"
     epic: 80
     action: "FR142 honesty: 1.0 stable surface must cite docs/public-api-1-0-surface.md;
       non-promise crates (hir/builder/vlog) are not SemVer-guaranteed."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-80-retro-2026-09-11.md"
   - id: "epic-80-retro-item-259-in-surface-changes-must-go-through-semve"
     epic: 80
     action: "IN-surface changes must go through SemVer/FR143–144 contract; do not
       silently expand the promise."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-80-retro-2026-09-11.md"
   - id: "epic-80-retro-item-260-keep-commit-subjects-story-n-m"
     epic: 80
     action: "Keep commit subjects Story N.M."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-80-retro-2026-09-11.md"
   - id: "epic-81-retro-item-261-fr143-fr144-honesty-semver-guarantee-cov"
     epic: 81
     action: "FR143/FR144 honesty: SemVer guarantee covers only surface-doc crates;
       CI green ≠ crates.io 1.0.0 published."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-81-retro-2026-09-11.md"
   - id: "epic-81-retro-item-262-keep-major-semantics-for-first-release-v"
     epic: 81
     action: "Keep major semantics for first release vs 0.x; document BITLOOM_SEMVER_ASSUME_PUBLISHED
       switch after live publish."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-81-retro-2026-09-11.md"
   - id: "epic-81-retro-item-263-keep-commit-subjects-story-n-m"
     epic: 81
     action: "Keep commit subjects Story N.M."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-81-retro-2026-09-11.md"
   - id: "epic-82-retro-item-264-fr145-skip-honesty-skip-surface-has-no-d"
     epic: 82
     action: "FR145-skip honesty: skip ≠ surface has no drift; known PortField etc.
       cite skip doc and treat as 1.0 major."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-82-retro-2026-09-11.md"
   - id: "epic-82-retro-item-265-if-a-true-blocker-appears-later-open-a-n"
     epic: 82
     action: "If a true blocker appears later, open a new hygiene contract; do not
       silently ignore."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-82-retro-2026-09-11.md"
   - id: "epic-82-retro-item-266-keep-commit-subjects-story-n-m"
     epic: 82
     action: "Keep commit subjects Story N.M."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-82-retro-2026-09-11.md"
   - id: "epic-83-retro-item-267-fr146-fr147-honesty-tag-docs-all-crates"
     epic: 83
     action: "FR146/FR147 honesty: tag/docs ≠ all crates on crates.io; CLI publish
       blockers cite FR146 manual follow-up; NFR59 not cleared (NFR63)."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-83-retro-2026-09-11.md"
   - id: "epic-83-retro-item-268-keep-phase-12-16-closing-faces-valid-nfr"
     epic: 83
     action: "Keep Phase 12–16 closing faces valid (NFR60/NFR56); claims only via FR147."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-83-retro-2026-09-11.md"
   - id: "epic-83-retro-item-269-keep-story-n-m-subjects-sequential-cargo"
     epic: 83
     action: "Keep Story N.M subjects; sequential cargo publish is ops follow-up, not
       rewriting Epic 83 as failed."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-83-retro-2026-09-11.md"
   - id: "epic-83-retro-item-270-after-phase-17-retros-deeper-unlisted-wo"
     epic: 83
     action: "After Phase 17 retros, deeper unlisted work still needs explicit contract
       (NFR59/NFR63)."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-83-retro-2026-09-11.md"
