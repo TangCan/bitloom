@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 09:25
+last_updated: 09-11-2026 09:30
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -490,7 +490,7 @@ development_status:
   68-1-epic-68-nfr14-风险记录: done
   68-2-全-soc-pad-路径实现与验收-fr128: done
   68-3-fr128-收口与文档指针: done
-  epic-68-retrospective: optional
+  epic-68-retrospective: done
 
   epic-69: done
   69-1-epic-69-nfr14-风险记录: done
@@ -1908,3 +1908,28 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-67-retro-2026-09-11.md"
+  - id: "epic-68-retro-item-210-fr128-诚实边界-对外不得把-fr108-gpiovip-c1-c4-alo"
+    epic: 68
+    action: "FR128 诚实边界：对外不得把 FR108 / GpioVip C1–C4 alone 写成全 SoC pad / FR128 完成面；宣称须引
+      D1–D4。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-68-retro-2026-09-11.md"
+  - id: "epic-68-retro-item-211-触碰-bitloom-prelude-ip-gpio-路径时保持-fr98-10"
+    epic: 68
+    action: "触碰 bitloom-prelude ip/gpio 路径时保持 FR98/108/120 回归可用（NFR52）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-68-retro-2026-09-11.md"
+  - id: "epic-68-retro-item-212-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 68
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-68-retro-2026-09-11.md"
+  - id: "epic-68-retro-item-213-可选工程卫生-若交付多外设-全芯片-pad-环-须新合同钉死-nfr55-当前完"
+    epic: 68
+    action: "可选工程卫生：若交付多外设/全芯片 pad 环，须新合同钉死（NFR55）；当前完成面为 GpioSocPad D1–D4。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-68-retro-2026-09-11.md"
