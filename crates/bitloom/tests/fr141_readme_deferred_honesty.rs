@@ -225,7 +225,7 @@ fn fr141_readme_bitloom_brand() {
         "README public brand must remain Bitloom"
     );
     assert!(
-        readme.contains("0.x") || readme.contains("当前仍为"),
-        "README must keep 0.x until FR146 / Epic 83"
+        readme.contains("0.x") || readme.contains("1.0.0") || readme.contains("当前仍为"),
+        "README must keep version honesty (0.x history and/or 1.0.0 after FR146)"
     );
 }

@@ -62,3 +62,4 @@ After **1.0.0** is on crates.io, set `BITLOOM_SEMVER_ASSUME_PUBLISHED=1` (or rem
 - Public product **Bitloom** / `bitloom`
 - 「1.0 / 公开 API 稳定」claims require FR141–146 (**FR147**)
 - **NFR59** remains deferred (**NFR63**)
+- **CLI `cargo install bitloom`:** not claimed until **FR151** (Phase 18 / Epic 85); library 1.0.0 ≠ CLI published

@@ -15,13 +15,21 @@ Rust 嵌入式 RTL HDL：设计是**可执行生成器**。`cargo bitloom build`
 
 文档、徽章与发布说明不得暗示本工具链以 crates.io 包名 `rhdl` 发布。
 
-## 快速开始（真独立；不必 clone）
+## 快速开始
+
+**诚实面（Phase 17 vs Phase 18）：** 库 crate（`bitloom-macro` / `hir` / `builder` / `vlog` / `sim` / `prelude`）已在 crates.io **1.0.0**（Phase 17 / FR146）。**公开 CLI `bitloom` 尚不可 `cargo install`**，直至 **FR151** 关闭（Phase 18 / Epic 85）。**禁止**在 FR151 前暗示 crates.io 安装已可用。贡献者请 clone 本仓库后使用 workspace CLI。
 
 ```bash
+# 贡献者 / FR151 关闭前（workspace）
 rustup toolchain install 1.97.1
-cargo install bitloom
-cargo bitloom new blink
-cargo bitloom build --package blink --manifest-dir blink --out-dir out
+cargo run -p bitloom -- new blink
+cargo run -p bitloom -- build --package blink --manifest-dir blink --out-dir out
+```
+
+```bash
+# 目标路径（仅 FR151 关闭后宣称可用）
+# cargo install bitloom
+# cargo bitloom new blink
 ```
 
 设计 crate 只依赖 **`bitloom-prelude`**（不要把 CLI 包 `bitloom` 加进 `[dependencies]`）。与 **bitbloom** 等无关拼写无关；与 [samitbasu/rhdl](https://github.com/samitbasu/rhdl) 无关。
@@ -256,7 +264,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 ## 状态与 deferred（诚实声明）
 
-当前为 **0.x**。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS（树内 FR95/FR96 MVP + 外挂 Bambu 可选）**、**Idiomatic Chisel（FR97 · Epic 42）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
+库 crate 表面为 **1.0.0**（Phase 17 / FR146；曾为 **0.x** 直至 FR146）。**CLI 仍待 FR151**（Phase 18），不得暗示 `cargo install bitloom` 已可用。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS（树内 FR95/FR96 MVP + 外挂 Bambu 可选）**、**Idiomatic Chisel（FR97 · Epic 42）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
 
 **路线图阶段五–七「绿 / 全绿」字面绿 MVP 按 Phase 12 验收（FR94–105 / NFR42）：字面项须由对应 FR 关闭后方可勾选；Phase 12 Epic 40–47 已关闭。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9。Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**，**禁止**用合同绿冒充字面全绿。
 
@@ -268,7 +276,9 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **Phase 16（产品终局结项 / NFR55 升格 · FR133–FR140 / NFR56–NFR59）：** Correct Course 已批准（2026-09-11）。Phase 12–15 关闭证据**仍有效**（**NFR56**），**不得**改写为失败。Phase 16 = 将原 NFR55 明示剩余升格为显式终局加深合同（闸门 **FR133** / Epic 72 **已关闭**；**Phase 16 规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 73 / FR134 已关闭**；**Epic 74 / FR135 已关闭**；**Epic 75 / FR136 已关闭**；**Epic 76 / FR137 已关闭**；**Epic 77 / FR138 已关闭**；**Epic 78 / FR139 已关闭**），**不是**「Phase 15 AC 未达标」补救，**也不等于**冲 1.0 / backlog 永久空。对外「终局 / Tywaves GUI·IDE / 更多 IP FL / 全芯片 pad / 外部 CIRCT 门禁 / Parser 恢复 / IP 跨 crate」类宣称按 **FR140** 勾选（对应 **FR133–139** 关闭后方可）；**禁止**用 Phase 15 完成面（含 **FR125–131 alone**）冒充本批 / 终局完成面。未列入本批的 deferred（含更深 IP 布局 / 更深 GUI·IDE 子集 / 未列入协议手写 FL / 更广 CIRCT·MLIR lower / 仿真门禁加深 / 更深 Chisel·Parser 生态）仍须另开合同（**NFR59**）。**禁止**用 Phase 16 终局 alone 冒充 **1.0 / 公开 API 稳定**（→ **Phase 17 / FR141–147**）。
 
-**Phase 17（公开 API 稳定门 / Bitloom 1.0 · FR141–FR147 / NFR60–NFR63）：** Correct Course 已批准（2026-09-11）。Phase 12–16 关闭证据**仍有效**（**NFR60**）。闸门 **FR141** / Epic 79–82 **已关闭**；**Epic 83 / FR146：** workspace **1.0.0** + tag `v1.0.0` + CHANGELOG（见 [`docs/fr146-bitloom-1-0-0-release.md`](docs/fr146-bitloom-1-0-0-release.md)；crates.io 全序 upload 可按清单续作）。对外「1.0 / 公开 API 稳定」按 **FR147**（Epic 83 收口后勾选）。**禁止**用 Phase 16 终局 alone 冒充 1.0。**NFR59** 仍 deferred（**NFR63**）。公开表面：[`docs/public-api-1-0-surface.md`](docs/public-api-1-0-surface.md)。
+**Phase 17（公开 API 稳定门 / Bitloom 1.0 · FR141–FR147 / NFR60–NFR63）：** Correct Course 已批准（2026-09-11）。Phase 12–16 关闭证据**仍有效**（**NFR60**）。闸门 **FR141** / Epic 79–83 **已关闭**；**Epic 83 / FR146：** workspace **1.0.0** + tag `v1.0.0` + CHANGELOG；库 crate 已上 crates.io **1.0.0**（见 [`docs/fr146-bitloom-1-0-0-release.md`](docs/fr146-bitloom-1-0-0-release.md)）。对外「1.0 / 公开 API 稳定」按 **FR147**。**禁止**用 Phase 16 终局 alone 冒充 1.0。**NFR59** 仍 deferred（**NFR63**）。**CLI 上架 ≠ Phase 17 完成面**（→ **Phase 18 / FR148–153**）。公开表面：[`docs/public-api-1-0-surface.md`](docs/public-api-1-0-surface.md)。
+
+**Phase 18（CLI / 依赖 crate crates.io 可发布 · FR148–FR153 / NFR64–NFR67）：** Correct Course 已批准（2026-09-11）。Phase 12–17 关闭证据**仍有效**（**NFR64**），**不得**改写为失败。闸门 **FR148** / Epic 84（未关闭前 Epic 85–86 不得 ready）。实现映射：`bitloom-firrtl` **FR149**；`bitloom-viz` **FR150**；CLI 上架 **FR151**；lsp 策略 **FR152(b)**；发版后诚实 / SemVer 跟进 **FR153**。**禁止**在 FR151 关闭前暗示 `cargo install bitloom` 已可用。**口径：** CLI 上架 ≠ 清空 NFR59（**NFR67**）。公开品牌 **Bitloom**。同源：[`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md) Phase 18 pointer。
 
 **Phase 12 规划/实现故事已齐（Epic 40–47 已关闭）。** Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。
 
@@ -343,7 +353,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 **FR140 宣称纪律：** 「终局 / Tywaves GUI·IDE / 更多 IP FL / 全芯片 pad / 外部 CIRCT 门禁 / Parser 恢复 / IP 跨 crate」**仅**在对应 **FR133–139** 关闭后方可勾选；**禁止**用 Phase 15 完成面（含 FR125–131 alone）冒充。终局口径 = 本批关闭 + 诚实 **NFR59** deferred；**不等于**冲 1.0 / 公开 API 稳定（→ **Phase 17**）。公开品牌 **Bitloom**。
 
-### Phase 17 稳定门（合同已批准；闸门 Epic 79 / FR141 已关闭；Epic 80–82 已关闭；Epic 83 须 NFR14 后方可 ready）
+### Phase 17 稳定门（合同已批准；闸门 Epic 79 / FR141 已关闭；Epic 79–83 已关闭）
 
 下列 **公开 API 稳定门 / Bitloom 1.0** 项已由 Correct Course + **FR141** 升格为 Phase 17 显式 FR（Epic 79–83）。对外宣称按 **FR147**。同源：PRD addendum「Phase 17」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。**不得**把 Phase 16 终局 alone 写成 1.0 / 公开 API 稳定。
 
@@ -353,11 +363,26 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | SemVer 1.0 政策 | FR143 / 81 | vs `docs/semver-0x-policy.md` / NFR15；表面内 breaking → major — **Epic 81 已关闭**（Story 81.4；[`docs/semver-1-0-policy.md`](docs/semver-1-0-policy.md)） |
 | 破坏性变更 CI 门禁 | FR144 / 81 | `cargo-semver-checks` / `just semver-check`；失败非零 — **Epic 81 已关闭**（同 Story 81.4；CI job `semver-check`） |
 | 预 1.0 表面卫生（可选） | FR145 / 82 | 仅阻塞 breaking；无阻塞可 skip（Q3）— **Epic 82 已关闭**（Story 82.3；**FR145-skip** — [`docs/fr145-pre-1-0-hygiene-skip.md`](docs/fr145-pre-1-0-hygiene-skip.md)） |
-| 发布 Bitloom 1.0.0 | FR146 / 83 | 版本 / tag `v1.0.0` / CHANGELOG / publish 或 dry-run+清单 — **Story 83.2 已落地**（[`docs/fr146-bitloom-1-0-0-release.md`](docs/fr146-bitloom-1-0-0-release.md)；Epic 83 收口→83.3） |
+| 发布 Bitloom 1.0.0 | FR146 / 83 | 版本 / tag `v1.0.0` / CHANGELOG / publish 或 dry-run+清单 — **Epic 83 已关闭**（[`docs/fr146-bitloom-1-0-0-release.md`](docs/fr146-bitloom-1-0-0-release.md)；库 crate 已上架；**CLI → Phase 18 / FR151**） |
 
-**FR147 宣称纪律：** 「1.0 / 公开 API 稳定」**仅**在对应 **FR141–146** 关闭后方可勾选 — **Phase 17 / Epic 79–83 已关闭**（FR146：`v1.0.0` / [`docs/fr146-bitloom-1-0-0-release.md`](docs/fr146-bitloom-1-0-0-release.md)）。**禁止**用 Phase 16 终局 alone 冒充。1.0 口径 = 对 FR142 钉死表面的 SemVer major 承诺 + 诚实 **NFR59** deferred（**NFR63**）；**不等于**清空 NFR59。公开品牌 **Bitloom**。crates.io 全序 upload 可按 FR146 清单续作。
+**FR147 宣称纪律：** 「1.0 / 公开 API 稳定」**仅**在对应 **FR141–146** 关闭后方可勾选 — **Phase 17 / Epic 79–83 已关闭**（FR146：`v1.0.0` / [`docs/fr146-bitloom-1-0-0-release.md`](docs/fr146-bitloom-1-0-0-release.md)）。**禁止**用 Phase 16 终局 alone 冒充。1.0 口径 = 对 FR142 钉死表面的 SemVer major 承诺 + 诚实 **NFR59** deferred（**NFR63**）；**不等于**清空 NFR59。公开品牌 **Bitloom**。**不等于** CLI 已可 `cargo install`（→ Phase 18）。
 
-**NFR59 仍 deferred（须另开合同；不得因「终局结项」或「1.0」口号静默吞并；NFR63）：**
+### Phase 18 CLI 可发布（合同已批准；闸门 Epic 84 / FR148；Epic 85–86 实现）
+
+下列 **CLI / 依赖 crate crates.io 可发布** 项已由 Correct Course + **FR148** 升格为 Phase 18 显式 FR（Epic 84–86）。对外「CLI 已可从 crates.io 安装」类宣称须对应 **FR148–153** 关闭后方可勾选。同源：PRD addendum「Phase 18」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。**不得**把 Phase 17 库 1.0 alone 写成 CLI 已上架。
+
+| 可发布面 | FR / Epic | 相对 Phase 17 关闭面 |
+| --- | --- | --- |
+| Phase 18 合同闸门 | FR148 / 84 | Correct Course + README/deferred/AD 诚实边界；未关闭前 85–86 不得 ready |
+| `bitloom-firrtl` 可发布 | FR149 / 85 | rename `rhdl-firrtl` → `bitloom-firrtl`；`publish=true`（AD-2） |
+| `bitloom-viz` 可发布 | FR150 / 85 | rename `rhdl-viz` → `bitloom-viz`；`publish=true`（AD-2） |
+| `bitloom` CLI 1.0.0 上架 | FR151 / 85 | `cargo install bitloom` 可用之前提 |
+| `bitloom-lsp` 发布策略 (b) | FR152 / 85 | 默认可 `publish=false`，须不挡 CLI 打包 |
+| SemVer / 发版诚实跟进 | FR153 / 86 | assume-published + 文档/Release 诚实 |
+
+**FR148–153 宣称纪律：** 「CLI 已可从 crates.io 安装」**仅**在对应 FR 关闭后方可勾选；**禁止**在 FR151 前暗示 `cargo install bitloom` 已可用。CLI 上架 ≠ 清空 NFR59（**NFR67**）。公开品牌 **Bitloom**。
+
+**NFR59 仍 deferred（须另开合同；不得因「终局结项」「1.0」或「CLI 上架」口号静默吞并；NFR63 / NFR67）：**
 
 - 自动 FSM 标签提取
 - 第三方 LCOV GUI 一等集成
