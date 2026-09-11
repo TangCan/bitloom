@@ -1018,7 +1018,7 @@ fn run_visualize(input: &Path, out_dir: &Path) -> Result<PathBuf, String> {
     let text = fs::read_to_string(input).map_err(|e| format!("read {}: {e}", input.display()))?;
     let hir = bitloom_firrtl::import(&text).map_err(|d| d.to_string())?;
     fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
-    let html = rhdl_viz::to_html(&hir);
+    let html = bitloom_viz::to_html(&hir);
     if !html.contains("Instance hierarchy") || !html.contains("Modules and ports") {
         return Err("hierarchy HTML missing required sections".into());
     }
@@ -1047,7 +1047,7 @@ fn run_wave(
     let text = fs::read_to_string(input).map_err(|e| format!("read {}: {e}", input.display()))?;
     let hir = bitloom_firrtl::import(&text).map_err(|d| d.to_string())?;
     let title = hir.abi_name.clone();
-    let typed = rhdl_viz::typed_signals_from_hir(&hir);
+    let typed = bitloom_viz::typed_signals_from_hir(&hir);
     fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
 
     let vcd_path = out_dir.join("wave.vcd");
@@ -1091,15 +1091,15 @@ fn run_wave(
     if vcd_text.trim().is_empty() {
         return Err(format!("VCD empty at {}", vcd_path.display()));
     }
-    let samples = rhdl_viz::samples_from_vcd(&vcd_text)?;
-    let html = rhdl_viz::timing_html(&title, &samples);
+    let samples = bitloom_viz::samples_from_vcd(&vcd_text)?;
+    let html = bitloom_viz::timing_html(&title, &samples);
     if !html.contains("Value table") {
         return Err("timing HTML missing Value table".into());
     }
     let timing_path = out_dir.join("timing.html");
     fs::write(&timing_path, &html).map_err(|e| format!("write {}: {e}", timing_path.display()))?;
 
-    let interactive = rhdl_viz::interactive_wave_html(&title, &samples);
+    let interactive = bitloom_viz::interactive_wave_html(&title, &samples);
     if !interactive.contains("data-bitloom-interactive-wave") {
         return Err("interactive HTML missing FR104 marker".into());
     }
@@ -1113,7 +1113,7 @@ fn run_wave(
                 .into(),
         );
     }
-    let typed_html = rhdl_viz::typed_wave_html(&title, &samples, &typed);
+    let typed_html = bitloom_viz::typed_wave_html(&title, &samples, &typed);
     if !typed_html.contains("data-bitloom-typed-wave=\"1\"") {
         return Err("typed-wave.html missing FR117 marker".into());
     }
@@ -1121,7 +1121,7 @@ fn run_wave(
     fs::write(&typed_path, &typed_html)
         .map_err(|e| format!("write {}: {e}", typed_path.display()))?;
 
-    let typed_json = rhdl_viz::typed_wave_json(&title, &samples, &typed);
+    let typed_json = bitloom_viz::typed_wave_json(&title, &samples, &typed);
     if !typed_json.contains("\"ty\"") || !typed_json.contains("\"signals\"") {
         return Err("wave.typed.json missing typed signal fields".into());
     }
@@ -1136,7 +1136,7 @@ fn run_wave(
     println!("wrote {}", typed_json_path.display());
 
     if want_tywaves {
-        let tywaves_json = rhdl_viz::tywaves_wave_json(&title, &samples, &typed);
+        let tywaves_json = bitloom_viz::tywaves_wave_json(&title, &samples, &typed);
         if !tywaves_json.contains("data-bitloom-tywaves")
             || !tywaves_json.contains("\"fr\": \"FR125\"")
             || !tywaves_json.contains("schemaVersion")
@@ -1146,7 +1146,7 @@ fn run_wave(
         let tywaves_path = out_dir.join("wave.tywaves.json");
         fs::write(&tywaves_path, &tywaves_json)
             .map_err(|e| format!("write {}: {e}", tywaves_path.display()))?;
-        let launch = rhdl_viz::tywaves_launch_sh("wave.tywaves.json");
+        let launch = bitloom_viz::tywaves_launch_sh("wave.tywaves.json");
         let launch_path = out_dir.join("tywaves.launch.sh");
         fs::write(&launch_path, &launch)
             .map_err(|e| format!("write {}: {e}", launch_path.display()))?;
@@ -1164,7 +1164,7 @@ fn run_wave(
         println!("wrote {}", launch_path.display());
 
         if want_tywaves_gui {
-            let manifest = rhdl_viz::tywaves_gui_manifest(&title);
+            let manifest = bitloom_viz::tywaves_gui_manifest(&title);
             if !manifest.contains("data-bitloom-tywaves-gui")
                 || !manifest.contains("\"fr\": \"FR134\"")
                 || !manifest.contains("schemaVersion")
@@ -1176,7 +1176,7 @@ fn run_wave(
             let manifest_path = out_dir.join("tywaves.gui.manifest.json");
             fs::write(&manifest_path, &manifest)
                 .map_err(|e| format!("write {}: {e}", manifest_path.display()))?;
-            let install = rhdl_viz::tywaves_gui_install_json();
+            let install = bitloom_viz::tywaves_gui_install_json();
             if !install.contains("version")
                 || !install.contains("channel")
                 || !install.contains("tywaves.gui")
@@ -1187,7 +1187,7 @@ fn run_wave(
             let install_path = out_dir.join("tywaves.gui.install.json");
             fs::write(&install_path, &install)
                 .map_err(|e| format!("write {}: {e}", install_path.display()))?;
-            let gui_sh = rhdl_viz::tywaves_gui_install_sh();
+            let gui_sh = bitloom_viz::tywaves_gui_install_sh();
             let gui_sh_path = out_dir.join("tywaves.gui.install.sh");
             fs::write(&gui_sh_path, &gui_sh)
                 .map_err(|e| format!("write {}: {e}", gui_sh_path.display()))?;

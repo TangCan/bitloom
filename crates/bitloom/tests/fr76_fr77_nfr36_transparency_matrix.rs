@@ -98,7 +98,7 @@ fn matrix_fr77_ip_viz_verilog_firrtl_transparent() {
     assert_no_closure_ir("matrix/fr77/firrtl", &fir);
 
     // Cap-R-64: product viz (FR38 hierarchy HTML) must stay closure-opaque.
-    let html = rhdl_viz::to_html(&hir);
+    let html = bitloom_viz::to_html(&hir);
     assert!(
         html.contains("Crc8Lut") || html.contains("Bitloom"),
         "viz should render hierarchy for Crc8Lut"

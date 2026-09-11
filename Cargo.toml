@@ -58,7 +58,7 @@ rhdl-cabi = { path = "crates/rhdl-cabi" }
 rhdl-hls = { path = "crates/rhdl-hls" }
 rhdl-formal = { path = "crates/rhdl-formal" }
 rhdl-float = { path = "crates/rhdl-float" }
-rhdl-viz = { path = "crates/rhdl-viz" }
+bitloom-viz = { path = "crates/rhdl-viz", version = "1.0.0" }
 bitloom-firrtl = { path = "crates/rhdl-firrtl", version = "1.0.0" }
 proc-macro2 = "1"
 quote = "1"

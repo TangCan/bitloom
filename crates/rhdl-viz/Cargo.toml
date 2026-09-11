@@ -1,11 +1,17 @@
 [package]
-name = "rhdl-viz"
+name = "bitloom-viz"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-description = "HIR HTML dump / LSP scaffold (FR38)"
-publish = false
+description = "HIR HTML dump / wave viz for Bitloom (crates.io: bitloom-viz; FR38). Unrelated to samitbasu/rhdl."
+publish = true
+authors = ["Bitloom contributors"]
+keywords = ["hdl", "rtl", "visualization", "bitloom"]
+categories = ["compilers", "development-tools"]
+repository = "https://github.com/TangCan/bitloom"
+homepage = "https://github.com/TangCan/bitloom"
+documentation = "https://docs.rs/bitloom-viz"
 
 [dependencies]
 bitloom-hir = { workspace = true }

@@ -168,7 +168,7 @@ fn fr117_wave_emits_typed_artifacts_beyond_i1_i3() {
 #[test]
 fn fr117_missing_typed_meta_fails_readable() {
     // Library guard: empty typed meta must not silent-Ok as FR117.
-    use rhdl_viz::{WaveSample, typed_wave_html};
+    use bitloom_viz::{WaveSample, typed_wave_html};
     use std::collections::BTreeMap;
 
     let samples = vec![WaveSample {
