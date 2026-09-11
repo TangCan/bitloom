@@ -95,9 +95,9 @@ stepsCompleted:
   - step-02-design-epics-phase-18
   - step-03-create-stories-phase-18
   - step-04-final-validation-phase-18
-status: in-progress
+status: complete
 phase17Status: complete
-phase18Status: planning-complete
+phase18Status: complete
 correctCoursePhase18Approved: 2026-09-11
 phase18WorkflowComplete: 2026-09-11
 phase18Epic84Stories: 4
@@ -105,6 +105,7 @@ phase18Epic84Status: complete
 phase18Epic85Stories: 6
 phase18Epic85Status: complete
 phase18Epic86Stories: 3
+phase18Epic86Status: complete
 phase18StoryCount: 13
 phase18Validation: |
   FR148–153 mapped to Epic 84–86 stories (13); Epic 84 hard gate for 85–86;
@@ -112,8 +113,9 @@ phase18Validation: |
   File-churn: Epic 85 owns rename/publish/CLI (ordered stories); Epic 86 docs/semver only;
   Correct Course approved 2026-09-11; Story 84.2 verified stamps; Epic 84 closed Story 84.4;
   Epic 85 closed Story 85.6 (FR149–152; bitloom CLI 1.0.0 on crates.io);
-  create-epics-and-stories Phase 18 validated 2026-09-11 — planning complete;
-  next: Epic 86 NFR14 (86.1) then FR153 honesty / SemVer.
+  Epic 86 closed Story 86.3 (FR153 SemVer honesty / assume-published);
+  Phase 18 implementation stories complete (Epic 84–86); NFR59 still deferred (NFR67);
+  create-epics-and-stories Phase 18 validated 2026-09-11 — planning complete.
 phase18Note: >
   Phase 18 draft from create-epics Step 1 (2026-09-11): bitloom CLI crates.io
   publishability leftover after FR146 library upload. Defaults on unanswered Qs:
@@ -416,7 +418,7 @@ uxDesignPhase13: none---
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48–56 · FR106–FR115 / NFR44–NFR47，**complete**）。阶段十四：NFR47 未选加深升格（Epic 57–63 · FR116–FR123 / NFR48–NFR51，**complete**）。阶段十五：NFR51 剩余升格（Epic 64–71 · FR124–FR132 / NFR52–NFR55，**complete**）。阶段十六：产品终局结项 / NFR55 升格（Epic 72–78 · FR133–FR140 / NFR56–NFR59，**complete**）。阶段十七：公开 API 稳定门 / Bitloom 1.0（Epic 79–83 · FR141–FR147 / NFR60–NFR63，**complete**；Correct Course **approved** 2026-09-11；`v1.0.0`）。阶段十八：CLI / 依赖 crate crates.io 可发布（Epic 84–86 · FR148–FR153 / NFR64–NFR67；Correct Course **approved** 2026-09-11；规划齐 / sprint seeded）。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48–56 · FR106–FR115 / NFR44–NFR47，**complete**）。阶段十四：NFR47 未选加深升格（Epic 57–63 · FR116–FR123 / NFR48–NFR51，**complete**）。阶段十五：NFR51 剩余升格（Epic 64–71 · FR124–FR132 / NFR52–NFR55，**complete**）。阶段十六：产品终局结项 / NFR55 升格（Epic 72–78 · FR133–FR140 / NFR56–NFR59，**complete**）。阶段十七：公开 API 稳定门 / Bitloom 1.0（Epic 79–83 · FR141–FR147 / NFR60–NFR63，**complete**；Correct Course **approved** 2026-09-11；`v1.0.0`）。阶段十八：CLI / 依赖 crate crates.io 可发布（Epic 84–86 · FR148–FR153 / NFR64–NFR67，**complete**；Correct Course **approved** 2026-09-11；`bitloom` CLI 1.0.0 上架；FR153 SemVer honesty）。无 UX。
 
 ## Requirements Inventory
 

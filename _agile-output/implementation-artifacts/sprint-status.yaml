@@ -602,10 +602,10 @@ development_status:
   85-6-fr149-152-收口与文档指针: done
   epic-85-retrospective: optional
 
-  epic-86: in-progress
+  epic-86: done
   86-1-epic-86-nfr14-风险记录: done
   86-2-semver-assume-published-与发版诚实更新-fr153: done
-  86-3-fr153-收口与-phase-18-故事清单指针: ready-for-dev
+  86-3-fr153-收口与-phase-18-故事清单指针: done
   epic-86-retrospective: optional
 
 action_items:

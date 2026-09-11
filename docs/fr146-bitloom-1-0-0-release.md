@@ -63,4 +63,4 @@ cargo publish -p bitloom  # FR151 — done 2026-09-11
 - **NFR59** remains deferred (**NFR63** / **NFR67**)
 - **Library crates 1.0.0 on crates.io:** Phase 17 / FR146
 - **CLI `cargo install bitloom`:** **FR151** closed (Epic 85)
-- **SemVer assume-published / release honesty:** **FR153** (Story 86.2 landed; Epic 86 closeout → Story 86.3)
+- **SemVer assume-published / release honesty:** **FR153** closed (Epic 86 / Story 86.3)

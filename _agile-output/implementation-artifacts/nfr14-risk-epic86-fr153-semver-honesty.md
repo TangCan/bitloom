@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR153 / Epic 86；NFR14、NFR64、NFR65、NFR67；对照 FR148–152 |
 | 记录日期 | 2026-09-11 |
-| 状态 | open / in-progress — Story 86.1；待 Story 86.3 勾选关闭 |
+| 状态 | closed — Story 86.3 勾选完成；Epic 86 关闭；FR153 可宣称；**NFR59 仍 deferred**（NFR67） |
 | **选定** | 在保留 Phase 17–18 关闭面的前提下，授权 SemVer assume-published / 移除 1.0.0 特例，并更新发版诚实文档；**不清空 NFR59**；**不扩大 FR142** |
 
 ### Phase 17 / 85 关闭面 vs Epic 86 实现边界（NFR64 · 必读）
@@ -84,8 +84,8 @@
 
 ### Epic 86 关闭条件（Story 86.3 勾选）
 
-- [ ] **FR153：** SemVer 默认正确（assume-published / 无 1.0.0 特例）+ `docs/fr146-*` / README / Release 诚实 — Story 86.2
-- [ ] **NFR14 / NFR64–67：** 本记录勾选关闭；**NFR59 仍 deferred**（NFR67）
-- [ ] **Phase 18：** Epic 84–86 故事清单齐；CLI crates.io 宣称须引 FR148–153
+- [x] **FR153：** SemVer 默认正确（assume-published / 无 1.0.0 特例）+ `docs/fr146-*` / README / Release 诚实 — Story 86.2
+- [x] **NFR14 / NFR64–67：** 本记录勾选关闭；**NFR59 仍 deferred**（NFR67）
+- [x] **Phase 18：** Epic 84–86 故事清单齐；CLI crates.io 宣称须引 FR148–153
 
-**Epic 86 未关闭前：** 不得宣称 FR153 已关闭；公开品牌 **Bitloom**。
+**Epic 86 已关闭（Story 86.3）：** FR153 可宣称；`just semver-check` 对 ≥1.0.0 默认 minor；库+CLI 上架诚实面齐；Phase 18 实现故事齐（Epic 84–86）；**不得**静默吞并 NFR59（NFR67）；公开品牌 **Bitloom**。

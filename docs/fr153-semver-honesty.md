@@ -17,15 +17,20 @@
 | --- | --- | --- |
 | Library crates (`bitloom-macro` / `hir` / `builder` / `vlog` / `sim` / `prelude`) | **1.0.0 on crates.io** | Phase 17 / FR146 |
 | CLI `bitloom` (+ `bitloom-firrtl` / `bitloom-viz`) | **1.0.0 on crates.io**; `cargo install bitloom` | Phase 18 / FR149–151 |
-| SemVer gate default | **minor** for ≥1.0.0 | This FR / Story 86.2 |
+| SemVer gate default | **minor** for ≥1.0.0 | This FR / Epic 86 **closed** |
 | **NFR59** deepen leftovers | **Still deferred** | NFR67 — not cleared by CLI publish or SemVer honesty |
 
 ## Claims boundary
 
 - 「CLI 已可从 crates.io 安装」→ cite **FR151** (not Phase 17 alone).
 - 「SemVer 检查默认已按已发布 1.0 处理」→ cite **FR153**.
-- Do **not** imply **NFR59** is empty; do **not** silently expand **FR142**.
+- Phase 18 complete claims → cite **FR148–153**.
+- Do **not** imply **NFR59** is empty; do **not** silently expand **FR142**. Deeper deepen needs a new contract.
 
 ## Brand
 
 Public product **Bitloom**; crates.io / CLI **`bitloom`**.
+
+## Closeout
+
+- Epic 86 / Story 86.3: NFR14 closed; `phase18Status: complete`; Phase 18 implementation stories (Epic 84–86) complete.
