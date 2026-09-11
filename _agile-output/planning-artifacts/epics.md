@@ -117,7 +117,7 @@ phase17Scope: >
 phase17Epic79Status: complete
 phase17Epic80Status: complete
 phase17Epic81Status: complete
-phase17Epic82Status: backlog
+phase17Epic82Status: complete
 phase17Epic83Status: backlog
 phase17InputDocuments:
   - prds/prd-rhdl-2026-08-19/prd.md
