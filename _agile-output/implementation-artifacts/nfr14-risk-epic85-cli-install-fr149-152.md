@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR149–FR152 / Epic 85；NFR14、NFR64、NFR65、NFR66、NFR67；对照 FR148 / FR153 |
 | 记录日期 | 2026-09-11 |
-| 状态 | open / in-progress — Story 85.1；Epic 85 实现进行中；关闭勾选属 Story 85.6 |
+| 状态 | closed — Story 85.6 勾选完成；Epic 85 关闭；FR149–152 实现面可宣称；**FR153** 仍属 Epic 86（86.1 可 ready-for-dev） |
 | **选定** | 在保留 Phase 17 关闭面与 Epic 84 合同的前提下，授权 rename/publish `bitloom-firrtl`/`bitloom-viz`、FR152(b) lsp 策略、以及 `bitloom` CLI 1.0.0 上架 |
 
 ### Phase 17 / 84 关闭面 vs Epic 85 实现边界（NFR64 · 必读）
@@ -99,9 +99,11 @@
 
 ### Epic 85 关闭条件（Story 85.6 勾选）
 
-- [ ] **FR149：** `bitloom-firrtl` dry-run（+ 实发可勾选）— Story 85.2
-- [ ] **FR150：** `bitloom-viz` dry-run（+ 实发可勾选）— Story 85.3
-- [ ] **FR152(b)：** lsp 不挡 `bitloom` publish — Story 85.4
-- [ ] **FR151：** `bitloom` 1.0.0 publish（或 dry-run+凭证失败文档）— Story 85.5
-- [ ] **NFR14 / NFR64–67：** 本记录勾选关闭；NFR59 仍 deferred
-- [ ] **FR153：** 明确仍属 Epic 86；可将 86.1 标 ready-for-dev
+- [x] **FR149：** `bitloom-firrtl` dry-run（+ 实发可勾选）— Story 85.2
+- [x] **FR150：** `bitloom-viz` dry-run（+ 实发可勾选）— Story 85.3
+- [x] **FR152(b)：** lsp 不挡 `bitloom` publish — Story 85.4
+- [x] **FR151：** `bitloom` 1.0.0 publish（或 dry-run+凭证失败文档）— Story 85.5
+- [x] **NFR14 / NFR64–67：** 本记录勾选关闭；NFR59 仍 deferred
+- [x] **FR153：** 明确仍属 Epic 86；可将 86.1 标 ready-for-dev
+
+**Epic 85 已关闭（Story 85.6）：** FR149–152 实现面可宣称；`cargo install bitloom` 可用（FR151）；**FR153** 诚实/SemVer 跟进仍属 Epic 86；**不得**静默吞并 NFR59（NFR67）；公开品牌 **Bitloom**。

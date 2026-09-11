@@ -58,15 +58,28 @@ fn fr148_readme_cli_not_installable_until_fr151() {
         readme.contains("FR151"),
         "README must cite FR151 for CLI publish"
     );
-    assert!(
-        (readme.contains("cargo install") || readme.contains("`cargo install"))
-            && (readme.contains("禁止")
-                || readme.contains("尚不可")
-                || readme.contains("仍待")
-                || readme.contains("不得")
-                || readme.contains("暗示")),
-        "README must honestly state cargo install bitloom is not available until FR151"
-    );
+    let sprint = read("_agile-output/implementation-artifacts/sprint-status.yaml");
+    let epic85_done = sprint.contains("epic-85: done") || sprint.contains("epic-85:done");
+    if epic85_done {
+        assert!(
+            (readme.contains("cargo install") || readme.contains("`cargo install"))
+                && (readme.contains("已可")
+                    || readme.contains("已上架")
+                    || readme.contains("已关闭")
+                    || readme.contains("FR151")),
+            "after Epic 85, README must state cargo install bitloom is available via FR151"
+        );
+    } else {
+        assert!(
+            (readme.contains("cargo install") || readme.contains("`cargo install"))
+                && (readme.contains("禁止")
+                    || readme.contains("尚不可")
+                    || readme.contains("仍待")
+                    || readme.contains("不得")
+                    || readme.contains("暗示")),
+            "README must honestly state cargo install bitloom is not available until FR151"
+        );
+    }
     assert!(
         readme.contains("1.0.0")
             && (readme.contains("库")
@@ -129,8 +142,10 @@ fn fr148_deferred_phase18_pointer() {
         deferred.contains("FR151")
             && (deferred.contains("cargo install")
                 || deferred.contains("禁止")
-                || deferred.contains("暗示")),
-        "deferred must forbid implying cargo install before FR151"
+                || deferred.contains("暗示")
+                || deferred.contains("可用")
+                || deferred.contains("已关闭")),
+        "deferred must track FR151 cargo install honesty (pre- or post-close)"
     );
 }
 

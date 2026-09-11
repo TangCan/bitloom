@@ -17,19 +17,20 @@ Rust 嵌入式 RTL HDL：设计是**可执行生成器**。`cargo bitloom build`
 
 ## 快速开始
 
-**诚实面（Phase 17 vs Phase 18）：** 库 crate（`bitloom-macro` / `hir` / `builder` / `vlog` / `sim` / `prelude`）已在 crates.io **1.0.0**（Phase 17 / FR146）。**公开 CLI `bitloom` 尚不可 `cargo install`**，直至 **FR151** 关闭（Phase 18 / Epic 85）。**禁止**在 FR151 前暗示 crates.io 安装已可用。贡献者请 clone 本仓库后使用 workspace CLI。
+**诚实面（Phase 17 vs Phase 18）：** 库 crate（`bitloom-macro` / `hir` / `builder` / `vlog` / `sim` / `prelude`）已在 crates.io **1.0.0**（Phase 17 / FR146）。**公开 CLI `bitloom` 1.0.0 已可 `cargo install`**（**FR151** / Epic 85 已关闭；见 [`docs/fr151-bitloom-cli-publish.md`](docs/fr151-bitloom-cli-publish.md)）。**FR153**（SemVer assume-published / 发版诚实）仍属 **Epic 86**。NFR59 仍 deferred（**NFR67**）。贡献者亦可 clone 本仓库使用 workspace CLI。
 
 ```bash
-# 贡献者 / FR151 关闭前（workspace）
-rustup toolchain install 1.97.1
-cargo run -p bitloom -- new blink
-cargo run -p bitloom -- build --package blink --manifest-dir blink --out-dir out
+# 推荐：crates.io（FR151）
+cargo install bitloom
+cargo bitloom new blink
+cargo bitloom build --package blink --manifest-dir blink --out-dir out
 ```
 
 ```bash
-# 目标路径（仅 FR151 关闭后宣称可用）
-# cargo install bitloom
-# cargo bitloom new blink
+# 贡献者（workspace）
+rustup toolchain install 1.97.1
+cargo run -p bitloom -- new blink
+cargo run -p bitloom -- build --package blink --manifest-dir blink --out-dir out
 ```
 
 设计 crate 只依赖 **`bitloom-prelude`**（不要把 CLI 包 `bitloom` 加进 `[dependencies]`）。与 **bitbloom** 等无关拼写无关；与 [samitbasu/rhdl](https://github.com/samitbasu/rhdl) 无关。
@@ -264,7 +265,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 ## 状态与 deferred（诚实声明）
 
-库 crate 表面为 **1.0.0**（Phase 17 / FR146；曾为 **0.x** 直至 FR146）。**CLI 仍待 FR151**（Phase 18），不得暗示 `cargo install bitloom` 已可用。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS（树内 FR95/FR96 MVP + 外挂 Bambu 可选）**、**Idiomatic Chisel（FR97 · Epic 42）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
+库 crate 表面为 **1.0.0**（Phase 17 / FR146；曾为 **0.x** 直至 FR146）。**CLI 已上架**（**FR151** / Epic 85；`cargo install bitloom`）。**FR153** 发版诚实 / SemVer 跟进仍属 Epic 86。已交付：生成器 elaborate → FrozenHir → `.v` / FIRRTL 互转 / `tick`、firtool 钉死、Mem/CDC、**HLS（树内 FR95/FR96 MVP + 外挂 Bambu 可选）**、**Idiomatic Chisel（FR97 · Epic 42）**、**内置层次/时序可视化入口** 等（见 `epics.md`）。
 
 **路线图阶段五–七「绿 / 全绿」字面绿 MVP 按 Phase 12 验收（FR94–105 / NFR42）：字面项须由对应 FR 关闭后方可勾选；Phase 12 Epic 40–47 已关闭。** 完成定义见 [`docs/requirements/19. 实施路线图.md`](docs/requirements/19.%20实施路线图.md) §19.7–19.9。Phase 11 合同绿（FR87 / NFR38）为**历史已交付里程碑**，**禁止**用合同绿冒充字面全绿。
 
@@ -278,7 +279,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **Phase 17（公开 API 稳定门 / Bitloom 1.0 · FR141–FR147 / NFR60–NFR63）：** Correct Course 已批准（2026-09-11）。Phase 12–16 关闭证据**仍有效**（**NFR60**）。闸门 **FR141** / Epic 79–83 **已关闭**；**Epic 83 / FR146：** workspace **1.0.0** + tag `v1.0.0` + CHANGELOG；库 crate 已上 crates.io **1.0.0**（见 [`docs/fr146-bitloom-1-0-0-release.md`](docs/fr146-bitloom-1-0-0-release.md)）。对外「1.0 / 公开 API 稳定」按 **FR147**。**禁止**用 Phase 16 终局 alone 冒充 1.0。**NFR59** 仍 deferred（**NFR63**）。**CLI 上架 ≠ Phase 17 完成面**（→ **Phase 18 / FR148–153**）。公开表面：[`docs/public-api-1-0-surface.md`](docs/public-api-1-0-surface.md)。
 
-**Phase 18（CLI / 依赖 crate crates.io 可发布 · FR148–FR153 / NFR64–NFR67）：** Correct Course 已批准（2026-09-11）。Phase 12–17 关闭证据**仍有效**（**NFR64**），**不得**改写为失败。闸门 **FR148** / Epic 84 **已关闭**（Story 84.4；Phase 18 闸门已开）。实现映射：`bitloom-firrtl` **FR149**；`bitloom-viz` **FR150**；CLI 上架 **FR151**；lsp 策略 **FR152(b)**；发版后诚实 / SemVer 跟进 **FR153**（Epic 85–86 仍须各自 NFR14）。**禁止**在 FR151 关闭前暗示 `cargo install bitloom` 已可用。**口径：** CLI 上架 ≠ 清空 NFR59（**NFR67**）。公开品牌 **Bitloom**。同源：[`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md) Phase 18 pointer。
+**Phase 18（CLI / 依赖 crate crates.io 可发布 · FR148–FR153 / NFR64–NFR67）：** Correct Course 已批准（2026-09-11）。Phase 12–17 关闭证据**仍有效**（**NFR64**），**不得**改写为失败。闸门 **FR148** / Epic 84 **已关闭**（Story 84.4）。**Epic 85 / FR149–152 已关闭**（`bitloom-firrtl` / `bitloom-viz` / CLI `bitloom` **1.0.0** 已上 crates.io；lsp 策略 **FR152(b)**）。**FR153** 发版后诚实 / SemVer 跟进 → **Epic 86**（须自有 NFR14）。**口径：** CLI 上架 ≠ 清空 NFR59（**NFR67**）。公开品牌 **Bitloom**。同源：[`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md) Phase 18 pointer；[`docs/fr151-bitloom-cli-publish.md`](docs/fr151-bitloom-cli-publish.md)。
 
 **Phase 12 规划/实现故事已齐（Epic 40–47 已关闭）。** Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。
 
@@ -367,20 +368,20 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 **FR147 宣称纪律：** 「1.0 / 公开 API 稳定」**仅**在对应 **FR141–146** 关闭后方可勾选 — **Phase 17 / Epic 79–83 已关闭**（FR146：`v1.0.0` / [`docs/fr146-bitloom-1-0-0-release.md`](docs/fr146-bitloom-1-0-0-release.md)）。**禁止**用 Phase 16 终局 alone 冒充。1.0 口径 = 对 FR142 钉死表面的 SemVer major 承诺 + 诚实 **NFR59** deferred（**NFR63**）；**不等于**清空 NFR59。公开品牌 **Bitloom**。**不等于** CLI 已可 `cargo install`（→ Phase 18）。
 
-### Phase 18 CLI 可发布（合同已批准；闸门 Epic 84 / FR148 已关闭；Epic 85–86 实现）
+### Phase 18 CLI 可发布（合同已批准；闸门 Epic 84 / FR148 已关闭；Epic 85 / FR149–152 已关闭；Epic 86 = FR153）
 
-下列 **CLI / 依赖 crate crates.io 可发布** 项已由 Correct Course + **FR148** 升格为 Phase 18 显式 FR（Epic 84–86）。对外「CLI 已可从 crates.io 安装」类宣称须对应 **FR148–153** 关闭后方可勾选。同源：PRD addendum「Phase 18」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。**不得**把 Phase 17 库 1.0 alone 写成 CLI 已上架。
+下列 **CLI / 依赖 crate crates.io 可发布** 项已由 Correct Course + **FR148** 升格为 Phase 18 显式 FR（Epic 84–86）。**Epic 85 已关闭：** `bitloom-firrtl` / `bitloom-viz` / `bitloom` **1.0.0** 已上 crates.io；`cargo install bitloom` 可用（**FR151**）。**FR153** 仍属 Epic 86。同源：PRD addendum「Phase 18」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。**不得**把 Phase 17 库 1.0 alone 写成 CLI 已上架（须 FR151）。
 
 | 可发布面 | FR / Epic | 相对 Phase 17 关闭面 |
 | --- | --- | --- |
-| Phase 18 合同闸门 | FR148 / 84 | Correct Course + README/deferred/AD 诚实边界；未关闭前 85–86 不得 ready |
-| `bitloom-firrtl` 可发布 | FR149 / 85 | rename `rhdl-firrtl` → `bitloom-firrtl`；`publish=true`（AD-2） |
-| `bitloom-viz` 可发布 | FR150 / 85 | rename `rhdl-viz` → `bitloom-viz`；`publish=true`（AD-2） |
-| `bitloom` CLI 1.0.0 上架 | FR151 / 85 | `cargo install bitloom` 可用之前提 |
-| `bitloom-lsp` 发布策略 (b) | FR152 / 85 | 默认可 `publish=false`，须不挡 CLI 打包 |
-| SemVer / 发版诚实跟进 | FR153 / 86 | assume-published + 文档/Release 诚实 |
+| Phase 18 合同闸门 | FR148 / 84 | Correct Course + README/deferred/AD 诚实边界 — **已关闭** |
+| `bitloom-firrtl` 可发布 | FR149 / 85 | rename `rhdl-firrtl` → `bitloom-firrtl`；`publish=true` — **已关闭** |
+| `bitloom-viz` 可发布 | FR150 / 85 | rename `rhdl-viz` → `bitloom-viz`；`publish=true` — **已关闭** |
+| `bitloom` CLI 1.0.0 上架 | FR151 / 85 | `cargo install bitloom` — **已关闭** |
+| `bitloom-lsp` 发布策略 (b) | FR152 / 85 | 默认可 `publish=false`，不挡 CLI 打包 — **已关闭** |
+| SemVer / 发版诚实跟进 | FR153 / 86 | assume-published + 文档/Release 诚实 — **仍待** |
 
-**FR148–153 宣称纪律：** 「CLI 已可从 crates.io 安装」**仅**在对应 FR 关闭后方可勾选；**禁止**在 FR151 前暗示 `cargo install bitloom` 已可用。CLI 上架 ≠ 清空 NFR59（**NFR67**）。公开品牌 **Bitloom**。
+**FR148–153 宣称纪律：** 「CLI 已可从 crates.io 安装」对应 **FR151**（Epic 85 已关）。完整 Phase 18 诚实/SemVer 跟进须 **FR153**。CLI 上架 ≠ 清空 NFR59（**NFR67**）。公开品牌 **Bitloom**。
 
 **NFR59 仍 deferred（须另开合同；不得因「终局结项」「1.0」或「CLI 上架」口号静默吞并；NFR63 / NFR67）：**
 

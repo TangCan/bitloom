@@ -32,7 +32,7 @@ done
 | bitloom-vlog | blocked | needs `bitloom-hir` **1.0.0** on crates.io first |
 | bitloom-prelude | blocked | needs builder/hir **1.0.0** on crates.io first |
 | bitloom-sim | blocked | needs hir **1.0.0** on crates.io first |
-| bitloom | blocked | needs versioned/`publish=true` path for `bitloom-firrtl` / `bitloom-viz` (still `publish = false`) **or** sequential after deps; tracked as manual publish follow-up |
+| bitloom | **OK** (FR151) | live publish 2026-09-11 after `bitloom-firrtl` / `bitloom-viz` 1.0.0 |
 
 **FR146 acceptance path used:** version bump + CHANGELOG + annotated tag + successful dry-run of publishable leaves + this checklist for sequential crates.io upload. Live `cargo publish` may follow when credentials and dependency publishes are available; absence of live upload does **not** undo the SemVer **1.0.0** tree state.
 
@@ -51,15 +51,14 @@ cargo publish -p bitloom-builder
 cargo publish -p bitloom-vlog
 cargo publish -p bitloom-prelude
 cargo publish -p bitloom-sim
-# bitloom CLI: after firrtl/viz publishability is resolved
-cargo publish -p bitloom
+cargo publish -p bitloom  # FR151 — done 2026-09-11
 ```
 
-After **1.0.0** is on crates.io, set `BITLOOM_SEMVER_ASSUME_PUBLISHED=1` (or remove the 1.0.0 special-case) so `just semver-check` defaults to `--release-type minor`.
+After **1.0.0** is on crates.io, set `BITLOOM_SEMVER_ASSUME_PUBLISHED=1` (or remove the 1.0.0 special-case) so `just semver-check` defaults to `--release-type minor` — **FR153 / Epic 86**.
 
 ## Brand / honesty
 
 - Public product **Bitloom** / `bitloom`
 - 「1.0 / 公开 API 稳定」claims require FR141–146 (**FR147**)
 - **NFR59** remains deferred (**NFR63**)
-- **CLI `cargo install bitloom`:** not claimed until **FR151** (Phase 18 / Epic 85); library 1.0.0 ≠ CLI published
+- **CLI `cargo install bitloom`:** **FR151** closed (Epic 85); SemVer assume-published honesty → **FR153**
