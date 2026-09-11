@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 09:35
+last_updated: 09-11-2026 09:40
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -502,7 +502,7 @@ development_status:
   70-1-epic-70-nfr14-风险记录: done
   70-2-ad-27-修订-若需-style-guide-parser-路径-fr130: done
   70-3-fr130-收口与文档指针: done
-  epic-70-retrospective: optional
+  epic-70-retrospective: done
 
   epic-71: done
   71-1-epic-71-nfr14-风险记录: done
@@ -1959,3 +1959,30 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-69-retro-2026-09-11.md"
+  - id: "epic-70-retro-item-218-fr130-诚实边界-对外不得把-fr97-fr111-fr122-o1-o4"
+    epic: 70
+    action: "FR130 诚实边界：对外不得把 FR97 / FR111 / FR122 O1–O4 alone 写成完整 Style Guide /
+      FR130 完成面；宣称须引 S1–S4。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-70-retro-2026-09-11.md"
+  - id: "epic-70-retro-item-219-触碰-rhdl-firrtl-chisel-路径时保持-fr97-111-122"
+    epic: 70
+    action: "触碰 rhdl-firrtl Chisel 路径时保持 FR97/111/122 回归可用（NFR52）；默认不得恢复 Scala Parser.parse
+      作为产品关闭条件。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-70-retro-2026-09-11.md"
+  - id: "epic-70-retro-item-220-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 70
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-70-retro-2026-09-11.md"
+  - id: "epic-70-retro-item-221-可选工程卫生-若恢复废弃-parser-须-correct-course-再修订"
+    epic: 70
+    action: "可选工程卫生：若恢复废弃 Parser，须 Correct Course + 再修订 AD-27（NFR54/NFR55）；当前 S1–S4
+      且 Parser 未恢复为 FR130 完成面。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-70-retro-2026-09-11.md"
