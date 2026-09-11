@@ -3,6 +3,8 @@
 //! Cycle path = FrozenHir [`crate::Sim::tick`]. Functional path =
 //! [`crate::GeneratedFunctional`] (generation path) **or** handwritten
 //! [`SyncFifoFunctional`] when FR103 nails architectural FL for Mem-based FIFO.
+//! **FR126** adds handwritten [`GpioFunctional`]; **FR135** adds handwritten
+//! [`UartTxFunctional`] beyond Gpio / GeneratedFunctional alone.
 //!
 //! Design crates stay on `bitloom-prelude`; this module lives in the toolchain.
 
@@ -167,12 +169,148 @@ pub fn gpio_dual_stimulus() -> Vec<PortValues> {
     out
 }
 
+/// Handwritten `UartTx` FL (FR135) — beyond FR126 Gpio / FR103 SyncFifo / GeneratedFunctional.
+///
+/// Models architectural ports `tx` / `tx_byte` / `tx_busy` ≡ `Sim::settle`+`tick` on
+/// [`uart_tx_dual_stimulus`]. Not GeneratedFunctional; not Gpio alone; not SyncFifo alone.
+#[derive(Debug, Clone, Default)]
+pub struct UartTxFunctional {
+    hold: u64,
+    shift_reg: u64,
+    busy: u64,
+    bit_idx: u64,
+    baud_cnt: u64,
+}
+
+impl UartTxFunctional {
+    pub fn new() -> Self {
+        Self::default()
+    }
+}
+
+impl AbstractionView for UartTxFunctional {
+    fn cycle(&mut self, inputs: &PortValues) -> PortValues {
+        let rst = inputs.get("rst").unwrap_or(0) != 0;
+        let wr_en = inputs.get("wr_en").unwrap_or(0) != 0;
+        let wr_data = inputs.get("wr_data").unwrap_or(0) & 0xff;
+        let baud_div = inputs.get("baud_div").unwrap_or(0) & 0xff;
+
+        if rst {
+            self.hold = 0;
+            self.shift_reg = 0;
+            self.busy = 0;
+            self.bit_idx = 0;
+            self.baud_cnt = 0;
+        } else {
+            let busy = self.busy != 0;
+            let accept = wr_en && !busy;
+            let is_start = self.bit_idx == 0;
+            let is_stop = self.bit_idx == 9;
+            let baud_eq = self.baud_cnt == baud_div;
+            let baud_tick = busy && baud_eq;
+
+            let baud_cnt_busy = if baud_eq {
+                0
+            } else {
+                self.baud_cnt.wrapping_add(1) & 0xff
+            };
+            let baud_cnt_busy_or_idle = if busy { baud_cnt_busy } else { 0 };
+            let next_baud_cnt = if accept { 0 } else { baud_cnt_busy_or_idle };
+
+            let busy_after_tick = if is_stop { 0 } else { 1 };
+            let busy_when_busy = if baud_tick { busy_after_tick } else { 1 };
+            let busy_when_busy_or_idle = if busy { busy_when_busy } else { 0 };
+            let next_busy = if accept { 1 } else { busy_when_busy_or_idle };
+
+            let bit_idx_p1 = (self.bit_idx.wrapping_add(1)) & 0xf;
+            let bit_after_tick = if is_stop { 0 } else { bit_idx_p1 };
+            let bit_when_busy = if baud_tick {
+                bit_after_tick
+            } else {
+                self.bit_idx
+            };
+            let bit_when_busy_or_idle = if busy { bit_when_busy } else { 0 };
+            let next_bit_idx = if accept { 0 } else { bit_when_busy_or_idle };
+
+            let do_shift = busy && !is_start && !is_stop;
+            let do_shift_tick = do_shift && baud_eq;
+            let shift_shr = (self.shift_reg >> 1) & 0xff;
+            let shift_after_tick = if do_shift_tick {
+                shift_shr
+            } else {
+                self.shift_reg
+            };
+            let next_shift_busy = if busy {
+                shift_after_tick
+            } else {
+                self.shift_reg
+            };
+            let next_shift_final = if accept { wr_data } else { next_shift_busy };
+            let next_hold = if accept { wr_data } else { self.hold };
+
+            self.busy = next_busy;
+            self.bit_idx = next_bit_idx;
+            self.shift_reg = next_shift_final;
+            self.hold = next_hold;
+            self.baud_cnt = next_baud_cnt;
+        }
+
+        let busy = self.busy != 0;
+        let is_start = self.bit_idx == 0;
+        let is_stop = self.bit_idx == 9;
+        let data_bit = (self.shift_reg & 1) != 0;
+        let tx_data_or_stop = if is_stop { 1 } else { u64::from(data_bit) };
+        let tx_active = if is_start { 0 } else { tx_data_or_stop };
+        let tx = if busy { tx_active } else { 1 };
+
+        let mut out = inputs.clone();
+        out.set("tx", tx);
+        out.set("tx_byte", self.hold & 0xff);
+        out.set("tx_busy", self.busy & 1);
+        out
+    }
+}
+
+/// Documented UartTx dual-model stimulus (reset, 8N1 frame, baud_div hold) — FR135.
+pub fn uart_tx_dual_stimulus() -> Vec<PortValues> {
+    let mut out = Vec::new();
+    let mut frame = |rst: u64, wr_en: u64, wr_data: u64, baud_div: u64| {
+        let mut pv = PortValues::default();
+        pv.set("rst", rst);
+        pv.set("wr_en", wr_en);
+        pv.set("wr_data", wr_data);
+        pv.set("baud_div", baud_div);
+        out.push(pv);
+    };
+    // baud_div=0: 1 clk/bit — full 0xA5 frame + idle clear
+    frame(1, 0, 0, 0);
+    frame(0, 0, 0, 0);
+    frame(0, 1, 0xa5, 0); // accept → start
+    for _ in 0..9 {
+        frame(0, 0, 0, 0); // data…stop
+    }
+    frame(0, 0, 0, 0); // clear busy
+    // baud_div=1: 2 clk/bit — start held then LSB
+    frame(1, 0, 0, 1);
+    frame(0, 1, 0x01, 1);
+    frame(0, 0, 0, 1); // start held
+    frame(0, 0, 0, 1); // LSB
+    // busy ignore: latch 0x3C, wr_en with 0xFF must not replace
+    frame(1, 0, 0, 0);
+    frame(0, 1, 0x3c, 0);
+    frame(0, 1, 0xff, 0);
+    frame(0, 0, 0, 0);
+    out
+}
+
 /// Architectural ports compared for SyncFifo dual-model (avoid internal wires).
 const SYNC_FIFO_ARCH_PORTS: &[&str] = &["full", "empty", "data_out"];
 
 /// Architectural ports for Gpio handwritten FL (FR126).
 const GPIO_ARCH_PORTS: &[&str] = &["pad_out", "rd_data"];
 
+/// Architectural ports for UartTx handwritten FL (FR135).
+const UART_TX_ARCH_PORTS: &[&str] = &["tx", "tx_byte", "tx_busy"];
 /// FR103 product entry: co-verify functional + cycle models for the NFR14 IP set.
 #[derive(Debug, Clone, Default)]
 pub struct IpDualModelMatrix;
@@ -242,6 +380,53 @@ impl IpDualModelMatrix {
             sim.tick();
             let abs_out = fl.cycle(&inputs);
             if let Err(mismatches) = compare_named_ports(sim.ports(), &abs_out, GPIO_ARCH_PORTS) {
+                return EquivStatus::Fail {
+                    cycle: cycles,
+                    mismatches,
+                };
+            }
+            cycles += 1;
+        }
+        EquivStatus::Pass { cycles }
+    }
+
+    /// FR135: handwritten `UartTx` FL ≡ tick on [`uart_tx_dual_stimulus`].
+    pub fn verify_uart_tx_handwritten(&self, hir: FrozenHir) -> EquivStatus {
+        let mut sim = Sim::new(hir);
+        let mut fl = UartTxFunctional::new();
+        let mut cycles = 0usize;
+        for inputs in uart_tx_dual_stimulus() {
+            sim.set_inputs(inputs.clone());
+            sim.settle();
+            sim.tick();
+            let abs_out = fl.cycle(&inputs);
+            if let Err(mismatches) = compare_named_ports(sim.ports(), &abs_out, UART_TX_ARCH_PORTS)
+            {
+                return EquivStatus::Fail {
+                    cycle: cycles,
+                    mismatches,
+                };
+            }
+            cycles += 1;
+        }
+        EquivStatus::Pass { cycles }
+    }
+
+    /// Deliberate mismatch / alternate FL ATDD for UartTx (FR135).
+    pub fn verify_uart_tx_handwritten_with<A: AbstractionView>(
+        &self,
+        hir: FrozenHir,
+        abs: &mut A,
+    ) -> EquivStatus {
+        let mut sim = Sim::new(hir);
+        let mut cycles = 0usize;
+        for inputs in uart_tx_dual_stimulus() {
+            sim.set_inputs(inputs.clone());
+            sim.settle();
+            sim.tick();
+            let abs_out = abs.cycle(&inputs);
+            if let Err(mismatches) = compare_named_ports(sim.ports(), &abs_out, UART_TX_ARCH_PORTS)
+            {
                 return EquivStatus::Fail {
                     cycle: cycles,
                     mismatches,
