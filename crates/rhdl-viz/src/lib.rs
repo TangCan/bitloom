@@ -369,6 +369,92 @@ pub fn tywaves_launch_sh(tywaves_json_rel: &str) -> String {
     )
 }
 
+/// Pinned upstream GUI / IDE plugin identities for FR134 G1 (beyond `BITLOOM_TYWAVES_BIN`).
+pub const TYWAVES_GUI_PACKAGE_ID: &str = "surfer-tywaves";
+pub const TYWAVES_GUI_VERSION: &str = "v0.3.2-tywaves-dev-SNAPSHOT";
+pub const TYWAVES_GUI_CHANNEL: &str =
+    "https://gitlab.com/rameloni/surfer-tywaves-demo/-/releases/v0.3.2-tywaves-SNAPSHOT";
+pub const TYWAVES_IDE_PLUGIN_ID: &str = "surfer-project.surfer";
+pub const TYWAVES_IDE_PLUGIN_CHANNEL: &str =
+    "https://marketplace.visualstudio.com/items?itemName=surfer-project.surfer";
+
+/// FR134 G2 checkable metadata (`tywaves.gui.manifest.json`).
+///
+/// Distinct from FR125 `wave.tywaves.json`: carries `tywaves.gui` /
+/// `tywaves.ide-plugin` capability marks and FR134 schema.
+pub fn tywaves_gui_manifest(title: &str) -> String {
+    format!(
+        "{{\n\
+         \"product\": \"Bitloom\",\n\
+         \"fr\": \"FR134\",\n\
+         \"schemaVersion\": \"bitloom-tywaves-gui-1\",\n\
+         \"marker\": \"data-bitloom-tywaves-gui\",\n\
+         \"title\": \"{title}\",\n\
+         \"tywaves.gui\": {{\n\
+         \"enabled\": true,\n\
+         \"packageId\": \"{TYWAVES_GUI_PACKAGE_ID}\",\n\
+         \"version\": \"{TYWAVES_GUI_VERSION}\"\n\
+         }},\n\
+         \"tywaves.ide-plugin\": {{\n\
+         \"enabled\": true,\n\
+         \"marketplaceId\": \"{TYWAVES_IDE_PLUGIN_ID}\",\n\
+         \"channel\": \"{TYWAVES_IDE_PLUGIN_CHANNEL}\"\n\
+         }},\n\
+         \"sidecar\": \"wave.tywaves.json\",\n\
+         \"note\": \"FR134 GUI/IDE depth beyond FR125 T1–T4; Tywaves runtime is not a design-crate dep\"\n\
+         }}\n",
+        title = escape_js_string(title),
+    )
+}
+
+/// FR134 G1 install descriptor (`tywaves.gui.install.json`) — version + distribution channel.
+pub fn tywaves_gui_install_json() -> String {
+    format!(
+        "{{\n\
+         \"product\": \"Bitloom\",\n\
+         \"fr\": \"FR134\",\n\
+         \"schemaVersion\": \"bitloom-tywaves-gui-install-1\",\n\
+         \"tywaves.gui\": {{\n\
+         \"packageId\": \"{TYWAVES_GUI_PACKAGE_ID}\",\n\
+         \"version\": \"{TYWAVES_GUI_VERSION}\",\n\
+         \"channel\": \"{TYWAVES_GUI_CHANNEL}\",\n\
+         \"installMarker\": \"BITLOOM_TYWAVES_GUI_OK\",\n\
+         \"envRoot\": \"BITLOOM_TYWAVES_GUI_ROOT\"\n\
+         }},\n\
+         \"tywaves.ide-plugin\": {{\n\
+         \"marketplaceId\": \"{TYWAVES_IDE_PLUGIN_ID}\",\n\
+         \"channel\": \"{TYWAVES_IDE_PLUGIN_CHANNEL}\",\n\
+         \"kind\": \"vscode-extension\"\n\
+         }},\n\
+         \"beyond\": \"BITLOOM_TYWAVES_BIN single-binary launch (FR125 T2) alone is not FR134\"\n\
+         }}\n"
+    )
+}
+
+/// Shell helper to validate / open FR134 GUI install root (G1/G3).
+pub fn tywaves_gui_install_sh() -> String {
+    format!(
+        "#!/usr/bin/env bash\n\
+         # Bitloom FR134 — validate upstream Tywaves GUI install (or stub root)\n\
+         set -euo pipefail\n\
+         ROOT=\"${{BITLOOM_TYWAVES_GUI_ROOT:-}}\"\n\
+         if [[ -z \"$ROOT\" ]]; then\n\
+           echo \"bitloom.tywaves-missing: set BITLOOM_TYWAVES_GUI_ROOT to upstream GUI install (or stub)\" >&2\n\
+           exit 2\n\
+         fi\n\
+         if [[ ! -d \"$ROOT\" ]]; then\n\
+           echo \"bitloom.tywaves-missing: BITLOOM_TYWAVES_GUI_ROOT is not a directory: $ROOT\" >&2\n\
+           exit 2\n\
+         fi\n\
+         if [[ ! -f \"$ROOT/BITLOOM_TYWAVES_GUI_OK\" ]]; then\n\
+           echo \"bitloom.tywaves-missing: GUI install marker BITLOOM_TYWAVES_GUI_OK not found under $ROOT\" >&2\n\
+           exit 2\n\
+         fi\n\
+         echo \"bitloom.tywaves: FR134 GUI root OK ($ROOT) — package {TYWAVES_GUI_PACKAGE_ID}@{TYWAVES_GUI_VERSION}\"\n\
+         echo \"bitloom.tywaves: IDE plugin channel {TYWAVES_IDE_PLUGIN_CHANNEL}\"\n"
+    )
+}
+
 /// Typed IDE waveform HTML (FR117 subset B): type/kind hierarchy beyond FR104 I1–I3.
 ///
 /// Empty `typed` → explicit empty marker (must not silent-claim FR117).

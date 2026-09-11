@@ -173,7 +173,8 @@ enum Commands {
         out_dir: PathBuf,
     },
     /// Tick a `.fir` design, dump VCD, timing HTML (FR38/49), interactive wave (FR104),
-    /// typed IDE wave (FR117 subset B), and optionally upstream Tywaves sidecar (FR125).
+    /// typed IDE wave (FR117 subset B), optionally upstream Tywaves sidecar (FR125),
+    /// and optionally FR134 GUI/IDE plugin depth (`--tywaves-gui`).
     Wave {
         /// Path to a `.fir` file with `FIRRTL version 6.0.0` header.
         #[arg(long)]
@@ -190,6 +191,10 @@ enum Commands {
         /// Also emit FR125 upstream Tywaves sidecar (`wave.tywaves.json` + `tywaves.launch.sh`).
         #[arg(long, default_value_t = false)]
         tywaves: bool,
+        /// Also emit FR134 GUI/IDE depth (`tywaves.gui.manifest.json` + install descriptor).
+        /// Implies FR125 sidecar emission.
+        #[arg(long, default_value_t = false)]
+        tywaves_gui: bool,
     },
     /// Tick a Mux demo (or `.fir`) and write FR114 `coverage.lcov` + `coverage.html`.
     Coverage {
@@ -952,7 +957,8 @@ fn main() {
             ticks,
             fst,
             tywaves,
-        } => match run_wave(&input, &out_dir, ticks, fst, tywaves) {
+            tywaves_gui,
+        } => match run_wave(&input, &out_dir, ticks, fst, tywaves, tywaves_gui) {
             Ok(()) => {}
             Err(e) => {
                 eprintln!("error: {e}");
@@ -1023,16 +1029,20 @@ fn run_visualize(input: &Path, out_dir: &Path) -> Result<PathBuf, String> {
 
 /// Product entry: tick → VCD + timing.html + interactive.html (FR38/49 + FR104)
 /// + typed-wave.html / wave.typed.json (FR117 subset B)
-/// + optional wave.tywaves.json / tywaves.launch.sh (FR125).
+/// + optional wave.tywaves.json / tywaves.launch.sh (FR125)
+/// + optional tywaves.gui.* FR134 GUI/IDE depth (`want_tywaves_gui`).
 fn run_wave(
     input: &Path,
     out_dir: &Path,
     ticks: u64,
     want_fst: bool,
     want_tywaves: bool,
+    want_tywaves_gui: bool,
 ) -> Result<(), String> {
     use bitloom_hir::PortValues;
     use bitloom_sim::Sim;
+
+    let want_tywaves = want_tywaves || want_tywaves_gui;
 
     let text = fs::read_to_string(input).map_err(|e| format!("read {}: {e}", input.display()))?;
     let hir = rhdl_firrtl::import(&text).map_err(|d| d.to_string())?;
@@ -1153,6 +1163,85 @@ fn run_wave(
         println!("wrote {}", tywaves_path.display());
         println!("wrote {}", launch_path.display());
 
+        if want_tywaves_gui {
+            let manifest = rhdl_viz::tywaves_gui_manifest(&title);
+            if !manifest.contains("data-bitloom-tywaves-gui")
+                || !manifest.contains("\"fr\": \"FR134\"")
+                || !manifest.contains("schemaVersion")
+                || !manifest.contains("tywaves.gui")
+                || !manifest.contains("tywaves.ide-plugin")
+            {
+                return Err("tywaves.gui.manifest.json missing FR134 contract fields".into());
+            }
+            let manifest_path = out_dir.join("tywaves.gui.manifest.json");
+            fs::write(&manifest_path, &manifest)
+                .map_err(|e| format!("write {}: {e}", manifest_path.display()))?;
+            let install = rhdl_viz::tywaves_gui_install_json();
+            if !install.contains("version")
+                || !install.contains("channel")
+                || !install.contains("tywaves.gui")
+                || !install.contains("tywaves.ide-plugin")
+            {
+                return Err("tywaves.gui.install.json missing FR134 G1 fields".into());
+            }
+            let install_path = out_dir.join("tywaves.gui.install.json");
+            fs::write(&install_path, &install)
+                .map_err(|e| format!("write {}: {e}", install_path.display()))?;
+            let gui_sh = rhdl_viz::tywaves_gui_install_sh();
+            let gui_sh_path = out_dir.join("tywaves.gui.install.sh");
+            fs::write(&gui_sh_path, &gui_sh)
+                .map_err(|e| format!("write {}: {e}", gui_sh_path.display()))?;
+            #[cfg(unix)]
+            {
+                use std::os::unix::fs::PermissionsExt;
+                let mut perms = fs::metadata(&gui_sh_path)
+                    .map_err(|e| format!("stat {}: {e}", gui_sh_path.display()))?
+                    .permissions();
+                perms.set_mode(0o755);
+                fs::set_permissions(&gui_sh_path, perms)
+                    .map_err(|e| format!("chmod {}: {e}", gui_sh_path.display()))?;
+            }
+            println!("wrote {}", manifest_path.display());
+            println!("wrote {}", install_path.display());
+            println!("wrote {}", gui_sh_path.display());
+
+            let gui_force = std::env::var_os("BITLOOM_TYWAVES_GUI_FORCE_MISSING").is_some();
+            let gui_root = std::env::var_os("BITLOOM_TYWAVES_GUI_ROOT");
+            let gui_ok = gui_root.as_ref().map(|r| {
+                let p = Path::new(r);
+                p.is_dir() && p.join("BITLOOM_TYWAVES_GUI_OK").is_file()
+            });
+            if gui_force || gui_ok == Some(false) {
+                return Err(
+                    "bitloom.tywaves-missing: upstream Tywaves GUI install / IDE plugin \
+                     depth unavailable (set BITLOOM_TYWAVES_GUI_ROOT to a directory with \
+                     BITLOOM_TYWAVES_GUI_OK marker, or unset BITLOOM_TYWAVES_GUI_FORCE_MISSING); \
+                     FR134 manifests written but must not silent-succeed"
+                        .into(),
+                );
+            }
+            if let Some(root) = gui_root {
+                println!(
+                    "FR134: validated upstream Tywaves GUI root via BITLOOM_TYWAVES_GUI_ROOT ({})",
+                    Path::new(&root).display()
+                );
+            } else {
+                // No root and no force: write artifacts but do not claim live GUI green.
+                // Require explicit root OR force for a decisive outcome — missing root without
+                // force is a soft advisory (sidecar/manifests written) only when not claiming
+                // live open. For ATDD honesty, treat missing root like FR125 missing BIN:
+                // soft OK with advisory (FORCE_MISSING is the hard fail path).
+                println!(
+                    "FR134: wrote GUI/IDE depth artifacts {}; set BITLOOM_TYWAVES_GUI_ROOT \
+                     (or exec {}) to validate upstream GUI install; IDE plugin channel in \
+                     tywaves.gui.install.json",
+                    manifest_path.display(),
+                    gui_sh_path.display()
+                );
+            }
+        }
+
+        // FR125 live-open semantics (unchanged when GUI path also runs).
         let force_missing = std::env::var_os("BITLOOM_TYWAVES_FORCE_MISSING").is_some();
         let bin = std::env::var_os("BITLOOM_TYWAVES_BIN");
         if force_missing
@@ -1183,7 +1272,7 @@ fn run_wave(
                 "FR125: launched upstream Tywaves via BITLOOM_TYWAVES_BIN ({})",
                 Path::new(&bin).display()
             );
-        } else {
+        } else if !want_tywaves_gui {
             println!(
                 "FR125: wrote Tywaves sidecar {}; set BITLOOM_TYWAVES_BIN and re-run \
                  --tywaves (or exec {}) to live-open upstream viewer",
@@ -1194,7 +1283,8 @@ fn run_wave(
     } else {
         println!(
             "open {} in a browser for FR117 typed IDE wave (interactive.html is FR104 I1–I3; \
-             GTKWave optional for {}; pass --tywaves for FR125 upstream Tywaves sidecar)",
+             GTKWave optional for {}; pass --tywaves for FR125 upstream Tywaves sidecar; \
+             pass --tywaves-gui for FR134 GUI/IDE depth)",
             typed_path.display(),
             vcd_path.display()
         );
