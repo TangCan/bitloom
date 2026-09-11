@@ -115,6 +115,13 @@ phase16Scope: >
   NFR55 升格 — 真实上游 Tywaves GUI/IDE 深度；更多 IP 手写 FL（超 Gpio）；
   多外设/全芯片 pad 环；完整外部 CIRCT 编译/仿真门禁；恢复废弃 Parser；
   VIP/SocPad 再细拆或跨 crate（及闸门/宣称 FR）。
+phase16Epic72Status: complete
+phase16Epic73Status: backlog
+phase16Epic74Status: backlog
+phase16Epic75Status: backlog
+phase16Epic76Status: backlog
+phase16Epic77Status: backlog
+phase16Epic78Status: backlog
 phase16InputDocuments:
   - prds/prd-rhdl-2026-08-19/prd.md
   - prds/prd-rhdl-2026-08-19/addendum.md

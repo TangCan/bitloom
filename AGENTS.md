@@ -18,6 +18,7 @@
 - FR101 / Epic 46: SystemC TLM-2.0 product path — **Epic 46 closed** (LT-only MVP via `emit_systemc_tlm_lt` / `gen-tlm`; AT deferred; ≠ FR47 Rust FL)
 - FR104 / FR105 / Epic 47: interactive rich waveform + sim coverage extension — **Epic 47 closed** (FR104 `interactive.html`; FR105 coverage v2 Mux branch; C3 FSM cropped); **FR114 / Epic 56 closed** (LCOV + in-tree coverage GUI; Tywaves deferred)
 - **Phase 15 / FR124–FR132:** NFR51 leftover deepen contract (Correct Course 2026-09-10) — **Epic 64 / FR124+FR132 gate closed** (Story 64.4); Phase 12–14 closes remain valid (**NFR52**); deepen epics 65–71 still need per-epic NFR14 (**NFR53**); AD-25→FR129 / AD-27→FR130 / CI sby→FR127 (**NFR54**); claims only via FR132
+- **Phase 16 / FR133–FR140:** NFR55 final-closeout contract (Correct Course 2026-09-11) — **Epic 72 / FR133+FR140 gate closed** (Story 72.4); Phase 12–15 closes remain valid (**NFR56**); deepen epics 73–78 still need per-epic NFR14 (**NFR57**); AD-27→FR138 / external CIRCT→FR137 / crate boundary→FR139 (**NFR58**); claims only via FR140
 
 ## Process
 

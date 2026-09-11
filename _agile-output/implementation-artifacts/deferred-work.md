@@ -30,11 +30,11 @@ Phase 12–14 关闭证据**仍有效**。原 NFR55 明示剩余（真实上游 
 ## Phase 16 pointer (FR133–140 / NFR56–NFR59) — 产品终局结项（NFR55 升格）
 
 Correct Course `sprint-change-proposal-2026-09-11-phase16-nfr55-final-closeout.md` + PRD addendum「Phase 16」**已批准**（**Phase 16 contract approved** 2026-09-11）。  
-闸门 **FR133 / Epic 72**（Story 72.1–72.4）；实现 epic = Epic 73–78（**FR134** Tywaves GUI/IDE；**FR135** 更多 IP FL；**FR136** 全芯片 pad；**FR137** 外部 CIRCT 门禁；**FR138** Parser + AD-27；**FR139** VIP/SocPad 再拆/跨 crate；宣称→**FR140**）。  
+闸门 **FR133 / Epic 72 已关闭**（Story 72.4）；实现 epic = Epic 73–78（**FR134** Tywaves GUI/IDE；**FR135** 更多 IP FL；**FR136** 全芯片 pad；**FR137** 外部 CIRCT 门禁；**FR138** Parser + AD-27；**FR139** VIP/SocPad 再拆/跨 crate；宣称→**FR140**）。  
 **禁止**用 Phase 15 完成面（含 **FR125–131 alone**）冒充本批 / 终局完成面（**NFR56** / **FR140**）。软序：建议 **Epic 78 → Epic 74/75**。  
 Phase 12–15 关闭证据**仍有效**。未列入本批者（自动 FSM 标签提取、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生）仍须另开合同（**NFR59**）。各实现 epic 仍须独立 NFR14（**NFR57**）；未关闭前不得宣称对应 FR。  
 终局口径 = 本批关闭 + 诚实 NFR59 deferred；**不等于**冲 1.0。公开品牌 **Bitloom**。  
-**Phase 16 规划故事已齐（Epic 72–78）；** sprint 已播种 backlog；剩余门为各 epic 实现关闭态。README「状态与 deferred」同源（Story 72.3）。
+**Phase 16 规划故事已齐（Epic 72–78）；** 闸门已开；sprint 实现 epic 仍为 backlog 直至各 epic 自有 NFR14。README「状态与 deferred」同源（Story 72.3–72.4）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
