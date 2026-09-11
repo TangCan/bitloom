@@ -4,7 +4,7 @@
 
 **Status:** **Epic 68 / FR128 closed** (Story **68.3**). Product path delivered in Story **68.2**.
 
-FR120 `GpioVip` C1–C4 close **remains valid** (NFR52).
+FR120 `GpioVip` C1–C4 close **remains valid** (NFR52). Multi-peripheral / full-chip pad ring beyond `GpioSocPad` D1–D4: **FR136 / Epic 75 closed** (Story **75.3**; `ChipPadRing`); see [`docs/fr136-multi-peripheral-full-chip-pad-ring.md`](fr136-multi-peripheral-full-chip-pad-ring.md). Broader pad/peripherals remain **NFR59**.
 
 Beyond FR120 `GpioVip` C1–C4: dual-bank pad ring, falling-edge IRQ, AXI-style CSR
 window, and scoreboard ATDD.
