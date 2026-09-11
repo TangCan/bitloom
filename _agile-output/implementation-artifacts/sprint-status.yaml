@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 18:30
+last_updated: 09-11-2026 18:32
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -564,7 +564,7 @@ development_status:
   80-1-epic-80-nfr14-风险记录: done
   80-2-成文公开表面清单与-atdd-fr142: done
   80-3-fr142-收口与文档指针: done
-  epic-80-retrospective: optional
+  epic-80-retrospective: done
 
   epic-81: done
   81-1-epic-81-nfr14-风险记录: done
@@ -2299,3 +2299,23 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-79-retro-2026-09-11.md"
+  - id: "epic-80-retro-item-258-fr142-honesty-1-0-stable-surface-must-ci"
+    epic: 80
+    action: "FR142 honesty: 1.0 stable surface must cite docs/public-api-1-0-surface.md;
+      non-promise crates (hir/builder/vlog) are not SemVer-guaranteed."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-80-retro-2026-09-11.md"
+  - id: "epic-80-retro-item-259-in-surface-changes-must-go-through-semve"
+    epic: 80
+    action: "IN-surface changes must go through SemVer/FR143–144 contract; do not
+      silently expand the promise."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-80-retro-2026-09-11.md"
+  - id: "epic-80-retro-item-260-keep-commit-subjects-story-n-m"
+    epic: 80
+    action: "Keep commit subjects Story N.M."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-80-retro-2026-09-11.md"
