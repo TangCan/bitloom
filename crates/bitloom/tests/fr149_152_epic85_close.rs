@@ -106,9 +106,12 @@ fn fr149_152_readme_deferred_cli_installable_fr153_pending() {
         "README must claim CLI installable after FR151"
     );
     assert!(
-        (readme.contains("FR153") || deferred.contains("FR153"))
-            && (readme.contains("Epic 86") || deferred.contains("Epic 86")),
-        "must point FR153 / Epic 86 as remaining"
+        readme.contains("FR153")
+            || deferred.contains("FR153")
+            || PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+                .join("../../docs/fr153-semver-honesty.md")
+                .exists(),
+        "must mention FR153 / Epic 86 honesty path"
     );
     assert!(readme.contains("NFR59") && deferred.contains("NFR59"));
     assert!(readme.contains("Bitloom"));

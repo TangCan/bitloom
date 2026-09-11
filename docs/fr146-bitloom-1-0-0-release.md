@@ -54,11 +54,13 @@ cargo publish -p bitloom-sim
 cargo publish -p bitloom  # FR151 — done 2026-09-11
 ```
 
-After **1.0.0** is on crates.io, set `BITLOOM_SEMVER_ASSUME_PUBLISHED=1` (or remove the 1.0.0 special-case) so `just semver-check` defaults to `--release-type minor` — **FR153 / Epic 86**.
+**FR153 (Story 86.2):** library + CLI **1.0.0** are on crates.io; the `semver-check.sh` 1.0.0 / `BITLOOM_SEMVER_ASSUME_PUBLISHED` special-case was **removed** so `just semver-check` defaults to `--release-type minor` for ≥1.0.0. See [`docs/fr153-semver-honesty.md`](fr153-semver-honesty.md).
 
 ## Brand / honesty
 
 - Public product **Bitloom** / `bitloom`
 - 「1.0 / 公开 API 稳定」claims require FR141–146 (**FR147**)
-- **NFR59** remains deferred (**NFR63**)
-- **CLI `cargo install bitloom`:** **FR151** closed (Epic 85); SemVer assume-published honesty → **FR153**
+- **NFR59** remains deferred (**NFR63** / **NFR67**)
+- **Library crates 1.0.0 on crates.io:** Phase 17 / FR146
+- **CLI `cargo install bitloom`:** **FR151** closed (Epic 85)
+- **SemVer assume-published / release honesty:** **FR153** (Story 86.2 landed; Epic 86 closeout → Story 86.3)

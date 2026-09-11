@@ -38,8 +38,8 @@ Out-of-promise crates (`bitloom-hir` / `bitloom-builder` / `bitloom-vlog`) may c
 - Tool: **`cargo-semver-checks`** against FR142 **library** surface crates (`bitloom-prelude`, `bitloom-sim`)
 - `bitloom` CLI verbs and `bitloom-macro` are in-surface via documentation; they are **not** fully covered by rustdoc-based semver-checks (macro has no conventional lib API; CLI is binary-first)
 - **Pre-1.0.0:** default `--release-type major` so known crates.io drift may be absorbed by the upcoming 1.0 major; tool must still run; missing tool → **non-zero**
-- **First 1.0.0 (local vs crates.io 0.x):** still defaults to `--release-type major` until `BITLOOM_SEMVER_ASSUME_PUBLISHED=1`
-- **After 1.0.0 is on crates.io:** default `--release-type minor` (override with `BITLOOM_SEMVER_RELEASE_TYPE`)
+- **After 1.0.0 is on crates.io (FR153):** default `--release-type minor` for workspace version ≥1.0.0 (the temporary 1.0.0 / `BITLOOM_SEMVER_ASSUME_PUBLISHED` special-case was **removed** once library + CLI 1.0.0 were published)
+- Override anytime with `BITLOOM_SEMVER_RELEASE_TYPE`
 - Missing tool or policy-violating breakage → **non-zero** with readable diagnostics；`BITLOOM_SEMVER_FORCE_MISSING=1` forces the missing-tool path for ATDD
 
 ## Brand

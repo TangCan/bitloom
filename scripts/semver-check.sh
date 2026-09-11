@@ -36,7 +36,10 @@ else
 fi
 
 # Pre-1.0.0: default major (absorb known crates.io drift into upcoming 1.0).
-# Post-1.0.0: default minor. Override with BITLOOM_SEMVER_RELEASE_TYPE.
+# Post-1.0.0 (published on crates.io, FR153): default minor.
+# Override with BITLOOM_SEMVER_RELEASE_TYPE.
+# Historical: BITLOOM_SEMVER_ASSUME_PUBLISHED=1 forced minor during first 1.0.0;
+# the 1.0.0 special-case was removed after library+CLI 1.0.0 landed on crates.io.
 detect_release_type() {
   if [[ -n "${BITLOOM_SEMVER_RELEASE_TYPE:-}" ]]; then
     echo "${BITLOOM_SEMVER_RELEASE_TYPE}"
@@ -46,12 +49,7 @@ detect_release_type() {
   ver="$(
     grep -m1 '^version' Cargo.toml 2>/dev/null | sed -E 's/.*"([^"]+)".*/\1/' || true
   )"
-  # Pre-1.0: allow major-level drift vs crates.io 0.x.
-  # First 1.0.0 release still compares against crates.io 0.x → major until
-  # BITLOOM_SEMVER_ASSUME_PUBLISHED=1 (set after 1.0.0 is on crates.io).
   if [[ "$ver" =~ ^0\. ]]; then
-    echo "major"
-  elif [[ "$ver" == "1.0.0" && "${BITLOOM_SEMVER_ASSUME_PUBLISHED:-0}" != "1" ]]; then
     echo "major"
   else
     echo "minor"

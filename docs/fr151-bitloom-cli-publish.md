@@ -37,4 +37,4 @@ cargo bitloom --help
 
 - FR151 closes CLI **installability**; does **not** expand FR142 command surface.
 - NFR59 remains deferred (**NFR67**).
-- FR153 (SemVer assume-published / release honesty) remains Epic 86.
+- FR153 (SemVer assume-published / release honesty) landed in Story 86.2 — see [`docs/fr153-semver-honesty.md`](fr153-semver-honesty.md); Epic 86 closeout → Story 86.3.

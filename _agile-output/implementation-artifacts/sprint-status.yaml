@@ -604,8 +604,8 @@ development_status:
 
   epic-86: in-progress
   86-1-epic-86-nfr14-风险记录: done
-  86-2-semver-assume-published-与发版诚实更新-fr153: ready-for-dev
-  86-3-fr153-收口与-phase-18-故事清单指针: backlog
+  86-2-semver-assume-published-与发版诚实更新-fr153: done
+  86-3-fr153-收口与-phase-18-故事清单指针: ready-for-dev
   epic-86-retrospective: optional
 
 action_items:
