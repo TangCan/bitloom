@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 15:50
+last_updated: 09-11-2026 15:47
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -521,7 +521,7 @@ development_status:
   73-1-epic-73-nfr14-风险记录: done
   73-2-上游-tywaves-gui-ide-深度实现与验收-fr134: done
   73-3-fr134-收口与文档指针: done
-  epic-73-retrospective: optional
+  epic-73-retrospective: done
 
   epic-74: done
   74-1-epic-74-nfr14-风险记录: done
@@ -2082,3 +2082,28 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-72-retro-2026-09-11.md"
+  - id: "epic-73-retro-item-230-fr134-诚实边界-对外不得把-fr104-fr114-fr117-fr125"
+    epic: 73
+    action: "FR134 诚实边界：对外不得把 FR104 / FR114 / FR117 / FR125 T1–T4 alone（或 docs-only）写成
+      FR134 完成；更深 GUI/IDE 子集须引 NFR59 新合同；宣称须引 Epic 73 关闭证据。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-73-retro-2026-09-11.md"
+  - id: "epic-73-retro-item-231-触碰-wave-tywaves-路径时保持-phase-12-15-关闭面有效"
+    epic: 73
+    action: "触碰 wave / Tywaves 路径时保持 Phase 12–15 关闭面有效（NFR56）；不得改写 FR104/114/117/125「已关闭」为失败。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-73-retro-2026-09-11.md"
+  - id: "epic-73-retro-item-232-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 73
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-73-retro-2026-09-11.md"
+  - id: "epic-73-retro-item-233-可选工程卫生-epic-74-各须本-epic-nfr14-nfr57-未列入更"
+    epic: 73
+    action: "可选工程卫生：Epic 74+ 各须本 epic NFR14（NFR57）；未列入更深 GUI/IDE / 未列协议等仍须显式合同（NFR59），不得因「终局」口号静默扩大。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-73-retro-2026-09-11.md"
