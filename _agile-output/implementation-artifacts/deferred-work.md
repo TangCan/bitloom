@@ -40,8 +40,8 @@ Phase 12–15 关闭证据**仍有效**。未列入本批者（自动 FSM 标签
 ## Phase 17 pointer (FR141–147 / NFR60–NFR63) — 公开 API 稳定门 / Bitloom 1.0
 
 Correct Course `sprint-change-proposal-2026-09-11-phase17-api-stability-1-0.md` + PRD addendum「Phase 17」**已批准**（**Phase 17 contract approved** 2026-09-11；`correctCoursePhase17Approved: 2026-09-11`）。  
-闸门 **FR141 / Epic 79**（Story 79.1–79.4；**进行中**）；实现 epic = Epic 80–83（**FR142** 表面清单；**FR143** SemVer 1.0 政策；**FR144** semver CI；**FR145** 可选卫生 / skip；**FR146** 发版 1.0.0；宣称→**FR147**）。  
-**禁止**用 Phase 16 终局 alone 冒充 1.0 / 公开 API 稳定（**NFR60** / **FR147**）。硬闸门：Epic 79 关闭前 Epic 80–83 不得标 ready。软序 **79 → 80 → 81 ‖ 82 → 83**。  
+闸门 **FR141 / Epic 79 已关闭**（Story 79.4）；实现 epic = Epic 80–83（**FR142** 表面清单；**FR143** SemVer 1.0 政策；**FR144** semver CI；**FR145** 可选卫生 / skip；**FR146** 发版 1.0.0；宣称→**FR147**）。  
+**禁止**用 Phase 16 终局 alone 冒充 1.0 / 公开 API 稳定（**NFR60** / **FR147**）。**Phase 17 闸门已开：** Epic 80–83 可在各自 NFR14 后标 ready。软序 **79 → 80 → 81 ‖ 82 → 83**。  
 Phase 12–16 关闭证据**仍有效**。NFR59 仍 deferred（自动 FSM 标签提取、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生，及更深 IP/GUI/协议/CIRCT/Chisel 子集）；**1.0 ≠ 清空 NFR59**（**NFR63**）。Q1–Q5：`bitloom-sim` IN；hir/builder/vlog publish OK 不进 1.0 承诺；Epic 82 skip-if-no-blockers；不以 NFR59 为 1.0 前提；保持 MSRV。公开品牌 **Bitloom**。当前仍为 **0.x** 直至 **FR146**。  
 README「状态与 deferred」同源（Story 79.3）。
 

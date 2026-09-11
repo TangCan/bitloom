@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR141 / Epic 79；NFR14、NFR60、NFR61、NFR62、NFR63；对照 FR94–140 / NFR40–59；FR147 宣称门面 |
 | 记录日期 | 2026-09-11 |
-| 状态 | accepted — Story 79.1；Epic 79 闸门记录就位；79.2–79.4 与 Epic 80–83 仍不得 ready（本记录关闭前） |
+| 状态 | closed — Story 79.4 勾选完成；Epic 79 关闭；Phase 17 闸门已开；Epic 80–83 仍 backlog（各 epic 自有 NFR14 后方可 ready）；发版属 Epic 83 |
 
 ### Phase 12–16 关闭面 vs Phase 17 稳定门边界（NFR60 · 必读）
 
@@ -130,10 +130,12 @@
 
 ### Epic 79 关闭条件（Story 79.4 勾选）
 
-- [ ] **FR141 / Correct Course + PRD：** Phase 17 批准文案验收 — Story 79.2
-- [ ] **README / deferred：** Phase 16 vs Phase 17 稳定门区分 — Story 79.3
-- [ ] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 17 指针 — Story 79.4
-- [ ] **NFR60–63：** 边界与诚实义务写入本记录并保持
-- [ ] **禁止事项未触发：** 80–83 在 Epic 79 关闭前未标 ready
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
-- [ ] **Epic 80–83：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭；发版属 Epic 83
+- [x] **FR141 / Correct Course + PRD：** Phase 17 批准文案验收 — Story 79.2
+- [x] **README / deferred：** Phase 16 vs Phase 17 稳定门区分 — Story 79.3
+- [x] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 17 指针 — Story 79.4
+- [x] **NFR60–63：** 边界与诚实义务写入本记录并保持
+- [x] **禁止事项未触发：** 80–83 在 Epic 79 关闭前未标 ready
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
+- [x] **Epic 80–83：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭；发版属 Epic 83
+
+**Phase 17 闸门已开（Story 79.4）：** Epic 80–83 可在各自 NFR14 后标 ready；软序 `80 → 81 ‖ 82 → 83`；**不得**宣称 FR142–146 已关闭直至对应 epic 关闭；**不得**静默吞并 NFR59（NFR63）。

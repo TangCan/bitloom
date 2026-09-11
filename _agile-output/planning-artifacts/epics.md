@@ -114,7 +114,7 @@ phase17Contract: api-stability-gate-bitloom-1-0
 phase17Scope: >
   公开 API 表面钉死；SemVer 1.0 政策；cargo-semver-checks（或等价）CI；
   可选预 1.0 卫生；发布 1.0.0；宣称诚实门面（及闸门 FR）。
-phase17Epic79Status: backlog
+phase17Epic79Status: complete
 phase17Epic80Status: backlog
 phase17Epic81Status: backlog
 phase17Epic82Status: backlog
