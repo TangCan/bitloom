@@ -84,3 +84,18 @@ jobs:
         run: cargo run -p bitloom -- firtool ensure
       - name: Required FR137 circt-external-check
         run: bash scripts/circt-external-check.sh
+
+  # FR144 / NFR62: required surface-crate SemVer gate (cargo-semver-checks).
+  # Same path as `just semver-check`. Failures are never ignored; missing tool fails the job.
+  semver-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.97.1"
+      - name: Install cargo-semver-checks (FR144)
+        run: cargo install cargo-semver-checks --locked
+      - name: Required FR144 semver-check
+        run: bash scripts/semver-check.sh

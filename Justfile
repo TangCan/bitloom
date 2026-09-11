@@ -48,3 +48,8 @@ circt-external-check:
 # Not part of default `just test`. Missing/mismatched firtool → non-zero (never silent skip).
 parser-restore-check:
 	bash scripts/parser-restore-check.sh
+
+# FR144: surface-crate SemVer breakage gate (cargo-semver-checks).
+# Not part of default `just test`. Missing tool → non-zero (never silent success).
+semver-check:
+	bash scripts/semver-check.sh

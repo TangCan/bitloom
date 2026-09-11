@@ -569,8 +569,8 @@ development_status:
   epic-81: in-progress
   81-1-epic-81-nfr14-风险记录: done
   81-2-semver-1-0-政策成文-fr143: done
-  81-3-表面-crate-semver-ci-门禁-fr144: ready-for-dev
-  81-4-fr143-fr144-收口与文档指针: backlog
+  81-3-表面-crate-semver-ci-门禁-fr144: done
+  81-4-fr143-fr144-收口与文档指针: ready-for-dev
   epic-81-retrospective: optional
 
   epic-82: backlog
