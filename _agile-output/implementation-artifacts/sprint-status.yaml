@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 16:00
+last_updated: 09-11-2026 16:05
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -551,7 +551,7 @@ development_status:
   78-1-epic-78-nfr14-风险记录: done
   78-2-vip-socpad-再细拆或跨-crate-实现与验收-fr139: done
   78-3-fr139-收口与-phase-16-故事清单指针: done
-  epic-78-retrospective: optional
+  epic-78-retrospective: done
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1
@@ -2212,3 +2212,31 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-77-retro-2026-09-11.md"
+  - id: "epic-78-retro-item-250-fr139-诚实边界-对外不得把-fr131-p1-p4-alone-fr128"
+    epic: 78
+    action: "FR139 诚实边界：对外不得把 FR131 P1–P4 alone / FR128 alone / FR120 alone（或 docs-only
+      / silent 改导出）写成 FR139 完成；C2 未选不得宣称跨 crate；未列入更深 IP 布局须引 NFR59 新合同；宣称须引 Epic
+      78 关闭证据（FR140）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-78-retro-2026-09-11.md"
+  - id: "epic-78-retro-item-251-触碰-bitloom-prelude-ip-时保持-phase-12-15-关闭"
+    epic: 78
+    action: "触碰 bitloom-prelude ip/ 时保持 Phase 12–15 关闭面有效（NFR56）；不得改写 FR98/108/120/128/131「已关闭」为失败；若日后勾选
+      C2 跨 crate 须先修订 AD-6 / 迁移说明 / 脊柱（NFR58）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-78-retro-2026-09-11.md"
+  - id: "epic-78-retro-item-252-续保持-commit-subject-story-n-m-retro-stori"
+    epic: 78
+    action: "续保持 commit subject Story N.M + retro --stories 短 id（本 epic 已验证）。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-78-retro-2026-09-11.md"
+  - id: "epic-78-retro-item-253-phase-16-可选-retrospective-已全部跑完-未列入更深-ip"
+    epic: 78
+    action: "Phase 16 可选 retrospective 已全部跑完；未列入更深 IP 布局 / GUI·IDE 子集 / 未列协议 / 更广
+      CIRCT·MLIR / 更深 Chisel·Parser 生态仍须显式合同（NFR59），不得因「终局」口号静默扩大。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-78-retro-2026-09-11.md"
