@@ -4,7 +4,7 @@
 
 **Status:** **Epic 78 / FR139 closed** (Story **78.3**). Product path delivered in Story **78.2** (**C1** prelude-internal split; **C2** not selected).
 
-Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72**（闸门 FR133）与 **Epic 78**（本 FR）**已关闭**；**Epic 73–77** 仍须各自实现关闭。本拆分/搬迁已关闭；未列入更深 IP 布局仍属 **NFR59**。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
+Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72**（闸门 FR133）、**Epic 73**（FR134）、**Epic 74**（FR135）与 **Epic 78**（本 FR）**已关闭**；**Epic 75–77** 仍须各自实现关闭。本拆分/搬迁已关闭；未列入更深 IP 布局仍属 **NFR59**。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
 
 ## Contract (NFR14 C1–C4)
 

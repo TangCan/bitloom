@@ -30,11 +30,11 @@ Phase 12–14 关闭证据**仍有效**。原 NFR55 明示剩余（真实上游 
 ## Phase 16 pointer (FR133–140 / NFR56–NFR59) — 产品终局结项（NFR55 升格）
 
 Correct Course `sprint-change-proposal-2026-09-11-phase16-nfr55-final-closeout.md` + PRD addendum「Phase 16」**已批准**（**Phase 16 contract approved** 2026-09-11）。  
-闸门 **FR133 / Epic 72 已关闭**（Story 72.4）；实现 epic = Epic 73–78（**FR134 / Epic 73 已关闭** — 真实上游 Tywaves GUI/IDE G1–G4 `--tywaves-gui`；**FR135** 更多 IP FL；**FR136** 全芯片 pad；**FR137** 外部 CIRCT 门禁；**FR138** Parser + AD-27；**FR139 / Epic 78 已关闭** — VIP/SocPad 再细拆 C1 `ip/gpio/{base,vip,socpad}`（C2 未选）；宣称→**FR140**）。  
-**禁止**用 Phase 15 完成面（含 **FR125–131 alone**）冒充本批 / 终局完成面（**NFR56** / **FR140**）。软序：建议 **Epic 78 → Epic 74/75**（FR139 已关闭）。  
-Phase 12–15 关闭证据**仍有效**。未列入本批者（自动 FSM 标签提取、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生）及**更深 IP 布局**、**更深 GUI/IDE 子集**仍须另开合同（**NFR59**）。各实现 epic 仍须独立 NFR14（**NFR57**）；未关闭前不得宣称对应 FR。  
+闸门 **FR133 / Epic 72 已关闭**（Story 72.4）；实现 epic = Epic 73–78（**FR134 / Epic 73 已关闭** — 真实上游 Tywaves GUI/IDE G1–G4 `--tywaves-gui`；**FR135 / Epic 74 已关闭** — 更多 IP 手写 FL / `UartTxFunctional`（超 Gpio）；**FR136** 全芯片 pad；**FR137** 外部 CIRCT 门禁；**FR138** Parser + AD-27；**FR139 / Epic 78 已关闭** — VIP/SocPad 再细拆 C1 `ip/gpio/{base,vip,socpad}`（C2 未选）；宣称→**FR140**）。  
+**禁止**用 Phase 15 完成面（含 **FR125–131 alone**）冒充本批 / 终局完成面（**NFR56** / **FR140**）。软序 **Epic 78 → Epic 74/75** 已满足（FR139 + FR135 已关闭）；**Epic 75** 仍待实现关闭。  
+Phase 12–15 关闭证据**仍有效**。未列入本批者（自动 FSM 标签提取、第三方 LCOV GUI 一等、emit MemRead stub→完整生成、非 Cargo monorepo 任意路径扫描、GHA formal-sby 镜像卫生）及**更深 IP 布局**、**更深 GUI/IDE 子集**、**未列入协议手写 FL**仍须另开合同（**NFR59**）。各实现 epic 仍须独立 NFR14（**NFR57**）；未关闭前不得宣称对应 FR。  
 终局口径 = 本批关闭 + 诚实 NFR59 deferred；**不等于**冲 1.0；终局宣称须引 **FR133–139**（**FR140**）。公开品牌 **Bitloom**。  
-**Phase 16 规划故事已齐（Epic 72–78）；** 实现关闭态：**Epic 72** + **Epic 73** + **Epic 78** 已关闭；**Epic 74–77** 仍须各自实现关闭。README「状态与 deferred」同源（Story 72.3–72.4 / **73.3** / **78.3**）。
+**Phase 16 规划故事已齐（Epic 72–78）；** 实现关闭态：**Epic 72** + **Epic 73** + **Epic 74** + **Epic 78** 已关闭；**Epic 75–77** 仍须各自实现关闭。README「状态与 deferred」同源（Story 72.3–72.4 / **73.3** / **74.3** / **78.3**）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
@@ -521,7 +521,7 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   evidence: |
     - item-197：**已落地（过程）** — Epic 65–71 各有本 epic NFR14；未选子集仍须显式合同（NFR55）
     - item-201：**真实上游 GUI 安装包 / IDE 插件深度 → FR134 / Epic 73 已关闭**（Story 73.3；G1–G4）；T1–T4 = FR125 完成面仍有效；更深 GUI/IDE 子集仍 **NFR59**
-    - item-205：更多 IP 手写 FL（超 Gpio）— 仍须另开合同（**NFR55**）；选定 Gpio = FR126 完成面
+    - item-205：**更多 IP 手写 FL（超 Gpio）→ FR135 / Epic 74 已关闭**（Story 74.3；`UartTxFunctional` F1–F3）；选定 Gpio = FR126 完成面仍有效；未列入协议仍 **NFR59**
     - item-209：监控 GHA formal-sby 安装时长/镜像漂移 — 卫生跟踪（**NFR54**）；改安装策略须更新文档与 ATDD
     - item-213：多外设 / 全芯片 pad 环 — 仍须另开合同（**NFR55**）；GpioSocPad D1–D4 = FR128 完成面
     - item-217：完整外部 CIRCT 编译/仿真门禁 — 仍须另开合同（**NFR55**）；C1–C4 = FR129 完成面

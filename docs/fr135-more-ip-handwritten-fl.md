@@ -1,8 +1,12 @@
 # FR135 — More IP handwritten FL (beyond Gpio)
 
-**Product:** Bitloom. **Status:** Story **74.2** delivers F1–F3 product path (Epic 74 closeout → **74.3**).
+**Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-Beyond FR126 `GpioFunctional`, FR103 SyncFifo handwritten, and FR103 UART/SPI/I2C/AXI **GeneratedFunctional**.
+**Status:** **Epic 74 / FR135 closed** (Story **74.3**). F1–F3 delivered in Story **74.2** (`UartTxFunctional` ≡ tick).
+
+Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72**（闸门 FR133）、**Epic 73**（FR134）、**Epic 74**（本 FR）、**Epic 78**（FR139）**已关闭**；**Epic 75–77** 仍须各自实现关闭。FR126 Gpio F1–F3 **仍有效**（NFR56）and is **not** this face alone. 未列入协议手写 FL 仍属 **NFR59**。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
+
+Beyond FR126 `GpioFunctional`, FR103 SyncFifo handwritten, and FR103 UART/SPI/I2C/AXI **GeneratedFunctional**. See also [`docs/fr126-more-ip-handwritten-fl.md`](fr126-more-ip-handwritten-fl.md).
 
 ## Selected IP (NFR14 F1–F3)
 
@@ -20,6 +24,11 @@ FR126 Gpio alone；GeneratedFunctional alone；SyncFifo / FR103 alone；FR92 alo
 
 ## Non-regression (NFR56)
 
-FR103 / FR112 / FR119 / FR126 closes remain valid.
+FR103 / FR112 / FR119 / **FR126 Gpio** closes remain valid. FR126 alone ≠ FR135.
 
-ATDD: `cargo test -p bitloom --test fr135_more_ip_handwritten_fl`
+## Deferred (NFR59)
+
+Unlisted protocols (`UartRx` / SPI / I2C / AXI handwritten FL, etc.) remain **NFR59** — require a new contract.
+
+ATDD: `cargo test -p bitloom --test fr135_more_ip_handwritten_fl`  
+Closeout: `cargo test -p bitloom --test fr135_epic74_closeout`

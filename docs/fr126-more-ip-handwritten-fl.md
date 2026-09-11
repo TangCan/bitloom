@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. **Status:** **Epic 66 / FR126 closed** (Story **66.3**). F1–F3 delivered in Story **66.2**.
 
-Beyond FR103 SyncFifo handwritten + GeneratedFunctional UART/SPI/I2C/AXI, and beyond FR112-B / FR119 alone.
+Beyond FR103 SyncFifo handwritten + GeneratedFunctional UART/SPI/I2C/AXI, and beyond FR112-B / FR119 alone. Further handwritten FL beyond Gpio: **FR135 / Epic 74 closed** (Story **74.3**; `UartTxFunctional`); see [`docs/fr135-more-ip-handwritten-fl.md`](fr135-more-ip-handwritten-fl.md). Unlisted protocols remain **NFR59**.
 
 ## Selected IP (NFR14 F1–F3)
 

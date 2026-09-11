@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR135 / Epic 74；对照 FR126 / FR103 / FR112 / FR119 / FR100 / FR92 |
 | 记录日期 | 2026-09-11 |
-| 状态 | **accepted** — Story **74.1**（门禁；实现→74.2；收口→74.3） |
+| 状态 | **closed** — Story **74.3**（74.1 NFR14；74.2 F1–F3；74.3 收口） |
 | **选定加深子集** | **超 Gpio 更多协议手写 FL ≡ tick（F1–F3）** |
 
 ### (a) 上游约束
@@ -90,8 +90,8 @@
 
 ### Epic 74 关闭条件（74.3 勾选）
 
-- [ ] **74.2 / FR135：** F1–F3 产品路径 + ATDD（≥1 超 Gpio 协议）
-- [ ] **文档 / deferred / Phase 16 故事清单指针**
-- [ ] **禁止事项未触发**
-- [ ] **品牌 / 依赖：** Bitloom；设计 crate → `bitloom-prelude`；FL 在工具链/`bitloom-sim`
-- [ ] **FR126 / FR103 / FR112 / FR119 关闭仍有效**（NFR56）
+- [x] **74.2 / FR135：** F1–F3 产品路径 + ATDD（≥1 超 Gpio 协议）
+- [x] **文档 / deferred / Phase 16 故事清单指针**
+- [x] **禁止事项未触发**
+- [x] **品牌 / 依赖：** Bitloom；设计 crate → `bitloom-prelude`；FL 在工具链/`bitloom-sim`
+- [x] **FR126 / FR103 / FR112 / FR119 关闭仍有效**（NFR56）

@@ -117,7 +117,7 @@ phase16Scope: >
   VIP/SocPad 再细拆或跨 crate（及闸门/宣称 FR）。
 phase16Epic72Status: complete
 phase16Epic73Status: complete
-phase16Epic74Status: backlog
+phase16Epic74Status: complete
 phase16Epic75Status: backlog
 phase16Epic76Status: backlog
 phase16Epic77Status: backlog
