@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 09:30
+last_updated: 09-11-2026 09:35
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -496,7 +496,7 @@ development_status:
   69-1-epic-69-nfr14-风险记录: done
   69-2-ad-25-修订-若需-circt-handshake-路径-fr129: done
   69-3-fr129-收口与文档指针: done
-  epic-69-retrospective: optional
+  epic-69-retrospective: done
 
   epic-70: done
   70-1-epic-70-nfr14-风险记录: done
@@ -1933,3 +1933,29 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-68-retro-2026-09-11.md"
+  - id: "epic-69-retro-item-214-fr129-诚实边界-对外不得把-fr95-96-fr110-fr121-rea"
+    epic: 69
+    action: "FR129 诚实边界：对外不得把 FR95/96 / FR110 / FR121 ready/valid alone 写成 CIRCT Handshake
+      全家桶 / FR129 完成面；宣称须引 C1–C4 + AD-25 修订。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-69-retro-2026-09-11.md"
+  - id: "epic-69-retro-item-215-触碰-bitloom-hls-handshake-路径时保持-fr95-110"
+    epic: 69
+    action: "触碰 bitloom HLS / Handshake 路径时保持 FR95/110/121 回归可用（NFR52）；调度前仍须 AD-18
+      溶解。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-69-retro-2026-09-11.md"
+  - id: "epic-69-retro-item-216-续保持-commit-subject-story-n-m-同故事多提交时优先-f"
+    epic: 69
+    action: "续保持 commit subject Story N.M；同故事多提交时优先 fix Story N.M 前缀以利归因。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-69-retro-2026-09-11.md"
+  - id: "epic-69-retro-item-217-可选工程卫生-若交付完整外部-circt-编译-仿真门禁-须新合同钉死-nfr5"
+    epic: 69
+    action: "可选工程卫生：若交付完整外部 CIRCT 编译/仿真门禁，须新合同钉死（NFR55）；当前 C1–C4 为 FR129 完成面。"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-69-retro-2026-09-11.md"
