@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 16:52
+last_updated: 09-11-2026 18:30
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -558,7 +558,7 @@ development_status:
   79-2-correct-course-prd-批准-phase-17-fr141: done
   79-3-同步-readme-deferred-路线图指针-fr141-fr147: done
   79-4-ad-指针与-epic-79-收口-fr141-fr147-nfr62: done
-  epic-79-retrospective: optional
+  epic-79-retrospective: done
 
   epic-80: done
   80-1-epic-80-nfr14-风险记录: done
@@ -2272,3 +2272,30 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-78-retro-2026-09-11.md"
+  - id: "epic-79-retro-item-254-fr141-fr147-honesty-phase-16-finality-is"
+    epic: 79
+    action: "FR141/FR147 honesty: Phase 16 finality is not Bitloom 1.0 shipped; Epic
+      79 close only unblocks 80–83; claims need FR147 / later close evidence."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-79-retro-2026-09-11.md"
+  - id: "epic-79-retro-item-255-keep-phase-12-16-closing-faces-valid-nfr"
+    epic: 79
+    action: "Keep Phase 12–16 closing faces valid (NFR60); do not rewrite closed FRs
+      as failed because of Phase 17."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-79-retro-2026-09-11.md"
+  - id: "epic-79-retro-item-256-keep-commit-subjects-story-n-m-and-retro"
+    epic: 79
+    action: "Keep commit subjects Story N.M and retro --stories short ids."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-79-retro-2026-09-11.md"
+  - id: "epic-79-retro-item-257-nfr59-deeper-unlisted-work-still-needs-e"
+    epic: 79
+    action: "NFR59 / deeper unlisted work still needs explicit contract (NFR63); do
+      not silently expand via 1.0 gate slogans."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-79-retro-2026-09-11.md"
