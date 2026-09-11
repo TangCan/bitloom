@@ -29,12 +29,16 @@ fn fr131_protocol_modules_exist() {
         "spi.rs",
         "i2c.rs",
         "axi.rs",
-        "gpio.rs",
         "blackbox.rs",
         "crc.rs",
     ] {
         assert!(ip.join(name).is_file(), "missing ip/{name}");
     }
+    // FR131 protocol module `gpio` may be `gpio.rs` or FR139 directory `gpio/`.
+    assert!(
+        ip.join("gpio.rs").is_file() || ip.join("gpio/mod.rs").is_file(),
+        "missing ip/gpio.rs or ip/gpio/mod.rs"
+    );
     let mod_rs = fs::read_to_string(ip.join("mod.rs")).unwrap();
     assert!(mod_rs.contains("FR131") || mod_rs.contains("pub use"));
     assert!(mod_rs.contains("mod uart") && mod_rs.contains("mod gpio"));

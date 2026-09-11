@@ -15,6 +15,8 @@
 //! uses [`SynthesizableClosure`] checks (D1).
 //!
 //! **FR131:** split by protocol; re-exported as `bitloom_prelude::ip::*`.
+//! **FR139:** GPIO VIP/SocPad further split under `ip/gpio/{base,vip,socpad}`;
+//! public paths unchanged (no cross-crate; AD-6 / C2 not selected).
 
 mod axi;
 mod blackbox;
