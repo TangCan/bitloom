@@ -698,9 +698,9 @@ development_status:
   100-3-fr167-收口与文档指针: backlog
   epic-100-retrospective: optional
 
-  epic-101: backlog
-  101-1-epic-101-nfr14-风险记录: ready-for-dev
-  101-2-spi-i2c-axi-手写-fl-实现与验收-fr168: backlog
+  epic-101: in-progress
+  101-1-epic-101-nfr14-风险记录: done
+  101-2-spi-i2c-axi-手写-fl-实现与验收-fr168: ready-for-dev
   101-3-fr168-收口与文档指针: backlog
   epic-101-retrospective: optional
 
