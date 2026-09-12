@@ -663,8 +663,8 @@ development_status:
 
   epic-95: in-progress
   95-1-epic-95-nfr14-风险记录: done
-  95-2-未列协议手写-fl-实现与验收-fr163: ready-for-dev
-  95-3-fr163-收口与文档指针: backlog
+  95-2-未列协议手写-fl-实现与验收-fr163: done
+  95-3-fr163-收口与文档指针: ready-for-dev
   epic-95-retrospective: optional
 
   epic-96: backlog

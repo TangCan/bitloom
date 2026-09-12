@@ -4,7 +4,8 @@
 //! [`crate::GeneratedFunctional`] (generation path) **or** handwritten
 //! [`SyncFifoFunctional`] when FR103 nails architectural FL for Mem-based FIFO.
 //! **FR126** adds handwritten [`GpioFunctional`]; **FR135** adds handwritten
-//! [`UartTxFunctional`] beyond Gpio / GeneratedFunctional alone.
+//! [`UartTxFunctional`]; **FR163** adds handwritten [`UartRxFunctional`] beyond
+//! UartTx / Gpio / GeneratedFunctional alone.
 //!
 //! Design crates stay on `bitloom-prelude`; this module lives in the toolchain.
 
@@ -303,6 +304,142 @@ pub fn uart_tx_dual_stimulus() -> Vec<PortValues> {
     out
 }
 
+/// Handwritten `UartRx` FL (FR163) — beyond FR135 `UartTx` / FR126 Gpio / GeneratedFunctional.
+///
+/// Models architectural ports `rd_data` / `rd_valid` / `rx_busy` ≡ `Sim::settle`+`tick` on
+/// [`uart_rx_dual_stimulus`]. Not GeneratedFunctional; not UartTx alone; not Gpio alone.
+#[derive(Debug, Clone, Default)]
+pub struct UartRxFunctional {
+    rx_prev: u64,
+    busy: u64,
+    bit_idx: u64,
+    baud_cnt: u64,
+    shift_reg: u64,
+    hold: u64,
+    valid: u64,
+}
+
+impl UartRxFunctional {
+    pub fn new() -> Self {
+        Self::default()
+    }
+}
+
+impl AbstractionView for UartRxFunctional {
+    fn cycle(&mut self, inputs: &PortValues) -> PortValues {
+        let rst = inputs.get("rst").unwrap_or(0) != 0;
+        let rx = inputs.get("rx").unwrap_or(1) & 1;
+        let baud_div = inputs.get("baud_div").unwrap_or(0) & 0xff;
+
+        if rst {
+            self.rx_prev = 0;
+            self.busy = 0;
+            self.bit_idx = 0;
+            self.baud_cnt = 0;
+            self.shift_reg = 0;
+            self.hold = 0;
+            self.valid = 0;
+        } else {
+            let busy = self.busy != 0;
+            let fall = self.rx_prev == 1 && rx == 0;
+            let start = !busy && fall;
+            let is_stop = self.bit_idx == 9;
+            let baud_eq = self.baud_cnt == baud_div;
+            let baud_tick = busy && baud_eq;
+
+            let baud_cnt_busy = if baud_eq {
+                0
+            } else {
+                self.baud_cnt.wrapping_add(1) & 0xff
+            };
+            let baud_cnt_busy_or_idle = if busy { baud_cnt_busy } else { 0 };
+            let next_baud_cnt = if start { 0 } else { baud_cnt_busy_or_idle };
+
+            let do_sample = baud_tick && !is_stop;
+            let do_finish = baud_tick && is_stop;
+
+            let shift_shr = (self.shift_reg >> 1) & 0xff;
+            let rx8 = if rx != 0 { 0x80 } else { 0 };
+            let shift_in = shift_shr | rx8;
+
+            let busy_after_tick = if is_stop { 0 } else { 1 };
+            let busy_when_busy = if baud_tick { busy_after_tick } else { 1 };
+            let busy_when_busy_or_idle = if busy { busy_when_busy } else { 0 };
+            let next_busy = if start { 1 } else { busy_when_busy_or_idle };
+
+            let bit_idx_p1 = (self.bit_idx.wrapping_add(1)) & 0xf;
+            let bit_after_tick = if is_stop { 0 } else { bit_idx_p1 };
+            let bit_when_busy = if baud_tick {
+                bit_after_tick
+            } else {
+                self.bit_idx
+            };
+            let bit_when_busy_or_idle = if busy { bit_when_busy } else { 0 };
+            let next_bit_idx = if start { 1 } else { bit_when_busy_or_idle };
+
+            let shift_after_sample = if do_sample { shift_in } else { self.shift_reg };
+            let next_shift_busy = if busy {
+                shift_after_sample
+            } else {
+                self.shift_reg
+            };
+            let next_shift = if start { 0 } else { next_shift_busy };
+
+            let next_hold = if do_finish { self.shift_reg } else { self.hold };
+            let next_valid = if do_finish { 1 } else { 0 };
+
+            self.rx_prev = rx;
+            self.busy = next_busy;
+            self.bit_idx = next_bit_idx;
+            self.baud_cnt = next_baud_cnt;
+            self.shift_reg = next_shift;
+            self.hold = next_hold;
+            self.valid = next_valid;
+        }
+
+        let mut out = inputs.clone();
+        out.set("rd_data", self.hold & 0xff);
+        out.set("rd_valid", self.valid & 1);
+        out.set("rx_busy", self.busy & 1);
+        out
+    }
+}
+
+/// Documented UartRx dual-model stimulus (reset, 8N1 RX frame, baud_div hold) — FR163.
+pub fn uart_rx_dual_stimulus() -> Vec<PortValues> {
+    let mut out = Vec::new();
+    let mut frame = |rst: u64, rx: u64, baud_div: u64| {
+        let mut pv = PortValues::default();
+        pv.set("rst", rst);
+        pv.set("rx", rx);
+        pv.set("baud_div", baud_div);
+        out.push(pv);
+    };
+    // baud_div=0: 1 clk/bit — 0xA5 LSB-first (matches prelude uart_rx smoke)
+    frame(1, 1, 0);
+    frame(0, 1, 0);
+    // start + data 0b1010_0101 LSB-first + stop
+    for &b in &[0u64, 1, 0, 1, 0, 0, 1, 0, 1, 1] {
+        frame(0, b, 0);
+    }
+    frame(0, 1, 0); // idle after valid
+    // baud_div=1: 2 clk/bit — start held then sample 0x01 (LSB=1)
+    frame(1, 1, 1);
+    frame(0, 1, 1);
+    frame(0, 0, 1); // fall → start
+    frame(0, 0, 1); // start held (baud_cnt 0→1)
+    frame(0, 1, 1); // sample bit0=1 @ baud_tick; bit_idx 1→2
+    frame(0, 1, 1); // hold
+    for _ in 0..7 {
+        // remaining data 0 + stop, 2 clk each
+        frame(0, 0, 1);
+        frame(0, 0, 1);
+    }
+    frame(0, 1, 1); // stop held
+    frame(0, 1, 1); // finish
+    out
+}
+
 /// Architectural ports compared for SyncFifo dual-model (avoid internal wires).
 const SYNC_FIFO_ARCH_PORTS: &[&str] = &["full", "empty", "data_out"];
 
@@ -311,6 +448,9 @@ const GPIO_ARCH_PORTS: &[&str] = &["pad_out", "rd_data"];
 
 /// Architectural ports for UartTx handwritten FL (FR135).
 const UART_TX_ARCH_PORTS: &[&str] = &["tx", "tx_byte", "tx_busy"];
+
+/// Architectural ports for UartRx handwritten FL (FR163).
+const UART_RX_ARCH_PORTS: &[&str] = &["rd_data", "rd_valid", "rx_busy"];
 /// FR103 product entry: co-verify functional + cycle models for the NFR14 IP set.
 #[derive(Debug, Clone, Default)]
 pub struct IpDualModelMatrix;
@@ -426,6 +566,53 @@ impl IpDualModelMatrix {
             sim.tick();
             let abs_out = abs.cycle(&inputs);
             if let Err(mismatches) = compare_named_ports(sim.ports(), &abs_out, UART_TX_ARCH_PORTS)
+            {
+                return EquivStatus::Fail {
+                    cycle: cycles,
+                    mismatches,
+                };
+            }
+            cycles += 1;
+        }
+        EquivStatus::Pass { cycles }
+    }
+
+    /// FR163: handwritten `UartRx` FL ≡ tick on [`uart_rx_dual_stimulus`].
+    pub fn verify_uart_rx_handwritten(&self, hir: FrozenHir) -> EquivStatus {
+        let mut sim = Sim::new(hir);
+        let mut fl = UartRxFunctional::new();
+        let mut cycles = 0usize;
+        for inputs in uart_rx_dual_stimulus() {
+            sim.set_inputs(inputs.clone());
+            sim.settle();
+            sim.tick();
+            let abs_out = fl.cycle(&inputs);
+            if let Err(mismatches) = compare_named_ports(sim.ports(), &abs_out, UART_RX_ARCH_PORTS)
+            {
+                return EquivStatus::Fail {
+                    cycle: cycles,
+                    mismatches,
+                };
+            }
+            cycles += 1;
+        }
+        EquivStatus::Pass { cycles }
+    }
+
+    /// Deliberate mismatch / alternate FL ATDD for UartRx (FR163).
+    pub fn verify_uart_rx_handwritten_with<A: AbstractionView>(
+        &self,
+        hir: FrozenHir,
+        abs: &mut A,
+    ) -> EquivStatus {
+        let mut sim = Sim::new(hir);
+        let mut cycles = 0usize;
+        for inputs in uart_rx_dual_stimulus() {
+            sim.set_inputs(inputs.clone());
+            sim.settle();
+            sim.tick();
+            let abs_out = abs.cycle(&inputs);
+            if let Err(mismatches) = compare_named_ports(sim.ports(), &abs_out, UART_RX_ARCH_PORTS)
             {
                 return EquivStatus::Fail {
                     cycle: cycles,

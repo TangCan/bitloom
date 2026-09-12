@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR163 / Epic 95；NFR14、NFR68、NFR69、NFR71、NFR72；对照 FR135 / FR126 / FR103 / FR112 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 95.1；Epic 95 未关闭 |
+| 状态 | open / in-progress — Story 95.2 implemented; Epic 95 未关闭（待 95.3） |
 | **选定** | 在保留 FR135 `UartTxFunctional` / FR126 `GpioFunctional` 关闭面的前提下，授权 **MVP：至少一项超出 `UartTx` 的协议手写 FL** — 选定 **`UartRx`**（`UartRxFunctional` ≡ tick + `IpDualModelMatrix::verify_uart_rx_handwritten` 或等价）；SPI / I2C / AXI handwritten **不做**（须新合同 / NFR71） |
 
 ### Phase 12–18 / FR135 关闭面 vs Epic 95 实现边界（NFR68 · 必读）
@@ -114,7 +114,7 @@
 
 ### Epic 95 关闭条件（Story 95.3 勾选）
 
-- [ ] **FR163 钉死子集实现 + 验收** — Story 95.2
+- [x] **FR163 钉死子集实现 + 验收** — Story 95.2
 - [ ] **文档 / deferred / README / docs/ip 收口** — Story 95.3
 - [ ] **NFR68/71/72：** 边界与诚实义务保持；未选 SPI/I2C/AXI 须新合同
 - [ ] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
