@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 102 / FR169 in progress** (Story **102.2** implementation). Story **102.3** closeout pending.
+**Status:** **Epic 102 / FR169 closed** (Story **102.3**). Product path: multi-lower / HW dialect allocation at AD-9 `firtool-1.155.0`. Option **(B)** firtool bump remains deferred (**NFR76**).
 
 Phase 19 **FR164** external sim gate and **FR137** compile gate **remain closed and valid** (NFR73).
 This FR delivers NFR14 option **(A)** — multi-lower / HW dialect allocation product path at the **same AD-9 pin** (`firtool-1.155.0`). Option **(B)** firtool bump is **not** selected in this story (requires Chisel formal pairing + AD-9 revise).

@@ -68,9 +68,10 @@ Correct Course `sprint-change-proposal-2026-09-12-phase20-nfr71-four-leftovers.m
 闸门 **FR166 / Epic 99**（**已关闭** / Story **99.4**）。
 **Epic 100 / FR167**（**已关闭** / Story **100.3**；[`docs/fr167-chiselsim-ide-stores.md`](../../docs/fr167-chiselsim-ide-stores.md)）— ChiselSim + Open VSX/JetBrains。
 **Epic 101 / FR168**（**已关闭** / Story **101.3**；[`docs/fr168-spi-i2c-axi-handwritten-fl.md`](../../docs/fr168-spi-i2c-axi-handwritten-fl.md)）— SPI+I2C+AXI 手写 FL。
-映射（其余）：**FR169** Epic 102（CIRCT/MLIR / firtool 升钉）；**FR170** Epic 103（HEAD Parser）；**FR171** Epic 104（宣称诚实）。
-**诚实：** Phase 19 关闭证据**仍有效**（**NFR73**）；不得用 Phase 19 alone 冒充本批四条；**FR169–170 未关闭前不得宣称**已交付；超出各 NFR14 钉死子集仍须新合同（**NFR76**）；宣称须引 **FR166–171**（**FR171** / **NFR77**）。公开品牌 **Bitloom**。`git push` 非 FR。
-README「状态与 deferred」同源（Story **99.3** / **99.4** / **100.3** / **101.3**；宣称收口 → **104.x**）。
+**Epic 102 / FR169**（**已关闭** / Story **102.3**；[`docs/fr169-circt-mlir-allocation.md`](../../docs/fr169-circt-mlir-allocation.md)）— multi-lower / HW dialect allocation @ AD-9 pin；firtool 升钉仍 **NFR76**。
+映射（其余）：**FR170** Epic 103（HEAD Parser）；**FR171** Epic 104（宣称诚实）。
+**诚实：** Phase 19 关闭证据**仍有效**（**NFR73**）；不得用 Phase 19 alone 冒充本批四条；**FR170 未关闭前不得宣称**已交付；超出各 NFR14 钉死子集仍须新合同（**NFR76**）；宣称须引 **FR166–171**（**FR171** / **NFR77**）。公开品牌 **Bitloom**。`git push` 非 FR。
+README「状态与 deferred」同源（Story **99.3** / **99.4** / **100.3** / **101.3** / **102.3**；宣称收口 → **104.x**）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 

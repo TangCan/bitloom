@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR169 / Epic 102；NFR14、NFR73、NFR74、NFR75、NFR76、NFR77；对照 FR164 / FR137 / FR129 / AD-9 / AD-25 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 102.1；Epic 102 进行中；102.2–102.3 须本记录后才可 ready |
+| 状态 | closed — Story 102.3 勾选完成；Epic 102 关闭；FR169 实现面可宣称（**(A)** multi-lower @ firtool-1.155.0）；**(B)** firtool 升钉仍 **NFR76**；**FR170–171** 仍属 Epic 103–104 |
 | **选定** | 在保留 FR164 仿真门禁 / FR137 compile 关闭面的前提下，授权 **(A) 更广 CIRCT/MLIR dialect allocation（或多 lower）产品加深** **和/或 (B) 经 Chisel 正式配对后的 firtool 升钉（修订 AD-9）** — **至少交付 (A) 或 (B) 之一，且须超出 FR164**；禁止 PATH 随机 firtool / 未配对 CIRCT HEAD 冒充已升钉 |
 
 ### Phase 12–19 / FR164 关闭面 vs Epic 102 实现边界（NFR73 · 必读）
@@ -89,3 +89,13 @@
 
 - AD-28；AD-9；FR169；对照 FR164 / FR137 / FR129；Phase 20 Correct Course approved 2026-09-12
 - **NFR14-crates** ≠ 本门禁
+
+---
+
+### Epic 102 关闭条件（Story 102.3 勾选）
+
+- [x] **FR169 钉死子集实现 + 验收** — Story 102.2（**(A)** multi-lower / HW dialect allocation @ AD-9 pin；**(B)** 未选）
+- [x] **文档 / deferred / README / spine 收口** — Story 102.3
+- [x] **NFR73/76：** 边界与诚实义务保持；firtool 升钉超 AD-9 与未写入子集须新合同
+- [x] **品牌 / AD-6：** Bitloom；CIRCT 运行时不得进入设计 crate
+- [x] **其余 FR170–171：** 未关前不得宣称 Phase 20 全清 / NFR71 账本已空
