@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-12-2026 16:20
+last_updated: 09-12-2026 16:25
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -2864,119 +2864,119 @@ action_items:
     epic: 99
     action: "Phase 20 宣称须引 FR166–171（闸门引 FR166）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-99-retro-2026-09-12.md"
   - id: "epic-99-retro-item-325-fr166-关闭-fr167-170-已交付-各加深-epic-须独立-nfr1"
     epic: 99
     action: "FR166 关闭 ≠ FR167–170 已交付；各加深 epic 须独立 NFR14"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-99-retro-2026-09-12.md"
   - id: "epic-99-retro-item-326-超出各-epic-nfr14-钉死子集仍须新合同-nfr76-不得宣称-nfr7"
     epic: 99
     action: "超出各 epic NFR14 钉死子集仍须新合同（NFR76）；不得宣称 NFR71 账本已空"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-99-retro-2026-09-12.md"
   - id: "epic-99-retro-item-327-git-push-不是-fr"
     epic: 99
     action: "git push 不是 FR"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-99-retro-2026-09-12.md"
   - id: "epic-100-retro-item-328-chiselsim-多商店已交付须引-fr167"
     epic: 100
     action: "ChiselSim/多商店已交付须引 FR167"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-100-retro-2026-09-12.md"
   - id: "epic-100-retro-item-329-更深-ide-商店子集超出-nfr14-仍-nfr76"
     epic: 100
     action: "更深 IDE/商店子集超出 NFR14 仍 NFR76"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-100-retro-2026-09-12.md"
   - id: "epic-100-retro-item-330-无-ovsx_pat-jetbrains_token-时-publish-脚本须"
     epic: 100
     action: "无 OVSX_PAT/JETBRAINS_TOKEN 时 publish 脚本须非零可读失败"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-100-retro-2026-09-12.md"
   - id: "epic-101-retro-item-331-spi-i2c-axi-手写-fl-须引-fr168-三者"
     epic: 101
     action: "SPI·I2C·AXI 手写 FL 须引 FR168（三者）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-101-retro-2026-09-12.md"
   - id: "epic-101-retro-item-332-其它未列协议仍-nfr76"
     epic: 101
     action: "其它未列协议仍 NFR76"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-101-retro-2026-09-12.md"
   - id: "epic-101-retro-item-333-禁止至少一项交差冒充-fr168"
     epic: 101
     action: "禁止至少一项交差冒充 FR168"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-101-retro-2026-09-12.md"
   - id: "epic-102-retro-item-334-circt-multi-lower-allocation-须引-fr169"
     epic: 102
     action: "CIRCT multi-lower / allocation 须引 FR169"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-102-retro-2026-09-12.md"
   - id: "epic-102-retro-item-335-firtool-升钉超-ad-9-须-chisel-正式配对-ad-9-修订-n"
     epic: 102
     action: "firtool 升钉超 AD-9 须 Chisel 正式配对 + AD-9 修订（NFR76）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-102-retro-2026-09-12.md"
   - id: "epic-102-retro-item-336-bitloom_circt_alloc_force_missing-1-须非零可"
     epic: 102
     action: "BITLOOM_CIRCT_ALLOC_FORCE_MISSING=1 须非零可读失败"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-102-retro-2026-09-12.md"
   - id: "epic-103-retro-item-337-update-mainline-head-parser-须引-fr170"
     epic: 103
     action: "update-mainline / HEAD Parser 须引 FR170"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-103-retro-2026-09-12.md"
   - id: "epic-103-retro-item-338-unpaired-circt-chisel-head-firtool-升钉仍-n"
     epic: 103
     action: "Unpaired CIRCT/Chisel HEAD / firtool 升钉仍 NFR76"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-103-retro-2026-09-12.md"
   - id: "epic-103-retro-item-339-无-ad-27-修订不得宣称-head-parser-已回迁"
     epic: 103
     action: "无 AD-27 修订不得宣称 HEAD Parser 已回迁"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-103-retro-2026-09-12.md"
   - id: "epic-104-retro-item-340-完整-phase-20-宣称须引-fr166-171-各加深条须引对应-fr-1"
     epic: 104
     action: "完整 Phase 20 宣称须引 FR166–171；各加深条须引对应 FR（167–170）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-104-retro-2026-09-12.md"
   - id: "epic-104-retro-item-341-phase-20-关闭-nfr71-账本已空-超出钉死子集仍须新合同-nfr76"
     epic: 104
     action: "Phase 20 关闭 ≠ NFR71 账本已空；超出钉死子集仍须新合同（NFR76）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-104-retro-2026-09-12.md"
   - id: "epic-104-retro-item-342-禁止-phase-19-alone-冒充-fr167-170-nfr77-git"
     epic: 104
     action: "禁止 Phase 19 alone 冒充 FR167–170（NFR77）；git push 不是 FR"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-104-retro-2026-09-12.md"
   - id: "epic-104-retro-item-343-phase-20-可选-retrospective-跑完后-未列加深仍须显式合同"
     epic: 104
     action: "Phase 20 可选 retrospective 跑完后，未列加深仍须显式合同（NFR76）"
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-104-retro-2026-09-12.md"
