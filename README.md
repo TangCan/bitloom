@@ -17,7 +17,7 @@ Rust 嵌入式 RTL HDL：设计是**可执行生成器**。`cargo bitloom build`
 
 ## 快速开始
 
-**诚实面（Phase 17 / 18 / 19）：** 库 crate（`bitloom-macro` / `hir` / `builder` / `vlog` / `sim` / `prelude`）已在 crates.io **1.0.0**（Phase 17 / FR146）。**公开 CLI `bitloom` 1.0.0 已可 `cargo install`**（**FR151** / Epic 85）。**Phase 18 已关闭**（Epic 84–86）：SemVer / 发版诚实 **FR153**（[`docs/fr153-semver-honesty.md`](docs/fr153-semver-honesty.md)）。CLI crates.io 宣称须引 **FR148–153**。**Phase 19 闸门 FR154 已关**（Epic 87）；**FR155** lsp 上架（Epic 88）；**FR157** FSM 标签（Epic 89）；**FR158** 第三方 LCOV GUI（`genhtml`；[`docs/fr158-third-party-lcov-gui.md`](docs/fr158-third-party-lcov-gui.md) / Epic 90）；**FR159** MemRead 完整生成（[`docs/fr159-memread-full-emit.md`](docs/fr159-memread-full-emit.md) / Epic 91）；**FR160** 非 Cargo 路径扫描（[`docs/fr160-non-cargo-path-scan.md`](docs/fr160-non-cargo-path-scan.md) / Epic 92）；**FR161** formal-sby 镜像卫生（[`docs/fr161-formal-sby-image-hygiene.md`](docs/fr161-formal-sby-image-hygiene.md) / Epic 93）；**FR162** 更深 GUI/IDE 默认波形主表面（[`docs/fr162-deeper-gui-ide-default-wave.md`](docs/fr162-deeper-gui-ide-default-wave.md) / Epic 94）；**FR163** 未列协议手写 FL（`UartRxFunctional`；[`docs/fr163-unlisted-protocol-handwritten-fl.md`](docs/fr163-unlisted-protocol-handwritten-fl.md) / Epic 95）；**FR164** 外部 CIRCT 仿真门禁（[`docs/fr164-circt-external-sim-gate.md`](docs/fr164-circt-external-sim-gate.md) / Epic 96）；**FR165** 更深 Chisel/Parser 生态（Style Guide/linter；[`docs/fr165-deeper-chisel-parser-ecosystem.md`](docs/fr165-deeper-chisel-parser-ecosystem.md) / Epic 97）。宣称纪律 **FR156** / Epic 98 — **在对应 FR 关闭前不得宣称已交付**；**禁止**用已关 FR alone 冒充 NFR59「全清」（**NFR68** / **NFR72**）。贡献者亦可 clone 本仓库使用 workspace CLI。
+**诚实面（Phase 17 / 18 / 19）：** 库 crate（`bitloom-macro` / `hir` / `builder` / `vlog` / `sim` / `prelude`）已在 crates.io **1.0.0**（Phase 17 / FR146）。**公开 CLI `bitloom` 1.0.0 已可 `cargo install`**（**FR151** / Epic 85）。**Phase 18 已关闭**（Epic 84–86）：SemVer / 发版诚实 **FR153**（[`docs/fr153-semver-honesty.md`](docs/fr153-semver-honesty.md)）。CLI crates.io 宣称须引 **FR148–153**。**Phase 19 已关闭**（Epic 87–98 / FR154–165）：闸门 **FR154**；**FR155** lsp 上架；**FR157–165** NFR59 升格子集；宣称诚实 **FR156**（[`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md)）。Phase 19 宣称须引 **FR154–165**；超出各 NFR14 钉死子集仍 **NFR71**（**NFR68** / **NFR72**）。贡献者亦可 clone 本仓库使用 workspace CLI。
 
 ```bash
 # 推荐：crates.io（FR151）
@@ -281,7 +281,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **Phase 18（CLI / 依赖 crate crates.io 可发布 · FR148–FR153 / NFR64–NFR67）：** Correct Course 已批准（2026-09-11）。Phase 12–17 关闭证据**仍有效**（**NFR64**），**不得**改写为失败。闸门 **FR148** / Epic 84 **已关闭**（Story 84.4）。**Epic 85 / FR149–152 已关闭**（`bitloom-firrtl` / `bitloom-viz` / CLI `bitloom` **1.0.0** 已上 crates.io；lsp 策略 **FR152(b)**）。**FR153** 发版后诚实 / SemVer 跟进 → **Epic 86**（**已关闭**）。**口径：** CLI 上架 ≠ 清空 NFR59（**NFR67**）。公开品牌 **Bitloom**。同源：[`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md) Phase 18 pointer；[`docs/fr151-bitloom-cli-publish.md`](docs/fr151-bitloom-cli-publish.md)。
 
-**Phase 19（NFR59 全子集升格 + FR152(a) · FR154–FR165 / NFR68–NFR72）：** Correct Course 已批准（2026-09-12；`correctCoursePhase19Approved`）。Phase 12–18 关闭证据**仍有效**（**NFR68**），**不得**改写为失败。闸门 **FR154** / Epic 87 **已关闭**。**Epic 88 / FR155**、**Epic 89 / FR157**、**Epic 90 / FR158**（`genhtml`；[`docs/fr158-third-party-lcov-gui.md`](docs/fr158-third-party-lcov-gui.md)）、**Epic 91 / FR159**（MemRead 完整生成；[`docs/fr159-memread-full-emit.md`](docs/fr159-memread-full-emit.md)）、**Epic 92 / FR160**（非 Cargo 路径扫描；[`docs/fr160-non-cargo-path-scan.md`](docs/fr160-non-cargo-path-scan.md)）、**Epic 93 / FR161**（formal-sby 镜像卫生；[`docs/fr161-formal-sby-image-hygiene.md`](docs/fr161-formal-sby-image-hygiene.md)）、**Epic 94 / FR162**（更深 GUI/IDE 默认主表面；[`docs/fr162-deeper-gui-ide-default-wave.md`](docs/fr162-deeper-gui-ide-default-wave.md)）、**Epic 95 / FR163**（`UartRx` 手写 FL；[`docs/fr163-unlisted-protocol-handwritten-fl.md`](docs/fr163-unlisted-protocol-handwritten-fl.md)）、**Epic 96 / FR164**（外部 CIRCT 仿真门禁；[`docs/fr164-circt-external-sim-gate.md`](docs/fr164-circt-external-sim-gate.md)）、**Epic 97 / FR165**（Style Guide/linter 加深；[`docs/fr165-deeper-chisel-parser-ecosystem.md`](docs/fr165-deeper-chisel-parser-ecosystem.md)；Chisel HEAD Parser 仍 **NFR71**）**已关闭**。实现面其余：**FR156** 宣称（Epic 98）。**禁止**用已关 FR alone 冒充 NFR59「全清」；**禁止**在对应 FR 关闭前勾选完成。`git push` **不是** FR。公开品牌 **Bitloom**。同源：[`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md) Phase 19 pointer。
+**Phase 19（NFR59 全子集升格 + FR152(a) · FR154–FR165 / NFR68–NFR72）：** Correct Course 已批准（2026-09-12；`correctCoursePhase19Approved`）。Phase 12–18 关闭证据**仍有效**（**NFR68**），**不得**改写为失败。闸门 **FR154** / Epic 87–**Epic 98 / FR156** **全部已关闭**（Story 98.3）。**Epic 88 / FR155**、**Epic 89–97 / FR157–165** 加深面已关；宣称诚实见 [`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md)。**Phase 19 规划故事已齐（Epic 87–98）**。**禁止**用 Phase 18 alone 冒充 lsp/NFR59；**禁止**暗示超出 NFR14 钉死子集的加深已清（**NFR71**）。`git push` **不是** FR。公开品牌 **Bitloom**。同源：[`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md) Phase 19 pointer。
 
 **Phase 12 规划/实现故事已齐（Epic 40–47 已关闭）。** Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。
 
@@ -385,9 +385,9 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 **FR148–153 宣称纪律：** 「CLI 已可从 crates.io 安装」对应 **FR151**；SemVer 默认已按已发布 1.0 处理 → **FR153**；完整 Phase 18 宣称须引 **FR148–153**。CLI 上架 ≠ 清空 NFR59（**NFR67**）。公开品牌 **Bitloom**。
 
-### Phase 19 NFR59 + FR152(a)（**in progress** — Epic 87–98 / FR154–165；宣称门 **FR156**）
+### Phase 19 NFR59 + FR152(a)（**complete** — Epic 87–98 / FR154–165；宣称门 **FR156 已关闭**）
 
-下列原 **NFR59** 账本 + **FR152(a)** 已由 Correct Course + **FR154** 升格为 Phase 19 显式 FR（Epic 87–98）。**对外宣称须引对应已关 FR**（**FR156** / **NFR72** / [`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md)）。Phase 12–18 关闭面**仍有效**（**NFR68**）。同源：PRD addendum「Phase 19」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+下列原 **NFR59** 账本 + **FR152(a)** 已由 Correct Course + **FR154** 升格为 Phase 19 显式 FR（Epic 87–98）。**对外宣称须引对应已关 FR**（**FR156** / **NFR72** / [`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md)）。Phase 12–18 关闭面**仍有效**（**NFR68**）。**Phase 19 规划故事已齐（Epic 87–98）**。超出各 epic NFR14 钉死子集的加深仍须新合同（**NFR71**）。同源：PRD addendum「Phase 19」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
 | 加深 / 上架面 | FR / Epic | 状态（诚实） |
 | --- | --- | --- |
@@ -402,9 +402,9 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 未列协议手写 FL | FR163 / 95 | `UartRxFunctional` ≡ tick（≠ FR135 alone；SPI/I2C/AXI 仍 NFR71）— **已关闭** |
 | 更广 CIRCT/MLIR / 仿真门禁 | FR164 / 96 | 外部 firtool 仿真门禁（≠ FR137 compile alone；更广 MLIR 仍 NFR71）— **已关闭** |
 | 更深 Chisel/Parser 生态 | FR165 / 97 | Style Guide/linter 加深（≠ FR138 alone；HEAD Parser 仍 NFR71）— **已关闭** |
-| Phase 19 宣称诚实门 | FR156 / 98 | [`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md) — **Story 98.2 诚实面（未关前不得宣称 FR156 已关闭）** |
+| Phase 19 宣称诚实门 | FR156 / 98 | [`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md) — **已关闭**（Story 98.3） |
 
-**FR154–165 宣称纪律：** 「lsp 已上架」须引 **FR155**；各 NFR59 条须引 **FR157–165**；完整 Phase 19 宣称须引 **FR154–165**（**FR156**）。超出各 epic NFR14 钉死子集的更深项仍须新合同（**NFR71**）。`git push` **不是** FR。公开品牌 **Bitloom**。
+**FR154–165 宣称纪律：** 「lsp 已上架」须引 **FR155**；各 NFR59 条须引 **FR157–165**；完整 Phase 19 宣称须引 **FR154–165**（**FR156**）。**不得宣称**超出已关 FR / NFR14 钉死子集的完成面（**NFR71**）。`git push` **不是** FR。公开品牌 **Bitloom**。
 
 **（历史口径）NFR59 曾 deferred（NFR63 / NFR67）— 现已由 Phase 19 合同升格；未关 FR 前仍不得冒充已清：**
 

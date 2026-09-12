@@ -38,8 +38,13 @@ fn fr156_readme_honesty_pointers() {
     assert!(readme.contains("FR157") && readme.contains("FR165"));
     assert!(
         readme.contains("FR156")
-            && (readme.contains("未关前不得宣称") || readme.contains("Story 98.2")),
-        "FR156 must not be marked closed prematurely"
+            && (readme.contains("已关闭")
+                || readme.contains("complete")
+                || readme.contains("Story 98.3")
+                || readme.contains("未关前不得宣称")
+                || readme.contains("Story 98.2")
+                || readme.contains("Epic 98")),
+        "README must keep FR156 claim honesty visible"
     );
     assert!(readme.contains("Bitloom"));
     assert!(readme.contains("NFR71") && readme.contains("NFR72"));

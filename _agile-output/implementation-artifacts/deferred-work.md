@@ -56,9 +56,9 @@ README「状态与 deferred」同源（Story 84.3 / 86.3）。
 ## Phase 19 pointer (FR154–165 / NFR68–NFR72) — NFR59 全子集升格 + FR152(a)
 
 Correct Course `sprint-change-proposal-2026-09-12-phase19-nfr59-fr152a.md` + PRD addendum「Phase 19」**已批准**（**Phase 19 contract approved** 2026-09-12；`correctCoursePhase19Approved: 2026-09-12`）。
-闸门 **FR154 / Epic 87**（**已关闭** / Story 87.4）。**Epic 88 / FR155**、**Epic 89 / FR157**、**Epic 90 / FR158**（**已关闭** / Story 90.3；`genhtml`；`docs/fr158-third-party-lcov-gui.md`）、**Epic 91 / FR159**（**已关闭** / Story 91.3；`docs/fr159-memread-full-emit.md`）、**Epic 92 / FR160**（**已关闭** / Story 92.3；`docs/fr160-non-cargo-path-scan.md`）、**Epic 93 / FR161**（**已关闭** / Story 93.3；`docs/fr161-formal-sby-image-hygiene.md`）、**Epic 94 / FR162**（**已关闭** / Story 94.3；`docs/fr162-deeper-gui-ide-default-wave.md`；ChiselSim/多商店仍 **NFR71**）、**Epic 95 / FR163**（**已关闭** / Story 95.3；`docs/fr163-unlisted-protocol-handwritten-fl.md`；SPI/I2C/AXI 手写仍 **NFR71**）、**Epic 96 / FR164**（**已关闭** / Story 96.3；`docs/fr164-circt-external-sim-gate.md`；更广 MLIR 仍 **NFR71**）、**Epic 97 / FR165**（**已关闭** / Story 97.3；`docs/fr165-deeper-chisel-parser-ecosystem.md`；Chisel HEAD Parser 仍 **NFR71**）已关。**Epic 98 / FR156** 宣称诚实门 — Story **98.2** 诚实面落地中（[`docs/fr156-phase19-claim-honesty.md`](../../docs/fr156-phase19-claim-honesty.md)）；未关前不得宣称 FR156 已关闭。
-**Phase 19 规划故事已齐（Epic 87–98）。** 宣称须引 **FR154–FR165**（**FR156**）。软序 **87 →（88 ‖ 89…97）→ 98**；**88–97 已关**；收口属 Epic **98**。
-**诚实：** 已关 deepen ≠ 跳过 FR156；**NFR71** 未选加深仍须新合同；**禁止** Phase 18 alone 冒充 lsp/NFR59（**NFR72**）。
+闸门 **FR154 / Epic 87**（**已关闭** / Story 87.4）。**Epic 88–97** deepen（FR155 / FR157–165）**已关闭**（含 **Epic 97 / FR165** / Story **97.3**）。**Epic 98 / FR156**（**已关闭** / Story 98.3；[`docs/fr156-phase19-claim-honesty.md`](../../docs/fr156-phase19-claim-honesty.md)）。
+**Phase 19 规划故事已齐（Epic 87–98）；实现故事已关。** 宣称须引 **FR154–FR165**（**FR156**）。
+**诚实：** Phase 19 关闭 ≠ NFR71 账本已空；超出各 epic NFR14 钉死子集的加深仍须新合同；**禁止** Phase 18 alone 冒充 lsp/NFR59（**NFR72**）；**不得宣称**超出已关 FR 的完成面。
 Phase 12–18 关闭证据**仍有效**（**NFR68**）。公开品牌 **Bitloom**。`git push` 非 FR。
 README「状态与 deferred」同源（Story **87.3** / **88.4** / **89.3** / **90.3** / **91.3** / **92.3** / **93.3**；宣称收口 → **98.x**）。
 

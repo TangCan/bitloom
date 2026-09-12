@@ -2,7 +2,11 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 98 / FR156 in progress** (Story **98.2** honesty surface). NFR14: `_agile-output/implementation-artifacts/nfr14-risk-epic98-phase19-claim-honesty-fr156.md`.
+**Status:** **Epic 98 / FR156 closed** (Story **98.3**). Honesty surface delivered in Story **98.2**.
+
+NFR14: `_agile-output/implementation-artifacts/nfr14-risk-epic98-phase19-claim-honesty-fr156.md`.
+
+Phase 19 **规划故事已齐（Epic 87–98）**；宣称须引 **FR154–165**（本 FR）。超出各 epic NFR14 钉死子集的加深仍 **NFR71**。
 
 ## Rule (NFR72)
 
