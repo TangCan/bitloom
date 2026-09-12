@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-12-2026 10:30
+last_updated: 09-12-2026 05:29
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -616,7 +616,7 @@ development_status:
   87-2-correct-course-prd-批准-phase-19-fr154: done
   87-3-同步-readme-deferred-路线图指针-fr154: done
   87-4-ad-指针与-epic-87-收口-fr154: done
-  epic-87-retrospective: optional
+  epic-87-retrospective: done
 
   epic-88: done
   88-1-epic-88-nfr14-风险记录: done
@@ -2558,3 +2558,55 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-86-retro-2026-09-12.md"
+  - id: "epic-87-retro-item-282-fr154-honesty-gate-close-nfr59-nine-deli"
+    epic: 87
+    action: "FR154 honesty: gate close ≠ NFR59 nine delivered; claims cite matching
+      FR (FR156/NFR72)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-87-retro-2026-09-12.md"
+  - id: "epic-87-retro-item-283-keep-phase-12-18-closing-faces-valid-nfr"
+    epic: 87
+    action: "Keep Phase 12–18 closing faces valid (NFR68); do not rewrite as failed"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-87-retro-2026-09-12.md"
+  - id: "epic-87-retro-item-284-keep-story-n-m-commit-subjects-one-story"
+    epic: 87
+    action: "Keep Story N.M commit subjects; one story one commit"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-87-retro-2026-09-12.md"
+  - id: "epic-87-retro-item-285-deeper-work-beyond-each-epic-nfr14-subse"
+    epic: 87
+    action: "Deeper work beyond each epic NFR14 subset still needs a new contract
+      (NFR71)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-87-retro-2026-09-12.md"
+  - id: "epic-87-retro-item-286-fr154-honesty-gate-close-nfr59-nine-deli"
+    epic: 87
+    action: "FR154 honesty: gate close != NFR59 nine delivered; claims cite matching
+      FR (FR156/NFR72)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-87-retro-2026-09-12.md"
+  - id: "epic-87-retro-item-287-keep-phase-12-18-closing-faces-valid-nfr"
+    epic: 87
+    action: "Keep Phase 12-18 closing faces valid (NFR68); do not rewrite as failed"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-87-retro-2026-09-12.md"
+  - id: "epic-87-retro-item-288-keep-story-n-m-commit-subjects-one-story"
+    epic: 87
+    action: "Keep Story N.M commit subjects; one story one commit"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-87-retro-2026-09-12.md"
+  - id: "epic-87-retro-item-289-deeper-work-beyond-each-epic-nfr14-subse"
+    epic: 87
+    action: "Deeper work beyond each epic NFR14 subset still needs a new contract
+      (NFR71)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-87-retro-2026-09-12.md"
