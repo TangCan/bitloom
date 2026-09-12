@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR161 / Epic 93；NFR14、NFR68、NFR69、NFR70、NFR71、NFR72；对照 FR127 / FR119 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 93.1；Epic 93 未关闭 |
+| 状态 | closed — Story 93.3 勾选完成；Epic 93 关闭；FR161 实现面可宣称；**FR162–165 / FR156** 仍属 Epic 94–98；**不得**宣称 NFR59「全清」 |
 | **选定** | 在保留 FR127（required `formal-sby` job）与 FR119（本机可选路径）关闭面的前提下，授权 **MVP：为 GHA `formal-sby` 安装面钉死可复现的来源/标签（或 commit）策略 + 可验证卫生跟踪（文档/脚本/CI 断言），使过期/缺钉死/缺工具行为可读失败** |
 
 ### Phase 12–18 / FR127 关闭面 vs Epic 93 实现边界（NFR68 · 必读）
@@ -102,8 +102,8 @@
 
 ### Epic 93 关闭条件（Story 93.3 勾选）
 
-- [ ] **FR161 钉死子集实现 + 验收** — Story 93.2
-- [ ] **文档 / deferred / README 收口** — Story 93.3
-- [ ] **NFR68/70/71/72：** 边界与诚实义务保持
-- [ ] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
-- [ ] **其余 FR162–165：** 未关前不得宣称 NFR59 全清
+- [x] **FR161 钉死子集实现 + 验收** — Story 93.2
+- [x] **文档 / deferred / README 收口** — Story 93.3
+- [x] **NFR68/70/71/72：** 边界与诚实义务保持
+- [x] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **其余 FR162–165：** 未关前不得宣称 NFR59 全清

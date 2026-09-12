@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 93 / FR161 delivered in Story 93.2** (closeout Story **93.3**).
+**Status:** **Epic 93 / FR161 closed** (Story **93.3**). Implementation Story **93.2**.
 Phase 15 FR127 required CI `formal-sby` job remains closed (NFR68).
 
 ## Selected face (NFR14)
