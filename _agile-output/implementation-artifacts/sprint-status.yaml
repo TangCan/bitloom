@@ -680,8 +680,8 @@ development_status:
   epic-97-retrospective: optional
 
   epic-98: in-progress
-  98-1-epic-98-nfr14-风险记录: ready-for-dev
-  98-2-readme-deferred-状态页诚实更新-fr156: backlog
+  98-1-epic-98-nfr14-风险记录: done
+  98-2-readme-deferred-状态页诚实更新-fr156: ready-for-dev
   98-3-fr156-收口与-phase-19-故事清单指针: backlog
   epic-98-retrospective: optional
 
