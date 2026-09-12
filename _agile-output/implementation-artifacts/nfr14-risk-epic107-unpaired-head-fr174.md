@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR174 / Epic 107；NFR14、NFR78、NFR79、NFR80、NFR81；对照 FR170 / FR138 / FR165 / AD-9 / AD-27 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open — Story 107.1；Epic 107 进行中；107.2–107.3 待本记录后 ready |
+| 状态 | **closed — Story 107.3**；Epic 107 / FR174 可宣称；浮动 git HEAD 超 1.156.0 仍 **NFR81** |
 | **选定** | 在保留 FR170 document-pinned update-mainline 关闭面的前提下，授权相对现行 AD-9 钉死对的 **unpaired CIRCT 与/或 Chisel HEAD（或文档钉死未配对主线二进制）产品路径**；须修订适用 AD（至少 **AD-9** 与/或 **AD-27**）；禁止 PATH-random 冒充 HEAD |
 
 ### Phase 12–20 / FR170 关闭面 vs Epic 107（NFR78）
@@ -88,8 +88,8 @@
 
 ### Epic 107 关闭条件（Story 107.3 勾选）
 
-- [ ] **FR174 钉死子集实现 + 验收** — Story 107.2
-- [ ] **文档 / deferred / README / spine 收口** — Story 107.3
-- [ ] **NFR78/81：** 边界与诚实义务保持
-- [ ] **品牌 / AD-6：** Bitloom；运行时不得进入设计 crate
-- [ ] **其余 FR175–177：** 未关前不得宣称 Phase 21 全清
+- [x] **FR174 钉死子集实现 + 验收** — Story 107.2
+- [x] **文档 / deferred / README / spine 收口** — Story 107.3
+- [x] **NFR78/81：** 边界与诚实义务保持
+- [x] **品牌 / AD-6：** Bitloom；运行时不得进入设计 crate
+- [x] **其余 FR175–177：** 未关前不得宣称 Phase 21 全清

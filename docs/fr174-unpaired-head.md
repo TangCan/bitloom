@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 107 / FR174 in progress** (Story **107.2** implementation).
+**Status:** **Epic 107 / FR174 closed** (Story **107.3**). Product path: document-pinned unpaired mainline **firtool-1.156.0** (`just circt-unpaired-head-check`; ≠ AD-9 **1.158.0**).
 
 Phase 20 **FR170** update-mainline Parser and Phase 21 **FR173** paired AD-9 pin (**firtool-1.158.0 ↔ Chisel 7.15.0**) **remain closed and valid** (NFR78). Those closes alone ≠ FR174.
 

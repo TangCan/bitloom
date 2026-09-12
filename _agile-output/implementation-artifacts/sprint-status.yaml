@@ -731,10 +731,10 @@ development_status:
   106-3-fr173-收口与文档指针: done
   epic-106-retrospective: optional
 
-  epic-107: in-progress
+  epic-107: done
   107-1-epic-107-nfr14-风险记录: done
   107-2-unpaired-head-产品路径实现与验收-fr174: done
-  107-3-fr174-收口与文档指针: ready-for-dev
+  107-3-fr174-收口与文档指针: done
   epic-107-retrospective: optional
 
   epic-108: backlog
