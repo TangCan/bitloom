@@ -44,6 +44,10 @@ formal-sby-check:
 circt-external-check:
 	bash scripts/circt-external-check.sh
 
+# FR164: external CIRCT sim gate (beyond FR137 compile-only).
+circt-external-sim-check:
+	bash scripts/circt-external-sim-check.sh
+
 # FR138: Parser restore product path (BitloomFirrtlParser.parse ≡ Parser.parse; AD-9 firtool -parse-only).
 # Not part of default `just test`. Missing/mismatched firtool → non-zero (never silent skip).
 parser-restore-check:

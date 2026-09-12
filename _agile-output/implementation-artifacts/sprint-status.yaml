@@ -669,8 +669,8 @@ development_status:
 
   epic-96: in-progress
   96-1-epic-96-nfr14-风险记录: done
-  96-2-circt-mlir-仿真门禁加深实现与验收-fr164: ready-for-dev
-  96-3-fr164-收口与文档指针: backlog
+  96-2-circt-mlir-仿真门禁加深实现与验收-fr164: done
+  96-3-fr164-收口与文档指针: ready-for-dev
   epic-96-retrospective: optional
 
   epic-97: backlog

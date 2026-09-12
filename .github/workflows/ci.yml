@@ -87,6 +87,21 @@ jobs:
       - name: Required FR137 circt-external-check
         run: bash scripts/circt-external-check.sh
 
+  # FR164: required external CIRCT simulation gate (beyond FR137 compile-only).
+  # Same path as `just circt-external-sim-check`. Failures are never ignored.
+  circt-external-sim:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.97.1"
+      - name: Ensure pinned firtool-1.155.0 (AD-9)
+        run: cargo run -p bitloom -- firtool ensure
+      - name: Required FR164 circt-external-sim-check
+        run: bash scripts/circt-external-sim-check.sh
+
   # FR144 / NFR62: required surface-crate SemVer gate (cargo-semver-checks).
   # Same path as `just semver-check`. Failures are never ignored; missing tool fails the job.
   semver-check:
