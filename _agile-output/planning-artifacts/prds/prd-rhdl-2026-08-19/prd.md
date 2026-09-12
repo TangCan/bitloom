@@ -3,7 +3,7 @@ title: Bitloom 阶段二 PRD — 2026-08-21 概述字面升格修订
 status: final
 created: 2026-08-19
 updated: 2026-09-12
-amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08; phase11-contract-green-2026-09-09; phase12-literal-green-path-b-2026-09-09; phase13-mvp-commercial-deepen-2026-09-10; phase14-nfr47-deferred-deepen-2026-09-10; phase15-nfr51-leftover-deepen-2026-09-10; phase16-nfr55-final-closeout-2026-09-11; phase17-api-stability-1-0-2026-09-11; phase18-cli-crates-io-publish-2026-09-11; phase19-nfr59-fr152a-2026-09-12
+amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08; phase11-contract-green-2026-09-09; phase12-literal-green-path-b-2026-09-09; phase13-mvp-commercial-deepen-2026-09-10; phase14-nfr47-deferred-deepen-2026-09-10; phase15-nfr51-leftover-deepen-2026-09-10; phase16-nfr55-final-closeout-2026-09-11; phase17-api-stability-1-0-2026-09-11; phase18-cli-crates-io-publish-2026-09-11; phase19-nfr59-fr152a-2026-09-12; phase20-nfr71-four-leftovers-2026-09-12
 ---
 
 # PRD: Bitloom 阶段二及愿景闭环（later-product → FR + 概述字面升格）
@@ -32,6 +32,8 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 
 *2026-09-12 追加（`phase19-nfr59-fr152a`）：Phase 19 NFR59 全子集升格 + FR152(a) **FR154–FR165** / **NFR68–NFR72** — Phase 12–18 关闭仍有效；NFR59 加深 / lsp 上架宣称仅引用 FR154–165（见 addendum「Phase 19」）。*
 
+*2026-09-12 追加（`phase20-nfr71-four-leftovers`）：Phase 20 NFR71 四条升格 **FR166–FR171** / **NFR73–NFR77** — Phase 12–19 关闭仍有效；四条加深宣称仅引用 FR166–171（见 addendum「Phase 20」）。*
+
 ## 0. Document Purpose
 
 本 PRD 面向 PM、架构与 epic 拆解。
@@ -51,6 +53,7 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 - **2026-09-11 Phase 17 公开 API 稳定门（Bitloom 1.0）：** **FR141–FR147** / **NFR60–NFR63** — 不回滚 FR94–140；1.0 ≠ 清空 NFR59；稳定宣称须新 FR 勾选（见 addendum「Phase 17」）。
 - **2026-09-11 Phase 18 CLI crates.io 可发布收口：** **FR148–FR153** / **NFR64–NFR67** — 不回滚 FR141–147；CLI 上架 ≠ 清空 NFR59；宣称须新 FR 勾选（见 addendum「Phase 18」）。
 - **2026-09-12 Phase 19 NFR59 全子集升格 + FR152(a)：** **FR154–FR165** / **NFR68–NFR72** — 不回滚 FR148–153；NFR59 九条升格 + `bitloom-lsp` live crates.io；`git push` 非 FR；宣称须新 FR 勾选（见 addendum「Phase 19」）。
+- **2026-09-12 Phase 20 NFR71 四条升格：** **FR166–FR171** / **NFR73–NFR77** — 不回滚 FR154–165；ChiselSim/多商店、SPI·I2C·AXI FL、CIRCT/firtool、HEAD Parser；`git push` 非 FR；宣称须新 FR 勾选（见 addendum「Phase 20」）。
 - **身份 supersession：** 公开产品名 **Bitloom**，crates.io / CLI **`bitloom`**（阶段三 FR41）；禁止发布 `rhdl` / `rhdl-bits`。正文不再以 `rhdl-rs` 为发布名。[ASSUMPTION] 概述仍写 RHDL；合同以 Bitloom 为准，概述另开任务对齐。
 - `later-product.md` 仍为索引，不承载无 ID 需求。
 
