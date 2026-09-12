@@ -13,6 +13,10 @@ Beyond FR119 local-optional `just formal-sby-check` / docs alone.
 | Run | `bash scripts/formal-sby-check.sh` (same as `just formal-sby-check`) |
 | Failure | No `continue-on-error`; missing tools → non-zero |
 
+**FR161** deepens install hygiene (pins / drift tracking) — see
+[`fr161-formal-sby-image-hygiene.md`](fr161-formal-sby-image-hygiene.md).
+FR127 alone ≠ FR161.
+
 ## Forbidden closes
 
 Docs-only; silent skip; rewriting FR119 closed as failed.

@@ -63,7 +63,9 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - name: Install sby + yosys + z3 (FR127)
+      - name: FR161 formal-sby hygiene (pins)
+        run: bash scripts/ci-sby-hygiene-check.sh
+      - name: Install sby + yosys + z3 (FR127/FR161)
         run: bash scripts/ci-install-sby.sh
       - name: Required FR127 formal-sby-check
         # Same path as `just formal-sby-check` (FR119 script; required here for FR127).

@@ -651,8 +651,8 @@ development_status:
 
   epic-93: in-progress
   93-1-epic-93-nfr14-风险记录: done
-  93-2-formal-sby-镜像卫生实现与验收-fr161: ready-for-dev
-  93-3-fr161-收口与文档指针: backlog
+  93-2-formal-sby-镜像卫生实现与验收-fr161: done
+  93-3-fr161-收口与文档指针: ready-for-dev
   epic-93-retrospective: optional
 
   epic-94: backlog
