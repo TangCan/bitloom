@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR170 / Epic 103；NFR14、NFR73、NFR74、NFR75、NFR76、NFR77；对照 FR138 / FR165 / FR130 / AD-27 / AD-9 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 103.1；Epic 103 进行中；103.2–103.3 须本记录后才可 ready |
+| 状态 | closed — Story 103.3 勾选完成；Epic 103 关闭；FR170 实现面可宣称（update-mainline `parseUpdateMainline` / FIRRTL 6.0.0；AD-27 已修订；AD-9 未改）；unpaired HEAD/firtool 升钉仍 **NFR76**；**FR171** 仍属 Epic 104 |
 | **选定** | 在保留 FR138 Parser / FR165 linter / FR130 Style Guide 关闭面的前提下，授权 **相对现行钉死对（Chisel 7.14.0 / firtool-1.155.0 / `BitloomFirrtlParser.parse`）的 Chisel HEAD（或文档钉死更新主线）Parser 产品路径回迁**；**必须 Correct Course 痕迹 + 修订 AD-27**；若依赖新 firtool/Chisel 钉死对则联动 AD-9（建议先完成 Epic 102 配对） |
 
 ### Phase 12–19 / FR138 关闭面 vs Epic 103 实现边界（NFR73 · 必读）
@@ -88,3 +88,13 @@
 
 - AD-28；AD-27；AD-9；FR170；对照 FR138 / FR165 / FR130；Phase 20 Correct Course approved 2026-09-12
 - **NFR14-crates** ≠ 本门禁
+
+---
+
+### Epic 103 关闭条件（Story 103.3 勾选）
+
+- [x] **FR170 钉死子集实现 + 验收** — Story 103.2（update-mainline Parser + AD-27 修订）
+- [x] **文档 / deferred / README / spine 收口** — Story 103.3
+- [x] **NFR73/76：** 边界与诚实义务保持；unpaired HEAD/firtool 升钉须新合同
+- [x] **品牌 / AD-6：** Bitloom；Scala/Parser 运行时不得进入设计 crate
+- [x] **其余 FR171：** 未关前不得宣称 Phase 20 全清 / NFR71 账本已空
