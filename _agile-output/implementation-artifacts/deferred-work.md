@@ -56,11 +56,11 @@ README「状态与 deferred」同源（Story 84.3 / 86.3）。
 ## Phase 19 pointer (FR154–165 / NFR68–NFR72) — NFR59 全子集升格 + FR152(a)
 
 Correct Course `sprint-change-proposal-2026-09-12-phase19-nfr59-fr152a.md` + PRD addendum「Phase 19」**已批准**（**Phase 19 contract approved** 2026-09-12；`correctCoursePhase19Approved: 2026-09-12`）。
-闸门 **FR154 / Epic 87**（**已关闭** / Story 87.4）。**Epic 88 / FR155**（**已关闭** / Story 88.4）：`bitloom-lsp` **1.0.0** live crates.io。**Epic 89 / FR157**（**已关闭** / Story 89.3）：自动 FSM 标签（`docs/fr157-auto-fsm-labels.md`）。其余实现：Epic 90–97 **FR158–FR165**；Epic 98 **FR156** 宣称。
-**Phase 19 规划故事已齐（Epic 87–98）。** 宣称须引 **FR154–FR165**。软序 **87 →（88 ‖ 89…97）→ 98**；**88–89 已关**，下一批 deepen 自 Epic **90** NFR14 起。
-**诚实：** FR157 关闭 ≠ NFR59「全清」；FR158–165 未关前不得宣称全清（**NFR72**）。
+闸门 **FR154 / Epic 87**（**已关闭** / Story 87.4）。**Epic 88 / FR155**、**Epic 89 / FR157**、**Epic 90 / FR158**（**已关闭** / Story 90.3；`genhtml`；`docs/fr158-third-party-lcov-gui.md`）已关。其余实现：Epic 91–97 **FR159–FR165**；Epic 98 **FR156** 宣称。
+**Phase 19 规划故事已齐（Epic 87–98）。** 宣称须引 **FR154–FR165**。软序 **87 →（88 ‖ 89…97）→ 98**；**88–90 已关**，下一批 deepen 自 Epic **91** NFR14 起。
+**诚实：** 已关 FR ≠ NFR59「全清」；FR159–165 未关前不得宣称全清（**NFR72**）。
 Phase 12–18 关闭证据**仍有效**（**NFR68**）。公开品牌 **Bitloom**。`git push` 非 FR。
-README「状态与 deferred」同源（Story **87.3** / **88.4** / **89.3**；宣称收口 → **98.x**）。
+README「状态与 deferred」同源（Story **87.3** / **88.4** / **89.3** / **90.3**；宣称收口 → **98.x**）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 

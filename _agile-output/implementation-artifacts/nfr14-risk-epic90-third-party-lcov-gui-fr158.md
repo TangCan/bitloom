@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR158 / Epic 90；NFR14、NFR68、NFR69、NFR71、NFR72；对照 FR114 / FR105 / FR154 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 90.1；Epic 90 未关闭 |
+| 状态 | closed — Story 90.3 勾选完成；Epic 90 关闭；FR158 实现面可宣称；**FR159–165 / FR156** 仍属 Epic 91–98；**不得**宣称 NFR59「全清」 |
 | **选定** | 在保留 FR114 树内 GUI 关闭面的前提下，授权 **MVP：以 `genhtml`（`lcov` 工具包）为一等第三方路径，消费 Bitloom `coverage.lcov` 并生成/打开可浏览 HTML** |
 
 ### Phase 12–18 / FR114 关闭面 vs Epic 90 实现边界（NFR68 · 必读）
@@ -85,8 +85,8 @@
 
 ### Epic 90 关闭条件（Story 90.3 勾选）
 
-- [ ] **FR158 钉死子集实现 + 验收** — Story 90.2
-- [ ] **文档 / deferred / README 收口** — Story 90.3
-- [ ] **NFR68/71/72：** 边界与诚实义务保持
-- [ ] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
-- [ ] **其余 FR159–165：** 未关前不得宣称 NFR59 全清
+- [x] **FR158 钉死子集实现 + 验收** — Story 90.2
+- [x] **文档 / deferred / README 收口** — Story 90.3
+- [x] **NFR68/71/72：** 边界与诚实义务保持
+- [x] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **其余 FR159–165：** 未关前不得宣称 NFR59 全清

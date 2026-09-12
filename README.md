@@ -17,7 +17,7 @@ Rust 嵌入式 RTL HDL：设计是**可执行生成器**。`cargo bitloom build`
 
 ## 快速开始
 
-**诚实面（Phase 17 / 18 / 19）：** 库 crate（`bitloom-macro` / `hir` / `builder` / `vlog` / `sim` / `prelude`）已在 crates.io **1.0.0**（Phase 17 / FR146）。**公开 CLI `bitloom` 1.0.0 已可 `cargo install`**（**FR151** / Epic 85）。**Phase 18 已关闭**（Epic 84–86）：SemVer / 发版诚实 **FR153**（[`docs/fr153-semver-honesty.md`](docs/fr153-semver-honesty.md)）。CLI crates.io 宣称须引 **FR148–153**。**Phase 19 闸门 FR154 已关**（Epic 87）；**FR155 / FR152(a)**：`bitloom-lsp` **1.0.0** 已上 crates.io（Epic 88）；**FR157** 自动 FSM 标签提取已关（[`docs/fr157-auto-fsm-labels.md`](docs/fr157-auto-fsm-labels.md) / Epic 89）。其余 NFR59 条仍为 **FR158–165**（Epic 90–97）；宣称纪律 **FR156** / Epic 98 — **在对应 FR 关闭前不得宣称已交付**（**NFR68** / **NFR72**）。贡献者亦可 clone 本仓库使用 workspace CLI。
+**诚实面（Phase 17 / 18 / 19）：** 库 crate（`bitloom-macro` / `hir` / `builder` / `vlog` / `sim` / `prelude`）已在 crates.io **1.0.0**（Phase 17 / FR146）。**公开 CLI `bitloom` 1.0.0 已可 `cargo install`**（**FR151** / Epic 85）。**Phase 18 已关闭**（Epic 84–86）：SemVer / 发版诚实 **FR153**（[`docs/fr153-semver-honesty.md`](docs/fr153-semver-honesty.md)）。CLI crates.io 宣称须引 **FR148–153**。**Phase 19 闸门 FR154 已关**（Epic 87）；**FR155** lsp 上架（Epic 88）；**FR157** FSM 标签（Epic 89）；**FR158** 第三方 LCOV GUI（`genhtml`；[`docs/fr158-third-party-lcov-gui.md`](docs/fr158-third-party-lcov-gui.md) / Epic 90）。其余 NFR59 条仍为 **FR159–165**（Epic 91–97）；宣称纪律 **FR156** / Epic 98 — **在对应 FR 关闭前不得宣称已交付**（**NFR68** / **NFR72**）。贡献者亦可 clone 本仓库使用 workspace CLI。
 
 ```bash
 # 推荐：crates.io（FR151）
@@ -281,7 +281,7 @@ FST 可选说明：[`docs/fr31-optional-fst.md`](docs/fr31-optional-fst.md)。�
 
 **Phase 18（CLI / 依赖 crate crates.io 可发布 · FR148–FR153 / NFR64–NFR67）：** Correct Course 已批准（2026-09-11）。Phase 12–17 关闭证据**仍有效**（**NFR64**），**不得**改写为失败。闸门 **FR148** / Epic 84 **已关闭**（Story 84.4）。**Epic 85 / FR149–152 已关闭**（`bitloom-firrtl` / `bitloom-viz` / CLI `bitloom` **1.0.0** 已上 crates.io；lsp 策略 **FR152(b)**）。**FR153** 发版后诚实 / SemVer 跟进 → **Epic 86**（**已关闭**）。**口径：** CLI 上架 ≠ 清空 NFR59（**NFR67**）。公开品牌 **Bitloom**。同源：[`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md) Phase 18 pointer；[`docs/fr151-bitloom-cli-publish.md`](docs/fr151-bitloom-cli-publish.md)。
 
-**Phase 19（NFR59 全子集升格 + FR152(a) · FR154–FR165 / NFR68–NFR72）：** Correct Course 已批准（2026-09-12；`correctCoursePhase19Approved`）。Phase 12–18 关闭证据**仍有效**（**NFR68**），**不得**改写为失败。闸门 **FR154** / Epic 87 **已关闭**（Story 87.4）。**Epic 88 / FR155 已关闭**（`bitloom-lsp` **1.0.0** live crates.io）。**Epic 89 / FR157 已关闭**（自动 FSM 标签；[`docs/fr157-auto-fsm-labels.md`](docs/fr157-auto-fsm-labels.md)）。实现面其余：**FR158–165**（Epic 90–97）；**FR156** 宣称（Epic 98）。**禁止**用 FR157 alone 冒充 NFR59「全清」；**禁止**在对应 FR 关闭前勾选完成。`git push` **不是** FR。公开品牌 **Bitloom**。同源：[`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md) Phase 19 pointer；提案 `sprint-change-proposal-2026-09-12-phase19-nfr59-fr152a.md`。
+**Phase 19（NFR59 全子集升格 + FR152(a) · FR154–FR165 / NFR68–NFR72）：** Correct Course 已批准（2026-09-12；`correctCoursePhase19Approved`）。Phase 12–18 关闭证据**仍有效**（**NFR68**），**不得**改写为失败。闸门 **FR154** / Epic 87 **已关闭**。**Epic 88 / FR155**、**Epic 89 / FR157**、**Epic 90 / FR158**（`genhtml`；[`docs/fr158-third-party-lcov-gui.md`](docs/fr158-third-party-lcov-gui.md)）**已关闭**。实现面其余：**FR159–165**（Epic 91–97）；**FR156** 宣称（Epic 98）。**禁止**用已关 FR alone 冒充 NFR59「全清」；**禁止**在对应 FR 关闭前勾选完成。`git push` **不是** FR。公开品牌 **Bitloom**。同源：[`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md) Phase 19 pointer。
 
 **Phase 12 规划/实现故事已齐（Epic 40–47 已关闭）。** Epic 47 / FR104+FR105 **已关闭**（Story 47.3）。
 
@@ -394,7 +394,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | Phase 19 合同闸门 | FR154 / 87 | Correct Course + README/deferred/AD — **已关闭** |
 | `bitloom-lsp` FR152(a) live 上架 | FR155 / 88 | `cargo install bitloom-lsp`（1.0.0）— **已关闭** |
 | 自动 FSM 标签提取 | FR157 / 89 | `#[bitloom::fsm]` / `FsmLabels` — **已关闭** |
-| 第三方 LCOV GUI 一等集成 | FR158 / 90 | 原 NFR59；**未关闭前不得宣称** |
+| 第三方 LCOV GUI 一等集成 | FR158 / 90 | `coverage --genhtml`（`genhtml`/lcov）— **已关闭** |
 | MemRead stub→完整生成 | FR159 / 91 | 原 NFR59；**未关闭前不得宣称** |
 | 非 Cargo monorepo 路径扫描 | FR160 / 92 | 原 NFR59；**未关闭前不得宣称** |
 | formal-sby 镜像卫生 | FR161 / 93 | 原 NFR59；**未关闭前不得宣称** |
@@ -409,7 +409,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 **（历史口径）NFR59 曾 deferred（NFR63 / NFR67）— 现已由 Phase 19 合同升格；未关 FR 前仍不得冒充已清：**
 
 - 自动 FSM 标签提取 → **FR157**（**Epic 89 已关闭** — [`docs/fr157-auto-fsm-labels.md`](docs/fr157-auto-fsm-labels.md)）
-- 第三方 LCOV GUI 一等集成 → **FR158**
+- 第三方 LCOV GUI 一等集成 → **FR158**（**Epic 90 已关闭** — [`docs/fr158-third-party-lcov-gui.md`](docs/fr158-third-party-lcov-gui.md)）
 - emit MemRead stub → 完整生成 → **FR159**
 - 非 Cargo 全 monorepo 任意路径扫描 → **FR160**
 - GHA `formal-sby` 镜像卫生跟踪 → **FR161**

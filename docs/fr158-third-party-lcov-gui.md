@@ -1,8 +1,8 @@
 # FR158 — Third-party LCOV GUI (`genhtml`)
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.  
-**Status:** Epic 90 / Story **90.2** (implementation). Closeout → Story **90.3**.  
-**NFR14:** `_agile-output/implementation-artifacts/nfr14-risk-epic90-third-party-lcov-gui-fr158.md`.
+**Status:** **Epic 90 / FR158 closed** (Story **90.3**). Implementation Story **90.2**.  
+**NFR14:** `_agile-output/implementation-artifacts/nfr14-risk-epic90-third-party-lcov-gui-fr158.md` (closed).
 
 ## Contract (MVP)
 
