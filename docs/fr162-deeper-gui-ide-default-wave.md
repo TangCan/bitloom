@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Epic 94 / FR162 — Story **94.2** implementation (closeout Story **94.3**).
+**Status:** **Epic 94 / FR162 closed** (Story **94.3**). Implementation Story **94.2**.
 
 Phase 16 **FR134** G1–G4 (opt-in `--tywaves-gui`) **remains closed and valid** (NFR68). This FR
 **promotes** Tywaves GUI depth to the **default / primary** `cargo bitloom wave` surface so
