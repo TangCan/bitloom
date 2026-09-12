@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-12-2026 09:30
+last_updated: 09-12-2026 09:32
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -600,7 +600,7 @@ development_status:
   85-4-bitloom-lsp-发布策略-b-fr152: done
   85-5-发布-bitloom-cli-1-0-0-fr151: done
   85-6-fr149-152-收口与文档指针: done
-  epic-85-retrospective: optional
+  epic-85-retrospective: done
 
   epic-86: done
   86-1-epic-86-nfr14-风险记录: done
@@ -2435,3 +2435,23 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-84-retro-2026-09-12.md"
+  - id: "epic-85-retro-item-275-fr149-152-honesty-cli-install-claims-nee"
+    epic: 85
+    action: "FR149–152 honesty: CLI install claims need FR151; never publish rhdl-*
+      names; FR152(b) is not lsp on crates.io."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-85-retro-2026-09-12.md"
+  - id: "epic-85-retro-item-276-when-touching-firrtl-viz-cli-deps-keep-a"
+    epic: 85
+    action: "When touching firrtl/viz/CLI deps keep AD-2/AD-6; do not restore path-only
+      publish blockers."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-85-retro-2026-09-12.md"
+  - id: "epic-85-retro-item-277-keep-commit-subjects-story-n-m"
+    epic: 85
+    action: "Keep commit subjects Story N.M."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-85-retro-2026-09-12.md"
