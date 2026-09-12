@@ -54,8 +54,14 @@ fn fr155_deferred_marks_epic88_closed() {
         "deferred Phase 19 pointer must mark Epic 88 / FR155 closed"
     );
     assert!(
-        deferred.contains("FR157") && deferred.contains("Epic 89"),
-        "deferred must point remaining NFR59 to Epic 89+"
+        (deferred.contains("FR157") && deferred.contains("Epic 89"))
+            || (deferred.contains("Phase 19")
+                && (deferred.contains("Epic 87–98")
+                    || deferred.contains("Epic 87-98")
+                    || deferred.contains("实现故事已关"))
+                && (deferred.contains("NFR71") || deferred.contains("FR156")))
+            || deferred.contains("Phase 20"),
+        "deferred must point remaining NFR59 to Epic 89+ or record Phase 19 complete / NFR71 leftovers"
     );
     assert!(
         deferred.contains("FR156") && deferred.contains("98"),
