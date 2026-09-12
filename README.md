@@ -200,7 +200,7 @@ mod sim {
 
 ## firtool（NFR3）
 
-默认**不信任** `PATH` 上的 firtool。CLI 钉死 **firtool-1.155.0**（与 Chisel **7.14.0** 配对 · AD-9 / NFR12；`firrtl-bin-linux-x64.tar.gz` + `.sha256`）：
+默认**不信任** `PATH` 上的 firtool。CLI 钉死 **firtool-1.158.0**（与 Chisel **7.15.0** 配对 · AD-9 / NFR12；`firrtl-bin-linux-x64.tar.gz` + `.sha256`）：
 
 ```bash
 cargo run -p bitloom -- firtool info

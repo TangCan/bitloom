@@ -3,7 +3,7 @@
 # Epic 103 / NFR14. Beyond FR138 BitloomFirrtlParser.parse restore alone.
 #
 # Selected shape: document-pinned **update-mainline** Parser product path
-# (Chisel 7.14.0 ↔ firtool-1.155.0 / AD-9 unchanged — Epic 102 option B deferred).
+# (Chisel 7.15.0 ↔ firtool-1.158.0 / AD-9 unchanged — Epic 102 option B deferred).
 # Migration delta vs FR138: accept FIRRTL **version 6.0.0** mainline dialect
 # (AD-3 exchange header) via BitloomFirrtlParser.parseUpdateMainline ≡ parse.
 #
@@ -15,8 +15,8 @@
 # Resolve firtool via AD-9: RHDL_FIRTOOL_PATH or `cargo bitloom firtool ensure`.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-EXPECTED_FIRTOOL_VERSION="1.155.0"
-EXPECTED_CHISEL_UPDATE_MAINLINE="7.14.0"
+EXPECTED_FIRTOOL_VERSION="1.158.0"
+EXPECTED_CHISEL_UPDATE_MAINLINE="7.15.0"
 FIR="${BITLOOM_PARSER_HEAD_FIR:-$ROOT/crates/rhdl-firrtl/fixtures/fr170_chisel_head_parser.fir}"
 OUT_DIR="${BITLOOM_PARSER_HEAD_OUT:-$ROOT/target/parser-head-migration-check}"
 DOCS="${ROOT}/docs/fr170-chisel-head-parser.md"

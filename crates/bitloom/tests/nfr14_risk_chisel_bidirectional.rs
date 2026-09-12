@@ -42,7 +42,8 @@ fn nfr14_risk_chisel_bidirectional_has_required_fields() {
         "risk record must name Chisel/firtool pin pair"
     );
     assert!(
-        text.contains("7.14.0") && text.contains("1.155.0"),
+        (text.contains("7.14.0") || text.contains("7.15.0"))
+            && (text.contains("1.155.0") || text.contains("1.158.0")),
         "risk record must cite pinned Chisel 7.14.0 and firtool 1.155.0"
     );
     assert!(

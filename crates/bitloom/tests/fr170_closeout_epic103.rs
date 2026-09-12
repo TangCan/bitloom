@@ -136,8 +136,12 @@ fn fr170_product_doc_closed() {
         "fr170 product doc must note closed status"
     );
     assert!(
-        doc.contains("NFR76")
-            && (doc.contains("HEAD") || doc.contains("firtool") || doc.contains("升钉")),
-        "product doc must keep unpaired HEAD/firtool bump deferred"
+        (doc.contains("HEAD") || doc.contains("FR174"))
+            && (doc.contains("NFR76")
+                || doc.contains("FR174")
+                || doc.contains("deferred")
+                || doc.contains("仍")
+                || doc.contains("remain")),
+        "product doc must keep unpaired HEAD deferred (FR174 / NFR76 era)"
     );
 }

@@ -38,7 +38,7 @@ fn fr170_docs_contract_forbid_fr138_alone() {
             && (docs.contains("alone") || docs.contains("≠") || docs.contains("仍")),
         "must keep FR165 distinct"
     );
-    assert!(docs.contains("7.14.0") && docs.contains("1.155.0"));
+    assert!(docs.contains("7.15.0") && docs.contains("1.158.0"));
     assert!(
         docs.contains("parser-head-migration") || docs.contains("parser-head-migration-check"),
         "must name migration check path / CI"
@@ -62,7 +62,7 @@ fn fr170_docs_contract_forbid_fr138_alone() {
 #[test]
 fn fr170_script_and_just_path() {
     let script = read("scripts/parser-head-migration-check.sh");
-    assert!(script.contains("1.155.0") && script.contains("7.14.0"));
+    assert!(script.contains("1.158.0") && script.contains("7.15.0"));
     assert!(script.contains("FR170"));
     assert!(
         script.contains("parseUpdateMainline") || script.contains("update-mainline"),

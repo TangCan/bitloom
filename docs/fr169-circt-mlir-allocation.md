@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 102 / FR169 closed** (Story **102.3**). Product path: multi-lower / HW dialect allocation at AD-9 `firtool-1.155.0`. Option **(B)** firtool bump remains deferred (**NFR76**).
+**Status:** **Epic 102 / FR169 closed** (Story **102.3**). Product path: multi-lower / HW dialect allocation at AD-9 `firtool-1.155.0`. Option **(B)** firtool bump was deferred in Epic 102 (**NFR76**); product bump delivered via **FR173** / Epic 106 (AD-9 → firtool-1.158.0 ↔ Chisel 7.15.0).
 
 Phase 19 **FR164** external sim gate and **FR137** compile gate **remain closed and valid** (NFR73).
 This FR delivers NFR14 option **(A)** — multi-lower / HW dialect allocation product path at the **same AD-9 pin** (`firtool-1.155.0`). Option **(B)** firtool bump is **not** selected in this story (requires Chisel formal pairing + AD-9 revise).
@@ -38,7 +38,7 @@ Artifacts under `target/circt-external-alloc-check/`:
 ## Standing honesty
 
 CIRCT/firtool runtime must **not** enter `bitloom-prelude` design-crate deps.
-firtool bump beyond 1.155.0 remains deferred until Chisel pairing + AD-9 revise (**NFR76** / option B).
+Epic 102 option B deferred at close; **FR173** later revised AD-9 to firtool-1.158.0 ↔ Chisel 7.15.0. FR169(A) close @ 1.155.0 remains valid (NFR78).
 
 ```text
 cargo test -p bitloom --test fr169_circt_mlir_allocation

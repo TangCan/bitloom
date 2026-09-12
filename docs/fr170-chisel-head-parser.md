@@ -2,10 +2,10 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 103 / FR170 closed** (Story **103.3**). Product path: document-pinned update-mainline `BitloomFirrtlParser.parseUpdateMainline` on FIRRTL **6.0.0** @ Chisel 7.14.0 ↔ firtool-1.155.0. Unpaired HEAD/firtool bump remains **NFR76**.
+**Status:** **Epic 103 / FR170 closed** (Story **103.3**). Product path: document-pinned update-mainline `BitloomFirrtlParser.parseUpdateMainline` on FIRRTL **6.0.0** @ Chisel 7.14.0 ↔ firtool-1.155.0 (FR170 close pin); current AD-9 after FR173: Chisel 7.15.0 ↔ firtool-1.158.0. Unpaired HEAD remains Epic 107 / FR174; firtool bump beyond then-pin delivered via **FR173** (AD-9 → 1.158.0).
 
 Phase 16 **FR138** `BitloomFirrtlParser.parse` and Phase 19 **FR165** Style Guide/linter **remain closed and valid** (NFR73).
-This FR delivers the NFR14 **document-pinned update-mainline** Parser product path beyond FR138 alone. **AD-9 is not revised** this batch (firtool stays **1.155.0**; unpaired CIRCT HEAD / firtool bump remains **NFR76** — Epic 102 option B deferred).
+This FR delivers the NFR14 **document-pinned update-mainline** Parser product path beyond FR138 alone. At Epic 103 close, **AD-9 was not revised** (firtool stayed **1.155.0**; unpaired CIRCT HEAD deferred). **FR173** later revised AD-9 to firtool-**1.158.0** ↔ Chisel **7.15.0**; FR170 close evidence @ 7.14.0/1.155.0 remains valid (**NFR78**).
 
 ## Selected shape
 
@@ -45,7 +45,7 @@ Scala façade (interop only; not a design-crate dep):
 
 ## Standing honesty
 
-Unpaired Chisel/CIRCT **HEAD binaries** / firtool beyond 1.155.0 require formal pairing + **AD-9** revise (**NFR76**).
+Unpaired Chisel/CIRCT **HEAD binaries** remain Epic **107 / FR174** (≠ FR170 alone). Firtool bump beyond the FR170 close pin was later delivered via **FR173** (AD-9 → **1.158.0** / Chisel **7.15.0**); FR170 close @ 1.155.0 remains valid (**NFR78**).
 Scala/Parser runtime must **not** enter `bitloom-prelude` design crates.
 
 ```text

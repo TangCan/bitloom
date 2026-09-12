@@ -37,7 +37,7 @@ fn fr169_docs_contract_forbid_fr164_alone() {
             && (docs.contains("alone") || docs.contains("≠") || docs.contains("仍")),
         "must keep FR137 distinct"
     );
-    assert!(docs.contains("1.155.0") || docs.contains("firtool-1.155.0"));
+    assert!(docs.contains("1.158.0") || docs.contains("firtool-1.158.0"));
     assert!(
         docs.contains("circt-external-alloc-check") || docs.contains("circt-external-alloc"),
         "must name alloc-check path / CI job"
@@ -48,17 +48,20 @@ fn fr169_docs_contract_forbid_fr164_alone() {
             || docs.contains("option B")
             || docs.contains("(B)"))
             && (docs.contains("Deferred")
+                || docs.contains("deferred")
+                || docs.contains("FR173")
                 || docs.contains("不做")
                 || docs.contains("not")
-                || docs.contains("未")),
-        "must defer firtool bump option B"
+                || docs.contains("未")
+                || docs.contains("FR173")),
+        "must note option B deferred in Epic 102 or delivered via FR173"
     );
 }
 
 #[test]
 fn fr169_script_and_just_path() {
     let script = read("scripts/circt-external-alloc-check.sh");
-    assert!(script.contains("1.155.0"));
+    assert!(script.contains("1.158.0"));
     assert!(script.contains("FR169"));
     assert!(
         script.contains("RHDL_FIRTOOL_PATH") || script.contains("firtool ensure"),

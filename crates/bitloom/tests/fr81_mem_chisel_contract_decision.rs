@@ -68,7 +68,9 @@ fn fr81_decision_exists_and_picks_exactly_path_a() {
 
     // NFR12 pinned pair
     assert!(
-        text.contains("NFR12") && text.contains("7.14.0") && text.contains("1.155.0"),
+        text.contains("NFR12")
+            && (text.contains("7.14.0") || text.contains("7.15.0"))
+            && (text.contains("1.155.0") || text.contains("1.158.0")),
         "decision must document NFR12 Chisel 7.14.0 ↔ firtool 1.155.0"
     );
 

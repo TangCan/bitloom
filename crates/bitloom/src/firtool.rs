@@ -1,4 +1,4 @@
-//! Ensure pinned firtool-1.155.0 is available (AD-9 / NFR3).
+//! Ensure pinned firtool-1.158.0 is available (AD-9 / NFR3).
 //! Never trust PATH by default. Override with `RHDL_FIRTOOL_PATH` (directory containing `firtool`).
 
 use std::fs;
@@ -8,7 +8,7 @@ use std::process::Command;
 
 use sha2::{Digest, Sha256};
 
-pub const FIRTOOL_VERSION: &str = "1.155.0";
+pub const FIRTOOL_VERSION: &str = "1.158.0";
 
 /// Host triple → CIRCT asset basename (NFR11).
 pub fn firtool_asset_for_host() -> Result<&'static str, FirtoolError> {
@@ -28,7 +28,7 @@ pub fn firtool_sha_asset_for_host() -> Result<String, FirtoolError> {
     Ok(format!("{}.sha256", firtool_asset_for_host()?))
 }
 
-const GITHUB_RELEASE_BASE: &str = "https://github.com/llvm/circt/releases/download/firtool-1.155.0";
+const GITHUB_RELEASE_BASE: &str = "https://github.com/llvm/circt/releases/download/firtool-1.158.0";
 
 #[derive(Debug)]
 pub enum FirtoolError {

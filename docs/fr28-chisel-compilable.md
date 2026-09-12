@@ -4,7 +4,7 @@
 
 **公开诚实声明（FR88）：** `emit_chisel` / 往返验收 = **可编译 ≠ idiomatic**。合同只要求钉死栈下**可编译** + **端口/层次谓词**；本页**不**以机械面关闭 **FR97**。Idiomatic / 可维护完成面见 **[FR97](fr97-idiomatic-chisel.md)**（`emit_chisel_idiomatic` + `check_idiomatic_chisel`；AD-27 修订；**Epic 42 已关闭**）。
 
-**钉死版本对（AD-9 / NFR12）：** Chisel **7.14.0** ↔ firtool **1.155.0**。升钉须上游正式配对并更新脊柱 Stack / AD-9 / 本页运维清单；**禁止**私自升版交差。
+**钉死版本对（AD-9 / NFR12）：** Chisel **7.15.0** ↔ firtool **1.158.0**。升钉须上游正式配对并更新脊柱 Stack / AD-9 / 本页运维清单；**禁止**私自升版交差。
 
 ```rust
 let art = bitloom_firrtl::emit_chisel(&frozen)?;
@@ -17,8 +17,8 @@ let art = bitloom_firrtl::emit_chisel(&frozen)?;
 
 | 项 | 合同 |
 |----|------|
-| Chisel | **7.14.0**（JVM 真编译：`just chisel-fr28-jvm` / GHA `fr28-chisel-jvm`） |
-| firtool | **1.155.0**（与 Chisel 正式配对；源码常量 `FIRTOOL_TARGET`） |
+| Chisel | **7.15.0**（JVM 真编译：`just chisel-fr28-jvm` / GHA `fr28-chisel-jvm`） |
+| firtool | **1.158.0**（与 Chisel 正式配对；源码常量 `FIRTOOL_TARGET`） |
 | 默认策略 | **不信任** `PATH` 上的裸 firtool；不得用 PATH 冒充钉死对 |
 | 下载/校验/缓存 | `cargo run -p bitloom -- firtool info` · `firtool ensure`（资产 + `.sha256` → 本地缓存） |
 | 覆盖入口 | `RHDL_FIRTOOL_PATH` = 含 `firtool` 二进制的目录 |

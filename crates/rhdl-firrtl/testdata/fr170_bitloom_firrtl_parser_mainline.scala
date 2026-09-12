@@ -4,7 +4,7 @@
 // FR138: BitloomFirrtlParser.parse (FIRRTL v4 restore path).
 // FR170: BitloomFirrtlParser.parseUpdateMainline — document-pinned
 // update-mainline track accepting FIRRTL version 6.0.0 (AD-3 header)
-// at Chisel 7.14.0 ↔ firtool-1.155.0 (AD-9 unchanged).
+// at Chisel 7.15.0 ↔ firtool-1.158.0 (AD-9 unchanged).
 //
 // Runtime: scripts/parser-head-migration-check.sh (firtool -parse-only).
 // Design crates must not depend on this JVM façade.

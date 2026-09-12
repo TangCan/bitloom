@@ -29,7 +29,7 @@ fn fr164_docs_contract_forbid_fr137_alone() {
             && (docs.contains("alone") || docs.contains("≠") || docs.contains("仍")),
         "must keep FR137 distinct"
     );
-    assert!(docs.contains("1.155.0") || docs.contains("firtool-1.155.0"));
+    assert!(docs.contains("1.158.0") || docs.contains("firtool-1.158.0"));
     assert!(
         docs.contains("circt-external-sim-check") || docs.contains("circt-external-sim"),
         "must name sim-check path / CI job"
@@ -44,7 +44,7 @@ fn fr164_docs_contract_forbid_fr137_alone() {
 #[test]
 fn fr164_script_and_just_path() {
     let script = read("scripts/circt-external-sim-check.sh");
-    assert!(script.contains("1.155.0"));
+    assert!(script.contains("1.158.0"));
     assert!(script.contains("FR164"));
     assert!(
         script.contains("RHDL_FIRTOOL_PATH") || script.contains("firtool ensure"),

@@ -2,8 +2,8 @@
 # FR138 — Parser restore product path (Bitloom).
 # Epic 77 / NFR14 P1–P4. Product-equivalent API: BitloomFirrtlParser.parse
 # ≡ historical Scala firrtl.Parser.parse / Parser.parse (removed; chipsalliance/chisel#4899).
-# Implementation: AD-9 firtool-1.155.0 -parse-only (CIRCT-era substitute).
-# Pairing: Chisel 7.14.0 ↔ firtool-1.155.0 (AD-9 Stack).
+# Implementation: AD-9 firtool-1.158.0 -parse-only (CIRCT-era substitute).
+# Pairing: Chisel 7.15.0 ↔ firtool-1.158.0 (AD-9 Stack).
 #
 # ≠ FR130 Style Guide alone (S3 Parser not restored for that FR).
 # ≠ FR122 / FR111 / FR97 alone.
@@ -13,8 +13,8 @@
 # Never treat bare PATH `firtool` as the success resolver.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-EXPECTED_FIRTOOL_VERSION="1.155.0"
-EXPECTED_CHISEL_VERSION="7.14.0"
+EXPECTED_FIRTOOL_VERSION="1.158.0"
+EXPECTED_CHISEL_VERSION="7.15.0"
 FIR="${BITLOOM_PARSER_FIR:-$ROOT/crates/rhdl-firrtl/fixtures/fr138_parser_restore.fir}"
 OUT_DIR="${BITLOOM_PARSER_OUT:-$ROOT/target/parser-restore-check}"
 

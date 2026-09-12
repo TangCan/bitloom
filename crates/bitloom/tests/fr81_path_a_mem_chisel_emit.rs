@@ -8,10 +8,10 @@ use bitloom_firrtl::{CHISEL_TARGET, FIRTOOL_TARGET, emit_chisel};
 use bitloom_hir::{BuilderOwnedHir, Module, Port, PortDirection, Stmt, seal_from_builder};
 
 fn pins_locked(scala: &str) {
-    assert_eq!(CHISEL_TARGET, "7.14.0");
-    assert_eq!(FIRTOOL_TARGET, "1.155.0");
+    assert_eq!(CHISEL_TARGET, "7.15.0");
+    assert_eq!(FIRTOOL_TARGET, "1.158.0");
     assert!(
-        scala.contains("Chisel 7.14.0") && scala.contains("firtool-1.155.0"),
+        scala.contains("Chisel 7.15.0") && scala.contains("firtool-1.158.0"),
         "NFR12 pin strings missing:\n{scala}"
     );
 }

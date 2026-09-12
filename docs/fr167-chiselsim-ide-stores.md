@@ -17,7 +17,7 @@ silent-Ok under missing ChiselSim root / missing store tokens / `FORCE_MISSING`.
 
 ## (a) ChiselSim coupling
 
-Pinned: `chisel3-chiselsim` **7.14.0** (pairs AD-9 Chisel 7.14.0 / firtool-1.155.0).
+Pinned: `chisel3-chiselsim` **7.15.0** (pairs AD-9 Chisel 7.15.0 / firtool-1.158.0).
 Peek/poke on generated SV — **not** Bitloom `tick` golden.
 
 ```bash

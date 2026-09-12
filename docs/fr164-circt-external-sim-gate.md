@@ -12,12 +12,12 @@ adds the **simulation / execution** deepen that FR137 explicitly deferred.
 | Item | Contract |
 |------|----------|
 | **Gate** | External firtool **compile** (AD-9) **+** cycle-sim **execution predicate** |
-| Tool | **firtool-1.155.0** (same AD-9 pin as FR137) |
+| Tool | **firtool-1.158.0** (same AD-9 pin as FR137) |
 | Local | `just circt-external-sim-check` → `bash scripts/circt-external-sim-check.sh` |
 | CI | `.github/workflows/ci.yml` → **`circt-external-sim`** (required; **no** `continue-on-error`) |
 | Compile fixture | `crates/rhdl-firrtl/fixtures/fr137_external_circt_gate.fir` (firtool dialect) |
 | Sim fixture | `crates/rhdl-firrtl/fixtures/fr164_external_circt_sim_gate.fir` (Bitloom FIRRTL 6 import) |
-| Failure | `BITLOOM_CIRCT_SIM_FORCE_MISSING=1` / missing tool / version ≠ 1.155.0 / sim fail → **non-zero** readable |
+| Failure | `BITLOOM_CIRCT_SIM_FORCE_MISSING=1` / missing tool / version ≠ 1.158.0 / sim fail → **non-zero** readable |
 
 ## Forbidden closes
 

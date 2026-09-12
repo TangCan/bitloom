@@ -1,5 +1,5 @@
 // FR81 Path A / FR71-adjacent Mem contract fixture (compile-only smoke under NFR12).
-// Mechanical style matching emit_chisel; pin: Chisel 7.14.0 ↔ firtool 1.155.0 (AD-9).
+// Mechanical style matching emit_chisel; pin: Chisel 7.15.0 ↔ firtool 1.158.0 (AD-9).
 // Required FR71 gate remains fr28_golden_counter.scala — this file is optional Mem Path A evidence.
 import chisel3._
 

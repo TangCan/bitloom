@@ -38,8 +38,8 @@ fn readme() -> String {
 fn fr88_fr28_documents_pinned_chisel_firtool_pair() {
     let text = fr28();
     assert!(
-        text.contains("7.14.0") && text.contains("1.155.0"),
-        "FR28 doc must pin Chisel 7.14.0 ↔ firtool 1.155.0 (AD-9 / NFR12)"
+        text.contains("7.15.0") && text.contains("1.158.0"),
+        "FR28 doc must pin Chisel 7.15.0 ↔ firtool 1.158.0 (AD-9 / NFR12)"
     );
     assert!(
         (text.contains("Chisel") || text.contains("chisel"))

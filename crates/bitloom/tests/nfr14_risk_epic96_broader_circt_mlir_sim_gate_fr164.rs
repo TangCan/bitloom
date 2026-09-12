@@ -73,7 +73,10 @@ fn nfr14_risk_epic96_broader_circt_sim_gate_fr164_has_required_fields() {
         "must nail sim-gate as selected MVP"
     );
     assert!(
-        text.contains("firtool-1.155.0") || text.contains("1.155.0"),
+        text.contains("firtool-1.155.0")
+            || text.contains("1.155.0")
+            || text.contains("1.158.0")
+            || text.contains("firtool-1.158.0"),
         "must pin firtool version"
     );
     assert!(

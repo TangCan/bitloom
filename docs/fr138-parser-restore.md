@@ -15,7 +15,7 @@ Upstream Scala `firrtl.Parser.parse` / `Parser.parse` was removed with the CIRCT
 |------|------|
 | Historical | `firrtl.Parser.parse` / `Parser.parse` |
 | **Bitloom product-equivalent (AD-27)** | **`BitloomFirrtlParser.parse`** (`bitloom.firrtl`) |
-| Implementation | AD-9 **`firtool-1.155.0 -parse-only`** on representative `.fir` |
+| Implementation | AD-9 **`firtool-1.158.0 -parse-only`** on representative `.fir` |
 
 Scala façade (interop/fixture only; **not** a design-crate dependency):
 `crates/rhdl-firrtl/testdata/fr138_bitloom_firrtl_parser.scala`.
@@ -25,7 +25,7 @@ Scala façade (interop/fixture only; **not** a design-crate dependency):
 ```text
 representative .fir
   → BitloomFirrtlParser.parse (≡ Parser.parse)
-  → firtool-1.155.0 -parse-only
+  → firtool-1.158.0 -parse-only
   → target/parser-restore-check/*.parse-ok
 ```
 
@@ -41,7 +41,7 @@ Fixture: `crates/rhdl-firrtl/fixtures/fr138_parser_restore.fir`.
 
 ## Version pairing (AD-9)
 
-**Chisel 7.14.0** ↔ **firtool-1.155.0**. ≠ PATH-random firtool; ≠ CIRCT HEAD.
+**Chisel 7.15.0** ↔ **firtool-1.158.0**. ≠ PATH-random firtool; ≠ CIRCT HEAD.
 
 ## Failure semantics (P3)
 
@@ -49,7 +49,7 @@ Fixture: `crates/rhdl-firrtl/fixtures/fr138_parser_restore.fir`.
 |---------|----------|
 | `BITLOOM_PARSER_FORCE_MISSING=1` | non-zero + readable (Parser / BitloomFirrtlParser unavailable) |
 | firtool missing / ensure fail | non-zero + readable |
-| version ≠ 1.155.0 | non-zero + readable mismatch |
+| version ≠ 1.158.0 | non-zero + readable mismatch |
 | `-parse-only` fail | non-zero |
 
 Silent skip is forbidden.

@@ -9,11 +9,11 @@ use bitloom_hir::{
     PortDirection, ProcessKind, Stmt,
 };
 
-/// Documented pairing (AD-9 / NFR12): Chisel 7.14.0 ↔ firtool-1.155.0.
-pub const CHISEL_TARGET: &str = "7.14.0";
+/// Documented pairing (AD-9 / NFR12): Chisel 7.15.0 ↔ firtool-1.158.0.
+pub const CHISEL_TARGET: &str = "7.15.0";
 
 /// Documented firtool pin paired with [`CHISEL_TARGET`].
-pub const FIRTOOL_TARGET: &str = "1.155.0";
+pub const FIRTOOL_TARGET: &str = "1.158.0";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ChiselGenError {

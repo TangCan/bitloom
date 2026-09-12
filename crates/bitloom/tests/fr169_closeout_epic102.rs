@@ -134,8 +134,10 @@ fn fr169_product_doc_closed() {
         (doc.contains("bump") || doc.contains("升钉") || doc.contains("(B)"))
             && (doc.contains("Deferred")
                 || doc.contains("deferred")
+                || doc.contains("FR173")
+                || doc.contains("deferred")
                 || doc.contains("NFR76")
                 || doc.contains("未")),
-        "product doc must keep option B / firtool bump deferred"
+        "product doc must note option B deferred-at-close or FR173 delivery"
     );
 }

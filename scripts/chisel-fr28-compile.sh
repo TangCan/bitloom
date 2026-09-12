@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# FR28 Chisel Scala compile under pinned Chisel 7.14.0 (AD-9).
+# FR28 Chisel Scala compile under pinned Chisel 7.15.0 (AD-9).
 #
 # Modes:
 #   BITLOOM_REQUIRE_CHISEL_JVM=1  — missing Java≥17 / sbt / compile fail → non-zero (FR71)
@@ -7,7 +7,7 @@
 #   (default / optional)         — missing toolchain → skip exit 0 (legacy local convenience)
 #
 # Prefer scripts/chisel-fr28-compile-required.sh for CI and just chisel-fr28-jvm.
-# Pin: Chisel 7.14.0 ↔ firtool 1.155.0. Never silent-downgrade FR28 to best-effort.
+# Pin: Chisel 7.15.0 ↔ firtool 1.158.0. Never silent-downgrade FR28 to best-effort.
 set -euo pipefail
 ROOT="$(cd "${BASH_SOURCE[0]%/*}/.." && pwd)"
 SCALA="${1:-}"
@@ -64,11 +64,11 @@ rm -rf "$WORKDIR"
 mkdir -p "$WORKDIR/src/main/scala" "$WORKDIR/project"
 cp "$SCALA" "$WORKDIR/src/main/scala/"
 
-# Minimal build.sbt: matching chisel + chisel-plugin (CrossVersion.full), Chisel 7.14.0.
+# Minimal build.sbt: matching chisel + chisel-plugin (CrossVersion.full), Chisel 7.15.0.
 cat >"$WORKDIR/build.sbt" <<'EOF'
 scalaVersion := "2.13.16"
-libraryDependencies += "org.chipsalliance" %% "chisel" % "7.14.0"
-addCompilerPlugin("org.chipsalliance" % "chisel-plugin" % "7.14.0" cross CrossVersion.full)
+libraryDependencies += "org.chipsalliance" %% "chisel" % "7.15.0"
+addCompilerPlugin("org.chipsalliance" % "chisel-plugin" % "7.15.0" cross CrossVersion.full)
 EOF
 
 # Pin sbt launcher for reproducible CI (optional; system sbt also OK).
@@ -76,9 +76,9 @@ cat >"$WORKDIR/project/build.properties" <<'EOF'
 sbt.version=1.10.11
 EOF
 
-echo "compiling under Chisel 7.14.0 in $WORKDIR (require=$REQUIRE) ..."
+echo "compiling under Chisel 7.15.0 in $WORKDIR (require=$REQUIRE) ..."
 (
   cd "$WORKDIR"
   sbt -batch compile
 )
-echo "FR28 Chisel compile OK (Chisel 7.14.0)"
+echo "FR28 Chisel compile OK (Chisel 7.15.0)"

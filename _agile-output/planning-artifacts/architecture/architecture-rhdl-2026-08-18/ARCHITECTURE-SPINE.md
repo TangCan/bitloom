@@ -123,7 +123,8 @@ flowchart TB
 
 - **Binds:** CLI, rhdl-firrtl, CI
 - **Prevents:** 系统 PATH 上的随机 firtool；Cement 式钉死过期 tarball 却当「当前」；两处各自下载
-- **Rule:** 调用 firtool 必须是 **firtool-1.155.0**（Chisel 7.14.0 配对，2026-08-11）。这不是 CIRCT HEAD：firtool-1.156.0 已于 2026-08-16 发布，**在 Chisel 配对它之前不得采用**。**只有 CLI** 下载/缓存/调用。产物是该 tag 的 `firrtl-bin-linux-x64.tar.gz`，校验同 tag 发布的 `.sha256`。阶段一宿主：**linux-x64**。首次可联网；缓存命中后必须能离线。覆盖：`RHDL_FIRTOOL_PATH` 指向含 `firtool` 二进制的目录。禁止默认信任 `PATH`。**FR137 / NFR58：** 外部 CIRCT **编译**门禁产品路径 = `just circt-external-check` / CI required job `circt-external`（见 `docs/fr137-external-circt-gate.md`）；≠ FR129 树内 Handshake alone；缺工具/版本不符须非零可读失败。**FR164：** 外部 CIRCT **仿真**门禁 = `just circt-external-sim-check` / CI `circt-external-sim`（见 `docs/fr164-circt-external-sim-gate.md`）；≠ FR137 compile alone。
+- **Rule:** 调用 firtool 必须是 **firtool-1.158.0**（Chisel **7.15.0** 配对；上游正式表 https://www.chisel-lang.org/docs/appendix/versioning ）。这不是 CIRCT HEAD / PATH 随机 firtool。**只有 CLI** 下载/缓存/调用。产物是该 tag 的 `firrtl-bin-linux-x64.tar.gz`，校验同 tag 发布的 `.sha256`。阶段一宿主：**linux-x64**。首次可联网；缓存命中后必须能离线。覆盖：`RHDL_FIRTOOL_PATH` 指向含 `firtool` 二进制的目录。禁止默认信任 `PATH`。**FR137 / NFR58：** 外部 CIRCT **编译**门禁产品路径 = `just circt-external-check` / CI required job `circt-external`（见 `docs/fr137-external-circt-gate.md`）；≠ FR129 树内 Handshake alone；缺工具/版本不符须非零可读失败。**FR164：** 外部 CIRCT **仿真**门禁 = `just circt-external-sim-check` / CI `circt-external-sim`（见 `docs/fr164-circt-external-sim-gate.md`）；≠ FR137 compile alone。**FR173 / NFR80：** 升钉须上游 Chisel 正式配对后修订本 AD / Stack；禁止 unpaired bump。
+- **Revised:** 2026-09-12 — Phase 21 / **FR173** / **NFR80**：Correct Course `correctCoursePhase21Approved: 2026-09-12`；产品钉死升至 **firtool-1.158.0 ↔ Chisel 7.15.0**（正式配对表）；历史钉死面 **firtool-1.155.0 ↔ Chisel 7.14.0**（FR169(A)/FR138/FR170 关闭时 pin）仍为有效关闭证据（**NFR78**），alone ≠ FR173。
 
 ### AD-10 — 诊断 [ADOPTED]
 
@@ -289,9 +290,9 @@ flowchart TB
 | rustc (MSRV) | 1.97.1 |
 | Rust edition | 2024 |
 | FIRRTL language spec | 6.0.0 |
-| CIRCT firtool（Chisel 7.14.0 配对，非 CIRCT HEAD） | 1.155.0 |
-| firtool 阶段一资产 | firrtl-bin-linux-x64.tar.gz @ firtool-1.155.0 |
-| Chisel (interop 对照，非依赖) | 7.14.0 |
+| CIRCT firtool（Chisel 7.15.0 配对，非 CIRCT HEAD） | 1.158.0 |
+| firtool 阶段一资产 | firrtl-bin-linux-x64.tar.gz @ firtool-1.158.0 |
+| Chisel (interop 对照，非依赖) | 7.15.0 |
 | Yosys (可选综合) | 0.68 |
 | Verilator (可选对照 sim) | 5.050 |
 | tracing (CLI) | 0.1.44 |
@@ -319,7 +320,7 @@ flowchart LR
   HIR --> V[.v]
   HIR --> S[tick + VCD]
   HIR -.-> F[.fir 阶段二]
-  F -.-> FT[firtool 1.155.0]
+  F -.-> FT[firtool 1.158.0]
   FT -.-> SV[firtool.v]
   V --> Y[Yosys 可选]
 ```
@@ -362,7 +363,7 @@ flowchart LR
 - **interp vs 编译版 `tick` 引擎**（产品 FR32；脊柱不选引擎）。
 - **`cargo bitloom` 其余动词**形态细节（FR40；`import`/`visualize`/`wave` 为 Phase 7 必需能力，名称可调）。
 - **macos / windows / linux-aarch64 firtool 资产**（NFR11；机制同 AD-9）。
-- **firtool-1.156.0**：等 Chisel 正式配对后再改 AD-9 / Stack 表（NFR12）。
+- **更高 firtool / Chisel 配对（超 1.158.0 / 7.15.0）：** 须上游正式配对后再改 AD-9 / Stack（NFR12 / NFR80 / **NFR81**）；≠ FR173 alone。
 - **更高 MSRV（>1.97.1）**：须另改 PRD/NFR13；当前 NFR13 = **1.97.1**。
 - **AD-22 phantom 选型的替代**：若推翻，须修订 AD-22，不得 silently 分叉。
 - **AD-27 Scala 生成器所在 crate**：`[ASSUMPTION]` 可 firrtl 或 CLI。

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Optional smoke: run pinned firtool-1.155.0 on an exported .fir (AD-9).
+# Optional smoke: run pinned firtool-1.158.0 on an exported .fir (AD-9).
 # Skips cleanly when firtool is not installed — does not fail CI by default.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -9,12 +9,12 @@ if [[ -z "$FIR" ]]; then
   exit 2
 fi
 if ! command -v firtool >/dev/null 2>&1; then
-  echo "firtool not found; skipping smoke (install firtool 1.155.0 to enable)"
+  echo "firtool not found; skipping smoke (install firtool 1.158.0 to enable)"
   exit 0
 fi
 ver="$(firtool --version 2>&1 || true)"
 if ! grep -q '1\.155\.0' <<<"$ver"; then
-  echo "warning: expected firtool 1.155.0, got: $ver" >&2
+  echo "warning: expected firtool 1.158.0, got: $ver" >&2
 fi
 out="$ROOT/target/firtool-smoke"
 mkdir -p "$out"
