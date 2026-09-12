@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** Epic 95 / FR163 — Story **95.2** implementation (closeout Story **95.3**).
+**Status:** **Epic 95 / FR163 closed** (Story **95.3**). Implementation Story **95.2**.
 
 Phase 16 **FR135** `UartTxFunctional` **remains closed and valid** (NFR68). This FR adds
 **at least one protocol beyond `UartTx`** with handwritten FL ≡ tick.
