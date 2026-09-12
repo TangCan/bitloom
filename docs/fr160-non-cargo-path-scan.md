@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`bitloom-lsp`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 92 / FR160 delivered in Story 92.2** (closeout Story **92.3**).
+**Status:** **Epic 92 / FR160 closed** (Story **92.3**). Implementation Story **92.2**.
 Phase 14 FR118 Cargo workspace members syn-scan remains closed (NFR68).
 
 ## Selected face (NFR14)

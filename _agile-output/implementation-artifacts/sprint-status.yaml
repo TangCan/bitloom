@@ -643,14 +643,14 @@ development_status:
   91-3-fr159-收口与文档指针: done
   epic-91-retrospective: optional
 
-  epic-92: in-progress
+  epic-92: done
   92-1-epic-92-nfr14-风险记录: done
   92-2-非-cargo-路径扫描实现与验收-fr160: done
-  92-3-fr160-收口与文档指针: ready-for-dev
+  92-3-fr160-收口与文档指针: done
   epic-92-retrospective: optional
 
-  epic-93: backlog
-  93-1-epic-93-nfr14-风险记录: backlog
+  epic-93: in-progress
+  93-1-epic-93-nfr14-风险记录: ready-for-dev
   93-2-formal-sby-镜像卫生实现与验收-fr161: backlog
   93-3-fr161-收口与文档指针: backlog
   epic-93-retrospective: optional

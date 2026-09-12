@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR160 / Epic 92；NFR14、NFR68、NFR69、NFR71、NFR72；对照 FR118 / FR113 / FR99 / FR155 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 92.1；Epic 92 未关闭 |
+| 状态 | closed — Story 92.3 勾选完成；Epic 92 关闭；FR160 实现面可宣称；**FR161–165 / FR156** 仍属 Epic 93–98；**不得**宣称 NFR59「全清」 |
 | **选定** | 在保留 FR118（Cargo workspace members syn-scan）与 FR113（metadata）关闭面的前提下，授权 **MVP：对非 Cargo 全 monorepo / 非 members 任意路径，按约定根目录或显式路径列表扫描 `#[bitloom::top]`（及过渡 `#[rhdl::top]`），发现设计根** |
 
 ### Phase 12–18 / FR118 关闭面 vs Epic 92 实现边界（NFR68 · 必读）
@@ -104,8 +104,8 @@
 
 ### Epic 92 关闭条件（Story 92.3 勾选）
 
-- [ ] **FR160 钉死子集实现 + 验收** — Story 92.2
-- [ ] **文档 / deferred / README 收口** — Story 92.3
-- [ ] **NFR68/71/72：** 边界与诚实义务保持
-- [ ] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
-- [ ] **其余 FR161–165：** 未关前不得宣称 NFR59 全清
+- [x] **FR160 钉死子集实现 + 验收** — Story 92.2
+- [x] **文档 / deferred / README 收口** — Story 92.3
+- [x] **NFR68/71/72：** 边界与诚实义务保持
+- [x] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **其余 FR161–165：** 未关前不得宣称 NFR59 全清
