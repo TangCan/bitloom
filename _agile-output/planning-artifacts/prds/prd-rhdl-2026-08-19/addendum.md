@@ -404,3 +404,36 @@
 
 **合同指针：** 详见 `epics.md` Phase 18 Inventory（FR148–FR153 / NFR64–NFR67）。
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-11-phase18-cli-crates-io-publish.md`
+
+## 2026-09-12 Update — Phase 19 NFR59 全子集升格 + FR152(a) bitloom-lsp 上架（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-12-phase19-nfr59-fr152a.md` —
+在 Phase 18 CLI crates.io 可发布 **已关闭**之后，正式 **Phase 19**
+「NFR59 全子集升格 + FR152(a)」（Epic 87–98 · **FR154–FR165** / **NFR68–NFR72**），
+打开曾被 **NFR63 / NFR67** 禁止静默吞并的 NFR59 账本，并升格 Phase 18 预留的 **FR152(a)**。
+
+**批准默认（Q1–Q5）：**
+1. **NFR59 README 九条全部**升格为 **FR157–FR165**（各 epic NFR14 钉死验收子集；禁止静默超子集 — NFR71）。
+2. **FR152 (a)：** `bitloom-lsp`：`publish = true` + version；重写 `docs/fr152-*`；(a)；**live** `cargo publish -p bitloom-lsp`（Epic 88 / FR155）；不得破坏已关闭 FR151。
+3. **不得**改写 Phase 12–18「已关闭」（**NFR68**）。
+4. **不得**静默扩大 FR142；宣称须引已关 FR（**FR156** / **NFR72**）。
+5. **MSRV** 默认保持现行；lsp 版本建议与工作区 **1.0.0** 对齐（除非故事另决）。
+
+**公开品牌（不变）：** **Bitloom**；crates.io / CLI **`bitloom`** / `bitloom-*`；设计 crate 仍只依赖
+`bitloom-prelude`（AD-6）。禁止发布 `rhdl` / `rhdl-bits`。
+
+**与 Phase 12–18 的关系（必须同时读）：**
+- Phase 12–18（FR94–153）关闭证据 **仍有效**；**不得**改写为失败（**NFR68**）。
+- Phase 19 是 **新合同**下的加深与 lsp 上架，**不是**「Phase 18 / CLI 失败」的补救叙事。
+- 映射：闸门 **FR154**；lsp (a) **FR155**；宣称 **FR156**；NFR59 九条 **FR157–FR165**。
+- 对外「lsp 已上架 / NFR59 某子集已交付」类表述：**仅**可在对应 FR 关闭后宣称；
+  **禁止**用 Phase 18 alone 冒充。
+- **口径：** 本批关闭 ≠ 清空超出各 NFR14 钉死子集的更深项（**NFR71**）；`git push` **不是** FR。
+
+**实现闸门：** Epic 87（Story 87.1–87.4 · **FR154**）关闭前，Epic 88–98 不得标 ready。  
+软序：**87 →（88 ‖ 89…97）→ 98**；Epic 95（`ip/`）与其它触及面建议串行。  
+README / deferred / 脊柱指针由 Story **87.3–87.4** 落地；lsp live 属 Epic **88**。  
+**不**在本合同批准瞬间强制 `cargo publish`。
+
+**合同指针：** 详见 `epics.md` Phase 19 Inventory（FR154–FR165 / NFR68–NFR72）。
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-12-phase19-nfr59-fr152a.md`

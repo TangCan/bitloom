@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-12-2026 01:32
+last_updated: 09-12-2026 10:00
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -607,6 +607,83 @@ development_status:
   86-2-semver-assume-published-与发版诚实更新-fr153: done
   86-3-fr153-收口与-phase-18-故事清单指针: done
   epic-86-retrospective: done
+
+  # === Phase 19: NFR59 full upgrade + FR152(a) bitloom-lsp publish (FR154–165) ===
+  # Soft order: 87 → (88 ‖ 89…97) → 98; Epic 87 hard gate before 88–98 ready
+  # Correct Course + PRD stamp required (Story 87.2) before implementation epics ready
+  epic-87: backlog
+  87-1-epic-87-nfr14-风险记录: backlog
+  87-2-correct-course-prd-批准-phase-19-fr154: backlog
+  87-3-同步-readme-deferred-路线图指针-fr154: backlog
+  87-4-ad-指针与-epic-87-收口-fr154: backlog
+  epic-87-retrospective: optional
+
+  epic-88: backlog
+  88-1-epic-88-nfr14-风险记录: backlog
+  88-2-bitloom-lsp-可发布化与政策-a-fr155: backlog
+  88-3-live-发布-bitloom-lsp-fr155: backlog
+  88-4-fr155-收口与文档指针: backlog
+  epic-88-retrospective: optional
+
+  epic-89: backlog
+  89-1-epic-89-nfr14-风险记录: backlog
+  89-2-自动-fsm-标签提取实现与验收-fr157: backlog
+  89-3-fr157-收口与文档指针: backlog
+  epic-89-retrospective: optional
+
+  epic-90: backlog
+  90-1-epic-90-nfr14-风险记录: backlog
+  90-2-lcov-gui-一等集成实现与验收-fr158: backlog
+  90-3-fr158-收口与文档指针: backlog
+  epic-90-retrospective: optional
+
+  epic-91: backlog
+  91-1-epic-91-nfr14-风险记录: backlog
+  91-2-memread-完整生成实现与验收-fr159: backlog
+  91-3-fr159-收口与文档指针: backlog
+  epic-91-retrospective: optional
+
+  epic-92: backlog
+  92-1-epic-92-nfr14-风险记录: backlog
+  92-2-非-cargo-路径扫描实现与验收-fr160: backlog
+  92-3-fr160-收口与文档指针: backlog
+  epic-92-retrospective: optional
+
+  epic-93: backlog
+  93-1-epic-93-nfr14-风险记录: backlog
+  93-2-formal-sby-镜像卫生实现与验收-fr161: backlog
+  93-3-fr161-收口与文档指针: backlog
+  epic-93-retrospective: optional
+
+  epic-94: backlog
+  94-1-epic-94-nfr14-风险记录: backlog
+  94-2-更深-gui-ide-实现与验收-fr162: backlog
+  94-3-fr162-收口与文档指针: backlog
+  epic-94-retrospective: optional
+
+  epic-95: backlog
+  95-1-epic-95-nfr14-风险记录: backlog
+  95-2-未列协议手写-fl-实现与验收-fr163: backlog
+  95-3-fr163-收口与文档指针: backlog
+  epic-95-retrospective: optional
+
+  epic-96: backlog
+  96-1-epic-96-nfr14-风险记录: backlog
+  96-2-circt-mlir-仿真门禁加深实现与验收-fr164: backlog
+  96-3-fr164-收口与文档指针: backlog
+  epic-96-retrospective: optional
+
+  epic-97: backlog
+  97-1-epic-97-nfr14-风险记录: backlog
+  97-2-更深-chisel-parser-生态实现与验收-fr165: backlog
+  97-3-fr165-收口与文档指针: backlog
+  epic-97-retrospective: optional
+
+  epic-98: backlog
+  98-1-epic-98-nfr14-风险记录: backlog
+  98-2-readme-deferred-状态页诚实更新-fr156: backlog
+  98-3-fr156-收口与-phase-19-故事清单指针: backlog
+  epic-98-retrospective: optional
 
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"

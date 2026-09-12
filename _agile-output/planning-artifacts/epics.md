@@ -95,9 +95,51 @@ stepsCompleted:
   - step-02-design-epics-phase-18
   - step-03-create-stories-phase-18
   - step-04-final-validation-phase-18
+  - step-01-validate-prerequisites-phase-19
+  - step-02-design-epics-phase-19
+  - step-03-create-stories-phase-19
+  - step-04-final-validation-phase-19
 status: complete
+phase19Status: planning-complete
+correctCoursePhase19Approved: 2026-09-12
+phase19ContractApproved: 2026-09-12
+phase19StoryCount: 38
+phase19StoriesDrafted: 2026-09-12
+phase19Validation: |
+  FR154–165 mapped to Epic 87–98 stories (38); Epic 87 hard gate for 88–98;
+  no forward story deps within epics; Architecture starter N/A; no UX-DR;
+  File-churn: Epic 88 owns lsp publish; 89–97 distinct deepen domains; Epic 95
+  soft-orders ip/; closeout docs (README/deferred) incidental shared like prior phases;
+  FR156 claim honesty in Epic 98 after deepen soft-order; Correct Course approved 2026-09-12
+  (Story 87.2 verifies stamp); create-epics-and-stories Phase 19 validated 2026-09-12; sprint seeded;
+  next: Build Story 87.1 NFR14.
 phase17Status: complete
 phase18Status: complete
+phase19EpicListApproved: 2026-09-12
+phase19EpicCount: 12
+phase19EpicRange: 87-98
+phase19Contract: nfr59-full-upgrade-plus-fr152a-lsp-publish
+phase19Scope: >
+  Gate FR154; FR152(a) bitloom-lsp live crates.io publish (FR155); claim honesty FR156;
+  NFR59 full subset upgrade FR157–FR165 (FSM labels, LCOV GUI, MemRead full emit,
+  non-Cargo path scan, formal-sby image hygiene, deeper GUI/IDE, more protocol FL,
+  broader CIRCT/MLIR, deeper Chisel/Parser).
+phase19Note: >
+  create-epics Step 1 (2026-09-12): user locked FR157–165 all-in; FR155 includes live
+  cargo publish -p bitloom-lsp; wording unchanged. FR148–153 / Phase 18 remain closed.
+  FR152(b) policy doc must be rewritten to (a). Correct Course approved 2026-09-12; PRD/addendum Phase 19 stamped. git push is ops, not FR.
+  Implementation gate remains Epic 87 close before 88–98 ready.
+phase19InputDocuments:
+  - prds/prd-rhdl-2026-08-19/prd.md
+  - prds/prd-rhdl-2026-08-19/addendum.md
+  - architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
+  - epics.md
+  - _agile-output/implementation-artifacts/deferred-work.md
+  - docs/fr152-bitloom-lsp-publish-policy.md
+  - docs/fr153-semver-honesty.md
+  - docs/fr151-bitloom-cli-publish.md
+  - sprint-change-proposal-2026-09-11-phase18-cli-crates-io-publish.md
+  - README.md (NFR59 deferred ledger)
 correctCoursePhase18Approved: 2026-09-11
 phase18WorkflowComplete: 2026-09-11
 phase18Epic84Stories: 4
@@ -418,7 +460,7 @@ uxDesignPhase13: none---
 
 This document provides the complete epic and story breakdown for rhdl, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
-阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48–56 · FR106–FR115 / NFR44–NFR47，**complete**）。阶段十四：NFR47 未选加深升格（Epic 57–63 · FR116–FR123 / NFR48–NFR51，**complete**）。阶段十五：NFR51 剩余升格（Epic 64–71 · FR124–FR132 / NFR52–NFR55，**complete**）。阶段十六：产品终局结项 / NFR55 升格（Epic 72–78 · FR133–FR140 / NFR56–NFR59，**complete**）。阶段十七：公开 API 稳定门 / Bitloom 1.0（Epic 79–83 · FR141–FR147 / NFR60–NFR63，**complete**；Correct Course **approved** 2026-09-11；`v1.0.0`）。阶段十八：CLI / 依赖 crate crates.io 可发布（Epic 84–86 · FR148–FR153 / NFR64–NFR67，**complete**；Correct Course **approved** 2026-09-11；`bitloom` CLI 1.0.0 上架；FR153 SemVer honesty）。无 UX。
+阶段一：SPEC CAP-1…CAP-9（Epic 1–4）。阶段二：PRD `prd-rhdl-2026-08-19`（Epic 5–10）。阶段三：公开品牌 **Bitloom** 改名 + 成熟度结项 + crates.io 首次发布（Epic 11–12）。阶段四：`cargo install bitloom` 后真独立（Epic 13–14）。阶段五：教学向 **RV32 示例核 + step-by-step 教程**。阶段六：Episode II。阶段七：概述字面闭环（Epic 19–24，complete）。阶段八：默认 CI 强制 FR28 JVM 真编译门禁（Epic 25 · FR71 / NFR34，complete）。阶段九：受控泛型闭包（Epic 26–30 · FR72–FR78 / NFR35–NFR36）。阶段十：Wave 3 非闭包 Partial 深度（Epic 31–35 · FR79–FR86 / NFR37，complete）。阶段十一：合同绿 / doc-19 阶段五–七重定义（Epic 36–39 · FR87–FR93 / NFR38–NFR39，complete）。阶段十二：字面七阶段全绿 Path B（Epic 40–47 · FR94–FR105 / NFR40–NFR43，**complete**）。阶段十三：MVP→商业加深（Epic 48–56 · FR106–FR115 / NFR44–NFR47，**complete**）。阶段十四：NFR47 未选加深升格（Epic 57–63 · FR116–FR123 / NFR48–NFR51，**complete**）。阶段十五：NFR51 剩余升格（Epic 64–71 · FR124–FR132 / NFR52–NFR55，**complete**）。阶段十六：产品终局结项 / NFR55 升格（Epic 72–78 · FR133–FR140 / NFR56–NFR59，**complete**）。阶段十七：公开 API 稳定门 / Bitloom 1.0（Epic 79–83 · FR141–FR147 / NFR60–NFR63，**complete**；Correct Course **approved** 2026-09-11；`v1.0.0`）。阶段十八：CLI / 依赖 crate crates.io 可发布（Epic 84–86 · FR148–FR153 / NFR64–NFR67，**complete**；Correct Course **approved** 2026-09-11；`bitloom` CLI 1.0.0 上架；FR153 SemVer honesty）。阶段十九：NFR59 全子集升格 + FR152(a) `bitloom-lsp` crates.io（Epic 87–98 · FR154–FR165 / NFR68–NFR72，**planning-complete**；Correct Course **approved** 2026-09-12；实现闸门 Epic 87）。无 UX。
 
 ## Requirements Inventory
 
@@ -7113,3 +7155,759 @@ So that Phase 18 规划与实现故事清单完整。
 **Then** NFR14 勾选 Epic 86 关闭
 **And** 文首/状态页可声明：Phase 18 故事已齐（Epic 84–86）；CLI crates.io 宣称须引 FR148–153
 **And** 明确：NFR59 仍 deferred（NFR67）；更深加深须新合同
+
+## Phase 19 Inventory — NFR59 全子集升格 + FR152(a) bitloom-lsp 上架
+
+**定位：** Phase 18（FR148–153）**合同与 CLI 1.0.0 上架已关闭**之后，正式打开曾被 **NFR63 / NFR67** 明确禁止静默吞并的 **NFR59 全子集**，并升格 Phase 18 预留的 **FR152(a)**（`bitloom-lsp` live crates.io publish）。  
+**是：**  
+1. Phase 19 合同闸门（Correct Course + PRD/addendum）  
+2. `bitloom-lsp`：`publish = true` + version + **live** `cargo publish -p bitloom-lsp`；重写 `docs/fr152-*`（(b)→(a)）  
+3. NFR59 README 诚实面 **全部九条**升格为可交付 FR（FR157–FR165）  
+4. 宣称诚实门（须引本批已关 FR；禁止暗示「NFR59 外仍有未列加深已清」或静默扩大 FR142）  
+
+**不是：** 改写 Phase 12–18「已关闭」；把 `git push main` 当成 FR；批准瞬间无闸门直接 publish；用 Phase 18 CLI 上架冒充 lsp/NFR59 加深。  
+**依据：** README NFR59 仍 deferred 账本；`docs/fr152-bitloom-lsp-publish-policy.md`（(a) deferred）；addendum Phase 18 Q3「(a) 另开合同」；NFR63 / NFR67。  
+**与 PRD 关系：** Correct Course + PRD/addendum「Phase 19」**已批准**（2026-09-12；`correctCoursePhase19Approved: 2026-09-12`）；**实现闸门** = Epic 87（FR154）关闭前，Epic 88–98 不得 ready。  
+**ID 注记：** **FR154–FR165** / **NFR68–NFR72**（接 FR153 / NFR67）。不重编号 FR148–153。  
+**批准默认（Correct Course yes · 2026-09-12 · Q1–Q5）：** NFR59 **全做 FR157–165**；FR155 **含 live** `cargo publish -p bitloom-lsp`；不回滚 Phase 12–18；不静默扩 FR142；保持 MSRV。
+
+### Phase 19 Functional Requirements
+
+FR148–FR153: （历史）Phase 18 — 关闭证据仍有效；Phase 19 不得改写为失败。FR152(b) 政策由 FR155 显式升格为 (a)。
+
+FR154: **Phase 19 合同闸门** — Correct Course + PRD/addendum 批准「NFR59 全子集升格 + FR152(a)」范围；同步 README / `deferred-work.md` /（若需）ARCHITECTURE-SPINE；钉死与 Phase 12–18 关闭面的边界；**未完成则 FR155+ 故事不得 ready**。  
+FR155: **bitloom-lsp FR152(a) 上架** — `crates/bitloom-lsp`：`publish = true`、版本与 registry 依赖可发布；更新 `docs/fr152-*` 为 (a)；**live** `cargo publish -p bitloom-lsp` 成功；不得破坏已关闭 FR151 的 CLI 可安装证据。  
+FR156: **Phase 19 宣称诚实门** — 对外「lsp 已上架 / NFR59 某子集已交付」须引本批已关 FR154–165 对应项；**禁止**用 Phase 18 alone 冒充；**禁止**暗示超出本批钉死范围的加深已清；不得静默扩大 FR142。  
+FR157: **自动 FSM 标签提取** — 产品路径可自动提取/标注 FSM 状态标签（验收子集在 NFR14 钉死）；不得仅文档宣称。  
+FR158: **第三方 LCOV GUI 一等集成** — 覆盖率产物可与约定第三方 LCOV GUI 一等集成（工具/版本/缺工具语义在 NFR14 钉死）。  
+FR159: **emit MemRead stub → 完整生成** — 将现 MemRead stub/半成品路径升格为完整可生成/可验收 emit（相对既有 stub 合同的加深边界在 NFR14 钉死）。  
+FR160: **非 Cargo 全 monorepo 任意路径扫描** — 工具链/LSP 或约定扫描面支持非 Cargo 布局的 monorepo 任意路径扫描（范围与失败语义在 NFR14 钉死）；≠ FR118 Cargo-graph / metadata  alone。  
+FR161: **GHA `formal-sby` 镜像卫生跟踪** — CI/`formal-sby` 镜像版本、更新与卫生跟踪成文并可验证（缺镜像/过期策略在 NFR14 钉死）。  
+FR162: **更深 GUI/IDE 子集** — 至少覆盖 README 钉死的加深面之一或多个（替换默认 VCD/`typed-wave.html` 唯一波形面；完整 ChiselSim 耦合；G1 外额外 IDE 商店多端发布）；**≠ FR134 G1–G4 alone**；子集在 NFR14 钉死。  
+FR163: **未列协议手写 FL** — 至少一项超出 FR135 `UartTx` 的协议手写 FL（如 `UartRx` / SPI / I2C / AXI 等）；**≠ FR135 alone**；具体协议在 NFR14 钉死；FR126 Gpio 仍有效。  
+FR164: **更广 CIRCT/MLIR lower / 仿真门禁加深** — 超出 FR137 编译门禁 MVP 的 lower 或仿真门禁加深；**≠ FR137 alone**；FR129 C1–C4 仍有效；工具版本在 NFR14 钉死。  
+FR165: **更深 Chisel/Parser 生态** — 超出 FR138 P1–P4 的 Style Guide/linter 全家桶或任意 Chisel HEAD Parser 回迁等加深；**≠ FR138 alone**；FR130 Style Guide 仍有效；若触 AD-27 须按 NFR70 修订。
+
+### Phase 19 Non-Functional Requirements
+
+NFR14: （继承）各实现 epic 标 ready 前须有风险记录。  
+NFR68: **Phase 19 vs Phase 12–18 关闭面隔离** — 不得改写 FR94–153「已关闭」；本批是新完成面。  
+NFR69: **NFR14 分 epic 风险门** — Phase 19 每个实现 epic 开工前独立 NFR14。  
+NFR70: **AD / 工具链 / 商店诚实同步** — 触及 AD-25/AD-27、外部 CIRCT、IDE 商店发布、crates.io lsp 时须先修订脊柱/文档/CI 合同再标 story ready。  
+NFR71: **超出本批钉死子集仍须另开合同** — 升格 FR 禁止静默扩大超出各 epic NFR14 钉死的验收子集；本批已全选 README NFR59 九条，但仍禁止把未写入 FR157–165 的新加深冒充已交付。  
+NFR72: **宣称仅经 FR156** — 不得用 Phase 18 CLI 上架或 FR152(b) 文档冒充 FR152(a) / NFR59 加深。
+
+### Phase 19 Additional Requirements (Architecture)
+
+- 无 greenfield starter template。  
+- AD-6：设计 crate 仍只依赖 `bitloom-prelude`（除非某 FR 显式另开跨 crate 合同）。  
+- 品牌 Bitloom；禁止 publish `rhdl` / `rhdl-bits`（AD-2）。  
+- FR155 须重写 `docs/fr152-bitloom-lsp-publish-policy.md`（(b)→(a)）；live publish 凭证/顺序在 Epic 88 NFR14 钉死。  
+- FR163 / 可能触及 `ip/`：与其他 epic 的软序在闸门或各 NFR14 钉死，避免同文件冲突。  
+- FR164 / FR165 可能触及 AD-25 / AD-27（NFR70）。  
+- `git push` / 远程同步 **不是** FR。  
+- UX：无独立 UX 合同；FR158/FR162 交互验收以产品文档/夹具 + ATDD（或文档化手动清单）为准。
+
+### Phase 19 UX Design Requirements
+
+无独立 UX-DR（无 `ux-designs/` spine）。
+
+### Phase 19 FR Coverage Map
+
+FR154: Epic 87 — Phase 19 合同闸门  
+FR155: Epic 88 — bitloom-lsp FR152(a) live crates.io  
+FR156: Epic 98 — Phase 19 宣称诚实门  
+FR157: Epic 89 — 自动 FSM 标签提取  
+FR158: Epic 90 — 第三方 LCOV GUI 一等集成  
+FR159: Epic 91 — MemRead 完整生成  
+FR160: Epic 92 — 非 Cargo monorepo 路径扫描  
+FR161: Epic 93 — formal-sby 镜像卫生  
+FR162: Epic 94 — 更深 GUI/IDE  
+FR163: Epic 95 — 未列协议手写 FL  
+FR164: Epic 96 — 更广 CIRCT/MLIR / 仿真门禁  
+FR165: Epic 97 — 更深 Chisel/Parser 生态  
+NFR68: Epic 87 — 隔离（横切写入 88–98）  
+NFR69 / NFR14: Epic 87–98 — 各 epic 首故事风险门  
+NFR70: Epic 88 / 94 / 96 / 97（及触及 AD 者）  
+NFR71: Epic 87 / 98 — 不得超子集静默扩大  
+NFR72: Epic 87 / 98 — 宣称纪律
+
+### Phase 19 Epic List
+
+### Epic 87: Phase 19 合同闸门与诚实边界
+维护者/用户看到「NFR59 全子集升格 + FR152(a)」已获 Correct Course + PRD 批准；Phase 12–18 关闭面不被改写；后续实现 epic 可合法开工。  
+**FRs covered:** FR154  
+**NFRs:** NFR14, NFR68, NFR69, NFR71, NFR72  
+**Depends on:** Phase 18 complete。不依赖 Epic 88–98。  
+**Gate:** Story 87.x（NFR14 + FR154）未完成前，88–98 不得标 ready。
+
+### Epic 88: 从 crates.io 安装 bitloom-lsp
+维护者可将 `bitloom-lsp` 以 FR152(a) 发布到 crates.io；政策文档从 (b) 改为 (a)；live publish 可勾选；不影响已关闭的 `cargo install bitloom`（FR151）。  
+**FRs covered:** FR155  
+**NFRs:** NFR14, NFR68, NFR69, NFR70, NFR72  
+**Depends on:** 硬依赖 Epic 87。
+
+### Epic 89: 自动 FSM 标签提取
+设计者/工具链获得可验收的自动 FSM 状态标签提取/标注产品路径。  
+**FRs covered:** FR157  
+**NFRs:** NFR14, NFR68, NFR69, NFR71  
+**Depends on:** 硬依赖 Epic 87。
+
+### Epic 90: 第三方 LCOV GUI 一等集成
+维护者/用户可将约定覆盖率产物接入第三方 LCOV GUI 一等路径。  
+**FRs covered:** FR158  
+**NFRs:** NFR14, NFR68, NFR69, NFR71  
+**Depends on:** 硬依赖 Epic 87。
+
+### Epic 91: MemRead 完整生成
+设计者获得相对 stub 的完整 MemRead emit/生成产品路径。  
+**FRs covered:** FR159  
+**NFRs:** NFR14, NFR68, NFR69, NFR71  
+**Depends on:** 硬依赖 Epic 87。
+
+### Epic 92: 非 Cargo monorepo 路径扫描
+用户/工具可在非 Cargo 全 monorepo 布局下按约定扫描任意路径。  
+**FRs covered:** FR160  
+**NFRs:** NFR14, NFR68, NFR69, NFR71  
+**Depends on:** 硬依赖 Epic 87。
+
+### Epic 93: formal-sby 镜像卫生跟踪
+维护者获得可验证的 GHA `formal-sby` 镜像版本/卫生跟踪合同。  
+**FRs covered:** FR161  
+**NFRs:** NFR14, NFR68, NFR69, NFR70, NFR71  
+**Depends on:** 硬依赖 Epic 87。
+
+### Epic 94: 更深 GUI/IDE 子集
+用户获得超出 FR134 G1–G4 的更深波形 GUI / IDE 发布或 ChiselSim 耦合子集（NFR14 钉死）。  
+**FRs covered:** FR162  
+**NFRs:** NFR14, NFR68, NFR69, NFR70, NFR71  
+**Depends on:** 硬依赖 Epic 87。
+
+### Epic 95: 未列协议手写 FL
+设计者获得至少一项超出 `UartTx` 的协议手写 FL（NFR14 钉死协议）。  
+**FRs covered:** FR163  
+**NFRs:** NFR14, NFR68, NFR69, NFR71  
+**Depends on:** 硬依赖 Epic 87。软序：若与其他 `ip/` 改动并行，在 NFR14 钉死顺序。
+
+### Epic 96: 更广 CIRCT/MLIR / 仿真门禁
+维护者获得超出 FR137 MVP 的 CIRCT/MLIR lower 或仿真门禁加深。  
+**FRs covered:** FR164  
+**NFRs:** NFR14, NFR68, NFR69, NFR70, NFR71  
+**Depends on:** 硬依赖 Epic 87。
+
+### Epic 97: 更深 Chisel/Parser 生态
+维护者获得超出 FR138 的更深 Chisel/Parser / Style Guide·linter 生态子集。  
+**FRs covered:** FR165  
+**NFRs:** NFR14, NFR68, NFR69, NFR70, NFR71  
+**Depends on:** 硬依赖 Epic 87。
+
+### Epic 98: Phase 19 宣称诚实门
+维护者更新 README / deferred / 状态页；对外宣称须引 FR154–165；不得用 Phase 18 alone 冒充。  
+**FRs covered:** FR156  
+**NFRs:** NFR14, NFR68, NFR69, NFR71, NFR72  
+**Depends on:** 硬依赖 Epic 87；建议在 Epic 88–97 关闭后收口（软序）。
+
+**实施软序：** `87 →（88 ‖ 89…97）→ 98`；硬闸门仅 Epic 87。Epic 95 与其它 `ip/` 触及面建议串行。
+
+
+## Epic 87: Phase 19 合同闸门与诚实边界
+
+维护者/用户看到「NFR59 全子集升格 + FR152(a)」已获 Correct Course + PRD 批准；Phase 12–18 关闭面不被改写；后续实现 epic 可合法开工。  
+**FRs covered:** FR154  
+**NFRs:** NFR14, NFR68, NFR69, NFR71, NFR72  
+**Depends on:** Phase 18 complete。不依赖 Epic 88–98。  
+**Gate:** Story 87.1 NFR14 未完成前，87.2–87.4 不得标 ready。**Epic 87 未关闭前，Epic 88–98 不得标 ready。**
+
+### Story 87.1: Epic 87 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 Phase 19「NFR59 全子集 + FR152(a)」填写 NFR14,
+So that 不以「1.0 / CLI 已上架」冒充 NFR59 加深与 lsp 上架已获授权。
+
+**Acceptance Criteria:**
+
+**Given** Phase 12–18 FR94–153 已关闭；README NFR59 九条仍 deferred；`docs/fr152-*` 仍为 (b)
+**When** 创建 Epic 87 风险记录
+**Then** 含：与 Phase 12–18 关闭面边界（NFR68）；FR155–165 范围摘要；批准默认（全做 FR157–165；FR155 live publish）；禁止事项（至少：FR154 未合入不得开 88–98；不得改写 FR94–153「已关闭」；不得静默扩大 FR142；不得把未写入 FR157–165 的新加深冒充已交付；`git push` 不是 FR）
+**And** 指定负责人（NFR14 / NFR68–72）
+**And** 无此记录则 87.2–87.4 不得标 ready
+
+### Story 87.2: Correct Course + PRD 批准 Phase 19（FR154）
+
+As a 产品负责人,
+I want PRD/addendum 经 Correct Course 明确批准「NFR59 全子集升格 + FR152(a)」,
+So that Phase 19 具备合同授权。
+
+**Acceptance Criteria:**
+
+**Given** Story 87.1；现 addendum 已批准至 Phase 18
+**When** 批准并落地 sprint-change-proposal（或等价）+ PRD/addendum Phase 19 段落
+**Then** 写明：Phase 19 = FR154–165；Phase 12–18 关闭仍有效；NFR59 九条全部升格；FR152(a) live publish；宣称须引对应 FR（FR156 / NFR72）
+**And** 公开品牌仍为 Bitloom / `bitloom-*`
+**And** 列出 Epic 87–98 与 FR 映射指针（可指向 `epics.md`）
+**And** `correctCoursePhase19Approved` 戳可验证
+
+### Story 87.3: 同步 README / deferred / 路线图指针（FR154）
+
+As a 文档维护者,
+I want 公开状态页区分 Phase 18 完成面与 Phase 19 加深/lsp 上架面,
+So that 对外不混淆「CLI 已上架」与「lsp/NFR59 加深」。
+
+**Acceptance Criteria:**
+
+**Given** Story 87.2 合同已批准
+**When** 更新 README「状态与 deferred」、`deferred-work.md`、（若需）Release 说明指针
+**Then** 明确 Phase 18 vs Phase 19 完成面与 FR154–165 映射
+**And** 诚实写出：在对应 FR 关闭前，不得宣称该 NFR59 条或 FR152(a) 已交付
+**And** 公开品牌 Bitloom
+
+### Story 87.4: AD 指针与 Epic 87 收口（FR154）
+
+As a 架构维护者,
+I want 脊柱/AGENTS 指针与 Epic 87 关闭勾选就绪,
+So that 后续实现 epic 有合法引用面。
+
+**Acceptance Criteria:**
+
+**Given** Story 87.3
+**When** 更新 ARCHITECTURE-SPINE / AGENTS（若需）Phase 19 指针并勾选 Epic 87 关闭
+**Then** NFR14 勾选 Epic 87 关闭
+**And** 文首/状态可声明：Epic 87 关闭后方可 ready Epic 88–98
+**And** Phase 12–18 关闭证据仍有效（NFR68）
+
+## Epic 88: 从 crates.io 安装 bitloom-lsp
+
+维护者可将 `bitloom-lsp` 以 FR152(a) 发布到 crates.io；政策文档从 (b) 改为 (a)；live publish 可勾选；不影响已关闭的 `cargo install bitloom`（FR151）。  
+**FRs covered:** FR155  
+**NFRs:** NFR14, NFR68, NFR69, NFR70, NFR72  
+**Depends on:** 硬依赖 Epic 87。  
+**Gate:** Story 88.1 NFR14 未完成前，88.2–88.4 不得标 ready。
+
+### Story 88.1: Epic 88 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR152(a) `bitloom-lsp` live publish 填写 NFR14,
+So that 上架不破坏 FR151 CLI 路径与 AD-2/AD-6。
+
+**Acceptance Criteria:**
+
+**Given** Epic 87 已关闭；FR151/FR152(b) 已关闭；`bitloom-lsp` 现 `publish=false`
+**When** 创建 Epic 88 风险记录
+**Then** 钉死：目标 version、依赖须全部 version/registry、dry-run→live 顺序、回滚/失败语义；与 FR151 边界；禁止事项（至少：不得 publish `rhdl`/`rhdl-bits`；不得静默扩大 FR142；不得在未 live 成功时宣称 crates.io 已可装 lsp）
+**And** 无此记录则 88.2–88.4 不得标 ready
+
+### Story 88.2: bitloom-lsp 可发布化与政策 (a)（FR155）
+
+As a 维护者,
+I want `bitloom-lsp` 变为可 crates.io 发布并重写 FR152 政策为 (a),
+So that live publish 具备前置条件。
+
+**Acceptance Criteria:**
+
+**Given** Story 88.1
+**When** 设置 `publish = true`、版本与依赖对齐；更新 `docs/fr152-bitloom-lsp-publish-policy.md` 为 **(a)**；必要时调整 workspace 引用
+**Then** `cargo publish -p bitloom-lsp --dry-run` 成功
+**And** 文档明确：(b) 已升格；(a) = live 上架目标；≠ LSP 产品功能加深（功能加深仍属其他 FR/NFR59 条若有）
+**And** ATDD/文档指针可验证
+**And** 不得破坏已关闭的 `cargo publish -p bitloom` / `cargo install bitloom` 路径
+
+### Story 88.3: live 发布 bitloom-lsp（FR155）
+
+As a 用户/维护者,
+I want 从 crates.io 获得已发布的 `bitloom-lsp`,
+So that FR152(a) 可公开勾选。
+
+**Acceptance Criteria:**
+
+**Given** Story 88.2 dry-run 成功
+**When** 执行 **live** `cargo publish -p bitloom-lsp`（版本与合同对齐，建议 1.0.0 或工作区对齐）
+**Then** crates.io 上可查询到该版本；安装/依赖路径文档可验证
+**And** 失败时不得勾选 FR155 关闭；须按 NFR14 回滚/重试策略处理
+**And** 公开品牌 Bitloom；禁止以 `rhdl-*` 为发布名
+
+### Story 88.4: FR155 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred 收口并勾选 Epic 88 关闭,
+So that FR152(a) 上架面可宣称。
+
+**Acceptance Criteria:**
+
+**Given** Story 88.3 live publish 成功
+**When** 更新 `docs/fr152-*` / Phase 19 指针 / deferred 并勾选 Epic 88
+**Then** NFR14 勾选 Epic 88 关闭
+**And** 明确：NFR59 各条仍属 Epic 89–97；宣称纪律属 Epic 98
+**And** 公开品牌 Bitloom
+
+## Epic 89: 自动 FSM 标签提取
+
+设计者/工具链获得可验收的自动 FSM 状态标签提取/标注产品路径。  
+**FRs covered:** FR157  
+**NFRs:** NFR14, NFR68, NFR69, NFR71  
+**Depends on:** 硬依赖 Epic 87。  
+**Gate:** Story 89.1 NFR14 未完成前，89.2–89.3 不得标 ready。
+
+### Story 89.1: Epic 89 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR157 自动 FSM 标签提取填写 NFR14,
+So that 验收子集不被静默扩大。
+
+**Acceptance Criteria:**
+
+**Given** Epic 87 已关闭；自动 FSM 标签提取原属 NFR59
+**When** 创建 Epic 89 风险记录
+**Then** 钉死：输入面（源/HIR/波形/覆盖率等）、输出形态（标签/注解/报告）、验收谓词与失败语义；与既有覆盖率/波形 FR 边界
+**And** 禁止超出钉死子集静默扩大（NFR71）
+**And** 无此记录则 89.2–89.3 不得标 ready
+
+### Story 89.2: 自动 FSM 标签提取实现与验收（FR157）
+
+As a 设计者/验证工程师,
+I want 产品路径自动提取或标注 FSM 状态标签,
+So that 无需纯手工维护标签即可验收。
+
+**Acceptance Criteria:**
+
+**Given** Story 89.1
+**When** 实现 NFR14 钉死的自动提取/标注路径并附 ATDD（或文档化手动清单 + 夹具）
+**Then** 验收谓词通过；缺输入/非法 FSM 的失败语义符合 NFR14
+**And** 不得仅文档宣称而无可运行证据
+**And** 公开品牌 Bitloom
+
+### Story 89.3: FR157 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred 收口并勾选 Epic 89 / FR157,
+So that 该 NFR59 条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 89.2
+**When** 更新 README NFR59 账本 / deferred / 产品文档指针并勾选 Epic 89
+**Then** NFR14 勾选 Epic 89 关闭
+**And** 明确：其余 FR158–165 未关前不得宣称 NFR59「全清」
+
+## Epic 90: 第三方 LCOV GUI 一等集成
+
+维护者/用户可将约定覆盖率产物接入第三方 LCOV GUI 一等路径。  
+**FRs covered:** FR158  
+**NFRs:** NFR14, NFR68, NFR69, NFR71  
+**Depends on:** 硬依赖 Epic 87。  
+**Gate:** Story 90.1 NFR14 未完成前，90.2–90.3 不得标 ready。
+
+### Story 90.1: Epic 90 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR158 第三方 LCOV GUI 一等集成填写 NFR14,
+So that 工具/版本/缺工具语义事先钉死。
+
+**Acceptance Criteria:**
+
+**Given** Epic 87 已关闭；既有 LCOV/覆盖率路径（如 FR114）已关闭
+**When** 创建 Epic 90 风险记录
+**Then** 钉死：第三方 GUI 名称/版本或契约、输入产物格式、一等集成形状、缺工具失败语义；与 FR114 / 树内 GUI 边界
+**And** 无此记录则 90.2–90.3 不得标 ready
+
+### Story 90.2: LCOV GUI 一等集成实现与验收（FR158）
+
+As a 验证工程师,
+I want 覆盖率产物可经一等路径打开或导入约定第三方 LCOV GUI,
+So that 不必依赖临时脚本冒充产品面。
+
+**Acceptance Criteria:**
+
+**Given** Story 90.1
+**When** 实现集成路径并附 ATDD 或文档化手动清单
+**Then** 验收谓词通过；缺工具行为符合 NFR14
+**And** 不得把「仅导出 LCOV 文件」alone 冒充本 FR（除非 NFR14 明确将该 GUI 打开步骤列为必验）
+
+### Story 90.3: FR158 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred 收口并勾选 Epic 90 / FR158,
+So that 该条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 90.2
+**When** 更新 README / deferred / 文档指针并勾选 Epic 90
+**Then** NFR14 勾选 Epic 90 关闭
+**And** 明确其余 NFR59 升格 FR 状态
+
+## Epic 91: MemRead 完整生成
+
+设计者获得相对 stub 的完整 MemRead emit/生成产品路径。  
+**FRs covered:** FR159  
+**NFRs:** NFR14, NFR68, NFR69, NFR71  
+**Depends on:** 硬依赖 Epic 87。  
+**Gate:** Story 91.1 NFR14 未完成前，91.2–91.3 不得标 ready。
+
+### Story 91.1: Epic 91 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR159 MemRead stub→完整生成填写 NFR14,
+So that 「完整」边界相对既有 stub 合同可验收。
+
+**Acceptance Criteria:**
+
+**Given** Epic 87 已关闭；现存在 MemRead stub/半成品路径
+**When** 创建 Epic 91 风险记录
+**Then** 钉死：相对 stub 的缺口清单、目标 emit/生成形状、黄金/ATDD 谓词、失败语义；禁止把 stub alone 勾选为本 FR
+**And** 无此记录则 91.2–91.3 不得标 ready
+
+### Story 91.2: MemRead 完整生成实现与验收（FR159）
+
+As a 设计者,
+I want MemRead 路径完整生成而非 stub,
+So that 仿真/综合消费者不再依赖半成品占位。
+
+**Acceptance Criteria:**
+
+**Given** Story 91.1
+**When** 实现完整生成路径并附 ATDD/黄金
+**Then** NFR14 钉死的缺口全部关闭；验收谓词通过
+**And** 文档标明相对 stub 的加深边界
+
+### Story 91.3: FR159 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred 收口并勾选 Epic 91 / FR159,
+So that 该条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 91.2
+**When** 更新 README / deferred / 文档指针并勾选 Epic 91
+**Then** NFR14 勾选 Epic 91 关闭
+
+## Epic 92: 非 Cargo monorepo 路径扫描
+
+用户/工具可在非 Cargo 全 monorepo 布局下按约定扫描任意路径。  
+**FRs covered:** FR160  
+**NFRs:** NFR14, NFR68, NFR69, NFR71  
+**Depends on:** 硬依赖 Epic 87。  
+**Gate:** Story 92.1 NFR14 未完成前，92.2–92.3 不得标 ready。
+
+### Story 92.1: Epic 92 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR160 非 Cargo monorepo 任意路径扫描填写 NFR14,
+So that 不与 FR118 Cargo-graph 合同混淆。
+
+**Acceptance Criteria:**
+
+**Given** Epic 87 已关闭；FR118 / FR113 等 Cargo 扫描面已关闭
+**When** 创建 Epic 92 风险记录
+**Then** 钉死：支持的布局形状、入口 API/CLI/LSP 行为、权限/失败语义、与 FR118 边界
+**And** 无此记录则 92.2–92.3 不得标 ready
+
+### Story 92.2: 非 Cargo 路径扫描实现与验收（FR160）
+
+As a 用户/工具集成者,
+I want 在非 Cargo monorepo 下扫描约定路径,
+So that 全仓设计发现不依赖 Cargo metadata alone。
+
+**Acceptance Criteria:**
+
+**Given** Story 92.1
+**When** 实现扫描路径并附 ATDD（含至少一种非 Cargo 布局夹具）
+**Then** 验收谓词通过；非法路径/权限失败语义符合 NFR14
+**And** 不得把 FR118 alone 勾选为本 FR
+
+### Story 92.3: FR160 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred 收口并勾选 Epic 92 / FR160,
+So that 该条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 92.2
+**When** 更新 README / deferred / 文档指针并勾选 Epic 92
+**Then** NFR14 勾选 Epic 92 关闭
+
+## Epic 93: formal-sby 镜像卫生跟踪
+
+维护者获得可验证的 GHA `formal-sby` 镜像版本/卫生跟踪合同。  
+**FRs covered:** FR161  
+**NFRs:** NFR14, NFR68, NFR69, NFR70, NFR71  
+**Depends on:** 硬依赖 Epic 87。  
+**Gate:** Story 93.1 NFR14 未完成前，93.2–93.3 不得标 ready。
+
+### Story 93.1: Epic 93 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR161 GHA formal-sby 镜像卫生填写 NFR14,
+So that 版本钉死与过期/缺镜像策略可验收。
+
+**Acceptance Criteria:**
+
+**Given** Epic 87 已关闭；既有 `formal-sby` / FR127 相关 CI 仍有效
+**When** 创建 Epic 93 风险记录
+**Then** 钉死：镜像来源/标签策略、更新跟踪面（文档/脚本/CI）、卫生检查谓词、缺镜像失败语义；与 FR127 边界
+**And** 无此记录则 93.2–93.3 不得标 ready
+
+### Story 93.2: formal-sby 镜像卫生实现与验收（FR161）
+
+As a 维护者,
+I want CI/`formal-sby` 镜像版本与卫生可跟踪、可验证,
+So that 形式验证门禁不依赖无记录的临时镜像。
+
+**Acceptance Criteria:**
+
+**Given** Story 93.1
+**When** 落地跟踪机制（文档 + CI/脚本断言）并附 ATDD 或可重复检查
+**Then** 验收谓词通过；缺镜像/过期行为符合 NFR14
+**And** 不得改写既有 FR127「已关闭」为失败（NFR68）
+
+### Story 93.3: FR161 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred 收口并勾选 Epic 93 / FR161,
+So that 该条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 93.2
+**When** 更新 README / deferred / CI 文档指针并勾选 Epic 93
+**Then** NFR14 勾选 Epic 93 关闭
+
+## Epic 94: 更深 GUI/IDE 子集
+
+用户获得超出 FR134 G1–G4 的更深波形 GUI / IDE 发布或 ChiselSim 耦合子集（NFR14 钉死）。  
+**FRs covered:** FR162  
+**NFRs:** NFR14, NFR68, NFR69, NFR70, NFR71  
+**Depends on:** 硬依赖 Epic 87。  
+**Gate:** Story 94.1 NFR14 未完成前，94.2–94.3 不得标 ready。
+
+### Story 94.1: Epic 94 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR162 更深 GUI/IDE 子集填写 NFR14,
+So that 明确 ≠ FR134 G1–G4 alone。
+
+**Acceptance Criteria:**
+
+**Given** Epic 87 已关闭；FR134 G1–G4 已关闭
+**When** 创建 Epic 94 风险记录
+**Then** 钉死本批子集（至少一类：替换默认 VCD/`typed-wave.html` 唯一波形面；完整 ChiselSim 耦合；G1 外额外 IDE 商店多端发布）、验收谓词、商店/上游版本契约、失败语义
+**And** 禁止把 FR134 alone 勾选为本 FR
+**And** 无此记录则 94.2–94.3 不得标 ready
+
+### Story 94.2: 更深 GUI/IDE 实现与验收（FR162）
+
+As a 调试/验证工程师,
+I want 使用超出 FR134 的更深 GUI/IDE 产品路径,
+So that 默认波形面或 IDE 分发不再是唯一完成口径。
+
+**Acceptance Criteria:**
+
+**Given** Story 94.1
+**When** 实现钉死子集并附 ATDD 或文档化手动清单
+**Then** 验收谓词通过；与 FR134 边界在文档中显式对照
+**And** 触及 IDE 商店时遵守 NFR70
+
+### Story 94.3: FR162 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred 收口并勾选 Epic 94 / FR162,
+So that 该条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 94.2
+**When** 更新 README / deferred / 文档指针并勾选 Epic 94
+**Then** NFR14 勾选 Epic 94 关闭
+**And** 明确：未选入本 epic NFR14 的更深 GUI 项仍须另开合同（NFR71）
+
+## Epic 95: 未列协议手写 FL
+
+设计者获得至少一项超出 `UartTx` 的协议手写 FL（NFR14 钉死协议）。  
+**FRs covered:** FR163  
+**NFRs:** NFR14, NFR68, NFR69, NFR71  
+**Depends on:** 硬依赖 Epic 87。  
+**Gate:** Story 95.1 NFR14 未完成前，95.2–95.3 不得标 ready。  
+**软序：** 若与其他 `ip/` 改动并行，先完成本 epic 或在 NFR14 钉死互斥序。
+
+### Story 95.1: Epic 95 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR163 未列协议手写 FL 填写 NFR14,
+So that 明确 ≠ FR135 `UartTx` alone。
+
+**Acceptance Criteria:**
+
+**Given** Epic 87 已关闭；FR135 / FR126 已关闭
+**When** 创建 Epic 95 风险记录
+**Then** 钉死：本批至少一个协议（如 `UartRx` / SPI / I2C / AXI 等）、双模型/FL 验收谓词、与 `ip/` 布局边界、软序
+**And** 禁止把 FR135 alone 勾选为本 FR
+**And** 无此记录则 95.2–95.3 不得标 ready
+
+### Story 95.2: 未列协议手写 FL 实现与验收（FR163）
+
+As a 设计者,
+I want 至少一项超出 UartTx 的协议具备手写 FL / 双模型验收,
+So that IP 诚实面覆盖更多协议。
+
+**Acceptance Criteria:**
+
+**Given** Story 95.1
+**When** 实现钉死协议的 FL/对照路径并附 ATDD
+**Then** 验收谓词通过；设计 crate 仍只依赖 `bitloom-prelude`（除非另开合同）
+**And** FR126 Gpio 关闭证据仍有效（NFR68）
+
+### Story 95.3: FR163 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred / IP README 收口并勾选 Epic 95 / FR163,
+So that 该条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 95.2
+**When** 更新 README NFR59 账本 / `docs/ip/` / deferred 并勾选 Epic 95
+**Then** NFR14 勾选 Epic 95 关闭
+**And** 未纳入本批的其它协议仍须另开合同（NFR71）
+
+## Epic 96: 更广 CIRCT/MLIR / 仿真门禁
+
+维护者获得超出 FR137 MVP 的 CIRCT/MLIR lower 或仿真门禁加深。  
+**FRs covered:** FR164  
+**NFRs:** NFR14, NFR68, NFR69, NFR70, NFR71  
+**Depends on:** 硬依赖 Epic 87。  
+**Gate:** Story 96.1 NFR14 未完成前，96.2–96.3 不得标 ready。
+
+### Story 96.1: Epic 96 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR164 更广 CIRCT/MLIR / 仿真门禁填写 NFR14,
+So that 明确 ≠ FR137 MVP alone。
+
+**Acceptance Criteria:**
+
+**Given** Epic 87 已关闭；FR137 / FR129 已关闭
+**When** 创建 Epic 96 风险记录
+**Then** 钉死：本批加深形状（更广 lower 与/或仿真门禁）、工具版本、缺工具失败语义、与 FR137/FR129 边界；触及 AD-25 时列修订计划（NFR70）
+**And** 无此记录则 96.2–96.3 不得标 ready
+
+### Story 96.2: CIRCT/MLIR / 仿真门禁加深实现与验收（FR164）
+
+As a 维护者,
+I want 超出 FR137 MVP 的 CIRCT/MLIR 或仿真门禁产品路径,
+So that 外部工具链加深可勾选。
+
+**Acceptance Criteria:**
+
+**Given** Story 96.1
+**When** 实现钉死加深并附 ATDD/CI 门禁证据
+**Then** 验收谓词通过；FR137/FR129 关闭证据不被改写为失败（NFR68）
+**And** 若修订 AD，须在标 ready 前落入脊柱（NFR70）
+
+### Story 96.3: FR164 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred / 脊柱指针收口并勾选 Epic 96 / FR164,
+So that 该条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 96.2
+**When** 更新 README / deferred / ARCHITECTURE-SPINE（若需）并勾选 Epic 96
+**Then** NFR14 勾选 Epic 96 关闭
+
+## Epic 97: 更深 Chisel/Parser 生态
+
+维护者获得超出 FR138 的更深 Chisel/Parser / Style Guide·linter 生态子集。  
+**FRs covered:** FR165  
+**NFRs:** NFR14, NFR68, NFR69, NFR70, NFR71  
+**Depends on:** 硬依赖 Epic 87。  
+**Gate:** Story 97.1 NFR14 未完成前，97.2–97.3 不得标 ready。
+
+### Story 97.1: Epic 97 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR165 更深 Chisel/Parser 生态填写 NFR14,
+So that 明确 ≠ FR138 P1–P4 alone。
+
+**Acceptance Criteria:**
+
+**Given** Epic 87 已关闭；FR138 / FR130 已关闭
+**When** 创建 Epic 97 风险记录
+**Then** 钉死：本批子集（如 Style Guide/linter 全家桶、任意 Chisel HEAD Parser 回迁等）、验收谓词、与 FR138/FR130 边界；触及 AD-27 时列修订计划（NFR70）
+**And** 无此记录则 97.2–97.3 不得标 ready
+
+### Story 97.2: 更深 Chisel/Parser 生态实现与验收（FR165）
+
+As a 维护者/Chisel 消费者,
+I want 超出 FR138 的更深生态路径,
+So that Style Guide/Parser 加深可勾选。
+
+**Acceptance Criteria:**
+
+**Given** Story 97.1
+**When** 实现钉死子集并附 ATDD/文档证据
+**Then** 验收谓词通过；FR138/FR130 关闭证据仍有效（NFR68）
+**And** 若修订 AD-27，须在标 ready 前落入脊柱（NFR70）
+
+### Story 97.3: FR165 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred / 脊柱指针收口并勾选 Epic 97 / FR165,
+So that 该条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 97.2
+**When** 更新 README / deferred / ARCHITECTURE-SPINE（若需）并勾选 Epic 97
+**Then** NFR14 勾选 Epic 97 关闭
+**And** 未纳入本批 NFR14 的更深生态项仍须另开合同（NFR71）
+
+## Epic 98: Phase 19 宣称诚实门
+
+维护者更新 README / deferred / 状态页；对外宣称须引 FR154–165；不得用 Phase 18 alone 冒充。  
+**FRs covered:** FR156  
+**NFRs:** NFR14, NFR68, NFR69, NFR71, NFR72  
+**Depends on:** 硬依赖 Epic 87；建议在 Epic 88–97 关闭后收口（软序）。  
+**Gate:** Story 98.1 NFR14 未完成前，98.2–98.3 不得标 ready。
+
+### Story 98.1: Epic 98 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR156 宣称诚实门填写 NFR14,
+So that 文档不误报 lsp/NFR59 完成面。
+
+**Acceptance Criteria:**
+
+**Given** Epic 87 已关闭；建议 Epic 88–97 已关闭或在记录中列出未关项的诚实措辞
+**When** 创建 Epic 98 风险记录
+**Then** 含：FR156 范围；禁止事项（至少：不得用 Phase 18 alone 宣称 lsp/NFR59；不得在未关 FR 上勾选「已交付」；不得静默扩大 FR142；不得暗示超出 FR157–165 钉死子集的加深已清）
+**And** 无此记录则 98.2–98.3 不得标 ready
+
+### Story 98.2: README / deferred / 状态页诚实更新（FR156）
+
+As a 维护者,
+I want 公开状态页按已关 FR 诚实宣称 Phase 19,
+So that 对外口径可审计。
+
+**Acceptance Criteria:**
+
+**Given** Story 98.1
+**When** 更新 README「状态与 deferred」、`deferred-work.md`、epics/sprint 状态指针
+**Then** 每条已关 FR154–165 有对应宣称指针；未关项仍标记未交付
+**And** 明确：`bitloom-lsp` 上架须引 FR155；NFR59 各条须引 FR157–165
+**And** 公开品牌 Bitloom
+
+### Story 98.3: FR156 收口与 Phase 19 故事清单指针
+
+As a 文档维护者,
+I want 勾选 Epic 98 / FR156 并声明 Phase 19 规划故事齐套,
+So that 实现与宣称收口可衔接。
+
+**Acceptance Criteria:**
+
+**Given** Story 98.2
+**When** 更新状态页/deferred 并勾选 Epic 98 / FR156
+**Then** NFR14 勾选 Epic 98 关闭
+**And** 文首/状态页可声明：Phase 19 规划故事已齐（Epic 87–98）；宣称须引 FR154–165（FR156）
+**And** 明确：超出本批 NFR14 钉死子集的加深仍须新合同（NFR71）

@@ -53,6 +53,14 @@ Correct Course `sprint-change-proposal-2026-09-11-phase18-cli-crates-io-publish.
 Phase 12–17 关闭证据**仍有效**。NFR59 仍 deferred（**NFR67**）；CLI 上架 ≠ 清空 NFR59；更深加深须新合同。Q1–Q5：rename→`bitloom-firrtl`/`bitloom-viz`；FR152(b)；不以 NFR59 为前提；保持 MSRV。公开品牌 **Bitloom**。库 crate 与 CLI 均已 **1.0.0** 上架；SemVer 门禁对 ≥1.0.0 默认 **minor**。
 README「状态与 deferred」同源（Story 84.3 / 86.3）。
 
+## Phase 19 pointer (FR154–165 / NFR68–NFR72) — NFR59 全子集升格 + FR152(a)
+
+Correct Course `sprint-change-proposal-2026-09-12-phase19-nfr59-fr152a.md` + PRD addendum「Phase 19」**已批准**（**Phase 19 contract approved** 2026-09-12；`correctCoursePhase19Approved: 2026-09-12`）。
+闸门 **FR154 / Epic 87**（未关闭前 Epic 88–98 不得 ready）。实现：Epic 88 **FR155** lsp (a) live publish；Epic 89–97 **FR157–165**（NFR59 九条）；Epic 98 **FR156** 宣称。
+**Phase 19 规划故事已齐（Epic 87–98 backlog）。** 宣称须引 **FR154–165**。软序 **87 →（88 ‖ 89…97）→ 98**。
+Phase 12–18 关闭证据**仍有效**（**NFR68**）。Q1–Q5：NFR59 全做；FR152(a) live；不回滚 12–18；不静默扩 FR142；保持 MSRV。公开品牌 **Bitloom**。`git push` 非 FR。
+README「状态与 deferred」完整同步属 Story **87.3** / **98.x**。
+
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
 **历史（Phase 11）：** 曾公开锁定下列五项，并写「须新 PRD 才能推翻」。
