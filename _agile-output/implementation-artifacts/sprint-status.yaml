@@ -625,14 +625,14 @@ development_status:
   88-4-fr155-收口与文档指针: done
   epic-88-retrospective: optional
 
-  epic-89: in-progress
+  epic-89: done
   89-1-epic-89-nfr14-风险记录: done
   89-2-自动-fsm-标签提取实现与验收-fr157: done
-  89-3-fr157-收口与文档指针: ready-for-dev
+  89-3-fr157-收口与文档指针: done
   epic-89-retrospective: optional
 
-  epic-90: backlog
-  90-1-epic-90-nfr14-风险记录: backlog
+  epic-90: in-progress
+  90-1-epic-90-nfr14-风险记录: ready-for-dev
   90-2-lcov-gui-一等集成实现与验收-fr158: backlog
   90-3-fr158-收口与文档指针: backlog
   epic-90-retrospective: optional

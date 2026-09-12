@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR157 / Epic 89；NFR14、NFR68、NFR69、NFR71、NFR72；对照 FR109 / FR105 / FR114 / FR154 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 89.1；Epic 89 未关闭 |
+| 状态 | closed — Story 89.3 勾选完成；Epic 89 关闭；FR157 实现面可宣称；**FR158–165 / FR156** 仍属 Epic 90–98；**不得**宣称 NFR59「全清」 |
 | **选定** | 在保留 Phase 12–18 与 FR109 关闭面的前提下，授权 **MVP：从设计源上的显式 FSM 标注自动提取状态标签集**，并可接入既有 `register_fsm_states` / FR109 覆盖率路径 |
 
 ### Phase 12–18 / FR109 关闭面 vs Epic 89 实现边界（NFR68 · 必读）
@@ -84,8 +84,8 @@
 
 ### Epic 89 关闭条件（Story 89.3 勾选）
 
-- [ ] **FR157 钉死子集实现 + ATDD** — Story 89.2
-- [ ] **文档 / deferred / README 收口** — Story 89.3
-- [ ] **NFR68/71/72：** 边界与诚实义务保持
-- [ ] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
-- [ ] **其余 FR158–165：** 未关前不得宣称 NFR59 全清
+- [x] **FR157 钉死子集实现 + ATDD** — Story 89.2
+- [x] **文档 / deferred / README 收口** — Story 89.3
+- [x] **NFR68/71/72：** 边界与诚实义务保持
+- [x] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **其余 FR158–165：** 未关前不得宣称 NFR59 全清

@@ -1,8 +1,8 @@
 # FR157 — Automatic FSM state-label extraction
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.  
-**Status:** Epic 89 / Story **89.2** (implementation). Closeout → Story **89.3**.  
-**NFR14:** `_agile-output/implementation-artifacts/nfr14-risk-epic89-auto-fsm-labels-fr157.md`.
+**Status:** **Epic 89 / FR157 closed** (Story **89.3**). Implementation Story **89.2**.  
+**NFR14:** `_agile-output/implementation-artifacts/nfr14-risk-epic89-auto-fsm-labels-fr157.md` (closed).
 
 ## Contract (MVP)
 
