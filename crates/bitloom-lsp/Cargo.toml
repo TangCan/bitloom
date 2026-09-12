@@ -5,10 +5,13 @@ edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 description = "Bitloom language-server (FR99/FR113/FR118). Stdio LSP; didSave full-design elaborate; Cargo metadata + #[bitloom::top] syn-scan design-root discovery. Unrelated to samitbasu/rhdl."
-publish = false
+publish = true
 authors = ["Bitloom contributors"]
 keywords = ["hdl", "rtl", "lsp", "bitloom"]
 categories = ["development-tools"]
+repository = "https://github.com/TangCan/bitloom"
+homepage = "https://github.com/TangCan/bitloom"
+documentation = "https://docs.rs/bitloom-lsp"
 
 [lib]
 name = "bitloom_lsp"
