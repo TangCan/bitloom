@@ -62,6 +62,14 @@ Correct Course `sprint-change-proposal-2026-09-12-phase19-nfr59-fr152a.md` + PRD
 Phase 12–18 关闭证据**仍有效**（**NFR68**）。公开品牌 **Bitloom**。`git push` 非 FR。
 README「状态与 deferred」同源（Story **87.3** / **88.4** / **89.3** / **90.3** / **91.3** / **92.3** / **93.3**；宣称收口 → **98.x**）。
 
+## Phase 20 pointer (FR166–171 / NFR73–NFR77) — NFR71 四条升格
+
+Correct Course `sprint-change-proposal-2026-09-12-phase20-nfr71-four-leftovers.md` + PRD addendum「Phase 20」**已批准**（**Phase 20 contract approved** 2026-09-12；`correctCoursePhase20Approved: 2026-09-12`）。
+闸门 **FR166 / Epic 99**（进行中 — Story 99.1–99.2 done；**未关闭前 Epic 100–104 不得 ready**）。
+映射：**FR167** Epic 100（ChiselSim / 多端 IDE 商店）；**FR168** Epic 101（SPI+I2C+AXI 手写 FL）；**FR169** Epic 102（CIRCT/MLIR / firtool 升钉）；**FR170** Epic 103（HEAD Parser）；**FR171** Epic 104（宣称诚实）。
+**诚实：** Phase 19 关闭证据**仍有效**（**NFR73**）；不得用 Phase 19 alone 冒充本批四条；未关闭前不得宣称 FR167–170 已交付；超出各 NFR14 钉死子集仍须新合同（**NFR76**）；宣称须引 **FR166–171**（**FR171** / **NFR77**）。公开品牌 **Bitloom**。`git push` 非 FR。
+README「状态与 deferred」同源（Story **99.3**；AD 指针 → **99.4**；宣称收口 → **104.x**）。
+
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
 **历史（Phase 11）：** 曾公开锁定下列五项，并写「须新 PRD 才能推翻」。

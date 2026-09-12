@@ -688,8 +688,8 @@ development_status:
   epic-99: in-progress
   99-1-epic-99-nfr14-风险记录: done
   99-2-correct-course-prd-批准-phase-20-fr166: done
-  99-3-同步-readme-deferred-路线图指针-fr166: ready-for-dev
-  99-4-ad-指针与-epic-99-收口-fr166: backlog
+  99-3-同步-readme-deferred-路线图指针-fr166: done
+  99-4-ad-指针与-epic-99-收口-fr166: ready-for-dev
   epic-99-retrospective: optional
 
   epic-100: backlog
