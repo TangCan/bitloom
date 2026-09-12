@@ -692,9 +692,9 @@ development_status:
   99-4-ad-指针与-epic-99-收口-fr166: done
   epic-99-retrospective: optional
 
-  epic-100: backlog
-  100-1-epic-100-nfr14-风险记录: ready-for-dev
-  100-2-chiselsim-与多端-ide-商店实现与验收-fr167: backlog
+  epic-100: in-progress
+  100-1-epic-100-nfr14-风险记录: done
+  100-2-chiselsim-与多端-ide-商店实现与验收-fr167: ready-for-dev
   100-3-fr167-收口与文档指针: backlog
   epic-100-retrospective: optional
 
