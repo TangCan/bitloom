@@ -56,7 +56,7 @@ README「状态与 deferred」同源（Story 84.3 / 86.3）。
 ## Phase 19 pointer (FR154–165 / NFR68–NFR72) — NFR59 全子集升格 + FR152(a)
 
 Correct Course `sprint-change-proposal-2026-09-12-phase19-nfr59-fr152a.md` + PRD addendum「Phase 19」**已批准**（**Phase 19 contract approved** 2026-09-12；`correctCoursePhase19Approved: 2026-09-12`）。
-闸门 **FR154 / Epic 87**（**已关闭** / Story 87.4）。**Epic 88–97** deepen（FR155 / FR157–165）**已关闭**（含 **Epic 89 / FR157** / Story **89.3**；**Epic 90 / FR158** / Story **90.3**；**Epic 97 / FR165** / Story **97.3**）。**Epic 98 / FR156**（**已关闭** / Story 98.3；[`docs/fr156-phase19-claim-honesty.md`](../../docs/fr156-phase19-claim-honesty.md)）。
+闸门 **FR154 / Epic 87**（**已关闭** / Story 87.4）。**Epic 88–97** deepen **已关闭**：**Epic 88 / FR155**（Story **88.4**）；**Epic 89 / FR157**（Story **89.3**）；**Epic 90 / FR158**（Story **90.3**）；**Epic 91 / FR159**（Story **91.3**）；**Epic 92 / FR160**（Story **92.3**）；**Epic 93 / FR161**（Story **93.3**）；**Epic 94 / FR162**（Story **94.3**）；**Epic 95 / FR163**（Story **95.3**）；**Epic 96 / FR164**（Story **96.3**）；**Epic 97 / FR165**（Story **97.3**）。**Epic 98 / FR156**（**已关闭** / Story 98.3；[`docs/fr156-phase19-claim-honesty.md`](../../docs/fr156-phase19-claim-honesty.md)）。
 **Phase 19 规划故事已齐（Epic 87–98）；实现故事已关。** 宣称须引 **FR154–FR165**（**FR156**）。
 **诚实：** Phase 19 关闭 ≠ NFR71 账本已空 / **不得**宣称 NFR59 **全清**；超出各 epic NFR14 钉死子集的加深仍须新合同；**禁止** Phase 18 alone 冒充 lsp/NFR59（**NFR72**）；**不得宣称**超出已关 FR 的完成面。
 Phase 12–18 关闭证据**仍有效**（**NFR68**）。公开品牌 **Bitloom**。`git push` 非 FR。

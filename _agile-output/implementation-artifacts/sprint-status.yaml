@@ -704,9 +704,9 @@ development_status:
   101-3-fr168-收口与文档指针: backlog
   epic-101-retrospective: optional
 
-  epic-102: backlog
-  102-1-epic-102-nfr14-风险记录: ready-for-dev
-  102-2-circt-mlir-allocation-与或-firtool-升钉实现与验收-fr169: backlog
+  epic-102: in-progress
+  102-1-epic-102-nfr14-风险记录: done
+  102-2-circt-mlir-allocation-与或-firtool-升钉实现与验收-fr169: ready-for-dev
   102-3-fr169-收口与文档指针: backlog
   epic-102-retrospective: optional
 
