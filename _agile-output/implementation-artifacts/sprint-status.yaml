@@ -712,8 +712,8 @@ development_status:
 
   epic-103: in-progress
   103-1-epic-103-nfr14-风险记录: done
-  103-2-chisel-head-parser-回迁实现与验收-fr170: ready-for-dev
-  103-3-fr170-收口与文档指针: backlog
+  103-2-chisel-head-parser-回迁实现与验收-fr170: done
+  103-3-fr170-收口与文档指针: ready-for-dev
   epic-103-retrospective: optional
 
   epic-104: backlog

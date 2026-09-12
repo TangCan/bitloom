@@ -4,7 +4,7 @@
 
 **Status:** **Epic 97 / FR165 closed** (Story **97.3**). Product path delivered in Story **97.2** (Style Guide / linter deepen beyond FR130).
 
-NFR14 selected **Style Guide / linter deepen**; **arbitrary Chisel HEAD Parser migration deferred** (**NFR71**).
+NFR14 selected **Style Guide / linter deepen**; **arbitrary Chisel HEAD Parser migration deferred for this FR** (**NFR71** → Phase 20 **FR170** / Epic 103 — [`docs/fr170-chisel-head-parser.md`](fr170-chisel-head-parser.md)；unpaired CIRCT HEAD / firtool bump still **NFR76**).
 
 **≠ FR138 alone** (`BitloomFirrtlParser.parse` P1–P4 still valid). **≠ FR130 alone** (S1–S4 Style Guide markers still valid; NFR68). **AD-27 not revised** this batch (**NFR70**).
 
@@ -36,7 +36,7 @@ BITLOOM_STYLE_LINT_FORCE_MISSING=1 just chisel-style-lint-check   # expect non-z
 
 ## Forbidden closes
 
-≠ FR138 P1–P4 alone; ≠ FR130 S1–S4 alone; ≠ FR122 alone; ≠ docs-only; ≠ Chisel HEAD Parser migration (deferred).
+≠ FR138 P1–P4 alone; ≠ FR130 S1–S4 alone; ≠ FR122 alone; ≠ docs-only; ≠ Chisel HEAD Parser migration (deferred for FR165 → **FR170**).
 
 ## Non-regression (NFR68)
 

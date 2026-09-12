@@ -117,6 +117,21 @@ jobs:
       - name: Required FR169 circt-external-alloc-check
         run: bash scripts/circt-external-alloc-check.sh
 
+  # FR170: required Chisel update-mainline / HEAD Parser migration gate (beyond FR138).
+  # Same path as `just parser-head-migration-check`. Failures are never ignored.
+  parser-head-migration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.97.1"
+      - name: Ensure pinned firtool-1.155.0 (AD-9)
+        run: cargo run -p bitloom -- firtool ensure
+      - name: Required FR170 parser-head-migration-check
+        run: bash scripts/parser-head-migration-check.sh
+
   # FR144 / NFR62: required surface-crate SemVer gate (cargo-semver-checks).
   # Same path as `just semver-check`. Failures are never ignored; missing tool fails the job.
   semver-check:

@@ -4,7 +4,7 @@
 
 **Status:** **Epic 77 / FR138 closed** (Story **77.3**). Product path + **AD-27 revise** delivered in Story **77.2** (P1–P4).
 
-Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72–78 全部已关闭**（含本 FR / Epic 77）。FR130 Style Guide S1–S4 **仍有效**（NFR56）and is **not** this face alone（Style Guide alone ≠ FR138）。未列更深 Chisel/Parser 生态（社区 Style Guide/linter 全家桶、任意 Chisel HEAD Parser 回迁等）仍属 **NFR59** 升格面 → **FR165 / Epic 97**（NFR14 选定 Style Guide/linter 加深；HEAD Parser 仍 **NFR71**）。≠ FR138 alone。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
+Phase 16 **规划故事已齐（Epic 72–78）**；实现关闭态：**Epic 72–78 全部已关闭**（含本 FR / Epic 77）。FR130 Style Guide S1–S4 **仍有效**（NFR56）and is **not** this face alone（Style Guide alone ≠ FR138）。未列更深 Chisel/Parser 生态（社区 Style Guide/linter 全家桶、任意 Chisel HEAD Parser 回迁等）仍属 **NFR59** 升格面 → **FR165 / Epic 97**（NFR14 选定 Style Guide/linter 加深；HEAD Parser → **FR170** / Epic 103）。≠ FR138 alone。终局宣称须对应 **FR133–139** 关闭后方可勾选（**FR140**）。
 
 ## Product-equivalent API (P1)
 

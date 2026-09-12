@@ -25,7 +25,9 @@ fn fr169_readme_marks_fr169_closed() {
     assert!(
         readme.contains("FR169")
             && (readme.contains("已关闭") || readme.contains("Epic 102"))
-            && (readme.contains("fr169") || readme.contains("multi-lower") || readme.contains("allocation")),
+            && (readme.contains("fr169")
+                || readme.contains("multi-lower")
+                || readme.contains("allocation")),
         "README must mark FR169 / Epic 102 closed"
     );
     assert!(

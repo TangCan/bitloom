@@ -57,6 +57,10 @@ circt-external-alloc-check:
 parser-restore-check:
 	bash scripts/parser-restore-check.sh
 
+# FR170: Chisel update-mainline / HEAD Parser migration (beyond FR138; AD-27 revise; AD-9 pin unchanged).
+parser-head-migration-check:
+	bash scripts/parser-head-migration-check.sh
+
 # FR165: Style Guide / linter deepen beyond FR130 (≠ FR138 alone; no Chisel HEAD Parser).
 chisel-style-lint-check:
 	bash scripts/chisel-style-lint-check.sh
