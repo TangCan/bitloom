@@ -83,10 +83,10 @@ Correct Course `sprint-change-proposal-2026-09-12-phase21-nfr76-leftovers.md` + 
 **Epic 107 / FR174**（**已关闭** / Story **107.3**；[`docs/fr174-unpaired-head.md`](../../docs/fr174-unpaired-head.md)）— unpaired firtool-1.156.0 主线渠道（≠ FR170 alone；≠ AD-9 产品钉）。
 **Epic 108 / FR175**（**已关闭** / Story **108.3**；[`docs/fr175-broader-circt-mlir-sim.md`](../../docs/fr175-broader-circt-mlir-sim.md)）— `--ir-sv` + `--ir-verilog`（超 FR169 NFR14）。
 **Epic 109 / FR176**（**已关闭** / Story **109.3**；[`docs/fr176-deeper-parser-chisel-ecosystem.md`](../../docs/fr176-deeper-parser-chisel-ecosystem.md)）— 组合 Style Guide + update-mainline 生态加深（超 FR170/FR165 alone）。
-**Epic 110 / FR177** — Phase 21 宣称诚实门（[`docs/fr177-phase21-claim-honesty.md`](../../docs/fr177-phase21-claim-honesty.md)；Story **110.2** 诚实面；收口 Story **110.3**；软序在 106–109 之后）。
+**Epic 110 / FR177**（**已关闭** / Story **110.3**；[`docs/fr177-phase21-claim-honesty.md`](../../docs/fr177-phase21-claim-honesty.md)）— Phase 21 宣称诚实门；Phase 21 规划故事已齐（Epic 105–110）。
 **Phase 21 规划故事已齐（Epic 105–110）**；触 AD-9 / AD-27 / firtool·HEAD 须按 **NFR80** 先修订再 story ready。宣称须引 **FR172–FR177**（**FR177** / **NFR82**）。
 **诚实：** Phase 12–20 关闭证据**仍有效**（**NFR78**）；不得用 Phase 20 alone 冒充本批四条；超出各 NFR14 钉死子集仍须新合同（**NFR81**）。公开品牌 **Bitloom**。`git push` 非 FR。
-README「状态与 deferred」同源（Story **105.3** / **105.4** / **106.3** / **107.3** / **108.3** / **109.3** / **110.2**）。宣称须引 **FR172–177**（**FR177** / **NFR82**）；**不得**用 Phase 20 alone 冒充；**不得**宣称「NFR76 账本已空」。
+README「状态与 deferred」同源（Story **105.3** / **105.4** / **106.3** / **107.3** / **108.3** / **109.3** / **110.2** / **110.3**）。宣称须引 **FR172–177**（**FR177** / **NFR82**）；**不得**用 Phase 20 alone 冒充；**不得**宣称「NFR76 账本已空」；超出 NFR14 仍 **NFR81**。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 

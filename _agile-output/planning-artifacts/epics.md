@@ -149,6 +149,7 @@ phase21Epic108Status: complete
 phase21Epic109Stories: 3
 phase21Epic109Status: complete
 phase21Epic110Stories: 3
+phase21Epic110Status: complete
 phase21ProposedEpics: 105-110
 phase21ProposedFRs: FR172-FR177
 phase21ProposedNFRs: NFR78-NFR82

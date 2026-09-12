@@ -2,11 +2,11 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** Epic 110 / FR177 — Story **110.2** honesty surface (claim map + pointers). Epic closeout is Story **110.3**.
+**Status:** **Epic 110 / FR177 closed** (Story **110.3**). Honesty surface delivered in Story **110.2**.
 
 NFR14: `_agile-output/implementation-artifacts/nfr14-risk-epic110-phase21-claim-honesty-fr177.md`.
 
-**Phase 21 规划故事已齐（Epic 105–110）**（规划齐 ≠ 宣称门已关；本门关闭于 **110.3**）；宣称须引 **FR172–177**（本 FR / **NFR82**）。超出各 epic NFR14 钉死子集的加深仍 **NFR81**。**不得**宣称「NFR76 账本已空」。
+**Phase 21 规划故事已齐（Epic 105–110）**；宣称须引 **FR172–177**（本 FR / **NFR82**）。超出各 epic NFR14 钉死子集的加深仍 **NFR81**。**不得**宣称「NFR76 账本已空」。
 
 ## Rule (NFR82)
 
