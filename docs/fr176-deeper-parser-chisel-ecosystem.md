@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`bitloom_firrtl` / Chisel emit + FIRRTL Parser gates). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Epic 109 / FR176 — Story **109.2** product path (combined Style Guide + update-mainline ecosystem deepen beyond FR165 / FR170 alone).
+**Status:** **Epic 109 / FR176 closed** (Story **109.3**). Product path delivered in Story **109.2** (combined Style Guide + update-mainline ecosystem deepen beyond FR165 / FR170 alone).
 
 **≠ FR170 alone** (`BitloomFirrtlParser.parseUpdateMainline` still valid). **≠ FR165 alone** (L1–L5 still valid). **≠ FR138 alone**. **≠ FR130 alone**. **AD-27 revised** 2026-09-12 for FR176 (**NFR80**).
 

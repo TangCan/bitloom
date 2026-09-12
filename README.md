@@ -431,7 +431,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | firtool 升钉（配对 AD-9） | FR173 / 106 | Chisel **7.15.0** ↔ firtool-**1.158.0**；AD-9 已修订（≠ FR169 alone）— **已关闭**（[`docs/fr173-firtool-bump-ad9.md`](docs/fr173-firtool-bump-ad9.md)；Story **106.3**） |
 | unpaired CIRCT/Chisel HEAD | FR174 / 107 | 文档钉死 unpaired mainline firtool-**1.156.0**（≠ AD-9 **1.158.0**；≠ FR170 alone）— **已关闭**（[`docs/fr174-unpaired-head.md`](docs/fr174-unpaired-head.md)；Story **107.3**） |
 | 更广 CIRCT/MLIR/sim | FR175 / 108 | `--ir-sv` + `--ir-verilog` @ AD-9 **1.158.0**（≠ FR169 fir+hw alone）— **已关闭**（[`docs/fr175-broader-circt-mlir-sim.md`](docs/fr175-broader-circt-mlir-sim.md)；Story **108.3**） |
-| 更深 Parser/Chisel 生态 | FR176 / 109 | ≠ FR170 NFR14 alone — **未关闭** |
+| 更深 Parser/Chisel 生态 | FR176 / 109 | 组合 FR165+FR170+ecosystem 标记 @ AD-9（≠ FR170/165 alone）— **已关闭**（[`docs/fr176-deeper-parser-chisel-ecosystem.md`](docs/fr176-deeper-parser-chisel-ecosystem.md)；Story **109.3**） |
 | Phase 21 宣称诚实门 | FR177 / 110 | — **未关闭**（软序建议在 106–109 之后） |
 
 **FR172–177 宣称纪律（FR177 / NFR82）：** 「firtool 升钉」须引 **FR173**；「unpaired HEAD」须引 **FR174**；「更广 CIRCT/sim」须引 **FR175**；「更深 Parser 生态」须引 **FR176**；完整 Phase 21 宣称须引 **FR172–177**。**不得**用 Phase 20 alone 冒充 FR173–176；**不得宣称**未关闭前已交付；超出各 NFR14 钉死子集仍须新合同（**NFR81**）。`git push` **不是** FR。

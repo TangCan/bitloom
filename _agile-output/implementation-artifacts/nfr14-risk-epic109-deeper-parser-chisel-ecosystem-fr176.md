@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR176 / Epic 109；NFR14、NFR78、NFR79、NFR80、NFR81；对照 FR170 / FR165 / FR138 / FR130 / AD-27 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open — Story 109.1；Epic 109 进行中；109.2–109.3 待本记录后 ready |
+| 状态 | closed — Story 109.3；Epic 109 / FR176 可宣称关闭；未写入子集仍 **NFR81** |
 | **选定** | 在保留 FR170 update-mainline / FR165 linter 关闭面的前提下，授权 **组合生态加深包**：FR165 style-lint **且** FR170 update-mainline parse（现行 AD-9 pin）**且** 新增 FR176 ecosystem 标记层（`emit`/`check` + `just` / CI）；触及则修订 **AD-27** |
 
 ### Phase 12–20 关闭面 vs Epic 109（NFR78）
@@ -86,8 +86,8 @@
 
 ### Epic 109 关闭条件（Story 109.3 勾选）
 
-- [ ] **FR176 钉死子集实现 + 验收** — Story 109.2
-- [ ] **文档 / deferred / README / spine 收口** — Story 109.3
-- [ ] **NFR78/81：** 边界与诚实义务保持
-- [ ] **品牌 / AD-6：** Bitloom；运行时不得进入设计 crate
-- [ ] **其余 FR177：** 未关前不得宣称 Phase 21 全清
+- [x] **FR176 钉死子集实现 + 验收** — Story 109.2
+- [x] **文档 / deferred / README / spine 收口** — Story 109.3
+- [x] **NFR78/81：** 边界与诚实义务保持
+- [x] **品牌 / AD-6：** Bitloom；运行时不得进入设计 crate
+- [x] **其余 FR177：** 未关前不得宣称 Phase 21 全清
