@@ -385,14 +385,14 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 **FR148–153 宣称纪律：** 「CLI 已可从 crates.io 安装」对应 **FR151**；SemVer 默认已按已发布 1.0 处理 → **FR153**；完整 Phase 18 宣称须引 **FR148–153**。CLI 上架 ≠ 清空 NFR59（**NFR67**）。公开品牌 **Bitloom**。
 
-### Phase 19 NFR59 + FR152(a)（**in progress** — Epic 87–98 / FR154–165）
+### Phase 19 NFR59 + FR152(a)（**in progress** — Epic 87–98 / FR154–165；宣称门 **FR156**）
 
-下列原 **NFR59** 账本 + **FR152(a)** 已由 Correct Course + **FR154** 升格为 Phase 19 显式 FR（Epic 87–98）。**在对应 FR / Epic 关闭前不得宣称该条已交付**（**FR156** / **NFR72**）。Phase 12–18 关闭面**仍有效**（**NFR68**）。同源：PRD addendum「Phase 19」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+下列原 **NFR59** 账本 + **FR152(a)** 已由 Correct Course + **FR154** 升格为 Phase 19 显式 FR（Epic 87–98）。**对外宣称须引对应已关 FR**（**FR156** / **NFR72** / [`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md)）。Phase 12–18 关闭面**仍有效**（**NFR68**）。同源：PRD addendum「Phase 19」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
 
 | 加深 / 上架面 | FR / Epic | 状态（诚实） |
 | --- | --- | --- |
 | Phase 19 合同闸门 | FR154 / 87 | Correct Course + README/deferred/AD — **已关闭** |
-| `bitloom-lsp` FR152(a) live 上架 | FR155 / 88 | `cargo install bitloom-lsp`（1.0.0）— **已关闭** |
+| `bitloom-lsp` FR152(a) live 上架 | FR155 / 88 | `cargo install bitloom-lsp`（1.0.0）— **已关闭**（须引 **FR155**；≠ Phase 18 alone） |
 | 自动 FSM 标签提取 | FR157 / 89 | `#[bitloom::fsm]` / `FsmLabels` — **已关闭** |
 | 第三方 LCOV GUI 一等集成 | FR158 / 90 | `coverage --genhtml`（`genhtml`/lcov）— **已关闭** |
 | MemRead stub→完整生成 | FR159 / 91 | `generate_functional_sim` MemRead（SyncReadMem latency-1）— **已关闭** |
@@ -402,7 +402,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 未列协议手写 FL | FR163 / 95 | `UartRxFunctional` ≡ tick（≠ FR135 alone；SPI/I2C/AXI 仍 NFR71）— **已关闭** |
 | 更广 CIRCT/MLIR / 仿真门禁 | FR164 / 96 | 外部 firtool 仿真门禁（≠ FR137 compile alone；更广 MLIR 仍 NFR71）— **已关闭** |
 | 更深 Chisel/Parser 生态 | FR165 / 97 | Style Guide/linter 加深（≠ FR138 alone；HEAD Parser 仍 NFR71）— **已关闭** |
-| Phase 19 宣称诚实门 | FR156 / 98 | 对外宣称须引已关 FR |
+| Phase 19 宣称诚实门 | FR156 / 98 | [`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md) — **Story 98.2 诚实面（未关前不得宣称 FR156 已关闭）** |
 
 **FR154–165 宣称纪律：** 「lsp 已上架」须引 **FR155**；各 NFR59 条须引 **FR157–165**；完整 Phase 19 宣称须引 **FR154–165**（**FR156**）。超出各 epic NFR14 钉死子集的更深项仍须新合同（**NFR71**）。`git push` **不是** FR。公开品牌 **Bitloom**。
 
