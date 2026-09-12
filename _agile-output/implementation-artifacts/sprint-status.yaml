@@ -725,9 +725,9 @@ development_status:
   105-4-ad-指针与-epic-105-收口-fr172: done
   epic-105-retrospective: optional
 
-  epic-106: backlog
-  106-1-epic-106-nfr14-风险记录: ready-for-dev
-  106-2-firtool-升钉实现与验收-fr173: backlog
+  epic-106: in-progress
+  106-1-epic-106-nfr14-风险记录: done
+  106-2-firtool-升钉实现与验收-fr173: ready-for-dev
   106-3-fr173-收口与文档指针: backlog
   epic-106-retrospective: optional
 
