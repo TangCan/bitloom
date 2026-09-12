@@ -52,6 +52,11 @@ circt-external-sim-check:
 circt-external-alloc-check:
 	bash scripts/circt-external-alloc-check.sh
 
+# FR175: broader CIRCT SV / ir-verilog lower (beyond FR169 fir+hw).
+# Not part of default `just test`. Missing/mismatched firtool → non-zero (never silent skip).
+circt-external-sv-check:
+	bash scripts/circt-external-sv-check.sh
+
 # FR138: Parser restore product path (BitloomFirrtlParser.parse ≡ Parser.parse; AD-9 firtool -parse-only).
 # Not part of default `just test`. Missing/mismatched firtool → non-zero (never silent skip).
 parser-restore-check:

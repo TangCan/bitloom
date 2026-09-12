@@ -117,6 +117,21 @@ jobs:
       - name: Required FR169 circt-external-alloc-check
         run: bash scripts/circt-external-alloc-check.sh
 
+  # FR175: required broader CIRCT SV / ir-verilog lower gate (beyond FR169).
+  # Same path as `just circt-external-sv-check`. Failures are never ignored.
+  circt-external-sv:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.97.1"
+      - name: Ensure pinned firtool-1.158.0 (AD-9)
+        run: cargo run -p bitloom -- firtool ensure
+      - name: Required FR175 circt-external-sv-check
+        run: bash scripts/circt-external-sv-check.sh
+
   # FR170: required Chisel update-mainline / HEAD Parser migration gate (beyond FR138).
   # Same path as `just parser-head-migration-check`. Failures are never ignored.
   parser-head-migration:

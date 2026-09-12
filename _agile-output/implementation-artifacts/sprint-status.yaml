@@ -739,8 +739,8 @@ development_status:
 
   epic-108: in-progress
   108-1-epic-108-nfr14-风险记录: done
-  108-2-更广-circt-mlir-sim-实现与验收-fr175: ready-for-dev
-  108-3-fr175-收口与文档指针: backlog
+  108-2-更广-circt-mlir-sim-实现与验收-fr175: done
+  108-3-fr175-收口与文档指针: ready-for-dev
   epic-108-retrospective: optional
 
   epic-109: backlog
