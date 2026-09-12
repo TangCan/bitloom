@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 106 / FR173 in progress** (Story **106.2** implementation). Product pin: **Chisel 7.15.0 ↔ firtool-1.158.0** with **AD-9 / Stack revised** (NFR80).
+**Status:** **Epic 106 / FR173 closed** (Story **106.3**). Product pin: **Chisel 7.15.0 ↔ firtool-1.158.0** with **AD-9 / Stack revised** (NFR80).
 
 Phase 20 **FR169(A)** multi-lower @ then-current `firtool-1.155.0`, **FR164** sim, and **FR137** compile **remain closed and valid** (NFR78). Those closes alone ≠ FR173.
 

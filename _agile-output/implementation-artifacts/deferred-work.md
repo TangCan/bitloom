@@ -79,14 +79,14 @@ README「状态与 deferred」同源（Story **99.3** / **99.4** / **100.3** / *
 
 Correct Course `sprint-change-proposal-2026-09-12-phase21-nfr76-leftovers.md` + PRD addendum「Phase 21」**已批准**（**Phase 21 contract approved** 2026-09-12；`correctCoursePhase21Approved: 2026-09-12`）。
 闸门 **FR172 / Epic 105** **已关闭**（Story **105.4**；闸门已开；实现 epic 可合法开工）。
-**Epic 106 / FR173** — firtool 升钉配对 AD-9（≠ FR169 alone）。
+**Epic 106 / FR173**（**已关闭** / Story **106.3**；[`docs/fr173-firtool-bump-ad9.md`](../../docs/fr173-firtool-bump-ad9.md)）— firtool 升钉配对 AD-9（Chisel 7.15.0 ↔ firtool-1.158.0；≠ FR169 alone）。
 **Epic 107 / FR174** — unpaired CIRCT/Chisel HEAD（≠ FR170 alone）。
 **Epic 108 / FR175** — 更广 CIRCT/MLIR/sim（超 FR169 NFR14）。
 **Epic 109 / FR176** — 更深 Parser/Chisel 生态（超 FR170 NFR14）。
 **Epic 110 / FR177** — Phase 21 宣称诚实门（软序建议在 106–109 之后）。
 **Phase 21 规划故事已齐（Epic 105–110）**；触 AD-9 / AD-27 / firtool·HEAD 须按 **NFR80** 先修订再 story ready。宣称须引 **FR172–FR177**（**FR177** / **NFR82**）。
 **诚实：** Phase 12–20 关闭证据**仍有效**（**NFR78**）；不得用 Phase 20 alone 冒充本批四条；超出各 NFR14 钉死子集仍须新合同（**NFR81**）。公开品牌 **Bitloom**。`git push` 非 FR。
-README「状态与 deferred」同源（Story **105.3** / **105.4**）。
+README「状态与 deferred」同源（Story **105.3** / **105.4** / **106.3**）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 

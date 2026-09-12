@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR173 / Epic 106；NFR14、NFR78、NFR79、NFR80、NFR81；对照 FR169 / FR164 / FR137 / AD-9 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open — Story 106.1；Epic 106 进行中；106.2–106.3 待本记录后 ready；升钉实现属 106.2 |
+| 状态 | **closed — Story 106.3**；Epic 106 / FR173 可宣称；未写入更高升钉仍 **NFR81** |
 | **选定** | 在保留 FR169(A) @ firtool-1.155.0 / FR164 / FR137 关闭面的前提下，授权经 Chisel **正式配对**后的 **firtool 升钉超现行 AD-9 `firtool-1.155.0`**，并 **必须**同步修订 **AD-9 / Stack**；禁止 unpaired bump / PATH-random firtool |
 
 ### Phase 12–20 关闭面 vs Epic 106 实现边界（NFR78 · 必读）
@@ -95,8 +95,8 @@
 
 ### Epic 106 关闭条件（Story 106.3 勾选）
 
-- [ ] **FR173 钉死子集实现 + 验收** — Story 106.2（firtool-1.158.0 + Chisel 7.15.0；AD-9 已修订）
-- [ ] **文档 / deferred / README / spine 收口** — Story 106.3
-- [ ] **NFR78/81：** 边界与诚实义务保持；未写入更高升钉/配对项须新合同
-- [ ] **品牌 / AD-6：** Bitloom；CIRCT 运行时不得进入设计 crate
-- [ ] **其余 FR174–177：** 未关前不得宣称 Phase 21 全清 / NFR76 账本已空
+- [x] **FR173 钉死子集实现 + 验收** — Story 106.2（firtool-1.158.0 + Chisel 7.15.0；AD-9 已修订）
+- [x] **文档 / deferred / README / spine 收口** — Story 106.3
+- [x] **NFR78/81：** 边界与诚实义务保持；未写入更高升钉/配对项须新合同
+- [x] **品牌 / AD-6：** Bitloom；CIRCT 运行时不得进入设计 crate
+- [x] **其余 FR174–177：** 未关前不得宣称 Phase 21 全清 / NFR76 账本已空

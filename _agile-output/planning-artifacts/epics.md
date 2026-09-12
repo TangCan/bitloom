@@ -141,6 +141,7 @@ phase21PlanningComplete: 2026-09-12
 phase21Epic105Stories: 4
 phase21Epic105Status: complete
 phase21Epic106Stories: 3
+phase21Epic106Status: complete
 phase21Epic107Stories: 3
 phase21Epic108Stories: 3
 phase21Epic109Stories: 3
