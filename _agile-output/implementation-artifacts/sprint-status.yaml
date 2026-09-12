@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-12-2026 09:34
+last_updated: 09-12-2026 01:32
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -2415,69 +2415,69 @@ action_items:
     action: "FR148 honesty: library 1.0 on crates.io is not CLI installable until
       FR151."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-84-retro-2026-09-12.md"
   - id: "epic-84-retro-item-272-keep-phase-12-17-closing-faces-valid-nfr"
     epic: 84
     action: "Keep Phase 12–17 closing faces valid (NFR64)."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-84-retro-2026-09-12.md"
   - id: "epic-84-retro-item-273-keep-commit-subjects-story-n-m"
     epic: 84
     action: "Keep commit subjects Story N.M."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-84-retro-2026-09-12.md"
   - id: "epic-84-retro-item-274-nfr59-still-needs-explicit-contract-nfr6"
     epic: 84
     action: "NFR59 still needs explicit contract (NFR67)."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-84-retro-2026-09-12.md"
   - id: "epic-85-retro-item-275-fr149-152-honesty-cli-install-claims-nee"
     epic: 85
     action: "FR149–152 honesty: CLI install claims need FR151; never publish rhdl-*
       names; FR152(b) is not lsp on crates.io."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-85-retro-2026-09-12.md"
   - id: "epic-85-retro-item-276-when-touching-firrtl-viz-cli-deps-keep-a"
     epic: 85
     action: "When touching firrtl/viz/CLI deps keep AD-2/AD-6; do not restore path-only
       publish blockers."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-85-retro-2026-09-12.md"
   - id: "epic-85-retro-item-277-keep-commit-subjects-story-n-m"
     epic: 85
     action: "Keep commit subjects Story N.M."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-85-retro-2026-09-12.md"
   - id: "epic-86-retro-item-278-fr153-honesty-semver-docs-green-nfr59-cl"
     epic: 86
     action: "FR153 honesty: SemVer/docs green ≠ NFR59 cleared; do not silently expand
       FR142."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-86-retro-2026-09-12.md"
   - id: "epic-86-retro-item-279-keep-phase-12-17-closing-faces-valid-nfr"
     epic: 86
     action: "Keep Phase 12–17 closing faces valid (NFR64)."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-86-retro-2026-09-12.md"
   - id: "epic-86-retro-item-280-keep-commit-subjects-story-n-m"
     epic: 86
     action: "Keep commit subjects Story N.M."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-86-retro-2026-09-12.md"
   - id: "epic-86-retro-item-281-after-phase-18-retros-deeper-unlisted-wo"
     epic: 86
     action: "After Phase 18 retros, deeper unlisted work still needs explicit contract
       (NFR59/NFR67)."
     owner: "Dev"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-86-retro-2026-09-12.md"
