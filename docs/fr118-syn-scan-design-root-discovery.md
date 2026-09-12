@@ -79,4 +79,5 @@ cargo test -p bitloom-lsp --test fr99_bitloom_lsp_full_elaborate
 |-----|------|
 | [`fr113-lsp-design-root-discovery.md`](fr113-lsp-design-root-discovery.md) | FR113 metadata face — still closed (NFR48) |
 | [`fr99-bitloom-lsp.md`](fr99-bitloom-lsp.md) | FR99 DesignFixture MVP — still closed |
+| [`fr160-non-cargo-path-scan.md`](fr160-non-cargo-path-scan.md) | FR160 non-Cargo / non-members path scan (≠ this FR118 page alone) |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic59-syn-scan-design-root-discovery.md` |

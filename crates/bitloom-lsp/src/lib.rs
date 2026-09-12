@@ -11,7 +11,7 @@ use bitloom_builder::{ElaborateSession, GroundType, HwCaptureRef, Span};
 use bitloom_hir::{Diagnostic, FrozenHir};
 
 mod discover;
-pub use discover::{DiscoveredDesignRoot, discover_design_roots};
+pub use discover::{DiscoveredDesignRoot, discover_design_roots, discover_design_roots_under};
 
 /// MVP module-count ceiling (NFR14 P4). Exceeding this must fail loudly.
 pub const MVP_MAX_MODULES: usize = 8;

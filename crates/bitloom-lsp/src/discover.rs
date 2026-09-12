@@ -1,10 +1,13 @@
 //! FR118 — Workspace `#[bitloom::top]` syn-scan + FR113 Cargo metadata discovery.
+//! FR160 — Non-Cargo / non-members explicit path scan (`discover_design_roots_under`).
 //!
 //! - Packages with `[package.metadata.bitloom] design_roots` → FR113 metadata path.
 //! - Prelude packages **without** metadata → scan `src/**/*.rs` for `#[bitloom::top]` /
 //!   `#[rhdl::top]` (FR118). DesignFixture-only ≠ FR118.
+//! - Explicit paths **without** requiring Cargo workspace members → FR160.
 
 use std::fs;
+use std::io;
 use std::path::{Path, PathBuf};
 
 /// One design root discovered from Cargo metadata and/or syn-scan (not a DesignFixture enum).
@@ -32,6 +35,116 @@ pub fn discover_design_roots(root: impl AsRef<Path>) -> std::io::Result<Vec<Disc
         collect_package_roots(root, &mut out)?;
     }
     Ok(out)
+}
+
+/// FR160: discover `#[bitloom::top]` / `#[rhdl::top]` under **explicit paths** that need
+/// not be Cargo workspace members (and need not contain `Cargo.toml`).
+///
+/// - Missing path → `ErrorKind::NotFound` with `bitloom-lsp.path-not-found` (readable).
+/// - Permission denied → `ErrorKind::PermissionDenied` with
+///   `bitloom-lsp.path-permission-denied` (readable); must not silent-Ok.
+pub fn discover_design_roots_under<P: AsRef<Path>>(
+    paths: &[P],
+) -> std::io::Result<Vec<DiscoveredDesignRoot>> {
+    let mut out = Vec::new();
+    for p in paths {
+        let path = p.as_ref();
+        collect_non_cargo_path(path, &mut out)?;
+    }
+    Ok(out)
+}
+
+fn map_path_io_err(path: &Path, err: io::Error) -> io::Error {
+    match err.kind() {
+        io::ErrorKind::NotFound => io::Error::new(
+            io::ErrorKind::NotFound,
+            format!(
+                "bitloom-lsp.path-not-found: {} (FR160 non-Cargo path scan)",
+                path.display()
+            ),
+        ),
+        io::ErrorKind::PermissionDenied => io::Error::new(
+            io::ErrorKind::PermissionDenied,
+            format!(
+                "bitloom-lsp.path-permission-denied: {} (FR160; must not silent-Ok)",
+                path.display()
+            ),
+        ),
+        _ => io::Error::new(
+            err.kind(),
+            format!(
+                "bitloom-lsp.discover-failed: {} — {err} (FR160)",
+                path.display()
+            ),
+        ),
+    }
+}
+
+fn collect_non_cargo_path(path: &Path, out: &mut Vec<DiscoveredDesignRoot>) -> std::io::Result<()> {
+    let meta = fs::metadata(path).map_err(|e| map_path_io_err(path, e))?;
+    if meta.is_file() {
+        if path.extension().and_then(|e| e.to_str()) != Some("rs") {
+            return Ok(());
+        }
+        let package_dir = path
+            .parent()
+            .map(Path::to_path_buf)
+            .unwrap_or_else(|| PathBuf::from("."));
+        let package_name = package_dir
+            .file_name()
+            .map(|s| s.to_string_lossy().into_owned())
+            .unwrap_or_else(|| "non-cargo".into());
+        let text = fs::read_to_string(path).map_err(|e| map_path_io_err(path, e))?;
+        for root_id in top_type_names_from_source(&text) {
+            push_unique(
+                out,
+                DiscoveredDesignRoot {
+                    package_name: package_name.clone(),
+                    package_dir: package_dir.clone(),
+                    root_id,
+                },
+            );
+        }
+        return Ok(());
+    }
+    if !meta.is_dir() {
+        return Ok(());
+    }
+    let package_name = path
+        .file_name()
+        .map(|s| s.to_string_lossy().into_owned())
+        .unwrap_or_else(|| "non-cargo".into());
+    let mut ids = Vec::new();
+    walk_rs_files(path, &mut |rs| {
+        let text = fs::read_to_string(rs).map_err(|e| map_path_io_err(rs, e))?;
+        for id in top_type_names_from_source(&text) {
+            if !ids.contains(&id) {
+                ids.push(id);
+            }
+        }
+        Ok(())
+    })
+    .map_err(|e| map_path_io_err(path, e))?;
+    for root_id in ids {
+        push_unique(
+            out,
+            DiscoveredDesignRoot {
+                package_name: package_name.clone(),
+                package_dir: path.to_path_buf(),
+                root_id,
+            },
+        );
+    }
+    Ok(())
+}
+
+fn push_unique(out: &mut Vec<DiscoveredDesignRoot>, root: DiscoveredDesignRoot) {
+    if !out
+        .iter()
+        .any(|r| r.root_id == root.root_id && r.package_dir == root.package_dir)
+    {
+        out.push(root);
+    }
 }
 
 fn collect_package_roots(
@@ -360,5 +473,37 @@ pub enum Fr118Alt {}
     fn syn_scan_tolerates_utf8_in_comments() {
         let src = "// FR113 negative fixture — prelude dep without metadata.\n#[bitloom::top]\nstruct A;\n";
         assert_eq!(top_type_names_from_source(src), vec!["A".to_string()]);
+    }
+
+    #[test]
+    fn fr160_under_scans_dir_without_cargo_toml() {
+        let dir = std::env::temp_dir().join(format!("bitloom-fr160-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&dir);
+        fs::create_dir_all(dir.join("design")).unwrap();
+        fs::write(
+            dir.join("design/top.rs"),
+            "#[bitloom::top]\nstruct Fr160BareTop;\n",
+        )
+        .unwrap();
+        assert!(!dir.join("Cargo.toml").exists());
+        let roots = discover_design_roots_under(&[dir.join("design")]).unwrap();
+        assert_eq!(roots.len(), 1);
+        assert_eq!(roots[0].root_id, "Fr160BareTop");
+        assert_eq!(roots[0].package_name, "design");
+        let _ = fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn fr160_missing_path_is_readable_not_found() {
+        let missing =
+            std::env::temp_dir().join(format!("bitloom-fr160-missing-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&missing);
+        let err = discover_design_roots_under(&[missing.as_path()]).unwrap_err();
+        assert_eq!(err.kind(), std::io::ErrorKind::NotFound);
+        let msg = err.to_string();
+        assert!(
+            msg.contains("path-not-found") && msg.contains("FR160"),
+            "readable FR160 missing-path error: {msg}"
+        );
     }
 }
