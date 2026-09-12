@@ -59,11 +59,12 @@ FR117 `typed-wave.html`, FR104 `interactive.html`, and FR125 sidecar still emit.
 Those closes remain valid; FR134 is the GUI/IDE depth claim face.
 FR125 T1–T4 remains closed and valid (≠ this FR alone).
 
-## Non-goals (NFR59)
+## Non-goals (historical for FR134 alone)
 
-Replacing default VCD / `typed-wave.html` as the only wave surface; full ChiselSim coupling;
-extra IDE-store multi-target publish beyond the G1-pinned Surfer marketplace id.
-Further GUI/IDE subsets not listed in G1–G4 remain **NFR59** (≠ FR134 alone).
+Replacing default VCD / `typed-wave.html` as the only wave surface → **FR162** (Epic 94);
+full ChiselSim coupling; extra IDE-store multi-target publish beyond the G1-pinned Surfer
+marketplace id. Further GUI/IDE subsets not listed in G1–G4 remain **NFR59** unless claimed
+by a later FR (FR162 closes the default-surface gap only).
 
 ```text
 cargo test -p bitloom --test fr134_tywaves_gui_ide

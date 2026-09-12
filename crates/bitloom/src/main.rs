@@ -173,13 +173,14 @@ enum Commands {
         out_dir: PathBuf,
     },
     /// Tick a `.fir` design, dump VCD, timing HTML (FR38/49), interactive wave (FR104),
-    /// typed IDE wave (FR117 subset B), optionally upstream Tywaves sidecar (FR125),
-    /// and optionally FR134 GUI/IDE plugin depth (`--tywaves-gui`).
+    /// typed IDE wave (FR117 subset B), and **by default** FR162 primary Tywaves GUI depth
+    /// (FR134-level `tywaves.gui.*` + FR125 sidecar). Opt out with `--no-tywaves-gui`.
     Wave {
         /// Path to a `.fir` file with `FIRRTL version 6.0.0` header.
         #[arg(long)]
         input: PathBuf,
-        /// Directory for `wave.vcd` + `timing.html` + `interactive.html` + `typed-wave.html`.
+        /// Directory for `wave.vcd` + `timing.html` + `interactive.html` + `typed-wave.html`
+        /// (+ FR162 default `tywaves.gui.*` / FR125 sidecar unless `--no-tywaves-gui`).
         #[arg(long, default_value = ".")]
         out_dir: PathBuf,
         /// Number of ticks after reset.
@@ -189,12 +190,18 @@ enum Commands {
         #[arg(long, default_value_t = false)]
         fst: bool,
         /// Also emit FR125 upstream Tywaves sidecar (`wave.tywaves.json` + `tywaves.launch.sh`).
+        /// Redundant when FR162 GUI primary is on (default); useful with `--no-tywaves-gui`.
         #[arg(long, default_value_t = false)]
         tywaves: bool,
-        /// Also emit FR134 GUI/IDE depth (`tywaves.gui.manifest.json` + install descriptor).
-        /// Implies FR125 sidecar emission.
+        /// Emit FR134/FR162 GUI/IDE depth (`tywaves.gui.manifest.json` + install descriptor).
+        /// **Default on** (FR162 primary surface). Implies FR125 sidecar emission.
+        /// Kept for FR134 ATDD / docs compatibility.
         #[arg(long, default_value_t = false)]
         tywaves_gui: bool,
+        /// FR162: disable default GUI primary surface (legacy typed-wave / VCD-focused path).
+        /// With this flag, FR125 requires `--tywaves`; GUI manifests are not emitted.
+        #[arg(long, default_value_t = false)]
+        no_tywaves_gui: bool,
     },
     /// Tick a Mux demo (or `.fir`) and write FR114 `coverage.lcov` + `coverage.html`.
     ///
@@ -965,14 +972,20 @@ fn main() {
             ticks,
             fst,
             tywaves,
-            tywaves_gui,
-        } => match run_wave(&input, &out_dir, ticks, fst, tywaves, tywaves_gui) {
-            Ok(()) => {}
-            Err(e) => {
-                eprintln!("error: {e}");
-                std::process::exit(1);
+            tywaves_gui: _,
+            no_tywaves_gui,
+        } => {
+            // FR162: GUI depth is the default primary wave surface unless opted out.
+            // `--tywaves-gui` remains accepted (FR134 ATDD / docs); default path already on.
+            let emit_gui = !no_tywaves_gui;
+            match run_wave(&input, &out_dir, ticks, fst, tywaves, emit_gui) {
+                Ok(()) => {}
+                Err(e) => {
+                    eprintln!("error: {e}");
+                    std::process::exit(1);
+                }
             }
-        },
+        }
         Commands::Coverage {
             input,
             out_dir,
@@ -1044,9 +1057,9 @@ fn run_visualize(input: &Path, out_dir: &Path) -> Result<PathBuf, String> {
 }
 
 /// Product entry: tick → VCD + timing.html + interactive.html (FR38/49 + FR104)
-/// + typed-wave.html / wave.typed.json (FR117 subset B)
-/// + optional wave.tywaves.json / tywaves.launch.sh (FR125)
-/// + optional tywaves.gui.* FR134 GUI/IDE depth (`want_tywaves_gui`).
+/// + typed-wave.html / wave.typed.json (FR117 subset B; secondary under FR162)
+/// + **default** tywaves.gui.* FR134/FR162 GUI primary (`want_tywaves_gui`; opt out via CLI)
+/// + FR125 sidecar when GUI primary or `--tywaves`.
 fn run_wave(
     input: &Path,
     out_dir: &Path,
@@ -1248,9 +1261,9 @@ fn run_wave(
                 // live open. For ATDD honesty, treat missing root like FR125 missing BIN:
                 // soft OK with advisory (FORCE_MISSING is the hard fail path).
                 println!(
-                    "FR134: wrote GUI/IDE depth artifacts {}; set BITLOOM_TYWAVES_GUI_ROOT \
+                    "FR162/FR134: wrote GUI/IDE primary surface {}; set BITLOOM_TYWAVES_GUI_ROOT \
                      (or exec {}) to validate upstream GUI install; IDE plugin channel in \
-                     tywaves.gui.install.json",
+                     tywaves.gui.install.json (typed-wave.html remains secondary)",
                     manifest_path.display(),
                     gui_sh_path.display()
                 );
@@ -1300,7 +1313,7 @@ fn run_wave(
         println!(
             "open {} in a browser for FR117 typed IDE wave (interactive.html is FR104 I1–I3; \
              GTKWave optional for {}; pass --tywaves for FR125 upstream Tywaves sidecar; \
-             pass --tywaves-gui for FR134 GUI/IDE depth)",
+             omit --no-tywaves-gui for FR162/FR134 GUI primary depth)",
             typed_path.display(),
             vcd_path.display()
         );

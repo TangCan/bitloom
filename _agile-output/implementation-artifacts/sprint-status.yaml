@@ -657,8 +657,8 @@ development_status:
 
   epic-94: in-progress
   94-1-epic-94-nfr14-风险记录: done
-  94-2-更深-gui-ide-实现与验收-fr162: ready-for-dev
-  94-3-fr162-收口与文档指针: backlog
+  94-2-更深-gui-ide-实现与验收-fr162: done
+  94-3-fr162-收口与文档指针: ready-for-dev
   epic-94-retrospective: optional
 
   epic-95: backlog

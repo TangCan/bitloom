@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR162 / Epic 94；NFR14、NFR68、NFR69、NFR70、NFR71、NFR72；对照 FR134 / FR125 / FR117 / FR104 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 94.1；Epic 94 未关闭 |
+| 状态 | open / in-progress — Story 94.2 implemented; Epic 94 未关闭（待 94.3） |
 | **选定** | 在保留 FR134 G1–G4（opt-in `--tywaves-gui` / GUI·IDE manifest）关闭面的前提下，授权 **MVP：替换「默认仅 VCD / `typed-wave.html` 为唯一波形完成面」** — 使更深 GUI/Tywaves 面成为 `cargo bitloom wave` **一等默认/主表面**（VCD/`typed-wave.html` **保留为次要/并存**，不得再 alone 冒充唯一完成口径） |
 
 ### Phase 12–18 / FR134 关闭面 vs Epic 94 实现边界（NFR68 · 必读）
@@ -108,7 +108,7 @@
 
 ### Epic 94 关闭条件（Story 94.3 勾选）
 
-- [ ] **FR162 钉死子集实现 + 验收** — Story 94.2
+- [x] **FR162 钉死子集实现 + 验收** — Story 94.2
 - [ ] **文档 / deferred / README 收口** — Story 94.3
 - [ ] **NFR68/70/71/72：** 边界与诚实义务保持；未选 ChiselSim/多商店须新合同
 - [ ] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`

@@ -201,6 +201,7 @@ fn fr134_not_satisfied_by_fr125_alone() {
         .arg(&out)
         .arg("--ticks")
         .arg("2")
+        .arg("--no-tywaves-gui")
         .arg("--tywaves")
         .env("BITLOOM_TYWAVES_BIN", &stub)
         .env_remove("BITLOOM_TYWAVES_FORCE_MISSING")
@@ -211,7 +212,7 @@ fn fr134_not_satisfied_by_fr125_alone() {
     assert!(out.join("wave.tywaves.json").is_file());
     assert!(
         !out.join("tywaves.gui.manifest.json").is_file(),
-        "FR125 alone must not emit FR134 GUI manifest"
+        "FR125 alone (--tywaves --no-tywaves-gui) must not emit FR134 GUI manifest"
     );
 }
 

@@ -129,6 +129,8 @@ fn fr125_not_satisfied_by_fr117_alone() {
         .arg(&out)
         .arg("--ticks")
         .arg("2")
+        // FR162 makes GUI/sidecar default; opt out to prove FR117 alone ≠ FR125.
+        .arg("--no-tywaves-gui")
         .env_remove("BITLOOM_TYWAVES_FORCE_MISSING")
         .status()
         .expect("spawn");
@@ -136,6 +138,6 @@ fn fr125_not_satisfied_by_fr117_alone() {
     assert!(out.join("typed-wave.html").is_file());
     assert!(
         !out.join("wave.tywaves.json").is_file(),
-        "without --tywaves must not emit FR125 sidecar (FR117 alone ≠ FR125)"
+        "with --no-tywaves-gui and without --tywaves must not emit FR125 sidecar (FR117 alone ≠ FR125)"
     );
 }

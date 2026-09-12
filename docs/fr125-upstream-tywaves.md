@@ -43,6 +43,6 @@ FR117 close remains valid; FR125 is the upstream Tywaves claim face.
 ## Non-goals (NFR55 → Phase 16)
 
 IDE marketplace plugins / 真实上游 GUI 安装包深度 → **FR134 / Epic 73 已关闭**（Story 73.3；G1–G4）；T1–T4 **仍有效**（alone ≠ FR134）。
-更深 GUI/IDE 子集（替换默认 VCD/typed-wave；完整 ChiselSim 耦合；额外 IDE 商店多端）仍 **NFR59**。
+默认波形主表面升格（不再仅 typed-wave）→ **FR162 / Epic 94**（[`fr162-deeper-gui-ide-default-wave.md`](fr162-deeper-gui-ide-default-wave.md)）；完整 ChiselSim / 额外 IDE 商店多端仍 **NFR59**。
 
 ATDD: `cargo test -p bitloom --test fr125_upstream_tywaves`

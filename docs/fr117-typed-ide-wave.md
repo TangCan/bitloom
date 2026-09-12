@@ -68,6 +68,7 @@ cargo bitloom coverage --out-dir target/cov            # coverage.lcov + coverag
 |-----|------|
 | [`fr104-interactive-wave.md`](fr104-interactive-wave.md) | FR104 I1–I3 — still closed; ≠ FR117 alone |
 | [`fr114-lcov-coverage-gui.md`](fr114-lcov-coverage-gui.md) | FR114 LCOV GUI — still closed; ≠ FR117 alone |
+| [`fr162-deeper-gui-ide-default-wave.md`](fr162-deeper-gui-ide-default-wave.md) | FR162 default GUI primary — typed-wave is secondary |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic58-tywaves-typed-ide-waveform.md` |
 
 ## Non-goals
