@@ -53,6 +53,10 @@ circt-external-sim-check:
 parser-restore-check:
 	bash scripts/parser-restore-check.sh
 
+# FR165: Style Guide / linter deepen beyond FR130 (≠ FR138 alone; no Chisel HEAD Parser).
+chisel-style-lint-check:
+	bash scripts/chisel-style-lint-check.sh
+
 # FR144: surface-crate SemVer breakage gate (cargo-semver-checks).
 # Not part of default `just test`. Missing tool → non-zero (never silent success).
 semver-check:
