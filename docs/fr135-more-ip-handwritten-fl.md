@@ -26,9 +26,10 @@ FR126 Gpio alone；GeneratedFunctional alone；SyncFifo / FR103 alone；FR92 alo
 
 FR103 / FR112 / FR119 / **FR126 Gpio** closes remain valid. FR126 alone ≠ FR135.
 
-## Deferred (NFR59)
+## Deferred (NFR59 → Phase 19)
 
-Unlisted protocols (`UartRx` / SPI / I2C / AXI handwritten FL, etc.) remain **NFR59** — require a new contract.
+Unlisted protocols beyond `UartTx` (`UartRx` / SPI / I2C / AXI handwritten FL, etc.) → **FR163 / Epic 95**
+（NFR14 选定 `UartRx` MVP；SPI/I2C/AXI 仍须新合同 **NFR71**）。≠ FR135 alone.
 
 ATDD: `cargo test -p bitloom --test fr135_more_ip_handwritten_fl`  
 Closeout: `cargo test -p bitloom --test fr135_epic74_closeout`
