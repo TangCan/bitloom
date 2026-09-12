@@ -72,8 +72,21 @@ Correct Course `sprint-change-proposal-2026-09-12-phase20-nfr71-four-leftovers.m
 **Epic 103 / FR170**（**已关闭** / Story **103.3**；[`docs/fr170-chisel-head-parser.md`](../../docs/fr170-chisel-head-parser.md)）— update-mainline Parser / FIRRTL 6.0.0；AD-27 已修订；unpaired HEAD/firtool 升钉仍 **NFR76**。
 **Epic 104 / FR171**（**已关闭** / Story **104.3**；[`docs/fr171-phase20-claim-honesty.md`](../../docs/fr171-phase20-claim-honesty.md)）— Phase 20 宣称诚实门。
 **Phase 20 规划故事已齐（Epic 99–104）**；实现故事已关。宣称须引 **FR166–FR171**（**FR171** / **NFR77**）。
-**诚实：** Phase 12–19 关闭证据**仍有效**（**NFR73**）；不得用 Phase 19 alone 冒充本批四条；**不得**宣称「NFR71 账本已空」；超出各 NFR14 钉死子集仍须新合同（**NFR76**）。公开品牌 **Bitloom**。`git push` 非 FR。
+**诚实：** Phase 12–19 关闭证据**仍有效**（**NFR73**）；不得用 Phase 19 alone 冒充本批四条；**不得**宣称「NFR71 账本已空」；超出各 NFR14 钉死子集仍须新合同（**NFR76** → Phase 21）。公开品牌 **Bitloom**。`git push` 非 FR。
 README「状态与 deferred」同源（Story **99.3** / **99.4** / **100.3** / **101.3** / **102.3** / **103.3** / **104.2** / **104.3**）。
+
+## Phase 21 pointer (FR172–177 / NFR78–NFR82) — NFR76 leftovers 升格
+
+Correct Course `sprint-change-proposal-2026-09-12-phase21-nfr76-leftovers.md` + PRD addendum「Phase 21」**已批准**（**Phase 21 contract approved** 2026-09-12；`correctCoursePhase21Approved: 2026-09-12`）。
+闸门 **FR172 / Epic 105**（**进行中** — Story **105.1–105.2** 已关；**Epic 106–110 在 Epic 105 关闭前不得 ready**）。
+**Epic 106 / FR173** — firtool 升钉配对 AD-9（≠ FR169 alone）。
+**Epic 107 / FR174** — unpaired CIRCT/Chisel HEAD（≠ FR170 alone）。
+**Epic 108 / FR175** — 更广 CIRCT/MLIR/sim（超 FR169 NFR14）。
+**Epic 109 / FR176** — 更深 Parser/Chisel 生态（超 FR170 NFR14）。
+**Epic 110 / FR177** — Phase 21 宣称诚实门。
+**Phase 21 规划故事已齐（Epic 105–110）**；实现故事 backlog。宣称须引 **FR172–FR177**（**FR177** / **NFR82**）。
+**诚实：** Phase 12–20 关闭证据**仍有效**（**NFR78**）；不得用 Phase 20 alone 冒充本批四条；超出各 NFR14 钉死子集仍须新合同（**NFR81**）。公开品牌 **Bitloom**。`git push` 非 FR。
+README「状态与 deferred」同源（Story **105.3** / **105.4**）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 

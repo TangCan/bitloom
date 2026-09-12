@@ -721,8 +721,8 @@ development_status:
   epic-105: in-progress
   105-1-epic-105-nfr14-风险记录: done
   105-2-correct-course-prd-批准-phase-21-fr172: done
-  105-3-同步-readme-deferred-路线图指针-fr172: ready-for-dev
-  105-4-ad-指针与-epic-105-收口-fr172: backlog
+  105-3-同步-readme-deferred-路线图指针-fr172: done
+  105-4-ad-指针与-epic-105-收口-fr172: ready-for-dev
   epic-105-retrospective: optional
 
   epic-106: backlog
