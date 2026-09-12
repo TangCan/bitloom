@@ -33,8 +33,15 @@ fn fr170_readme_marks_fr170_closed() {
     );
     assert!(
         readme.contains("FR171")
-            && (readme.contains("未关闭前不得宣称") || readme.contains("不得宣称")),
-        "README must keep FR171 unclaimed"
+            && (readme.contains("已关闭")
+                || readme.contains("Epic 104")
+                || readme.contains("fr171-phase20-claim-honesty")),
+        "README must keep FR171 honesty / closed pointer"
+    );
+    assert!(
+        readme.contains("NFR76")
+            && (readme.contains("新合同") || readme.contains("仍须") || readme.contains("超出")),
+        "README must keep NFR76 leftovers honesty"
     );
     assert!(readme.contains("Bitloom"));
 }

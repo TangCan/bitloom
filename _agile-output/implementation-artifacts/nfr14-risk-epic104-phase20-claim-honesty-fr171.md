@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR171 / Epic 104；NFR14、NFR73、NFR74、NFR76、NFR77；对照 FR166–170 / FR154–165 / FR142 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 104.1；Epic 104 进行中；104.2–104.3 须本记录后才可 ready |
+| 状态 | closed — Story 104.3 勾选完成；Epic 104 关闭；FR171 宣称门可宣称；Phase 20 规划故事齐（Epic 99–104）；**NFR76** 未选加深仍须新合同；**不得**宣称 NFR71 账本已空 |
 | **选定** | 在保留 Phase 12–19 与 Epic 99–103 关闭面的前提下，授权 **Phase 20 宣称诚实门（FR171）**：公开 README / deferred / 状态页按**已关** FR166–171 可审计宣称；**禁止** Phase 19 alone 冒充 FR167–170；**禁止**未关 FR 勾选「已交付」；**禁止**静默扩大 FR142；**禁止**暗示超出 FR167–170 各 epic NFR14 钉死子集的加深已清或「NFR71 账本已空」；**禁止**把 `git push` 当 FR |
 
 ### Phase 12–19 / Epic 99–103 vs Epic 104 边界（NFR73 · 必读）
@@ -87,8 +87,8 @@
 
 ### Epic 104 关闭条件（Story 104.3 勾选）
 
-- [ ] **FR171 诚实面落地** — Story 104.2（README / deferred / 状态指针）
-- [ ] **文档 / deferred / README / spine 收口** — Story 104.3
-- [ ] **NFR73/76/77：** Phase 20 宣称须引 FR166–171；NFR76 未选仍须新合同；不得宣称 NFR71 账本已空
-- [ ] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
-- [ ] **Phase 20 规划故事齐：** Epic 99–104；≠ 宣称 NFR71/NFR76 账本已空
+- [x] **FR171 诚实面落地** — Story 104.2（README / deferred / 状态指针）
+- [x] **文档 / deferred / README / spine 收口** — Story 104.3
+- [x] **NFR73/76/77：** Phase 20 宣称须引 FR166–171；NFR76 未选仍须新合同；不得宣称 NFR71 账本已空
+- [x] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **Phase 20 规划故事齐：** Epic 99–104；≠ 宣称 NFR71/NFR76 账本已空

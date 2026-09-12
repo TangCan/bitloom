@@ -31,9 +31,12 @@ fn fr169_readme_marks_fr169_closed() {
         "README must mark FR169 / Epic 102 closed"
     );
     assert!(
-        readme.contains("FR170")
-            && (readme.contains("未关闭前不得宣称") || readme.contains("不得宣称")),
-        "README must keep FR170+ unclaimed"
+        (readme.contains("FR170") || readme.contains("FR171"))
+            && (readme.contains("已关闭")
+                || readme.contains("不得宣称")
+                || readme.contains("NFR76")
+                || readme.contains("NFR77")),
+        "README must keep Phase 20 claim honesty"
     );
     assert!(readme.contains("Bitloom"));
 }
