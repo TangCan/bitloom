@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR154 / Epic 87；NFR14、NFR68、NFR69、NFR71、NFR72；对照 FR148–153 / NFR64–67；FR155–165 实现面 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 87.1；Epic 87 未关闭；闸门未开 |
+| 状态 | closed — Story 87.4 勾选完成；Epic 87 关闭；Phase 19 闸门已开；Epic 88–98 仍须各自 NFR14；实发/加深属 Epic 88–97；宣称属 Epic 98 |
 | **选定** | 在保留 Phase 12–18 关闭面的前提下，授权 Phase 19「NFR59 全子集升格 + FR152(a)」合同闸门（FR154）；实现属 Epic 88–98 |
 
 ### Phase 12–18 关闭面 vs Phase 19 边界（NFR68 · 必读）
@@ -124,10 +124,12 @@
 
 ### Epic 87 关闭条件（Story 87.4 勾选）
 
-- [ ] **FR154 / Correct Course + PRD：** Phase 19 批准文案验收 — Story 87.2
-- [ ] **README / deferred：** Phase 18 vs Phase 19 合同区分 — Story 87.3
-- [ ] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 19 指针 — Story 87.4
-- [ ] **NFR68–72：** 边界与诚实义务写入本记录并保持
-- [ ] **禁止事项未触发：** 88–98 在 Epic 87 关闭前未标 ready
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`；禁 publish `rhdl`/`rhdl-bits`
-- [ ] **Epic 88–98：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭
+- [x] **FR154 / Correct Course + PRD：** Phase 19 批准文案验收 — Story 87.2
+- [x] **README / deferred：** Phase 18 vs Phase 19 合同区分 — Story 87.3
+- [x] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 19 指针 — Story 87.4
+- [x] **NFR68–72：** 边界与诚实义务写入本记录并保持
+- [x] **禁止事项未触发：** 88–98 在 Epic 87 关闭前未标 ready
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`；禁 publish `rhdl`/`rhdl-bits`
+- [x] **Epic 88–98：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭
+
+**Phase 19 闸门已开（Story 87.4）：** Epic 88–98 可在各自 NFR14 后标 ready；软序 `87 →（88 ‖ 89…97）→ 98`；**不得**宣称 FR155–165 已关闭直至对应 epic 关闭；**不得**用 Phase 18 alone 冒充（NFR72）。
