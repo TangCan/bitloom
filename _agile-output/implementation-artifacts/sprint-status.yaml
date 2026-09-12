@@ -638,8 +638,8 @@ development_status:
   epic-90-retrospective: optional
 
   epic-91: in-progress
-  91-1-epic-91-nfr14-风险记录: ready-for-dev
-  91-2-memread-完整生成实现与验收-fr159: backlog
+  91-1-epic-91-nfr14-风险记录: done
+  91-2-memread-完整生成实现与验收-fr159: ready-for-dev
   91-3-fr159-收口与文档指针: backlog
   epic-91-retrospective: optional
 
