@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-12-2026 05:29
+last_updated: 09-12-2026 05:32
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -623,67 +623,67 @@ development_status:
   88-2-bitloom-lsp-可发布化与政策-a-fr155: done
   88-3-live-发布-bitloom-lsp-fr155: done
   88-4-fr155-收口与文档指针: done
-  epic-88-retrospective: optional
+  epic-88-retrospective: done
 
   epic-89: done
   89-1-epic-89-nfr14-风险记录: done
   89-2-自动-fsm-标签提取实现与验收-fr157: done
   89-3-fr157-收口与文档指针: done
-  epic-89-retrospective: optional
+  epic-89-retrospective: done
 
   epic-90: done
   90-1-epic-90-nfr14-风险记录: done
   90-2-lcov-gui-一等集成实现与验收-fr158: done
   90-3-fr158-收口与文档指针: done
-  epic-90-retrospective: optional
+  epic-90-retrospective: done
 
   epic-91: done
   91-1-epic-91-nfr14-风险记录: done
   91-2-memread-完整生成实现与验收-fr159: done
   91-3-fr159-收口与文档指针: done
-  epic-91-retrospective: optional
+  epic-91-retrospective: done
 
   epic-92: done
   92-1-epic-92-nfr14-风险记录: done
   92-2-非-cargo-路径扫描实现与验收-fr160: done
   92-3-fr160-收口与文档指针: done
-  epic-92-retrospective: optional
+  epic-92-retrospective: done
 
   epic-93: done
   93-1-epic-93-nfr14-风险记录: done
   93-2-formal-sby-镜像卫生实现与验收-fr161: done
   93-3-fr161-收口与文档指针: done
-  epic-93-retrospective: optional
+  epic-93-retrospective: done
 
   epic-94: done
   94-1-epic-94-nfr14-风险记录: done
   94-2-更深-gui-ide-实现与验收-fr162: done
   94-3-fr162-收口与文档指针: done
-  epic-94-retrospective: optional
+  epic-94-retrospective: done
 
   epic-95: done
   95-1-epic-95-nfr14-风险记录: done
   95-2-未列协议手写-fl-实现与验收-fr163: done
   95-3-fr163-收口与文档指针: done
-  epic-95-retrospective: optional
+  epic-95-retrospective: done
 
   epic-96: done
   96-1-epic-96-nfr14-风险记录: done
   96-2-circt-mlir-仿真门禁加深实现与验收-fr164: done
   96-3-fr164-收口与文档指针: done
-  epic-96-retrospective: optional
+  epic-96-retrospective: done
 
   epic-97: done
   97-1-epic-97-nfr14-风险记录: done
   97-2-更深-chisel-parser-生态实现与验收-fr165: done
   97-3-fr165-收口与文档指针: done
-  epic-97-retrospective: optional
+  epic-97-retrospective: done
 
   epic-98: done
   98-1-epic-98-nfr14-风险记录: done
   98-2-readme-deferred-状态页诚实更新-fr156: done
   98-3-fr156-收口与-phase-19-故事清单指针: done
-  epic-98-retrospective: optional
+  epic-98-retrospective: done
 
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
@@ -2610,3 +2610,216 @@ action_items:
     owner: "Dev"
     status: open
     ref: "_agile-output/implementation-artifacts/epic-87-retro-2026-09-12.md"
+  - id: "epic-88-retro-item-290-fr155-honesty-cargo-install-bitloom-lsp"
+    epic: 88
+    action: "FR155 honesty: cargo install bitloom-lsp claims must cite FR155 (not
+      Phase 18 / FR152(b) alone)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-88-retro-2026-09-12.md"
+  - id: "epic-88-retro-item-291-keep-fr151-cli-install-evidence-valid-nf"
+    epic: 88
+    action: "Keep FR151 CLI install evidence valid (NFR68)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-88-retro-2026-09-12.md"
+  - id: "epic-88-retro-item-292-keep-story-n-m-commit-subjects"
+    epic: 88
+    action: "Keep Story N.M commit subjects"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-88-retro-2026-09-12.md"
+  - id: "epic-89-retro-item-293-fr157-honesty-fsm-label-claims-must-cite"
+    epic: 89
+    action: "FR157 honesty: FSM label claims must cite FR157; no docs-only close"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-89-retro-2026-09-12.md"
+  - id: "epic-89-retro-item-294-keep-phase-12-18-closing-faces-valid-nfr"
+    epic: 89
+    action: "Keep Phase 12-18 closing faces valid (NFR68)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-89-retro-2026-09-12.md"
+  - id: "epic-89-retro-item-295-keep-story-n-m-commit-subjects"
+    epic: 89
+    action: "Keep Story N.M commit subjects"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-89-retro-2026-09-12.md"
+  - id: "epic-90-retro-item-296-fr158-honesty-lcov-gui-claims-must-cite"
+    epic: 90
+    action: "FR158 honesty: LCOV GUI claims must cite FR158 (genhtml); other GUIs
+      remain NFR71"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-90-retro-2026-09-12.md"
+  - id: "epic-90-retro-item-297-missing-genhtml-must-fail-non-zero-no-si"
+    epic: 90
+    action: "Missing genhtml must fail non-zero (no silent skip)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-90-retro-2026-09-12.md"
+  - id: "epic-90-retro-item-298-keep-story-n-m-commit-subjects"
+    epic: 90
+    action: "Keep Story N.M commit subjects"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-90-retro-2026-09-12.md"
+  - id: "epic-91-retro-item-299-fr159-honesty-memread-full-emit-claims-m"
+    epic: 91
+    action: "FR159 honesty: MemRead full-emit claims must cite FR159"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-91-retro-2026-09-12.md"
+  - id: "epic-91-retro-item-300-keep-prior-stub-fr112-closing-faces-vali"
+    epic: 91
+    action: "Keep prior stub/FR112 closing faces valid (NFR68)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-91-retro-2026-09-12.md"
+  - id: "epic-91-retro-item-301-keep-story-n-m-commit-subjects"
+    epic: 91
+    action: "Keep Story N.M commit subjects"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-91-retro-2026-09-12.md"
+  - id: "epic-92-retro-item-302-fr160-honesty-non-cargo-scan-claims-must"
+    epic: 92
+    action: "FR160 honesty: non-Cargo scan claims must cite FR160 (not FR118 alone)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-92-retro-2026-09-12.md"
+  - id: "epic-92-retro-item-303-keep-fr118-fr113-closing-faces-valid-nfr"
+    epic: 92
+    action: "Keep FR118/FR113 closing faces valid (NFR68)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-92-retro-2026-09-12.md"
+  - id: "epic-92-retro-item-304-keep-story-n-m-commit-subjects"
+    epic: 92
+    action: "Keep Story N.M commit subjects"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-92-retro-2026-09-12.md"
+  - id: "epic-93-retro-item-305-fr161-honesty-formal-sby-image-hygiene-c"
+    epic: 93
+    action: "FR161 honesty: formal-sby image hygiene claims must cite FR161"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-93-retro-2026-09-12.md"
+  - id: "epic-93-retro-item-306-keep-fr127-fr119-closing-faces-valid-nfr"
+    epic: 93
+    action: "Keep FR127/FR119 closing faces valid (NFR68)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-93-retro-2026-09-12.md"
+  - id: "epic-93-retro-item-307-keep-story-n-m-commit-subjects"
+    epic: 93
+    action: "Keep Story N.M commit subjects"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-93-retro-2026-09-12.md"
+  - id: "epic-94-retro-item-308-fr162-honesty-default-wave-gui-claims-mu"
+    epic: 94
+    action: "FR162 honesty: default wave GUI claims must cite FR162 (not FR134 alone)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-94-retro-2026-09-12.md"
+  - id: "epic-94-retro-item-309-chiselsim-extra-ide-store-ports-still-ne"
+    epic: 94
+    action: "ChiselSim / extra IDE store ports still need a new contract (NFR71)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-94-retro-2026-09-12.md"
+  - id: "epic-94-retro-item-310-keep-story-n-m-commit-subjects"
+    epic: 94
+    action: "Keep Story N.M commit subjects"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-94-retro-2026-09-12.md"
+  - id: "epic-95-retro-item-311-fr163-honesty-uartrx-fl-claims-must-cite"
+    epic: 95
+    action: "FR163 honesty: UartRx FL claims must cite FR163 (not FR135 alone)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-95-retro-2026-09-12.md"
+  - id: "epic-95-retro-item-312-spi-i2c-axi-handwritten-fl-still-need-a"
+    epic: 95
+    action: "SPI/I2C/AXI handwritten FL still need a new contract (NFR71)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-95-retro-2026-09-12.md"
+  - id: "epic-95-retro-item-313-keep-story-n-m-commit-subjects"
+    epic: 95
+    action: "Keep Story N.M commit subjects"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-95-retro-2026-09-12.md"
+  - id: "epic-96-retro-item-314-fr164-honesty-external-circt-sim-gate-cl"
+    epic: 96
+    action: "FR164 honesty: external CIRCT sim-gate claims must cite FR164 (not FR137
+      compile alone)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-96-retro-2026-09-12.md"
+  - id: "epic-96-retro-item-315-broader-circt-mlir-allocation-firtool-bu"
+    epic: 96
+    action: "Broader CIRCT/MLIR allocation / firtool bump still need a new contract
+      (NFR71)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-96-retro-2026-09-12.md"
+  - id: "epic-96-retro-item-316-keep-story-n-m-commit-subjects"
+    epic: 96
+    action: "Keep Story N.M commit subjects"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-96-retro-2026-09-12.md"
+  - id: "epic-97-retro-item-317-fr165-honesty-style-guide-linter-deepen"
+    epic: 97
+    action: "FR165 honesty: Style Guide/linter deepen claims must cite FR165 (not
+      FR138 alone)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-97-retro-2026-09-12.md"
+  - id: "epic-97-retro-item-318-chisel-head-parser-migration-still-needs"
+    epic: 97
+    action: "Chisel HEAD Parser migration still needs new contract + AD-9/AD-27 (NFR71/NFR70)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-97-retro-2026-09-12.md"
+  - id: "epic-97-retro-item-319-keep-story-n-m-commit-subjects"
+    epic: 97
+    action: "Keep Story N.M commit subjects"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-97-retro-2026-09-12.md"
+  - id: "epic-98-retro-item-320-fr156-honesty-full-phase-19-claims-must"
+    epic: 98
+    action: "FR156 honesty: full Phase 19 claims must cite FR154-165; lsp cites FR155;
+      each NFR59 subset cites its FR"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-98-retro-2026-09-12.md"
+  - id: "epic-98-retro-item-321-phase-19-close-nfr71-ledger-empty-beyond"
+    epic: 98
+    action: "Phase 19 close != NFR71 ledger empty; beyond-subset deepen still needs
+      a new contract"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-98-retro-2026-09-12.md"
+  - id: "epic-98-retro-item-322-forbid-phase-18-alone-impersonating-lsp"
+    epic: 98
+    action: "Forbid Phase 18 alone impersonating lsp/NFR59 (NFR72); git push is not
+      an FR"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-98-retro-2026-09-12.md"
+  - id: "epic-98-retro-item-323-after-phase-19-retros-unlisted-deepen-st"
+    epic: 98
+    action: "After Phase 19 retros, unlisted deepen still needs an explicit contract
+      (NFR71)"
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-98-retro-2026-09-12.md"
