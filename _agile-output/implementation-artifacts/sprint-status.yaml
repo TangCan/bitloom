@@ -614,8 +614,8 @@ development_status:
   epic-87: in-progress
   87-1-epic-87-nfr14-风险记录: done
   87-2-correct-course-prd-批准-phase-19-fr154: done
-  87-3-同步-readme-deferred-路线图指针-fr154: ready-for-dev
-  87-4-ad-指针与-epic-87-收口-fr154: backlog
+  87-3-同步-readme-deferred-路线图指针-fr154: done
+  87-4-ad-指针与-epic-87-收口-fr154: ready-for-dev
   epic-87-retrospective: optional
 
   epic-88: backlog
