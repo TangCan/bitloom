@@ -70,9 +70,9 @@ Correct Course `sprint-change-proposal-2026-09-12-phase20-nfr71-four-leftovers.m
 **Epic 101 / FR168**（**已关闭** / Story **101.3**；[`docs/fr168-spi-i2c-axi-handwritten-fl.md`](../../docs/fr168-spi-i2c-axi-handwritten-fl.md)）— SPI+I2C+AXI 手写 FL。
 **Epic 102 / FR169**（**已关闭** / Story **102.3**；[`docs/fr169-circt-mlir-allocation.md`](../../docs/fr169-circt-mlir-allocation.md)）— multi-lower / HW dialect allocation @ AD-9 pin；firtool 升钉仍 **NFR76**。
 **Epic 103 / FR170**（**已关闭** / Story **103.3**；[`docs/fr170-chisel-head-parser.md`](../../docs/fr170-chisel-head-parser.md)）— update-mainline Parser / FIRRTL 6.0.0；AD-27 已修订；unpaired HEAD/firtool 升钉仍 **NFR76**。
-映射（其余）：**FR171** Epic 104（宣称诚实）。
-**诚实：** Phase 19 关闭证据**仍有效**（**NFR73**）；不得用 Phase 19 alone 冒充本批四条；**FR171 未关闭前不得宣称** Phase 20 全清；超出各 NFR14 钉死子集仍须新合同（**NFR76**）；宣称须引 **FR166–171**（**FR171** / **NFR77**）。公开品牌 **Bitloom**。`git push` 非 FR。
-README「状态与 deferred」同源（Story **99.3** / **99.4** / **100.3** / **101.3** / **102.3** / **103.3**；宣称收口 → **104.x**）。
+**Epic 104 / FR171**（进行中 / Story **104.2** 诚实面；[`docs/fr171-phase20-claim-honesty.md`](../../docs/fr171-phase20-claim-honesty.md)；收口 → **104.3**）— Phase 20 宣称诚实门。
+**诚实：** Phase 19 关闭证据**仍有效**（**NFR73**）；不得用 Phase 19 alone 冒充本批四条；**不得**宣称「NFR71 账本已空」；**FR171 未关闭前不得宣称** Phase 20 全清；超出各 NFR14 钉死子集仍须新合同（**NFR76**）；宣称须引 **FR166–171**（**FR171** / **NFR77**）。公开品牌 **Bitloom**。`git push` 非 FR。
+README「状态与 deferred」同源（Story **99.3** / **99.4** / **100.3** / **101.3** / **102.3** / **103.3** / **104.2**；宣称收口 → **104.3**）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 

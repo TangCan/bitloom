@@ -718,8 +718,8 @@ development_status:
 
   epic-104: in-progress
   104-1-epic-104-nfr14-风险记录: done
-  104-2-readme-deferred-状态页诚实更新-fr171: ready-for-dev
-  104-3-fr171-收口与-phase-20-故事清单指针: backlog
+  104-2-readme-deferred-状态页诚实更新-fr171: done
+  104-3-fr171-收口与-phase-20-故事清单指针: ready-for-dev
   epic-104-retrospective: optional
 
 action_items:

@@ -44,9 +44,9 @@ External claims about Phase 19 delivery **must** cite the matching closed FR:
 | FR165 | 97 | [`fr165-deeper-chisel-parser-ecosystem.md`](fr165-deeper-chisel-parser-ecosystem.md) |
 | FR156 | 98 | this document |
 
-## NFR71 leftovers (still need new contracts)
+## NFR71 leftovers → Phase 20
 
-Examples: Chisel HEAD Parser migration; broader CIRCT/MLIR allocation; SPI/I2C/AXI handwritten FL; full ChiselSim / extra IDE store ports.
+原 NFR71 四条已由 Phase 20 升格并关闭：ChiselSim/多商店 → **FR167**；SPI/I2C/AXI FL → **FR168**；CIRCT allocation → **FR169**；HEAD Parser → **FR170**。宣称诚实见 **FR171**（[`fr171-phase20-claim-honesty.md`](fr171-phase20-claim-honesty.md)）。超出各 Phase 20 NFR14 子集仍 **NFR76**；**不得**宣称「NFR71 账本已空」。
 
 ## Brand
 
