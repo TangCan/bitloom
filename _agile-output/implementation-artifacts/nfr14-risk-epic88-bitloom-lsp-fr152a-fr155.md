@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR155 / Epic 88；NFR14、NFR68、NFR69、NFR70、NFR72；对照 FR151 / FR152(b) / FR154 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 88.1；Epic 88 未关闭 |
+| 状态 | closed — Story 88.4 勾选完成；Epic 88 关闭；FR155 / FR152(a) 实现面可宣称；**FR157–165 / FR156** 仍属 Epic 89–98 |
 | **选定** | 在保留 Phase 12–18 与 Epic 87 闸门的前提下，授权 `bitloom-lsp` FR152(a)：`publish=true` + version 依赖 + **live** `cargo publish` |
 
 ### Phase 18 / 87 关闭面 vs Epic 88 实现边界（NFR68 · 必读）
@@ -76,8 +76,9 @@
 
 ### Epic 88 关闭条件（Story 88.4 勾选）
 
-- [ ] **FR155 可发布化 + 政策 (a)** — Story 88.2
-- [ ] **live `cargo publish -p bitloom-lsp`** — Story 88.3
-- [ ] **文档 / deferred 收口** — Story 88.4
-- [ ] **NFR68/70/72：** 边界与诚实义务保持
-- [ ] **品牌 / AD-2：** Bitloom / `bitloom-lsp`；禁 `rhdl`/`rhdl-bits`
+- [x] **FR155 可发布化 + 政策 (a)** — Story 88.2
+- [x] **live `cargo publish -p bitloom-lsp`** — Story 88.3（Published bitloom-lsp v1.0.0）
+- [x] **文档 / deferred 收口** — Story 88.4
+- [x] **NFR68/70/72：** 边界与诚实义务保持
+- [x] **品牌 / AD-2：** Bitloom / `bitloom-lsp`；禁 `rhdl`/`rhdl-bits`
+- [x] **Epic 89–98：** NFR59 / 宣称仍属后续 epic；本 epic 仅关 FR155

@@ -618,15 +618,15 @@ development_status:
   87-4-ad-指针与-epic-87-收口-fr154: done
   epic-87-retrospective: optional
 
-  epic-88: in-progress
+  epic-88: done
   88-1-epic-88-nfr14-风险记录: done
   88-2-bitloom-lsp-可发布化与政策-a-fr155: done
   88-3-live-发布-bitloom-lsp-fr155: done
-  88-4-fr155-收口与文档指针: ready-for-dev
+  88-4-fr155-收口与文档指针: done
   epic-88-retrospective: optional
 
-  epic-89: backlog
-  89-1-epic-89-nfr14-风险记录: backlog
+  epic-89: in-progress
+  89-1-epic-89-nfr14-风险记录: ready-for-dev
   89-2-自动-fsm-标签提取实现与验收-fr157: backlog
   89-3-fr157-收口与文档指针: backlog
   epic-89-retrospective: optional
