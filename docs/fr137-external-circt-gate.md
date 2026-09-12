@@ -40,3 +40,7 @@ FR95 / FR110 / FR121 / FR129 product paths remain valid.
 
 ATDD: `cargo test -p bitloom --test fr137_external_circt_compile_sim_gate`  
 Closeout: `cargo test -p bitloom --test fr137_epic76_closeout`
+
+## Deferred deepen (NFR59 → Phase 19)
+
+更广 CIRCT/MLIR lower / **仿真门禁加深** → **FR164 / Epic 96**（NFR14 选定外部 firtool **仿真门禁**；更广 MLIR allocation 仍 **NFR71**）。≠ FR137 compile alone.
