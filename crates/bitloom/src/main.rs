@@ -197,6 +197,8 @@ enum Commands {
         tywaves_gui: bool,
     },
     /// Tick a Mux demo (or `.fir`) and write FR114 `coverage.lcov` + `coverage.html`.
+    ///
+    /// Optional `--genhtml` runs third-party `genhtml` on the LCOV (FR158).
     Coverage {
         /// Optional `.fir` input; when omitted, uses the built-in Mux coverage demo DUT.
         #[arg(long)]
@@ -207,6 +209,12 @@ enum Commands {
         /// Number of ticks after reset (Mux demo).
         #[arg(long, default_value_t = 4)]
         ticks: u64,
+        /// FR158: after writing LCOV, run third-party `genhtml` (fails if not on PATH).
+        #[arg(long, default_value_t = false)]
+        genhtml: bool,
+        /// FR158: directory for `genhtml` HTML output (default: `<out-dir>/genhtml`).
+        #[arg(long)]
+        genhtml_out: Option<PathBuf>,
     },
 }
 
@@ -969,7 +977,15 @@ fn main() {
             input,
             out_dir,
             ticks,
-        } => match run_coverage(input.as_deref(), &out_dir, ticks) {
+            genhtml,
+            genhtml_out,
+        } => match run_coverage(
+            input.as_deref(),
+            &out_dir,
+            ticks,
+            genhtml,
+            genhtml_out.as_deref(),
+        ) {
             Ok(()) => {}
             Err(e) => {
                 eprintln!("error: {e}");
@@ -1293,7 +1309,15 @@ fn run_wave(
 }
 
 /// Product entry: tick → `coverage.lcov` + `coverage.html` (FR114).
-fn run_coverage(input: Option<&Path>, out_dir: &Path, ticks: u64) -> Result<(), String> {
+/// Optional `--genhtml` → third-party HTML via `genhtml` (FR158).
+fn run_coverage(
+    input: Option<&Path>,
+    out_dir: &Path,
+    ticks: u64,
+    want_genhtml: bool,
+    genhtml_out: Option<&Path>,
+) -> Result<(), String> {
+    use bitloom::lcov_gui::run_genhtml;
     use bitloom_builder::{ElaborateSession, GroundType, Span};
     use bitloom_hir::PortValues;
     use bitloom_sim::Sim;
@@ -1358,6 +1382,17 @@ fn run_coverage(input: Option<&Path>, out_dir: &Path, ticks: u64) -> Result<(), 
         html.display(),
         lcov.display()
     );
+
+    if want_genhtml {
+        let gen_out = genhtml_out
+            .map(PathBuf::from)
+            .unwrap_or_else(|| out_dir.join("genhtml"));
+        let entry = run_genhtml(&lcov, &gen_out).map_err(|e| e.to_string())?;
+        println!(
+            "FR158: wrote third-party genhtml HTML at {} (≠ FR114 in-tree coverage.html)",
+            entry.display()
+        );
+    }
     Ok(())
 }
 

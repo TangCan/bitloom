@@ -4,3 +4,4 @@
 
 pub mod fsm_labels;
 pub mod hls;
+pub mod lcov_gui;

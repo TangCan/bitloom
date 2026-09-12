@@ -633,8 +633,8 @@ development_status:
 
   epic-90: in-progress
   90-1-epic-90-nfr14-风险记录: done
-  90-2-lcov-gui-一等集成实现与验收-fr158: ready-for-dev
-  90-3-fr158-收口与文档指针: backlog
+  90-2-lcov-gui-一等集成实现与验收-fr158: done
+  90-3-fr158-收口与文档指针: ready-for-dev
   epic-90-retrospective: optional
 
   epic-91: backlog

@@ -65,6 +65,7 @@ cargo bitloom coverage --out-dir target/cov
 | [`fr104-interactive-wave.md`](fr104-interactive-wave.md) | FR104 I1–I3 MVP — still closed (NFR44); ≠ FR114 alone |
 | [`fr105-sim-coverage-ext.md`](fr105-sim-coverage-ext.md) | Mux v2 text — still closed; ≠ FR114 alone |
 | [`fr109-fsm-state-visit-coverage.md`](fr109-fsm-state-visit-coverage.md) | C3 recorder — closed; text alone ≠ FR114 |
+| [`fr158-third-party-lcov-gui.md`](fr158-third-party-lcov-gui.md) | Third-party `genhtml` path (FR158) — ≠ this in-tree GUI |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic56-waveform-coverage-gui.md` |
 
 ## Non-goals (NFR47 / NFR51)

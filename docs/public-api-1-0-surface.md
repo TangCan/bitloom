@@ -35,7 +35,7 @@ Documented `cargo bitloom` / `cargo-bitloom` subcommands (names may gain aliases
 | `visualize` | Hierarchy / timing viz |
 | `doc` | Doc emit helper |
 | `wave` | Waveform artifacts |
-| `coverage` | Coverage artifacts |
+| `coverage` | Coverage artifacts (FR114 LCOV + in-tree GUI; optional `--genhtml` FR158 third-party path) |
 
 Library modules under `bitloom` that are **not** documented as CLI surface are **not** automatically in-surface.
 
