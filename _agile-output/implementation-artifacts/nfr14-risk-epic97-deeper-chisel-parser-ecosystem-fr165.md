@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR165 / Epic 97；NFR14、NFR68、NFR69、NFR70、NFR71、NFR72；对照 FR138 / FR130 / FR122 / AD-27 / AD-9 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 97.1；Epic 97 未关闭 |
+| 状态 | closed — Story 97.3 勾选完成；Epic 97 关闭；FR165 实现面可宣称；**FR156** 仍属 Epic 98；**不得**宣称 NFR59「全清」；未选 Chisel HEAD Parser 仍 **NFR71** |
 | **选定** | 在保留 FR138 `BitloomFirrtlParser.parse` / FR130 Style Guide S1–S4 关闭面的前提下，授权 **MVP：Style Guide / linter 加深包** — 超出 FR130 标记面的可检查 lint/规则包（产品 API + `just`/脚本门禁 + ATDD）；**任意 Chisel HEAD Parser 回迁** **不做**（须新合同 / NFR71 + AD-9/AD-27） |
 
 ### Phase 12–18 / FR138 关闭面 vs Epic 97 实现边界（NFR68 · 必读）
@@ -108,8 +108,8 @@
 
 ### Epic 97 关闭条件（Story 97.3 勾选）
 
-- [ ] **FR165 钉死子集实现 + 验收** — Story 97.2
-- [ ] **文档 / deferred / README / spine 收口** — Story 97.3
-- [ ] **NFR68/70/71/72：** 边界与诚实义务保持；未选 HEAD Parser 仍须新合同
-- [ ] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
-- [ ] **FR156 / Epic 98：** 宣称门仍开放；不得以本 epic alone 冒充 Phase 19 全清
+- [x] **FR165 钉死子集实现 + 验收** — Story 97.2
+- [x] **文档 / deferred / README / spine 收口** — Story 97.3
+- [x] **NFR68/70/71/72：** 边界与诚实义务保持；未选 HEAD Parser 仍须新合同
+- [x] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **FR156 / Epic 98：** 宣称门仍开放；不得以本 epic alone 冒充 Phase 19 全清

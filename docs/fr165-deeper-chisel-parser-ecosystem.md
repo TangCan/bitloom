@@ -2,7 +2,9 @@
 
 **Product:** Bitloom (`bitloom_firrtl` / Chisel emit). Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 97 / FR165 in progress** (Story **97.2** product path). NFR14 selected **Style Guide / linter deepen**; **arbitrary Chisel HEAD Parser migration deferred** (**NFR71**).
+**Status:** **Epic 97 / FR165 closed** (Story **97.3**). Product path delivered in Story **97.2** (Style Guide / linter deepen beyond FR130).
+
+NFR14 selected **Style Guide / linter deepen**; **arbitrary Chisel HEAD Parser migration deferred** (**NFR71**).
 
 **≠ FR138 alone** (`BitloomFirrtlParser.parse` P1–P4 still valid). **≠ FR130 alone** (S1–S4 Style Guide markers still valid; NFR68). **AD-27 not revised** this batch (**NFR70**).
 

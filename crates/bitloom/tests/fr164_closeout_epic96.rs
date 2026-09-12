@@ -32,9 +32,11 @@ fn fr164_readme_marks_fr164_closed() {
         "README must mark FR164 / Epic 96 closed"
     );
     assert!(
-        readme.contains("FR165")
-            && (readme.contains("未关闭前不得宣称") || readme.contains("不得宣称")),
-        "README must keep FR165+ unclaimed"
+        readme.contains("FR156")
+            && (readme.contains("未关闭前不得宣称")
+                || readme.contains("不得宣称")
+                || readme.contains("Epic 98")),
+        "README must keep FR156 claim honesty open"
     );
     assert!(
         (readme.contains("全清") || readme.contains("NFR59"))
