@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 100 / FR167 in progress** (Story **100.2** implementation). Story **100.3** closeout pending.
+**Status:** **Epic 100 / FR167 closed** (Story **100.3**). Product path delivered in Story **100.2** ((a)+(b)).
 
 Phase 19 **FR162** default Tywaves GUI primary and **FR134** G1–G4 **remain closed and valid** (NFR73).
 This FR deepens **both**:

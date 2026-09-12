@@ -66,9 +66,10 @@ README「状态与 deferred」同源（Story **87.3** / **88.4** / **89.3** / **
 
 Correct Course `sprint-change-proposal-2026-09-12-phase20-nfr71-four-leftovers.md` + PRD addendum「Phase 20」**已批准**（**Phase 20 contract approved** 2026-09-12；`correctCoursePhase20Approved: 2026-09-12`）。
 闸门 **FR166 / Epic 99**（**已关闭** / Story **99.4**）。
-映射：**FR167** Epic 100（ChiselSim / 多端 IDE 商店）；**FR168** Epic 101（SPI+I2C+AXI 手写 FL）；**FR169** Epic 102（CIRCT/MLIR / firtool 升钉）；**FR170** Epic 103（HEAD Parser）；**FR171** Epic 104（宣称诚实）。
-**诚实：** Phase 19 关闭证据**仍有效**（**NFR73**）；不得用 Phase 19 alone 冒充本批四条；未关闭前不得宣称 FR167–170 已交付；超出各 NFR14 钉死子集仍须新合同（**NFR76**）；宣称须引 **FR166–171**（**FR171** / **NFR77**）。公开品牌 **Bitloom**。`git push` 非 FR。
-README「状态与 deferred」同源（Story **99.3** / **99.4**；宣称收口 → **104.x**）。
+**Epic 100 / FR167**（**已关闭** / Story **100.3**；[`docs/fr167-chiselsim-ide-stores.md`](../../docs/fr167-chiselsim-ide-stores.md)）— ChiselSim + Open VSX/JetBrains。
+映射（其余）：**FR168** Epic 101（SPI+I2C+AXI 手写 FL）；**FR169** Epic 102（CIRCT/MLIR / firtool 升钉）；**FR170** Epic 103（HEAD Parser）；**FR171** Epic 104（宣称诚实）。
+**诚实：** Phase 19 关闭证据**仍有效**（**NFR73**）；不得用 Phase 19 alone 冒充本批四条；**FR168–170 未关闭前不得宣称**已交付；超出各 NFR14 钉死子集仍须新合同（**NFR76**）；宣称须引 **FR166–171**（**FR171** / **NFR77**）。公开品牌 **Bitloom**。`git push` 非 FR。
+README「状态与 deferred」同源（Story **99.3** / **99.4** / **100.3**；宣称收口 → **104.x**）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 

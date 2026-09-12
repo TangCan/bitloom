@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR167 / Epic 100；NFR14、NFR73、NFR74、NFR75、NFR76、NFR77；对照 FR162 / FR134 / FR125 / FR117 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 100.1；Epic 100 进行中；100.2–100.3 须本记录后才可 ready |
+| 状态 | closed — Story 100.3 勾选完成；Epic 100 关闭；FR167 实现面可宣称；**FR168–171** 仍属 Epic 101–104；更深 GUI/商店未写入本记录子集仍 **NFR76** |
 | **选定** | 在保留 FR162 / FR134 关闭面的前提下，授权 **(a) 完整 ChiselSim 耦合** 且 **(b) 额外 IDE 商店多端**（至少 Open VSX 与/或 JetBrains 等价端，超出 FR134 G1）**二者皆交付** |
 
 ### Phase 12–19 / FR162 关闭面 vs Epic 100 实现边界（NFR73 · 必读）
@@ -86,3 +86,13 @@
 
 - AD-28；FR167；对照 FR162 / FR134；Phase 20 Correct Course approved 2026-09-12
 - **NFR14-crates** ≠ 本门禁
+
+---
+
+### Epic 100 关闭条件（Story 100.3 勾选）
+
+- [x] **FR167 钉死子集实现 + 验收** — Story 100.2（(a)+(b)）
+- [x] **文档 / deferred / README 收口** — Story 100.3
+- [x] **NFR73/75/76：** 边界与诚实义务保持；未写入更深 GUI/商店须新合同
+- [x] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **其余 FR168–171：** 未关前不得宣称 Phase 20 全清 / NFR71 账本已空

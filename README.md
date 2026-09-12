@@ -17,7 +17,7 @@ Rust 嵌入式 RTL HDL：设计是**可执行生成器**。`cargo bitloom build`
 
 ## 快速开始
 
-**诚实面（Phase 17 / 18 / 19 / 20）：** 库 crate（`bitloom-macro` / `hir` / `builder` / `vlog` / `sim` / `prelude`）已在 crates.io **1.0.0**（Phase 17 / FR146）。**公开 CLI `bitloom` 1.0.0 已可 `cargo install`**（**FR151** / Epic 85）。**Phase 18 已关闭**（Epic 84–86）：SemVer / 发版诚实 **FR153**（[`docs/fr153-semver-honesty.md`](docs/fr153-semver-honesty.md)）。CLI crates.io 宣称须引 **FR148–153**。**Phase 19 已关闭**（Epic 87–98 / FR154–165）：闸门 **FR154**；**FR155** lsp 上架；**FR157–165** NFR59 升格子集；宣称诚实 **FR156**（[`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md)）。Phase 19 宣称须引 **FR154–165**；超出各 NFR14 钉死子集仍曾归 **NFR71**（**NFR68** / **NFR72**）。**Phase 20 合同已批准且闸门已关**（Epic 99–104 / **FR166–FR171** / **NFR73–NFR77**；Correct Course 2026-09-12；**Epic 99 / FR166 已关闭** / Story **99.4**）：完整 ChiselSim / 多端 IDE 商店 **FR167**；SPI·I2C·AXI 手写 FL **FR168**；更广 CIRCT/MLIR / firtool 升钉 **FR169**；Chisel HEAD Parser **FR170**；宣称诚实 **FR171**。Phase 20 宣称须引 **FR166–171**；Epic 100–104 须各自 NFR14 后开工；未关闭前不得宣称对应条已交付（**NFR73** / **NFR77**）。`git push` **不是** FR。贡献者亦可 clone 本仓库使用 workspace CLI。
+**诚实面（Phase 17 / 18 / 19 / 20）：** 库 crate（`bitloom-macro` / `hir` / `builder` / `vlog` / `sim` / `prelude`）已在 crates.io **1.0.0**（Phase 17 / FR146）。**公开 CLI `bitloom` 1.0.0 已可 `cargo install`**（**FR151** / Epic 85）。**Phase 18 已关闭**（Epic 84–86）：SemVer / 发版诚实 **FR153**（[`docs/fr153-semver-honesty.md`](docs/fr153-semver-honesty.md)）。CLI crates.io 宣称须引 **FR148–153**。**Phase 19 已关闭**（Epic 87–98 / FR154–165）：闸门 **FR154**；**FR155** lsp 上架；**FR157–165** NFR59 升格子集；宣称诚实 **FR156**（[`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md)）。Phase 19 宣称须引 **FR154–165**；超出各 NFR14 钉死子集仍曾归 **NFR71**（**NFR68** / **NFR72**）。**Phase 20 合同已批准且闸门已关**（Epic 99–104 / **FR166–FR171** / **NFR73–NFR77**；Correct Course 2026-09-12；**Epic 99 / FR166 已关闭** / Story **99.4**；**Epic 100 / FR167 已关闭** / Story **100.3** — [`docs/fr167-chiselsim-ide-stores.md`](docs/fr167-chiselsim-ide-stores.md)）：完整 ChiselSim / 多端 IDE 商店 **FR167**（**已关闭**）；SPI·I2C·AXI 手写 FL **FR168**；更广 CIRCT/MLIR / firtool 升钉 **FR169**；Chisel HEAD Parser **FR170**；宣称诚实 **FR171**。Phase 20 宣称须引 **FR166–171**；Epic 101–104 须各自 NFR14 后开工；未关闭前不得宣称对应条已交付（**NFR73** / **NFR77**）。`git push` **不是** FR。贡献者亦可 clone 本仓库使用 workspace CLI。
 
 ```bash
 # 推荐：crates.io（FR151）
@@ -404,7 +404,22 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 更深 Chisel/Parser 生态 | FR165 / 97 | Style Guide/linter 加深（≠ FR138 alone；HEAD Parser 仍 NFR71）— **已关闭** |
 | Phase 19 宣称诚实门 | FR156 / 98 | [`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md) — **已关闭**（Story 98.3） |
 
-**FR154–165 宣称纪律：** 「lsp 已上架」须引 **FR155**；各 NFR59 条须引 **FR157–165**；完整 Phase 19 宣称须引 **FR154–165**（**FR156**）。**不得宣称**超出已关 FR / NFR14 钉死子集的完成面（**NFR71**）。`git push` **不是** FR。公开品牌 **Bitloom**。
+**FR154–165 宣称纪律：** 「lsp 已上架」须引 **FR155**；各 NFR59 条须引 **FR157–165**；完整 Phase 19 宣称须引 **FR154–165**（**FR156**）。**不得宣称**超出已关 FR / NFR14 钉死子集的完成面（**NFR71** → Phase 20）。`git push` **不是** FR。公开品牌 **Bitloom**。
+
+### Phase 20 加深面（NFR71 四条升格 · FR166–FR171 / NFR73–NFR77）
+
+下列原 **NFR71** 账本已由 Correct Course + **FR166** 升格为 Phase 20 显式 FR（Epic 99–104）。**对外宣称须引对应已关 FR**（**FR171** / **NFR77**）。Phase 12–19 关闭面**仍有效**（**NFR73**）。同源：PRD addendum「Phase 20」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。
+
+| 加深面 | FR / Epic | 状态（诚实） |
+| --- | --- | --- |
+| Phase 20 合同闸门 | FR166 / 99 | Correct Course + README/deferred/AD — **已关闭** |
+| 完整 ChiselSim / 多端 IDE 商店 | FR167 / 100 | `--chiselsim` + Open VSX/JetBrains（≠ FR162/FR134 alone）— **已关闭**（[`docs/fr167-chiselsim-ide-stores.md`](docs/fr167-chiselsim-ide-stores.md)） |
+| SPI·I2C·AXI 手写 FL | FR168 / 101 | 三者皆须 — **未关闭前不得宣称** |
+| 更广 CIRCT/MLIR / firtool 升钉 | FR169 / 102 | ≠ FR164 alone；升钉须 AD-9 — **未关闭前不得宣称** |
+| Chisel HEAD Parser 回迁 | FR170 / 103 | ≠ FR138/FR165 alone；须修订 AD-27 — **未关闭前不得宣称** |
+| Phase 20 宣称诚实门 | FR171 / 104 | — **未关闭前不得宣称** |
+
+**FR166–171 宣称纪律：** 「ChiselSim/多商店已交付」须引 **FR167**；其余条须引对应 FR；完整 Phase 20 宣称须引 **FR166–171**（**FR171**）。超出各 NFR14 钉死子集仍须新合同（**NFR76**）。`git push` **不是** FR。
 
 **（历史口径）NFR59 曾 deferred（NFR63 / NFR67）— 现已由 Phase 19 合同升格；未关 FR 前仍不得冒充已清：**
 
@@ -413,7 +428,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 - emit MemRead stub → 完整生成 → **FR159**（**Epic 91 已关闭** — [`docs/fr159-memread-full-emit.md`](docs/fr159-memread-full-emit.md)）
 - 非 Cargo 全 monorepo 任意路径扫描 → **FR160**（**Epic 92 已关闭** — [`docs/fr160-non-cargo-path-scan.md`](docs/fr160-non-cargo-path-scan.md)）
 - GHA `formal-sby` 镜像卫生跟踪 → **FR161**（**Epic 93 已关闭** — [`docs/fr161-formal-sby-image-hygiene.md`](docs/fr161-formal-sby-image-hygiene.md)）
-- 更深 GUI/IDE 子集（替换默认 VCD/`typed-wave.html` 唯一波形面）— ≠ FR134 G1–G4 alone → **FR162**（**Epic 94 已关闭** — [`docs/fr162-deeper-gui-ide-default-wave.md`](docs/fr162-deeper-gui-ide-default-wave.md)；完整 ChiselSim / 额外 IDE 商店多端仍须新合同 **NFR71**）
+- 更深 GUI/IDE 子集（替换默认 VCD/`typed-wave.html` 唯一波形面）— ≠ FR134 G1–G4 alone → **FR162**（**Epic 94 已关闭** — [`docs/fr162-deeper-gui-ide-default-wave.md`](docs/fr162-deeper-gui-ide-default-wave.md)；完整 ChiselSim / 额外 IDE 商店多端 → **FR167** / **Epic 100 已关闭**）
 - 未列入协议手写 FL（`UartRx` beyond `UartTx`）— ≠ FR135 `UartTx` alone；FR126 Gpio 仍有效 → **FR163**（**Epic 95 已关闭** — [`docs/fr163-unlisted-protocol-handwritten-fl.md`](docs/fr163-unlisted-protocol-handwritten-fl.md)；SPI / I2C / AXI 手写仍须新合同 **NFR71**）
 - 更广 CIRCT/MLIR lower / 仿真门禁加深 — ≠ FR137 编译门禁 MVP alone；FR129 C1–C4 仍有效 → **FR164**（**Epic 96 已关闭** — [`docs/fr164-circt-external-sim-gate.md`](docs/fr164-circt-external-sim-gate.md)；更广 MLIR allocation 仍须新合同 **NFR71**）
 - 更深 Chisel/Parser 生态（社区 Style Guide/linter 全家桶；任意 Chisel HEAD Parser 回迁）— ≠ FR138 P1–P4 alone；FR130 Style Guide 仍有效 → **FR165**（**Epic 97 已关闭** — [`docs/fr165-deeper-chisel-parser-ecosystem.md`](docs/fr165-deeper-chisel-parser-ecosystem.md)；任意 Chisel HEAD Parser 仍须新合同 **NFR71**）
