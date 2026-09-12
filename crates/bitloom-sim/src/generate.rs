@@ -27,12 +27,15 @@ enum SeqOp {
     },
 }
 
-/// In-process functional model derived from FrozenHir (FR47 / FR112).
+/// In-process functional model derived from FrozenHir (FR47 / FR112 / FR159).
 ///
 /// **FR112:** SyncReadMem / Mem `MemRead`+`MemWrite` semantics match cycle-accurate
-/// [`crate::Sim::tick`] (latency-1 sync read via `pending_mem_reads`). The emitted
-/// crate (`generate_functional_sim`) still stubs `MemRead` as `0` — use this
-/// in-process view / `check_generated_bridge` for MemRead≡tick.
+/// [`crate::Sim::tick`] (latency-1 sync read via `pending_mem_reads`) for the
+/// **in-process** view / `check_generated_bridge`.
+///
+/// **FR159:** [`generate_functional_sim`] emits the same MemRead/MemWrite +
+/// SyncReadMem latency-1 semantics into the standalone functional-sim crate
+/// (no longer stubs `MemRead` as `0`).
 #[derive(Debug, Clone)]
 pub struct GeneratedFunctional {
     regs: BTreeMap<String, u64>,
@@ -356,22 +359,74 @@ fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
         .keys()
         .map(|n| format!("        regs.insert({n:?}.into(), 0u64);\n"))
         .collect();
+    let mem_inits: String = model
+        .mems
+        .iter()
+        .map(|(n, words)| {
+            let lit = words
+                .iter()
+                .map(|w| w.to_string())
+                .collect::<Vec<_>>()
+                .join(", ");
+            format!("        mems.insert({n:?}.into(), vec![{lit}]);\n")
+        })
+        .collect();
     let seq_arms: String = model
         .seq
         .iter()
-        .filter_map(|op| match op {
+        .map(|op| match op {
             SeqOp::RegD { name, expr, has_en } => {
-                let en_guard = if *has_en {
-                    "            if !enable { /* hold */ } else {\n"
-                } else {
-                    "            {\n"
+                let body = match expr {
+                    AssignExpr::MemRead { mem, addr } if model.mem_is_sync(mem) => format!(
+                        "                    let val = self.eval_mem_read(inputs, {mem:?}, {addr:?});\n\
+                                            next_pending.insert({name:?}.into(), val);\n"
+                    ),
+                    _ => format!(
+                        "                    next_regs.insert({name:?}.into(), {});\n",
+                        render_expr(expr)
+                    ),
                 };
-                Some(format!(
-                    "{en_guard}                next.insert({name:?}.into(), {});\n            }}\n",
-                    render_expr(expr)
-                ))
+                let en_guard = if *has_en {
+                    format!(
+                        "                if reset {{\n\
+                                            next_regs.insert({name:?}.into(), 0);\n\
+                                        }} else if enable {{\n\
+                         {body}                }}\n"
+                    )
+                } else {
+                    format!(
+                        "                if reset {{\n\
+                                            next_regs.insert({name:?}.into(), 0);\n\
+                                        }} else {{\n\
+                         {body}                }}\n"
+                    )
+                };
+                en_guard
             }
-            SeqOp::MemWrite { .. } => None,
+            SeqOp::MemWrite {
+                mem,
+                addr,
+                we,
+                expr,
+            } => {
+                let we_guard = match we {
+                    Some(w) => format!(
+                        "                if !reset && self.lookup(inputs, {w:?}) != 0 {{\n"
+                    ),
+                    None => "                if !reset {\n".into(),
+                };
+                format!(
+                    "{we_guard}                    let a_idx = self.lookup(inputs, {addr:?}) as usize;\n\
+                                        let data = {};\n\
+                                        if let Some(bank) = self.mems.get_mut({mem:?}) {{\n\
+                                            if a_idx < bank.len() {{\n\
+                                                bank[a_idx] = data;\n\
+                                            }}\n\
+                                        }}\n\
+                                    }}\n",
+                    render_expr(expr)
+                )
+            }
         })
         .collect();
     let comb_arms: String = model
@@ -389,10 +444,37 @@ fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
         Some(p) => format!("let enable = inputs.get({p:?}).unwrap_or(0) != 0;"),
         None => "#[allow(unused_variables)] let enable = true;".into(),
     };
+    let mem_gold = if model.mems.is_empty() {
+        String::new()
+    } else {
+        format!(
+            r#"
+    #[test]
+    fn gold_sync_read_mem_latency1_write_then_read() {{
+        // FR159: emitted SyncReadMem path matches Sim / GeneratedFunctional latency-1.
+        let mut sim = FunctionalSim::new();
+        let mut pv = PortValues::default();
+        pv.set({reset:?}, 0);
+        pv.set("addr", 3);
+        pv.set("wdata", 0xAB);
+        pv.set("we", 1);
+        let c0 = sim.cycle(&pv);
+        if c0.values.contains_key("rdata") {{
+            assert_eq!(c0.get("rdata"), Some(0));
+        }}
+        let c1 = sim.cycle(&pv);
+        if c1.values.contains_key("rdata") {{
+            assert_eq!(c1.get("rdata"), Some(0xAB));
+        }}
+    }}
+"#
+        )
+    };
 
     format!(
-        r#"//! Generated Bitloom functional simulator (FR47 / AD-5).
+        r#"//! Generated Bitloom functional simulator (FR47 / FR159 / AD-5).
 //! Not SystemC / TLM-2.0. Do not hand-edit; regenerate via `generate_functional_sim`.
+//! MemRead/MemWrite + SyncReadMem latency-1 match GeneratedFunctional / Sim::tick (FR159).
 
 use std::collections::BTreeMap;
 
@@ -400,8 +482,11 @@ use bitloom_hir::PortValues;
 
 /// Generated functional view (AbstractionView-compatible cycle API).
 #[derive(Debug, Clone)]
+#[allow(dead_code)] // mems/pending unused on designs without MemRead
 pub struct FunctionalSim {{
     regs: BTreeMap<String, u64>,
+    mems: BTreeMap<String, Vec<u64>>,
+    pending_mem_reads: BTreeMap<String, u64>,
 }}
 
 impl Default for FunctionalSim {{
@@ -413,7 +498,12 @@ impl Default for FunctionalSim {{
 impl FunctionalSim {{
     pub fn new() -> Self {{
         let mut regs = BTreeMap::new();
-{reg_inits}        Self {{ regs }}
+{reg_inits}        let mut mems = BTreeMap::new();
+{mem_inits}        Self {{
+            regs,
+            mems,
+            pending_mem_reads: BTreeMap::new(),
+        }}
     }}
 
     fn lookup(&self, inputs: &PortValues, name: &str) -> u64 {{
@@ -423,20 +513,30 @@ impl FunctionalSim {{
             .unwrap_or(0)
     }}
 
+    #[allow(dead_code)]
+    fn eval_mem_read(&self, inputs: &PortValues, mem: &str, addr: &str) -> u64 {{
+        let a = self.lookup(inputs, addr) as usize;
+        self.mems
+            .get(mem)
+            .and_then(|m| m.get(a).copied())
+            .unwrap_or(0)
+    }}
+
     /// One untimed functional cycle; returns updated `PortValues`.
     pub fn cycle(&mut self, inputs: &PortValues) -> PortValues {{
         let reset = inputs.get({reset:?}).unwrap_or(0) != 0;
         {enable_init}
-        if reset {{
-            for v in self.regs.values_mut() {{
-                *v = 0;
-            }}
-        }} else {{
-            let mut next = BTreeMap::new();
-{seq_arms}            for (k, v) in next {{
-                self.regs.insert(k, v);
-            }}
+        // Apply SyncReadMem pending from previous cycle (latency 1) — matches Sim.
+        let pending = std::mem::take(&mut self.pending_mem_reads);
+        for (name, val) in pending {{
+            self.regs.insert(name, if reset {{ 0 }} else {{ val }});
         }}
+        let mut next_pending = BTreeMap::new();
+        let mut next_regs: BTreeMap<String, u64> = BTreeMap::new();
+{seq_arms}        for (k, v) in next_regs {{
+            self.regs.insert(k, v);
+        }}
+        self.pending_mem_reads = next_pending;
         let mut out = inputs.clone();
 {comb_arms}        out
     }}
@@ -462,7 +562,7 @@ mod tests {{
             assert_eq!(last.get("data_out"), Some(3));
         }}
     }}
-}}
+{mem_gold}}}
 "#
     )
 }
@@ -493,7 +593,9 @@ fn render_expr(expr: &AssignExpr) -> String {
         AssignExpr::Mux { sel, t, f } => format!(
             "if self.lookup(inputs, {sel:?}) != 0 {{ self.lookup(inputs, {t:?}) }} else {{ self.lookup(inputs, {f:?}) }}"
         ),
-        AssignExpr::MemRead { .. } => "0".into(),
+        AssignExpr::MemRead { mem, addr } => {
+            format!("self.eval_mem_read(inputs, {mem:?}, {addr:?})")
+        }
     }
 }
 
@@ -628,5 +730,40 @@ mod tests {
         let cargo = fs::read_to_string(out.join("Cargo.toml")).unwrap();
         assert!(cargo.contains("bitloom-hir"));
         assert!(out.join("src/main.rs").is_file());
+    }
+
+    #[test]
+    fn emit_sync_read_mem_not_stubbed_and_cargo_tests() {
+        let hir = sync_read_mem_hir();
+        let dir = std::env::temp_dir().join(format!("bitloom-func-mem-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&dir);
+        let out = generate_functional_sim(&hir, &dir).unwrap();
+        let lib = fs::read_to_string(out.join("src/lib.rs")).unwrap();
+        assert!(
+            lib.contains("eval_mem_read") && lib.contains("pending_mem_reads"),
+            "FR159 emit must include real MemRead / SyncReadMem latency-1"
+        );
+        assert!(
+            lib.contains("gold_sync_read_mem_latency1_write_then_read"),
+            "emitted crate must include SyncReadMem gold"
+        );
+        // Must not be the pre-FR159 constant stub for MemRead targets.
+        assert!(
+            lib.contains("next_pending.insert(\"q\"")
+                || lib.contains("next_pending.insert(\"q\".into()"),
+            "sync MemRead into q must queue pending, not assign 0"
+        );
+        let status = std::process::Command::new("cargo")
+            .arg("+1.97.1")
+            .arg("test")
+            .arg("--manifest-path")
+            .arg(out.join("Cargo.toml"))
+            .arg("--quiet")
+            .status()
+            .expect("spawn cargo test");
+        assert!(
+            status.success(),
+            "emitted SyncReadMem functional crate must cargo test"
+        );
     }
 }

@@ -30,8 +30,10 @@ fixture (latency-1 read): same PortValues after documented stimuli via
 `check_generated_bridge`.
 
 - **Tooling:** in-tree Bitloom (`just test` / `cargo test`) — no SymbiYosys required.
-- **Emitted crate** (`generate_functional_sim`) may still stub `MemRead` as `0`;
-  the FR112 face is the **in-process** view used by `check_generated_bridge`.
+- **Emitted crate** MemRead full generate is **FR159** — see
+  [`fr159-memread-full-emit.md`](fr159-memread-full-emit.md).
+  The FR112 face remains the **in-process** view used by `check_generated_bridge`
+  (FR112 alone ≠ FR159).
 
 ## Recipe
 
@@ -53,6 +55,7 @@ A deliberate FL that ignores MemRead latency (always drives `rdata=0`) must
 | [`fr100-formal-equiv.md`](fr100-formal-equiv.md) | Phase 12 F1-(i) MVP — still closed (NFR44); ≠ FR112 alone |
 | [`fr103-ip-dual-model.md`](fr103-ip-dual-model.md) | SyncFifo handwritten FL MVP — still closed; ≠ FR112 alone |
 | [`fr119-symbiyosys-smt.md`](fr119-symbiyosys-smt.md) | FR119 / Epic 60 SymbiYosys path (former branch A; ≠ this page) |
+| [`fr159-memread-full-emit.md`](fr159-memread-full-emit.md) | FR159 emitted MemRead full generate (≠ this FR112 page alone) |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic54-formal-dual-model-depth.md` |
 
 ## Non-goals (this FR112 page)
