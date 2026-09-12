@@ -694,8 +694,8 @@ development_status:
 
   epic-100: in-progress
   100-1-epic-100-nfr14-风险记录: done
-  100-2-chiselsim-与多端-ide-商店实现与验收-fr167: ready-for-dev
-  100-3-fr167-收口与文档指针: backlog
+  100-2-chiselsim-与多端-ide-商店实现与验收-fr167: done
+  100-3-fr167-收口与文档指针: ready-for-dev
   epic-100-retrospective: optional
 
   epic-101: in-progress

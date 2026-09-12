@@ -202,6 +202,12 @@ enum Commands {
         /// With this flag, FR125 requires `--tywaves`; GUI manifests are not emitted.
         #[arg(long, default_value_t = false)]
         no_tywaves_gui: bool,
+        /// FR167 (a): emit ChiselSim coupling artifacts (`chiselsim.*`) beyond FR162 GUI primary.
+        #[arg(long, default_value_t = false)]
+        chiselsim: bool,
+        /// FR167 (b): emit multi IDE-store descriptors (Open VSX + JetBrains beyond FR134 G1).
+        #[arg(long, default_value_t = false)]
+        ide_stores: bool,
     },
     /// Tick a Mux demo (or `.fir`) and write FR114 `coverage.lcov` + `coverage.html`.
     ///
@@ -974,11 +980,15 @@ fn main() {
             tywaves,
             tywaves_gui: _,
             no_tywaves_gui,
+            chiselsim,
+            ide_stores,
         } => {
             // FR162: GUI depth is the default primary wave surface unless opted out.
             // `--tywaves-gui` remains accepted (FR134 ATDD / docs); default path already on.
             let emit_gui = !no_tywaves_gui;
-            match run_wave(&input, &out_dir, ticks, fst, tywaves, emit_gui) {
+            match run_wave(
+                &input, &out_dir, ticks, fst, tywaves, emit_gui, chiselsim, ide_stores,
+            ) {
                 Ok(()) => {}
                 Err(e) => {
                     eprintln!("error: {e}");
@@ -1060,6 +1070,7 @@ fn run_visualize(input: &Path, out_dir: &Path) -> Result<PathBuf, String> {
 /// + typed-wave.html / wave.typed.json (FR117 subset B; secondary under FR162)
 /// + **default** tywaves.gui.* FR134/FR162 GUI primary (`want_tywaves_gui`; opt out via CLI)
 /// + FR125 sidecar when GUI primary or `--tywaves`.
+/// + optional FR167 `--chiselsim` / `--ide-stores` deepen.
 fn run_wave(
     input: &Path,
     out_dir: &Path,
@@ -1067,6 +1078,8 @@ fn run_wave(
     want_fst: bool,
     want_tywaves: bool,
     want_tywaves_gui: bool,
+    want_chiselsim: bool,
+    want_ide_stores: bool,
 ) -> Result<(), String> {
     use bitloom_hir::PortValues;
     use bitloom_sim::Sim;
@@ -1318,6 +1331,99 @@ fn run_wave(
             vcd_path.display()
         );
     }
+
+    if want_chiselsim {
+        let manifest = bitloom::fr167::chiselsim_manifest(&title);
+        if !manifest.contains("data-bitloom-chiselsim")
+            || !manifest.contains("\"fr\": \"FR167\"")
+            || !manifest.contains("chiselsim")
+        {
+            return Err("chiselsim.manifest.json missing FR167 contract fields".into());
+        }
+        let manifest_path = out_dir.join("chiselsim.manifest.json");
+        fs::write(&manifest_path, &manifest)
+            .map_err(|e| format!("write {}: {e}", manifest_path.display()))?;
+        let install = bitloom::fr167::chiselsim_install_json();
+        let install_path = out_dir.join("chiselsim.install.json");
+        fs::write(&install_path, &install)
+            .map_err(|e| format!("write {}: {e}", install_path.display()))?;
+        let check_sh = bitloom::fr167::chiselsim_check_sh();
+        let check_path = out_dir.join("chiselsim.check.sh");
+        fs::write(&check_path, &check_sh)
+            .map_err(|e| format!("write {}: {e}", check_path.display()))?;
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            let mut perms = fs::metadata(&check_path)
+                .map_err(|e| format!("stat {}: {e}", check_path.display()))?
+                .permissions();
+            perms.set_mode(0o755);
+            fs::set_permissions(&check_path, perms)
+                .map_err(|e| format!("chmod {}: {e}", check_path.display()))?;
+        }
+        println!("wrote {}", manifest_path.display());
+        println!("wrote {}", install_path.display());
+        println!("wrote {}", check_path.display());
+
+        let force = std::env::var_os("BITLOOM_CHISELSIM_FORCE_MISSING").is_some();
+        let root = std::env::var_os("BITLOOM_CHISELSIM_ROOT");
+        let root_ok = root.as_ref().is_some_and(|r| {
+            let p = Path::new(r);
+            p.is_dir() && p.join("BITLOOM_CHISELSIM_OK").is_file()
+        });
+        if force || !root_ok {
+            return Err("bitloom.chiselsim-missing: ChiselSim coupling unavailable \
+                 (set BITLOOM_CHISELSIM_ROOT to a directory with BITLOOM_CHISELSIM_OK, \
+                 or unset BITLOOM_CHISELSIM_FORCE_MISSING); FR167 manifests written \
+                 but must not silent-succeed"
+                .into());
+        }
+        println!(
+            "FR167: validated ChiselSim root via BITLOOM_CHISELSIM_ROOT ({})",
+            Path::new(root.as_ref().unwrap()).display()
+        );
+    }
+
+    if want_ide_stores {
+        let manifest = bitloom::fr167::ide_stores_manifest(&title);
+        if !manifest.contains("data-bitloom-ide-stores")
+            || !manifest.contains("\"fr\": \"FR167\"")
+            || !manifest.contains("open-vsx")
+            || !manifest.contains("jetbrains")
+        {
+            return Err("tywaves.ide-stores.manifest.json missing FR167 multi-store fields".into());
+        }
+        let manifest_path = out_dir.join("tywaves.ide-stores.manifest.json");
+        fs::write(&manifest_path, &manifest)
+            .map_err(|e| format!("write {}: {e}", manifest_path.display()))?;
+        let install = bitloom::fr167::ide_stores_install_json();
+        if !install.contains("OVSX_PAT") || !install.contains("JETBRAINS_TOKEN") {
+            return Err("tywaves.ide-stores.install.json missing token env contract".into());
+        }
+        let install_path = out_dir.join("tywaves.ide-stores.install.json");
+        fs::write(&install_path, &install)
+            .map_err(|e| format!("write {}: {e}", install_path.display()))?;
+        println!("wrote {}", manifest_path.display());
+        println!("wrote {}", install_path.display());
+
+        let force = std::env::var_os("BITLOOM_IDE_STORE_PUBLISH_FORCE_MISSING").is_some();
+        let ovsx = std::env::var_os("OVSX_PAT").filter(|v| !v.is_empty());
+        let jb = std::env::var_os("JETBRAINS_TOKEN").filter(|v| !v.is_empty());
+        if force || ovsx.is_none() || jb.is_none() {
+            return Err(
+                "bitloom.ide-store-missing-token: Open VSX / JetBrains publish tokens \
+                 unavailable (set OVSX_PAT and JETBRAINS_TOKEN for live publish, or unset \
+                 BITLOOM_IDE_STORE_PUBLISH_FORCE_MISSING); FR167 store descriptors written \
+                 but must not silent-succeed as published"
+                    .into(),
+            );
+        }
+        println!(
+            "FR167: IDE store tokens present (OVSX_PAT + JETBRAINS_TOKEN); \
+             live publish via scripts/publish-tywaves-ide-stores.sh (NFR75)"
+        );
+    }
+
     Ok(())
 }
 
