@@ -111,6 +111,7 @@ phase20RequirementsApproved: 2026-09-12
 phase20EpicListApproved: 2026-09-12
 phase20Epic99StoriesDrafted: 2026-09-12
 phase20Epic99Stories: 4
+phase20Epic99Status: complete
 phase20Epic100StoriesDrafted: 2026-09-12
 phase20Epic100Stories: 3
 phase20Epic101StoriesDrafted: 2026-09-12
@@ -127,12 +128,8 @@ phase20EpicCount: 6
 phase20EpicRange: 99-104
 phase20Validation: |
   FR166–171 mapped to Epic 99–104 stories (19); Epic 99 hard gate for 100–104;
-  no forward story deps within epics; Architecture starter N/A; no UX-DR;
-  File-churn: Epic 100 wave/IDE; 101 ip/; 102 CIRCT/firtool; 103 Parser; 104 docs;
-  Epic 101 soft-orders ip/; Epic 102 bump before 103 Parser if same pin set;
-  FR171 claim honesty in Epic 104 after deepen soft-order; Correct Course approved 2026-09-12
-  (Story 99.2 verifies stamp); create-epics-and-stories Phase 20 validated 2026-09-12;
-  sprint seeded backlog; next: Build Story 99.1 NFR14.
+  Epic 99 / FR166 closed Story 99.4; Correct Course approved 2026-09-12;
+  next: Build Epic 100–103 NFR14 (parallel soft); Epic 104 after deepen.
 phase20Contract: nfr71-four-leftover-upgrade
 phase20Scope: >
   Gate FR166; full ChiselSim / extra IDE store multi-target (FR167);
@@ -141,8 +138,8 @@ phase20Scope: >
 phase20Note: >
   create-epics Step 1–4 complete (2026-09-12); Correct Course approved 2026-09-12
   (Q1–Q5 defaults). Soft order: 99 → (100 ‖ 101 ‖ 102 ‖ 103) → 104.
-  Phase 12–19 closes remain valid. git push is ops, not FR.
-  Implementation gate remains Epic 99 close before 100–104 ready.
+  Phase 12–19 closes remain valid. Epic 99 / FR166 gate closed 2026-09-12.
+  git push is ops, not FR.
 phase20WorkflowComplete: 2026-09-12
 phase19Status: complete
 correctCoursePhase19Approved: 2026-09-12

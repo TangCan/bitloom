@@ -62,11 +62,14 @@ fn fr166_readme_forbids_claim_before_fr_close() {
         "README must forbid claiming Phase 20 delivers before FR closes"
     );
     assert!(
-        (readme.contains("100") || readme.contains("Epic 100"))
+        ((readme.contains("100") || readme.contains("Epic 100"))
             && (readme.contains("不得 ready")
                 || readme.contains("不得标 ready")
-                || readme.contains("不得 ready")),
-        "README must note Epic 100–104 not ready before Epic 99 closes"
+                || readme.contains("须各自 NFR14")
+                || readme.contains("NFR14")))
+            || (readme.contains("Epic 99")
+                && (readme.contains("已关闭") || readme.contains("闸门已关"))),
+        "README must note Epic 100–104 gated until Epic 99 closes, or gate closed + per-epic NFR14"
     );
     assert!(
         (readme.contains("git push") || readme.contains("`git push`"))
@@ -84,11 +87,12 @@ fn fr166_deferred_phase20_pointer() {
     );
     assert!(
         deferred.contains("Epic 99")
-            && (deferred.contains("不得 ready")
+            && ((deferred.contains("不得 ready")
                 || deferred.contains("未关闭前")
                 || deferred.contains("100–104")
-                || deferred.contains("100-104")),
-        "deferred must gate Epic 100–104 until Epic 99 closes"
+                || deferred.contains("100-104"))
+                || (deferred.contains("已关闭") && deferred.contains("99.4"))),
+        "deferred must gate Epic 100–104 until Epic 99 closes, or record Epic 99 closed"
     );
     for fr in ["FR167", "FR168", "FR169", "FR170", "FR171"] {
         assert!(

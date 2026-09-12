@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR166 / Epic 99；NFR14、NFR73、NFR74、NFR76、NFR77；对照 FR154–165 / NFR68–72；FR167–171 实现面 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 99.1；Epic 99 闸门进行中；99.2–99.4 须本记录后才可 ready；Epic 100–104 在 Epic 99 关闭前不得 ready |
+| 状态 | closed — Story 99.4 勾选完成；Epic 99 关闭；Phase 20 闸门已开；Epic 100–104 仍须各自 NFR14；实发/加深属 Epic 100–103；宣称属 Epic 104 |
 | **选定** | 在保留 Phase 12–19 关闭面的前提下，授权 Phase 20「NFR71 四条升格」合同闸门（FR166）；实现属 Epic 100–104 |
 
 ### Phase 12–19 关闭面 vs Phase 20 边界（NFR73 · 必读）
@@ -115,3 +115,17 @@
 - Addendum：`prd-rhdl-2026-08-19/addendum.md` — Phase 20（→ 99.2）
 - 体例：`nfr14-risk-epic87-phase19-nfr59-fr152a.md`
 - **NFR14-crates** ≠ 本门禁
+
+---
+
+### Epic 99 关闭条件（Story 99.4 勾选）
+
+- [x] **FR166 / Correct Course + PRD：** Phase 20 批准文案验收 — Story 99.2
+- [x] **README / deferred：** Phase 19 vs Phase 20 合同区分 — Story 99.3
+- [x] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 20 指针 — Story 99.4
+- [x] **NFR73–77：** 边界与诚实义务写入本记录并保持
+- [x] **禁止事项未触发：** 100–104 在 Epic 99 关闭前未标 ready
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`；禁 publish `rhdl`/`rhdl-bits`
+- [x] **Epic 100–104：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭
+
+**Phase 20 闸门已开（Story 99.4）：** Epic 100–104 可在各自 NFR14 后标 ready；软序 `99 →（100 ‖ 101 ‖ 102 ‖ 103）→ 104`；**不得**宣称 FR167–170 已关闭直至对应 epic 关闭；**不得**用 Phase 19 alone 冒充（NFR77）。
