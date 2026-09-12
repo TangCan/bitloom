@@ -470,3 +470,36 @@ README / deferred / 脊柱指针由 Story **99.3–99.4** 落地；实现加深�
 
 **合同指针：** 详见 `epics.md` Phase 20 Inventory（FR166–FR171 / NFR73–NFR77）。
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-12-phase20-nfr71-four-leftovers.md`
+
+## 2026-09-12 Update — Phase 21 NFR76 leftovers 升格（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-12-phase21-nfr76-leftovers.md` —
+在 Phase 20 NFR71 四条升格 **已关闭**之后，正式 **Phase 21**
+「NFR76 leftovers 升格」（Epic 105–110 · **FR172–FR177** / **NFR78–NFR82**），
+打开曾被 **NFR76** 明确要求另开合同的四条 leftover。
+
+**批准默认（Q1–Q5）：**
+1. **NFR76 四条全部**升格为 **FR173–FR176**（各 epic NFR14 钉死验收子集；禁止静默超子集 — NFR81）。
+2. **FR173：** firtool 升钉 **必须**上游 Chisel **正式配对**后修订 **AD-9 / Stack**（禁止 unpaired bump）。
+3. **不得**改写 Phase 12–20「已关闭」（**NFR78**）。
+4. **不得**静默扩大 FR142；宣称须引已关 FR（**FR177** / **NFR82**）。
+5. **MSRV** 默认保持现行，除非某 epic NFR14 显式另开；超出本批钉死子集仍须新合同（**NFR81**）。
+
+**公开品牌（不变）：** **Bitloom**；crates.io / CLI **`bitloom`** / `bitloom-*`；设计 crate 仍只依赖
+`bitloom-prelude`（AD-6）。禁止发布 `rhdl` / `rhdl-bits`。
+
+**与 Phase 12–20 的关系（必须同时读）：**
+- Phase 12–20（FR94–171）关闭证据 **仍有效**；**不得**改写为失败（**NFR78**）。
+- Phase 21 是 **新合同**下的加深，**不是**「Phase 20 失败」的补救叙事。
+- 映射：闸门 **FR172**；firtool 升钉 **FR173**；unpaired HEAD **FR174**；更广 CIRCT/MLIR/sim **FR175**；更深 Parser/Chisel 生态 **FR176**；宣称 **FR177**。
+- 对外「NFR76 四条已交付」类表述：**仅**可在对应 FR 关闭后宣称；
+  **禁止**用 Phase 20 alone 冒充。
+- **口径：** 本批关闭 ≠ 清空超出各 NFR14 钉死子集的更深项（**NFR81**）；`git push` **不是** FR。
+
+**实现闸门：** Epic 105（Story 105.1–105.4 · **FR172**）关闭前，Epic 106–110 不得标 ready。  
+软序：**105 →（106 ‖ 107 ‖ 108 ‖ 109）→ 110**；触及 AD-9 的 Epic 106/107 建议串行或明确配对依赖。  
+README / deferred / 脊柱指针由 Story **105.3–105.4** 落地；实现加深属 Epic **106–109**。  
+**不**在本合同批准瞬间强制 firtool live 升钉 / HEAD 二进制。
+
+**合同指针：** 详见 `epics.md` Phase 21 Inventory（**planning-complete** · Epic 105–110 · FR172–FR177 / NFR78–NFR82）。
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-12-phase21-nfr76-leftovers.md`

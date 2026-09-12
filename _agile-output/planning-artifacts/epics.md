@@ -103,30 +103,35 @@ stepsCompleted:
   - step-02-design-epics-phase-20
   - step-03-create-stories-phase-20
   - step-04-final-validation-phase-20
-status: complete
-phase20Status: complete
-correctCoursePhase20Approved: 2026-09-12
-phase20ContractApproved: 2026-09-12
-phase20RequirementsApproved: 2026-09-12
-phase20EpicListApproved: 2026-09-12
-phase20Epic99StoriesDrafted: 2026-09-12
-phase20Epic99Stories: 4
-phase20Epic99Status: complete
-phase20Epic100StoriesDrafted: 2026-09-12
-phase20Epic100Stories: 3
-phase20Epic100Status: complete
-phase20Epic101StoriesDrafted: 2026-09-12
-phase20Epic101Stories: 3
-phase20Epic101Status: complete
-phase20Epic102StoriesDrafted: 2026-09-12
-phase20Epic102Stories: 3
-phase20Epic102Status: complete
-phase20Epic103StoriesDrafted: 2026-09-12
-phase20Epic103Stories: 3
-phase20Epic103Status: complete
-phase20Epic104StoriesDrafted: 2026-09-12
-phase20Epic104Stories: 3
-phase20Epic104Status: complete
+  - step-01-validate-prerequisites-phase-21
+  - step-02-design-epics-phase-21
+  - step-03-create-stories-phase-21
+  - step-04-final-validation-phase-21
+phase21Status: planning-complete
+phase21RequirementsExtracted: 2026-09-12
+phase21EpicListApproved: 2026-09-12
+phase21StoriesDrafted: 2026-09-12
+phase21PlanningComplete: 2026-09-12
+phase21Epic105Stories: 4
+phase21Epic106Stories: 3
+phase21Epic107Stories: 3
+phase21Epic108Stories: 3
+phase21Epic109Stories: 3
+phase21Epic110Stories: 3
+phase21ProposedEpics: 105-110
+phase21ProposedFRs: FR172-FR177
+phase21ProposedNFRs: NFR78-NFR82
+phase21InputDocuments:
+  - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
+  - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md
+  - _agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md
+  - _agile-output/planning-artifacts/sprint-change-proposal-2026-09-12-phase21-nfr76-leftovers.md
+  - docs/fr171-phase20-claim-honesty.md
+  - docs/fr169-circt-mlir-allocation.md
+  - docs/fr170-chisel-head-parser.md
+  - _agile-output/implementation-artifacts/deferred-work.md
+excludedFromPhase21Rewrite:
+  - Phase 1–20 epics/stories (Epic 1–104 retained as historical complete; Phase 20 FR166–171 close remains valid)
 phase20StoryCount: 19
 phase20StoriesDrafted: 2026-09-12
 phase20EpicCount: 6
@@ -8396,3 +8401,425 @@ So that 实现与宣称收口可衔接。
 **Then** NFR14 勾选 Epic 104 关闭
 **And** 文首/状态页可声明：Phase 20 规划故事已齐（Epic 99–104）；宣称须引 FR166–171（FR171）
 **And** 明确：超出本批 NFR14 钉死子集的加深仍须新合同（NFR76）
+
+## Phase 21 Inventory — NFR76 leftovers 升格（firtool 升钉 / unpaired HEAD / 更广 CIRCT·sim / 更深 Parser 生态）
+
+**定位：** Phase 20（FR166–171）**合同与实现已关闭**之后，正式打开曾被 **NFR76** 明确要求「另开合同」的 **四条 leftover**。  
+**是：**  
+1. Phase 21 合同闸门（Correct Course + PRD/addendum）  
+2. firtool 升钉超 AD-9（上游 Chisel **正式配对** + 修订 AD-9 / Stack）  
+3. unpaired CIRCT / Chisel HEAD 二进制产品路径（≠ FR170 document-pinned update-mainline @ 1.155.0）  
+4. 更广 CIRCT/MLIR/sim 套件（超 FR169 NFR14 钉死子集）  
+5. 更深 Parser / Chisel 生态（超 FR170 NFR14 钉死子集）  
+6. 宣称诚实门（须引本批已关 FR；禁止暗示「NFR76 账本已空」或静默扩大 FR142）  
+
+**不是：** 改写 Phase 12–20「已关闭」；把 `git push` 当成 FR；用 FR169/170 alone 冒充本批完成面；无 Chisel 正式配对私自升 firtool（NFR12）。  
+**依据：** `docs/fr171-phase20-claim-honesty.md` NFR76 leftovers；`docs/fr169` option B；`docs/fr170` unpaired HEAD；ARCHITECTURE-SPINE AD-9 / Stack；README / deferred Phase 20；Correct Course 提案（approved 2026-09-12）。  
+**与 PRD 关系：** Correct Course + PRD/addendum「Phase 21」**已批准**（2026-09-12；`correctCoursePhase21Approved: 2026-09-12`）；**实现闸门** = Epic 105（FR172）关闭前，Epic 106–110 不得 ready。  
+**ID 注记：** **FR172–FR177** / **NFR78–NFR82**（接 FR171 / NFR77）。不重编号 FR166–171。  
+**批准默认（Correct Course yes · 2026-09-12 · Q1–Q5）：** NFR76 **四条全做 FR173–176**；FR173 升钉须配对修订 AD-9；不回滚 Phase 12–20；不静默扩 FR142；MSRV 默认保持；超子集仍 NFR81。
+
+### Phase 21 Functional Requirements
+
+FR166–FR171: （历史）Phase 20 — 关闭证据仍有效；Phase 21 不得改写为失败。
+
+FR172: **Phase 21 合同闸门** — Correct Course + PRD/addendum 批准「NFR76 leftovers 升格」范围；同步 README / `deferred-work.md` /（若需）ARCHITECTURE-SPINE；钉死与 Phase 12–20 关闭面的边界；**未完成则 FR173–FR177 故事不得 ready**。  
+FR173: **firtool 升钉超 AD-9** — 经上游 Chisel **正式配对**后，将产品钉死 firtool 升至超出现行 AD-9 `firtool-1.155.0` 的文档化版本；**必须**同步修订 **AD-9 / Stack**（及运维清单）；**禁止** unpaired bump / PATH-random firtool；**≠ FR169(A) 同钉 multi-lower alone**；**≠ FR164 / FR137 alone**。  
+FR174: **unpaired CIRCT / Chisel HEAD 产品路径** — 产品路径支持相对现行钉死对的 **CIRCT 与/或 Chisel HEAD（或文档钉死的未配对主线二进制）** 工作流；须 Correct Course 痕迹 + 适用 AD 修订（至少 **AD-9** 与/或 **AD-27**，在 NFR14 钉死）；**≠ FR170 document-pinned update-mainline @ 1.155.0 alone**；**≠ FR138 alone**。  
+FR175: **更广 CIRCT/MLIR/sim 套件** — 超出 FR169 NFR14 钉死子集的 CIRCT/MLIR lower / allocation / 仿真门禁加深（具体 dialect、谓词、CI job 在 NFR14 钉死）；**≠ FR169 alone**；**≠ FR164 / FR137 alone**；**≠ FR129 alone**。  
+FR176: **更深 Parser / Chisel 生态** — 超出 FR170 NFR14 钉死子集的 Parser / Style Guide / linter / 社区生态加深（具体验收面在 NFR14 钉死）；**≠ FR170 alone**；**≠ FR165 / FR138 / FR130 alone**。  
+FR177: **Phase 21 宣称诚实门** — 对外「firtool 升钉 / unpaired HEAD / 更广 CIRCT·sim / 更深 Parser 生态已交付」须引本批已关 FR172–177 对应项；**禁止**用 Phase 20 alone 冒充；**禁止**暗示超出本批钉死范围的加深已清或「NFR76 账本已空」；不得静默扩大 FR142。
+
+### Phase 21 Non-Functional Requirements
+
+NFR14: （继承）各实现 epic 标 ready 前须有风险记录。  
+NFR78: **Phase 21 vs Phase 12–20 关闭面隔离** — 不得改写 FR94–171「已关闭」；本批是新完成面。  
+NFR79: **NFR14 分 epic 风险门** — Phase 21 每个实现 epic 开工前独立 NFR14。  
+NFR80: **AD / 工具链诚实同步** — 触及 AD-9（firtool 升钉 / HEAD 二进制）、AD-27（Parser/生态）、Stack 表时，须先修订脊柱/文档/CI 合同再标 story ready（继承 NFR12 / NFR75 纪律）。  
+NFR81: **超出本批钉死子集仍须另开合同** — 升格 FR 禁止静默扩大超出各 epic NFR14 钉死的验收子集；本批已全选 NFR76 四条，但仍禁止把未写入 FR173–176 的新加深冒充已交付。  
+NFR82: **宣称仅经 FR177** — 不得用 FR169/170 或 Phase 20 alone 冒充本批四条完成面。
+
+### Phase 21 Additional Requirements (Architecture)
+
+- 无 greenfield starter template。  
+- AD-6：设计 crate 仍只依赖 `bitloom-prelude`（除非某 FR 显式另开跨 crate 合同）。  
+- 品牌 Bitloom；禁止 publish `rhdl` / `rhdl-bits`（AD-2）。  
+- FR173：firtool 升钉 **必须**等 Chisel 正式配对后再改 AD-9 / Stack（ARCHITECTURE-SPINE；NFR12）；不得采用 PATH 随机 firtool 冒充已升钉。  
+- FR174：HEAD 路径须修订适用 AD（AD-9 与/或 AD-27）；不得把 FR170 同钉方言面写成已含 unpaired HEAD 二进制。  
+- FR175 / FR176：各 epic NFR14 钉死验收子集；缺工具/版本不符须非零可读失败（继承 FR169/170 FORCE_MISSING 纪律）。  
+- CIRCT/firtool/Chisel 运行时 **不得**进入 `bitloom-prelude` 设计 crate 依赖。  
+- `git push` / 远程同步 **不是** FR。  
+- UX：无独立 UX 合同。
+
+### Phase 21 UX Design Requirements
+
+无独立 UX-DR（无 `ux-designs/` spine）。
+
+### Phase 21 FR Coverage Map
+
+FR172: Epic 105 — Phase 21 合同闸门  
+FR173: Epic 106 — firtool 升钉超 AD-9（配对 + AD-9 修订）  
+FR174: Epic 107 — unpaired CIRCT/Chisel HEAD 产品路径  
+FR175: Epic 108 — 更广 CIRCT/MLIR/sim（超 FR169 NFR14）  
+FR176: Epic 109 — 更深 Parser/Chisel 生态（超 FR170 NFR14）  
+FR177: Epic 110 — Phase 21 宣称诚实门  
+NFR78: Epic 105 — 隔离（横切写入 106–110）  
+NFR79 / NFR14: Epic 105–110 — 各 epic 首故事风险门  
+NFR80: Epic 106 / 107 / 109（及触及 AD 者）  
+NFR81: Epic 105 / 110 — 不得超子集静默扩大  
+NFR82: Epic 105 / 110 — 宣称纪律
+
+### Phase 21 Epic List
+
+### Epic 105: Phase 21 合同闸门与诚实边界
+维护者/用户看到「NFR76 leftovers 升格」已获 Correct Course + PRD 批准；Phase 12–20 关闭面不被改写；后续实现 epic 可合法开工。  
+**FRs covered:** FR172  
+**NFRs:** NFR14, NFR78, NFR79, NFR81, NFR82  
+**Depends on:** Phase 20 complete。不依赖 Epic 106–110。  
+**Gate:** Story 105.x（NFR14 + FR172）未完成前，106–110 不得标 ready。
+
+### Epic 106: firtool 升钉（配对 AD-9）
+维护者获得经上游 Chisel 正式配对后的 firtool 升钉产品路径；AD-9 / Stack 已修订；禁止 unpaired bump。  
+**FRs covered:** FR173  
+**NFRs:** NFR14, NFR78, NFR79, NFR80, NFR81  
+**Depends on:** 硬依赖 Epic 105。
+
+### Epic 107: unpaired CIRCT / Chisel HEAD 产品路径
+用户/维护者获得相对现行钉死对的 unpaired HEAD（或文档钉死未配对主线二进制）产品路径；适用 AD 已修订。  
+**FRs covered:** FR174  
+**NFRs:** NFR14, NFR78, NFR79, NFR80, NFR81  
+**Depends on:** 硬依赖 Epic 105。软序：建议在 Epic 106 完成配对升钉之后（若本批同升 AD-9）。
+
+### Epic 108: 更广 CIRCT/MLIR/sim 套件
+维护者获得超出 FR169 NFR14 钉死子集的 CIRCT/MLIR/sim 加深产品路径。  
+**FRs covered:** FR175  
+**NFRs:** NFR14, NFR78, NFR79, NFR80, NFR81  
+**Depends on:** 硬依赖 Epic 105。软序：若依赖新 firtool 钉死对，建议在 Epic 106 之后。
+
+### Epic 109: 更深 Parser / Chisel 生态
+用户获得超出 FR170 NFR14 的 Parser / Style Guide / linter / 生态加深产品路径。  
+**FRs covered:** FR176  
+**NFRs:** NFR14, NFR78, NFR79, NFR80, NFR81  
+**Depends on:** 硬依赖 Epic 105。软序：若依赖 HEAD/升钉工具链，建议在 Epic 106/107 之后。
+
+### Epic 110: Phase 21 宣称诚实门
+维护者更新 README / deferred / 状态页；对外宣称须引 FR172–177；不得用 Phase 20 alone 冒充。  
+**FRs covered:** FR177  
+**NFRs:** NFR14, NFR78, NFR79, NFR81, NFR82  
+**Depends on:** 硬依赖 Epic 105；软序建议在 Epic 106–109 关闭或诚实列出未关项之后。
+
+**实施软序：** `105 →（106 ‖ 107 ‖ 108 ‖ 109）→ 110`；硬闸门仅 Epic 105。Epic 106/107 触及 AD-9 建议串行或明确配对依赖；Epic 108/109 若依赖新钉死对则跟在 106/107 后。
+
+**File-overlap note：** Epic 106 与 107 均可能修订 AD-9 / firtool 运维面——保持分 epic（风险边界：配对升钉 vs unpaired HEAD），软序串行，不合并为单 epic（与 Correct Course Q1–Q2 一致）。
+
+## Epic 105: Phase 21 合同闸门与诚实边界
+
+维护者/用户看到「NFR76 leftovers 升格」已获 Correct Course + PRD 批准；Phase 12–20 关闭面不被改写；后续实现 epic 可合法开工。  
+**FRs covered:** FR172  
+**NFRs:** NFR14, NFR78, NFR79, NFR81, NFR82  
+**Depends on:** Phase 20 complete。不依赖 Epic 106–110。  
+**Gate:** Story 105.1–105.4（NFR14 + FR172）未完成前，106–110 不得标 ready。
+
+### Story 105.1: Epic 105 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 Phase 21「NFR76 leftovers 升格」填写 NFR14,
+So that 闸门与后续 epic 有风险边界。
+
+**Acceptance Criteria:**
+
+**Given** Phase 20 complete
+**When** 创建 Epic 105 风险记录
+**Then** 含：与 Phase 12–20 关闭面边界（NFR78）；FR173–177 范围摘要；批准默认（四条全做；FR173 升钉须配对修订 AD-9）；禁止事项（至少：FR172 未合入不得开 106–110；不得改写 FR94–171「已关闭」；不得静默扩大 FR142；不得把未写入 FR173–176 的新加深冒充已交付；`git push` 不是 FR）
+**And** 无此记录则 105.2–105.4 不得标 ready
+
+### Story 105.2: Correct Course + PRD 批准 Phase 21（FR172）
+
+As a 产品负责人,
+I want PRD/addendum 经 Correct Course 明确批准「NFR76 leftovers 升格」,
+So that Phase 21 具备合同授权。
+
+**Acceptance Criteria:**
+
+**Given** Story 105.1
+**When** 批准并落地 sprint-change-proposal（或等价）+ PRD/addendum Phase 21 段落
+**Then** 写明：Phase 21 = FR172–177；Phase 12–20 关闭仍有效；NFR76 四条全做；宣称须引对应 FR（FR177 / NFR82）
+**And** `correctCoursePhase21Approved` 戳可验证；提案 `status: approved` 可验证
+**And** 公开品牌仍为 Bitloom / `bitloom-*`
+
+### Story 105.3: 同步 README / deferred / 路线图指针（FR172）
+
+As a 维护者,
+I want 公开状态页区分 Phase 20 完成面与 Phase 21 加深面,
+So that 读者不把 NFR76 leftover 当成已交付。
+
+**Acceptance Criteria:**
+
+**Given** Story 105.2
+**When** 更新 README「状态与 deferred」、`deferred-work.md`、epics/sprint 状态指针
+**Then** 明确 Phase 20 vs Phase 21 完成面与 FR172–177 映射
+**And** 标明 Epic 106–110 在闸门关闭前不得 ready
+**And** 公开品牌 Bitloom
+
+### Story 105.4: AD 指针与 Epic 105 收口（FR172）
+
+As a 文档维护者,
+I want 勾选 Epic 105 / FR172 并钉死 AD/工具链触碰面指针,
+So that 实现 epic 可合法标 ready。
+
+**Acceptance Criteria:**
+
+**Given** Story 105.3
+**When** 更新 ARCHITECTURE-SPINE（或指针）与状态并勾选 Epic 105 / FR172
+**Then** NFR14 勾选 Epic 105 关闭；可声明闸门已开
+**And** 注明：触 AD-9 / AD-27 / firtool·HEAD 升钉须按 NFR80 先修订再 story ready
+**And** 可将 Epic 106–110 标为可开工（软序仍建议 106–109 → 110；106/107 建议串行）
+
+## Epic 106: firtool 升钉（配对 AD-9）
+
+维护者获得经上游 Chisel 正式配对后的 firtool 升钉产品路径；AD-9 / Stack 已修订；禁止 unpaired bump。  
+**FRs covered:** FR173  
+**NFRs:** NFR14, NFR78, NFR79, NFR80, NFR81  
+**Depends on:** 硬依赖 Epic 105。  
+**Gate:** Story 106.1 NFR14 未完成前，106.2–106.3 不得标 ready。
+
+### Story 106.1: Epic 106 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR173 firtool 升钉填写 NFR14,
+So that 明确须 Chisel 正式配对 + 修订 AD-9，且 ≠ FR169(A) alone。
+
+**Acceptance Criteria:**
+
+**Given** Epic 105 已关闭；FR169 / FR164 / FR137 关闭证据仍有效（NFR78）
+**When** 创建 Epic 106 风险记录
+**Then** 钉死：目标 firtool 版本与上游 Chisel **正式配对**证据来源；AD-9 / Stack 修订计划（NFR80 / NFR12）；验收谓词（下载校验 / CI / just 目标）；与 FR169(A) 同钉 multi-lower 边界
+**And** 禁止 unpaired bump / PATH-random firtool；禁止把 FR169 alone / FR164 alone / FR137 alone 勾选为本 FR
+**And** 无此记录则 106.2–106.3 不得标 ready
+
+### Story 106.2: firtool 升钉实现与验收（FR173）
+
+As a 工具链维护者,
+I want 产品钉死 firtool 升至经 Chisel 正式配对的新版本,
+So that 不再停留在 AD-9 `firtool-1.155.0` 钉死面。
+
+**Acceptance Criteria:**
+
+**Given** Story 106.1
+**When** 实现升钉路径并附 ATDD/CI 证据
+**Then** 验收谓词通过；AD-9 / Stack（及运维清单）须在标 story ready 前落地修订（NFR80）
+**And** FR169 / FR164 / FR137 关闭证据仍有效（NFR78）
+**And** 缺工具/版本不符须非零可读失败，不得 silent-Ok
+
+### Story 106.3: FR173 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred / 脊柱指针收口并勾选 Epic 106 / FR173,
+So that 该条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 106.2
+**When** 更新 README / deferred / ARCHITECTURE-SPINE 并勾选 Epic 106
+**Then** NFR14 勾选 Epic 106 关闭
+**And** 明确：未写入本 epic NFR14 的更深升钉/配对项仍须另开合同（NFR81）
+
+## Epic 107: unpaired CIRCT / Chisel HEAD 产品路径
+
+用户/维护者获得相对现行钉死对的 unpaired HEAD（或文档钉死未配对主线二进制）产品路径；适用 AD 已修订。  
+**FRs covered:** FR174  
+**NFRs:** NFR14, NFR78, NFR79, NFR80, NFR81  
+**Depends on:** 硬依赖 Epic 105。  
+**Gate:** Story 107.1 NFR14 未完成前，107.2–107.3 不得标 ready。  
+**软序：** 建议在 Epic 106 完成配对升钉之后（若本批同升 AD-9）。
+
+### Story 107.1: Epic 107 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR174 unpaired HEAD 产品路径填写 NFR14,
+So that 明确 ≠ FR170 document-pinned update-mainline alone，且须修订适用 AD。
+
+**Acceptance Criteria:**
+
+**Given** Epic 105 已关闭；FR170 / FR138 / FR165 关闭证据仍有效（NFR78）
+**When** 创建 Epic 107 风险记录
+**Then** 钉死：目标 CIRCT 与/或 Chisel HEAD（或文档钉死未配对主线）二进制来源与验收谓词；AD-9 与/或 AD-27 修订计划（NFR80）；与 FR170 同钉方言面边界
+**And** 禁止把 FR170 alone / FR138 alone / FR165 alone 勾选为本 FR；禁止 PATH-random 冒充 HEAD 产品路径
+**And** 无此记录则 107.2–107.3 不得标 ready
+
+### Story 107.2: unpaired HEAD 产品路径实现与验收（FR174）
+
+As a 维护者/互操作消费者,
+I want 使用 unpaired CIRCT/Chisel HEAD（或文档钉死未配对主线）产品路径,
+So that 不再仅停留在 FR170 @ firtool-1.155.0 同钉面。
+
+**Acceptance Criteria:**
+
+**Given** Story 107.1
+**When** 实现钉死 HEAD 路径并附 ATDD/文档证据
+**Then** 验收谓词通过；适用 AD（AD-9 与/或 AD-27）须在标 story ready 前落地（NFR80）
+**And** FR170 / FR138 / FR165 关闭证据仍有效（NFR78）
+**And** 缺工具/版本不符须非零可读失败，不得 silent-Ok
+
+### Story 107.3: FR174 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred / 脊柱指针收口并勾选 Epic 107 / FR174,
+So that 该条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 107.2
+**When** 更新 README / deferred / ARCHITECTURE-SPINE（若需）并勾选 Epic 107
+**Then** NFR14 勾选 Epic 107 关闭
+**And** 明确：未写入本 epic NFR14 的更深 HEAD/配对项仍须另开合同（NFR81）
+
+## Epic 108: 更广 CIRCT/MLIR/sim 套件
+
+维护者获得超出 FR169 NFR14 钉死子集的 CIRCT/MLIR/sim 加深产品路径。  
+**FRs covered:** FR175  
+**NFRs:** NFR14, NFR78, NFR79, NFR80, NFR81  
+**Depends on:** 硬依赖 Epic 105。  
+**Gate:** Story 108.1 NFR14 未完成前，108.2–108.3 不得标 ready。  
+**软序：** 若依赖新 firtool 钉死对，建议在 Epic 106 之后。
+
+### Story 108.1: Epic 108 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR175 更广 CIRCT/MLIR/sim 填写 NFR14,
+So that 明确超 FR169 钉死子集，且 ≠ FR169 / FR164 / FR137 alone。
+
+**Acceptance Criteria:**
+
+**Given** Epic 105 已关闭；FR169 / FR164 / FR137 / FR129 关闭证据仍有效（NFR78）
+**When** 创建 Epic 108 风险记录
+**Then** 钉死：超出 FR169 的 dialect / lower / sim 验收子集、CI job / just 目标、失败语义（含 FORCE_MISSING 或等价）；与 FR169/164/137/129 边界
+**And** 禁止把 FR169 alone / FR164 alone / FR137 alone / FR129 alone 勾选为本 FR
+**And** 若依赖 Epic 106 新钉死对，记录软依赖；触及 AD-9 时遵守 NFR80
+**And** 无此记录则 108.2–108.3 不得标 ready
+
+### Story 108.2: 更广 CIRCT/MLIR/sim 实现与验收（FR175）
+
+As a 工具链/验证工程师,
+I want 超出 FR169 钉死子集的 CIRCT/MLIR/sim 产品路径,
+So that allocation/sim 加深面可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 108.1
+**When** 实现钉死子集并附 ATDD/CI 证据
+**Then** 验收谓词通过；FR169 / FR164 / FR137 关闭证据仍有效（NFR78）
+**And** 缺工具/版本不符须非零可读失败，不得 silent-Ok
+**And** CIRCT/firtool 运行时不得进入 `bitloom-prelude` 设计 crate 依赖
+
+### Story 108.3: FR175 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred / CI 指针收口并勾选 Epic 108 / FR175,
+So that 该条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 108.2
+**When** 更新 README / deferred / 文档指针并勾选 Epic 108
+**Then** NFR14 勾选 Epic 108 关闭
+**And** 明确：未写入本 epic NFR14 的更广 MLIR/sim 项仍须另开合同（NFR81）
+
+## Epic 109: 更深 Parser / Chisel 生态
+
+用户获得超出 FR170 NFR14 的 Parser / Style Guide / linter / 生态加深产品路径。  
+**FRs covered:** FR176  
+**NFRs:** NFR14, NFR78, NFR79, NFR80, NFR81  
+**Depends on:** 硬依赖 Epic 105。  
+**Gate:** Story 109.1 NFR14 未完成前，109.2–109.3 不得标 ready。  
+**软序：** 若依赖 HEAD/升钉工具链，建议在 Epic 106/107 之后。
+
+### Story 109.1: Epic 109 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR176 更深 Parser/Chisel 生态填写 NFR14,
+So that 明确超 FR170 钉死子集，且 ≠ FR170 / FR165 / FR138 / FR130 alone。
+
+**Acceptance Criteria:**
+
+**Given** Epic 105 已关闭；FR170 / FR165 / FR138 / FR130 关闭证据仍有效（NFR78）
+**When** 创建 Epic 109 风险记录
+**Then** 钉死：超出 FR170 的 Parser / Style Guide / linter / 生态验收子集；AD-27（±AD-9）修订计划（若触及；NFR80）；与 FR170/165/138/130 边界
+**And** 禁止把 FR170 alone / FR165 alone / FR138 alone / FR130 alone 勾选为本 FR
+**And** 无此记录则 109.2–109.3 不得标 ready
+
+### Story 109.2: 更深 Parser/Chisel 生态实现与验收（FR176）
+
+As a Chisel/Parser 消费者,
+I want 超出 FR170 钉死子集的 Parser/生态产品路径,
+So that 更深生态面可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 109.1
+**When** 实现钉死子集并附 ATDD/文档证据
+**Then** 验收谓词通过；FR170 / FR165 / FR138 / FR130 关闭证据仍有效（NFR78）
+**And** 若触及 AD-27 / AD-9，须在标 story ready 前落地修订（NFR80）
+**And** 缺工具/夹具不符须非零可读失败，不得 silent-Ok
+
+### Story 109.3: FR176 收口与文档指针
+
+As a 文档维护者,
+I want 文档/deferred / 脊柱指针收口并勾选 Epic 109 / FR176,
+So that 该条可宣称关闭。
+
+**Acceptance Criteria:**
+
+**Given** Story 109.2
+**When** 更新 README / deferred / ARCHITECTURE-SPINE（若需）并勾选 Epic 109
+**Then** NFR14 勾选 Epic 109 关闭
+**And** 明确：未写入本 epic NFR14 的更深 Parser/Chisel 生态仍须另开合同（NFR81）
+
+## Epic 110: Phase 21 宣称诚实门
+
+维护者更新 README / deferred / 状态页；对外宣称须引 FR172–177；不得用 Phase 20 alone 冒充。  
+**FRs covered:** FR177  
+**NFRs:** NFR14, NFR78, NFR79, NFR81, NFR82  
+**Depends on:** 硬依赖 Epic 105；软序建议在 Epic 106–109 关闭或诚实列出未关项之后。  
+**Gate:** Story 110.1 NFR14 未完成前，110.2–110.3 不得标 ready。
+
+### Story 110.1: Epic 110 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR177 宣称诚实门填写 NFR14,
+So that 文档不误报 NFR76 四条完成面。
+
+**Acceptance Criteria:**
+
+**Given** Epic 105 已关闭；建议 Epic 106–109 已关闭或在记录中列出未关项的诚实措辞
+**When** 创建 Epic 110 风险记录
+**Then** 含：FR177 范围；禁止事项（至少：不得用 Phase 20 alone 宣称 FR173–176；不得在未关 FR 上勾选「已交付」；不得静默扩大 FR142；不得暗示超出 FR173–176 钉死子集的加深已清或「NFR76 账本已空」；`git push` 不是 FR）
+**And** 无此记录则 110.2–110.3 不得标 ready
+
+### Story 110.2: README / deferred / 状态页诚实更新（FR177）
+
+As a 维护者,
+I want 公开状态页按已关 FR 诚实宣称 Phase 21,
+So that 对外口径可审计。
+
+**Acceptance Criteria:**
+
+**Given** Story 110.1
+**When** 更新 README「状态与 deferred」、`deferred-work.md`、epics/sprint 状态指针
+**Then** 每条已关 FR172–177 有对应宣称指针；未关项仍标记未交付
+**And** 明确：firtool 升钉须引 FR173；unpaired HEAD 须引 FR174；更广 CIRCT/sim 须引 FR175；更深 Parser 生态须引 FR176
+**And** 公开品牌 Bitloom
+
+### Story 110.3: FR177 收口与 Phase 21 故事清单指针
+
+As a 文档维护者,
+I want 勾选 Epic 110 / FR177 并声明 Phase 21 规划故事齐套,
+So that 实现与宣称收口可衔接。
+
+**Acceptance Criteria:**
+
+**Given** Story 110.2
+**When** 更新状态页/deferred 并勾选 Epic 110 / FR177
+**Then** NFR14 勾选 Epic 110 关闭
+**And** 文首/状态页可声明：Phase 21 规划故事已齐（Epic 105–110）；宣称须引 FR172–177（FR177）
+**And** 明确：超出本批 NFR14 钉死子集的加深仍须新合同（NFR81）
