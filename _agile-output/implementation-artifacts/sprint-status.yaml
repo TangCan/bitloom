@@ -626,8 +626,8 @@ development_status:
   epic-88-retrospective: optional
 
   epic-89: in-progress
-  89-1-epic-89-nfr14-风险记录: ready-for-dev
-  89-2-自动-fsm-标签提取实现与验收-fr157: backlog
+  89-1-epic-89-nfr14-风险记录: done
+  89-2-自动-fsm-标签提取实现与验收-fr157: ready-for-dev
   89-3-fr157-收口与文档指针: backlog
   epic-89-retrospective: optional
 
