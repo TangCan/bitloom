@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-11-2026 19:00
+last_updated: 09-12-2026 09:30
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -591,7 +591,7 @@ development_status:
   84-2-correct-course-prd-批准-phase-18-fr148: done
   84-3-同步-readme-deferred-路线图指针-fr148: done
   84-4-ad-指针与-epic-84-收口-fr148-nfr66: done
-  epic-84-retrospective: optional
+  epic-84-retrospective: done
 
   epic-85: done
   85-1-epic-85-nfr14-风险记录: done
@@ -2410,3 +2410,28 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-83-retro-2026-09-11.md"
+  - id: "epic-84-retro-item-271-fr148-honesty-library-1-0-on-crates-io-i"
+    epic: 84
+    action: "FR148 honesty: library 1.0 on crates.io is not CLI installable until
+      FR151."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-84-retro-2026-09-12.md"
+  - id: "epic-84-retro-item-272-keep-phase-12-17-closing-faces-valid-nfr"
+    epic: 84
+    action: "Keep Phase 12–17 closing faces valid (NFR64)."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-84-retro-2026-09-12.md"
+  - id: "epic-84-retro-item-273-keep-commit-subjects-story-n-m"
+    epic: 84
+    action: "Keep commit subjects Story N.M."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-84-retro-2026-09-12.md"
+  - id: "epic-84-retro-item-274-nfr59-still-needs-explicit-contract-nfr6"
+    epic: 84
+    action: "NFR59 still needs explicit contract (NFR67)."
+    owner: "Dev"
+    status: open
+    ref: "_agile-output/implementation-artifacts/epic-84-retro-2026-09-12.md"
