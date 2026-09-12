@@ -621,8 +621,8 @@ development_status:
   epic-88: in-progress
   88-1-epic-88-nfr14-风险记录: done
   88-2-bitloom-lsp-可发布化与政策-a-fr155: done
-  88-3-live-发布-bitloom-lsp-fr155: ready-for-dev
-  88-4-fr155-收口与文档指针: backlog
+  88-3-live-发布-bitloom-lsp-fr155: done
+  88-4-fr155-收口与文档指针: ready-for-dev
   epic-88-retrospective: optional
 
   epic-89: backlog

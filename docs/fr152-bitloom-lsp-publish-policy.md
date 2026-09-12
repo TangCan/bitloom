@@ -21,11 +21,12 @@
 ## Publish packaging assert
 
 - `cargo publish -p bitloom-lsp --dry-run` must succeed (Story 88.2).
-- **Live** `cargo publish -p bitloom-lsp` is Story **88.3** — until then, do **not** claim crates.io installability (**NFR72**).
+- **Live** `cargo publish -p bitloom-lsp` (Story **88.3**): **Published bitloom-lsp v1.0.0** on crates.io (2026-09-12). See [`fr155-bitloom-lsp-publish.md`](fr155-bitloom-lsp-publish.md).
 - `cargo publish -p bitloom` / `cargo install bitloom` (**FR151**) must remain green and must **not** require unpublished path-only lsp.
 
 ## Honesty
 
-- **(a) = crates.io packaging + live publish target** for the existing LSP binary/crate surface.
+- **(a) = crates.io packaging + live publish** for the existing LSP binary/crate surface.
 - **(a) ≠ shipping a deeper LSP product** (feature deepen remains other FR / NFR59 items if any).
-- Do not use Phase 18 (b) docs to claim (a) delivered before Epic 88 closes (**NFR72**).
+- Do not use Phase 18 (b) docs alone to claim (a) without FR155 / Epic 88 close evidence (**NFR72**).
+- Live publish evidence: [`fr155-bitloom-lsp-publish.md`](fr155-bitloom-lsp-publish.md).
