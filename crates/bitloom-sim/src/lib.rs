@@ -28,8 +28,11 @@ pub use formal_equiv::FormalEquivProduct;
 
 mod ip_dual;
 pub use ip_dual::{
-    GpioFunctional, IpDualModelMatrix, SyncFifoFunctional, UartRxFunctional, UartTxFunctional,
-    gpio_dual_stimulus, sync_fifo_dual_stimulus, uart_rx_dual_stimulus, uart_tx_dual_stimulus,
+    Axi4LiteSlaveFunctional, GpioFunctional, I2cMasterFunctional, IpDualModelMatrix,
+    SpiMasterFunctional, SyncFifoFunctional, UartRxFunctional, UartTxFunctional,
+    axi4_lite_slave_dual_stimulus, gpio_dual_stimulus, i2c_master_dual_stimulus,
+    spi_master_dual_stimulus, sync_fifo_dual_stimulus, uart_rx_dual_stimulus,
+    uart_tx_dual_stimulus,
 };
 
 mod generate;
