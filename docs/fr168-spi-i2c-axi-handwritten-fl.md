@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** Story **101.2** implementation face（Epic 101 / FR168；收口 → Story **101.3**）。
+**Status:** **Epic 101 / FR168 closed** (Story **101.3**). Product path delivered in Story **101.2** (all three).
 
 Phase 19 **FR163** `UartRxFunctional` **remains closed and valid**（NFR73）。本 FR 在保留 FR163 / FR135 / FR126 / FR103 关闭面的前提下，为 **SPI + I2C + AXI 三者** 各交付手写 FL ≡ `Sim::settle`+`tick`。
 

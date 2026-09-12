@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR168 / Epic 101；NFR14、NFR73、NFR74、NFR76、NFR77；对照 FR163 / FR135 / FR126 / FR103 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 101.1；Epic 101 进行中；101.2–101.3 须本记录后才可 ready |
+| 状态 | closed — Story 101.3 勾选完成；Epic 101 关闭；FR168 实现面可宣称；**FR169–171** 仍属 Epic 102–104；未纳入其它协议仍 **NFR76** |
 | **选定** | 在保留 FR163 `UartRxFunctional` / FR135 `UartTxFunctional` / FR126 `GpioFunctional` 关闭面的前提下，授权 **`SpiMaster`（或文档等价）、`I2cMaster`（或等价）、`Axi4LiteSlave`（或等价）各自手写 FL ≡ tick** — **三者皆交付**；**≠ FR163 alone**；**≠「至少一项」** |
 
 ### Phase 12–19 / FR163 关闭面 vs Epic 101 实现边界（NFR73 · 必读）
@@ -95,3 +95,13 @@
 
 - AD-28；FR168；对照 FR163 / FR135 / FR126；Phase 20 Correct Course approved 2026-09-12（Q1–Q5：FR168 = SPI+I2C+AXI 三者皆交付）
 - **NFR14-crates** ≠ 本门禁
+
+---
+
+### Epic 101 关闭条件（Story 101.3 勾选）
+
+- [x] **FR168 钉死子集实现 + 验收** — Story 101.2（SPI+I2C+AXI 三者）
+- [x] **文档 / deferred / README / docs/ip 收口** — Story 101.3
+- [x] **NFR73/76：** 边界与诚实义务保持；未纳入其它协议须新合同
+- [x] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **其余 FR169–171：** 未关前不得宣称 Phase 20 全清 / NFR71 账本已空
