@@ -75,6 +75,11 @@ circt-unpaired-head-check:
 chisel-style-lint-check:
 	bash scripts/chisel-style-lint-check.sh
 
+# FR176: combined Style Guide + update-mainline ecosystem deepen (≠ FR165/FR170 alone).
+# Not part of default `just test`. FORCE_MISSING / sub-gate fail → non-zero (never silent skip).
+chisel-ecosystem-deepen-check:
+	bash scripts/chisel-ecosystem-deepen-check.sh
+
 # FR144: surface-crate SemVer breakage gate (cargo-semver-checks).
 # Not part of default `just test`. Missing tool → non-zero (never silent success).
 semver-check:

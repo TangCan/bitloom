@@ -745,8 +745,8 @@ development_status:
 
   epic-109: in-progress
   109-1-epic-109-nfr14-风险记录: done
-  109-2-更深-parser-chisel-生态实现与验收-fr176: ready-for-dev
-  109-3-fr176-收口与文档指针: backlog
+  109-2-更深-parser-chisel-生态实现与验收-fr176: done
+  109-3-fr176-收口与文档指针: ready-for-dev
   epic-109-retrospective: optional
 
   epic-110: backlog
