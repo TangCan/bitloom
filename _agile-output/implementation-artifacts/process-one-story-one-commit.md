@@ -8,7 +8,7 @@ Lesson from Epic 18 (and earlier retros): bundling multiple stories into a singl
 
 Contract / story commits must stay scoped to the story. Do **not** fold unrelated example reformats, tool-script churn (e.g. `render_skill.py`), or drive-by formatting into the same commit as AC/contract changes. Historical noise: `e30e6ca` (`examples/bundle_vec_skel`), `b758832` (`render_skill.py`). Hygiene or tooling edits → separate commit or omit.
 
-## NFR14 / closeout commit subject (epic-42–47 retro items 109/113/116/120/124/128; continued epic-48–56 items 132/136/140/144/148/152/156/160/164; continued epic-57–63 items 168/172/176/180/184/188/192; continued epic-64–71 items 196/200/204/208/212/216/220/224; continued epic-72–78 items 228/232/236/240/244/248/252)
+## NFR14 / closeout commit subject (epic-42–47 retro items 109/113/116/120/124/128; continued epic-48–56 items 132/136/140/144/148/152/156/160/164; continued epic-57–63 items 168/172/176/180/184/188/192; continued epic-64–71 items 196/200/204/208/212/216/220/224; continued epic-72–78 items 228/232/236/240/244/248/252; continued epic-87–98 Phase 19 sweep 284/288/292/295/298/301/304/307/310/313/316/319)
 
 Gate and closeout (and implementation) commits must put a story id in the **subject** so `git_evidence.py` can attribute them. Prefer ASCII short forms:
 
