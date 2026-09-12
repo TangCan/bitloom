@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR159 / Epic 91；NFR14、NFR68、NFR69、NFR71、NFR72；对照 FR112 / FR100 / FR103 / FR47 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 91.1；Epic 91 未关闭 |
+| 状态 | closed — Story 91.3 勾选完成；Epic 91 关闭；FR159 实现面可宣称；**FR160–165 / FR156** 仍属 Epic 92–98；**不得**宣称 NFR59「全清」 |
 | **选定** | 在保留 FR112 in-process MemRead≡tick 关闭面的前提下，授权 **MVP：升格 `generate_functional_sim` 发出的功能仿真 crate，使 `MemRead` 不再恒 stub 为 `0`，而与 GeneratedFunctional / `Sim::tick` 语义对齐（含 SyncReadMem latency-1）** |
 
 ### Phase 12–18 / FR112 关闭面 vs Epic 91 实现边界（NFR68 · 必读）
@@ -97,8 +97,8 @@
 
 ### Epic 91 关闭条件（Story 91.3 勾选）
 
-- [ ] **FR159 缺口 G1–G3 关闭 + ATDD** — Story 91.2
-- [ ] **文档 / deferred / README 收口** — Story 91.3
-- [ ] **NFR68/71/72：** 边界与诚实义务保持
-- [ ] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
-- [ ] **其余 FR160–165：** 未关前不得宣称 NFR59 全清
+- [x] **FR159 缺口 G1–G3 关闭 + ATDD** — Story 91.2
+- [x] **文档 / deferred / README 收口** — Story 91.3
+- [x] **NFR68/71/72：** 边界与诚实义务保持
+- [x] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **其余 FR160–165：** 未关前不得宣称 NFR59 全清

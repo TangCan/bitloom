@@ -637,14 +637,14 @@ development_status:
   90-3-fr158-收口与文档指针: done
   epic-90-retrospective: optional
 
-  epic-91: in-progress
+  epic-91: done
   91-1-epic-91-nfr14-风险记录: done
   91-2-memread-完整生成实现与验收-fr159: done
-  91-3-fr159-收口与文档指针: ready-for-dev
+  91-3-fr159-收口与文档指针: done
   epic-91-retrospective: optional
 
-  epic-92: backlog
-  92-1-epic-92-nfr14-风险记录: backlog
+  epic-92: in-progress
+  92-1-epic-92-nfr14-风险记录: ready-for-dev
   92-2-非-cargo-路径扫描实现与验收-fr160: backlog
   92-3-fr160-收口与文档指针: backlog
   epic-92-retrospective: optional

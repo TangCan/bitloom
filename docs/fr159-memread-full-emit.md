@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`cargo bitloom`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 91 / FR159 delivered in Story 91.2** (closeout Story **91.3**).
+**Status:** **Epic 91 / FR159 closed** (Story **91.3**). Implementation Story **91.2**.
 Phase 12 FR112 in-process `GeneratedFunctional` MemRead≡tick remains closed (NFR68).
 
 ## Selected face (NFR14)
