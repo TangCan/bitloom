@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-12-2026 10:00
+last_updated: 09-12-2026 10:30
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -611,9 +611,9 @@ development_status:
   # === Phase 19: NFR59 full upgrade + FR152(a) bitloom-lsp publish (FR154–165) ===
   # Soft order: 87 → (88 ‖ 89…97) → 98; Epic 87 hard gate before 88–98 ready
   # Correct Course + PRD stamp required (Story 87.2) before implementation epics ready
-  epic-87: backlog
-  87-1-epic-87-nfr14-风险记录: backlog
-  87-2-correct-course-prd-批准-phase-19-fr154: backlog
+  epic-87: in-progress
+  87-1-epic-87-nfr14-风险记录: done
+  87-2-correct-course-prd-批准-phase-19-fr154: ready-for-dev
   87-3-同步-readme-deferred-路线图指针-fr154: backlog
   87-4-ad-指针与-epic-87-收口-fr154: backlog
   epic-87-retrospective: optional
