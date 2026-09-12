@@ -733,8 +733,8 @@ development_status:
 
   epic-107: in-progress
   107-1-epic-107-nfr14-风险记录: done
-  107-2-unpaired-head-产品路径实现与验收-fr174: ready-for-dev
-  107-3-fr174-收口与文档指针: backlog
+  107-2-unpaired-head-产品路径实现与验收-fr174: done
+  107-3-fr174-收口与文档指针: ready-for-dev
   epic-107-retrospective: optional
 
   epic-108: backlog

@@ -132,6 +132,19 @@ jobs:
       - name: Required FR170 parser-head-migration-check
         run: bash scripts/parser-head-migration-check.sh
 
+  # FR174: required unpaired CIRCT/firtool document-pinned mainline gate (≠ AD-9 product; ≠ FR170 alone).
+  # Same path as `just circt-unpaired-head-check`. Failures are never ignored.
+  circt-unpaired-head:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.97.1"
+      - name: Required FR174 circt-unpaired-head-check
+        run: bash scripts/circt-unpaired-head-check.sh
+
   # FR144 / NFR62: required surface-crate SemVer gate (cargo-semver-checks).
   # Same path as `just semver-check`. Failures are never ignored; missing tool fails the job.
   semver-check:

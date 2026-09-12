@@ -61,6 +61,11 @@ parser-restore-check:
 parser-head-migration-check:
 	bash scripts/parser-head-migration-check.sh
 
+# FR174: unpaired CIRCT/firtool document-pinned mainline (≠ AD-9 product pin; ≠ FR170 alone).
+# Not part of default `just test`. Missing/mismatched HEAD pin → non-zero (never silent skip).
+circt-unpaired-head-check:
+	bash scripts/circt-unpaired-head-check.sh
+
 # FR165: Style Guide / linter deepen beyond FR130 (≠ FR138 alone; no Chisel HEAD Parser).
 chisel-style-lint-check:
 	bash scripts/chisel-style-lint-check.sh
