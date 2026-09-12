@@ -644,8 +644,8 @@ development_status:
   epic-91-retrospective: optional
 
   epic-92: in-progress
-  92-1-epic-92-nfr14-风险记录: ready-for-dev
-  92-2-非-cargo-路径扫描实现与验收-fr160: backlog
+  92-1-epic-92-nfr14-风险记录: done
+  92-2-非-cargo-路径扫描实现与验收-fr160: ready-for-dev
   92-3-fr160-收口与文档指针: backlog
   epic-92-retrospective: optional
 
