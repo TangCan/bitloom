@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** Epic 96 / FR164 — Story **96.2** implementation (closeout Story **96.3**).
+**Status:** **Epic 96 / FR164 closed** (Story **96.3**). Implementation Story **96.2**.
 
 Phase 16 **FR137** external CIRCT **compile** gate **remains closed and valid** (NFR68). This FR
 adds the **simulation / execution** deepen that FR137 explicitly deferred.

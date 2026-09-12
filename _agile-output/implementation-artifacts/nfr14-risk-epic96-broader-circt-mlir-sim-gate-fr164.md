@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR164 / Epic 96；NFR14、NFR68、NFR69、NFR70、NFR71、NFR72；对照 FR137 / FR129 / FR121 / AD-9 / AD-25 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open / in-progress — Story 96.2 implemented; Epic 96 未关闭（待 96.3） |
+| 状态 | closed — Story 96.3 勾选完成；Epic 96 关闭；FR164 实现面可宣称；**FR165 / FR156** 仍属 Epic 97–98；**不得**宣称 NFR59「全清」；未选更广 MLIR / 升钉仍 **NFR71** |
 | **选定** | 在保留 FR137 **编译门禁** MVP（`just circt-external-check` / CI `circt-external` / firtool-1.155.0）关闭面的前提下，授权 **MVP：外部 CIRCT / firtool 仿真门禁加深** — 文档钉死路径 + CI required（或文档钉死可复现路径在 CI 强制跑通）对代表性 `.fir` 做 **sim/执行谓词**（超出「仅 compile」）；更广 CIRCT/MLIR allocation / 多 dialect lower 全家桶 **不做**（须新合同 / NFR71） |
 
 ### Phase 12–18 / FR137 关闭面 vs Epic 96 实现边界（NFR68 · 必读）
@@ -111,7 +111,7 @@
 ### Epic 96 关闭条件（Story 96.3 勾选）
 
 - [x] **FR164 钉死子集实现 + 验收** — Story 96.2
-- [ ] **文档 / deferred / README / spine 收口** — Story 96.3
-- [ ] **NFR68/70/71/72：** 边界与诚实义务保持；未选更广 MLIR lower / 升钉仍须新合同
-- [ ] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
-- [ ] **其余 FR165：** 未关前不得宣称 NFR59 全清
+- [x] **文档 / deferred / README / spine 收口** — Story 96.3
+- [x] **NFR68/70/71/72：** 边界与诚实义务保持；未选更广 MLIR lower / 升钉仍须新合同
+- [x] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **其余 FR165：** 未关前不得宣称 NFR59 全清
