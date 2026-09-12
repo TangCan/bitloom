@@ -145,6 +145,7 @@ phase21Epic106Status: complete
 phase21Epic107Stories: 3
 phase21Epic107Status: complete
 phase21Epic108Stories: 3
+phase21Epic108Status: complete
 phase21Epic109Stories: 3
 phase21Epic110Stories: 3
 phase21ProposedEpics: 105-110

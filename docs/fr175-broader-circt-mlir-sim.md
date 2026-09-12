@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 108 / FR175 in progress** (Story **108.2** implementation).
+**Status:** **Epic 108 / FR175 closed** (Story **108.3**). Product path: AD-9 **firtool-1.158.0** `--ir-sv` + `--ir-verilog` deepen beyond FR169 (`just circt-external-sv-check`).
 
 Phase 20 **FR169** (`--ir-fir` + `--ir-hw` + Verilog), **FR164** sim, and **FR137** compile **remain closed and valid** (NFR78). Those closes alone ≠ FR175.
 

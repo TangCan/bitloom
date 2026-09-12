@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR175 / Epic 108；NFR14、NFR78、NFR79、NFR80、NFR81；对照 FR169 / FR164 / FR137 / FR129 / AD-9 |
 | 记录日期 | 2026-09-12 |
-| 状态 | open — Story 108.1；Epic 108 进行中；108.2–108.3 待本记录后 ready |
+| 状态 | **closed — Story 108.3**；Epic 108 / FR175 可宣称；更深 dialect/sim 超本子集仍 **NFR81** |
 | **选定** | 在保留 FR169(A) `--ir-fir`+`--ir-hw`+Verilog 关闭面的前提下，授权 **更广 multi-lower**：增加 **`--ir-sv`（SV dialect）+ `--ir-verilog`（Verilog-lowering IR）** 产品门禁 @ AD-9 **firtool-1.158.0**；可选与 sim 证据同夹具串联；禁止仅再跑 FR169/FR164 冒充加深 |
 
 ### Phase 12–20 关闭面 vs Epic 108（NFR78）
@@ -87,8 +87,8 @@
 
 ### Epic 108 关闭条件（Story 108.3 勾选）
 
-- [ ] **FR175 钉死子集实现 + 验收** — Story 108.2
-- [ ] **文档 / deferred / README / CI 收口** — Story 108.3
-- [ ] **NFR78/81：** 边界与诚实义务保持
-- [ ] **品牌 / AD-6：** Bitloom；CIRCT 运行时不得进入设计 crate
-- [ ] **其余 FR176–177：** 未关前不得宣称 Phase 21 全清
+- [x] **FR175 钉死子集实现 + 验收** — Story 108.2
+- [x] **文档 / deferred / README / CI 收口** — Story 108.3
+- [x] **NFR78/81：** 边界与诚实义务保持
+- [x] **品牌 / AD-6：** Bitloom；CIRCT 运行时不得进入设计 crate
+- [x] **其余 FR176–177：** 未关前不得宣称 Phase 21 全清

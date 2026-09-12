@@ -737,10 +737,10 @@ development_status:
   107-3-fr174-收口与文档指针: done
   epic-107-retrospective: optional
 
-  epic-108: in-progress
+  epic-108: done
   108-1-epic-108-nfr14-风险记录: done
   108-2-更广-circt-mlir-sim-实现与验收-fr175: done
-  108-3-fr175-收口与文档指针: ready-for-dev
+  108-3-fr175-收口与文档指针: done
   epic-108-retrospective: optional
 
   epic-109: backlog
