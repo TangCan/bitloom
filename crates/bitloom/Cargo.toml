@@ -29,6 +29,7 @@ bitloom-sim = { workspace = true }
 bitloom-hir = { workspace = true }
 bitloom-builder = { workspace = true }
 bitloom-viz = { workspace = true }
+syn = { workspace = true }
 
 [dev-dependencies]
 bitloom-builder = { workspace = true }

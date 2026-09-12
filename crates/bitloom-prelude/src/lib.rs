@@ -20,11 +20,31 @@ pub mod ip;
 /// are type attributes; `functional_state` is an **inert field attribute** recognized
 /// by [`module`](rhdl::module) and HostView macros (stripped on expand; never HIR).
 /// See `docs/fr102-multiview-attribute-matrix.md`.
+///
+/// **FR157:** [`fsm`](rhdl::fsm) marks an FSM state enum for automatic label extraction.
 pub mod rhdl {
     pub use bitloom_macro::{
-        abstraction, both, bridge, combinational, functional_model, hls, module, process,
+        abstraction, both, bridge, combinational, fsm, functional_model, hls, module, process,
         sequential, top,
     };
+}
+
+/// Bitloom-branded attribute facade (FR118 / FR157 text paths use `#[bitloom::…]`).
+///
+/// Prefer this for new design annotations; [`rhdl`] remains the transitional alias.
+pub mod bitloom {
+    pub use bitloom_macro::{fsm, top};
+}
+
+/// FR157: compile-time FSM state label set (from `#[bitloom::fsm]` / `#[rhdl::fsm]`).
+///
+/// Feed `bitloom_sim::Sim::register_fsm_states` with [`Self::FSM_ID`] and
+/// [`Self::state_labels`] — does **not** replace FR109 visit sampling.
+pub trait FsmLabels {
+    /// FSM instance id used in coverage keys (`fsm:<id>:<label>`).
+    const FSM_ID: &'static str;
+    /// Ordered state labels (enum variant names).
+    fn state_labels() -> &'static [&'static str];
 }
 
 /// Host-only simulation view kind (FR29 / FR102). Never a FrozenHir node.

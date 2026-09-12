@@ -463,3 +463,82 @@ pub fn top(_attr: TokenStream, item: TokenStream) -> TokenStream {
         }
     })
 }
+
+/// FR157: mark an FSM state `enum` so variant names become a label set.
+///
+/// Optional attribute: `name = "demo"` overrides the FSM id (default: type name).
+/// Only unit variants are supported. Empty enums / non-enums → `compile_error!`.
+///
+/// Implements [`bitloom_prelude::FsmLabels`]. Re-exported as `#[rhdl::fsm]` /
+/// `#[bitloom::fsm]` from `bitloom-prelude` (AD-6).
+#[proc_macro_attribute]
+pub fn fsm(attr: TokenStream, item: TokenStream) -> TokenStream {
+    let args = parse_macro_input!(attr as FsmAttrArgs);
+    let input = parse_macro_input!(item as DeriveInput);
+    match expand_fsm(&args, &input) {
+        Ok(ts) => ts,
+        Err(e) => e.to_compile_error().into(),
+    }
+}
+
+struct FsmAttrArgs {
+    name: Option<syn::LitStr>,
+}
+
+impl syn::parse::Parse for FsmAttrArgs {
+    fn parse(input: syn::parse::ParseStream) -> syn::Result<Self> {
+        if input.is_empty() {
+            return Ok(Self { name: None });
+        }
+        let ident: syn::Ident = input.parse()?;
+        if ident != "name" {
+            return Err(syn::Error::new(ident.span(), "expected `name = \"...\"`"));
+        }
+        input.parse::<syn::Token![=]>()?;
+        let name: syn::LitStr = input.parse()?;
+        Ok(Self { name: Some(name) })
+    }
+}
+
+fn expand_fsm(args: &FsmAttrArgs, input: &DeriveInput) -> Result<TokenStream, syn::Error> {
+    let Data::Enum(data) = &input.data else {
+        return Err(syn::Error::new_spanned(
+            &input.ident,
+            "#[bitloom::fsm] / #[rhdl::fsm] may only be applied to enums (FR157)",
+        ));
+    };
+    if data.variants.is_empty() {
+        return Err(syn::Error::new_spanned(
+            &input.ident,
+            "#[bitloom::fsm] enum must have at least one variant (FR157)",
+        ));
+    }
+    let mut label_lits = Vec::new();
+    for v in &data.variants {
+        if !matches!(v.fields, Fields::Unit) {
+            return Err(syn::Error::new_spanned(
+                &v.ident,
+                "#[bitloom::fsm] supports only unit variants (FR157 MVP)",
+            ));
+        }
+        let lit = v.ident.to_string();
+        label_lits.push(syn::LitStr::new(&lit, v.ident.span()));
+    }
+    let ty = &input.ident;
+    let fsm_id = if let Some(n) = &args.name {
+        n.value()
+    } else {
+        ty.to_string()
+    };
+    let fsm_id_lit = syn::LitStr::new(&fsm_id, ty.span());
+    Ok(TokenStream::from(quote! {
+        #input
+
+        impl ::bitloom_prelude::FsmLabels for #ty {
+            const FSM_ID: &'static str = #fsm_id_lit;
+            fn state_labels() -> &'static [&'static str] {
+                &[#(#label_lits),*]
+            }
+        }
+    }))
+}

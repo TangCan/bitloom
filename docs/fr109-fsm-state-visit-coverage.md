@@ -41,10 +41,13 @@ let report = sim.coverage_report();
 
 Parsers: `parse_state_report` (alongside `parse_report` / `parse_branch_report`).
 
+**FR157:** labels may be obtained automatically from `#[bitloom::fsm]` / `FsmLabels` — see [`fr157-auto-fsm-labels.md`](fr157-auto-fsm-labels.md). FR109 visit semantics unchanged.
+
 ## Cross-links
 
 - FR105 Mux v2 (still closed): [`fr105-sim-coverage-ext.md`](fr105-sim-coverage-ext.md)
 - FR34 toggle: [`fr34-sim-coverage.md`](fr34-sim-coverage.md)
+- FR157 auto labels: [`fr157-auto-fsm-labels.md`](fr157-auto-fsm-labels.md)
 - NFR14: `_agile-output/implementation-artifacts/nfr14-risk-epic51-fsm-state-visit-coverage.md`
 
 ## Non-goals (NFR47)
