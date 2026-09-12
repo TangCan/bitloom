@@ -23,9 +23,9 @@ adds the **simulation / execution** deepen that FR137 explicitly deferred.
 
 FR137 compile alone；FR129 C1–C4 alone；FR121 alone；docs-only；`continue-on-error` silent skip；CIRCT HEAD / PATH-random firtool.
 
-## Deferred (NFR71)
+## Deferred (NFR71 → Phase 20)
 
-更广 CIRCT/MLIR dialect allocation / multi-lower 全家桶；firtool 升钉超 AD-9 — require a new contract.
+更广 CIRCT/MLIR dialect allocation / multi-lower → **FR169** / Epic 102（`docs/fr169-circt-mlir-allocation.md`）。firtool 升钉超 AD-9 与更广全家桶未写入 FR169 NFR14 的子集 — still Deferred / 新合同（NFR76）。
 
 ## Recipe
 

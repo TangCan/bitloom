@@ -48,6 +48,10 @@ circt-external-check:
 circt-external-sim-check:
 	bash scripts/circt-external-sim-check.sh
 
+# FR169: external CIRCT multi-lower / MLIR allocation (beyond FR164 sim; AD-9 pin).
+circt-external-alloc-check:
+	bash scripts/circt-external-alloc-check.sh
+
 # FR138: Parser restore product path (BitloomFirrtlParser.parse ≡ Parser.parse; AD-9 firtool -parse-only).
 # Not part of default `just test`. Missing/mismatched firtool → non-zero (never silent skip).
 parser-restore-check:

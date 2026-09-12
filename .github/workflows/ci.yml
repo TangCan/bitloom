@@ -102,6 +102,21 @@ jobs:
       - name: Required FR164 circt-external-sim-check
         run: bash scripts/circt-external-sim-check.sh
 
+  # FR169: required external CIRCT multi-lower / MLIR allocation gate (beyond FR164 sim).
+  # Same path as `just circt-external-alloc-check`. Failures are never ignored.
+  circt-external-alloc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.97.1"
+      - name: Ensure pinned firtool-1.155.0 (AD-9)
+        run: cargo run -p bitloom -- firtool ensure
+      - name: Required FR169 circt-external-alloc-check
+        run: bash scripts/circt-external-alloc-check.sh
+
   # FR144 / NFR62: required surface-crate SemVer gate (cargo-semver-checks).
   # Same path as `just semver-check`. Failures are never ignored; missing tool fails the job.
   semver-check:
