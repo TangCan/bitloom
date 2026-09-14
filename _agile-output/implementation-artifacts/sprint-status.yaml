@@ -828,8 +828,8 @@ development_status:
   epic-121-retrospective: optional
 
   epic-122: in-progress
-  122-1-epic-122-nfr14-风险记录: ready-for-dev
-  122-2-继续-firtool-产品钉升钉实现与验收-fr189: backlog
+  122-1-epic-122-nfr14-风险记录: done
+  122-2-继续-firtool-产品钉升钉实现与验收-fr189: ready-for-dev
   122-3-fr189-收口与文档指针: backlog
   epic-122-retrospective: optional
 
