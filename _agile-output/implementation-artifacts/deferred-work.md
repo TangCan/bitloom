@@ -102,6 +102,14 @@ Correct Course `sprint-change-proposal-2026-09-12-phase22-nfr81-leftovers.md` + 
 **诚实：** Phase 12–21 关闭证据**仍有效**（**NFR83**）；不得用 Phase 21 alone 冒充本批五条；超出各 NFR14 钉死子集仍须新合同（**NFR86**）。公开品牌 **Bitloom**。`git push` 非 FR。
 README「状态与 deferred」同源（Story **111.3** / **112.3** / **113.3** / **114.3** / **115.3** / **116.3** / **117.3**）。
 
+## Engineering closeout pointer (2026-09-14) — 工程/合同结项收口
+
+Correct Course `sprint-change-proposal-2026-09-14-engineering-closeout.md` + PRD addendum「工程/合同结项收口」**已批准**（**engineeringCloseoutApproved: 2026-09-14**；`engineeringCloseoutStatus: complete`）。
+**口径：** Phase 12–22 钉死合同面与 sprint backlog（故事 / 回顾 / action items）**已全部关闭**；可宣称「工程/合同结项」。
+**诚实：** **≠** 「NFR86 账本已空」；无界 tip / 更深 Handshake lower / 社区 Style 全家桶 / 继续 firtool 升钉 / 继续扩 FR142 等仍须**新** Correct Course（建议 Phase 23+）。**不得**用本结项 alone 冒充 Phase 23 已批准。`git push` **不是** FR。
+公开品牌 **Bitloom**。产品宣称仍须引已关 FR（至 **FR184** / **FR147** / **FR140** 等）。
+README「状态与 deferred」同源。
+
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
 **历史（Phase 11）：** 曾公开锁定下列五项，并写「须新 PRD 才能推翻」。

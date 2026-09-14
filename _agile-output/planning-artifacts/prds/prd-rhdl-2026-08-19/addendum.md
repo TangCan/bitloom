@@ -538,3 +538,30 @@ README / deferred / 脊柱指针由 Story **111.3–111.4** 落地；实现加�
 
 **合同指针：** 详见 `epics.md` Phase 22 Inventory（create-epics 后 · Epic 111–117 · FR178–FR184 / NFR83–NFR87）。
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-12-phase22-nfr81-leftovers.md`
+
+## 2026-09-14 Update — 工程/合同结项收口（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-14-engineering-closeout.md` —
+在 Phase 12–22 钉死合同面与 sprint backlog **全部关闭**之后，正式做 **工程/合同结项收口**。
+**本批不开** NFR86 → Phase 23 加深合同；不新增实现 epic。
+
+**批准默认（Q1–Q6）：**
+1. 本批 = 结项收口文档与状态戳；**不**升格 NFR86 为 Phase 23 加深 FR。
+2. **不**新增实现 epic；**不**改已关 Epic 1–117 AC。
+3. Phase 12–22 关闭证据 **仍有效**；**不得**改写为失败。
+4. 宣称：「sprint/合同 backlog 已空 / 工程结项」**≠**「NFR86 账本已空」；产品宣称仍须引已关 FR（至 **FR184** / **FR147** / **FR140** 等）。
+5. **`git push` / 远程同步不在本合同内。**
+6. 若日后要做 NFR86 加深，须 **另开** Correct Course（建议 Phase 23+）；**不得**从本结项 alone 冒充已授权。
+
+**公开品牌（不变）：** **Bitloom**；crates.io / CLI **`bitloom`** / `bitloom-*`；设计 crate 仍只依赖
+`bitloom-prelude`（AD-6）。禁止发布 `rhdl` / `rhdl-bits`。
+
+**结项目径（必须同时读）：**
+- Sprint 故事 / 回顾 / action items **全部 done**；`phase17Status`…`phase22Status: complete`。
+- Phase 16 产品终局（FR140）、Phase 17 Bitloom 1.0（FR147）、Phase 18 CLI 上架（FR148–153）、Phase 19–22 加深升格 **仍有效**。
+- **NFR86**（无界 CIRCT tip、更深 Handshake lower、社区 Style 全家桶、继续 firtool 升钉、继续扩 FR142 等）**仍 standing** — 见 `docs/fr184-phase22-claim-honesty.md`。
+- **禁止**用本结项 alone 冒充：NFR86 已清、Phase 23 已批准、或未关加深已交付。
+
+**合同指针：**
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-14-engineering-closeout.md`
+- `epics.md`：`engineeringCloseoutApproved` / `engineeringCloseoutStatus: complete`

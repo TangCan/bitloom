@@ -177,6 +177,14 @@ phase22RequirementsScope: FR178-FR184 / NFR83-NFR87
 phase22ProposedEpics: 111-117
 phase22ProposedFRs: FR178-FR184
 phase22ProposedNFRs: NFR83-NFR87
+engineeringCloseoutApproved: 2026-09-14
+engineeringCloseoutStatus: complete
+engineeringCloseoutNote: >
+  Correct Course approved 2026-09-14 (engineering/contract closeout; Batch; Q1–Q6).
+  Sprint backlog empty (stories/retros/action items done). Phase 12–22 closes remain valid.
+  NFR86 leftovers still standing — need new Correct Course (suggested Phase 23+) to deepen.
+  This closeout alone does not authorize NFR86 work; git push is not an FR.
+  Proposal: sprint-change-proposal-2026-09-14-engineering-closeout.md
 phase22Note: >
   Correct Course approved 2026-09-12 (Q1 five leftovers; Q5 FR142=FR183).
   Soft order: 111 → (112 ‖ 113 ‖ 114 ‖ 115 ‖ 116) → 117. Hard gate Epic 111 CLOSED Story 111.4.
@@ -188,6 +196,7 @@ phase22Note: >
   Epic 117 / FR184 CLOSED Story 117.3 (Phase 22 claim honesty).
   Phase 22 planning+implementation stories complete (Epic 111–117).
   Phase 12–21 closes remain valid (NFR83). Beyond NFR14 subsets still NFR86; must not claim NFR81 ledger empty.
+  Engineering closeout approved 2026-09-14 (see engineeringCloseoutStatus).
 phase22InputDocuments:
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md
