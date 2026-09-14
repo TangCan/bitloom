@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-14-2026 09:30
+last_updated: 09-14-2026 04:19
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -762,43 +762,43 @@ development_status:
   111-2-correct-course-prd-批准-phase-22-fr178: done
   111-3-同步-readme-deferred-路线图指针-fr178: done
   111-4-ad-指针与-epic-111-收口-fr178: done
-  epic-111-retrospective: optional
+  epic-111-retrospective: done
 
   epic-112: done
   112-1-epic-112-nfr14-风险记录: done
   112-2-浮动-circt-git-head-实现与验收-fr179: done
   112-3-fr179-收口与文档指针: done
-  epic-112-retrospective: optional
+  epic-112-retrospective: done
 
   epic-113: done
   113-1-epic-113-nfr14-风险记录: done
   113-2-handshake-dialect-加深实现与验收-fr180: done
   113-3-fr180-收口与文档指针: done
-  epic-113-retrospective: optional
+  epic-113-retrospective: done
 
   epic-114: done
   114-1-epic-114-nfr14-风险记录: done
   114-2-更深-style-guide-linter-实现与验收-fr181: done
   114-3-fr181-收口与文档指针: done
-  epic-114-retrospective: optional
+  epic-114-retrospective: done
 
   epic-115: done
   115-1-epic-115-nfr14-风险记录: done
   115-2-unpaired-firtool-产品钉再升钉实现与验收-fr182: done
   115-3-fr182-收口与文档指针: done
-  epic-115-retrospective: optional
+  epic-115-retrospective: done
 
   epic-116: done
   116-1-epic-116-nfr14-风险记录: done
   116-2-显式扩大-fr142-公开-api-表面实现与验收-fr183: done
   116-3-fr183-收口与文档指针: done
-  epic-116-retrospective: optional
+  epic-116-retrospective: done
 
   epic-117: done
   117-1-epic-117-nfr14-风险记录: done
   117-2-readme-deferred-状态页诚实更新-fr184: done
   117-3-fr184-收口与-phase-22-故事清单指针: done
-  epic-117-retrospective: optional
+  epic-117-retrospective: done
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1
@@ -3182,3 +3182,145 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-110-retro-2026-09-12.md"
+  - id: "epic-111-retro-item-364-phase-22-deepen-fr179-183-and-claim-hone"
+    epic: 111
+    action: "Phase 22 deepen (FR179-183) and claim honesty (FR184) need own Epic/NFR14;
+      do not smuggle implementation into the gate stories."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-111-retro-2026-09-14.md"
+  - id: "epic-111-retro-item-365-touching-ad-9-ad-25-ad-27-fr142-requires"
+    epic: 111
+    action: "Touching AD-9 / AD-25 / AD-27 / FR142 requires NFR85 revise-before-ready."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-111-retro-2026-09-14.md"
+  - id: "epic-111-retro-item-366-phase-22-claims-must-cite-fr178-184-fr18"
+    epic: 111
+    action: "Phase 22 claims must cite FR178-184 (FR184/NFR87); ban Phase 21 alone
+      / empty NFR81 ledger; leftovers still NFR86."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-111-retro-2026-09-14.md"
+  - id: "epic-111-retro-item-367-git-push-is-not-an-fr"
+    epic: 111
+    action: "git push is not an FR."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-111-retro-2026-09-14.md"
+  - id: "epic-112-retro-item-368-external-floating-head-claims-must-cite"
+    epic: 112
+    action: "External floating-HEAD claims must cite FR179; do not use FR174/FR182
+      alone."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-112-retro-2026-09-14.md"
+  - id: "epic-112-retro-item-369-when-floating-track-and-product-pin-vers"
+    epic: 112
+    action: "When floating-track and product-pin versions coincide, distinguish by
+      cache/path channel (firtool-floating-head / BITLOOM_FIRTOOL_FLOATING_HEAD_PATH)."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-112-retro-2026-09-14.md"
+  - id: "epic-112-retro-item-370-unbounded-tip-deeper-floating-still-nfr8"
+    epic: 112
+    action: "Unbounded tip / deeper floating still NFR86; needs a new contract."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-112-retro-2026-09-14.md"
+  - id: "epic-113-retro-item-371-handshake-deepen-fork-join-claims-must-c"
+    epic: 113
+    action: "Handshake deepen / fork+join claims must cite FR180; do not use FR129/FR121/FR175
+      alone."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-113-retro-2026-09-14.md"
+  - id: "epic-113-retro-item-372-deeper-handshake-dialect-circt-lower-sti"
+    epic: 113
+    action: "Deeper Handshake dialect / CIRCT lower still NFR86; needs a new contract."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-113-retro-2026-09-14.md"
+  - id: "epic-113-retro-item-373-touching-ad-25-requires-nfr85-revise-bef"
+    epic: 113
+    action: "Touching AD-25 requires NFR85 revise-before-ready."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-113-retro-2026-09-14.md"
+  - id: "epic-114-retro-item-374-style-linter-deepen-claims-must-cite-fr1"
+    epic: 114
+    action: "Style/linter deepen claims must cite FR181; do not use FR176/FR165 alone."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-114-retro-2026-09-14.md"
+  - id: "epic-114-retro-item-375-deeper-style-guide-community-linter-pack"
+    epic: 114
+    action: "Deeper Style Guide / community linter pack still NFR86; needs a new contract."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-114-retro-2026-09-14.md"
+  - id: "epic-114-retro-item-376-touching-ad-27-requires-nfr85-revise-bef"
+    epic: 114
+    action: "Touching AD-27 requires NFR85 revise-before-ready."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-114-retro-2026-09-14.md"
+  - id: "epic-115-retro-item-377-unpaired-product-pin-default-firtool-1-1"
+    epic: 115
+    action: "Unpaired product-pin / default firtool-1.159.0 claims must cite FR182;
+      do not use FR173/FR174/FR179 alone."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-115-retro-2026-09-14.md"
+  - id: "epic-115-retro-item-378-when-fr179-version-coincides-distinguish"
+    epic: 115
+    action: "When FR179 version coincides, distinguish product cache vs floating-head
+      path channels."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-115-retro-2026-09-14.md"
+  - id: "epic-115-retro-item-379-further-firtool-bumps-still-nfr86-touchi"
+    epic: 115
+    action: "Further firtool bumps still NFR86; touching AD-9 requires NFR85 revise-before-ready."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-115-retro-2026-09-14.md"
+  - id: "epic-116-retro-item-380-explicit-fr142-expand-bitloom-firrtl-in"
+    epic: 116
+    action: "Explicit FR142 expand / bitloom-firrtl in-surface claims must cite FR183;
+      do not use FR142 alone."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-116-retro-2026-09-14.md"
+  - id: "epic-116-retro-item-381-no-silent-surface-expand-design-crates-m"
+    epic: 116
+    action: "No silent surface expand; design crates must stay prelude-only (AD-6)."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-116-retro-2026-09-14.md"
+  - id: "epic-116-retro-item-382-further-api-expand-still-nfr86-touching"
+    epic: 116
+    action: "Further API expand still NFR86; touching FR142 surface requires NFR85
+      doc revise-before-ready."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-116-retro-2026-09-14.md"
+  - id: "epic-117-retro-item-383-full-phase-22-claims-must-cite-fr178-184"
+    epic: 117
+    action: "Full Phase 22 claims must cite FR178-184; each deepen cites its FR (179-183)."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-117-retro-2026-09-14.md"
+  - id: "epic-117-retro-item-384-phase-22-close-does-not-empty-the-nfr81"
+    epic: 117
+    action: "Phase 22 close does not empty the NFR81 ledger; beyond-NFR14 deepen still
+      NFR86."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-117-retro-2026-09-14.md"
+  - id: "epic-117-retro-item-385-ban-phase-21-alone-as-fr179-183-nfr87-gi"
+    epic: 117
+    action: "Ban Phase 21 alone as FR179-183 (NFR87); git push is not an FR."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-117-retro-2026-09-14.md"
