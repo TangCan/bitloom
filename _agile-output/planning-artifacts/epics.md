@@ -208,8 +208,9 @@ phase23Epic121Stories: 3
 phase23Epic121Status: complete
 phase23Epic122StoriesDrafted: 2026-09-14
 phase23Epic122Stories: 3
-phase23Epic122Status: blocked-upstream
+phase23Epic122Status: deferred
 phase23Epic122ParkApproved: 2026-09-14
+phase23Epic122DeferCloseApproved: 2026-09-14
 phase23Epic123StoriesDrafted: 2026-09-14
 phase23Epic123Stories: 3
 phase23Epic123Status: complete
@@ -237,11 +238,11 @@ phase23Note: >
   Soft order: 118 → (119 ‖ 120 ‖ 121 ‖ 122 ‖ 123) → 124. Hard gate Epic 118 CLOSED Story 118.4.
   Epic 119 / FR186 CLOSED Story 119.3. Epic 120 / FR187 CLOSED Story 120.3.
   Epic 121 / FR188 CLOSED Story 121.3. Epic 123 / FR190 CLOSED Story 123.3.
-  Epic 122 / FR189 blocked-upstream PARKED (Correct Course A approved 2026-09-14; no firtool >1.159.0).
+  Epic 122 / FR189 DEFERRED closeout (NOT delivered; Correct Course 2026-09-14 defer-close; → NFR91).
   Epic 124 / FR191 CLOSED Story 124.3 (Phase 23 claim honesty).
-  Phase 23 planning stories complete (Epic 118–124). Implementation honesty: FR189 unclosed/parked.
+  Phase 23 planning stories complete (Epic 118–124). Implementation honesty: FR189 unclosed/deferred.
   Phase 12–22 + engineering closeout remain valid (NFR88). Beyond NFR14 still NFR91.
-  Must not claim NFR86 ledger empty. Resume 122.2 when published firtool >1.159.0.
+  Must not claim NFR86 ledger empty. Further firtool product-pin bump needs new contract (NFR91).
 phase22Note: >
   Correct Course approved 2026-09-12 (Q1 five leftovers; Q5 FR142=FR183).
   Soft order: 111 → (112 ‖ 113 ‖ 114 ‖ 115 ‖ 116) → 117. Hard gate Epic 111 CLOSED Story 111.4.
@@ -9758,7 +9759,7 @@ So that 宣称须引 FR188。
 **NFRs:** NFR14, NFR88, NFR90, NFR91  
 **Depends on:** 硬依赖 Epic 118。  
 **Gate:** Story 122.1 NFR14 未完成前，122.2–122.3 不得标 ready。  
-**Status (2026-09-14):** **blocked-upstream / parked** — Correct Course **A** approved（`sprint-change-proposal-2026-09-14-fr189-upstream-block.md`）。无已发布 firtool >1.159.0；**不得** silent-Ok / 以 FR182 alone 关闭。上游发布后恢复 Story 122.2。
+**Status (2026-09-14):** **deferred closeout — NOT delivered** — Correct Course `sprint-change-proposal-2026-09-14-fr189-defer-close.md`（产品确认延期关账）。FR189 升钉验收未满足；**不得**宣称已交付；后续超 1.159.0 产品钉 → **NFR91** 新合同。Story 122.1 NFR14 仍有效作形状参考。
 
 ### Story 122.1: Epic 122 NFR14 风险记录
 
@@ -9785,7 +9786,7 @@ So that NFR86 firtool leftover 可勾选。
 **When** 实现升钉（ensure/info/CI 按 NFR14）
 **Then** 产品钉版本可验证为已发布 **>1.159.0**；≠ FR182 alone
 **And** 公开品牌 Bitloom  
-**And Given** 开工时仍无已发布 firtool >1.159.0，**Then** 不得关闭本故事；保持 blocked-upstream / park（Correct Course A）或非零可读失败；**禁止** silent-Ok
+**And Given** 开工时仍无已发布 firtool >1.159.0，**Then** 不得关闭为已交付；保持 blocked-upstream / park / **deferred**（Correct Course）或非零可读失败；**禁止** silent-Ok
 
 ### Story 122.3: FR189 收口与文档指针
 

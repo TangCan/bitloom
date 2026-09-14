@@ -38,20 +38,34 @@ fn nfr14_risk_epic122_further_firtool_product_pin_fr189_has_required_fields() {
     assert!(text.contains("负责人") && (text.contains("(d)") || text.contains("（d）")));
 
     let status_open = text.contains("状态")
-        && (text.contains("open") || text.contains("in-progress") || text.contains("进行中"))
+        && (text.contains("open")
+            || text.contains("in-progress")
+            || text.contains("进行中")
+            || text.contains("deferred")
+            || text.contains("未交付")
+            || text.contains("parked"))
         && !text.contains("closed — Story 122.3");
     let status_closed = text.contains("closed — Story 122.3")
-        || (text.contains("closed") && text.contains("Epic 122") && text.contains("可宣称"));
+        || (text.contains("closed")
+            && text.contains("Epic 122")
+            && text.contains("可宣称")
+            && text.contains("已交付"));
     assert!(status_open || status_closed);
 
     let sprint = fs::read_to_string(
         workspace_root().join("_agile-output/implementation-artifacts/sprint-status.yaml"),
     )
     .expect("sprint");
-    if !(sprint.contains("epic-122: done") || sprint.contains("epic-122:done")) {
+    // `deferred` is NOT delivery-done; risk record must stay non-delivered.
+    if sprint.contains("epic-122: done") || sprint.contains("epic-122:done") {
+        assert!(
+            status_closed,
+            "epic-122 done must mean delivered close (Story 122.3)"
+        );
+    } else {
         assert!(
             status_open,
-            "before epic-122 done, risk record must stay open"
+            "before epic-122 delivery-done, risk record must stay open/deferred/not-delivered"
         );
     }
 

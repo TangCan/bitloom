@@ -53,6 +53,8 @@ fn fr190_deferred_marks_epic123_closed() {
         deferred.contains("FR189")
             && (deferred.contains("blocked")
                 || deferred.contains("未关")
+                || deferred.contains("deferred")
+                || deferred.contains("未交付")
                 || deferred.contains("NFR91")
                 || deferred.contains("Epic 124")),
         "deferred must keep FR189 honesty / point remaining"

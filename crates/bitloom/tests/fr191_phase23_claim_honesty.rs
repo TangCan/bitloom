@@ -26,8 +26,12 @@ fn fr191_docs_claim_map() {
         "must forbid NFR86 ledger-empty claim"
     );
     assert!(
-        docs.contains("FR189") && (docs.contains("blocked") || docs.contains("blocked-upstream")),
-        "must list FR189 blocked honestly"
+        docs.contains("FR189")
+            && (docs.contains("blocked")
+                || docs.contains("blocked-upstream")
+                || docs.contains("deferred")
+                || docs.contains("未交付")),
+        "must list FR189 blocked/deferred honestly"
     );
     assert!(
         docs.contains("git push")
@@ -53,8 +57,11 @@ fn fr191_readme_honesty_pointers() {
     assert!(readme.contains("FR188") && readme.contains("FR190"));
     assert!(
         readme.contains("FR189")
-            && (readme.contains("blocked-upstream") || readme.contains("blocked")),
-        "README must keep FR189 blocked honesty"
+            && (readme.contains("blocked-upstream")
+                || readme.contains("blocked")
+                || readme.contains("deferred")
+                || readme.contains("未交付")),
+        "README must keep FR189 blocked/deferred honesty"
     );
     assert!(
         readme.contains("FR191")
@@ -86,8 +93,11 @@ fn fr191_deferred_points_to_honesty_doc() {
     );
     assert!(
         deferred.contains("FR189")
-            && (deferred.contains("blocked") || deferred.contains("blocked-upstream")),
-        "deferred must keep FR189 blocked"
+            && (deferred.contains("blocked")
+                || deferred.contains("blocked-upstream")
+                || deferred.contains("deferred")
+                || deferred.contains("未交付")),
+        "deferred must keep FR189 blocked/deferred"
     );
     assert!(
         deferred.contains("NFR92")
@@ -104,8 +114,12 @@ fn fr191_nfr14_gates_124_2() {
     );
     assert!(risk.contains("FR191") && risk.contains("124.2"));
     assert!(
-        risk.contains("FR189") && (risk.contains("blocked") || risk.contains("未关")),
-        "NFR14 must list FR189 unclosed/blocked"
+        risk.contains("FR189")
+            && (risk.contains("blocked")
+                || risk.contains("未关")
+                || risk.contains("deferred")
+                || risk.contains("未交付")),
+        "NFR14 must list FR189 unclosed/blocked/deferred"
     );
 }
 

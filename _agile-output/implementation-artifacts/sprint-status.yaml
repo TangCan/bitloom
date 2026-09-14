@@ -827,13 +827,13 @@ development_status:
   121-3-fr188-收口与文档指针: done
   epic-121-retrospective: optional
 
-  epic-122: in-progress
+  epic-122: deferred
   122-1-epic-122-nfr14-风险记录: done
-  # parked — Correct Course A approved 2026-09-14 (FR189 upstream block):
-  # no published firtool-* >1.159.0; resume 122.2 only when tip >1.159.0;
-  # see sprint-change-proposal-2026-09-14-fr189-upstream-block.md
-  122-2-继续-firtool-产品钉升钉实现与验收-fr189: ready-for-dev
-  122-3-fr189-收口与文档指针: backlog
+  # deferred closeout (NOT delivered) — Correct Course 2026-09-14:
+  # product confirmed 延期关账（非已交付）; FR189 → NFR91 until new contract;
+  # see sprint-change-proposal-2026-09-14-fr189-defer-close.md
+  122-2-继续-firtool-产品钉升钉实现与验收-fr189: deferred
+  122-3-fr189-收口与文档指针: deferred
   epic-122-retrospective: optional
 
   epic-123: done

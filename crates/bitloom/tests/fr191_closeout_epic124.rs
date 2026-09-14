@@ -37,8 +37,11 @@ fn fr191_readme_marks_fr191_and_phase23_planning_closed() {
     );
     assert!(
         readme.contains("FR189")
-            && (readme.contains("blocked-upstream") || readme.contains("blocked")),
-        "README must keep FR189 blocked honesty"
+            && (readme.contains("blocked-upstream")
+                || readme.contains("blocked")
+                || readme.contains("deferred")
+                || readme.contains("未交付")),
+        "README must keep FR189 blocked/deferred honesty"
     );
     assert!(
         readme.contains("NFR91")
@@ -75,8 +78,11 @@ fn fr191_deferred_marks_epic124_closed() {
     );
     assert!(
         deferred.contains("FR189")
-            && (deferred.contains("blocked") || deferred.contains("blocked-upstream")),
-        "deferred must keep FR189 blocked"
+            && (deferred.contains("blocked")
+                || deferred.contains("blocked-upstream")
+                || deferred.contains("deferred")
+                || deferred.contains("未交付")),
+        "deferred must keep FR189 blocked/deferred"
     );
 }
 
@@ -97,8 +103,11 @@ fn fr191_agents_and_spine_closed() {
     );
     assert!(
         agents.contains("FR189")
-            && (agents.contains("blocked") || agents.contains("blocked-upstream")),
-        "AGENTS must keep FR189 blocked"
+            && (agents.contains("blocked")
+                || agents.contains("blocked-upstream")
+                || agents.contains("deferred")
+                || agents.contains("not delivered")),
+        "AGENTS must keep FR189 blocked/deferred"
     );
     let spine = read(
         "_agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md",
@@ -117,8 +126,11 @@ fn fr191_agents_and_spine_closed() {
     );
     assert!(
         spine.contains("FR189")
-            && (spine.contains("blocked") || spine.contains("blocked-upstream")),
-        "spine must keep FR189 blocked"
+            && (spine.contains("blocked")
+                || spine.contains("blocked-upstream")
+                || spine.contains("deferred")
+                || spine.contains("未交付")),
+        "spine must keep FR189 blocked/deferred"
     );
 }
 
@@ -146,7 +158,11 @@ fn fr191_nfr14_epic124_close_conditions_checked() {
         "NFR14 must be closed after Story 124.3"
     );
     assert!(
-        text.contains("FR189") && (text.contains("blocked") || text.contains("未关")),
+        text.contains("FR189")
+            && (text.contains("blocked")
+                || text.contains("未关")
+                || text.contains("deferred")
+                || text.contains("未交付")),
         "NFR14 close must keep FR189 honesty"
     );
 }
@@ -181,7 +197,10 @@ fn fr191_epics_phase23_epic124_complete() {
     );
     assert!(
         !epics.contains("phase23Status: complete\n")
-            || epics.contains("FR189") && epics.contains("blocked"),
+            || (epics.contains("FR189")
+                && (epics.contains("blocked")
+                    || epics.contains("deferred")
+                    || epics.contains("DEFERRED"))),
         "must not silently mark full Phase 23 implementation complete without FR189 honesty"
     );
 }
@@ -194,8 +213,12 @@ fn fr191_product_doc_closed() {
         "fr191 product doc must note closed status"
     );
     assert!(
-        doc.contains("FR189") && (doc.contains("blocked") || doc.contains("blocked-upstream")),
-        "must keep FR189 blocked honesty"
+        doc.contains("FR189")
+            && (doc.contains("blocked")
+                || doc.contains("blocked-upstream")
+                || doc.contains("deferred")
+                || doc.contains("未交付")),
+        "must keep FR189 blocked/deferred honesty"
     );
     assert!(
         doc.contains("NFR91") || doc.contains("NFR86"),

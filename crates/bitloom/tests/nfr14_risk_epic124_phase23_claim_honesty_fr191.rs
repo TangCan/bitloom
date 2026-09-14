@@ -74,8 +74,10 @@ fn nfr14_risk_epic124_phase23_claim_honesty_fr191_has_required_fields() {
             && (text.contains("blocked")
                 || text.contains("未关")
                 || text.contains("未关闭")
-                || text.contains("不得宣称")),
-        "must honestly list FR189 unclosed / blocked"
+                || text.contains("不得宣称")
+                || text.contains("deferred")
+                || text.contains("未交付")),
+        "must honestly list FR189 unclosed / blocked / deferred"
     );
     assert!(
         (text.contains("Phase 22") || text.contains("结项"))

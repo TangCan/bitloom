@@ -3,8 +3,8 @@
 > **权威：** PRD `prd-rhdl-2026-08-19` **NFR14**；架构脊柱 **AD-28**；Phase 23 **NFR88–NFR92**；宣称面 **FR191**；宣称须引 **FR185–191**。  
 > **模板：** `nfr14-risk-record-template.md`。  
 > **体例对照：** `nfr14-risk-epic117-phase22-claim-honesty-fr184.md`。  
-> **前置：** Epic 118 / FR185 **closed**；Epic 119–121 / FR186–188 **closed**；Epic 123 / FR190 **closed**；Epic 122 / FR189 **blocked-upstream**（诚实列出未关）；Phase 12–22 / 结项关闭面仍有效（**NFR88**）。  
-> **门禁：** 无本有效记录 ⇒ **不得**将 **124.2–124.3** 标 `ready`。**不得**用 Phase 22 / 结项 alone 冒充本批五条；**不得**暗示「NFR86 账本已空」；**不得**把未关 **FR189** 写成已交付。
+> **前置：** Epic 118 / FR185 **closed**；Epic 119–121 / FR186–188 **closed**；Epic 123 / FR190 **closed**；Epic 122 / FR189 **deferred / 未交付**（诚实列出）；Phase 12–22 / 结项关闭面仍有效（**NFR88**）。  
+> **门禁：** 无本有效记录 ⇒ **不得**将 **124.2–124.3** 标 `ready`。**不得**用 Phase 22 / 结项 alone 冒充本批五条；**不得**暗示「NFR86 账本已空」；**不得**把未交付 **FR189** 写成已交付。
 
 ---
 
@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR191 / Epic 124；NFR14、NFR88、NFR89、NFR91、NFR92；对照 FR185–190 / FR178–184 / 结项 |
 | 记录日期 | 2026-09-14 |
-| 状态 | **closed — Story 124.3**；Epic 124 关闭；FR191 宣称门可宣称；Phase 23 **规划**故事齐（Epic 118–124）；实现诚实 **FR189 blocked-upstream**；**NFR91** 未选加深仍须新合同；**不得**宣称 NFR86 账本已空 |
+| 状态 | **closed — Story 124.3**；Epic 124 关闭；FR191 宣称门可宣称；Phase 23 **规划**故事齐（Epic 118–124）；实现诚实 **FR189 deferred / 未交付**；**NFR91** 未选加深仍须新合同；**不得**宣称 NFR86 账本已空 |
 | **选定** | 在保留 Phase 12–22 / 结项与已关 Phase 23 deepen 的前提下，授权 **Phase 23 宣称诚实门（FR191）**：公开 README / deferred / 状态页按**已关** FR185–191 可审计宣称，并**诚实列出未关 FR189**；**禁止** Phase 22 / 结项 alone 冒充 FR186–190；**禁止**未关 FR 勾选「已交付」；**禁止**暗示超出各 epic NFR14 钉死子集的加深已清或「NFR86 账本已空」；**禁止**把 `git push` 当 FR |
 
 ### 已关 / 未关 FR185–191 宣称矩阵（本 epic 钉死）
@@ -25,7 +25,7 @@
 | **FR186** | 119 | 无界 CIRCT tip | **已关闭** | **FR186**（≠ FR179 alone） |
 | **FR187** | 120 | Handshake lower deepen | **已关闭** | **FR187**（≠ FR180 alone） |
 | **FR188** | 121 | 社区 Style Guide 全家桶 | **已关闭** | **FR188**（≠ FR181 alone） |
-| **FR189** | 122 | 继续 firtool 产品钉升钉 | **未关闭 / blocked-upstream**（无已发布 firtool >1.159.0） | **不得宣称已交付**；须引 blocked 诚实面 |
+| **FR189** | 122 | 继续 firtool 产品钉升钉 | **deferred / 未交付**（Correct Course 延期关账 2026-09-14；后续 → NFR91） | **不得宣称已交付**；须引 deferred 诚实面 |
 | **FR190** | 123 | 继续显式扩 FR142 | **已关闭** | **FR190**（≠ FR183 alone） |
 | **FR191** | 124 | **宣称诚实门**（本 epic） | **已关闭** | **FR185–FR191** via **FR191**（含 FR189 未关诚实） |
 
@@ -38,7 +38,7 @@
 | --- | --- | --- |
 | **Phase 12–22 + 结项** | FR94–184 / engineering closeout | **仍有效；不得改写为失败**（**NFR88**） |
 | **Epic 118–121 / 123** | 闸门 + 已关 deepen | **已关闭**；宣称须引对应 FR |
-| **Epic 122 / FR189** | firtool 再升钉 | **未关 / blocked**；**alone ≠ 已交付** |
+| **Epic 122 / FR189** | firtool 再升钉 | **deferred / 未交付**；**alone ≠ 已交付** |
 | **Epic 124 / FR191** | **宣称诚实门**（本 epic） | **本实现 epic**（文档/状态页；非新加深） |
 
 **选定：关闭「宣称无 FR 指针 / Phase 22·结项冒充 Phase 23 / 把未关 FR189 写成已交付」缺口；≠ 重做 FR186–190；≠ 清空 NFR91 / 「NFR86 账本已空」。**

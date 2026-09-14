@@ -609,3 +609,15 @@ README / deferred / 脊柱指针由 Story **118.3–118.4** 落地；实现加�
 5. `git push` **不是** FR。公开品牌 **Bitloom**。
 
 **合同指针：** `_agile-output/planning-artifacts/sprint-change-proposal-2026-09-14-fr189-upstream-block.md`
+
+## 2026-09-14 Update — FR189 / Epic 122 延期关账（非已交付）（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-14-fr189-defer-close.md` — **延期关账（非已交付）**（在方案 A park 之后）。
+
+1. Sprint：Epic 122 / 122.2 / 122.3 = **`deferred`**（**不是** `done`）。
+2. **FR189 未交付**；不得以 1.159.0 / FR182 alone / FR186 live tip 勾选。
+3. 后续「超 1.159.0 产品钉再升」归 **NFR91** — 须新合同。
+4. Phase 23 规划故事（Epic 118–124）与 FR191 诚实门关闭面仍有效；宣称矩阵标 FR189 **deferred / 未交付**。
+5. Story 122.1 NFR14 保持 done（形状参考）。`git push` **不是** FR。公开品牌 **Bitloom**。
+
+**合同指针：** `_agile-output/planning-artifacts/sprint-change-proposal-2026-09-14-fr189-defer-close.md`

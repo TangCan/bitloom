@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR189 / Epic 122；NFR14、NFR88、NFR90、NFR91；对照 FR182 / FR186 / FR179 / FR173 / AD-9 |
 | 记录日期 | 2026-09-14 |
-| 状态 | **open / in-progress / parked**（Story 122.1 done；Epic 122 **blocked-upstream** — Correct Course **A** approved 2026-09-14；关闭勾选 → Story 122.3 after tip >1.159.0） |
+| 状态 | **deferred / 未交付**（Story 122.1 done；Epic 122 **延期关账** — Correct Course 2026-09-14；**不是** FR189 已交付；后续升钉 → **NFR91**） |
 | **选定** | 在保留 FR182 **firtool-1.159.0** unpaired 产品钉关闭面的前提下，授权将 **AD-9 默认产品钉**再升至 **严格大于 1.159.0** 的已发布 `firtool-*` tag（semver）；Story **122.2 开工时**须从 GitHub `llvm/circt` releases 解析并**钉死具体版本号**写入 docs/本记录；Chisel 默认仍 **7.15.0**，除非该 firtool 有上游正式配对（若有则按配对升钉；若无则延续 *unpaired product-pin* 例外）；触及 **AD-9** 须按 **NFR90** 先修订；禁止把 FR186 live tip / FR179 floating-track 冒充默认产品钉 |
 
 ### Phase 22 / FR182 关闭面 vs Epic 122（NFR88）
