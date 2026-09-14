@@ -45,7 +45,7 @@ External claims about Phase 22 delivery **must** cite the matching closed FR:
 
 Beyond each Phase 22 epic NFR14 subset (e.g. unbounded live CIRCT tip; Handshake dialect/lower beyond fork+join; full community Style Guide 全家桶; further unpaired product-pin bumps; further public-API expands) still needs a **new** contract (**NFR86**). Do **not** claim 「NFR81 账本已空」.
 
-**Phase 23 upgrade (Correct Course approved 2026-09-14):** those five leftovers are contracted as **FR186–FR190** (gate **FR185** / honesty **FR191** / Epic 118–124). Until those FRs close, do **not** claim them delivered. Beyond Phase 23 NFR14 subsets still need a newer contract (**NFR91**).
+**Phase 23 upgrade (Correct Course approved 2026-09-14):** those five leftovers are contracted as **FR186–FR190** (gate **FR185** / honesty **FR191** / Epic 118–124). Claim honesty: [`fr191-phase23-claim-honesty.md`](fr191-phase23-claim-honesty.md). **FR186–188 / FR190 closed**; **FR189 blocked-upstream** (do **not** claim delivered). Beyond Phase 23 NFR14 subsets still need a newer contract (**NFR91**). **Do not** claim 「NFR86 账本已空」.
 
 ## Brand
 

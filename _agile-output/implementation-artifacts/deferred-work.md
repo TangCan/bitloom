@@ -119,8 +119,9 @@ Correct Course `sprint-change-proposal-2026-09-14-phase23-nfr86-leftovers.md` + 
 **Epic 121 / FR188**（**已关闭** / Story **121.3**；[`docs/fr188-community-style-guide-pack.md`](../../docs/fr188-community-style-guide-pack.md)）— 社区 Style Guide 全家桶（≠ FR181 alone；≠ FR176 alone；超子集仍 **NFR91**）。
 **Epic 122 / FR189**（**blocked-upstream** — 无已发布 `firtool-*` >**1.159.0**；见 `sprint-change-proposal-2026-09-14-fr189-upstream-block.md`；**不得**以 FR182 alone 勾选）— 继续 firtool 产品钉升钉。
 **Epic 123 / FR190**（**已关闭** / Story **123.3**；[`docs/fr190-further-fr142-api-expand.md`](../../docs/fr190-further-fr142-api-expand.md)）— 继续显式扩 FR142（≠ FR183 alone；AD-6 仍 prelude-only；超子集仍 **NFR91**）。
-实现映射：**FR186** 无界 CIRCT tip（已关）；**FR187** Handshake lower（已关）；**FR188** Style 全家桶（已关）；**FR189** 继续 firtool 升钉（**未关 / blocked**）；**FR190** 继续扩 FR142（已关）；**FR191** 宣称诚实门。
-**诚实：** Phase 12–22 / 工程结项关闭证据**仍有效**（**NFR88**）；不得用 Phase 22 / 结项 alone 冒充本批五条；超出各 NFR14 仍 **NFR91**。`git push` 非 FR。
+**Epic 124 / FR191**（**实现中** / Story **124.2**；[`docs/fr191-phase23-claim-honesty.md`](../../docs/fr191-phase23-claim-honesty.md)）— Phase 23 宣称诚实门；宣称须引 **FR185–191**（**NFR92**）；**FR189** 诚实 **blocked-upstream**；**不得**宣称「NFR86 账本已空」；超子集仍 **NFR91**；Epic 关闭 → Story **124.3**。
+实现映射：**FR186** 无界 CIRCT tip（已关）；**FR187** Handshake lower（已关）；**FR188** Style 全家桶（已关）；**FR189** 继续 firtool 升钉（**未关 / blocked**）；**FR190** 继续扩 FR142（已关）；**FR191** 宣称诚实门（诚实面 Story **124.2**）。
+**诚实：** Phase 12–22 / 工程结项关闭证据**仍有效**（**NFR88**）；不得用 Phase 22 / 结项 alone 冒充本批五条；**不得**宣称「NFR86 账本已空」；超出各 NFR14 仍 **NFR91**。`git push` 非 FR。
 公开品牌 **Bitloom**。软序 `118 →（119 ‖ 120 ‖ 121 ‖ 122 ‖ 123）→ 124`。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻

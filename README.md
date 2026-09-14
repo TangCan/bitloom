@@ -464,9 +464,9 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | Style Guide 全家桶 | FR188 / 121 | 超 FR181 wartremover deepen；community-style-guide+scalafmt — **已关闭**（[`docs/fr188-community-style-guide-pack.md`](docs/fr188-community-style-guide-pack.md)；Story **121.3**） |
 | 继续 firtool 产品钉升钉 | FR189 / 122 | 超 FR182 1.159.0 — **blocked-upstream**（无已发布 firtool >1.159.0；Correct Course pending） |
 | 继续显式扩 FR142 | FR190 / 123 | 超 FR183；emit/import/check_* — **已关闭**（[`docs/fr190-further-fr142-api-expand.md`](docs/fr190-further-fr142-api-expand.md)；Story **123.3**） |
-| Phase 23 宣称诚实门 | FR191 / 124 | 宣称须引 FR185–191 — **backlog** |
+| Phase 23 宣称诚实门 | FR191 / 124 | 宣称须引 FR185–191 — **实现中**（[`docs/fr191-phase23-claim-honesty.md`](docs/fr191-phase23-claim-honesty.md)；Story **124.2**；Epic 关闭 → **124.3**） |
 
-**FR185–191 宣称纪律（FR191 / NFR92）：** 「无界 tip」须引 **FR186**；「Handshake lower」须引 **FR187**；「Style 全家桶」须引 **FR188**；「firtool 再升钉」须引 **FR189**；「继续扩 FR142」须引 **FR190**；完整 Phase 23 宣称须引 **FR185–191**（**FR191** 诚实门）。**不得**用 Phase 22 / 结项 alone 冒充本批五条；**不得宣称**未关闭前已交付；超出各 NFR14 钉死子集仍须新合同（**NFR91**）。`git push` **不是** FR。
+**FR185–191 宣称纪律（FR191 / NFR92）：** 「无界 tip」须引 **FR186**；「Handshake lower」须引 **FR187**；「Style 全家桶」须引 **FR188**；「firtool 再升钉」须引 **FR189**（当前 **blocked-upstream**，**不得**勾选已交付）；「继续扩 FR142」须引 **FR190**；完整 Phase 23 宣称须引 **FR185–191**（**FR191** 诚实门 — [`docs/fr191-phase23-claim-honesty.md`](docs/fr191-phase23-claim-honesty.md)）。**不得**用 Phase 22 / 结项 alone 冒充本批五条；**不得宣称**未关闭前已交付；**不得**宣称「NFR86 账本已空」；超出各 NFR14 钉死子集仍须新合同（**NFR91**）。`git push` **不是** FR。
 
 **（历史口径）NFR59 曾 deferred（NFR63 / NFR67）— 现已由 Phase 19 合同升格；未关 FR 前仍不得冒充已清：**
 
