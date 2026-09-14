@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR186 / Epic 119；NFR14、NFR88、NFR90、NFR91；对照 FR179 / FR174 / FR182 / AD-9 |
 | 记录日期 | 2026-09-14 |
-| 状态 | **open / in-progress**（Story 119.1；Epic 119 未关闭；关闭勾选 → Story 119.3） |
+| 状态 | **closed — Story 119.3**；Epic 119 / FR186 可宣称关闭；超子集仍 **NFR91** |
 | **选定** | 在保留 FR179 文档钉死 **浮动轨 1.159.0** 关闭面的前提下，授权相对该钉死浮动轨之外的 **可复现无界 / live CIRCT tip** 产品通道；触及 **AD-9** 须按 **NFR90** 先修订；诚实「非产品默认钉」；禁止 PATH-random / silent-Ok |
 
 ### Phase 22 / FR179 关闭面 vs Epic 119（NFR88）
@@ -91,9 +91,9 @@
 
 ### Epic 119 关闭条件（Story 119.3 勾选）
 
-- [ ] **无界 tip 通道 + 验收谓词：** Story 119.2
-- [ ] **AD-9 修订（NFR90）：** tip 渠道边界写入脊柱
-- [ ] **docs/README/deferred：** ≠ FR179 alone；诚实非产品默认钉
-- [ ] **NFR88 / NFR91：** 边界保持；超子集仍须新合同
-- [ ] **禁止事项未触发：** 未用 FR179 alone 勾选
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
+- [x] **无界 tip 通道 + 验收谓词：** Story 119.2
+- [x] **AD-9 修订（NFR90）：** tip 渠道边界写入脊柱
+- [x] **docs/README/deferred：** ≠ FR179 alone；诚实非产品默认钉
+- [x] **NFR88 / NFR91：** 边界保持；超子集仍须新合同
+- [x] **禁止事项未触发：** 未用 FR179 alone 勾选
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`

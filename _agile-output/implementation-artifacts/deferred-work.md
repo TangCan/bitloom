@@ -92,7 +92,7 @@ README「状态与 deferred」同源（Story **105.3** / **105.4** / **106.3** /
 
 Correct Course `sprint-change-proposal-2026-09-12-phase22-nfr81-leftovers.md` + PRD addendum「Phase 22」**已批准**（**Phase 22 contract approved** 2026-09-12；`correctCoursePhase22Approved: 2026-09-12`；planning-complete 2026-09-14）。
 闸门 **FR178 / Epic 111** **已关闭**（Story **111.4**；闸门已开；实现 epic 可合法开工）。
-**Epic 112 / FR179**（**已关闭** / Story **112.3**；[`docs/fr179-floating-circt-git-head.md`](../../docs/fr179-floating-circt-git-head.md)）— 浮动轨 firtool-1.159.0（≠ FR174 alone；≠ AD-9 产品钉；无界 tip 仍 **NFR86**）。
+**Epic 112 / FR179**（**已关闭** / Story **112.3**；[`docs/fr179-floating-circt-git-head.md`](../../docs/fr179-floating-circt-git-head.md)）— 浮动轨 firtool-1.159.0（≠ FR174 alone；≠ AD-9 产品钉；无界 tip → **FR186**）。
 **Epic 113 / FR180**（**已关闭** / Story **113.3**；[`docs/fr180-handshake-dialect-deepen.md`](../../docs/fr180-handshake-dialect-deepen.md)）— Handshake dialect deepen fork+join（≠ FR129 alone；≠ FR175 alone；更深 dialect/lower 仍 **NFR86**）。
 **Epic 114 / FR181**（**已关闭** / Story **114.3**；[`docs/fr181-deeper-style-guide-linter.md`](../../docs/fr181-deeper-style-guide-linter.md)）— Style/linter deepen wartremover+fatal-warnings（≠ FR176 alone；完整社区 Style Guide 全家桶仍 **NFR86**）。
 **Epic 115 / FR182**（**已关闭** / Story **115.3**；[`docs/fr182-unpaired-firtool-product-pin.md`](../../docs/fr182-unpaired-firtool-product-pin.md)）— unpaired firtool 产品钉 **1.159.0** + Chisel **7.15.0**（AD-9 *unpaired product-pin* 例外；≠ FR173/FR174/FR179 alone；更深升钉仍 **NFR86**）。
@@ -114,7 +114,8 @@ README「状态与 deferred」同源。
 
 Correct Course `sprint-change-proposal-2026-09-14-phase23-nfr86-leftovers.md` + PRD addendum「Phase 23」**已批准**（**Phase 23 contract approved** 2026-09-14；`correctCoursePhase23Approved: 2026-09-14`；`phase23Status: planning-complete`）。
 闸门 **FR185 / Epic 118**（**已关闭** / Story **118.4**；Epic 119–124 可合法开工且须各自 NFR14）。
-实现映射：**FR186** 无界 CIRCT tip；**FR187** Handshake lower；**FR188** Style 全家桶；**FR189** 继续 firtool 升钉；**FR190** 继续扩 FR142；**FR191** 宣称诚实门。
+**Epic 119 / FR186**（**已关闭** / Story **119.3**；[`docs/fr186-unbounded-circt-tip.md`](../../docs/fr186-unbounded-circt-tip.md)）— live tip 渠道（≠ FR179 alone；非产品默认钉；超子集仍 **NFR91**）。
+实现映射：**FR186** 无界 CIRCT tip（已关）；**FR187** Handshake lower；**FR188** Style 全家桶；**FR189** 继续 firtool 升钉；**FR190** 继续扩 FR142；**FR191** 宣称诚实门。
 **诚实：** Phase 12–22 / 工程结项关闭证据**仍有效**（**NFR88**）；不得用 Phase 22 / 结项 alone 冒充本批五条；超出各 NFR14 仍 **NFR91**。`git push` 非 FR。
 公开品牌 **Bitloom**。软序 `118 →（119 ‖ 120 ‖ 121 ‖ 122 ‖ 123）→ 124`。
 

@@ -123,7 +123,7 @@ fn fr179_product_doc_closed() {
         "fr179 product doc must note closed status"
     );
     assert!(
-        doc.contains("NFR86") || doc.contains("unbounded") || doc.contains("live tip"),
-        "must leave unbounded tip as NFR86"
+        doc.contains("FR186") || doc.contains("unbounded") || doc.contains("live tip"),
+        "must leave unbounded tip as FR186 honesty"
     );
 }

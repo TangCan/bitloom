@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** Epic 119 / FR186 implementation (Story **119.2**). Product path: **live tip** channel that resolves the latest GitHub `firtool-*` release (readable tip identity) via `just circt-live-tip-check` / CI `circt-live-tip`. **Not** the AD-9 product default pin. **Not** FR179 floating-track alone.
+**Status:** **Epic 119 / FR186 closed** (Story **119.3**). Product path: **live tip** channel that resolves the latest GitHub `firtool-*` release (readable tip identity) via `just circt-live-tip-check` / CI `circt-live-tip`. **Not** the AD-9 product default pin. **Not** FR179 floating-track alone.
 
 Phase 22 **FR179** floating-track **firtool-1.159.0** and **FR182** product pin **1.159.0** **remain closed and valid** (NFR88). Those closes alone ≠ FR186. **FR174** unpaired **1.156.0** alone ≠ FR186.
 

@@ -459,7 +459,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 加深面 | FR / Epic | 状态（诚实） |
 | --- | --- | --- |
 | Phase 23 合同闸门 | FR185 / 118 | Correct Course + README/deferred/AD — **已关闭**（Story **118.4**；闸门已开） |
-| 无界 CIRCT tip | FR186 / 119 | 超 FR179 浮动轨钉死；无界 live tip — **backlog**（须各自 NFR14） |
+| 无界 CIRCT tip | FR186 / 119 | 超 FR179 浮动轨；live tip 渠道 `circt-live-tip` — **已关闭**（[`docs/fr186-unbounded-circt-tip.md`](docs/fr186-unbounded-circt-tip.md)；Story **119.3**） |
 | Handshake lower/dialect | FR187 / 120 | 超 FR180 fork+join — **backlog** |
 | Style Guide 全家桶 | FR188 / 121 | 超 FR181 wartremover deepen — **backlog** |
 | 继续 firtool 产品钉升钉 | FR189 / 122 | 超 FR182 1.159.0；须修订 AD-9 — **backlog** |

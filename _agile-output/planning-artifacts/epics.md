@@ -199,7 +199,7 @@ phase23Epic118Stories: 4
 phase23Epic118Status: complete
 phase23Epic119StoriesDrafted: 2026-09-14
 phase23Epic119Stories: 3
-phase23Epic119Status: stories-drafted
+phase23Epic119Status: complete
 phase23Epic120StoriesDrafted: 2026-09-14
 phase23Epic120Stories: 3
 phase23Epic120Status: stories-drafted
