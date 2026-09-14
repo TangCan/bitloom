@@ -503,3 +503,38 @@ README / deferred / 脊柱指针由 Story **105.3–105.4** 落地；实现加�
 
 **合同指针：** 详见 `epics.md` Phase 21 Inventory（**planning-complete** · Epic 105–110 · FR172–FR177 / NFR78–NFR82）。
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-12-phase21-nfr76-leftovers.md`
+
+## 2026-09-12 Update — Phase 22 NFR81 leftovers 升格（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-12-phase22-nfr81-leftovers.md` —
+在 Phase 21 NFR76 leftovers 升格 **已关闭**之后，正式 **Phase 22**
+「NFR81 leftovers 升格」（Epic 111–117 · **FR178–FR184** / **NFR83–NFR87**），
+打开曾被 **NFR81** 明确要求另开合同的五条 leftover。
+
+**批准默认（Q1–Q7）：**
+1. **NFR81 五条全部**升格为 **FR179–FR183**（各 epic NFR14 钉死验收子集；禁止静默超子集 — **NFR86**）。
+2. 各加深条独立 NFR14；浮动 HEAD / Handshake / Style / unpaired firtool / FR142 扩展分 epic。
+3. **不得**改写 Phase 12–21「已关闭」（**NFR83**）。
+4. 宣称须引已关 FR（**FR184** / **NFR87**）；**禁止**用 Phase 21 alone 冒充本批五条。
+5. **「扩 FR142」= 独立 FR183**（显式公开 API 表面扩展 + SemVer/docs；不是静默扩大）。
+6. **MSRV** 默认保持现行，除非某 epic NFR14 显式另开；超出本批钉死子集仍须新合同（**NFR86**）。
+7. **FR182：** 无上游 Chisel 正式配对的 firtool **产品钉**再升钉须修订 **AD-9** 明示 *unpaired product-pin* 例外（≠ FR173 配对升钉；≠ FR174 optional HEAD alone）。
+
+**公开品牌（不变）：** **Bitloom**；crates.io / CLI **`bitloom`** / `bitloom-*`；设计 crate 仍只依赖
+`bitloom-prelude`（AD-6）。禁止发布 `rhdl` / `rhdl-bits`。
+
+**与 Phase 12–21 的关系（必须同时读）：**
+- Phase 12–21（FR94–177）关闭证据 **仍有效**；**不得**改写为失败（**NFR83**）。
+- Phase 22 是 **新合同**下的加深，**不是**「Phase 21 失败」的补救叙事。
+- 映射：闸门 **FR178**；浮动 HEAD **FR179**；Handshake dialect **FR180**；更深 Style/linter **FR181**；unpaired firtool 产品钉 **FR182**；显式 FR142 扩展 **FR183**；宣称 **FR184**。
+- 对外「NFR81 五条已交付」类表述：**仅**可在对应 FR 关闭后宣称；
+  **禁止**用 Phase 21 alone 冒充。
+- **口径：** 本批关闭 ≠ 清空超出各 NFR14 钉死子集的更深项（**NFR86**）；`git push` **不是** FR。
+
+**实现闸门：** Epic 111（Story 111.1–111.4 · **FR178**）关闭前，Epic 112–117 不得标 ready。  
+软序：**111 →（112 ‖ 113 ‖ 114 ‖ 115 ‖ 116）→ 117**；触及 AD-9 的 Epic 112/115 建议串行。  
+README / deferred / 脊柱指针由 Story **111.3–111.4** 落地；实现加深属 Epic **112–116**。  
+**不**在本合同批准瞬间强制浮动 HEAD live / unpaired 产品升钉 / crates.io 破坏性发版。
+
+**合同指针：** 详见 `epics.md` Phase 22 Inventory（create-epics 后 · Epic 111–117 · FR178–FR184 / NFR83–NFR87）。
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-12-phase22-nfr81-leftovers.md`
