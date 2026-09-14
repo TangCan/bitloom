@@ -770,13 +770,13 @@ development_status:
   112-3-fr179-收口与文档指针: done
   epic-112-retrospective: optional
 
-  epic-113: in-progress
+  epic-113: done
   113-1-epic-113-nfr14-风险记录: done
   113-2-handshake-dialect-加深实现与验收-fr180: done
-  113-3-fr180-收口与文档指针: ready-for-dev
+  113-3-fr180-收口与文档指针: done
   epic-113-retrospective: optional
 
-  epic-114: backlog
+  epic-114: in-progress
   114-1-epic-114-nfr14-风险记录: ready-for-dev
   114-2-更深-style-guide-linter-实现与验收-fr181: backlog
   114-3-fr181-收口与文档指针: backlog
