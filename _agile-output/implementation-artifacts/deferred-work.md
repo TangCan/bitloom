@@ -97,10 +97,10 @@ Correct Course `sprint-change-proposal-2026-09-12-phase22-nfr81-leftovers.md` + 
 **Epic 114 / FR181**（**已关闭** / Story **114.3**；[`docs/fr181-deeper-style-guide-linter.md`](../../docs/fr181-deeper-style-guide-linter.md)）— Style/linter deepen wartremover+fatal-warnings（≠ FR176 alone；完整社区 Style Guide 全家桶仍 **NFR86**）。
 **Epic 115 / FR182**（**已关闭** / Story **115.3**；[`docs/fr182-unpaired-firtool-product-pin.md`](../../docs/fr182-unpaired-firtool-product-pin.md)）— unpaired firtool 产品钉 **1.159.0** + Chisel **7.15.0**（AD-9 *unpaired product-pin* 例外；≠ FR173/FR174/FR179 alone；更深升钉仍 **NFR86**）。
 **Epic 116 / FR183**（**已关闭** / Story **116.3**；[`docs/fr183-explicit-fr142-api-expand.md`](../../docs/fr183-explicit-fr142-api-expand.md)）— 显式扩大 FR142：文档化 `bitloom-firrtl` interop 升入表面（≠ 静默扩大；AD-6 仍 prelude-only；更深 API 扩展仍 **NFR86**）。
-**Epic 117 / FR184** — Phase 22 宣称诚实门（须各自 NFR14；未关闭前不得宣称已交付）。
+**Epic 117 / FR184**（**实现中** / Story **117.2**；[`docs/fr184-phase22-claim-honesty.md`](../../docs/fr184-phase22-claim-honesty.md)）— Phase 22 宣称诚实门；宣称须引 **FR178–184**（**NFR87**）；未关前不得宣称本门已交付；**不得**宣称「NFR81 账本已空」；超子集仍 **NFR86**。
 **Phase 22 规划故事已齐（Epic 111–117）**；触 AD-9 / AD-25 / AD-27 / FR142 须按 **NFR85** 先修订再 story ready。宣称须引 **FR178–FR184**（**FR184** / **NFR87**）。
 **诚实：** Phase 12–21 关闭证据**仍有效**（**NFR83**）；不得用 Phase 21 alone 冒充本批五条；超出各 NFR14 钉死子集仍须新合同（**NFR86**）。公开品牌 **Bitloom**。`git push` 非 FR。
-README「状态与 deferred」同源（Story **111.3** / **112.3** / **113.3** / **114.3** / **115.3** / **116.3** / …）。
+README「状态与 deferred」同源（Story **111.3** / **112.3** / **113.3** / **114.3** / **115.3** / **116.3** / **117.2** / …）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 

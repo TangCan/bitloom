@@ -448,7 +448,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 更深 Style Guide / linter | FR181 / 114 | wartremover + fatal-warnings beyond FR176 — **已关闭**（[`docs/fr181-deeper-style-guide-linter.md`](docs/fr181-deeper-style-guide-linter.md)；Story **114.3**） |
 | unpaired firtool 产品钉再升钉 | FR182 / 115 | AD-9 默认钉 **1.159.0** + Chisel **7.15.0**（*unpaired product-pin*；≠ FR173/174/179 alone）— **已关闭**（[`docs/fr182-unpaired-firtool-product-pin.md`](docs/fr182-unpaired-firtool-product-pin.md)；Story **115.3**） |
 | 显式扩大 FR142 公开 API | FR183 / 116 | 文档化 `bitloom-firrtl` interop 升入表面（≠ 静默扩大；AD-6 仍 prelude-only）— **已关闭**（[`docs/fr183-explicit-fr142-api-expand.md`](docs/fr183-explicit-fr142-api-expand.md)；Story **116.3**） |
-| Phase 22 宣称诚实门 | FR184 / 117 | 宣称须引 FR178–184 — **未关闭**（须各自 NFR14） |
+| Phase 22 宣称诚实门 | FR184 / 117 | 宣称须引 FR178–184（[`docs/fr184-phase22-claim-honesty.md`](docs/fr184-phase22-claim-honesty.md)）— **实现中**（Story **117.2**；收口 → **117.3**） |
 
 **FR178–184 宣称纪律（FR184 / NFR87）：** 「浮动 HEAD」须引 **FR179**；「Handshake」须引 **FR180**；「Style/linter」须引 **FR181**；「unpaired 产品钉」须引 **FR182**；「FR142 显式扩展」须引 **FR183**；完整 Phase 22 宣称须引 **FR178–184**（**FR184** 诚实门）。**不得**用 Phase 21 alone 冒充 FR179–183；**不得宣称**未关闭前已交付；**不得**宣称「NFR81 账本已空」；超出各 NFR14 钉死子集仍须新合同（**NFR86**）。`git push` **不是** FR。
 

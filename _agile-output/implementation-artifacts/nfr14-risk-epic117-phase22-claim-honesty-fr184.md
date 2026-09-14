@@ -96,7 +96,7 @@
 
 ### Epic 117 关闭条件（Story 117.3 勾选）
 
-- [ ] **FR184 诚实面落地** — Story 117.2（README / deferred / `docs/fr184-*`）
+- [x] **FR184 诚实面落地** — Story 117.2（README / deferred / `docs/fr184-*`）
 - [ ] **文档 / deferred / README / spine 收口** — Story 117.3
 - [ ] **NFR83/86/87：** Phase 22 宣称须引 FR178–184；NFR86 未选仍须新合同；不得宣称 NFR81 账本已空
 - [ ] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
