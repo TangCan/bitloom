@@ -17,6 +17,7 @@ Once **1.0.0** is published for an in-surface crate:
 - Removing or renaming a documented public API / CLI verb → **major**.
 - Tightening documented accepted inputs in a way that breaks callers → **major**.
 - Expanding in-surface is allowed in **minor** / **patch** only when additive and documented.
+- **FR183 / Epic 116:** documented promote of `bitloom-firrtl` interop subset into in-surface is an **additive** expand → **minor** on the next `bitloom-firrtl` publish after the surface revision (see [`docs/public-api-1-0-surface.md`](public-api-1-0-surface.md) / [`docs/fr183-explicit-fr142-api-expand.md`](fr183-explicit-fr142-api-expand.md)). Silent expand remains forbidden.
 
 Out-of-promise crates (`bitloom-hir` / `bitloom-builder` / `bitloom-vlog`) may continue to change without a Bitloom 1.0 major **unless** they break the prelude/sim in-surface contract.
 

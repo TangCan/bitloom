@@ -1,19 +1,21 @@
-# Bitloom 1.0 public API surface (FR142)
+# Bitloom 1.0 public API surface (FR142 + FR183 expand)
 
-> **Contract:** Phase 17 / **FR142** / Epic 80.  
-> **Authority:** Correct Course 2026-09-11 (`correctCoursePhase17Approved`); Q1–Q5 defaults.  
+> **Contract:** Phase 17 / **FR142** / Epic 80; Phase 22 / **FR183** / Epic 116 explicit expand.  
+> **Authority:** Correct Course 2026-09-11 (`correctCoursePhase17Approved`); Phase 22 Correct Course 2026-09-12 (`correctCoursePhase22Approved`).  
 > **Claim discipline:** 「1.0 / 公开 API 稳定」requires FR141–146 closed (**FR147**). This file alone ≠ 1.0 shipped.  
-> **NFR63:** Listing a surface does **not** clear **NFR59** deferred product deepen.
+> **FR183:** Explicit additive expand of in-surface (NFR14 S1–S3). **≠** silent expand. See [`docs/fr183-explicit-fr142-api-expand.md`](fr183-explicit-fr142-api-expand.md).  
+> **NFR63 / NFR86:** Listing a surface does **not** clear deferred deepen outside each NFR14 subset.
 
 ## Purpose
 
-Pin the **in-surface** vs **out-of-promise / out-of-surface** partition for SemVer **1.0** major stability. Breaking changes **inside** in-surface require a **major** bump once 1.0.0 is published (see [`docs/semver-1-0-policy.md`](semver-1-0-policy.md) / FR143).
+Pin the **in-surface** vs **out-of-promise / out-of-surface** partition for SemVer **1.0** major stability. Breaking changes **inside** in-surface require a **major** bump once 1.0.0 is published (see [`docs/semver-1-0-policy.md`](semver-1-0-policy.md) / FR143). **Additive** in-surface expands require an explicit doc + story update (FR183) and are **minor**-class under FR143.
 
 ## Design crate dependency boundary (AD-6)
 
 - Design crates depend **only** on **`bitloom-prelude`**.
-- Design crates must **not** depend on `bitloom` (CLI), `bitloom-sim`, `bitloom-hir`, `bitloom-builder`, `bitloom-vlog`, `bitloom-macro` (direct), or `bitloom-lsp`.
+- Design crates must **not** depend on `bitloom` (CLI), `bitloom-sim`, `bitloom-hir`, `bitloom-builder`, `bitloom-vlog`, `bitloom-macro` (direct), `bitloom-firrtl`, or `bitloom-lsp`.
 - Macros and attributes are consumed via the prelude `rhdl` facade / re-exports.
+- **FR183 honesty:** Promoting documented `bitloom-firrtl` interop into in-surface does **not** authorize design crates to depend on `bitloom-firrtl`. That crate remains a **maintainer / toolchain interop** surface.
 
 ## In-surface (1.0 SemVer promise)
 
@@ -65,6 +67,22 @@ Public simulation / dual-model API used by maintainers and product paths:
 
 Internal modules and undocumented `pub` items are **not** promised.
 
+### `bitloom-firrtl` — FR183 / v1.x expand (maintainer / toolchain interop)
+
+**Promoted (additive · FR183):** the following **documented** interop entries are **in-surface** for SemVer promise on the `bitloom-firrtl` crate:
+
+| Entry | Role |
+| --- | --- |
+| `emit_chisel` | FrozenHir → compilable Chisel Scala (FR28 mechanical face) |
+| `emit_chisel_idiomatic` / documented idiomatic·style·ecosystem variants already productized (`emit_chisel_idiomatic_fr111`, `emit_chisel_idiomatic_fr122`, `emit_chisel_style_guide_fr130`, `emit_chisel_style_guide_fr165`, `emit_chisel_ecosystem_fr176`, `emit_chisel_style_linter_fr181`) | Documented maintainable / Style / deepen faces |
+| `CHISEL_TARGET` / `FIRTOOL_TARGET` | Documented AD-9 pin constants |
+| `BitloomFirrtlParser.parse` | Product-equivalent Parser path (FR138; `just parser-restore-check`) |
+| `BitloomFirrtlParser.parseUpdateMainline` | Update-mainline Parser path (FR170; FIRRTL 6.0.0) |
+
+**Not** in this expand: undocumented `pub` items; whole-crate internal modules; design-crate dependency on `bitloom-firrtl` (forbidden — **AD-6**).
+
+**SemVer honesty (FR143):** this expand is **additive**. The next crates.io publish of `bitloom-firrtl` that cuts after this surface revision is a **minor** bump (e.g. 1.0.0 → 1.1.0), not a silent major and not “already expanded without a doc/story”. Tree may remain at 1.0.0 until that publish; surface honesty is this file + [`docs/fr183-explicit-fr142-api-expand.md`](fr183-explicit-fr142-api-expand.md).
+
 ## Out-of-promise (may publish; not 1.0-stable) — Q2
 
 | Crate | Note |
@@ -73,16 +91,17 @@ Internal modules and undocumented `pub` items are **not** promised.
 | `bitloom-builder` | Same |
 | `bitloom-vlog` | Same |
 
-Breaking changes in these crates do **not** by themselves require a Bitloom **1.0** major, but must not silently break the **prelude** / **sim** in-surface contracts.
+Breaking changes in these crates do **not** by themselves require a Bitloom **1.0** major, but must not silently break the **prelude** / **sim** / **FR183 firrtl interop** in-surface contracts.
 
 ## Out-of-surface (not in 1.0 promise)
 
 | Item | Note |
 | --- | --- |
 | `bitloom-lsp` / LSP | Product exists; not part of 1.0 SemVer surface promise |
-| `bitloom-firrtl` (FR149) / remaining `rhdl-*` (`rhdl-formal`, …) | firrtl is `bitloom-*` publishable but **not** in 1.0 SemVer surface promise; other `rhdl-*` stay unpublished internal names |
+| `bitloom-firrtl` **undocumented** `pub` / non-listed modules | Publishable crate; only the FR183 table above is in-surface — **no** silent promotion |
+| remaining `rhdl-*` (`rhdl-formal`, …) | Stay unpublished internal names |
 | Undocumented internal `pub` APIs | Forbidden from silent promotion to in-surface |
-| NFR59 deferred deepen | Remains deferred; 1.0 ≠ clear NFR59 |
+| NFR59 / NFR86 deferred deepen | Remains deferred; 1.0 ≠ clear leftovers |
 
 ## Blocking hygiene candidates (FR145 / Epic 82)
 
@@ -90,6 +109,6 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 
 ## Change process
 
-- Expanding in-surface requires an explicit doc + story update (do not silent-expand).
-- After 1.0.0, in-surface breaking → major (FR143).
+- Expanding in-surface requires an explicit doc + story update (do not silent-expand). **FR183** is the Phase 22 contract for the firrtl interop promote above.
+- After 1.0.0, in-surface breaking → major (FR143); additive documented expands → minor.
 - Brand: **Bitloom** / `bitloom` / `bitloom-*`; never publish `rhdl` / `rhdl-bits` as the product name.

@@ -790,8 +790,8 @@ development_status:
 
   epic-116: in-progress
   116-1-epic-116-nfr14-风险记录: done
-  116-2-显式扩大-fr142-公开-api-表面实现与验收-fr183: ready-for-dev
-  116-3-fr183-收口与文档指针: backlog
+  116-2-显式扩大-fr142-公开-api-表面实现与验收-fr183: done
+  116-3-fr183-收口与文档指针: ready-for-dev
   epic-116-retrospective: optional
 
   epic-117: backlog
