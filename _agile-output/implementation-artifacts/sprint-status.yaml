@@ -756,46 +756,46 @@ development_status:
   epic-110-retrospective: done
 
   # Phase 22 — NFR81 leftovers (Correct Course approved 2026-09-12; planning-complete 2026-09-14)
-  # Hard gate: epic-111 done before 112–117 ready-for-dev
-  epic-111: in-progress
+  # Hard gate: epic-111 done before 112–117 ready-for-dev — CLOSED (Story 111.4)
+  epic-111: done
   111-1-epic-111-nfr14-风险记录: done
   111-2-correct-course-prd-批准-phase-22-fr178: done
   111-3-同步-readme-deferred-路线图指针-fr178: done
-  111-4-ad-指针与-epic-111-收口-fr178: ready-for-dev
+  111-4-ad-指针与-epic-111-收口-fr178: done
   epic-111-retrospective: optional
 
   epic-112: backlog
-  112-1-epic-112-nfr14-风险记录: backlog
+  112-1-epic-112-nfr14-风险记录: ready-for-dev
   112-2-浮动-circt-git-head-实现与验收-fr179: backlog
   112-3-fr179-收口与文档指针: backlog
   epic-112-retrospective: optional
 
   epic-113: backlog
-  113-1-epic-113-nfr14-风险记录: backlog
+  113-1-epic-113-nfr14-风险记录: ready-for-dev
   113-2-handshake-dialect-加深实现与验收-fr180: backlog
   113-3-fr180-收口与文档指针: backlog
   epic-113-retrospective: optional
 
   epic-114: backlog
-  114-1-epic-114-nfr14-风险记录: backlog
+  114-1-epic-114-nfr14-风险记录: ready-for-dev
   114-2-更深-style-guide-linter-实现与验收-fr181: backlog
   114-3-fr181-收口与文档指针: backlog
   epic-114-retrospective: optional
 
   epic-115: backlog
-  115-1-epic-115-nfr14-风险记录: backlog
+  115-1-epic-115-nfr14-风险记录: ready-for-dev
   115-2-unpaired-firtool-产品钉再升钉实现与验收-fr182: backlog
   115-3-fr182-收口与文档指针: backlog
   epic-115-retrospective: optional
 
   epic-116: backlog
-  116-1-epic-116-nfr14-风险记录: backlog
+  116-1-epic-116-nfr14-风险记录: ready-for-dev
   116-2-显式扩大-fr142-公开-api-表面实现与验收-fr183: backlog
   116-3-fr183-收口与文档指针: backlog
   epic-116-retrospective: optional
 
   epic-117: backlog
-  117-1-epic-117-nfr14-风险记录: backlog
+  117-1-epic-117-nfr14-风险记录: ready-for-dev
   117-2-readme-deferred-状态页诚实更新-fr184: backlog
   117-3-fr184-收口与-phase-22-故事清单指针: backlog
   epic-117-retrospective: optional

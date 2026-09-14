@@ -163,43 +163,17 @@ phase22RequirementsExtracted: 2026-09-14
 phase22EpicListApproved: 2026-09-14
 phase22Epic111StoriesDrafted: 2026-09-14
 phase22Epic111Stories: 4
-phase22Epic111Status: stories-drafted
-phase22Epic112StoriesDrafted: 2026-09-14
-phase22Epic112Stories: 3
-phase22Epic112Status: stories-drafted
-phase22Epic113StoriesDrafted: 2026-09-14
-phase22Epic113Stories: 3
-phase22Epic113Status: stories-drafted
-phase22Epic114StoriesDrafted: 2026-09-14
-phase22Epic114Stories: 3
-phase22Epic114Status: stories-drafted
-phase22Epic115StoriesDrafted: 2026-09-14
-phase22Epic115Stories: 3
-phase22Epic115Status: stories-drafted
-phase22Epic116StoriesDrafted: 2026-09-14
-phase22Epic116Stories: 3
-phase22Epic116Status: stories-drafted
-phase22Epic117StoriesDrafted: 2026-09-14
-phase22Epic117Stories: 3
-phase22Epic117Status: stories-drafted
-phase22StoriesDrafted: 2026-09-14
-phase22StoryCount: 22
-phase22EpicCount: 7
-phase22EpicRange: 111-117
-phase22Status: planning-complete
-phase22PlanningComplete: 2026-09-14
-phase22Validation: |
-  FR178–184 mapped to Epic 111–117 stories (22); Epic 111 hard gate for 112–117;
-  NFR83–87 covered; no starter-template story required; AD-9 overlap 112/115 kept split with soft serial;
-  create-epics Phase 22 complete 2026-09-14; next: Build Story 111.1 NFR14.
+phase22Epic111Status: complete
+phase22Status: gate-closed
+phase22GateClosed: 2026-09-14
 phase22RequirementsScope: FR178-FR184 / NFR83-NFR87
 phase22ProposedEpics: 111-117
 phase22ProposedFRs: FR178-FR184
 phase22ProposedNFRs: NFR83-NFR87
 phase22Note: >
   Correct Course approved 2026-09-12 (Q1 five leftovers; Q5 FR142=FR183).
-  Soft order: 111 → (112 ‖ 113 ‖ 114 ‖ 115 ‖ 116) → 117. Hard gate Epic 111.
-  Phase 12–21 closes remain valid (NFR83). Planning complete (22 stories); next: Build 111.1.
+  Soft order: 111 → (112 ‖ 113 ‖ 114 ‖ 115 ‖ 116) → 117. Hard gate Epic 111 CLOSED Story 111.4.
+  Phase 12–21 closes remain valid (NFR83). Next: Build Epic 112–116 NFR14 (parallel soft); Epic 117 after deepen.
 phase22InputDocuments:
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md

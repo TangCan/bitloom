@@ -17,7 +17,7 @@ Rust 嵌入式 RTL HDL：设计是**可执行生成器**。`cargo bitloom build`
 
 ## 快速开始
 
-**诚实面（Phase 17 / 18 / 19 / 20 / 21 / 22）：** 库 crate（`bitloom-macro` / `hir` / `builder` / `vlog` / `sim` / `prelude`）已在 crates.io **1.0.0**（Phase 17 / FR146）。**公开 CLI `bitloom` 1.0.0 已可 `cargo install`**（**FR151** / Epic 85）。**Phase 18 已关闭**（Epic 84–86）：SemVer / 发版诚实 **FR153**（[`docs/fr153-semver-honesty.md`](docs/fr153-semver-honesty.md)）。CLI crates.io 宣称须引 **FR148–153**。**Phase 19 已关闭**（Epic 87–98 / FR154–165）：闸门 **FR154**；**FR155** lsp 上架；**FR157–165** NFR59 升格子集；宣称诚实 **FR156**（[`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md)）。Phase 19 宣称须引 **FR154–165**；超出各 NFR14 钉死子集仍曾归 **NFR71**（**NFR68** / **NFR72**）。**Phase 20 已关闭**（Epic 99–104 / **FR166–FR171** / **NFR73–NFR77**；Correct Course 2026-09-12）：完整 ChiselSim / 多端 IDE 商店 **FR167**；SPI·I2C·AXI 手写 FL **FR168**；更广 CIRCT/MLIR allocation **FR169**（firtool 升钉曾 **NFR76**）；Chisel update-mainline Parser **FR170**；宣称诚实门 **FR171**（[`docs/fr171-phase20-claim-honesty.md`](docs/fr171-phase20-claim-honesty.md)）。**Phase 20 规划+实现故事已齐（Epic 99–104）**；宣称须引 **FR166–171**（**NFR77**）；**不得**宣称「NFR71 账本已空」。**Phase 21 已关闭**（Epic 105–110 / **FR172–FR177** / **NFR78–NFR82**；Correct Course 2026-09-12；`correctCoursePhase21Approved`）：宣称诚实门 **FR177**（[`docs/fr177-phase21-claim-honesty.md`](docs/fr177-phase21-claim-honesty.md)）。**Phase 21 规划+实现故事已齐（Epic 105–110）**；Phase 21 宣称须引 **FR172–177**（**NFR82**）；**不得**用 Phase 20 alone 冒充 FR173–176；**不得**宣称「NFR76 账本已空」；超出各 NFR14 钉死子集曾归 **NFR81**（**NFR78**）。**Phase 22 合同闸门进行中**（Epic 111–117 / **FR178–FR184** / **NFR83–NFR87**；Correct Course 2026-09-12；`correctCoursePhase22Approved`；规划故事已齐；闸门 **Epic 111 / FR178** — Story **111.1–111.2** 已关；**Epic 112–117 在 Epic 111 关闭前不得 ready**）：NFR81 leftovers 升格（浮动 HEAD / Handshake / Style / unpaired 产品钉 / 显式 FR142）；宣称须引 **FR178–184**（**FR184** / **NFR87**）；**不得**用 Phase 21 alone 冒充本批五条；**不得**宣称「NFR81 账本已空」；超出各 NFR14 钉死子集仍须新合同（**NFR86**；**NFR83**）。触 AD-9 / AD-25 / AD-27 / FR142 表面须按 **NFR85** 先修订再 story ready。`git push` **不是** FR。贡献者亦可 clone 本仓库使用 workspace CLI。
+**诚实面（Phase 17 / 18 / 19 / 20 / 21 / 22）：** 库 crate（`bitloom-macro` / `hir` / `builder` / `vlog` / `sim` / `prelude`）已在 crates.io **1.0.0**（Phase 17 / FR146）。**公开 CLI `bitloom` 1.0.0 已可 `cargo install`**（**FR151** / Epic 85）。**Phase 18 已关闭**（Epic 84–86）：SemVer / 发版诚实 **FR153**（[`docs/fr153-semver-honesty.md`](docs/fr153-semver-honesty.md)）。CLI crates.io 宣称须引 **FR148–153**。**Phase 19 已关闭**（Epic 87–98 / FR154–165）：闸门 **FR154**；**FR155** lsp 上架；**FR157–165** NFR59 升格子集；宣称诚实 **FR156**（[`docs/fr156-phase19-claim-honesty.md`](docs/fr156-phase19-claim-honesty.md)）。Phase 19 宣称须引 **FR154–165**；超出各 NFR14 钉死子集仍曾归 **NFR71**（**NFR68** / **NFR72**）。**Phase 20 已关闭**（Epic 99–104 / **FR166–FR171** / **NFR73–NFR77**；Correct Course 2026-09-12）：完整 ChiselSim / 多端 IDE 商店 **FR167**；SPI·I2C·AXI 手写 FL **FR168**；更广 CIRCT/MLIR allocation **FR169**（firtool 升钉曾 **NFR76**）；Chisel update-mainline Parser **FR170**；宣称诚实门 **FR171**（[`docs/fr171-phase20-claim-honesty.md`](docs/fr171-phase20-claim-honesty.md)）。**Phase 20 规划+实现故事已齐（Epic 99–104）**；宣称须引 **FR166–171**（**NFR77**）；**不得**宣称「NFR71 账本已空」。**Phase 21 已关闭**（Epic 105–110 / **FR172–FR177** / **NFR78–NFR82**；Correct Course 2026-09-12；`correctCoursePhase21Approved`）：宣称诚实门 **FR177**（[`docs/fr177-phase21-claim-honesty.md`](docs/fr177-phase21-claim-honesty.md)）。**Phase 21 规划+实现故事已齐（Epic 105–110）**；Phase 21 宣称须引 **FR172–177**（**NFR82**）；**不得**用 Phase 20 alone 冒充 FR173–176；**不得**宣称「NFR76 账本已空」；超出各 NFR14 钉死子集曾归 **NFR81**（**NFR78**）。**Phase 22 合同闸门已关闭**（Epic 111–117 / **FR178–FR184** / **NFR83–NFR87**；Correct Course 2026-09-12；`correctCoursePhase22Approved`；闸门 **Epic 111 / FR178** **已关闭** / Story **111.4**；Epic 112–117 可合法开工且须各自 NFR14）：NFR81 leftovers 升格（浮动 HEAD / Handshake / Style / unpaired 产品钉 / 显式 FR142）；宣称须引 **FR178–184**（**FR184** / **NFR87**）；**不得**用 Phase 21 alone 冒充本批五条；**不得**宣称「NFR81 账本已空」；超出各 NFR14 钉死子集仍须新合同（**NFR86**；**NFR83**）。触 AD-9 / AD-25 / AD-27 / FR142 表面须按 **NFR85** 先修订再 story ready。`git push` **不是** FR。贡献者亦可 clone 本仓库使用 workspace CLI。
 
 ```bash
 # 推荐：crates.io（FR151）
@@ -436,19 +436,19 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 **FR172–177 宣称纪律（FR177 / NFR82）：** 「firtool 升钉」须引 **FR173**；「unpaired HEAD」须引 **FR174**；「更广 CIRCT/sim」须引 **FR175**；「更深 Parser 生态」须引 **FR176**；完整 Phase 21 宣称须引 **FR172–177**（本 **FR177** 诚实门 — [`docs/fr177-phase21-claim-honesty.md`](docs/fr177-phase21-claim-honesty.md)）。**不得**用 Phase 20 alone 冒充 FR173–176；**不得宣称**未关闭前已交付；**不得**宣称「NFR76 账本已空」；超出各 NFR14 钉死子集仍须新合同（**NFR81** → Phase 22）。`git push` **不是** FR。
 
-### Phase 22 加深面（NFR81 leftovers 升格 · FR178–FR184 / NFR83–NFR87；合同闸门进行中 / Epic 111）
+### Phase 22 加深面（NFR81 leftovers 升格 · FR178–FR184 / NFR83–NFR87；合同闸门已关闭 / Epic 111 已关闭）
 
 下列原 **NFR81** leftover 已由 Correct Course + **FR178** 升格为 Phase 22 显式 FR（Epic 111–117）。**对外宣称须引对应已关 FR**（**FR184** / **NFR87**）。Phase 12–21 关闭面**仍有效**（**NFR83**）。同源：PRD addendum「Phase 22」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。触 **AD-9 / AD-25 / AD-27 / FR142** 须按 **NFR85** 先修订再 story ready。**Epic 112–117 在 Epic 111 关闭前不得 ready**；须各自 NFR14。
 
 | 加深面 | FR / Epic | 状态（诚实） |
 | --- | --- | --- |
-| Phase 22 合同闸门 | FR178 / 111 | Correct Course + README/deferred/AD — **进行中**（Story **111.1–111.2** 已关；**111.3–111.4** 收口前闸门未完全关闭） |
-| 浮动 CIRCT git HEAD | FR179 / 112 | 超 FR174 文档钉死 unpaired 子集 — **未关闭**（Epic 111 关闭前不得 ready） |
-| Handshake dialect 加深 | FR180 / 113 | 超 FR129/FR175 — **未关闭**（Epic 111 关闭前不得 ready） |
-| 更深 Style Guide / linter | FR181 / 114 | 超 FR176 — **未关闭**（Epic 111 关闭前不得 ready） |
-| unpaired firtool 产品钉再升钉 | FR182 / 115 | AD-9 *unpaired product-pin* 例外（≠ FR173/FR174）— **未关闭**（Epic 111 关闭前不得 ready） |
-| 显式扩大 FR142 公开 API | FR183 / 116 | SemVer/docs 诚实（≠ 静默扩大）— **未关闭**（Epic 111 关闭前不得 ready） |
-| Phase 22 宣称诚实门 | FR184 / 117 | 宣称须引 FR178–184 — **未关闭**（Epic 111 关闭前不得 ready） |
+| Phase 22 合同闸门 | FR178 / 111 | Correct Course + README/deferred/AD — **已关闭**（Story **111.4**；闸门已开） |
+| 浮动 CIRCT git HEAD | FR179 / 112 | 超 FR174 文档钉死 unpaired 子集 — **未关闭**（须各自 NFR14） |
+| Handshake dialect 加深 | FR180 / 113 | 超 FR129/FR175 — **未关闭**（须各自 NFR14） |
+| 更深 Style Guide / linter | FR181 / 114 | 超 FR176 — **未关闭**（须各自 NFR14） |
+| unpaired firtool 产品钉再升钉 | FR182 / 115 | AD-9 *unpaired product-pin* 例外（≠ FR173/FR174）— **未关闭**（须各自 NFR14） |
+| 显式扩大 FR142 公开 API | FR183 / 116 | SemVer/docs 诚实（≠ 静默扩大）— **未关闭**（须各自 NFR14） |
+| Phase 22 宣称诚实门 | FR184 / 117 | 宣称须引 FR178–184 — **未关闭**（须各自 NFR14） |
 
 **FR178–184 宣称纪律（FR184 / NFR87）：** 「浮动 HEAD」须引 **FR179**；「Handshake」须引 **FR180**；「Style/linter」须引 **FR181**；「unpaired 产品钉」须引 **FR182**；「FR142 显式扩展」须引 **FR183**；完整 Phase 22 宣称须引 **FR178–184**（**FR184** 诚实门）。**不得**用 Phase 21 alone 冒充 FR179–183；**不得宣称**未关闭前已交付；**不得**宣称「NFR81 账本已空」；超出各 NFR14 钉死子集仍须新合同（**NFR86**）。`git push` **不是** FR。
 

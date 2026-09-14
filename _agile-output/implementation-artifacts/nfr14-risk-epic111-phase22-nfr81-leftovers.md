@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR178 / Epic 111；NFR14、NFR83、NFR84、NFR86、NFR87；对照 FR172–177 / NFR78–82；FR179–184 实现面 |
 | 记录日期 | 2026-09-14 |
-| 状态 | **open — Story 111.1**（in-progress）；Epic 111 闸门尚未关闭 |
+| 状态 | **closed — Story 111.4**；Epic 111 / FR178 闸门已开；Epic 112–116 NFR14 可 ready；117-1 软序仍 backlog-or-ready |
 | **选定** | 在保留 Phase 12–21 关闭面的前提下，授权 Phase 22「NFR81 leftovers 升格」合同闸门（FR178）；实现属 Epic 112–117 |
 
 ### Phase 12–21 关闭面 vs Phase 22 边界（NFR83 · 必读）
@@ -124,10 +124,10 @@
 
 ### Epic 111 关闭条件（Story 111.4 勾选）
 
-- [ ] **FR178 / Correct Course + PRD：** Phase 22 批准文案验收 — Story 111.2
-- [ ] **README / deferred：** Phase 21 vs Phase 22 合同区分 — Story 111.3
-- [ ] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 22 指针 — Story 111.4
-- [ ] **NFR83–87：** 边界与诚实义务写入本记录并保持
-- [ ] **禁止事项未触发：** 112–117 在 Epic 111 关闭前未标 ready
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`；禁 publish `rhdl`/`rhdl-bits`
-- [ ] **Epic 112–117：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭
+- [x] **FR178 / Correct Course + PRD：** Phase 22 批准文案验收 — Story 111.2
+- [x] **README / deferred：** Phase 21 vs Phase 22 合同区分 — Story 111.3
+- [x] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 22 指针 — Story 111.4
+- [x] **NFR83–87：** 边界与诚实义务写入本记录并保持
+- [x] **禁止事项未触发：** 112–117 在 Epic 111 关闭前未标 ready
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`；禁 publish `rhdl`/`rhdl-bits`
+- [x] **Epic 112–117：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭
