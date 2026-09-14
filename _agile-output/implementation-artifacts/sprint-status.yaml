@@ -766,8 +766,8 @@ development_status:
 
   epic-112: in-progress
   112-1-epic-112-nfr14-风险记录: done
-  112-2-浮动-circt-git-head-实现与验收-fr179: ready-for-dev
-  112-3-fr179-收口与文档指针: backlog
+  112-2-浮动-circt-git-head-实现与验收-fr179: done
+  112-3-fr179-收口与文档指针: ready-for-dev
   epic-112-retrospective: optional
 
   epic-113: backlog

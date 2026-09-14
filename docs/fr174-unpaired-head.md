@@ -33,7 +33,7 @@ CI: required job **`circt-unpaired-head`** (no `continue-on-error`).
 ## Standing honesty
 
 Default product path remains AD-9 **1.158.0**. FR174 does **not** replace the paired pin.
-True floating CIRCT/Chisel git HEAD beyond document-pinned **1.156.0** still needs a new contract (**NFR81**).
+True floating CIRCT/Chisel git HEAD beyond document-pinned **1.156.0** → **FR179** / Epic 112（[`docs/fr179-floating-circt-git-head.md`](fr179-floating-circt-git-head.md)；浮动轨钉 **1.159.0**）。
 CIRCT/firtool runtime must **not** enter `bitloom-prelude` design-crate deps.
 
 ```text

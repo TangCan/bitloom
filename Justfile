@@ -71,6 +71,11 @@ parser-head-migration-check:
 circt-unpaired-head-check:
 	bash scripts/circt-unpaired-head-check.sh
 
+# FR179: floating CIRCT HEAD track beyond FR174 (document-pinned firtool-1.159.0; ≠ AD-9; ≠ FR174).
+# Not part of default `just test`. Missing/mismatched floating pin → non-zero (never silent skip).
+circt-floating-git-head-check:
+	bash scripts/circt-floating-git-head-check.sh
+
 # FR165: Style Guide / linter deepen beyond FR130 (≠ FR138 alone; no Chisel HEAD Parser).
 chisel-style-lint-check:
 	bash scripts/chisel-style-lint-check.sh
