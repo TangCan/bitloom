@@ -42,7 +42,7 @@ External claims about Phase 21 delivery **must** cite the matching closed FR:
 
 ## NFR81 leftovers (still need new contracts)
 
-Examples: floating CIRCT git HEAD beyond document-pinned unpaired subset; Handshake dialect families beyond FR129/FR175 NFR14; further Style Guide/linter ecosystems beyond FR176 NFR14; firtool bumps without upstream Chisel pairing; silent expand of public API surface (FR142).
+Examples historically listed here are now under **Phase 22** Correct Course（FR178–184 / Epic 111–117）：floating CIRCT git HEAD → **FR179**；Handshake dialect beyond FR129/FR175 → **FR180**；further Style Guide/linter beyond FR176 → **FR181**；firtool bumps without upstream Chisel pairing → **FR182**；explicit expand of public API surface (FR142) → **FR183**. See PRD addendum「Phase 22」and `sprint-change-proposal-2026-09-12-phase22-nfr81-leftovers.md`. Beyond each Phase 22 NFR14 subset still needs a **new** contract (**NFR86**).
 
 ## Brand
 
