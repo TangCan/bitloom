@@ -162,6 +162,21 @@ jobs:
       - name: Required FR176 chisel-ecosystem-deepen-check
         run: bash scripts/chisel-ecosystem-deepen-check.sh
 
+  # FR181: required Style Guide / linter deepen beyond FR176.
+  # Same path as `just chisel-style-linter-deepen-check`. Failures are never ignored.
+  chisel-style-linter-deepen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.97.1"
+      - name: Ensure pinned firtool-1.158.0 (AD-9)
+        run: cargo run -p bitloom -- firtool ensure
+      - name: Required FR181 chisel-style-linter-deepen-check
+        run: bash scripts/chisel-style-linter-deepen-check.sh
+
   # FR174: required unpaired CIRCT/firtool document-pinned mainline gate (≠ AD-9 product; ≠ FR170 alone).
   # Same path as `just circt-unpaired-head-check`. Failures are never ignored.
   circt-unpaired-head:

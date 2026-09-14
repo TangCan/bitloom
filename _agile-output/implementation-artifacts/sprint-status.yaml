@@ -778,8 +778,8 @@ development_status:
 
   epic-114: in-progress
   114-1-epic-114-nfr14-风险记录: done
-  114-2-更深-style-guide-linter-实现与验收-fr181: ready-for-dev
-  114-3-fr181-收口与文档指针: backlog
+  114-2-更深-style-guide-linter-实现与验收-fr181: done
+  114-3-fr181-收口与文档指针: ready-for-dev
   epic-114-retrospective: optional
 
   epic-115: backlog

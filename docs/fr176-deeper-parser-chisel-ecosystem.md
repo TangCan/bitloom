@@ -38,6 +38,8 @@ BITLOOM_ECOSYSTEM_FORCE_MISSING=1 just chisel-ecosystem-deepen-check   # expect 
 
 FR97 / FR111 / FR122 / FR130 / FR138 / FR165 / FR170 closes remain valid.
 
+Deeper Style Guide / linter beyond this combined pack → **FR181** / Epic 114（[`docs/fr181-deeper-style-guide-linter.md`](fr181-deeper-style-guide-linter.md)）.
+
 ```text
 cargo test -p bitloom --test fr176_deeper_parser_chisel_ecosystem
 cargo run -p bitloom --example fr176_ecosystem_gate
