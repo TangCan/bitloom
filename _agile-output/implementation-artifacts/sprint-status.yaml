@@ -759,8 +759,8 @@ development_status:
   # Hard gate: epic-111 done before 112–117 ready-for-dev
   epic-111: in-progress
   111-1-epic-111-nfr14-风险记录: done
-  111-2-correct-course-prd-批准-phase-22-fr178: ready-for-dev
-  111-3-同步-readme-deferred-路线图指针-fr178: backlog
+  111-2-correct-course-prd-批准-phase-22-fr178: done
+  111-3-同步-readme-deferred-路线图指针-fr178: ready-for-dev
   111-4-ad-指针与-epic-111-收口-fr178: backlog
   epic-111-retrospective: optional
 
