@@ -92,7 +92,7 @@ README「状态与 deferred」同源（Story **105.3** / **105.4** / **106.3** /
 
 Correct Course `sprint-change-proposal-2026-09-12-phase22-nfr81-leftovers.md` + PRD addendum「Phase 22」**已批准**（**Phase 22 contract approved** 2026-09-12；`correctCoursePhase22Approved: 2026-09-12`；planning-complete 2026-09-14）。
 闸门 **FR178 / Epic 111** **已关闭**（Story **111.4**；闸门已开；实现 epic 可合法开工）。
-**Epic 112 / FR179** — 浮动 CIRCT git HEAD（超 FR174；Epic 111 关闭前不得 ready）。
+**Epic 112 / FR179**（**已关闭** / Story **112.3**；[`docs/fr179-floating-circt-git-head.md`](../../docs/fr179-floating-circt-git-head.md)）— 浮动轨 firtool-1.159.0（≠ FR174 alone；≠ AD-9 产品钉；无界 tip 仍 **NFR86**）。
 **Epic 113 / FR180** — Handshake dialect 加深（超 FR129/FR175；Epic 111 关闭前不得 ready）。
 **Epic 114 / FR181** — 更深 Style Guide / linter（超 FR176；Epic 111 关闭前不得 ready）。
 **Epic 115 / FR182** — unpaired firtool 产品钉再升钉（AD-9 例外；≠ FR173/FR174；Epic 111 关闭前不得 ready）。
@@ -100,7 +100,7 @@ Correct Course `sprint-change-proposal-2026-09-12-phase22-nfr81-leftovers.md` + 
 **Epic 117 / FR184** — Phase 22 宣称诚实门（须各自 NFR14；未关闭前不得宣称已交付）。
 **Phase 22 规划故事已齐（Epic 111–117）**；触 AD-9 / AD-25 / AD-27 / FR142 须按 **NFR85** 先修订再 story ready。宣称须引 **FR178–FR184**（**FR184** / **NFR87**）。
 **诚实：** Phase 12–21 关闭证据**仍有效**（**NFR83**）；不得用 Phase 21 alone 冒充本批五条；超出各 NFR14 钉死子集仍须新合同（**NFR86**）。公开品牌 **Bitloom**。`git push` 非 FR。
-README「状态与 deferred」同源（Story **111.3** / …）。
+README「状态与 deferred」同源（Story **111.3** / **112.3** / …）。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 

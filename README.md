@@ -443,7 +443,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 加深面 | FR / Epic | 状态（诚实） |
 | --- | --- | --- |
 | Phase 22 合同闸门 | FR178 / 111 | Correct Course + README/deferred/AD — **已关闭**（Story **111.4**；闸门已开） |
-| 浮动 CIRCT git HEAD | FR179 / 112 | 超 FR174 文档钉死 unpaired 子集 — **未关闭**（须各自 NFR14） |
+| 浮动 CIRCT git HEAD | FR179 / 112 | 文档钉死浮动轨 firtool-**1.159.0**（≠ AD-9 **1.158.0**；≠ FR174 **1.156.0**）— **已关闭**（[`docs/fr179-floating-circt-git-head.md`](docs/fr179-floating-circt-git-head.md)；Story **112.3**） |
 | Handshake dialect 加深 | FR180 / 113 | 超 FR129/FR175 — **未关闭**（须各自 NFR14） |
 | 更深 Style Guide / linter | FR181 / 114 | 超 FR176 — **未关闭**（须各自 NFR14） |
 | unpaired firtool 产品钉再升钉 | FR182 / 115 | AD-9 *unpaired product-pin* 例外（≠ FR173/FR174）— **未关闭**（须各自 NFR14） |

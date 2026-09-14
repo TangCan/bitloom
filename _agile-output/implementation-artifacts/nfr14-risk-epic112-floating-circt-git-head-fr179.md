@@ -87,10 +87,12 @@
 
 ### Epic 112 关闭条件（Story 112.3 勾选）
 
-- [ ] **浮动 HEAD 通道 + 验收谓词：** Story 112.2
-- [ ] **AD-9 修订（NFR85）：** Story 112.2 ready 前落地
-- [ ] **docs/fr179-* + README/deferred：** Story 112.3
-- [ ] **NFR83：** FR174/FR173 关闭面未改写
-- [ ] **禁止事项未触发：** 未用 FR174 alone 勾选；未 silent-Ok
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
-- [ ] **超子集：** 未写入本 epic NFR14 的更深 HEAD/方言仍 **NFR86**
+- [x] **浮动 HEAD 通道 + 验收谓词：** Story 112.2
+- [x] **AD-9 修订（NFR85）：** Story 112.2 ready 前落地
+- [x] **docs/fr179-* + README/deferred：** Story 112.3
+- [x] **NFR83：** FR174/FR173 关闭面未改写
+- [x] **禁止事项未触发：** 未用 FR174 alone 勾选；未 silent-Ok
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
+- [x] **超子集：** 未写入本 epic NFR14 的更深 HEAD/方言仍 **NFR86**
+
+**Status:** **closed — Story 112.3**（可宣称 FR179；无界 live tip 仍 **NFR86**）。

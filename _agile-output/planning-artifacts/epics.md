@@ -164,6 +164,7 @@ phase22EpicListApproved: 2026-09-14
 phase22Epic111StoriesDrafted: 2026-09-14
 phase22Epic111Stories: 4
 phase22Epic111Status: complete
+phase22Epic112Status: complete
 phase22Status: gate-closed
 phase22GateClosed: 2026-09-14
 phase22RequirementsScope: FR178-FR184 / NFR83-NFR87
@@ -173,7 +174,8 @@ phase22ProposedNFRs: NFR83-NFR87
 phase22Note: >
   Correct Course approved 2026-09-12 (Q1 five leftovers; Q5 FR142=FR183).
   Soft order: 111 → (112 ‖ 113 ‖ 114 ‖ 115 ‖ 116) → 117. Hard gate Epic 111 CLOSED Story 111.4.
-  Phase 12–21 closes remain valid (NFR83). Next: Build Epic 112–116 NFR14 (parallel soft); Epic 117 after deepen.
+  Epic 112 / FR179 CLOSED Story 112.3 (floating-track firtool-1.159.0).
+  Phase 12–21 closes remain valid (NFR83). Next: Build Epic 113–116 NFR14 (parallel soft); Epic 117 after deepen.
 phase22InputDocuments:
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md

@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** Epic 112 / FR179 implementation (Story **112.2**). Product path: document-pinned **floating-track** firtool-**1.159.0** (`just circt-floating-git-head-check`; ≠ AD-9 **1.158.0**; ≠ FR174 **1.156.0**).
+**Status:** **Epic 112 / FR179 closed** (Story **112.3**). Product path: document-pinned **floating-track** firtool-**1.159.0** (`just circt-floating-git-head-check`; ≠ AD-9 **1.158.0**; ≠ FR174 **1.156.0**).
 
 Phase 21 **FR174** unpaired **1.156.0** and **FR173** paired AD-9 pin (**firtool-1.158.0 ↔ Chisel 7.15.0**) **remain closed and valid** (NFR83). Those closes alone ≠ FR179.
 
