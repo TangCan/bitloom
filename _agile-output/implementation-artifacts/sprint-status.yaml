@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-14-2026 13:45
+last_updated: 09-14-2026 08:53
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -807,25 +807,25 @@ development_status:
   118-2-correct-course-prd-批准-phase-23-fr185: done
   118-3-同步-readme-deferred-路线图指针-fr185: done
   118-4-ad-指针与-epic-118-收口-fr185: done
-  epic-118-retrospective: optional
+  epic-118-retrospective: done
 
   epic-119: done
   119-1-epic-119-nfr14-风险记录: done
   119-2-无界-circt-tip-实现与验收-fr186: done
   119-3-fr186-收口与文档指针: done
-  epic-119-retrospective: optional
+  epic-119-retrospective: done
 
   epic-120: done
   120-1-epic-120-nfr14-风险记录: done
   120-2-handshake-lower-加深实现与验收-fr187: done
   120-3-fr187-收口与文档指针: done
-  epic-120-retrospective: optional
+  epic-120-retrospective: done
 
   epic-121: done
   121-1-epic-121-nfr14-风险记录: done
   121-2-社区-style-guide-全家桶实现与验收-fr188: done
   121-3-fr188-收口与文档指针: done
-  epic-121-retrospective: optional
+  epic-121-retrospective: done
 
   epic-122: deferred
   122-1-epic-122-nfr14-风险记录: done
@@ -834,19 +834,19 @@ development_status:
   # see sprint-change-proposal-2026-09-14-fr189-defer-close.md
   122-2-继续-firtool-产品钉升钉实现与验收-fr189: deferred
   122-3-fr189-收口与文档指针: deferred
-  epic-122-retrospective: optional
+  epic-122-retrospective: done
 
   epic-123: done
   123-1-epic-123-nfr14-风险记录: done
   123-2-继续显式扩大-fr142-表面实现与验收-fr190: done
   123-3-fr190-收口与文档指针: done
-  epic-123-retrospective: optional
+  epic-123-retrospective: done
 
   epic-124: done
   124-1-epic-124-nfr14-风险记录: done
   124-2-readme-deferred-状态页诚实更新-fr191: done
   124-3-fr191-收口与-phase-23-故事清单指针: done
-  epic-124-retrospective: optional
+  epic-124-retrospective: done
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1
@@ -3372,3 +3372,132 @@ action_items:
     owner: "Dev"
     status: done
     ref: "_agile-output/implementation-artifacts/epic-117-retro-2026-09-14.md"
+  - id: "epic-118-retro-item-386-epic-119-124-each-need-their-own-nfr14-t"
+    epic: 118
+    action: "Epic 119-124 each need their own NFR14; touching AD-9/25/27/FR142 requires
+      NFR90."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-118-retro-2026-09-14.md"
+  - id: "epic-118-retro-item-387-claims-must-cite-closed-fr185-191-via-fr"
+    epic: 118
+    action: "Claims must cite closed FR185-191 via FR191; ban Phase 22/closeout alone."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-118-retro-2026-09-14.md"
+  - id: "epic-118-retro-item-388-git-push-is-not-an-fr"
+    epic: 118
+    action: "git push is not an FR."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-118-retro-2026-09-14.md"
+  - id: "epic-119-retro-item-389-claims-of-unbounded-circt-tip-must-cite"
+    epic: 119
+    action: "Claims of unbounded CIRCT tip must cite FR186 (not FR179 alone)."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-119-retro-2026-09-14.md"
+  - id: "epic-119-retro-item-390-do-not-treat-live-tip-as-the-ad-9-defaul"
+    epic: 119
+    action: "Do not treat live tip as the AD-9 default product pin."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-119-retro-2026-09-14.md"
+  - id: "epic-119-retro-item-391-beyond-nfr14-leftovers-remain-nfr91-git"
+    epic: 119
+    action: "Beyond-NFR14 leftovers remain NFR91; git push is not an FR."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-119-retro-2026-09-14.md"
+  - id: "epic-120-retro-item-392-handshake-lower-deepen-claims-must-cite"
+    epic: 120
+    action: "Handshake lower deepen claims must cite FR187 (not FR180/FR129 alone)."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-120-retro-2026-09-14.md"
+  - id: "epic-120-retro-item-393-deeper-handshake-dialect-lower-remains-n"
+    epic: 120
+    action: "Deeper Handshake/dialect lower remains NFR91."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-120-retro-2026-09-14.md"
+  - id: "epic-120-retro-item-394-git-push-is-not-an-fr"
+    epic: 120
+    action: "git push is not an FR."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-120-retro-2026-09-14.md"
+  - id: "epic-121-retro-item-395-community-style-guide-pack-claims-must-c"
+    epic: 121
+    action: "Community Style Guide pack claims must cite FR188 (not FR181/FR176 alone)."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-121-retro-2026-09-14.md"
+  - id: "epic-121-retro-item-396-deeper-ide-style-guide-leftovers-remain"
+    epic: 121
+    action: "Deeper IDE/Style Guide leftovers remain NFR91."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-121-retro-2026-09-14.md"
+  - id: "epic-121-retro-item-397-git-push-is-not-an-fr"
+    epic: 121
+    action: "git push is not an FR."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-121-retro-2026-09-14.md"
+  - id: "epic-122-retro-item-398-do-not-claim-fr189-delivered-do-not-tick"
+    epic: 122
+    action: "Do not claim FR189 delivered; do not tick FR189 on firtool-1.159.0 alone."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-122-retro-2026-09-14.md"
+  - id: "epic-122-retro-item-399-a-product-pin-strictly-above-1-159-0-req"
+    epic: 122
+    action: "A product pin strictly above 1.159.0 requires a new NFR91 contract (122.1
+      NFR14 shape reusable)."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-122-retro-2026-09-14.md"
+  - id: "epic-122-retro-item-400-git-push-is-not-an-fr"
+    epic: 122
+    action: "git push is not an FR."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-122-retro-2026-09-14.md"
+  - id: "epic-123-retro-item-401-further-fr142-expand-claims-must-cite-fr"
+    epic: 123
+    action: "Further FR142 expand claims must cite FR190 (not FR183 alone)."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-123-retro-2026-09-14.md"
+  - id: "epic-123-retro-item-402-do-not-silently-expand-the-public-api-fu"
+    epic: 123
+    action: "Do not silently expand the public API; further expand remains NFR91."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-123-retro-2026-09-14.md"
+  - id: "epic-123-retro-item-403-git-push-is-not-an-fr"
+    epic: 123
+    action: "git push is not an FR."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-123-retro-2026-09-14.md"
+  - id: "epic-124-retro-item-404-full-phase-23-claims-must-cite-fr185-191"
+    epic: 124
+    action: "Full Phase 23 claims must cite FR185-191; each deepen cites its FR."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-124-retro-2026-09-14.md"
+  - id: "epic-124-retro-item-405-fr189-is-undelivered-further-product-pin"
+    epic: 124
+    action: "FR189 is undelivered; further product-pin bump is NFR91; do not claim
+      NFR86 ledger empty."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-124-retro-2026-09-14.md"
+  - id: "epic-124-retro-item-406-ban-phase-22-closeout-alone-as-fr186-190"
+    epic: 124
+    action: "Ban Phase 22/closeout alone as FR186-190; git push is not an FR."
+    owner: "Dev"
+    status: done
+    ref: "_agile-output/implementation-artifacts/epic-124-retro-2026-09-14.md"
