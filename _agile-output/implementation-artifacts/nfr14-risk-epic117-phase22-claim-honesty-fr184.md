@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR184 / Epic 117；NFR14、NFR83、NFR84、NFR86、NFR87；对照 FR178–183 / FR172–177 / FR142 |
 | 记录日期 | 2026-09-14 |
-| 状态 | **open — Story 117.1**（in-progress）；Epic 117 未关闭 |
+| 状态 | **closed — Story 117.3**；Epic 117 关闭；FR184 宣称门可宣称；Phase 22 规划+实现故事齐（Epic 111–117）；**NFR86** 未选加深仍须新合同；**不得**宣称 NFR81 账本已空 |
 | **选定** | 在保留 Phase 12–21 与 Epic 111–116 关闭面的前提下，授权 **Phase 22 宣称诚实门（FR184）**：公开 README / deferred / 状态页按**已关** FR178–184 可审计宣称；**禁止** Phase 21 alone 冒充 FR179–183；**禁止**未关 FR 勾选「已交付」；**禁止**暗示超出各 epic NFR14 钉死子集的加深已清或「NFR81 账本已空」；**禁止**把 `git push` 当 FR |
 
 ### 已关 / 未关 FR178–184 宣称矩阵（本 epic 钉死）
@@ -27,7 +27,7 @@
 | **FR181** | 114 | Style/linter 加深 | **已关闭** | **FR181**（≠ FR176 alone） |
 | **FR182** | 115 | unpaired firtool 产品钉 | **已关闭** | **FR182**（≠ FR173/174/179 alone） |
 | **FR183** | 116 | 显式扩大 FR142 表面 | **已关闭** | **FR183**（≠ FR142 alone / 静默扩大） |
-| **FR184** | 117 | **宣称诚实门**（本 epic） | **未关闭** → 本 epic 交付后关闭 | **FR178–FR184** via **FR184** |
+| **FR184** | 117 | **宣称诚实门**（本 epic） | **已关闭** | **FR178–FR184** via **FR184** |
 
 **Story 117.2 时：** 若 FR184 尚未关闭，状态页仍标本门「未关闭 / 实现中」；关闭后须有 `docs/fr184-*` 指针。  
 **Story 117.3 时：** 勾选 Epic 117 / FR184；声明 Phase 22 规划+实现故事齐（Epic 111–117）；仍 **不得**宣称「NFR81 账本已空」。
@@ -97,7 +97,9 @@
 ### Epic 117 关闭条件（Story 117.3 勾选）
 
 - [x] **FR184 诚实面落地** — Story 117.2（README / deferred / `docs/fr184-*`）
-- [ ] **文档 / deferred / README / spine 收口** — Story 117.3
-- [ ] **NFR83/86/87：** Phase 22 宣称须引 FR178–184；NFR86 未选仍须新合同；不得宣称 NFR81 账本已空
-- [ ] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
-- [ ] **Phase 22 规划故事齐：** Epic 111–117；≠ 宣称 NFR81/NFR86 账本已空
+- [x] **文档 / deferred / README / spine 收口** — Story 117.3
+- [x] **NFR83/86/87：** Phase 22 宣称须引 FR178–184；NFR86 未选仍须新合同；不得宣称 NFR81 账本已空
+- [x] **品牌 / AD-6：** Bitloom；设计 crate → `bitloom-prelude`
+- [x] **Phase 22 规划故事齐：** Epic 111–117；≠ 宣称 NFR81/NFR86 账本已空
+
+**Status:** **closed — Story 117.3**（可宣称 Epic 117 / FR184 关闭；Phase 22 规划+实现故事已齐）。

@@ -2,11 +2,11 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 117 / FR184 in progress** (Story **117.2** honesty surface). Closeout → Story **117.3**.
+**Status:** **Epic 117 / FR184 closed** (Story **117.3**). Honesty surface delivered in Story **117.2**.
 
 NFR14: `_agile-output/implementation-artifacts/nfr14-risk-epic117-phase22-claim-honesty-fr184.md`.
 
-**Phase 22 规划故事已齐（Epic 111–117）**；加深面 FR179–183 **已关闭**；本诚实门关闭后宣称须引 **FR178–184**（本 FR / **NFR87**）。超出各 epic NFR14 钉死子集的加深仍 **NFR86**。**不得**宣称「NFR81 账本已空」。
+**Phase 22 规划+实现故事已齐（Epic 111–117）**；宣称须引 **FR178–184**（本 FR / **NFR87**）。超出各 epic NFR14 钉死子集的加深仍 **NFR86**。**不得**宣称「NFR81 账本已空」。
 
 ## Rule (NFR87)
 
@@ -39,7 +39,7 @@ External claims about Phase 22 delivery **must** cite the matching closed FR:
 | FR181 | 114 | [`fr181-deeper-style-guide-linter.md`](fr181-deeper-style-guide-linter.md) |
 | FR182 | 115 | [`fr182-unpaired-firtool-product-pin.md`](fr182-unpaired-firtool-product-pin.md) |
 | FR183 | 116 | [`fr183-explicit-fr142-api-expand.md`](fr183-explicit-fr142-api-expand.md) |
-| FR184 | 117 | this document (honesty gate; close in Story **117.3**) |
+| FR184 | 117 | this document |
 
 ## NFR86 leftovers (still need new contracts)
 
