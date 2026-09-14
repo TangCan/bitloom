@@ -771,8 +771,8 @@ development_status:
   epic-112-retrospective: optional
 
   epic-113: in-progress
-  113-1-epic-113-nfr14-风险记录: ready-for-dev
-  113-2-handshake-dialect-加深实现与验收-fr180: backlog
+  113-1-epic-113-nfr14-风险记录: done
+  113-2-handshake-dialect-加深实现与验收-fr180: ready-for-dev
   113-3-fr180-收口与文档指针: backlog
   epic-113-retrospective: optional
 
