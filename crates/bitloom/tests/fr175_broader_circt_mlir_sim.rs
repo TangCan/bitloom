@@ -26,7 +26,7 @@ fn fr175_docs_contract_forbid_fr169_alone() {
             && (docs.contains("alone") || docs.contains("≠") || docs.contains("仍")),
         "must keep FR169 distinct"
     );
-    assert!(docs.contains("1.158.0") || docs.contains("firtool-1.158"));
+    assert!(docs.contains("1.159.0") || docs.contains("firtool-1.158"));
     assert!(
         docs.contains("BITLOOM_CIRCT_SV_FORCE_MISSING") || docs.contains("FORCE_MISSING"),
         "must document FORCE_MISSING"
@@ -37,7 +37,7 @@ fn fr175_docs_contract_forbid_fr169_alone() {
 fn fr175_script_just_ci() {
     let script = read("scripts/circt-external-sv-check.sh");
     assert!(script.contains("--ir-sv") && script.contains("--ir-verilog"));
-    assert!(script.contains("1.158.0"));
+    assert!(script.contains("1.159.0"));
     assert!(script.contains("BITLOOM_CIRCT_SV_FORCE_MISSING"));
     assert!(script.contains("FR175"));
     let just = read("Justfile");

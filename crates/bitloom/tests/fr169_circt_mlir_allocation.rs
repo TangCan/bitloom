@@ -37,7 +37,15 @@ fn fr169_docs_contract_forbid_fr164_alone() {
             && (docs.contains("alone") || docs.contains("≠") || docs.contains("仍")),
         "must keep FR137 distinct"
     );
-    assert!(docs.contains("1.158.0") || docs.contains("firtool-1.158.0"));
+    assert!(
+        docs.contains("1.155.0")
+            || docs.contains("1.158.0")
+            || docs.contains("1.159.0")
+            || docs.contains("firtool-1.155")
+            || docs.contains("firtool-1.158")
+            || docs.contains("firtool-1.159"),
+        "must document AD-9 / historical firtool pin"
+    );
     assert!(
         docs.contains("circt-external-alloc-check") || docs.contains("circt-external-alloc"),
         "must name alloc-check path / CI job"
@@ -61,7 +69,7 @@ fn fr169_docs_contract_forbid_fr164_alone() {
 #[test]
 fn fr169_script_and_just_path() {
     let script = read("scripts/circt-external-alloc-check.sh");
-    assert!(script.contains("1.158.0"));
+    assert!(script.contains("1.159.0"));
     assert!(script.contains("FR169"));
     assert!(
         script.contains("RHDL_FIRTOOL_PATH") || script.contains("firtool ensure"),

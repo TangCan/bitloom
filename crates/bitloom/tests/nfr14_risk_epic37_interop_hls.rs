@@ -46,7 +46,7 @@ fn nfr14_risk_epic37_interop_hls_has_required_fields() {
     );
     assert!(
         (text.contains("7.14.0") || text.contains("7.15.0"))
-            && (text.contains("1.155.0") || text.contains("1.158.0")),
+            && (text.contains("1.155.0") || text.contains("1.158.0") || text.contains("1.159.0")),
         "risk record must cite current NFR12 pin pair Chisel 7.14.0 ↔ firtool 1.155.0"
     );
 

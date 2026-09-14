@@ -3,7 +3,7 @@
 # Epic 107 / NFR14. Beyond FR170 update-mainline alone / FR173 paired AD-9 pin alone.
 #
 # Selected shape (NFR14): document-pinned **unpaired mainline** firtool-**1.156.0**
-# (≠ AD-9 product pin firtool-1.158.0 ↔ Chisel 7.15.0). Optional override:
+# (≠ AD-9 product pin firtool-1.159.0 ↔ Chisel 7.15.0). Optional override:
 #   BITLOOM_FIRTOOL_HEAD_PATH=/dir/containing/firtool
 # Must report version matching EXPECTED_HEAD_VERSION and must **not** equal AD-9 pin.
 #
@@ -11,7 +11,7 @@
 # ≠ PATH-random firtool · ≠ silent-Ok under BITLOOM_FIRTOOL_HEAD_FORCE_MISSING
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-AD9_PRODUCT_VERSION="1.158.0"
+AD9_PRODUCT_VERSION="1.159.0"
 EXPECTED_HEAD_VERSION="1.156.0"
 ASSET="firrtl-bin-linux-x64.tar.gz"
 RELEASE_BASE="https://github.com/llvm/circt/releases/download/firtool-${EXPECTED_HEAD_VERSION}"

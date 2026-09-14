@@ -7,7 +7,7 @@
 #   (default / optional)         — missing toolchain → skip exit 0 (legacy local convenience)
 #
 # Prefer scripts/chisel-fr28-compile-required.sh for CI and just chisel-fr28-jvm.
-# Pin: Chisel 7.15.0 ↔ firtool 1.158.0. Never silent-downgrade FR28 to best-effort.
+# Pin: Chisel 7.15.0 ↔ firtool 1.159.0. Never silent-downgrade FR28 to best-effort.
 set -euo pipefail
 ROOT="$(cd "${BASH_SOURCE[0]%/*}/.." && pwd)"
 SCALA="${1:-}"

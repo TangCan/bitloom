@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 107 / FR174 closed** (Story **107.3**). Product path: document-pinned unpaired mainline **firtool-1.156.0** (`just circt-unpaired-head-check`; ≠ AD-9 **1.158.0**).
+**Status:** **Epic 107 / FR174 closed** (Story **107.3**). Product path: document-pinned unpaired mainline **firtool-1.156.0** (`just circt-unpaired-head-check`; ≠ AD-9 **1.159.0**).
 
 Phase 20 **FR170** update-mainline Parser and Phase 21 **FR173** paired AD-9 pin (**firtool-1.158.0 ↔ Chisel 7.15.0**) **remain closed and valid** (NFR78). Those closes alone ≠ FR174.
 
@@ -10,7 +10,7 @@ Phase 20 **FR170** update-mainline Parser and Phase 21 **FR173** paired AD-9 pin
 
 | Layer | Role |
 |-------|------|
-| **AD-9 product pin** | firtool-**1.158.0** ↔ Chisel **7.15.0** (default `cargo bitloom firtool ensure`) |
+| **AD-9 product pin** | firtool-**1.159.0** + Chisel **7.15.0** (FR182 unpaired; default `cargo bitloom firtool ensure`; FR173 close @ 1.158.0 still valid) |
 | **FR174 unpaired pin** | Document-pinned unpaired mainline **firtool-1.156.0** (≠ product pin; historically never Chisel-paired in Bitloom Stack) |
 | **Override** | `BITLOOM_FIRTOOL_HEAD_PATH` → directory containing `firtool` (must still report **1.156.0**) |
 | **AD revise** | AD-9 optional HEAD/mainline channel; AD-27 notes unpaired channel ≠ FR170 alone |
@@ -32,7 +32,7 @@ CI: required job **`circt-unpaired-head`** (no `continue-on-error`).
 
 ## Standing honesty
 
-Default product path remains AD-9 **1.158.0**. FR174 does **not** replace the paired pin.
+Default product path remains AD-9 **1.159.0** (FR182). FR174 does **not** replace the product pin.
 True floating CIRCT/Chisel git HEAD beyond document-pinned **1.156.0** → **FR179** / Epic 112（[`docs/fr179-floating-circt-git-head.md`](fr179-floating-circt-git-head.md)；浮动轨钉 **1.159.0**）。
 CIRCT/firtool runtime must **not** enter `bitloom-prelude` design-crate deps.
 

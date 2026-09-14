@@ -9,11 +9,12 @@ use bitloom_hir::{
     PortDirection, ProcessKind, Stmt,
 };
 
-/// Documented pairing (AD-9 / NFR12): Chisel 7.15.0 ↔ firtool-1.158.0.
+/// Documented Chisel target (AD-9 / NFR12). Remains 7.15.0 under FR182 unpaired product-pin.
 pub const CHISEL_TARGET: &str = "7.15.0";
 
-/// Documented firtool pin paired with [`CHISEL_TARGET`].
-pub const FIRTOOL_TARGET: &str = "1.158.0";
+/// Documented firtool product pin (AD-9). FR182: **1.159.0** unpaired with Chisel 7.15.0
+/// (no upstream official pairing; ≠ FR173 paired bump alone; ≠ FR174/FR179 optional channels).
+pub const FIRTOOL_TARGET: &str = "1.159.0";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ChiselGenError {

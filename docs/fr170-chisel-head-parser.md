@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 103 / FR170 closed** (Story **103.3**). Product path: document-pinned update-mainline `BitloomFirrtlParser.parseUpdateMainline` on FIRRTL **6.0.0** @ Chisel 7.14.0 ↔ firtool-1.155.0 (FR170 close pin); current AD-9 after FR173: Chisel 7.15.0 ↔ firtool-1.158.0. Unpaired HEAD remains Epic 107 / FR174; firtool bump beyond then-pin delivered via **FR173** (AD-9 → 1.158.0).
+**Status:** **Epic 103 / FR170 closed** (Story **103.3**). Product path: document-pinned update-mainline `BitloomFirrtlParser.parseUpdateMainline` on FIRRTL **6.0.0** @ Chisel 7.14.0 ↔ firtool-1.155.0 (FR170 close pin); current AD-9 after FR182: Chisel 7.15.0 + firtool-1.159.0 (unpaired; FR173 close @ 1.158.0 still valid). Unpaired HEAD remains Epic 107 / FR174; firtool bump beyond then-pin delivered via **FR173** (AD-9 → 1.158.0).
 
 Phase 16 **FR138** `BitloomFirrtlParser.parse` and Phase 19 **FR165** Style Guide/linter **remain closed and valid** (NFR73).
 This FR delivers the NFR14 **document-pinned update-mainline** Parser product path beyond FR138 alone. At Epic 103 close, **AD-9 was not revised** (firtool stayed **1.155.0**; unpaired CIRCT HEAD deferred). **FR173** later revised AD-9 to firtool-**1.158.0** ↔ Chisel **7.15.0**; FR170 close evidence @ 7.14.0/1.155.0 remains valid (**NFR78**).

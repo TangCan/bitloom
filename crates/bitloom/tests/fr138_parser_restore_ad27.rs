@@ -27,8 +27,8 @@ fn fr138_p1_api_workflow_pairing() {
         "docs must contrast historical Parser.parse / firrtl.Parser"
     );
     assert!(
-        docs.contains("7.15.0") && docs.contains("1.158.0"),
-        "docs must pin Chisel 7.15.0 + firtool-1.158.0"
+        docs.contains("7.15.0") && docs.contains("1.159.0"),
+        "docs must pin Chisel 7.15.0 + firtool-1.159.0"
     );
     assert!(
         docs.contains("parse-only")
@@ -40,8 +40,8 @@ fn fr138_p1_api_workflow_pairing() {
 
     let script = read("scripts/parser-restore-check.sh");
     assert!(
-        script.contains("1.158.0"),
-        "script must pin firtool 1.158.0"
+        script.contains("1.159.0"),
+        "script must pin firtool 1.159.0"
     );
     assert!(
         script.contains("7.15.0"),
@@ -187,7 +187,7 @@ fn fr138_p3_version_mismatch_nonzero() {
         String::from_utf8_lossy(&out.stderr)
     );
     assert!(
-        err.contains("1.158.0")
+        err.contains("1.159.0")
             || err.to_lowercase().contains("version")
             || err.contains("mismatch")
             || err.contains("expected"),

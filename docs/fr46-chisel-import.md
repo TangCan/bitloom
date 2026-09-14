@@ -4,7 +4,7 @@
 
 **诚实边界（FR88 / 与 FR28 对称）：** 正向 `emit_chisel` = **可编译 ≠ idiomatic**；反向腿亦不把「手写可维护 / idiomatic Scala」当作验收。运维钉死对与覆盖入口见 [`fr28-chisel-compilable.md`](fr28-chisel-compilable.md#firtool--chisel-钉死运维清单fr88--nfr3--nfr12)。
 
-**钉死版本对：** Chisel **7.15.0** ↔ firtool **1.158.0**（与 FR28 相同）。
+**钉死版本对：** Chisel **7.15.0** + firtool **1.159.0**（与 FR28 / FR182 相同；unpaired）。
 
 ## CIRCT 交换边界
 

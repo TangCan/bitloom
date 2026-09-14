@@ -68,7 +68,10 @@ fn nfr14_risk_epic108_broader_circt_mlir_sim_fr175_has_required_fields() {
         "must pin SV / ir-verilog deepen beyond FR169"
     );
     assert!(
-        text.contains("1.158.0") || text.contains("firtool-1.158"),
+        text.contains("1.158.0")
+            || text.contains("firtool-1.158")
+            || text.contains("1.159.0")
+            || text.contains("firtool-1.159"),
         "must use AD-9 product pin"
     );
     assert!(

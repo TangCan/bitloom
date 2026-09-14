@@ -42,7 +42,7 @@ let art = emit_chisel_idiomatic(&frozen)?;
 check_idiomatic_chisel(&art.files[0].contents, &frozen)?;
 ```
 
-**钉死版本对（AD-9 / NFR12）：** Chisel **7.15.0** ↔ firtool **1.158.0**（与 FR28 相同）。
+**钉死版本对（AD-9 / NFR12）：** Chisel **7.15.0** + firtool **1.159.0**（与 FR28 / FR182 相同；unpaired）。
 
 ## 官方现实（非完成定义）
 

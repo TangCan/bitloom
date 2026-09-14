@@ -3,13 +3,13 @@
 # Epic 108 / NFR14. Beyond FR169 --ir-fir + --ir-hw + Verilog alone.
 #
 # Selected deepen: --ir-sv (SV dialect) + --ir-verilog (post-Verilog-lowering IR)
-# at AD-9 firtool-1.158.0, then Verilog emit.
+# at AD-9 firtool-1.159.0, then Verilog emit.
 #
 # ≠ FR169 alone · ≠ FR164 alone · ≠ FR137 alone · ≠ FR129 alone
 # ≠ PATH-random · ≠ unpaired HEAD pin · ≠ silent-Ok under BITLOOM_CIRCT_SV_FORCE_MISSING
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-EXPECTED_VERSION="1.158.0"
+EXPECTED_VERSION="1.159.0"
 FIR="${BITLOOM_CIRCT_SV_FIR:-$ROOT/crates/rhdl-firrtl/fixtures/fr169_circt_mlir_allocation.fir}"
 OUT_DIR="${BITLOOM_CIRCT_SV_OUT:-$ROOT/target/circt-external-sv-check}"
 DOCS="${ROOT}/docs/fr175-broader-circt-mlir-sim.md"

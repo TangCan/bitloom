@@ -11,7 +11,7 @@
 # Never treat bare PATH `firtool` as the success resolver.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-EXPECTED_VERSION="1.158.0"
+EXPECTED_VERSION="1.159.0"
 FIR="${BITLOOM_CIRCT_FIR:-$ROOT/crates/rhdl-firrtl/fixtures/fr137_external_circt_gate.fir}"
 OUT_DIR="${BITLOOM_CIRCT_OUT:-$ROOT/target/circt-external-check}"
 

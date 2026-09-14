@@ -200,7 +200,7 @@ mod sim {
 
 ## firtool（NFR3）
 
-默认**不信任** `PATH` 上的 firtool。CLI 钉死 **firtool-1.158.0**（与 Chisel **7.15.0** 配对 · AD-9 / NFR12；`firrtl-bin-linux-x64.tar.gz` + `.sha256`）：
+默认**不信任** `PATH` 上的 firtool。CLI 钉死 **firtool-1.159.0**（Chisel **7.15.0** · AD-9 / NFR12 / FR182 *unpaired product-pin*；`firrtl-bin-linux-x64.tar.gz` + `.sha256`）：
 
 ```bash
 cargo run -p bitloom -- firtool info
@@ -429,8 +429,8 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | --- | --- | --- |
 | Phase 21 合同闸门 | FR172 / 105 | Correct Course + README/deferred/AD — **已关闭**（Story **105.4**；闸门已开） |
 | firtool 升钉（配对 AD-9） | FR173 / 106 | Chisel **7.15.0** ↔ firtool-**1.158.0**；AD-9 已修订（≠ FR169 alone）— **已关闭**（[`docs/fr173-firtool-bump-ad9.md`](docs/fr173-firtool-bump-ad9.md)；Story **106.3**） |
-| unpaired CIRCT/Chisel HEAD | FR174 / 107 | 文档钉死 unpaired mainline firtool-**1.156.0**（≠ AD-9 **1.158.0**；≠ FR170 alone）— **已关闭**（[`docs/fr174-unpaired-head.md`](docs/fr174-unpaired-head.md)；Story **107.3**） |
-| 更广 CIRCT/MLIR/sim | FR175 / 108 | `--ir-sv` + `--ir-verilog` @ AD-9 **1.158.0**（≠ FR169 fir+hw alone）— **已关闭**（[`docs/fr175-broader-circt-mlir-sim.md`](docs/fr175-broader-circt-mlir-sim.md)；Story **108.3**） |
+| unpaired CIRCT/Chisel HEAD | FR174 / 107 | 文档钉死 unpaired mainline firtool-**1.156.0**（≠ AD-9 **1.159.0**；≠ FR170 alone）— **已关闭**（[`docs/fr174-unpaired-head.md`](docs/fr174-unpaired-head.md)；Story **107.3**） |
+| 更广 CIRCT/MLIR/sim | FR175 / 108 | `--ir-sv` + `--ir-verilog` @ AD-9 firtool（现 **1.159.0**；关闭时 **1.158.0**）— **已关闭**（[`docs/fr175-broader-circt-mlir-sim.md`](docs/fr175-broader-circt-mlir-sim.md)；Story **108.3**） |
 | 更深 Parser/Chisel 生态 | FR176 / 109 | 组合 FR165+FR170+ecosystem 标记 @ AD-9（≠ FR170/165 alone）— **已关闭**（[`docs/fr176-deeper-parser-chisel-ecosystem.md`](docs/fr176-deeper-parser-chisel-ecosystem.md)；Story **109.3**） |
 | Phase 21 宣称诚实门 | FR177 / 110 | [`docs/fr177-phase21-claim-honesty.md`](docs/fr177-phase21-claim-honesty.md) — **已关闭**（Story **110.3**；Phase 21 规划故事已齐 Epic 105–110） |
 
@@ -443,7 +443,8 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 加深面 | FR / Epic | 状态（诚实） |
 | --- | --- | --- |
 | Phase 22 合同闸门 | FR178 / 111 | Correct Course + README/deferred/AD — **已关闭**（Story **111.4**；闸门已开） |
-| 浮动 CIRCT git HEAD | FR179 / 112 | 文档钉死浮动轨 firtool-**1.159.0**（≠ AD-9 **1.158.0**；≠ FR174 **1.156.0**）— **已关闭**（[`docs/fr179-floating-circt-git-head.md`](docs/fr179-floating-circt-git-head.md)；Story **112.3**） |
+| 浮动 CIRCT git HEAD | FR179 / 112 | 文档钉死浮动轨 firtool-**1.159.0**（渠道 ≠ AD-9 产品 cache；≠ FR174 **1.156.0**）— **已关闭**（[`docs/fr179-floating-circt-git-head.md`](docs/fr179-floating-circt-git-head.md)；Story **112.3**） |
+| unpaired firtool 产品钉再升钉 | FR182 / 115 | AD-9 默认钉 **1.159.0** + Chisel **7.15.0**（*unpaired product-pin*；≠ FR173/174/179 alone）— **实现中**（[`docs/fr182-unpaired-firtool-product-pin.md`](docs/fr182-unpaired-firtool-product-pin.md)；Story **115.2**） |
 | Handshake dialect 加深 | FR180 / 113 | `handshake.fork`+`handshake.join` beyond FR129 C1–C4 — **已关闭**（[`docs/fr180-handshake-dialect-deepen.md`](docs/fr180-handshake-dialect-deepen.md)；Story **113.3**） |
 | 更深 Style Guide / linter | FR181 / 114 | wartremover + fatal-warnings beyond FR176 — **已关闭**（[`docs/fr181-deeper-style-guide-linter.md`](docs/fr181-deeper-style-guide-linter.md)；Story **114.3**） |
 | unpaired firtool 产品钉再升钉 | FR182 / 115 | AD-9 *unpaired product-pin* 例外（≠ FR173/FR174）— **未关闭**（须各自 NFR14） |

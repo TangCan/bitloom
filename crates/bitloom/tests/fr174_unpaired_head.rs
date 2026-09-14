@@ -21,8 +21,8 @@ fn fr174_docs_contract_forbid_fr170_alone() {
     let docs = read("docs/fr174-unpaired-head.md");
     assert!(docs.contains("FR174") && docs.contains("Bitloom"));
     assert!(
-        docs.contains("1.156.0") && docs.contains("1.158.0"),
-        "must pin unpaired 1.156.0 and contrast AD-9 1.158.0"
+        docs.contains("1.156.0") && docs.contains("1.159.0"),
+        "must pin unpaired 1.156.0 and contrast AD-9 1.159.0"
     );
     assert!(
         docs.contains("FR170")
@@ -45,7 +45,7 @@ fn fr174_docs_contract_forbid_fr170_alone() {
 #[test]
 fn fr174_script_and_just_and_ci() {
     let script = read("scripts/circt-unpaired-head-check.sh");
-    assert!(script.contains("1.156.0") && script.contains("1.158.0"));
+    assert!(script.contains("1.156.0") && script.contains("1.159.0"));
     assert!(script.contains("BITLOOM_FIRTOOL_HEAD_FORCE_MISSING"));
     assert!(script.contains("BITLOOM_FIRTOOL_HEAD_PATH") || script.contains("FIRTOOL_HEAD"));
     assert!(script.contains("FR174"));

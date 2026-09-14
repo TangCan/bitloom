@@ -1,5 +1,5 @@
 // FR28 / FR71 golden fixture: mechanical Chisel 7.15.0 Module (compile-only smoke).
-// Generated-style; pin: Chisel 7.15.0 ↔ firtool 1.158.0 (AD-9).
+// Generated-style; pin: Chisel 7.15.0 ↔ firtool 1.159.0 (AD-9).
 import chisel3._
 
 class Fr28GoldenCounter extends Module {

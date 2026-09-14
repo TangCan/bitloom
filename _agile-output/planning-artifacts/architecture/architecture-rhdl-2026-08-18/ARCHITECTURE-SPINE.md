@@ -124,10 +124,11 @@ flowchart TB
 
 - **Binds:** CLI, rhdl-firrtl, CI
 - **Prevents:** 系统 PATH 上的随机 firtool；Cement 式钉死过期 tarball 却当「当前」；两处各自下载
-- **Rule:** 调用 firtool 必须是 **firtool-1.158.0**（Chisel **7.15.0** 配对；上游正式表 https://www.chisel-lang.org/docs/appendix/versioning ）。这不是 CIRCT HEAD / PATH 随机 firtool。**只有 CLI** 下载/缓存/调用。产物是该 tag 的 `firrtl-bin-linux-x64.tar.gz`，校验同 tag 发布的 `.sha256`。阶段一宿主：**linux-x64**。首次可联网；缓存命中后必须能离线。覆盖：`RHDL_FIRTOOL_PATH` 指向含 `firtool` 二进制的目录。禁止默认信任 `PATH`。**FR137 / NFR58：** 外部 CIRCT **编译**门禁产品路径 = `just circt-external-check` / CI required job `circt-external`（见 `docs/fr137-external-circt-gate.md`）；≠ FR129 树内 Handshake alone；缺工具/版本不符须非零可读失败。**FR164：** 外部 CIRCT **仿真**门禁 = `just circt-external-sim-check` / CI `circt-external-sim`（见 `docs/fr164-circt-external-sim-gate.md`）；≠ FR137 compile alone。**FR173 / NFR80：** 升钉须上游 Chisel 正式配对后修订本 AD / Stack；禁止 unpaired bump。**FR174 / NFR80：** 可选 **unpaired HEAD / 文档钉死未配对主线** 渠道 = `just circt-unpaired-head-check` / CI `circt-unpaired-head`（文档钉死 **firtool-1.156.0**；覆盖 `BITLOOM_FIRTOOL_HEAD_PATH`；见 `docs/fr174-unpaired-head.md`）；**不得**把 AD-9 产品钉冒充 HEAD；缺工具/版本不符 / `BITLOOM_FIRTOOL_HEAD_FORCE_MISSING` → 非零可读失败；**≠** 默认产品钉。**FR179 / NFR85：** 可选 **浮动 CIRCT HEAD track** 渠道 = `just circt-floating-git-head-check` / CI `circt-floating-git-head`（文档钉死浮动轨 **firtool-1.159.0**；覆盖 `BITLOOM_FIRTOOL_FLOATING_HEAD_PATH`；见 `docs/fr179-floating-circt-git-head.md`）；**≠** FR174 **1.156.0** alone；**≠** AD-9 产品钉；缺工具/版本不符 / `BITLOOM_FIRTOOL_FLOATING_HEAD_FORCE_MISSING` → 非零可读失败；无界 live tip 无文档钉仍 **NFR86**。
+- **Rule:** 调用 firtool 必须是 **firtool-1.159.0**（Chisel **7.15.0** 仍钉死；**FR182 / NFR85：** *unpaired product-pin* 例外 — **无**上游 Chisel 正式配对表条目将 1.159.0 与 7.15.0 绑死；≠ FR173 配对升钉 alone）。这不是 CIRCT HEAD / PATH 随机 firtool。**只有 CLI** 下载/缓存/调用。产物是该 tag 的 `firrtl-bin-linux-x64.tar.gz`，校验同 tag 发布的 `.sha256`。阶段一宿主：**linux-x64**。首次可联网；缓存命中后必须能离线。覆盖：`RHDL_FIRTOOL_PATH` 指向含 `firtool` 二进制的目录。禁止默认信任 `PATH`。**FR137 / NFR58：** 外部 CIRCT **编译**门禁产品路径 = `just circt-external-check` / CI required job `circt-external`（见 `docs/fr137-external-circt-gate.md`）；≠ FR129 树内 Handshake alone；缺工具/版本不符须非零可读失败。**FR164：** 外部 CIRCT **仿真**门禁 = `just circt-external-sim-check` / CI `circt-external-sim`（见 `docs/fr164-circt-external-sim-gate.md`）；≠ FR137 compile alone。**FR173 / NFR80：** 配对升钉纪律仍有效（关闭证据 **1.158.0 ↔ 7.15.0**）；默认再升钉若无正式配对须走 **FR182** 例外修订。**FR174 / NFR80：** 可选 **unpaired HEAD / 文档钉死未配对主线** 渠道 = `just circt-unpaired-head-check` / CI `circt-unpaired-head`（文档钉死 **firtool-1.156.0**；覆盖 `BITLOOM_FIRTOOL_HEAD_PATH`；见 `docs/fr174-unpaired-head.md`）；**不得**把 AD-9 产品钉冒充 HEAD；缺工具/版本不符 / `BITLOOM_FIRTOOL_HEAD_FORCE_MISSING` → 非零可读失败；**≠** 默认产品钉。**FR179 / NFR85：** 可选 **浮动 CIRCT HEAD track** 渠道 = `just circt-floating-git-head-check` / CI `circt-floating-git-head`（文档钉死浮动轨 **firtool-1.159.0**；覆盖 `BITLOOM_FIRTOOL_FLOATING_HEAD_PATH` / `firtool-floating-head` 缓存；见 `docs/fr179-floating-circt-git-head.md`）；与产品钉版本可重合，**须按路径/渠道区分**（≠ 产品 cache）；**≠** FR174 **1.156.0** alone；缺工具/版本不符 / `BITLOOM_FIRTOOL_FLOATING_HEAD_FORCE_MISSING` → 非零可读失败；无界 live tip 无文档钉仍 **NFR86**。**FR182 / NFR85：** 默认产品钉 unpaired 再升至 **1.159.0**（见 `docs/fr182-unpaired-firtool-product-pin.md`）；≠ FR173/FR174/FR179 alone。
 - **Revised:** 2026-09-12 — Phase 21 / **FR173** / **NFR80**：Correct Course `correctCoursePhase21Approved: 2026-09-12`；产品钉死升至 **firtool-1.158.0 ↔ Chisel 7.15.0**（正式配对表）；历史钉死面 **firtool-1.155.0 ↔ Chisel 7.14.0**（FR169(A)/FR138/FR170 关闭时 pin）仍为有效关闭证据（**NFR78**），alone ≠ FR173。
-- **Revised:** 2026-09-12 — Phase 21 / **FR174** / **NFR80**：Correct Course `correctCoursePhase21Approved: 2026-09-12`；允许文档钉死 **unpaired mainline** firtool 渠道（钉死 **firtool-1.156.0**；`BITLOOM_FIRTOOL_HEAD_PATH`）；**默认产品钉仍为 1.158.0**；FR170 update-mainline alone ≠ FR174；浮动 git HEAD 超 1.156.0 → **FR179**（Phase 22）。
-- **Revised:** 2026-09-14 — Phase 22 / **FR179** / **NFR85**：Correct Course `correctCoursePhase22Approved: 2026-09-12`；允许文档钉死 **浮动 CIRCT HEAD track** firtool 渠道（钉死 **firtool-1.159.0**；`BITLOOM_FIRTOOL_FLOATING_HEAD_PATH`）；**默认产品钉仍为 1.158.0**；FR174 **1.156.0** alone ≠ FR179；无界 live tip 无钉仍 **NFR86**。
+- **Revised:** 2026-09-12 — Phase 21 / **FR174** / **NFR80**：Correct Course `correctCoursePhase21Approved: 2026-09-12`；允许文档钉死 **unpaired mainline** firtool 渠道（钉死 **firtool-1.156.0**；`BITLOOM_FIRTOOL_HEAD_PATH`）；**当时**默认产品钉为 1.158.0；FR170 update-mainline alone ≠ FR174；浮动 git HEAD 超 1.156.0 → **FR179**（Phase 22）。
+- **Revised:** 2026-09-14 — Phase 22 / **FR179** / **NFR85**：Correct Course `correctCoursePhase22Approved: 2026-09-12`；允许文档钉死 **浮动 CIRCT HEAD track** firtool 渠道（钉死 **firtool-1.159.0**；`BITLOOM_FIRTOOL_FLOATING_HEAD_PATH`）；**当时**默认产品钉为 1.158.0；FR174 **1.156.0** alone ≠ FR179；无界 live tip 无钉仍 **NFR86**。
+- **Revised:** 2026-09-14 — Phase 22 / **FR182** / **NFR85**：Correct Course `correctCoursePhase22Approved: 2026-09-12`；**unpaired product-pin** 例外：默认产品钉升至 **firtool-1.159.0**，Chisel **仍 7.15.0**（无上游正式配对）；FR173 **1.158.0↔7.15.0** 关闭证据仍有效（**NFR83**）；FR174 **1.156.0** / FR179 floating-track 渠道仍有效且 alone ≠ FR182；与 FR179 版本重合时按 **cache/path 渠道**区分。
 
 ### AD-10 — 诊断 [ADOPTED]
 
@@ -297,8 +298,8 @@ flowchart TB
 | rustc (MSRV) | 1.97.1 |
 | Rust edition | 2024 |
 | FIRRTL language spec | 6.0.0 |
-| CIRCT firtool（Chisel 7.15.0 配对，非 CIRCT HEAD） | 1.158.0 |
-| firtool 阶段一资产 | firrtl-bin-linux-x64.tar.gz @ firtool-1.158.0 |
+| CIRCT firtool（Chisel 7.15.0；FR182 unpaired product-pin，非 CIRCT HEAD） | 1.159.0 |
+| firtool 阶段一资产 | firrtl-bin-linux-x64.tar.gz @ firtool-1.159.0 |
 | Chisel (interop 对照，非依赖) | 7.15.0 |
 | Yosys (可选综合) | 0.68 |
 | Verilator (可选对照 sim) | 5.050 |
@@ -327,7 +328,7 @@ flowchart LR
   HIR --> V[.v]
   HIR --> S[tick + VCD]
   HIR -.-> F[.fir 阶段二]
-  F -.-> FT[firtool 1.158.0]
+  F -.-> FT[firtool 1.159.0]
   FT -.-> SV[firtool.v]
   V --> Y[Yosys 可选]
 ```
@@ -370,7 +371,7 @@ flowchart LR
 - **interp vs 编译版 `tick` 引擎**（产品 FR32；脊柱不选引擎）。
 - **`cargo bitloom` 其余动词**形态细节（FR40；`import`/`visualize`/`wave` 为 Phase 7 必需能力，名称可调）。
 - **macos / windows / linux-aarch64 firtool 资产**（NFR11；机制同 AD-9）。
-- **更高 firtool / Chisel 配对（超 1.158.0 / 7.15.0）：** 须上游正式配对后再改 AD-9 / Stack（NFR12 / NFR80 / **NFR81**）；≠ FR173 alone。
+- **更高 firtool / Chisel（超 FR182 产品钉 1.159.0 / Chisel 7.15.0）：** 配对升钉须上游正式配对后再改 AD-9 / Stack（NFR12 / NFR80）；unpaired 产品钉再升须新合同 + AD-9 例外修订（**NFR86**）；≠ FR173 / FR182 alone。
 - **更高 MSRV（>1.97.1）**：须另改 PRD/NFR13；当前 NFR13 = **1.97.1**。
 - **AD-22 phantom 选型的替代**：若推翻，须修订 AD-22，不得 silently 分叉。
 - **AD-27 Scala 生成器所在 crate**：`[ASSUMPTION]` 可 firrtl 或 CLI。

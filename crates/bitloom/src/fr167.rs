@@ -12,7 +12,7 @@ pub const CHISELSIM_PACKAGE_ID: &str = "chisel3-chiselsim";
 pub const CHISELSIM_VERSION: &str = "7.15.0";
 pub const CHISELSIM_CHANNEL: &str =
     "https://github.com/chipsalliance/chisel/tree/v7.15.0/src/main/scala/chisel3/simulator";
-pub const CHISELSIM_PAIRING_NOTE: &str = "pairs with AD-9 Chisel 7.15.0 / firtool-1.158.0; peek/poke on generated SV (not Bitloom tick golden)";
+pub const CHISELSIM_PAIRING_NOTE: &str = "pairs with AD-9 Chisel 7.15.0 / firtool-1.159.0; peek/poke on generated SV (not Bitloom tick golden)";
 
 pub const IDE_STORE_OPENVSX_ID: &str = "surfer-project.surfer";
 pub const IDE_STORE_OPENVSX_CHANNEL: &str = "https://open-vsx.org/extension/surfer-project/surfer";

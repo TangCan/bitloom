@@ -14,13 +14,13 @@ See also [`docs/fr129-circt-handshake.md`](fr129-circt-handshake.md).
 |------|----------|
 | **Selected gate** | **Compile gate** (external `firtool` lowers a representative `.fir`) |
 | **Sim gate** | **Not selected** this epic — deferred (**NFR59** / future contract); still satisfies E1–E4 |
-| Tool | **firtool-1.158.0** (Chisel 7.15.0 pair; **AD-9**) |
-| Channel | GitHub tag `firtool-1.158.0` → `firrtl-bin-linux-x64.tar.gz` + `.sha256` **or** AD-9 CLI cache (`cargo bitloom firtool ensure`) |
+| Tool | **firtool-1.159.0** (Chisel 7.15.0; FR182 unpaired; **AD-9**) |
+| Channel | GitHub tag `firtool-1.159.0` → `firrtl-bin-linux-x64.tar.gz` + `.sha256` **or** AD-9 CLI cache (`cargo bitloom firtool ensure`) |
 | Override | `RHDL_FIRTOOL_PATH` (directory containing `firtool`); **never** trust bare `PATH` firtool as the resolver |
 | Local path | `just circt-external-check` → `bash scripts/circt-external-check.sh` |
 | CI job | `.github/workflows/ci.yml` → **`circt-external`** (required; **no** `continue-on-error`) |
 | Fixture | `crates/rhdl-firrtl/fixtures/fr137_external_circt_gate.fir` |
-| Failure | Missing tool / version ≠ 1.158.0 / compile fail → **non-zero** + readable stderr (`BITLOOM_CIRCT_FORCE_MISSING=1` forces missing) |
+| Failure | Missing tool / version ≠ 1.159.0 / compile fail → **non-zero** + readable stderr (`BITLOOM_CIRCT_FORCE_MISSING=1` forces missing) |
 
 ## Forbidden closes
 
@@ -30,7 +30,7 @@ See also [`docs/fr129-circt-handshake.md`](fr129-circt-handshake.md).
 
 ## NFR58 ops sync
 
-- AD-9 / Stack pin remains firtool-1.158.0；CI + `just` path documented here
+- AD-9 / Stack pin remains firtool-1.159.0 (FR182 unpaired; FR173 close @ 1.158.0 still valid)；CI + `just` path documented here
 - Spine Phase 16 pointer: external CIRCT → **FR137** / this doc
 - Cross-link: [`fr129-circt-handshake.md`](fr129-circt-handshake.md) (in-tree ≠ external gate)
 

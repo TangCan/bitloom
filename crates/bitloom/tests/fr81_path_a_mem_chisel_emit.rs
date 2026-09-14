@@ -9,9 +9,9 @@ use bitloom_hir::{BuilderOwnedHir, Module, Port, PortDirection, Stmt, seal_from_
 
 fn pins_locked(scala: &str) {
     assert_eq!(CHISEL_TARGET, "7.15.0");
-    assert_eq!(FIRTOOL_TARGET, "1.158.0");
+    assert_eq!(FIRTOOL_TARGET, "1.159.0");
     assert!(
-        scala.contains("Chisel 7.15.0") && scala.contains("firtool-1.158.0"),
+        scala.contains("Chisel 7.15.0") && scala.contains("firtool-1.159.0"),
         "NFR12 pin strings missing:\n{scala}"
     );
 }

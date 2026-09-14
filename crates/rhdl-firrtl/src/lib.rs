@@ -743,12 +743,12 @@ mod tests {
     #[test]
     fn chisel_fr28_flat_counter_emits_scala() {
         assert_eq!(CHISEL_TARGET, "7.15.0");
-        assert_eq!(FIRTOOL_TARGET, "1.158.0");
+        assert_eq!(FIRTOOL_TARGET, "1.159.0");
         let hir = counter_for_chisel();
         let art = emit_chisel(&hir).unwrap();
         let scala = &art.files[0].contents;
         assert!(scala.contains("target Chisel 7.15.0"));
-        assert!(scala.contains("firtool-1.158.0"));
+        assert!(scala.contains("firtool-1.159.0"));
         assert!(scala.contains("FR28 compilable Chisel"));
         assert!(scala.contains("class Counter extends Module"));
         assert!(scala.contains("io.data_out := count"));
@@ -874,18 +874,18 @@ mod tests {
         assert_hierarchy_predicates(&scala, &back);
         assert!(scala.contains("Module(new Child)"));
         assert!(scala.contains("target Chisel 7.15.0"));
-        assert!(scala.contains("firtool-1.158.0"));
+        assert!(scala.contains("firtool-1.159.0"));
     }
 
     #[test]
     fn chisel_fr28_pin_locked() {
         assert_eq!(CHISEL_TARGET, "7.15.0");
-        assert_eq!(FIRTOOL_TARGET, "1.158.0");
+        assert_eq!(FIRTOOL_TARGET, "1.159.0");
         let scala = emit_chisel(&counter_for_chisel()).unwrap().files[0]
             .contents
             .clone();
         assert!(scala.contains("Chisel 7.15.0"));
-        assert!(scala.contains("firtool-1.158.0"));
+        assert!(scala.contains("firtool-1.159.0"));
     }
 
     #[test]
@@ -911,7 +911,7 @@ mod tests {
         assert!(scala.contains("SyncReadMem(4, UInt(8.W))"), "{scala}");
         assert!(scala.contains("ram.read("), "{scala}");
         assert!(scala.contains("Chisel 7.15.0"));
-        assert!(scala.contains("firtool-1.158.0"));
+        assert!(scala.contains("firtool-1.159.0"));
     }
 
     #[test]

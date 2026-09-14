@@ -71,7 +71,7 @@ jobs:
         # Same path as `just formal-sby-check` (FR119 script; required here for FR127).
         run: bash scripts/formal-sby-check.sh
 
-  # FR137 / NFR58: required external CIRCT compile gate (firtool-1.158.0 / AD-9).
+  # FR137 / NFR58: required external CIRCT compile gate (firtool-1.159.0 / AD-9).
   # Same path as `just circt-external-check`. Compile-gate MVP (sim deferred).
   # ≠ FR129 in-tree Handshake alone. Failures are never ignored; missing firtool fails the job.
   circt-external:
@@ -82,7 +82,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: "1.97.1"
-      - name: Ensure pinned firtool-1.158.0 (AD-9)
+      - name: Ensure pinned firtool-1.159.0 (AD-9)
         run: cargo run -p bitloom -- firtool ensure
       - name: Required FR137 circt-external-check
         run: bash scripts/circt-external-check.sh
@@ -97,7 +97,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: "1.97.1"
-      - name: Ensure pinned firtool-1.158.0 (AD-9)
+      - name: Ensure pinned firtool-1.159.0 (AD-9)
         run: cargo run -p bitloom -- firtool ensure
       - name: Required FR164 circt-external-sim-check
         run: bash scripts/circt-external-sim-check.sh
@@ -112,7 +112,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: "1.97.1"
-      - name: Ensure pinned firtool-1.158.0 (AD-9)
+      - name: Ensure pinned firtool-1.159.0 (AD-9)
         run: cargo run -p bitloom -- firtool ensure
       - name: Required FR169 circt-external-alloc-check
         run: bash scripts/circt-external-alloc-check.sh
@@ -127,7 +127,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: "1.97.1"
-      - name: Ensure pinned firtool-1.158.0 (AD-9)
+      - name: Ensure pinned firtool-1.159.0 (AD-9)
         run: cargo run -p bitloom -- firtool ensure
       - name: Required FR175 circt-external-sv-check
         run: bash scripts/circt-external-sv-check.sh
@@ -142,7 +142,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: "1.97.1"
-      - name: Ensure pinned firtool-1.158.0 (AD-9)
+      - name: Ensure pinned firtool-1.159.0 (AD-9)
         run: cargo run -p bitloom -- firtool ensure
       - name: Required FR170 parser-head-migration-check
         run: bash scripts/parser-head-migration-check.sh
@@ -157,7 +157,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: "1.97.1"
-      - name: Ensure pinned firtool-1.158.0 (AD-9)
+      - name: Ensure pinned firtool-1.159.0 (AD-9)
         run: cargo run -p bitloom -- firtool ensure
       - name: Required FR176 chisel-ecosystem-deepen-check
         run: bash scripts/chisel-ecosystem-deepen-check.sh
@@ -172,7 +172,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: "1.97.1"
-      - name: Ensure pinned firtool-1.158.0 (AD-9)
+      - name: Ensure pinned firtool-1.159.0 (AD-9)
         run: cargo run -p bitloom -- firtool ensure
       - name: Required FR181 chisel-style-linter-deepen-check
         run: bash scripts/chisel-style-linter-deepen-check.sh

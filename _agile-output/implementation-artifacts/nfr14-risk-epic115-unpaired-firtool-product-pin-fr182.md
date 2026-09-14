@@ -86,8 +86,8 @@
 
 ### Epic 115 关闭条件（Story 115.3 勾选）
 
-- [ ] **unpaired 产品钉再升钉 + 验收谓词：** Story 115.2
-- [ ] **AD-9 *unpaired product-pin* 例外修订（NFR85）：** Story 115.2 ready 前落地
+- [x] **unpaired 产品钉再升钉 + 验收谓词：** Story 115.2
+- [x] **AD-9 *unpaired product-pin* 例外修订（NFR85）：** Story 115.2 ready 前落地
 - [ ] **docs/fr182-* + README/deferred：** Story 115.3
 - [ ] **NFR83：** FR173/FR174/FR179 关闭面未改写
 - [ ] **禁止事项未触发：** 未用 FR173/174/179 alone 勾选；未 silent-Ok

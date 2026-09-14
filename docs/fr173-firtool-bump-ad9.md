@@ -33,7 +33,8 @@ CI jobs that ensure pinned firtool must resolve **1.158.0** (no `continue-on-err
 ## Standing honesty
 
 CIRCT/firtool runtime must **not** enter `bitloom-prelude` design-crate deps.
-Further bumps beyond 1.158.0 / 7.15.0 require a new contract (**NFR81**).
+Further **paired** bumps beyond 1.158.0 / 7.15.0 require upstream pairing + AD-9 revise.
+Live AD-9 product pin later moved to **firtool-1.159.0** (Chisel still 7.15.0) via **FR182** unpaired product-pin exception (**NFR85**); FR173 close @ 1.158.0 remains valid (**NFR83**).
 Unpaired HEAD binaries remain Epic **107 / FR174** (≠ this FR).
 
 ```text

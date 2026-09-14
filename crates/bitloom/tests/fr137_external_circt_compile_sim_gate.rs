@@ -18,11 +18,11 @@ fn read(rel: &str) -> String {
 fn fr137_e1_firtool_version_channel_pinned() {
     let script = read("scripts/circt-external-check.sh");
     assert!(
-        script.contains("1.158.0") || script.contains("FIRTOOL_VERSION"),
-        "script must pin firtool 1.158.0"
+        script.contains("1.159.0") || script.contains("FIRTOOL_VERSION"),
+        "script must pin firtool 1.159.0"
     );
     assert!(
-        script.contains("firtool-1.158.0")
+        script.contains("firtool-1.159.0")
             || script.contains("firrtl-bin-linux-x64")
             || script.contains("firtool ensure")
             || script.contains("RHDL_FIRTOOL"),
@@ -40,9 +40,9 @@ fn fr137_e1_firtool_version_channel_pinned() {
         "must resolve via AD-9 ensure or RHDL_FIRTOOL_PATH"
     );
     let docs = read("docs/fr137-external-circt-gate.md");
-    assert!(docs.contains("1.158.0"));
+    assert!(docs.contains("1.159.0"));
     assert!(
-        docs.contains("firrtl-bin-linux-x64") || docs.contains("firtool-1.158.0"),
+        docs.contains("firrtl-bin-linux-x64") || docs.contains("firtool-1.159.0"),
         "docs must name release channel"
     );
     assert!(
@@ -150,7 +150,7 @@ fn fr137_e3_version_mismatch_nonzero() {
         String::from_utf8_lossy(&out.stderr)
     );
     assert!(
-        err.contains("1.158.0")
+        err.contains("1.159.0")
             || err.to_lowercase().contains("version")
             || err.contains("mismatch")
             || err.contains("expected"),

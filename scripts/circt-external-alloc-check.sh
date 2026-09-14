@@ -5,7 +5,7 @@
 # ≠ FR164 sim alone.
 # ≠ FR137 compile alone.
 # ≠ FR129 C1–C4 alone (in-tree Handshake markers).
-# ≠ firtool bump (option B / AD-9 revise) — this gate stays on firtool-1.158.0.
+# ≠ firtool bump (option B / AD-9 revise) — this gate stays on firtool-1.159.0.
 # ≠ scripts/firtool-smoke.sh (silent-skip when missing).
 #
 # Product path: multi-lower emits FIR dialect IR + HW dialect IR + Verilog from the
@@ -15,7 +15,7 @@
 # Never treat bare PATH `firtool` as the success resolver.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-EXPECTED_VERSION="1.158.0"
+EXPECTED_VERSION="1.159.0"
 FIR="${BITLOOM_CIRCT_ALLOC_FIR:-$ROOT/crates/rhdl-firrtl/fixtures/fr169_circt_mlir_allocation.fir}"
 OUT_DIR="${BITLOOM_CIRCT_ALLOC_OUT:-$ROOT/target/circt-external-alloc-check}"
 

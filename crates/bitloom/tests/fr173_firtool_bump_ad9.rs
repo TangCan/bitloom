@@ -1,12 +1,14 @@
 //! ATDD Story 106.2 / FR173 — firtool bump beyond AD-9 with Chisel pairing.
 //!
+//! Close evidence remains **1.158.0 ↔ 7.15.0**. Live AD-9 product pin later moved
+//! to **1.159.0** via FR182 (unpaired); those live assertions live in `fr182_*`.
+//!
 //! ```text
 //! cargo test -p bitloom --test fr173_firtool_bump_ad9
 //! ```
 
 use std::fs;
 use std::path::PathBuf;
-use std::process::Command;
 
 fn root() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..")
@@ -40,7 +42,7 @@ fn fr173_docs_and_ad9_pin_chisel_715_firtool_1158() {
     );
     assert!(
         spine.contains("firtool-1.158.0") && spine.contains("7.15.0"),
-        "AD-9 / Stack must revise to firtool-1.158.0 ↔ Chisel 7.15.0"
+        "AD-9 / Stack must retain FR173 firtool-1.158.0 ↔ Chisel 7.15.0 close evidence"
     );
     assert!(
         spine.contains("FR173") && (spine.contains("Revised") || spine.contains("修订")),
@@ -54,38 +56,16 @@ fn fr173_docs_and_ad9_pin_chisel_715_firtool_1158() {
 }
 
 #[test]
-fn fr173_cli_and_chisel_constants() {
-    let firtool = read("crates/bitloom/src/firtool.rs");
+fn fr173_close_docs_not_rewritten_by_fr182() {
+    let docs = read("docs/fr173-firtool-bump-ad9.md");
     assert!(
-        firtool.contains("1.158.0") && firtool.contains("firtool-1.158.0"),
-        "CLI firtool module must download firtool-1.158.0"
+        docs.contains("1.158.0")
+            && (docs.contains("closed") || docs.contains("已关闭") || docs.contains("106.3")),
+        "FR173 close @ 1.158.0 must remain"
     );
-    let chisel = read("crates/rhdl-firrtl/src/chisel.rs");
     assert!(
-        chisel.contains("\"7.15.0\"") && chisel.contains("\"1.158.0\""),
-        "CHISEL_TARGET / FIRTOOL_TARGET must be 7.15.0 / 1.158.0"
-    );
-}
-
-#[test]
-fn fr173_scripts_pin_new_version() {
-    for script in [
-        "scripts/circt-external-check.sh",
-        "scripts/circt-external-sim-check.sh",
-        "scripts/circt-external-alloc-check.sh",
-        "scripts/parser-restore-check.sh",
-        "scripts/chisel-fr28-compile.sh",
-    ] {
-        let text = read(script);
-        assert!(
-            text.contains("1.158.0"),
-            "{script} must expect firtool 1.158.0"
-        );
-    }
-    let chisel = read("scripts/chisel-fr28-compile.sh");
-    assert!(
-        chisel.contains("7.15.0"),
-        "FR28 compile script must pin Chisel 7.15.0"
+        docs.contains("FR182") || docs.contains("1.159.0"),
+        "FR173 docs should acknowledge live pin moved via FR182"
     );
 }
 
@@ -99,44 +79,5 @@ fn fr173_nfr78_prior_closes_still_documented() {
     assert!(
         fr169.contains("1.155.0"),
         "FR169 historical close pin 1.155.0 must remain documented"
-    );
-}
-
-#[test]
-fn fr173_live_firtool_info_reports_1158() {
-    let out = Command::new("cargo")
-        .args(["run", "-q", "-p", "bitloom", "--", "firtool", "info"])
-        .current_dir(root())
-        .output()
-        .expect("cargo run firtool info");
-    let stdout = String::from_utf8_lossy(&out.stdout);
-    let stderr = String::from_utf8_lossy(&out.stderr);
-    assert!(
-        out.status.success(),
-        "firtool info must succeed: stdout={stdout} stderr={stderr}"
-    );
-    assert!(
-        stdout.contains("1.158.0"),
-        "firtool info must report 1.158.0; got {stdout}"
-    );
-}
-
-#[test]
-fn fr173_live_ensure_downloads_when_needed() {
-    let out = Command::new("cargo")
-        .args(["run", "-q", "-p", "bitloom", "--", "firtool", "ensure"])
-        .current_dir(root())
-        .output()
-        .expect("cargo run firtool ensure");
-    let stdout = String::from_utf8_lossy(&out.stdout);
-    let stderr = String::from_utf8_lossy(&out.stderr);
-    assert!(
-        out.status.success(),
-        "firtool ensure must succeed: stdout={stdout} stderr={stderr}"
-    );
-    let combined = format!("{stdout}{stderr}");
-    assert!(
-        combined.contains("firtool") || PathBuf::from(stdout.trim()).exists() || !stdout.is_empty(),
-        "ensure should print firtool path; stdout={stdout} stderr={stderr}"
     );
 }

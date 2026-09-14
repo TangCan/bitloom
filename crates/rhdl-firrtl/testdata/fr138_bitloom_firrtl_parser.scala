@@ -7,10 +7,10 @@
 // Product-equivalent API (named in docs/fr138-parser-restore.md + AD-27):
 //   bitloom.firrtl.BitloomFirrtlParser.parse
 //
-// Implementation of the product path is AD-9 firtool-1.158.0 -parse-only
+// Implementation of the product path is AD-9 firtool-1.159.0 -parse-only
 // (see `just parser-restore-check` / scripts/parser-restore-check.sh).
 // This file documents the Scala surface name; do NOT pull Scala runtime into design crates.
-// Pairing: Chisel 7.15.0 ↔ firtool-1.158.0.
+// Pairing: Chisel 7.15.0 ↔ firtool-1.159.0.
 
 package bitloom.firrtl
 
@@ -18,7 +18,7 @@ package bitloom.firrtl
 object BitloomFirrtlParser {
   /** Parse FIRRTL text via the documented Bitloom FR138 product path (firtool -parse-only). */
   def parse(firPath: String): Unit = {
-    // Runtime: invoked by scripts/parser-restore-check.sh under pinned firtool-1.158.0.
+    // Runtime: invoked by scripts/parser-restore-check.sh under pinned firtool-1.159.0.
     // Design crates must not depend on this JVM façade.
     sys.error(
       s"BitloomFirrtlParser.parse: use `just parser-restore-check` (firtool -parse-only) for path=$firPath"

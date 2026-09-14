@@ -15,7 +15,7 @@
 | **E3** | API + per-module marker | `emit_chisel_ecosystem_fr176` / `check_chisel_ecosystem_fr176` + `--- FR176 ecosystem ---` |
 | **E4** | Combined product gate | `just chisel-ecosystem-deepen-check` = FR165 style-lint **and** FR170 parser-head-migration **and** FR176 emit/check |
 
-Superset of FR165: emit/check still require FR165 L1–L5 markers. Live Parser path remains the FR170 sub-gate @ AD-9 **firtool-1.158.0 ↔ Chisel 7.15.0**.
+Superset of FR165: emit/check still require FR165 L1–L5 markers. Live Parser path remains the FR170 sub-gate @ AD-9 **firtool-1.159.0 + Chisel 7.15.0 (FR182 unpaired; FR173 close @ 1.158.0 still valid)**.
 
 ## Workflow
 

@@ -21,8 +21,18 @@ fn fr179_docs_contract_forbid_fr174_alone() {
     let docs = read("docs/fr179-floating-circt-git-head.md");
     assert!(docs.contains("FR179") && docs.contains("Bitloom"));
     assert!(
-        docs.contains("1.159.0") && docs.contains("1.158.0") && docs.contains("1.156.0"),
-        "must pin floating-track 1.159.0 and contrast AD-9 1.158.0 + FR174 1.156.0"
+        docs.contains("1.159.0") && docs.contains("1.156.0"),
+        "must pin floating-track 1.159.0 and contrast FR174 1.156.0"
+    );
+    assert!(
+        docs.contains("1.158.0") || docs.contains("FR173") || docs.contains("FR182"),
+        "must retain FR173/FR182 honesty for product pin history"
+    );
+    assert!(
+        docs.contains("floating-head")
+            || docs.contains("channel")
+            || docs.contains("BITLOOM_FIRTOOL_FLOATING_HEAD_PATH"),
+        "must distinguish floating-track channel by path when versions coincide with AD-9"
     );
     assert!(
         docs.contains("FR174")
@@ -49,7 +59,18 @@ fn fr179_docs_contract_forbid_fr174_alone() {
 #[test]
 fn fr179_script_and_just_and_ci() {
     let script = read("scripts/circt-floating-git-head-check.sh");
-    assert!(script.contains("1.159.0") && script.contains("1.158.0") && script.contains("1.156.0"));
+    assert!(script.contains("1.159.0") && script.contains("1.156.0"));
+    assert!(script.contains("AD9_PRODUCT_VERSION=\"1.159.0\""));
+    assert!(
+        script.contains("floating-head") || script.contains("channel"),
+        "script must distinguish channel by path"
+    );
+    assert!(
+        !script.contains("firtool reports AD-9 product pin")
+            || script.contains("coincide")
+            || script.contains("path/cache"),
+        "must not reject AD-9 version equality unconditionally after FR182"
+    );
     assert!(script.contains("BITLOOM_FIRTOOL_FLOATING_HEAD_FORCE_MISSING"));
     assert!(script.contains("BITLOOM_FIRTOOL_FLOATING_HEAD_PATH"));
     assert!(script.contains("FR179"));

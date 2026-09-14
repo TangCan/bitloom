@@ -124,7 +124,7 @@
 **合同：**
 - **唯一路径：** Path A；`emit_chisel` 对文档化子集产出可编译 Scala；子集外保留 **E0901**。
 - **子集（最小）：** 单时钟 AD-21 `Mem` / `SyncReadMem`（HIR `MemDecl`，含可选常量 `init`）。
-- **NFR12：** Chisel **7.15.0** ↔ firtool **1.158.0**（FR173 / AD-9 revised 2026-09-12；不得私自升版交差）。历史关闭证据曾钉 **7.14.0 ↔ 1.155.0**（仍有效 · NFR78）。
+- **NFR12：** Chisel **7.15.0** + firtool **1.159.0**（FR182 *unpaired product-pin* / AD-9 revised 2026-09-14；不得私自升版交差）。FR173 配对关闭证据 **7.15.0 ↔ 1.158.0** 仍有效（NFR83）；更早 **7.14.0 ↔ 1.155.0** 仍有效（NFR78）。
 - **NFR37：** FR28「done」+ 历史全量 Mem→E0901 ≠ FR81 深度关闭。
 - **FR71：** 不得削弱 `fr28-chisel-jvm` / `just chisel-fr28-jvm`。
 
