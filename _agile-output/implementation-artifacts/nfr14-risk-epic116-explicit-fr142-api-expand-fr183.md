@@ -99,8 +99,10 @@
 
 - [x] **显式表面扩展 + 验收谓词：** Story 116.2
 - [x] **表面文档修订（NFR85）：** Story 116.2
-- [ ] **docs/fr183-* + README/deferred：** Story 116.3
-- [ ] **NFR83：** FR142/FR143 / Phase 17–21 关闭面未改写
-- [ ] **禁止事项未触发：** 未静默扩大；未破坏 AD-6
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude` 设计边界
-- [ ] **超子集：** 未写入本 epic NFR14 的更深 API 扩展仍 **NFR86**
+- [x] **docs/fr183-* + README/deferred：** Story 116.3
+- [x] **NFR83：** FR142/FR143 / Phase 17–21 关闭面未改写
+- [x] **禁止事项未触发：** 未静默扩大；未破坏 AD-6
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude` 设计边界
+- [x] **超子集：** 未写入本 epic NFR14 的更深 API 扩展仍 **NFR86**
+
+**Status:** **closed — Story 116.3**（可宣称 Epic 116 / FR183 关闭）。

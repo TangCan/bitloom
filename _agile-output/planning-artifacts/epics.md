@@ -168,6 +168,7 @@ phase22Epic112Status: complete
 phase22Epic113Status: complete
 phase22Epic114Status: complete
 phase22Epic115Status: complete
+phase22Epic116Status: complete
 phase22Status: gate-closed
 phase22GateClosed: 2026-09-14
 phase22RequirementsScope: FR178-FR184 / NFR83-NFR87
@@ -181,7 +182,8 @@ phase22Note: >
   Epic 113 / FR180 CLOSED Story 113.3 (Handshake fork+join deepen).
   Epic 114 / FR181 CLOSED Story 114.3 (Style/linter wartremover deepen).
   Epic 115 / FR182 CLOSED Story 115.3 (unpaired product-pin firtool-1.159.0).
-  Phase 12–21 closes remain valid (NFR83). Next: Build Epic 116 NFR14; Epic 117 after deepen.
+  Epic 116 / FR183 CLOSED Story 116.3 (explicit FR142 bitloom-firrtl interop expand).
+  Phase 12–21 closes remain valid (NFR83). Next: Build Epic 117 NFR14 claim honesty.
 phase22InputDocuments:
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/prd.md
   - _agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md

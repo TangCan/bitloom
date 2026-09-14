@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 116 / FR183 in progress** (Story **116.2** implement). Product path: **explicit** additive promote of documented `bitloom-firrtl` interop into the FR142 surface list ([`docs/public-api-1-0-surface.md`](public-api-1-0-surface.md)); SemVer honesty per FR143 (**minor** for additive); **AD-6** unchanged.
+**Status:** **Epic 116 / FR183 closed** (Story **116.3**). Product path: **explicit** additive promote of documented `bitloom-firrtl` interop into the FR142 surface list ([`docs/public-api-1-0-surface.md`](public-api-1-0-surface.md)); SemVer honesty per FR143 (**minor** for additive); **AD-6** unchanged.
 
 Phase 17 **FR142** surface lock and **FR143** SemVer policy **remain closed and valid** (NFR83). Those closes alone ≠ FR183. Silent expand remains forbidden.
 
