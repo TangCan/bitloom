@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`cargo bitloom` / `bitloom::hls`). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Epic 120 / FR187 **in progress** (Story **120.2** product path). Handshake lower deepen with **`handshake.branch` + `handshake.merge`** beyond FR180 fork+join (`schedule_circt_handshake_lower_deepen` / `--circt-handshake-lower-deepen`).
+**Status:** **Epic 120 / FR187 closed** (Story **120.3**). Product path: Handshake lower deepen with **`handshake.branch` + `handshake.merge`** beyond FR180 fork+join (`schedule_circt_handshake_lower_deepen` / `--circt-handshake-lower-deepen`).
 
 Phase 22 **FR180** fork+join deepen, Phase 15 **FR129** C1–C4, and Phase 21 **FR175** `--ir-sv`/`--ir-verilog` **remain closed and valid** (NFR88). Those closes alone ≠ FR187.
 

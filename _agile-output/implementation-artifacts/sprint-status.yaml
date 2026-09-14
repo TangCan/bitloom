@@ -815,14 +815,14 @@ development_status:
   119-3-fr186-收口与文档指针: done
   epic-119-retrospective: optional
 
-  epic-120: in-progress
+  epic-120: done
   120-1-epic-120-nfr14-风险记录: done
   120-2-handshake-lower-加深实现与验收-fr187: done
-  120-3-fr187-收口与文档指针: ready-for-dev
+  120-3-fr187-收口与文档指针: done
   epic-120-retrospective: optional
 
-  epic-121: backlog
-  121-1-epic-121-nfr14-风险记录: backlog
+  epic-121: in-progress
+  121-1-epic-121-nfr14-风险记录: ready-for-dev
   121-2-社区-style-guide-全家桶实现与验收-fr188: backlog
   121-3-fr188-收口与文档指针: backlog
   epic-121-retrospective: optional

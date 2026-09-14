@@ -202,7 +202,7 @@ phase23Epic119Stories: 3
 phase23Epic119Status: complete
 phase23Epic120StoriesDrafted: 2026-09-14
 phase23Epic120Stories: 3
-phase23Epic120Status: stories-drafted
+phase23Epic120Status: complete
 phase23Epic121StoriesDrafted: 2026-09-14
 phase23Epic121Stories: 3
 phase23Epic121Status: stories-drafted

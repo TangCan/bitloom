@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR187 / Epic 120；NFR14、NFR88、NFR90、NFR91；对照 FR180 fork+join / FR129 C1–C4 / FR175 / AD-25 |
 | 记录日期 | 2026-09-14 |
-| 状态 | **open / in-progress**（Story 120.1；Epic 120 未关闭；关闭勾选 → Story 120.3） |
+| 状态 | **closed — Story 120.3**（Epic 120 / FR187 可宣称；≠ FR180 alone） |
 | **选定** | 在保留 FR180 `handshake.fork`+`handshake.join` 关闭面的前提下，授权 **Handshake lower/dialect 再加深**：至少增加 **`handshake.branch` + `handshake.merge`**（控制分支/合流）标记 + 产品 API/CLI/ATDD/CI；触及 **AD-25** 须按 **NFR90** 先修订；禁止仅重跑 FR180/FR129 冒充加深 |
 
 ### Phase 22 / FR180 关闭面 vs Epic 120（NFR88）
@@ -89,10 +89,10 @@
 
 ### Epic 120 关闭条件（Story 120.3 勾选）
 
-- [ ] **Handshake lower deepen 通道 + 验收谓词：** Story 120.2
-- [ ] **AD-25 修订（NFR90）：** Story 120.2 ready 前落地
-- [ ] **docs/fr187-* + README/deferred：** Story 120.3
-- [ ] **NFR88：** FR180/FR129/FR175 关闭面未改写
-- [ ] **禁止事项未触发：** 未用 FR180/FR129 alone 勾选；未 silent-Ok
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
-- [ ] **超子集：** 未写入本 epic NFR14 的更深 dialect/lower 仍 **NFR91**
+- [x] **Handshake lower deepen 通道 + 验收谓词：** Story 120.2
+- [x] **AD-25 修订（NFR90）：** Story 120.2 ready 前落地
+- [x] **docs/fr187-* + README/deferred：** Story 120.3
+- [x] **NFR88：** FR180/FR129/FR175 关闭面未改写
+- [x] **禁止事项未触发：** 未用 FR180/FR129 alone 勾选；未 silent-Ok
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
+- [x] **超子集：** 未写入本 epic NFR14 的更深 dialect/lower 仍 **NFR91**
