@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** **Epic 115 / FR182 in progress** (Story **115.2** implement). Product path: AD-9 default product pin **firtool-1.159.0** with Chisel remaining **7.15.0** (**no** upstream official Chisel↔firtool pairing for 1.159.0). **AD-9 revised** with *unpaired product-pin* exception (**NFR85**).
+**Status:** **Epic 115 / FR182 closed** (Story **115.3**). Product path: AD-9 default product pin **firtool-1.159.0** with Chisel remaining **7.15.0** (**no** upstream official Chisel↔firtool pairing for 1.159.0). **AD-9 revised** with *unpaired product-pin* exception (**NFR85**).
 
 Phase 21 **FR173** paired close (**firtool-1.158.0 ↔ Chisel 7.15.0**), **FR174** unpaired optional **1.156.0**, and **FR179** floating-track optional channel **1.159.0** **remain closed and valid** (NFR83). Those closes alone ≠ FR182.
 
@@ -36,6 +36,7 @@ CI jobs that ensure the AD-9 product pin must resolve **1.159.0** (no `continue-
 CIRCT/firtool runtime must **not** enter `bitloom-prelude` design-crate deps.
 Further bumps beyond this NFR14 subset require a new contract (**NFR86**).
 FR179 floating-track remains a **separate channel** even when the readable version equals the product pin.
+Do **not** claim FR173/FR174/FR179 alone deliver this FR.
 
 ```text
 cargo test -p bitloom --test fr182_unpaired_firtool_product_pin

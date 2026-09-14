@@ -88,8 +88,10 @@
 
 - [x] **unpaired 产品钉再升钉 + 验收谓词：** Story 115.2
 - [x] **AD-9 *unpaired product-pin* 例外修订（NFR85）：** Story 115.2 ready 前落地
-- [ ] **docs/fr182-* + README/deferred：** Story 115.3
-- [ ] **NFR83：** FR173/FR174/FR179 关闭面未改写
-- [ ] **禁止事项未触发：** 未用 FR173/174/179 alone 勾选；未 silent-Ok
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
-- [ ] **超子集：** 未写入本 epic NFR14 的更深升钉仍 **NFR86**
+- [x] **docs/fr182-* + README/deferred：** Story 115.3
+- [x] **NFR83：** FR173/FR174/FR179 关闭面未改写
+- [x] **禁止事项未触发：** 未用 FR173/174/179 alone 勾选；未 silent-Ok
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
+- [x] **超子集：** 未写入本 epic NFR14 的更深升钉仍 **NFR86**
+
+**Status:** **closed — Story 115.3**（可宣称 Epic 115 / FR182 关闭）。
