@@ -125,6 +125,14 @@ Correct Course `sprint-change-proposal-2026-09-14-phase23-nfr86-leftovers.md` + 
 **诚实：** Phase 12–22 / 工程结项关闭证据**仍有效**（**NFR88**）；不得用 Phase 22 / 结项 alone 冒充本批五条；**不得**宣称「NFR86 账本已空」；超出各 NFR14 仍 **NFR91**。`git push` 非 FR。
 公开品牌 **Bitloom**。软序 `118 →（119 ‖ 120 ‖ 121 ‖ 122 ‖ 123）→ 124`。
 
+## Phase 23 honest closeout pointer (2026-09-14) — 诚实结项收口
+
+Correct Course `sprint-change-proposal-2026-09-14-phase23-honest-closeout.md` + PRD addendum「Phase 23 诚实结项收口」**已批准**（**phase23CloseoutApproved: 2026-09-14**；`phase23CloseoutStatus: complete`）。
+**口径：** Phase 23 规划/回顾/action items 齐；已关 FR185–188 / FR190–191；可停当前 sprint；可宣称「Phase 23 诚实结项」。
+**证据：** `just circt-live-tip-check` → tip **firtool-1.159.0**（当前最新；与 FR182 产品钉重合）。
+**诚实：** **≠** FR189 已交付（合同要求严格 **>1.159.0**）；Epic 122 保持 **`deferred`**；**≠** 「NFR86 / NFR91 账本已空」。后续升钉须 **NFR91** 新合同。`git push` **不是** FR。
+公开品牌 **Bitloom**。README「状态与 deferred」同源。
+
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 
 **历史（Phase 11）：** 曾公开锁定下列五项，并写「须新 PRD 才能推翻」。

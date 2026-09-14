@@ -621,3 +621,14 @@ README / deferred / 脊柱指针由 Story **118.3–118.4** 落地；实现加�
 5. Story 122.1 NFR14 保持 done（形状参考）。`git push` **不是** FR。公开品牌 **Bitloom**。
 
 **合同指针：** `_agile-output/planning-artifacts/sprint-change-proposal-2026-09-14-fr189-defer-close.md`
+
+## 2026-09-14 Update — Phase 23 诚实结项收口（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-14-phase23-honest-closeout.md` — 用户确认 live tip **firtool-1.159.0** 已是最新，要求结项。
+
+1. **Phase 23 诚实结项**：规划故事齐；retro / action items 齐；已关 FR185–188 / FR190–191；可停当前 sprint。
+2. **FR189 仍未交付**：合同要求产品钉严格 **> 1.159.0**；tip==产品钉 ⇒ 上游暂无可升版本；**不得**因「已是最新」勾选 FR189 已交付；Epic 122 保持 **`deferred`**。
+3. 后续超 1.159.0 产品钉 → **NFR91** 新合同。
+4. Phase 12–22 工程结项仍有效；**≠** 「NFR86 / NFR91 账本已空」。`git push` **不是** FR。公开品牌 **Bitloom**。
+
+**合同指针：** `_agile-output/planning-artifacts/sprint-change-proposal-2026-09-14-phase23-honest-closeout.md`

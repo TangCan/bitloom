@@ -224,11 +224,22 @@ phase23EpicRange: 118-124
 phase23Status: planning-complete
 phase23HonestyClosed: 2026-09-14
 phase23PlanningComplete: 2026-09-14
+phase23CloseoutApproved: 2026-09-14
+phase23CloseoutStatus: complete
+phase23CloseoutNote: >
+  Correct Course approved 2026-09-14 (Phase 23 honest closeout; Batch).
+  User confirmed live tip firtool-1.159.0 is current latest; requested closeout.
+  Tip == FR182 product pin ⇒ FR189 (strictly >1.159.0) cannot be delivered now.
+  Epic 122 / FR189 remains deferred / not delivered → NFR91.
+  Sprint may stop; must not claim NFR86/NFR91 ledger empty or FR189 delivered.
+  Proposal: sprint-change-proposal-2026-09-14-phase23-honest-closeout.md.
+  Prior engineeringCloseout (Phase 12–22) remains valid.
 phase23Validation: |
   FR185–191 mapped to Epic 118–124 stories (22); Epic 118 hard gate for 119–124;
   NFR88–92 covered; AD-9 overlap 119/122 kept split with soft serial;
   create-epics Phase 23 complete 2026-09-14; honesty closed Story 124.3;
-  FR189 remains blocked-upstream; must not claim NFR86 ledger empty.
+  FR189 remains deferred (tip==1.159.0; no newer upstream pin); must not claim NFR86 ledger empty;
+  Phase 23 honest closeout stamped 2026-09-14.
 phase23RequirementsScope: FR185-FR191 / NFR88-NFR92
 phase23ProposedEpics: 118-124
 phase23ProposedFRs: FR185-FR191
@@ -241,6 +252,7 @@ phase23Note: >
   Epic 122 / FR189 DEFERRED closeout (NOT delivered; Correct Course 2026-09-14 defer-close; → NFR91).
   Epic 124 / FR191 CLOSED Story 124.3 (Phase 23 claim honesty).
   Phase 23 planning stories complete (Epic 118–124). Implementation honesty: FR189 unclosed/deferred.
+  Phase 23 honest closeout approved 2026-09-14 (tip==1.159.0; see phase23CloseoutStatus).
   Phase 12–22 + engineering closeout remain valid (NFR88). Beyond NFR14 still NFR91.
   Must not claim NFR86 ledger empty. Further firtool product-pin bump needs new contract (NFR91).
 phase22Note: >

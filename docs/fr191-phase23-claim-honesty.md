@@ -8,6 +8,8 @@ NFR14: `_agile-output/implementation-artifacts/nfr14-risk-epic124-phase23-claim-
 
 **Phase 23 规划故事已齐（Epic 118–124）**；宣称须引 **FR185–191**（本 FR / **NFR92**）。实现诚实：**FR186–188 / FR190 closed**；**FR189 deferred / 未交付**（Correct Course 延期关账 2026-09-14；**不得**宣称已升钉；后续 → **NFR91**）。超出各 epic NFR14 钉死子集的加深仍 **NFR91**。**不得**宣称「NFR86 账本已空」。Phase 12–22 + engineering closeout remain valid (**NFR88**).
 
+**Phase 23 诚实结项（2026-09-14）：** Correct Course `sprint-change-proposal-2026-09-14-phase23-honest-closeout.md` / `phase23CloseoutStatus: complete`。证据：`just circt-live-tip-check` → tip **firtool-1.159.0**（与 FR182 产品钉重合）。**结项 ≠ FR189 已交付**——合同要求严格 **>1.159.0**；「已是最新」只说明上游暂无可升版本。可停 sprint；**不得**宣称 NFR86/NFR91 账本已空。
+
 ## Rule (NFR92)
 
 External claims about Phase 23 delivery **must** cite the matching closed FR (or honest deferred/blocked):
@@ -25,8 +27,10 @@ External claims about Phase 23 delivery **must** cite the matching closed FR (or
 ## Forbidden
 
 - Phase 22 / engineering closeout alone as “FR186–190 delivered” or “NFR86 leftovers cleared”
+- Phase 23 honest closeout alone as “FR189 delivered” or “product pin bumped above 1.159.0”
+- Treating “live tip is latest (==1.159.0)” as FR189 acceptance
 - Marking undelivered / deferred FRs (especially **FR189**) as done
-- Implying beyond-NFR14 deepen is already cleared, or 「NFR86 账本已空」
+- Implying beyond-NFR14 deepen is already cleared, or 「NFR86 账本已空」/ 「NFR91 账本已空」
 - Treating `git push` as a product FR
 
 ## Claim map (pointers)
