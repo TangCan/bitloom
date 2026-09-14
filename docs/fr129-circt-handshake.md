@@ -7,7 +7,8 @@
 FR121 ready/valid close **remains valid** (NFR52).
 
 Beyond FR121 ready/valid alone: CIRCT Handshake dialect IR markers and multi-clock
-elastic buffers.
+elastic buffers. Handshake dialect deepen beyond C1–C4 (`handshake.fork`/`handshake.join`)
+→ **FR180** / Epic 113（[`docs/fr180-handshake-dialect-deepen.md`](fr180-handshake-dialect-deepen.md)）.
 
 ## Contract (NFR14 C1–C4)
 
