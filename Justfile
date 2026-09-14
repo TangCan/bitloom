@@ -76,6 +76,10 @@ circt-unpaired-head-check:
 circt-floating-git-head-check:
 	bash scripts/circt-floating-git-head-check.sh
 
+# FR186: unbounded / live CIRCT tip beyond FR179 floating-track pin (≠ AD-9 product default).
+circt-live-tip-check:
+	bash scripts/circt-live-tip-check.sh
+
 # FR165: Style Guide / linter deepen beyond FR130 (≠ FR138 alone; no Chisel HEAD Parser).
 chisel-style-lint-check:
 	bash scripts/chisel-style-lint-check.sh

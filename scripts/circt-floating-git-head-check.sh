@@ -12,7 +12,7 @@
 # (not the default AD-9 product cache path).
 #
 # Honesty: this is a reproducible floating-track pin (readable version), not PATH-random
-# and not unbounded live tip without pin (unbounded tip still NFR86).
+# and not FR186 live tip (see docs/fr186-unbounded-circt-tip.md; FR179 alone ≠ FR186).
 #
 # ≠ FR174 alone · ≠ FR173 alone · ≠ FR182 alone
 # ≠ PATH-random firtool · ≠ silent-Ok under BITLOOM_FIRTOOL_FLOATING_HEAD_FORCE_MISSING

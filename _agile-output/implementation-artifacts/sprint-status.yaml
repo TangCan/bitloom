@@ -811,8 +811,8 @@ development_status:
 
   epic-119: in-progress
   119-1-epic-119-nfr14-风险记录: done
-  119-2-无界-circt-tip-实现与验收-fr186: ready-for-dev
-  119-3-fr186-收口与文档指针: backlog
+  119-2-无界-circt-tip-实现与验收-fr186: done
+  119-3-fr186-收口与文档指针: ready-for-dev
   epic-119-retrospective: optional
 
   epic-120: backlog

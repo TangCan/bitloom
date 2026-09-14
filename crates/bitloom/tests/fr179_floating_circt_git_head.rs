@@ -51,8 +51,8 @@ fn fr179_docs_contract_forbid_fr174_alone() {
         "must forbid PATH-random / silent-Ok"
     );
     assert!(
-        docs.contains("NFR86") || docs.contains("unbounded") || docs.contains("live tip"),
-        "must leave unbounded tip as NFR86 honesty"
+        docs.contains("FR186") || docs.contains("unbounded") || docs.contains("live tip"),
+        "must leave unbounded tip as FR186 honesty (beyond FR179)"
     );
 }
 

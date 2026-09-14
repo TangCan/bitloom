@@ -16,7 +16,7 @@ Phase 21 **FR174** unpaired **1.156.0** and **FR173** paired AD-9 close (**firto
 | **Override** | `BITLOOM_FIRTOOL_FLOATING_HEAD_PATH` → directory containing `firtool` (must still report **1.159.0**; must not be the AD-9 product cache tree) |
 | **AD revise** | AD-9 floating-track channel (NFR85); ≠ FR174 alone; ≠ FR182 unpaired product-pin bump alone |
 
-**Honesty:** This is a **reproducible floating-track pin** (not PATH-random). Unbounded live tip without a document pin still needs a new contract (**NFR86**).
+**Honesty:** This is a **reproducible floating-track pin** (not PATH-random). Unbounded / live tip beyond this floating-track pin is **FR186** (`docs/fr186-unbounded-circt-tip.md`); alone ≠ FR186.
 
 **Forbidden closes:** FR174 alone; FR173 alone; FR182 alone; PATH-random firtool; using AD-9 product **cache** or FR174 **1.156.0** as “floating HEAD”; docs-only; silent-Ok under `BITLOOM_FIRTOOL_FLOATING_HEAD_FORCE_MISSING`.
 
