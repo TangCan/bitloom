@@ -12,7 +12,24 @@
 - [x] `CHANGELOG.md` section `[1.1.0]`
 - [x] Annotated tag **`v1.1.0`** on the release commit
 - [x] `just semver-check` green (`--release-type minor`)
-- [ ] Sequential `cargo publish` for publishable packages
+- [x] Sequential `cargo publish` for publishable packages (2026-09-14)
+
+## Live publish results (2026-09-14)
+
+| Package | Result |
+| --- | --- |
+| bitloom-macro | **Published** 1.1.0 |
+| bitloom-hir | **Published** 1.1.0 |
+| bitloom-builder | **Published** 1.1.0 |
+| bitloom-vlog | **Published** 1.1.0 |
+| bitloom-sim | **Published** 1.1.0 |
+| bitloom-prelude | **Published** 1.1.0 |
+| bitloom-firrtl | **Published** 1.1.0 |
+| bitloom-viz | **Published** 1.1.0 |
+| bitloom | **Published** 1.1.0 |
+| bitloom-lsp | **Published** 1.1.0 |
+
+Install: `cargo install bitloom` / `cargo install bitloom-lsp` (after index propagate).
 
 ## Publish order (dependency-aware)
 
