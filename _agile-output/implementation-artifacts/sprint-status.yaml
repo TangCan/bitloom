@@ -829,13 +829,14 @@ development_status:
 
   epic-122: in-progress
   122-1-epic-122-nfr14-风险记录: done
+  # blocked-upstream: no published firtool-* >1.159.0 (2026-09-14); see sprint-change-proposal-2026-09-14-fr189-upstream-block.md
   122-2-继续-firtool-产品钉升钉实现与验收-fr189: ready-for-dev
   122-3-fr189-收口与文档指针: backlog
   epic-122-retrospective: optional
 
-  epic-123: backlog
-  123-1-epic-123-nfr14-风险记录: backlog
-  123-2-继续显式扩大-fr142-表面实现与验收-fr190: backlog
+  epic-123: in-progress
+  123-1-epic-123-nfr14-风险记录: done
+  123-2-继续显式扩大-fr142-表面实现与验收-fr190: ready-for-dev
   123-3-fr190-收口与文档指针: backlog
   epic-123-retrospective: optional
 
