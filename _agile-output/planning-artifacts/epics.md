@@ -205,7 +205,7 @@ phase23Epic120Stories: 3
 phase23Epic120Status: complete
 phase23Epic121StoriesDrafted: 2026-09-14
 phase23Epic121Stories: 3
-phase23Epic121Status: stories-drafted
+phase23Epic121Status: complete
 phase23Epic122StoriesDrafted: 2026-09-14
 phase23Epic122Stories: 3
 phase23Epic122Status: stories-drafted

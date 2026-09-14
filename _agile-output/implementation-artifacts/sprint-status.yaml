@@ -821,14 +821,14 @@ development_status:
   120-3-fr187-收口与文档指针: done
   epic-120-retrospective: optional
 
-  epic-121: in-progress
+  epic-121: done
   121-1-epic-121-nfr14-风险记录: done
   121-2-社区-style-guide-全家桶实现与验收-fr188: done
-  121-3-fr188-收口与文档指针: ready-for-dev
+  121-3-fr188-收口与文档指针: done
   epic-121-retrospective: optional
 
-  epic-122: backlog
-  122-1-epic-122-nfr14-风险记录: backlog
+  epic-122: in-progress
+  122-1-epic-122-nfr14-风险记录: ready-for-dev
   122-2-继续-firtool-产品钉升钉实现与验收-fr189: backlog
   122-3-fr189-收口与文档指针: backlog
   epic-122-retrospective: optional

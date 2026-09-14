@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR188 / Epic 121；NFR14、NFR88、NFR90、NFR91；对照 FR181 / FR176 / FR165 / FR130 / AD-27 |
 | 记录日期 | 2026-09-14 |
-| 状态 | **open / in-progress**（Story 121.1；Epic 121 未关闭；关闭勾选 → Story 121.3） |
+| 状态 | **closed — Story 121.3**（Epic 121 / FR188 可宣称；≠ FR181 alone） |
 | **选定** | 在保留 FR181 `chisel-wartremover-rules`+`fatal-warnings-lint` 关闭面的前提下，授权 **社区 Style Guide 全家桶** 产品路径：至少增加 **`chisel-community-style-guide` + `scalafmt-community`** 标记 + `emit_chisel_style_guide_pack_fr188` / `check_chisel_style_guide_pack_fr188`（或文档等价）+ per-module `--- FR188 style-guide-pack ---`；产品门禁须 **串联** FR181 deepen gate；触及 **AD-27** 须按 **NFR90** 先修订；禁止仅重跑 FR181/FR176 冒充全家桶 |
 
 ### Phase 22 / FR181 关闭面 vs Epic 121（NFR88）
@@ -89,10 +89,10 @@
 
 ### Epic 121 关闭条件（Story 121.3 勾选）
 
-- [ ] **Style Guide 全家桶通道 + 验收谓词：** Story 121.2
-- [ ] **AD-27 修订（NFR90）：** Story 121.2 ready 前落地
-- [ ] **docs/fr188-* + README/deferred：** Story 121.3
-- [ ] **NFR88：** FR181/FR176/FR165/FR130 关闭面未改写
-- [ ] **禁止事项未触发：** 未用 FR181/FR176 alone 勾选；未 silent-Ok
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
-- [ ] **超子集：** 未写入本 epic NFR14 的更深 IDE/社区 Style 仍 **NFR91**
+- [x] **Style Guide 全家桶通道 + 验收谓词：** Story 121.2
+- [x] **AD-27 修订（NFR90）：** Story 121.2 ready 前落地
+- [x] **docs/fr188-* + README/deferred：** Story 121.3
+- [x] **NFR88：** FR181/FR176/FR165/FR130 关闭面未改写
+- [x] **禁止事项未触发：** 未用 FR181/FR176 alone 勾选；未 silent-Ok
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
+- [x] **超子集：** 未写入本 epic NFR14 的更深 IDE/社区 Style 仍 **NFR91**

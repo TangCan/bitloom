@@ -461,7 +461,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | Phase 23 合同闸门 | FR185 / 118 | Correct Course + README/deferred/AD — **已关闭**（Story **118.4**；闸门已开） |
 | 无界 CIRCT tip | FR186 / 119 | 超 FR179 浮动轨；live tip 渠道 `circt-live-tip` — **已关闭**（[`docs/fr186-unbounded-circt-tip.md`](docs/fr186-unbounded-circt-tip.md)；Story **119.3**） |
 | Handshake lower/dialect | FR187 / 120 | 超 FR180 fork+join；`branch`+`merge` — **已关闭**（[`docs/fr187-handshake-lower-deepen.md`](docs/fr187-handshake-lower-deepen.md)；Story **120.3**） |
-| Style Guide 全家桶 | FR188 / 121 | 超 FR181 wartremover deepen — **backlog** |
+| Style Guide 全家桶 | FR188 / 121 | 超 FR181 wartremover deepen；community-style-guide+scalafmt — **已关闭**（[`docs/fr188-community-style-guide-pack.md`](docs/fr188-community-style-guide-pack.md)；Story **121.3**） |
 | 继续 firtool 产品钉升钉 | FR189 / 122 | 超 FR182 1.159.0；须修订 AD-9 — **backlog** |
 | 继续显式扩 FR142 | FR190 / 123 | 超 FR183；禁止静默扩大；AD-6 仍 prelude-only — **backlog** |
 | Phase 23 宣称诚实门 | FR191 / 124 | 宣称须引 FR185–191 — **backlog** |

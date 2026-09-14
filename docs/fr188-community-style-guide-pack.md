@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`bitloom_firrtl` / Chisel emit). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Epic 121 / FR188 **in progress** (Story **121.2** product path). Community Style Guide pack with **`chisel-community-style-guide` + `scalafmt-community`** beyond FR181 (`emit_chisel_style_guide_pack_fr188` / `just chisel-style-guide-pack-check`).
+**Status:** **Epic 121 / FR188 closed** (Story **121.3**). Product path: Community Style Guide pack with **`chisel-community-style-guide` + `scalafmt-community`** beyond FR181 (`emit_chisel_style_guide_pack_fr188` / `just chisel-style-guide-pack-check`).
 
 Phase 22 **FR181** wartremover+fatal-warnings deepen and Phase 21 **FR176** ecosystem pack **remain closed and valid** (NFR88). Those closes alone ≠ FR188.
 
