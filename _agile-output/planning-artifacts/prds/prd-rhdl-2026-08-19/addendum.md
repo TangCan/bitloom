@@ -565,3 +565,35 @@ README / deferred / 脊柱指针由 Story **111.3–111.4** 落地；实现加�
 **合同指针：**
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-14-engineering-closeout.md`
 - `epics.md`：`engineeringCloseoutApproved` / `engineeringCloseoutStatus: complete`
+
+## 2026-09-14 Update — Phase 23 NFR86 leftovers 升格（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-14-phase23-nfr86-leftovers.md` —
+在工程/合同结项收口之后，正式 **Phase 23**「NFR86 leftovers 升格」
+（Epic 118–124 · **FR185–FR191** / **NFR88–NFR92**），打开曾被 **NFR86** 明确要求另开合同的五条 leftover。
+
+**批准默认（Q1–Q8）：**
+1. **NFR86 五条全部**升格为 **FR186–FR190**（各 epic NFR14 钉死验收子集；禁止静默超子集 — **NFR91**）。
+2. 各加深条独立 NFR14；无界 tip / Handshake lower / Style 全家桶 / firtool 再升钉 / FR142 再扩展分 epic。
+3. **不得**改写 Phase 12–22「已关闭」或工程结项（**NFR88**）。
+4. 宣称须引已关 FR（**FR191** / **NFR92**）；**禁止**用 Phase 22 alone 或工程结项 alone 冒充本批五条。
+5. **「继续扩 FR142」= 独立 FR190**（显式公开 API 表面扩展 + SemVer/docs；不是静默扩大）。
+6. **MSRV** 默认保持现行，除非某 epic NFR14 显式另开；超出本批钉死子集仍须新合同（**NFR91**）。
+7. 触 **AD-9 / AD-25 / AD-27 / FR142** 须按 **NFR90** 先修订再 story ready。
+8. **`git push` / 远程同步不在本合同内。**
+
+**公开品牌（不变）：** **Bitloom**；crates.io / CLI **`bitloom`** / `bitloom-*`；设计 crate 仍只依赖
+`bitloom-prelude`（AD-6）。禁止发布 `rhdl` / `rhdl-bits`。
+
+**与 Phase 12–22 / 结项的关系（必须同时读）：**
+- Phase 12–22（FR94–184）与工程结项关闭证据 **仍有效**；**不得**改写为失败（**NFR88**）。
+- Phase 23 是 **新合同**下的加深，**不是**「Phase 22 / 结项失败」的补救叙事。
+- 映射：闸门 **FR185**；无界 CIRCT tip **FR186**；Handshake lower **FR187**；Style 全家桶 **FR188**；继续 firtool 升钉 **FR189**；继续扩 FR142 **FR190**；宣称 **FR191**。
+- **口径：** 本批关闭 ≠ 清空超出各 NFR14 钉死子集的更深项（**NFR91**）；`git push` **不是** FR。
+
+**实现闸门：** Epic 118（Story 118.1–118.4 · **FR185**）关闭前，Epic 119–124 不得标 ready。  
+软序：**118 →（119 ‖ 120 ‖ 121 ‖ 122 ‖ 123）→ 124**；触及 AD-9 的 Epic 119/122 建议串行。  
+README / deferred / 脊柱指针由 Story **118.3–118.4** 落地；实现加深属 Epic **119–123**。
+
+**合同指针：** 详见 `epics.md` Phase 23 Inventory（Epic 118–124 · FR185–FR191 / NFR88–NFR92）。
+- 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-14-phase23-nfr86-leftovers.md`

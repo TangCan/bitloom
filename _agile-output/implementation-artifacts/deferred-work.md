@@ -106,9 +106,17 @@ README「状态与 deferred」同源（Story **111.3** / **112.3** / **113.3** /
 
 Correct Course `sprint-change-proposal-2026-09-14-engineering-closeout.md` + PRD addendum「工程/合同结项收口」**已批准**（**engineeringCloseoutApproved: 2026-09-14**；`engineeringCloseoutStatus: complete`）。
 **口径：** Phase 12–22 钉死合同面与 sprint backlog（故事 / 回顾 / action items）**已全部关闭**；可宣称「工程/合同结项」。
-**诚实：** **≠** 「NFR86 账本已空」；无界 tip / 更深 Handshake lower / 社区 Style 全家桶 / 继续 firtool 升钉 / 继续扩 FR142 等仍须**新** Correct Course（建议 Phase 23+）。**不得**用本结项 alone 冒充 Phase 23 已批准。`git push` **不是** FR。
-公开品牌 **Bitloom**。产品宣称仍须引已关 FR（至 **FR184** / **FR147** / **FR140** 等）。
+**诚实：** **≠** 「NFR86 账本已空」。加深授权已由 **Phase 23** Correct Course 接管（见下节）；本结项 alone 仍 **≠** FR186–190 已交付。`git push` **不是** FR。
+公开品牌 **Bitloom**。产品宣称仍须引已关 FR（至 **FR184** / **FR147** / **FR140** 等；本批加深须引 **FR185–191**）。
 README「状态与 deferred」同源。
+
+## Phase 23 pointer (FR185–191 / NFR88–NFR92) — NFR86 leftovers 升格
+
+Correct Course `sprint-change-proposal-2026-09-14-phase23-nfr86-leftovers.md` + PRD addendum「Phase 23」**已批准**（**Phase 23 contract approved** 2026-09-14；`correctCoursePhase23Approved: 2026-09-14`；`phase23Status: planning-complete`）。
+闸门 **FR185 / Epic 118**（sprint `backlog`；关闭前 Epic 119–124 不得 ready）。
+实现映射：**FR186** 无界 CIRCT tip；**FR187** Handshake lower；**FR188** Style 全家桶；**FR189** 继续 firtool 升钉；**FR190** 继续扩 FR142；**FR191** 宣称诚实门。
+**诚实：** Phase 12–22 / 工程结项关闭证据**仍有效**（**NFR88**）；不得用 Phase 22 / 结项 alone 冒充本批五条；超出各 NFR14 仍 **NFR91**。`git push` 非 FR。
+公开品牌 **Bitloom**。软序 `118 →（119 ‖ 120 ‖ 121 ‖ 122 ‖ 123）→ 124`。
 
 ## 永久非目标（FR93）— 历史锁定；已被 Phase 12 推翻
 

@@ -3,7 +3,7 @@ title: Bitloom 阶段二 PRD — 2026-08-21 概述字面升格修订
 status: final
 created: 2026-08-19
 updated: 2026-09-14
-amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08; phase11-contract-green-2026-09-09; phase12-literal-green-path-b-2026-09-09; phase13-mvp-commercial-deepen-2026-09-10; phase14-nfr47-deferred-deepen-2026-09-10; phase15-nfr51-leftover-deepen-2026-09-10; phase16-nfr55-final-closeout-2026-09-11; phase17-api-stability-1-0-2026-09-11; phase18-cli-crates-io-publish-2026-09-11; phase19-nfr59-fr152a-2026-09-12; phase20-nfr71-four-leftovers-2026-09-12; phase21-nfr76-leftovers-2026-09-12; phase22-nfr81-leftovers-2026-09-12; engineering-closeout-2026-09-14
+amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closures-fr72-78-2026-09-08; phase11-contract-green-2026-09-09; phase12-literal-green-path-b-2026-09-09; phase13-mvp-commercial-deepen-2026-09-10; phase14-nfr47-deferred-deepen-2026-09-10; phase15-nfr51-leftover-deepen-2026-09-10; phase16-nfr55-final-closeout-2026-09-11; phase17-api-stability-1-0-2026-09-11; phase18-cli-crates-io-publish-2026-09-11; phase19-nfr59-fr152a-2026-09-12; phase20-nfr71-four-leftovers-2026-09-12; phase21-nfr76-leftovers-2026-09-12; phase22-nfr81-leftovers-2026-09-12; engineering-closeout-2026-09-14; phase23-nfr86-leftovers-2026-09-14
 ---
 
 # PRD: Bitloom 阶段二及愿景闭环（later-product → FR + 概述字面升格）
@@ -40,6 +40,8 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 
 *2026-09-14 追加（`engineering-closeout`）：工程/合同结项收口 — sprint backlog 空；Phase 12–22 关闭仍有效；**NFR86** 仍 standing；本结项 alone ≠ Phase 23 / ≠ NFR86 清空（见 addendum「工程/合同结项收口」）。*
 
+*2026-09-14 追加（`phase23-nfr86-leftovers`）：Phase 23 NFR86 leftovers 升格 **FR185–FR191** / **NFR88–NFR92** — Phase 12–22 / 结项关闭仍有效；无界 tip / Handshake lower / Style 全家桶 / firtool 再升钉 / FR142 再扩展宣称仅引用 FR185–191（见 addendum「Phase 23」）。*
+
 ## 0. Document Purpose
 
 本 PRD 面向 PM、架构与 epic 拆解。
@@ -63,6 +65,7 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 - **2026-09-12 Phase 21 NFR76 leftovers 升格：** **FR172–FR177** / **NFR78–NFR82** — 不回滚 FR166–171；firtool 升钉（配对 AD-9）、unpaired HEAD、更广 CIRCT/sim、更深 Parser 生态；`git push` 非 FR；宣称须新 FR 勾选（见 addendum「Phase 21」）。
 - **2026-09-12 Phase 22 NFR81 leftovers 升格：** **FR178–FR184** / **NFR83–NFR87** — 不回滚 FR172–177；浮动 CIRCT HEAD、Handshake dialect、更深 Style/linter、无配对 firtool 产品钉再升钉、显式扩大 FR142；`git push` 非 FR；宣称须新 FR 勾选（见 addendum「Phase 22」）。
 - **2026-09-14 工程/合同结项收口：** sprint backlog 空；Phase 12–22 关闭仍有效；**NFR86** 仍 standing；结项 alone ≠ Phase 23 批准 / ≠ NFR86 清空；`git push` 非 FR（见 addendum「工程/合同结项收口」）。
+- **2026-09-14 Phase 23 NFR86 leftovers 升格：** **FR185–FR191** / **NFR88–NFR92** — 不回滚 FR178–184 / 结项；无界 CIRCT tip、Handshake lower、Style 全家桶、继续 firtool 升钉、继续扩 FR142；`git push` 非 FR；宣称须新 FR 勾选（见 addendum「Phase 23」）。
 - **身份 supersession：** 公开产品名 **Bitloom**，crates.io / CLI **`bitloom`**（阶段三 FR41）；禁止发布 `rhdl` / `rhdl-bits`。正文不再以 `rhdl-rs` 为发布名。[ASSUMPTION] 概述仍写 RHDL；合同以 Bitloom 为准，概述另开任务对齐。
 - `later-product.md` 仍为索引，不承载无 ID 需求。
 

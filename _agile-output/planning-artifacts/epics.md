@@ -111,6 +111,10 @@ stepsCompleted:
   - step-02-design-epics-phase-22
   - step-03-create-stories-phase-22
   - step-04-final-validation-phase-22
+  - step-01-validate-prerequisites-phase-23
+  - step-02-design-epics-phase-23
+  - step-03-create-stories-phase-23
+  - step-04-final-validation-phase-23
 status: complete
 phase20Status: complete
 correctCoursePhase20Approved: 2026-09-12
@@ -184,7 +188,52 @@ engineeringCloseoutNote: >
   Sprint backlog empty (stories/retros/action items done). Phase 12–22 closes remain valid.
   NFR86 leftovers still standing — need new Correct Course (suggested Phase 23+) to deepen.
   This closeout alone does not authorize NFR86 work; git push is not an FR.
-  Proposal: sprint-change-proposal-2026-09-14-engineering-closeout.md
+  Proposal: sprint-change-proposal-2026-09-14-engineering-closeout.md.
+  Superseded for deepen authorization by Phase 23 (correctCoursePhase23Approved 2026-09-14) — closeout stamp remains valid.
+correctCoursePhase23Approved: 2026-09-14
+phase23ContractApproved: 2026-09-14
+phase23RequirementsExtracted: 2026-09-14
+phase23EpicListApproved: 2026-09-14
+phase23Epic118StoriesDrafted: 2026-09-14
+phase23Epic118Stories: 4
+phase23Epic118Status: stories-drafted
+phase23Epic119StoriesDrafted: 2026-09-14
+phase23Epic119Stories: 3
+phase23Epic119Status: stories-drafted
+phase23Epic120StoriesDrafted: 2026-09-14
+phase23Epic120Stories: 3
+phase23Epic120Status: stories-drafted
+phase23Epic121StoriesDrafted: 2026-09-14
+phase23Epic121Stories: 3
+phase23Epic121Status: stories-drafted
+phase23Epic122StoriesDrafted: 2026-09-14
+phase23Epic122Stories: 3
+phase23Epic122Status: stories-drafted
+phase23Epic123StoriesDrafted: 2026-09-14
+phase23Epic123Stories: 3
+phase23Epic123Status: stories-drafted
+phase23Epic124StoriesDrafted: 2026-09-14
+phase23Epic124Stories: 3
+phase23Epic124Status: stories-drafted
+phase23StoriesDrafted: 2026-09-14
+phase23StoryCount: 22
+phase23EpicCount: 7
+phase23EpicRange: 118-124
+phase23Status: planning-complete
+phase23PlanningComplete: 2026-09-14
+phase23Validation: |
+  FR185–191 mapped to Epic 118–124 stories (22); Epic 118 hard gate for 119–124;
+  NFR88–92 covered; AD-9 overlap 119/122 kept split with soft serial;
+  create-epics Phase 23 complete 2026-09-14; next: Build Story 118.1 NFR14.
+phase23RequirementsScope: FR185-FR191 / NFR88-NFR92
+phase23ProposedEpics: 118-124
+phase23ProposedFRs: FR185-FR191
+phase23ProposedNFRs: NFR88-NFR92
+phase23Note: >
+  Correct Course approved 2026-09-14 (Q1 five NFR86 leftovers).
+  Soft order: 118 → (119 ‖ 120 ‖ 121 ‖ 122 ‖ 123) → 124. Hard gate Epic 118.
+  Phase 12–22 + engineering closeout remain valid (NFR88). Beyond NFR14 still NFR91.
+  Must not claim NFR86 ledger empty via Phase 22/closeout alone.
 phase22Note: >
   Correct Course approved 2026-09-12 (Q1 five leftovers; Q5 FR142=FR183).
   Soft order: 111 → (112 ‖ 113 ‖ 114 ‖ 115 ‖ 116) → 117. Hard gate Epic 111 CLOSED Story 111.4.
@@ -9387,3 +9436,449 @@ So that 实现与宣称收口可衔接。
 **Then** NFR14 勾选 Epic 117 关闭
 **And** 文首/状态页可声明：Phase 22 规划故事已齐（Epic 111–117）；宣称须引 FR178–184（FR184）
 **And** 明确：超出本批 NFR14 钉死子集的加深仍须新合同（NFR86）
+
+## Phase 23 Inventory — NFR86 leftovers 升格（无界 tip / Handshake lower / Style 全家桶 / firtool 再升钉 / 继续扩 FR142）
+
+**定位：** Phase 22（FR178–184）与工程结项 **已关闭**之后，正式打开曾被 **NFR86** 明确要求「另开合同」的 **五条 leftover**。  
+**是：**  
+1. Phase 23 合同闸门（Correct Course + PRD/addendum）  
+2. 无界 / live CIRCT tip（超 FR179 文档钉死浮动轨 firtool-1.159.0）  
+3. Handshake dialect/lower 加深（超 FR180 fork+join）  
+4. 社区 Style Guide 全家桶（超 FR181 wartremover + fatal-warnings）  
+5. 继续 firtool 产品钉升钉（超 FR182 1.159.0）  
+6. 继续显式扩大 FR142 公开 API 表面（独立 FR190；SemVer/docs；不是静默扩大）  
+7. 宣称诚实门（须引本批已关 FR；禁止用 Phase 22 / 结项 alone 冒充；禁止暗示「NFR86 账本已空」超本批）  
+
+**不是：** 改写 Phase 12–22 / 结项「已关闭」；把 `git push` 当成 FR；用 FR179–184 alone 冒充本批五条。  
+**依据：** `docs/fr184-phase22-claim-honesty.md` NFR86 leftovers；工程结项提案；ARCHITECTURE-SPINE AD-9 / AD-25 / AD-27；Correct Course 提案（approved 2026-09-14）。  
+**与 PRD 关系：** Correct Course + PRD/addendum「Phase 23」**已批准**（2026-09-14；`correctCoursePhase23Approved: 2026-09-14`）；**实现闸门** = Epic 118（FR185）关闭前，Epic 119–124 不得 ready。  
+**ID 注记：** **FR185–FR191** / **NFR88–NFR92**（接 FR184 / NFR87）。不重编号 FR178–184。  
+**批准默认（Correct Course yes · 2026-09-14 · Q1–Q8）：** NFR86 **五条全做 FR186–190**；Q5 FR142 再扩展=独立 FR190；不回滚 Phase 12–22 / 结项；MSRV 默认保持；超子集仍 NFR91。
+
+### Phase 23 Functional Requirements
+
+FR178–FR184: （历史）Phase 22 — 关闭证据仍有效；Phase 23 不得改写为失败。
+
+FR185: **Phase 23 合同闸门** — Correct Course + PRD/addendum 批准「NFR86 leftovers 升格」范围；同步 README / `deferred-work.md` /（若需）ARCHITECTURE-SPINE；钉死与 Phase 12–22 / 结项关闭面的边界；**未完成则 FR186–FR191 故事不得 ready**。  
+FR186: **无界 CIRCT tip** — 产品路径支持相对 FR179 文档钉死浮动轨之外的 **无界 / live CIRCT tip**（或等价可复现 tip 通道）；须可读 tip 身份/可复现失败；诚实「非产品默认钉」；触及 **AD-9** 须按 NFR90 先修订；**≠ FR179 alone**。  
+FR187: **Handshake dialect/lower 加深** — 超出 FR180 fork+join 的 Handshake / CIRCT lower 加深（具体 dialect、谓词、CI 在 NFR14 钉死）；触及 **AD-25** 须按 NFR90 先修订；**≠ FR180 alone**；**≠ FR129 alone**。  
+FR188: **社区 Style Guide 全家桶** — 超出 FR181 NFR14 钉死子集的社区 Style Guide / linter 全家桶（验收面在 NFR14 钉死）；触及 **AD-27** 须按 NFR90 先修订；**≠ FR181 alone**；**≠ FR176 alone**。  
+FR189: **继续 firtool 产品钉升钉** — 超出 FR182 **1.159.0** 的产品钉再升钉；配对或 *unpaired product-pin* 例外须修订 **AD-9**（NFR90）；**≠ FR182 alone**；**≠ FR173 alone**。  
+FR190: **继续显式扩大 FR142 公开 API 表面** — 合法、显式扩展公开 API 表面清单；须 SemVer / 发版诚实；**禁止**静默扩大；**≠ FR183 alone**。  
+FR191: **Phase 23 宣称诚实门** — 对外本批五条已交付须引已关 FR185–191；**禁止**用 Phase 22 / 结项 alone 冒充；**禁止**暗示超出本批钉死范围的加深已清或「NFR86 账本已空」；不得把未关 FR 写成已交付。
+
+### Phase 23 Non-Functional Requirements
+
+NFR14: （继承）各实现 epic 标 ready 前须有风险记录。  
+NFR88: **Phase 23 vs Phase 12–22 / 结项隔离** — 不得改写 FR94–184 / 工程结项「已关闭」；本批是新完成面。  
+NFR89: **规划故事齐套门** — Phase 23 规划故事齐（Epic 118–124）后方可宣称规划 complete。  
+NFR90: **AD / 表面诚实同步** — 触及 AD-9 / AD-25 / AD-27 / FR142 表面时，须先修订脊柱/文档/CI 再标 story ready。  
+NFR91: **超出本批钉死子集仍须另开合同** — 禁止静默扩大超出各 epic NFR14 的验收子集。  
+NFR92: **宣称仅经 FR191** — 不得用 FR178–184 或工程结项 alone 冒充本批五条。
+
+### Phase 23 Additional Requirements (Architecture)
+
+- AD-6：设计 crate 仍只依赖 `bitloom-prelude`（除非某 FR 显式另开）。  
+- 品牌 Bitloom；禁止 publish `rhdl` / `rhdl-bits`（AD-2）。  
+- CIRCT/firtool/Chisel 运行时 **不得**进入 `bitloom-prelude`。  
+- `git push` **不是** FR。  
+- 软序：`118 →（119 ‖ 120 ‖ 121 ‖ 122 ‖ 123）→ 124`；Epic 119/122（AD-9）建议串行。
+
+### Phase 23 FR Coverage Map
+
+FR185: Epic 118 — Phase 23 合同闸门  
+FR186: Epic 119 — 无界 CIRCT tip（超 FR179）  
+FR187: Epic 120 — Handshake lower 加深（超 FR180）  
+FR188: Epic 121 — 社区 Style Guide 全家桶（超 FR181）  
+FR189: Epic 122 — 继续 firtool 产品钉升钉（超 FR182）  
+FR190: Epic 123 — 继续显式扩大 FR142（超 FR183）  
+FR191: Epic 124 — Phase 23 宣称诚实门  
+NFR88–NFR92 / NFR14 / NFR90: 横切 Epic 118–124
+
+### Phase 23 Epic List
+
+### Epic 118: Phase 23 合同闸门与诚实边界
+维护者/用户看到「NFR86 leftovers 升格」已获批准；Phase 12–22 / 结项不被改写；后续实现 epic 可合法开工。  
+**FRs covered:** FR185  
+**NFRs:** NFR14, NFR88, NFR89, NFR91, NFR92  
+**Depends on:** Phase 22 complete + engineering closeout。不依赖 Epic 119–124。  
+**Gate:** Story 118.x 未完成前，119–124 不得 ready。
+
+### Epic 119: 无界 CIRCT tip
+维护者获得相对 FR179 文档钉死浮动轨之外的可复现无界 / live CIRCT tip 产品通道。  
+**FRs covered:** FR186  
+**NFRs:** NFR14, NFR88, NFR90, NFR91  
+**Depends on:** 硬依赖 Epic 118。软序：与 Epic 122 触及 AD-9 时建议串行。
+
+### Epic 120: Handshake lower 加深
+维护者获得超出 FR180 fork+join 的 Handshake dialect/lower 加深产品路径。  
+**FRs covered:** FR187  
+**NFRs:** NFR14, NFR88, NFR90, NFR91  
+**Depends on:** 硬依赖 Epic 118。
+
+### Epic 121: 社区 Style Guide 全家桶
+用户/维护者获得超出 FR181 的社区 Style Guide / linter 全家桶产品路径。  
+**FRs covered:** FR188  
+**NFRs:** NFR14, NFR88, NFR90, NFR91  
+**Depends on:** 硬依赖 Epic 118。
+
+### Epic 122: 继续 firtool 产品钉升钉
+维护者获得超出 FR182 1.159.0 的 firtool 产品钉再升钉路径；AD-9 已按需修订。  
+**FRs covered:** FR189  
+**NFRs:** NFR14, NFR88, NFR90, NFR91  
+**Depends on:** 硬依赖 Epic 118。软序：与 Epic 119 触及 AD-9 时建议串行。
+
+### Epic 123: 继续显式扩大 FR142 公开 API 表面
+用户/维护者获得经显式合同再扩展的公开 API 表面（表面清单 + SemVer/docs）。  
+**FRs covered:** FR190  
+**NFRs:** NFR14, NFR88, NFR90, NFR91  
+**Depends on:** 硬依赖 Epic 118。
+
+### Epic 124: Phase 23 宣称诚实门
+维护者更新 README / deferred / 状态页；对外宣称须引 FR185–191；不得用 Phase 22 / 结项 alone 冒充。  
+**FRs covered:** FR191  
+**NFRs:** NFR14, NFR88, NFR89, NFR91, NFR92  
+**Depends on:** 硬依赖 Epic 118；软序建议在 Epic 119–123 关闭或诚实列出未关项之后。
+
+**实施软序：** `118 →（119 ‖ 120 ‖ 121 ‖ 122 ‖ 123）→ 124`；硬闸门仅 Epic 118。Epic 119/122 触及 AD-9 建议串行。
+
+## Epic 118: Phase 23 合同闸门与诚实边界
+
+维护者/用户看到「NFR86 leftovers 升格」已获批准；Phase 12–22 / 结项不被改写；后续实现 epic 可合法开工。  
+**FRs covered:** FR185  
+**NFRs:** NFR14, NFR88, NFR89, NFR91, NFR92  
+**Depends on:** Phase 22 complete + engineering closeout。  
+**Gate:** Story 118.1–118.4 未完成前，119–124 不得 ready。
+
+### Story 118.1: Epic 118 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 Phase 23「NFR86 leftovers 升格」填写 NFR14,
+So that 闸门与后续 epic 有风险边界。
+
+**Acceptance Criteria:**
+
+**Given** Phase 22 complete + engineering closeout
+**When** 创建 Epic 118 风险记录
+**Then** 含：与 Phase 12–22 / 结项边界（NFR88）；FR186–191 范围摘要；批准默认（五条全做；FR190 独立扩 FR142）；禁止事项（至少：FR185 未合入不得开 119–124；不得改写 FR94–184 / 结项；不得静默扩大；`git push` 不是 FR）
+**And** 无此记录则 118.2–118.4 不得标 ready
+
+### Story 118.2: Correct Course + PRD 批准 Phase 23（FR185）
+
+As a 产品负责人,
+I want PRD/addendum 经 Correct Course 明确批准「NFR86 leftovers 升格」,
+So that Phase 23 具备合同授权。
+
+**Acceptance Criteria:**
+
+**Given** Story 118.1
+**When** 批准并落地 sprint-change-proposal + PRD/addendum Phase 23 段落
+**Then** 写明：Phase 23 = FR185–191；Phase 12–22 / 结项仍有效；NFR86 五条全做；宣称须引对应 FR（FR191 / NFR92）
+**And** `correctCoursePhase23Approved` 戳可验证；提案 `status: approved` 可验证
+**And** 公开品牌仍为 Bitloom / `bitloom-*`
+
+### Story 118.3: 同步 README / deferred / 路线图指针（FR185）
+
+As a 维护者,
+I want 公开状态页区分结项完成面与 Phase 23 加深面,
+So that 读者不把 NFR86 leftover 当成已交付。
+
+**Acceptance Criteria:**
+
+**Given** Story 118.2
+**When** 更新 README「状态与 deferred」、`deferred-work.md`、epics/sprint 状态指针
+**Then** 明确结项 / Phase 22 vs Phase 23 完成面与 FR185–191 映射
+**And** 标明 Epic 119–124 在闸门关闭前不得 ready
+**And** 公开品牌 Bitloom
+
+### Story 118.4: AD 指针与 Epic 118 收口（FR185）
+
+As a 文档维护者,
+I want 勾选 Epic 118 / FR185 并钉死 AD/表面触碰面指针,
+So that 实现 epic 可合法标 ready。
+
+**Acceptance Criteria:**
+
+**Given** Story 118.3
+**When** 更新 ARCHITECTURE-SPINE（或指针）与状态并勾选 Epic 118 / FR185
+**Then** NFR14 勾选 Epic 118 关闭；可声明闸门已开
+**And** 注明：触 AD-9 / AD-25 / AD-27 / FR142 须按 NFR90 先修订再 story ready
+**And** 可将 Epic 119–124 标为可开工（软序仍建议 119–123 → 124；119/122 建议串行）
+
+## Epic 119: 无界 CIRCT tip
+
+维护者获得相对 FR179 文档钉死浮动轨之外的可复现无界 / live CIRCT tip 产品通道。  
+**FRs covered:** FR186  
+**NFRs:** NFR14, NFR88, NFR90, NFR91  
+**Depends on:** 硬依赖 Epic 118。  
+**Gate:** Story 119.1 NFR14 未完成前，119.2–119.3 不得标 ready。
+
+### Story 119.1: Epic 119 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR186 无界 CIRCT tip 填写 NFR14,
+So that 验收子集与 AD-9 触碰面钉死。
+
+**Acceptance Criteria:**
+
+**Given** Epic 118 已关闭
+**When** 创建 Epic 119 风险记录
+**Then** 钉死 tip 身份/可读失败/≠ FR179 产品默认钉；AD-9 修订需求；禁止用 FR179 alone 关闭本 FR
+**And** 无此记录则 119.2–119.3 不得 ready
+
+### Story 119.2: 无界 CIRCT tip 实现与验收（FR186）
+
+As a 维护者,
+I want 可复现的无界 / live CIRCT tip 产品路径,
+So that 超出 FR179 文档钉死浮动轨。
+
+**Acceptance Criteria:**
+
+**Given** Story 119.1；AD-9 若需已按 NFR90 修订
+**When** 实现 tip 通道（脚本/CI/文档钉死形状按 NFR14）
+**Then** 可读 tip 身份；缺工具/失败非零可读；诚实「非产品默认钉」
+**And** ≠ FR179 alone；公开品牌 Bitloom
+
+### Story 119.3: FR186 收口与文档指针
+
+As a 文档维护者,
+I want 勾选 Epic 119 / FR186 并更新诚实指针,
+So that 宣称须引 FR186。
+
+**Acceptance Criteria:**
+
+**Given** Story 119.2
+**When** 更新 docs/README/deferred 并勾选关闭
+**Then** 明确 ≠ FR179 alone；超子集仍 NFR91
+
+## Epic 120: Handshake lower 加深
+
+维护者获得超出 FR180 fork+join 的 Handshake dialect/lower 加深产品路径。  
+**FRs covered:** FR187  
+**NFRs:** NFR14, NFR88, NFR90, NFR91  
+**Depends on:** 硬依赖 Epic 118。  
+**Gate:** Story 120.1 NFR14 未完成前，120.2–120.3 不得标 ready。
+
+### Story 120.1: Epic 120 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR187 Handshake lower 加深填写 NFR14,
+So that dialect/谓词/CI 子集钉死。
+
+**Acceptance Criteria:**
+
+**Given** Epic 118 已关闭
+**When** 创建风险记录
+**Then** 钉死加深子集与 AD-25 修订需求；禁止 FR180/FR129 alone 关闭
+**And** 无此记录则 120.2–120.3 不得 ready
+
+### Story 120.2: Handshake lower 加深实现与验收（FR187）
+
+As a 维护者,
+I want 超出 FR180 fork+join 的 Handshake/lower 产品路径,
+So that NFR86 Handshake leftover 可勾选。
+
+**Acceptance Criteria:**
+
+**Given** Story 120.1；AD-25 若需已修订
+**When** 实现加深路径（按 NFR14）
+**Then** 验收谓词/CI 可勾选；≠ FR180 alone
+**And** 公开品牌 Bitloom
+
+### Story 120.3: FR187 收口与文档指针
+
+As a 文档维护者,
+I want 勾选 Epic 120 / FR187,
+So that 宣称须引 FR187。
+
+**Acceptance Criteria:**
+
+**Given** Story 120.2
+**When** 更新文档并勾选关闭
+**Then** 明确 ≠ FR180 alone；超子集仍 NFR91
+
+## Epic 121: 社区 Style Guide 全家桶
+
+用户/维护者获得超出 FR181 的社区 Style Guide / linter 全家桶产品路径。  
+**FRs covered:** FR188  
+**NFRs:** NFR14, NFR88, NFR90, NFR91  
+**Depends on:** 硬依赖 Epic 118。  
+**Gate:** Story 121.1 NFR14 未完成前，121.2–121.3 不得标 ready。
+
+### Story 121.1: Epic 121 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR188 Style 全家桶填写 NFR14,
+So that 验收面与 AD-27 触碰面钉死。
+
+**Acceptance Criteria:**
+
+**Given** Epic 118 已关闭
+**When** 创建风险记录
+**Then** 钉死全家桶子集与 AD-27 修订需求；禁止 FR181/FR176 alone 关闭
+**And** 无此记录则 121.2–121.3 不得 ready
+
+### Story 121.2: 社区 Style Guide 全家桶实现与验收（FR188）
+
+As a 维护者,
+I want 超出 FR181 的 Style Guide / linter 全家桶路径,
+So that NFR86 Style leftover 可勾选。
+
+**Acceptance Criteria:**
+
+**Given** Story 121.1；AD-27 若需已修订
+**When** 实现全家桶路径（按 NFR14）
+**Then** 验收可勾选；≠ FR181 alone
+**And** 公开品牌 Bitloom
+
+### Story 121.3: FR188 收口与文档指针
+
+As a 文档维护者,
+I want 勾选 Epic 121 / FR188,
+So that 宣称须引 FR188。
+
+**Acceptance Criteria:**
+
+**Given** Story 121.2
+**When** 更新文档并勾选关闭
+**Then** 明确 ≠ FR181 alone；超子集仍 NFR91
+
+## Epic 122: 继续 firtool 产品钉升钉
+
+维护者获得超出 FR182 1.159.0 的 firtool 产品钉再升钉路径。  
+**FRs covered:** FR189  
+**NFRs:** NFR14, NFR88, NFR90, NFR91  
+**Depends on:** 硬依赖 Epic 118。  
+**Gate:** Story 122.1 NFR14 未完成前，122.2–122.3 不得标 ready。
+
+### Story 122.1: Epic 122 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR189 firtool 再升钉填写 NFR14,
+So that 目标版本与 AD-9 例外/配对纪律钉死。
+
+**Acceptance Criteria:**
+
+**Given** Epic 118 已关闭
+**When** 创建风险记录
+**Then** 钉死目标 firtool/Chisel 形状；AD-9 修订需求；禁止 FR182 alone 关闭
+**And** 无此记录则 122.2–122.3 不得 ready
+
+### Story 122.2: 继续 firtool 产品钉升钉实现与验收（FR189）
+
+As a 维护者,
+I want 超出 FR182 的产品钉再升钉路径,
+So that NFR86 firtool leftover 可勾选。
+
+**Acceptance Criteria:**
+
+**Given** Story 122.1；AD-9 已按 NFR90 修订
+**When** 实现升钉（ensure/info/CI 按 NFR14）
+**Then** 产品钉版本可验证；≠ FR182 alone
+**And** 公开品牌 Bitloom
+
+### Story 122.3: FR189 收口与文档指针
+
+As a 文档维护者,
+I want 勾选 Epic 122 / FR189,
+So that 宣称须引 FR189。
+
+**Acceptance Criteria:**
+
+**Given** Story 122.2
+**When** 更新文档并勾选关闭
+**Then** 明确 ≠ FR182 alone；超子集仍 NFR91
+
+## Epic 123: 继续显式扩大 FR142 公开 API 表面
+
+用户/维护者获得经显式合同再扩展的公开 API 表面。  
+**FRs covered:** FR190  
+**NFRs:** NFR14, NFR88, NFR90, NFR91  
+**Depends on:** 硬依赖 Epic 118。  
+**Gate:** Story 123.1 NFR14 未完成前，123.2–123.3 不得标 ready。
+
+### Story 123.1: Epic 123 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR190 继续扩 FR142 填写 NFR14,
+So that 入面符号与 SemVer 纪律钉死。
+
+**Acceptance Criteria:**
+
+**Given** Epic 118 已关闭
+**When** 创建风险记录
+**Then** 钉死拟入面 API 列表；禁止静默扩大；禁止 FR183 alone 关闭；AD-6 prelude-only 仍有效
+**And** 无此记录则 123.2–123.3 不得 ready
+
+### Story 123.2: 继续显式扩大 FR142 表面实现与验收（FR190）
+
+As a 维护者,
+I want 显式更新公开 API 表面清单并兑现入面,
+So that NFR86 FR142 leftover 可勾选。
+
+**Acceptance Criteria:**
+
+**Given** Story 123.1
+**When** 更新 `public-api-1-0-surface.md`（或后继）+ 实现/测试（按 NFR14）
+**Then** 表面清单与 SemVer 诚实可验证；≠ FR183 alone；设计 crate 仍 prelude-only
+**And** 公开品牌 Bitloom
+
+### Story 123.3: FR190 收口与文档指针
+
+As a 文档维护者,
+I want 勾选 Epic 123 / FR190,
+So that 宣称须引 FR190。
+
+**Acceptance Criteria:**
+
+**Given** Story 123.2
+**When** 更新文档并勾选关闭
+**Then** 明确 ≠ FR183 alone；超子集仍 NFR91
+
+## Epic 124: Phase 23 宣称诚实门
+
+维护者更新 README / deferred / 状态页；对外宣称须引 FR185–191。  
+**FRs covered:** FR191  
+**NFRs:** NFR14, NFR88, NFR89, NFR91, NFR92  
+**Depends on:** 硬依赖 Epic 118。  
+**Gate:** Story 124.1 NFR14 未完成前，124.2–124.3 不得标 ready。
+
+### Story 124.1: Epic 124 NFR14 风险记录
+
+As a 实现负责人,
+I want 为 FR191 Phase 23 宣称诚实门填写 NFR14,
+So that 宣称矩阵与禁止项钉死。
+
+**Acceptance Criteria:**
+
+**Given** Epic 118 已关闭
+**When** 创建风险记录
+**Then** 钉死已关/未关 FR185–191 宣称矩阵；禁止 Phase 22 / 结项 alone 冒充；禁止「NFR86 账本已空」超本批；`git push` 不是 FR
+**And** 无此记录则 124.2–124.3 不得 ready
+
+### Story 124.2: README / deferred / 状态页诚实更新（FR191）
+
+As a 维护者,
+I want 公开状态页反映 Phase 23 宣称纪律,
+So that 读者须引对应 FR。
+
+**Acceptance Criteria:**
+
+**Given** Story 124.1
+**When** 更新 README / deferred / docs/fr191-*（或等价）
+**Then** 宣称地图覆盖 FR185–191；Forbidden 含 Phase 22/结项 alone 与空账本冒充
+**And** 公开品牌 Bitloom
+
+### Story 124.3: FR191 收口与 Phase 23 故事清单指针
+
+As a 文档维护者,
+I want 勾选 Epic 124 / FR191 并声明 Phase 23 规划故事齐套,
+So that 规划 complete 可宣称（NFR89）。
+
+**Acceptance Criteria:**
+
+**Given** Story 124.2；Epic 119–123 已关或诚实列出未关项（按实现状态）
+**When** 更新状态页/deferred 并勾选 Epic 124 / FR191
+**Then** NFR14 勾选 Epic 124 关闭
+**And** 文首/状态页可声明：Phase 23 规划故事已齐（Epic 118–124）；宣称须引 FR185–191（FR191）
+**And** 明确：超出本批 NFR14 钉死子集的加深仍须新合同（NFR91）
