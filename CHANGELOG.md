@@ -10,6 +10,29 @@ followed Cargo **0.x** compatibility rules.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-09-14
+
+### Added
+
+- Phase 18–23 deepen shipped since 1.0.0 (additive / minor under FR143):
+  - CLI + `bitloom-firrtl` / `bitloom-viz` / `bitloom-lsp` crates.io install paths (FR149–151 / FR155)
+  - Coverage / wave / IP / CIRCT / Chisel Style·Parser deepen (FR157–165, FR167–176, FR179–181, FR186–188)
+  - Explicit FR142 in-surface expands for `bitloom-firrtl` interop (`emit` / `import` / `check_*` family) — FR183 + FR190
+- AD-9 product pin / channels through **firtool-1.159.0** (FR173 / FR182; live-tip channel FR186)
+- Phase 19–23 claim-honesty docs (`docs/fr156`…`fr191`)
+
+### Changed
+
+- Workspace package version **1.0.0 → 1.1.0** (lockstep for publishable Bitloom crates)
+- Public surface doc: [`docs/public-api-1-0-surface.md`](docs/public-api-1-0-surface.md) (FR183 / FR190)
+
+### Notes
+
+- **Minor** release: additive in-surface expands; no intentional breaking of the FR142 1.0 promise
+- **FR189** (firtool product pin **strictly > 1.159.0**) remains **undelivered** / deferred → **NFR91**
+- Beyond-NFR14 deepen leftovers remain **NFR91**; must not claim NFR86/NFR91 ledger empty
+- crates.io upload: see [`docs/bitloom-1-1-0-release.md`](docs/bitloom-1-1-0-release.md)
+
 ## [1.0.0] - 2026-09-11
 
 ### Added

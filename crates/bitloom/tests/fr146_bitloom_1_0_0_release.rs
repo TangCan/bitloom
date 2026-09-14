@@ -16,11 +16,13 @@ fn read(rel: &str) -> String {
 }
 
 #[test]
-fn fr146_workspace_version_is_1_0_0() {
-    let cargo = read("Cargo.toml");
+fn fr146_workspace_version_was_1_0_0_at_release() {
+    // Historical FR146 gate: 1.0.0 was the first stable release.
+    // Workspace may later bump (e.g. 1.1.0); CHANGELOG must retain [1.0.0].
+    let log = read("CHANGELOG.md");
     assert!(
-        cargo.contains("version = \"1.0.0\""),
-        "workspace.package version must be 1.0.0"
+        log.contains("[1.0.0]") && log.contains("2026-09-11"),
+        "CHANGELOG must retain historical [1.0.0] section from FR146"
     );
 }
 

@@ -99,7 +99,7 @@ Internal modules and undocumented `pub` items are **not** promised.
 
 **Not** in this expand: undocumented `pub`; design-crate dependency on `bitloom-firrtl` (**AD-6**); promoting `bitloom-lsp` / `bitloom-hir` / `bitloom-builder` / `bitloom-vlog` to 1.0-stable.
 
-**SemVer honesty (FR143):** FR190 is **additive** beyond FR183 → **minor** on the next `bitloom-firrtl` publish that cuts after this revision. See [`docs/fr190-further-fr142-api-expand.md`](fr190-further-fr142-api-expand.md).
+**SemVer honesty (FR143):** FR190 is **additive** beyond FR183 → **minor** on the next `bitloom-firrtl` publish that cuts after this revision. See [`docs/fr190-further-fr142-api-expand.md`](fr190-further-fr142-api-expand.md). Workspace **1.1.0** (2026-09-14) is that minor cut — see [`docs/bitloom-1-1-0-release.md`](bitloom-1-1-0-release.md).
 
 ## Out-of-promise (may publish; not 1.0-stable) — Q2
 
