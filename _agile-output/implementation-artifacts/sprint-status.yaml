@@ -841,8 +841,8 @@ development_status:
   epic-123-retrospective: optional
 
   epic-124: in-progress
-  124-1-epic-124-nfr14-风险记录: ready-for-dev
-  124-2-readme-deferred-状态页诚实更新-fr191: backlog
+  124-1-epic-124-nfr14-风险记录: done
+  124-2-readme-deferred-状态页诚实更新-fr191: ready-for-dev
   124-3-fr191-收口与-phase-23-故事清单指针: backlog
   epic-124-retrospective: optional
 action_items:
