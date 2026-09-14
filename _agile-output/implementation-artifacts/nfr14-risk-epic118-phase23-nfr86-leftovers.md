@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR185 / Epic 118；NFR14、NFR88、NFR89、NFR91、NFR92；对照 FR178–184 / NFR83–87；FR186–191 实现面 |
 | 记录日期 | 2026-09-14 |
-| 状态 | **open / in-progress**（Story 118.1；Epic 118 闸门未关；关闭勾选 → Story 118.4） |
+| 状态 | **closed — Story 118.4**；Epic 118 / FR185 闸门已开；Epic 119–123 NFR14 可 ready；124-1 软序仍 backlog-or-ready |
 | **选定** | 在保留 Phase 12–22 + 工程结项关闭面的前提下，授权 Phase 23「NFR86 leftovers 升格」合同闸门（FR185）；实现属 Epic 119–124 |
 
 ### Phase 12–22 / 结项关闭面 vs Phase 23 边界（NFR88 · 必读）
@@ -127,10 +127,10 @@
 
 ### Epic 118 关闭条件（Story 118.4 勾选）
 
-- [ ] **FR185 / Correct Course + PRD：** Phase 23 批准文案验收 — Story 118.2
-- [ ] **README / deferred：** 结项 / Phase 22 vs Phase 23 合同区分 — Story 118.3
-- [ ] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 23 指针 — Story 118.4
-- [ ] **NFR88–92：** 边界与诚实义务写入本记录并保持
-- [ ] **禁止事项未触发：** 119–124 在 Epic 118 关闭前未标 ready
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`；禁 publish `rhdl`/`rhdl-bits`
-- [ ] **Epic 119–124：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭
+- [x] **FR185 / Correct Course + PRD：** Phase 23 批准文案验收 — Story 118.2
+- [x] **README / deferred：** 结项 / Phase 22 vs Phase 23 合同区分 — Story 118.3
+- [x] **AD 指针：** ARCHITECTURE-SPINE / AGENTS Phase 23 指针 — Story 118.4
+- [x] **NFR88–92：** 边界与诚实义务写入本记录并保持
+- [x] **禁止事项未触发：** 119–124 在 Epic 118 关闭前未标 ready
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`；禁 publish `rhdl`/`rhdl-bits`
+- [x] **Epic 119–124：** 仍须各自 NFR14；未实现前不得宣称对应 FR 关闭

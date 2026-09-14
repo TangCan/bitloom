@@ -452,14 +452,14 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 **FR178–184 宣称纪律（FR184 / NFR87）：** 「浮动 HEAD」须引 **FR179**；「Handshake」须引 **FR180**；「Style/linter」须引 **FR181**；「unpaired 产品钉」须引 **FR182**；「FR142 显式扩展」须引 **FR183**；完整 Phase 22 宣称须引 **FR178–184**（**FR184** 诚实门）。**不得**用 Phase 21 alone 冒充 FR179–183；**不得宣称**未关闭前已交付；**不得**宣称「NFR81 账本已空」；超出各 NFR14 钉死子集仍须新合同（**NFR86** → Phase 23）。`git push` **不是** FR。
 
-### Phase 23 加深面（NFR86 leftovers 升格 · FR185–FR191 / NFR88–NFR92；合同已批准 / 闸门 Epic 118 进行中）
+### Phase 23 加深面（NFR86 leftovers 升格 · FR185–FR191 / NFR88–NFR92；合同闸门已关闭 / Epic 118 已关闭）
 
-下列原 **NFR86** leftover 已由 Correct Course + **FR185** 升格为 Phase 23 显式 FR（Epic 118–124）。**对外宣称须引对应已关 FR**（**FR191** / **NFR92**）。Phase 12–22 + 工程结项关闭面**仍有效**（**NFR88**）。同源：PRD addendum「Phase 23」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。触 **AD-9 / AD-25 / AD-27 / FR142** 须按 **NFR90** 先修订再 story ready。**Epic 119–124 在 Epic 118 关闭前不得 ready**；须各自 NFR14。
+下列原 **NFR86** leftover 已由 Correct Course + **FR185** 升格为 Phase 23 显式 FR（Epic 118–124）。**对外宣称须引对应已关 FR**（**FR191** / **NFR92**）。Phase 12–22 + 工程结项关闭面**仍有效**（**NFR88**）。同源：PRD addendum「Phase 23」与 [`deferred-work.md`](_agile-output/implementation-artifacts/deferred-work.md)。触 **AD-9 / AD-25 / AD-27 / FR142** 须按 **NFR90** 先修订再 story ready。**Epic 119–124 在 Epic 118 关闭前不得 ready**（闸门现已开）；须各自 NFR14。
 
 | 加深面 | FR / Epic | 状态（诚实） |
 | --- | --- | --- |
-| Phase 23 合同闸门 | FR185 / 118 | Correct Course + README/deferred — **进行中**（Story **118.1–118.2** done；**118.3–118.4**；关闭前闸门未开） |
-| 无界 CIRCT tip | FR186 / 119 | 超 FR179 浮动轨钉死；无界 live tip — **backlog**（Epic 118 闸门后） |
+| Phase 23 合同闸门 | FR185 / 118 | Correct Course + README/deferred/AD — **已关闭**（Story **118.4**；闸门已开） |
+| 无界 CIRCT tip | FR186 / 119 | 超 FR179 浮动轨钉死；无界 live tip — **backlog**（须各自 NFR14） |
 | Handshake lower/dialect | FR187 / 120 | 超 FR180 fork+join — **backlog** |
 | Style Guide 全家桶 | FR188 / 121 | 超 FR181 wartremover deepen — **backlog** |
 | 继续 firtool 产品钉升钉 | FR189 / 122 | 超 FR182 1.159.0；须修订 AD-9 — **backlog** |
