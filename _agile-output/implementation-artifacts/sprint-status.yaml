@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-14-2026 05:34
+last_updated: 09-14-2026 13:45
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -802,9 +802,9 @@ development_status:
 
   # Phase 23 — NFR86 leftovers (Correct Course approved 2026-09-14; planning-complete 2026-09-14)
   # Hard gate: epic-118 done before 119–124 ready-for-dev
-  epic-118: backlog
-  118-1-epic-118-nfr14-风险记录: backlog
-  118-2-correct-course-prd-批准-phase-23-fr185: backlog
+  epic-118: in-progress
+  118-1-epic-118-nfr14-风险记录: done
+  118-2-correct-course-prd-批准-phase-23-fr185: ready-for-dev
   118-3-同步-readme-deferred-路线图指针-fr185: backlog
   118-4-ad-指针与-epic-118-收口-fr185: backlog
   epic-118-retrospective: optional
