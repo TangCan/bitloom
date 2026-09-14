@@ -823,8 +823,8 @@ development_status:
 
   epic-121: in-progress
   121-1-epic-121-nfr14-风险记录: done
-  121-2-社区-style-guide-全家桶实现与验收-fr188: ready-for-dev
-  121-3-fr188-收口与文档指针: backlog
+  121-2-社区-style-guide-全家桶实现与验收-fr188: done
+  121-3-fr188-收口与文档指针: ready-for-dev
   epic-121-retrospective: optional
 
   epic-122: backlog

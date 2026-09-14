@@ -74,7 +74,7 @@ Internal modules and undocumented `pub` items are **not** promised.
 | Entry | Role |
 | --- | --- |
 | `emit_chisel` | FrozenHir → compilable Chisel Scala (FR28 mechanical face) |
-| `emit_chisel_idiomatic` / documented idiomatic·style·ecosystem variants already productized (`emit_chisel_idiomatic_fr111`, `emit_chisel_idiomatic_fr122`, `emit_chisel_style_guide_fr130`, `emit_chisel_style_guide_fr165`, `emit_chisel_ecosystem_fr176`, `emit_chisel_style_linter_fr181`) | Documented maintainable / Style / deepen faces |
+| `emit_chisel_idiomatic` / documented idiomatic·style·ecosystem variants already productized (`emit_chisel_idiomatic_fr111`, `emit_chisel_idiomatic_fr122`, `emit_chisel_style_guide_fr130`, `emit_chisel_style_guide_fr165`, `emit_chisel_ecosystem_fr176`, `emit_chisel_style_linter_fr181`, `emit_chisel_style_guide_pack_fr188`) | Documented maintainable / Style / deepen faces |
 | `CHISEL_TARGET` / `FIRTOOL_TARGET` | Documented AD-9 pin constants |
 | `BitloomFirrtlParser.parse` | Product-equivalent Parser path (FR138; `just parser-restore-check`) |
 | `BitloomFirrtlParser.parseUpdateMainline` | Update-mainline Parser path (FR170; FIRRTL 6.0.0) |

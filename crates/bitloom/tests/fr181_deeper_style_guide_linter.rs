@@ -67,8 +67,11 @@ fn fr181_docs_contract() {
         "must forbid FR176 alone"
     );
     assert!(
-        docs.contains("NFR86") || docs.contains("全家桶"),
-        "must leave fuller suite as NFR86"
+        docs.contains("FR188")
+            || docs.contains("NFR86")
+            || docs.contains("NFR91")
+            || docs.contains("全家桶"),
+        "must leave fuller suite as FR188/NFR91 (or historical NFR86)"
     );
 }
 

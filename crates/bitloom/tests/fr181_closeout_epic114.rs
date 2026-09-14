@@ -123,7 +123,10 @@ fn fr181_product_doc_closed() {
         "fr181 product doc must note closed status"
     );
     assert!(
-        doc.contains("NFR86") || doc.contains("全家桶"),
-        "must leave fuller suite as NFR86"
+        doc.contains("FR188")
+            || doc.contains("NFR86")
+            || doc.contains("NFR91")
+            || doc.contains("全家桶"),
+        "must leave fuller suite as FR188/NFR91 (or historical NFR86)"
     );
 }

@@ -94,6 +94,11 @@ chisel-ecosystem-deepen-check:
 chisel-style-linter-deepen-check:
 	bash scripts/chisel-style-linter-deepen-check.sh
 
+# FR188: community Style Guide pack beyond FR181 (≠ FR181/FR176/FR165 alone).
+# Not part of default `just test`. FORCE_MISSING / sub-gate fail → non-zero (never silent skip).
+chisel-style-guide-pack-check:
+	bash scripts/chisel-style-guide-pack-check.sh
+
 # FR144: surface-crate SemVer breakage gate (cargo-semver-checks).
 # Not part of default `just test`. Missing tool → non-zero (never silent success).
 semver-check:

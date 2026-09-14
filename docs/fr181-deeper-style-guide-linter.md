@@ -36,9 +36,9 @@ BITLOOM_STYLE_LINTER_DEEPEN_FORCE_MISSING=1 just chisel-style-linter-deepen-chec
 
 ≠ FR176 alone; ≠ FR165 alone; ≠ FR130 alone; ≠ FR138 alone; ≠ docs-only; ≠ ecosystem gate without FR181 markers.
 
-## Non-goals (NFR86)
+## Non-goals (NFR86 → FR188)
 
-Full community Style Guide 全家桶 / IDE plugin suite still needs a new contract.
+Full community Style Guide 全家桶 / IDE plugin suite → **FR188** / Epic 121（[`docs/fr188-community-style-guide-pack.md`](fr188-community-style-guide-pack.md)）. Beyond that NFR14 pack still **NFR91**.
 
 ```text
 cargo test -p bitloom --test fr181_deeper_style_guide_linter
