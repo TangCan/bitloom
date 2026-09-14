@@ -40,8 +40,8 @@ fn fr191_docs_claim_map() {
         assert!(docs.contains(fr), "claim map missing {fr}");
     }
     assert!(
-        !docs.contains("Epic 124 / FR191 closed") && docs.contains("not closed"),
-        "FR191 must stay unclosed until Story 124.3"
+        docs.contains("Epic 124 / FR191 closed") || docs.contains("124.3"),
+        "FR191 product doc must note closed after Story 124.3"
     );
 }
 

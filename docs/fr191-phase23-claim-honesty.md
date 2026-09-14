@@ -2,11 +2,11 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** Honesty surface delivered in Story **124.2**. **Epic 124 / FR191 not closed** until Story **124.3**.
+**Status:** **Epic 124 / FR191 closed** (Story **124.3**). Honesty surface delivered in Story **124.2**.
 
 NFR14: `_agile-output/implementation-artifacts/nfr14-risk-epic124-phase23-claim-honesty-fr191.md`.
 
-Phase 23 deepen FRs **must** be claimed only via matching closed FRs (or honest blocked status). Full Phase 23 claim set cites **FR185–FR191** via this **FR191** gate (**NFR92**). Phase 12–22 + engineering closeout remain valid (**NFR88**). Beyond each epic NFR14 subset still needs a newer contract (**NFR91**). **Do not** claim 「NFR86 账本已空」.
+**Phase 23 规划故事已齐（Epic 118–124）**；宣称须引 **FR185–191**（本 FR / **NFR92**）。实现诚实：**FR186–188 / FR190 closed**；**FR189 blocked-upstream**（**不得**宣称已交付）。超出各 epic NFR14 钉死子集的加深仍 **NFR91**。**不得**宣称「NFR86 账本已空」。Phase 12–22 + engineering closeout remain valid (**NFR88**).
 
 ## Rule (NFR92)
 
@@ -39,7 +39,7 @@ External claims about Phase 23 delivery **must** cite the matching closed FR (or
 | FR188 | 121 | **closed** | [`fr188-community-style-guide-pack.md`](fr188-community-style-guide-pack.md) |
 | FR189 | 122 | **blocked-upstream** | Correct Course pending: `sprint-change-proposal-2026-09-14-fr189-upstream-block.md` — **not delivered** |
 | FR190 | 123 | **closed** | [`fr190-further-fr142-api-expand.md`](fr190-further-fr142-api-expand.md) |
-| FR191 | 124 | **open** (this gate) | this document |
+| FR191 | 124 | **closed** | this document |
 
 ## NFR91 leftovers
 

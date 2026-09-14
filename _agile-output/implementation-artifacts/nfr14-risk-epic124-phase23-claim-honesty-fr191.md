@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR191 / Epic 124；NFR14、NFR88、NFR89、NFR91、NFR92；对照 FR185–190 / FR178–184 / 结项 |
 | 记录日期 | 2026-09-14 |
-| 状态 | **open / in-progress**（Story 124.1；Epic 124 未关闭；关闭勾选 → Story 124.3） |
+| 状态 | **closed — Story 124.3**；Epic 124 关闭；FR191 宣称门可宣称；Phase 23 **规划**故事齐（Epic 118–124）；实现诚实 **FR189 blocked-upstream**；**NFR91** 未选加深仍须新合同；**不得**宣称 NFR86 账本已空 |
 | **选定** | 在保留 Phase 12–22 / 结项与已关 Phase 23 deepen 的前提下，授权 **Phase 23 宣称诚实门（FR191）**：公开 README / deferred / 状态页按**已关** FR185–191 可审计宣称，并**诚实列出未关 FR189**；**禁止** Phase 22 / 结项 alone 冒充 FR186–190；**禁止**未关 FR 勾选「已交付」；**禁止**暗示超出各 epic NFR14 钉死子集的加深已清或「NFR86 账本已空」；**禁止**把 `git push` 当 FR |
 
 ### 已关 / 未关 FR185–191 宣称矩阵（本 epic 钉死）
@@ -27,7 +27,7 @@
 | **FR188** | 121 | 社区 Style Guide 全家桶 | **已关闭** | **FR188**（≠ FR181 alone） |
 | **FR189** | 122 | 继续 firtool 产品钉升钉 | **未关闭 / blocked-upstream**（无已发布 firtool >1.159.0） | **不得宣称已交付**；须引 blocked 诚实面 |
 | **FR190** | 123 | 继续显式扩 FR142 | **已关闭** | **FR190**（≠ FR183 alone） |
-| **FR191** | 124 | **宣称诚实门**（本 epic） | **未关闭**（本 epic） | **FR185–FR191** via **FR191**（含未关项诚实） |
+| **FR191** | 124 | **宣称诚实门**（本 epic） | **已关闭** | **FR185–FR191** via **FR191**（含 FR189 未关诚实） |
 
 **Story 124.2 时：** 落地 `docs/fr191-*`；状态页标本门与 **FR189 blocked**；已关 FR186–188/190 有指针。  
 **Story 124.3 时：** 勾选 Epic 124 / FR191；可声明 Phase 23 **规划**故事齐（Epic 118–124）；**实现**诚实：FR189 仍未关；仍 **不得**宣称「NFR86 账本已空」。
@@ -98,10 +98,12 @@
 
 ### Epic 124 关闭条件（Story 124.3 勾选）
 
-- [ ] **FR191 诚实面落地** — Story 124.2（README / deferred / `docs/fr191-*`；含 FR189 blocked）
-- [ ] **文档 / deferred / README / spine 收口** — Story 124.3
-- [ ] **Phase 23 规划故事齐声明** — Epic 118–124（NFR89）；实现诚实列出 FR189 未关
-- [ ] **NFR88：** Phase 12–22 / 结项 / 已关 deepen 未改写
-- [ ] **禁止事项未触发：** 未用 Phase 22/结项 alone；未宣称 NFR86 账本已空；未把 FR189 写成已交付
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
-- [ ] **超子集：** 超出本批 NFR14 仍 **NFR91**
+- [x] **FR191 诚实面落地** — Story 124.2（README / deferred / `docs/fr191-*`；含 FR189 blocked）
+- [x] **文档 / deferred / README / spine 收口** — Story 124.3
+- [x] **Phase 23 规划故事齐声明** — Epic 118–124（NFR89）；实现诚实列出 FR189 未关
+- [x] **NFR88：** Phase 12–22 / 结项 / 已关 deepen 未改写
+- [x] **禁止事项未触发：** 未用 Phase 22/结项 alone；未宣称 NFR86 账本已空；未把 FR189 写成已交付
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
+- [x] **超子集：** 超出本批 NFR14 仍 **NFR91**
+
+**Status:** **closed — Story 124.3**（可宣称 Epic 124 / FR191 关闭；Phase 23 规划故事已齐；FR189 仍 blocked）。
