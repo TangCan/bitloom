@@ -804,8 +804,8 @@ development_status:
   # Hard gate: epic-118 done before 119–124 ready-for-dev
   epic-118: in-progress
   118-1-epic-118-nfr14-风险记录: done
-  118-2-correct-course-prd-批准-phase-23-fr185: ready-for-dev
-  118-3-同步-readme-deferred-路线图指针-fr185: backlog
+  118-2-correct-course-prd-批准-phase-23-fr185: done
+  118-3-同步-readme-deferred-路线图指针-fr185: ready-for-dev
   118-4-ad-指针与-epic-118-收口-fr185: backlog
   epic-118-retrospective: optional
 
