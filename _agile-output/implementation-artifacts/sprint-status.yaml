@@ -783,8 +783,8 @@ development_status:
   epic-114-retrospective: optional
 
   epic-115: in-progress
-  115-1-epic-115-nfr14-风险记录: ready-for-dev
-  115-2-unpaired-firtool-产品钉再升钉实现与验收-fr182: backlog
+  115-1-epic-115-nfr14-风险记录: done
+  115-2-unpaired-firtool-产品钉再升钉实现与验收-fr182: ready-for-dev
   115-3-fr182-收口与文档指针: backlog
   epic-115-retrospective: optional
 
