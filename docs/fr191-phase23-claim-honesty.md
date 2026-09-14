@@ -18,7 +18,7 @@ External claims about Phase 23 delivery **must** cite the matching closed FR (or
 | unbounded CIRCT live tip | **FR186** (≠ FR179 alone; ≠ Phase 22 alone) |
 | Handshake lower deepen (`branch`+`merge`) | **FR187** (≠ FR180 alone; ≠ FR129 alone) |
 | community Style Guide pack | **FR188** (≠ FR181 alone; ≠ FR176 alone) |
-| further firtool product-pin | **FR189** — **blocked-upstream** (no published firtool >1.159.0); **must not** claim delivered |
+| further firtool product-pin | **FR189** — **blocked-upstream / parked** (Correct Course A 2026-09-14; no published firtool >1.159.0); **must not** claim delivered |
 | further explicit FR142 expand | **FR190** (≠ FR183 alone; ≠ silent expand) |
 | Full Phase 23 claim set | **FR185–FR191** via this **FR191** honesty gate (includes honest FR189 blocked) |
 
@@ -37,7 +37,7 @@ External claims about Phase 23 delivery **must** cite the matching closed FR (or
 | FR186 | 119 | **closed** | [`fr186-unbounded-circt-tip.md`](fr186-unbounded-circt-tip.md) |
 | FR187 | 120 | **closed** | [`fr187-handshake-lower-deepen.md`](fr187-handshake-lower-deepen.md) |
 | FR188 | 121 | **closed** | [`fr188-community-style-guide-pack.md`](fr188-community-style-guide-pack.md) |
-| FR189 | 122 | **blocked-upstream** | Correct Course pending: `sprint-change-proposal-2026-09-14-fr189-upstream-block.md` — **not delivered** |
+| FR189 | 122 | **blocked-upstream / parked** | Correct Course **A** approved 2026-09-14: `sprint-change-proposal-2026-09-14-fr189-upstream-block.md` — **not delivered** |
 | FR190 | 123 | **closed** | [`fr190-further-fr142-api-expand.md`](fr190-further-fr142-api-expand.md) |
 | FR191 | 124 | **closed** | this document |
 

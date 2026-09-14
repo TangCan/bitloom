@@ -597,3 +597,15 @@ README / deferred / 脊柱指针由 Story **118.3–118.4** 落地；实现加�
 
 **合同指针：** 详见 `epics.md` Phase 23 Inventory（Epic 118–124 · FR185–FR191 / NFR88–NFR92）。
 - 变更提案：`_agile-output/planning-artifacts/sprint-change-proposal-2026-09-14-phase23-nfr86-leftovers.md`
+
+## 2026-09-14 Update — FR189 / Epic 122 upstream park（Correct Course）
+
+**用户决议：** 批准 `sprint-change-proposal-2026-09-14-fr189-upstream-block.md` — 方案 **A（Park Epic 122）**。
+
+1. FR189 验收仍要求已发布 firtool **>1.159.0** + **AD-9** 修订（**NFR90**）。
+2. **不得**以 **1.159.0** / **FR182 alone** / **FR186** live tip 勾选 FR189。
+3. Phase 23 **规划**故事（Epic 118–124）与 **FR191** 诚实门关闭面仍有效；实现债：**FR189 未关 / parked**。
+4. 上游发布 `firtool-*` >1.159.0 后直接恢复 Story **122.2**；超子集仍 **NFR91**。
+5. `git push` **不是** FR。公开品牌 **Bitloom**。
+
+**合同指针：** `_agile-output/planning-artifacts/sprint-change-proposal-2026-09-14-fr189-upstream-block.md`

@@ -462,7 +462,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 无界 CIRCT tip | FR186 / 119 | 超 FR179 浮动轨；live tip 渠道 `circt-live-tip` — **已关闭**（[`docs/fr186-unbounded-circt-tip.md`](docs/fr186-unbounded-circt-tip.md)；Story **119.3**） |
 | Handshake lower/dialect | FR187 / 120 | 超 FR180 fork+join；`branch`+`merge` — **已关闭**（[`docs/fr187-handshake-lower-deepen.md`](docs/fr187-handshake-lower-deepen.md)；Story **120.3**） |
 | Style Guide 全家桶 | FR188 / 121 | 超 FR181 wartremover deepen；community-style-guide+scalafmt — **已关闭**（[`docs/fr188-community-style-guide-pack.md`](docs/fr188-community-style-guide-pack.md)；Story **121.3**） |
-| 继续 firtool 产品钉升钉 | FR189 / 122 | 超 FR182 1.159.0 — **blocked-upstream**（无已发布 firtool >1.159.0；Correct Course pending） |
+| 继续 firtool 产品钉升钉 | FR189 / 122 | 超 FR182 1.159.0 — **blocked-upstream / parked**（Correct Course **A** approved 2026-09-14；无已发布 firtool >1.159.0；[`sprint-change-proposal-2026-09-14-fr189-upstream-block.md`](_agile-output/planning-artifacts/sprint-change-proposal-2026-09-14-fr189-upstream-block.md)） |
 | 继续显式扩 FR142 | FR190 / 123 | 超 FR183；emit/import/check_* — **已关闭**（[`docs/fr190-further-fr142-api-expand.md`](docs/fr190-further-fr142-api-expand.md)；Story **123.3**） |
 | Phase 23 宣称诚实门 | FR191 / 124 | 宣称须引 FR185–191 — **已关闭**（[`docs/fr191-phase23-claim-honesty.md`](docs/fr191-phase23-claim-honesty.md)；Story **124.3**；Phase 23 **规划**故事已齐 Epic **118–124**；**FR189** 仍 **blocked-upstream**） |
 
