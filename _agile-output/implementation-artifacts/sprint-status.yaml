@@ -764,9 +764,9 @@ development_status:
   111-4-ad-指针与-epic-111-收口-fr178: done
   epic-111-retrospective: optional
 
-  epic-112: backlog
-  112-1-epic-112-nfr14-风险记录: ready-for-dev
-  112-2-浮动-circt-git-head-实现与验收-fr179: backlog
+  epic-112: in-progress
+  112-1-epic-112-nfr14-风险记录: done
+  112-2-浮动-circt-git-head-实现与验收-fr179: ready-for-dev
   112-3-fr179-收口与文档指针: backlog
   epic-112-retrospective: optional
 
