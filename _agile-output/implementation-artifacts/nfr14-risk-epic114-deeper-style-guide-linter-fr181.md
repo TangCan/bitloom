@@ -87,10 +87,12 @@
 
 ### Epic 114 关闭条件（Story 114.3 勾选）
 
-- [ ] **Style/linter deepen 通道 + 验收谓词：** Story 114.2
-- [ ] **AD-27 修订（NFR85）：** Story 114.2 ready 前落地
-- [ ] **docs/fr181-* + README/deferred：** Story 114.3
-- [ ] **NFR83：** FR176/FR165/FR130/FR138 关闭面未改写
-- [ ] **禁止事项未触发：** 未用 FR176/FR165 alone 勾选；未 silent-Ok
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
-- [ ] **超子集：** 未写入本 epic NFR14 的更深生态/IDE 项仍 **NFR86**
+- [x] **Style/linter deepen 通道 + 验收谓词：** Story 114.2
+- [x] **AD-27 修订（NFR85）：** Story 114.2 ready 前落地
+- [x] **docs/fr181-* + README/deferred：** Story 114.3
+- [x] **NFR83：** FR176/FR165/FR130/FR138 关闭面未改写
+- [x] **禁止事项未触发：** 未用 FR176/FR165 alone 勾选；未 silent-Ok
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`
+- [x] **超子集：** 未写入本 epic NFR14 的更深生态/IDE 项仍 **NFR86**
+
+**Status:** **closed — Story 114.3**（可宣称 FR181；完整社区 Style Guide 全家桶仍 **NFR86**）。

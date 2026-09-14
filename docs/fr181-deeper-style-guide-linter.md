@@ -2,7 +2,7 @@
 
 **Product:** Bitloom (`bitloom_firrtl` / Chisel emit). Unrelated to `samitbasu/rhdl`.
 
-**Status:** Epic 114 / FR181 implementation (Story **114.2**). Product path: Style Guide / linter deepen beyond FR176 (`emit_chisel_style_linter_fr181` / `just chisel-style-linter-deepen-check`).
+**Status:** **Epic 114 / FR181 closed** (Story **114.3**). Product path: Style Guide / linter deepen beyond FR176 (`emit_chisel_style_linter_fr181` / `just chisel-style-linter-deepen-check`).
 
 Phase 21 **FR176** combined ecosystem pack and Phase 19 **FR165** L1–L5 **remain closed and valid** (NFR83). Those closes alone ≠ FR181.
 
