@@ -1,4 +1,4 @@
-//! Product HLS front-end (AD-25 revised / FR35 / FR50 / FR76 / **FR95** / **FR96** / **FR110** / **FR121** / **FR129** / **FR180**).
+//! Product HLS front-end (AD-25 revised / FR35 / FR50 / FR76 / **FR95** / **FR96** / **FR110** / **FR121** / **FR129** / **FR180** / **FR187**).
 //!
 //! - **FR35 / FR76 external path:** emit host C and call pinned Bambu (optional/对照).
 //! - **FR95 in-tree path:** documented-subset scheduling/allocation inside bitloom
@@ -14,6 +14,8 @@
 //!   alone satisfies FR129 (not FR121 ready/valid alone).
 //! - **FR180:** Handshake dialect deepen beyond FR129 — `handshake.fork`+`handshake.join`
 //!   (`schedule_circt_handshake_deepen`) — AD-25 revised; alone ≠ FR129/FR175/FR121.
+//! - **FR187:** Handshake lower deepen beyond FR180 — `handshake.branch`+`handshake.merge`
+//!   (`schedule_circt_handshake_lower_deepen`) — AD-25 revised; alone ≠ FR180/FR129.
 //!
 //! Story 29.2: HLS dataflow closures dissolve to C ops **before** external schedule/lower.
 //! Story 41.2: in-tree loop-unroll schedule IR + optional RTL stub.
@@ -21,6 +23,7 @@
 //! Story 62.2: Handshake default synthesizable path (FR121).
 //! Story 69.2: CIRCT Handshake / multi-clock elastic path (FR129).
 //! Story 113.2: Handshake dialect deepen fork+join (FR180).
+//! Story 120.2: Handshake lower deepen branch+merge (FR187).
 
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -142,6 +145,13 @@ pub enum InTreeScheduleKind {
         clock_domains: u32,
         elastic_depth: u32,
     },
+    /// FR187 Handshake lower deepen beyond FR180: adds `handshake.branch` + `handshake.merge`.
+    /// Same multi-clock elastic gates; FR180 alone ≠ FR187.
+    CirctHandshakeLowerDeepen {
+        channels: u32,
+        clock_domains: u32,
+        elastic_depth: u32,
+    },
 }
 
 /// True when `kind` meets NFR14 FR110 default gates Q1+Q2 (`pipeline_stages >= 2` + II).
@@ -177,6 +187,18 @@ pub fn meets_fr180_handshake_deepen(kind: &InTreeScheduleKind) -> bool {
     matches!(
         kind,
         InTreeScheduleKind::CirctHandshakeDeepen {
+            channels,
+            clock_domains,
+            elastic_depth
+        } if *channels >= 1 && *clock_domains >= 2 && *elastic_depth >= 1
+    )
+}
+
+/// True when `kind` meets FR187 Handshake lower deepen (branch+merge beyond FR180).
+pub fn meets_fr187_handshake_lower_deepen(kind: &InTreeScheduleKind) -> bool {
+    matches!(
+        kind,
+        InTreeScheduleKind::CirctHandshakeLowerDeepen {
             channels,
             clock_domains,
             elastic_depth
@@ -493,6 +515,16 @@ fn build_schedule_ir(
             lines.push("  \"semantics\": \"circt-handshake-dialect-deepen\",".into());
             lines.push("  \"path\": \"in-tree-circt-handshake-deepen\",".into());
         }
+        InTreeScheduleKind::CirctHandshakeLowerDeepen { .. } => {
+            lines.push("  \"fr129\": true,".into());
+            lines.push("  \"fr180\": true,".into());
+            lines.push("  \"fr187\": true,".into());
+            lines.push("  \"circt_handshake\": true,".into());
+            lines.push("  \"handshake_deepen\": true,".into());
+            lines.push("  \"handshake_lower_deepen\": true,".into());
+            lines.push("  \"semantics\": \"circt-handshake-lower-deepen\",".into());
+            lines.push("  \"path\": \"in-tree-circt-handshake-lower-deepen\",".into());
+        }
         _ => {
             lines.push("  \"fr95\": true,".into());
             lines.push("  \"path\": \"in-tree\",".into());
@@ -554,6 +586,22 @@ fn build_schedule_ir(
                     .into(),
             );
         }
+        InTreeScheduleKind::CirctHandshakeLowerDeepen {
+            channels,
+            clock_domains,
+            elastic_depth,
+        } => {
+            lines.push("  \"kind\": \"circt-handshake-lower-deepen\",".into());
+            lines.push(format!("  \"channels\": {channels},"));
+            lines.push(format!("  \"clock_domains\": {clock_domains},"));
+            lines.push(format!("  \"elastic_depth\": {elastic_depth},"));
+            lines.push(format!("  \"elastic_buffers\": {elastic_depth},"));
+            lines.push("  \"dialect\": \"circt.handshake\",".into());
+            lines.push(
+                "  \"ops\": [\"handshake.func\", \"handshake.buffer\", \"handshake.fork\", \"handshake.join\", \"handshake.branch\", \"handshake.merge\"],"
+                    .into(),
+            );
+        }
     }
     lines.push(format!("  \"stage_count\": {},", stages.len()));
     lines.push("  \"stages\": [".into());
@@ -587,7 +635,7 @@ fn build_rtl_stub(fn_name: &str, kind: &InTreeScheduleKind, stages: &[ScheduleSt
             *clock_domains,
             *elastic_depth,
             stages,
-            false,
+            CirctHandshakeStubDepth::Base,
         );
     }
     if let InTreeScheduleKind::CirctHandshakeDeepen {
@@ -602,7 +650,22 @@ fn build_rtl_stub(fn_name: &str, kind: &InTreeScheduleKind, stages: &[ScheduleSt
             *clock_domains,
             *elastic_depth,
             stages,
-            true,
+            CirctHandshakeStubDepth::Deepen,
+        );
+    }
+    if let InTreeScheduleKind::CirctHandshakeLowerDeepen {
+        channels,
+        clock_domains,
+        elastic_depth,
+    } = kind
+    {
+        return build_circt_handshake_rtl_stub(
+            fn_name,
+            *channels,
+            *clock_domains,
+            *elastic_depth,
+            stages,
+            CirctHandshakeStubDepth::LowerDeepen,
         );
     }
     let kind_note = match kind {
@@ -622,7 +685,8 @@ fn build_rtl_stub(fn_name: &str, kind: &InTreeScheduleKind, stages: &[ScheduleSt
         }
         InTreeScheduleKind::Handshake { .. }
         | InTreeScheduleKind::CirctHandshake { .. }
-        | InTreeScheduleKind::CirctHandshakeDeepen { .. } => {
+        | InTreeScheduleKind::CirctHandshakeDeepen { .. }
+        | InTreeScheduleKind::CirctHandshakeLowerDeepen { .. } => {
             unreachable!()
         }
     };
@@ -686,13 +750,20 @@ fn build_handshake_rtl_stub(fn_name: &str, channels: u32, stages: &[ScheduleStag
     )
 }
 
+#[derive(Clone, Copy)]
+enum CirctHandshakeStubDepth {
+    Base,
+    Deepen,
+    LowerDeepen,
+}
+
 fn build_circt_handshake_rtl_stub(
     fn_name: &str,
     channels: u32,
     clock_domains: u32,
     elastic_depth: u32,
     stages: &[ScheduleStage],
-    deepen: bool,
+    depth: CirctHandshakeStubDepth,
 ) -> String {
     let mut clk_ports = String::new();
     for d in 0..clock_domains {
@@ -705,9 +776,18 @@ fn build_circt_handshake_rtl_stub(
     body.push_str(&format!(
         "  // handshake.buffer depth={elastic_depth} elastic_buffers={elastic_depth} across {clock_domains} clock domains\n"
     ));
-    if deepen {
-        body.push_str("  // handshake.fork — FR180 dialect deepen (control fan-out)\n");
-        body.push_str("  // handshake.join — FR180 dialect deepen (control fan-in)\n");
+    match depth {
+        CirctHandshakeStubDepth::Base => {}
+        CirctHandshakeStubDepth::Deepen => {
+            body.push_str("  // handshake.fork — FR180 dialect deepen (control fan-out)\n");
+            body.push_str("  // handshake.join — FR180 dialect deepen (control fan-in)\n");
+        }
+        CirctHandshakeStubDepth::LowerDeepen => {
+            body.push_str("  // handshake.fork — FR180 dialect deepen (control fan-out)\n");
+            body.push_str("  // handshake.join — FR180 dialect deepen (control fan-in)\n");
+            body.push_str("  // handshake.branch — FR187 lower deepen (control branch)\n");
+            body.push_str("  // handshake.merge — FR187 lower deepen (control merge)\n");
+        }
     }
     let mut cur = "x_data".to_string();
     for st in stages {
@@ -716,16 +796,19 @@ fn build_circt_handshake_rtl_stub(
         body.push_str(&format!("  wire [31:0] {next} = {expr};\n"));
         cur = next;
     }
-    let (fr_tag, beyond) = if deepen {
-        (
+    let (fr_tag, beyond) = match depth {
+        CirctHandshakeStubDepth::LowerDeepen => (
+            "FR187",
+            "beyond FR180 fork+join: dialect ops handshake.branch / handshake.merge (+ fork/join + func/buffer + multi-clock elastic)",
+        ),
+        CirctHandshakeStubDepth::Deepen => (
             "FR180",
             "beyond FR129 C1–C4: dialect ops handshake.fork / handshake.join (+ func/buffer + multi-clock elastic)",
-        )
-    } else {
-        (
+        ),
+        CirctHandshakeStubDepth::Base => (
             "FR129",
             "beyond FR121 ready/valid: dialect ops handshake.func / handshake.buffer + multi-clock elastic buffers",
-        )
+        ),
     };
     format!(
         "// generated by bitloom {fr_tag} CIRCT Handshake (channels={channels}, clock_domains={clock_domains}, elastic_depth={elastic_depth}); no Bambu\n\
@@ -754,8 +837,9 @@ fn build_circt_handshake_rtl_stub(
 /// Documented subset: [`InTreeScheduleKind::LoopUnroll`] (primary),
 /// [`InTreeScheduleKind::Pipeline`] (secondary),
 /// [`InTreeScheduleKind::Handshake`] (**FR121**),
-/// [`InTreeScheduleKind::CirctHandshake`] (**FR129**), and
-/// [`InTreeScheduleKind::CirctHandshakeDeepen`] (**FR180**).
+/// [`InTreeScheduleKind::CirctHandshake`] (**FR129**),
+/// [`InTreeScheduleKind::CirctHandshakeDeepen`] (**FR180**), and
+/// [`InTreeScheduleKind::CirctHandshakeLowerDeepen`] (**FR187**).
 pub fn schedule_in_tree(
     fn_name: &str,
     op: HlsDataflowOp,
@@ -820,6 +904,20 @@ pub fn schedule_in_tree(
                     "FR180 Handshake deepen: require channels>=1, clock_domains>=2, elastic_depth>=1 \
                      (got channels={channels} clock_domains={clock_domains} elastic_depth={elastic_depth}); \
                      FR129/FR175/FR121 alone ≠ FR180"
+                )));
+            }
+            channels
+        }
+        InTreeScheduleKind::CirctHandshakeLowerDeepen {
+            channels,
+            clock_domains,
+            elastic_depth,
+        } => {
+            if channels == 0 || clock_domains < 2 || elastic_depth == 0 {
+                return Err(HlsError::Message(format!(
+                    "FR187 Handshake lower deepen: require channels>=1, clock_domains>=2, elastic_depth>=1 \
+                     (got channels={channels} clock_domains={clock_domains} elastic_depth={elastic_depth}); \
+                     FR180/FR129/FR175 alone ≠ FR187"
                 )));
             }
             channels
@@ -1038,6 +1136,76 @@ where
         build_schedule_ir(&artifact.fn_name, &artifact.kind, &artifact.stages, true);
     artifact.rtl_stub = format!(
         "// FR96: dataflow transform dissolved before FR180 Handshake deepen schedule (AD-18)\n{}",
+        artifact.rtl_stub
+    );
+    Ok(artifact)
+}
+
+/// FR187 Handshake lower deepen: beyond FR180 fork+join with `handshake.branch` + `handshake.merge`.
+///
+/// Requires the same multi-clock elastic gates as FR129/FR180. FR180 alone ≠ FR187.
+/// Set `BITLOOM_HANDSHAKE_LOWER_FORCE_MISSING=1` to force a readable non-zero failure
+/// (refuses silent success).
+pub fn schedule_circt_handshake_lower_deepen(
+    fn_name: &str,
+    op: HlsDataflowOp,
+    channels: u32,
+    clock_domains: u32,
+    elastic_depth: u32,
+) -> Result<InTreeScheduleArtifact, HlsError> {
+    if std::env::var_os("BITLOOM_HANDSHAKE_LOWER_FORCE_MISSING").as_deref()
+        == Some(std::ffi::OsStr::new("1"))
+    {
+        return Err(HlsError::Message(
+            "FR187 Handshake lower deepen unavailable (BITLOOM_HANDSHAKE_LOWER_FORCE_MISSING=1); \
+             refusing silent success"
+                .into(),
+        ));
+    }
+    let kind = InTreeScheduleKind::CirctHandshakeLowerDeepen {
+        channels,
+        clock_domains,
+        elastic_depth,
+    };
+    if !meets_fr187_handshake_lower_deepen(&kind) {
+        return Err(HlsError::Message(format!(
+            "FR187 Handshake lower deepen: require channels>=1, clock_domains>=2, elastic_depth>=1 \
+             (got channels={channels} clock_domains={clock_domains} elastic_depth={elastic_depth}); \
+             FR180/FR129/FR175 alone ≠ FR187"
+        )));
+    }
+    if fn_name.is_empty() {
+        return Err(HlsError::Message(
+            "FR187 Handshake lower deepen schedule: fn_name must be non-empty".into(),
+        ));
+    }
+    schedule_in_tree(fn_name, op, kind)
+}
+
+/// FR187 + AD-18: dissolve dataflow transform, then Handshake lower deepen schedule.
+pub fn schedule_circt_handshake_lower_deepen_from_transform<F>(
+    fn_name: &str,
+    violations: &[HlsDataflowClosureViolation],
+    channels: u32,
+    clock_domains: u32,
+    elastic_depth: u32,
+    transform: F,
+) -> Result<InTreeScheduleArtifact, HlsError>
+where
+    F: FnOnce() -> HlsDataflowOp,
+{
+    let dissolved = dissolve_dataflow_transform(fn_name, violations, transform)?;
+    let mut artifact = schedule_circt_handshake_lower_deepen(
+        &dissolved.fn_name,
+        dissolved.op,
+        channels,
+        clock_domains,
+        elastic_depth,
+    )?;
+    artifact.schedule_ir =
+        build_schedule_ir(&artifact.fn_name, &artifact.kind, &artifact.stages, true);
+    artifact.rtl_stub = format!(
+        "// FR96: dataflow transform dissolved before FR187 Handshake lower deepen schedule (AD-18)\n{}",
         artifact.rtl_stub
     );
     Ok(artifact)

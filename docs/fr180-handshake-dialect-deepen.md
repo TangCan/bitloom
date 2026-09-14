@@ -30,7 +30,7 @@ BITLOOM_HANDSHAKE_DEEPEN_FORCE_MISSING=1 cargo bitloom hls --circt-handshake-dee
 
 ## Standing honesty
 
-FR129 `--circt-handshake` path remains regressable. Full CIRCT Handshake dialect lower suite still needs a new contract (**NFR86**).
+FR129 `--circt-handshake` path remains regressable. Handshake lower deepen beyond fork+join (`handshake.branch`+`handshake.merge`) is **FR187** / Epic 120 (Phase 23). Fuller CIRCT Handshake lower suite beyond that NFR14 subset still needs a new contract (**NFR91**).
 
 ```text
 cargo test -p bitloom --test fr180_handshake_dialect_deepen

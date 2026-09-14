@@ -101,10 +101,14 @@ enum Commands {
         /// Implies in-tree; takes precedence over `--circt-handshake` / `--handshake`.
         #[arg(long, default_value_t = false)]
         circt_handshake_deepen: bool,
-        /// Clock domains for `--circt-handshake` / `--circt-handshake-deepen` (require ≥2).
+        /// FR187: Handshake lower deepen (`handshake.branch`+`handshake.merge`) beyond FR180.
+        /// Implies in-tree; takes precedence over `--circt-handshake-deepen` / `--circt-handshake`.
+        #[arg(long, default_value_t = false)]
+        circt_handshake_lower_deepen: bool,
+        /// Clock domains for `--circt-handshake` / deepen flags (require ≥2).
         #[arg(long, default_value_t = 2)]
         clock_domains: u32,
-        /// Elastic buffer depth for `--circt-handshake` / `--circt-handshake-deepen` (require ≥1).
+        /// Elastic buffer depth for `--circt-handshake` / deepen flags (require ≥1).
         #[arg(long, default_value_t = 1)]
         elastic_depth: u32,
     },
@@ -639,11 +643,41 @@ fn main() {
             channels,
             circt_handshake,
             circt_handshake_deepen,
+            circt_handshake_lower_deepen,
             clock_domains,
             elastic_depth,
         } => {
-            if circt_handshake_deepen || circt_handshake || handshake || in_tree {
-                if circt_handshake_deepen {
+            if circt_handshake_lower_deepen
+                || circt_handshake_deepen
+                || circt_handshake
+                || handshake
+                || in_tree
+            {
+                if circt_handshake_lower_deepen {
+                    println!(
+                        "path=in-tree-circt-handshake-lower-deepen fr187=true fr180=true fr129=true fr96=true circt_handshake=true handshake_deepen=true handshake_lower_deepen=true channels={channels} clock_domains={clock_domains} elastic_depth={elastic_depth} dataflow={dataflow}"
+                    );
+                    match hls::parse_dataflow_alias(&dataflow).and_then(|op| {
+                        let art = hls::schedule_circt_handshake_lower_deepen_from_transform(
+                            &function,
+                            &[],
+                            channels,
+                            clock_domains,
+                            elastic_depth,
+                            move || op,
+                        )?;
+                        hls::emit_in_tree_schedule(&art, &out_dir)
+                    }) {
+                        Ok((sched, rtl)) => {
+                            println!("ok_schedule={}", sched.display());
+                            println!("ok_rtl={}", rtl.display());
+                        }
+                        Err(e) => {
+                            eprintln!("error: {e}");
+                            std::process::exit(1);
+                        }
+                    }
+                } else if circt_handshake_deepen {
                     println!(
                         "path=in-tree-circt-handshake-deepen fr180=true fr129=true fr96=true circt_handshake=true handshake_deepen=true channels={channels} clock_domains={clock_domains} elastic_depth={elastic_depth} dataflow={dataflow}"
                     );

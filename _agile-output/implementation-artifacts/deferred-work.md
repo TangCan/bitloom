@@ -93,7 +93,7 @@ README「状态与 deferred」同源（Story **105.3** / **105.4** / **106.3** /
 Correct Course `sprint-change-proposal-2026-09-12-phase22-nfr81-leftovers.md` + PRD addendum「Phase 22」**已批准**（**Phase 22 contract approved** 2026-09-12；`correctCoursePhase22Approved: 2026-09-12`；planning-complete 2026-09-14）。
 闸门 **FR178 / Epic 111** **已关闭**（Story **111.4**；闸门已开；实现 epic 可合法开工）。
 **Epic 112 / FR179**（**已关闭** / Story **112.3**；[`docs/fr179-floating-circt-git-head.md`](../../docs/fr179-floating-circt-git-head.md)）— 浮动轨 firtool-1.159.0（≠ FR174 alone；≠ AD-9 产品钉；无界 tip → **FR186**）。
-**Epic 113 / FR180**（**已关闭** / Story **113.3**；[`docs/fr180-handshake-dialect-deepen.md`](../../docs/fr180-handshake-dialect-deepen.md)）— Handshake dialect deepen fork+join（≠ FR129 alone；≠ FR175 alone；更深 dialect/lower 仍 **NFR86**）。
+**Epic 113 / FR180**（**已关闭** / Story **113.3**；[`docs/fr180-handshake-dialect-deepen.md`](../../docs/fr180-handshake-dialect-deepen.md)）— Handshake dialect deepen fork+join（≠ FR129 alone；≠ FR175 alone；更深 lower → **FR187** / Epic 120）。
 **Epic 114 / FR181**（**已关闭** / Story **114.3**；[`docs/fr181-deeper-style-guide-linter.md`](../../docs/fr181-deeper-style-guide-linter.md)）— Style/linter deepen wartremover+fatal-warnings（≠ FR176 alone；完整社区 Style Guide 全家桶仍 **NFR86**）。
 **Epic 115 / FR182**（**已关闭** / Story **115.3**；[`docs/fr182-unpaired-firtool-product-pin.md`](../../docs/fr182-unpaired-firtool-product-pin.md)）— unpaired firtool 产品钉 **1.159.0** + Chisel **7.15.0**（AD-9 *unpaired product-pin* 例外；≠ FR173/FR174/FR179 alone；更深升钉仍 **NFR86**）。
 **Epic 116 / FR183**（**已关闭** / Story **116.3**；[`docs/fr183-explicit-fr142-api-expand.md`](../../docs/fr183-explicit-fr142-api-expand.md)）— 显式扩大 FR142：文档化 `bitloom-firrtl` interop 升入表面（≠ 静默扩大；AD-6 仍 prelude-only；更深 API 扩展仍 **NFR86**）。

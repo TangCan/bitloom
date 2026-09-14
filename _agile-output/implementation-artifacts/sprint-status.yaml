@@ -817,8 +817,8 @@ development_status:
 
   epic-120: in-progress
   120-1-epic-120-nfr14-风险记录: done
-  120-2-handshake-lower-加深实现与验收-fr187: ready-for-dev
-  120-3-fr187-收口与文档指针: backlog
+  120-2-handshake-lower-加深实现与验收-fr187: done
+  120-3-fr187-收口与文档指针: ready-for-dev
   epic-120-retrospective: optional
 
   epic-121: backlog

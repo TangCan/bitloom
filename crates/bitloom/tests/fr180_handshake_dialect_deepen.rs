@@ -43,8 +43,12 @@ fn fr180_docs_contract_forbid_fr129_alone() {
         "must document FORCE_MISSING"
     );
     assert!(
-        docs.contains("NFR86") || docs.contains("full") || docs.contains("全家桶"),
-        "must leave fuller dialect as NFR86"
+        docs.contains("FR187")
+            || docs.contains("NFR86")
+            || docs.contains("NFR91")
+            || docs.contains("full")
+            || docs.contains("全家桶"),
+        "must leave fuller dialect as FR187/NFR91 (or historical NFR86)"
     );
 }
 
