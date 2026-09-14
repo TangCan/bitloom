@@ -462,8 +462,8 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 | 无界 CIRCT tip | FR186 / 119 | 超 FR179 浮动轨；live tip 渠道 `circt-live-tip` — **已关闭**（[`docs/fr186-unbounded-circt-tip.md`](docs/fr186-unbounded-circt-tip.md)；Story **119.3**） |
 | Handshake lower/dialect | FR187 / 120 | 超 FR180 fork+join；`branch`+`merge` — **已关闭**（[`docs/fr187-handshake-lower-deepen.md`](docs/fr187-handshake-lower-deepen.md)；Story **120.3**） |
 | Style Guide 全家桶 | FR188 / 121 | 超 FR181 wartremover deepen；community-style-guide+scalafmt — **已关闭**（[`docs/fr188-community-style-guide-pack.md`](docs/fr188-community-style-guide-pack.md)；Story **121.3**） |
-| 继续 firtool 产品钉升钉 | FR189 / 122 | 超 FR182 1.159.0；须修订 AD-9 — **backlog** |
-| 继续显式扩 FR142 | FR190 / 123 | 超 FR183；禁止静默扩大；AD-6 仍 prelude-only — **backlog** |
+| 继续 firtool 产品钉升钉 | FR189 / 122 | 超 FR182 1.159.0 — **blocked-upstream**（无已发布 firtool >1.159.0；Correct Course pending） |
+| 继续显式扩 FR142 | FR190 / 123 | 超 FR183；emit/import/check_* — **已关闭**（[`docs/fr190-further-fr142-api-expand.md`](docs/fr190-further-fr142-api-expand.md)；Story **123.3**） |
 | Phase 23 宣称诚实门 | FR191 / 124 | 宣称须引 FR185–191 — **backlog** |
 
 **FR185–191 宣称纪律（FR191 / NFR92）：** 「无界 tip」须引 **FR186**；「Handshake lower」须引 **FR187**；「Style 全家桶」须引 **FR188**；「firtool 再升钉」须引 **FR189**；「继续扩 FR142」须引 **FR190**；完整 Phase 23 宣称须引 **FR185–191**（**FR191** 诚实门）。**不得**用 Phase 22 / 结项 alone 冒充本批五条；**不得宣称**未关闭前已交付；超出各 NFR14 钉死子集仍须新合同（**NFR91**）。`git push` **不是** FR。

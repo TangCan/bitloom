@@ -2,7 +2,7 @@
 
 **Product:** Bitloom. Unrelated to `samitbasu/rhdl`.
 
-**Status:** Epic 123 / FR190 **in progress** (Story **123.2**). Product path: **explicit** additive promote of FIRRTL text `emit`/`import` + roundtrip predicates + documented `check_*` family into the FR142 surface list ([`docs/public-api-1-0-surface.md`](public-api-1-0-surface.md)); SemVer honesty per FR143 (**minor** for additive); **AD-6** unchanged.
+**Status:** **Epic 123 / FR190 closed** (Story **123.3**). Product path: **explicit** additive promote of FIRRTL text `emit`/`import` + roundtrip predicates + documented `check_*` family into the FR142 surface list ([`docs/public-api-1-0-surface.md`](public-api-1-0-surface.md)); SemVer honesty per FR143 (**minor** for additive); **AD-6** unchanged.
 
 Phase 22 **FR183** firrtl emit/Parser expand and Phase 17 **FR142** surface lock **remain closed and valid** (NFR88). Those closes alone ≠ FR190. Silent expand remains forbidden.
 

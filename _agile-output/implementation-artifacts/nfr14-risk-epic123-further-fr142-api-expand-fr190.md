@@ -14,7 +14,7 @@
 | --- | --- |
 | 覆盖 FR / Epic | FR190 / Epic 123；NFR14、NFR88、NFR90、NFR91；对照 FR183 / FR142 / FR143 / AD-6 |
 | 记录日期 | 2026-09-14 |
-| 状态 | **open / in-progress**（Story 123.1；Epic 123 未关闭；关闭勾选 → Story 123.3） |
+| 状态 | **closed — Story 123.3**（Epic 123 / FR190 可宣称；≠ FR183 alone） |
 | **选定** | 在保留 FR183 `bitloom-firrtl` emit/Parser 关闭面的前提下，**显式**再升入 in-surface：**FIRRTL 文本 `emit`/`import` + 往返谓词**与 **文档化 `check_*` 验收族**；更新 `docs/public-api-1-0-surface.md` + SemVer 诚实；**AD-6 不变**；禁止静默扩大 |
 
 ### Phase 17/22 关闭面 vs Epic 123（NFR88）
@@ -97,10 +97,10 @@
 
 ### Epic 123 关闭条件（Story 123.3 勾选）
 
-- [ ] **表面扩展 S1–S3 + 验收谓词：** Story 123.2
-- [ ] **表面文档修订（NFR90）：** Story 123.2
-- [ ] **docs/fr190-* + README/deferred：** Story 123.3
-- [ ] **NFR88：** FR183/FR142/FR143 关闭面未改写
-- [ ] **禁止事项未触发：** 未用 FR183 alone 勾选；未 silent expand
-- [ ] **品牌 / 依赖：** Bitloom / `bitloom-prelude`；AD-6
-- [ ] **超子集：** 未写入本 epic NFR14 的更深表面仍 **NFR91**
+- [x] **表面扩展 S1–S3 + 验收谓词：** Story 123.2
+- [x] **表面文档修订（NFR90）：** Story 123.2
+- [x] **docs/fr190-* + README/deferred：** Story 123.3
+- [x] **NFR88：** FR183/FR142/FR143 关闭面未改写
+- [x] **禁止事项未触发：** 未用 FR183 alone 勾选；未 silent expand
+- [x] **品牌 / 依赖：** Bitloom / `bitloom-prelude`；AD-6
+- [x] **超子集：** 未写入本 epic NFR14 的更深表面仍 **NFR91**
