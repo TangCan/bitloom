@@ -27,7 +27,7 @@ cargo test -p bitloom --test fr183_explicit_fr142_api_expand
 
 ## Standing honesty
 
-Further API expands beyond this NFR14 subset need a new contract (**NFR86**).
+Further API expands beyond this NFR14 subset → **FR190** / Epic 123（[`docs/fr190-further-fr142-api-expand.md`](fr190-further-fr142-api-expand.md)）. Beyond that pack still **NFR91**.
 Do **not** claim FR142 alone delivers this FR.
 
 ```text

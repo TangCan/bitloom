@@ -44,8 +44,11 @@ fn fr183_docs_contract_forbid_silent_expand() {
         "must state SemVer honesty"
     );
     assert!(
-        docs.contains("NFR86") || docs.contains("Further"),
-        "must leave further expands as NFR86"
+        docs.contains("FR190")
+            || docs.contains("NFR86")
+            || docs.contains("NFR91")
+            || docs.contains("Further"),
+        "must leave further expands as FR190/NFR91 (or historical NFR86)"
     );
 }
 

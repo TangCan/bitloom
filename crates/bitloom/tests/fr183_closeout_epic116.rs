@@ -127,7 +127,10 @@ fn fr183_product_doc_closed() {
         "fr183 product doc must note closed status"
     );
     assert!(
-        doc.contains("NFR86") || doc.contains("Further"),
-        "must leave further API expands as NFR86"
+        doc.contains("FR190")
+            || doc.contains("NFR86")
+            || doc.contains("NFR91")
+            || doc.contains("Further"),
+        "must leave further API expands as FR190/NFR91 (or historical NFR86)"
     );
 }

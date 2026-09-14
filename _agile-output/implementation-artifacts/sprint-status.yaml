@@ -836,8 +836,8 @@ development_status:
 
   epic-123: in-progress
   123-1-epic-123-nfr14-风险记录: done
-  123-2-继续显式扩大-fr142-表面实现与验收-fr190: ready-for-dev
-  123-3-fr190-收口与文档指针: backlog
+  123-2-继续显式扩大-fr142-表面实现与验收-fr190: done
+  123-3-fr190-收口与文档指针: ready-for-dev
   epic-123-retrospective: optional
 
   epic-124: backlog

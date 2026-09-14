@@ -1,14 +1,15 @@
-# Bitloom 1.0 public API surface (FR142 + FR183 expand)
+# Bitloom 1.0 public API surface (FR142 + FR183 + FR190 expand)
 
-> **Contract:** Phase 17 / **FR142** / Epic 80; Phase 22 / **FR183** / Epic 116 explicit expand.  
-> **Authority:** Correct Course 2026-09-11 (`correctCoursePhase17Approved`); Phase 22 Correct Course 2026-09-12 (`correctCoursePhase22Approved`).  
+> **Contract:** Phase 17 / **FR142** / Epic 80; Phase 22 / **FR183** / Epic 116; Phase 23 / **FR190** / Epic 123 further expand.  
+> **Authority:** Correct Course 2026-09-11 (`correctCoursePhase17Approved`); Phase 22 Correct Course 2026-09-12 (`correctCoursePhase22Approved`); Phase 23 Correct Course 2026-09-14 (`correctCoursePhase23Approved`).  
 > **Claim discipline:** 「1.0 / 公开 API 稳定」requires FR141–146 closed (**FR147**). This file alone ≠ 1.0 shipped.  
 > **FR183:** Explicit additive expand of in-surface (NFR14 S1–S3). **≠** silent expand. See [`docs/fr183-explicit-fr142-api-expand.md`](fr183-explicit-fr142-api-expand.md).  
-> **NFR63 / NFR86:** Listing a surface does **not** clear deferred deepen outside each NFR14 subset.
+> **FR190:** Further additive expand beyond FR183 (FIRRTL text emit/import + documented `check_*` family). **≠** FR183 alone. See [`docs/fr190-further-fr142-api-expand.md`](fr190-further-fr142-api-expand.md).  
+> **NFR63 / NFR91:** Listing a surface does **not** clear deferred deepen outside each NFR14 subset.
 
 ## Purpose
 
-Pin the **in-surface** vs **out-of-promise / out-of-surface** partition for SemVer **1.0** major stability. Breaking changes **inside** in-surface require a **major** bump once 1.0.0 is published (see [`docs/semver-1-0-policy.md`](semver-1-0-policy.md) / FR143). **Additive** in-surface expands require an explicit doc + story update (FR183) and are **minor**-class under FR143.
+Pin the **in-surface** vs **out-of-promise / out-of-surface** partition for SemVer **1.0** major stability. Breaking changes **inside** in-surface require a **major** bump once 1.0.0 is published (see [`docs/semver-1-0-policy.md`](semver-1-0-policy.md) / FR143). **Additive** in-surface expands require an explicit doc + story update (**FR183** / **FR190**) and are **minor**-class under FR143.
 
 ## Design crate dependency boundary (AD-6)
 
@@ -83,6 +84,23 @@ Internal modules and undocumented `pub` items are **not** promised.
 
 **SemVer honesty (FR143):** this expand is **additive**. The next crates.io publish of `bitloom-firrtl` that cuts after this surface revision is a **minor** bump (e.g. 1.0.0 → 1.1.0), not a silent major and not “already expanded without a doc/story”. Tree may remain at 1.0.0 until that publish; surface honesty is this file + [`docs/fr183-explicit-fr142-api-expand.md`](fr183-explicit-fr142-api-expand.md).
 
+### `bitloom-firrtl` — FR190 / v1.x expand (beyond FR183)
+
+**Promoted (additive · FR190):** the following **documented** entries are **also in-surface** (superset of FR183):
+
+| Entry | Role |
+| --- | --- |
+| `emit` | FrozenHir → FIRRTL 6.0.0 text (AD-3) |
+| `import` | FIRRTL text → FrozenHir |
+| `ports_roundtrip_ok` / `instance_graph_roundtrip_ok` | Documented interop roundtrip predicates |
+| `check_idiomatic_chisel` / `check_idiomatic_chisel_fr111` / `check_idiomatic_chisel_fr122` | Documented acceptance checks paired with idiomatic emit faces |
+| `check_chisel_style_guide_fr130` / `check_chisel_style_guide_fr165` | Style Guide check faces |
+| `check_chisel_ecosystem_fr176` / `check_chisel_style_linter_fr181` / `check_chisel_style_guide_pack_fr188` | Ecosystem / deepen / pack check faces |
+
+**Not** in this expand: undocumented `pub`; design-crate dependency on `bitloom-firrtl` (**AD-6**); promoting `bitloom-lsp` / `bitloom-hir` / `bitloom-builder` / `bitloom-vlog` to 1.0-stable.
+
+**SemVer honesty (FR143):** FR190 is **additive** beyond FR183 → **minor** on the next `bitloom-firrtl` publish that cuts after this revision. See [`docs/fr190-further-fr142-api-expand.md`](fr190-further-fr142-api-expand.md).
+
 ## Out-of-promise (may publish; not 1.0-stable) — Q2
 
 | Crate | Note |
@@ -91,17 +109,17 @@ Internal modules and undocumented `pub` items are **not** promised.
 | `bitloom-builder` | Same |
 | `bitloom-vlog` | Same |
 
-Breaking changes in these crates do **not** by themselves require a Bitloom **1.0** major, but must not silently break the **prelude** / **sim** / **FR183 firrtl interop** in-surface contracts.
+Breaking changes in these crates do **not** by themselves require a Bitloom **1.0** major, but must not silently break the **prelude** / **sim** / **FR183/FR190 firrtl interop** in-surface contracts.
 
 ## Out-of-surface (not in 1.0 promise)
 
 | Item | Note |
 | --- | --- |
 | `bitloom-lsp` / LSP | Product exists; not part of 1.0 SemVer surface promise |
-| `bitloom-firrtl` **undocumented** `pub` / non-listed modules | Publishable crate; only the FR183 table above is in-surface — **no** silent promotion |
+| `bitloom-firrtl` **undocumented** `pub` / non-listed modules | Publishable crate; only the FR183 + FR190 tables above are in-surface — **no** silent promotion |
 | remaining `rhdl-*` (`rhdl-formal`, …) | Stay unpublished internal names |
 | Undocumented internal `pub` APIs | Forbidden from silent promotion to in-surface |
-| NFR59 / NFR86 deferred deepen | Remains deferred; 1.0 ≠ clear leftovers |
+| NFR59 / NFR91 deferred deepen | Remains deferred; 1.0 ≠ clear leftovers |
 
 ## Blocking hygiene candidates (FR145 / Epic 82)
 
@@ -109,6 +127,6 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 
 ## Change process
 
-- Expanding in-surface requires an explicit doc + story update (do not silent-expand). **FR183** is the Phase 22 contract for the firrtl interop promote above.
+- Expanding in-surface requires an explicit doc + story update (do not silent-expand). **FR183** (Phase 22) and **FR190** (Phase 23) are the contracts for the firrtl interop promotes above.
 - After 1.0.0, in-surface breaking → major (FR143); additive documented expands → minor.
 - Brand: **Bitloom** / `bitloom` / `bitloom-*`; never publish `rhdl` / `rhdl-bits` as the product name.
