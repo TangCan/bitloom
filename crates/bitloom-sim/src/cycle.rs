@@ -401,7 +401,10 @@ mod tests {
     fn generated_crate_registry_dependencies_use_published_versions() {
         assert_eq!(published_dependency_version("bitloom-hir"), "1.1.0");
         assert_eq!(published_dependency_version("bitloom-builder"), "1.1.0");
-        assert_eq!(published_dependency_version("bitloom-sim"), "1.1.2");
+        assert_eq!(
+            published_dependency_version("bitloom-sim"),
+            env!("CARGO_PKG_VERSION")
+        );
     }
 
     #[test]

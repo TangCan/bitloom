@@ -39,6 +39,7 @@ enum SeqOp {
 #[derive(Debug, Clone)]
 pub struct GeneratedFunctional {
     regs: BTreeMap<String, u64>,
+    nets: PortValues,
     mems: BTreeMap<String, Vec<u64>>,
     mem_sync: BTreeMap<String, bool>,
     pending_mem_reads: BTreeMap<String, u64>,
@@ -140,6 +141,7 @@ impl GeneratedFunctional {
 
         Self {
             regs,
+            nets: PortValues::default(),
             mems,
             mem_sync,
             pending_mem_reads: BTreeMap::new(),
@@ -154,6 +156,7 @@ impl GeneratedFunctional {
         inputs
             .get(name)
             .or_else(|| self.regs.get(name).copied())
+            .or_else(|| self.nets.get(name))
             .unwrap_or(0)
     }
 
@@ -266,7 +269,9 @@ impl AbstractionView for GeneratedFunctional {
         let mut out = inputs.clone();
         for (name, expr) in &self.comb {
             // Prefer updated regs over prior port values (matches Sim::tick_combinational).
-            out.set(name.clone(), self.eval(&out, expr));
+            let value = self.eval(&out, expr);
+            self.nets.set(name.clone(), value);
+            out.set(name.clone(), value);
         }
         out
     }
@@ -434,7 +439,7 @@ fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
         .iter()
         .map(|(name, expr)| {
             format!(
-                "        out.set({name:?}, {});\n",
+                "        let value = {};\n        self.nets.set({name:?}, value);\n        out.set({name:?}, value);\n",
                 render_expr_ports_regs(expr)
             )
         })
@@ -485,6 +490,7 @@ use bitloom_hir::PortValues;
 #[allow(dead_code)] // mems/pending unused on designs without MemRead
 pub struct FunctionalSim {{
     regs: BTreeMap<String, u64>,
+    nets: PortValues,
     mems: BTreeMap<String, Vec<u64>>,
     pending_mem_reads: BTreeMap<String, u64>,
 }}
@@ -501,6 +507,7 @@ impl FunctionalSim {{
 {reg_inits}        let mut mems = BTreeMap::new();
 {mem_inits}        Self {{
             regs,
+            nets: PortValues::default(),
             mems,
             pending_mem_reads: BTreeMap::new(),
         }}
@@ -510,6 +517,7 @@ impl FunctionalSim {{
         inputs
             .get(name)
             .or_else(|| self.regs.get(name).copied())
+            .or_else(|| self.nets.get(name))
             .unwrap_or(0)
     }}
 
