@@ -56,6 +56,12 @@ fn emit_expr(expr: &AssignExpr) -> String {
         AssignExpr::Xor(a, b) => format!("xor({a}, {b})"),
         AssignExpr::Shl(a, b) => format!("dshl({a}, {b})"),
         AssignExpr::Shr(a, b) => format!("dshr({a}, {b})"),
+        AssignExpr::Slice { src, lo, width } => format!("bits({src}, {}, {lo})", lo + width - 1),
+        AssignExpr::Concat { high, low, .. } => format!("cat({high}, {low})"),
+        AssignExpr::ZeroExtend { src, to_width, .. } => format!("pad({src}, {to_width})"),
+        AssignExpr::SignExtend { src, to_width, .. } => {
+            format!("asUInt(pad(asSInt({src}), {to_width}))")
+        }
         AssignExpr::Eq(a, b) => format!("eq({a}, {b})"),
         AssignExpr::Mux { sel, t, f } => format!("mux({sel}, {t}, {f})"),
         AssignExpr::MemRead { mem, addr } => format!("{mem}[{addr}]"),

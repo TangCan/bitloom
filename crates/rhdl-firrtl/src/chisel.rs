@@ -1005,6 +1005,18 @@ fn emit_expr(m: &Module, expr: &AssignExpr) -> String {
         AssignExpr::Xor(a, b) => format!("{} ^ {}", ref_name(m, a), ref_name(m, b)),
         AssignExpr::Shl(a, b) => format!("{} << {}", ref_name(m, a), ref_name(m, b)),
         AssignExpr::Shr(a, b) => format!("{} >> {}", ref_name(m, a), ref_name(m, b)),
+        AssignExpr::Slice { src, lo, width } => {
+            format!("{}({}, {lo})", ref_name(m, src), lo + width - 1)
+        }
+        AssignExpr::Concat { high, low, .. } => {
+            format!("Cat({}, {})", ref_name(m, high), ref_name(m, low))
+        }
+        AssignExpr::ZeroExtend { src, to_width, .. } => {
+            format!("{}.pad({to_width})", ref_name(m, src))
+        }
+        AssignExpr::SignExtend { src, to_width, .. } => {
+            format!("{}.asSInt.pad({to_width}).asUInt", ref_name(m, src))
+        }
         AssignExpr::Eq(a, b) => format!("{} === {}", ref_name(m, a), ref_name(m, b)),
         AssignExpr::Mux { sel, t, f } => format!(
             "Mux({}, {}, {})",

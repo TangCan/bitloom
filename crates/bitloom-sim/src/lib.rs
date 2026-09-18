@@ -250,6 +250,45 @@ impl Sim {
             AssignExpr::Xor(a, b) => self.lookup(a) ^ self.lookup(b),
             AssignExpr::Shl(a, b) => self.lookup(a) << (self.lookup(b) & 63),
             AssignExpr::Shr(a, b) => self.lookup(a) >> (self.lookup(b) & 63),
+            AssignExpr::Slice { src, lo, width } => {
+                let mask = if *width == 64 {
+                    u64::MAX
+                } else {
+                    (1u64 << width) - 1
+                };
+                (self.lookup(src) >> lo) & mask
+            }
+            AssignExpr::Concat {
+                high,
+                low,
+                low_width,
+            } => (self.lookup(high) << low_width) | self.lookup(low),
+            AssignExpr::ZeroExtend { src, to_width, .. } => {
+                self.lookup(src)
+                    & if *to_width == 64 {
+                        u64::MAX
+                    } else {
+                        (1u64 << to_width) - 1
+                    }
+            }
+            AssignExpr::SignExtend {
+                src,
+                from_width: from,
+                to_width,
+            } => {
+                let value = self.lookup(src);
+                let extended = if *from < 64 && value & (1u64 << (*from - 1)) != 0 {
+                    value | (!0u64 << *from)
+                } else {
+                    value
+                };
+                extended
+                    & if *to_width == 64 {
+                        u64::MAX
+                    } else {
+                        (1u64 << to_width) - 1
+                    }
+            }
             AssignExpr::Eq(a, b) => u64::from(self.lookup(a) == self.lookup(b)),
             AssignExpr::Mux { sel, t, f } => {
                 let took_true = self.lookup(sel) != 0;

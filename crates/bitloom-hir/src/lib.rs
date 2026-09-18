@@ -133,6 +133,26 @@ pub enum AssignExpr {
     Shl(String, String),
     /// Logical right shift: `a >> (b & 63)`.
     Shr(String, String),
+    /// Extract `width` bits starting at LSB bit `lo`.
+    Slice { src: String, lo: u32, width: u32 },
+    /// Concatenate `high` above `low`.
+    Concat {
+        high: String,
+        low: String,
+        low_width: u32,
+    },
+    /// Extend an unsigned source to `to_width` bits.
+    ZeroExtend {
+        src: String,
+        from_width: u32,
+        to_width: u32,
+    },
+    /// Sign-extend a two's-complement source to `to_width` bits.
+    SignExtend {
+        src: String,
+        from_width: u32,
+        to_width: u32,
+    },
     /// Equality compare of two refs → 0/1 (Bool).
     Eq(String, String),
     /// 2:1 mux: `sel != 0 ? t : f`.

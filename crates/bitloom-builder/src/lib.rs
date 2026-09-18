@@ -39,6 +39,8 @@ pub struct ElaborateSession {
     signals: HashMap<String, SignalKind>,
     /// name -> bit width for UInt/SInt (Clock/Reset/Bool use 1)
     widths: HashMap<String, u32>,
+    /// memory name -> (depth, word width, synchronous read)
+    memories: HashMap<String, (u32, u32, bool)>,
     /// Phantom clock-domain id per signal (AD-22); default 0.
     domains: HashMap<String, u32>,
     /// Signals that may legally cross domains (DoubleFlop/SyncFIFO bridges).
@@ -56,6 +58,7 @@ impl ElaborateSession {
             current: None,
             signals: HashMap::new(),
             widths: HashMap::new(),
+            memories: HashMap::new(),
             domains: HashMap::new(),
             cdc_bridges: HashSet::new(),
             clock_port: None,
@@ -72,6 +75,7 @@ impl ElaborateSession {
     pub fn begin_module(&mut self, name: impl Into<String>, span: Span) {
         self.signals.clear();
         self.widths.clear();
+        self.memories.clear();
         self.domains.clear();
         self.cdc_bridges.clear();
         self.clock_port = None;
@@ -438,6 +442,8 @@ impl ElaborateSession {
         };
         self.signals.insert(name.clone(), SignalKind::Wire);
         self.widths.insert(name.clone(), width);
+        self.memories
+            .insert(name.clone(), (depth, width, sync_read));
         if let Some(m) = self.current.as_mut() {
             m.body.push(Stmt::MemDecl {
                 name,
@@ -930,6 +936,155 @@ impl ElaborateSession {
         span: Span,
     ) {
         self.push_comb_net_expr(dst.into(), AssignExpr::Shr(lhs.into(), rhs.into()), span);
+    }
+
+    /// Combinational extraction of `width` bits starting at LSB bit `lo`.
+    pub fn assign_slice(
+        &mut self,
+        dst: impl Into<String>,
+        src: impl Into<String>,
+        lo: u32,
+        width: u32,
+        span: Span,
+    ) {
+        let dst = dst.into();
+        let src = src.into();
+        let src_width = self.widths.get(&src).copied();
+        let dst_width = self.widths.get(&dst).copied();
+        if width == 0 || src_width.is_none_or(|w| lo.checked_add(width).is_none_or(|end| end > w)) {
+            self.push_err(Diagnostic {
+                span,
+                code: "rhdl::E0133".into(),
+                en: format!("slice [{lo} +: {width}] is outside source '{src}'"),
+                zh: format!("slice [{lo} +: {width}] 超出源 '{src}' 范围"),
+            });
+            return;
+        }
+        if dst_width != Some(width) {
+            self.push_err(Diagnostic {
+                span,
+                code: "rhdl::E0134".into(),
+                en: format!("slice destination '{dst}' must have width {width}"),
+                zh: format!("slice 目标 '{dst}' 必须为 {width} 位"),
+            });
+            return;
+        }
+        self.push_comb_net_expr(dst, AssignExpr::Slice { src, lo, width }, span);
+    }
+
+    /// Combinational concatenation with `high` placed above `low`.
+    pub fn assign_concat(
+        &mut self,
+        dst: impl Into<String>,
+        high: impl Into<String>,
+        low: impl Into<String>,
+        span: Span,
+    ) {
+        let dst = dst.into();
+        let high = high.into();
+        let low = low.into();
+        let low_width = self.widths.get(&low).copied();
+        let expected = self
+            .widths
+            .get(&high)
+            .copied()
+            .zip(low_width)
+            .and_then(|(a, b)| a.checked_add(b));
+        if expected.is_none() || self.widths.get(&dst).copied() != expected {
+            self.push_err(Diagnostic {
+                span,
+                code: "rhdl::E0135".into(),
+                en: format!("concat destination '{dst}' must equal widths of '{high}' and '{low}'"),
+                zh: format!("concat 目标 '{dst}' 必须等于 '{high}' 与 '{low}' 的位宽之和"),
+            });
+            return;
+        }
+        self.push_comb_net_expr(
+            dst,
+            AssignExpr::Concat {
+                high,
+                low,
+                low_width: low_width.unwrap(),
+            },
+            span,
+        );
+    }
+
+    fn assign_extend(&mut self, dst: String, src: String, to_width: u32, sign: bool, span: Span) {
+        let src_width = self.widths.get(&src).copied();
+        if src_width.is_none_or(|w| to_width <= w)
+            || self.widths.get(&dst).copied() != Some(to_width)
+        {
+            self.push_err(Diagnostic { span, code: "rhdl::E0136".into(), en: format!("extension from '{src}' to {to_width} bits requires a wider matching destination '{dst}'"), zh: format!("从 '{src}' 扩展到 {to_width} 位要求目标 '{dst}' 更宽且位宽匹配") });
+            return;
+        }
+        let from_width = src_width.unwrap();
+        let expr = if sign {
+            AssignExpr::SignExtend {
+                src,
+                from_width,
+                to_width,
+            }
+        } else {
+            AssignExpr::ZeroExtend {
+                src,
+                from_width,
+                to_width,
+            }
+        };
+        self.push_comb_net_expr(dst, expr, span);
+    }
+
+    pub fn assign_zero_extend(
+        &mut self,
+        dst: impl Into<String>,
+        src: impl Into<String>,
+        to_width: u32,
+        span: Span,
+    ) {
+        self.assign_extend(dst.into(), src.into(), to_width, false, span);
+    }
+
+    pub fn assign_sign_extend(
+        &mut self,
+        dst: impl Into<String>,
+        src: impl Into<String>,
+        to_width: u32,
+        span: Span,
+    ) {
+        self.assign_extend(dst.into(), src.into(), to_width, true, span);
+    }
+
+    /// Combinational read from an async-read `Mem`.
+    pub fn assign_mem_read(
+        &mut self,
+        dst: impl Into<String>,
+        mem: impl Into<String>,
+        addr: impl Into<String>,
+        span: Span,
+    ) {
+        let dst = dst.into();
+        let mem = mem.into();
+        let addr = addr.into();
+        let Some((depth, width, sync_read)) = self.memories.get(&mem).copied() else {
+            self.push_err(Diagnostic {
+                span,
+                code: "rhdl::E0213".into(),
+                en: format!("unknown memory '{mem}'"),
+                zh: format!("未知 memory '{mem}'"),
+            });
+            return;
+        };
+        let addr_width = self.widths.get(&addr).copied();
+        let required = (32 - (depth - 1).leading_zeros()).max(1);
+        if sync_read
+            || self.widths.get(&dst).copied() != Some(width)
+            || addr_width != Some(required)
+        {
+            self.push_err(Diagnostic { span, code: "rhdl::E0214".into(), en: format!("combinational read of '{mem}' requires async memory, {required}-bit address, and {width}-bit destination"), zh: format!("组合读取 '{mem}' 要求异步 memory、{required} 位地址和 {width} 位目标") });
+            return;
+        }
+        self.push_comb_net_expr(dst, AssignExpr::MemRead { mem, addr }, span);
     }
 
     fn push_comb_net_expr(&mut self, dst: String, expr: AssignExpr, span: Span) {

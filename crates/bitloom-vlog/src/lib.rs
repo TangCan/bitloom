@@ -44,6 +44,22 @@ fn emit_expr(expr: &AssignExpr) -> String {
         AssignExpr::Xor(a, b) => format!("({a} ^ {b})"),
         AssignExpr::Shl(a, b) => format!("({a} << {b})"),
         AssignExpr::Shr(a, b) => format!("({a} >> {b})"),
+        AssignExpr::Slice { src, lo, width } => format!("{src}[{}:{}]", lo + width - 1, lo),
+        AssignExpr::Concat { high, low, .. } => format!("{{{high}, {low}}}"),
+        AssignExpr::ZeroExtend {
+            src,
+            from_width,
+            to_width,
+        } => format!("{{{{{}{{1'b0}}}}, {src}}}", to_width - from_width),
+        AssignExpr::SignExtend {
+            src,
+            from_width,
+            to_width,
+        } => format!(
+            "{{{{{}{{{src}[{}]}}}}, {src}}}",
+            to_width - from_width,
+            from_width - 1
+        ),
         AssignExpr::Eq(a, b) => format!("({a} == {b})"),
         AssignExpr::Mux { sel, t, f } => format!("({sel} ? {t} : {f})"),
         AssignExpr::MemRead { mem, addr } => format!("{mem}[{addr}]"),

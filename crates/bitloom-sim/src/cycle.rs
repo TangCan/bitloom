@@ -232,10 +232,30 @@ fn emit_hir_builder(hir: &FrozenHir) -> Result<String, String> {
                 }
                 body.push_str("    s.end_process();\n");
             }
-            Stmt::Instance(_) | Stmt::MemDecl { .. } => {
-                return Err(
-                    "instances/memories not supported in minimal cycle-accurate emit".into(),
-                );
+            Stmt::MemDecl {
+                name,
+                depth,
+                width,
+                sync_read,
+                init,
+                ..
+            } => {
+                let method = if *sync_read {
+                    "declare_sync_read_mem"
+                } else {
+                    "declare_mem"
+                };
+                if let Some(init) = init {
+                    let method = format!("{method}_with_init");
+                    body.push_str(&format!("    s.{method}({name:?}, {depth}, {width}, vec!{init:?}, Span::default());\n"));
+                } else {
+                    body.push_str(&format!(
+                        "    s.{method}({name:?}, {depth}, {width}, Span::default());\n"
+                    ));
+                }
+            }
+            Stmt::Instance(_) => {
+                return Err("instances not supported in cycle-accurate emit".into());
             }
         }
     }
@@ -278,6 +298,21 @@ fn emit_assign(a: &bitloom_hir::Assign) -> Result<String, String> {
         )),
         (AssignTarget::Net(name), AssignExpr::Eq(a, b)) => Ok(format!(
             "    s.assign_eq({name:?}, {a:?}, {b:?}, Span::default());\n"
+        )),
+        (AssignTarget::Net(name), AssignExpr::Slice { src, lo, width }) => Ok(format!(
+            "    s.assign_slice({name:?}, {src:?}, {lo}, {width}, Span::default());\n"
+        )),
+        (AssignTarget::Net(name), AssignExpr::Concat { high, low, .. }) => Ok(format!(
+            "    s.assign_concat({name:?}, {high:?}, {low:?}, Span::default());\n"
+        )),
+        (AssignTarget::Net(name), AssignExpr::ZeroExtend { src, to_width, .. }) => Ok(format!(
+            "    s.assign_zero_extend({name:?}, {src:?}, {to_width}, Span::default());\n"
+        )),
+        (AssignTarget::Net(name), AssignExpr::SignExtend { src, to_width, .. }) => Ok(format!(
+            "    s.assign_sign_extend({name:?}, {src:?}, {to_width}, Span::default());\n"
+        )),
+        (AssignTarget::Net(name), AssignExpr::MemRead { mem, addr }) => Ok(format!(
+            "    s.assign_mem_read({name:?}, {mem:?}, {addr:?}, Span::default());\n"
         )),
         (AssignTarget::Net(name), AssignExpr::Mux { sel, t, f }) => Ok(format!(
             "    s.assign_mux({name:?}, {sel:?}, {t:?}, {f:?}, Span::default());\n"

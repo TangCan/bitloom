@@ -184,6 +184,44 @@ impl GeneratedFunctional {
             AssignExpr::Xor(a, b) => self.lookup(inputs, a) ^ self.lookup(inputs, b),
             AssignExpr::Shl(a, b) => self.lookup(inputs, a) << (self.lookup(inputs, b) & 63),
             AssignExpr::Shr(a, b) => self.lookup(inputs, a) >> (self.lookup(inputs, b) & 63),
+            AssignExpr::Slice { src, lo, width } => {
+                (self.lookup(inputs, src) >> lo)
+                    & if *width == 64 {
+                        u64::MAX
+                    } else {
+                        (1u64 << width) - 1
+                    }
+            }
+            AssignExpr::Concat {
+                high,
+                low,
+                low_width,
+            } => (self.lookup(inputs, high) << low_width) | self.lookup(inputs, low),
+            AssignExpr::ZeroExtend { src, to_width, .. } => {
+                self.lookup(inputs, src)
+                    & if *to_width == 64 {
+                        u64::MAX
+                    } else {
+                        (1u64 << to_width) - 1
+                    }
+            }
+            AssignExpr::SignExtend {
+                src,
+                from_width: from,
+                to_width,
+            } => {
+                let v = self.lookup(inputs, src);
+                let e = if *from < 64 && v & (1u64 << (from - 1)) != 0 {
+                    v | (!0u64 << from)
+                } else {
+                    v
+                };
+                e & if *to_width == 64 {
+                    u64::MAX
+                } else {
+                    (1u64 << to_width) - 1
+                }
+            }
             AssignExpr::Eq(a, b) => u64::from(self.lookup(inputs, a) == self.lookup(inputs, b)),
             AssignExpr::Mux { sel, t, f } => {
                 if self.lookup(inputs, sel) != 0 {
@@ -595,6 +633,42 @@ fn render_expr(expr: &AssignExpr) -> String {
         AssignExpr::Shr(a, b) => {
             format!("self.lookup(inputs, {a:?}) >> (self.lookup(inputs, {b:?}) & 63)")
         }
+        AssignExpr::Slice { src, lo, width } => format!(
+            "(self.lookup(inputs, {src:?}) >> {lo}) & {}",
+            if *width == 64 {
+                "u64::MAX".into()
+            } else {
+                format!("((1u64 << {width}) - 1)")
+            }
+        ),
+        AssignExpr::Concat {
+            high,
+            low,
+            low_width,
+        } => {
+            format!("(self.lookup(inputs, {high:?}) << {low_width}) | self.lookup(inputs, {low:?})")
+        }
+        AssignExpr::ZeroExtend { src, to_width, .. } => format!(
+            "self.lookup(inputs, {src:?}) & {}",
+            if *to_width == 64 {
+                "u64::MAX".into()
+            } else {
+                format!("((1u64 << {to_width}) - 1)")
+            }
+        ),
+        AssignExpr::SignExtend {
+            src,
+            from_width,
+            to_width,
+        } => format!(
+            "{{ let v = self.lookup(inputs, {src:?}); let e = if {from_width} < 64 && v & (1u64 << ({} - 1)) != 0 {{ v | (!0u64 << {from_width}) }} else {{ v }}; e & {} }}",
+            from_width,
+            if *to_width == 64 {
+                "u64::MAX".into()
+            } else {
+                format!("((1u64 << {to_width}) - 1)")
+            }
+        ),
         AssignExpr::Eq(a, b) => {
             format!("u64::from(self.lookup(inputs, {a:?}) == self.lookup(inputs, {b:?}))")
         }
