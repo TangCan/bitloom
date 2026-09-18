@@ -115,7 +115,18 @@ fn resolve_dep(crate_name: &str, out_dir: &Path) -> String {
             return format!("{crate_name} = {{ path = \"{}\" }}", c.display());
         }
     }
-    format!("{crate_name} = \"{}\"", env!("CARGO_PKG_VERSION"))
+    format!(
+        "{crate_name} = \"{}\"",
+        published_dependency_version(crate_name)
+    )
+}
+
+fn published_dependency_version(crate_name: &str) -> &'static str {
+    match crate_name {
+        "bitloom-hir" | "bitloom-builder" => "1.1.0",
+        "bitloom-sim" => env!("CARGO_PKG_VERSION"),
+        _ => unreachable!("cycle crate generator requested unknown dependency: {crate_name}"),
+    }
 }
 
 fn render_cargo_toml(pkg: &str, out_dir: &Path) -> io::Result<String> {
@@ -384,6 +395,13 @@ mod tests {
             lib.contains("CycleAccurate") && lib.contains("Sim::tick") || lib.contains("sim.tick")
         );
         assert!(lib.contains("cycle_wrapper_smoke"));
+    }
+
+    #[test]
+    fn generated_crate_registry_dependencies_use_published_versions() {
+        assert_eq!(published_dependency_version("bitloom-hir"), "1.1.0");
+        assert_eq!(published_dependency_version("bitloom-builder"), "1.1.0");
+        assert_eq!(published_dependency_version("bitloom-sim"), "1.1.2");
     }
 
     #[test]
