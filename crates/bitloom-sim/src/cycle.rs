@@ -123,7 +123,7 @@ fn resolve_dep(crate_name: &str, out_dir: &Path) -> String {
 
 fn published_dependency_version(crate_name: &str) -> &'static str {
     match crate_name {
-        "bitloom-hir" | "bitloom-builder" => "1.1.0",
+        "bitloom-hir" | "bitloom-builder" => "1.1.1",
         "bitloom-sim" => env!("CARGO_PKG_VERSION"),
         _ => unreachable!("cycle crate generator requested unknown dependency: {crate_name}"),
     }
@@ -281,6 +281,26 @@ fn emit_assign(a: &bitloom_hir::Assign) -> Result<String, String> {
         (AssignTarget::RegD(name), AssignExpr::Mux { sel, t, f }) => Ok(format!(
             "    s.assign_reg_d_mux({name:?}, {sel:?}, {t:?}, {f:?}, Span::default());\n"
         )),
+        (
+            AssignTarget::MemWrite {
+                mem,
+                addr,
+                we: None,
+            },
+            AssignExpr::Ref(data),
+        ) => Ok(format!(
+            "    s.assign_mem_write({mem:?}, {addr:?}, {data:?}, Span::default());\n"
+        )),
+        (
+            AssignTarget::MemWrite {
+                mem,
+                addr,
+                we: Some(we),
+            },
+            AssignExpr::Ref(data),
+        ) => Ok(format!(
+            "    s.assign_mem_write_en({mem:?}, {addr:?}, {data:?}, {we:?}, Span::default());\n"
+        )),
         (AssignTarget::Net(name), AssignExpr::Add(a, b)) => Ok(format!(
             "    s.assign_add({name:?}, {a:?}, {b:?}, Span::default());\n"
         )),
@@ -395,6 +415,7 @@ mod tests {{
 #[cfg(test)]
 mod tests {
     use bitloom_builder::{ElaborateSession, GroundType, Span};
+    use bitloom_hir::{Assign, AssignExpr, AssignTarget};
 
     use super::*;
     use crate::reset_then_run;
@@ -449,11 +470,44 @@ mod tests {
 
     #[test]
     fn generated_crate_registry_dependencies_use_published_versions() {
-        assert_eq!(published_dependency_version("bitloom-hir"), "1.1.0");
-        assert_eq!(published_dependency_version("bitloom-builder"), "1.1.0");
+        assert_eq!(published_dependency_version("bitloom-hir"), "1.1.1");
+        assert_eq!(published_dependency_version("bitloom-builder"), "1.1.1");
         assert_eq!(
             published_dependency_version("bitloom-sim"),
             env!("CARGO_PKG_VERSION")
+        );
+    }
+
+    #[test]
+    fn emit_cycle_crate_rebuilds_gpr_style_memory_writes() {
+        let span = Span::default();
+        let plain = Assign {
+            target: AssignTarget::MemWrite {
+                mem: "gpr".into(),
+                addr: "rd".into(),
+                we: None,
+            },
+            expr: AssignExpr::Ref("data".into()),
+            span,
+        };
+        let gated = Assign {
+            target: AssignTarget::MemWrite {
+                mem: "gpr".into(),
+                addr: "rd".into(),
+                we: Some("we".into()),
+            },
+            expr: AssignExpr::Ref("data".into()),
+            span,
+        };
+        assert!(
+            emit_assign(&plain)
+                .unwrap()
+                .contains("assign_mem_write(\"gpr\"")
+        );
+        assert!(
+            emit_assign(&gated)
+                .unwrap()
+                .contains("assign_mem_write_en(\"gpr\"")
         );
     }
 
