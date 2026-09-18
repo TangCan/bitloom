@@ -45,21 +45,21 @@ default-members = [
 edition = "2024"
 rust-version = "1.97.1"
 license = "MIT OR Apache-2.0"
-version = "1.1.0"
+version = "1.1.1"
 
 [workspace.dependencies]
-bitloom-hir = { path = "crates/bitloom-hir", version = "1.1.0" }
-bitloom-builder = { path = "crates/bitloom-builder", version = "1.1.0" }
+bitloom-hir = { path = "crates/bitloom-hir", version = "1.1.1" }
+bitloom-builder = { path = "crates/bitloom-builder", version = "1.1.1" }
 bitloom-macro = { path = "crates/bitloom-macro", version = "1.1.0" }
-bitloom-prelude = { path = "crates/bitloom-prelude", version = "1.1.0" }
-bitloom-vlog = { path = "crates/bitloom-vlog", version = "1.1.0" }
-bitloom-sim = { path = "crates/bitloom-sim", version = "1.1.0" }
+bitloom-prelude = { path = "crates/bitloom-prelude", version = "1.1.1" }
+bitloom-vlog = { path = "crates/bitloom-vlog", version = "1.1.1" }
+bitloom-sim = { path = "crates/bitloom-sim", version = "1.1.5" }
 rhdl-cabi = { path = "crates/rhdl-cabi" }
 rhdl-hls = { path = "crates/rhdl-hls" }
 rhdl-formal = { path = "crates/rhdl-formal" }
 rhdl-float = { path = "crates/rhdl-float" }
-bitloom-viz = { path = "crates/rhdl-viz", version = "1.1.0" }
-bitloom-firrtl = { path = "crates/rhdl-firrtl", version = "1.1.0" }
+bitloom-viz = { path = "crates/rhdl-viz", version = "1.1.1" }
+bitloom-firrtl = { path = "crates/rhdl-firrtl", version = "1.1.1" }
 proc-macro2 = "1"
 quote = "1"
 syn = { version = "2", features = ["full"] }
