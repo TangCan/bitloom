@@ -39,6 +39,8 @@ pub struct ElaborateSession {
     signals: HashMap<String, SignalKind>,
     /// name -> bit width for UInt/SInt (Clock/Reset/Bool use 1)
     widths: HashMap<String, u32>,
+    /// name -> declared ground type for typed arithmetic validation
+    types: HashMap<String, GroundType>,
     /// memory name -> (depth, word width, synchronous read)
     memories: HashMap<String, (u32, u32, bool)>,
     /// Phantom clock-domain id per signal (AD-22); default 0.
@@ -58,6 +60,7 @@ impl ElaborateSession {
             current: None,
             signals: HashMap::new(),
             widths: HashMap::new(),
+            types: HashMap::new(),
             memories: HashMap::new(),
             domains: HashMap::new(),
             cdc_bridges: HashSet::new(),
@@ -75,6 +78,7 @@ impl ElaborateSession {
     pub fn begin_module(&mut self, name: impl Into<String>, span: Span) {
         self.signals.clear();
         self.widths.clear();
+        self.types.clear();
         self.memories.clear();
         self.domains.clear();
         self.cdc_bridges.clear();
@@ -170,6 +174,7 @@ impl ElaborateSession {
             GroundType::Clock | GroundType::Reset | GroundType::Bool | GroundType::Analog => 1,
         };
         self.widths.insert(name.to_string(), w);
+        self.types.insert(name.to_string(), ty.clone());
     }
 
     /// Fail-before-emit when a flattened leaf / port name collides (FR51).
@@ -442,6 +447,7 @@ impl ElaborateSession {
         };
         self.signals.insert(name.clone(), SignalKind::Wire);
         self.widths.insert(name.clone(), width);
+        self.types.insert(name.clone(), GroundType::UInt { width });
         self.memories
             .insert(name.clone(), (depth, width, sync_read));
         if let Some(m) = self.current.as_mut() {
@@ -936,6 +942,132 @@ impl ElaborateSession {
         span: Span,
     ) {
         self.push_comb_net_expr(dst.into(), AssignExpr::Shr(lhs.into(), rhs.into()), span);
+    }
+
+    fn assign_typed_compare(
+        &mut self,
+        dst: String,
+        lhs: String,
+        rhs: String,
+        signed: bool,
+        span: Span,
+    ) {
+        let required = if signed { "SInt" } else { "UInt" };
+        let valid_operands = matches!(self.types.get(&lhs), Some(GroundType::SInt { .. }))
+            && matches!(self.types.get(&rhs), Some(GroundType::SInt { .. }));
+        let valid_operands = if signed {
+            valid_operands
+        } else {
+            matches!(self.types.get(&lhs), Some(GroundType::UInt { .. }))
+                && matches!(self.types.get(&rhs), Some(GroundType::UInt { .. }))
+        };
+        let width = self
+            .widths
+            .get(&lhs)
+            .copied()
+            .zip(self.widths.get(&rhs).copied())
+            .and_then(|(lhs_width, rhs_width)| (lhs_width == rhs_width).then_some(lhs_width));
+        if !valid_operands || width.is_none() {
+            self.push_err(Diagnostic {
+                span,
+                code: "rhdl::E0137".into(),
+                en: format!("comparison requires same-width {required} operands"),
+                zh: format!("比较要求同位宽 {required} 操作数"),
+            });
+            return;
+        }
+        if !matches!(self.types.get(&dst), Some(GroundType::Bool)) {
+            self.push_err(Diagnostic {
+                span,
+                code: "rhdl::E0138".into(),
+                en: format!("comparison destination '{dst}' must be Bool"),
+                zh: format!("比较目标 '{dst}' 必须为 Bool"),
+            });
+            return;
+        }
+        let expr = if signed {
+            AssignExpr::Slt {
+                lhs,
+                rhs,
+                width: width.unwrap(),
+            }
+        } else {
+            AssignExpr::Ult {
+                lhs,
+                rhs,
+                width: width.unwrap(),
+            }
+        };
+        self.push_comb_net_expr(dst, expr, span);
+    }
+
+    /// Combinational unsigned comparison of same-width `UInt` operands.
+    pub fn assign_ult(
+        &mut self,
+        dst: impl Into<String>,
+        lhs: impl Into<String>,
+        rhs: impl Into<String>,
+        span: Span,
+    ) {
+        self.assign_typed_compare(dst.into(), lhs.into(), rhs.into(), false, span);
+    }
+
+    /// Combinational two's-complement comparison of same-width `SInt` operands.
+    pub fn assign_slt(
+        &mut self,
+        dst: impl Into<String>,
+        lhs: impl Into<String>,
+        rhs: impl Into<String>,
+        span: Span,
+    ) {
+        self.assign_typed_compare(dst.into(), lhs.into(), rhs.into(), true, span);
+    }
+
+    /// Combinational arithmetic right shift of a same-width `SInt` value.
+    pub fn assign_sar(
+        &mut self,
+        dst: impl Into<String>,
+        value: impl Into<String>,
+        shamt: impl Into<String>,
+        span: Span,
+    ) {
+        let dst = dst.into();
+        let value = value.into();
+        let shamt = shamt.into();
+        let width = self.widths.get(&value).copied();
+        let valid = matches!(self.types.get(&value), Some(GroundType::SInt { .. }))
+            && self.widths.contains_key(&shamt)
+            && matches!(self.types.get(&dst), Some(GroundType::SInt { .. }))
+            && self.widths.get(&dst).copied() == width;
+        let Some(width) = width else {
+            self.push_err(Diagnostic {
+                span,
+                code: "rhdl::E0139".into(),
+                en: format!("arithmetic right shift references unknown value '{value}'"),
+                zh: format!("算术右移引用未知值 '{value}'"),
+            });
+            return;
+        };
+        if !valid {
+            self.push_err(Diagnostic {
+                span,
+                code: "rhdl::E0139".into(),
+                en: format!(
+                    "arithmetic right shift requires SInt value/destination with matching width"
+                ),
+                zh: "算术右移要求 SInt 输入和同位宽 SInt 目标".into(),
+            });
+            return;
+        }
+        self.push_comb_net_expr(
+            dst,
+            AssignExpr::Sar {
+                value,
+                shamt,
+                width,
+            },
+            span,
+        );
     }
 
     /// Combinational extraction of `width` bits starting at LSB bit `lo`.

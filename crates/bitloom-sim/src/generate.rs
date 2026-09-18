@@ -184,6 +184,24 @@ impl GeneratedFunctional {
             AssignExpr::Xor(a, b) => self.lookup(inputs, a) ^ self.lookup(inputs, b),
             AssignExpr::Shl(a, b) => self.lookup(inputs, a) << (self.lookup(inputs, b) & 63),
             AssignExpr::Shr(a, b) => self.lookup(inputs, a) >> (self.lookup(inputs, b) & 63),
+            AssignExpr::Ult { lhs, rhs, width } => u64::from(
+                mask_width(self.lookup(inputs, lhs), *width)
+                    < mask_width(self.lookup(inputs, rhs), *width),
+            ),
+            AssignExpr::Slt { lhs, rhs, width } => u64::from(signed_less(
+                self.lookup(inputs, lhs),
+                self.lookup(inputs, rhs),
+                *width,
+            )),
+            AssignExpr::Sar {
+                value,
+                shamt,
+                width,
+            } => arithmetic_right_shift(
+                self.lookup(inputs, value),
+                self.lookup(inputs, shamt),
+                *width,
+            ),
             AssignExpr::Slice { src, lo, width } => {
                 (self.lookup(inputs, src) >> lo)
                     & if *width == 64 {
@@ -233,6 +251,45 @@ impl GeneratedFunctional {
             AssignExpr::MemRead { mem, addr } => self.eval_mem_read(inputs, mem, addr),
         }
     }
+}
+
+fn signed_less(lhs: u64, rhs: u64, width: u32) -> bool {
+    let lhs = mask_width(lhs, width);
+    let rhs = mask_width(rhs, width);
+    let sign = 1u64 << (width - 1);
+    let lhs_negative = lhs & sign != 0;
+    let rhs_negative = rhs & sign != 0;
+    if lhs_negative != rhs_negative {
+        lhs_negative
+    } else {
+        lhs < rhs
+    }
+}
+
+fn mask_width(value: u64, width: u32) -> u64 {
+    value
+        & if width == 64 {
+            u64::MAX
+        } else {
+            (1u64 << width) - 1
+        }
+}
+
+fn arithmetic_right_shift(value: u64, shamt: u64, width: u32) -> u64 {
+    let mask = if width == 64 {
+        u64::MAX
+    } else {
+        (1u64 << width) - 1
+    };
+    let value = value & mask;
+    let shamt = shamt & 63;
+    if value & (1u64 << (width - 1)) == 0 {
+        return value >> shamt;
+    }
+    if shamt >= u64::from(width) {
+        return mask;
+    }
+    ((value >> shamt) | (!0u64 << (width - shamt as u32))) & mask
 }
 
 impl AbstractionView for GeneratedFunctional {
@@ -523,6 +580,29 @@ use std::collections::BTreeMap;
 
 use bitloom_hir::PortValues;
 
+#[allow(dead_code)]
+fn mask_width(value: u64, width: u32) -> u64 {{
+    value & if width == 64 {{ u64::MAX }} else {{ (1u64 << width) - 1 }}
+}}
+
+#[allow(dead_code)]
+fn signed_less(lhs: u64, rhs: u64, width: u32) -> bool {{
+    let lhs = mask_width(lhs, width);
+    let rhs = mask_width(rhs, width);
+    let sign = 1u64 << (width - 1);
+    if (lhs & sign != 0) != (rhs & sign != 0) {{ lhs & sign != 0 }} else {{ lhs < rhs }}
+}}
+
+#[allow(dead_code)]
+fn arithmetic_right_shift(value: u64, shamt: u64, width: u32) -> u64 {{
+    let mask = mask_width(u64::MAX, width);
+    let value = value & mask;
+    let shamt = shamt & 63;
+    if value & (1u64 << (width - 1)) == 0 {{ return value >> shamt; }}
+    if shamt >= u64::from(width) {{ return mask; }}
+    ((value >> shamt) | (!0u64 << (width - shamt as u32))) & mask
+}}
+
 /// Generated functional view (AbstractionView-compatible cycle API).
 #[derive(Debug, Clone)]
 #[allow(dead_code)] // mems/pending unused on designs without MemRead
@@ -633,6 +713,19 @@ fn render_expr(expr: &AssignExpr) -> String {
         AssignExpr::Shr(a, b) => {
             format!("self.lookup(inputs, {a:?}) >> (self.lookup(inputs, {b:?}) & 63)")
         }
+        AssignExpr::Ult { lhs, rhs, width } => format!(
+            "u64::from(mask_width(self.lookup(inputs, {lhs:?}), {width}) < mask_width(self.lookup(inputs, {rhs:?}), {width}))"
+        ),
+        AssignExpr::Slt { lhs, rhs, width } => format!(
+            "u64::from(signed_less(self.lookup(inputs, {lhs:?}), self.lookup(inputs, {rhs:?}), {width}))"
+        ),
+        AssignExpr::Sar {
+            value,
+            shamt,
+            width,
+        } => format!(
+            "arithmetic_right_shift(self.lookup(inputs, {value:?}), self.lookup(inputs, {shamt:?}), {width})"
+        ),
         AssignExpr::Slice { src, lo, width } => format!(
             "(self.lookup(inputs, {src:?}) >> {lo}) & {}",
             if *width == 64 {

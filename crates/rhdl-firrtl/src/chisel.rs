@@ -1005,6 +1005,11 @@ fn emit_expr(m: &Module, expr: &AssignExpr) -> String {
         AssignExpr::Xor(a, b) => format!("{} ^ {}", ref_name(m, a), ref_name(m, b)),
         AssignExpr::Shl(a, b) => format!("{} << {}", ref_name(m, a), ref_name(m, b)),
         AssignExpr::Shr(a, b) => format!("{} >> {}", ref_name(m, a), ref_name(m, b)),
+        AssignExpr::Ult { lhs, rhs, .. } => format!("{} < {}", ref_name(m, lhs), ref_name(m, rhs)),
+        AssignExpr::Slt { lhs, rhs, .. } => format!("{} < {}", ref_name(m, lhs), ref_name(m, rhs)),
+        AssignExpr::Sar { value, shamt, .. } => {
+            format!("{} >> {}", ref_name(m, value), ref_name(m, shamt))
+        }
         AssignExpr::Slice { src, lo, width } => {
             format!("{}({}, {lo})", ref_name(m, src), lo + width - 1)
         }

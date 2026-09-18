@@ -296,8 +296,23 @@ fn emit_assign(a: &bitloom_hir::Assign) -> Result<String, String> {
         (AssignTarget::Net(name), AssignExpr::Xor(a, b)) => Ok(format!(
             "    s.assign_xor({name:?}, {a:?}, {b:?}, Span::default());\n"
         )),
+        (AssignTarget::Net(name), AssignExpr::Shl(a, b)) => Ok(format!(
+            "    s.assign_shl({name:?}, {a:?}, {b:?}, Span::default());\n"
+        )),
+        (AssignTarget::Net(name), AssignExpr::Shr(a, b)) => Ok(format!(
+            "    s.assign_shr({name:?}, {a:?}, {b:?}, Span::default());\n"
+        )),
         (AssignTarget::Net(name), AssignExpr::Eq(a, b)) => Ok(format!(
             "    s.assign_eq({name:?}, {a:?}, {b:?}, Span::default());\n"
+        )),
+        (AssignTarget::Net(name), AssignExpr::Ult { lhs, rhs, .. }) => Ok(format!(
+            "    s.assign_ult({name:?}, {lhs:?}, {rhs:?}, Span::default());\n"
+        )),
+        (AssignTarget::Net(name), AssignExpr::Slt { lhs, rhs, .. }) => Ok(format!(
+            "    s.assign_slt({name:?}, {lhs:?}, {rhs:?}, Span::default());\n"
+        )),
+        (AssignTarget::Net(name), AssignExpr::Sar { value, shamt, .. }) => Ok(format!(
+            "    s.assign_sar({name:?}, {value:?}, {shamt:?}, Span::default());\n"
         )),
         (AssignTarget::Net(name), AssignExpr::Slice { src, lo, width }) => Ok(format!(
             "    s.assign_slice({name:?}, {src:?}, {lo}, {width}, Span::default());\n"

@@ -133,6 +133,24 @@ pub enum AssignExpr {
     Shl(String, String),
     /// Logical right shift: `a >> (b & 63)`.
     Shr(String, String),
+    /// Unsigned same-width comparison: `a < b` → 0/1.
+    Ult {
+        lhs: String,
+        rhs: String,
+        width: u32,
+    },
+    /// Two's-complement same-width comparison: `a < b` → 0/1.
+    Slt {
+        lhs: String,
+        rhs: String,
+        width: u32,
+    },
+    /// Arithmetic right shift of a `width`-bit two's-complement value.
+    Sar {
+        value: String,
+        shamt: String,
+        width: u32,
+    },
     /// Extract `width` bits starting at LSB bit `lo`.
     Slice { src: String, lo: u32, width: u32 },
     /// Concatenate `high` above `low`.

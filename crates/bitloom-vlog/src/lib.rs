@@ -44,6 +44,9 @@ fn emit_expr(expr: &AssignExpr) -> String {
         AssignExpr::Xor(a, b) => format!("({a} ^ {b})"),
         AssignExpr::Shl(a, b) => format!("({a} << {b})"),
         AssignExpr::Shr(a, b) => format!("({a} >> {b})"),
+        AssignExpr::Ult { lhs, rhs, .. } => format!("({lhs} < {rhs})"),
+        AssignExpr::Slt { lhs, rhs, .. } => format!("($signed({lhs}) < $signed({rhs}))"),
+        AssignExpr::Sar { value, shamt, .. } => format!("($signed({value}) >>> {shamt})"),
         AssignExpr::Slice { src, lo, width } => format!("{src}[{}:{}]", lo + width - 1, lo),
         AssignExpr::Concat { high, low, .. } => format!("{{{high}, {low}}}"),
         AssignExpr::ZeroExtend {

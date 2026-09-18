@@ -250,6 +250,17 @@ impl Sim {
             AssignExpr::Xor(a, b) => self.lookup(a) ^ self.lookup(b),
             AssignExpr::Shl(a, b) => self.lookup(a) << (self.lookup(b) & 63),
             AssignExpr::Shr(a, b) => self.lookup(a) >> (self.lookup(b) & 63),
+            AssignExpr::Ult { lhs, rhs, width } => u64::from(
+                mask_width(self.lookup(lhs), *width) < mask_width(self.lookup(rhs), *width),
+            ),
+            AssignExpr::Slt { lhs, rhs, width } => {
+                u64::from(signed_less(self.lookup(lhs), self.lookup(rhs), *width))
+            }
+            AssignExpr::Sar {
+                value,
+                shamt,
+                width,
+            } => arithmetic_right_shift(self.lookup(value), self.lookup(shamt), *width),
             AssignExpr::Slice { src, lo, width } => {
                 let mask = if *width == 64 {
                     u64::MAX
@@ -576,6 +587,45 @@ impl Sim {
             }
         }
     }
+}
+
+fn signed_less(lhs: u64, rhs: u64, width: u32) -> bool {
+    let lhs = mask_width(lhs, width);
+    let rhs = mask_width(rhs, width);
+    let sign = 1u64 << (width - 1);
+    let lhs_negative = lhs & sign != 0;
+    let rhs_negative = rhs & sign != 0;
+    if lhs_negative != rhs_negative {
+        lhs_negative
+    } else {
+        lhs < rhs
+    }
+}
+
+fn mask_width(value: u64, width: u32) -> u64 {
+    value
+        & if width == 64 {
+            u64::MAX
+        } else {
+            (1u64 << width) - 1
+        }
+}
+
+fn arithmetic_right_shift(value: u64, shamt: u64, width: u32) -> u64 {
+    let mask = if width == 64 {
+        u64::MAX
+    } else {
+        (1u64 << width) - 1
+    };
+    let value = value & mask;
+    let shamt = shamt & 63;
+    if value & (1u64 << (width - 1)) == 0 {
+        return value >> shamt;
+    }
+    if shamt >= u64::from(width) {
+        return mask;
+    }
+    ((value >> shamt) | (!0u64 << (width - shamt as u32))) & mask
 }
 
 /// A handwritten abstraction/bridge cycle (FR29). Compared only via `PortValues`.
