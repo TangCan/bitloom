@@ -1,0 +1,9 @@
+{
+  "command": "cargo clean && cargo fmt --all && just test",
+  "exit": 0,
+  "result_blocks": 460,
+  "passed": 1763,
+  "failed": 0,
+  "ignored": 14,
+  "note": "Aggregated actual test-result blocks, including spawned generated-crate tests. Eight dedicated formal tests have separate proof evidence; six existing doctests remain ignored."
+}

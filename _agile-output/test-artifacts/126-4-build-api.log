@@ -1,0 +1,418 @@
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 3.45s
+     Running tests/fr195_param_sync_fifo.rs (target/debug/deps/fr195_param_sync_fifo-f684c9903ceceaa3)
+
+running 31 tests
+FR195 width=1 depth=1 seed=0x12641950a551 accepted=103 delivered=100 cancelled=3 occupancy=[172, 248] simultaneous=0 full_release=81 reset_live=1 flush_live=2 overlap=1 longest_stall=41 longest_throughput=0 full_drains=100
+FR195 width=64 depth=3 seed=0x12641950a551 accepted=177 delivered=167 cancelled=10 occupancy=[82, 105, 85, 148] simultaneous=124 full_release=18 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=6
+FR195 width=1 depth=2 seed=0x12641950a551 accepted=171 delivered=165 cancelled=6 occupancy=[81, 179, 160] simultaneous=122 full_release=23 reset_live=1 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=10
+FR195 width=1 depth=3 seed=0x12641950a551 accepted=177 delivered=167 cancelled=10 occupancy=[82, 105, 85, 148] simultaneous=124 full_release=18 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=6
+FR195 width=64 depth=3 seed=0xdeadbeef8012 accepted=185 delivered=175 cancelled=10 occupancy=[81, 116, 89, 134] simultaneous=130 full_release=10 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=5
+FR195 width=8 depth=7 seed=0x73592401ffff accepted=214 delivered=192 cancelled=22 occupancy=[60, 73, 36, 25, 32, 21, 59, 114] simultaneous=147 full_release=10 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=45 full_drains=3
+FR195 width=1 depth=16 seed=0x12641950a551 accepted=249 delivered=209 cancelled=40 occupancy=[31, 71, 36, 37, 29, 16, 10, 14, 14, 26, 13, 8, 7, 6, 6, 28, 68] simultaneous=143 full_release=3 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=46 full_drains=2
+FR195 width=1 depth=4 seed=0x12641950a551 accepted=188 delivered=176 cancelled=12 occupancy=[72, 97, 41, 72, 138] simultaneous=138 full_release=13 reset_live=1 flush_live=2 overlap=1 longest_stall=41 longest_throughput=44 full_drains=4
+FR195 width=1 depth=7 seed=0x12641950a551 accepted=211 delivered=189 cancelled=22 occupancy=[62, 81, 46, 22, 27, 29, 43, 110] simultaneous=149 full_release=5 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=3
+FR195 width=32 depth=1 seed=0x12641950a551 accepted=103 delivered=100 cancelled=3 occupancy=[172, 248] simultaneous=0 full_release=81 reset_live=1 flush_live=2 overlap=1 longest_stall=41 longest_throughput=0 full_drains=100
+FR195 width=32 depth=16 seed=0x12641950a551 accepted=249 delivered=209 cancelled=40 occupancy=[31, 71, 36, 37, 29, 16, 10, 14, 14, 26, 13, 8, 7, 6, 6, 28, 68] simultaneous=143 full_release=3 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=46 full_drains=2
+FR195 width=32 depth=2 seed=0x12641950a551 accepted=171 delivered=165 cancelled=6 occupancy=[81, 179, 160] simultaneous=122 full_release=23 reset_live=1 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=10
+FR195 width=32 depth=3 seed=0x12641950a551 accepted=177 delivered=167 cancelled=10 occupancy=[82, 105, 85, 148] simultaneous=124 full_release=18 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=6
+FR195 width=32 depth=4 seed=0x12641950a551 accepted=188 delivered=176 cancelled=12 occupancy=[72, 97, 41, 72, 138] simultaneous=138 full_release=13 reset_live=1 flush_live=2 overlap=1 longest_stall=41 longest_throughput=44 full_drains=4
+FR195 width=32 depth=7 seed=0x12641950a551 accepted=211 delivered=189 cancelled=22 occupancy=[62, 81, 46, 22, 27, 29, 43, 110] simultaneous=149 full_release=5 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=3
+FR195 width=64 depth=1 seed=0x12641950a551 accepted=103 delivered=100 cancelled=3 occupancy=[172, 248] simultaneous=0 full_release=81 reset_live=1 flush_live=2 overlap=1 longest_stall=41 longest_throughput=0 full_drains=100
+FR195 width=64 depth=2 seed=0x12641950a551 accepted=171 delivered=165 cancelled=6 occupancy=[81, 179, 160] simultaneous=122 full_release=23 reset_live=1 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=10
+FR195 width=64 depth=3 seed=0x12641950a551 accepted=177 delivered=167 cancelled=10 occupancy=[82, 105, 85, 148] simultaneous=124 full_release=18 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=6
+FR195 width=64 depth=16 seed=0x12641950a551 accepted=249 delivered=209 cancelled=40 occupancy=[31, 71, 36, 37, 29, 16, 10, 14, 14, 26, 13, 8, 7, 6, 6, 28, 68] simultaneous=143 full_release=3 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=46 full_drains=2
+FR195 width=64 depth=4 seed=0x12641950a551 accepted=188 delivered=176 cancelled=12 occupancy=[72, 97, 41, 72, 138] simultaneous=138 full_release=13 reset_live=1 flush_live=2 overlap=1 longest_stall=41 longest_throughput=44 full_drains=4
+FR195 width=64 depth=7 seed=0x12641950a551 accepted=211 delivered=189 cancelled=22 occupancy=[62, 81, 46, 22, 27, 29, 43, 110] simultaneous=149 full_release=5 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=3
+FR195 width=8 depth=1 seed=0x12641950a551 accepted=103 delivered=100 cancelled=3 occupancy=[172, 248] simultaneous=0 full_release=81 reset_live=1 flush_live=2 overlap=1 longest_stall=41 longest_throughput=0 full_drains=100
+FR195 width=8 depth=2 seed=0x12641950a551 accepted=171 delivered=165 cancelled=6 occupancy=[81, 179, 160] simultaneous=122 full_release=23 reset_live=1 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=10
+FR195 width=8 depth=3 seed=0x12641950a551 accepted=177 delivered=167 cancelled=10 occupancy=[82, 105, 85, 148] simultaneous=124 full_release=18 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=6
+FR195 width=8 depth=16 seed=0x12641950a551 accepted=249 delivered=209 cancelled=40 occupancy=[31, 71, 36, 37, 29, 16, 10, 14, 14, 26, 13, 8, 7, 6, 6, 28, 68] simultaneous=143 full_release=3 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=46 full_drains=2
+test p0_depth_is_part_of_definition_identity ... ok
+test distinct_widths_coexist_in_one_session ... ok
+test p0_shared_definition_and_exact_port_contract ... ok
+test p0_invalid_parameters_are_diagnostics_and_leave_no_partial_definition ... ok
+FR195 width=8 depth=4 seed=0x12641950a551 accepted=188 delivered=176 cancelled=12 occupancy=[72, 97, 41, 72, 138] simultaneous=138 full_release=13 reset_live=1 flush_live=2 overlap=1 longest_stall=41 longest_throughput=44 full_drains=4
+FR195 width=8 depth=7 seed=0x12641950a551 accepted=211 delivered=189 cancelled=22 occupancy=[62, 81, 46, 22, 27, 29, 43, 110] simultaneous=149 full_release=5 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=3
+
+thread 'p1_native_hierarchy_remains_explicitly_unsupported' (3326085) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'p1_native_hierarchy_remains_explicitly_unsupported' (3326085) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+test p1_native_hierarchy_remains_explicitly_unsupported ... ok
+legacy-known-ram: FR195 PASS
+tb.sv:27: $finish called at 36 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/legacy-known-ram-3326052
+test p0_legacy_fifo_known_ram_latency_full_and_reset_retention ... ok
+single-w1-d1-seed12641950a551: FR195 PASS
+tb.sv:6618: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d1-seed12641950a551-3326052
+FR195 width=1 depth=1 seed=0xdeadbeef8012 accepted=108 delivered=104 cancelled=4 occupancy=[172, 248] simultaneous=0 full_release=86 reset_live=2 flush_live=2 overlap=1 longest_stall=39 longest_throughput=0 full_drains=104
+single-w32-d1-seed12641950a551: FR195 PASS
+tb.sv:6618: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d1-seed12641950a551-3326052
+FR195 width=32 depth=1 seed=0xdeadbeef8012 accepted=108 delivered=104 cancelled=4 occupancy=[172, 248] simultaneous=0 full_release=86 reset_live=2 flush_live=2 overlap=1 longest_stall=39 longest_throughput=0 full_drains=104
+single-w64-d1-seed12641950a551: FR195 PASS
+tb.sv:6618: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d1-seed12641950a551-3326052
+FR195 width=64 depth=1 seed=0xdeadbeef8012 accepted=108 delivered=104 cancelled=4 occupancy=[172, 248] simultaneous=0 full_release=86 reset_live=2 flush_live=2 overlap=1 longest_stall=39 longest_throughput=0 full_drains=104
+single-w8-d1-seed12641950a551: FR195 PASS
+tb.sv:6618: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d1-seed12641950a551-3326052
+FR195 width=8 depth=1 seed=0xdeadbeef8012 accepted=108 delivered=104 cancelled=4 occupancy=[172, 248] simultaneous=0 full_release=86 reset_live=2 flush_live=2 overlap=1 longest_stall=39 longest_throughput=0 full_drains=104
+single-w1-d2-seed12641950a551: FR195 PASS
+tb.sv:6891: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d2-seed12641950a551-3326052
+FR195 width=1 depth=2 seed=0xdeadbeef8012 accepted=179 delivered=172 cancelled=7 occupancy=[87, 180, 153] simultaneous=130 full_release=19 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=12
+single-w32-d2-seed12641950a551: FR195 PASS
+tb.sv:6891: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d2-seed12641950a551-3326052
+FR195 width=32 depth=2 seed=0xdeadbeef8012 accepted=179 delivered=172 cancelled=7 occupancy=[87, 180, 153] simultaneous=130 full_release=19 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=12
+single-w8-d2-seed12641950a551: FR195 PASS
+tb.sv:6891: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d2-seed12641950a551-3326052
+FR195 width=8 depth=2 seed=0xdeadbeef8012 accepted=179 delivered=172 cancelled=7 occupancy=[87, 180, 153] simultaneous=130 full_release=19 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=12
+single-w8-d3-seed12641950a551: FR195 PASS
+tb.sv:6888: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d3-seed12641950a551-3326052
+FR195 width=8 depth=3 seed=0xdeadbeef8012 accepted=185 delivered=175 cancelled=10 occupancy=[81, 116, 89, 134] simultaneous=130 full_release=10 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=5
+single-w1-d3-seed12641950a551: FR195 PASS
+tb.sv:6888: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d3-seed12641950a551-3326052
+FR195 width=1 depth=3 seed=0xdeadbeef8012 accepted=185 delivered=175 cancelled=10 occupancy=[81, 116, 89, 134] simultaneous=130 full_release=10 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=5
+single-w64-d3-seed12641950a551: FR195 PASS
+tb.sv:6888: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d3-seed12641950a551-3326052
+FR195 width=64 depth=3 seed=0xdeadbeef8012 accepted=185 delivered=175 cancelled=10 occupancy=[81, 116, 89, 134] simultaneous=130 full_release=10 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=5
+single-w64-d2-seed12641950a551: FR195 PASS
+tb.sv:6891: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d2-seed12641950a551-3326052
+FR195 width=64 depth=2 seed=0xdeadbeef8012 accepted=179 delivered=172 cancelled=7 occupancy=[87, 180, 153] simultaneous=130 full_release=19 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=12
+single-w1-d7-seed12641950a551: FR195 PASS
+tb.sv:6948: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d7-seed12641950a551-3326052
+FR195 width=1 depth=7 seed=0xdeadbeef8012 accepted=216 delivered=194 cancelled=22 occupancy=[55, 71, 21, 29, 19, 34, 78, 113] simultaneous=152 full_release=7 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=46 full_drains=3
+single-w32-d3-seed12641950a551: FR195 PASS
+tb.sv:6888: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d3-seed12641950a551-3326052
+FR195 width=32 depth=3 seed=0xdeadbeef8012 accepted=185 delivered=175 cancelled=10 occupancy=[81, 116, 89, 134] simultaneous=130 full_release=10 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=5
+single-w1-d4-seed12641950a551: FR195 PASS
+tb.sv:6918: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d4-seed12641950a551-3326052
+FR195 width=1 depth=4 seed=0xdeadbeef8012 accepted=198 delivered=186 cancelled=12 occupancy=[73, 99, 61, 57, 130] simultaneous=147 full_release=11 reset_live=1 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=3
+single-w8-d4-seed12641950a551: FR195 PASS
+tb.sv:6918: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d4-seed12641950a551-3326052
+FR195 width=8 depth=4 seed=0xdeadbeef8012 accepted=198 delivered=186 cancelled=12 occupancy=[73, 99, 61, 57, 130] simultaneous=147 full_release=11 reset_live=1 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=3
+single-w64-d4-seed12641950a551: FR195 PASS
+tb.sv:6918: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d4-seed12641950a551-3326052
+FR195 width=64 depth=4 seed=0xdeadbeef8012 accepted=198 delivered=186 cancelled=12 occupancy=[73, 99, 61, 57, 130] simultaneous=147 full_release=11 reset_live=1 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=3
+single-w32-d4-seed12641950a551: FR195 PASS
+tb.sv:6918: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d4-seed12641950a551-3326052
+FR195 width=32 depth=4 seed=0xdeadbeef8012 accepted=198 delivered=186 cancelled=12 occupancy=[73, 99, 61, 57, 130] simultaneous=147 full_release=11 reset_live=1 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=3
+single-w32-d7-seed12641950a551: FR195 PASS
+tb.sv:6948: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d7-seed12641950a551-3326052
+FR195 width=32 depth=7 seed=0xdeadbeef8012 accepted=216 delivered=194 cancelled=22 occupancy=[55, 71, 21, 29, 19, 34, 78, 113] simultaneous=152 full_release=7 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=46 full_drains=3
+single-w64-d7-seed12641950a551: FR195 PASS
+tb.sv:6948: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d7-seed12641950a551-3326052
+FR195 width=64 depth=7 seed=0xdeadbeef8012 accepted=216 delivered=194 cancelled=22 occupancy=[55, 71, 21, 29, 19, 34, 78, 113] simultaneous=152 full_release=7 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=46 full_drains=3
+single-w8-d7-seed12641950a551: FR195 PASS
+tb.sv:6948: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d7-seed12641950a551-3326052
+FR195 width=8 depth=7 seed=0xdeadbeef8012 accepted=216 delivered=194 cancelled=22 occupancy=[55, 71, 21, 29, 19, 34, 78, 113] simultaneous=152 full_release=7 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=46 full_drains=3
+three-fifos: FR195 PASS
+tb.sv:10491: $finish called at 1329 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/three-fifos-3326052
+test p0_real_rtl_three_instances_preserve_independent_state ... ok
+single-w1-d1-seeddeadbeef8012: FR195 PASS
+tb.sv:6618: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d1-seeddeadbeef8012-3326052
+FR195 width=1 depth=1 seed=0x73592401ffff accepted=103 delivered=99 cancelled=4 occupancy=[166, 254] simultaneous=0 full_release=85 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=0 full_drains=99
+single-w32-d1-seeddeadbeef8012: FR195 PASS
+tb.sv:6618: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d1-seeddeadbeef8012-3326052
+FR195 width=32 depth=1 seed=0x73592401ffff accepted=103 delivered=99 cancelled=4 occupancy=[166, 254] simultaneous=0 full_release=85 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=0 full_drains=99
+single-w8-d1-seeddeadbeef8012: FR195 PASS
+tb.sv:6618: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d1-seeddeadbeef8012-3326052
+FR195 width=8 depth=1 seed=0x73592401ffff accepted=103 delivered=99 cancelled=4 occupancy=[166, 254] simultaneous=0 full_release=85 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=0 full_drains=99
+single-w1-d2-seeddeadbeef8012: FR195 PASS
+tb.sv:6873: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d2-seeddeadbeef8012-3326052
+FR195 width=1 depth=2 seed=0x73592401ffff accepted=176 delivered=169 cancelled=7 occupancy=[91, 182, 147] simultaneous=128 full_release=15 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=10
+single-w64-d1-seeddeadbeef8012: FR195 PASS
+tb.sv:6618: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d1-seeddeadbeef8012-3326052
+FR195 width=64 depth=1 seed=0x73592401ffff accepted=103 delivered=99 cancelled=4 occupancy=[166, 254] simultaneous=0 full_release=85 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=0 full_drains=99
+single-w1-d16-seed12641950a551: FR195 PASS
+tb.sv:7041: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d16-seed12641950a551-3326052
+FR195 width=1 depth=16 seed=0xdeadbeef8012 accepted=254 delivered=214 cancelled=40 occupancy=[37, 69, 18, 24, 30, 32, 26, 14, 19, 13, 10, 10, 7, 6, 6, 28, 71] simultaneous=152 full_release=3 reset_live=2 flush_live=2 overlap=1 longest_stall=41 longest_throughput=50 full_drains=2
+single-w32-d2-seeddeadbeef8012: FR195 PASS
+tb.sv:6873: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d2-seeddeadbeef8012-3326052
+FR195 width=32 depth=2 seed=0x73592401ffff accepted=176 delivered=169 cancelled=7 occupancy=[91, 182, 147] simultaneous=128 full_release=15 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=10
+single-w64-d16-seed12641950a551: FR195 PASS
+tb.sv:7041: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d16-seed12641950a551-3326052
+FR195 width=64 depth=16 seed=0xdeadbeef8012 accepted=254 delivered=214 cancelled=40 occupancy=[37, 69, 18, 24, 30, 32, 26, 14, 19, 13, 10, 10, 7, 6, 6, 28, 71] simultaneous=152 full_release=3 reset_live=2 flush_live=2 overlap=1 longest_stall=41 longest_throughput=50 full_drains=2
+single-w8-d2-seeddeadbeef8012: FR195 PASS
+tb.sv:6873: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d2-seeddeadbeef8012-3326052
+FR195 width=8 depth=2 seed=0x73592401ffff accepted=176 delivered=169 cancelled=7 occupancy=[91, 182, 147] simultaneous=128 full_release=15 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=10
+single-w32-d16-seed12641950a551: FR195 PASS
+tb.sv:7041: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d16-seed12641950a551-3326052
+FR195 width=32 depth=16 seed=0xdeadbeef8012 accepted=254 delivered=214 cancelled=40 occupancy=[37, 69, 18, 24, 30, 32, 26, 14, 19, 13, 10, 10, 7, 6, 6, 28, 71] simultaneous=152 full_release=3 reset_live=2 flush_live=2 overlap=1 longest_stall=41 longest_throughput=50 full_drains=2
+single-w8-d16-seed12641950a551: FR195 PASS
+tb.sv:7041: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d16-seed12641950a551-3326052
+FR195 width=8 depth=16 seed=0xdeadbeef8012 accepted=254 delivered=214 cancelled=40 occupancy=[37, 69, 18, 24, 30, 32, 26, 14, 19, 13, 10, 10, 7, 6, 6, 28, 71] simultaneous=152 full_release=3 reset_live=2 flush_live=2 overlap=1 longest_stall=41 longest_throughput=50 full_drains=2
+single-w8-d3-seeddeadbeef8012: FR195 PASS
+tb.sv:6891: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d3-seeddeadbeef8012-3326052
+FR195 width=8 depth=3 seed=0x73592401ffff accepted=182 delivered=172 cancelled=10 occupancy=[87, 110, 84, 139] simultaneous=134 full_release=12 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=48 full_drains=6
+single-w32-d3-seeddeadbeef8012: FR195 PASS
+tb.sv:6891: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d3-seeddeadbeef8012-3326052
+FR195 width=32 depth=3 seed=0x73592401ffff accepted=182 delivered=172 cancelled=10 occupancy=[87, 110, 84, 139] simultaneous=134 full_release=12 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=48 full_drains=6
+single-w1-d3-seeddeadbeef8012: FR195 PASS
+tb.sv:6891: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d3-seeddeadbeef8012-3326052
+FR195 width=1 depth=3 seed=0x73592401ffff accepted=182 delivered=172 cancelled=10 occupancy=[87, 110, 84, 139] simultaneous=134 full_release=12 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=48 full_drains=6
+single-w64-d2-seeddeadbeef8012: FR195 PASS
+tb.sv:6873: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d2-seeddeadbeef8012-3326052
+FR195 width=64 depth=2 seed=0x73592401ffff accepted=176 delivered=169 cancelled=7 occupancy=[91, 182, 147] simultaneous=128 full_release=15 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=10
+single-w64-d3-seeddeadbeef8012: FR195 PASS
+tb.sv:6891: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d3-seeddeadbeef8012-3326052
+FR195 width=64 depth=3 seed=0x73592401ffff accepted=182 delivered=172 cancelled=10 occupancy=[87, 110, 84, 139] simultaneous=134 full_release=12 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=48 full_drains=6
+single-w8-d4-seeddeadbeef8012: FR195 PASS
+tb.sv:6915: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d4-seeddeadbeef8012-3326052
+FR195 width=8 depth=4 seed=0x73592401ffff accepted=199 delivered=186 cancelled=13 occupancy=[78, 107, 55, 57, 123] simultaneous=147 full_release=6 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=47 full_drains=4
+single-w1-d4-seeddeadbeef8012: FR195 PASS
+tb.sv:6915: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d4-seeddeadbeef8012-3326052
+FR195 width=1 depth=4 seed=0x73592401ffff accepted=199 delivered=186 cancelled=13 occupancy=[78, 107, 55, 57, 123] simultaneous=147 full_release=6 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=47 full_drains=4
+single-w64-d4-seeddeadbeef8012: FR195 PASS
+tb.sv:6915: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d4-seeddeadbeef8012-3326052
+FR195 width=64 depth=4 seed=0x73592401ffff accepted=199 delivered=186 cancelled=13 occupancy=[78, 107, 55, 57, 123] simultaneous=147 full_release=6 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=47 full_drains=4
+single-w32-d4-seeddeadbeef8012: FR195 PASS
+tb.sv:6915: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d4-seeddeadbeef8012-3326052
+FR195 width=32 depth=4 seed=0x73592401ffff accepted=199 delivered=186 cancelled=13 occupancy=[78, 107, 55, 57, 123] simultaneous=147 full_release=6 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=47 full_drains=4
+single-w1-d7-seeddeadbeef8012: FR195 PASS
+tb.sv:6969: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d7-seeddeadbeef8012-3326052
+FR195 width=1 depth=7 seed=0x73592401ffff accepted=214 delivered=192 cancelled=22 occupancy=[60, 73, 36, 25, 32, 21, 59, 114] simultaneous=147 full_release=10 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=45 full_drains=3
+single-w32-d7-seeddeadbeef8012: FR195 PASS
+tb.sv:6969: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d7-seeddeadbeef8012-3326052
+FR195 width=32 depth=7 seed=0x73592401ffff accepted=214 delivered=192 cancelled=22 occupancy=[60, 73, 36, 25, 32, 21, 59, 114] simultaneous=147 full_release=10 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=45 full_drains=3
+single-w8-d7-seeddeadbeef8012: FR195 PASS
+tb.sv:6969: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d7-seeddeadbeef8012-3326052
+FR195 width=8 depth=7 seed=0x73592401ffff accepted=214 delivered=192 cancelled=22 occupancy=[60, 73, 36, 25, 32, 21, 59, 114] simultaneous=147 full_release=10 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=45 full_drains=3
+single-w64-d7-seeddeadbeef8012: FR195 PASS
+tb.sv:6969: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d7-seeddeadbeef8012-3326052
+FR195 width=64 depth=7 seed=0x73592401ffff accepted=214 delivered=192 cancelled=22 occupancy=[60, 73, 36, 25, 32, 21, 59, 114] simultaneous=147 full_release=10 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=45 full_drains=3
+single-w1-d1-seed73592401ffff: FR195 PASS
+tb.sv:6636: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d1-seed73592401ffff-3326052
+test p0_w1_d1_native_and_real_rtl ... ok
+single-w1-d2-seed73592401ffff: FR195 PASS
+tb.sv:6861: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d2-seed73592401ffff-3326052
+test p0_w1_d2_native_and_real_rtl ... ok
+single-w64-d1-seed73592401ffff: FR195 PASS
+tb.sv:6636: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d1-seed73592401ffff-3326052
+test p0_w64_d1_native_and_real_rtl ... ok
+single-w8-d1-seed73592401ffff: FR195 PASS
+tb.sv:6636: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d1-seed73592401ffff-3326052
+test p0_w8_d1_native_and_real_rtl ... ok
+single-w32-d1-seed73592401ffff: FR195 PASS
+tb.sv:6636: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d1-seed73592401ffff-3326052
+test p0_w32_d1_native_and_real_rtl ... ok
+single-w32-d2-seed73592401ffff: FR195 PASS
+tb.sv:6861: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d2-seed73592401ffff-3326052
+test p0_w32_d2_native_and_real_rtl ... ok
+single-w1-d3-seed73592401ffff: FR195 PASS
+tb.sv:6873: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d3-seed73592401ffff-3326052
+test p0_w1_d3_native_and_real_rtl ... ok
+single-w8-d2-seed73592401ffff: FR195 PASS
+tb.sv:6861: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d2-seed73592401ffff-3326052
+test p0_w8_d2_native_and_real_rtl ... ok
+single-w8-d3-seed73592401ffff: FR195 PASS
+tb.sv:6873: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d3-seed73592401ffff-3326052
+test p0_w8_d3_native_and_real_rtl ... ok
+single-w32-d3-seed73592401ffff: FR195 PASS
+tb.sv:6873: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d3-seed73592401ffff-3326052
+test p0_w32_d3_native_and_real_rtl ... ok
+single-w64-d3-seed73592401ffff: FR195 PASS
+tb.sv:6873: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d3-seed73592401ffff-3326052
+test p0_w64_d3_native_and_real_rtl ... ok
+single-w64-d2-seed73592401ffff: FR195 PASS
+tb.sv:6861: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d2-seed73592401ffff-3326052
+test p0_w64_d2_native_and_real_rtl ... ok
+single-w1-d4-seed73592401ffff: FR195 PASS
+tb.sv:6900: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d4-seed73592401ffff-3326052
+test p0_w1_d4_native_and_real_rtl ... ok
+single-w8-d4-seed73592401ffff: FR195 PASS
+tb.sv:6900: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d4-seed73592401ffff-3326052
+test p0_w8_d4_native_and_real_rtl ... ok
+single-w32-d4-seed73592401ffff: FR195 PASS
+tb.sv:6900: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d4-seed73592401ffff-3326052
+test p0_w32_d4_native_and_real_rtl ... ok
+single-w64-d4-seed73592401ffff: FR195 PASS
+tb.sv:6900: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d4-seed73592401ffff-3326052
+test p0_w64_d4_native_and_real_rtl ... ok
+single-w1-d7-seed73592401ffff: FR195 PASS
+tb.sv:6954: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d7-seed73592401ffff-3326052
+test p0_w1_d7_native_and_real_rtl ... ok
+single-w8-d7-seed73592401ffff: FR195 PASS
+tb.sv:6954: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d7-seed73592401ffff-3326052
+test p0_w8_d7_native_and_real_rtl ... ok
+single-w8-d16-seeddeadbeef8012: FR195 PASS
+tb.sv:7023: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d16-seeddeadbeef8012-3326052
+FR195 width=8 depth=16 seed=0x73592401ffff accepted=254 delivered=214 cancelled=40 occupancy=[42, 93, 36, 36, 20, 15, 30, 13, 6, 6, 6, 6, 6, 6, 6, 28, 65] simultaneous=153 full_release=3 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=2
+single-w64-d16-seeddeadbeef8012: FR195 PASS
+tb.sv:7023: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d16-seeddeadbeef8012-3326052
+FR195 width=64 depth=16 seed=0x73592401ffff accepted=254 delivered=214 cancelled=40 occupancy=[42, 93, 36, 36, 20, 15, 30, 13, 6, 6, 6, 6, 6, 6, 6, 28, 65] simultaneous=153 full_release=3 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=2
+single-w32-d7-seed73592401ffff: FR195 PASS
+tb.sv:6954: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d7-seed73592401ffff-3326052
+test p0_w32_d7_native_and_real_rtl ... ok
+single-w1-d16-seeddeadbeef8012: FR195 PASS
+tb.sv:7023: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d16-seeddeadbeef8012-3326052
+FR195 width=1 depth=16 seed=0x73592401ffff accepted=254 delivered=214 cancelled=40 occupancy=[42, 93, 36, 36, 20, 15, 30, 13, 6, 6, 6, 6, 6, 6, 6, 28, 65] simultaneous=153 full_release=3 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=2
+single-w64-d7-seed73592401ffff: FR195 PASS
+tb.sv:6954: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d7-seed73592401ffff-3326052
+test p0_w64_d7_native_and_real_rtl ... ok
+single-w32-d16-seeddeadbeef8012: FR195 PASS
+tb.sv:7023: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d16-seeddeadbeef8012-3326052
+FR195 width=32 depth=16 seed=0x73592401ffff accepted=254 delivered=214 cancelled=40 occupancy=[42, 93, 36, 36, 20, 15, 30, 13, 6, 6, 6, 6, 6, 6, 6, 28, 65] simultaneous=153 full_release=3 reset_live=2 flush_live=2 overlap=1 longest_stall=40 longest_throughput=44 full_drains=2
+single-w8-d16-seed73592401ffff: FR195 PASS
+tb.sv:7008: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w8-d16-seed73592401ffff-3326052
+test p0_w8_d16_native_and_real_rtl ... ok
+single-w1-d16-seed73592401ffff: FR195 PASS
+tb.sv:7008: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w1-d16-seed73592401ffff-3326052
+test p0_w1_d16_native_and_real_rtl ... ok
+single-w32-d16-seed73592401ffff: FR195 PASS
+tb.sv:7008: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w32-d16-seed73592401ffff-3326052
+test p0_w32_d16_native_and_real_rtl ... ok
+single-w64-d16-seed73592401ffff: FR195 PASS
+tb.sv:7008: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo/single-w64-d16-seed73592401ffff-3326052
+test p0_w64_d16_native_and_real_rtl ... ok
+
+test result: ok. 31 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.86s
+

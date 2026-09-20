@@ -1,0 +1,114 @@
+{
+  "detected_stack": "backend",
+  "execution_mode": "subagent",
+  "probe_enabled": true,
+  "supports": {
+    "subagent": true,
+    "agentTeam": false
+  },
+  "total_tests": 0,
+  "existing_tests_reviewed": 37,
+  "new_test_files": 0,
+  "fixtures_created": 0,
+  "performance_gain": "not measured",
+  "workers": [
+    {
+      "success": true,
+      "subagent": "api-tests",
+      "tests": [],
+      "fixture_needs": [],
+      "knowledge_fragments_used": [
+        "library-integration-mandate",
+        "playwright-utils-mandate",
+        "pactjs-utils-mandate",
+        "test-levels-framework",
+        "test-quality"
+      ],
+      "test_count": 0,
+      "existing_coverage": {
+        "rust_test_functions": 31,
+        "configuration_tests": 24,
+        "seeds_per_configuration": 3,
+        "configuration_seed_groups": 72,
+        "native_engines_per_group": 2,
+        "real_rtl_runs_per_group": 1,
+        "other_test_functions": 7,
+        "new_tests": 0,
+        "counts_basis": "Static source inspection; not execution in this worker"
+      },
+      "coverage": [
+        "AC1/2/5: default 32x4, exact nine ports/types/directions, equality of shared and standalone bodies, repeat-definition reuse, WIDTH and DEPTH identity conflicts, specialization coexistence, all specified invalid extremes and mixed errors on both entry points, catch_unwind and same-name valid recovery.",
+        "AC3/4/6: 24 configurations x 3 fixed seeds, VecDeque oracle independent of register layout, before/after edge assertions on two native engines and emitted RTL; directed every occupancy, full-release rejection, no empty bypass, DEPTH1 exclusion of simultaneous transfers, long stalls, throughput for DEPTH>1, bit63, repeated fill/drain, epoch conservation and producer hold.",
+        "Cancellation matrix has reset-only/flush-only/overlap x empty/partial/full with actual hit assertions; partial occupancy excluded for DEPTH1, apparent transfers cancelled and post-cancellation reuse checked without asserting invalid payload.",
+        "AC7/9: three actual RTL instances, two reused 64x3 definitions plus 8x7 specialization, independent traffic/flush, shared live reset, explicit native hierarchy rejection, legacy known-RAM latency/full/reset-retention RTL regression."
+      ],
+      "risks": [
+        "This worker did not execute Cargo or external tools. Coordinator must rerun and bind current-source evidence; static counts are not new PASS results.",
+        "Finite matrix is the approved 24 configurations, not exhaustive width/depth/trace enumeration. No defect-based reason found to reopen rejected optional depth smoke or redundant formal cancellation cover.",
+        "AC8 formal/synthesis evidence and final AC10 clean/workspace/documentation gates remain separate coordinator obligations; API/native results do not substitute for them."
+      ],
+      "playwright_utils_deviations": [],
+      "pactjs_utils_deviations": [],
+      "provider_scrutiny": "not-applicable: no HTTP or independent consumer/provider boundary",
+      "provider_files_read": [
+        "crates/bitloom-prelude/src/ip/param_sync_fifo.rs"
+      ],
+      "pact_mcp_reachable": false,
+      "summary": "Reviewed existing Rust Cargo API/native/real-RTL coverage against Story126.4 and prior review dispositions. No uncovered important in-scope boundary identified. Existing: 31 Rust tests, including 24 configurations and 72 configuration/seed groups; generated: 0. No fixtures needed. Playwright/Pact mandates are outside runner/language and consumer-boundary scope; no auth or broker artifacts apply. No code, tests, CI, story, or status modified; no Cargo run. Runtime verification and archival remain with coordinator."
+    },
+    {
+      "success": true,
+      "subagent": "backend-tests",
+      "subagentType": "backend",
+      "testsGenerated": [],
+      "coverageSummary": {
+        "totalTests": 0,
+        "newTests": 0,
+        "existingTestsReviewed": 6,
+        "testLevels": [
+          "integration"
+        ],
+        "fixtureNeeds": [],
+        "priority_coverage_existing": {
+          "P0": 6,
+          "P1": 0,
+          "P2": 0,
+          "P3": 0
+        },
+        "existingCoverage": [
+          "AC8: WIDTH1 DEPTH1/2/3 emitted RTL safety induction with initial synchronous reset and legal stalled producer; capacity, port ready/valid, queue ordering, cancellation, stalled payload and modular accounting assertions.",
+          "AC8: nonvacuous cover requires full-to-empty release, full reset/flush followed by reuse, overlapping reset+flush followed by reuse; DEPTH2/3 simultaneous push/pop cover; DEPTH1 asserts simultaneous push/pop impossible.",
+          "AC8: synthesis of original uninstrumented WIDTH1 DEPTH1, WIDTH8 DEPTH3, WIDTH64 DEPTH16 RTL; Yosys hierarchy/check -assert, mapped-cell allowlist rejecting latch/memory/unsupported cells, multiple-driver and surviving flip-flop checks, cell-statistics evidence.",
+          "All six existing tests use finite tool deadlines, fail on nonzero exits and missing tools, save versions and commands; formal additionally requires literal PASS status for prove and cover.",
+          "Historical negative-control log records corrupted RTL output rejected by vvp exit1 and ignored flush rejected by SBY exit2/status FAIL. No negative controls were executed by this worker."
+        ],
+        "newCoverageGaps": [],
+        "duplicateCoverageAvoided": [
+          "Additional optional depth smoke scaffolding duplicates the rejected independent-review item4 without a discovered defect.",
+          "Additional formal cancellation-handshake covers duplicate rejected item5: safety properties leave cancellation-edge ready/valid free, and the corrected main simulation matrix supplies counted scenario evidence."
+        ]
+      },
+      "status": "complete",
+      "knowledge_fragments_used": [
+        "test-levels-framework",
+        "test-priorities-matrix",
+        "data-factories"
+      ],
+      "framework": "Rust Cargo integration tests invoking SBY/Yosys/Z3",
+      "pact_mcp_reachable": false,
+      "scopeNotes": [
+        "No HTTP, database, browser or Pact contract boundary; Playwright/Pact JavaScript requirements are not applicable.",
+        "Parameterized design/observer builders and PID-plus-configuration artifact directories already meet the applicable fixture isolation intent; intentional hardware boundary values must remain deterministic.",
+        "Read-only product/test inspection; no Cargo, formal, synthesis or simulation execution, no product/CI/status edits and no delegation."
+      ],
+      "risks": [
+        "Actual current-source PASS remains the coordinator's responsibility: all six tests are ignored by ordinary workspace runs and require explicit --ignored execution before closure.",
+        "Formal proof is limited to WIDTH1 DEPTH1/2/3, as AC8 requires. It does not constitute proof for every WIDTH/DEPTH specialization; the separate approved 24-configuration simulation matrix covers broader configurations.",
+        "Reference accounting counters are 32-bit modular counters; exact bounded occupancy and queue-order assertions supply the safety argument. Do not describe the counters as unbounded integer totals.",
+        "Proof assumptions are initial synchronous reset and stable producer offers while blocked, with cancellation releasing the offer; no eventual-ready fairness or liveness result is claimed.",
+        "Synthesis evidence covers structural acceptability and cells for three representatives, not PPA, BRAM inference or every specialization. Preserve current source hashes and generated artifacts before cargo clean."
+      ],
+      "summary": "Independently audited the six existing P0 formal/synthesis integration tests against Story126.4 AC8 and review/negative-control evidence. No actionable uncovered contract requirement found; generated zero new tests to avoid redundant scaffolding. Coordinator must execute and archive the explicit ignored gates."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.64s
+     Running tests/fr103_ip_dual_model.rs (target/debug/deps/fr103_ip_dual_model-b0ebd9c1240f38ee)
+
+running 8 tests
+test fr103_docs_adapters_supporting_not_sufficient ... ok
+test fr103_docs_completion_surface_and_five_ip_classes ... ok
+test fr103_docs_tlm_product_still_epic46 ... ok
+test fr103_product_api_exported ... ok
+test fifo_independent_read_before_write_and_reset_bank_retention ... ok
+test fr103_sync_fifo_deliberate_mismatch_fails_readable ... ok
+test fr103_sync_fifo_dual_model_pass ... ok
+test fr103_uart_spi_i2c_axi_generated_fl_rst_compare ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/fr82_fifo_uart_baseline.rs (target/debug/deps/fr82_fifo_uart_baseline-86d9bd905ec72f4f)
+
+running 4 tests
+test fr82_blackbox_boundary_documented ... ok
+test fr82_ip_api_has_no_generator_closures ... ok
+test fr82_sync_fifo_elaborate_emit_tick_non_stub ... ok
+test fr82_uart_tx_elaborate_emit_tick_non_stub ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

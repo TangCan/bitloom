@@ -10137,3 +10137,9 @@ Story125.1–125.3 / Epic125 已完成，FR192/FR193按M0合同关闭；真实�
 2026-09-20 M0关闭后续授权：用户要求继续，当前执行范围为 Story126.1 NFR14 → 126.2 模块组合基础；126.3/126.4及Epic127–130仍backlog，未授权自动执行。不宣称M1或Phase24已交付；上述M0批准记录保留为历史。
 
 2026-09-20 Story126.2 / FR194 已完成：同一session模块定义复用、参数专门化与实例图/连接诊断；首批Gpio共用定义体，实际RTL验证通过。实现与证据见 docs/ip/module-composition.md 和 docs/ip/module-composition-evidence.md。126.1/126.2 done；126.3/126.4及Epic127–130保持backlog，Epic126/M1未关闭，FR195–201未交付；FR189 deferred/NFR91保持。
+
+## M1 / Epic126 实施关闭（2026-09-20）
+
+2026-09-20 Story126.4七步完成，随本故事单独提交关闭Epic126/M1：126.1–126.4均done，FR194模块组合与FR195两槽注册切片/参数FIFO交付。clean + fmt + just test退出0，460个实际结果块汇总1763 passed、0 failed、14 ignored；8个专用形式测试另有真实运行证据，6个既有doc-test保持ignored。最终证据 `_agile-output/test-artifacts/126-4-final-verification.md`，关闭映射 `_agile-output/implementation-artifacts/epic-126-closeout.md`。Epic127–130 / FR196–201尚待各自七步与NFR14，整个Phase24未完成；FR189/Epic122 deferred及NFR91保持，不push、不publish。
+
+本节为当前状态，前文M0/126.2/126.3时点的范围记录保留为历史。新增API已逐符号登记FR142，属SemVer minor，未更改包版本或发布。

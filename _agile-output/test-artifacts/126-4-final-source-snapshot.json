@@ -1,0 +1,24 @@
+{
+  "stage": "final source/doc snapshot before Story126.4 commit",
+  "sources": {
+    ".github/workflows/ci.yml": "0b5a136dbd472ecbb74271574e3add84d17b58efa5f64c03a85ad8db33272bfb",
+    "AGENTS.md": "3f83de3b0cf8f2616de618c48f68d927644f5b44c2b25a65a4659ed5840ed439",
+    "_agile-output/implementation-artifacts/epic-126-context.md": "cecd5bd6734f9600ccc611f2b0a813d135405737da855710c908f2852465bfaa",
+    "_agile-output/implementation-artifacts/epic-126-nfr14.md": "36bc85e2208362ca4cfc25b42f95cc4088be7defd91c38c2631e3a903c109302",
+    "_agile-output/implementation-artifacts/goal-all-stories-seven-step.md": "f3fbea1d6eb907640b6338b2b6b0eb70c57bfdf57395081fb8ee470d5a7438c5",
+    "_agile-output/implementation-artifacts/sprint-status.yaml": "37c619f88a97c4c8364faad606615f33aa56a7860d83349518f11e20ccac918e",
+    "_agile-output/planning-artifacts/epics.md": "571768074535e9d9b2b3ba1a77d4426bb323f29a8d3b7532ecfa1bf6b8d1b522",
+    "_agile-output/planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md": "433f699714f088b366e35d6369c76373342abc22a1119de2cab03a8a46d99eb4",
+    "crates/bitloom-prelude/src/ip/mod.rs": "045ea826dbc711601903e275a92d736d1c37645d13ca29bdbbdd39f20fcff9e9",
+    "docs/ip/README.md": "139be00be388d173c69b3e684a557ff7d71acf3ed24f61e9263d03cab30e4b8a",
+    "docs/ip/phase24-contract.md": "f5e3f992366b102c23ef7e87922cde20f2b9b9d07e5a401cf126bc19a37de210",
+    "docs/public-api-1-0-surface.md": "ea4c1177a408b6cb52dbb7044700ef87cda14670d248f960f09cf973228b4267",
+    "scripts/check_fr194_example.py": "adc3dafef673e2469c89b180953983c4ad9ecf31fa14996551b0efe6a73704fc",
+    "crates/bitloom-prelude/src/ip/param_sync_fifo.rs": "e22f4b09af60ffa93301d97d3299f6ababae2769702438603571721a15fd8c43",
+    "crates/bitloom/tests/fr195_param_sync_fifo.rs": "8028b85d0bf394065bbc092549d8d23ebfdedeaa0911f456e0f035d40a6e389a",
+    "crates/bitloom/tests/fr195_param_sync_fifo_formal.rs": "eb9dbe9b6b8626d82ef0930828ebd75a8c37a1e2d2538dcdf548e75b7c056d76",
+    "docs/ip/param-sync-fifo.md": "10d26ab6a9e17e3056e6d6070461d073c369437a07f84cf05e7ff2b5651248a4"
+  },
+  "workspace_log_sha256": "993e5889ced3b5465db3c7a81882be84cf1a8e368475628e4b960f645ca4b05b",
+  "automation_manifest_sha256": "b5c5a75555f824c8489f2127ab0b38c1b1eab1a4fd6c2d15f73f270c5ae72c97"
+}

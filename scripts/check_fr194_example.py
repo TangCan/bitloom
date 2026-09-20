@@ -39,6 +39,7 @@ def check_example(relative_path, requirement):
 def main():
     check_example('docs/ip/module-composition.md', 'FR194')
     check_example('docs/ip/rv-reg-slice.md', 'FR195')
+    check_example('docs/ip/param-sync-fifo.md', 'FR195-FIFO')
 
 
 if __name__ == '__main__':

@@ -63,3 +63,9 @@ CI 安装入口为 [.github/workflows/ci.yml](../../.github/workflows/ci.yml) �
 工具前置修复保持SBY tag对象钉：严格核验tag及peeled commit，改用上游make安装正确Python路径；旧FR119 fixture修正为受支持的过程断言和初始reset。真实负例以FAIL状态及反例为准并非零，CI强制执行；缺工具、UNKNOWN、超时不能通过。归档见test-artifacts/126-3-build-evidence.md及126-3-review2-tools.md。独立代码审阅完成；automation、clean全workspace回归和提交仍待本故事后续步骤，故M1仍未关闭。
 
 126.3最终收尾：七步完成，本故事提交；clean+fmt+just test退出0（1732通过、8忽略），专用formal实际通过。126.3 done；126.4仍待实现，Epic126/M1未关闭。证据索引test-artifacts/126-3-final-verification.md。
+
+## Story126.4 / M1 最终关闭（2026-09-20）
+
+2026-09-20 Story126.4七步完成，随本故事单独提交关闭Epic126/M1：126.1–126.4均done，FR194模块组合与FR195两槽注册切片/参数FIFO交付。clean + fmt + just test退出0，460个实际结果块汇总1763 passed、0 failed、14 ignored；8个专用形式测试另有真实运行证据，6个既有doc-test保持ignored。最终证据 `_agile-output/test-artifacts/126-4-final-verification.md`，关闭映射 `_agile-output/implementation-artifacts/epic-126-closeout.md`。Epic127–130 / FR196–201尚待各自七步与NFR14，整个Phase24未完成；FR189/Epic122 deferred及NFR91保持，不push、不publish。
+
+风险关闭：非法参数在硬件定义前诊断、全参数身份、非二次幂寄存器容量、取消控制×占用、在途共享reset隔离恢复、旧SyncFifo RAM/延迟、真实RTL/归纳证明/综合及文档例均有本故事证据。支持宽1..64深1..16；行为24配置×3seed，形式W1×D1/2/3，综合1×1/8×3/64×16。无PPA、BRAM、异步/深RAM FIFO或native层级支持宣称；126.2既有名称/Instance.params遗留仍在deferred-work，不宣称账本清空。

@@ -1,0 +1,5 @@
+$ iverilog -g2012 -s tb -o simulation design.v tb.sv => 0
+$ vvp simulation => 1
+$ sby -f fifo.sby prove => 2
+mutated formal status=FAIL
+PASS: corrupted output is rejected by actual RTL scoreboard; ignored flush is rejected by actual formal counterexample. Product sources unchanged.

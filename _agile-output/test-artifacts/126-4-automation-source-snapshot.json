@@ -1,0 +1,12 @@
+{
+  "stage": "Story126.4 automate before clean regression",
+  "sources": {
+    "crates/bitloom-prelude/src/ip/param_sync_fifo.rs": "e22f4b09af60ffa93301d97d3299f6ababae2769702438603571721a15fd8c43",
+    "crates/bitloom-prelude/src/ip/mod.rs": "045ea826dbc711601903e275a92d736d1c37645d13ca29bdbbdd39f20fcff9e9",
+    "crates/bitloom/tests/fr195_param_sync_fifo.rs": "8028b85d0bf394065bbc092549d8d23ebfdedeaa0911f456e0f035d40a6e389a",
+    "crates/bitloom/tests/fr195_param_sync_fifo_formal.rs": "eb9dbe9b6b8626d82ef0930828ebd75a8c37a1e2d2538dcdf548e75b7c056d76",
+    "crates/bitloom-builder/src/lib.rs": "2fd31dcc131c054eed76d3f5168b4a5314303194e04d0413200b1cda2b418662",
+    "docs/ip/param-sync-fifo.md": "3aabba6ee375c41c81ca8ef8488078868a169825430fe324107da58abc0f753d",
+    ".github/workflows/ci.yml": "0b5a136dbd472ecbb74271574e3add84d17b58efa5f64c03a85ad8db33272bfb"
+  }
+}

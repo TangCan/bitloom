@@ -1,0 +1,35 @@
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.25s
+     Running unittests src/lib.rs (target/debug/deps/bitloom_prelude-e3c0f4f1c15a9b05)
+
+running 17 tests
+test ip::tests::blackbox_elaborate_emit_tick_opaque ... ok
+test ip::tests::crc8_lut_synthesizable_closure_violation_is_clear_error ... ok
+test ip::tests::crc8_lut_custom_poly_via_table_fn ... ok
+test ip::tests::crc8_lut_default_elaborate_emit_tick ... ok
+test ip::tests::gpio_elaborate_emit_tick_ports ... ok
+test ip::tests::gpio_masked_write_and_direction_readback ... ok
+test ip::tests::gpio_vip_elaborate_emit_commercial_ports ... ok
+test ip::tests::gpio_vip_set_clear_irq_open_drain_tick ... ok
+test ip::tests::sync_fifo_elaborate_emit_tick ... ok
+test ip::tests::sync_fifo_fills_then_blocks_write ... ok
+test ip::tests::uart_tx_programmable_baud_holds_bits ... ok
+test ip::tests::fifo_uart_api_has_no_generator_closure_params ... ok
+test ip::tests::uart_tx_elaborate_emit_tick ... ok
+test ip::tests::axi4_lite_slave_elaborate_emit_tick ... ok
+test ip::tests::uart_rx_elaborate_emit_tick ... ok
+test ip::tests::spi_master_elaborate_emit_tick ... ok
+test ip::tests::i2c_master_elaborate_emit_tick ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+   Doc-tests bitloom_prelude
+
+running 3 tests
+test crates/bitloom-prelude/src/lib.rs - (line 486) ... ignored
+test crates/bitloom-prelude/src/lib.rs - generate_mem_init (line 486) ... ignored
+test crates/bitloom-prelude/src/lib.rs - mask_mem_word (line 486) ... ignored
+
+test result: ok. 0 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+all doctests ran in 0.25s; merged doctests compilation took 0.24s

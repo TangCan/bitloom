@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "subagent": "api-tests",
+  "tests": [],
+  "fixture_needs": [],
+  "knowledge_fragments_used": [
+    "library-integration-mandate",
+    "playwright-utils-mandate",
+    "pactjs-utils-mandate",
+    "test-levels-framework",
+    "test-quality"
+  ],
+  "test_count": 0,
+  "existing_coverage": {
+    "rust_test_functions": 31,
+    "configuration_tests": 24,
+    "seeds_per_configuration": 3,
+    "configuration_seed_groups": 72,
+    "native_engines_per_group": 2,
+    "real_rtl_runs_per_group": 1,
+    "other_test_functions": 7,
+    "new_tests": 0,
+    "counts_basis": "Static source inspection; not execution in this worker"
+  },
+  "coverage": [
+    "AC1/2/5: default 32x4, exact nine ports/types/directions, equality of shared and standalone bodies, repeat-definition reuse, WIDTH and DEPTH identity conflicts, specialization coexistence, all specified invalid extremes and mixed errors on both entry points, catch_unwind and same-name valid recovery.",
+    "AC3/4/6: 24 configurations x 3 fixed seeds, VecDeque oracle independent of register layout, before/after edge assertions on two native engines and emitted RTL; directed every occupancy, full-release rejection, no empty bypass, DEPTH1 exclusion of simultaneous transfers, long stalls, throughput for DEPTH>1, bit63, repeated fill/drain, epoch conservation and producer hold.",
+    "Cancellation matrix has reset-only/flush-only/overlap x empty/partial/full with actual hit assertions; partial occupancy excluded for DEPTH1, apparent transfers cancelled and post-cancellation reuse checked without asserting invalid payload.",
+    "AC7/9: three actual RTL instances, two reused 64x3 definitions plus 8x7 specialization, independent traffic/flush, shared live reset, explicit native hierarchy rejection, legacy known-RAM latency/full/reset-retention RTL regression."
+  ],
+  "risks": [
+    "This worker did not execute Cargo or external tools. Coordinator must rerun and bind current-source evidence; static counts are not new PASS results.",
+    "Finite matrix is the approved 24 configurations, not exhaustive width/depth/trace enumeration. No defect-based reason found to reopen rejected optional depth smoke or redundant formal cancellation cover.",
+    "AC8 formal/synthesis evidence and final AC10 clean/workspace/documentation gates remain separate coordinator obligations; API/native results do not substitute for them."
+  ],
+  "playwright_utils_deviations": [],
+  "pactjs_utils_deviations": [],
+  "provider_scrutiny": "not-applicable: no HTTP or independent consumer/provider boundary",
+  "provider_files_read": [
+    "crates/bitloom-prelude/src/ip/param_sync_fifo.rs"
+  ],
+  "pact_mcp_reachable": false,
+  "summary": "Reviewed existing Rust Cargo API/native/real-RTL coverage against Story126.4 and prior review dispositions. No uncovered important in-scope boundary identified. Existing: 31 Rust tests, including 24 configurations and 72 configuration/seed groups; generated: 0. No fixtures needed. Playwright/Pact mandates are outside runner/language and consumer-boundary scope; no auth or broker artifacts apply. No code, tests, CI, story, or status modified; no Cargo run. Runtime verification and archival remain with coordinator."
+}

@@ -1,0 +1,12 @@
+{
+  "tdd_phase": "RED",
+  "total_tests": 37,
+  "api_tests": 31,
+  "tool_tests": 6,
+  "execution_mode": "subagent",
+  "all_tests_skipped": false,
+  "active_red_authorized": true,
+  "performance_gain": "not measured",
+  "fixture_count": 0,
+  "browser_e2e_count": 0
+}

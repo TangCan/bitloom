@@ -152,3 +152,13 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 | `Elaboratable for ip::RvRegSlice<WIDTH>` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立 session，仅 finish 一次 |
 
 此处显式纳入 FR142 文档表面；使用与边界见[注册切片](ip/rv-reg-slice.md)。新增API按SemVer minor处理；未更改版本号或发布，不能声称crates.io已包含。此追加不包含ParamSyncFifo，也不承诺native层级仿真。
+
+### `bitloom-prelude` — FR195 / Story126.4 显式追加
+
+| 符号 | 契约 |
+|---|---|
+| `ip::ParamSyncFifo<const WIDTH: u32 = 32, const DEPTH: u32 = 4>` | 寄存器 FIFO，WIDTH 1..64、DEPTH 1..16；同步 reset > flush > 握手，无空直通，满时不接收 |
+| `ip::ParamSyncFifo::define_module` | `(&mut ElaborateSession, impl Into<String>) -> Result<String, Diagnostics>`；完整 WIDTH/DEPTH 身份，与独立入口共用唯一模块体 |
+| `Elaboratable for ip::ParamSyncFifo<WIDTH, DEPTH>` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立 session，仅 finish 一次 |
+
+此处逐符号显式纳入 FR142 文档表面，未列出的内部接口不自动扩大承诺。中文契约与完整 prelude-only 示例见[参数 FIFO](ip/param-sync-fifo.md)。追加属 SemVer minor；本故事不改包版本、不发布，代码合入不代表 crates.io 已包含。保留旧 SyncFifo 行为及设计依赖边界，不承诺 native/generated 层级仿真、异步 FIFO 或 BRAM 推断。

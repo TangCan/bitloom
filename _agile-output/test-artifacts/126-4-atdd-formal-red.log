@@ -1,0 +1,18 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+error[E0432]: unresolved import `bitloom_prelude::ip::ParamSyncFifo`
+ --> crates/bitloom/tests/fr195_param_sync_fifo_formal.rs:3:37
+  |
+3 | use bitloom_prelude::{Elaboratable, ip::ParamSyncFifo};
+  |                                     ^^^^^^^^^^^^^^^^^ no `ParamSyncFifo` in `ip`
+
+warning: unused import: `Elaboratable`
+ --> crates/bitloom/tests/fr195_param_sync_fifo_formal.rs:3:23
+  |
+3 | use bitloom_prelude::{Elaboratable, ip::ParamSyncFifo};
+  |                       ^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+For more information about this error, try `rustc --explain E0432`.
+warning: `bitloom` (test "fr195_param_sync_fifo_formal") generated 1 warning
+error: could not compile `bitloom` (test "fr195_param_sync_fifo_formal") due to 1 previous error; 1 warning emitted

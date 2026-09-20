@@ -1,0 +1,95 @@
+[
+  {
+    "command": [
+      "rustc",
+      "--version"
+    ],
+    "exit": 0,
+    "seconds": 0.032
+  },
+  {
+    "command": [
+      "cargo",
+      "--version"
+    ],
+    "exit": 0,
+    "seconds": 0.016
+  },
+  {
+    "command": [
+      "iverilog",
+      "-V"
+    ],
+    "exit": 0,
+    "seconds": 0.016
+  },
+  {
+    "command": [
+      "vvp",
+      "-V"
+    ],
+    "exit": 0,
+    "seconds": 0.008
+  },
+  {
+    "command": [
+      "sby",
+      "--version"
+    ],
+    "exit": 0,
+    "seconds": 0.114
+  },
+  {
+    "command": [
+      "yosys",
+      "-V"
+    ],
+    "exit": 0,
+    "seconds": 0.008
+  },
+  {
+    "command": [
+      "z3",
+      "-version"
+    ],
+    "exit": 0,
+    "seconds": 0.004
+  },
+  {
+    "command": [
+      "timeout",
+      "--version"
+    ],
+    "exit": 0,
+    "seconds": 0.004
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "bitloom",
+      "--test",
+      "fr195_param_sync_fifo",
+      "--",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "seconds": 3.282
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "bitloom",
+      "--test",
+      "fr195_param_sync_fifo_formal",
+      "--",
+      "--ignored",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "seconds": 13.451
+  }
+]

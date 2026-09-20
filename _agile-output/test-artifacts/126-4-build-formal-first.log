@@ -1,0 +1,32 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.24s
+     Running tests/fr195_param_sync_fifo_formal.rs (target/debug/deps/fr195_param_sync_fifo_formal-910b1fc6f276bf25)
+
+running 6 tests
+FR195 FIFO synthesis W1 D1 cells=7 PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo-formal/synthesis-w1-d1-3327814
+test p0_original_rtl_synthesis_width1_depth1 ... ok
+FR195 FIFO synthesis W8 D3 cells=66 PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo-formal/synthesis-w8-d3-3327814
+test p0_original_rtl_synthesis_width8_depth3 ... ok
+FR195 FIFO synthesis W64 D16 cells=2104 PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo-formal/synthesis-w64-d16-3327814
+test p0_original_rtl_synthesis_width64_depth16 ... ok
+FR195 FIFO W1 D1 prove+cover PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo-formal/prove-w1-d1-3327814
+test p0_fifo_width1_depth1_safety_and_nonvacuous_cover ... ok
+
+thread 'p0_fifo_width1_depth2_safety_and_nonvacuous_cover' (3327816) panicked at crates/bitloom/tests/fr195_param_sync_fifo_formal.rs:22:5:
+sby ["-f", "fifo.sby", "prove"]: exit status: 4; artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo-formal/prove-w1-d2-3327814
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test p0_fifo_width1_depth2_safety_and_nonvacuous_cover ... FAILED
+
+thread 'p0_fifo_width1_depth3_safety_and_nonvacuous_cover' (3327817) panicked at crates/bitloom/tests/fr195_param_sync_fifo_formal.rs:22:5:
+sby ["-f", "fifo.sby", "prove"]: exit status: 4; artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-fifo-formal/prove-w1-d3-3327814
+test p0_fifo_width1_depth3_safety_and_nonvacuous_cover ... FAILED
+
+failures:
+
+failures:
+    p0_fifo_width1_depth2_safety_and_nonvacuous_cover
+    p0_fifo_width1_depth3_safety_and_nonvacuous_cover
+
+test result: FAILED. 4 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 16.13s
+
+error: test failed, to rerun pass `-p bitloom --test fr195_param_sync_fifo_formal`

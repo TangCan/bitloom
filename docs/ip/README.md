@@ -153,4 +153,12 @@ sim.tick();
 
 ## FR194 模块组合基础
 
-Story126.2已提供Session模块定义复用与首批 `Gpio::define_module`，设计仍只依赖prelude。见[完整示例](module-composition.md)和[实际RTL证据](module-composition-evidence.md)。尚未完成流/FIFO或完整外设系统，M1仍未关闭。
+Story126.2已提供Session模块定义复用与首批 `Gpio::define_module`，设计仍只依赖prelude。见[完整示例](module-composition.md)和[实际RTL证据](module-composition-evidence.md)。Story126.3已完成两槽[RvRegSlice](rv-reg-slice.md)；Story126.4已实现[ParamSyncFifo](param-sync-fifo.md)并完成本阶段native/真实RTL、形式与综合验证。完整外设系统尚未完成，M1仍待最终七步核验，不代表整个Phase24交付。
+
+## FR195 参数同步 FIFO
+
+`bitloom_prelude::ip::ParamSyncFifo<WIDTH=32, DEPTH=4>` 提供单时钟寄存器FIFO，WIDTH1..64、DEPTH1..16（含非二次幂）。支持独立 `Elaboratable::elaborate()` 及同一session的 `define_module`，完整用法与边界见[参数FIFO](param-sync-fifo.md)。无空直通，满时即使同拍pop也不接push；同步reset优先于flush，取消沿不计传输。保留旧`SyncFifo`的8×4 RAM与注册输出行为。
+
+验证入口：`cargo test -p bitloom --test fr195_param_sync_fifo -- --nocapture`；专用形式/综合须显式执行 `cargo test -p bitloom --test fr195_param_sync_fifo_formal -- --ignored --nocapture`。组合行为由真实RTL验收，native/generated层级仍unsupported；不承诺异步/深RAM FIFO、BRAM推断或PPA。新增API按SemVer minor，未发布；M1须待Story126.4最终七步核验。
+
+Story126.4最终关闭：Epic126/M1与FR194/FR195完成，七步证据见[关闭记录](../../_agile-output/implementation-artifacts/epic-126-closeout.md)。本节取代前文build阶段的待核验状态；后续CSR/外设/外部适配仍未交付。

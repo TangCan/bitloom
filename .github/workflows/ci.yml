@@ -31,7 +31,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: rv-rtl-failure-evidence
-          path: target/fr195/
+          path: |
+            target/fr195/
+            target/fr195-fifo/
 
   # FR71 / NFR34 / FR28: required true Chisel JVM compile (Pattern A — parallel to Rust test).
   # Escape hatch env must never be enabled here. Do not use continue-on-error.
@@ -118,6 +120,8 @@ jobs:
           cargo test -p bitloom --test fr119_symbiyosys_smt_path fr119_optional_real_sby_fail_fixture_when_installed -- --exact --nocapture
       - name: Required FR195 generated RTL safety and cover
         run: cargo test -p bitloom --test fr195_rv_reg_slice_formal -- --ignored --nocapture
+      - name: Required FR195 parameter FIFO safety, cover and original RTL synthesis
+        run: CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr195_param_sync_fifo_formal -- --ignored --nocapture
       - name: Preserve formal failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
@@ -125,6 +129,7 @@ jobs:
           name: formal-failure-evidence
           path: |
             target/fr195-formal/
+            target/fr195-fifo-formal/
             target/fr119/
             crates/rhdl-formal/fixtures/fr119/fr119_fail/
 
