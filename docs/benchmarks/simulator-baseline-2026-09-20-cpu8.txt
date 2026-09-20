@@ -1,0 +1,39 @@
+# Historical run: grouped by engine; all interpreter samples precede compiled samples.
+cycles=200000 samples=5 warmup=20000 profile=release
+workload,requested_engine,effective_engine,sample,ns_per_cycle,checksum
+counter,interpreter,interpreter,1,2755.49,df1fa2dafed646ff
+counter,interpreter,interpreter,2,2776.53,df1fa2dafed646ff
+counter,interpreter,interpreter,3,2740.30,df1fa2dafed646ff
+counter,interpreter,interpreter,4,2802.89,df1fa2dafed646ff
+counter,interpreter,interpreter,5,2736.73,df1fa2dafed646ff
+summary counter interpreter effective=interpreter: min=2736.73 median=2755.49 max=2802.89 ns/cycle
+counter,compiled,compiled,1,2459.59,df1fa2dafed646ff
+counter,compiled,compiled,2,2436.17,df1fa2dafed646ff
+counter,compiled,compiled,3,2481.19,df1fa2dafed646ff
+counter,compiled,compiled,4,2427.12,df1fa2dafed646ff
+counter,compiled,compiled,5,2453.26,df1fa2dafed646ff
+summary counter compiled effective=compiled: min=2427.12 median=2453.26 max=2481.19 ns/cycle
+arithmetic,interpreter,interpreter,1,13194.46,a1b7250b42de2f26
+arithmetic,interpreter,interpreter,2,13427.91,a1b7250b42de2f26
+arithmetic,interpreter,interpreter,3,13416.56,a1b7250b42de2f26
+arithmetic,interpreter,interpreter,4,13199.59,a1b7250b42de2f26
+arithmetic,interpreter,interpreter,5,13331.43,a1b7250b42de2f26
+summary arithmetic interpreter effective=interpreter: min=13194.46 median=13331.43 max=13427.91 ns/cycle
+arithmetic,compiled,compiled,1,12170.44,a1b7250b42de2f26
+arithmetic,compiled,compiled,2,12182.71,a1b7250b42de2f26
+arithmetic,compiled,compiled,3,11883.44,a1b7250b42de2f26
+arithmetic,compiled,compiled,4,12082.45,a1b7250b42de2f26
+arithmetic,compiled,compiled,5,11965.64,a1b7250b42de2f26
+summary arithmetic compiled effective=compiled: min=11883.44 median=12082.45 max=12182.71 ns/cycle
+memory,interpreter,interpreter,1,3037.70,0f5a029b41b5a716
+memory,interpreter,interpreter,2,2997.37,0f5a029b41b5a716
+memory,interpreter,interpreter,3,3019.89,0f5a029b41b5a716
+memory,interpreter,interpreter,4,3041.22,0f5a029b41b5a716
+memory,interpreter,interpreter,5,3063.04,0f5a029b41b5a716
+summary memory interpreter effective=interpreter: min=2997.37 median=3037.70 max=3063.04 ns/cycle
+memory,compiled,interpreter,1,3099.59,0f5a029b41b5a716
+memory,compiled,interpreter,2,2989.80,0f5a029b41b5a716
+memory,compiled,interpreter,3,2983.03,0f5a029b41b5a716
+memory,compiled,interpreter,4,2983.04,0f5a029b41b5a716
+memory,compiled,interpreter,5,3016.35,0f5a029b41b5a716
+summary memory compiled effective=interpreter: min=2983.03 median=2989.80 max=3099.59 ns/cycle

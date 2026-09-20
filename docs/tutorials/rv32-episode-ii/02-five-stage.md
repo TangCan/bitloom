@@ -9,7 +9,7 @@
 要点（详 `PIPE.md`）：
 
 - 级间 IF/ID、ID/EX、EX/MEM、MEM/WB
-- `bitloom-sim`：**下游 Reg 先于上游**赋值（WB←MEM←EX←ID←IF）
+- `bitloom-sim`：所有 `RegD` 按拍前值求值至 `next_regs` 后统一提交；级间采样不依赖赋值排列顺序
 - `pc_f` 对齐 harness `instr` 与取指 PC
 - 取指合同仍是 (b) harness `instr`
 

@@ -19,3 +19,7 @@ bitloom-hir = { workspace = true }
 
 [dev-dependencies]
 bitloom-builder = { workspace = true }
+
+[[bench]]
+name = "baseline"
+harness = false

@@ -36,7 +36,7 @@ Out-of-promise crates (`bitloom-hir` / `bitloom-builder` / `bitloom-vlog`) may c
 
 - Local: `just semver-check` → `scripts/semver-check.sh`
 - CI required job: `semver-check` (no `continue-on-error`)
-- Tool: **`cargo-semver-checks`** against FR142 **library** surface crates (`bitloom-prelude`, `bitloom-sim`)
+- Tool: **`cargo-semver-checks`** against FR142 **library** surface crates (`bitloom-prelude`, `bitloom-sim`, `bitloom-firrtl`)
 - `bitloom` CLI verbs and `bitloom-macro` are in-surface via documentation; they are **not** fully covered by rustdoc-based semver-checks (macro has no conventional lib API; CLI is binary-first)
 - **Pre-1.0.0:** default `--release-type major` so known crates.io drift may be absorbed by the upcoming 1.0 major; tool must still run; missing tool → **non-zero**
 - **After 1.0.0 is on crates.io (FR153):** default `--release-type minor` for workspace version ≥1.0.0 (the temporary 1.0.0 / `BITLOOM_SEMVER_ASSUME_PUBLISHED` special-case was **removed** once library + CLI 1.0.0 were published)

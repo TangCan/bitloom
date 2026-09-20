@@ -61,8 +61,12 @@ pub use systemc_tlm_at::{
 };
 
 /// Simulator state for one FrozenHir circuit.
+///
+/// Values use `u64` storage. Wider HIR signals retain their low 64 bits on
+/// passthrough and writeback; this is not arbitrary-width integer simulation.
 pub struct Sim {
     hir: FrozenHir,
+    widths: BTreeMap<String, u32>,
     regs: BTreeMap<String, u64>,
     mems: BTreeMap<String, Vec<u64>>,
     /// SyncReadMem: data captured last cycle, applied this cycle (latency 1).
@@ -121,6 +125,7 @@ impl Sim {
         }
         let kernel = engine::compile(&hir);
         Self {
+            widths: signal_widths(&hir),
             hir,
             regs,
             mems,
@@ -223,7 +228,7 @@ impl Sim {
 
     pub fn set_inputs(&mut self, inputs: PortValues) {
         for (k, v) in inputs.values {
-            self.ports.set(k, v);
+            self.ports.set(k.clone(), self.truncate(&k, v));
         }
     }
 
@@ -238,6 +243,10 @@ impl Sim {
             .unwrap_or(0)
     }
 
+    fn truncate(&self, name: &str, value: u64) -> u64 {
+        mask_width(value, self.widths.get(name).copied().unwrap_or(64))
+    }
+
     fn eval(&mut self, expr: &AssignExpr) -> u64 {
         match expr {
             AssignExpr::Ref(n) => self.lookup(n),
@@ -248,8 +257,14 @@ impl Sim {
             AssignExpr::And(a, b) => self.lookup(a) & self.lookup(b),
             AssignExpr::Or(a, b) => self.lookup(a) | self.lookup(b),
             AssignExpr::Xor(a, b) => self.lookup(a) ^ self.lookup(b),
-            AssignExpr::Shl(a, b) => self.lookup(a) << (self.lookup(b) & 63),
-            AssignExpr::Shr(a, b) => self.lookup(a) >> (self.lookup(b) & 63),
+            AssignExpr::Shl(a, b) => self
+                .lookup(a)
+                .checked_shl(self.lookup(b).min(64) as u32)
+                .unwrap_or(0),
+            AssignExpr::Shr(a, b) => self
+                .lookup(a)
+                .checked_shr(self.lookup(b).min(64) as u32)
+                .unwrap_or(0),
             AssignExpr::Ult { lhs, rhs, width } => u64::from(
                 mask_width(self.lookup(lhs), *width) < mask_width(self.lookup(rhs), *width),
             ),
@@ -262,7 +277,7 @@ impl Sim {
                 width,
             } => arithmetic_right_shift(self.lookup(value), self.lookup(shamt), *width),
             AssignExpr::Slice { src, lo, width } => {
-                let mask = if *width == 64 {
+                let mask = if *width >= 64 {
                     u64::MAX
                 } else {
                     (1u64 << width) - 1
@@ -276,7 +291,7 @@ impl Sim {
             } => (self.lookup(high) << low_width) | self.lookup(low),
             AssignExpr::ZeroExtend { src, to_width, .. } => {
                 self.lookup(src)
-                    & if *to_width == 64 {
+                    & if *to_width >= 64 {
                         u64::MAX
                     } else {
                         (1u64 << to_width) - 1
@@ -294,7 +309,7 @@ impl Sim {
                     value
                 };
                 extended
-                    & if *to_width == 64 {
+                    & if *to_width >= 64 {
                         u64::MAX
                     } else {
                         (1u64 << to_width) - 1
@@ -477,14 +492,14 @@ impl Sim {
             let mut next_regs: BTreeMap<String, u64> = BTreeMap::new();
             for (name, expr) in seq {
                 let next = if reset { 0 } else { self.eval(&expr) };
-                next_regs.insert(name, next);
+                next_regs.insert(name.clone(), self.truncate(&name, next));
             }
             for (name, val) in next_regs {
                 self.regs.insert(name, val);
             }
             for (name, expr) in comb {
                 let val = self.eval(&expr);
-                self.ports.set(name, val);
+                self.ports.set(name.clone(), self.truncate(&name, val));
             }
             return;
         }
@@ -534,11 +549,11 @@ impl Sim {
                                         mem: mem.clone(),
                                         addr: addr.clone(),
                                     });
-                                    next_pending.insert(name.clone(), val);
+                                    next_pending.insert(name.clone(), self.truncate(name, val));
                                 }
                                 _ => {
                                     let next = self.eval(&a.expr);
-                                    next_regs.insert(name.clone(), next);
+                                    next_regs.insert(name.clone(), self.truncate(name, next));
                                 }
                             }
                         }
@@ -553,6 +568,7 @@ impl Sim {
                             }
                             let a_idx = self.lookup(addr) as usize;
                             let data = self.eval(&a.expr);
+                            let data = self.truncate(mem, data);
                             if let Some(bank) = self.mems.get_mut(mem) {
                                 if a_idx < bank.len() {
                                     bank[a_idx] = data;
@@ -580,7 +596,7 @@ impl Sim {
                     for a in &p.assigns {
                         if let AssignTarget::Net(name) = &a.target {
                             let val = self.eval(&a.expr);
-                            self.ports.set(name.clone(), val);
+                            self.ports.set(name.clone(), self.truncate(name, val));
                         }
                     }
                 }
@@ -602,9 +618,36 @@ fn signed_less(lhs: u64, rhs: u64, width: u32) -> bool {
     }
 }
 
+fn signal_widths(hir: &FrozenHir) -> BTreeMap<String, u32> {
+    let mut widths = BTreeMap::new();
+    if let Some(module) = hir.circuit().modules.first() {
+        for port in &module.ports {
+            widths.insert(port.name.clone(), ground_width(&port.ty));
+        }
+        for stmt in &module.body {
+            match stmt {
+                Stmt::RegDecl { name, ty, .. } | Stmt::WireDecl { name, ty, .. } => {
+                    widths.insert(name.clone(), ground_width(ty));
+                }
+                Stmt::MemDecl { name, width, .. } => {
+                    widths.insert(name.clone(), *width);
+                }
+                _ => {}
+            }
+        }
+    }
+    widths
+}
+fn ground_width(ty: &GroundType) -> u32 {
+    match ty {
+        GroundType::UInt { width } | GroundType::SInt { width } => *width,
+        _ => 1,
+    }
+}
+
 fn mask_width(value: u64, width: u32) -> u64 {
     value
-        & if width == 64 {
+        & if width >= 64 {
             u64::MAX
         } else {
             (1u64 << width) - 1
@@ -612,18 +655,18 @@ fn mask_width(value: u64, width: u32) -> u64 {
 }
 
 fn arithmetic_right_shift(value: u64, shamt: u64, width: u32) -> u64 {
-    let mask = if width == 64 {
+    let mask = if width >= 64 {
         u64::MAX
     } else {
         (1u64 << width) - 1
     };
     let value = value & mask;
-    let shamt = shamt & 63;
-    if value & (1u64 << (width - 1)) == 0 {
-        return value >> shamt;
-    }
+    let negative = value & (1u64 << (width - 1)) != 0;
     if shamt >= u64::from(width) {
-        return mask;
+        return if negative { mask } else { 0 };
+    }
+    if shamt == 0 || !negative {
+        return value >> shamt;
     }
     ((value >> shamt) | (!0u64 << (width - shamt as u32))) & mask
 }

@@ -2,7 +2,7 @@
 # FR144 — surface-crate SemVer breakage gate (cargo-semver-checks).
 # Documented entry: `just semver-check` (not part of default `just test`).
 #
-# Library surface crates (FR142): bitloom-prelude, bitloom-sim.
+# Library surface crates (FR142): bitloom-prelude, bitloom-sim, bitloom-firrtl.
 # CLI (`bitloom`) + macro (`bitloom-macro`) are in-surface via docs; not fully
 # covered by rustdoc-based semver-checks.
 #
@@ -63,6 +63,7 @@ ${SEMVER_BIN} --version 2>&1 | head -n 3 | sed 's/^/semver-check: /' || true
 PACKAGES=(
   bitloom-prelude
   bitloom-sim
+  bitloom-firrtl
 )
 
 run_check() {

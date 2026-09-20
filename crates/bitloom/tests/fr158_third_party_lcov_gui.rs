@@ -8,6 +8,11 @@ use std::fs;
 use std::os::unix::fs::PermissionsExt;
 use std::path::PathBuf;
 use std::process::Command;
+use std::sync::Mutex;
+
+// These two tests temporarily replace process-wide PATH. Keep their overrides
+// disjoint so the missing-tool fixture cannot hide the fake executable.
+static PATH_OVERRIDE: Mutex<()> = Mutex::new(());
 
 use bitloom::lcov_gui::{LcovGuiError, find_genhtml, run_genhtml};
 use bitloom_builder::{ElaborateSession, GroundType, Span};
@@ -88,6 +93,7 @@ fn fr158_docs_contract() {
 
 #[test]
 fn fr158_missing_genhtml_is_explicit_error() {
+    let _path_guard = PATH_OVERRIDE.lock().unwrap();
     let dir = tempfile_dir("fr158-miss");
     let lcov = write_fixture_lcov(&dir);
     let html_out = dir.join("genhtml");
@@ -114,6 +120,7 @@ fn fr158_missing_genhtml_is_explicit_error() {
 
 #[test]
 fn fr158_fake_genhtml_produces_html() {
+    let _path_guard = PATH_OVERRIDE.lock().unwrap();
     let dir = tempfile_dir("fr158-ok");
     let lcov = write_fixture_lcov(&dir);
     let bin_dir = dir.join("bin");

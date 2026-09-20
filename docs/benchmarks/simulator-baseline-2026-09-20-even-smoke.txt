@@ -1,0 +1,32 @@
+cycles=1000 samples=4 warmup=20000 profile=release order=alternating-pairs
+workload,requested_engine,effective_engine,sample,ns_per_cycle,checksum
+counter,interpreter,interpreter,1,2756.87,89acef5c8b564947
+counter,compiled,compiled,1,2450.34,89acef5c8b564947
+counter,compiled,compiled,2,2437.14,89acef5c8b564947
+counter,interpreter,interpreter,2,2733.27,89acef5c8b564947
+counter,interpreter,interpreter,3,2988.26,89acef5c8b564947
+counter,compiled,compiled,3,2491.47,89acef5c8b564947
+counter,compiled,compiled,4,2460.18,89acef5c8b564947
+counter,interpreter,interpreter,4,2786.70,89acef5c8b564947
+summary counter interpreter effective=interpreter: min=2733.27 median=2771.78 max=2988.26 ns/cycle
+summary counter compiled effective=compiled: min=2437.14 median=2455.26 max=2491.47 ns/cycle
+arithmetic,interpreter,interpreter,1,13633.02,a056b3955e0f01f1
+arithmetic,compiled,compiled,1,12448.29,a056b3955e0f01f1
+arithmetic,compiled,compiled,2,12276.55,a056b3955e0f01f1
+arithmetic,interpreter,interpreter,2,13625.47,a056b3955e0f01f1
+arithmetic,interpreter,interpreter,3,13691.27,a056b3955e0f01f1
+arithmetic,compiled,compiled,3,12179.68,a056b3955e0f01f1
+arithmetic,compiled,compiled,4,12410.50,a056b3955e0f01f1
+arithmetic,interpreter,interpreter,4,13871.53,a056b3955e0f01f1
+summary arithmetic interpreter effective=interpreter: min=13625.47 median=13662.14 max=13871.53 ns/cycle
+summary arithmetic compiled effective=compiled: min=12179.68 median=12343.53 max=12448.29 ns/cycle
+memory,interpreter,interpreter,1,3089.95,380e08a69d1c0972
+memory,compiled,interpreter,1,3094.63,380e08a69d1c0972
+memory,compiled,interpreter,2,3091.00,380e08a69d1c0972
+memory,interpreter,interpreter,2,3124.38,380e08a69d1c0972
+memory,interpreter,interpreter,3,3157.63,380e08a69d1c0972
+memory,compiled,interpreter,3,3055.03,380e08a69d1c0972
+memory,compiled,interpreter,4,3195.06,380e08a69d1c0972
+memory,interpreter,interpreter,4,3160.42,380e08a69d1c0972
+summary memory interpreter effective=interpreter: min=3089.95 median=3141.00 max=3160.42 ns/cycle
+summary memory compiled effective=interpreter: min=3055.03 median=3092.81 max=3195.06 ns/cycle

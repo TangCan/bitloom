@@ -756,7 +756,7 @@ impl Elaboratable for EpisodeIIPipe {
         s.assign_net("led_out", "led", Span::default());
         s.end_process();
 
-        // Seq: 下游 Reg 先于上游（WB ← MEM ← EX ← ID ← IF ← pc_f ← PC）
+        // Seq: 按下游到上游排列以便阅读；所有 RegD 拍前求值后统一提交。
         s.begin_sequential(Span::default());
         s.assign_reg_d_from("x1", "next_x1", Span::default());
         s.assign_reg_d_from("x2", "next_x2", Span::default());

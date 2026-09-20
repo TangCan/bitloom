@@ -16,12 +16,36 @@ fn read(rel: &str) -> String {
 }
 
 #[test]
-fn bitloom_1_1_0_workspace_version() {
-    let cargo = read("Cargo.toml");
-    assert!(
-        cargo.contains("version = \"1.1.0\""),
-        "workspace.package version must be 1.1.0"
-    );
+fn current_workspace_version_retains_1_1_release_history() {
+    let output = std::process::Command::new("cargo")
+        .args([
+            "metadata",
+            "--no-deps",
+            "--offline",
+            "--format-version",
+            "1",
+        ])
+        .current_dir(workspace_root())
+        .output()
+        .expect("cargo metadata");
+    assert!(output.status.success());
+    let metadata: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
+    let cli = metadata["packages"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|p| p["name"] == "bitloom")
+        .unwrap();
+    assert_eq!(cli["version"], env!("CARGO_PKG_VERSION"));
+    let version: Vec<u64> = cli["version"]
+        .as_str()
+        .unwrap()
+        .split('.')
+        .take(2)
+        .map(|v| v.parse().unwrap())
+        .collect();
+    assert!(version.as_slice() >= [1, 1].as_slice());
+    assert!(read("CHANGELOG.md").contains("[1.1.0]"));
 }
 
 #[test]

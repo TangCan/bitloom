@@ -278,6 +278,9 @@ fn emit_assign(a: &bitloom_hir::Assign) -> Result<String, String> {
         (AssignTarget::RegD(name), AssignExpr::Ref(from)) => Ok(format!(
             "    s.assign_reg_d_from({name:?}, {from:?}, Span::default());\n"
         )),
+        (AssignTarget::RegD(name), AssignExpr::MemRead { mem, addr }) => Ok(format!(
+            "    s.assign_reg_d_mem_read({name:?}, {mem:?}, {addr:?}, Span::default());\n"
+        )),
         (AssignTarget::RegD(name), AssignExpr::Mux { sel, t, f }) => Ok(format!(
             "    s.assign_reg_d_mux({name:?}, {sel:?}, {t:?}, {f:?}, Span::default());\n"
         )),
@@ -455,17 +458,152 @@ mod tests {
         assert!(!check_generated_bridge_with(hir, &mut w, reset_then_run(1)).is_pass());
     }
 
+    fn run_generated_cycles(hir: FrozenHir, vectors: Vec<(PortValues, u64)>, output: &str) {
+        let dir = std::env::temp_dir().join(format!(
+            "bitloom-cycle-{}-{}-{}",
+            hir.abi_name,
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        let mut native = Sim::new(hir.clone());
+        let mut functional = GeneratedFunctional::from_hir(&hir);
+        let mut test = String::from("#[test] fn every_cycle() { let mut sim = CONSTRUCTOR;\n");
+        for (i, (input, expected)) in vectors.into_iter().enumerate() {
+            native.set_inputs(input.clone());
+            native.tick();
+            assert_eq!(
+                native.ports().get(output),
+                Some(expected),
+                "native cycle {i}"
+            );
+            assert_eq!(
+                functional.cycle(&input).get(output),
+                Some(expected),
+                "functional cycle {i}"
+            );
+            test.push_str("let mut input = bitloom_hir::PortValues::default();\n");
+            for (name, value) in input.values {
+                test.push_str(&format!("input.set({name:?}, {value});\n"));
+            }
+            test.push_str(&format!("assert_eq!(sim.cycle(&input).get({output:?}), Some({expected}), \"generated cycle {i}\");\n"));
+        }
+        test.push_str("}\n");
+        for functional in [false, true] {
+            let crate_dir = dir.join(if functional { "functional" } else { "cycle" });
+            let constructor = if functional {
+                crate::generate_functional_sim(&hir, &crate_dir).unwrap();
+                format!(
+                    "bitloom_func_{}::FunctionalSim::new()",
+                    hir.abi_name.to_lowercase()
+                )
+            } else {
+                generate_cycle_accurate_sim(&hir, &crate_dir).unwrap();
+                format!("{}::CycleAccurate::new()", sanitize_pkg_name(&hir.abi_name))
+            };
+            fs::create_dir_all(crate_dir.join("tests")).unwrap();
+            fs::write(
+                crate_dir.join("tests/cycles.rs"),
+                test.replace("CONSTRUCTOR", &constructor),
+            )
+            .unwrap();
+            // Isolated from the parent cargo target; shared only by these sequential builds.
+            let result = std::process::Command::new("cargo")
+                .args(["test", "--offline", "--quiet", "--manifest-path"])
+                .arg(crate_dir.join("Cargo.toml"))
+                .env("CARGO_TARGET_DIR", dir.join("target"))
+                .output()
+                .unwrap();
+            assert!(
+                result.status.success(),
+                "generated crate retained at {}\n{}\n{}",
+                crate_dir.display(),
+                String::from_utf8_lossy(&result.stdout),
+                String::from_utf8_lossy(&result.stderr)
+            );
+        }
+        fs::remove_dir_all(dir).unwrap();
+    }
+
     #[test]
     fn emit_cycle_crate_compiles() {
-        let hir = counter_hir();
-        let dir = std::env::temp_dir().join(format!("bitloom-cycle-gen-{}", std::process::id()));
-        let _ = fs::remove_dir_all(&dir);
-        let out = generate_cycle_accurate_sim(&hir, &dir).unwrap();
-        let lib = fs::read_to_string(out.join("src/lib.rs")).unwrap();
-        assert!(
-            lib.contains("CycleAccurate") && lib.contains("Sim::tick") || lib.contains("sim.tick")
-        );
-        assert!(lib.contains("cycle_wrapper_smoke"));
+        let mut count = 0;
+        let vectors = (0..310)
+            .map(|i| {
+                let reset = i == 0 || i == 300;
+                count = if reset { 0 } else { (count + 1) & 0xff };
+                let mut input = PortValues::default();
+                input.set("rst", reset as u64);
+                (input, count)
+            })
+            .collect();
+        run_generated_cycles(counter_hir(), vectors, "data_out");
+    }
+
+    #[test]
+    fn emitted_cycle_memory_reset_and_write_enable() {
+        let p = Span::default();
+        let mut s = ElaborateSession::new("memory");
+        s.begin_module("Memory", p);
+        s.add_input("clk", GroundType::Clock, p);
+        s.add_input("rst", GroundType::Reset, p);
+        s.add_input("addr", GroundType::UInt { width: 2 }, p);
+        s.add_input("data", GroundType::UInt { width: 16 }, p);
+        s.add_input("increment", GroundType::UInt { width: 16 }, p);
+        s.declare_wire("write_data", GroundType::UInt { width: 16 }, p);
+        s.add_input("we", GroundType::Bool, p);
+        s.add_output("out", GroundType::UInt { width: 20 }, p);
+        s.declare_sync_read_mem("ram", 4, 8, p);
+        s.declare_reg("read_data", GroundType::UInt { width: 4 }, p);
+        s.declare_reg("read_wide", GroundType::UInt { width: 16 }, p);
+        s.begin_sequential(p);
+        s.assign_mem_write_en("ram", "addr", "write_data", "we", p);
+        s.assign_reg_d_mem_read("read_data", "ram", "addr", p);
+        s.assign_reg_d_mem_read("read_wide", "ram", "addr", p);
+        s.end_process();
+        s.begin_combinational(p);
+        s.assign_add("write_data", "data", "increment", p);
+        s.assign_concat("out", "read_wide", "read_data", p);
+        s.end_process();
+        s.end_module();
+        let hir = s.finish().unwrap();
+        let mut bank = [0; 4];
+        let mut pending = 0;
+        let mut prior_sum = 0;
+        let vectors = (0..40)
+            .map(|i| {
+                let reset = i == 0 || i == 17;
+                let addr = i % 4;
+                let data = 0x1fff0 + (i * 0x123) as u64;
+                let we = i % 3 != 0;
+                let expected = if reset {
+                    0
+                } else {
+                    (pending << 4) | (pending & 0xf)
+                };
+                if !reset && we {
+                    bank[addr] = prior_sum & 0xff;
+                }
+                pending = if reset { 0 } else { bank[addr] };
+                // Sequential logic samples the previous comb result, then comb
+                // computes the current 16-bit sum after this edge.
+                prior_sum = ((data & 0xffff) + 0x30) & 0xffff;
+                let mut input = PortValues::default();
+                for (name, value) in [
+                    ("rst", reset as u64),
+                    ("addr", addr as u64),
+                    ("data", data),
+                    ("increment", 0x10030),
+                    ("we", we as u64),
+                ] {
+                    input.set(name, value);
+                }
+                (input, expected)
+            })
+            .collect();
+        run_generated_cycles(hir, vectors, "out");
     }
 
     #[test]

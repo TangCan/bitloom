@@ -30,14 +30,52 @@ fn fr150_bitloom_viz_package_identity() {
 
     let ws = fs::read_to_string(root.join("Cargo.toml")).expect("workspace toml");
     assert!(
-        ws.contains("bitloom-viz")
-            && ws.contains("crates/rhdl-viz")
-            && ws.contains("version = \"1.0.0\""),
+        ws.contains("bitloom-viz") && ws.contains("crates/rhdl-viz"),
         "workspace must map bitloom-viz path+version"
     );
     assert!(
         !ws.lines().any(|l| l.trim().starts_with("rhdl-viz =")),
         "workspace must not keep rhdl-viz dependency key"
+    );
+
+    // Cargo resolves the current path+registry requirement; historical 1.0.0
+    // identity must not pin every subsequent release to its original version.
+    let metadata = Command::new("cargo")
+        .args([
+            "metadata",
+            "--no-deps",
+            "--offline",
+            "--format-version",
+            "1",
+        ])
+        .current_dir(&root)
+        .output()
+        .expect("cargo metadata");
+    assert!(
+        metadata.status.success(),
+        "{}",
+        String::from_utf8_lossy(&metadata.stderr)
+    );
+    let metadata: serde_json::Value = serde_json::from_slice(&metadata.stdout).unwrap();
+    let cli = metadata["packages"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|p| p["name"] == "bitloom")
+        .unwrap();
+    let dependency = cli["dependencies"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|d| d["name"] == "bitloom-viz")
+        .unwrap();
+    assert_ne!(
+        dependency["req"], "*",
+        "published dependency needs a version requirement"
+    );
+    assert_eq!(
+        dependency["path"].as_str(),
+        root.join("crates/rhdl-viz").to_str()
     );
 
     let bitloom = fs::read_to_string(root.join("crates/bitloom/Cargo.toml")).expect("cli toml");

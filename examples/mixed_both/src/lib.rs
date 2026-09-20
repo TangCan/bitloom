@@ -39,7 +39,7 @@ impl CounterAbs {
         if inputs.get("rst").unwrap_or(0) != 0 {
             self.count = 0;
         } else {
-            self.count = self.count.wrapping_add(1);
+            self.count = self.count.wrapping_add(1) & 0xff;
         }
         let mut out = inputs.clone();
         out.set("data_out", self.count);
@@ -105,7 +105,7 @@ mod tests {
         pv.set("rst", 1);
         check_mixed_both(&mut sim, &mut mixed.abs, pv.clone()).unwrap();
         pv.set("rst", 0);
-        for _ in 0..3 {
+        for _ in 0..259 {
             let bridged = CounterBridge::to_pins(&pv);
             check_mixed_both(&mut sim, &mut mixed.abs, bridged).unwrap();
         }

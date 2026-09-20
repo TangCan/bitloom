@@ -16,11 +16,11 @@ jobs:
           toolchain: "1.97.1"
           components: rustfmt
       - name: Install SystemC (FR101 LT smoke)
-        run: sudo apt-get update && sudo apt-get install -y libsystemc-dev pkg-config g++
+        run: sudo apt-get update && sudo apt-get install -y libsystemc-dev pkg-config g++ iverilog
       - name: fmt check
         run: cargo fmt --all -- --check
       - name: test (MSRV 1.97.1)
-        run: cargo test --workspace
+        run: BITLOOM_REQUIRE_RTL=1 cargo test --workspace
 
   # FR71 / NFR34 / FR28: required true Chisel JVM compile (Pattern A — parallel to Rust test).
   # Escape hatch env must never be enabled here. Do not use continue-on-error.
@@ -84,6 +84,13 @@ jobs:
           toolchain: "1.97.1"
       - name: Ensure pinned firtool-1.159.0 (AD-9)
         run: cargo run -p bitloom -- firtool ensure
+      - name: Install Icarus for bit-vector simulation regression
+        run: sudo apt-get update && sudo apt-get install -y iverilog
+      - name: Required native and emitted Rust, Verilog and FIRRTL bit-vector matrix
+        run: |
+          firtool_bin="$(cargo run -q -p bitloom -- firtool ensure)"
+          export RHDL_FIRTOOL_PATH="$(dirname "$firtool_bin")"
+          BITLOOM_REQUIRE_RTL=1 BITLOOM_REQUIRE_FIRRTL=1 cargo test -p bitloom --test simulator_bit_vectors -- --nocapture
       - name: Required FR137 circt-external-check
         run: bash scripts/circt-external-check.sh
 
@@ -243,5 +250,7 @@ jobs:
           toolchain: "1.97.1"
       - name: Install cargo-semver-checks (FR144)
         run: cargo install cargo-semver-checks --locked
+      - name: SemVer script package coverage and failure propagation
+        run: bash scripts/test-semver-check.sh
       - name: Required FR144 semver-check
         run: bash scripts/semver-check.sh

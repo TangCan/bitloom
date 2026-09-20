@@ -21,7 +21,7 @@ pub fn emit(hir: &FrozenHir) -> Artifact {
     let mut body = String::from("FIRRTL version 6.0.0\n");
     body.push_str(&format!("circuit {} :\n", hir.abi_name));
     for m in &hir.circuit().modules {
-        body.push_str(&emit_module(m));
+        body.push_str(&emit_module(m, m.name == hir.abi_name));
     }
     let path = format!("{}.fir", hir.abi_name);
     Artifact {
@@ -44,7 +44,7 @@ fn fir_type(ty: &GroundType) -> String {
     }
 }
 
-fn emit_expr(expr: &AssignExpr) -> String {
+fn emit_expr(expr: &AssignExpr, m: &Module, target: &str) -> String {
     match expr {
         AssignExpr::Ref(n) => n.clone(),
         AssignExpr::Lit(v) => format!("UInt({v})"),
@@ -54,8 +54,11 @@ fn emit_expr(expr: &AssignExpr) -> String {
         AssignExpr::And(a, b) => format!("and({a}, {b})"),
         AssignExpr::Or(a, b) => format!("or({a}, {b})"),
         AssignExpr::Xor(a, b) => format!("xor({a}, {b})"),
-        AssignExpr::Shl(a, b) => format!("dshl({a}, {b})"),
-        AssignExpr::Shr(a, b) => format!("dshr({a}, {b})"),
+        AssignExpr::Shl(a, b) => bounded_left_shift(m, a, b, target),
+        AssignExpr::Shr(a, b) => {
+            let value = unsigned_ref(m, a);
+            format!("dshr({value}, {b})")
+        }
         AssignExpr::Ult { lhs, rhs, .. } => format!("lt({lhs}, {rhs})"),
         AssignExpr::Slt { lhs, rhs, .. } => format!("lt(asSInt({lhs}), asSInt({rhs}))"),
         AssignExpr::Sar { value, shamt, .. } => format!("dshr(asSInt({value}), {shamt})"),
@@ -71,15 +74,91 @@ fn emit_expr(expr: &AssignExpr) -> String {
     }
 }
 
-fn emit_module(m: &Module) -> String {
-    let mut out = format!("  module {} :\n", m.name);
+fn signal_type<'a>(m: &'a Module, name: &str) -> Option<&'a GroundType> {
+    m.ports
+        .iter()
+        .find(|p| p.name == name)
+        .map(|p| &p.ty)
+        .or_else(|| {
+            m.body.iter().find_map(|stmt| match stmt {
+                Stmt::RegDecl { name: n, ty, .. } | Stmt::WireDecl { name: n, ty, .. }
+                    if n == name =>
+                {
+                    Some(ty)
+                }
+                _ => None,
+            })
+        })
+}
+
+fn unsigned_ref(m: &Module, name: &str) -> String {
+    if matches!(signal_type(m, name), Some(GroundType::SInt { .. })) {
+        format!("asUInt({name})")
+    } else {
+        name.into()
+    }
+}
+
+fn bounded_left_shift(m: &Module, value: &str, shift: &str, target: &str) -> String {
+    let width = match signal_type(m, target) {
+        Some(GroundType::UInt { width } | GroundType::SInt { width }) => *width,
+        _ => 1,
+    };
+    // FIRRTL dshl's inferred width grows exponentially with shift-operand width.
+    // Bound the shift operand, but preserve out-of-range zero semantics by guarding
+    // the original (untruncated) shift amount. Width-one needs no dshl at all.
+    let value = unsigned_ref(m, value);
+    let shifted = if width <= 1 {
+        value.to_string()
+    } else {
+        let shift_width = match signal_type(m, shift) {
+            Some(GroundType::UInt { width } | GroundType::SInt { width }) => *width,
+            _ => 1,
+        };
+        let high = (31 - (width - 1).leading_zeros()).min(shift_width - 1);
+        format!("dshl({value}, bits({shift}, {high}, 0))")
+    };
+    format!("mux(geq({shift}, UInt({width})), UInt(0), {shifted})")
+}
+
+fn emit_assignment_expr(expr: &AssignExpr, m: &Module, target: &str) -> String {
+    if let AssignExpr::SignExtend { src, to_width, .. } = expr {
+        if matches!(signal_type(m, target), Some(GroundType::SInt { .. })) {
+            return format!("pad(asSInt({src}), {to_width})");
+        }
+    }
+    let expression = emit_expr(expr, m, target);
+    if matches!(expr, AssignExpr::Shl(..) | AssignExpr::Shr(..))
+        && matches!(signal_type(m, target), Some(GroundType::SInt { .. }))
+    {
+        let width = match signal_type(m, target) {
+            Some(GroundType::SInt { width }) => *width,
+            _ => unreachable!(),
+        };
+        // Logical results zero-extend before adopting a signed destination type.
+        format!("asSInt(pad({expression}, {width}))")
+    } else {
+        expression
+    }
+}
+
+fn emit_module(m: &Module, is_top: bool) -> String {
+    let visibility = if is_top { "public " } else { "" };
+    let mut out = format!("  {visibility}module {} :\n", m.name);
     for p in &m.ports {
         let dir = match p.direction {
             PortDirection::Input => "input",
             PortDirection::Output => "output",
             PortDirection::InOut => "inout",
         };
-        out.push_str(&format!("    {} {}: {}\n", dir, p.name, fir_type(&p.ty)));
+        let ty = if matches!(p.ty, GroundType::Reset) {
+            // Public FIRRTL ports require concrete reset types. Preserve our
+            // logical reset identity in a comment for the subset importer.
+            "UInt<1> ; bitloom-type: Reset".to_string()
+        } else {
+            fir_type(&p.ty)
+        };
+        out.push_str(&format!("    {} {}: {}\n", dir, p.name, ty));
     }
     for stmt in &m.body {
         match stmt {
@@ -93,12 +172,18 @@ fn emit_module(m: &Module) -> String {
                 reset,
                 ..
             } => {
+                let zero = if matches!(ty, GroundType::SInt { .. }) {
+                    "SInt(0)"
+                } else {
+                    "UInt(0)"
+                };
                 out.push_str(&format!(
-                    "    reg {}: {}, {} with:\n      reset => ({}, UInt(0))\n",
+                    "    regreset {}: {}, {}, {}, {}\n",
                     name,
                     fir_type(ty),
                     clock,
-                    reset
+                    reset,
+                    zero
                 ));
             }
             Stmt::MemDecl {
@@ -129,16 +214,22 @@ fn emit_module(m: &Module) -> String {
                 for a in &p.assigns {
                     match (&a.target, p.kind) {
                         (AssignTarget::Net(n), ProcessKind::Combinational) => {
-                            out.push_str(&format!("    {n} <= {}\n", emit_expr(&a.expr)));
+                            out.push_str(&format!(
+                                "    connect {n}, {}\n",
+                                emit_assignment_expr(&a.expr, m, n)
+                            ));
                         }
                         (AssignTarget::RegD(n), ProcessKind::Sequential) => {
-                            out.push_str(&format!("    {n} <= {}\n", emit_expr(&a.expr)));
+                            out.push_str(&format!(
+                                "    connect {n}, {}\n",
+                                emit_assignment_expr(&a.expr, m, n)
+                            ));
                         }
                         (AssignTarget::MemWrite { mem, addr, we }, ProcessKind::Sequential) => {
                             let gate = we.as_ref().map(|e| format!(" if {e}")).unwrap_or_default();
                             out.push_str(&format!(
                                 "    ; mem write{gate} {mem}[{addr}] <= {}\n",
-                                emit_expr(&a.expr)
+                                emit_expr(&a.expr, m, mem)
                             ));
                         }
                         _ => {}
@@ -150,7 +241,7 @@ fn emit_module(m: &Module) -> String {
                 for c in &inst.connects {
                     if !c.dangling {
                         out.push_str(&format!(
-                            "    {}.{} <= {}\n",
+                            "    connect {}.{}, {}\n",
                             inst.name, c.child_port, c.parent_net
                         ));
                     }
@@ -208,7 +299,10 @@ pub fn import(text: &str) -> Result<FrozenHir, bitloom_hir::Diagnostics> {
         let line = line.trim();
         if let Some(rest) = line.strip_prefix("circuit ") {
             circuit_name = rest.trim_end_matches(" :").trim().to_string();
-        } else if let Some(rest) = line.strip_prefix("module ") {
+        } else if let Some(rest) = line
+            .strip_prefix("module ")
+            .or_else(|| line.strip_prefix("public module "))
+        {
             if let Some(mut m) = current.take() {
                 flush_processes(&mut m, &mut comb_assigns, &mut seq_assigns);
                 modules.push(m);
@@ -247,6 +341,28 @@ pub fn import(text: &str) -> Result<FrozenHir, bitloom_hir::Diagnostics> {
                         span: bitloom_hir::Span::default(),
                     });
                 }
+            } else if let Some(rest) = line.strip_prefix("regreset ") {
+                if let Some((name, declaration)) = rest.split_once(':') {
+                    let parts: Vec<_> = declaration.split(',').map(str::trim).collect();
+                    if parts.len() == 4 && matches!(parts[3], "UInt(0)" | "SInt(0)") {
+                        m.body.push(Stmt::RegDecl {
+                            name: name.trim().into(),
+                            ty: parse_ty(parts[0]),
+                            clock: parts[1].into(),
+                            reset: parts[2].into(),
+                            async_reset: false,
+                            has_enable: false,
+                            span: bitloom_hir::Span::default(),
+                        });
+                    } else {
+                        import_errs.push(bitloom_hir::Diagnostic {
+                            span: bitloom_hir::Span::default(),
+                            code: "rhdl::E0403".into(),
+                            en: "import supports only zero-reset regreset declarations".into(),
+                            zh: "导入仅支持零复位 regreset 声明".into(),
+                        });
+                    }
+                }
             } else if let Some(rest) = line.strip_prefix("reg ") {
                 // reg count: UInt<8>, clk with:
                 if let Some((lhs, _)) = rest.split_once(" with:") {
@@ -277,8 +393,11 @@ pub fn import(text: &str) -> Result<FrozenHir, bitloom_hir::Diagnostics> {
                         span: bitloom_hir::Span::default(),
                     }));
                 }
-            } else if line.contains(" <= ") {
-                let (lhs, rhs) = line.split_once(" <= ").unwrap();
+            } else if let Some((lhs, rhs)) = line
+                .strip_prefix("connect ")
+                .and_then(|s| s.split_once(", "))
+                .or_else(|| line.split_once(" <= "))
+            {
                 let lhs = lhs.trim();
                 let rhs = rhs.trim();
                 // Bitloom emit: `inst.port <= parent`. firtool/Chisel output often uses
@@ -338,7 +457,7 @@ pub fn import(text: &str) -> Result<FrozenHir, bitloom_hir::Diagnostics> {
                     took_inst = true;
                 }
                 if !took_inst {
-                    let expr = parse_expr(rhs);
+                    let expr = parse_expr(rhs, m, lhs);
                     let is_reg = m
                         .body
                         .iter()
@@ -526,7 +645,63 @@ pub fn instance_graph_roundtrip_ok(expected: &FrozenHir, got: &FrozenHir) -> Res
     Ok(())
 }
 
-fn parse_expr(s: &str) -> AssignExpr {
+fn parse_expr(s: &str, m: &Module, target: &str) -> AssignExpr {
+    if let Some(inner) = s.strip_prefix("asSInt(").and_then(|s| s.strip_suffix(')')) {
+        let inner = inner
+            .strip_prefix("pad(")
+            .and_then(|s| s.strip_suffix(')'))
+            .and_then(|s| s.rsplit_once(", ").map(|(value, _)| value))
+            .unwrap_or(inner);
+        let expression = parse_expr(inner, m, target);
+        if matches!(expression, AssignExpr::Shl(..) | AssignExpr::Shr(..))
+            && emit_assignment_expr(&expression, m, target) == s
+        {
+            return expression;
+        }
+    }
+    // Recognize exactly our bounded dynamic-left-shift encoding, preserving HIR
+    // identity rather than treating the nested FIRRTL primitive as a signal name.
+    if let Some(rest) = s.strip_prefix("mux(geq(") {
+        if let Some((shift, rest)) = rest.split_once(", UInt(") {
+            if let Some((_, rest)) = rest.split_once(")), UInt(0), ") {
+                let value = rest
+                    .strip_prefix("dshl(")
+                    .and_then(|s| s.split_once(',').map(|(v, _)| v))
+                    .or_else(|| rest.strip_suffix(')'));
+                if let Some(value) = value {
+                    let value = value
+                        .strip_prefix("asUInt(")
+                        .and_then(|s| s.strip_suffix(')'))
+                        .unwrap_or(value);
+                    let candidate = AssignExpr::Shl(value.into(), shift.into());
+                    if emit_expr(&candidate, m, target) == s {
+                        return candidate;
+                    }
+                }
+            }
+        }
+    }
+    for (primitive, make) in [
+        ("dshl(", AssignExpr::Shl as fn(String, String) -> AssignExpr),
+        ("dshr(", AssignExpr::Shr as fn(String, String) -> AssignExpr),
+    ] {
+        if let Some(inner) = s.strip_prefix(primitive).and_then(|x| x.strip_suffix(')')) {
+            if let Some((a, b)) = inner.split_once(", ") {
+                let a = a
+                    .strip_prefix("asUInt(")
+                    .and_then(|s| s.strip_suffix(')'))
+                    .unwrap_or(a);
+                if !a.contains('(') && !b.contains('(') {
+                    let candidate = make(a.into(), b.into());
+                    // Only discard casts that match our logical-shift encoding.
+                    if emit_expr(&candidate, m, target) == s || s == format!("{primitive}{a}, {b})")
+                    {
+                        return candidate;
+                    }
+                }
+            }
+        }
+    }
     if let Some(inner) = s.strip_prefix("add(").and_then(|x| x.strip_suffix(')')) {
         let parts: Vec<_> = inner.split(',').map(str::trim).collect();
         if parts.len() == 2 {
@@ -547,6 +722,9 @@ fn parse_expr(s: &str) -> AssignExpr {
 }
 
 fn parse_ty(s: &str) -> GroundType {
+    if s == "UInt<1> ; bitloom-type: Reset" {
+        return GroundType::Reset;
+    }
     match s {
         "Clock" => GroundType::Clock,
         "Reset" => GroundType::Reset,
@@ -575,6 +753,90 @@ mod tests {
     use bitloom_builder::{ElaborateSession, GroundType, Span};
 
     use super::*;
+
+    #[test]
+    fn firrtl6_public_top_and_modern_connections() {
+        let hir = hierarchical_sample();
+        let text = emit(&hir).files.remove(0).contents;
+        assert!(text.contains(&format!("public module {} :", hir.abi_name)));
+        assert_eq!(text.matches("public module ").count(), 1);
+        assert!(text.contains("connect "));
+        assert!(
+            !text
+                .lines()
+                .any(|l| !l.trim().starts_with(';') && l.contains(" <= "))
+        );
+        let back = import(&text).expect("modern FIRRTL remains importable");
+        ports_roundtrip_ok(&hir, &back).unwrap();
+        instance_graph_roundtrip_ok(&hir, &back).unwrap();
+    }
+
+    #[test]
+    fn bounded_left_shift_roundtrips_without_modulo_semantics() {
+        for (width, shift_width, out_width, signed) in [
+            (1, 1, 1),
+            (8, 8, 8),
+            (32, 32, 32),
+            (64, 64, 64),
+            (32, 1, 32),
+            (8, 8, 16),
+            (8, 1, 16),
+            (16, 8, 8),
+        ]
+        .into_iter()
+        .flat_map(|(w, s, o)| [(w, s, o, false), (w, s, o, true)])
+        {
+            let mut s = ElaborateSession::new("Shift");
+            let p = Span::default();
+            s.begin_module("Shift", p);
+            s.add_input("clk", GroundType::Clock, p);
+            s.add_input("rst", GroundType::Reset, p);
+            let ty = if signed {
+                GroundType::SInt { width }
+            } else {
+                GroundType::UInt { width }
+            };
+            s.add_input("a", ty.clone(), p);
+            s.add_input("shift", GroundType::UInt { width: shift_width }, p);
+            let out_ty = if signed {
+                GroundType::SInt { width: out_width }
+            } else {
+                GroundType::UInt { width: out_width }
+            };
+            s.add_output("out", out_ty.clone(), p);
+            s.add_output("right", out_ty, p);
+            s.begin_combinational(p);
+            s.assign_shl("out", "a", "shift", p);
+            s.assign_shr("right", "a", "shift", p);
+            s.end_process();
+            s.end_module();
+            let hir = s.finish().unwrap();
+            let text = emit(&hir).files.remove(0).contents;
+            assert!(text.contains(&format!("geq(shift, UInt({out_width}))")));
+            let back = import(&text).expect("bounded shift expression roundtrip");
+            let assignments: Vec<_> = back.circuit().modules[0]
+                .body
+                .iter()
+                .filter_map(|s| {
+                    if let Stmt::Process(p) = s {
+                        Some(p.assigns.as_slice())
+                    } else {
+                        None
+                    }
+                })
+                .flatten()
+                .collect();
+            assert_eq!(assignments.len(), 2);
+            assert_eq!(
+                assignments[0].expr,
+                AssignExpr::Shl("a".into(), "shift".into())
+            );
+            assert_eq!(
+                assignments[1].expr,
+                AssignExpr::Shr("a".into(), "shift".into())
+            );
+        }
+    }
 
     fn hierarchical_sample() -> FrozenHir {
         let mut s = ElaborateSession::new("t");

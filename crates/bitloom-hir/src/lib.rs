@@ -129,9 +129,9 @@ pub enum AssignExpr {
     Or(String, String),
     /// Bitwise XOR of two refs.
     Xor(String, String),
-    /// Logical left shift: `a << (b & 63)`.
+    /// Logical left shift: `a << b`, truncated to the destination width; large shifts yield zero.
     Shl(String, String),
-    /// Logical right shift: `a >> (b & 63)`.
+    /// Logical right shift: `a >> b`; shifts at least the input width yield zero.
     Shr(String, String),
     /// Unsigned same-width comparison: `a < b` → 0/1.
     Ult {

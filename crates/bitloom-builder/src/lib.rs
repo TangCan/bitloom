@@ -922,7 +922,7 @@ impl ElaborateSession {
         self.push_comb_net_expr(dst.into(), AssignExpr::Xor(lhs.into(), rhs.into()), span);
     }
 
-    /// Combinational `dst = lhs << (rhs & 63)`.
+    /// Combinational `dst = lhs << rhs`, truncated to the destination width; large shifts yield zero.
     pub fn assign_shl(
         &mut self,
         dst: impl Into<String>,
@@ -933,7 +933,7 @@ impl ElaborateSession {
         self.push_comb_net_expr(dst.into(), AssignExpr::Shl(lhs.into(), rhs.into()), span);
     }
 
-    /// Combinational `dst = lhs >> (rhs & 63)` (logical).
+    /// Combinational `dst = lhs >> rhs` (logical); large shifts yield zero.
     pub fn assign_shr(
         &mut self,
         dst: impl Into<String>,

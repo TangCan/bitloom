@@ -29,6 +29,9 @@ enum SeqOp {
 
 /// In-process functional model derived from FrozenHir (FR47 / FR112 / FR159).
 ///
+/// Like `Sim`, values occupy a `u64`; wider HIR signals preserve the low word,
+/// rather than providing arbitrary-width integer simulation.
+///
 /// **FR112:** SyncReadMem / Mem `MemRead`+`MemWrite` semantics match cycle-accurate
 /// [`crate::Sim::tick`] (latency-1 sync read via `pending_mem_reads`) for the
 /// **in-process** view / `check_generated_bridge`.
@@ -38,6 +41,7 @@ enum SeqOp {
 /// (no longer stubs `MemRead` as `0`).
 #[derive(Debug, Clone)]
 pub struct GeneratedFunctional {
+    widths: BTreeMap<String, u32>,
     regs: BTreeMap<String, u64>,
     nets: PortValues,
     mems: BTreeMap<String, Vec<u64>>,
@@ -140,6 +144,7 @@ impl GeneratedFunctional {
         }
 
         Self {
+            widths: crate::signal_widths(hir),
             regs,
             nets: PortValues::default(),
             mems,
@@ -152,12 +157,19 @@ impl GeneratedFunctional {
         }
     }
 
+    fn truncate(&self, name: &str, value: u64) -> u64 {
+        mask_width(value, self.widths.get(name).copied().unwrap_or(64))
+    }
+
     fn lookup(&self, inputs: &PortValues, name: &str) -> u64 {
-        inputs
-            .get(name)
-            .or_else(|| self.regs.get(name).copied())
-            .or_else(|| self.nets.get(name))
-            .unwrap_or(0)
+        self.truncate(
+            name,
+            inputs
+                .get(name)
+                .or_else(|| self.regs.get(name).copied())
+                .or_else(|| self.nets.get(name))
+                .unwrap_or(0),
+        )
     }
 
     fn mem_is_sync(&self, name: &str) -> bool {
@@ -182,8 +194,14 @@ impl GeneratedFunctional {
             AssignExpr::And(a, b) => self.lookup(inputs, a) & self.lookup(inputs, b),
             AssignExpr::Or(a, b) => self.lookup(inputs, a) | self.lookup(inputs, b),
             AssignExpr::Xor(a, b) => self.lookup(inputs, a) ^ self.lookup(inputs, b),
-            AssignExpr::Shl(a, b) => self.lookup(inputs, a) << (self.lookup(inputs, b) & 63),
-            AssignExpr::Shr(a, b) => self.lookup(inputs, a) >> (self.lookup(inputs, b) & 63),
+            AssignExpr::Shl(a, b) => self
+                .lookup(inputs, a)
+                .checked_shl(self.lookup(inputs, b).min(64) as u32)
+                .unwrap_or(0),
+            AssignExpr::Shr(a, b) => self
+                .lookup(inputs, a)
+                .checked_shr(self.lookup(inputs, b).min(64) as u32)
+                .unwrap_or(0),
             AssignExpr::Ult { lhs, rhs, width } => u64::from(
                 mask_width(self.lookup(inputs, lhs), *width)
                     < mask_width(self.lookup(inputs, rhs), *width),
@@ -204,7 +222,7 @@ impl GeneratedFunctional {
             ),
             AssignExpr::Slice { src, lo, width } => {
                 (self.lookup(inputs, src) >> lo)
-                    & if *width == 64 {
+                    & if *width >= 64 {
                         u64::MAX
                     } else {
                         (1u64 << width) - 1
@@ -217,7 +235,7 @@ impl GeneratedFunctional {
             } => (self.lookup(inputs, high) << low_width) | self.lookup(inputs, low),
             AssignExpr::ZeroExtend { src, to_width, .. } => {
                 self.lookup(inputs, src)
-                    & if *to_width == 64 {
+                    & if *to_width >= 64 {
                         u64::MAX
                     } else {
                         (1u64 << to_width) - 1
@@ -234,7 +252,7 @@ impl GeneratedFunctional {
                 } else {
                     v
                 };
-                e & if *to_width == 64 {
+                e & if *to_width >= 64 {
                     u64::MAX
                 } else {
                     (1u64 << to_width) - 1
@@ -268,7 +286,7 @@ fn signed_less(lhs: u64, rhs: u64, width: u32) -> bool {
 
 fn mask_width(value: u64, width: u32) -> u64 {
     value
-        & if width == 64 {
+        & if width >= 64 {
             u64::MAX
         } else {
             (1u64 << width) - 1
@@ -276,29 +294,29 @@ fn mask_width(value: u64, width: u32) -> u64 {
 }
 
 fn arithmetic_right_shift(value: u64, shamt: u64, width: u32) -> u64 {
-    let mask = if width == 64 {
+    let mask = if width >= 64 {
         u64::MAX
     } else {
         (1u64 << width) - 1
     };
     let value = value & mask;
-    let shamt = shamt & 63;
-    if value & (1u64 << (width - 1)) == 0 {
-        return value >> shamt;
-    }
+    let negative = value & (1u64 << (width - 1)) != 0;
     if shamt >= u64::from(width) {
-        return mask;
+        return if negative { mask } else { 0 };
+    }
+    if shamt == 0 || !negative {
+        return value >> shamt;
     }
     ((value >> shamt) | (!0u64 << (width - shamt as u32))) & mask
 }
 
 impl AbstractionView for GeneratedFunctional {
     fn cycle(&mut self, inputs: &PortValues) -> PortValues {
-        let reset = inputs.get(&self.reset_port).unwrap_or(0) != 0;
+        let reset = self.lookup(inputs, &self.reset_port) != 0;
         let enable = self
             .enable_port
             .as_ref()
-            .map(|p| inputs.get(p).unwrap_or(0) != 0)
+            .map(|p| self.lookup(inputs, p) != 0)
             .unwrap_or(true);
 
         // Apply SyncReadMem pending from previous cycle (latency 1) — matches Sim.
@@ -325,10 +343,11 @@ impl AbstractionView for GeneratedFunctional {
                     match expr {
                         AssignExpr::MemRead { mem, addr } if self.mem_is_sync(mem) => {
                             let val = self.eval_mem_read(inputs, mem, addr);
-                            next_pending.insert(name.clone(), val);
+                            next_pending.insert(name.clone(), self.truncate(name, val));
                         }
                         _ => {
-                            next_regs.insert(name.clone(), self.eval(inputs, expr));
+                            next_regs
+                                .insert(name.clone(), self.truncate(name, self.eval(inputs, expr)));
                         }
                     }
                 }
@@ -347,7 +366,7 @@ impl AbstractionView for GeneratedFunctional {
                         }
                     }
                     let a_idx = self.lookup(inputs, addr) as usize;
-                    let data = self.eval(inputs, expr);
+                    let data = self.truncate(mem, self.eval(inputs, expr));
                     if let Some(bank) = self.mems.get_mut(mem) {
                         if a_idx < bank.len() {
                             bank[a_idx] = data;
@@ -362,9 +381,12 @@ impl AbstractionView for GeneratedFunctional {
         self.pending_mem_reads = next_pending;
 
         let mut out = inputs.clone();
+        for (name, value) in &mut out.values {
+            *value = self.truncate(name, *value);
+        }
         for (name, expr) in &self.comb {
             // Prefer updated regs over prior port values (matches Sim::tick_combinational).
-            let value = self.eval(&out, expr);
+            let value = self.truncate(name, self.eval(&out, expr));
             self.nets.set(name.clone(), value);
             out.set(name.clone(), value);
         }
@@ -479,10 +501,10 @@ fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
                 let body = match expr {
                     AssignExpr::MemRead { mem, addr } if model.mem_is_sync(mem) => format!(
                         "                    let val = self.eval_mem_read(inputs, {mem:?}, {addr:?});\n\
-                                            next_pending.insert({name:?}.into(), val);\n"
+                                            next_pending.insert({name:?}.into(), self.truncate({name:?}, val));\n"
                     ),
                     _ => format!(
-                        "                    next_regs.insert({name:?}.into(), {});\n",
+                        "                    next_regs.insert({name:?}.into(), self.truncate({name:?}, {}));\n",
                         render_expr(expr)
                     ),
                 };
@@ -517,7 +539,7 @@ fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
                 };
                 format!(
                     "{we_guard}                    let a_idx = self.lookup(inputs, {addr:?}) as usize;\n\
-                                        let data = {};\n\
+                                        let data = self.truncate({mem:?}, {});\n\
                                         if let Some(bank) = self.mems.get_mut({mem:?}) {{\n\
                                             if a_idx < bank.len() {{\n\
                                                 bank[a_idx] = data;\n\
@@ -534,14 +556,19 @@ fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
         .iter()
         .map(|(name, expr)| {
             format!(
-                "        let value = {};\n        self.nets.set({name:?}, value);\n        out.set({name:?}, value);\n",
+                "        let value = self.truncate({name:?}, {});\n        self.nets.set({name:?}, value);\n        out.set({name:?}, value);\n",
                 render_expr_ports_regs(expr)
             )
         })
         .collect();
+    let width_arms: String = model
+        .widths
+        .iter()
+        .map(|(n, w)| format!("            {n:?} => {w},\n"))
+        .collect();
     let reset = &model.reset_port;
     let enable_init = match &model.enable_port {
-        Some(p) => format!("let enable = inputs.get({p:?}).unwrap_or(0) != 0;"),
+        Some(p) => format!("let enable = self.lookup(inputs, {p:?}) != 0;"),
         None => "#[allow(unused_variables)] let enable = true;".into(),
     };
     let mem_gold = if model.mems.is_empty() {
@@ -575,6 +602,7 @@ fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
         r#"//! Generated Bitloom functional simulator (FR47 / FR159 / AD-5).
 //! Not SystemC / TLM-2.0. Do not hand-edit; regenerate via `generate_functional_sim`.
 //! MemRead/MemWrite + SyncReadMem latency-1 match GeneratedFunctional / Sim::tick (FR159).
+//! Values use u64 storage; wider HIR signals preserve only the low 64-bit word.
 
 use std::collections::BTreeMap;
 
@@ -582,7 +610,7 @@ use bitloom_hir::PortValues;
 
 #[allow(dead_code)]
 fn mask_width(value: u64, width: u32) -> u64 {{
-    value & if width == 64 {{ u64::MAX }} else {{ (1u64 << width) - 1 }}
+    value & if width >= 64 {{ u64::MAX }} else {{ (1u64 << width) - 1 }}
 }}
 
 #[allow(dead_code)]
@@ -597,9 +625,9 @@ fn signed_less(lhs: u64, rhs: u64, width: u32) -> bool {{
 fn arithmetic_right_shift(value: u64, shamt: u64, width: u32) -> u64 {{
     let mask = mask_width(u64::MAX, width);
     let value = value & mask;
-    let shamt = shamt & 63;
-    if value & (1u64 << (width - 1)) == 0 {{ return value >> shamt; }}
-    if shamt >= u64::from(width) {{ return mask; }}
+    let negative = value & (1u64 << (width - 1)) != 0;
+    if shamt >= u64::from(width) {{ return if negative {{ mask }} else {{ 0 }}; }}
+    if shamt == 0 || !negative {{ return value >> shamt; }}
     ((value >> shamt) | (!0u64 << (width - shamt as u32))) & mask
 }}
 
@@ -631,12 +659,19 @@ impl FunctionalSim {{
         }}
     }}
 
+    fn truncate(&self, name: &str, value: u64) -> u64 {{
+        let width = match name {{
+{width_arms}            _ => 64,
+        }};
+        mask_width(value, width)
+    }}
+
     fn lookup(&self, inputs: &PortValues, name: &str) -> u64 {{
-        inputs
+        self.truncate(name, inputs
             .get(name)
             .or_else(|| self.regs.get(name).copied())
             .or_else(|| self.nets.get(name))
-            .unwrap_or(0)
+            .unwrap_or(0))
     }}
 
     #[allow(dead_code)]
@@ -650,7 +685,7 @@ impl FunctionalSim {{
 
     /// One untimed functional cycle; returns updated `PortValues`.
     pub fn cycle(&mut self, inputs: &PortValues) -> PortValues {{
-        let reset = inputs.get({reset:?}).unwrap_or(0) != 0;
+        let reset = self.lookup(inputs, {reset:?}) != 0;
         {enable_init}
         // Apply SyncReadMem pending from previous cycle (latency 1) — matches Sim.
         let pending = std::mem::take(&mut self.pending_mem_reads);
@@ -664,6 +699,7 @@ impl FunctionalSim {{
         }}
         self.pending_mem_reads = next_pending;
         let mut out = inputs.clone();
+        for (name, value) in &mut out.values {{ *value = self.truncate(name, *value); }}
 {comb_arms}        out
     }}
 }}
@@ -708,10 +744,14 @@ fn render_expr(expr: &AssignExpr) -> String {
         AssignExpr::Or(a, b) => format!("self.lookup(inputs, {a:?}) | self.lookup(inputs, {b:?})"),
         AssignExpr::Xor(a, b) => format!("self.lookup(inputs, {a:?}) ^ self.lookup(inputs, {b:?})"),
         AssignExpr::Shl(a, b) => {
-            format!("self.lookup(inputs, {a:?}) << (self.lookup(inputs, {b:?}) & 63)")
+            format!(
+                "self.lookup(inputs, {a:?}).checked_shl(self.lookup(inputs, {b:?}).min(64) as u32).unwrap_or(0)"
+            )
         }
         AssignExpr::Shr(a, b) => {
-            format!("self.lookup(inputs, {a:?}) >> (self.lookup(inputs, {b:?}) & 63)")
+            format!(
+                "self.lookup(inputs, {a:?}).checked_shr(self.lookup(inputs, {b:?}).min(64) as u32).unwrap_or(0)"
+            )
         }
         AssignExpr::Ult { lhs, rhs, width } => format!(
             "u64::from(mask_width(self.lookup(inputs, {lhs:?}), {width}) < mask_width(self.lookup(inputs, {rhs:?}), {width}))"
@@ -728,7 +768,7 @@ fn render_expr(expr: &AssignExpr) -> String {
         ),
         AssignExpr::Slice { src, lo, width } => format!(
             "(self.lookup(inputs, {src:?}) >> {lo}) & {}",
-            if *width == 64 {
+            if *width >= 64 {
                 "u64::MAX".into()
             } else {
                 format!("((1u64 << {width}) - 1)")
@@ -743,7 +783,7 @@ fn render_expr(expr: &AssignExpr) -> String {
         }
         AssignExpr::ZeroExtend { src, to_width, .. } => format!(
             "self.lookup(inputs, {src:?}) & {}",
-            if *to_width == 64 {
+            if *to_width >= 64 {
                 "u64::MAX".into()
             } else {
                 format!("((1u64 << {to_width}) - 1)")
@@ -754,9 +794,9 @@ fn render_expr(expr: &AssignExpr) -> String {
             from_width,
             to_width,
         } => format!(
-            "{{ let v = self.lookup(inputs, {src:?}); let e = if {from_width} < 64 && v & (1u64 << ({} - 1)) != 0 {{ v | (!0u64 << {from_width}) }} else {{ v }}; e & {} }}",
+            "{{ let v = self.lookup(inputs, {src:?}); let e = if {from_width} < 64 && v & (1u64 << ({} - 1)) != 0 {{ v | ((!0u64).wrapping_shl({from_width})) }} else {{ v }}; e & {} }}",
             from_width,
-            if *to_width == 64 {
+            if *to_width >= 64 {
                 "u64::MAX".into()
             } else {
                 format!("((1u64 << {to_width}) - 1)")

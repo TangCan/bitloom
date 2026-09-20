@@ -40,7 +40,7 @@ impl Elaboratable for PipelineFeasibilitySpike {
         s.end_process();
 
         s.begin_sequential(Span::default());
-        // Order matters for interpreter (in-place reg update): capture old s0 into s1 first.
+        // NBA commit: both assignments sample old registers; listing order is for readability.
         s.assign_reg_d_from("s1", "s0", Span::default());
         s.assign_reg_d_from("s0", "s0_next", Span::default());
         s.end_process();

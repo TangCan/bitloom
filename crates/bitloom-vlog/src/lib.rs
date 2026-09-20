@@ -53,16 +53,29 @@ fn emit_expr(expr: &AssignExpr) -> String {
             src,
             from_width,
             to_width,
-        } => format!("{{{{{}{{1'b0}}}}, {src}}}", to_width - from_width),
+        } => {
+            if to_width == from_width {
+                src.clone()
+            } else {
+                format!("{{{{{}{{1'b0}}}}, {src}}}", to_width - from_width)
+            }
+        }
         AssignExpr::SignExtend {
             src,
             from_width,
             to_width,
-        } => format!(
-            "{{{{{}{{{src}[{}]}}}}, {src}}}",
-            to_width - from_width,
-            from_width - 1
-        ),
+        } => {
+            if to_width == from_width {
+                src.clone()
+            } else {
+                let sign = if *from_width == 1 {
+                    src.clone()
+                } else {
+                    format!("{src}[{}]", from_width - 1)
+                };
+                format!("{{{{{}{{{}}}}}, {src}}}", to_width - from_width, sign)
+            }
+        }
         AssignExpr::Eq(a, b) => format!("({a} == {b})"),
         AssignExpr::Mux { sel, t, f } => format!("({sel} ? {t} : {f})"),
         AssignExpr::MemRead { mem, addr } => format!("{mem}[{addr}]"),

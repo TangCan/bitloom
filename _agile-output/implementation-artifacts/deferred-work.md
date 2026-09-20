@@ -667,3 +667,7 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
   resolution: |
     item-229 过程证据已齐；其余未选加深写入本 ledger，禁止静默扩大关闭面。
     **Phase 16 规划/实现/retro/action-items 已齐（Epic 72–78）。**
+
+- source_spec: `_agile-output/implementation-artifacts/spec-simulator-reliability-maintenance.md`
+  summary: Chisel 后端既有 SInt 逻辑右移仍采用算术右移，需独立数值一致性修复与真实 JVM/RTL 对拍。
+  evidence: `crates/rhdl-firrtl/src/chisel.rs` 的 `AssignExpr::Shr` 与 `Sar` 均直接使用 `>>`，对 SInt 为符号填充；例如 SInt8 的 0xff 右移一位应得逻辑位型 0x7f，而非 0xff。本次新增数值矩阵覆盖 Rust/Verilog/FIRRTL，不包含 Chisel；后续应把生成 Scala 编译降级后的 RTL 纳入相同独立参考矩阵。

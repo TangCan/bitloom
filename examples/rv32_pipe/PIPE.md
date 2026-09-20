@@ -22,8 +22,8 @@
 ## 仿真时序（`bitloom-sim`）
 
 1. 每拍 **先 sequential 再 combinational**；级间 next 线对 `instr` 的采样滞后一拍。
-2. 级间赋值必须 **下游 Reg 先于上游**（WB←MEM←EX←ID←IF，然后 `pc_f`←`pc`←`next_pc`），因 `RegD` 就地更新。
-3. **`pc_f`**：在更新 `pc` 之前锁存当前 PC，供 comb 将 harness `instr` 与取指 PC 对齐。
+2. `RegD` 先对拍前寄存器快照求值，写入 `next_regs`，再统一提交（NBA 语义）。级间赋值顺序不影响采样；代码保留下游到上游的排列以便阅读。
+3. **`pc_f`**：与 `pc` 同拍更新，采样拍前 PC，供 comb 将 harness `instr` 与取指 PC 对齐。
 4. **复位后 arming：** 复位边沿后 comb 仍可能见 `rst=1`（`next_pc` 保持 0）。黄金先 `tick_with` 首条指令，再按 `pc_out` 查 ROM（`rom_tick`）排空至 WB。
 5. Stall 用 **mux hold**（非模块级 `en`）：`do_stall` 时 PC/IF-ID 保持，ID/EX 进 bubble；EX/MEM/WB 继续前进。`rs2` 匹配仅对 ADD/BEQ/SW 门控（避免 I-type `imm[4:0]` 伪冲突）。
 6. **勿**对 `load_q` 做 MEM→EX 旁路：async DMEM + seq→comb 下同拍可读到 `load_q`，旁路会让无 stall 的 load-use 仍绿，破坏 ATDD。
