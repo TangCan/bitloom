@@ -1,0 +1,38 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.60s
+     Running tests/fr119_symbiyosys_smt_path.rs (target/debug/deps/fr119_symbiyosys_smt_path-ae052d6606f79c31)
+
+running 8 tests
+test fr119_docs_nail_sby_binding_and_bans ... ok
+test fr119_fixtures_have_assume_assert_pass_and_fail ... ok
+test fr119_nfr14_selected_binding_still_gates ... ok
+test fr119_fr100_and_fr112_surfaces_still_present ... ok
+test fr119_script_and_just_entry_exist ... ok
+test fr119_script_fails_readably_when_sby_missing ... ok
+test fr119_optional_real_sby_pass_when_installed ... ok
+test fr119_optional_real_sby_fail_fixture_when_installed ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.53s
+
+     Running tests/fr161_formal_sby_image_hygiene.rs (target/debug/deps/fr161_formal_sby_image_hygiene-4b87cc8ae6fe8674)
+
+running 6 tests
+test fr161_ci_runs_hygiene_before_install ... ok
+test fr161_docs_contract_and_forbid_fr127_alone ... ok
+test fr161_fr127_job_still_present ... ok
+test fr161_install_script_obeys_pins ... ok
+test fr161_pins_file_nonempty ... ok
+ci-sby-hygiene-check: FR161 formal-sby image/tooling hygiene (Bitloom)
+ci-sby-hygiene-check: ok pin ref=yosys-0.47 sha=bfc1c47eb786496fe794481ff88e75728f0529a6 url=https://github.com/YosysHQ/sby.git
+ci-sby-hygiene-check: install script obeys FR161 pins
+test fr161_hygiene_script_pass_and_force_fail ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/nfr14_risk_epic93_formal_sby_image_hygiene_fr161.rs (target/debug/deps/nfr14_risk_epic93_formal_sby_image_hygiene_fr161-81baa9599275bcc4)
+
+running 1 test
+test nfr14_risk_epic93_formal_sby_image_hygiene_fr161_has_required_fields ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

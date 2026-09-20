@@ -1,0 +1,19 @@
+{
+  "story_id": "126.3",
+  "tdd_phase": "RED",
+  "execution_mode": "subagent",
+  "api_tests": 8,
+  "e2e_tests": 0,
+  "formal_tests": 2,
+  "total_tests": 10,
+  "formal_activation": "--ignored",
+  "red_result": "exit 101: E0432 missing RvRegSlice",
+  "generated_files": [
+    "crates/bitloom/tests/fr195_rv_reg_slice.rs",
+    "crates/bitloom/tests/fr195_rv_reg_slice_formal.rs"
+  ],
+  "pact_mcp_reachable": false,
+  "playwright_applicable": false,
+  "pact_applicable": false,
+  "performance_gain": "not measured"
+}

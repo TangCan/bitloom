@@ -1,0 +1,12 @@
+FR195 width=1 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+FR195 width=1 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+FR195 width=1 seed=0x73592401ffff accepted=247 delivered=240 cancelled=7 occupancy=[69, 250, 101] simultaneous=180 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+FR195 width=8 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+FR195 width=8 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+FR195 width=8 seed=0x73592401ffff accepted=247 delivered=240 cancelled=7 occupancy=[69, 250, 101] simultaneous=180 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+FR195 width=32 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+FR195 width=32 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+FR195 width=32 seed=0x73592401ffff accepted=247 delivered=240 cancelled=7 occupancy=[69, 250, 101] simultaneous=180 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+FR195 width=64 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+FR195 width=64 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+FR195 width=64 seed=0x73592401ffff accepted=247 delivered=240 cancelled=7 occupancy=[69, 250, 101] simultaneous=180 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44

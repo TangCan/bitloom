@@ -32,13 +32,13 @@ if ! command -v sby >/dev/null 2>&1; then
 fi
 
 echo "formal-sby-check: sby=$(command -v sby)"
-if sby --version >/dev/null 2>&1; then
-  sby --version 2>&1 | head -n 5 | sed 's/^/formal-sby-check: /' || true
-elif sby -h >/dev/null 2>&1; then
+if timeout --kill-after=2s 10s sby --version >/dev/null 2>&1; then
+  timeout --kill-after=2s 10s sby --version 2>&1 | head -n 5 | sed 's/^/formal-sby-check: /' || true
+elif timeout --kill-after=2s 10s sby -h >/dev/null 2>&1; then
   echo "formal-sby-check: sby present (no --version); see docs/fr119-symbiyosys-smt.md to record band"
 fi
 if command -v yosys >/dev/null 2>&1; then
-  yosys -V 2>&1 | head -n 2 | sed 's/^/formal-sby-check: /' || true
+  timeout --kill-after=2s 10s yosys -V 2>&1 | head -n 2 | sed 's/^/formal-sby-check: /' || true
 else
   echo "formal-sby-check: warning: yosys not on PATH (sby may still locate it)" >&2
 fi
@@ -51,7 +51,7 @@ if [[ "${BITLOOM_SBY_SKIP_ENGINE_PREFLIGHT:-0}" != "1" ]]; then
     exit 1
   fi
   echo "formal-sby-check: z3=$(command -v z3)"
-  z3 -version 2>&1 | head -n 1 | sed 's/^/formal-sby-check: /' || true
+  timeout --kill-after=2s 10s z3 -version 2>&1 | head -n 1 | sed 's/^/formal-sby-check: /' || true
 fi
 
 case "$MODE" in
@@ -90,7 +90,21 @@ fi
 echo "formal-sby-check: running sby -f $SBY_FILE (mode=$MODE)"
 (
   cd "$FIXTURE_DIR"
-  sby -f "$(basename "$SBY_FILE")"
+  timeout --kill-after=5s 180s sby -f "$(basename "$SBY_FILE")"
 )
 
-echo "formal-sby-check: OK mode=$MODE fixture=$SBY_FILE"
+STATUS_FILE="$FIXTURE_DIR/fr119_${MODE}/status"
+if [[ ! -f "$STATUS_FILE" ]]; then
+  echo "error: missing actual SBY status: $STATUS_FILE" >&2
+  exit 1
+fi
+read -r ACTUAL_STATUS _ < "$STATUS_FILE"
+if [[ "$ACTUAL_STATUS" != "PASS" ]]; then
+  echo "error: actual SBY status=$ACTUAL_STATUS mode=$MODE; see $STATUS_FILE" >&2
+  exit 1
+fi
+if [[ "$MODE" == "fail" ]]; then
+  echo "error: negative fixture unexpectedly PASS" >&2
+  exit 1
+fi
+echo "formal-sby-check: OK mode=$MODE actual status=PASS fixture=$SBY_FILE"

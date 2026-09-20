@@ -24,8 +24,14 @@ jobs:
       - name: test (MSRV 1.97.1)
         # Optimize long protocol matrices; test-profile assertions/overflow checks stay enabled.
         run: BITLOOM_REQUIRE_RTL=1 CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test --workspace
-      - name: FR194 documented prelude-only design
+      - name: FR194 and FR195 documented prelude-only designs
         run: python3 scripts/check_fr194_example.py
+      - name: Preserve Icarus failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rv-rtl-failure-evidence
+          path: target/fr195/
 
   # FR71 / NFR34 / FR28: required true Chisel JVM compile (Pattern A — parallel to Rust test).
   # Escape hatch env must never be enabled here. Do not use continue-on-error.
@@ -101,6 +107,26 @@ jobs:
       - name: Required FR127 formal-sby-check
         # Same path as `just formal-sby-check` (FR119 script; required here for FR127).
         run: bash scripts/formal-sby-check.sh
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.97.1"
+      - name: Required FR119 real counterexample
+        run: |
+          command -v sby
+          command -v yosys
+          command -v z3
+          cargo test -p bitloom --test fr119_symbiyosys_smt_path fr119_optional_real_sby_fail_fixture_when_installed -- --exact --nocapture
+      - name: Required FR195 generated RTL safety and cover
+        run: cargo test -p bitloom --test fr195_rv_reg_slice_formal -- --ignored --nocapture
+      - name: Preserve formal failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: formal-failure-evidence
+          path: |
+            target/fr195-formal/
+            target/fr119/
+            crates/rhdl-formal/fixtures/fr119/fr119_fail/
 
   # FR137 / NFR58: required external CIRCT compile gate (firtool-1.159.0 / AD-9).
   # Same path as `just circt-external-check`. Compile-gate MVP (sim deferred).

@@ -32,28 +32,25 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update -y
-sudo apt-get install -y yosys z3 python3 python3-pip git
+sudo apt-get install -y yosys z3 python3 python3-pip python3-click git make
 
 # SymbiYosys (sby) — upstream YosysHQ at FR161 pin (not HEAD).
 TMP="${RUNNER_TEMP:-/tmp}/bitloom-sby-src"
 rm -rf "$TMP"
 git clone --depth 1 --branch "$SBY_GIT_REF" "$SBY_GIT_URL" "$TMP"
+# Verify the ref object itself, then compare commits after peeling annotated tags.
+REF_OBJECT="$(git -C "$TMP" rev-parse "$SBY_GIT_REF")"
+PIN_COMMIT="$(git -C "$TMP" rev-parse "${SBY_GIT_SHA}^{commit}")"
 ACTUAL_SHA="$(git -C "$TMP" rev-parse HEAD)"
-if [[ "$ACTUAL_SHA" != "$SBY_GIT_SHA" ]]; then
-  echo "error: FR161 sby SHA mismatch: expected $SBY_GIT_SHA got $ACTUAL_SHA (ref $SBY_GIT_REF)" >&2
+if [[ "$REF_OBJECT" != "$SBY_GIT_SHA" || "$ACTUAL_SHA" != "$PIN_COMMIT" ]]; then
+  echo "error: FR161 sby SHA mismatch: expected object $SBY_GIT_SHA commit $PIN_COMMIT; got ref $REF_OBJECT HEAD $ACTUAL_SHA" >&2
   exit 1
 fi
-echo "ci-install-sby: cloned sby@$ACTUAL_SHA (matches pin)"
+echo "ci-install-sby: cloned sby@$ACTUAL_SHA (matches pin object $REF_OBJECT)"
 
-# sby is a Python driver; install into /usr/local/bin
-sudo install -m 0755 "$TMP/sbysrc/sby.py" /usr/local/bin/sby
-# Also ship support modules next to it when present
-if [[ -d "$TMP/sbysrc" ]]; then
-  sudo mkdir -p /usr/local/share/sby
-  sudo cp -a "$TMP/sbysrc/." /usr/local/share/sby/
-fi
-
-command -v sby >/dev/null
+# Upstream installs support modules and patches the launcher's Python search path.
+sudo make -C "$TMP" install PREFIX=/usr/local
+env -u PYTHONPATH /usr/local/bin/sby --version
 command -v yosys >/dev/null
 command -v z3 >/dev/null
-echo "ci-install-sby: installed sby=$(command -v sby) yosys=$(command -v yosys) z3=$(command -v z3)"
+echo "ci-install-sby: installed sby=/usr/local/bin/sby yosys=$(command -v yosys) z3=$(command -v z3)"

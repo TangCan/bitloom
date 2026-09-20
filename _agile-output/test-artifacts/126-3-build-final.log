@@ -1,0 +1,136 @@
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.95s
+     Running tests/fr119_symbiyosys_smt_path.rs (target/debug/deps/fr119_symbiyosys_smt_path-ae052d6606f79c31)
+
+running 8 tests
+test fr119_docs_nail_sby_binding_and_bans ... ok
+test fr119_fixtures_have_assume_assert_pass_and_fail ... ok
+test fr119_fr100_and_fr112_surfaces_still_present ... ok
+test fr119_nfr14_selected_binding_still_gates ... ok
+test fr119_script_and_just_entry_exist ... ok
+test fr119_script_fails_readably_when_sby_missing ... ok
+test fr119_optional_real_sby_pass_when_installed ... ok
+test fr119_optional_real_sby_fail_fixture_when_installed ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.53s
+
+     Running tests/fr161_formal_sby_image_hygiene.rs (target/debug/deps/fr161_formal_sby_image_hygiene-4b87cc8ae6fe8674)
+
+running 6 tests
+test fr161_ci_runs_hygiene_before_install ... ok
+test fr161_docs_contract_and_forbid_fr127_alone ... ok
+test fr161_fr127_job_still_present ... ok
+test fr161_pins_file_nonempty ... ok
+test fr161_install_script_obeys_pins ... ok
+ci-sby-hygiene-check: FR161 formal-sby image/tooling hygiene (Bitloom)
+ci-sby-hygiene-check: ok pin ref=yosys-0.47 sha=bfc1c47eb786496fe794481ff88e75728f0529a6 url=https://github.com/YosysHQ/sby.git
+ci-sby-hygiene-check: install script obeys FR161 pins
+test fr161_hygiene_script_pass_and_force_fail ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/fr195_rv_reg_slice.rs (target/debug/deps/fr195_rv_reg_slice-46d803397a0c5295)
+
+running 8 tests
+FR195 width=64 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+FR195 width=64 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+FR195 width=1 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+test p0_invalid_widths_are_diagnostics ... ok
+test p0_shared_definition_and_exact_port_contract ... ok
+FR195 width=8 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+FR195 width=32 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+FR195 width=64 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+
+thread 'p1_native_hierarchy_remains_explicitly_unsupported' (2909423) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'p1_native_hierarchy_remains_explicitly_unsupported' (2909423) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+test p1_native_hierarchy_remains_explicitly_unsupported ... ok
+pair-w64: FR195 PASS
+tb.sv:7457: $finish called at 1293 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/pair-w64-2909415
+test p0_real_rtl_two_instances_preserve_independent_state ... ok
+single-w1-seed12631950a551: FR195 PASS
+tb.sv:6939: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w1-seed12631950a551-2909415
+FR195 width=1 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w64-seed12631950a551: FR195 PASS
+tb.sv:6939: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w64-seed12631950a551-2909415
+FR195 width=64 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w32-seed12631950a551: FR195 PASS
+tb.sv:6939: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w32-seed12631950a551-2909415
+FR195 width=32 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w8-seed12631950a551: FR195 PASS
+tb.sv:6939: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w8-seed12631950a551-2909415
+FR195 width=8 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w1-seeddeadbeef8012: FR195 PASS
+tb.sv:6942: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w1-seeddeadbeef8012-2909415
+FR195 width=1 seed=0x73592401ffff accepted=247 delivered=240 cancelled=7 occupancy=[69, 250, 101] simultaneous=180 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w64-seeddeadbeef8012: FR195 PASS
+tb.sv:6942: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w64-seeddeadbeef8012-2909415
+FR195 width=64 seed=0x73592401ffff accepted=247 delivered=240 cancelled=7 occupancy=[69, 250, 101] simultaneous=180 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w8-seeddeadbeef8012: FR195 PASS
+tb.sv:6942: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w8-seeddeadbeef8012-2909415
+FR195 width=8 seed=0x73592401ffff accepted=247 delivered=240 cancelled=7 occupancy=[69, 250, 101] simultaneous=180 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w32-seeddeadbeef8012: FR195 PASS
+tb.sv:6942: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w32-seeddeadbeef8012-2909415
+FR195 width=32 seed=0x73592401ffff accepted=247 delivered=240 cancelled=7 occupancy=[69, 250, 101] simultaneous=180 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w1-seed73592401ffff: FR195 PASS
+tb.sv:6927: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w1-seed73592401ffff-2909415
+test p0_width1_native_and_real_rtl ... ok
+single-w64-seed73592401ffff: FR195 PASS
+tb.sv:6927: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w64-seed73592401ffff-2909415
+test p0_width64_native_and_real_rtl ... ok
+single-w8-seed73592401ffff: FR195 PASS
+tb.sv:6927: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w8-seed73592401ffff-2909415
+test p0_width8_native_and_real_rtl ... ok
+single-w32-seed73592401ffff: FR195 PASS
+tb.sv:6927: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w32-seed73592401ffff-2909415
+test p0_width32_native_and_real_rtl ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.04s
+
+     Running tests/fr195_rv_reg_slice_formal.rs (target/debug/deps/fr195_rv_reg_slice_formal-94afbd3fca5935fa)
+
+running 2 tests
+FR195 formal width=1 prove+cover PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-formal/width1-2909576
+test p0_generated_rtl_width1_safety_induction_cover_and_registered_outputs ... ok
+FR195 formal width=8 prove+cover PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-formal/width8-2909576
+test p0_generated_rtl_width8_safety_induction_cover_and_registered_outputs ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.09s
+
+     Running tests/nfr14_risk_epic93_formal_sby_image_hygiene_fr161.rs (target/debug/deps/nfr14_risk_epic93_formal_sby_image_hygiene_fr161-81baa9599275bcc4)
+
+running 1 test
+test nfr14_risk_epic93_formal_sby_image_hygiene_fr161_has_required_fields ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

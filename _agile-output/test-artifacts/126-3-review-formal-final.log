@@ -1,0 +1,26 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.81s
+     Running tests/fr195_rv_reg_slice_formal.rs (target/debug/deps/fr195_rv_reg_slice_formal-94afbd3fca5935fa)
+
+running 3 tests
+
+thread 'structural_checker_rejects_input_paths_and_unresolved_bits' (2974026) panicked at crates/bitloom/tests/fr195_rv_reg_slice_formal.rs:168:13:
+input combinational path to input_ready bit 1
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'structural_checker_rejects_input_paths_and_unresolved_bits' (2974026) panicked at crates/bitloom/tests/fr195_rv_reg_slice_formal.rs:168:13:
+input combinational path to input_ready bit 3
+
+thread 'structural_checker_rejects_input_paths_and_unresolved_bits' (2974026) panicked at crates/bitloom/tests/fr195_rv_reg_slice_formal.rs:97:28:
+undriven bit 2
+
+thread 'structural_checker_rejects_input_paths_and_unresolved_bits' (2974026) panicked at crates/bitloom/tests/fr195_rv_reg_slice_formal.rs:111:9:
+unresolved bit "unresolved"
+test structural_checker_rejects_input_paths_and_unresolved_bits ... ok
+FR195 formal width=1 prove+cover PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-formal/width1-2974023
+test p0_generated_rtl_width1_safety_induction_cover_and_registered_outputs ... ok
+FR195 formal width=8 prove+cover PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-formal/width8-2974023
+test p0_generated_rtl_width8_safety_induction_cover_and_registered_outputs ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.16s
+

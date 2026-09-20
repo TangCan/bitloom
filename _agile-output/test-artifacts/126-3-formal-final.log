@@ -1,0 +1,12 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.61s
+     Running tests/fr195_rv_reg_slice_formal.rs (target/debug/deps/fr195_rv_reg_slice_formal-94afbd3fca5935fa)
+
+running 2 tests
+FR195 formal width=1 prove+cover PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-formal/width1-2897658
+test p0_generated_rtl_width1_safety_induction_cover_and_registered_outputs ... ok
+FR195 formal width=8 prove+cover PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195-formal/width8-2897658
+test p0_generated_rtl_width8_safety_induction_cover_and_registered_outputs ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.18s
+

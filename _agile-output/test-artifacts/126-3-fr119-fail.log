@@ -1,0 +1,43 @@
+formal-sby-check: FR119 SymbiYosys product path (Bitloom; ≠ FR85/FR100/FR112-B/FR107)
+formal-sby-check: sby=/tmp/bitloom-1263-sby-installed/bin/sby
+formal-sby-check: SBY yosys-0.47
+formal-sby-check: Yosys 0.33 (git sha1 2584903a060)
+formal-sby-check: z3=/usr/bin/z3
+formal-sby-check: Z3 version 4.8.12 - 64 bit
+formal-sby-check: running sby -f /home/richard/richard/2026/2026/rhdl/crates/rhdl-formal/fixtures/fr119/fr119_fail.sby (mode=fail)
+SBY 19:24:42 [fr119_fail] Removing directory '/nvme_data2/richard/2026/rhdl/crates/rhdl-formal/fixtures/fr119/fr119_fail'.
+SBY 19:24:42 [fr119_fail] Copy '/nvme_data2/richard/2026/rhdl/crates/rhdl-formal/fixtures/fr119/fr119_fail.sv' to '/nvme_data2/richard/2026/rhdl/crates/rhdl-formal/fixtures/fr119/fr119_fail/src/fr119_fail.sv'.
+SBY 19:24:42 [fr119_fail] engine_0: smtbmc z3
+SBY 19:24:42 [fr119_fail] base: starting process "cd fr119_fail/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 19:24:42 [fr119_fail] base: finished (returncode=0)
+SBY 19:24:42 [fr119_fail] prep: starting process "cd fr119_fail/model; yosys -ql design_prep.log design_prep.ys"
+SBY 19:24:42 [fr119_fail] prep: finished (returncode=0)
+SBY 19:24:42 [fr119_fail] smt2: starting process "cd fr119_fail/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 19:24:42 [fr119_fail] smt2: finished (returncode=0)
+SBY 19:24:42 [fr119_fail] engine_0: starting process "cd fr119_fail; yosys-smtbmc -s z3 --presat --noprogress -t 8  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Solver: z3
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Checking assumptions in step 0..
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Checking assertions in step 0..
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Checking assumptions in step 1..
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Checking assertions in step 1..
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Checking assumptions in step 2..
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Checking assertions in step 2..
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Checking assumptions in step 3..
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Checking assertions in step 3..
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  BMC failed!
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Assert failed in fr119_fail: fr119_fail.sv:16.37-17.34 ($assert$fr119_fail.sv:16$17)
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace.vcd
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace_tb.v
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace.smtc
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace.yw
+SBY 19:24:43 [fr119_fail] engine_0: ##   0:00:00  Status: failed
+SBY 19:24:43 [fr119_fail] engine_0: finished (returncode=1)
+SBY 19:24:43 [fr119_fail] engine_0: Status returned by engine: FAIL
+SBY 19:24:43 [fr119_fail] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 19:24:43 [fr119_fail] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 19:24:43 [fr119_fail] summary: engine_0 (smtbmc z3) returned FAIL
+SBY 19:24:43 [fr119_fail] summary: counterexample trace: fr119_fail/engine_0/trace.vcd
+SBY 19:24:43 [fr119_fail] summary:   failed assertion fr119_fail.$assert$fr119_fail.sv:16$17 at fr119_fail.sv:16.37-17.34 in step 3
+SBY 19:24:43 [fr119_fail] DONE (FAIL, rc=0)
+error: actual SBY status=FAIL mode=fail; see /home/richard/richard/2026/2026/rhdl/crates/rhdl-formal/fixtures/fr119/fr119_fail/status
+wrapper_exit=1

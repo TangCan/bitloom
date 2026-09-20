@@ -220,26 +220,55 @@ fn fr119_optional_real_sby_fail_fixture_when_installed() {
         eprintln!("sby/z3 not on PATH — skipping live SymbiYosys fail fixture");
         return;
     }
-    let script = workspace_root().join("scripts/formal-sby-check.sh");
+    // Each process owns its SBY -f work directory. Retain it even on assertion
+    // failure so the printed path and CI artifact upload refer to this exact run.
+    let root = workspace_root();
+    let runs = root.join("target/fr119");
+    fs::create_dir_all(&runs).unwrap();
+    let nonce = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_nanos();
+    let run = runs.join(format!("fail-{}-{nonce}", std::process::id()));
+    fs::create_dir(&run).unwrap();
+    for name in ["fr119_fail.sv", "fr119_fail.sby"] {
+        fs::copy(
+            root.join("crates/rhdl-formal/fixtures/fr119").join(name),
+            run.join(name),
+        )
+        .unwrap();
+    }
+    eprintln!("FR119 real negative evidence: {}", run.display());
+    let script = root.join("scripts/formal-sby-check.sh");
     let out = Command::new("bash")
         .arg(&script)
         .env("BITLOOM_SBY_MODE", "fail")
+        .env("BITLOOM_SBY_FIXTURE_DIR", &run)
         .env_remove("BITLOOM_SBY_FORCE_MISSING")
         .output()
         .unwrap_or_else(|e| panic!("spawn sby fail: {e}"));
-    // With `expect fail` in the .sby, SymbiYosys treats assertion violation as SUCCESS.
-    // If the engine/setup is broken, we still require a readable non-silent outcome.
+    // SBY expect-fail may exit zero; the product wrapper reports actual FAIL.
     let combined = format!(
         "{}{}",
         String::from_utf8_lossy(&out.stderr),
         String::from_utf8_lossy(&out.stdout)
     );
+    fs::write(run.join("wrapper.log"), &combined).unwrap();
+    let status = fs::read_to_string(run.join("fr119_fail/status")).unwrap();
+    assert_eq!(
+        status.split_whitespace().next(),
+        Some("FAIL"),
+        "see {}",
+        run.display()
+    );
     assert!(
-        out.status.success()
-            || combined.contains("FAIL")
-            || combined.contains("Assert")
-            || combined.contains("error"),
-        "fail fixture must yield expect-fail OK or a readable engine diagnostic; got status={:?}\n{combined}",
-        out.status.code()
+        !out.status.success() && combined.contains("actual SBY status=FAIL"),
+        "expected genuine counterexample and nonzero wrapper: {combined}"
+    );
+    let trace = run.join("fr119_fail/engine_0/trace.vcd");
+    assert!(
+        trace.is_file(),
+        "missing real counterexample: {}",
+        trace.display()
     );
 }

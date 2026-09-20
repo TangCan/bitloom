@@ -1,0 +1,3 @@
+ci-sby-hygiene-check: FR161 formal-sby image/tooling hygiene (Bitloom)
+ci-sby-hygiene-check: ok pin ref=yosys-0.47 sha=bfc1c47eb786496fe794481ff88e75728f0529a6 url=https://github.com/YosysHQ/sby.git
+ci-sby-hygiene-check: install script obeys FR161 pins

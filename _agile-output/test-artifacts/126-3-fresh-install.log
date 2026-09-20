@@ -1,0 +1,29 @@
+Cloning into '/tmp/bitloom-1263-fresh.S3vXsz/source'...
+Note: switching to 'daed0e1544fd96ee7dab843e5a891d92784c6230'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+verified ref=bfc1c47eb786496fe794481ff88e75728f0529a6 commit=daed0e1544fd96ee7dab843e5a891d92784c6230
+make: Entering directory '/tmp/bitloom-1263-fresh.S3vXsz/source'
+mkdir -p /tmp/bitloom-1263-fresh.S3vXsz/installed/bin
+mkdir -p /tmp/bitloom-1263-fresh.S3vXsz/installed/share/yosys/python3
+cp sbysrc/sby_*.py /tmp/bitloom-1263-fresh.S3vXsz/installed/share/yosys/python3/
+sed -e 's|##yosys-program-prefix##|"''"|' < sbysrc/sby_core.py > /tmp/bitloom-1263-fresh.S3vXsz/installed/share/yosys/python3/sby_core.py
+sed -e 's|##yosys-sys-path##|sys.path += [os.path.dirname(__file__) + p for p in ["/share/python3", "/../share/yosys/python3"]]|;' \
+	-e "s|##yosys-release-version##|release_version = 'SBY yosys-0.47'|;" < sbysrc/sby.py > /tmp/bitloom-1263-fresh.S3vXsz/installed/bin/sby
+chmod +x /tmp/bitloom-1263-fresh.S3vXsz/installed/bin/sby
+make: Leaving directory '/tmp/bitloom-1263-fresh.S3vXsz/source'
+SBY yosys-0.47

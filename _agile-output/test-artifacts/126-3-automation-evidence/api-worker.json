@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "subagent": "api-tests",
+  "tests": [],
+  "fixture_needs": [],
+  "knowledge_fragments_used": [
+    "playwright-utils-mandate",
+    "pactjs-utils-mandate"
+  ],
+  "playwright_utils_deviations": [],
+  "pactjs_utils_deviations": [],
+  "provider_scrutiny": "not-applicable",
+  "provider_files_read": [],
+  "test_count": 0,
+  "summary": "Rust硬件组件，无HTTP endpoint或Pact边界；Rust公开API已有专门合同覆盖，不重复添加。"
+}

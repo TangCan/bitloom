@@ -61,3 +61,7 @@ Rust 嵌入式 RTL HDL：设计是生成器，冻结 HIR 后再降后端。需�
 - 公开 CLI：`cargo bitloom`（包 `bitloom`，实际二进制 `cargo-bitloom`）；树内运行用 `cargo run -p bitloom -- …`。
 
 <!-- /bmad:context -->
+
+## 当前整体执行授权（2026-09-20）
+
+用户明确要求按create-story→ATDD→build→code-review→automate→clean/fmt/regression→commit七步连续处理sprint-status全部未完成Story。此授权取代旧的M0-only或仅126.1/126.2执行安排；各故事仍须满足自身依赖、NFR14及真实验证，一故事一提交。已有done保留；deferred不得假交付。122.2/122.3在2026-09-20实时核验后仍因没有已发布firtool>1.159.0而阻塞；继续其他17个可执行故事，待前置满足后再恢复FR189。整体目标尚未完成，不推送或发布。

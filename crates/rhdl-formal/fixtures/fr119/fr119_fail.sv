@@ -8,13 +8,13 @@ module fr119_fail (
   reg [3:0] q;
 
   always @(posedge clk) begin
-    if (rst)
-      q <= 4'd0;
-    else
-      q <= din;
+    // Establish a defined state before checking the sampled register value.
+    if ($initstate) assume property (rst);
+    if (rst) q <= 4'd0;
+    else q <= din;
+    if (!rst) begin
+      assume property (din < 4'd10);
+      assert property (q == 4'd0);
+    end
   end
-
-  assume property (@(posedge clk) disable iff (rst) din < 4'd10);
-  // Deliberately false: claims q is always zero after reset clears.
-  assert property (@(posedge clk) disable iff (rst) q == 4'd0);
 endmodule

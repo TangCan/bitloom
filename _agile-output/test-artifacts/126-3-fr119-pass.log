@@ -1,0 +1,43 @@
+formal-sby-check: FR119 SymbiYosys product path (Bitloom; ≠ FR85/FR100/FR112-B/FR107)
+formal-sby-check: sby=/tmp/bitloom-1263-sby-installed/bin/sby
+formal-sby-check: SBY yosys-0.47
+formal-sby-check: Yosys 0.33 (git sha1 2584903a060)
+formal-sby-check: z3=/usr/bin/z3
+formal-sby-check: Z3 version 4.8.12 - 64 bit
+formal-sby-check: running sby -f /home/richard/richard/2026/2026/rhdl/crates/rhdl-formal/fixtures/fr119/fr119_pass.sby (mode=pass)
+SBY 19:24:42 [fr119_pass] Removing directory '/nvme_data2/richard/2026/rhdl/crates/rhdl-formal/fixtures/fr119/fr119_pass'.
+SBY 19:24:42 [fr119_pass] Copy '/nvme_data2/richard/2026/rhdl/crates/rhdl-formal/fixtures/fr119/fr119_pass.sv' to '/nvme_data2/richard/2026/rhdl/crates/rhdl-formal/fixtures/fr119/fr119_pass/src/fr119_pass.sv'.
+SBY 19:24:42 [fr119_pass] engine_0: smtbmc z3
+SBY 19:24:42 [fr119_pass] base: starting process "cd fr119_pass/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 19:24:42 [fr119_pass] base: finished (returncode=0)
+SBY 19:24:42 [fr119_pass] prep: starting process "cd fr119_pass/model; yosys -ql design_prep.log design_prep.ys"
+SBY 19:24:42 [fr119_pass] prep: finished (returncode=0)
+SBY 19:24:42 [fr119_pass] smt2: starting process "cd fr119_pass/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 19:24:42 [fr119_pass] smt2: finished (returncode=0)
+SBY 19:24:42 [fr119_pass] engine_0: starting process "cd fr119_pass; yosys-smtbmc -s z3 --presat --noprogress -t 8  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Solver: z3
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assumptions in step 0..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assertions in step 0..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assumptions in step 1..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assertions in step 1..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assumptions in step 2..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assertions in step 2..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assumptions in step 3..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assertions in step 3..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assumptions in step 4..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assertions in step 4..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assumptions in step 5..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assertions in step 5..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assumptions in step 6..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assertions in step 6..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assumptions in step 7..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Checking assertions in step 7..
+SBY 19:24:42 [fr119_pass] engine_0: ##   0:00:00  Status: passed
+SBY 19:24:42 [fr119_pass] engine_0: finished (returncode=0)
+SBY 19:24:42 [fr119_pass] engine_0: Status returned by engine: pass
+SBY 19:24:42 [fr119_pass] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 19:24:42 [fr119_pass] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 19:24:42 [fr119_pass] summary: engine_0 (smtbmc z3) returned pass
+SBY 19:24:42 [fr119_pass] summary: engine_0 did not produce any traces
+SBY 19:24:42 [fr119_pass] DONE (PASS, rc=0)
+formal-sby-check: OK mode=pass actual status=PASS fixture=/home/richard/richard/2026/2026/rhdl/crates/rhdl-formal/fixtures/fr119/fr119_pass.sby

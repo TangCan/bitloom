@@ -1,0 +1,13 @@
+{
+  "detected_stack": "backend",
+  "execution_mode": "subagent",
+  "api_tests": 0,
+  "backend_new_properties": 2,
+  "new_rust_test_functions": 0,
+  "modified_test_files": 1,
+  "fixtures_created": 0,
+  "priority_coverage": {
+    "P1": 2
+  },
+  "performance_gain": "未测量，不声称40–70%加速"
+}

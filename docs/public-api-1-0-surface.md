@@ -142,3 +142,13 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 | `ip::Gpio::define_module` | 注册可实例化GPIO定义，与原有Gpio::elaborate共享逻辑体 |
 
 完整签名、参数与命名约束、可编译设计例及支持边界见[模块组合](ip/module-composition.md)。不扩展设计crate依赖边界；不承诺原生层级仿真或Verilog实例参数覆盖。新增API按SemVer minor策略发布，本次不修改现有版本号；代码合入不代表crates.io已提供这些接口。
+
+### `bitloom-prelude` — FR195 / Story126.3 显式追加
+
+| 符号 | 契约 |
+|---|---|
+| `ip::RvRegSlice<const WIDTH: u32 = 32>` | 两槽注册切片，WIDTH 1..64；寄存状态输出、同步 reset > flush > 握手 |
+| `ip::RvRegSlice::define_module` | `(&mut ElaborateSession, impl Into<String>) -> Result<String, Diagnostics>`；完整 WIDTH 身份，与独立 elaborate 共用模块体 |
+| `Elaboratable for ip::RvRegSlice<WIDTH>` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立 session，仅 finish 一次 |
+
+此处显式纳入 FR142 文档表面；使用与边界见[注册切片](ip/rv-reg-slice.md)。新增API按SemVer minor处理；未更改版本号或发布，不能声称crates.io已包含。此追加不包含ParamSyncFifo，也不承诺native层级仿真。

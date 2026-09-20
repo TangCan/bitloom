@@ -1,0 +1,3 @@
+FR195 PASS
+tb.sv:7457: $finish called at 1293 (1s)
+status=exit status: 0

@@ -47,7 +47,12 @@ Default `just test` does **not** require `sby` on the host.
 | Pass | `crates/rhdl-formal/fixtures/fr119/fr119_pass.{sv,sby}` | BMC `expect pass` |
 | Fail | `crates/rhdl-formal/fixtures/fr119/fr119_fail.{sv,sby}` | BMC `expect fail` (readable non-pass) |
 
-Each SV fixture includes at least one `assume property` and one `assert property`.
+Each SV fixture includes at least one `assume property` and one `assert property`,
+inside a clocked process supported by Yosys. The initial clock edge assumes reset.
+The wrapper checks the actual task status: only PASS in pass mode returns zero.
+Although SBY itself returns zero for an expected FAIL, the fail-mode wrapper reports
+`actual SBY status=FAIL` and returns nonzero. Regression requires a real counterexample;
+syntax errors, UNKNOWN, missing status, and timeouts cannot satisfy that negative test.
 
 ## Tool versions / known-good band
 
@@ -59,18 +64,13 @@ Detection: `command -v sby`; script prints `sby --version` / `yosys -V` when ava
 | Yosys | Required by typical `sby` installs |
 | SMT engine (e.g. z3 via `smtbmc z3`) | Required by the committed `.sby` `[engines]` block |
 
-**Known-good band:** This CI/dev host does **not** ship SymbiYosys (`command -v sby`
-fails). Contract verified via `BITLOOM_SBY_FORCE_MISSING=1` (readable non-zero).
-When you first get a green `just formal-sby-check`, append measured versions here:
-
-```text
-# Example once measured on a machine with sby:
-# sby: <sby --version>
-# yosys: <yosys -V>
-# engine: smtbmc z3 (<z3 -version>)
-# host note: <distro / install path>
-# Recorded: <ISO date>
-```
+**Measured 2026-09-20 (Story126.3 prerequisite repair):** SBY `yosys-0.47`,
+Yosys `0.33 (2584903a060)`, Z3 `4.8.12`. Real pass fixture PASS; fail fixture
+FAIL with a step-3 counterexample and wrapper exit 1. Evidence:
+`_agile-output/test-artifacts/126-3-fr119-{pass,fail}.log`.
+Fresh pinned clone and upstream `make install` into an isolated `/tmp` prefix were
+verified with PYTHONPATH unset; full CI sudo/apt provisioning was not run locally.
+See [implementation evidence](../_agile-output/test-artifacts/126-3-build-evidence.md).
 
 CI without SymbiYosys must fail readably on this script (or use
 `BITLOOM_SBY_FORCE_MISSING=1`); it must **not** silent-succeed.

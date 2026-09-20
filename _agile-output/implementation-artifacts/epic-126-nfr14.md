@@ -51,3 +51,15 @@ CI 安装入口为 [.github/workflows/ci.yml](../../.github/workflows/ci.yml) �
 2026-09-20 Story126.2 / FR194 已完成：同一session模块定义复用、参数专门化与实例图/连接诊断；首批Gpio共用定义体，实际RTL验证通过。实现与证据见 docs/ip/module-composition.md 和 docs/ip/module-composition-evidence.md。126.1/126.2 done；126.3/126.4及Epic127–130保持backlog，Epic126/M1未关闭，FR195–201未交付；FR189 deferred/NFR91保持。
 
 风险关闭：模块身份、生命周期、全图校验、连接与旧GPIO兼容均有对应回归；新API已显式登记FR142。保留实例/局部网名合法性、Instance.params覆盖两个既有缺口（deferred-work.md）。formal及流/FIFO仍待126.3/126.4，不把126.2测试当作后续验收。
+
+## 当前整体执行授权（2026-09-20）
+
+用户明确要求按create-story→ATDD→build→code-review→automate→clean/fmt/regression→commit七步连续处理sprint-status全部未完成Story。此授权取代旧的M0-only或仅126.1/126.2执行安排；各故事仍须满足自身依赖、NFR14及真实验证，一故事一提交。已有done保留；deferred不得假交付。122.2/122.3在2026-09-20实时核验后仍因没有已发布firtool>1.159.0而阻塞；继续其他17个可执行故事，待前置满足后再恢复FR189。整体目标尚未完成，不推送或发布。
+
+## Story126.3 实施与风险证据（review阶段）
+
+两槽RvRegSlice已实现WIDTH1..64，shared-session定义与单独elaborate共用模块体；四宽三种子在Interpreter/Compiled和真实Icarus逐拍通过。双实例共享唯一Reset，独立flush、payload和ready验证隔离，native层级仍拒绝。WIDTH1/8实际生成RTL通过SBY/Z3归纳安全证明和两个非空cover；组合锥在未插入observer的原始RTL上检查。只证明安全性，不作无限活性声明，无需引入ready公平性假设。
+
+工具前置修复保持SBY tag对象钉：严格核验tag及peeled commit，改用上游make安装正确Python路径；旧FR119 fixture修正为受支持的过程断言和初始reset。真实负例以FAIL状态及反例为准并非零，CI强制执行；缺工具、UNKNOWN、超时不能通过。归档见test-artifacts/126-3-build-evidence.md及126-3-review2-tools.md。独立代码审阅完成；automation、clean全workspace回归和提交仍待本故事后续步骤，故M1仍未关闭。
+
+126.3最终收尾：七步完成，本故事提交；clean+fmt+just test退出0（1732通过、8忽略），专用formal实际通过。126.3 done；126.4仍待实现，Epic126/M1未关闭。证据索引test-artifacts/126-3-final-verification.md。

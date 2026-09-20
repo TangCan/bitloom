@@ -1,0 +1,9 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.05s
+     Running tests/fr119_symbiyosys_smt_path.rs (target/debug/deps/fr119_symbiyosys_smt_path-ae052d6606f79c31)
+
+running 1 test
+FR119 real negative evidence: /nvme_data2/richard/2026/rhdl/target/fr119/fail-3012231-1789904287504170355
+test fr119_optional_real_sby_fail_fixture_when_installed ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.55s
+

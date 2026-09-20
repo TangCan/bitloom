@@ -40,3 +40,15 @@ ready/valid 在上升沿两者均有效时传输一次；受阻时保持 valid �
 Story126.1 依赖已完成的 Story125.3/M0。Story126.2 和126.3 各依赖126.1；Story126.4 同时依赖两者。只有全部故事完成，且风险关闭记录、需求映射和实际支持矩阵一致，才可关闭 M1。FIFO 验证覆盖宽度1/8/32/64与深度1/2/3/4/7/16，以及空/满、同拍传输、reset/flush、非法参数和旧行为兼容。
 
 这些基础供后续 CSR/桥及外设系统使用，外部适配也依赖可用的模块组合。上述下游交付及 Story126.3–126.4 均不在本轮执行126.1–126.2的授权范围内。
+
+## 当前整体执行授权（2026-09-20）
+
+用户明确要求按create-story→ATDD→build→code-review→automate→clean/fmt/regression→commit七步连续处理sprint-status全部未完成Story。此授权取代旧的M0-only或仅126.1/126.2执行安排；各故事仍须满足自身依赖、NFR14及真实验证，一故事一提交。已有done保留；deferred不得假交付。122.2/122.3在2026-09-20实时核验后仍因没有已发布firtool>1.159.0而阻塞；继续其他17个可执行故事，待前置满足后再恢复FR189。整体目标尚未完成，不推送或发布。
+
+## 126.3 实现连续性（2026-09-20）
+
+RvRegSlice<WIDTH=32>已实现，宽度1..64，两个payload寄存器+2-bit占用；input_ready/output_valid/output_data只依赖寄存态，空无直通，满时不接收，即使同时pop。reset>flush>正常传输，取消沿的表面握手不记账。新helper登记WIDTH，旧SyncFifo未改。注册切片原始设计、SBY observer安全归纳和四条cover证据见test-artifacts/automation-126-3.md；这是FR195子集，非FIFO或M1关闭。
+
+126.4应复用共享session定义机制、独立端口队列和真实RTL工具入口；参数WIDTH1..64、DEPTH1..16（含非二次幂），矩阵宽1/8/32/64×深1/2/3/4/7/16。native层级仍unsupported。顶层只能一个Reset输入，双实例取消隔离用共享rst+独立flush；不要再次生成多个Reset端口。当前用户授权七步连续执行全部未完成故事，每故事一提交，提交前clean全回归。
+
+126.3最终收尾：七步完成，本故事提交；clean+fmt+just test退出0（1732通过、8忽略），专用formal实际通过。126.3 done；126.4仍待实现，Epic126/M1未关闭。证据索引test-artifacts/126-3-final-verification.md。

@@ -1,0 +1,17 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.68s
+     Running tests/fr119_symbiyosys_smt_path.rs (target/debug/deps/fr119_symbiyosys_smt_path-ae052d6606f79c31)
+
+running 8 tests
+test fr119_docs_nail_sby_binding_and_bans ... ok
+test fr119_nfr14_selected_binding_still_gates ... ok
+test fr119_fixtures_have_assume_assert_pass_and_fail ... ok
+test fr119_fr100_and_fr112_surfaces_still_present ... ok
+test fr119_script_and_just_entry_exist ... ok
+FR119 real negative evidence: /nvme_data2/richard/2026/rhdl/target/fr119/fail-3010738-1789904272046264687
+test fr119_script_fails_readably_when_sby_missing ... ok
+test fr119_optional_real_sby_pass_when_installed ... ok
+test fr119_optional_real_sby_fail_fixture_when_installed ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.55s
+

@@ -4,7 +4,7 @@
 
 2026-09-20 M0关闭后续授权：用户要求继续，当前执行范围为 Story126.1 NFR14 → 126.2 模块组合基础；126.3/126.4及Epic127–130仍backlog，未授权自动执行。不宣称M1或Phase24已交付；上述M0批准记录保留为历史。
 
-设计仅依赖 bitloom-prelude，单一 FrozenHir/ElaborateSession，工具钉不变。旧 API、端口和映射保持；126.2已实现ElaborateSession::define_module与Gpio::define_module并显式登记FR142清单；其余RvRegSlice、ParamSyncFifo、CSR 描述/桥/译码、Timer、IRQ、GPIO/UART wrapper仍仅为待实现命名表面。实现故事须逐符号更新 FR142 清单与 SemVer minor 说明。
+设计仅依赖 bitloom-prelude，单一 FrozenHir/ElaborateSession，工具钉不变。旧 API、端口和映射保持；126.2已实现ElaborateSession::define_module与Gpio::define_module并显式登记FR142清单；Story126.3已实现RvRegSlice两槽注册切片并显式登记FR142清单，使用见[注册切片](rv-reg-slice.md)；ParamSyncFifo、CSR 描述/桥/译码、Timer、IRQ、GPIO/UART wrapper仍仅为待实现命名表面。实现故事须逐符号更新 FR142 清单与 SemVer minor 说明。
 
 首版仅单时钟、32-bit 数据、16-bit 字节地址、寄存器小 FIFO、UART8N1、GPIO32、Timer32、IRQ5，以及单独验收的一个外部小核。不包含 CPU、DMA、PWM、watchdog、SPI/I2C加深、burst/ID、多主、多时钟模拟、异步 FIFO、深RAM FIFO、通用FIRRTL内存、原生层级模拟、复杂外部核、物理签核或发布。FR189/Epic122 deferred 与 NFR91 不变。
 
@@ -146,3 +146,13 @@ CSR叶节点固定在提交沿锁存响应，下一周期rsp_valid可见，保�
 外部核以源清单/完整commit/递归依赖与SHA256、文件顺序/include/宏、端口参数/clock/reset映射、许可证原文hash与NOTICE、wrapper版本、工具锁、维护人及证据为准；CLI构建层获取，prelude不拉源码。官方原生、外部适配、仅收录分别标识；catalogued/locked/compiled/behavior-tested/maintained逐级有证据，native无模型明确unsupported。首选PULP稳定版仍待准入，不以master阅读记录代替稳定版验证。API新增不等于进入FR142稳定清单。
 
 2026-09-20 Story126.2 / FR194 已完成：同一session模块定义复用、参数专门化与实例图/连接诊断；首批Gpio共用定义体，实际RTL验证通过。实现与证据见 docs/ip/module-composition.md 和 docs/ip/module-composition-evidence.md。126.1/126.2 done；126.3/126.4及Epic127–130保持backlog，Epic126/M1未关闭，FR195–201未交付；FR189 deferred/NFR91保持。
+
+## 当前整体执行授权（2026-09-20）
+
+用户明确要求按create-story→ATDD→build→code-review→automate→clean/fmt/regression→commit七步连续处理sprint-status全部未完成Story。此授权取代旧的M0-only或仅126.1/126.2执行安排；各故事仍须满足自身依赖、NFR14及真实验证，一故事一提交。已有done保留；deferred不得假交付。122.2/122.3在2026-09-20实时核验后仍因没有已发布firtool>1.159.0而阻塞；继续其他17个可执行故事，待前置满足后再恢复FR189。整体目标尚未完成，不推送或发布。
+
+## Story126.3 实现范围
+
+FR195 的 RvRegSlice 子集已实现：WIDTH1..64、两槽寄存、无输入组合直通、reset/flush取消、共享定义与独立入口。真实native/RTL及formal证据见 `_agile-output/test-artifacts/126-3-build-evidence.md`。故事状态由后续独立审阅、automate、clean/fmt/regression与单故事提交闭合；ParamSyncFifo/Story126.4未由本实现交付，FR195整体、M1和Phase24不得据此关闭。此前126.2时点的backlog记录保留为历史；当前整体执行授权见上节。
+
+2026-09-20 Story126.3七步完成并单独提交：1732项workspace回归通过，真实formal归纳与四cover通过。仅关闭注册切片子集；参数FIFO/126.4仍待交付，Epic126/M1继续in-progress。

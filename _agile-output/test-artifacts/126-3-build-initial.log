@@ -1,0 +1,94 @@
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.30s
+     Running tests/fr195_rv_reg_slice.rs (target/debug/deps/fr195_rv_reg_slice-46d803397a0c5295)
+
+running 8 tests
+
+thread 'p0_real_rtl_two_instances_preserve_independent_state' (2869194) panicked at crates/bitloom/tests/fr195_rv_reg_slice.rs:423:26:
+called `Result::unwrap()` on an `Err` value: Diagnostics([Diagnostic { span: Span { start: 0, end: 0 }, code: "rhdl::E0121", en: "module 'Pair' must have exactly one Reset input (found 2)", zh: "模块 'Pair' 必须恰好有一个 Reset 输入（找到 2 个）" }])
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FR195 width=1 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+test p0_invalid_widths_are_diagnostics ... ok
+test p0_real_rtl_two_instances_preserve_independent_state ... FAILED
+FR195 width=32 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+FR195 width=8 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+FR195 width=64 seed=0x12631950a551 accepted=249 delivered=242 cancelled=7 occupancy=[65, 255, 100] simultaneous=181 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=45
+
+thread 'p1_native_hierarchy_remains_explicitly_unsupported' (2869200) panicked at crates/bitloom/tests/fr195_rv_reg_slice.rs:423:26:
+called `Result::unwrap()` on an `Err` value: Diagnostics([Diagnostic { span: Span { start: 0, end: 0 }, code: "rhdl::E0121", en: "module 'Pair' must have exactly one Reset input (found 2)", zh: "模块 'Pair' 必须恰好有一个 Reset 输入（找到 2 个）" }])
+test p0_shared_definition_and_exact_port_contract ... ok
+
+thread 'p1_native_hierarchy_remains_explicitly_unsupported' (2869200) panicked at crates/bitloom/tests/fr195_rv_reg_slice.rs:491:9:
+unexpected panic: called `Result::unwrap()` on an `Err` value: Diagnostics([Diagnostic { span: Span { start: 0, end: 0 }, code: "rhdl::E0121", en: "module 'Pair' must have exactly one Reset input (found 2)", zh: "模块 'Pair' 必须恰好有一个 Reset 输入（找到 2 个）" }])
+test p1_native_hierarchy_remains_explicitly_unsupported ... FAILED
+single-w1-seed12631950a551: FR195 PASS
+tb.sv:6939: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w1-seed12631950a551-2869192
+FR195 width=1 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w32-seed12631950a551: FR195 PASS
+tb.sv:6939: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w32-seed12631950a551-2869192
+FR195 width=32 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w64-seed12631950a551: FR195 PASS
+tb.sv:6939: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w64-seed12631950a551-2869192
+FR195 width=64 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w8-seed12631950a551: FR195 PASS
+tb.sv:6939: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w8-seed12631950a551-2869192
+FR195 width=8 seed=0xdeadbeef8012 accepted=245 delivered=238 cancelled=7 occupancy=[64, 246, 110] simultaneous=170 full_release=35 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w1-seeddeadbeef8012: FR195 PASS
+tb.sv:6942: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w1-seeddeadbeef8012-2869192
+FR195 width=1 seed=0x73592401ffff accepted=247 delivered=240 cancelled=7 occupancy=[69, 250, 101] simultaneous=180 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w32-seeddeadbeef8012: FR195 PASS
+tb.sv:6942: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w32-seeddeadbeef8012-2869192
+FR195 width=32 seed=0x73592401ffff accepted=247 delivered=240 cancelled=7 occupancy=[69, 250, 101] simultaneous=180 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w8-seeddeadbeef8012: FR195 PASS
+tb.sv:6942: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w8-seeddeadbeef8012-2869192
+FR195 width=8 seed=0x73592401ffff accepted=247 delivered=240 cancelled=7 occupancy=[69, 250, 101] simultaneous=180 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w64-seeddeadbeef8012: FR195 PASS
+tb.sv:6942: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w64-seeddeadbeef8012-2869192
+FR195 width=64 seed=0x73592401ffff accepted=247 delivered=240 cancelled=7 occupancy=[69, 250, 101] simultaneous=180 full_release=26 reset_live=2 flush_live=2 overlap=1 longest_stall=38 longest_throughput=44
+single-w32-seed73592401ffff: FR195 PASS
+tb.sv:6927: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w32-seed73592401ffff-2869192
+test p0_width32_native_and_real_rtl ... ok
+single-w8-seed73592401ffff: FR195 PASS
+tb.sv:6927: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w8-seed73592401ffff-2869192
+test p0_width8_native_and_real_rtl ... ok
+single-w1-seed73592401ffff: FR195 PASS
+tb.sv:6927: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w1-seed73592401ffff-2869192
+test p0_width1_native_and_real_rtl ... ok
+single-w64-seed73592401ffff: FR195 PASS
+tb.sv:6927: $finish called at 1679 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr195/single-w64-seed73592401ffff-2869192
+test p0_width64_native_and_real_rtl ... ok
+
+failures:
+
+failures:
+    p0_real_rtl_two_instances_preserve_independent_state
+    p1_native_hierarchy_remains_explicitly_unsupported
+
+test result: FAILED. 6 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.02s
+
+error: test failed, to rerun pass `-p bitloom --test fr195_rv_reg_slice`

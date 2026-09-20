@@ -8,14 +8,13 @@ module fr119_pass (
   reg [3:0] q;
 
   always @(posedge clk) begin
-    if (rst)
-      q <= 4'd0;
-    else
-      q <= din;
+    // Establish a defined state before checking the sampled register value.
+    if ($initstate) assume property (rst);
+    if (rst) q <= 4'd0;
+    else q <= din;
+    if (!rst) begin
+      assume property (din < 4'd10);
+      assert property (q < 4'd10);
+    end
   end
-
-  // Environment: din stays below 10 when out of reset.
-  assume property (@(posedge clk) disable iff (rst) din < 4'd10);
-  // Property: q inherits the same bound.
-  assert property (@(posedge clk) disable iff (rst) q < 4'd10);
 endmodule

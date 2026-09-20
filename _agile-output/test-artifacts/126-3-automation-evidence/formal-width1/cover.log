@@ -1,0 +1,52 @@
+SBY 19:42:01 [slice_cover] Removing directory '/nvme_data2/richard/2026/rhdl/target/fr195-formal/width1-3041368/slice_cover'.
+SBY 19:42:01 [slice_cover] Copy '/nvme_data2/richard/2026/rhdl/target/fr195-formal/width1-3041368/design_formal.v' to '/nvme_data2/richard/2026/rhdl/target/fr195-formal/width1-3041368/slice_cover/src/design_formal.v'.
+SBY 19:42:01 [slice_cover] engine_0: smtbmc --unroll z3
+SBY 19:42:01 [slice_cover] base: starting process "cd slice_cover/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 19:42:01 [slice_cover] base: finished (returncode=0)
+SBY 19:42:01 [slice_cover] prep: starting process "cd slice_cover/model; yosys -ql design_prep.log design_prep.ys"
+SBY 19:42:01 [slice_cover] prep: finished (returncode=0)
+SBY 19:42:01 [slice_cover] smt2: starting process "cd slice_cover/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 19:42:01 [slice_cover] smt2: finished (returncode=0)
+SBY 19:42:01 [slice_cover] engine_0: starting process "cd slice_cover; yosys-smtbmc -s z3 --presat --unroll -c --noprogress -t 12  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Solver: z3
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Checking cover reachability in step 0..
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Checking cover reachability in step 2..
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Reached cover statement at design_formal.v:96.40-97.71 ($cover$design_formal.v:96$168) in step 3.
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace0.vcd
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace0_tb.v
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace0.smtc
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace0.yw
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Checking cover reachability in step 4..
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Reached cover statement at design_formal.v:97.72-99.88 ($cover$design_formal.v:97$169) in step 5.
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace1.vcd
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace1_tb.v
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace1.smtc
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace1.yw
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Reached cover statement at design_formal.v:99.89-101.98 ($cover$design_formal.v:99$170) in step 5.
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace2.vcd
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace2_tb.v
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace2.smtc
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace2.yw
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Checking cover reachability in step 6..
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Reached cover statement at design_formal.v:95.10-96.39 ($cover$design_formal.v:95$167) in step 6.
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace3.vcd
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace3_tb.v
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace3.smtc
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace3.yw
+SBY 19:42:02 [slice_cover] engine_0: ##   0:00:00  Status: passed
+SBY 19:42:02 [slice_cover] engine_0: finished (returncode=0)
+SBY 19:42:02 [slice_cover] engine_0: Status returned by engine: pass
+SBY 19:42:02 [slice_cover] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 19:42:02 [slice_cover] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 19:42:02 [slice_cover] summary: engine_0 (smtbmc --unroll z3) returned pass
+SBY 19:42:02 [slice_cover] summary: trace: slice_cover/engine_0/trace0.vcd
+SBY 19:42:02 [slice_cover] summary: trace: slice_cover/engine_0/trace1.vcd
+SBY 19:42:02 [slice_cover] summary: trace: slice_cover/engine_0/trace2.vcd
+SBY 19:42:02 [slice_cover] summary: trace: slice_cover/engine_0/trace3.vcd
+SBY 19:42:02 [slice_cover] DONE (PASS, rc=0)

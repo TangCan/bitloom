@@ -1,0 +1,3 @@
+yosys -p read_verilog design.v; hierarchy -top RvRegSlice; proc; flatten; opt; write_json structure.json
+sby -f slice.sby prove
+sby -f slice.sby cover

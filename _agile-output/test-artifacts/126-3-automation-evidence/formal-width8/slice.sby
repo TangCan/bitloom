@@ -1,0 +1,15 @@
+[tasks]
+prove
+cover
+[options]
+prove: mode prove
+cover: mode cover
+prove: depth 4
+cover: depth 12
+[engines]
+smtbmc --unroll z3
+[script]
+read -formal design_formal.v
+prep -top RvRegSlice
+[files]
+design_formal.v
