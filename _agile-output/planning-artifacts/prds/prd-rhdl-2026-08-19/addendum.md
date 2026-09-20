@@ -632,3 +632,32 @@ README / deferred / 脊柱指针由 Story **118.3–118.4** 落地；实现加�
 4. Phase 12–22 工程结项仍有效；**≠** 「NFR86 / NFR91 账本已空」。`git push` **不是** FR。公开品牌 **Bitloom**。
 
 **合同指针：** `_agile-output/planning-artifacts/sprint-change-proposal-2026-09-14-phase23-honest-closeout.md`
+
+## 2026-09-20 Update — Phase 24 可组合 IP 与可验证生态
+
+用户于 2026-09-20 批准完整规划登记及 M0 / Epic 125 执行。正式范围：Epic 125–130，FR192–201，NFR93–99。交付目标为可复用模块定义、流基础、CSR/AXI-Lite 连接、UART/GPIO/Timer/IRQ 系统，以及单独验收的一个外部小核。原 FR48、历史关闭及 Epic 122 / FR189 deferred 保留；NFR91 未清空。
+
+Epic 125 关闭前，126–130 不得 ready/in-progress；关闭后每 Epic 实现仍须对应 .1 NFR14 done，并按依赖安排。此次授权仅执行 M0，后续保持 backlog。核心与外部独立关闭，外部未通过不得称整个 Phase 24 完成。产品实现、规划完成和发布分别记录。新增 API 必须显式更新 FR142 表面清单与 SemVer 文档，不自动进入稳定承诺；不调整工具钉。
+
+正式接口：`docs/ip/phase24-contract.md`；故事和依赖：`epics.md` Phase 24 Inventory；M0 风险：`_agile-output/implementation-artifacts/epic-125-nfr14.md`。
+
+| FR | 能力 | 验收摘要 | Epic |
+|---|---|---|---|
+| FR192 | 合同与 M0 闸门 | 接口/复位/地址/兼容边界固化，现有 AXI 缺陷修复后才开放后续实现。 | 125 |
+| FR193 | 既有 AXI 接收与响应正确性 | 分拍 AW/W、读写并发、背压及 reset 的 native 与实际生成 RTL 回归通过；手写 FL 同步修正。 | 125 |
+| FR194 | 同一 session 内模块组合 | 共用模块定义 helper，顶层一次 freeze；参数标识与实例图诊断，旧 elaborate 入口兼容。 | 126 |
+| FR195 | 流基础组件 | 两槽注册切片和 WIDTH 1..64 / DEPTH 1..16 的寄存器 FIFO，独立参考与属性验证。 | 126 |
+| FR196 | CSR 及总线连接 | 静态描述、地址文档/C 头文件、AXI-Lite 桥、单主静态译码，提交点及错误规则可验证。 | 127 |
+| FR197 | 可组合外设 | Timer、IRQ、GPIO CSR、带 FIFO UART 全部交付；明确异步输入与板级边界。 | 128 |
+| FR198 | 完整外设系统 | 单时钟 UART/GPIO/Timer/IRQ 系统通过真实层级 RTL 执行；干净 checkout 一条命令复现。 | 129 |
+| FR199 | 外部 IP 可复现来源 | 固定完整源闭包、版本、校验、许可证材料、工具及维护人；禁网重放通过。 | 130 |
+| FR200 | 一个外部小核真实适配 | 准确 module binding、参数/端口映射、关联 RTL 源和独立行为测试；空壳不达标。 | 130 |
+| FR201 | 支持矩阵与生态维护 | 核心与外部状态分别记录，新增 API 表面显式登记、兼容门禁、贡献模板、维护人和证据链接。 | 129,130 |
+
+- **NFR93：** 既有关闭证据与 FR189 deferred 保持；新发现缺陷必须公开跟踪，历史关闭不得代替当前正确性证据。
+- **NFR94：** 每 Epic 实现前完成 NFR14：上游限制、工具、风险、估算、负责人、禁止静默降级；每故事一个提交。
+- **NFR95：** emit 成功不等于执行成功；实际 RTL、Rust、综合、形式证明分别记录，工具缺失不得静默 skip 为通过。
+- **NFR96：** 设计仅依赖 bitloom-prelude；旧 API/端口保留；新增稳定表面先显式登记；MSRV/工具钉不随本阶段变更。
+- **NFR97：** 首版单时钟、32-bit 数据/16-bit 地址、小寄存器 FIFO；不包含原生层级仿真、通用 FIRRTL 内存、复杂外部核或未列协议。
+- **NFR98：** 外部依赖固定完整 commit/文件闭包与校验、许可证原文和维护人；构建层显式获取，prelude 不拉取源码；无 native 模型明确 unsupported。
+- **NFR99：** 收益由组合复用、上手步骤、CI 与维护成本实测；不承诺未经测量的加速/PPA。超本阶段子集需另立范围。

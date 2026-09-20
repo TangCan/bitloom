@@ -1,0 +1,95 @@
+{
+  "stories": [
+    {
+      "id": "IP-001",
+      "min_days": 1,
+      "max_days": 2
+    },
+    {
+      "id": "IP-002",
+      "min_days": 2,
+      "max_days": 3
+    },
+    {
+      "id": "IP-003",
+      "min_days": 2,
+      "max_days": 3
+    },
+    {
+      "id": "IP-101",
+      "min_days": 3,
+      "max_days": 4
+    },
+    {
+      "id": "IP-102",
+      "min_days": 2,
+      "max_days": 3
+    },
+    {
+      "id": "IP-103",
+      "min_days": 3,
+      "max_days": 5
+    },
+    {
+      "id": "IP-201",
+      "min_days": 4,
+      "max_days": 6
+    },
+    {
+      "id": "IP-202",
+      "min_days": 5,
+      "max_days": 7
+    },
+    {
+      "id": "IP-203",
+      "min_days": 3,
+      "max_days": 5
+    },
+    {
+      "id": "IP-301",
+      "min_days": 2,
+      "max_days": 3
+    },
+    {
+      "id": "IP-302",
+      "min_days": 2,
+      "max_days": 3
+    },
+    {
+      "id": "IP-303",
+      "min_days": 2,
+      "max_days": 3
+    },
+    {
+      "id": "IP-304",
+      "min_days": 4,
+      "max_days": 7
+    },
+    {
+      "id": "IP-401",
+      "min_days": 3,
+      "max_days": 5
+    },
+    {
+      "id": "IP-402",
+      "min_days": 3,
+      "max_days": 5
+    },
+    {
+      "id": "IP-501",
+      "min_days": 2,
+      "max_days": 3
+    },
+    {
+      "id": "IP-502",
+      "min_days": 3,
+      "max_days": 5
+    }
+  ],
+  "story_count": 17,
+  "core_min_days": 41,
+  "core_max_days": 64,
+  "all_min_days": 46,
+  "all_max_days": 72,
+  "note": "规划估算，仅检查加总；未证明工期准确性。"
+}

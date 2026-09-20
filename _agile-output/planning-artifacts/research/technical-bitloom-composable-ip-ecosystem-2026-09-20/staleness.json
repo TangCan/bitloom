@@ -1,0 +1,35 @@
+{
+  "today": "2026-09-20",
+  "claims": [
+    {
+      "ref": "5",
+      "claim": "Arm历史规范允许AW/W不同次序并约束响应；权威单源，独立实现未逐条复核全部条款。",
+      "status": "unverified",
+      "class": "patterns",
+      "pub_date": "2020-03",
+      "recheck": "2022-03-01",
+      "stale": true
+    },
+    {
+      "ref": "6",
+      "claim": "正常AXI VALID受阻期间载荷保持，Arm规范与独立实现作者分析一致；不含跨reset保持。 核对见digests/verification-r1.md。",
+      "status": "verified",
+      "class": "patterns",
+      "pub_date": "2021-08",
+      "recheck": "2023-08-01",
+      "stale": true
+    },
+    {
+      "ref": "20",
+      "claim": "common_cells有2026年7月发布事件与v2改名记录；单上游记录不证明集成成熟。",
+      "status": "unverified",
+      "class": "ecosystem",
+      "pub_date": "2026-07",
+      "recheck": "2027-01-01",
+      "stale": false
+    }
+  ],
+  "stale_count": 2,
+  "earliest_recheck": "2022-03-01",
+  "no_window_classes": []
+}

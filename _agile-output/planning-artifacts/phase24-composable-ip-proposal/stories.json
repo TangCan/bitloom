@@ -1,0 +1,303 @@
+[
+  {
+    "story": "125.1",
+    "source": "IP-001",
+    "title": "合同、接口与 NFR14",
+    "dependencies": [],
+    "fr": [
+      "FR192"
+    ],
+    "days": "1–2",
+    "status": "proposed"
+  },
+  {
+    "story": "125.2",
+    "source": "IP-002",
+    "title": "AXI 真实 RTL 红测",
+    "dependencies": [
+      "125.1"
+    ],
+    "fr": [
+      "FR193"
+    ],
+    "days": "2–3",
+    "status": "proposed"
+  },
+  {
+    "story": "125.3",
+    "source": "IP-003",
+    "title": "AXI 修复、双模型与 M0 关闭",
+    "dependencies": [
+      "125.2"
+    ],
+    "fr": [
+      "FR192",
+      "FR193"
+    ],
+    "days": "2–3",
+    "status": "proposed"
+  },
+  {
+    "story": "126.1",
+    "source": "新增",
+    "title": "组合基础 NFR14",
+    "dependencies": [
+      "125.3"
+    ],
+    "fr": [
+      "FR194",
+      "FR195"
+    ],
+    "days": "0.5–1",
+    "status": "proposed"
+  },
+  {
+    "story": "126.2",
+    "source": "IP-101",
+    "title": "共享模块定义与实例校验",
+    "dependencies": [
+      "126.1"
+    ],
+    "fr": [
+      "FR194"
+    ],
+    "days": "3–4",
+    "status": "proposed"
+  },
+  {
+    "story": "126.3",
+    "source": "IP-102",
+    "title": "两槽 ready/valid 注册切片",
+    "dependencies": [
+      "126.1"
+    ],
+    "fr": [
+      "FR195"
+    ],
+    "days": "2–3",
+    "status": "proposed"
+  },
+  {
+    "story": "126.4",
+    "source": "IP-103",
+    "title": "参数 FIFO 与 M1 关闭",
+    "dependencies": [
+      "126.2",
+      "126.3"
+    ],
+    "fr": [
+      "FR195"
+    ],
+    "days": "3–5",
+    "status": "proposed"
+  },
+  {
+    "story": "127.1",
+    "source": "新增",
+    "title": "CSR/总线 NFR14",
+    "dependencies": [
+      "125.3"
+    ],
+    "fr": [
+      "FR196"
+    ],
+    "days": "0.5–1",
+    "status": "proposed"
+  },
+  {
+    "story": "127.2",
+    "source": "IP-201",
+    "title": "CSR 描述、RTL 与软件地址产物",
+    "dependencies": [
+      "127.1",
+      "126.2"
+    ],
+    "fr": [
+      "FR196"
+    ],
+    "days": "4–6",
+    "status": "proposed"
+  },
+  {
+    "story": "127.3",
+    "source": "IP-202",
+    "title": "AXI-Lite→CSR 桥",
+    "dependencies": [
+      "127.2",
+      "126.3"
+    ],
+    "fr": [
+      "FR196"
+    ],
+    "days": "5–7",
+    "status": "proposed"
+  },
+  {
+    "story": "127.4",
+    "source": "IP-203",
+    "title": "静态译码与 M2 关闭",
+    "dependencies": [
+      "127.3"
+    ],
+    "fr": [
+      "FR196"
+    ],
+    "days": "3–5",
+    "status": "proposed"
+  },
+  {
+    "story": "128.1",
+    "source": "新增",
+    "title": "外设 NFR14",
+    "dependencies": [
+      "125.3"
+    ],
+    "fr": [
+      "FR197"
+    ],
+    "days": "0.5–1",
+    "status": "proposed"
+  },
+  {
+    "story": "128.2",
+    "source": "IP-301",
+    "title": "Timer",
+    "dependencies": [
+      "128.1",
+      "127.2"
+    ],
+    "fr": [
+      "FR197"
+    ],
+    "days": "2–3",
+    "status": "proposed"
+  },
+  {
+    "story": "128.3",
+    "source": "IP-302",
+    "title": "事件 IRQ",
+    "dependencies": [
+      "128.1",
+      "127.2"
+    ],
+    "fr": [
+      "FR197"
+    ],
+    "days": "2–3",
+    "status": "proposed"
+  },
+  {
+    "story": "128.4",
+    "source": "IP-303",
+    "title": "GPIO CSR wrapper",
+    "dependencies": [
+      "128.3",
+      "126.2"
+    ],
+    "fr": [
+      "FR197"
+    ],
+    "days": "2–3",
+    "status": "proposed"
+  },
+  {
+    "story": "128.5",
+    "source": "IP-304",
+    "title": "缓冲 UART 与 M3 关闭",
+    "dependencies": [
+      "128.3",
+      "126.4"
+    ],
+    "fr": [
+      "FR197"
+    ],
+    "days": "4–7",
+    "status": "proposed"
+  },
+  {
+    "story": "129.1",
+    "source": "新增",
+    "title": "组合系统与证据 NFR14",
+    "dependencies": [
+      "125.3"
+    ],
+    "fr": [
+      "FR198",
+      "FR201"
+    ],
+    "days": "0.5–1",
+    "status": "proposed"
+  },
+  {
+    "story": "129.2",
+    "source": "IP-401",
+    "title": "外设子系统与使用配方",
+    "dependencies": [
+      "129.1",
+      "127.4",
+      "128.2",
+      "128.4",
+      "128.5"
+    ],
+    "fr": [
+      "FR198"
+    ],
+    "days": "3–5",
+    "status": "proposed"
+  },
+  {
+    "story": "129.3",
+    "source": "IP-402",
+    "title": "CI、兼容性、贡献模板与核心关闭",
+    "dependencies": [
+      "129.2"
+    ],
+    "fr": [
+      "FR201"
+    ],
+    "days": "3–5",
+    "status": "proposed"
+  },
+  {
+    "story": "130.1",
+    "source": "新增",
+    "title": "外部 IP 准入 NFR14",
+    "dependencies": [
+      "125.3"
+    ],
+    "fr": [
+      "FR199",
+      "FR200"
+    ],
+    "days": "0.5–1",
+    "status": "proposed"
+  },
+  {
+    "story": "130.2",
+    "source": "IP-501",
+    "title": "来源清单、锁定与离线重放",
+    "dependencies": [
+      "130.1"
+    ],
+    "fr": [
+      "FR199"
+    ],
+    "days": "2–3",
+    "status": "proposed"
+  },
+  {
+    "story": "130.3",
+    "source": "IP-502",
+    "title": "一个真实外部核适配及试点关闭",
+    "dependencies": [
+      "130.2",
+      "126.2"
+    ],
+    "fr": [
+      "FR200",
+      "FR201"
+    ],
+    "days": "3–5",
+    "status": "proposed"
+  }
+]

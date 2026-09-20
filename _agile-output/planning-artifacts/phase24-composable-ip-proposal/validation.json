@@ -1,0 +1,12 @@
+{
+  "stories": 22,
+  "epics": 6,
+  "all_dependencies_exist_and_acyclic": true,
+  "FR192_to_FR201_covered": true,
+  "estimate_person_days": [
+    48.5,
+    77.0
+  ],
+  "authoritative_baselines_unchanged": true,
+  "approval": "pending"
+}

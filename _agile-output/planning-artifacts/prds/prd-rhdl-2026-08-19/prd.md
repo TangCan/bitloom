@@ -44,6 +44,8 @@ amendment: overview-literal-C-2026-08-21; fr71-jvm-ci-2026-08-21; phase9-closure
 
 ## 0. Document Purpose
 
+2026-09-20：Phase 24 正式合同 FR192–201 / NFR93–99 见 [addendum](addendum.md)「Phase 24 可组合 IP 与可验证生态」及 epics.md Phase 24 Inventory；仅 M0 获准执行，下游 backlog，原 FR48 与既有验收保留。
+
 本 PRD 面向 PM、架构与 epic 拆解。
 
 **权威边界：**

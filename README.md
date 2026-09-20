@@ -490,3 +490,7 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 - 自动等价证明 / SystemC TLM-2.0 产品（**FR100 / Epic 45 已关闭** — 形式等价产品 + IP 双模型；**FR101 / Epic 46 已关闭** — LT-only MVP；「不承诺 SystemC TLM」不再是完成排除项；AT → **FR107**；见 [`docs/fr101-systemc-tlm.md`](docs/fr101-systemc-tlm.md) / doc-19）
 
 详见 [`docs/semver-0x-policy.md`](docs/semver-0x-policy.md) 与 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。
+
+### Phase 24：可组合 IP（计划中）
+
+2026-09-20 已批准可组合模块、流/FIFO、CSR/AXI-Lite、UART/GPIO/Timer/IRQ 系统与一个外部小核的规划（FR192–201 / Epic125–130）。当前仅 M0 合同及既有 AXI 正确性工作获准执行，后续均为 backlog，尚不代表新系统交付。参见 [正式接口合同](docs/ip/phase24-contract.md) 和 [故事清单](_agile-output/planning-artifacts/epics.md#phase-24-inventory--可组合-ip-与可验证生态)。历史能力及 FR189 deferred 保留；支持矩阵、维护人和贡献模板在129.3/130.3按实测补齐。

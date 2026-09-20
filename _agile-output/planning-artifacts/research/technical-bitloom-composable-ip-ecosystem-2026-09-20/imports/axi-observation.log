@@ -1,0 +1,27 @@
+     Locking 9 packages to latest Rust 1.97.1 compatible versions
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling bitloom-hir v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+   Compiling bitloom-builder v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+   Compiling bitloom-sim v1.1.6 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+   Compiling syn v2.0.119
+   Compiling bitloom-macro v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom-ip-audit v0.0.0 (/tmp/bitloom-ip-audit-4hug7374)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.76s
+     Running unittests src/lib.rs (target/ip-research-probe/debug/deps/bitloom_ip_audit-fac67b3561059b59)
+
+running 2 tests
+AW accepted before W; W accepted next cycle; observed B response over next 5 cycles=false
+AR accepted alongside AW/W; observed R response over next 5 cycles=false
+test audit::separated_aw_w_probe ... ok
+test audit::concurrent_read_write_probe ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+   Doc-tests bitloom_ip_audit
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

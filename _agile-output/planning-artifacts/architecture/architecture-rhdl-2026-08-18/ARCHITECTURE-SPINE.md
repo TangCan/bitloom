@@ -391,3 +391,26 @@ flowchart LR
 - **Phase 19「NFR59 全子集升格 + FR152(a)」合同（闸门 Epic 87 / FR154 已关闭；Epic 88–98 全部已关闭）：** **FR154–FR165** / **NFR68–NFR72**（Correct Course 2026-09-12；**Epic 87 已关闭** / Story 87.4；**Epic 88 已关闭** / Story 88.4 — `bitloom-lsp` **1.0.0** live crates.io / FR152(a)；**Epic 89 已关闭** / Story **89.3** — FR157；**Epic 90 已关闭** / Story **90.3** — FR158；**Epic 91 已关闭** / Story **91.3** — FR159；**Epic 92 已关闭** / Story **92.3** — FR160；**Epic 93 已关闭** / Story **93.3** — FR161；**Epic 94 已关闭** / Story **94.3** — FR162；**Epic 95 已关闭** / Story **95.3** — FR163；**Epic 96 已关闭** / Story **96.3** — FR164；**Epic 97 已关闭** / Story **97.3** — FR165；**Epic 98 已关闭** / Story 98.3 — FR156 宣称诚实门；见 `docs/fr156-phase19-claim-honesty.md`）。Phase 12–18 关闭证据**仍有效**（**NFR68**），不得改写为失败。映射：**FR154–FR165 全部已关**。宣称须引 **FR154–165**（**NFR72**）；超出 NFR14 钉死子集仍须新合同（**NFR71**）。`git push` 不是 FR。
 - **Phase 20「NFR71 四条升格」合同（闸门 Epic 99 / FR166 已关闭；Epic 100–104 **全部已关闭**；Phase 20 规划故事已齐）：** **FR166–FR171** / **NFR73–NFR77**（Correct Course 2026-09-12；**Epic 99 已关闭** / Story 99.4；**Epic 100 已关闭** / Story **100.3** — FR167；**Epic 101 已关闭** / Story **101.3** — FR168；**Epic 102 已关闭** / Story **102.3** — FR169；**Epic 103 已关闭** / Story **103.3** — FR170；**Epic 104 已关闭** / Story **104.3** — FR171 宣称诚实门）。Phase 12–19 关闭证据**仍有效**（**NFR73**），不得改写为失败。映射：**FR166–FR171 全部已关**。宣称须引 **FR166–171**（**NFR77**）；超出 NFR14 钉死子集仍须新合同（**NFR76**）；**不得**宣称「NFR71 账本已空」。`git push` 不是 FR。
 - **Phase 21「NFR76 leftovers 升格」合同（闸门 Epic 105 / FR172 已关闭；Epic 106–110 **全部已关闭**；Phase 21 规划+实现故事已齐）：** **FR172–FR177** / **NFR78–NFR82**（Correct Course 2026-09-12；**Epic 105 已关闭** / Story **105.4**；**Epic 106 已关闭** / Story **106.3** — FR173 firtool-1.158.0 ↔ Chisel 7.15.0 / AD-9 修订；**Epic 107 已关闭** / Story **107.3** — FR174 unpaired firtool-1.156.0；**Epic 108 已关闭** / Story **108.3** — FR175 `--ir-sv`/`--ir-verilog`；**Epic 109 已关闭** / Story **109.3** — FR176 组合生态 / AD-27 修订；**Epic 110 已关闭** / Story **110.3** — FR177 宣称诚实门）。Phase 12–20 关闭证据**仍有效**（**NFR78**），不得改写为失败。宣称须引 **FR172–177**（**NFR82**）；触 **AD-9 / AD-27** / firtool·HEAD 升钉须按 **NFR80** 先修订脊柱/文档/CI 再 story ready；超出各 epic NFR14 钉死子集仍须新合同（**NFR81** → Phase 22）。软序 `105 →（106 ‖ 107 ‖ 108 ‖ 109）→ 110`；106/107 建议串行。`git push` 不是 FR。- **Phase 22「NFR81 leftovers 升格」合同（闸门 Epic 111 / FR178 已关闭；Epic 112–117 可合法开工；Phase 22 规划故事已齐）：** **FR178–FR184** / **NFR83–NFR87**（Correct Course 2026-09-12；**Epic 111 已关闭** / Story **111.4**；**Epic 112 已关闭** / Story **112.3** — FR179 floating-track firtool-1.159.0 / AD-9 修订；**Epic 113 已关闭** / Story **113.3** — FR180 Handshake fork+join deepen / AD-25 修订；**Epic 114 已关闭** / Story **114.3** — FR181 Style/linter wartremover deepen / AD-27 修订；**Epic 115 已关闭** / Story **115.3** — FR182 unpaired product-pin firtool-1.159.0 / AD-9 例外；**Epic 116 已关闭** / Story **116.3** — FR183 explicit FR142 `bitloom-firrtl` interop expand；**Epic 117 已关闭** / Story **117.3** — FR184 宣称诚实门；**Phase 22 规划+实现故事已齐（Epic 111–117）**）。Phase 12–21 关闭证据**仍有效**（**NFR83**），不得改写为失败。宣称须引 **FR178–184**（**NFR87**）；触 **AD-9 / AD-25 / AD-27 / FR142** 须按 **NFR85** 先修订脊柱/文档/CI 再 story ready；超出各 epic NFR14 钉死子集仍须新合同（**NFR86**）。软序 `111 →（112 ‖ 113 ‖ 114 ‖ 115 ‖ 116）→ 117`；112/115 建议串行。`git push` 不是 FR。
+
+### AD-30 可组合 IP（2026-09-20）
+
+ 复用同一 ElaborateSession 的模块定义 helper；公开 elaborate 仍是顶层入口并且只 finish/freeze 一次。不得拼接 FrozenHir 或创建第二套电路 IR。静态 CSR 描述只服务 elaboration 与文档生成。参数/方向/宽度、重复模块、缺模块和实例环在 freeze 前用现有 Diagnostics 报告。默认单时钟同步高有效内部 reset；系统 aresetn 由外部控制器同步断言与释放后转换，全部 leaf 同域复位。层级行为验收走实际 RTL；native/generated 不支持的层级明确拒绝。
+
+### AD-31 外部 RTL 与证据（2026-09-20）
+
+ 在现有外部模块表示上绑定源清单和锁定元数据，源码解析/获取属于 CLI/构建层，设计依赖仍仅 prelude。若现有 HIR 不能表达必需端口/参数，先提出最小扩展并补审，不另立 IR。Manifest 中区分上游源与 wrapper 版本、源闭包/校验、工具、许可证和支持矩阵。无模型不得以零输出模拟；actual RTL 测试是 behavior-tested 的必要条件。AD-9 产品钉与 AD-27 后端承诺保持。
+
+合同：`docs/ip/phase24-contract.md`；FR192–201 / Epic125–130。规划决定不表示实现完成；仅 M0 执行。
+
+```mermaid
+flowchart LR
+    AXI[AXI-Lite] --> CAP[AW/W/AR捕获与轮转仲裁]
+    CAP --> CSR[CSR单提交点]
+    CSR --> DEC[静态译码]
+    DEC --> UART[UART]
+    DEC --> GPIO[GPIO]
+    DEC --> TIMER[Timer]
+    DEC --> IRQ[IRQ]
+    SRC[外部源清单与锁] --> BUILD[CLI构建器]
+    BUILD --> BIND[现有外部模块绑定]
+```

@@ -1,0 +1,65 @@
+[
+  {
+    "ref": "1",
+    "claim": "至少LiteX和OpenTitan两个生态采用共同IP连接约定；不证明Bitloom需求排序。 核对见digests/verification-r1.md。",
+    "status": "verified",
+    "class": "patterns",
+    "pub_date": "unknown"
+  },
+  {
+    "ref": "3",
+    "claim": "寄存器描述/对象参与软硬件生成在OpenTitan和LiteX有独立实例；不证明语义相同。 核对见digests/verification-r1.md。",
+    "status": "verified",
+    "class": "patterns",
+    "pub_date": "unknown"
+  },
+  {
+    "ref": "8",
+    "claim": "LiteDRAM/LiteEth上游描述独立RTL使用方式；Bitloom兼容尚未运行。",
+    "status": "unverified",
+    "class": "patterns",
+    "pub_date": "unknown"
+  },
+  {
+    "ref": "11",
+    "claim": "Bender和Cargo分别区分依赖意图与解析锁定身份；不自动保证离线重建。 核对见digests/verification-r1.md。",
+    "status": "verified",
+    "class": "patterns",
+    "pub_date": "unknown"
+  },
+  {
+    "ref": "14",
+    "claim": "OpenTitan通用RW1C和event helper接合时clear优先是单上游条件事实；不成为普遍W1C规则。",
+    "status": "unverified",
+    "class": "patterns",
+    "pub_date": "unknown"
+  },
+  {
+    "ref": "15",
+    "claim": "cocotbext-axi源码显示逐通道pause与reset取消；未锁定安装/运行组合。",
+    "status": "unverified",
+    "class": "compatibility",
+    "pub_date": "unknown"
+  },
+  {
+    "ref": "21",
+    "claim": "common_cells master cc_fifo已审查，稳定v1.40.0源码/完整pin尚未准入；不能混用API。",
+    "status": "unverified",
+    "class": "compatibility",
+    "pub_date": "unknown"
+  },
+  {
+    "ref": "25",
+    "claim": "common_cells所读许可证为Solderpad Hardware License 0.51；未审计全部依赖或法律效果。",
+    "status": "unverified",
+    "class": "license",
+    "pub_date": "unknown"
+  },
+  {
+    "ref": "26",
+    "claim": "Taxi所读文件与许可证为CERN-OHL-S-2.0；未审计全部依赖或法律效果。",
+    "status": "unverified",
+    "class": "license",
+    "pub_date": "unknown"
+  }
+]

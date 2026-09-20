@@ -118,3 +118,7 @@ sources:
 - FR46 可通过「生成 Scala + 导入 `.fir`/CIRCT」满足，不恢复已删 Parser；上游删除 API 不自动豁免验收。
 - 外挂 HLS 调度可接受；启用时钉死单一后端。
 - Launch（P0+P1+Bitloom 身份）可不阻塞于 P3；但「概述完全完成」声明必须 CAP-10…16 / FR46–52 收口。
+
+## Phase 24 — 可组合 IP（已批准规划，尚未交付）
+
+FR192–201 / NFR93–99、Epic125–130 于 2026-09-20 登记；原 CAP-14 保留。新增目标为可组合模块/流/FIFO、CSR/AXI-Lite、UART/GPIO/Timer/IRQ 系统及单独验收的外部小核。仅 M0 获准实现；126–130 backlog。正式接口见 `docs/ip/phase24-contract.md`，正式需求见 PRD addendum 与 epics.md Phase 24 Inventory。FR189 / Epic122 deferred、NFR91 及历史关闭保持；此阶段未交付，不授权发布或工具升钉。
