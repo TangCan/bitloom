@@ -34,25 +34,28 @@
 - Future epics: **one story → one commit** (see `_agile-output/implementation-artifacts/process-one-story-one-commit.md`).
 
 <!-- bmad:context -->
-<!-- Verified 2026-08-18 against 7fe8d78. Managed by bmad-project-context; edits inside this block are replaced on refresh. Keep anything you want preserved outside the markers. -->
+<!-- Verified 2026-09-20 against 7a8135f. Managed by bmad-project-context; edits inside this block are replaced on refresh. Keep anything you want preserved outside the markers. -->
 
 ## rhdl (workspace; public brand Bitloom)
 
-Rust 嵌入式 RTL HDL：设计是生成器，冻结 HIR 后再降后端。需求在 `docs/requirements/`，规划在 `_agile-output/planning-artifacts/`。公开产品名 **Bitloom**（crates.io / CLI：`bitloom`）。
+Rust 嵌入式 RTL HDL：设计是生成器，冻结 HIR 后再降后端。需求在 `docs/requirements/`，规划在 `_agile-output/planning-artifacts/`。公开产品名 Bitloom（crates.io 包：`bitloom`；命令：`cargo bitloom`）。
 
 ## Policy
 
-- 禁止向 crates.io 发布名 `rhdl` 或 `rhdl-bits`；发布名与 CLI 用 **`bitloom`**（不用 `rhdl-rs`）。设计 crate 只依赖 **`bitloom-prelude`**。文档须声明与 `samitbasu/rhdl` 无关。
+- 禁止向 crates.io 发布名 `rhdl` 或 `rhdl-bits`，不用 `rhdl-rs`；公开发布名用 `bitloom`。设计 crate 只依赖 `bitloom-prelude`，不得依赖 CLI 包。文档须声明与 `samitbasu/rhdl` 无关。
 
 ## Where things are
 
-- 改语言或工具链（将来的 `crates/`）：先读 `_agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md`，按 AD 做；不要另立 HIR，不要在 rustc 编译期抽网表。
+- 改语言或工具链（`crates/`）：先读 `_agile-output/planning-artifacts/architecture/architecture-rhdl-2026-08-18/ARCHITECTURE-SPINE.md`，按 AD 做；不要另立 HIR，不要在 rustc 编译期抽网表。
 - 给人讲架构：同目录 `team-walkthrough.html`。
 - 技术依据：`_agile-output/planning-artifacts/research/technical-rhdl-rust-edsl-hdl-implementation-archit-2026-08-18/research.md`。
 - 命名依据：`_agile-output/planning-artifacts/research/technical-rhdl-rename-alternatives-product-naming-2026-08-19/research.md`。
 
 ## Running and verifying
 
-- TODO：按脊柱钉死的 rustc 1.97.1 / edition 2024 跑 `just test`，并 refresh 本块。公开 CLI：`cargo bitloom`（包 `bitloom`，二进制 `cargo-bitloom`）。
+- 使用 `rust-toolchain.toml` 与根 `Cargo.toml` 钉死的 Rust 1.97.1 / edition 2024。
+- 工作区测试用 `just test`（`cargo test --workspace`）；裸 `cargo test` 只覆盖 `default-members`，会漏掉 CLI、LSP 等成员。
+- `just check` 增加格式检查，但不覆盖独立的 JVM、formal、CIRCT 等门禁；改相关路径时，按 `Justfile` 和 `.github/workflows/ci.yml` 选择对应门禁，不能把工作区测试通过视为全部 CI 通过。
+- 公开 CLI：`cargo bitloom`（包 `bitloom`，实际二进制 `cargo-bitloom`）；树内运行用 `cargo run -p bitloom -- …`。
 
 <!-- /bmad:context -->

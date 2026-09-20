@@ -34,7 +34,7 @@ project: rhdl
 project_key: NOKEY
 tracking_system: file-system
 story_location: 
-  /home/richard/richard/2026/2026/rhdl/_agile-output/implementation-artifacts
+  /nvme_data2/richard/2026/rhdl/_agile-output/implementation-artifacts
 development_status:
   epic-1: done
   1-1-声明带方向端口的模块并-elaborate: done
