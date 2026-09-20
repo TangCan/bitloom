@@ -1,0 +1,73 @@
+   Compiling bitloom-hir v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+   Compiling bitloom-builder v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+   Compiling bitloom-firrtl v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/rhdl-firrtl)
+   Compiling bitloom-viz v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+   Compiling bitloom-vlog v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-vlog)
+   Compiling bitloom-sim v1.1.6 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 4.67s
+     Running tests/fr194_module_composition.rs (target/debug/deps/fr194_module_composition-e8f9d768b6f0c733)
+
+running 5 tests
+
+thread 'hierarchical_native_models_keep_explicit_unsupported_boundary' (2712447) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+test gpio_legacy_entry_matches_shared_definition_and_preserves_port_contract ... note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+ok
+
+thread 'hierarchical_native_models_keep_explicit_unsupported_boundary' (2712447) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchical_native_models_keep_explicit_unsupported_boundary' (2712447) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchical_native_models_keep_explicit_unsupported_boundary' (2712447) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchical_native_models_keep_explicit_unsupported_boundary' (2712447) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchical_native_models_keep_explicit_unsupported_boundary' (2712447) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchical_native_models_keep_explicit_unsupported_boundary' (2712447) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchical_native_models_keep_explicit_unsupported_boundary' (2712447) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchical_native_models_keep_explicit_unsupported_boundary' (2712447) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchical_native_models_keep_explicit_unsupported_boundary' (2712447) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchical_native_models_keep_explicit_unsupported_boundary' (2712447) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchical_native_models_keep_explicit_unsupported_boundary' (2712447) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+test hierarchical_native_models_keep_explicit_unsupported_boundary ... ok
+test stalled_tool_times_out_and_preserves_log ... ok
+registers-top-first: FR194 PASS registers cycles=192 seed=0x19480816
+tb.sv:2495: $finish called at 2880 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr194/registers-top-first-2712445
+gpio-pair: FR194 PASS gpio cycles=160 seed=0x19469100
+tb.sv:2241: $finish called at 2400 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr194/gpio-pair-2712445
+test rtl_two_gpio_banks_keep_masked_writes_and_pad_reads_independent ... ok
+registers-child-first: FR194 PASS registers cycles=192 seed=0x19480816
+tb.sv:2495: $finish called at 2880 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr194/registers-child-first-2712445
+registers-two-levels: FR194 PASS registers cycles=192 seed=0x19480816
+tb.sv:2495: $finish called at 2880 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr194/registers-two-levels-2712445
+test rtl_same_and_different_parameters_preserve_instance_state_for_both_module_orders ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.38s
+

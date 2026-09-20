@@ -150,3 +150,7 @@ sim.tick();
 ## Phase24 M0 correctness notice（2026-09-20）
 
 现有AXI能力的历史有限验收曾遗漏分拍AW/W接受后无B、并发读写丢R的缺陷。Story125.2已记录[真实RTL红测](phase24-axi-red-evidence.md)。Story125.3已修复独立AW/W捕获及并发读响应，手写FL同步更新；覆盖与实测见[FR193修复证据](phase24-axi-green-evidence.md)，不宣称所有AXI时序或商业VIP合规。见 [正式接口合同](phase24-contract.md)；可组合系统与外部适配仍计划中。
+
+## FR194 模块组合基础
+
+Story126.2已提供Session模块定义复用与首批 `Gpio::define_module`，设计仍只依赖prelude。见[完整示例](module-composition.md)和[实际RTL证据](module-composition-evidence.md)。尚未完成流/FIFO或完整外设系统，M1仍未关闭。

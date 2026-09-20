@@ -10135,3 +10135,5 @@ So that 规划 complete 可宣称（NFR89）。
 Story125.1–125.3 / Epic125 已完成，FR192/FR193按M0合同关闭；真实红→绿、兼容和矩阵证据见 `docs/ip/phase24-axi-green-evidence.md` 与 `_agile-output/implementation-artifacts/epic-125-closeout.md`。FR194–201及Epic126–130尚未交付，仍backlog，须后续安排及各自NFR14；整个Phase24实现未complete。FR189 deferred/NFR91保持。
 
 2026-09-20 M0关闭后续授权：用户要求继续，当前执行范围为 Story126.1 NFR14 → 126.2 模块组合基础；126.3/126.4及Epic127–130仍backlog，未授权自动执行。不宣称M1或Phase24已交付；上述M0批准记录保留为历史。
+
+2026-09-20 Story126.2 / FR194 已完成：同一session模块定义复用、参数专门化与实例图/连接诊断；首批Gpio共用定义体，实际RTL验证通过。实现与证据见 docs/ip/module-composition.md 和 docs/ip/module-composition-evidence.md。126.1/126.2 done；126.3/126.4及Epic127–130保持backlog，Epic126/M1未关闭，FR195–201未交付；FR189 deferred/NFR91保持。

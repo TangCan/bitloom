@@ -1,6 +1,6 @@
 # Epic 126 NFR14 — 组合与流基础风险门禁
 
-记录日期：2026-09-20；执行者：Codex；项目 owner：Richard。关联 FR194/FR195、AD-30/31、NFR93–99。M0 已关闭，依赖证据见 [Epic125 关闭记录](epic-125-closeout.md)。当前完成风险记录和工具可用性探针，Story126.1 经主代理评审完成（done）；尚无126.2行为证据，不宣称 FR194/FR195 或 M1 交付。
+记录日期：2026-09-20；执行者：Codex；项目 owner：Richard。关联 FR194/FR195、AD-30/31、NFR93–99。M0 已关闭，依赖证据见 [Epic125 关闭记录](epic-125-closeout.md)。当前完成风险记录和工具可用性探针，Story126.1 经主代理评审完成（done）；126.1结项时尚无126.2行为证据；后续结果见末节，不宣称 FR195 或 M1 交付。
 
 ## 当前授权、估算与依赖
 
@@ -45,3 +45,9 @@
 |`/tmp/bitloom-maintenance-tools/bin/vvp -V`|解析路径 `/tmp/bitloom-maintenance-tools/iverilog/usr/bin/vvp`；Icarus Verilog runtime 12.0 (stable)，命令退出0|
 
 CI 安装入口为 [.github/workflows/ci.yml](../../.github/workflows/ci.yml) 的 `sudo apt-get update && sudo apt-get install -y iverilog`。126.2通过 `command -v iverilog` 和 `command -v vvp` 从 PATH 发现工具，再运行 `iverilog -V`、`vvp -V` 记录实际版本与路径；不固定临时 wrapper，也不假定任何环境必为12.0。2026-09-20复测时默认 PATH 均未找到工具，因此仅在本地探针 PATH 前加入 `/tmp/bitloom-maintenance-tools/bin` 后重测，二者实际均报告12.0 stable、退出0，与上表一致。CI或其他安装可直接使用其 PATH 中的工具；安装/配置后仍找不到工具须严格失败。本次只证明工具可调用；未编译执行组合 RTL，行为证据留待126.2。门禁状态变异验证见 [126.1 spec Verification](spec-126-1-composition-gate.md#verification)。
+
+## Story126.2 验收结果
+
+2026-09-20 Story126.2 / FR194 已完成：同一session模块定义复用、参数专门化与实例图/连接诊断；首批Gpio共用定义体，实际RTL验证通过。实现与证据见 docs/ip/module-composition.md 和 docs/ip/module-composition-evidence.md。126.1/126.2 done；126.3/126.4及Epic127–130保持backlog，Epic126/M1未关闭，FR195–201未交付；FR189 deferred/NFR91保持。
+
+风险关闭：模块身份、生命周期、全图校验、连接与旧GPIO兼容均有对应回归；新API已显式登记FR142。保留实例/局部网名合法性、Instance.params覆盖两个既有缺口（deferred-work.md）。formal及流/FIFO仍待126.3/126.4，不把126.2测试当作后续验收。

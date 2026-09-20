@@ -124,3 +124,5 @@ sources:
 FR192–201 / NFR93–99、Epic125–130 于 2026-09-20 登记；原 CAP-14 保留。新增目标为可组合模块/流/FIFO、CSR/AXI-Lite、UART/GPIO/Timer/IRQ 系统及单独验收的外部小核。仅 M0 获准实现；126–130 backlog。正式接口见 `docs/ip/phase24-contract.md`，正式需求见 PRD addendum 与 epics.md Phase 24 Inventory。FR189 / Epic122 deferred、NFR91 及历史关闭保持；此阶段未交付，不授权发布或工具升钉。
 
 2026-09-20 M0 状态：Epic125 / FR192–193 已按 `docs/ip/phase24-axi-green-evidence.md` 关闭；FR194–201仍未交付。
+
+2026-09-20 Story126.2 / FR194 已完成：同一session模块定义复用、参数专门化与实例图/连接诊断；首批Gpio共用定义体，实际RTL验证通过。实现与证据见 docs/ip/module-composition.md 和 docs/ip/module-composition-evidence.md。126.1/126.2 done；126.3/126.4及Epic127–130保持backlog，Epic126/M1未关闭，FR195–201未交付；FR189 deferred/NFR91保持。

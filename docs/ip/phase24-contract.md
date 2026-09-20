@@ -4,7 +4,7 @@
 
 2026-09-20 M0关闭后续授权：用户要求继续，当前执行范围为 Story126.1 NFR14 → 126.2 模块组合基础；126.3/126.4及Epic127–130仍backlog，未授权自动执行。不宣称M1或Phase24已交付；上述M0批准记录保留为历史。
 
-设计仅依赖 bitloom-prelude，单一 FrozenHir/ElaborateSession，工具钉不变。旧 API、端口和映射保持；新增 define_module、RvRegSlice、ParamSyncFifo、CSR 描述/桥/译码、Timer、IRQ、GPIO/UART wrapper 仅为待实现命名表面，未增加任何已承诺稳定符号。实现故事须逐符号更新 FR142 清单与 SemVer minor 说明。
+设计仅依赖 bitloom-prelude，单一 FrozenHir/ElaborateSession，工具钉不变。旧 API、端口和映射保持；126.2已实现ElaborateSession::define_module与Gpio::define_module并显式登记FR142清单；其余RvRegSlice、ParamSyncFifo、CSR 描述/桥/译码、Timer、IRQ、GPIO/UART wrapper仍仅为待实现命名表面。实现故事须逐符号更新 FR142 清单与 SemVer minor 说明。
 
 首版仅单时钟、32-bit 数据、16-bit 字节地址、寄存器小 FIFO、UART8N1、GPIO32、Timer32、IRQ5，以及单独验收的一个外部小核。不包含 CPU、DMA、PWM、watchdog、SPI/I2C加深、burst/ID、多主、多时钟模拟、异步 FIFO、深RAM FIFO、通用FIRRTL内存、原生层级模拟、复杂外部核、物理签核或发布。FR189/Epic122 deferred 与 NFR91 不变。
 
@@ -15,6 +15,8 @@
 同拍 AW/W 握手后一个 tick 可观察 BVALID 的兼容时序保留；分拍分别缓存，收齐后写一次。并发接受的 AR 和完整写均须产生响应，同址读返回该写入之前的值（read-before-write）。受阻B/R保持有效及payload，响应不重复；reset 清捕获槽和待响应。手写 FL 同步修正。研究只在 native 观察缺陷；125.2须真实生成RTL红测，125.3才能记录修复关闭。
 
 ## 模块定义合同
+
+126.2现行可编译入口与严格参数身份规则见[模块组合](module-composition.md)，实测见[验收记录](module-composition-evidence.md)。下列UartTx/Timer仅是未来IP适配形状，不能误认为这些类型已提供define_module。
 
 ```rust
 // 合同中的调用形状；实现故事须逐符号登记 API，当前不是可编译的已发布 API。
@@ -142,3 +144,5 @@ CSR叶节点固定在提交沿锁存响应，下一周期rsp_valid可见，保�
 正式故事/AC见 epics.md Phase24 Inventory；适用验证采用历史 implementation-plan.md §5，保存命令、工具版本、种子与结果，分别记录native、真实RTL、综合及formal。缺工具不得skip冒充pass。新系统必须实际层级RTL执行；旧bank本故事不改RTL。
 
 外部核以源清单/完整commit/递归依赖与SHA256、文件顺序/include/宏、端口参数/clock/reset映射、许可证原文hash与NOTICE、wrapper版本、工具锁、维护人及证据为准；CLI构建层获取，prelude不拉源码。官方原生、外部适配、仅收录分别标识；catalogued/locked/compiled/behavior-tested/maintained逐级有证据，native无模型明确unsupported。首选PULP稳定版仍待准入，不以master阅读记录代替稳定版验证。API新增不等于进入FR142稳定清单。
+
+2026-09-20 Story126.2 / FR194 已完成：同一session模块定义复用、参数专门化与实例图/连接诊断；首批Gpio共用定义体，实际RTL验证通过。实现与证据见 docs/ip/module-composition.md 和 docs/ip/module-composition-evidence.md。126.1/126.2 done；126.3/126.4及Epic127–130保持backlog，Epic126/M1未关闭，FR195–201未交付；FR189 deferred/NFR91保持。

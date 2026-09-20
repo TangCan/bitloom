@@ -24,6 +24,8 @@ jobs:
       - name: test (MSRV 1.97.1)
         # Optimize long protocol matrices; test-profile assertions/overflow checks stay enabled.
         run: BITLOOM_REQUIRE_RTL=1 CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test --workspace
+      - name: FR194 documented prelude-only design
+        run: python3 scripts/check_fr194_example.py
 
   # FR71 / NFR34 / FR28: required true Chisel JVM compile (Pattern A — parallel to Rust test).
   # Escape hatch env must never be enabled here. Do not use continue-on-error.

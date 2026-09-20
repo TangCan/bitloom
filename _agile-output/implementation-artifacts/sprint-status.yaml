@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: 09-20-2026 18:38
+last_updated: 09-20-2026 19:00
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -862,7 +862,7 @@ development_status:
   125-3-axi-修复-双模型与-m0-关闭: done
   epic-126: in-progress
   126-1-组合基础-nfr14: done
-  126-2-共享模块定义与实例校验: backlog
+  126-2-共享模块定义与实例校验: done
   126-3-两槽-ready-valid-注册切片: backlog
   126-4-参数-fifo-与-m1-关闭: backlog
   epic-127: backlog

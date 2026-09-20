@@ -130,3 +130,15 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 - Expanding in-surface requires an explicit doc + story update (do not silent-expand). **FR183** (Phase 22) and **FR190** (Phase 23) are the contracts for the firrtl interop promotes above.
 - After 1.0.0, in-surface breaking → major (FR143); additive documented expands → minor.
 - Brand: **Bitloom** / `bitloom` / `bitloom-*`; never publish `rhdl` / `rhdl-bits` as the product name.
+
+
+### `bitloom-prelude` — FR194 / Story126.2 显式追加
+
+本故事把下列设计入口显式纳入已文档化表面，遵循 FR142/FR143 的追加流程：
+
+| 符号 | 契约 |
+|---|---|
+| `ElaborateSession::define_module` | 在同一session中按显式名字、规范参数和完整定义复用模块；非捕获定义函数，错误通过Diagnostics返回并保留 |
+| `ip::Gpio::define_module` | 注册可实例化GPIO定义，与原有Gpio::elaborate共享逻辑体 |
+
+完整签名、参数与命名约束、可编译设计例及支持边界见[模块组合](ip/module-composition.md)。不扩展设计crate依赖边界；不承诺原生层级仿真或Verilog实例参数覆盖。新增API按SemVer minor策略发布，本次不修改现有版本号；代码合入不代表crates.io已提供这些接口。

@@ -3,6 +3,8 @@
 
 use std::fmt;
 
+mod composition;
+
 /// Source span threaded from builder / macros (opaque for now).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub struct Span {
@@ -351,11 +353,13 @@ pub(crate) fn freeze(mut hir: Hir) -> Result<FrozenHir, Diagnostics> {
         }]));
     }
     let mut diags = Diagnostics::default();
+    let top = composition::validate_hierarchy(&hir.circuit, &mut diags);
     for m in &hir.circuit.modules {
         validate_clock_reset(m, &mut diags);
         validate_unique_drivers(m, &mut diags);
-        validate_instances(&hir.circuit, m, &mut diags);
-        validate_special_io(&hir.circuit, m, &mut diags);
+        if let Some(top) = &top {
+            validate_special_io(top, m, &mut diags);
+        }
     }
     if !diags.is_empty() {
         return Err(diags);
@@ -378,40 +382,22 @@ pub(crate) fn freeze(mut hir: Hir) -> Result<FrozenHir, Diagnostics> {
         }
     }
 
-    // Imported FIRRTL names its public top explicitly. Module declaration
-    // order must not select a child and silently discard the parent backend.
-    let top = hir
-        .circuit
-        .modules
-        .iter()
-        .find(|m| m.name == hir.circuit.name)
-        .or_else(|| {
-            hir.circuit.modules.iter().find(|candidate| {
-                !hir.circuit.modules.iter().any(|m| {
-                    m.body
-                        .iter()
-                        .any(|s| matches!(s, Stmt::Instance(inst) if inst.module == candidate.name))
-                })
-            })
-        })
-        .ok_or_else(|| {
-            Diagnostics(vec![Diagnostic {
-                span: Span::default(),
-                code: "rhdl::E0002".into(),
-                en: "circuit has no identifiable top module (recursive instance graph)".into(),
-                zh: "电路无法确定顶层模块（实例图递归）".into(),
-            }])
-        })?
-        .name
-        .clone();
+    let top = top.ok_or_else(|| {
+        Diagnostics(vec![Diagnostic {
+            span: Span::default(),
+            code: "rhdl::E0002".into(),
+            en: "circuit has no identifiable top module".into(),
+            zh: "电路无法确定顶层模块".into(),
+        }])
+    })?;
     Ok(FrozenHir {
         circuit: hir.circuit,
         abi_name: top,
     })
 }
 
-fn validate_special_io(circuit: &Circuit, m: &Module, diags: &mut Diagnostics) {
-    let is_top = m.name == circuit.name;
+fn validate_special_io(top: &str, m: &Module, diags: &mut Diagnostics) {
+    let is_top = m.name == top;
     for p in &m.ports {
         let special =
             matches!(p.direction, PortDirection::InOut) || matches!(p.ty, GroundType::Analog);
@@ -421,12 +407,9 @@ fn validate_special_io(circuit: &Circuit, m: &Module, diags: &mut Diagnostics) {
                 code: "rhdl::E0270".into(),
                 en: format!(
                     "Analog/InOut port `{}` only allowed on top module `{}`",
-                    p.name, circuit.name
+                    p.name, top
                 ),
-                zh: format!(
-                    "Analog/InOut 端口 `{}` 仅允许在顶层模块 `{}`",
-                    p.name, circuit.name
-                ),
+                zh: format!("Analog/InOut 端口 `{}` 仅允许在顶层模块 `{}`", p.name, top),
             });
         }
     }
@@ -542,104 +525,6 @@ fn validate_unique_drivers(m: &Module, diags: &mut Diagnostics) {
                 en: format!("multiple drivers for '{net}' ({} drivers)", spans.len()),
                 zh: format!("'{net}' 有多个驱动（{} 个）", spans.len()),
             });
-        }
-    }
-}
-
-fn validate_instances(circuit: &Circuit, parent: &Module, diags: &mut Diagnostics) {
-    use std::collections::HashMap;
-    let modules: HashMap<&str, &Module> = circuit
-        .modules
-        .iter()
-        .map(|m| (m.name.as_str(), m))
-        .collect();
-    for stmt in &parent.body {
-        let Stmt::Instance(inst) = stmt else {
-            continue;
-        };
-        let Some(child) = modules.get(inst.module.as_str()) else {
-            diags.push(Diagnostic {
-                span: inst.span,
-                code: "rhdl::E0201".into(),
-                en: format!("unknown child module '{}'", inst.module),
-                zh: format!("未知子模块 '{}'", inst.module),
-            });
-            continue;
-        };
-        let connected: HashMap<&str, &PortConnect> = inst
-            .connects
-            .iter()
-            .map(|c| (c.child_port.as_str(), c))
-            .collect();
-        for port in &child.ports {
-            match connected.get(port.name.as_str()) {
-                None if port.direction == PortDirection::Input => {
-                    diags.push(Diagnostic {
-                        span: inst.span,
-                        code: "rhdl::E0202".into(),
-                        en: format!(
-                            "undriven child input '{}.{}' (mark dangling if intentional)",
-                            inst.name, port.name
-                        ),
-                        zh: format!(
-                            "子模块输入 '{}.{}' 未驱动（若故意悬空请标记 dangling）",
-                            inst.name, port.name
-                        ),
-                    });
-                }
-                Some(c) if c.dangling && port.direction == PortDirection::Input => {}
-                Some(c) => {
-                    // Width check against parent net if present in parent ports/wires.
-                    let parent_ty = parent
-                        .ports
-                        .iter()
-                        .find(|p| p.name == c.parent_net)
-                        .map(|p| &p.ty)
-                        .or_else(|| {
-                            parent.body.iter().find_map(|s| match s {
-                                Stmt::WireDecl { name, ty, .. }
-                                | Stmt::RegDecl { name, ty, .. }
-                                    if name == &c.parent_net =>
-                                {
-                                    Some(ty)
-                                }
-                                _ => None,
-                            })
-                        });
-                    if let Some(pty) = parent_ty {
-                        let pw = width_of(pty);
-                        let cw = width_of(&port.ty);
-                        if pw != cw {
-                            diags.push(Diagnostic {
-                                span: c.span,
-                                code: "rhdl::E0203".into(),
-                                en: format!(
-                                    "width mismatch connecting '{}' (parent {pw}) to '{}.{}' (child {cw})",
-                                    c.parent_net, inst.name, port.name
-                                ),
-                                zh: format!(
-                                    "连接位宽不匹配：'{}'（父 {pw}）→ '{}.{}'（子 {cw}）",
-                                    c.parent_net, inst.name, port.name
-                                ),
-                            });
-                        }
-                    } else if !c.dangling {
-                        diags.push(Diagnostic {
-                            span: c.span,
-                            code: "rhdl::E0204".into(),
-                            en: format!(
-                                "cannot resolve parent net '{}' when connecting to '{}.{}'",
-                                c.parent_net, inst.name, port.name
-                            ),
-                            zh: format!(
-                                "连接 '{}.{}' 时无法解析父网 '{}'",
-                                inst.name, port.name, c.parent_net
-                            ),
-                        });
-                    }
-                }
-                None => {}
-            }
         }
     }
 }
@@ -781,6 +666,11 @@ mod tests {
             body: vec![],
             span: Span::default(),
         });
+        // An explicit Top is needed: a lone Child is itself the unique root.
+        let mut top = hir.circuit_mut().modules[0].clone();
+        top.name = "Top".into();
+        top.ports.retain(|p| p.name != "pad");
+        hir.add_module(top);
         let err = seal_from_builder(hir).unwrap_err();
         assert!(err.0.iter().any(|d| d.code == "rhdl::E0270"));
     }

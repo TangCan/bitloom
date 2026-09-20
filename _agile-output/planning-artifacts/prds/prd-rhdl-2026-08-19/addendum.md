@@ -663,3 +663,5 @@ Epic 125 关闭前，126–130 不得 ready/in-progress；关闭后每 Epic 实�
 - **NFR99：** 收益由组合复用、上手步骤、CI 与维护成本实测；不承诺未经测量的加速/PPA。超本阶段子集需另立范围。
 
 **2026-09-20 M0 实施关闭：** Story125.1–125.3 / Epic125 / FR192–193 已完成。证据见 `docs/ip/phase24-axi-green-evidence.md`；FR194–201 / Epic126–130 backlog，整个Phase24未交付，FR189 deferred/NFR91不变。
+
+2026-09-20 Story126.2 / FR194 已完成：同一session模块定义复用、参数专门化与实例图/连接诊断；首批Gpio共用定义体，实际RTL验证通过。实现与证据见 docs/ip/module-composition.md 和 docs/ip/module-composition-evidence.md。126.1/126.2 done；126.3/126.4及Epic127–130保持backlog，Epic126/M1未关闭，FR195–201未交付；FR189 deferred/NFR91保持。

@@ -701,3 +701,10 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
 - source_spec: `_agile-output/implementation-artifacts/spec-backend-boundary-evidence.md`
   summary: Chisel算术右移的SInt移位量仍需规范化与真实RTL回归。
   evidence: assign_sar允许有声明width的SInt shamt；Chisel的SAR分支在baseline与当前均直接value >> shamt，动态移位要求UInt。现有实际SAR矩阵的移位量为UInt，不证明该SInt-shamt子集。
+
+- source_spec: `_agile-output/implementation-artifacts/spec-126-2-module-composition.md`
+  summary: 既有实例与网名路径缺统一HDL标识符合法性/转义校验。
+  evidence: medium；旧add_instance接受任意String，freeze名称检查只拒绝碰撞，vlog原样打印实例名；如module或bad-name可生成非法RTL。新模块helper仅保证自身模块名字合法，后续应统一处理实例/网/导入名称并增加实际编译负测。
+- source_spec: `_agile-output/implementation-artifacts/spec-126-2-module-composition.md`
+  summary: 既有Instance.params被接受但后端忽略，需单独定义支持或显式拒绝契约。
+  evidence: medium；add_instance保存params，vlog与FIRRTL实例emit不输出覆盖参数。FR194明确采用展开时专门化并记录此限制，未交付实例参数覆盖；后续需兼容评估再增加诊断或实现。

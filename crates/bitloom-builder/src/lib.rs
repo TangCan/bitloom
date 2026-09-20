@@ -51,6 +51,8 @@ pub struct ElaborateSession {
     reset_port: Option<String>,
     process: Option<ProcessState>,
     errors: Diagnostics,
+    definitions: HashMap<String, Vec<(String, u32)>>,
+    defining_body: bool,
 }
 
 impl ElaborateSession {
@@ -68,6 +70,8 @@ impl ElaborateSession {
             reset_port: None,
             process: None,
             errors: Diagnostics::default(),
+            definitions: HashMap::new(),
+            defining_body: false,
         }
     }
 
@@ -76,6 +80,15 @@ impl ElaborateSession {
     }
 
     pub fn begin_module(&mut self, name: impl Into<String>, span: Span) {
+        if self.current.is_some() || self.defining_body {
+            self.module_error(
+                "rhdl::E0240",
+                span,
+                "cannot begin a module while another module is active",
+                "已有活动模块，不能再次开始模块",
+            );
+            return;
+        }
         self.signals.clear();
         self.widths.clear();
         self.types.clear();
@@ -91,6 +104,129 @@ impl ElaborateSession {
             body: Vec::new(),
             span,
         });
+    }
+
+    fn module_error(&mut self, code: &str, span: Span, en: &str, zh: &str) {
+        self.push_err(Diagnostic {
+            span,
+            code: code.into(),
+            en: en.into(),
+            zh: zh.into(),
+        });
+    }
+
+    /// Define or reuse a module in this session (FR194).
+    ///
+    /// Parameters are sorted by key before invoking the non-capturing function
+    /// pointer. Duplicate keys are rejected. Every request executes the body;
+    /// reuse requires equal parameters and the complete same HIR, including
+    /// source spans. Function addresses are never used as definition identity.
+    /// The callback declares ports, statements and processes only: it must not
+    /// begin/end modules or recursively call this helper. Finish the session
+    /// once after all definitions. Any failure also poisons the session.
+    pub fn define_module(
+        &mut self,
+        name: impl Into<String>,
+        mut params: Vec<(String, u32)>,
+        body: fn(&mut ElaborateSession, &[(String, u32)]) -> Result<(), Diagnostics>,
+    ) -> Result<String, Diagnostics> {
+        let name = name.into();
+        if self.current.is_some() || self.defining_body {
+            self.module_error(
+                "rhdl::E0240",
+                Span::default(),
+                "define_module requires no active module",
+                "define_module 要求当前没有活动模块",
+            );
+            return Err(self.errors.clone());
+        }
+        if !valid_module_identifier(&name) {
+            self.module_error(
+                "rhdl::E0241",
+                Span::default(),
+                "module name must be a non-reserved ASCII HDL identifier",
+                "模块名必须是非保留字的 ASCII HDL 标识符",
+            );
+        }
+        params.sort_by(|a, b| a.0.cmp(&b.0));
+        if params.windows(2).any(|p| p[0].0 == p[1].0) {
+            self.module_error(
+                "rhdl::E0242",
+                Span::default(),
+                "duplicate module parameter key",
+                "模块参数键重复",
+            );
+        }
+        if !self.errors.is_empty() {
+            return Err(self.errors.clone());
+        }
+        self.begin_module(&name, Span::default());
+        self.defining_body = true;
+        if let Err(errors) = body(self, &params) {
+            // A nested helper can return diagnostics already recorded in this
+            // session. Preserve distinct callback diagnostics without repeating
+            // the same code, span and bilingual messages on propagation.
+            for diagnostic in errors.0 {
+                if !self.errors.0.contains(&diagnostic) {
+                    self.errors.push(diagnostic);
+                }
+            }
+            let failure = Diagnostic {
+                span: Span::default(),
+                code: "rhdl::E0243".into(),
+                en: "module definition callback failed".into(),
+                zh: "模块定义回调失败".into(),
+            };
+            if !self.errors.0.contains(&failure) {
+                self.errors.push(failure);
+            }
+        }
+        self.defining_body = false;
+        if self.process.is_some() {
+            self.module_error(
+                "rhdl::E0243",
+                Span::default(),
+                "module definition callback left an open process",
+                "模块定义回调留下未结束的过程",
+            );
+            self.end_process();
+        }
+        if let Some(candidate) = self.current.take() {
+            if let Some(existing) = self
+                .hir
+                .circuit_mut()
+                .modules
+                .iter()
+                .find(|m| m.name == name)
+            {
+                if self.definitions.get(&name) != Some(&params) || existing != &candidate {
+                    let previous = self.definitions.get(&name).map_or_else(
+                        || "<manual module / 手工模块>".to_owned(),
+                        |parameters| format!("{parameters:?}"),
+                    );
+                    self.module_error(
+                        "rhdl::E0244", candidate.span,
+                        &format!("module '{name}' conflicts with parameters, definition content, or a manual module; previous parameters: {previous}; requested parameters: {params:?}"),
+                        &format!("模块 '{name}' 与参数、定义内容或手工模块冲突；原参数：{previous}；请求参数：{params:?}"),
+                    );
+                }
+            } else {
+                self.hir.add_module(candidate);
+                self.definitions.insert(name.clone(), params);
+            }
+        } else {
+            self.module_error(
+                "rhdl::E0243",
+                Span::default(),
+                "module definition callback changed the active module",
+                "模块定义回调改变了活动模块",
+            );
+        }
+        if self.errors.is_empty() {
+            Ok(name)
+        } else {
+            Err(self.errors.clone())
+        }
     }
 
     /// Bind a phantom clock-domain id to a signal (AD-22).
@@ -1577,6 +1713,15 @@ impl ElaborateSession {
     }
 
     pub fn end_module(&mut self) {
+        if self.defining_body {
+            self.module_error(
+                "rhdl::E0243",
+                Span::default(),
+                "module definition callback must not call end_module",
+                "模块定义回调不得调用 end_module",
+            );
+            return;
+        }
         if self.process.is_some() {
             self.end_process();
         }
@@ -1589,7 +1734,15 @@ impl ElaborateSession {
         self.reset_port = None;
     }
 
-    pub fn finish(self) -> Result<FrozenHir, Diagnostics> {
+    pub fn finish(mut self) -> Result<FrozenHir, Diagnostics> {
+        if self.current.is_some() || self.defining_body {
+            self.module_error(
+                "rhdl::E0240",
+                Span::default(),
+                "cannot finish with an active module; call end_module first",
+                "不能冻结活动模块，请先调用 end_module",
+            );
+        }
         if !self.errors.is_empty() {
             return Err(self.errors);
         }
@@ -3025,3 +3178,20 @@ mod tests {
         assert!(diags.0.iter().any(|d| d.code == "rhdl::E0146"));
     }
 }
+
+fn valid_module_identifier(name: &str) -> bool {
+    let mut bytes = name.bytes();
+    let Some(first) = bytes.next() else {
+        return false;
+    };
+    if !(first.is_ascii_alphabetic() || first == b'_')
+        || !bytes.all(|b| b.is_ascii_alphanumeric() || b == b'_')
+    {
+        return false;
+    }
+    !HDL_RESERVED
+        .split_ascii_whitespace()
+        .any(|word| word == name)
+}
+
+const HDL_RESERVED: &str = "accept_on alias always always_comb always_ff always_latch and assert assign assume automatic before begin bind bins binsof bit break buf bufif0 bufif1 byte case casex casez cell chandle checker class clocking cmos config const constraint context continue cover covergroup coverpoint cross deassign default defparam design disable dist do edge else end endcase endchecker endclass endclocking endconfig endfunction endgenerate endgroup endinterface endmodule endpackage endprimitive endprogram endproperty endspecify endsequence endtable endtask enum event eventually expect export extends extern final first_match for force foreach forever fork forkjoin function generate genvar global highz0 highz1 if iff ifnone ignore_bins illegal_bins implements implies import incdir include initial inout input inside int integer interconnect interface intersect join join_any join_none large let liblist library local localparam logic longint macromodule matches medium modport module nand negedge nettype new nexttime nmos nor noshowcancelled not notif0 notif1 null or output package packed parameter pmos posedge primitive priority program property protected pull0 pull1 pulldown pullup pulsestyle_ondetect pulsestyle_onevent pure rand randc randcase randsequence rcmos real realtime ref reg reject_on release repeat restrict return rnmos rpmos rtran rtranif0 rtranif1 s_always s_eventually s_nexttime s_until s_until_with scalared sequence shortint shortreal showcancelled signed small soft solve specify specparam static string strong strong0 strong1 struct super supply0 supply1 sync_accept_on sync_reject_on table tagged task this throughout time timeprecision timeunit tran tranif0 tranif1 tri tri0 tri1 triand trior trireg type typedef union unique unique0 unsigned until until_with untyped use uwire var vectored virtual void wait wait_order wand weak weak0 weak1 while wildcard wire with within wor xnor xor";

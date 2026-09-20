@@ -496,3 +496,5 @@ Bitloom（公开品牌；仓库历史名可含 rhdl）要把「合法 Rust → F
 | §1.5.1 所有权防多驱动 | 阶段一 FR15 |
 | §1.5.2 ClockDomain / 显式 CDC | FR23, FR24, FR52 |
 | §1.3.4 复合参数化缺口 | FR51 |
+
+2026-09-20 Story126.2 / FR194 已完成：同一session模块定义复用、参数专门化与实例图/连接诊断；首批Gpio共用定义体，实际RTL验证通过。实现与证据见 docs/ip/module-composition.md 和 docs/ip/module-composition-evidence.md。126.1/126.2 done；126.3/126.4及Epic127–130保持backlog，Epic126/M1未关闭，FR195–201未交付；FR189 deferred/NFR91保持。

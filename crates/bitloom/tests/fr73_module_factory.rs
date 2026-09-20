@@ -136,7 +136,7 @@ fn fr73_factory_batches_instances_emit_hierarchy_and_connects() {
 
 #[test]
 fn fr73_generate_instances_from_prelude_surface() {
-    let mut s = ElaborateSession::new("t");
+    let mut s = ElaborateSession::new("Parent");
     declare_lane(&mut s);
     s.begin_module("Parent", Span::default());
     s.add_input("clk", GroundType::Clock, Span::default());
@@ -171,7 +171,7 @@ fn fr73_generate_instances_from_prelude_surface() {
 
 #[test]
 fn fr73_factory_width_mismatch_fails_before_emit() {
-    let mut s = ElaborateSession::new("t");
+    let mut s = ElaborateSession::new("Parent");
     declare_lane(&mut s); // child x/y are 8-bit
     s.begin_module("Parent", Span::default());
     s.add_input("clk", GroundType::Clock, Span::default());

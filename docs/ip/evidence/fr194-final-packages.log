@@ -1,0 +1,200 @@
+   Compiling bitloom-vlog v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-vlog)
+   Compiling bitloom-firrtl v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/rhdl-firrtl)
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom-builder v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+   Compiling bitloom-hir v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.39s
+     Running unittests src/lib.rs (target/debug/deps/bitloom_builder-d196c0df739995ab)
+
+running 45 tests
+test tests::assert_no_hw_capture_empty_ok ... ok
+test tests::assign_reg_d_cross_domain_without_bridge_rejected ... ok
+test tests::assign_outside_process_rejected ... ok
+test tests::async_reset_and_enable_flags ... ok
+test tests::both_branches_assign_ok ... ok
+test tests::cdc_bridge_allows_crossing ... ok
+test tests::comb_cannot_write_reg_d ... ok
+test tests::complete_comb_assign_ok ... ok
+test tests::diagnose_free_fn_cap_r60 ... ok
+test tests::diagnose_seq_ownership_free_fn ... ok
+test tests::double_flop_stages_allow_reg_d_crossing ... ok
+test tests::fr16_capturing_closure_still_e0141 ... ok
+test tests::generate_instances_factory_batches_children ... ok
+test tests::generate_instances_from_returns_plain_specs ... ok
+test tests::hierarchy_instance_preserved ... ok
+test tests::hw_capture_reg_rejected_e0142 ... ok
+test tests::hw_capture_wire_rejected_e0142 ... ok
+test tests::illegal_domain_crossing_rejected ... ok
+test tests::incomplete_branch_is_latch_error ... ok
+test tests::inline_comb_fn_expands_to_ordinary_assign ... ok
+test tests::inline_comb_fn_incomplete_branch_still_latch ... ok
+test tests::inline_comb_fn_violation_skips_expand ... ok
+test tests::inline_seq_fn_cap_r70_blocks_second_reg_d ... ok
+test tests::inline_seq_fn_expands_to_ordinary_reg_d ... ok
+test tests::inline_seq_fn_multi_drive_still_e0140 ... ok
+test tests::inline_seq_fn_ownership_token_skips_expand ... ok
+test tests::legal_empty_and_simple_synthesizable_closure_pass ... ok
+test tests::mem_init_len_mismatch_fails ... ok
+test tests::mem_with_init_fn_stores_plain_words ... ok
+test tests::mismatched_add_width_rejected ... ok
+test tests::mismatched_assign_net_width_rejected ... ok
+test tests::mismatched_assign_reg_d_width_rejected ... ok
+test tests::missing_clock_rejected ... ok
+test tests::missing_reset_rejected ... ok
+test tests::multi_drive_rejected ... ok
+test tests::pad_then_add_ok ... ok
+test tests::parameterized_widths_w8_and_w16 ... ok
+test tests::seq_cannot_drive_comb_net ... ok
+test tests::seq_reg_d_ok ... ok
+test tests::sync_read_mem_declares_and_emits ... ok
+test tests::synthesizable_closure_capture_state_e0144 ... ok
+test tests::synthesizable_closure_heap_e0143 ... ok
+test tests::synthesizable_closure_impure_e0145 ... ok
+test tests::undriven_child_input_rejected ... ok
+test tests::unknown_parent_net_rejected ... ok
+
+test result: ok. 45 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/module_composition.rs (target/debug/deps/module_composition-5f5f5ab8eec15566)
+
+running 12 tests
+test active_module_cannot_be_overwritten_or_silently_discarded ... ok
+test callback_diagnostics_survive_without_exact_duplicates ... ok
+test callback_module_lifecycle_and_nested_helpers_are_rejected ... ok
+test callback_receives_sorted_complete_parameters ... ok
+test conflicting_definition_identifies_module_and_parameter_context ... ok
+test conflicting_parameters_and_duplicate_keys_poison_finish ... ok
+test explicit_top_can_be_defined_before_or_after_children ... ok
+test invalid_and_reserved_module_names_fail_before_emit ... ok
+test repeated_body_is_executed_even_with_identical_function_pointer ... ok
+test manual_definitions_cannot_be_silently_reused_in_either_order ... ok
+test reuses_full_parameters_independent_of_order_and_specializes_by_explicit_name ... ok
+test same_parameters_cannot_hide_changed_body_or_source_spans ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/bitloom_firrtl-439ef8e487075274)
+
+running 19 tests
+test tests::chisel_fr28_dangling_connect_omitted ... ok
+test tests::chisel_fr28_fir_import_then_emit ... ok
+test tests::chisel_fr28_flat_counter_emits_scala ... ok
+test tests::chisel_fr28_hierarchy_emits_module_new_and_connects ... ok
+test tests::bounded_left_shift_roundtrips_without_modulo_semantics ... ok
+test tests::chisel_fr28_hierarchy_via_wire_parent_net ... ok
+test tests::chisel_fr28_pin_locked ... ok
+test tests::chisel_fr81_e0901_out_of_subset_init_len ... ok
+test tests::chisel_fr81_path_a_lowers_async_mem_and_init ... ok
+test tests::chisel_fr81_path_a_lowers_sync_read_mem ... ok
+test tests::emit_has_version_header ... ok
+test tests::fr46_dangling_connect_roundtrip_predicate_fails_clearly ... ok
+test tests::firrtl6_public_top_and_modern_connections ... ok
+test tests::fr46_export_reimport_ports_and_instance_graph ... ok
+test tests::fr46_external_fir_firtool_style_connects_then_emit ... ok
+test tests::fr46_rejects_unknown_inst_port_le_parent ... ok
+test tests::fr46_import_counter_then_tick ... ok
+test tests::fr46_rejects_unknown_parent_le_inst_port ... ok
+test tests::roundtrip_hierarchy_reg_and_instance ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/bitloom_hir-d9503361eb45d958)
+
+running 4 tests
+test tests::analog_on_non_top_rejected ... ok
+test tests::analog_on_top_ok ... ok
+test tests::freeze_requires_module ... ok
+test tests::freeze_simple_module ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/module_composition.rs (target/debug/deps/module_composition-79655cda6b9166ca)
+
+running 13 tests
+test child_inputs_can_read_parent_outputs_and_registers ... ok
+test child_outputs_only_drive_wires_or_parent_outputs ... ok
+test dangling_and_unconnected_output_remain_legal_but_not_duplicate_dangling_ports ... ok
+test detects_instance_instance_and_instance_process_multiple_drivers ... ok
+test cycle_diagnostic_names_bounded_cycle_or_blocked_residual ... ok
+test identical_local_names_across_modules_and_distinct_output_nets_are_legal ... ok
+test explicit_top_wins_otherwise_unique_root_required_and_declaration_order_irrelevant ... ok
+test rejects_duplicate_modules_ports_nets_instances_and_instance_net_collision ... ok
+test rejects_explicit_top_cycle_unreachable_cycle_and_self_cycle ... ok
+test rejects_missing_module_missing_input_unknown_net_duplicate_and_unknown_ports ... ok
+test special_io_uses_selected_top_including_unique_root_fallback ... ok
+test widths_and_ground_types_checked_for_both_directions ... ok
+test deep_graph_does_not_use_recursive_traversal ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running unittests src/lib.rs (target/debug/deps/bitloom_prelude-e3c0f4f1c15a9b05)
+
+running 17 tests
+test ip::tests::blackbox_elaborate_emit_tick_opaque ... ok
+test ip::tests::crc8_lut_custom_poly_via_table_fn ... ok
+test ip::tests::crc8_lut_synthesizable_closure_violation_is_clear_error ... ok
+test ip::tests::crc8_lut_default_elaborate_emit_tick ... ok
+test ip::tests::gpio_elaborate_emit_tick_ports ... ok
+test ip::tests::gpio_masked_write_and_direction_readback ... ok
+test ip::tests::gpio_vip_elaborate_emit_commercial_ports ... ok
+test ip::tests::sync_fifo_fills_then_blocks_write ... ok
+test ip::tests::sync_fifo_elaborate_emit_tick ... ok
+test ip::tests::gpio_vip_set_clear_irq_open_drain_tick ... ok
+test ip::tests::uart_tx_programmable_baud_holds_bits ... ok
+test ip::tests::fifo_uart_api_has_no_generator_closure_params ... ok
+test ip::tests::uart_tx_elaborate_emit_tick ... ok
+test ip::tests::uart_rx_elaborate_emit_tick ... ok
+test ip::tests::axi4_lite_slave_elaborate_emit_tick ... ok
+test ip::tests::spi_master_elaborate_emit_tick ... ok
+test ip::tests::i2c_master_elaborate_emit_tick ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running unittests src/lib.rs (target/debug/deps/bitloom_vlog-033306768a9143c8)
+
+running 4 tests
+test tests::emit_abi_named_v_without_forbidden_syntax ... ok
+test tests::async_reset_emits_edge_sensitive_form ... ok
+test tests::enable_emits_gated_update ... ok
+test tests::golden_passthrough_v_snapshot ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests bitloom_builder
+
+running 3 tests
+test crates/bitloom-builder/src/lib.rs - ElaborateSession::generate_instances (line 2158) ... ignored
+test crates/bitloom-builder/src/lib.rs - ElaborateSession::inline_comb_fn (line 1854) ... ignored
+test crates/bitloom-builder/src/lib.rs - ElaborateSession::inline_seq_fn (line 1943) ... ignored
+
+test result: ok. 0 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+all doctests ran in 0.24s; merged doctests compilation took 0.23s
+   Doc-tests bitloom_firrtl
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests bitloom_hir
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests bitloom_prelude
+
+running 3 tests
+test crates/bitloom-prelude/src/lib.rs - (line 486) ... ignored
+test crates/bitloom-prelude/src/lib.rs - generate_mem_init (line 486) ... ignored
+test crates/bitloom-prelude/src/lib.rs - mask_mem_word (line 486) ... ignored
+
+test result: ok. 0 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+all doctests ran in 0.23s; merged doctests compilation took 0.22s
+   Doc-tests bitloom_vlog
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

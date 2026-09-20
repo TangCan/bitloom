@@ -1,0 +1,14 @@
+FR194 prelude-only example: cargo run --offline --manifest-path /tmp/bitloom-fr194-example-fuzvbrws/Cargo.toml
+     Locking 8 packages to latest Rust 1.97.1 compatible versions
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling bitloom-hir v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+   Compiling bitloom-builder v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+   Compiling syn v2.0.119
+   Compiling bitloom-macro v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling fr194-design-example v0.0.0 (/tmp/bitloom-fr194-example-fuzvbrws)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.99s
+     Running `target/fr194-doc-example/debug/fr194-design-example`
+PASS: FR194 documented prelude-only design compiled and executed

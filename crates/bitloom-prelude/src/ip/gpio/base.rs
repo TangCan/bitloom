@@ -16,7 +16,21 @@ pub struct Gpio;
 impl Elaboratable for Gpio {
     fn elaborate() -> Result<FrozenHir, Diagnostics> {
         let mut s = ElaborateSession::new("Gpio");
-        s.begin_module("Gpio", Span::default());
+        Self::define_module(&mut s, "Gpio")?;
+        s.finish()
+    }
+}
+
+impl Gpio {
+    /// Define the legacy eight-bit GPIO bank in a shared session (FR194).
+    pub fn define_module(
+        session: &mut ElaborateSession,
+        name: impl Into<String>,
+    ) -> Result<String, Diagnostics> {
+        session.define_module(name, vec![], Self::define_body)
+    }
+
+    fn define_body(s: &mut ElaborateSession, _: &[(String, u32)]) -> Result<(), Diagnostics> {
         s.add_input("clk", GroundType::Clock, Span::default());
         s.add_input("rst", GroundType::Reset, Span::default());
         s.add_input("dir", GroundType::UInt { width: 8 }, Span::default());
@@ -50,7 +64,6 @@ impl Elaboratable for Gpio {
         s.begin_sequential(Span::default());
         s.assign_reg_d_mux("out_r", "wr_en", "merged", "out_r", Span::default());
         s.end_process();
-        s.end_module();
-        s.finish()
+        Ok(())
     }
 }

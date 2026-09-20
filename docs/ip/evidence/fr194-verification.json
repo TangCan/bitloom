@@ -1,0 +1,55 @@
+{
+  "date": "2026-09-20",
+  "baseline": "706632a",
+  "rustc": "1.97.1",
+  "iverilog": "12.0 stable",
+  "commands": {
+    "workspace": "PATH=/tmp/bitloom-maintenance-tools/bin:$PATH BITLOOM_REQUIRE_RTL=1 CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test --workspace --no-fail-fast",
+    "final-packages": "PATH=/tmp/bitloom-maintenance-tools/bin:$PATH BITLOOM_REQUIRE_RTL=1 CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom-builder -p bitloom-hir -p bitloom-prelude -p bitloom-firrtl -p bitloom-vlog",
+    "rtl": "PATH=/tmp/bitloom-maintenance-tools/bin:$PATH BITLOOM_REQUIRE_RTL=1 CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr194_module_composition -- --nocapture",
+    "example": "python3 scripts/check_fr194_example.py",
+    "semver": "bash scripts/semver-check.sh"
+  },
+  "results": {
+    "workspace": {
+      "result_targets": 456,
+      "passed": 1718,
+      "failed": 0,
+      "ignored": 6,
+      "filtered": 0,
+      "log_sha256": "6254010f01e273a97121fb85a8fe0e206d79d288cfa056d9012a8c267d6df44a"
+    },
+    "final-packages": {
+      "result_targets": 12,
+      "passed": 114,
+      "failed": 0,
+      "ignored": 6,
+      "filtered": 0,
+      "log_sha256": "84ad5a1f5dac6e96fb7fa101020ec5478f224ec4ff2c803c6efb7ad6f13cc225"
+    },
+    "rtl": {
+      "result_targets": 1,
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0,
+      "log_sha256": "d0b6b6ffd8720ec06b5d673325ff111684792259b2a84f6296bb662014c4ecdd"
+    }
+  },
+  "note": "完整workspace运行于审阅修补前；修补仅诊断信息/去重和测试基础设施，之后对受影响5包及新增RTL/示例重新验证。不是三轮测试数量相加的独立测试总数。",
+  "rtl": {
+    "executions": 4,
+    "cycles": 736,
+    "comparisons": 4723,
+    "seeds": [
+      "0x19480816",
+      "0x19469100"
+    ]
+  },
+  "remaining": [
+    "native hierarchical execution unsupported",
+    "instance parameter overrides unsupported",
+    "legacy instance/net identifier validation deferred",
+    "126.3/126.4 backlog; M1 open"
+  ]
+}
