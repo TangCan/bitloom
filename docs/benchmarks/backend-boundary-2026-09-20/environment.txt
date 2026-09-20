@@ -1,0 +1,60 @@
+Timestamp: 2026-09-20T16:42:25.115896+08:00
+Base commit: 6fda33eb10ca576e0aabc649b8d6e7a172a9ec4b
+Working tree: backend-boundary maintenance (not published)
+Kernel: Linux-6.8.0-100-generic-x86_64-with-glibc2.39
+CPU affinity: CPU 8 for native timing; shared host, frequency not fixed
+Load: (12.33056640625, 12.10986328125, 11.015625)
+rustc 1.97.1 (8bab26f4f 2026-07-14)
+binary: rustc
+commit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452
+commit-date: 2026-07-14
+host: x86_64-unknown-linux-gnu
+release: 1.97.1
+LLVM version: 22.1.6
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           43 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  64
+On-line CPU(s) list:                     0-63
+Vendor ID:                               AuthenticAMD
+Model name:                              AMD EPYC 7532 32-Core Processor
+CPU family:                              23
+Model:                                   49
+Thread(s) per core:                      2
+Core(s) per socket:                      32
+Socket(s):                               1
+Stepping:                                0
+Frequency boost:                         enabled
+CPU(s) scaling MHz:                      86%
+CPU max MHz:                             2400.0000
+CPU min MHz:                             1500.0000
+BogoMIPS:                                4800.15
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sev sev_es ibpb_exit_to_user
+Virtualization:                          AMD-V
+L1d cache:                               1 MiB (32 instances)
+L1i cache:                               1 MiB (32 instances)
+L2 cache:                                16 MiB (32 instances)
+L3 cache:                                256 MiB (16 instances)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-63
+Vulnerability Gather data sampling:      Not affected
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             Not affected
+Vulnerability L1tf:                      Not affected
+Vulnerability Mds:                       Not affected
+Vulnerability Meltdown:                  Not affected
+Vulnerability Mmio stale data:           Not affected
+Vulnerability Reg file data sampling:    Not affected
+Vulnerability Retbleed:                  Mitigation; untrained return thunk; SMT enabled with STIBP protection
+Vulnerability Spec rstack overflow:      Mitigation; Safe RET
+Vulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:                Mitigation; Retpolines; IBPB conditional; STIBP always-on; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerability Srbds:                     Not affected
+Vulnerability Tsa:                       Not affected
+Vulnerability Tsx async abort:           Not affected
+Vulnerability Vmscape:                   Mitigation; IBPB before exit to userspace
+Native command: BITLOOM_BENCH_WORKLOAD=pipeline32 BITLOOM_BENCH_CYCLES=20000 BITLOOM_BENCH_SAMPLES=5 BITLOOM_BENCH_WARMUP=2000 taskset -c 8 target/release/deps/baseline-ac263366af62f9ca
+Native build: CARGO_PROFILE_BENCH_DEBUG=1 cargo bench -p bitloom-sim --bench baseline --no-run
+Allocator build: cargo bench -p bitloom-sim --bench baseline --features bench-alloc --no-run

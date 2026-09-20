@@ -35,7 +35,7 @@ mkdir -p /tmp/tywaves-gui-stub && echo ok > /tmp/tywaves-gui-stub/BITLOOM_TYWAVE
 
 BITLOOM_TYWAVES_GUI_ROOT=/tmp/tywaves-gui-stub \
   cargo bitloom wave \
-    --input crates/rhdl-firrtl/fixtures/external_hierarchy.fir \
+    --input crates/rhdl-firrtl/fixtures/external_wave_counter.fir \
     --out-dir target/wave-tywaves-gui \
     --ticks 8 \
     --tywaves-gui

@@ -23,3 +23,7 @@ bitloom-builder = { workspace = true }
 [[bench]]
 name = "baseline"
 harness = false
+
+[features]
+# Allocation instrumentation is compiled only into the baseline benchmark.
+bench-alloc = []

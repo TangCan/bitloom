@@ -23,7 +23,7 @@ impl Elaboratable for EpisodeIIPipe {
         s.add_output("x4_out", GroundType::UInt { width: 32 }, Span::default());
         s.add_output("led_out", GroundType::UInt { width: 32 }, Span::default());
 
-        for n in ["pc", "pc_f", "x1", "x2", "x3", "x4", "led", "load_q"] {
+        for n in ["pc", "x1", "x2", "x3", "x4", "led"] {
             s.declare_reg(n, GroundType::UInt { width: 32 }, Span::default());
         }
         s.declare_mem("dmem", 16, 32, Span::default());
@@ -323,6 +323,12 @@ impl Elaboratable for EpisodeIIPipe {
             s.declare_wire(n, GroundType::Bool, Span::default());
         }
 
+        s.declare_wire("load_q", GroundType::UInt { width: 32 }, Span::default());
+        s.declare_wire(
+            "mem_read_addr",
+            GroundType::UInt { width: 4 },
+            Span::default(),
+        );
         s.begin_combinational(Span::default());
         s.assign_lit("c0", 0, Span::default());
         s.assign_lit("c1", 1, Span::default());
@@ -601,12 +607,12 @@ impl Elaboratable for EpisodeIIPipe {
         // Hold PC at 0 while rst is observed in comb (helps post-reset arming).
         s.assign_mux("next_pc", "rst", "c0", "next_pc_stall", Span::default());
 
-        // IF/ID: flush→bubble; else stall→hold; else advance from pc_f/instr.
+        // IF/ID: flush→bubble; else stall→hold; else advance from current pc/instr.
         s.assign_mux(
             "if_id_pc_adv",
             "do_stall",
             "if_id_pc",
-            "pc_f",
+            "pc",
             Span::default(),
         );
         s.assign_mux(
@@ -703,7 +709,10 @@ impl Elaboratable for EpisodeIIPipe {
         s.assign_net("ex_mem_is_lw_n", "id_ex_is_lw", Span::default());
         s.assign_net("ex_mem_is_sw_n", "id_ex_is_sw", Span::default());
 
-        // MEM/WB next（LW：load_q 在 MEM 拍 seq 写入后，下一拍经 MEM/WB→EX 转发）
+        // Asynchronous dmem is sampled by MEM/WB alongside this instruction's
+        // rd/we metadata; an extra load register would misalign the result.
+        s.assign_slice("mem_read_addr", "ex_mem_dmem_idx", 0, 4, Span::default());
+        s.assign_mem_read("load_q", "dmem", "mem_read_addr", Span::default());
         s.assign_mux(
             "mem_wb_data_n",
             "ex_mem_is_lw",
@@ -770,7 +779,6 @@ impl Elaboratable for EpisodeIIPipe {
             "dmem_we",
             Span::default(),
         );
-        s.assign_reg_d_mem_read("load_q", "dmem", "ex_mem_dmem_idx", Span::default());
 
         s.assign_reg_d_from("mem_wb_data", "mem_wb_data_n", Span::default());
         s.assign_reg_d_from("mem_wb_rd", "mem_wb_rd_n", Span::default());
@@ -801,8 +809,6 @@ impl Elaboratable for EpisodeIIPipe {
         s.assign_reg_d_from("if_id_pc", "if_id_pc_n", Span::default());
         s.assign_reg_d_from("if_id_instr", "if_id_instr_n", Span::default());
 
-        // pc_f mirrors pre-update PC so comb can pair instr with fetch PC (seq-then-comb).
-        s.assign_reg_d_from("pc_f", "pc", Span::default());
         s.assign_reg_d_from("pc", "next_pc", Span::default());
         s.end_process();
 

@@ -554,12 +554,9 @@ mod tests {
         let mut sim = reset_sim();
 
         tick_instr(&mut sim, enc_addi(1, 0, -1));
-        tick_instr(&mut sim, enc_addi(1, 0, -1));
         assert_eq!(sim.ports().get("x1_out"), Some(0xffff_ffff));
 
         tick_instr(&mut sim, enc_addi(2, 0, 5));
-        tick_instr(&mut sim, enc_addi(2, 0, 5));
-        tick_instr(&mut sim, enc_addi(2, 2, -2));
         tick_instr(&mut sim, enc_addi(2, 2, -2));
         assert_eq!(sim.ports().get("x2_out"), Some(3));
     }

@@ -23,7 +23,7 @@ fn wave_smoke_emits_vcd_and_browsable_timing_html() {
     let bin = env!("CARGO_BIN_EXE_cargo-bitloom");
     let fir = concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../rhdl-firrtl/fixtures/external_hierarchy.fir"
+        "/../rhdl-firrtl/fixtures/external_wave_counter.fir"
     );
     let out_dir = tempfile_dir("wave");
     let out = Command::new(bin)
@@ -74,7 +74,7 @@ fn wave_without_fst_still_writes_vcd_path() {
     let bin = env!("CARGO_BIN_EXE_cargo-bitloom");
     let fir = concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../rhdl-firrtl/fixtures/external_hierarchy.fir"
+        "/../rhdl-firrtl/fixtures/external_wave_counter.fir"
     );
     let out_dir = tempfile_dir("wave-nofst");
     let out = Command::new(bin)
@@ -109,4 +109,35 @@ fn tempfile_dir(tag: &str) -> std::path::PathBuf {
     ));
     fs::create_dir_all(&p).unwrap();
     p
+}
+
+#[test]
+fn wave_and_coverage_reject_hierarchy_readably() {
+    let bin = env!("CARGO_BIN_EXE_cargo-bitloom");
+    let input = concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../rhdl-firrtl/fixtures/external_hierarchy.fir"
+    );
+    for command in ["wave", "coverage"] {
+        let dir = tempfile_dir("hierarchy-rejection");
+        let output = Command::new(bin)
+            .args([
+                command,
+                "--input",
+                input,
+                "--out-dir",
+                dir.to_str().unwrap(),
+            ])
+            .output()
+            .unwrap();
+        assert!(!output.status.success());
+        let error = String::from_utf8_lossy(&output.stderr);
+        assert!(
+            error.contains("hierarchical simulation is unsupported"),
+            "{error}"
+        );
+        assert!(!error.contains("panicked"), "{error}");
+        assert!(!dir.join("wave.vcd").exists());
+        fs::remove_dir_all(dir).unwrap();
+    }
 }

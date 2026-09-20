@@ -1,0 +1,22 @@
+2026-09-20 backend-boundary maintenance; source is working tree (no publish/push).
+PASS cargo test --workspace --no-fail-fast
+  452 target result summaries; 1680 passed, 0 failed, 6 existing ignored doctests.
+  PATH includes real Icarus12; RHDL_FIRTOOL_PATH unset for this workspace invocation.
+  Includes actual FR149-152 cargo publish --dry-run --allow-dirty packaging (no upload).
+PASS cargo fmt --all -- --check
+PASS bash scripts/semver-check.sh
+  bitloom-prelude, bitloom-sim, bitloom-firrtl; registry baselines; 196 checks each.
+PASS bash scripts/chisel-numeric-check.sh (final run after review fixes)
+  PATH=/tmp/bitloom-jvm-tools/bin:/tmp/bitloom-maintenance-tools/bin:$PATH
+  RHDL_FIRTOOL_PATH=/home/richard/.cache/rhdl/firtool/1.159.0/bin
+  BITLOOM_CHISEL_WORK=target/chisel-numeric-final
+  13 Rust integration tests; 18 actual Scala/JVM->firtool->Icarus cases.
+PASS targeted lib tests: bitloom-hir/firrtl/sim/vlog; five affected RV32 example libraries.
+PASS old FR28 required JVM compile fixture with Scala2.13.18/Chisel7.15.0/Java17.
+PASS FR101/107 SystemC2.3.4 g++ compiled LT/AT smoke; 7+5 tests.
+PASS native pipeline32 5 alternating sample pairs with independent checksum.
+PASS separate allocator 3 pairs, and actual Callgrind3.22.0 per-engine 3 samples.
+NOT RUN standalone external formal-sby, standalone FR164 gate, actual Scala lint tools, GUI/store sessions.
+REVIEW three independent reviewers; all introduced defects patched and rechecked.
+  Four pre-existing gaps deferred explicitly; see spec triage and deferred-work ledger.
+  Profiling samples predate review construction-only fixes; tick hot path unchanged.

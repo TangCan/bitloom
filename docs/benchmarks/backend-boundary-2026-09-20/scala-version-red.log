@@ -1,0 +1,48 @@
+[info] [launcher] getting org.scala-sbt sbt 1.10.11  (this may take some time)...
+[info] [launcher] getting Scala 2.12.20 (for sbt)...
+[info] welcome to sbt 1.10.11 (Ubuntu Java 17.0.20)
+[info] loading project definition from /nvme_data2/richard/2026/rhdl/target/chisel-numeric/project
+[info] loading settings for project chisel-numeric from build.sbt...
+[info] set current project to chisel-numeric (in build file:/nvme_data2/richard/2026/rhdl/target/chisel-numeric/)
+[error] java.lang.RuntimeException: Expected `chisel-numeric / scalaVersion` to be 2.13.18 or later, but found 2.13.16.
+[error] To support backwards-only binary compatibility (SIP-51), the Scala 2.13 compiler
+[error] should not be older than scala-library on the dependency classpath.
+[error]
+[error] Upgrade the `scalaVersion` to fix the build. If upgrading the Scala compiler version is
+[error] not possible (for example due to a regression in the compiler or a missing dependency),
+[error] this error can be demoted by setting `allowUnsafeScalaLibUpgrade := true`.
+[error]
+[error] See `chisel-numeric / evicted` to know why scala-library 2.13.18 is getting pulled in.
+[error]
+[error] 	at scala.sys.package$.error(package.scala:30)
+[error] 	at sbt.Defaults$.$anonfun$scalaInstanceFromUpdate$15(Defaults.scala:1238)
+[error] 	at sbt.Defaults$.$anonfun$scalaInstanceFromUpdate$15$adapted(Defaults.scala:1213)
+[error] 	at scala.collection.Iterator.foreach(Iterator.scala:943)
+[error] 	at scala.collection.Iterator.foreach$(Iterator.scala:943)
+[error] 	at scala.collection.AbstractIterator.foreach(Iterator.scala:1431)
+[error] 	at sbt.Defaults$.$anonfun$scalaInstanceFromUpdate$1(Defaults.scala:1213)
+[error] 	at scala.Function1.$anonfun$compose$1(Function1.scala:49)
+[error] 	at sbt.internal.util.$tilde$greater.$anonfun$$u2219$1(TypeFunctions.scala:63)
+[error] 	at sbt.std.Transform$$anon$4.work(Transform.scala:69)
+[error] 	at sbt.Execute.$anonfun$submit$2(Execute.scala:283)
+[error] 	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:24)
+[error] 	at sbt.Execute.work(Execute.scala:292)
+[error] 	at sbt.Execute.$anonfun$submit$1(Execute.scala:283)
+[error] 	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:265)
+[error] 	at sbt.CompletionService$$anon$2.call(CompletionService.scala:65)
+[error] 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+[error] 	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+[error] 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+[error] 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+[error] 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+[error] 	at java.base/java.lang.Thread.run(Thread.java:840)
+[error] (scalaInstance) Expected `chisel-numeric / scalaVersion` to be 2.13.18 or later, but found 2.13.16.
+[error] To support backwards-only binary compatibility (SIP-51), the Scala 2.13 compiler
+[error] should not be older than scala-library on the dependency classpath.
+[error]
+[error] Upgrade the `scalaVersion` to fix the build. If upgrading the Scala compiler version is
+[error] not possible (for example due to a regression in the compiler or a missing dependency),
+[error] this error can be demoted by setting `allowUnsafeScalaLibUpgrade := true`.
+[error]
+[error] See `chisel-numeric / evicted` to know why scala-library 2.13.18 is getting pulled in.
+[error] Total time: 38 s, completed Sep 20, 2026, 4:21:00 PM

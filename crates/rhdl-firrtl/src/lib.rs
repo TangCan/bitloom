@@ -21,7 +21,11 @@ pub fn emit(hir: &FrozenHir) -> Artifact {
     let mut body = String::from("FIRRTL version 6.0.0\n");
     body.push_str(&format!("circuit {} :\n", hir.abi_name));
     for m in &hir.circuit().modules {
-        body.push_str(&emit_module(m, m.name == hir.abi_name));
+        body.push_str(&emit_module(
+            m,
+            m.name == hir.abi_name,
+            &hir.circuit().modules,
+        ));
     }
     let path = format!("{}.fir", hir.abi_name);
     Artifact {
@@ -48,7 +52,14 @@ fn emit_expr(expr: &AssignExpr, m: &Module, target: &str) -> String {
     match expr {
         AssignExpr::Ref(n) => n.clone(),
         AssignExpr::Lit(v) => format!("UInt({v})"),
-        AssignExpr::Inc(n) => format!("add({n}, UInt(1))"),
+        AssignExpr::Inc(n) => {
+            let literal = if matches!(signal_type(m, n), Some(GroundType::SInt { .. })) {
+                "SInt(1)"
+            } else {
+                "UInt(1)"
+            };
+            format!("add({n}, {literal})")
+        }
         AssignExpr::Add(a, b) => format!("add({a}, {b})"),
         AssignExpr::Sub(a, b) => format!("sub({a}, {b})"),
         AssignExpr::And(a, b) => format!("and({a}, {b})"),
@@ -122,6 +133,14 @@ fn bounded_left_shift(m: &Module, value: &str, shift: &str, target: &str) -> Str
 }
 
 fn emit_assignment_expr(expr: &AssignExpr, m: &Module, target: &str) -> String {
+    if let AssignExpr::ZeroExtend { src, to_width, .. } = expr {
+        let padded = format!("pad({}, {to_width})", unsigned_ref(m, src));
+        return if matches!(signal_type(m, target), Some(GroundType::SInt { .. })) {
+            format!("asSInt({padded})")
+        } else {
+            padded
+        };
+    }
     if let AssignExpr::SignExtend { src, to_width, .. } = expr {
         if matches!(signal_type(m, target), Some(GroundType::SInt { .. })) {
             return format!("pad(asSInt({src}), {to_width})");
@@ -142,7 +161,7 @@ fn emit_assignment_expr(expr: &AssignExpr, m: &Module, target: &str) -> String {
     }
 }
 
-fn emit_module(m: &Module, is_top: bool) -> String {
+fn emit_module(m: &Module, is_top: bool, modules: &[Module]) -> String {
     let visibility = if is_top { "public " } else { "" };
     let mut out = format!("  {visibility}module {} :\n", m.name);
     for p in &m.ports {
@@ -240,10 +259,22 @@ fn emit_module(m: &Module, is_top: bool) -> String {
                 out.push_str(&format!("    inst {} of {}\n", inst.name, inst.module));
                 for c in &inst.connects {
                     if !c.dangling {
-                        out.push_str(&format!(
-                            "    connect {}.{}, {}\n",
-                            inst.name, c.child_port, c.parent_net
-                        ));
+                        let output = modules
+                            .iter()
+                            .find(|child| child.name == inst.module)
+                            .and_then(|child| child.ports.iter().find(|p| p.name == c.child_port))
+                            .is_some_and(|p| p.direction == PortDirection::Output);
+                        if output {
+                            out.push_str(&format!(
+                                "    connect {}, {}.{}\n",
+                                c.parent_net, inst.name, c.child_port
+                            ));
+                        } else {
+                            out.push_str(&format!(
+                                "    connect {}.{}, {}\n",
+                                inst.name, c.child_port, c.parent_net
+                            ));
+                        }
                     }
                 }
             }
@@ -705,7 +736,7 @@ fn parse_expr(s: &str, m: &Module, target: &str) -> AssignExpr {
     if let Some(inner) = s.strip_prefix("add(").and_then(|x| x.strip_suffix(')')) {
         let parts: Vec<_> = inner.split(',').map(str::trim).collect();
         if parts.len() == 2 {
-            if parts[1] == "UInt(1)" {
+            if matches!(parts[1], "UInt(1)" | "SInt(1)") {
                 return AssignExpr::Inc(parts[0].to_string());
             }
             return AssignExpr::Add(parts[0].to_string(), parts[1].to_string());
@@ -879,7 +910,7 @@ mod tests {
     fn emit_has_version_header() {
         let art = emit(&hierarchical_sample());
         assert!(art.files[0].contents.starts_with("FIRRTL version 6.0.0"));
-        assert_eq!(art.filelist[0], "Child.fir");
+        assert_eq!(art.filelist[0], "Top.fir");
     }
 
     #[test]
@@ -1213,7 +1244,10 @@ mod tests {
         assert!(!scala.contains("SyncReadMem("), "{scala}");
         assert!(scala.contains("rom_init = VecInit("), "{scala}");
         assert!(scala.contains("rom.write(i.U, rom_init(i))"), "{scala}");
-        assert!(scala.contains("when (io.we)"), "{scala}");
+        assert!(
+            scala.contains("when (!reset.asBool && io.we.asBool)"),
+            "{scala}"
+        );
         assert!(scala.contains("rom.write(io.addr, io.wdata)"), "{scala}");
     }
 

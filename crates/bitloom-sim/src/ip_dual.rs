@@ -46,24 +46,24 @@ impl AbstractionView for SyncFifoFunctional {
         let data_in = inputs.get("data_in").unwrap_or(0);
 
         if rst {
-            self.ram = [0; 4];
+            // Reset controls registers; the memory bank retains its contents.
             self.wr_ptr = 0;
             self.rd_ptr = 0;
             self.count = 0;
             self.dout = 0;
         } else {
-            // Match SyncFifo HIR order: mem write (if can_wr), then async
-            // dout := ram[rd_ptr], then advance pointers/count.
+            // Sample the pre-edge bank and pointers. Internal collisions use
+            // read-before-write regardless of HIR statement order.
             let full = self.count >= 4;
             let empty = self.count == 0;
             let can_wr = wr_en && !full;
             let can_rd = rd_en && !empty;
 
+            // Unconditional registered head peek (RegD <- asynchronous Mem).
+            self.dout = self.ram[self.rd_ptr as usize % 4];
             if can_wr {
                 self.ram[self.wr_ptr as usize % 4] = data_in & 0xff;
             }
-            // Unconditional async-style head peek (assign_reg_d_mem_read on declare_mem).
-            self.dout = self.ram[self.rd_ptr as usize % 4];
 
             if can_wr {
                 self.wr_ptr = self.wr_ptr.wrapping_add(1) & 0b11;

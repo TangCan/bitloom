@@ -127,7 +127,7 @@ fn fr104_wave_emits_interactive_html_i1_i3() {
     let bin = env!("CARGO_BIN_EXE_cargo-bitloom");
     let fir = concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../rhdl-firrtl/fixtures/external_hierarchy.fir"
+        "/../rhdl-firrtl/fixtures/external_wave_counter.fir"
     );
     let out_dir = tempfile_dir("fr104-wave");
     let out = Command::new(bin)
@@ -202,7 +202,7 @@ fn fr104_vcd_and_timing_still_emitted() {
     let bin = env!("CARGO_BIN_EXE_cargo-bitloom");
     let fir = concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../rhdl-firrtl/fixtures/external_hierarchy.fir"
+        "/../rhdl-firrtl/fixtures/external_wave_counter.fir"
     );
     let out_dir = tempfile_dir("fr104-vcd");
     let out = Command::new(bin)

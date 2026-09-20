@@ -1,0 +1,15 @@
+cycles=20000 samples=5 warmup=2000 profile=release order=alternating-pairs
+allocation_instrumentation=false (instrumented time is not native throughput)
+workload,requested_engine,effective_engine,sample,ns_per_cycle,checksum,allocation_calls,requested_bytes
+pipeline32,interpreter,interpreter,1,108220.41,b8567df545dc686d,0,0
+pipeline32,compiled,compiled,1,110389.61,b8567df545dc686d,0,0
+pipeline32,compiled,compiled,2,110591.47,b8567df545dc686d,0,0
+pipeline32,interpreter,interpreter,2,110055.19,b8567df545dc686d,0,0
+pipeline32,interpreter,interpreter,3,107514.24,b8567df545dc686d,0,0
+pipeline32,compiled,compiled,3,109296.12,b8567df545dc686d,0,0
+pipeline32,compiled,compiled,4,114523.09,b8567df545dc686d,0,0
+pipeline32,interpreter,interpreter,4,115398.29,b8567df545dc686d,0,0
+pipeline32,interpreter,interpreter,5,117470.24,b8567df545dc686d,0,0
+pipeline32,compiled,compiled,5,109801.79,b8567df545dc686d,0,0
+summary pipeline32 interpreter effective=interpreter: min=107514.24 median=110055.19 max=117470.24 ns/cycle
+summary pipeline32 compiled effective=compiled: min=109296.12 median=110389.61 max=114523.09 ns/cycle

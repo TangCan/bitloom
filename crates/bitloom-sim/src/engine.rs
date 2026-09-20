@@ -55,5 +55,90 @@ pub(crate) fn compile(hir: &FrozenHir) -> CompiledKernel {
             }
         }
     }
+    order_comb(&mut comb);
     CompiledKernel { seq, comb }
+}
+
+pub(crate) fn validate_single_module(hir: &FrozenHir) -> Result<(), &'static str> {
+    if hir.circuit().modules.len() != 1
+        || hir
+            .circuit()
+            .modules
+            .iter()
+            .any(|m| m.body.iter().any(|s| matches!(s, Stmt::Instance(_))))
+    {
+        Err("hierarchical simulation is unsupported: expected one module without instances")
+    } else {
+        Ok(())
+    }
+}
+
+/// One shared dependency order for native and generated combinational execution.
+/// Registers and memory banks are sources; only combinational targets form edges.
+pub(crate) fn order_comb(comb: &mut Vec<(String, AssignExpr)>) {
+    let assigns = std::mem::take(comb);
+    let targets: std::collections::BTreeMap<_, _> = assigns
+        .iter()
+        .enumerate()
+        .map(|(index, (name, _))| (name.as_str(), index))
+        .collect();
+    let mut waiting = vec![0usize; assigns.len()];
+    let mut users = vec![Vec::new(); assigns.len()];
+    for (index, (_, expr)) in assigns.iter().enumerate() {
+        for source in dependencies(expr) {
+            if let Some(&producer) = targets.get(source) {
+                waiting[index] += 1;
+                users[producer].push(index);
+            }
+        }
+    }
+    let mut ready: std::collections::BTreeSet<_> = waiting
+        .iter()
+        .enumerate()
+        .filter_map(|(index, &count)| (count == 0).then_some(index))
+        .collect();
+    let mut order = Vec::with_capacity(assigns.len());
+    while let Some(index) = ready.pop_first() {
+        order.push(index);
+        for &user in &users[index] {
+            waiting[user] -= 1;
+            if waiting[user] == 0 {
+                ready.insert(user);
+            }
+        }
+    }
+    assert_eq!(
+        order.len(),
+        assigns.len(),
+        "combinational cycle is unsupported by simulation"
+    );
+    let mut assigns: Vec<_> = assigns.into_iter().map(Some).collect();
+    comb.extend(
+        order
+            .into_iter()
+            .map(|index| assigns[index].take().unwrap()),
+    );
+}
+
+fn dependencies(expr: &AssignExpr) -> Vec<&str> {
+    match expr {
+        AssignExpr::Lit(_) => vec![],
+        AssignExpr::Ref(a) | AssignExpr::Inc(a) => vec![a],
+        AssignExpr::Add(a, b)
+        | AssignExpr::Sub(a, b)
+        | AssignExpr::And(a, b)
+        | AssignExpr::Or(a, b)
+        | AssignExpr::Xor(a, b)
+        | AssignExpr::Shl(a, b)
+        | AssignExpr::Shr(a, b)
+        | AssignExpr::Eq(a, b) => vec![a, b],
+        AssignExpr::Ult { lhs, rhs, .. } | AssignExpr::Slt { lhs, rhs, .. } => vec![lhs, rhs],
+        AssignExpr::Sar { value, shamt, .. } => vec![value, shamt],
+        AssignExpr::Slice { src, .. }
+        | AssignExpr::ZeroExtend { src, .. }
+        | AssignExpr::SignExtend { src, .. } => vec![src],
+        AssignExpr::Concat { high, low, .. } => vec![high, low],
+        AssignExpr::Mux { sel, t, f } => vec![sel, t, f],
+        AssignExpr::MemRead { addr, .. } => vec![addr],
+    }
 }

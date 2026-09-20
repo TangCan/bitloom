@@ -67,7 +67,7 @@ fn fr167_chiselsim_writes_manifest_and_validates_root() {
     fs::create_dir_all(&root).unwrap();
     fs::write(root.join("BITLOOM_CHISELSIM_OK"), "ok\n").unwrap();
 
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let status = cargo_bitloom()
         .arg("wave")
         .arg("--input")
@@ -94,7 +94,7 @@ fn fr167_chiselsim_writes_manifest_and_validates_root() {
 #[test]
 fn fr167_chiselsim_force_missing_is_nonzero() {
     let out = tempfile_dir("fr167-cs-fail");
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let output = cargo_bitloom()
         .arg("wave")
         .arg("--input")
@@ -119,7 +119,7 @@ fn fr167_chiselsim_force_missing_is_nonzero() {
 #[test]
 fn fr167_ide_stores_writes_manifest_with_tokens() {
     let out = tempfile_dir("fr167-ide-ok");
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let status = cargo_bitloom()
         .arg("wave")
         .arg("--input")
@@ -146,7 +146,7 @@ fn fr167_ide_stores_writes_manifest_with_tokens() {
 #[test]
 fn fr167_ide_stores_missing_token_is_nonzero() {
     let out = tempfile_dir("fr167-ide-fail");
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let output = cargo_bitloom()
         .arg("wave")
         .arg("--input")

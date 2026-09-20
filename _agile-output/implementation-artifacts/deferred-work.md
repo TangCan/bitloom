@@ -265,12 +265,19 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
 - source_spec: `_agile-output/implementation-artifacts/epic-21-retro-2026-08-21.md`
   summary: FR47 cycle/functional 生成器 MVP = 扁平单模块子集（无层次实例、无 MemDecl 周期精确 emit）
   evidence: epic-21-retro-item-46；`bitloom-sim` `cycle.rs` 显式拒绝 instances/memories；`generate.rs` 取 `modules.first()`；见 language-surface / `docs/fr47-dual-sim-generation.md`
-  status: deferred — 子集已文档锁定；扩子集须改文档+故事，禁止静默扩大
+  status: partially resolved — 2026-09-20；Mem已支持，hierarchy继续unsupported
+  resolution: |
+    上述evidence保留2026-08-21历史。当前cycle/functional均支持单模块Mem/SyncReadMem；
+    本轮实际编译执行两类生成crate，修复enable/async元数据和边沿语义。
+    hierarchy入口明确拒绝，不再返回modules.first()结果。见docs/backend-boundary-evidence-2026-09-20.md。
 
 - source_spec: `_agile-output/implementation-artifacts/epic-21-retro-2026-08-21.md`
   summary: 层次模块 / Mem 的周期精确生成（及对应 functional 语义）作为后续故事
   evidence: epic-21-retro-item-47；当前 MVP 故意不含；扩子集前必须更新 deferred-work + language-surface + fr47 文档
-  status: deferred — 未来故事；forbid silent subset expansion
+  status: partially resolved — 2026-09-20；hierarchy仍deferred
+  resolution: |
+    Mem周期/functional生成已存在，本轮用独立bank/read-stage/q参考与真实crate、Verilog/Chisel执行验证。
+    层级模拟器仍未实现，FIRRTL内存lowering也未因此升级；FR47/language-surface已同步当前边界。
 
 - source_spec: `_agile-output/implementation-artifacts/epic-22-retro-2026-08-21.md`
   summary: 五类一级 IP 历史为端口语义 stub；Epic 34/FR82 加深为非 stub 文档最小子集
@@ -671,3 +678,26 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
 - source_spec: `_agile-output/implementation-artifacts/spec-simulator-reliability-maintenance.md`
   summary: Chisel 后端既有 SInt 逻辑右移仍采用算术右移，需独立数值一致性修复与真实 JVM/RTL 对拍。
   evidence: `crates/rhdl-firrtl/src/chisel.rs` 的 `AssignExpr::Shr` 与 `Sar` 均直接使用 `>>`，对 SInt 为符号填充；例如 SInt8 的 0xff 右移一位应得逻辑位型 0x7f，而非 0xff。本次新增数值矩阵覆盖 Rust/Verilog/FIRRTL，不包含 Chisel；后续应把生成 Scala 编译降级后的 RTL 纳入相同独立参考矩阵。
+
+  status: resolved — 2026-09-20 backend-boundary maintenance
+  resolution: |
+    共用Chisel emitter修复signed逻辑移位、目标类型扩展、有符号寄存器与大移位推断；
+    scripts/chisel-numeric-check.sh严格执行Chisel7.15.0/Scala2.13.18/JVM→firtool1.159.0→Icarus，
+    同一独立参考的同宽/异宽矩阵通过，保留旧Scala/RTL红灯。
+    证据 docs/backend-boundary-evidence-2026-09-20.md；不宣称FR189交付或NFR91清空。
+
+- source_spec: `_agile-output/implementation-artifacts/spec-backend-boundary-evidence.md`
+  summary: 显式命名top或top下的递归实例图尚无独立freeze诊断。
+  evidence: validate_instances只校验端口连接；circuit Loop/module Loop/inst again of Loop在baseline和当前均可进入FrozenHir；后续需独立图环检测与清晰诊断。
+
+- source_spec: `_agile-output/implementation-artifacts/spec-backend-boundary-evidence.md`
+  summary: 电路名不匹配且存在多个独立根时，默认top仍有声明次序歧义。
+  evidence: baseline以modules.first选择；当前fallback选择首个未实例化模块。本轮层级证据使用明确circuit-name top，不证明多根选择策略。
+
+- source_spec: `_agile-output/implementation-artifacts/spec-backend-boundary-evidence.md`
+  summary: 顶层Analog/InOut验证尚未与fallback顶层选择统一。
+  evidence: validate_special_io仅按circuit.name识别top；标签名与实际根模块名不同时，baseline及当前均可能将真实根拒为子模块。
+
+- source_spec: `_agile-output/implementation-artifacts/spec-backend-boundary-evidence.md`
+  summary: Chisel算术右移的SInt移位量仍需规范化与真实RTL回归。
+  evidence: assign_sar允许有声明width的SInt shamt；Chisel的SAR分支在baseline与当前均直接value >> shamt，动态移位要求UInt。现有实际SAR矩阵的移位量为UInt，不证明该SInt-shamt子集。

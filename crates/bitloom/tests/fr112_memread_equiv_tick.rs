@@ -51,7 +51,7 @@ fn write_then_read_stimuli() -> Vec<PortValues> {
     pv.set("addr", 3);
     pv.set("wdata", 0xAB);
     pv.set("we", 1);
-    vec![pv.clone(), pv]
+    vec![pv.clone(), pv.clone(), pv]
 }
 
 #[test]

@@ -10,7 +10,7 @@
 
 真实 RTL 执行另暴露后端问题：Verilog 符号扩展现在支持一位标量源；FIRRTL 使用公开 top、现代 connect/regreset 语法和具体同步复位端口，导入时保留 HIR 复位类型。左移限制动态移位操作数位宽，并显式使超宽移位归零；有符号输入通过无符号转换保持逻辑移位语义。所测算术设计已可由既有产品钉编译并执行。异宽回归进一步覆盖 `UInt32 << UInt1`、`UInt8 << UInt8 → UInt16`、窄目标等组合：左移的归零界限以目标位宽为准，切片不超移位端口声明位宽；signed 逻辑结果扩宽先零扩展再转换目标类型，左右移均可通过规范编码导入往返。
 
-仿真值仍存储于 `u64`。接受的 UInt128 直通在原生、compiled、进程内和真实编译的生成功能 crate 中保留低 64 位；所有宽度掩码对 `width >= 64` 直接保留该低字，避免 Rust 移位溢出。这是既有低字行为的兼容性修复，不是任意精度仿真。Chisel 后端不在本次对拍覆盖中；其既有 signed Shr 差异单独记录，不以本次 FIRRTL 通过代替 Chisel 验证。
+仿真值仍存储于 `u64`。接受的 UInt128 直通在原生、compiled、进程内和真实编译的生成功能 crate 中保留低 64 位；所有宽度掩码对 `width >= 64` 直接保留该低字，避免 Rust 移位溢出。这是既有低字行为的兼容性修复，不是任意精度仿真。原轮维护未覆盖 Chisel，其 signed Shr 差异当时单独登记；后续本日维护已通过真实 Scala/JVM→RTL 矩阵修复，见[后端边界证据](backend-boundary-evidence-2026-09-20.md)。
 
 原 `emit_cycle_crate_compiles` 仅检查字符串；现在真正调用独立 Cargo 测试，逐拍检查 310 拍计数器（含回绕及第二次复位）。另外分别编译 cycle 与 functional crate，检查 40 拍同步存储器，与小型参考模型、原生 Sim 及进程内模型同时对照。向 16 位端口送入未预先截断的原始值，通过溢出的 16 位和写入 8 位存储器，再分别读入 4 位和 16 位寄存器，验证输入、写入、窄读截断及写使能抑制、复位、读延迟。该测试先暴露 `RegD <- MemRead` 缺少 builder 生成分支，现已补齐。每次调用使用唯一目录和独立 Cargo target，失败时保留产物供检查。
 
@@ -45,3 +45,5 @@ PIPE.md 及相关教程说明既有 next-register 统一提交语义。README �
 最终完整回归还复现 FR158 两个测试并发修改 PATH 的竞态；两段测试 override 现用同一个互斥锁隔离，保留缺工具与假工具断言。
 
 最终验证：严格跨后端 integration 4 项、sim 38 项、FIRRTL 单元 19 项通过；带真实 firtool/Icarus 的完整 workspace 测试、三库真实 SemVer、参数/失败传播、fmt 与差异空白检查均通过。完整 workspace 保留 6 个既有忽略 doctest，不代表独立 JVM/formal/SystemC 门禁全部执行。下一步见[项目分析](project-next-steps-2026-09-20.md)。
+
+后续边沿修复：当前 `tick` 自动拓扑settle后采样，同时提交寄存器/存储器；内部碰撞read-before-write，SyncReadMem读阶段与目的寄存器分开。原轮测试中写在先即读新值、采上拍组合值的预期已由独立硬件参考更正；详情及RV32/FIFO调用方迁移见[本日后续记录](backend-boundary-evidence-2026-09-20.md)。

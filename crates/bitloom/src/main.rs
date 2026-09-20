@@ -1156,6 +1156,17 @@ fn run_wave(
     fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
 
     let vcd_path = out_dir.join("wave.vcd");
+    if hir.circuit().modules.len() != 1
+        || hir.circuit().modules.iter().any(|m| {
+            m.body
+                .iter()
+                .any(|s| matches!(s, bitloom_hir::Stmt::Instance(_)))
+        })
+    {
+        return Err(
+            "hierarchical simulation is unsupported: expected one module without instances".into(),
+        );
+    }
     let mut sim = Sim::new(hir);
     if want_fst {
         let fst_path = out_dir.join("wave.fst");
@@ -1524,6 +1535,17 @@ fn run_coverage(
     };
 
     fs::create_dir_all(out_dir).map_err(|e| format!("create out_dir: {e}"))?;
+    if hir.circuit().modules.len() != 1
+        || hir.circuit().modules.iter().any(|m| {
+            m.body
+                .iter()
+                .any(|s| matches!(s, bitloom_hir::Stmt::Instance(_)))
+        })
+    {
+        return Err(
+            "hierarchical simulation is unsupported: expected one module without instances".into(),
+        );
+    }
     let mut sim = Sim::new(hir);
     let mut pv = PortValues::default();
     pv.set("rst", 1);

@@ -103,3 +103,7 @@ chisel-style-guide-pack-check:
 # Not part of default `just test`. Missing tool → non-zero (never silent success).
 semver-check:
 	bash scripts/semver-check.sh
+
+# Behavioral Scala/JVM -> RTL numeric matrix; missing tools fail.
+chisel-numeric-check:
+	bash scripts/chisel-numeric-check.sh

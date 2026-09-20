@@ -341,7 +341,7 @@ impl Hir {
 }
 
 /// Private freeze: only called from elaborate/import paths (AD-1, AD-7).
-pub(crate) fn freeze(hir: Hir) -> Result<FrozenHir, Diagnostics> {
+pub(crate) fn freeze(mut hir: Hir) -> Result<FrozenHir, Diagnostics> {
     if hir.circuit.modules.is_empty() {
         return Err(Diagnostics(vec![Diagnostic {
             span: Span::default(),
@@ -360,12 +360,50 @@ pub(crate) fn freeze(hir: Hir) -> Result<FrozenHir, Diagnostics> {
     if !diags.is_empty() {
         return Err(diags);
     }
+    // Within each process, Net/RegD connections use last-assignment priority.
+    // Normalize once for every backend before dependency scheduling or read-stage
+    // allocation. Memory writes remain ordered side effects, never discarded.
+    for module in &mut hir.circuit.modules {
+        for stmt in &mut module.body {
+            if let Stmt::Process(process) = stmt {
+                let mut seen = std::collections::BTreeSet::new();
+                process.assigns.reverse();
+                process.assigns.retain(|assign| match &assign.target {
+                    AssignTarget::Net(name) => seen.insert((false, name.clone())),
+                    AssignTarget::RegD(name) => seen.insert((true, name.clone())),
+                    AssignTarget::MemWrite { .. } => true,
+                });
+                process.assigns.reverse();
+            }
+        }
+    }
+
+    // Imported FIRRTL names its public top explicitly. Module declaration
+    // order must not select a child and silently discard the parent backend.
     let top = hir
         .circuit
         .modules
-        .first()
-        .map(|m| m.name.clone())
-        .unwrap_or_else(|| hir.circuit.name.clone());
+        .iter()
+        .find(|m| m.name == hir.circuit.name)
+        .or_else(|| {
+            hir.circuit.modules.iter().find(|candidate| {
+                !hir.circuit.modules.iter().any(|m| {
+                    m.body
+                        .iter()
+                        .any(|s| matches!(s, Stmt::Instance(inst) if inst.module == candidate.name))
+                })
+            })
+        })
+        .ok_or_else(|| {
+            Diagnostics(vec![Diagnostic {
+                span: Span::default(),
+                code: "rhdl::E0002".into(),
+                en: "circuit has no identifiable top module (recursive instance graph)".into(),
+                zh: "电路无法确定顶层模块（实例图递归）".into(),
+            }])
+        })?
+        .name
+        .clone();
     Ok(FrozenHir {
         circuit: hir.circuit,
         abi_name: top,

@@ -6,7 +6,7 @@
 
 ```bash
 cargo bitloom wave \
-  --input crates/rhdl-firrtl/fixtures/external_hierarchy.fir \
+  --input crates/rhdl-firrtl/fixtures/external_wave_counter.fir \
   --out-dir target/wave \
   --ticks 8
 ```

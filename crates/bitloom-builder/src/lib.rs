@@ -1479,7 +1479,16 @@ impl ElaborateSession {
         }
     }
 
-    /// Sequential SyncReadMem read into a register (latency 1 on tick).
+    /// Sample a memory read into a destination register.
+    ///
+    /// For `Mem`, the register samples the pre-edge bank on this edge. For
+    /// `SyncReadMem`, the memory read stage samples on every edge and the
+    /// destination register receives the previous read-stage value: an address
+    /// presented before edge N becomes visible in the register at edge N+1.
+    /// The destination's current-edge enable/reset controls this register update,
+    /// not memory-read sampling. Reset clears the register but preserves the bank;
+    /// writes are suppressed during reset. Internal same-address read/write uses
+    /// the pre-write bank; FIRRTL collision values remain undefined.
     pub fn assign_reg_d_mem_read(
         &mut self,
         reg: impl Into<String>,

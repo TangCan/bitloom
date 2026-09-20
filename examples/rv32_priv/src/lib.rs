@@ -620,39 +620,33 @@ mod tests {
     #[test]
     fn tick_mtvec_ecall_mret_golden() {
         let mut sim = reset_sim();
-        let nop = enc_addi(0, 0, 0);
-
-        step(&mut sim, enc_addi(1, 0, 0x20)); // arm
-        step(&mut sim, enc_csrrw(0, CSR_MTVEC, 1)); // commit addi
-        step(&mut sim, enc_ecall()); // commit mtvec
+        step(&mut sim, enc_addi(1, 0, 0x20));
+        step(&mut sim, enc_csrrw(0, CSR_MTVEC, 1));
         assert_eq!(sim.ports().get("mtvec_out"), Some(0x20));
-
-        step(&mut sim, enc_addi(2, 0, 0x55)); // commit ecall (trap)
+        step(&mut sim, enc_ecall());
         assert_eq!(sim.ports().get("mcause_out"), Some(11));
-        let mepc = sim.ports().get("mepc_out").expect("mepc");
-        assert!(mepc >= 4, "mepc should be pc+4 of ecall site, got {mepc}");
+        assert_eq!(sim.ports().get("mepc_out"), Some(12));
         assert_eq!(
             sim.ports().get("pc_out"),
             Some(0x20),
             "trap must jump to mtvec"
         );
-
-        step(&mut sim, enc_mret()); // commit handler addi
+        step(&mut sim, enc_addi(2, 0, 0x55));
         assert_eq!(sim.ports().get("x2_out"), Some(0x55), "handler must run");
-
-        step(&mut sim, enc_addi(3, 0, 0x66)); // commit mret
+        assert_eq!(sim.ports().get("pc_out"), Some(0x24));
+        step(&mut sim, enc_mret());
         assert_eq!(
             sim.ports().get("pc_out"),
-            Some(mepc),
+            Some(12),
             "mret must restore mepc"
         );
-
-        step(&mut sim, nop); // commit return-path addi
+        step(&mut sim, enc_addi(3, 0, 0x66));
         assert_eq!(
             sim.ports().get("x3_out"),
             Some(0x66),
             "execution continues after mret"
         );
+        assert_eq!(sim.ports().get("pc_out"), Some(16));
     }
 
     #[test]

@@ -1,0 +1,18 @@
+[info] welcome to sbt 1.10.11 (Ubuntu Java 17.0.20)
+[info] loading project definition from /nvme_data2/richard/2026/rhdl/target/chisel-numeric/project
+[info] loading settings for project chisel-numeric from build.sbt...
+[info] set current project to chisel-numeric (in build file:/nvme_data2/richard/2026/rhdl/target/chisel-numeric/)
+[info] compiling 9 Scala sources to /nvme_data2/richard/2026/rhdl/target/chisel-numeric/target/scala-2.13/classes ...
+[warn] 224 feature warnings; re-run with -feature for details
+[warn] one warning found
+[info] done compiling
+[info] running NumericMain
+[error] chisel3.package$ChiselException: Connection between sink (Vectors.io.sext: IO[SInt<64>]) and source (Vectors.io_sext_?: OpResult[UInt<64>]) failed @: Sink (SInt<64>) and Source (UInt<64>) have different types.
+[error] 	at ... ()
+[error] 	at same_1.Vectors.<init>(same_1.scala:49)
+[error] 	at NumericMain$.$anonfun$new$5(NumericMain.scala:6)
+[error] 	at ... ()
+[error] 	at ... (Stack trace trimmed to user code only. Rerun with --full-stacktrace to see the full stack trace)
+[error] stack trace is suppressed; run 'last Compile / runMain' for the full output
+[error] (Compile / runMain) chisel3.package$ChiselException: Connection between sink (Vectors.io.sext: IO[SInt<64>]) and source (Vectors.io_sext_?: OpResult[UInt<64>]) failed @: Sink (SInt<64>) and Source (UInt<64>) have different types.
+[error] Total time: 32 s, completed Sep 20, 2026, 4:22:19 PM

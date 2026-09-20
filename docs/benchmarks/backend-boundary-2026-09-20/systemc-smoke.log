@@ -1,0 +1,26 @@
+   Compiling bitloom-sim v1.1.6 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.44s
+     Running tests/fr101_systemc_tlm_product.rs (target/debug/deps/fr101_systemc_tlm_product-35d6280e6d489787)
+
+running 7 tests
+test fr101_docs_lt_only_ad5_not_rust_fl ... ok
+test fr101_fr47_doc_still_says_not_systemc ... ok
+test fr101_nfr14_gate_still_present_and_46_2_checkable ... ok
+test fr101_emit_d1_d2_sources_are_systemc_tlm_not_rust_fl ... ok
+test fr101_sprint_46_2_done_epic_may_close_after_46_3 ... ok
+test fr101_resolve_systemc_or_readable_error ... ok
+test fr101_lt_smoke_build_and_run_when_systemc_present ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.03s
+
+     Running tests/fr107_systemc_tlm_at.rs (target/debug/deps/fr107_systemc_tlm_at-e8da3a9814f37904)
+
+running 5 tests
+test fr107_docs_at_ad5_not_lt_not_rust_fl ... ok
+test fr107_cli_mentions_gen_tlm_at ... ok
+test fr107_ad5_allows_at ... ok
+test fr107_emit_contains_nb_transport_fw ... ok
+test fr107_smoke_when_systemc_present ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.99s

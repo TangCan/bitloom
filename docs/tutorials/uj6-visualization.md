@@ -33,7 +33,7 @@ Details: [`fr38-viz-lsp.md`](../fr38-viz-lsp.md).
 
 ```bash
 cargo bitloom wave \
-  --input crates/rhdl-firrtl/fixtures/external_hierarchy.fir \
+  --input crates/rhdl-firrtl/fixtures/external_wave_counter.fir \
   --out-dir target/uj6-wave \
   --ticks 8
 ```
@@ -57,3 +57,5 @@ Cross-link: [`fr31-optional-fst.md`](../fr31-optional-fst.md) · [`fr38-wave.md`
 ## CLI verb table
 
 See [`fr40-cli-verbs.md`](../fr40-cli-verbs.md).
+
+仿真与波形目前只支持单模块且无实例；上述层级夹具用于可视化，波形使用独立单模块计数器。层级 wave/coverage 输入明确返回 unsupported，不会仅执行首模块。

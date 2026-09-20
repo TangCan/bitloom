@@ -87,7 +87,7 @@ fn fr117_wave_emits_typed_artifacts_beyond_i1_i3() {
     let bin = env!("CARGO_BIN_EXE_cargo-bitloom");
     let fir = concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../rhdl-firrtl/fixtures/external_hierarchy.fir"
+        "/../rhdl-firrtl/fixtures/external_wave_counter.fir"
     );
     let out_dir = tempfile_dir("fr117-wave");
     let out = Command::new(bin)

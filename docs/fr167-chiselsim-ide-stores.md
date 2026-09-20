@@ -25,7 +25,7 @@ mkdir -p /tmp/chiselsim-stub && echo ok > /tmp/chiselsim-stub/BITLOOM_CHISELSIM_
 
 BITLOOM_CHISELSIM_ROOT=/tmp/chiselsim-stub \
   cargo bitloom wave \
-    --input crates/rhdl-firrtl/fixtures/external_hierarchy.fir \
+    --input crates/rhdl-firrtl/fixtures/external_wave_counter.fir \
     --out-dir target/wave-fr167 \
     --ticks 4 \
     --chiselsim

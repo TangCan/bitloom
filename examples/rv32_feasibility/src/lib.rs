@@ -48,8 +48,8 @@ impl Elaboratable for FeasibilitySpike {
 
         s.begin_sequential(Span::default());
         s.assign_reg_d_from("state", "next_state", Span::default());
-        // Sequential `we` gating is deferred; tests keep writes idempotent.
-        s.assign_mem_write("imem", "addr", "wdata", Span::default());
+        // Explicit `we` gates writes; internal collisions sample the pre-write bank.
+        s.assign_mem_write_en("imem", "addr", "wdata", "we", Span::default());
         s.assign_reg_d_mem_read("q", "imem", "addr", Span::default());
         s.end_process();
 
@@ -96,9 +96,11 @@ mod tests {
         assert_eq!(sim.ports().get("state_out"), Some(1));
         assert_eq!(sim.ports().get("rdata"), Some(0));
 
-        sim.tick(); // Fetch→Exec; pending read delivers
+        pv.set("we", 0);
+        sim.set_inputs(pv.clone());
+        sim.tick(); // Fetch→Exec; q receives the pre-write read, memory samples 0x5A.
         assert_eq!(sim.ports().get("state_out"), Some(2));
-        assert_eq!(sim.ports().get("rdata"), Some(0x5A));
+        assert_eq!(sim.ports().get("rdata"), Some(0));
 
         sim.tick(); // Exec→Idle
         assert_eq!(sim.ports().get("state_out"), Some(0));

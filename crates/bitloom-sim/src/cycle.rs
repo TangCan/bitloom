@@ -204,9 +204,15 @@ fn emit_hir_builder(hir: &FrozenHir) -> Result<String, String> {
     }
     for stmt in &m.body {
         match stmt {
-            Stmt::RegDecl { name, ty, .. } => {
+            Stmt::RegDecl {
+                name,
+                ty,
+                async_reset,
+                has_enable,
+                ..
+            } => {
                 body.push_str(&format!(
-                    "    s.declare_reg({:?}, {}, Span::default());\n",
+                    "    s.declare_reg_ex({:?}, {}, {async_reset}, {has_enable}, Span::default());\n",
                     name,
                     render_ground_type(ty)
                 ));
@@ -571,7 +577,6 @@ mod tests {
         let hir = s.finish().unwrap();
         let mut bank = [0; 4];
         let mut pending = 0;
-        let mut prior_sum = 0;
         let vectors = (0..40)
             .map(|i| {
                 let reset = i == 0 || i == 17;
@@ -583,13 +588,10 @@ mod tests {
                 } else {
                     (pending << 4) | (pending & 0xf)
                 };
+                pending = bank[addr];
                 if !reset && we {
-                    bank[addr] = prior_sum & 0xff;
+                    bank[addr] = ((data & 0xffff) + 0x30) & 0xff;
                 }
-                pending = if reset { 0 } else { bank[addr] };
-                // Sequential logic samples the previous comb result, then comb
-                // computes the current 16-bit sum after this edge.
-                prior_sum = ((data & 0xffff) + 0x30) & 0xffff;
                 let mut input = PortValues::default();
                 for (name, value) in [
                     ("rst", reset as u64),

@@ -1,0 +1,18 @@
+==568337== Callgrind, a call-graph generating cache profiler
+==568337== Copyright (C) 2002-2017, and GNU GPL'd, by Josef Weidendorfer et al.
+==568337== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==568337== Command: target/release/deps/baseline-ac263366af62f9ca
+==568337==
+==568337== For interactive control, run 'callgrind_control -h'.
+cycles=1000 samples=3 warmup=0 profile=release order=alternating-pairs
+allocation_instrumentation=false (instrumented time is not native throughput)
+workload,requested_engine,effective_engine,sample,ns_per_cycle,checksum,allocation_calls,requested_bytes
+pipeline32,compiled,compiled,1,6758713.46,5c22e11962c54992,0,0
+pipeline32,compiled,compiled,2,6751192.95,5c22e11962c54992,0,0
+pipeline32,compiled,compiled,3,6804007.35,5c22e11962c54992,0,0
+summary pipeline32 compiled effective=compiled: min=6751192.95 median=6758713.46 max=6804007.35 ns/cycle
+==568337==
+==568337== Events    : Ir
+==568337== Collected : 2612210521
+==568337==
+==568337== I   refs:      2,612,210,521

@@ -1,0 +1,74 @@
+--------------------------------------------------------------------------------
+Profile data file 'docs/benchmarks/backend-boundary-2026-09-20/callgrind.interpreter' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 527979124
+Trigger: Program termination
+Profiled target:  target/release/deps/baseline-ac263366af62f9ca (PID 541443, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       95
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+2,591,478,490 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                      file:function
+--------------------------------------------------------------------------------
+5,182,400,660 (200.0%)  ???:(below main) [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+2,591,478,490 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+2,591,200,141 (99.99%)  ???:0x000000000002a150 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+2,591,198,334 (99.99%)  ???:main [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+2,591,198,322 (99.99%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/std/src/rt.rs:std::rt::lang_start_internal [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+2,591,100,189 (99.99%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ops/function.rs:std::rt::lang_start_internal
+2,591,100,188 (99.99%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/std/src/rt.rs:std::rt::lang_start::<()>::{closure#0} [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+2,591,100,182 (99.99%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()> [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+2,591,100,179 (99.99%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+2,591,100,178 (99.99%)  /nvme_data2/richard/2026/rhdl/crates/bitloom-sim/benches/baseline.rs:baseline::main
+2,590,773,099 (99.97%)  crates/bitloom-sim/benches/baseline.rs:baseline::main [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+2,590,039,886 (99.94%)  crates/bitloom-sim/benches/baseline.rs:baseline::measure [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+2,587,089,135 (99.83%)  /nvme_data2/richard/2026/rhdl/crates/bitloom-sim/src/lib.rs:<bitloom_sim::Sim>::tick
+2,515,134,877 (97.05%)  crates/bitloom-sim/src/lib.rs:<bitloom_sim::Sim>::tick [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+1,597,891,908 (61.66%)  crates/bitloom-sim/src/lib.rs:<bitloom_sim::Sim>::tick_interpreter [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+1,366,922,375 (52.75%)  crates/bitloom-sim/src/lib.rs:<bitloom_sim::Sim>::tick_combinational [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  739,359,274 (28.53%)  ???:__rustc::__rust_alloc [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  736,038,573 (28.40%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/std/src/alloc.rs:__rustc::__rdl_alloc [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  732,717,872 (28.27%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/std/src/sys/alloc/unix.rs:__rustc::__rdl_alloc
+  712,413,003 (27.49%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/string.rs:<alloc::string::String as core::clone::Clone>::clone [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  706,154,831 (27.25%)  ???:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  592,319,400 (22.86%)  ???:0x00000000000ab650 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  565,798,408 (21.83%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/alloc.rs:<alloc::string::String as core::clone::Clone>::clone
+  459,895,943 (17.75%)  ???:0x0000000000188620 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  453,716,721 (17.51%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/vec/mod.rs:<alloc::vec::Vec<(alloc::string::String, bitloom_hir::AssignExpr)> as core::clone::Clone>::clone [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  430,132,144 (16.60%)  crates/bitloom-hir/src/lib.rs:<bitloom_sim::Sim>::tick_interpreter
+  427,254,948 (16.49%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/vec/mod.rs:<alloc::vec::Vec<bitloom_hir::Stmt> as core::clone::Clone>::clone [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  363,394,425 (14.02%)  crates/bitloom-sim/src/lib.rs:<bitloom_sim::Sim>::eval [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  359,114,904 (13.86%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/map.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, u64>>::insert [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  352,768,647 (13.61%)  crates/bitloom-hir/src/lib.rs:<alloc::vec::Vec<bitloom_hir::Stmt> as core::clone::Clone>::clone
+  345,725,647 (13.34%)  ???:__rustc::__rust_dealloc [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  342,404,947 (13.21%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/std/src/sys/alloc/unix.rs:__rustc::__rdl_dealloc [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  339,084,757 (13.08%)  ???:free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  319,690,684 (12.34%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/option.rs:<bitloom_hir::PortValues>::get [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  310,763,889 (11.99%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/clone.rs:<alloc::vec::Vec<(alloc::string::String, bitloom_hir::AssignExpr)> as core::clone::Clone>::clone
+  237,242,167 ( 9.15%)  ???:0x00000000000ab250 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  215,730,596 ( 8.32%)  /nvme_data2/richard/2026/rhdl/crates/bitloom-sim/src/coverage.rs:<bitloom_sim::coverage::Coverage>::sample::<alloc::string::String>
+  212,314,715 ( 8.19%)  /nvme_data2/richard/2026/rhdl/crates/bitloom-hir/src/lib.rs:<bitloom_hir::AssignExpr as core::clone::Clone>::clone
+  207,270,091 ( 8.00%)  crates/bitloom-hir/src/lib.rs:<bitloom_sim::Sim>::tick_combinational
+  181,529,077 ( 7.00%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/cmp.rs:<bitloom_hir::PortValues>::get
+  168,589,745 ( 6.51%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ptr/mod.rs:core::ptr::drop_glue::<bitloom_hir::Module> [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  164,997,528 ( 6.37%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/cmp.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, u64>>::insert
+  164,125,344 ( 6.33%)  ???:0x00000000000a9c90 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  163,102,706 ( 6.29%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ptr/mod.rs:core::ptr::drop_glue::<bitloom_hir::Stmt> [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  158,241,555 ( 6.11%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ptr/mod.rs:core::ptr::drop_glue::<bitloom_hir::AssignExpr> [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  141,072,011 ( 5.44%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/alloc.rs:core::ptr::drop_glue::<bitloom_hir::AssignExpr>
+  135,253,140 ( 5.22%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/alloc.rs:<alloc::vec::Vec<(alloc::string::String, bitloom_hir::AssignExpr)> as core::clone::Clone>::clone
+  130,872,304 ( 5.05%)  crates/bitloom-hir/src/lib.rs:<bitloom_hir::AssignExpr as core::clone::Clone>::clone [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  107,488,171 ( 4.15%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/cmp.rs:<bitloom_sim::Sim>::tick_combinational

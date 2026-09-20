@@ -1,4 +1,4 @@
-//! ATDD Story 23.5: joint FR38/FR49 acceptance — same fixture → hierarchy + timing.
+//! ATDD Story 23.5: joint FR38/FR49 acceptance — hierarchy visualization + single-module timing.
 
 use std::fs;
 use std::path::PathBuf;
@@ -24,7 +24,7 @@ fn tempfile_dir(tag: &str) -> PathBuf {
 }
 
 #[test]
-fn fr38_fr49_joint_acceptance_same_fixture() {
+fn fr38_fr49_joint_acceptance_supported_fixtures() {
     let bin = env!("CARGO_BIN_EXE_cargo-bitloom");
     let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
     assert!(fir.is_file(), "fixture missing: {}", fir.display());
@@ -43,8 +43,17 @@ fn fr38_fr49_joint_acceptance_same_fixture() {
         String::from_utf8_lossy(&viz.stderr)
     );
 
+    let wave_fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let wave = Command::new(bin)
-        .args(["wave", "--input", fir_s, "--out-dir", out_s, "--ticks", "4"])
+        .args([
+            "wave",
+            "--input",
+            wave_fir.to_str().unwrap(),
+            "--out-dir",
+            out_s,
+            "--ticks",
+            "4",
+        ])
         .output()
         .expect("wave");
     assert!(

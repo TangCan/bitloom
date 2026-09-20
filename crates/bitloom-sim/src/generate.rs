@@ -55,8 +55,12 @@ pub struct GeneratedFunctional {
 }
 
 impl GeneratedFunctional {
-    /// Build a functional model from the top module of `hir`.
+    /// Build a functional model from a single module without instances.
+    ///
+    /// Panics for unsupported hierarchical designs.
     pub fn from_hir(hir: &FrozenHir) -> Self {
+        crate::engine::validate_single_module(hir)
+            .expect("GeneratedFunctional construction failed");
         let m = hir
             .circuit()
             .modules
@@ -143,6 +147,7 @@ impl GeneratedFunctional {
             }
         }
 
+        crate::engine::order_comb(&mut comb);
         Self {
             widths: crate::signal_widths(hir),
             regs,
@@ -319,20 +324,33 @@ impl AbstractionView for GeneratedFunctional {
             .map(|p| self.lookup(inputs, p) != 0)
             .unwrap_or(true);
 
-        // Apply SyncReadMem pending from previous cycle (latency 1) — matches Sim.
-        let pending = std::mem::take(&mut self.pending_mem_reads);
-        for (name, val) in pending {
-            self.regs.insert(name, if reset { 0 } else { val });
+        self.settle(inputs);
+        let mut next_regs = std::mem::take(&mut self.pending_mem_reads);
+        if reset {
+            for value in next_regs.values_mut() {
+                *value = 0;
+            }
         }
-
         let mut next_pending = BTreeMap::new();
-        let mut next_regs: BTreeMap<String, u64> = BTreeMap::new();
+        let mut writes = Vec::new();
         // Clone ops so MemWrite can mutate `mems` without borrowing `seq`.
         let ops = self.seq.clone();
 
         for op in &ops {
             match op {
                 SeqOp::RegD { name, expr, has_en } => {
+                    if let AssignExpr::MemRead { mem, addr } = expr {
+                        if self.mem_is_sync(mem) {
+                            let value = self.eval_mem_read(inputs, mem, addr);
+                            next_pending.insert(name.clone(), self.truncate(name, value));
+                            if reset {
+                                next_regs.insert(name.clone(), 0);
+                            } else if *has_en && !enable {
+                                next_regs.remove(name);
+                            }
+                            continue;
+                        }
+                    }
                     if reset {
                         next_regs.insert(name.clone(), 0);
                         continue;
@@ -340,16 +358,7 @@ impl AbstractionView for GeneratedFunctional {
                     if *has_en && !enable {
                         continue;
                     }
-                    match expr {
-                        AssignExpr::MemRead { mem, addr } if self.mem_is_sync(mem) => {
-                            let val = self.eval_mem_read(inputs, mem, addr);
-                            next_pending.insert(name.clone(), self.truncate(name, val));
-                        }
-                        _ => {
-                            next_regs
-                                .insert(name.clone(), self.truncate(name, self.eval(inputs, expr)));
-                        }
-                    }
+                    next_regs.insert(name.clone(), self.truncate(name, self.eval(inputs, expr)));
                 }
                 SeqOp::MemWrite {
                     mem,
@@ -367,11 +376,14 @@ impl AbstractionView for GeneratedFunctional {
                     }
                     let a_idx = self.lookup(inputs, addr) as usize;
                     let data = self.truncate(mem, self.eval(inputs, expr));
-                    if let Some(bank) = self.mems.get_mut(mem) {
-                        if a_idx < bank.len() {
-                            bank[a_idx] = data;
-                        }
-                    }
+                    writes.push((mem.clone(), a_idx, data));
+                }
+            }
+        }
+        for (mem, index, value) in writes {
+            if let Some(bank) = self.mems.get_mut(&mem) {
+                if let Some(word) = bank.get_mut(index) {
+                    *word = value;
                 }
             }
         }
@@ -379,7 +391,12 @@ impl AbstractionView for GeneratedFunctional {
             self.regs.insert(k, v);
         }
         self.pending_mem_reads = next_pending;
+        self.settle(inputs)
+    }
+}
 
+impl GeneratedFunctional {
+    fn settle(&mut self, inputs: &PortValues) -> PortValues {
         let mut out = inputs.clone();
         for (name, value) in &mut out.values {
             *value = self.truncate(name, *value);
@@ -403,6 +420,8 @@ pub fn emit_functional_crate(hir: &FrozenHir, out_dir: &Path) -> io::Result<Path
 ///
 /// Includes `src/lib.rs` (FunctionalSim + gold test) and `src/main.rs` for `cargo run`.
 pub fn generate_functional_sim(hir: &FrozenHir, out_dir: &Path) -> io::Result<PathBuf> {
+    crate::engine::validate_single_module(hir)
+        .map_err(|e| io::Error::new(io::ErrorKind::InvalidInput, e))?;
     fs::create_dir_all(out_dir.join("src"))?;
     let pkg = sanitize_pkg_name(&hir.abi_name);
     let model = GeneratedFunctional::from_hir(hir);
@@ -498,6 +517,11 @@ fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
         .iter()
         .map(|op| match op {
             SeqOp::RegD { name, expr, has_en } => {
+                if let AssignExpr::MemRead { mem, addr } = expr {
+                    if model.mem_is_sync(mem) {
+                        return format!("        next_pending.insert({name:?}.into(), self.truncate({name:?}, self.eval_mem_read(inputs, {mem:?}, {addr:?})));\n        if reset {{ next_regs.insert({name:?}.into(), 0); }} else if {has_en} && !enable {{ next_regs.remove({name:?}); }}\n");
+                    }
+                }
                 let body = match expr {
                     AssignExpr::MemRead { mem, addr } if model.mem_is_sync(mem) => format!(
                         "                    let val = self.eval_mem_read(inputs, {mem:?}, {addr:?});\n\
@@ -540,11 +564,7 @@ fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
                 format!(
                     "{we_guard}                    let a_idx = self.lookup(inputs, {addr:?}) as usize;\n\
                                         let data = self.truncate({mem:?}, {});\n\
-                                        if let Some(bank) = self.mems.get_mut({mem:?}) {{\n\
-                                            if a_idx < bank.len() {{\n\
-                                                bank[a_idx] = data;\n\
-                                            }}\n\
-                                        }}\n\
+                                        writes.push(({mem:?}, a_idx, data));\n\
                                     }}\n",
                     render_expr(expr)
                 )
@@ -591,7 +611,11 @@ fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
         }}
         let c1 = sim.cycle(&pv);
         if c1.values.contains_key("rdata") {{
-            assert_eq!(c1.get("rdata"), Some(0xAB));
+            assert_eq!(c1.get("rdata"), Some(0));
+        }}
+        let c2 = sim.cycle(&pv);
+        if c2.values.contains_key("rdata") {{
+            assert_eq!(c2.get("rdata"), Some(0xAB));
         }}
     }}
 "#
@@ -687,17 +711,24 @@ impl FunctionalSim {{
     pub fn cycle(&mut self, inputs: &PortValues) -> PortValues {{
         let reset = self.lookup(inputs, {reset:?}) != 0;
         {enable_init}
-        // Apply SyncReadMem pending from previous cycle (latency 1) — matches Sim.
-        let pending = std::mem::take(&mut self.pending_mem_reads);
-        for (name, val) in pending {{
-            self.regs.insert(name, if reset {{ 0 }} else {{ val }});
-        }}
+        self.settle(inputs);
+        let mut next_regs = std::mem::take(&mut self.pending_mem_reads);
+        if reset {{ for value in next_regs.values_mut() {{ *value = 0; }} }}
         let mut next_pending = BTreeMap::new();
-        let mut next_regs: BTreeMap<String, u64> = BTreeMap::new();
-{seq_arms}        for (k, v) in next_regs {{
+        let mut writes: Vec<(&str, usize, u64)> = Vec::new();
+{seq_arms}        for (mem, index, value) in writes {{
+            if let Some(bank) = self.mems.get_mut(mem) {{
+                if let Some(word) = bank.get_mut(index) {{ *word = value; }}
+            }}
+        }}
+        for (k, v) in next_regs {{
             self.regs.insert(k, v);
         }}
         self.pending_mem_reads = next_pending;
+        self.settle(inputs)
+    }}
+
+    fn settle(&mut self, inputs: &PortValues) -> PortValues {{
         let mut out = inputs.clone();
         for (name, value) in &mut out.values {{ *value = self.truncate(name, *value); }}
 {comb_arms}        out
@@ -926,6 +957,8 @@ mod tests {
         pv.set("addr", 3);
         pv.set("wdata", 0xAB);
         pv.set("we", 1);
+        check_mixed_both(&mut sim, &mut abs, pv.clone()).unwrap();
+        assert_eq!(sim.ports().get("rdata"), Some(0));
         check_mixed_both(&mut sim, &mut abs, pv.clone()).unwrap();
         assert_eq!(sim.ports().get("rdata"), Some(0));
         check_mixed_both(&mut sim, &mut abs, pv).unwrap();

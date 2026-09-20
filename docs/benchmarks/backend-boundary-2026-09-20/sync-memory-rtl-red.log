@@ -1,0 +1,21 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.48s
+     Running tests/simulator_bit_vectors.rs (target/debug/deps/simulator_bit_vectors-2628a3b69306d350)
+
+running 1 test
+FATAL: tb.v:124: memory_edges_synctrue cycle=13 net=always_out
+       Time: 140  Scope: tb
+
+thread 'noncolliding_memory_edges_match_independent_pipeline_and_rtl' (71056) panicked at crates/bitloom/tests/simulator_bit_vectors.rs:635:5:
+assertion failed: Command::new("vvp").current_dir(dir).arg("run").status().unwrap().success()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test noncolliding_memory_edges_match_independent_pipeline_and_rtl ... FAILED
+
+failures:
+
+failures:
+    noncolliding_memory_edges_match_independent_pipeline_and_rtl
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 7 filtered out; finished in 2.96s
+
+error: test failed, to rerun pass `-p bitloom --test simulator_bit_vectors`

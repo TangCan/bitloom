@@ -62,7 +62,7 @@ fn fr134_wave_tywaves_gui_writes_manifest() {
     // Stub install marker: package present for G3 success path.
     fs::write(gui_root.join("BITLOOM_TYWAVES_GUI_OK"), "ok\n").unwrap();
 
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let status = cargo_bitloom()
         .arg("wave")
         .arg("--input")
@@ -124,7 +124,7 @@ fn fr134_gui_install_descriptor_pins_version_channel() {
     let gui_root = out.join("gui-root");
     fs::create_dir_all(&gui_root).unwrap();
     fs::write(gui_root.join("BITLOOM_TYWAVES_GUI_OK"), "ok\n").unwrap();
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let status = cargo_bitloom()
         .arg("wave")
         .arg("--input")
@@ -153,7 +153,7 @@ fn fr134_gui_install_descriptor_pins_version_channel() {
 #[test]
 fn fr134_force_missing_is_nonzero_readable() {
     let out = tempfile_dir("fr134-miss");
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let output = cargo_bitloom()
         .arg("wave")
         .arg("--input")
@@ -192,7 +192,7 @@ fn fr134_not_satisfied_by_fr125_alone() {
     perms.set_mode(0o755);
     fs::set_permissions(&stub, perms).unwrap();
 
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let status = cargo_bitloom()
         .arg("wave")
         .arg("--input")

@@ -1,0 +1,4 @@
+FATAL: target/chisel-numeric/cases/mixed_8_1_16/tb.v:12: sleft widths=8/1/16 a=255 shift=0
+       Time: 3  Scope: tb
+
+exit=1

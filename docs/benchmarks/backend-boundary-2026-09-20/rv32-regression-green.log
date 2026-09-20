@@ -1,0 +1,68 @@
+   Compiling bitloom-sim v1.1.6 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling rv32_feasibility v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/rv32_feasibility)
+   Compiling rv32_priv v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/rv32_priv)
+   Compiling rv32_pipeline_feasibility v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/rv32_pipeline_feasibility)
+   Compiling rv32_core v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/rv32_core)
+   Compiling rv32_pipe v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/rv32_pipe)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.66s
+     Running unittests src/lib.rs (target/debug/deps/rv32_core-4f0ec68340c77051)
+
+running 11 tests
+test tests::imm_reconstruct_i_s_b_u_j_contract ... ok
+test tests::elaborate_ok ... ok
+test tests::emit_yosys_friendly_v ... ok
+test tests::tick_addi_negative_imm_golden ... ok
+test tests::subset_minimal_filter_program ... ok
+test tests::tick_addi_then_add_golden ... ok
+test tests::tick_sw_negative_imm_mmio_golden ... ok
+test tests::tick_sw_mmio_led_golden ... ok
+test tests::tick_beq_taken_jumps_plus8 ... ok
+test tests::tick_beq_taken_jumps_minus8 ... ok
+test tests::tick_sw_mmio_excludes_dmem_bypass_golden ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running unittests src/lib.rs (target/debug/deps/rv32_feasibility-be3af7bebea47b49)
+
+running 3 tests
+test tests::elaborate_ok ... ok
+test tests::build_smoke_emits_yosys_friendly_v ... ok
+test tests::tick_fsm_and_sync_read_mem_golden ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/rv32_pipe-99ea7895a25b11f5)
+
+running 9 tests
+test tests::elaborate_ok ... ok
+test tests::emit_verilog_smoke ... ok
+test tests::tick_alu_alu_raw_forward_golden ... ok
+test tests::tick_addi_negative_imm_pipe_golden ... ok
+test tests::tick_clean_path_addi_add_golden ... ok
+test tests::tick_beq_taken_flush_wrong_path_not_committed ... ok
+test tests::tick_load_use_stall_atdd_golden ... ok
+test tests::tick_load_use_rs2_consumer_atdd_golden ... ok
+test tests::tick_sw_mmio_excludes_dmem_bypass_golden ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running unittests src/lib.rs (target/debug/deps/rv32_pipeline_feasibility-8e4018806b6aae23)
+
+running 4 tests
+test tests::elaborate_ok ... ok
+test tests::emit_verilog_smoke ... ok
+test tests::tick_stall_hold_mux_golden ... ok
+test tests::tick_two_stage_pipe_and_forward_golden ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/rv32_priv-2faed60cdf9c0e7f)
+
+running 4 tests
+test tests::elaborate_ok ... ok
+test tests::emit_verilog_smoke ... ok
+test tests::tick_mtvec_ecall_mret_golden ... ok
+test tests::tick_csr_rmw_and_ie_serialize_golden ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s

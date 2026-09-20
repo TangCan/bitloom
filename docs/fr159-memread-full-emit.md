@@ -21,9 +21,12 @@ real `MemRead` / `MemWrite` with **SyncReadMem latency-1**, aligned with
 ## Proof obligation
 
 1. Emitted `src/lib.rs` includes `eval_mem_read` + `pending_mem_reads` (SyncReadMem).
-2. SyncReadMem fixture: write then read → `rdata` is `0` then `0xAB` under
-   `cargo test` on the generated crate (gold
-   `gold_sync_read_mem_latency1_write_then_read`).
+2. SyncReadMem fixture (corrected 2026-09-20): a colliding first write/read
+   yields `rdata = 0, 0, 0xAB` over three edges in the internal read-before-write
+   model. The memory read stage has latency one; its RegD target adds a register
+   stage. The generated crate executes this sequence in
+   `gold_sync_read_mem_latency1_write_then_read`. This corrects the old
+   statement-order-dependent write-first expectation, without changing the historical FR159 close.
 3. In-process FR112 bridge remains green.
 
 ## Recipe
@@ -48,3 +51,5 @@ cargo test -p bitloom --test fr112_memread_equiv_tick
 - Async-only deepen beyond SyncReadMem MVP
 - Verilog/FIRRTL mem semantics deepen
 - Claiming NFR59 “fully cleared” before FR157–FR165 all close
+
+Current reset/enable/collision boundaries and actual generated Rust/Verilog/Chisel execution are recorded in [backend boundary evidence](backend-boundary-evidence-2026-09-20.md). FIRRTL memory collision remains undefined; this does not upgrade the FIRRTL memory lowering contract.

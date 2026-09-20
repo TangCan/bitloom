@@ -99,6 +99,51 @@ fn reg_flags<'a>(m: &'a bitloom_hir::Module, name: &str) -> (bool, bool) {
     (false, false)
 }
 
+// A SyncReadMem result has one memory-read stage before a RegD target.
+fn sync_read_name(m: &bitloom_hir::Module, target: &str) -> String {
+    let index = m
+        .body
+        .iter()
+        .position(|s| matches!(s, Stmt::RegDecl { name, .. } if name == target))
+        .expect("frozen register target");
+    let mut name = format!("__bitloom_read_{index}");
+    while m.ports.iter().any(|p| p.name == name)
+        || m.body.iter().any(|s| match s {
+            Stmt::RegDecl { name: n, .. }
+            | Stmt::WireDecl { name: n, .. }
+            | Stmt::MemDecl { name: n, .. } => *n == name,
+            Stmt::Instance(inst) => inst.name == name,
+            _ => false,
+        })
+    {
+        name.push('_');
+    }
+    name
+}
+
+fn sync_read_width(m: &bitloom_hir::Module, expr: &AssignExpr) -> Option<u32> {
+    let AssignExpr::MemRead { mem, .. } = expr else {
+        return None;
+    };
+    m.body.iter().find_map(|s| match s {
+        Stmt::MemDecl {
+            name,
+            sync_read: true,
+            width,
+            ..
+        } if name == mem => Some(*width),
+        _ => None,
+    })
+}
+
+fn sequential_rhs(m: &bitloom_hir::Module, target: &str, expr: &AssignExpr) -> String {
+    if sync_read_width(m, expr).is_some() {
+        sync_read_name(m, target)
+    } else {
+        emit_expr(expr)
+    }
+}
+
 fn emit_module(m: &bitloom_hir::Module) -> String {
     let mut out = String::new();
     out.push_str(&format!("module {} (\n", m.name));
@@ -125,6 +170,28 @@ fn emit_module(m: &bitloom_hir::Module) -> String {
         }
         if matches!(p.ty, GroundType::Reset) {
             rst = Some(p.name.as_str());
+        }
+    }
+
+    // Read stages are not reset or gated by the destination register enable.
+    // Both stages use nonblocking assignments, preserving pre-edge sampling.
+    for stmt in &m.body {
+        if let Stmt::Process(p) = stmt {
+            if p.kind == ProcessKind::Sequential {
+                for a in &p.assigns {
+                    if let AssignTarget::RegD(target) = &a.target {
+                        if let Some(width) = sync_read_width(m, &a.expr) {
+                            let name = sync_read_name(m, target);
+                            out.push_str(&format!(
+                                "  reg [{}:0] {name};\n  always @(posedge {}) {name} <= {};\n",
+                                width - 1,
+                                clk.unwrap_or("clk"),
+                                emit_expr(&a.expr)
+                            ));
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -217,7 +284,7 @@ fn emit_module(m: &bitloom_hir::Module) -> String {
                         for a in &async_regs {
                             if let AssignTarget::RegD(n) = &a.target {
                                 let (_, has_en) = reg_flags(m, n);
-                                let rhs = emit_expr(&a.expr);
+                                let rhs = sequential_rhs(m, n, &a.expr);
                                 if has_en {
                                     out.push_str(&format!("      if (en) {n} <= {rhs};\n"));
                                 } else {
@@ -240,7 +307,7 @@ fn emit_module(m: &bitloom_hir::Module) -> String {
                             for a in &sync_regs {
                                 if let AssignTarget::RegD(n) = &a.target {
                                     let (_, has_en) = reg_flags(m, n);
-                                    let rhs = emit_expr(&a.expr);
+                                    let rhs = sequential_rhs(m, n, &a.expr);
                                     if has_en {
                                         out.push_str(&format!("      if (en) {n} <= {rhs};\n"));
                                     } else {
@@ -255,9 +322,11 @@ fn emit_module(m: &bitloom_hir::Module) -> String {
                                 let rhs = emit_expr(&a.expr);
                                 match we {
                                     Some(en) => out.push_str(&format!(
-                                        "    if ({en}) {mem}[{addr}] <= {rhs};\n"
+                                        "    if (!{rst} && {en}) {mem}[{addr}] <= {rhs};\n"
                                     )),
-                                    None => out.push_str(&format!("    {mem}[{addr}] <= {rhs};\n")),
+                                    None => out.push_str(&format!(
+                                        "    if (!{rst}) {mem}[{addr}] <= {rhs};\n"
+                                    )),
                                 }
                             }
                         }

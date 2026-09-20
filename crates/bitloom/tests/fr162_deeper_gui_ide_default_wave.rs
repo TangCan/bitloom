@@ -71,7 +71,7 @@ fn fr162_docs_contract_forbid_fr134_alone() {
 #[test]
 fn fr162_default_wave_emits_gui_primary() {
     let out = tempfile_dir("fr162-default");
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let status = cargo_bitloom()
         .arg("wave")
         .arg("--input")
@@ -106,7 +106,7 @@ fn fr162_default_wave_emits_gui_primary() {
 #[test]
 fn fr162_default_force_missing_nonzero_readable() {
     let out = tempfile_dir("fr162-miss");
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let output = cargo_bitloom()
         .arg("wave")
         .arg("--input")
@@ -137,7 +137,7 @@ fn fr162_default_force_missing_nonzero_readable() {
 #[test]
 fn fr162_no_tywaves_gui_opts_out_of_primary() {
     let out = tempfile_dir("fr162-optout");
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let status = cargo_bitloom()
         .arg("wave")
         .arg("--input")

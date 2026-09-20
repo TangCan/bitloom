@@ -201,9 +201,9 @@ Rejected on this path: heap `Vec`/`Box`/`String`（软件堆，非硬件 `Vec<T,
 
 Functional view（手写 `#[functional_model]` 或 CAP-13 生成的 Rust crate）may use rejected constructs. Fields marked `#[functional_state]` never enter HIR.
 
-## FR47 dual-sim generators (MVP subset)
+## FR47 dual-sim generators (current subset)
 
-`generate_functional_sim` / `generate_cycle_accurate_sim`（及 CLI `gen-func` / `gen-cycle`）当前 **MVP = 扁平单模块**：只消费顶层一个 module；**不**保证层次实例（`instances`）或 `MemDecl` 的周期精确 emit。扩到层次/mem 须单独故事并先改本段与 `docs/fr47-dual-sim-generation.md` / `deferred-work.md`——禁止静默扩子集。
+`generate_functional_sim` / `generate_cycle_accurate_sim`（及 CLI `gen-func` / `gen-cycle`）当前支持 **无实例的单模块**，含文档化 `Mem` / `SyncReadMem`；两类生成Rust crate均有真实编译运行验收。2026-09-20维护补齐cycle生成的enable/async元数据，并统一组合拓扑、边沿采样及内存读阶段。层级输入明确拒绝，不再静默消费首模块；不交付任意精度或完整层级模拟器。历史MVP不含Mem的说明已由后续实现及本轮证据取代。同步读阶段与目标寄存器的延迟、reset/enable、内部read-before-write碰撞及FIRRTL内存未证明边界见 `docs/backend-boundary-evidence-2026-09-20.md`；`docs/fr47-dual-sim-generation.md` / `deferred-work.md`同步当前状态。
 
 **消歧（Epic 29）：** FR47「sim generators」= 从 FrozenHir **生成**功能/周期精确 **Rust crate**。**不是** FR73/FR76/FR77 的 elaborate-time / HLS 数据流 **闭包**定制。不得用 FR47 完成话术冒充 Epic 29 关闭。
 

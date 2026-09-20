@@ -1,0 +1,4 @@
+FATAL: /tmp/bitloom-chisel-shr-red-tb.sv:5: SInt8 logical right shift: expected 007f got ffff
+       Time: 1  Scope: tb
+
+exit=1

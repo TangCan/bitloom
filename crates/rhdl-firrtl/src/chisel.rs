@@ -993,18 +993,69 @@ fn ref_name(m: &Module, n: &str) -> String {
     }
 }
 
-fn emit_expr(m: &Module, expr: &AssignExpr) -> String {
+fn signal_ty<'a>(m: &'a Module, name: &str) -> Option<&'a GroundType> {
+    m.ports
+        .iter()
+        .find(|p| p.name == name)
+        .map(|p| &p.ty)
+        .or_else(|| {
+            m.body.iter().find_map(|s| match s {
+                Stmt::RegDecl { name: n, ty, .. } | Stmt::WireDecl { name: n, ty, .. }
+                    if n == name =>
+                {
+                    Some(ty)
+                }
+                _ => None,
+            })
+        })
+}
+
+fn emit_logical_shift(m: &Module, a: &str, b: &str, target: &str, left: bool) -> String {
+    let ty = signal_ty(m, target).expect("frozen shift target has a type");
+    let width = match ty {
+        GroundType::UInt { width } | GroundType::SInt { width } => *width,
+        _ => 1,
+    };
+    let value = ref_name(m, a);
+    let amount = ref_name(m, b);
+    // Bound dynamic-left-shift inference even for a 64-bit shift input. The
+    // full amount still controls the overflow guard; it is never reduced modulo.
+    let bits = (u32::BITS - (width - 1).leading_zeros()).max(1);
+    let expr = if left {
+        format!(
+            "Mux({amount}.asUInt >= {width}.U, 0.U({width}.W), ({value}.asUInt << {amount}.asUInt.pad({bits})({}, 0)).pad({width})({}, 0))",
+            bits - 1,
+            width - 1
+        )
+    } else {
+        format!("({value}.asUInt >> {amount}.asUInt).pad({width})")
+    };
+    if matches!(ty, GroundType::SInt { .. }) {
+        format!("({expr}).asSInt")
+    } else {
+        expr
+    }
+}
+
+fn emit_expr(m: &Module, expr: &AssignExpr, target: &str) -> String {
     match expr {
         AssignExpr::Ref(n) => ref_name(m, n),
         AssignExpr::Lit(v) => format!("{v}.U"),
-        AssignExpr::Inc(n) => format!("{} + 1.U", ref_name(m, n)),
+        AssignExpr::Inc(n) => {
+            let one = if matches!(signal_ty(m, n), Some(GroundType::SInt { .. })) {
+                "1.S"
+            } else {
+                "1.U"
+            };
+            format!("{} + {one}", ref_name(m, n))
+        }
         AssignExpr::Add(a, b) => format!("{} + {}", ref_name(m, a), ref_name(m, b)),
         AssignExpr::Sub(a, b) => format!("{} - {}", ref_name(m, a), ref_name(m, b)),
         AssignExpr::And(a, b) => format!("{} & {}", ref_name(m, a), ref_name(m, b)),
         AssignExpr::Or(a, b) => format!("{} | {}", ref_name(m, a), ref_name(m, b)),
         AssignExpr::Xor(a, b) => format!("{} ^ {}", ref_name(m, a), ref_name(m, b)),
-        AssignExpr::Shl(a, b) => format!("{} << {}", ref_name(m, a), ref_name(m, b)),
-        AssignExpr::Shr(a, b) => format!("{} >> {}", ref_name(m, a), ref_name(m, b)),
+        AssignExpr::Shl(a, b) => emit_logical_shift(m, a, b, target, true),
+        AssignExpr::Shr(a, b) => emit_logical_shift(m, a, b, target, false),
         AssignExpr::Ult { lhs, rhs, .. } => format!("{} < {}", ref_name(m, lhs), ref_name(m, rhs)),
         AssignExpr::Slt { lhs, rhs, .. } => format!("{} < {}", ref_name(m, lhs), ref_name(m, rhs)),
         AssignExpr::Sar { value, shamt, .. } => {
@@ -1017,10 +1068,20 @@ fn emit_expr(m: &Module, expr: &AssignExpr) -> String {
             format!("Cat({}, {})", ref_name(m, high), ref_name(m, low))
         }
         AssignExpr::ZeroExtend { src, to_width, .. } => {
-            format!("{}.pad({to_width})", ref_name(m, src))
+            let expr = format!("{}.asUInt.pad({to_width})", ref_name(m, src));
+            if matches!(signal_ty(m, target), Some(GroundType::SInt { .. })) {
+                format!("{expr}.asSInt")
+            } else {
+                expr
+            }
         }
         AssignExpr::SignExtend { src, to_width, .. } => {
-            format!("{}.asSInt.pad({to_width}).asUInt", ref_name(m, src))
+            let expr = format!("{}.asSInt.pad({to_width})", ref_name(m, src));
+            if matches!(signal_ty(m, target), Some(GroundType::SInt { .. })) {
+                expr
+            } else {
+                format!("{expr}.asUInt")
+            }
         }
         AssignExpr::Eq(a, b) => format!("{} === {}", ref_name(m, a), ref_name(m, b)),
         AssignExpr::Mux { sel, t, f } => format!(
@@ -1191,13 +1252,29 @@ fn emit_stmt_into(
     };
 
     match stmt {
-        Stmt::RegDecl { name, ty, .. } => {
+        Stmt::RegDecl {
+            name,
+            ty,
+            async_reset,
+            ..
+        } => {
             enter(body, BodySection::Registers, "registers");
             let w = match ty {
                 GroundType::UInt { width } | GroundType::SInt { width } => *width,
                 _ => 1,
             };
-            body.push_str(&format!("  val {name} = RegInit(0.U({w}.W))\n"));
+            let zero = if matches!(ty, GroundType::SInt { .. }) {
+                format!("0.S({w}.W)")
+            } else {
+                format!("0.U({w}.W)")
+            };
+            let init = format!("RegInit({zero})");
+            let init = if *async_reset {
+                format!("withReset(reset.asAsyncReset) {{ {init} }}")
+            } else {
+                init
+            };
+            body.push_str(&format!("  val {name} = {init}\n"));
         }
         Stmt::WireDecl { name, ty, .. } => {
             enter(body, BodySection::Wires, "wires");
@@ -1209,27 +1286,58 @@ fn emit_stmt_into(
                 match (&a.target, p.kind) {
                     (AssignTarget::Net(n), ProcessKind::Combinational)
                     | (AssignTarget::RegD(n), ProcessKind::Sequential) => {
-                        body.push_str(&format!(
-                            "  {} := {}\n",
-                            ref_name(m, n),
-                            emit_expr(m, &a.expr)
-                        ));
+                        let mut rhs = emit_expr(m, &a.expr, n);
+                        if matches!(a.target, AssignTarget::RegD(_))
+                            && matches!(a.expr, AssignExpr::MemRead { .. })
+                        {
+                            // Elaborate the read outside `when(en)` so SyncReadMem
+                            // samples every edge; en belongs to the destination reg.
+                            let index = m
+                                .body
+                                .iter()
+                                .position(|s| matches!(s, Stmt::RegDecl { name, .. } if name == n))
+                                .expect("frozen register target");
+                            let mut read = format!("__bitloom_read_{index}");
+                            while m.ports.iter().any(|p| p.name == read)
+                                || m.body.iter().any(|s| match s {
+                                    Stmt::RegDecl { name, .. }
+                                    | Stmt::WireDecl { name, .. }
+                                    | Stmt::MemDecl { name, .. } => *name == read,
+                                    Stmt::Instance(inst) => inst.name == read,
+                                    _ => false,
+                                })
+                            {
+                                read.push('_');
+                            }
+                            body.push_str(&format!("  val {read} = {rhs}\n"));
+                            rhs = read;
+                        }
+                        let assign = format!("{} := {rhs}", ref_name(m, n));
+                        let enabled = matches!(&a.target, AssignTarget::RegD(_)) && m.body.iter().any(|s| matches!(s, Stmt::RegDecl { name, has_enable: true, .. } if name == n));
+                        if enabled {
+                            body.push_str(&format!(
+                                "  when ({}.asBool) {{ {assign} }}\n",
+                                ref_name(m, "en")
+                            ));
+                        } else {
+                            body.push_str(&format!("  {assign}\n"));
+                        }
                     }
                     (AssignTarget::MemWrite { mem, addr, we }, ProcessKind::Sequential) => {
                         let write = format!(
                             "{mem}.write({}, {})",
                             ref_name(m, addr),
-                            emit_expr(m, &a.expr)
+                            emit_expr(m, &a.expr, mem)
                         );
                         match we {
                             Some(en) => {
                                 body.push_str(&format!(
-                                    "  when ({}) {{\n    {write}\n  }}\n",
+                                    "  when (!reset.asBool && {}.asBool) {{\n    {write}\n  }}\n",
                                     ref_name(m, en)
                                 ));
                             }
                             None => {
-                                body.push_str(&format!("  {write}\n"));
+                                body.push_str(&format!("  when (!reset.asBool) {{ {write} }}\n"));
                             }
                         }
                     }

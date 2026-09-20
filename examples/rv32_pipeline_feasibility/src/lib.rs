@@ -93,8 +93,7 @@ mod tests {
 
         pv.set("din", 0x22);
         sim.set_inputs(pv.clone());
-        sim.tick(); // comb still had din=0x11 → s0 stays 0x11, s1<=0x11
-        sim.tick(); // now s0<=0x22, s1<=0x11
+        sim.tick(); // Current din is sampled: s0<=0x22, s1<=old s0 (0x11).
         assert_eq!(sim.ports().get("s0_out"), Some(0x22));
         assert_eq!(sim.ports().get("s1_out"), Some(0x11));
         assert_eq!(sim.ports().get("fwd_out"), Some(0x11));

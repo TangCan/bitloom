@@ -66,7 +66,7 @@ cp "$SCALA" "$WORKDIR/src/main/scala/"
 
 # Minimal build.sbt: matching chisel + chisel-plugin (CrossVersion.full), Chisel 7.15.0.
 cat >"$WORKDIR/build.sbt" <<'EOF'
-scalaVersion := "2.13.16"
+scalaVersion := "2.13.18"
 libraryDependencies += "org.chipsalliance" %% "chisel" % "7.15.0"
 addCompilerPlugin("org.chipsalliance" % "chisel-plugin" % "7.15.0" cross CrossVersion.full)
 EOF

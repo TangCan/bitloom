@@ -97,6 +97,7 @@ impl Sim {
     }
 
     pub fn with_engine(hir: FrozenHir, engine: TickEngine) -> Self {
+        engine::validate_single_module(&hir).expect("Sim construction failed");
         let mut regs = BTreeMap::new();
         let mut mems = BTreeMap::new();
         for m in &hir.circuit().modules {
@@ -396,6 +397,7 @@ impl Sim {
 
     /// One rising edge of the module Clock (AD-15). Driven by FrozenHir assigns.
     pub fn tick(&mut self) {
+        self.tick_combinational();
         match self.engine {
             TickEngine::Interpreter => self.tick_interpreter(),
             TickEngine::Compiled => self.tick_compiled(),
@@ -461,8 +463,8 @@ impl Sim {
 
     /// Recompute combinational nets from current ports/regs without a clock edge.
     ///
-    /// Use after [`Self::set_inputs`] when sequential logic samples same-cycle
-    /// enables derived from inputs (e.g. `wr_en && !full`).
+    /// `tick` settles automatically before sampling and after committing the edge.
+    /// Use this method to observe combinational outputs without advancing time.
     pub fn settle(&mut self) {
         self.tick_combinational();
     }
@@ -513,20 +515,16 @@ impl Sim {
         let reset = self.reset_active(&m);
         let enable = self.enable_active();
 
-        // Apply SyncReadMem pending data from previous cycle (latency 1).
-        let pending = std::mem::take(&mut self.pending_mem_reads);
-        for (name, val) in pending {
-            if reset {
-                self.regs.insert(name, 0);
-            } else {
-                self.regs.insert(name, val);
+        // Pending synchronous reads join the simultaneous register commit;
+        // downstream sequential RHS still observes the pre-edge register file.
+        let mut next_regs = std::mem::take(&mut self.pending_mem_reads);
+        if reset {
+            for value in next_regs.values_mut() {
+                *value = 0;
             }
         }
-
         let mut next_pending = BTreeMap::new();
-        // NBA: evaluate all RegD next-values against the pre-edge register file,
-        // then commit — required for 2-flop CDC latency (FR79 / AD-29).
-        let mut next_regs: BTreeMap<String, u64> = BTreeMap::new();
+        let mut writes = Vec::new();
         for stmt in &m.body {
             if let Stmt::Process(p) = stmt {
                 if p.kind != ProcessKind::Sequential {
@@ -536,6 +534,23 @@ impl Sim {
                     match &a.target {
                         AssignTarget::RegD(name) => {
                             let (_async_rst, has_en) = self.reg_meta(name);
+                            if let AssignExpr::MemRead { mem, addr } = &a.expr {
+                                if self.mem_is_sync(mem) {
+                                    // The memory read stage samples every edge; the
+                                    // destination register gates retirement at this edge.
+                                    let value = self.eval(&AssignExpr::MemRead {
+                                        mem: mem.clone(),
+                                        addr: addr.clone(),
+                                    });
+                                    next_pending.insert(name.clone(), self.truncate(name, value));
+                                    if reset {
+                                        next_regs.insert(name.clone(), 0);
+                                    } else if has_en && !enable {
+                                        next_regs.remove(name);
+                                    }
+                                    continue;
+                                }
+                            }
                             if reset {
                                 next_regs.insert(name.clone(), 0);
                                 continue;
@@ -543,19 +558,8 @@ impl Sim {
                             if has_en && !enable {
                                 continue;
                             }
-                            match &a.expr {
-                                AssignExpr::MemRead { mem, addr } if self.mem_is_sync(mem) => {
-                                    let val = self.eval(&AssignExpr::MemRead {
-                                        mem: mem.clone(),
-                                        addr: addr.clone(),
-                                    });
-                                    next_pending.insert(name.clone(), self.truncate(name, val));
-                                }
-                                _ => {
-                                    let next = self.eval(&a.expr);
-                                    next_regs.insert(name.clone(), self.truncate(name, next));
-                                }
-                            }
+                            let next = self.eval(&a.expr);
+                            next_regs.insert(name.clone(), self.truncate(name, next));
                         }
                         AssignTarget::MemWrite { mem, addr, we } => {
                             if reset {
@@ -569,14 +573,19 @@ impl Sim {
                             let a_idx = self.lookup(addr) as usize;
                             let data = self.eval(&a.expr);
                             let data = self.truncate(mem, data);
-                            if let Some(bank) = self.mems.get_mut(mem) {
-                                if a_idx < bank.len() {
-                                    bank[a_idx] = data;
-                                }
-                            }
+                            writes.push((mem.clone(), a_idx, data));
                         }
                         _ => {}
                     }
+                }
+            }
+        }
+        // Internal collision convention is read-before-write, independent of
+        // statement order. FIRRTL collision results remain undefined.
+        for (mem, index, value) in writes {
+            if let Some(bank) = self.mems.get_mut(&mem) {
+                if let Some(word) = bank.get_mut(index) {
+                    *word = value;
                 }
             }
         }
@@ -587,20 +596,9 @@ impl Sim {
     }
 
     fn tick_combinational(&mut self) {
-        let Some(m) = self.hir.circuit().modules.first().cloned() else {
-            return;
-        };
-        for stmt in &m.body {
-            if let Stmt::Process(p) = stmt {
-                if p.kind == ProcessKind::Combinational {
-                    for a in &p.assigns {
-                        if let AssignTarget::Net(name) = &a.target {
-                            let val = self.eval(&a.expr);
-                            self.ports.set(name.clone(), self.truncate(name, val));
-                        }
-                    }
-                }
-            }
+        for (name, expr) in self.kernel.comb.clone() {
+            let value = self.eval(&expr);
+            self.ports.set(name.clone(), self.truncate(&name, value));
         }
     }
 }
@@ -1102,7 +1100,9 @@ mod tests {
         sim.set_inputs(pv.clone());
         sim.tick(); // write + schedule read of old (0)
         assert_eq!(sim.ports().get("rdata"), Some(0));
-        sim.tick(); // pending read delivers written value
+        sim.tick(); // retires the pre-write read; the new read sees 0xAB
+        assert_eq!(sim.ports().get("rdata"), Some(0));
+        sim.tick();
         assert_eq!(sim.ports().get("rdata"), Some(0xAB));
     }
 

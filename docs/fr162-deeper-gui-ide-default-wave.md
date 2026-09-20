@@ -25,7 +25,7 @@ silent-Ok under `BITLOOM_TYWAVES_GUI_FORCE_MISSING`.
 ```bash
 # FR162 primary (default): GUI manifests + FR125 sidecar + typed-wave (secondary)
 cargo bitloom wave \
-  --input crates/rhdl-firrtl/fixtures/external_hierarchy.fir \
+  --input crates/rhdl-firrtl/fixtures/external_wave_counter.fir \
   --out-dir target/wave-fr162 \
   --ticks 8
 

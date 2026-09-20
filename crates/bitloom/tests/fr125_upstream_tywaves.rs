@@ -58,7 +58,7 @@ fn fr125_wave_tywaves_writes_sidecar_and_keeps_fr117() {
     perms.set_mode(0o755);
     fs::set_permissions(&stub, perms).unwrap();
 
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let status = cargo_bitloom()
         .arg("wave")
         .arg("--input")
@@ -90,7 +90,7 @@ fn fr125_wave_tywaves_writes_sidecar_and_keeps_fr117() {
 #[test]
 fn fr125_force_missing_is_nonzero_readable() {
     let out = tempfile_dir("fr125-miss");
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let output = cargo_bitloom()
         .arg("wave")
         .arg("--input")
@@ -120,7 +120,7 @@ fn fr125_force_missing_is_nonzero_readable() {
 #[test]
 fn fr125_not_satisfied_by_fr117_alone() {
     let out = tempfile_dir("fr125-no-flag");
-    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_hierarchy.fir");
+    let fir = workspace_root().join("crates/rhdl-firrtl/fixtures/external_wave_counter.fir");
     let status = cargo_bitloom()
         .arg("wave")
         .arg("--input")

@@ -1,0 +1,36 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.53s
+     Running tests/simulator_bit_vectors.rs (target/debug/deps/simulator_bit_vectors-2628a3b69306d350)
+
+running 1 test
+
+thread 'hierarchy_is_compiled_but_simulation_rejects_every_module_order' (150037) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'hierarchy_is_compiled_but_simulation_rejects_every_module_order' (150037) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchy_is_compiled_but_simulation_rejects_every_module_order' (150037) panicked at crates/bitloom-sim/src/generate.rs:62:52:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+tb.v:11: $finish called at 100 (1s)
+
+thread 'hierarchy_is_compiled_but_simulation_rejects_every_module_order' (150037) panicked at crates/bitloom/tests/simulator_bit_vectors.rs:884:5:
+firtool="/home/richard/.cache/rhdl/firtool/1.159.0/bin" artifacts=/tmp/bitloom-hierarchy-150036-1789893127355818601
+/tmp/bitloom-hierarchy-150036-1789893127355818601/design.fir:22:5: error: connect has invalid flow: the destination expression "u.y" has source flow, expected sink or duplex flow
+    connect u.y, child_y
+    ^
+/tmp/bitloom-hierarchy-150036-1789893127355818601/design.fir:18:5: note: the destination was defined here
+    inst u of Child
+    ^
+
+test hierarchy_is_compiled_but_simulation_rejects_every_module_order ... FAILED
+
+failures:
+
+failures:
+    hierarchy_is_compiled_but_simulation_rejects_every_module_order
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.04s
+
+error: test failed, to rerun pass `-p bitloom --test simulator_bit_vectors`

@@ -149,3 +149,34 @@ fn fr103_product_api_exported() {
         "ip_dual must document FR103 + SyncFifoFunctional"
     );
 }
+
+#[test]
+fn fifo_independent_read_before_write_and_reset_bank_retention() {
+    let hir = SyncFifo::elaborate().unwrap();
+    let mut native = bitloom_sim::Sim::new(hir);
+    let mut functional = bitloom_sim::SyncFifoFunctional::new();
+    // Register reset preserves RAM; colliding first push samples old zero.
+    for (reset, write, read, data, expected) in [
+        (1, 0, 0, 0, 0),
+        (0, 1, 0, 0x11, 0),
+        (0, 1, 0, 0x22, 0x11),
+        (0, 0, 1, 0, 0x11),
+        (0, 0, 1, 0, 0x22),
+        (1, 0, 0, 0, 0),
+        (0, 0, 0, 0, 0x11),
+    ] {
+        let mut input = PortValues::default();
+        for (name, value) in [
+            ("rst", reset),
+            ("wr_en", write),
+            ("rd_en", read),
+            ("data_in", data),
+        ] {
+            input.set(name, value);
+        }
+        native.set_inputs(input.clone());
+        native.tick();
+        assert_eq!(native.ports().get("data_out"), Some(expected));
+        assert_eq!(functional.cycle(&input).get("data_out"), Some(expected));
+    }
+}

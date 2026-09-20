@@ -1,0 +1,89 @@
+--------------------------------------------------------------------------------
+Profile data file 'docs/benchmarks/backend-boundary-2026-09-20/callgrind.interpreter' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 527979124
+Trigger: Program termination
+Profiled target:  target/release/deps/baseline-ac263366af62f9ca (PID 541443, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       95
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+2,591,478,490 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                    file:function
+--------------------------------------------------------------------------------
+459,895,943 (17.75%)  ???:0x0000000000188620 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+407,086,852 (15.71%)  ???:0x00000000000ab650 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+236,884,606 ( 9.14%)  ???:0x00000000000ab250 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+144,488,112 ( 5.58%)  ???:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+127,279,926 ( 4.91%)  ???:0x00000000000a9c90 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+102,941,886 ( 3.97%)  ???:free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 62,385,018 ( 2.41%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/string.rs:<alloc::string::String as core::clone::Clone>::clone [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+ 62,362,592 ( 2.41%)  ???:0x0000000000188d80 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 59,350,458 ( 2.29%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/search.rs:<bitloom_hir::PortValues>::get
+ 54,159,843 ( 2.09%)  ???:0x00000000000a9bb0 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 50,034,597 ( 1.93%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/search.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, u64>>::insert
+ 47,510,712 ( 1.83%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/cmp.rs:<bitloom_hir::PortValues>::get
+ 43,481,136 ( 1.68%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/cmp.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, u64>>::insert
+ 34,156,122 ( 1.32%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/search.rs:<bitloom_sim::Sim>::tick_combinational
+ 32,268,408 ( 1.25%)  crates/bitloom-hir/src/lib.rs:<bitloom_hir::AssignExpr as core::clone::Clone>::clone [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+ 28,396,368 ( 1.10%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/cmp.rs:<bitloom_sim::Sim>::tick_combinational
+ 26,565,608 ( 1.03%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/std/src/sys/alloc/unix.rs:__rustc::__rdl_alloc
+ 23,755,356 ( 0.92%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/cmp.rs:<bitloom_hir::PortValues>::get
+ 23,746,437 ( 0.92%)  crates/bitloom-sim/src/lib.rs:<bitloom_sim::Sim>::tick_interpreter [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+ 23,267,244 ( 0.90%)  crates/bitloom-hir/src/lib.rs:<alloc::vec::Vec<bitloom_hir::Stmt> as core::clone::Clone>::clone
+ 21,740,568 ( 0.84%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/cmp.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, u64>>::insert
+ 20,328,174 ( 0.78%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/option.rs:<bitloom_hir::PortValues>::get [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+ 18,546,360 ( 0.72%)  crates/bitloom-sim/src/lib.rs:<bitloom_sim::Sim>::eval [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+ 16,417,110 ( 0.63%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ptr/mod.rs:<alloc::string::String as core::clone::Clone>::clone
+ 16,016,856 ( 0.62%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/map.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, u64>>::insert [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+ 14,577,936 ( 0.56%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/node.rs:<bitloom_hir::PortValues>::get
+ 14,198,184 ( 0.55%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/cmp.rs:<bitloom_sim::Sim>::tick_combinational
+ 14,198,184 ( 0.55%)  crates/bitloom-sim/src/lib.rs:<bitloom_sim::Sim>::tick_combinational [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+ 13,291,899 ( 0.51%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/search.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, alloc::collections::btree::set_val::SetValZST>>::insert
+ 13,133,688 ( 0.51%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/alloc.rs:<alloc::string::String as core::clone::Clone>::clone
+ 13,133,688 ( 0.51%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/raw_vec/mod.rs:<alloc::string::String as core::clone::Clone>::clone
+ 12,423,318 ( 0.48%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/search.rs:<bitloom_sim::Sim>::eval
+ 11,913,747 ( 0.46%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ptr/non_null.rs:<bitloom_hir::PortValues>::get
+ 11,794,278 ( 0.46%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ptr/non_null.rs:<bitloom_sim::Sim>::tick_interpreter
+ 11,033,064 ( 0.43%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/cmp.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, alloc::collections::btree::set_val::SetValZST>>::insert
+ 11,014,473 ( 0.43%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ptr/non_null.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, u64>>::insert
+ 10,965,920 ( 0.42%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ptr/mod.rs:core::ptr::drop_glue::<bitloom_hir::AssignExpr> [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+ 10,925,256 ( 0.42%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/cmp.rs:<bitloom_sim::Sim>::tick_interpreter
+ 10,721,550 ( 0.41%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/node.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, u64>>::insert
+ 10,186,128 ( 0.39%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/cmp.rs:<bitloom_sim::Sim>::eval
+  8,234,226 ( 0.32%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/node.rs:<bitloom_sim::Sim>::tick_combinational
+  8,126,118 ( 0.31%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ptr/non_null.rs:<bitloom_sim::Sim>::tick_combinational
+  7,811,130 ( 0.30%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/search.rs:<bitloom_sim::coverage::Coverage>::sample::<alloc::string::String>
+  7,551,000 ( 0.29%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/search.rs:<bitloom_sim::Sim>::tick_interpreter
+  7,299,495 ( 0.28%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/iter/macros.rs:<bitloom_sim::Sim>::tick_interpreter
+  7,156,660 ( 0.28%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ptr/mod.rs:core::ptr::drop_glue::<bitloom_hir::Stmt> [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  6,348,342 ( 0.24%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/search.rs:<bitloom_sim::Sim>::tick
+  6,342,840 ( 0.24%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/cmp.rs:<bitloom_sim::coverage::Coverage>::sample::<alloc::string::String>
+  6,203,624 ( 0.24%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/raw_vec/mod.rs:core::ptr::drop_glue::<bitloom_hir::AssignExpr>
+  5,974,908 ( 0.23%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/iter/macros.rs:<bitloom_hir::PortValues>::get
+  5,930,925 ( 0.23%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/mem/maybe_uninit.rs:<alloc::vec::Vec<bitloom_hir::Stmt> as core::clone::Clone>::clone
+  5,579,331 ( 0.22%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/iter/macros.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, u64>>::insert
+  5,516,532 ( 0.21%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/cmp.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, alloc::collections::btree::set_val::SetValZST>>::insert
+  5,266,268 ( 0.20%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/alloc.rs:core::ptr::drop_glue::<bitloom_hir::AssignExpr>
+  5,117,112 ( 0.20%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/cmp.rs:<bitloom_sim::Sim>::tick
+  5,093,064 ( 0.20%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/cmp.rs:<bitloom_sim::Sim>::eval
+  4,684,680 ( 0.18%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/mem/maybe_uninit.rs:<alloc::vec::Vec<(alloc::string::String, bitloom_hir::AssignExpr)> as core::clone::Clone>::clone
+  4,681,272 ( 0.18%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/option.rs:<bitloom_sim::Sim>::eval
+  4,351,254 ( 0.17%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/map.rs:<alloc::collections::btree::map::BTreeMap<alloc::string::String, alloc::collections::btree::set_val::SetValZST>>::insert [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  4,214,532 ( 0.16%)  ???:0x00000000000a92d0 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  4,064,115 ( 0.16%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/node.rs:<alloc::collections::btree::node::Handle<alloc::collections::btree::node::NodeRef<alloc::collections::btree::node::marker::Mut, alloc::string::String, u64, alloc::collections::btree::node::marker::Leaf>, alloc::collections::btree::node::marker::Edge>>::insert_recursing::<alloc::alloc::Global, <alloc::collections::btree::map::entry::VacantEntry<alloc::string::String, u64>>::insert_entry::{closure#0}> [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  4,029,639 ( 0.16%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/alloc/src/collections/btree/map/entry.rs:<alloc::collections::btree::map::entry::VacantEntry<alloc::string::String, u64>>::insert_entry [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
+  3,789,786 ( 0.15%)  /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/slice/iter/macros.rs:<bitloom_sim::Sim>::tick_combinational
+  3,697,011 ( 0.14%)  crates/bitloom-sim/src/coverage.rs:<bitloom_sim::coverage::Coverage>::sample::<alloc::string::String> [/nvme_data2/richard/2026/rhdl/target/release/deps/baseline-ac263366af62f9ca]
