@@ -1,0 +1,6 @@
+# Complete runtime dependency closure; Python 3.12.3 verified.
+cocotb==2.0.1
+cocotb-bus==0.3.0
+cocotbext-axi==0.1.28
+find-libpython==0.5.1
+scapy==2.7.0

@@ -1,0 +1,105 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.09s
+     Running tests/fr193_axi_protocol.rs (target/debug/deps/fr193_axi_protocol-cfa087ed100893e2)
+
+running 9 tests
+
+thread 'w_first_interpreter' (2024133) panicked at crates/bitloom/tests/fr193_axi_protocol.rs:306:21:
+assertion `left == right` failed: PROTOCOL w_first/interpreter frame 3 delayed AW must produce B post s_axi_bvalid; evidence <workspace>/crates/bitloom/../../target/fr193-axi/w_first/interpreter
+  left: Some(0)
+ right: Some(1)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test w_first_interpreter ... FAILED
+
+thread 'aw_first_interpreter' (2024127) panicked at crates/bitloom/tests/fr193_axi_protocol.rs:306:21:
+assertion `left == right` failed: PROTOCOL aw_first/interpreter frame 3 delayed W must produce B post s_axi_bvalid; evidence <workspace>/crates/bitloom/../../target/fr193-axi/aw_first/interpreter
+  left: Some(0)
+ right: Some(1)
+
+thread 'w_first_compiled' (2024132) panicked at crates/bitloom/tests/fr193_axi_protocol.rs:306:21:
+assertion `left == right` failed: PROTOCOL w_first/compiled frame 3 delayed AW must produce B post s_axi_bvalid; evidence <workspace>/crates/bitloom/../../target/fr193-axi/w_first/compiled
+  left: Some(0)
+ right: Some(1)
+test aw_first_interpreter ... FAILED
+test w_first_compiled ... FAILED
+
+thread 'aw_first_compiled' (2024126) panicked at crates/bitloom/tests/fr193_axi_protocol.rs:306:21:
+assertion `left == right` failed: PROTOCOL aw_first/compiled frame 3 delayed W must produce B post s_axi_bvalid; evidence <workspace>/crates/bitloom/../../target/fr193-axi/aw_first/compiled
+  left: Some(0)
+ right: Some(1)
+test aw_first_compiled ... FAILED
+
+thread 'concurrent_interpreter' (2024130) panicked at crates/bitloom/tests/fr193_axi_protocol.rs:306:21:
+assertion `left == right` failed: PROTOCOL concurrent/interpreter frame 3 concurrent same-address read must produce R and B post s_axi_rvalid; evidence <workspace>/crates/bitloom/../../target/fr193-axi/concurrent/interpreter
+  left: Some(0)
+ right: Some(1)
+test concurrent_interpreter ... FAILED
+
+thread 'concurrent_compiled' (2024129) panicked at crates/bitloom/tests/fr193_axi_protocol.rs:306:21:
+assertion `left == right` failed: PROTOCOL concurrent/compiled frame 3 concurrent same-address read must produce R and B post s_axi_rvalid; evidence <workspace>/crates/bitloom/../../target/fr193-axi/concurrent/compiled
+  left: Some(0)
+ right: Some(1)
+test concurrent_compiled ... FAILED
+
+thread 'w_first_rtl' (2024134) panicked at crates/bitloom/tests/fr193_axi_protocol.rs:359:9:
+RTL w_first: status=exit status: 1
+frame 0 post s_axi_bvalid=0 expected=0
+frame 0 post s_axi_rvalid=0 expected=0
+frame 1 pre s_axi_wready=1 expected=1
+frame 1 post s_axi_bvalid=0 expected=0
+frame 2 post s_axi_bvalid=0 expected=0
+frame 3 pre s_axi_awready=1 expected=1
+frame 3 post s_axi_bvalid=0 expected=1
+FATAL: tb.sv:89: PROTOCOL frame 3 delayed AW must produce B post s_axi_bvalid: expected 1, got 0
+       Time: 55  Scope: tb
+; evidence <workspace>/crates/bitloom/../../target/fr193-axi/w_first/rtl
+test w_first_rtl ... FAILED
+
+thread 'concurrent_rtl' (2024131) panicked at crates/bitloom/tests/fr193_axi_protocol.rs:359:9:
+RTL concurrent: status=exit status: 1
+frame 0 post s_axi_bvalid=0 expected=0
+frame 0 post s_axi_rvalid=0 expected=0
+frame 1 pre s_axi_awready=1 expected=1
+frame 1 pre s_axi_wready=1 expected=1
+frame 1 post s_axi_bvalid=1 expected=1
+frame 2 pre s_axi_bvalid=1 expected=1
+frame 2 post s_axi_bvalid=0 expected=0
+frame 3 pre s_axi_awready=1 expected=1
+frame 3 pre s_axi_wready=1 expected=1
+frame 3 pre s_axi_arready=1 expected=1
+frame 3 post s_axi_bvalid=1 expected=1
+frame 3 post s_axi_rvalid=0 expected=1
+FATAL: tb.sv:99: PROTOCOL frame 3 concurrent same-address read must produce R and B post s_axi_rvalid: expected 1, got 0
+       Time: 55  Scope: tb
+; evidence <workspace>/crates/bitloom/../../target/fr193-axi/concurrent/rtl
+test concurrent_rtl ... FAILED
+
+thread 'aw_first_rtl' (2024128) panicked at crates/bitloom/tests/fr193_axi_protocol.rs:359:9:
+RTL aw_first: status=exit status: 1
+frame 0 post s_axi_bvalid=0 expected=0
+frame 0 post s_axi_rvalid=0 expected=0
+frame 1 pre s_axi_awready=1 expected=1
+frame 1 post s_axi_bvalid=0 expected=0
+frame 2 post s_axi_bvalid=0 expected=0
+frame 3 pre s_axi_wready=1 expected=1
+frame 3 post s_axi_bvalid=0 expected=1
+FATAL: tb.sv:89: PROTOCOL frame 3 delayed W must produce B post s_axi_bvalid: expected 1, got 0
+       Time: 55  Scope: tb
+; evidence <workspace>/crates/bitloom/../../target/fr193-axi/aw_first/rtl
+test aw_first_rtl ... FAILED
+
+failures:
+
+failures:
+    aw_first_compiled
+    aw_first_interpreter
+    aw_first_rtl
+    concurrent_compiled
+    concurrent_interpreter
+    concurrent_rtl
+    w_first_compiled
+    w_first_interpreter
+    w_first_rtl
+
+test result: FAILED. 0 passed; 9 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.08s
+
+error: test failed, to rerun pass `-p bitloom --test fr193_axi_protocol`

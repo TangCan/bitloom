@@ -854,7 +854,7 @@ development_status:
   # Phase 24: approved 2026-09-20; M0 only authorized
   epic-125: in-progress
   125-1-合同-接口与-nfr14: done
-  125-2-axi-真实-rtl-红测: backlog
+  125-2-axi-真实-rtl-红测: done
   125-3-axi-修复-双模型与-m0-关闭: backlog
   epic-126: backlog
   126-1-组合基础-nfr14: backlog
