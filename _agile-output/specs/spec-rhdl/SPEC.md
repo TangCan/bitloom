@@ -122,3 +122,5 @@ sources:
 ## Phase 24 — 可组合 IP（已批准规划，尚未交付）
 
 FR192–201 / NFR93–99、Epic125–130 于 2026-09-20 登记；原 CAP-14 保留。新增目标为可组合模块/流/FIFO、CSR/AXI-Lite、UART/GPIO/Timer/IRQ 系统及单独验收的外部小核。仅 M0 获准实现；126–130 backlog。正式接口见 `docs/ip/phase24-contract.md`，正式需求见 PRD addendum 与 epics.md Phase 24 Inventory。FR189 / Epic122 deferred、NFR91 及历史关闭保持；此阶段未交付，不授权发布或工具升钉。
+
+2026-09-20 M0 状态：Epic125 / FR192–193 已按 `docs/ip/phase24-axi-green-evidence.md` 关闭；FR194–201仍未交付。

@@ -896,10 +896,13 @@ pub fn i2c_master_dual_stimulus() -> Vec<PortValues> {
     out
 }
 
-/// Handwritten `Axi4LiteSlave` FL (FR168) — write+read handshake ≡ tick on
-/// [`axi4_lite_slave_dual_stimulus`]. Not GeneratedFunctional; not FR163 alone.
+/// Handwritten `Axi4LiteSlave` FL (FR168 / FR193): independent AW/W capture,
+/// byte writes, concurrent read-before-write, held responses, and reset cancellation.
+/// Verified against independent protocol vectors as well as the public stimulus.
 #[derive(Debug, Clone, Default)]
 pub struct Axi4LiteSlaveFunctional {
+    aw: Option<u64>,
+    w: Option<(u64, u64)>,
     data0_r: u64,
     data1_r: u64,
     data2_r: u64,
@@ -931,13 +934,30 @@ impl AbstractionView for Axi4LiteSlaveFunctional {
         if rst {
             *self = Self::default();
         } else {
-            let aw_ready = self.bvalid_r == 0;
-            let ar_ready = self.rvalid_r == 0 && self.bvalid_r == 0;
-            let do_write = awvalid && aw_ready && wvalid;
-            let do_read = !do_write && arvalid && ar_ready;
+            let do_read = arvalid && self.rvalid_r == 0;
             let b_fire = self.bvalid_r != 0 && bready;
             let r_fire = self.rvalid_r != 0 && rready;
-
+            // Snapshot before any write: concurrent AR observes the old bank.
+            if do_read {
+                self.rdata_r = match araddr {
+                    0 => self.data0_r,
+                    4 => self.data1_r,
+                    8 => self.data2_r,
+                    12 => self.data3_r,
+                    _ => 0,
+                };
+            }
+            if self.bvalid_r == 0 {
+                if self.aw.is_none() && awvalid {
+                    self.aw = Some(awaddr);
+                }
+                if self.w.is_none() && wvalid {
+                    self.w = Some((wdata, wstrb));
+                }
+            }
+            let do_write = self.aw.is_some() && self.w.is_some();
+            let awaddr = self.aw.unwrap_or(0);
+            let (wdata, wstrb) = self.w.unwrap_or((0, 0));
             let mut byte_mask = 0u64;
             if wstrb & 1 != 0 {
                 byte_mask |= 0x0000_00ff;
@@ -965,15 +985,9 @@ impl AbstractionView for Axi4LiteSlaveFunctional {
                 }
             }
 
-            let rdata_mux = match araddr {
-                0x00 => self.data0_r,
-                0x04 => self.data1_r,
-                0x08 => self.data2_r,
-                0x0c => self.data3_r,
-                _ => 0,
-            };
-            if do_read {
-                self.rdata_r = rdata_mux;
+            if do_write {
+                self.aw = None;
+                self.w = None;
             }
 
             self.bvalid_r = if do_write {
@@ -992,11 +1006,12 @@ impl AbstractionView for Axi4LiteSlaveFunctional {
             };
         }
 
-        let aw_ready = self.bvalid_r == 0;
-        let ar_ready = self.rvalid_r == 0 && self.bvalid_r == 0;
+        let aw_ready = self.bvalid_r == 0 && self.aw.is_none();
+        let w_ready = self.bvalid_r == 0 && self.w.is_none();
+        let ar_ready = self.rvalid_r == 0;
         let mut out = inputs.clone();
         out.set("s_axi_awready", u64::from(aw_ready));
-        out.set("s_axi_wready", u64::from(aw_ready));
+        out.set("s_axi_wready", u64::from(w_ready));
         out.set("s_axi_bresp", 0);
         out.set("s_axi_bvalid", self.bvalid_r & 1);
         out.set("s_axi_arready", u64::from(ar_ready));

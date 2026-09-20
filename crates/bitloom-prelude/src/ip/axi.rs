@@ -9,13 +9,13 @@ use crate::{
 /// Documented widths: **ADDR=8**, **DATA=32**, `wstrb` 4-bit. Word window
 /// `0x00` / `0x04` / `0x08` / `0x0C` → `data0_r`..`data3_r`.
 ///
-/// - **Write (A1):** when `awvalid && wvalid && !bvalid`, decode `awaddr`, merge
-///   `wdata` through `wstrb` byte lanes into the hit register (unmapped write
-///   ignored); hold `bvalid` until `bready`.
-/// - **Read (A1):** when `arvalid && !rvalid && !bvalid`, latch `rdata` from the
-///   decoded register (unmapped → 0); hold `rvalid` until `rready`.
-/// - **Ready:** combinatorial when the corresponding response channel is idle;
-///   write preferred over read in the same cycle.
+/// - **Write:** independently capture one AW and one W; commit exactly once when
+///   both are present. Same-edge AW/W still produces BVALID after one tick.
+/// - **Read:** independently snapshot the decoded register on AR acceptance,
+///   including during B stalls. Concurrent same-address reads see the old value.
+/// - **Ready:** depends only on registered slot/response occupancy. Responses
+///   hold until ready; synchronous reset clears the bank and all pending state.
+/// - Unmapped/unaligned reads return zero and writes are ignored, always OKAY.
 ///
 /// Non-goals (A4): Full AXI (burst/ID/QoS), interconnect, multi-slave arrays,
 /// commercial VIP co-sim, GPIO VIP, generator closures (Epic 29).
@@ -119,6 +119,24 @@ impl Elaboratable for Axi4LiteSlave {
         s.declare_reg("bvalid_r", GroundType::UInt { width: 1 }, Span::default());
         s.declare_reg("rvalid_r", GroundType::UInt { width: 1 }, Span::default());
 
+        for (name, width) in [
+            ("aw_pending_r", 1),
+            ("w_pending_r", 1),
+            ("awaddr_r", 8),
+            ("wdata_r", 32),
+            ("wstrb_r", 4),
+        ] {
+            s.declare_reg(name, GroundType::UInt { width }, Span::default());
+            s.declare_wire(
+                &format!("next_{name}"),
+                GroundType::UInt { width },
+                Span::default(),
+            );
+        }
+        for (name, width) in [("write_addr", 8), ("write_data", 32), ("write_strb", 4)] {
+            s.declare_wire(name, GroundType::UInt { width }, Span::default());
+        }
+
         for (n, w) in [
             ("c0_1", 1u32),
             ("c1_1", 1),
@@ -158,7 +176,11 @@ impl Elaboratable for Axi4LiteSlave {
             "next_rvalid",
             "not_bvalid",
             "not_rvalid",
-            "can_ar",
+            "w_ready",
+            "aw_empty",
+            "w_empty",
+            "aw_have",
+            "w_have",
             "aw_eq0",
             "aw_eq1",
             "aw_eq2",
@@ -232,11 +254,13 @@ impl Elaboratable for Axi4LiteSlave {
 
         s.assign_xor("not_bvalid", "bvalid_r", "c1_1", Span::default());
         s.assign_xor("not_rvalid", "rvalid_r", "c1_1", Span::default());
-        s.assign_net("aw_ready", "not_bvalid", Span::default());
-        s.assign_and("can_ar", "not_rvalid", "not_bvalid", Span::default());
-        s.assign_net("ar_ready", "can_ar", Span::default());
+        s.assign_xor("aw_empty", "aw_pending_r", "c1_1", Span::default());
+        s.assign_xor("w_empty", "w_pending_r", "c1_1", Span::default());
+        s.assign_and("aw_ready", "not_bvalid", "aw_empty", Span::default());
+        s.assign_and("w_ready", "not_bvalid", "w_empty", Span::default());
+        s.assign_net("ar_ready", "not_rvalid", Span::default());
         s.assign_net("s_axi_awready", "aw_ready", Span::default());
-        s.assign_net("s_axi_wready", "aw_ready", Span::default());
+        s.assign_net("s_axi_wready", "w_ready", Span::default());
         s.assign_net("s_axi_arready", "ar_ready", Span::default());
         s.assign_net("s_axi_bvalid", "bvalid_r", Span::default());
         s.assign_net("s_axi_rvalid", "rvalid_r", Span::default());
@@ -245,17 +269,47 @@ impl Elaboratable for Axi4LiteSlave {
         s.assign_lit("s_axi_rresp", 0, Span::default());
 
         s.assign_and("aw_fire", "s_axi_awvalid", "aw_ready", Span::default());
-        s.assign_and("w_fire", "s_axi_wvalid", "aw_ready", Span::default());
-        s.assign_and("do_write", "aw_fire", "w_fire", Span::default());
+        s.assign_and("w_fire", "s_axi_wvalid", "w_ready", Span::default());
+        s.assign_or("aw_have", "aw_pending_r", "aw_fire", Span::default());
+        s.assign_or("w_have", "w_pending_r", "w_fire", Span::default());
+        s.assign_and("do_write", "aw_have", "w_have", Span::default());
+        s.assign_mux(
+            "next_aw_pending_r",
+            "do_write",
+            "c0_1",
+            "aw_have",
+            Span::default(),
+        );
+        s.assign_mux(
+            "next_w_pending_r",
+            "do_write",
+            "c0_1",
+            "w_have",
+            Span::default(),
+        );
+        for (next, fire, input, old) in [
+            ("next_awaddr_r", "aw_fire", "s_axi_awaddr", "awaddr_r"),
+            ("next_wdata_r", "w_fire", "s_axi_wdata", "wdata_r"),
+            ("next_wstrb_r", "w_fire", "s_axi_wstrb", "wstrb_r"),
+        ] {
+            s.assign_mux(next, fire, input, old, Span::default());
+        }
+        for (selected, pending, saved, live) in [
+            ("write_addr", "aw_pending_r", "awaddr_r", "s_axi_awaddr"),
+            ("write_data", "w_pending_r", "wdata_r", "s_axi_wdata"),
+            ("write_strb", "w_pending_r", "wstrb_r", "s_axi_wstrb"),
+        ] {
+            s.assign_mux(selected, pending, saved, live, Span::default());
+        }
         s.assign_and("ar_fire", "s_axi_arvalid", "ar_ready", Span::default());
-        s.assign_mux("do_read", "do_write", "c0_1", "ar_fire", Span::default());
+        s.assign_net("do_read", "ar_fire", Span::default());
         s.assign_and("b_fire", "bvalid_r", "s_axi_bready", Span::default());
         s.assign_and("r_fire", "rvalid_r", "s_axi_rready", Span::default());
 
-        s.assign_eq("aw_eq0", "s_axi_awaddr", "c0_8", Span::default());
-        s.assign_eq("aw_eq1", "s_axi_awaddr", "c4_8", Span::default());
-        s.assign_eq("aw_eq2", "s_axi_awaddr", "c8_8", Span::default());
-        s.assign_eq("aw_eq3", "s_axi_awaddr", "c12_8", Span::default());
+        s.assign_eq("aw_eq0", "write_addr", "c0_8", Span::default());
+        s.assign_eq("aw_eq1", "write_addr", "c4_8", Span::default());
+        s.assign_eq("aw_eq2", "write_addr", "c8_8", Span::default());
+        s.assign_eq("aw_eq3", "write_addr", "c12_8", Span::default());
         s.assign_eq("ar_eq0", "s_axi_araddr", "c0_8", Span::default());
         s.assign_eq("ar_eq1", "s_axi_araddr", "c4_8", Span::default());
         s.assign_eq("ar_eq2", "s_axi_araddr", "c8_8", Span::default());
@@ -265,10 +319,10 @@ impl Elaboratable for Axi4LiteSlave {
         s.assign_and("wr2", "do_write", "aw_eq2", Span::default());
         s.assign_and("wr3", "do_write", "aw_eq3", Span::default());
 
-        s.assign_and("strb0", "s_axi_wstrb", "c1_4", Span::default());
-        s.assign_and("strb1", "s_axi_wstrb", "c2_4", Span::default());
-        s.assign_and("strb2", "s_axi_wstrb", "c4_4", Span::default());
-        s.assign_and("strb3", "s_axi_wstrb", "c8_4", Span::default());
+        s.assign_and("strb0", "write_strb", "c1_4", Span::default());
+        s.assign_and("strb1", "write_strb", "c2_4", Span::default());
+        s.assign_and("strb2", "write_strb", "c4_4", Span::default());
+        s.assign_and("strb3", "write_strb", "c8_4", Span::default());
         s.assign_mux("lane0", "strb0", "c_ff", "c0_32", Span::default());
         s.assign_mux("lane1", "strb1", "c_ff00", "c0_32", Span::default());
         s.assign_mux("lane2", "strb2", "c_ff0000", "c0_32", Span::default());
@@ -277,7 +331,7 @@ impl Elaboratable for Axi4LiteSlave {
         s.assign_or("lane23", "lane2", "lane3", Span::default());
         s.assign_or("byte_mask", "lane01", "lane23", Span::default());
         s.assign_xor("byte_mask_n", "byte_mask", "c_ffff_ffff", Span::default());
-        s.assign_and("wdata_m", "s_axi_wdata", "byte_mask", Span::default());
+        s.assign_and("wdata_m", "write_data", "byte_mask", Span::default());
 
         s.assign_and("old0_m", "data0_r", "byte_mask_n", Span::default());
         s.assign_or("merged0", "wdata_m", "old0_m", Span::default());
@@ -337,6 +391,15 @@ impl Elaboratable for Axi4LiteSlave {
         s.end_process();
 
         s.begin_sequential(Span::default());
+        for name in [
+            "aw_pending_r",
+            "w_pending_r",
+            "awaddr_r",
+            "wdata_r",
+            "wstrb_r",
+        ] {
+            s.assign_reg_d_from(name, &format!("next_{name}"), Span::default());
+        }
         s.assign_reg_d_from("data0_r", "next_data0", Span::default());
         s.assign_reg_d_from("data1_r", "next_data1", Span::default());
         s.assign_reg_d_from("data2_r", "next_data2", Span::default());

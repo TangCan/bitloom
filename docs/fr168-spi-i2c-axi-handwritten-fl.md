@@ -44,3 +44,9 @@ cargo test -p bitloom-sim --lib
 | [`fr163-unlisted-protocol-handwritten-fl.md`](fr163-unlisted-protocol-handwritten-fl.md) | FR163 UartRx（仍关闭；≠ FR168 alone） |
 | [`fr135-more-ip-handwritten-fl.md`](fr135-more-ip-handwritten-fl.md) | FR135 UartTx |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic101-spi-i2c-axi-handwritten-fl-fr168.md` |
+
+## FR193 / Story125.3 AXI protocol correction
+
+历史FR168只以公开的顺序write/read stimulus关闭，并未证明独立AW/W或并发读写正确。Story125.2的[红测历史](ip/phase24-axi-red-evidence.md)保留。125.3为`Axi4LiteSlaveFunctional`增加私有AW/W捕获，读快照在更新bank前形成，读响应与B阻塞独立；同步reset清捕获和响应。公开类型/字段/端口及四寄存器8-bit地址映射不变。
+
+[FR193绿色证据](ip/phase24-axi-green-evidence.md)记录独立事务队列/字节黄金模型驱动的两个native引擎、手写FL和真实direct RTL矩阵。结果不依赖FL与DUT互相对拍，也不把旧顺序stimulus通过当作新协议矩阵证明。本次不宣称Chisel/FIRRTL矩阵或形式证明；新CSR桥和Phase24后续epic仍未交付。

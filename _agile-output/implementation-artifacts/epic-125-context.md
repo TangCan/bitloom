@@ -25,3 +25,6 @@
 ## Cross-Story Dependencies
 
 125.1 → 125.2 → 125.3。主代理每故事单独提交。Epic125未done禁止126–130 ready/in-progress；之后其实现故事仍需相应.1 NFR14 done。此次后续只backlog，M0关闭后记录实测估算与是否继续，不自动执行全Phase24。检查入口：`python3 scripts/check_phase24_gate.py`。
+
+## M0完成状态（2026-09-20）
+125.1–125.3已完成；FR192/FR193关闭，真实红→绿及工作区证据见epic-125-closeout.md。以上Technical Decisions仍有效，125.2/125.3工作描述保留为故事上下文。后续126–130保持backlog。

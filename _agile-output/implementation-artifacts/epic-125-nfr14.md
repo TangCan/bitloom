@@ -1,10 +1,10 @@
 # Epic 125 NFR14 — M0 合同与 AXI 修复
 
-记录日期：2026-09-20；执行者：Codex；项目 owner：Richard。授权为完整 Phase24 规划落地及仅 M0 执行。状态：风险/边界已登记，M0 未关闭。关联 FR192/FR193、NFR93–99、AD-30/31；接口以 `docs/ip/phase24-contract.md` 为准。
+记录日期：2026-09-20；执行者：Codex；项目 owner：Richard。授权为完整 Phase24 规划落地及仅 M0 执行。状态：M0 已关闭（2026-09-20），证据见下文。关联 FR192/FR193、NFR93–99、AD-30/31；接口以 `docs/ip/phase24-contract.md` 为准。
 
 ## 证据与上游限制
 
-研究基线29c52df的native Sim观察到分拍AW/W被接受后无B响应，以及同时接受读写时丢R；见研究 `imports/project-audit.md` 和 `axi-observation.rs/log`。这是native缺陷观察，不是真实RTL复现、协议正确性或修复证据。125.2必须从当前生成RTL复现，结果不同先解释差异再修复。
+研究基线`29c52dfbfa403e0ae9930d1061e99cfe73bd41fc`的native Sim观察到分拍AW/W被接受后无B响应，以及同时接受读写时丢R；见研究 `imports/project-audit.md` 和 `axi-observation.rs/log`。这是native缺陷观察，不是真实RTL复现、协议正确性或修复证据。125.2必须从当前生成RTL复现，结果不同先解释差异再修复。
 
 已有elaborate逐IP冻结、native/generated层级unsupported、FIRRTL内存行为缺口、外部blackbox只有壳等限制仍有效。M0只修旧bank协议及手写FL；不实现新CSR桥或组合系统，不更改工具钉。旧bank端口/映射保持，同拍AW/W一个tick后BVALID，并发同址read-before-write；未来单CSR请求容量不套入旧bank。
 
@@ -38,4 +38,8 @@
 3. 125.3旧bank与FL完成修复，合法分拍/并发/背压/reset通过native与真实RTL；旧兼容证据齐全。
 4. 保存支持边界、剩余估算和是否继续安排的结论；所有M0故事证据通过才将Epic125 done；下游仍须各自NFR14 .1 done。
 
-当前关闭证据：尚待125.2/125.3；不得将本风险记录写成FR193已交付。后续故事在本节追加实际结果。
+125.1创建时关闭证据：尚待125.2/125.3；实际关闭结果见下节，不以风险记录本身代替实现。
+
+## 2026-09-20 实施关闭证据
+
+125.1合同/gate完成；125.2原设计9个独立协议失败在native及实际RTL复现并归档；125.3同一期望转绿，并完成WSTRB/时序/reset/随机/旧兼容矩阵。工作区与SemVer通过，明细见 `docs/ip/evidence/phase24-verification.json`。M0关闭条件1–4均满足。后续剩余43.5–69人日仍为规划估算；实际工具兼容已降低M0不确定性，尚不足以缩减未来CSR/外部核工时。Epic126–130继续backlog，需后续安排。

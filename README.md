@@ -493,4 +493,6 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 ### Phase 24：可组合 IP（计划中）
 
-2026-09-20 已批准可组合模块、流/FIFO、CSR/AXI-Lite、UART/GPIO/Timer/IRQ 系统与一个外部小核的规划（FR192–201 / Epic125–130）。当前仅 M0 合同及既有 AXI 正确性工作获准执行，后续均为 backlog，尚不代表新系统交付。参见 [正式接口合同](docs/ip/phase24-contract.md) 和 [故事清单](_agile-output/planning-artifacts/epics.md#phase-24-inventory--可组合-ip-与可验证生态)。历史能力及 FR189 deferred 保留；支持矩阵、维护人和贡献模板在129.3/130.3按实测补齐。
+2026-09-20 已批准可组合模块、流/FIFO、CSR/AXI-Lite、UART/GPIO/Timer/IRQ 系统与一个外部小核的规划（FR192–201 / Epic125–130）。M0 合同及既有 AXI 正确性工作已完成（FR192/FR193）；后续均为 backlog，尚不代表新系统交付。参见 [正式接口合同](docs/ip/phase24-contract.md) 和 [故事清单](_agile-output/planning-artifacts/epics.md#phase-24-inventory--可组合-ip-与可验证生态)。历史能力及 FR189 deferred 保留；支持矩阵、维护人和贡献模板在129.3/130.3按实测补齐。
+
+既有 `Axi4LiteSlave`（FR193 / Story125.3）保留8-bit地址、32-bit数据和四寄存器映射：AW/W各一槽独立捕获，同拍AW/W仍一tick产生B；独立读可与写并发或在B受阻时接受，同址并发读返回旧值。WSTRB按字节合并，未映射/未对齐读0写忽略并OKAY；B/R受阻保持，同步reset清bank和在途状态。手写FL同步修正，验证范围见[AXI修复证据](docs/ip/phase24-axi-green-evidence.md)。这不交付未来16-bit CSR桥或Epic126–130，也不扩大FR142稳定API。

@@ -1,0 +1,87 @@
+FR193 complete revised suite (test opt-level=1, required direct RTL)
+   Compiling bitloom-hir v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+   Compiling generic-array v0.14.7
+   Compiling typenum v1.20.1
+   Compiling utf8parse v0.2.2
+   Compiling unicode-ident v1.0.24
+   Compiling anstyle-query v1.1.5
+   Compiling colorchoice v1.0.5
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling anstyle v1.0.14
+   Compiling clap_lex v1.1.0
+   Compiling strsim v0.11.1
+   Compiling memchr v2.8.3
+   Compiling cfg-if v1.0.4
+   Compiling itoa v1.0.18
+   Compiling cpufeatures v0.2.17
+   Compiling proc-macro2 v1.0.107
+   Compiling serde_core v1.0.229
+   Compiling quote v1.0.47
+   Compiling zmij v1.0.23
+   Compiling clap_derive v4.6.4
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling anstyle-parse v1.0.0
+   Compiling anstream v1.0.0
+   Compiling bitloom-builder v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+   Compiling bitloom-viz v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+   Compiling bitloom-firrtl v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/rhdl-firrtl)
+   Compiling bitloom-vlog v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-vlog)
+   Compiling bitloom-sim v1.1.6 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+   Compiling clap_builder v4.6.6
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling syn v2.0.119
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling clap v4.6.6
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 14.58s
+     Running tests/fr193_axi_protocol.rs (target/debug/deps/fr193_axi_protocol-8b8d1c330e1584e4)
+
+running 12 tests
+test legacy_axi_emits_protocol_fixture ... ok
+test w_first_interpreter ... ok
+test aw_first_interpreter ... ok
+test aw_first_compiled ... ok
+test w_first_compiled ... ok
+test concurrent_compiled ... ok
+test concurrent_interpreter ... ok
+test w_first_rtl ... ok
+test aw_first_rtl ... ok
+test concurrent_rtl ... ok
+seed-1253193000000001: 18560 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+directed: 24119 cycles, 2569 writes, 3877 reads; interpreter/compiled/FL/direct RTL PASS
+test required_directed_protocol_matrix ... ok
+seed-1253193000000002: 18237 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-1253193000000003: 18180 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+test required_random_protocol_matrix_16_seeds_1000_transactions has been running for over 60 seconds
+seed-1253193000000004: 18134 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-1253193000000005: 17974 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-1253193000000006: 17898 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-1253193000000007: 17932 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-1253193000000008: 18194 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-1253193000000009: 17640 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-125319300000000a: 17677 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-125319300000000b: 17983 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-125319300000000c: 18114 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-125319300000000d: 18042 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-125319300000000e: 17554 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-125319300000000f: 17864 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+seed-1253193000000010: 18262 cycles, 1000 writes, 1004 reads; interpreter/compiled/FL/direct RTL PASS
+test required_random_protocol_matrix_16_seeds_1000_transactions ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 243.99s
+
+
+Final directed reset READY/payload precedence supplement (random function unchanged)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 2.62s
+     Running tests/fr193_axi_protocol.rs (target/debug/deps/fr193_axi_protocol-8b8d1c330e1584e4)
+
+running 1 test
+directed: 24119 cycles, 2569 writes, 3877 reads; interpreter/compiled/FL/direct RTL PASS
+test required_directed_protocol_matrix ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 20.19s

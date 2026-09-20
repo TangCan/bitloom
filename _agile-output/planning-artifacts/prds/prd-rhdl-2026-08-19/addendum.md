@@ -661,3 +661,5 @@ Epic 125 关闭前，126–130 不得 ready/in-progress；关闭后每 Epic 实�
 - **NFR97：** 首版单时钟、32-bit 数据/16-bit 地址、小寄存器 FIFO；不包含原生层级仿真、通用 FIRRTL 内存、复杂外部核或未列协议。
 - **NFR98：** 外部依赖固定完整 commit/文件闭包与校验、许可证原文和维护人；构建层显式获取，prelude 不拉取源码；无 native 模型明确 unsupported。
 - **NFR99：** 收益由组合复用、上手步骤、CI 与维护成本实测；不承诺未经测量的加速/PPA。超本阶段子集需另立范围。
+
+**2026-09-20 M0 实施关闭：** Story125.1–125.3 / Epic125 / FR192–193 已完成。证据见 `docs/ip/phase24-axi-green-evidence.md`；FR194–201 / Epic126–130 backlog，整个Phase24未交付，FR189 deferred/NFR91不变。

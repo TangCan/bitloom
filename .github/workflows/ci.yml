@@ -19,8 +19,11 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y libsystemc-dev pkg-config g++ iverilog
       - name: fmt check
         run: cargo fmt --all -- --check
+      - name: Phase 24 scope and dependency gate
+        run: python3 scripts/check_phase24_gate.py
       - name: test (MSRV 1.97.1)
-        run: BITLOOM_REQUIRE_RTL=1 cargo test --workspace
+        # Optimize long protocol matrices; test-profile assertions/overflow checks stay enabled.
+        run: BITLOOM_REQUIRE_RTL=1 CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test --workspace
 
   # FR71 / NFR34 / FR28: required true Chisel JVM compile (Pattern A — parallel to Rust test).
   # Escape hatch env must never be enabled here. Do not use continue-on-error.

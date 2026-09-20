@@ -684,9 +684,11 @@ phase13InputDocuments:
   - docs/fr95 / fr96 / fr97 / fr98 / fr100 / fr101 / fr104 / fr105 / docs/ip/README.md（诚实边界指针）
 uxDesignPhase13: none
 phase24ProposalApproved: 2026-09-20
-phase24PlanningStatus: in-progress
+phase24PlanningStatus: complete
 phase24ImplementationStatus: in-progress
 phase24ImplementationAuthorized: M0-only
+phase24M0Status: complete
+phase24M0Closed: 2026-09-20
 phase24RequirementsScope: FR192-FR201 / NFR93-NFR99
 phase24StoryCount: 22
 ---
@@ -10126,3 +10128,7 @@ So that 规划 complete 可宣称（NFR89）。
 **Then** 实際wrapper module binding、源文件关联与参数映射；上游测试+独立组合RTL测试；不能以空壳过关。
 
 首选稳定 PULP FIFO 仅为候选，须先核对该 tag 的实际源/端口；master 阅读结果不作稳定版兼容证据。准入失败保持 blocked/未交付，不以目录条目替代适配；核心结果不受其拖累。
+
+### Phase 24 M0 实施关闭（2026-09-20）
+
+Story125.1–125.3 / Epic125 已完成，FR192/FR193按M0合同关闭；真实红→绿、兼容和矩阵证据见 `docs/ip/phase24-axi-green-evidence.md` 与 `_agile-output/implementation-artifacts/epic-125-closeout.md`。FR194–201及Epic126–130尚未交付，仍backlog，须后续安排及各自NFR14；整个Phase24实现未complete。FR189 deferred/NFR91保持。

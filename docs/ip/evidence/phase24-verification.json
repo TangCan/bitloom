@@ -1,0 +1,47 @@
+{
+  "date": "2026-09-20",
+  "workspace": {
+    "command": "PATH=<icarus-bin>:$PATH BITLOOM_REQUIRE_RTL=1 CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test --workspace --no-fail-fast -- --skip required_directed_protocol_matrix --skip required_random_protocol_matrix_16_seeds_1000_transactions",
+    "exit_code": 0,
+    "target_results": 453,
+    "passed": 1690,
+    "failed": 0,
+    "ignored_existing": 6,
+    "filtered_already_separately_executed": 2
+  },
+  "separate_fr193": {
+    "passed": 12,
+    "failed": 0,
+    "ignored": 0,
+    "final_directed_rerun_passed": 1,
+    "random_seeds": 16,
+    "random_cycles": 288245,
+    "random_writes": 16000,
+    "random_workload_reads": 16000,
+    "random_audit_reads": 64,
+    "directed_cycles": 24119
+  },
+  "unique_rust_tests_combined_passed": 1692,
+  "semver": {
+    "crates": [
+      "bitloom-prelude",
+      "bitloom-sim",
+      "bitloom-firrtl"
+    ],
+    "passed_per_crate": 196,
+    "inapplicable_skips_per_crate": 58,
+    "exit_code": 0
+  },
+  "fmt_exit_code": 0,
+  "reviews": {
+    "blind": "7 findings triaged; applicable coverage/artifact gaps fixed",
+    "edge": "no findings",
+    "verification": "no gaps"
+  },
+  "not_claimed": [
+    "FR193 Chisel/FIRRTL execution",
+    "FR193 formal proof",
+    "new CSR/peripheral/external IP delivered",
+    "publish or push"
+  ]
+}
