@@ -402,6 +402,8 @@ flowchart LR
 
 合同：`docs/ip/phase24-contract.md`；FR192–201 / Epic125–130。规划决定不表示实现完成；仅 M0 执行。
 
+2026-09-20 M0关闭后续授权：用户要求继续，当前执行范围为 Story126.1 NFR14 → 126.2 模块组合基础；126.3/126.4及Epic127–130仍backlog，未授权自动执行。不宣称M1或Phase24已交付；上述M0批准记录保留为历史。
+
 ```mermaid
 flowchart LR
     AXI[AXI-Lite] --> CAP[AW/W/AR捕获与轮转仲裁]

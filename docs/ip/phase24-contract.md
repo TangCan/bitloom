@@ -2,6 +2,8 @@
 
 批准：2026-09-20；Story125.1 / FR192；FR192–201、NFR93–99。本文固化计划中的行为与范围，不代表产品已交付。仅 M0 / Epic125 获准执行，126–130 backlog。研究保持历史原文；本合同的 GPIO32 位、IRQ5 有效位取代历史草案的 GPIO8/最多8路。
 
+2026-09-20 M0关闭后续授权：用户要求继续，当前执行范围为 Story126.1 NFR14 → 126.2 模块组合基础；126.3/126.4及Epic127–130仍backlog，未授权自动执行。不宣称M1或Phase24已交付；上述M0批准记录保留为历史。
+
 设计仅依赖 bitloom-prelude，单一 FrozenHir/ElaborateSession，工具钉不变。旧 API、端口和映射保持；新增 define_module、RvRegSlice、ParamSyncFifo、CSR 描述/桥/译码、Timer、IRQ、GPIO/UART wrapper 仅为待实现命名表面，未增加任何已承诺稳定符号。实现故事须逐符号更新 FR142 清单与 SemVer minor 说明。
 
 首版仅单时钟、32-bit 数据、16-bit 字节地址、寄存器小 FIFO、UART8N1、GPIO32、Timer32、IRQ5，以及单独验收的一个外部小核。不包含 CPU、DMA、PWM、watchdog、SPI/I2C加深、burst/ID、多主、多时钟模拟、异步 FIFO、深RAM FIFO、通用FIRRTL内存、原生层级模拟、复杂外部核、物理签核或发布。FR189/Epic122 deferred 与 NFR91 不变。

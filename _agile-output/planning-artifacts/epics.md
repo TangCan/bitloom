@@ -686,7 +686,8 @@ uxDesignPhase13: none
 phase24ProposalApproved: 2026-09-20
 phase24PlanningStatus: complete
 phase24ImplementationStatus: in-progress
-phase24ImplementationAuthorized: M0-only
+phase24ImplementationAuthorized: M0-complete-and-126.1-126.2
+phase24M0ImplementationAuthorized: M0-only
 phase24M0Status: complete
 phase24M0Closed: 2026-09-20
 phase24RequirementsScope: FR192-FR201 / NFR93-NFR99
@@ -10132,3 +10133,5 @@ So that 规划 complete 可宣称（NFR89）。
 ### Phase 24 M0 实施关闭（2026-09-20）
 
 Story125.1–125.3 / Epic125 已完成，FR192/FR193按M0合同关闭；真实红→绿、兼容和矩阵证据见 `docs/ip/phase24-axi-green-evidence.md` 与 `_agile-output/implementation-artifacts/epic-125-closeout.md`。FR194–201及Epic126–130尚未交付，仍backlog，须后续安排及各自NFR14；整个Phase24实现未complete。FR189 deferred/NFR91保持。
+
+2026-09-20 M0关闭后续授权：用户要求继续，当前执行范围为 Story126.1 NFR14 → 126.2 模块组合基础；126.3/126.4及Epic127–130仍backlog，未授权自动执行。不宣称M1或Phase24已交付；上述M0批准记录保留为历史。
