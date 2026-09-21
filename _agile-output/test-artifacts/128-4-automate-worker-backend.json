@@ -1,0 +1,96 @@
+{
+  "subagentType": "backend",
+  "testsGenerated": [],
+  "coverageSummary": {
+    "totalTests": 0,
+    "testLevels": [
+      "integration",
+      "formal"
+    ],
+    "fixtureNeeds": []
+  },
+  "status": "complete",
+  "success": true,
+  "subagent": "backend-tests",
+  "knowledge_fragments_used": [
+    "test-levels-framework",
+    "test-priorities-matrix",
+    "data-factories",
+    "selective-testing"
+  ],
+  "summary": "只读审计AC2/3/4/5/6后，未发现可实证且不重复的P0/P1缺口；新增0测试，保留现有独立逐拍、三后端及形式覆盖。",
+  "findings": [],
+  "coverageEvidence": [
+    {
+      "ac": [
+        2,
+        3
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio.rs:270",
+      "details": "32位分别验证初始高、sync1/sync2/history逐拍、沿前IN快照、持续高/下降/再次上升；oldDIR两方向竞争及事件旧快照各32次。独立Oracle逐bit更新，不读取产品描述或DUT内部状态作为黄金。"
+    },
+    {
+      "ac": [
+        2,
+        4,
+        5
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio.rs:349",
+      "details": "五可写地址全部16WSTRB，560个定向组合；SET空/混合及CLEAR全1/混合各80。32位同位set胜clear、异位clear/rise、16种WSTRB碰撞均计数强制到达。"
+    },
+    {
+      "ac": [
+        4,
+        5,
+        6
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio.rs:429",
+      "details": "保持请求消费沿无refill、idle候选不提交；长背压遍历32个针脚仍置事件且读快照稳定；126项访问权限/错齐/高地址与rise交错；10种待响应取消、5种reset胜可用提交/rise。accepted=consumed+cancelled最终守恒。"
+    },
+    {
+      "ac": [
+        3,
+        4,
+        6
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio_api.rs:432",
+      "details": "真实GPIO→IRQ4逐拍检查同步延迟；mask保pending、清IRQ不因GPIO sticky重触发、下次真实rise有效；新rise同时胜GPIO和IRQ双clear；有效raw窗口复位立即压低并取消两待响应。同夹具供direct/FIRRTL/Chisel。"
+    },
+    {
+      "ac": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio_formal.rs:51",
+      "details": "独立ghost对同步链/oldDIR/OUT/事件/响应做状态等价及行为assert；仅初始reset和合法受阻请求稳定假设，无ready公平性。10个cover含bit31、双向方向竞争、同位/异位W1C、长stall、取消后再提交及初始高。"
+    },
+    {
+      "ac": [
+        2,
+        4,
+        7
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio_formal.rs:198; crates/bitloom/tests/fr197_gpio.rs:771",
+      "details": "三个实际DUT形式变异IN=OUT、clear胜set、SET忽略WSTRB；要求控制PASS、变异exit2/指定性质失败/VCD。direct独立黄金另以IN=OUT负控制要求cycle4指定rdata失败、exit1/VCD，编译失败和timeout不计检出。"
+    },
+    {
+      "ac": [
+        7
+      ],
+      "source": "_agile-output/test-artifacts/128-4-build-review-root-audit.json",
+      "details": "读取已完成run20260921T115845.483458Z-797187，atdd/formal/backends状态pass；只读核对其formal原始prove/cover均PASS、cover.log实际10个Reached cover statement，三变异FAIL而control PASS。现行主runner由root执行，worker未启动或重跑工具。"
+    }
+  ],
+  "limitations": [
+    "零新增不代表穷尽证明或整个Phase24交付；当前源码最终执行绑定及后续clean/fmt/workspace由root负责。",
+    "没有HTTP/consumer/provider边界，Playwright/Pact不适用；未重复probe或联系broker。"
+  ],
+  "actions": {
+    "testsExecuted": false,
+    "sourceModified": false,
+    "fixturesCreated": false
+  }
+}

@@ -1,0 +1,79 @@
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 2.51s
+     Running tests/fr197_gpio.rs (target/debug/deps/fr197_gpio-b9a595892f46d448)
+
+running 2 tests
+test p1_gpio_firrtl_chisel_same_independent_vectors ... ignored, ATDD RED Story 128.4; dedicated pinned firtool and JVM full independent vector gate
+seed=128419705511 frames=18384 accepted=6801 consumed=6789 cancelled=12 rises=[889, 389, 538, 586, 479, 620, 748, 682, 468, 691, 661, 608, 775, 522, 531, 640, 550, 550, 410, 746, 399, 392, 629, 590, 601, 705, 574, 608, 646, 739, 609, 778] collisions=[16, 1, 4, 3, 7, 4, 9, 14, 10, 5, 4, 4, 5, 5, 4, 5, 16, 2, 3, 6, 5, 4, 6, 9, 13, 4, 3, 6, 3, 3, 4, 12] strobes=[[11, 10, 11, 7, 10, 7, 9, 10, 8, 8, 8, 6, 11, 9, 11, 214], [7, 11, 11, 7, 7, 10, 11, 11, 12, 9, 7, 9, 8, 7, 8, 602], [15, 18, 15, 12, 13, 15, 16, 18, 16, 15, 18, 17, 15, 12, 14, 15], [16, 16, 15, 17, 11, 13, 14, 13, 14, 16, 14, 13, 15, 16, 14, 15], [10, 13, 15, 8, 9, 12, 12, 18, 10, 8, 8, 15, 14, 12, 12, 107]] directed={"backpressure_natural_events": 1, "clear_full": 80, "clear_mixed": 80, "event_old_snapshot": 32, "every_pin_pipeline_initial_high_repeat_fall": 32, "full_strobe_matrix": 560, "held_write_consume_no_refill": 2, "idle_set_clear": 32, "in_actual_pins_all_directions": 16, "old_dir_input_to_output": 32, "old_dir_output_to_input": 32, "other_bit_clear_and_rise": 32, "permissions_aliases_with_rise": 126, "reset_beats_available_commit_and_rise": 5, "reset_cancels_response": 10, "same_bit_set_beats_clear": 32, "set_empty": 80, "set_mixed": 80, "w1c_strobes_with_new_rise": 16}
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-gpio/direct-128419705511-638675-1789990595508318270
+seed=deadbeef1284 frames=18383 accepted=6782 consumed=6770 cancelled=12 rises=[719, 162, 463, 547, 562, 453, 773, 473, 569, 550, 497, 543, 588, 564, 413, 492, 402, 420, 443, 555, 523, 416, 530, 436, 408, 548, 710, 686, 380, 600, 487, 922] collisions=[13, 1, 4, 5, 6, 3, 8, 11, 15, 3, 3, 4, 4, 5, 7, 6, 11, 2, 3, 2, 4, 3, 3, 1, 9, 3, 4, 7, 2, 3, 1, 13] strobes=[[13, 10, 8, 9, 9, 6, 16, 13, 10, 6, 6, 8, 9, 12, 9, 220], [10, 13, 9, 6, 5, 8, 10, 14, 9, 12, 8, 7, 11, 10, 6, 597], [16, 12, 16, 14, 18, 12, 14, 15, 13, 14, 18, 16, 13, 12, 14, 17], [13, 18, 15, 17, 18, 13, 17, 14, 13, 12, 16, 17, 16, 13, 16, 22], [14, 16, 7, 11, 13, 10, 14, 13, 11, 8, 8, 11, 13, 12, 12, 107]] directed={"backpressure_natural_events": 1, "clear_full": 80, "clear_mixed": 80, "event_old_snapshot": 32, "every_pin_pipeline_initial_high_repeat_fall": 32, "full_strobe_matrix": 560, "held_write_consume_no_refill": 2, "idle_set_clear": 32, "in_actual_pins_all_directions": 16, "old_dir_input_to_output": 32, "old_dir_output_to_input": 32, "other_bit_clear_and_rise": 32, "permissions_aliases_with_rise": 126, "reset_beats_available_commit_and_rise": 5, "reset_cancels_response": 10, "same_bit_set_beats_clear": 32, "set_empty": 80, "set_mixed": 80, "w1c_strobes_with_new_rise": 16}
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-gpio/direct-deadbeef1284-638675-1789990605472835631
+seed=83592401ffff frames=18384 accepted=6798 consumed=6786 cancelled=12 rises=[867, 176, 456, 557, 493, 371, 585, 719, 430, 468, 516, 547, 587, 485, 656, 489, 423, 574, 669, 655, 671, 487, 552, 700, 675, 524, 587, 618, 412, 769, 698, 744] collisions=[13, 1, 4, 4, 5, 6, 2, 12, 12, 3, 3, 2, 3, 4, 4, 3, 9, 1, 7, 5, 5, 3, 2, 10, 12, 4, 4, 4, 4, 6, 5, 12] strobes=[[14, 11, 13, 10, 8, 8, 10, 12, 7, 9, 10, 9, 11, 10, 9, 212], [13, 8, 16, 7, 11, 10, 9, 8, 12, 8, 8, 13, 9, 14, 8, 600], [19, 16, 10, 13, 13, 13, 11, 18, 17, 12, 16, 14, 18, 16, 15, 19], [23, 14, 13, 13, 15, 13, 14, 14, 16, 14, 14, 18, 16, 14, 12, 16], [10, 10, 11, 10, 11, 11, 9, 13, 11, 9, 13, 11, 12, 13, 13, 109]] directed={"backpressure_natural_events": 1, "clear_full": 80, "clear_mixed": 80, "event_old_snapshot": 32, "every_pin_pipeline_initial_high_repeat_fall": 32, "full_strobe_matrix": 560, "held_write_consume_no_refill": 2, "idle_set_clear": 32, "in_actual_pins_all_directions": 16, "old_dir_input_to_output": 32, "old_dir_output_to_input": 32, "other_bit_clear_and_rise": 32, "permissions_aliases_with_rise": 126, "reset_beats_available_commit_and_rise": 5, "reset_cancels_response": 10, "same_bit_set_beats_clear": 32, "set_empty": 80, "set_mixed": 80, "w1c_strobes_with_new_rise": 16}
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-gpio/direct-83592401ffff-638675-1789990615376261424
+test p0_gpio_direct_rtl_independent_32_pin_directed_and_seeded_oracle ... ok
+
+test result: ok. 1 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 30.05s
+
+     Running tests/fr197_gpio_api.rs (target/debug/deps/fr197_gpio_api-530daf891b13f5e3)
+
+running 10 tests
+test p1_composition_firrtl_chisel_shared_renamed_actual_gpio_irq ... ignored, ATDD RED; dedicated pinned firtool and JVM composition gate
+test p0_descriptor_exact_local_addresses_masks_and_owners ... ok
+test p1_legacy_gpio_exact_ports_masked_write_reset_and_handwritten_fl_preserved ... ok
+
+thread 'p1_software_outputs_match_independent_local_address_golden' (641198) panicked at crates/bitloom/tests/fr197_gpio_api.rs:133:71:
+called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "No such file or directory" }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test p1_software_outputs_match_independent_local_address_golden ... FAILED
+test p0_exact_sixteen_ports_and_shared_standalone_equivalence ... ok
+test p0_invalid_names_and_conflicting_bodies_are_rejected ... ok
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (641196) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (641196) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (641196) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (641196) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (641196) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (641196) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (641196) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (641196) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (641196) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (641196) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (641196) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (641196) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+test p1_hierarchy_native_and_generated_reject_explicitly ... ok
+test p0_shared_gpio_wiring_rejects_width_clock_type_and_direction ... ok
+test p0_actual_gpio_raw_to_irq4_never_retriggers_from_sticky ... ok
+test p0_actual_two_gpio_rtl_shared_and_renamed_isolation ... ok
+
+failures:
+
+failures:
+    p1_software_outputs_match_independent_local_address_golden
+
+test result: FAILED. 8 passed; 1 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+error: test failed, to rerun pass `-p bitloom --test fr197_gpio_api`

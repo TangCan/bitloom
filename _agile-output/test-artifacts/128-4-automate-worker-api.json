@@ -1,0 +1,98 @@
+{
+  "success": true,
+  "subagent": "api-tests",
+  "tests": [],
+  "fixture_needs": [],
+  "knowledge_fragments_used": [
+    "test-quality",
+    "test-levels-framework",
+    "test-priorities-matrix",
+    "data-factories",
+    "selective-testing",
+    "ci-burn-in",
+    "evidence-integrity"
+  ],
+  "playwright_utils_deviations": [],
+  "pactjs_utils_deviations": [],
+  "provider_scrutiny": "not_applicable",
+  "provider_files_read": [
+    "crates/bitloom-prelude/src/ip/gpio/csr.rs",
+    "crates/bitloom/tests/fr197_gpio_api.rs",
+    "docs/ip/gpio-csr.md",
+    "docs/ip/gpio-csr-example.rs",
+    "_agile-output/test-artifacts/128-4-build-runner.py",
+    "_agile-output/test-artifacts/128-4-build-header-check.c"
+  ],
+  "test_count": 0,
+  "summary": "只读核对AC1/5/6后未发现可实证且非重复的P0/P1 API覆盖缺口，新增0测试。Rust HDL无HTTP认证或consumer/provider服务边界，Playwright/Pact不适用；未重新probe、未运行测试、未修改源码。此结果是覆盖审计，不是当前完整runner通过声明。",
+  "coverage_evidence": [
+    {
+      "ac": [
+        1
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio_api.rs:40",
+      "evidence": "精确16端口名称/类型/方向；String与str名称；重复同定义与standalone整体FrozenHir相等。"
+    },
+    {
+      "ac": [
+        1,
+        5
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio_api.rs:65",
+      "evidence": "六项独立offset/access/owner/event黄金；完整字段mask/reset/reject/名称和描述validate。"
+    },
+    {
+      "ac": [
+        1
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio_api.rs:141",
+      "evidence": "空、空白和关键字名称E0241，冲突定义E0244；立即返回与最终finish均要求相同诊断。"
+    },
+    {
+      "ac": [
+        1
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio_api.rs:165",
+      "evidence": "宽度E0203、clock类型E0256、方向E0257含精确端口/网络；同名复用与异名额外模块数检验共享叶。"
+    },
+    {
+      "ac": [
+        1,
+        6
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio_api.rs:271",
+      "evidence": "standalone、共享/异名双实例、GPIOIRQ四图分别在Interpreter/Compiled/GeneratedFunctional明确拒绝层级，并核对诊断。"
+    },
+    {
+      "ac": [
+        5
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio_api.rs:94",
+      "evidence": "C头/Markdown重复生成确定性，六本地地址及全mask/reset/access独立手写黄金，文件逐字相等，禁止把系统base混入local。"
+    },
+    {
+      "ac": [
+        1,
+        5
+      ],
+      "source": "_agile-output/test-artifacts/128-4-build-runner.py:266",
+      "evidence": "原文例复制至只依赖bitloom-prelude的独立Cargo工程并执行；软件产物独立比较gate；C11严格编译及执行消费者，静态断言独立地址/base。"
+    },
+    {
+      "ac": [
+        1,
+        6
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio_api.rs:394",
+      "evidence": "真实双实例非对称DIR/OUT/IN/event，单lane背压、写清另一lane与状态隔离，共同reset取消待响应；共享/异名均调用，专用后端复用。"
+    },
+    {
+      "ac": [
+        6
+      ],
+      "source": "crates/bitloom/tests/fr197_gpio_api.rs:511",
+      "evidence": "旧GPIO精确端口，独立字面量全写/掩码/零mask/混合方向/reset胜写，与手写FL及Interpreter/Compiled比较；settle无tick直接改变pad验证旧组合读取。"
+    }
+  ],
+  "zero_gap_rationale": "新增注册描述拷贝隔离测试将主要镜像返回owned CsrBlock的实现；重复端口、地址、软件例或legacy向量不会扩大已批准P0/P1合同覆盖。AC5总线错误与提交时序由专门逐拍行为worker审计，此API worker不重复生成RTL或formal测试。"
+}

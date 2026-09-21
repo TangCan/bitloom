@@ -1,0 +1,19 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "-p",
+    "bitloom",
+    "--test",
+    "fr197_gpio",
+    "--test",
+    "fr197_gpio_api",
+    "--",
+    "--nocapture"
+  ],
+  "start": "2026-09-21T11:31:44.299694+00:00",
+  "seconds": 0.3101292139617726,
+  "exit": 101,
+  "expected": "E0432 missing GpioCsr; behavior not yet executed"
+}

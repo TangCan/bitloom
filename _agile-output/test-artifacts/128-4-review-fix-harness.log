@@ -1,0 +1,19 @@
+test_absent_and_empty_archive_inputs_fail_without_output (__main__.HarnessReview.test_absent_and_empty_archive_inputs_fail_without_output) ... ok
+test_archive_rechecks_software_bytes_identity_and_witnesses (__main__.HarnessReview.test_archive_rechecks_software_bytes_identity_and_witnesses) ... ok
+test_custom_selected_run_archive_roundtrip_and_no_overwrite (__main__.HarnessReview.test_custom_selected_run_archive_roundtrip_and_no_overwrite) ... ok
+test_during_run_source_change_rejected_but_logs_do_not_change_fingerprint (__main__.HarnessReview.test_during_run_source_change_rejected_but_logs_do_not_change_fingerprint) ... ok
+test_exact_zero_ignored_and_wrong_targets_fail (__main__.HarnessReview.test_exact_zero_ignored_and_wrong_targets_fail) ... ok
+test_fingerprint_includes_justfile_and_tool_pins (__main__.HarnessReview.test_fingerprint_includes_justfile_and_tool_pins) ... ok
+test_formal_zero_ignored_wrong_target_and_archive_rejected (__main__.HarnessReview.test_formal_zero_ignored_wrong_target_and_archive_rejected) ... ok
+test_launch_failure_preserves_attempt (__main__.HarnessReview.test_launch_failure_preserves_attempt) ... ok
+test_missing_selected_artifact_cannot_use_history (__main__.HarnessReview.test_missing_selected_artifact_cannot_use_history) ... ok
+test_no_historical_gate_union_and_comparison_required (__main__.HarnessReview.test_no_historical_gate_union_and_comparison_required) ... ok
+test_normal_and_unchecked_hash_cache_use_verified_sources (__main__.HarnessReview.test_normal_and_unchecked_hash_cache_use_verified_sources) ... ok
+test_package_and_legacy_bytecode_shadow_rejected (__main__.HarnessReview.test_package_and_legacy_bytecode_shadow_rejected) ... ok
+test_software_comparison_is_explicit_pass_or_fail_gate (__main__.HarnessReview.test_software_comparison_is_explicit_pass_or_fail_gate) ... ok
+test_source_binding_and_associated_formal_statuses (__main__.HarnessReview.test_source_binding_and_associated_formal_statuses) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 4.247s
+
+OK

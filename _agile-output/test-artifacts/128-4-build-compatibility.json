@@ -1,0 +1,39 @@
+[
+  {
+    "command": [
+      "rustc",
+      "--version"
+    ],
+    "start_utc": "2026-09-21T11:46:28.201386+00:00",
+    "end_utc": "2026-09-21T11:46:28.232872+00:00",
+    "seconds": 0.03147518204059452,
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "bitloom",
+      "--test",
+      "fr108_gpio_near_vip",
+      "--test",
+      "fr120_gpio_commercial_vip",
+      "--test",
+      "fr126_more_ip_handwritten_fl",
+      "--test",
+      "fr128_soc_pad",
+      "--test",
+      "fr136_multi_peripheral_full_chip_pad_ring",
+      "--test",
+      "fr139_vip_socpad_split",
+      "--",
+      "--nocapture"
+    ],
+    "start_utc": "2026-09-21T11:46:28.233031+00:00",
+    "end_utc": "2026-09-21T11:46:28.917085+00:00",
+    "seconds": 0.6840805750107393,
+    "exit_code": 0
+  }
+]

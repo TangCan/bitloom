@@ -221,3 +221,14 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 | `Elaboratable for ip::Irq` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立电路/模块名`Irq`，finish一次 |
 
 以上逐符号显式纳入FR142，私有CSR名字/helper/内部状态不自动纳入。端口/时序、prelude-only原文例与证据见[五路事件IRQ](ip/irq.md)。追加属SemVer minor；未改版本或发布，不宣称crates.io已有。设计依赖仍仅prelude，native/generated层级unsupported；仅FR197 IRQ子集，M3/Phase24及FR189 deferred/NFR91不由此关闭。
+
+### `bitloom-prelude` — FR197 / Story128.4 GPIO显式追加
+
+| 符号 | 契约 |
+|---|---|
+| `ip::GpioCsr` | 固定32位GPIO CSR，16端口；同步针脚、沿前DIR事件、唯一OUT与原始事件 |
+| `ip::GpioCsr::registers` | `() -> CsrBlock`；固定local00/04/08/0c/10/14，六个bits字段全mask；修改返回值不改变硬件 |
+| `ip::GpioCsr::define_module` | `(&mut ElaborateSession, impl Into<String>) -> Result<String, Diagnostics>`；同session复用定义/共享CSR，一次finish |
+| `Elaboratable for ip::GpioCsr` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立电路/模块名`GpioCsr`，共用定义体 |
+
+上述四符号逐项纳入FR142，私有CSR/helper/状态不自动纳入。端口、时序和原文例见[GPIO32 CSR](ip/gpio-csr.md)。追加属SemVer minor，未改版本或发布；旧GPIO8/FL、prelude-only依赖与native/generated层级unsupported保持。仅GPIO子集，M3/Phase24未关闭；FR189 deferred/NFR91保持。

@@ -1,0 +1,11 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.06s
+     Running tests/fr197_gpio_api.rs (target/debug/deps/fr197_gpio_api-530daf891b13f5e3)
+
+running 1 test
+GPIO composition FIRRTL and JVM actual RTL PASS /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-gpio-api/pair-true-true-788221-1789991849741965999
+GPIO composition FIRRTL and JVM actual RTL PASS /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-gpio-api/pair-false-true-788221-1789991865993385637
+GPIO composition FIRRTL and JVM actual RTL PASS /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-gpio-api/gpio-irq-true-788221-1789991882543449255
+test p1_composition_firrtl_chisel_shared_renamed_actual_gpio_irq ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 9 filtered out; finished in 50.87s
+

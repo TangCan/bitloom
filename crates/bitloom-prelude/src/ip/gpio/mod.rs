@@ -10,10 +10,12 @@
 
 mod base;
 mod chip_ring;
+mod csr;
 mod socpad;
 mod vip;
 
 pub use base::*;
 pub use chip_ring::*;
+pub use csr::*;
 pub use socpad::*;
 pub use vip::*;

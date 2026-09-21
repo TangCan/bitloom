@@ -184,3 +184,9 @@ Timer32固定接口已实现，完整契约和prelude-only原文例见[Timer32](
 固定五路`ip::Irq`已实现，实际接口/原文prelude-only例见[五路事件IRQ](irq.md)。单session共享CSR叶，PENDING/ENABLE唯一owner，TEST commit门控且RAW硬件独占；全部14端口、四local地址和五具名字段保持正式合同。实际Timer→IRQ组合仅接原始match，不接sticky EVENT；不代表GPIO/UART算法或系统交付。四项公开符号逐项登记FR142，属SemVer minor，未改工具钉、包版本或发布。
 
 构建实测和原始证据见`_agile-output/test-artifacts/128-3-build-evidence.md`；故事仍须独立审查、automate、clean/fmt/完整回归与单故事提交闭合。仅IRQ子集；128.4/128.5、Epic129–130、FR197整体/M3及Phase24未交付，FR189 deferred/NFR91保持。此前各时点记录保留为历史。
+
+## Story128.4 GPIO实现子集（2026-09-21）
+
+独立`ip::GpioCsr`实现固定GPIO32、16端口、六local寄存器，完整签名/原文prelude-only例见[GPIO32 CSR](gpio-csr.md)。OUT唯一wrapper状态，DIR/RISE_EVENT由共享CSR唯一保存；IN来自双级实际针脚，沿前DIR筛新沿，原始事件接IRQ4且不取sticky。旧GPIO8/手写FL保持，新增四符号显式登记FR142/minor，工具钉/包版本/发布不变。
+
+构建验证见`_agile-output/test-artifacts/128-4-build-evidence.md`；七步最终关闭仍以故事独立审查/automate/clean/fmt/完整回归和提交为准。只交付GPIO子集，128.5 UART、FR197整体/M3、Epic129–130及Phase24未由此关闭；FR189 deferred/NFR91保持。历史状态保留。

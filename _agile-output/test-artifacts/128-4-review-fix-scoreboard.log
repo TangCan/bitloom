@@ -1,0 +1,10 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.50s
+     Running tests/fr197_gpio.rs (target/debug/deps/fr197_gpio-b9a595892f46d448)
+
+running 1 test
+GPIO scoreboard control PASS and IN=OUT behavioral counterexample PASS /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-gpio/scoreboard-mutation-780646-1789991793570300943
+test p0_gpio_independent_scoreboard_detects_input_output_mutation ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.09s
+

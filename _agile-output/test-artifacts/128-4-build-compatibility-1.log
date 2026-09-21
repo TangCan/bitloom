@@ -1,0 +1,70 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.61s
+     Running tests/fr108_gpio_near_vip.rs (target/debug/deps/fr108_gpio_near_vip-7f607bed6faa3059)
+
+running 5 tests
+test fr108_docs_boundaries_honest ... ok
+test fr108_gpio_elaborate_emit_ports ... ok
+test fr108_gpio_direction_write_mask_tick ... ok
+test fr108_gpio_negative_mask_zero_keeps_out ... ok
+test fr108_nfr44_fr98_ip_still_reachable ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr120_gpio_commercial_vip.rs (target/debug/deps/fr120_gpio_commercial_vip-6271bed9c05c8e60)
+
+running 6 tests
+test fr120_docs_name_gpiovip_fr120_honest_non_goals ... ok
+test fr120_gpio_vip_elaborate_emit_ports ... ok
+test fr120_c1_rising_irq_and_negatives ... ok
+test fr120_c2_open_drain_oe ... ok
+test fr120_c3_atomic_set_clear_and_p3_mask ... ok
+test fr120_nfr48_fr98_fr108_no_regression ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr126_more_ip_handwritten_fl.rs (target/debug/deps/fr126_more_ip_handwritten_fl-ccbe9b339a7b8731)
+
+running 4 tests
+test fr126_docs_contract ... ok
+test fr126_deliberate_mismatch_fails ... ok
+test fr126_exports_gpio_functional ... ok
+test fr126_gpio_handwritten_pass ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr128_soc_pad.rs (target/debug/deps/fr128_soc_pad-9e0c5212bcc49635)
+
+running 6 tests
+test fr128_docs_contract ... ok
+test fr128_d1_dual_bank_and_d3_csr ... ok
+test fr128_elaborate_emit_ports ... ok
+test fr128_regression_gpio_and_vip_still_elaborate ... ok
+test fr128_d2_falling_edge_irq ... ok
+test fr128_d4_scoreboard_expected_vs_observed ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr136_multi_peripheral_full_chip_pad_ring.rs (target/debug/deps/fr136_multi_peripheral_full_chip_pad_ring-818dff16282791e9)
+
+running 8 tests
+test fr136_design_crate_prelude_only ... ok
+test fr136_docs_contract ... ok
+test fr136_fr139_gpio_split_intact ... ok
+test fr136_r2_full_chip_ring_shape ... ok
+test fr136_r1_chip_pad_ring_elaborate_ports ... ok
+test fr136_r4_not_satisfied_by_fr128_or_fr120_or_fr108_alone ... ok
+test fr136_r3_deliberate_wrong_model_fails ... ok
+test fr136_r3_ring_scoreboard_pass ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr139_vip_socpad_split.rs (target/debug/deps/fr139_vip_socpad_split-6f951e7b5a48bb8f)
+
+running 3 tests
+test fr139_gpio_submodules_exist ... ok
+test fr139_nfr14_and_no_cross_crate ... ok
+test fr139_public_api_stable_elaborate ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

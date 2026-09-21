@@ -1,0 +1,14 @@
+[
+  {
+    "name": "gpio-csr-registers.h",
+    "equal": true,
+    "expected_sha256": "8e5374db3e535e7571d0901faa651ae9642707944677c54c6cafc0b593b41d0e",
+    "actual_sha256": "8e5374db3e535e7571d0901faa651ae9642707944677c54c6cafc0b593b41d0e"
+  },
+  {
+    "name": "gpio-csr-registers.md",
+    "equal": true,
+    "expected_sha256": "2fa0ebe80f5edac807a61fee4927e1ec81a794b8549639050ec0c623bc71a94d",
+    "actual_sha256": "2fa0ebe80f5edac807a61fee4927e1ec81a794b8549639050ec0c623bc71a94d"
+  }
+]

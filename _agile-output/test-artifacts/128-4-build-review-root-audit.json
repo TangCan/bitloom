@@ -1,0 +1,687 @@
+{
+  "scope": "independent raw member/source byte audit; original commands retained",
+  "selected_run": "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-reruns/20260921T115845.483458Z-797187",
+  "archive": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/128-4-build-review-raw.tar.gz",
+  "archive_sha256": "528fd853bb7104065e77a8f48f0eb5e3e1392695b8b8004740484b0c81d39274",
+  "verified_members": 678,
+  "source_files": 566,
+  "start_end_current_equal": true,
+  "commands": {
+    "invocation": [
+      "/usr/bin/python3",
+      "_agile-output/test-artifacts/128-4-build-runner.py"
+    ],
+    "environment": {
+      "PATH": "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-reruns/20260921T115845.483458Z-797187/sby-runtime:/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:/tmp/bitloom-jvm-tools/bin:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.opam/5.1.1/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.codex/tmp/arg0/codex-arg0JQQ9rr:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.local/bin:/home/richard/opt/Isabelle2026-RC0/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-13.2/bin:/nvme_data1/richard/.trae-cn-server/bin/stable-bf463f1c10476ab51d5c25db4513c590c975a76e-debian10/bin/remote-cli:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-11.6/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.cargo/bin:/home/richard/.local/bin:/home/richard/.nvm/versions/node/v24.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+      "RHDL_FIRTOOL_PATH": "/home/richard/.cache/rhdl/firtool/1.159.0/bin",
+      "BITLOOM_SBY_SOURCE": "/tmp/bitloom-1263-sby-src"
+    },
+    "commands": [
+      {
+        "label": "source-files",
+        "command": [
+          "git",
+          "ls-files",
+          "-z"
+        ],
+        "start_utc": "2026-09-21T11:58:45.485451+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.492877+00:00",
+        "seconds": 0.009014896000735462,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-0",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "remote",
+          "get-url",
+          "origin"
+        ],
+        "start_utc": "2026-09-21T11:58:45.585257+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.588786+00:00",
+        "seconds": 0.0049535270081833005,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-1",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "rev-parse",
+          "yosys-0.47"
+        ],
+        "start_utc": "2026-09-21T11:58:45.591899+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.595170+00:00",
+        "seconds": 0.004718440002761781,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-2",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "rev-parse",
+          "bfc1c47eb786496fe794481ff88e75728f0529a6^{commit}"
+        ],
+        "start_utc": "2026-09-21T11:58:45.598283+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.602504+00:00",
+        "seconds": 0.005635741981677711,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-3",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "rev-parse",
+          "HEAD"
+        ],
+        "start_utc": "2026-09-21T11:58:45.605611+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.608947+00:00",
+        "seconds": 0.004759158007800579,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-4",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "status",
+          "--porcelain",
+          "--untracked-files=no"
+        ],
+        "start_utc": "2026-09-21T11:58:45.612089+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.617073+00:00",
+        "seconds": 0.006422230042517185,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-5",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "describe",
+          "--dirty"
+        ],
+        "start_utc": "2026-09-21T11:58:45.620216+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.625142+00:00",
+        "seconds": 0.006339398096315563,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-6",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "ls-tree",
+          "-r",
+          "--name-only",
+          "HEAD",
+          "sbysrc"
+        ],
+        "start_utc": "2026-09-21T11:58:45.628381+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.632079+00:00",
+        "seconds": 0.005113046965561807,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-7",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_autotune.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.635324+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.639333+00:00",
+        "seconds": 0.0054294990841299295,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-8",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_cmdline.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.642550+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.646442+00:00",
+        "seconds": 0.005311327055096626,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-9",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_core.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.649759+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.654084+00:00",
+        "seconds": 0.005760688916780055,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-10",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_design.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.657357+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.661289+00:00",
+        "seconds": 0.005341987009160221,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-11",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_engine_abc.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.664530+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.668445+00:00",
+        "seconds": 0.005326901911757886,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-12",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_engine_aiger.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.671687+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.675629+00:00",
+        "seconds": 0.005362870986573398,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-13",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_engine_btor.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.678909+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.683639+00:00",
+        "seconds": 0.006168005988001823,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-14",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_engine_smtbmc.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.686913+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.691099+00:00",
+        "seconds": 0.005620236974209547,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-15",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_jobserver.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.694365+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.698466+00:00",
+        "seconds": 0.005515196011401713,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-16",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_mode_bmc.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.701813+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.706453+00:00",
+        "seconds": 0.006064431043341756,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-17",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_mode_cover.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.709773+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.713981+00:00",
+        "seconds": 0.005639582988806069,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-18",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_mode_live.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.717300+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.721340+00:00",
+        "seconds": 0.005462603992782533,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-19",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_mode_prove.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.724649+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.730105+00:00",
+        "seconds": 0.006869286997243762,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-20",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_sim.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.733433+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.737569+00:00",
+        "seconds": 0.0055577290477231145,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-21",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby_status.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.740930+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.745008+00:00",
+        "seconds": 0.005518058082088828,
+        "artifact_roots": []
+      },
+      {
+        "label": "identity-git-22",
+        "command": [
+          "git",
+          "-C",
+          "/tmp/bitloom-1263-sby-src",
+          "show",
+          "HEAD:sbysrc/sby.py"
+        ],
+        "start_utc": "2026-09-21T11:58:45.748367+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:45.752575+00:00",
+        "seconds": 0.005644333083182573,
+        "artifact_roots": []
+      },
+      {
+        "label": "sby-runtime",
+        "command": [
+          "sby",
+          "--version"
+        ],
+        "start_utc": "2026-09-21T11:58:45.757359+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:58:46.123153+00:00",
+        "seconds": 0.3672417220659554,
+        "artifact_roots": []
+      },
+      {
+        "label": "atdd",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "bitloom",
+          "--test",
+          "fr197_gpio",
+          "--test",
+          "fr197_gpio_api",
+          "--",
+          "--nocapture"
+        ],
+        "start_utc": "2026-09-21T11:58:46.129571+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:59:16.070617+00:00",
+        "seconds": 29.94355414598249,
+        "artifact_roots": [
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-api/gpio-irq-false-799234-1789991955921132504",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-api/pair-false-false-799234-1789991955993173738",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-api/pair-true-false-799234-1789991955921542685",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio/direct-128419705511-797240-1789991926238489486",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio/direct-83592401ffff-797240-1789991945941711709",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio/direct-deadbeef1284-797240-1789991936121254310",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio/scoreboard-mutation-797240-1789991926209018214"
+        ]
+      },
+      {
+        "label": "formal",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "bitloom",
+          "--test",
+          "fr197_gpio_formal",
+          "--",
+          "--ignored",
+          "--nocapture"
+        ],
+        "start_utc": "2026-09-21T11:59:16.079738+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T11:59:34.891469+00:00",
+        "seconds": 18.815630213939585,
+        "artifact_roots": [
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-formal/mutations-799305-1789991956171156006",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-formal/proof-799305-1789991956171911555",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-formal/synthesis-799305-1789991956171882710"
+        ]
+      },
+      {
+        "label": "backends",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "bitloom",
+          "--test",
+          "fr197_gpio",
+          "p1_gpio_firrtl_chisel_same_independent_vectors",
+          "--",
+          "--ignored",
+          "--exact",
+          "--nocapture"
+        ],
+        "start_utc": "2026-09-21T11:59:34.901221+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exact_test": "p1_gpio_firrtl_chisel_same_independent_vectors",
+        "exit": 0,
+        "end_utc": "2026-09-21T12:00:51.242404+00:00",
+        "seconds": 76.34545096498914,
+        "artifact_roots": [
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio/backends-800464-1789991975066728661"
+        ]
+      },
+      {
+        "label": "pair-backends",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "bitloom",
+          "--test",
+          "fr197_gpio_api",
+          "p1_composition_firrtl_chisel_shared_renamed_actual_gpio_irq",
+          "--",
+          "--ignored",
+          "--exact",
+          "--nocapture"
+        ],
+        "start_utc": "2026-09-21T12:00:51.247190+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exact_test": "p1_composition_firrtl_chisel_shared_renamed_actual_gpio_irq",
+        "exit": 0,
+        "end_utc": "2026-09-21T12:01:43.029134+00:00",
+        "seconds": 51.78396909695584,
+        "artifact_roots": [
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-api/gpio-irq-true-809404-1789992085087303378",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-api/pair-false-true-809404-1789992067810443147",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-api/pair-true-true-809404-1789992051343155012"
+        ]
+      },
+      {
+        "label": "firrtl-regression",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "-p",
+          "bitloom-firrtl"
+        ],
+        "start_utc": "2026-09-21T12:01:43.039696+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T12:01:43.187226+00:00",
+        "seconds": 0.15215545403771102,
+        "artifact_roots": []
+      },
+      {
+        "label": "numeric",
+        "command": [
+          "bash",
+          "scripts/chisel-numeric-check.sh"
+        ],
+        "start_utc": "2026-09-21T12:01:43.197636+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T12:02:55.174321+00:00",
+        "seconds": 71.9813624509843,
+        "artifact_roots": []
+      },
+      {
+        "label": "semver",
+        "command": [
+          "just",
+          "semver-check"
+        ],
+        "start_utc": "2026-09-21T12:02:55.182574+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T12:03:02.542379+00:00",
+        "seconds": 7.3633353400509804,
+        "artifact_roots": []
+      },
+      {
+        "label": "example",
+        "command": [
+          "cargo",
+          "run",
+          "--offline",
+          "--manifest-path",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-reruns/20260921T115845.483458Z-797187/example/Cargo.toml",
+          "--",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-reruns/20260921T115845.483458Z-797187/example/software"
+        ],
+        "start_utc": "2026-09-21T12:03:02.555341+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T12:03:07.212434+00:00",
+        "seconds": 4.662210035021417,
+        "artifact_roots": []
+      },
+      {
+        "label": "example-artifacts",
+        "command": [
+          "compare-generated-artifacts",
+          "gpio-csr-registers.h",
+          "gpio-csr-registers.md"
+        ],
+        "start_utc": "2026-09-21T12:03:07.221042+00:00",
+        "status": "pass",
+        "exit": 0,
+        "end_utc": "2026-09-21T12:03:07.222391+00:00",
+        "seconds": 0.004913300974294543,
+        "artifact_roots": []
+      },
+      {
+        "label": "header-compile",
+        "command": [
+          "cc",
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-I",
+          "/nvme_data2/richard/2026/rhdl/docs/ip",
+          "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/128-4-build-header-check.c",
+          "-o",
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-reruns/20260921T115845.483458Z-797187/header-check"
+        ],
+        "start_utc": "2026-09-21T12:03:07.230422+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T12:03:07.294786+00:00",
+        "seconds": 0.06788965896703303,
+        "artifact_roots": []
+      },
+      {
+        "label": "header-execute",
+        "command": [
+          "/nvme_data2/richard/2026/rhdl/target/fr197-gpio-reruns/20260921T115845.483458Z-797187/header-check"
+        ],
+        "start_utc": "2026-09-21T12:03:07.306494+00:00",
+        "status": "pass",
+        "process_exit": 0,
+        "exit": 0,
+        "end_utc": "2026-09-21T12:03:07.309665+00:00",
+        "seconds": 0.008308032061904669,
+        "artifact_roots": []
+      }
+    ],
+    "workspace": "/nvme_data2/richard/2026/rhdl",
+    "selected_gates": [
+      "atdd",
+      "backends",
+      "example",
+      "firrtl-regression",
+      "formal",
+      "header",
+      "identity",
+      "numeric",
+      "semver"
+    ],
+    "source_fingerprint_complete": true
+  },
+  "status": "pass"
+}

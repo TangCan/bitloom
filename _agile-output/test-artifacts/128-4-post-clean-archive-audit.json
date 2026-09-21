@@ -1,0 +1,20 @@
+{
+  "archives": [
+    {
+      "path": "_agile-output/test-artifacts/128-4-build-raw.tar.gz",
+      "sha256": "5ab1016a48551e6334ce1d5bf9c71a1c20bd4359e32d4e56d7f4fe2a4f16a9e2"
+    },
+    {
+      "path": "_agile-output/test-artifacts/128-4-build-review-raw.tar.gz",
+      "sha256": "528fd853bb7104065e77a8f48f0eb5e3e1392695b8b8004740484b0c81d39274"
+    },
+    {
+      "path": "_agile-output/test-artifacts/128-4-code-review-raw.tar.gz",
+      "sha256": "95f6b137604dd5064e4536c9519a532f355871a2dce07e9dcb2df8a56df852d9"
+    }
+  ],
+  "archives_unchanged_after_clean": true,
+  "source_files": 566,
+  "source_unchanged_after_fmt": true,
+  "note": "final workspace test remains running; this is archive/source integrity only"
+}
