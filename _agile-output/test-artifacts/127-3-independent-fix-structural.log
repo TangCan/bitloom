@@ -1,0 +1,35 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.05s
+     Running tests/fr196_axi_lite_csr_formal.rs (target/debug/deps/fr196_axi_lite_csr_formal-38d1e389ee71a346)
+
+running 1 test
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1592760) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:418:13:
+input (including rst) path to s_axi_awready
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1592760) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:366:9:
+unsupported/latch/unknown cell $_DLATCH_P_
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1592760) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:366:9:
+unsupported/latch/unknown cell mystery
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1592760) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:366:9:
+unsupported/latch/unknown cell $_DFF_FAKE_
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1592760) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:304:28:
+undriven bit 9
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1592760) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:285:9:
+unknown/nonbinary structural constant "x"
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1592760) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:379:13:
+assertion `left == right` failed: FF clock must be the dedicated clk input
+  left: Some(1)
+ right: Some(3)
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1592760) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:377:18:
+FF missing C connection
+test p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+

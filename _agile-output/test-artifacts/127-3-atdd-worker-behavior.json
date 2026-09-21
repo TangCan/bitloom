@@ -1,0 +1,32 @@
+{
+  "files": [
+    "crates/bitloom/tests/fr196_axi_lite_csr.rs",
+    "crates/bitloom/tests/fr196_axi_lite_csr/tools.rs",
+    "crates/bitloom/tests/fr196_axi_lite_csr/integration.rs"
+  ],
+  "test_count": 8,
+  "priority_counts": {
+    "P0": 7,
+    "P1": 1
+  },
+  "coverage": [
+    "AC1 same-session real bridge + CsrBlock",
+    "AC2 raw gaps 0/1/7/31, all16 WSTRB, all8 PROT, partial-write read progress",
+    "AC3 initial read priority, alternation, locked write with late AR",
+    "AC4 independent response slots, CSR consume frees owner, 00/10/11, zero WSTRB",
+    "AC5 partial capture/offer/owner/responses reset cancellation accounting",
+    "AC6 actual RTL RW/RO/WO/W1C, holes/unaligned/high addresses, side-effect counts, snapshot and dynamic rejection",
+    "AC7 monitor negative tests, independent causal scoreboard, sixteen seeds x1000 actual completion assertions; real RTL replay and two native engines",
+    "Exact public port names/directions/types and two same-session bridge instances with independent traces in real RTL"
+  ],
+  "limitations": [
+    "Not executed by this worker; manager must establish compile RED and later GREEN.",
+    "Random tests use individually drained transactions with randomized channel skew/backpressure; sustained overlap is covered by directed tests, not random.",
+    "Formal/structural evidence and prelude-only documentation are separate workers.",
+    "Negative monitor tests execute Rust monitor; dedicated real RTL monitor mutation is not included."
+  ],
+  "worker": "api",
+  "status": "red-scaffold",
+  "success": true,
+  "expected_to_fail": true
+}

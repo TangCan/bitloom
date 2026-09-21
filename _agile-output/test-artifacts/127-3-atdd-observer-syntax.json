@@ -1,0 +1,10 @@
+{
+  "command": [
+    "yosys",
+    "-Q",
+    "-p",
+    "read_verilog -formal _agile-output/test-artifacts/127-3-atdd-observer-syntax-probe.sv"
+  ],
+  "exit_code": 0,
+  "scope": "Syntax parser only, no product design, no safety/proof/cover/synthesis result"
+}

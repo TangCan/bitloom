@@ -1,0 +1,21 @@
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.33s
+     Running tests/fr196_axi_lite_csr_formal.rs (target/debug/deps/fr196_axi_lite_csr_formal-38d1e389ee71a346)
+
+running 1 test
+test p0_port_oracle_safety_induction_and_nonvacuous_covers has been running for over 60 seconds
+
+thread 'p0_port_oracle_safety_induction_and_nonvacuous_covers' (1373951) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:34:5:
+sby ["-f", "bridge.sby", "prove"]: exit status: 124; artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-bridge-formal/proof-1373950
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test p0_port_oracle_safety_induction_and_nonvacuous_covers ... FAILED
+
+failures:
+
+failures:
+    p0_port_oracle_safety_induction_and_nonvacuous_covers
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 2 filtered out; finished in 180.14s
+
+error: test failed, to rerun pass `-p bitloom --test fr196_axi_lite_csr_formal`

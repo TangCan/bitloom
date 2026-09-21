@@ -1,0 +1,35 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+error[E0432]: unresolved import `bitloom_prelude::ip::AxiLiteCsrBridge`
+ --> crates/bitloom/tests/fr196_axi_lite_csr.rs:4:60
+  |
+4 | use bitloom_prelude::{Elaboratable, FrozenHir, GroundType, ip::AxiLiteCsrBridge};
+  |                                                            ^^^^^^^^^^^^^^^^^^^^ no `AxiLiteCsrBridge` in `ip`
+
+error[E0432]: unresolved import `bitloom_prelude::ip::AxiLiteCsrBridge`
+ --> crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:4:37
+  |
+4 | use bitloom_prelude::{Elaboratable, ip::AxiLiteCsrBridge};
+  |                                     ^^^^^^^^^^^^^^^^^^^^ no `AxiLiteCsrBridge` in `ip`
+
+warning: unused import: `Elaboratable`
+ --> crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:4:23
+  |
+4 | use bitloom_prelude::{Elaboratable, ip::AxiLiteCsrBridge};
+  |                       ^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+For more information about this error, try `rustc --explain E0432`.
+warning: `bitloom` (test "fr196_axi_lite_csr_formal") generated 1 warning
+error: could not compile `bitloom` (test "fr196_axi_lite_csr_formal") due to 1 previous error; 1 warning emitted
+warning: build failed, waiting for other jobs to finish...
+warning: unused import: `Elaboratable`
+ --> crates/bitloom/tests/fr196_axi_lite_csr.rs:4:23
+  |
+4 | use bitloom_prelude::{Elaboratable, FrozenHir, GroundType, ip::AxiLiteCsrBridge};
+  |                       ^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `bitloom` (test "fr196_axi_lite_csr") generated 1 warning
+error: could not compile `bitloom` (test "fr196_axi_lite_csr") due to 1 previous error; 1 warning emitted

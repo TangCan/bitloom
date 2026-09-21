@@ -179,3 +179,13 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 | `ip::CsrBlock::emit_c_header` | `(&self) -> Result<String, Diagnostics>`；确定的namespace/include guard/local offset宏 |
 
 此处明确纳入FR142文档表面，端口/时序/合法配置与prelude-only例见[CSR](ip/csr.md)。这是SemVer minor追加；不改版本、不发布，不宣称crates.io已包含。私有codec/RTL模块不入表面；设计依赖仍仅prelude。FR196整体/M2尚未关闭，桥、四窗译码和外设后续独立验收；FR189 deferred和NFR91保留。Bitloom与samitbasu/rhdl无关。
+
+### `bitloom-prelude` — FR196 / Story127.3 显式追加
+
+| 符号 | 契约 |
+|---|---|
+| `ip::AxiLiteCsrBridge` | 固定addr16/data32/WSTRB4、同步reset的AXI4-Lite→CSR桥；AW/W/AR各一捕获槽，单CSR执行owner，B/R独立保持 |
+| `ip::AxiLiteCsrBridge::define_module` | `(&mut ElaborateSession, impl Into<String>) -> Result<String, Diagnostics>`；共享无捕获定义体，完整HIR身份与既有helper诊断 |
+| `Elaboratable for ip::AxiLiteCsrBridge` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立入口电路/模块名为`AxiLiteCsrBridge`，finish一次 |
+
+固定端口、时序和prelude-only组合例见[桥接文档](ip/axi-lite-csr-bridge.md)。上述符号显式纳入FR142，未列出的私有状态或辅助方法不自动进入表面。追加属SemVer minor；不改版本、不发布，不宣称crates.io已有。旧Axi4LiteSlave接口保持，四窗译码/M2仍待127.4；设计依赖与native/generated层级限制不变。

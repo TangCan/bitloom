@@ -1,0 +1,31 @@
+{
+  "files": [
+    "crates/bitloom/tests/fr196_axi_lite_csr_formal.rs"
+  ],
+  "test_count": 3,
+  "priority_counts": {
+    "P0": 2,
+    "P1": 1
+  },
+  "coverage": [
+    "AC2 independent AW/W/AR capture payload and cancellation accounting",
+    "AC3 one CSR in flight, locked offers, read-first alternating eligible arbitration",
+    "AC4 owner routing, reservation and B/R held payload",
+    "AC5 reset cancellation and five input-free output cones",
+    "AC7 actual prove/cover configuration plus original RTL synthesis/check",
+    "Covers require opposite-class CSR commit during the exact blocked B/R response, followed by that response consumption; flags clear on consumption/reset"
+  ],
+  "limitations": [
+    "Not compiled or executed: missing DUT intentional API red, manager owns compile",
+    "Port-only oracle may require additional proved induction invariants after implementation; no PASS claimed",
+    "No bounded-completion/liveness claim; CSR finite response assumption <=7 clocks, no B/R fairness",
+    "Ordinary structural negative test prepared but not run; whole target remains missing-API compile RED",
+    "No actual RTL mutation possible before implementation"
+  ],
+  "worker": "formal-structure",
+  "status": "red-scaffold",
+  "ordinary_test_count": 1,
+  "dedicated_ignored_test_count": 2,
+  "success": true,
+  "expected_to_fail": true
+}

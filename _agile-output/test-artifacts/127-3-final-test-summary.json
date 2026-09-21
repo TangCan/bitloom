@@ -1,0 +1,13 @@
+{
+  "test_result_blocks": 465,
+  "totals": {
+    "passed": 1801,
+    "failed": 0,
+    "ignored": 21,
+    "measured": 0,
+    "filtered": 0
+  },
+  "commands_all_exit_zero": true,
+  "elapsed_seconds": 826.2171189785004,
+  "rust_format_changes": []
+}

@@ -1,0 +1,31 @@
+{
+  "detected_stack": "backend",
+  "new_rust_test_entries": 1,
+  "extended_formal_entrypoints": 1,
+  "new_formal_cover_obligations": 2,
+  "existing_integration_entry_retested": 1,
+  "new_monitor_negative_scenarios": 24,
+  "new_monitor_positive_scenarios": 8,
+  "total_current_entries": 17,
+  "ordinary_entries": 14,
+  "dedicated_ignored_entries": 3,
+  "priority_coverage": {
+    "P0_new_entrypoints": 1,
+    "P0_new_cover_obligations": 2
+  },
+  "performance_gain": "not measured",
+  "execution": "subagent",
+  "files": [
+    "crates/bitloom/tests/fr196_axi_lite_csr_formal.rs",
+    "crates/bitloom/tests/fr196_axi_lite_csr/integration.rs",
+    "crates/bitloom/tests/fr196_axi_lite_csr/tools.rs",
+    "crates/bitloom/tests/fr196_axi_lite_csr/producer_monitor.sv"
+  ],
+  "actual_results": {
+    "formal_prove": "PASS depth8 basecase+induction",
+    "formal_cover": "PASS depth64 seven covers",
+    "new_monitor_entry": "PASS 24 expected failures +8 positives",
+    "real_csr_integration": "PASS 177 submit/176 consume/B110/R64 with reset cancellations",
+    "unanticipated_failures": 0
+  }
+}

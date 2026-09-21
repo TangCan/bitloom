@@ -1,0 +1,11 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.29s
+     Running tests/fr196_axi_lite_csr_formal.rs (target/debug/deps/fr196_axi_lite_csr_formal-38d1e389ee71a346)
+
+running 3 tests
+test p0_original_rtl_synthesis_check_and_all_five_registered_boundaries ... ok
+test p0_port_oracle_kills_pairing_routing_and_offer_hold_rtl_mutants ... ok
+test p0_port_oracle_safety_induction_and_nonvacuous_covers ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 28.00s
+

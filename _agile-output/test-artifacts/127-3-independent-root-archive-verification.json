@@ -1,0 +1,16 @@
+{
+  "verified_at_unix": 1789963731.310209,
+  "method": "Root independent tar member bytes/SHA256 and live source match",
+  "archives": [
+    {
+      "archive": "_agile-output/test-artifacts/127-3-independent-fix-source-snapshot.tar.gz",
+      "archive_sha256": "94cfda7707b3f2735edf9aa47be6c9f66bb988ed805a84f01da02da2cfd08a4f",
+      "members_verified": 6
+    },
+    {
+      "archive": "_agile-output/test-artifacts/127-3-independent-fix-tool-artifacts.tar.gz",
+      "archive_sha256": "e10a6ac0cb9510c175f9a686e0d5699e8bcca2e98d342458435cc908111f66c3",
+      "members_verified": 405
+    }
+  ]
+}

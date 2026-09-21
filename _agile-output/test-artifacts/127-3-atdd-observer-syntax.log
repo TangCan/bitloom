@@ -1,0 +1,11 @@
+
+-- Running command `read_verilog -formal _agile-output/test-artifacts/127-3-atdd-observer-syntax-probe.sv' --
+
+1. Executing Verilog-2005 frontend: _agile-output/test-artifacts/127-3-atdd-observer-syntax-probe.sv
+Parsing formal Verilog input from `_agile-output/test-artifacts/127-3-atdd-observer-syntax-probe.sv' to AST representation.
+Generating RTLIL representation for module `\observer_syntax_probe'.
+Successfully finished Verilog frontend.
+
+End of script. Logfile hash: baa3185c93, CPU: user 0.04s system 0.01s, MEM: 12.00 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 100% 2x read_verilog (0 sec)

@@ -1,0 +1,38 @@
+{
+  "proof_status": "PASS 0 22",
+  "cover_status": "PASS 0 6",
+  "witnesses": {
+    "2": {
+      "trace": "target/fr196-bridge-formal/proof-1656385/bridge_cover/engine_0/trace0.vcd",
+      "aw_consumption_step": 1,
+      "w_consumption_step": 1,
+      "csr_write_submission_step": 3,
+      "csr_response_consumption_step": 4,
+      "csr_error": 2,
+      "csr_rdata": 1,
+      "b_consumption_step": 5,
+      "bresp": 2,
+      "no_reset_between_submission_and_b": true
+    },
+    "3": {
+      "trace": "target/fr196-bridge-formal/proof-1656385/bridge_cover/engine_0/trace1.vcd",
+      "aw_consumption_step": 1,
+      "w_consumption_step": 1,
+      "csr_write_submission_step": 3,
+      "csr_response_consumption_step": 4,
+      "csr_error": 3,
+      "csr_rdata": 1,
+      "b_consumption_step": 5,
+      "bresp": 3,
+      "no_reset_between_submission_and_b": true
+    }
+  },
+  "cover_count": 7,
+  "new_cover_count": 2,
+  "source_scope": "Witness flags and all reference updates use ports only. Shared emitted formal source also includes existing proved implementation correspondence assertions, never implementation assumptions.",
+  "versions": {
+    "yosys": "Yosys 0.33 (git sha1 2584903a060)",
+    "sby": "SBY yosys-0.47",
+    "z3": "Z3 version 4.8.12 - 64 bit"
+  }
+}

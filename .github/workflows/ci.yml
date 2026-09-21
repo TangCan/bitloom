@@ -28,6 +28,8 @@ jobs:
         run: python3 scripts/check_fr194_example.py
       - name: FR196 documented prelude-only CSR design
         run: python3 scripts/check_fr196_example.py
+      - name: FR196 documented prelude-only AXI-Lite and CSR composition
+        run: python3 scripts/check_fr196_bridge_example.py
       - name: Preserve Icarus failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
@@ -38,6 +40,7 @@ jobs:
             target/fr195-fifo/
             target/fr196-csr/
             target/fr196-csr-c/
+            target/fr196-axi-lite-csr/
 
   # FR71 / NFR34 / FR28: required true Chisel JVM compile (Pattern A — parallel to Rust test).
   # Escape hatch env must never be enabled here. Do not use continue-on-error.
@@ -128,6 +131,8 @@ jobs:
         run: CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr195_param_sync_fifo_formal -- --ignored --nocapture
       - name: Required FR196 CSR safety, cover and original RTL synthesis
         run: CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr196_csr_formal -- --ignored --nocapture
+      - name: Required FR196 AXI-Lite bridge safety, cover and registered boundaries
+        run: CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr196_axi_lite_csr_formal -- --ignored --nocapture
       - name: Preserve formal failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
@@ -137,6 +142,7 @@ jobs:
             target/fr195-formal/
             target/fr195-fifo-formal/
             target/fr196-csr-formal/
+            target/fr196-bridge-formal/
             target/fr119/
             crates/rhdl-formal/fixtures/fr119/fr119_fail/
 

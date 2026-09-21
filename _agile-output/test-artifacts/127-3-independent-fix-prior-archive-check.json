@@ -1,0 +1,26 @@
+[
+  {
+    "manifest": "_agile-output/test-artifacts/127-3-build-source-snapshot-manifest.json",
+    "archive": "_agile-output/test-artifacts/127-3-build-source-snapshot.tar.gz",
+    "sha256": "de4fa08cc0ba0f7343211d5e1c0ab0796abb9a7d8648b0bad0819178a382e045",
+    "unchanged": true
+  },
+  {
+    "manifest": "_agile-output/test-artifacts/127-3-build-tool-artifacts-manifest.json",
+    "archive": "_agile-output/test-artifacts/127-3-build-tool-artifacts.tar.gz",
+    "sha256": "7c02ecd2c6e2161fc858e9319c40a522d33aac82c740e87f26854a95f8956489",
+    "unchanged": true
+  },
+  {
+    "manifest": "_agile-output/test-artifacts/127-3-review-fix-tool-artifacts-manifest.json",
+    "archive": "_agile-output/test-artifacts/127-3-review-fix-tool-artifacts.tar.gz",
+    "sha256": "d0da119717bf33289093dbad088a8139fd9608d5bd2db1b1ed7327faa3d5a665",
+    "unchanged": true
+  },
+  {
+    "manifest": "_agile-output/test-artifacts/127-3-review-fix-source-snapshot-manifest.json",
+    "archive": "_agile-output/test-artifacts/127-3-review-fix-source-snapshot.tar.gz",
+    "sha256": "44b400b31b7f6045d22f78e218ef4e01982f394c5ed9da4d1d32847b7e96be87",
+    "unchanged": true
+  }
+]

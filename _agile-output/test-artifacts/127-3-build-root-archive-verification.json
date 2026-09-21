@@ -1,0 +1,12 @@
+[
+  {
+    "archive": "_agile-output/test-artifacts/127-3-build-source-snapshot.tar.gz",
+    "sha256": "de4fa08cc0ba0f7343211d5e1c0ab0796abb9a7d8648b0bad0819178a382e045",
+    "verified_members": 19
+  },
+  {
+    "archive": "_agile-output/test-artifacts/127-3-build-tool-artifacts.tar.gz",
+    "sha256": "7c02ecd2c6e2161fc858e9319c40a522d33aac82c740e87f26854a95f8956489",
+    "verified_members": 445
+  }
+]

@@ -1,0 +1,23 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.10s
+     Running tests/fr196_axi_lite_csr.rs (target/debug/deps/fr196_axi_lite_csr-b721319b8e1132b5)
+
+running 1 test
+
+thread 'integration::p0_same_session_bridge_real_csr_accesses_snapshots_and_single_side_effects' (1388541) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'integration::p0_same_session_bridge_real_csr_accesses_snapshots_and_single_side_effects' (1388541) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'integration::p0_same_session_bridge_real_csr_accesses_snapshots_and_single_side_effects' (1388541) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+real-csr-integration: FR196 PASS integration submits=102 consumes=102 B=58 R=44 CW=14 TW=8 EW=1
+tb.sv:118: $finish called at 11124 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/real-csr-integration-1388540
+test integration::p0_same_session_bridge_real_csr_accesses_snapshots_and_single_side_effects ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.11s
+

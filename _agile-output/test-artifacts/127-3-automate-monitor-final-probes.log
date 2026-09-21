@@ -1,0 +1,168 @@
+command=['cargo', 'test', '-p', 'bitloom', '--test', 'fr196_axi_lite_csr', 'p0_sv_producer_monitor', '--', '--nocapture']
+env={'PATH': '/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.opam/5.1.1/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.codex/tmp/arg0/codex-arg0JQQ9rr:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.local/bin:/home/richard/opt/Isabelle2026-RC0/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-13.2/bin:/nvme_data1/richard/.trae-cn-server/bin/stable-bf463f1c10476ab51d5c25db4513c590c975a76e-debian10/bin/remote-cli:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-11.6/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.cargo/bin:/home/richard/.local/bin:/home/richard/.nvm/versions/node/v24.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'CARGO_PROFILE_TEST_OPT_LEVEL': '1', 'BITLOOM_REQUIRE_RTL': '1', 'PYTHONDONTWRITEBYTECODE': '1'}
+started_utc=2026-09-21T04:15:01.124831+00:00
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.91s
+     Running tests/fr196_axi_lite_csr.rs (target/debug/deps/fr196_axi_lite_csr-b721319b8e1132b5)
+
+running 1 test
+sv-monitor-aw-ready0-s_axi_awvalid: FATAL: tb.sv:20: AW producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-aw-ready0-s_axi_awvalid-1665799
+monitor negative accepted: channel=aw ready=0 mutation=s_axi_awvalid exact_fatal=AW producer hold violation
+sv-monitor-aw-ready0-s_axi_awaddr: FATAL: tb.sv:20: AW producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-aw-ready0-s_axi_awaddr-1665799
+monitor negative accepted: channel=aw ready=0 mutation=s_axi_awaddr exact_fatal=AW producer hold violation
+sv-monitor-aw-ready0-s_axi_awprot: FATAL: tb.sv:20: AW producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-aw-ready0-s_axi_awprot-1665799
+monitor negative accepted: channel=aw ready=0 mutation=s_axi_awprot exact_fatal=AW producer hold violation
+sv-monitor-aw-ready1-s_axi_awvalid: FATAL: tb.sv:20: AW producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-aw-ready1-s_axi_awvalid-1665799
+monitor negative accepted: channel=aw ready=1 mutation=s_axi_awvalid exact_fatal=AW producer hold violation
+sv-monitor-aw-ready1-s_axi_awaddr: FATAL: tb.sv:20: AW producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-aw-ready1-s_axi_awaddr-1665799
+monitor negative accepted: channel=aw ready=1 mutation=s_axi_awaddr exact_fatal=AW producer hold violation
+sv-monitor-aw-ready1-s_axi_awprot: FATAL: tb.sv:20: AW producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-aw-ready1-s_axi_awprot-1665799
+monitor negative accepted: channel=aw ready=1 mutation=s_axi_awprot exact_fatal=AW producer hold violation
+sv-monitor-aw-stable-acceptance: FR196 PASS monitor probe
+tb.sv:35: $finish called at 12 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-aw-stable-acceptance-1665799
+sv-monitor-aw-reset-cancellation: FR196 PASS monitor probe
+tb.sv:35: $finish called at 18 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-aw-reset-cancellation-1665799
+sv-monitor-w-ready0-s_axi_wvalid: FATAL: tb.sv:21: W producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-w-ready0-s_axi_wvalid-1665799
+monitor negative accepted: channel=w ready=0 mutation=s_axi_wvalid exact_fatal=W producer hold violation
+sv-monitor-w-ready0-s_axi_wdata: FATAL: tb.sv:21: W producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-w-ready0-s_axi_wdata-1665799
+monitor negative accepted: channel=w ready=0 mutation=s_axi_wdata exact_fatal=W producer hold violation
+sv-monitor-w-ready0-s_axi_wstrb: FATAL: tb.sv:21: W producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-w-ready0-s_axi_wstrb-1665799
+monitor negative accepted: channel=w ready=0 mutation=s_axi_wstrb exact_fatal=W producer hold violation
+sv-monitor-w-ready1-s_axi_wvalid: FATAL: tb.sv:21: W producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-w-ready1-s_axi_wvalid-1665799
+monitor negative accepted: channel=w ready=1 mutation=s_axi_wvalid exact_fatal=W producer hold violation
+sv-monitor-w-ready1-s_axi_wdata: FATAL: tb.sv:21: W producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-w-ready1-s_axi_wdata-1665799
+monitor negative accepted: channel=w ready=1 mutation=s_axi_wdata exact_fatal=W producer hold violation
+sv-monitor-w-ready1-s_axi_wstrb: FATAL: tb.sv:21: W producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-w-ready1-s_axi_wstrb-1665799
+monitor negative accepted: channel=w ready=1 mutation=s_axi_wstrb exact_fatal=W producer hold violation
+sv-monitor-w-stable-acceptance: FR196 PASS monitor probe
+tb.sv:35: $finish called at 12 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-w-stable-acceptance-1665799
+sv-monitor-w-reset-cancellation: FR196 PASS monitor probe
+tb.sv:35: $finish called at 18 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-w-reset-cancellation-1665799
+sv-monitor-ar-ready0-s_axi_arvalid: FATAL: tb.sv:22: AR producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-ar-ready0-s_axi_arvalid-1665799
+monitor negative accepted: channel=ar ready=0 mutation=s_axi_arvalid exact_fatal=AR producer hold violation
+sv-monitor-ar-ready0-s_axi_araddr: FATAL: tb.sv:22: AR producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-ar-ready0-s_axi_araddr-1665799
+monitor negative accepted: channel=ar ready=0 mutation=s_axi_araddr exact_fatal=AR producer hold violation
+sv-monitor-ar-ready0-s_axi_arprot: FATAL: tb.sv:22: AR producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-ar-ready0-s_axi_arprot-1665799
+monitor negative accepted: channel=ar ready=0 mutation=s_axi_arprot exact_fatal=AR producer hold violation
+sv-monitor-ar-ready1-s_axi_arvalid: FATAL: tb.sv:22: AR producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-ar-ready1-s_axi_arvalid-1665799
+monitor negative accepted: channel=ar ready=1 mutation=s_axi_arvalid exact_fatal=AR producer hold violation
+sv-monitor-ar-ready1-s_axi_araddr: FATAL: tb.sv:22: AR producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-ar-ready1-s_axi_araddr-1665799
+monitor negative accepted: channel=ar ready=1 mutation=s_axi_araddr exact_fatal=AR producer hold violation
+sv-monitor-ar-ready1-s_axi_arprot: FATAL: tb.sv:22: AR producer hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-ar-ready1-s_axi_arprot-1665799
+monitor negative accepted: channel=ar ready=1 mutation=s_axi_arprot exact_fatal=AR producer hold violation
+sv-monitor-ar-stable-acceptance: FR196 PASS monitor probe
+tb.sv:35: $finish called at 12 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-ar-stable-acceptance-1665799
+sv-monitor-ar-reset-cancellation: FR196 PASS monitor probe
+tb.sv:35: $finish called at 18 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-ar-reset-cancellation-1665799
+sv-monitor-csr-rsp-ready0-csr_rsp_valid: FATAL: tb.sv:23: CSR responder hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-csr-rsp-ready0-csr_rsp_valid-1665799
+monitor negative accepted: channel=csr-rsp ready=0 mutation=csr_rsp_valid exact_fatal=CSR responder hold violation
+sv-monitor-csr-rsp-ready0-csr_rdata: FATAL: tb.sv:23: CSR responder hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-csr-rsp-ready0-csr_rdata-1665799
+monitor negative accepted: channel=csr-rsp ready=0 mutation=csr_rdata exact_fatal=CSR responder hold violation
+sv-monitor-csr-rsp-ready0-csr_error: FATAL: tb.sv:23: CSR responder hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-csr-rsp-ready0-csr_error-1665799
+monitor negative accepted: channel=csr-rsp ready=0 mutation=csr_error exact_fatal=CSR responder hold violation
+sv-monitor-csr-rsp-ready1-csr_rsp_valid: FATAL: tb.sv:23: CSR responder hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-csr-rsp-ready1-csr_rsp_valid-1665799
+monitor negative accepted: channel=csr-rsp ready=1 mutation=csr_rsp_valid exact_fatal=CSR responder hold violation
+sv-monitor-csr-rsp-ready1-csr_rdata: FATAL: tb.sv:23: CSR responder hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-csr-rsp-ready1-csr_rdata-1665799
+monitor negative accepted: channel=csr-rsp ready=1 mutation=csr_rdata exact_fatal=CSR responder hold violation
+sv-monitor-csr-rsp-ready1-csr_error: FATAL: tb.sv:23: CSR responder hold violation
+       Time: 9  Scope: tb.monitor_producers
+status=exit status: 1
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-csr-rsp-ready1-csr_error-1665799
+monitor negative accepted: channel=csr-rsp ready=1 mutation=csr_error exact_fatal=CSR responder hold violation
+sv-monitor-csr-rsp-stable-acceptance: FR196 PASS monitor probe
+tb.sv:35: $finish called at 12 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-csr-rsp-stable-acceptance-1665799
+sv-monitor-csr-rsp-reset-cancellation: FR196 PASS monitor probe
+tb.sv:35: $finish called at 18 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/sv-monitor-csr-rsp-reset-cancellation-1665799
+SV monitor probes: native_test_entries=1 negative=24 positive=8 elapsed=1.662710531s
+test integration::p0_sv_producer_monitor_rejects_each_hold_violation_and_accepts_release ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 12 filtered out; finished in 1.66s
+
+
+exit=0
+wall_seconds=2.6234854198992252

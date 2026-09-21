@@ -1,0 +1,32 @@
+command=['cargo', 'test', '-p', 'bitloom', '--test', 'fr196_axi_lite_csr', 'p0_same_session_bridge_real_csr', '--', '--nocapture']
+env={'PATH': '/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.opam/5.1.1/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.codex/tmp/arg0/codex-arg0JQQ9rr:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.local/bin:/home/richard/opt/Isabelle2026-RC0/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-13.2/bin:/nvme_data1/richard/.trae-cn-server/bin/stable-bf463f1c10476ab51d5c25db4513c590c975a76e-debian10/bin/remote-cli:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-11.6/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.cargo/bin:/home/richard/.local/bin:/home/richard/.nvm/versions/node/v24.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'CARGO_PROFILE_TEST_OPT_LEVEL': '1', 'BITLOOM_REQUIRE_RTL': '1', 'PYTHONDONTWRITEBYTECODE': '1'}
+started_utc=2026-09-21T04:14:18.297436+00:00
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.06s
+     Running tests/fr196_axi_lite_csr.rs (target/debug/deps/fr196_axi_lite_csr-b721319b8e1132b5)
+
+running 1 test
+
+thread 'integration::p0_same_session_bridge_real_csr_accesses_snapshots_and_single_side_effects' (1662555) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'integration::p0_same_session_bridge_real_csr_accesses_snapshots_and_single_side_effects' (1662555) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'integration::p0_same_session_bridge_real_csr_accesses_snapshots_and_single_side_effects' (1662555) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+real-csr-integration: common reset phase=0 canceled_submit=0 canceled_CSR_response=0 no_AXI_replay=1
+common reset phase=1 canceled_submit=1 canceled_CSR_response=0 no_AXI_replay=1
+common reset phase=2 canceled_submit=1 canceled_CSR_response=1 no_AXI_replay=1
+common reset phase=3 canceled_submit=1 canceled_CSR_response=1 no_AXI_replay=1
+FR196 PASS integration submits=177 consumes=176 B=110 R=64 CW=66 TW=8 EW=1
+tb.sv:189: $finish called at 25557 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/real-csr-integration-1662554
+test integration::p0_same_session_bridge_real_csr_accesses_snapshots_and_single_side_effects ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 12 filtered out; finished in 0.14s
+
+
+exit=0
+wall_seconds=0.23268626211211085

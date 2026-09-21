@@ -1,0 +1,38 @@
+{
+  "archive": "_agile-output/test-artifacts/127-3-review-fix-source-snapshot.tar.gz",
+  "archive_sha256": "44b400b31b7f6045d22f78e218ef4e01982f394c5ed9da4d1d32847b7e96be87",
+  "member_count": 6,
+  "members": [
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr/integration.rs",
+      "bytes": 19199,
+      "sha256": "21cb9ba66ab9fa947661d23f9fb9afd0a6dcfb0096f9f85f614b6e93e9ca3780"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr/tools.rs",
+      "bytes": 3953,
+      "sha256": "c67127a32e5c40c31c827cd5828d525ad7464821eb7b55774d83be0204ec0190"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr.rs",
+      "bytes": 31061,
+      "sha256": "dcb81a97463295f4939d34b33dc9d6cb67af4976eab20cd8c0d4acc8f485be7b"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr_formal.rs",
+      "bytes": 20908,
+      "sha256": "76f51219896978238fbd7bb6d69b2d9f846b0f1cdbc94716316ffa5b4431c410"
+    },
+    {
+      "path": "crates/bitloom-prelude/src/ip/axi_lite_csr.rs",
+      "bytes": 12166,
+      "sha256": "fa0f087569c37e598c519f7d7e0e762225dd9bb3b41db6861001925a74c6c291"
+    },
+    {
+      "path": "docs/ip/axi-lite-csr-bridge.md",
+      "bytes": 11105,
+      "sha256": "18634567cd981ee79ce3c7b0f34c71a4d61425977e417879b287a2961414de93"
+    }
+  ],
+  "verification": "Each archived member re-read and matched; snapshot hashes do not imply future live-file equality."
+}

@@ -1,0 +1,41 @@
+{
+  "environment_prefix": "PATH=/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:$PATH CARGO_PROFILE_TEST_OPT_LEVEL=1 BITLOOM_REQUIRE_RTL=1",
+  "commands": [
+    {
+      "command": "cargo test -p bitloom --test fr196_axi_lite_csr --test fr196_axi_lite_csr_formal -- --nocapture",
+      "log": "127-3-independent-fix-ordinary.log",
+      "exit_code": 0,
+      "rust_reported_wall_seconds": [
+        396.05,
+        0.0
+      ],
+      "ordinary_passed": 13,
+      "ordinary_ignored": 3
+    },
+    {
+      "command": "cargo test -p bitloom --test fr196_axi_lite_csr_formal -- --ignored --nocapture",
+      "log": "127-3-independent-fix-formal.log",
+      "exit_code": 0,
+      "rust_reported_wall_seconds": 25.25
+    },
+    {
+      "command": "cargo test -p bitloom --test fr196_axi_lite_csr_formal p1_structural -- --nocapture",
+      "log": "127-3-independent-fix-structural.log",
+      "exit_code": 0,
+      "rust_reported_wall_seconds": 0.0
+    }
+  ],
+  "formal_assumption_diff": {
+    "before": "if (csr_error != 0) assume(csr_rdata == 0);",
+    "after": "if (!f_owner && csr_error != 0) assume(csr_rdata == 0);",
+    "meaning": "Only failed reads require zero data; failed writes may return arbitrary data. No latency or B/R fairness bound."
+  },
+  "proof_depth": 8,
+  "cover_depth": 64,
+  "mutation_bmc_depth": 10,
+  "new_test_entrypoints": [
+    "p0_delayed_csr_completion_retains_owner_while_new_channels_arrive",
+    "p0_scoreboard_rejects_response_and_new_request_on_same_edge"
+  ],
+  "total_entrypoints": 16
+}

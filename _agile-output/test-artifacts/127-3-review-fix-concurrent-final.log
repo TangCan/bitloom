@@ -1,0 +1,19 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.13s
+     Running tests/fr196_axi_lite_csr.rs (target/debug/deps/fr196_axi_lite_csr-b721319b8e1132b5)
+
+running 1 test
+concurrent Interpreter: overlapping=3019 stalls_AW_W_AR_B_R_CSR=[3133, 3141, 3534, 1879, 2254, 678] ledger=Ledger { aw: 256, w: 256, ar: 256, complete_write: 256, submit: 512, consume: 512, b: 256, r: 256, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 }
+concurrent-Interpreter: FR196 PASS
+tb.sv:128588: $finish called at 11688 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/concurrent-Interpreter-1490718
+concurrent Compiled: overlapping=3019 stalls_AW_W_AR_B_R_CSR=[3133, 3141, 3534, 1879, 2254, 678] ledger=Ledger { aw: 256, w: 256, ar: 256, complete_write: 256, submit: 512, consume: 512, b: 256, r: 256, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 }
+concurrent-Compiled: FR196 PASS
+tb.sv:128588: $finish called at 11688 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/concurrent-Compiled-1490718
+test p0_concurrent_independent_producers_with_bounded_backpressure ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 9 filtered out; finished in 6.18s
+

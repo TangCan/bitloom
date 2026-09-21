@@ -1,0 +1,103 @@
+{
+  "archive": "_agile-output/test-artifacts/127-3-build-source-snapshot.tar.gz",
+  "archive_sha256": "de4fa08cc0ba0f7343211d5e1c0ab0796abb9a7d8648b0bad0819178a382e045",
+  "member_count": 19,
+  "members": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 13540,
+      "sha256": "4a37bf29cb4eb32337960fbb7defde332a2acd6466384d27f1063b13466d5949"
+    },
+    {
+      "path": "Cargo.lock",
+      "bytes": 24904,
+      "sha256": "de52c4c6c3db7e9256ed6cb190f37f4478c2ed7bbbbd5467114d09bb98854a3d"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 1913,
+      "sha256": "9ce9d65c01eba6c118bbbe344733c9c834dbb5a15e4b588ed2fd4ea33d57382d"
+    },
+    {
+      "path": "_agile-output/test-artifacts/127-3-build-example.json",
+      "bytes": 654,
+      "sha256": "8adb2c10545c53710933a74c5d9eb355bcafdc99850bcb8beb4dec09311cc2ab"
+    },
+    {
+      "path": "_agile-output/test-artifacts/127-3-build-example.log",
+      "bytes": 1018,
+      "sha256": "8cca2e02148f49eeeb00e790609450e137e8a7bdf48f1e4e3631e8be94f45290"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr/integration.rs",
+      "bytes": 14560,
+      "sha256": "e9ff36f02d2cecf6afd3add9a3c6714fc5637d93863860a5a4acfdd0675a54cc"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr/tools.rs",
+      "bytes": 3953,
+      "sha256": "c67127a32e5c40c31c827cd5828d525ad7464821eb7b55774d83be0204ec0190"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr.rs",
+      "bytes": 26313,
+      "sha256": "a40221a4a379ca3b999ef1883d950a23b5ba061b1e793aa14962d554996836a9"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr_formal.rs",
+      "bytes": 17441,
+      "sha256": "af252820c41ad33347a40340ad943ca104fbef8ca07993eeb51c9c708436c0f2"
+    },
+    {
+      "path": "crates/bitloom-builder/src/lib.rs",
+      "bytes": 118792,
+      "sha256": "2fd31dcc131c054eed76d3f5168b4a5314303194e04d0413200b1cda2b418662"
+    },
+    {
+      "path": "crates/bitloom-prelude/src/ip/axi_lite_csr.rs",
+      "bytes": 12166,
+      "sha256": "fa0f087569c37e598c519f7d7e0e762225dd9bb3b41db6861001925a74c6c291"
+    },
+    {
+      "path": "crates/bitloom-prelude/src/ip/csr/rtl.rs",
+      "bytes": 9430,
+      "sha256": "26c311fa11b9f97801bb71bbec86a80278f35691ad54ab94356bd1be67d698a2"
+    },
+    {
+      "path": "crates/bitloom-prelude/src/ip/mod.rs",
+      "bytes": 1739,
+      "sha256": "d39c10789f47b5ae1c2ff7faa8855cd5de335daad0aca092c8fa06743683bee6"
+    },
+    {
+      "path": "docs/ip/README.md",
+      "bytes": 16450,
+      "sha256": "f52f13ee9996e209d753590596b3cc4cd1b889ebdd5aea295617015955036563"
+    },
+    {
+      "path": "docs/ip/axi-lite-csr-bridge.md",
+      "bytes": 10453,
+      "sha256": "e34b7694c347c56c9cac2b46ad7d17a3b27cfaf4e905792ea6fd7cf4f0dc97dd"
+    },
+    {
+      "path": "docs/public-api-1-0-surface.md",
+      "bytes": 14211,
+      "sha256": "712f69237ae4f39451e2ff325dd5af92caebd39281b33b4ee95d081df9c7b322"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "bytes": 31,
+      "sha256": "5d959dfcc98b53886ee772ba216c4f9a1b31f093b46b5b263c0d084af54e821d"
+    },
+    {
+      "path": "scripts/check_fr194_example.py",
+      "bytes": 1924,
+      "sha256": "adc3dafef673e2469c89b180953983c4ad9ecf31fa14996551b0efe6a73704fc"
+    },
+    {
+      "path": "scripts/check_fr196_bridge_example.py",
+      "bytes": 289,
+      "sha256": "3bd64d183af1217a89d57b4da55a835496dab7f16ffa09f47330560975de6ea4"
+    }
+  ],
+  "verification": "All archived members re-read and SHA256 matched; hashes describe archive snapshot, not future live files."
+}

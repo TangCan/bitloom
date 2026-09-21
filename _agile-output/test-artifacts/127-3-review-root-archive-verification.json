@@ -1,0 +1,17 @@
+{
+  "verified_at_unix": 1789962266.2468772,
+  "method": "Independent root archive SHA256 and every tar member bytes/SHA256; no extraction",
+  "archives": [
+    {
+      "archive": "_agile-output/test-artifacts/127-3-review-fix-source-snapshot.tar.gz",
+      "sha256": "44b400b31b7f6045d22f78e218ef4e01982f394c5ed9da4d1d32847b7e96be87",
+      "verified_members": 6
+    },
+    {
+      "archive": "_agile-output/test-artifacts/127-3-review-fix-tool-artifacts.tar.gz",
+      "sha256": "d0da119717bf33289093dbad088a8139fd9608d5bd2db1b1ed7327faa3d5a665",
+      "verified_members": 499
+    }
+  ],
+  "total_verified_members": 505
+}

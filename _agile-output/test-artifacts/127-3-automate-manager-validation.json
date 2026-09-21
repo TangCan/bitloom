@@ -1,0 +1,12 @@
+{
+  "final_rtl_tool_logs": {
+    "negative": 24,
+    "positive": 8,
+    "real_integration": 1
+  },
+  "formal_status_and_cover_count": "prove PASS, cover PASS, 7 reached",
+  "product_unchanged_from_review_snapshot": true,
+  "format": "rustfmt --edition 2024 --check three edited Rust files exit0",
+  "diff_check": "git diff --check scoped files exit0",
+  "root_workspace_regression": "pending next authorized step"
+}

@@ -1,0 +1,9 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.27s
+     Running tests/fr196_axi_lite_csr_formal.rs (target/debug/deps/fr196_axi_lite_csr_formal-38d1e389ee71a346)
+
+running 1 test
+test p0_port_oracle_kills_pairing_routing_and_offer_hold_rtl_mutants ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 15.79s
+

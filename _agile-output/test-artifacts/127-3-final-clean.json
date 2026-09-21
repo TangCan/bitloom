@@ -1,0 +1,10 @@
+{
+  "command": [
+    "cargo",
+    "clean"
+  ],
+  "start_unix": 1789964403.8971422,
+  "elapsed_seconds": 7.810369491577148,
+  "exit_code": 0,
+  "log_sha256": "eb0bfb4a7371f7441174178004e480d8a7c8da6f025bab48a21f9dfbca7fbad8"
+}

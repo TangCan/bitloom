@@ -1,0 +1,14 @@
+{
+  "command": [
+    "python3",
+    "scripts/check_fr196_bridge_example.py"
+  ],
+  "exit": 0,
+  "elapsed_seconds": 4.579918860108592,
+  "verification_note": "Compiled and ran exact documentation code; subsequent docs edits are prose only. Source digests below captured at build freeze.",
+  "freeze_sha256": {
+    "docs/ip/axi-lite-csr-bridge.md": "e34b7694c347c56c9cac2b46ad7d17a3b27cfaf4e905792ea6fd7cf4f0dc97dd",
+    "scripts/check_fr196_bridge_example.py": "3bd64d183af1217a89d57b4da55a835496dab7f16ffa09f47330560975de6ea4",
+    "crates/bitloom-prelude/src/ip/axi_lite_csr.rs": "fa0f087569c37e598c519f7d7e0e762225dd9bb3b41db6861001925a74c6c291"
+  }
+}

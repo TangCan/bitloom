@@ -166,3 +166,7 @@ Story126.4最终关闭：Epic126/M1与FR194/FR195完成，七步证据见[关闭
 ## FR196 静态 CSR 叶节点（Story127.2）
 
 `CsrBlock`、`CsrRegister`、`CsrField`、`CsrAccess`、`CsrOwner` 提供同源RTL/Markdown/C头生成，包含RW/RO/WO/W1C、动态拒绝与单一外部状态owner。同一session可复用定义；完整prelude-only例、端口、同沿提交脉冲和限制见[CSR叶节点](csr.md)。验证：`cargo test -p bitloom --test fr196_csr_config --test fr196_csr`；专用形式/综合：`cargo test -p bitloom --test fr196_csr_formal -- --ignored`。此为FR196描述/叶子集，桥/译码/外设与M2尚未交付；未发布。
+
+## FR196 AXI-Lite 到 CSR 桥（Story127.3）
+
+`AxiLiteCsrBridge` 提供固定addr16/data32/WSTRB4桥接，AW/W/AR独立捕获、CSR单执行请求、锁定请求及B/R独立响应保持。使用、完整prelude-only组合例和复位约束见[桥接文档](axi-lite-csr-bridge.md)。验证入口为 `fr196_axi_lite_csr` 与 `fr196_axi_lite_csr_formal`；专用证明/综合须显式 `--ignored`，实际结果由故事证据记录。前节“桥未交付”为127.2关闭时点；本节不关闭四窗译码、M2或整个FR196，不声明已发布。

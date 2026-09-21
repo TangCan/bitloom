@@ -1,0 +1,45 @@
+{
+  "archive": "_agile-output/test-artifacts/127-3-automate-source-snapshot.tar.gz",
+  "archive_sha256": "ecdabe1d198496f23e154a477384019f4392f017cc34c81bbf62f6a4fbb708e6",
+  "archive_bytes": 30572,
+  "member_count": 7,
+  "readback_verified": true,
+  "excluded": null,
+  "members": [
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr.rs",
+      "size_bytes": 38711,
+      "sha256": "18bbe2bd1d9aaca78ca371ebcd0e2d2b2d0895dc9c146738ab5814422a59755c"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr_formal.rs",
+      "size_bytes": 23435,
+      "sha256": "2aef4bb98e0d8308b63e443f0623939d2af7f2d76ceafc19f3fd48e60df58008"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr/integration.rs",
+      "size_bytes": 23117,
+      "sha256": "bb986809b76ed07dc502ca1b2a2faa764fa4de2706a18abde2f5308b876ba0d3"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr/tools.rs",
+      "size_bytes": 5065,
+      "sha256": "bd7245800ccc1f219fe82d5acd16a3a1b14467a6dce9be27f9f25b9318abefbc"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_axi_lite_csr/producer_monitor.sv",
+      "size_bytes": 1205,
+      "sha256": "32f5fe3c55266fb2960662f5027a73954752c5c880a184571468613c8061c3cb"
+    },
+    {
+      "path": "crates/bitloom-prelude/src/ip/axi_lite_csr.rs",
+      "size_bytes": 12166,
+      "sha256": "fa0f087569c37e598c519f7d7e0e762225dd9bb3b41db6861001925a74c6c291"
+    },
+    {
+      "path": "docs/ip/axi-lite-csr-bridge.md",
+      "size_bytes": 11575,
+      "sha256": "472f4adcc924f9a0c911bb5c6b148ee9094a465d12c4065ba179da205dd7814c"
+    }
+  ]
+}

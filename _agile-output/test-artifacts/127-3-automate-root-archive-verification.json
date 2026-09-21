@@ -1,0 +1,17 @@
+{
+  "time_unix": 1789964385.993309,
+  "method": "Root independent readback every member plus live source match",
+  "prior_attempt": "Root verifier expected bytes; manifest uses size_bytes. KeyError before member verification; corrected schema, no archive/source change.",
+  "archives": [
+    {
+      "archive": "_agile-output/test-artifacts/127-3-automate-source-snapshot.tar.gz",
+      "sha256": "ecdabe1d198496f23e154a477384019f4392f017cc34c81bbf62f6a4fbb708e6",
+      "verified_members": 7
+    },
+    {
+      "archive": "_agile-output/test-artifacts/127-3-automate-tool-artifacts.tar.gz",
+      "sha256": "9a7be1c763057385103387662077205c36cb25d688c88a13c0db86cd3a08e592",
+      "verified_members": 543
+    }
+  ]
+}

@@ -21,6 +21,7 @@
 //! `ip/gpio/chip_ring` (beyond [`GpioSocPad`] alone).
 
 mod axi;
+mod axi_lite_csr;
 mod blackbox;
 mod crc;
 mod csr;
@@ -33,6 +34,7 @@ mod sync_fifo;
 mod uart;
 
 pub use axi::*;
+pub use axi_lite_csr::*;
 pub use blackbox::*;
 pub use crc::*;
 pub use csr::*;

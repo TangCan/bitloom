@@ -1,0 +1,207 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.06s
+     Running tests/fr196_axi_lite_csr.rs (target/debug/deps/fr196_axi_lite_csr-b721319b8e1132b5)
+
+running 10 tests
+test p0_protocol_monitor_rejects_withdrawal_mutation_and_accepts_reset ... ok
+test integration::p0_bridge_definition_and_connection_diagnostics ... ok
+
+thread 'integration::p0_same_session_bridge_real_csr_accesses_snapshots_and_single_side_effects' (1504736) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'integration::p0_same_session_bridge_real_csr_accesses_snapshots_and_single_side_effects' (1504736) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'integration::p0_same_session_bridge_real_csr_accesses_snapshots_and_single_side_effects' (1504736) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+real-csr-integration: common reset phase=0 canceled_submit=0 canceled_CSR_response=0 no_AXI_replay=1
+common reset phase=1 canceled_submit=1 canceled_CSR_response=0 no_AXI_replay=1
+common reset phase=2 canceled_submit=1 canceled_CSR_response=1 no_AXI_replay=1
+common reset phase=3 canceled_submit=1 canceled_CSR_response=1 no_AXI_replay=1
+FR196 PASS integration submits=177 consumes=176 B=110 R=64 CW=66 TW=8 EW=1
+tb.sv:168: $finish called at 25557 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/real-csr-integration-1504733
+test integration::p0_same_session_bridge_real_csr_accesses_snapshots_and_single_side_effects ... ok
+dual-state: FR196 PASS
+tb.sv:2595: $finish called at 120 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/dual-state-1504733
+test integration::p0_public_ports_and_two_same_session_bridge_instances_have_private_state ... ok
+late-read-partials-Interpreter: FR196 PASS
+tb.sv:6158: $finish called at 558 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/late-read-partials-Interpreter-1504733
+arbitration-Interpreter: FR196 PASS
+tb.sv:8897: $finish called at 807 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/arbitration-Interpreter-1504733
+reset-Interpreter: FR196 PASS
+tb.sv:9755: $finish called at 885 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/reset-Interpreter-1504733
+late-read-partials-Compiled: FR196 PASS
+tb.sv:6158: $finish called at 558 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/late-read-partials-Compiled-1504733
+test p0_late_read_cannot_steal_locked_write_and_partial_write_never_blocks_read ... ok
+arbitration-Compiled: FR196 PASS
+tb.sv:8897: $finish called at 807 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/arbitration-Compiled-1504733
+test p0_offer_lock_round_robin_and_independent_response_slots ... ok
+reset-Compiled: FR196 PASS
+tb.sv:9755: $finish called at 885 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/reset-Compiled-1504733
+test p0_reset_cancels_partial_offer_execution_responses_and_recovers ... ok
+concurrent Interpreter: overlapping=3019 stalls_AW_W_AR_B_R_CSR=[3133, 3141, 3534, 1879, 2254, 678] ledger=Ledger { aw: 256, w: 256, ar: 256, complete_write: 256, submit: 512, consume: 512, b: 256, r: 256, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 }
+concurrent-Interpreter: FR196 PASS
+tb.sv:128588: $finish called at 11688 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/concurrent-Interpreter-1504733
+concurrent Compiled: overlapping=3019 stalls_AW_W_AR_B_R_CSR=[3133, 3141, 3534, 1879, 2254, 678] ledger=Ledger { aw: 256, w: 256, ar: 256, complete_write: 256, submit: 512, consume: 512, b: 256, r: 256, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 }
+seed=1 observed_aw_first=187 observed_w_first=184 B_stall_cycles=6053 R_stall_cycles=6461
+concurrent-Compiled: FR196 PASS
+tb.sv:128588: $finish called at 11688 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/concurrent-Compiled-1504733
+test p0_concurrent_independent_producers_with_bounded_backpressure ... ok
+matrix-Interpreter: FR196 PASS
+tb.sv:599861: $finish called at 54531 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/matrix-Interpreter-1504733
+seed-1: FR196 PASS
+tb.sv:732620: $finish called at 66600 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-1-1504733
+seed=1 completed=1000 ledger=Ledger { aw: 482, w: 482, ar: 518, complete_write: 482, submit: 1000, consume: 1000, b: 482, r: 518, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[111, 124, 129, 118] strobes=[20, 34, 34, 36, 27, 44, 31, 28, 31, 26, 26, 26, 28, 33, 26, 32] errors=[477, 0, 133, 390] elapsed=17.224442616s
+seed=2 observed_aw_first=172 observed_w_first=176 B_stall_cycles=6563 R_stall_cycles=6997
+matrix-Compiled: FR196 PASS
+tb.sv:599861: $finish called at 54531 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/matrix-Compiled-1504733
+test p0_raw_order_gaps_strobes_prot_errors_native_and_rtl ... ok
+seed-2: FR196 PASS
+tb.sv:761627: $finish called at 69237 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-2-1504733
+seed=2 completed=1000 ledger=Ledger { aw: 481, w: 481, ar: 519, complete_write: 481, submit: 1000, consume: 1000, b: 481, r: 519, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[133, 117, 115, 116] strobes=[24, 30, 27, 48, 21, 28, 35, 30, 25, 28, 43, 23, 28, 28, 30, 33] errors=[524, 0, 130, 346] elapsed=35.528607055s
+seed=3 observed_aw_first=188 observed_w_first=169 B_stall_cycles=6628 R_stall_cycles=6397
+seed-3: FR196 PASS
+tb.sv:752189: $finish called at 68379 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-3-1504733
+seed=3 completed=1000 ledger=Ledger { aw: 499, w: 499, ar: 501, complete_write: 499, submit: 1000, consume: 1000, b: 499, r: 501, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[142, 118, 115, 124] strobes=[34, 18, 32, 32, 25, 36, 24, 34, 37, 36, 37, 32, 27, 28, 38, 29] errors=[529, 0, 117, 354] elapsed=53.553020055s
+seed=4 observed_aw_first=191 observed_w_first=176 B_stall_cycles=7387 R_stall_cycles=6492
+test p1_sixteen_reproducible_seeds_each_complete_one_thousand_transactions has been running for over 60 seconds
+seed-4: FR196 PASS
+tb.sv:795155: $finish called at 72285 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-4-1504733
+seed=4 completed=1000 ledger=Ledger { aw: 509, w: 509, ar: 491, complete_write: 509, submit: 1000, consume: 1000, b: 509, r: 491, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[142, 111, 118, 138] strobes=[32, 26, 46, 31, 35, 28, 34, 41, 39, 29, 31, 22, 25, 35, 35, 20] errors=[505, 0, 124, 371] elapsed=72.665050923s
+seed=5 observed_aw_first=186 observed_w_first=206 B_stall_cycles=6455 R_stall_cycles=6207
+seed-5: FR196 PASS
+tb.sv:747107: $finish called at 67917 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-5-1504733
+seed=5 completed=1000 ledger=Ledger { aw: 513, w: 513, ar: 487, complete_write: 513, submit: 1000, consume: 1000, b: 513, r: 487, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[121, 136, 129, 127] strobes=[28, 39, 36, 38, 26, 31, 44, 28, 32, 34, 25, 34, 28, 28, 32, 30] errors=[520, 0, 126, 354] elapsed=90.639905071s
+seed=6 observed_aw_first=170 observed_w_first=204 B_stall_cycles=6199 R_stall_cycles=6706
+seed-6: FR196 PASS
+tb.sv:755918: $finish called at 68718 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-6-1504733
+seed=6 completed=1000 ledger=Ledger { aw: 498, w: 498, ar: 502, complete_write: 498, submit: 1000, consume: 1000, b: 498, r: 502, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[124, 115, 131, 128] strobes=[34, 28, 29, 36, 33, 37, 25, 27, 35, 22, 37, 34, 36, 21, 32, 32] errors=[490, 0, 133, 377] elapsed=108.672892412s
+seed=7 observed_aw_first=169 observed_w_first=183 B_stall_cycles=6941 R_stall_cycles=6259
+seed-7: FR196 PASS
+tb.sv:747305: $finish called at 67935 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-7-1504733
+seed=7 completed=1000 ledger=Ledger { aw: 502, w: 502, ar: 498, complete_write: 502, submit: 1000, consume: 1000, b: 502, r: 498, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[150, 126, 112, 114] strobes=[40, 30, 37, 22, 29, 35, 29, 24, 28, 24, 25, 32, 45, 34, 34, 34] errors=[501, 0, 126, 373] elapsed=126.438942556s
+seed=8 observed_aw_first=176 observed_w_first=178 B_stall_cycles=6283 R_stall_cycles=6715
+seed-8: FR196 PASS
+tb.sv:751595: $finish called at 68325 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-8-1504733
+seed=8 completed=1000 ledger=Ledger { aw: 479, w: 479, ar: 521, complete_write: 479, submit: 1000, consume: 1000, b: 479, r: 521, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[125, 109, 122, 123] strobes=[30, 25, 39, 32, 33, 27, 33, 27, 26, 25, 28, 31, 32, 34, 25, 32] errors=[503, 0, 137, 360] elapsed=144.28687185s
+seed=9 observed_aw_first=178 observed_w_first=188 B_stall_cycles=6533 R_stall_cycles=6848
+seed-9: FR196 PASS
+tb.sv:757304: $finish called at 68844 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-9-1504733
+seed=9 completed=1000 ledger=Ledger { aw: 489, w: 489, ar: 511, complete_write: 489, submit: 1000, consume: 1000, b: 489, r: 511, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[123, 122, 130, 114] strobes=[34, 24, 31, 38, 30, 35, 42, 28, 25, 35, 36, 34, 29, 30, 17, 21] errors=[483, 0, 127, 390] elapsed=162.338964044s
+seed=10 observed_aw_first=207 observed_w_first=171 B_stall_cycles=6732 R_stall_cycles=6686
+seed-10: FR196 PASS
+tb.sv:771395: $finish called at 70125 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-10-1504733
+seed=10 completed=1000 ledger=Ledger { aw: 500, w: 500, ar: 500, complete_write: 500, submit: 1000, consume: 1000, b: 500, r: 500, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[122, 135, 113, 130] strobes=[27, 25, 37, 34, 35, 30, 26, 32, 25, 39, 28, 38, 32, 30, 34, 28] errors=[502, 0, 120, 378] elapsed=180.872282791s
+seed=11 observed_aw_first=181 observed_w_first=183 B_stall_cycles=6307 R_stall_cycles=6530
+seed-11: FR196 PASS
+tb.sv:743840: $finish called at 67620 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-11-1504733
+seed=11 completed=1000 ledger=Ledger { aw: 494, w: 494, ar: 506, complete_write: 494, submit: 1000, consume: 1000, b: 494, r: 506, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[130, 125, 118, 121] strobes=[26, 39, 29, 29, 26, 27, 41, 21, 38, 37, 34, 27, 41, 29, 21, 29] errors=[448, 0, 134, 418] elapsed=198.861602969s
+seed=12 observed_aw_first=193 observed_w_first=193 B_stall_cycles=6837 R_stall_cycles=6524
+seed-12: FR196 PASS
+tb.sv:768194: $finish called at 69834 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-12-1504733
+seed=12 completed=1000 ledger=Ledger { aw: 512, w: 512, ar: 488, complete_write: 512, submit: 1000, consume: 1000, b: 512, r: 488, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[126, 143, 115, 128] strobes=[35, 35, 29, 36, 28, 35, 29, 25, 35, 31, 31, 29, 32, 38, 30, 34] errors=[499, 0, 126, 375] elapsed=217.027660113s
+seed=13 observed_aw_first=189 observed_w_first=185 B_stall_cycles=6439 R_stall_cycles=6938
+seed-13: FR196 PASS
+tb.sv:763574: $finish called at 69414 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-13-1504733
+seed=13 completed=1000 ledger=Ledger { aw: 484, w: 484, ar: 516, complete_write: 484, submit: 1000, consume: 1000, b: 484, r: 516, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[110, 115, 141, 118] strobes=[34, 35, 23, 27, 26, 37, 28, 31, 35, 24, 30, 29, 35, 21, 35, 34] errors=[521, 0, 128, 351] elapsed=235.529366162s
+seed=14 observed_aw_first=168 observed_w_first=206 B_stall_cycles=7243 R_stall_cycles=6946
+seed-14: FR196 PASS
+tb.sv:793538: $finish called at 72138 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-14-1504733
+seed=14 completed=1000 ledger=Ledger { aw: 505, w: 505, ar: 495, complete_write: 505, submit: 1000, consume: 1000, b: 505, r: 495, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[131, 131, 117, 126] strobes=[39, 29, 34, 36, 36, 36, 28, 25, 30, 33, 22, 28, 41, 31, 28, 29] errors=[473, 0, 112, 415] elapsed=254.397389292s
+seed=15 observed_aw_first=173 observed_w_first=196 B_stall_cycles=6604 R_stall_cycles=6508
+seed-15: FR196 PASS
+tb.sv:764762: $finish called at 69522 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-15-1504733
+seed=15 completed=1000 ledger=Ledger { aw: 493, w: 493, ar: 507, complete_write: 493, submit: 1000, consume: 1000, b: 493, r: 507, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[124, 119, 117, 133] strobes=[34, 30, 30, 26, 33, 37, 30, 30, 35, 39, 27, 31, 27, 32, 27, 25] errors=[513, 0, 119, 368] elapsed=272.860758569s
+seed=16 observed_aw_first=211 observed_w_first=186 B_stall_cycles=6846 R_stall_cycles=6314
+seed-16: FR196 PASS
+tb.sv:771230: $finish called at 70110 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-axi-lite-csr/seed-16-1504733
+seed=16 completed=1000 ledger=Ledger { aw: 515, w: 515, ar: 485, complete_write: 515, submit: 1000, consume: 1000, b: 515, r: 485, cancel_aw: 0, cancel_w: 0, cancel_ar: 0, cancel_owner: 0, cancel_b: 0, cancel_r: 0, epochs: 1 } gaps=[118, 127, 137, 133] strobes=[27, 24, 30, 30, 38, 41, 41, 36, 29, 30, 25, 34, 37, 35, 24, 34] errors=[509, 0, 122, 369] elapsed=291.573237343s
+test p1_sixteen_reproducible_seeds_each_complete_one_thousand_transactions ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 291.72s
+
+     Running tests/fr196_axi_lite_csr_formal.rs (target/debug/deps/fr196_axi_lite_csr_formal-38d1e389ee71a346)
+
+running 4 tests
+test p0_original_rtl_synthesis_check_and_all_five_registered_boundaries ... ignored, requires implemented bridge and real Yosys; CI must explicitly run --ignored
+test p0_port_oracle_kills_pairing_routing_and_offer_hold_rtl_mutants ... ignored, requires real SBY/Yosys/Z3; checks assertion counterexamples, not tool errors
+test p0_port_oracle_safety_induction_and_nonvacuous_covers ... ignored, requires implemented bridge and real SBY/Yosys/Z3; CI must explicitly run --ignored
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1525202) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:399:13:
+input (including rst) path to s_axi_awready
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1525202) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:361:9:
+unsupported/latch/unknown cell $_DLATCH_P_
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1525202) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:361:9:
+unsupported/latch/unknown cell mystery
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1525202) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:361:9:
+unsupported/latch/unknown cell $_DFF_FAKE_
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1525202) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:304:28:
+undriven bit 9
+
+thread 'p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1525202) panicked at crates/bitloom/tests/fr196_axi_lite_csr_formal.rs:285:9:
+unknown/nonbinary structural constant "x"
+test p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers ... ok
+
+test result: ok. 1 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

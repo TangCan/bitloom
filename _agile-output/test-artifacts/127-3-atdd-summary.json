@@ -1,0 +1,37 @@
+{
+  "phase": "Compile RED confirmed",
+  "total_tests": 11,
+  "ordinary_tests": 9,
+  "dedicated_ignored_tests": 2,
+  "execution": "subagent",
+  "all_tests_skipped": false,
+  "adaptation": "Explicit user-authorized real Rust compile RED; no JS test.skip in Rust backend",
+  "files": [
+    "crates/bitloom/tests/fr196_axi_lite_csr.rs",
+    "crates/bitloom/tests/fr196_axi_lite_csr/tools.rs",
+    "crates/bitloom/tests/fr196_axi_lite_csr/integration.rs",
+    "crates/bitloom/tests/fr196_axi_lite_csr_formal.rs"
+  ],
+  "coverage": [
+    "AC1 same-session real bridge + CsrBlock",
+    "AC2 raw gaps 0/1/7/31, all16 WSTRB, all8 PROT, partial-write read progress",
+    "AC3 initial read priority, alternation, locked write with late AR",
+    "AC4 independent response slots, CSR consume frees owner, 00/10/11, zero WSTRB",
+    "AC5 partial capture/offer/owner/responses reset cancellation accounting",
+    "AC6 actual RTL RW/RO/WO/W1C, holes/unaligned/high addresses, side-effect counts, snapshot and dynamic rejection",
+    "AC7 monitor negative tests, independent causal scoreboard, sixteen seeds x1000 actual completion assertions; real RTL replay and two native engines",
+    "Exact public port names/directions/types and two same-session bridge instances with independent traces in real RTL",
+    "AC2 independent AW/W/AR capture payload and cancellation accounting",
+    "AC3 one CSR in flight, locked offers, read-first alternating eligible arbitration",
+    "AC4 owner routing, reservation and B/R held payload",
+    "AC5 reset cancellation and five input-free output cones",
+    "AC7 actual prove/cover configuration plus original RTL synthesis/check",
+    "Covers require opposite-class CSR commit during the exact blocked B/R response, followed by that response consumption; flags clear on consumption/reset"
+  ],
+  "performance_gain": "Not measured",
+  "compile_exit": 101,
+  "compile_error": "E0432: bitloom_prelude::ip::AxiLiteCsrBridge absent in both test targets",
+  "behavior_executed": false,
+  "formal_executed": false,
+  "observer_syntax_only_exit": 0
+}
