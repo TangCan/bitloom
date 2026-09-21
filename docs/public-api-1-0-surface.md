@@ -189,3 +189,13 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 | `Elaboratable for ip::AxiLiteCsrBridge` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立入口电路/模块名为`AxiLiteCsrBridge`，finish一次 |
 
 固定端口、时序和prelude-only组合例见[桥接文档](ip/axi-lite-csr-bridge.md)。上述符号显式纳入FR142，未列出的私有状态或辅助方法不自动进入表面。追加属SemVer minor；不改版本、不发布，不宣称crates.io已有。旧Axi4LiteSlave接口保持，四窗译码/M2仍待127.4；设计依赖与native/generated层级限制不变。
+
+### `bitloom-prelude` — FR196 / Story127.4 显式追加
+
+| 符号 | 契约 |
+|---|---|
+| `ip::CsrDecoder` | 固定52端口、四个256字节窗口，addr16/data32/WSTRB4，同域同步reset、单请求owner与持久DECERR |
+| `ip::CsrDecoder::define_module` | `(&mut ElaborateSession, impl Into<String>) -> Result<String, Diagnostics>`；共享无捕获定义体，完整定义复用与既有helper错误语义 |
+| `Elaboratable for ip::CsrDecoder` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立电路/模块名`CsrDecoder`，finish一次 |
+
+上述逐符号显式纳入FR142，完整端口/气泡/reset/支持矩阵和prelude-only例见[四窗译码](ip/csr-decoder.md)。追加属SemVer minor；未改版本或发布，不宣称crates.io已包含。私有状态、任意map、多主与native/generated层级未扩承诺；历史段落为当时状态，M2最终状态以故事关闭记录为准。

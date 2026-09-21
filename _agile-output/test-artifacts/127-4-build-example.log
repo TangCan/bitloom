@@ -1,0 +1,8 @@
+FR196-DECODER docs/ip/csr-decoder.md prelude-only example: cargo run --offline --manifest-path /tmp/bitloom-fr196-decoder-example-arx0_h2v/Cargo.toml
+     Locking 8 packages to latest Rust 1.97.1 compatible versions
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling fr194-design-example v0.0.0 (/tmp/bitloom-fr196-decoder-example-arx0_h2v)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.66s
+     Running `target/fr194-doc-example/debug/fr194-design-example`
+CsrSystem: 7 modules
+PASS: FR196-DECODER documented prelude-only design compiled and executed

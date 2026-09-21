@@ -1,0 +1,263 @@
+{
+  "records": [
+    {
+      "seed": 1,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 40267,
+      "elapsed_seconds": 1.9172155229999999,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-1.log",
+      "coverage_lines": [
+        "RANDOM seed=1 windows=213,200,194,215,178 errors=447,375,178 gaps=122,140,135,129 order=253,273",
+        "STALLS AW=825 W=855 AR=752 B=478 R=395",
+        "CONCURRENT seed=1 three_channel_offer_cycles=689",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=482 write_effects=537",
+        "STRESS PASS seed=1 random=1000 concurrent=256 cycles=40267 AW=937 W=937 AR=762 commit=1695 leaf=1516 csr_rsp=1693 B=934 R=757 cancel=10 effects=537 read=760 write=935 windows=277,264,258,279,178 errors=703,375,178"
+      ]
+    },
+    {
+      "seed": 7,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 40064,
+      "elapsed_seconds": 1.8819821920000002,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-7.log",
+      "coverage_lines": [
+        "RANDOM seed=7 windows=208,214,190,189,199 errors=432,369,199 gaps=108,121,110,133 order=246,226",
+        "STALLS AW=858 W=842 AR=766 B=473 R=394",
+        "CONCURRENT seed=7 three_channel_offer_cycles=722",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=506 write_effects=509",
+        "STRESS PASS seed=7 random=1000 concurrent=256 cycles=40064 AW=883 W=883 AR=816 commit=1695 leaf=1495 csr_rsp=1693 B=880 R=811 cancel=10 effects=509 read=814 write=881 windows=272,278,254,253,199 errors=688,369,199"
+      ]
+    },
+    {
+      "seed": 31,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 39543,
+      "elapsed_seconds": 1.857763426,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-31.log",
+      "coverage_lines": [
+        "RANDOM seed=31 windows=207,202,204,201,186 errors=449,365,186 gaps=128,119,112,114 order=216,257",
+        "STALLS AW=845 W=839 AR=771 B=477 R=390",
+        "CONCURRENT seed=31 three_channel_offer_cycles=719",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=508 write_effects=514",
+        "STRESS PASS seed=31 random=1000 concurrent=256 cycles=39543 AW=884 W=884 AR=815 commit=1695 leaf=1508 csr_rsp=1693 B=881 R=810 cancel=10 effects=514 read=813 write=882 windows=271,266,268,265,186 errors=705,365,186"
+      ]
+    },
+    {
+      "seed": 127,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 39149,
+      "elapsed_seconds": 1.847330806,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-127.log",
+      "coverage_lines": [
+        "RANDOM seed=127 windows=206,184,206,204,200 errors=431,369,200 gaps=122,140,122,107 order=255,236",
+        "STALLS AW=856 W=825 AR=773 B=475 R=396",
+        "CONCURRENT seed=127 three_channel_offer_cycles=713",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=499 write_effects=500",
+        "STRESS PASS seed=127 random=1000 concurrent=256 cycles=39149 AW=902 W=902 AR=797 commit=1695 leaf=1494 csr_rsp=1693 B=899 R=792 cancel=10 effects=500 read=795 write=900 windows=270,248,270,268,200 errors=687,369,200"
+      ]
+    },
+    {
+      "seed": 1021,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 39786,
+      "elapsed_seconds": 1.892661699,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-1021.log",
+      "coverage_lines": [
+        "RANDOM seed=1021 windows=205,172,212,224,187 errors=441,372,187 gaps=130,129,137,112 order=261,247",
+        "STALLS AW=869 W=826 AR=741 B=475 R=396",
+        "CONCURRENT seed=1021 three_channel_offer_cycles=690",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=498 write_effects=512",
+        "STRESS PASS seed=1021 random=1000 concurrent=256 cycles=39786 AW=919 W=919 AR=780 commit=1695 leaf=1507 csr_rsp=1693 B=916 R=775 cancel=10 effects=512 read=778 write=917 windows=269,236,276,288,187 errors=697,372,187"
+      ]
+    },
+    {
+      "seed": 4093,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 40269,
+      "elapsed_seconds": 1.897231602,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-4093.log",
+      "coverage_lines": [
+        "RANDOM seed=4093 windows=196,218,195,194,197 errors=440,363,197 gaps=132,113,138,127 order=273,237",
+        "STALLS AW=851 W=851 AR=764 B=474 R=397",
+        "CONCURRENT seed=4093 three_channel_offer_cycles=729",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=487 write_effects=515",
+        "STRESS PASS seed=4093 random=1000 concurrent=256 cycles=40269 AW=921 W=921 AR=778 commit=1695 leaf=1497 csr_rsp=1693 B=918 R=773 cancel=10 effects=515 read=776 write=919 windows=260,282,259,258,197 errors=696,363,197"
+      ]
+    },
+    {
+      "seed": 65521,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 39836,
+      "elapsed_seconds": 1.904467558,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-65521.log",
+      "coverage_lines": [
+        "RANDOM seed=65521 windows=218,210,198,206,168 errors=455,377,168 gaps=103,142,126,117 order=238,250",
+        "STALLS AW=873 W=832 AR=759 B=470 R=395",
+        "CONCURRENT seed=65521 three_channel_offer_cycles=705",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=511 write_effects=524",
+        "STRESS PASS seed=65521 random=1000 concurrent=256 cycles=39836 AW=899 W=899 AR=800 commit=1695 leaf=1526 csr_rsp=1693 B=896 R=795 cancel=10 effects=524 read=798 write=897 windows=282,274,262,270,168 errors=711,377,168"
+      ]
+    },
+    {
+      "seed": 1048573,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 39798,
+      "elapsed_seconds": 1.886389552,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-1048573.log",
+      "coverage_lines": [
+        "RANDOM seed=1048573 windows=215,178,213,206,188 errors=440,372,188 gaps=135,122,122,115 order=254,240",
+        "STALLS AW=860 W=831 AR=764 B=475 R=389",
+        "CONCURRENT seed=1048573 three_channel_offer_cycles=704",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=510 write_effects=512",
+        "STRESS PASS seed=1048573 random=1000 concurrent=256 cycles=39798 AW=905 W=905 AR=794 commit=1695 leaf=1506 csr_rsp=1693 B=902 R=789 cancel=10 effects=512 read=792 write=903 windows=279,242,277,270,188 errors=696,372,188"
+      ]
+    },
+    {
+      "seed": 19088743,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 40332,
+      "elapsed_seconds": 1.9084202540000001,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-19088743.log",
+      "coverage_lines": [
+        "RANDOM seed=19088743 windows=208,188,188,226,190 errors=426,384,190 gaps=138,107,119,137 order=249,252",
+        "STALLS AW=853 W=878 AR=794 B=472 R=395",
+        "CONCURRENT seed=19088743 three_channel_offer_cycles=744",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=485 write_effects=515",
+        "STRESS PASS seed=19088743 random=1000 concurrent=256 cycles=40332 AW=912 W=912 AR=787 commit=1695 leaf=1504 csr_rsp=1693 B=909 R=782 cancel=10 effects=515 read=785 write=910 windows=272,252,252,290,190 errors=682,384,190"
+      ]
+    },
+    {
+      "seed": 36984440,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 40630,
+      "elapsed_seconds": 1.914619528,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-36984440.log",
+      "coverage_lines": [
+        "RANDOM seed=36984440 windows=227,213,198,189,173 errors=445,382,173 gaps=127,119,116,137 order=242,257",
+        "STALLS AW=854 W=838 AR=769 B=476 R=385",
+        "CONCURRENT seed=36984440 three_channel_offer_cycles=717",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=501 write_effects=507",
+        "STRESS PASS seed=36984440 random=1000 concurrent=256 cycles=40630 AW=910 W=910 AR=789 commit=1695 leaf=1521 csr_rsp=1693 B=907 R=784 cancel=10 effects=507 read=787 write=908 windows=291,277,262,253,173 errors=701,382,173"
+      ]
+    },
+    {
+      "seed": 54880137,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 39778,
+      "elapsed_seconds": 1.8864746810000002,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-54880137.log",
+      "coverage_lines": [
+        "RANDOM seed=54880137 windows=199,184,206,229,182 errors=458,360,182 gaps=123,122,130,102 order=237,240",
+        "STALLS AW=845 W=881 AR=753 B=472 R=391",
+        "CONCURRENT seed=54880137 three_channel_offer_cycles=720",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=513 write_effects=517",
+        "STRESS PASS seed=54880137 random=1000 concurrent=256 cycles=39778 AW=888 W=888 AR=811 commit=1695 leaf=1512 csr_rsp=1693 B=885 R=806 cancel=10 effects=517 read=809 write=886 windows=263,248,270,293,182 errors=714,360,182"
+      ]
+    },
+    {
+      "seed": 72775834,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 40482,
+      "elapsed_seconds": 1.91683257,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-72775834.log",
+      "coverage_lines": [
+        "RANDOM seed=72775834 windows=227,202,200,173,198 errors=431,371,198 gaps=118,120,129,120 order=260,227",
+        "STALLS AW=814 W=865 AR=805 B=469 R=398",
+        "CONCURRENT seed=72775834 three_channel_offer_cycles=724",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=508 write_effects=507",
+        "STRESS PASS seed=72775834 random=1000 concurrent=256 cycles=40482 AW=898 W=898 AR=801 commit=1695 leaf=1496 csr_rsp=1693 B=895 R=796 cancel=10 effects=507 read=799 write=896 windows=291,266,264,237,198 errors=687,371,198"
+      ]
+    },
+    {
+      "seed": 90671531,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 39920,
+      "elapsed_seconds": 1.887338777,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-90671531.log",
+      "coverage_lines": [
+        "RANDOM seed=90671531 windows=184,213,200,220,183 errors=420,397,183 gaps=120,124,147,117 order=279,229",
+        "STALLS AW=845 W=865 AR=733 B=476 R=394",
+        "CONCURRENT seed=90671531 three_channel_offer_cycles=688",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=499 write_effects=499",
+        "STRESS PASS seed=90671531 random=1000 concurrent=256 cycles=39920 AW=919 W=919 AR=780 commit=1695 leaf=1511 csr_rsp=1693 B=916 R=775 cancel=10 effects=499 read=778 write=917 windows=248,277,264,284,183 errors=676,397,183"
+      ]
+    },
+    {
+      "seed": 108567228,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 39610,
+      "elapsed_seconds": 1.871961899,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-108567228.log",
+      "coverage_lines": [
+        "RANDOM seed=108567228 windows=188,219,184,207,202 errors=432,366,202 gaps=138,124,117,118 order=264,233",
+        "STALLS AW=846 W=880 AR=767 B=476 R=393",
+        "CONCURRENT seed=108567228 three_channel_offer_cycles=725",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=500 write_effects=512",
+        "STRESS PASS seed=108567228 random=1000 concurrent=256 cycles=39610 AW=908 W=908 AR=791 commit=1695 leaf=1492 csr_rsp=1693 B=905 R=786 cancel=10 effects=512 read=789 write=906 windows=252,283,248,271,202 errors=688,366,202"
+      ]
+    },
+    {
+      "seed": 126462925,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 39522,
+      "elapsed_seconds": 1.874752345,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-126462925.log",
+      "coverage_lines": [
+        "RANDOM seed=126462925 windows=221,226,185,198,170 errors=459,371,170 gaps=148,137,129,112 order=247,279",
+        "STALLS AW=860 W=839 AR=782 B=475 R=393",
+        "CONCURRENT seed=126462925 three_channel_offer_cycles=732",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=494 write_effects=525",
+        "STRESS PASS seed=126462925 random=1000 concurrent=256 cycles=39522 AW=937 W=937 AR=762 commit=1695 leaf=1524 csr_rsp=1693 B=934 R=757 cancel=10 effects=525 read=760 write=935 windows=285,290,249,262,170 errors=715,371,170"
+      ]
+    },
+    {
+      "seed": 305441741,
+      "random_completed": 1000,
+      "concurrent_completed": 256,
+      "cycles": 40383,
+      "elapsed_seconds": 1.901010502,
+      "exit_code": 0,
+      "raw_log": "target/fr196-decoder-integration/stress-1966921/seed-305441741.log",
+      "coverage_lines": [
+        "RANDOM seed=305441741 windows=195,191,198,213,203 errors=427,370,203 gaps=104,124,134,129 order=245,246",
+        "STALLS AW=858 W=862 AR=755 B=478 R=394",
+        "CONCURRENT seed=305441741 three_channel_offer_cycles=722",
+        "CANCEL AW=2 W=2 AR=2 CSR=2 B=1 R=1 read_effects=494 write_effects=512",
+        "STRESS PASS seed=305441741 random=1000 concurrent=256 cycles=40383 AW=902 W=902 AR=797 commit=1695 leaf=1491 csr_rsp=1693 B=899 R=792 cancel=10 effects=512 read=795 write=900 windows=259,255,262,277,203 errors=683,370,203"
+      ]
+    }
+  ],
+  "random_total": 16000,
+  "concurrent_total": 4096,
+  "note": "Each seed repeats directed setup independently; those transactions are not included in random_total/concurrent_total."
+}

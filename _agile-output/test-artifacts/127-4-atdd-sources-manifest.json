@@ -1,0 +1,62 @@
+[
+  {
+    "path": "crates/bitloom/tests/fr196_csr_decoder.rs",
+    "size_bytes": 11469,
+    "sha256": "06eabb7e1c0a11bc3a7c1c27b0ff2904bedca0f3ce081f2e06531ae727bec0ad"
+  },
+  {
+    "path": "crates/bitloom/tests/fr196_csr_decoder_formal.rs",
+    "size_bytes": 5474,
+    "sha256": "c1063a56389320867cc40cb07f5f438d4e5f049fc71657e02d05da9f49d0f6b7"
+  },
+  {
+    "path": "crates/bitloom/tests/fr196_csr_decoder_integration.rs",
+    "size_bytes": 15703,
+    "sha256": "69ab0b47d1ed4b03b034c54e3e9f057c103368345bdf9f8ca059fe666f7f76cb"
+  },
+  {
+    "path": "_agile-output/test-artifacts/127-4-atdd-api-contract.md",
+    "size_bytes": 4513,
+    "sha256": "c547120e90b0b6857d23a2875cd5db701a6e2cf07a74ddc86166ceb0dc2cb33b"
+  },
+  {
+    "path": "_agile-output/test-artifacts/127-4-atdd-worker-api.json",
+    "size_bytes": 19487,
+    "sha256": "568234cc3bcf9a48875d5184cf26cfd269a1b16bb5860cad1027f60c3f71ce62"
+  },
+  {
+    "path": "_agile-output/test-artifacts/127-4-atdd-worker-e2e.json",
+    "size_bytes": 18304,
+    "sha256": "4ea080b5760eac32d5b6ec3865ea9e0cc951727c666086c54a20682e219cf19a"
+  },
+  {
+    "path": "_agile-output/test-artifacts/127-4-atdd-summary.json",
+    "size_bytes": 2845,
+    "sha256": "e992f1a74b3bda7c3d5cc27d7fe479e2b5a3c2d22d8fac11eed054b2b6ac6893"
+  },
+  {
+    "path": "_agile-output/test-artifacts/127-4-atdd-red.log",
+    "size_bytes": 2164,
+    "sha256": "422c2ab78db2f30c49061cb918429f2d2782f3dc3a26592d3fc7b0166585f431"
+  },
+  {
+    "path": "_agile-output/test-artifacts/127-4-atdd-red.json",
+    "size_bytes": 1994,
+    "sha256": "fd71269b691d0997d1d2cae9722161657a532c912205a7d4e1a5fc0072d7ec9c"
+  },
+  {
+    "path": "_agile-output/test-artifacts/127-4-root-tool-preflight.json",
+    "size_bytes": 5577,
+    "sha256": "2051473d233037ef54a7041767df1f38d277ead1efabd77cac0bdec05bca9af2"
+  },
+  {
+    "path": "_agile-output/test-artifacts/127-4-root-contract-audit.md",
+    "size_bytes": 2302,
+    "sha256": "50752baafe925daca3affd568ecab2dc215c5fcd4ea390dcc35fcfdc406f8cdd"
+  },
+  {
+    "path": "_agile-output/test-artifacts/atdd-checklist-127-4-静态译码与-m2-关闭.md",
+    "size_bytes": 12967,
+    "sha256": "64d6597d315c5570aef3c5eb5343b218ec66c5899ceb9511de5ec49e6e3df6e2"
+  }
+]

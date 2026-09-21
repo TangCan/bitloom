@@ -1,0 +1,329 @@
+{
+  "passed": 8,
+  "failed": 0,
+  "ignored": 0,
+  "replays": [
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-0000000012740001-2367506/coverage.json",
+      "canceled_by_uart_gpio_timer_irq_miss": [
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "completed_by_read_write_error_0_1_2_3": [
+        [
+          18,
+          0,
+          17,
+          30
+        ],
+        [
+          13,
+          0,
+          22,
+          28
+        ]
+      ],
+      "completed_by_uart_gpio_timer_irq_miss": [
+        26,
+        26,
+        26,
+        25,
+        25
+      ],
+      "cycles": 7053,
+      "engines": [
+        "Interpreter",
+        "Compiled",
+        "iverilog/vvp"
+      ],
+      "leaf_wait_cycles": 4599,
+      "request_stall_cycles": 551,
+      "response_stall_cycles": 1187,
+      "seed": "0000000012740001"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000a55a1234-2367506/coverage.json",
+      "canceled_by_uart_gpio_timer_irq_miss": [
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "completed_by_read_write_error_0_1_2_3": [
+        [
+          24,
+          0,
+          18,
+          27
+        ],
+        [
+          14,
+          0,
+          18,
+          27
+        ]
+      ],
+      "completed_by_uart_gpio_timer_irq_miss": [
+        26,
+        26,
+        26,
+        25,
+        25
+      ],
+      "cycles": 7102,
+      "engines": [
+        "Interpreter",
+        "Compiled",
+        "iverilog/vvp"
+      ],
+      "leaf_wait_cycles": 4699,
+      "request_stall_cycles": 550,
+      "response_stall_cycles": 1137,
+      "seed": "00000000a55a1234"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000deadbeef-2367506/coverage.json",
+      "canceled_by_uart_gpio_timer_irq_miss": [
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "completed_by_read_write_error_0_1_2_3": [
+        [
+          14,
+          0,
+          21,
+          28
+        ],
+        [
+          15,
+          0,
+          22,
+          28
+        ]
+      ],
+      "completed_by_uart_gpio_timer_irq_miss": [
+        26,
+        26,
+        26,
+        25,
+        25
+      ],
+      "cycles": 7061,
+      "engines": [
+        "Interpreter",
+        "Compiled",
+        "iverilog/vvp"
+      ],
+      "leaf_wait_cycles": 4593,
+      "request_stall_cycles": 553,
+      "response_stall_cycles": 1199,
+      "seed": "00000000deadbeef"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00005eedcafef00d-2367506/coverage.json",
+      "canceled_by_uart_gpio_timer_irq_miss": [
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "completed_by_read_write_error_0_1_2_3": [
+        [
+          12,
+          0,
+          17,
+          41
+        ],
+        [
+          11,
+          0,
+          17,
+          30
+        ]
+      ],
+      "completed_by_uart_gpio_timer_irq_miss": [
+        26,
+        26,
+        26,
+        25,
+        25
+      ],
+      "cycles": 6913,
+      "engines": [
+        "Interpreter",
+        "Compiled",
+        "iverilog/vvp"
+      ],
+      "leaf_wait_cycles": 4367,
+      "request_stall_cycles": 607,
+      "response_stall_cycles": 1223,
+      "seed": "00005eedcafef00d"
+    }
+  ],
+  "wo_tool_runs": [
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-candidate-2367874/run.json",
+      "command": [
+        "timeout",
+        "--kill-after=5s",
+        "60s",
+        "vvp",
+        "simulation"
+      ],
+      "elapsed_seconds": 0.03976684,
+      "exit_code": 1,
+      "expected_rejection": "WO payload 00000110",
+      "mutated_output": "candidate",
+      "register": "clear"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-control-2367874/run.json",
+      "args": [
+        "simulation"
+      ],
+      "elapsed_seconds": 0.037424484,
+      "exit_code": 0,
+      "tool": "vvp"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-write_mask-2367874/run.json",
+      "command": [
+        "timeout",
+        "--kill-after=5s",
+        "60s",
+        "vvp",
+        "simulation"
+      ],
+      "elapsed_seconds": 0.038573661,
+      "exit_code": 1,
+      "expected_rejection": "WO payload 00000110",
+      "mutated_output": "write_mask",
+      "register": "clear"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-candidate-2367874/run.json",
+      "command": [
+        "timeout",
+        "--kill-after=5s",
+        "60s",
+        "vvp",
+        "simulation"
+      ],
+      "elapsed_seconds": 0.038542931,
+      "exit_code": 1,
+      "expected_rejection": "WO payload 0000010c",
+      "mutated_output": "candidate",
+      "register": "set"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-control-2367874/run.json",
+      "args": [
+        "simulation"
+      ],
+      "elapsed_seconds": 0.041796584,
+      "exit_code": 0,
+      "tool": "vvp"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-write_mask-2367874/run.json",
+      "command": [
+        "timeout",
+        "--kill-after=5s",
+        "60s",
+        "vvp",
+        "simulation"
+      ],
+      "elapsed_seconds": 0.038726475,
+      "exit_code": 1,
+      "expected_rejection": "WO payload 0000010c",
+      "mutated_output": "write_mask",
+      "register": "set"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-candidate-2367874/run.json",
+      "command": [
+        "timeout",
+        "--kill-after=5s",
+        "60s",
+        "vvp",
+        "simulation"
+      ],
+      "elapsed_seconds": 0.030189006,
+      "exit_code": 1,
+      "expected_rejection": "WO payload 00000308",
+      "mutated_output": "candidate",
+      "register": "test"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-control-2367874/run.json",
+      "args": [
+        "simulation"
+      ],
+      "elapsed_seconds": 0.040300082,
+      "exit_code": 0,
+      "tool": "vvp"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-write_mask-2367874/run.json",
+      "command": [
+        "timeout",
+        "--kill-after=5s",
+        "60s",
+        "vvp",
+        "simulation"
+      ],
+      "elapsed_seconds": 0.037347309,
+      "exit_code": 1,
+      "expected_rejection": "WO payload 00000308",
+      "mutated_output": "write_mask",
+      "register": "test"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-candidate-2367874/run.json",
+      "command": [
+        "timeout",
+        "--kill-after=5s",
+        "60s",
+        "vvp",
+        "simulation"
+      ],
+      "elapsed_seconds": 0.042919781,
+      "exit_code": 1,
+      "expected_rejection": "WO payload 0000000c",
+      "mutated_output": "candidate",
+      "register": "tx_data"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-control-2367874/run.json",
+      "args": [
+        "simulation"
+      ],
+      "elapsed_seconds": 0.044077409,
+      "exit_code": 0,
+      "tool": "vvp"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-write_mask-2367874/run.json",
+      "command": [
+        "timeout",
+        "--kill-after=5s",
+        "60s",
+        "vvp",
+        "simulation"
+      ],
+      "elapsed_seconds": 0.040626454,
+      "exit_code": 1,
+      "expected_rejection": "WO payload 0000000c",
+      "mutated_output": "write_mask",
+      "register": "tx_data"
+    }
+  ]
+}

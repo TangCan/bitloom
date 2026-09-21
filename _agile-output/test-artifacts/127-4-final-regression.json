@@ -1,0 +1,46 @@
+{
+  "sequence": "cargo clean && cargo fmt --all && just test",
+  "started_unix": 1789972048.0460632,
+  "elapsed_seconds": 884.254930973053,
+  "environment": {
+    "PATH": "/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.opam/5.1.1/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.codex/tmp/arg0/codex-arg0JQQ9rr:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.local/bin:/home/richard/opt/Isabelle2026-RC0/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-13.2/bin:/nvme_data1/richard/.trae-cn-server/bin/stable-bf463f1c10476ab51d5c25db4513c590c975a76e-debian10/bin/remote-cli:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-11.6/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.cargo/bin:/home/richard/.local/bin:/home/richard/.nvm/versions/node/v24.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+    "BITLOOM_REQUIRE_RTL": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "steps": [
+    {
+      "command": [
+        "cargo",
+        "clean"
+      ],
+      "start_unix": 1789972048.046128,
+      "elapsed_seconds": 7.591353893280029,
+      "exit_code": 0,
+      "log_sha256": "299613b12a452e45cfa740573152d1484f3c35dff528350835db93a74beb2910"
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all"
+      ],
+      "start_unix": 1789972055.6381798,
+      "elapsed_seconds": 1.1107542514801025,
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rust_format_changes": []
+    },
+    {
+      "command": [
+        "just",
+        "test"
+      ],
+      "start_unix": 1789972056.8156211,
+      "elapsed_seconds": 875.4843473434448,
+      "exit_code": 0,
+      "log_sha256": "15aac3f5f958a0d883a65eca4a34611d7449090f04d0ccb9be8650529885553c"
+    }
+  ],
+  "all_commands_passed": true
+}

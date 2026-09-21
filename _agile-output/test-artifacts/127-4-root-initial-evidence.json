@@ -1,0 +1,27 @@
+{
+  "evidence": [
+    {
+      "source": "target/fr196-decoder-integration/rtl-1899559/run.log",
+      "saved": "_agile-output/test-artifacts/127-4-root-initial-integration-run.log",
+      "sha256": "d211be402405e8470f01855ceb72c57995adab28b3e06499dcf7879f16ea0ef5"
+    },
+    {
+      "source": "target/fr196-decoder-formal/routing-1901242/prove/status",
+      "saved": "_agile-output/test-artifacts/127-4-root-initial-formal-status",
+      "sha256": "a37c1cb1714024fa4fed0ddfe7d06dbccfeab84b13d0bbfbc5396efe86b4de2c"
+    },
+    {
+      "source": "target/fr196-decoder-formal/routing-1901242/prove/logfile.txt",
+      "saved": "_agile-output/test-artifacts/127-4-root-initial-formal-logfile.txt",
+      "sha256": "f5065c92a79bf9b50e3c88ea6aadbfcf08570984de39d31a6bf56818be217a73"
+    },
+    {
+      "source": "target/fr196-decoder-formal/routing-1901242/prove-execution.json",
+      "saved": "_agile-output/test-artifacts/127-4-root-initial-formal-prove-execution.json",
+      "sha256": "6bcf1872e7e0e94b70f4d01b7b3750abee30472be2101b9352f849e65f965436"
+    }
+  ],
+  "integration": "PASS 31 submits/31 responses/26 leaf/7B/24R",
+  "formal": "Initial basecase PASS, induction FAIL, overall UNKNOWN exit4; not a proof PASS",
+  "scope": "intermediate evidence, full Story127.4 remains in progress"
+}

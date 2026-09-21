@@ -166,3 +166,9 @@ FR195 的 RvRegSlice 子集已实现：WIDTH1..64、两槽寄存、无输入组�
 ## Story127.2 CSR叶子集关闭（2026-09-21）
 
 127.1风险门与127.2静态CSR描述/组合RTL/Markdown/C产物七步完成；公开入口与单owner/提交时序见`docs/ip/csr.md`。127.2完整回归1787 passed、0 failed、18 ignored，专用CSR形式/综合4项实际另跑通过，证据`_agile-output/test-artifacts/127-2-final-verification.md`。只交付FR196叶子集，127.3桥/127.4译码及M2仍待验收，Epic127 in-progress；Epic128–130/Phase24整体未交付。新增API逐符号纳入FR142/minor，未发布；FR189/Epic122 deferred及NFR91保持。前述各时点状态保留为历史。
+
+## M2 / Epic127 实施关闭（2026-09-21）
+
+Story127.1–127.4随各自单故事提交完成，FR196静态CSR描述/软件地址产物、AXI-Lite桥和固定四窗CsrDecoder交付。127.4实际clean/fmt/justtest为470结果块、1823 passed / 0 failed / 25 ignored，专用decoder/CSR/bridge形式与综合本轮另跑通过，不把ignored计PASS。关闭映射 `_agile-output/implementation-artifacts/epic-127-closeout.md`，完整验收 `_agile-output/test-artifacts/127-4-final-verification.md`。新增API逐符号登记FR142/minor，未改工具钉、包版本或发布。
+
+真实七模块夹具验证总线/CSR语义，不代表Epic128外设算法或Epic129系统；native/generated层级仍unsupported。Epic128–130/FR197–201及整个Phase24未交付；下一故事128.1 NFR14，全部未完成故事七步授权继续有效。FR189/Epic122 deferred和NFR91保持，不push、不publish。此前各时点交付状态保留为历史。

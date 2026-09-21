@@ -1,0 +1,127 @@
+{
+  "patched": [
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R6",
+    "R7",
+    "R8",
+    "R9",
+    "R10"
+  ],
+  "rejected_not_implemented": [
+    "R5"
+  ],
+  "integration_tests": 5,
+  "stress_seeds": 16,
+  "random_transactions_per_seed": 1000,
+  "concurrent_transactions_per_seed": 256,
+  "eligible_arbitration_decisions_per_seed": 16,
+  "monitor_control": "PASS",
+  "monitor_negative_cases": 7,
+  "dedicated_tests": 4,
+  "cover_goals": 17,
+  "cover_trace_files": 16,
+  "proof": "PASS (asserted implementation correspondence lemmas)",
+  "mutations": {
+    "control": {
+      "status": "PASS 0 5",
+      "args": [
+        "-f",
+        "mutation.sby"
+      ],
+      "depth": 10,
+      "elapsed_seconds": 5.258911448,
+      "exit_code": 0,
+      "oracle": "port-only",
+      "tool": "sby"
+    },
+    "cross-owner": {
+      "status": "FAIL 2 1",
+      "args": [
+        "-f",
+        "mutation.sby"
+      ],
+      "depth": 10,
+      "elapsed_seconds": 1.942833345,
+      "exit_code": 2,
+      "oracle": "port-only",
+      "tool": "sby"
+    },
+    "dual-select": {
+      "status": "FAIL 2 1",
+      "args": [
+        "-f",
+        "mutation.sby"
+      ],
+      "depth": 10,
+      "elapsed_seconds": 1.669547441,
+      "exit_code": 2,
+      "oracle": "port-only",
+      "tool": "sby"
+    },
+    "high-alias": {
+      "status": "FAIL 2 1",
+      "args": [
+        "-f",
+        "mutation.sby"
+      ],
+      "depth": 10,
+      "elapsed_seconds": 1.50377885,
+      "exit_code": 2,
+      "oracle": "port-only",
+      "tool": "sby"
+    },
+    "miss-drops-under-stall": {
+      "status": "FAIL 2 2",
+      "args": [
+        "-f",
+        "mutation.sby"
+      ],
+      "depth": 10,
+      "elapsed_seconds": 2.282676238,
+      "exit_code": 2,
+      "oracle": "port-only",
+      "tool": "sby"
+    },
+    "ready-gated-valid": {
+      "status": "FAIL 2 1",
+      "args": [
+        "-f",
+        "mutation.sby"
+      ],
+      "depth": 10,
+      "elapsed_seconds": 1.568536698,
+      "exit_code": 2,
+      "oracle": "port-only",
+      "tool": "sby"
+    },
+    "reset-retains-pending": {
+      "status": "FAIL 2 2",
+      "args": [
+        "-f",
+        "mutation.sby"
+      ],
+      "depth": 10,
+      "elapsed_seconds": 2.376909867,
+      "exit_code": 2,
+      "oracle": "port-only",
+      "tool": "sby"
+    }
+  },
+  "docs_example": "PASS",
+  "trace_audit": "owner and miss cancellation: accept at t10, reset pending at t20, new accept at t30, new response completion at t40; miss mutant drops stalled response; reset mutant retains real accepted pending after later reset. See traces.json.",
+  "archive": {
+    "path": "_agile-output/test-artifacts/127-4-code-review-fix-tool-artifacts.tar.gz",
+    "sha256": "0274774bd02227c03dddcf38a800debe0f46de2104d482dfaf81c458b7f6fa0d",
+    "files": 387
+  },
+  "source_sha256": {
+    "crates/bitloom/tests/fr196_csr_decoder/stress.sv": "9cedc661153815a757b415cc7b1e41fe813664e0514097eddd2274b6988f9ccf",
+    "crates/bitloom/tests/fr196_csr_decoder_formal.rs": "37ace89ab2524692d2ab6a3d3a5f3d77a16bc125115a82924834e833b2ca3631",
+    "crates/bitloom/tests/fr196_csr_decoder_integration.rs": "447458346f9f385a38fedf698149c93fa0ebd635ca4d6ddd838982c6fbfb0fc0",
+    "docs/ip/csr-decoder.md": "9d14b69b2bf83453294b67a8a6ad62bbc2ad15b119592c7c14dd965d5cc96f5f"
+  },
+  "scope": "No product logic/API changes. No story/spec/sprint/goal modifications by this worker. No commit, clean or push. Full verification remains with root."
+}

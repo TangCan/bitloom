@@ -1,0 +1,10 @@
+{
+  "command": [
+    "just",
+    "test"
+  ],
+  "start_unix": 1789972056.8156211,
+  "elapsed_seconds": 875.4843473434448,
+  "exit_code": 0,
+  "log_sha256": "15aac3f5f958a0d883a65eca4a34611d7449090f04d0ccb9be8650529885553c"
+}

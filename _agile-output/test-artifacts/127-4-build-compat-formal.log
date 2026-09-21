@@ -1,0 +1,29 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.48s
+     Running tests/fr196_axi_lite_csr_formal.rs (target/debug/deps/fr196_axi_lite_csr_formal-38d1e389ee71a346)
+
+running 3 tests
+test p0_original_rtl_synthesis_check_and_all_five_registered_boundaries ... ok
+test p0_port_oracle_kills_pairing_routing_and_offer_hold_rtl_mutants ... ok
+test p0_port_oracle_safety_induction_and_nonvacuous_covers ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 25.77s
+
+     Running tests/fr196_csr_formal.rs (target/debug/deps/fr196_csr_formal-2b2c9d85425627b7)
+
+running 4 tests
+FR196 singleton 0 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-0-1984055
+FR196 singleton 1 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-1-1984055
+FR196 CSR uninstrumented synthesis artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/synthesis-1984055
+test p0_csr_original_rtl_synthesis_check ... ok
+FR196 singleton 2 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-2-1984055
+FR196 singleton 3 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-3-1984055
+FR196 singleton 4 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-4-1984055
+test p0_each_supported_singleton_original_rtl_synthesis ... ok
+FR196 CSR original PASS / lost-event mutation FAIL artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/lost-event-mutation-1984055
+test p0_csr_formal_rejects_lost_event_output_with_counterexample ... ok
+FR196 CSR proof/cover artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/proof-1984055
+test p0_csr_real_safety_and_nonvacuous_cover ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 10.76s
+

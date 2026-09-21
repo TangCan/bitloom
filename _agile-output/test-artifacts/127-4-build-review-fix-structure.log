@@ -1,0 +1,45 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.08s
+     Running tests/fr196_csr_decoder_formal.rs (target/debug/deps/fr196_csr_decoder_formal-43260981e010a796)
+
+running 1 test
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (2069389) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:131:13:
+input (including rst) path to s_axi_awready
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (2069389) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:85:9:
+unsupported/latch/unknown cell $_DLATCH_P_
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (2069389) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:85:9:
+unsupported/latch/unknown cell $_DFF_N_
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (2069389) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:85:9:
+unsupported/latch/unknown cell $_DFFE_NP_
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (2069389) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:85:9:
+unsupported/latch/unknown cell $_DFFE_NN_
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (2069389) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:85:9:
+unsupported/latch/unknown cell mystery
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (2069389) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:85:9:
+unsupported/latch/unknown cell $_DFF_FAKE_
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (2069389) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:26:28:
+undriven bit 9
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (2069389) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:7:9:
+unknown/nonbinary structural constant "x"
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (2069389) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:98:13:
+assertion `left == right` failed: FF clock must be the dedicated clk input
+  left: Some(1)
+ right: Some(3)
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (2069389) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:96:18:
+FF missing C connection
+test structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.00s
+

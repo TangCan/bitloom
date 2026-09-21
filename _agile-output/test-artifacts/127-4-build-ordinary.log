@@ -1,0 +1,145 @@
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.48s
+     Running tests/fr196_csr_decoder.rs (target/debug/deps/fr196_csr_decoder-db47098fe28e20be)
+
+running 8 tests
+test p0_invalid_names_and_conflicting_definitions_poison_session ... ok
+test p0_exact_52_ports_shared_body_and_definition_reuse ... ok
+test p0_reused_definition_rejects_wrong_connection_width_and_direction ... ok
+test standalone::p0_two_actual_rtl_instances_keep_independent_owners_and_cancellation ... ok
+test p0_decerr_is_registered_stable_and_reset_cancels_before_consumption ... ok
+test p0_owner_reset_cancels_waiting_and_visible_response_without_replay ... ok
+test p0_owner_survives_long_request_response_stalls_and_input_changes ... ok
+test p0_all_65536_addresses_route_actual_dut_without_high_alias_or_alignment ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 11.19s
+
+     Running tests/fr196_csr_decoder_formal.rs (target/debug/deps/fr196_csr_decoder_formal-43260981e010a796)
+
+running 5 tests
+test p0_original_decoder_synthesis_check ... ignored, requires real Yosys
+test p0_original_hierarchy_synthesis_and_five_registered_boundaries ... ignored, requires real Yosys
+test p0_port_only_oracle_kills_cross_owner_dual_select_and_high_alias_mutants ... ignored, requires real SBY/Yosys/Z3
+test p0_port_only_owner_response_safety_prove_and_cover ... ignored, requires real SBY/Yosys/Z3
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1938834) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:134:13:
+input (including rst) path to s_axi_awready
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1938834) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:88:9:
+unsupported/latch/unknown cell $_DLATCH_P_
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1938834) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:88:9:
+unsupported/latch/unknown cell mystery
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1938834) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:88:9:
+unsupported/latch/unknown cell $_DFF_FAKE_
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1938834) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:26:28:
+undriven bit 9
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1938834) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:7:9:
+unknown/nonbinary structural constant "x"
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1938834) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:101:13:
+assertion `left == right` failed: FF clock must be the dedicated clk input
+  left: Some(1)
+ right: Some(3)
+
+thread 'structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers' (1938834) panicked at crates/bitloom/tests/fr196_csr_decoder/structure.rs:99:18:
+FF missing C connection
+test structure::p1_structural_observer_rejects_reset_paths_latches_unknowns_and_missing_drivers ... ok
+
+test result: ok. 1 passed; 0 failed; 4 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr196_csr_decoder_integration.rs (target/debug/deps/fr196_csr_decoder_integration-f3739376f5761d8b)
+
+running 4 tests
+test p1_four_local_headers_repeat_and_compile_with_independent_global_goldens ... ok
+test p0_real_hierarchy_routes_errors_partial_write_and_common_reset ... ok
+test p0_real_monitor_rejects_changed_stalled_payload_and_consume_refill ... ok
+RANDOM seed=1 windows=213,200,194,215,178 errors=447,375,178 gaps=122,140,135,129 order=253,273
+STALLS AW=825 W=855 AR=752 B=478 R=395
+CONCURRENT seed=1 three_channel_offer_cycles=689
+STRESS PASS seed=1 random=1000 concurrent=256 cycles=40066 AW=932 W=932 AR=753 commit=1681 leaf=1502 csr_rsp=1679 B=929 R=748 cancel=10 effects=536 read=751 write=930 windows=277,264,258,279,178 errors=703,375,178
+tb.sv:504: $finish called at 240396 (1s)
+RANDOM seed=7 windows=208,214,190,189,199 errors=432,369,199 gaps=108,121,110,133 order=246,226
+STALLS AW=858 W=842 AR=766 B=473 R=394
+CONCURRENT seed=7 three_channel_offer_cycles=722
+STRESS PASS seed=7 random=1000 concurrent=256 cycles=39863 AW=878 W=878 AR=807 commit=1681 leaf=1481 csr_rsp=1679 B=875 R=802 cancel=10 effects=508 read=805 write=876 windows=272,278,254,253,199 errors=688,369,199
+tb.sv:504: $finish called at 239178 (1s)
+RANDOM seed=31 windows=207,202,204,201,186 errors=449,365,186 gaps=128,119,112,114 order=216,257
+STALLS AW=845 W=839 AR=771 B=477 R=390
+CONCURRENT seed=31 three_channel_offer_cycles=719
+STRESS PASS seed=31 random=1000 concurrent=256 cycles=39342 AW=879 W=879 AR=806 commit=1681 leaf=1494 csr_rsp=1679 B=876 R=801 cancel=10 effects=513 read=804 write=877 windows=271,266,268,265,186 errors=705,365,186
+tb.sv:504: $finish called at 236052 (1s)
+RANDOM seed=127 windows=206,184,206,204,200 errors=431,369,200 gaps=122,140,122,107 order=255,236
+STALLS AW=856 W=825 AR=773 B=475 R=396
+CONCURRENT seed=127 three_channel_offer_cycles=713
+STRESS PASS seed=127 random=1000 concurrent=256 cycles=38948 AW=897 W=897 AR=788 commit=1681 leaf=1480 csr_rsp=1679 B=894 R=783 cancel=10 effects=499 read=786 write=895 windows=270,248,270,268,200 errors=687,369,200
+tb.sv:504: $finish called at 233688 (1s)
+RANDOM seed=1021 windows=205,172,212,224,187 errors=441,372,187 gaps=130,129,137,112 order=261,247
+STALLS AW=869 W=826 AR=741 B=475 R=396
+CONCURRENT seed=1021 three_channel_offer_cycles=690
+STRESS PASS seed=1021 random=1000 concurrent=256 cycles=39585 AW=914 W=914 AR=771 commit=1681 leaf=1493 csr_rsp=1679 B=911 R=766 cancel=10 effects=511 read=769 write=912 windows=269,236,276,288,187 errors=697,372,187
+tb.sv:504: $finish called at 237510 (1s)
+RANDOM seed=4093 windows=196,218,195,194,197 errors=440,363,197 gaps=132,113,138,127 order=273,237
+STALLS AW=851 W=851 AR=764 B=474 R=397
+CONCURRENT seed=4093 three_channel_offer_cycles=729
+STRESS PASS seed=4093 random=1000 concurrent=256 cycles=40068 AW=916 W=916 AR=769 commit=1681 leaf=1483 csr_rsp=1679 B=913 R=764 cancel=10 effects=514 read=767 write=914 windows=260,282,259,258,197 errors=696,363,197
+tb.sv:504: $finish called at 240408 (1s)
+RANDOM seed=65521 windows=218,210,198,206,168 errors=455,377,168 gaps=103,142,126,117 order=238,250
+STALLS AW=873 W=832 AR=759 B=470 R=395
+CONCURRENT seed=65521 three_channel_offer_cycles=705
+STRESS PASS seed=65521 random=1000 concurrent=256 cycles=39635 AW=894 W=894 AR=791 commit=1681 leaf=1512 csr_rsp=1679 B=891 R=786 cancel=10 effects=523 read=789 write=892 windows=282,274,262,270,168 errors=711,377,168
+tb.sv:504: $finish called at 237810 (1s)
+RANDOM seed=1048573 windows=215,178,213,206,188 errors=440,372,188 gaps=135,122,122,115 order=254,240
+STALLS AW=860 W=831 AR=764 B=475 R=389
+CONCURRENT seed=1048573 three_channel_offer_cycles=704
+STRESS PASS seed=1048573 random=1000 concurrent=256 cycles=39597 AW=900 W=900 AR=785 commit=1681 leaf=1492 csr_rsp=1679 B=897 R=780 cancel=10 effects=511 read=783 write=898 windows=279,242,277,270,188 errors=696,372,188
+tb.sv:504: $finish called at 237582 (1s)
+RANDOM seed=19088743 windows=208,188,188,226,190 errors=426,384,190 gaps=138,107,119,137 order=249,252
+STALLS AW=853 W=878 AR=794 B=472 R=395
+CONCURRENT seed=19088743 three_channel_offer_cycles=744
+STRESS PASS seed=19088743 random=1000 concurrent=256 cycles=40131 AW=907 W=907 AR=778 commit=1681 leaf=1490 csr_rsp=1679 B=904 R=773 cancel=10 effects=514 read=776 write=905 windows=272,252,252,290,190 errors=682,384,190
+tb.sv:504: $finish called at 240786 (1s)
+RANDOM seed=36984440 windows=227,213,198,189,173 errors=445,382,173 gaps=127,119,116,137 order=242,257
+STALLS AW=854 W=838 AR=769 B=476 R=385
+CONCURRENT seed=36984440 three_channel_offer_cycles=717
+STRESS PASS seed=36984440 random=1000 concurrent=256 cycles=40429 AW=905 W=905 AR=780 commit=1681 leaf=1507 csr_rsp=1679 B=902 R=775 cancel=10 effects=506 read=778 write=903 windows=291,277,262,253,173 errors=701,382,173
+tb.sv:504: $finish called at 242574 (1s)
+RANDOM seed=54880137 windows=199,184,206,229,182 errors=458,360,182 gaps=123,122,130,102 order=237,240
+STALLS AW=845 W=881 AR=753 B=472 R=391
+CONCURRENT seed=54880137 three_channel_offer_cycles=720
+STRESS PASS seed=54880137 random=1000 concurrent=256 cycles=39577 AW=883 W=883 AR=802 commit=1681 leaf=1498 csr_rsp=1679 B=880 R=797 cancel=10 effects=516 read=800 write=881 windows=263,248,270,293,182 errors=714,360,182
+tb.sv:504: $finish called at 237462 (1s)
+RANDOM seed=72775834 windows=227,202,200,173,198 errors=431,371,198 gaps=118,120,129,120 order=260,227
+STALLS AW=814 W=865 AR=805 B=469 R=398
+CONCURRENT seed=72775834 three_channel_offer_cycles=724
+STRESS PASS seed=72775834 random=1000 concurrent=256 cycles=40281 AW=893 W=893 AR=792 commit=1681 leaf=1482 csr_rsp=1679 B=890 R=787 cancel=10 effects=506 read=790 write=891 windows=291,266,264,237,198 errors=687,371,198
+tb.sv:504: $finish called at 241686 (1s)
+RANDOM seed=90671531 windows=184,213,200,220,183 errors=420,397,183 gaps=120,124,147,117 order=279,229
+STALLS AW=845 W=865 AR=733 B=476 R=394
+CONCURRENT seed=90671531 three_channel_offer_cycles=688
+STRESS PASS seed=90671531 random=1000 concurrent=256 cycles=39719 AW=914 W=914 AR=771 commit=1681 leaf=1497 csr_rsp=1679 B=911 R=766 cancel=10 effects=498 read=769 write=912 windows=248,277,264,284,183 errors=676,397,183
+tb.sv:504: $finish called at 238314 (1s)
+RANDOM seed=108567228 windows=188,219,184,207,202 errors=432,366,202 gaps=138,124,117,118 order=264,233
+STALLS AW=846 W=880 AR=767 B=476 R=393
+CONCURRENT seed=108567228 three_channel_offer_cycles=725
+STRESS PASS seed=108567228 random=1000 concurrent=256 cycles=39409 AW=903 W=903 AR=782 commit=1681 leaf=1478 csr_rsp=1679 B=900 R=777 cancel=10 effects=511 read=780 write=901 windows=252,283,248,271,202 errors=688,366,202
+tb.sv:504: $finish called at 236454 (1s)
+RANDOM seed=126462925 windows=221,226,185,198,170 errors=459,371,170 gaps=148,137,129,112 order=247,279
+STALLS AW=860 W=839 AR=782 B=475 R=393
+CONCURRENT seed=126462925 three_channel_offer_cycles=732
+STRESS PASS seed=126462925 random=1000 concurrent=256 cycles=39321 AW=932 W=932 AR=753 commit=1681 leaf=1510 csr_rsp=1679 B=929 R=748 cancel=10 effects=524 read=751 write=930 windows=285,290,249,262,170 errors=715,371,170
+tb.sv:504: $finish called at 235926 (1s)
+RANDOM seed=305441741 windows=195,191,198,213,203 errors=427,370,203 gaps=104,124,134,129 order=245,246
+STALLS AW=858 W=862 AR=755 B=478 R=394
+CONCURRENT seed=305441741 three_channel_offer_cycles=722
+STRESS PASS seed=305441741 random=1000 concurrent=256 cycles=40182 AW=897 W=897 AR=788 commit=1681 leaf=1477 csr_rsp=1679 B=894 R=783 cancel=10 effects=511 read=786 write=895 windows=259,255,262,277,203 errors=683,370,203
+tb.sv:504: $finish called at 241092 (1s)
+test p0_independent_scoreboard_directed_random_and_concurrent_real_rtl ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 30.29s
+

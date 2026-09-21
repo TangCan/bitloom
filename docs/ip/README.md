@@ -170,3 +170,7 @@ Story126.4最终关闭：Epic126/M1与FR194/FR195完成，七步证据见[关闭
 ## FR196 AXI-Lite 到 CSR 桥（Story127.3）
 
 `AxiLiteCsrBridge` 提供固定addr16/data32/WSTRB4桥接，AW/W/AR独立捕获、CSR单执行请求、锁定请求及B/R独立响应保持。使用、完整prelude-only组合例和复位约束见[桥接文档](axi-lite-csr-bridge.md)。验证入口为 `fr196_axi_lite_csr` 与 `fr196_axi_lite_csr_formal`；专用证明/综合须显式 `--ignored`，实际结果由故事证据记录。前节“桥未交付”为127.2关闭时点；本节不关闭四窗译码、M2或整个FR196，不声明已发布。
+
+## FR196 四窗口 CSR 译码（Story127.4）
+
+`CsrDecoder` 固定UART/GPIO/Timer/IRQ四个256字节窗口，完整16位命中、局部byte offset、单owner响应和持久DECERR。完整52端口、同沿提交、共同reset与保守气泡、可编译prelude-only七模块例见[四窗译码](csr-decoder.md)。行为入口 `fr196_csr_decoder` / `fr196_csr_decoder_integration`；独立形式/原始RTL综合入口 `fr196_csr_decoder_formal -- --ignored`，CI显式执行。前文“译码未交付”为127.3时点；本故事七步完成，Epic127/FR196/M2关闭，见[M2映射](../../_agile-output/implementation-artifacts/epic-127-closeout.md)；新增延迟响应/WO突变入口为 `fr196_csr_decoder_automate` / `fr196_csr_decoder_oracle`。四个CSR测试peer不代表Epic128外设算法或Epic129系统已交付。

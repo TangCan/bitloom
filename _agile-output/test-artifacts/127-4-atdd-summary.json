@@ -1,0 +1,45 @@
+{
+  "story": "127.4",
+  "phase": "RED scaffold",
+  "files": [
+    "crates/bitloom/tests/fr196_csr_decoder.rs",
+    "crates/bitloom/tests/fr196_csr_decoder_formal.rs",
+    "crates/bitloom/tests/fr196_csr_decoder_integration.rs"
+  ],
+  "test_count": 9,
+  "api_native": 5,
+  "dedicated_tools": 2,
+  "integration_software": 2,
+  "all_ignored": true,
+  "worker_execution": "sequential A then B (subagent capacity fallback)",
+  "parallel_speedup_claimed": false,
+  "remaining_build_gaps": [
+    "Full causal port-only owner and response safety observer, reset-after-owner and DECERR consumption, cover stalled-response recovery and reset/new request",
+    "Actual representative RTL mutants with assertion-counterexample checks; no mutation PASS claimed",
+    "Two instantiated decoder RTL isolation, invalid module name/definition conflict diagnostic tests",
+    "Native owner-reset competition and normal DECERR drain, producer monitor negative test, edge payload checks expanded across all fields",
+    "Icarus standalone replay; full composed bridge+four-leaf raw AXI, software artifacts, 16 seeds x 1000 and concurrent stress are assigned to integration/build",
+    "Synthesis unknown-cell/clock dependency checks and composed five bridge boundary checks; current synthesis scaffold checks real synth/check plus latches only",
+    "Full raw AXI AW/W gap 0/1/7/31 and partial-W read progress; independent concurrent producers; B-stall read progress and R-stall write progress",
+    "16 seeds x 1000 complete transactions with independent software state/side-effect oracle and per-seed metrics",
+    "All 16 WSTRB with contrasting old/new data, zero mask, RO/WO permission, dynamic reject, W1C clear/set collision, and snapshot peer changes",
+    "Full common-reset matrix including owner/DECERR/leaf/B/R pending and acceptance competition, independent accepted/cancelled ledger",
+    "Actual producer hold monitor with accepting-edge checks and negative sensitivity test not yet implemented; current finite producer tasks hold valid/payload until accepted",
+    "Native/generated hierarchical unsupported checks, two decoder instance isolation and documentation prelude-only consumer",
+    "Hierarchy synthesis/check plus five bridge boundary dependency cones and actual formal regressions",
+    "Clean/fmt/workspace/compatibility and outside-target evidence archive belong to subsequent build/review/automate/final steps"
+  ],
+  "red_exit_code": 101,
+  "red_errors": [
+    "E0432 missing CsrDecoder",
+    "E0432 missing CsrDecoder",
+    "E0432 missing CsrDecoder"
+  ],
+  "behavior_tests_executed": 0,
+  "all_workers_completed": true,
+  "source_line_counts": {
+    "crates/bitloom/tests/fr196_csr_decoder.rs": 321,
+    "crates/bitloom/tests/fr196_csr_decoder_formal.rs": 126,
+    "crates/bitloom/tests/fr196_csr_decoder_integration.rs": 415
+  }
+}

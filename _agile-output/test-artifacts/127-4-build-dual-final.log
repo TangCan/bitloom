@@ -1,0 +1,9 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.87s
+     Running tests/fr196_csr_decoder.rs (target/debug/deps/fr196_csr_decoder-db47098fe28e20be)
+
+running 1 test
+test standalone::p0_two_actual_rtl_instances_keep_independent_owners_and_cancellation ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.05s
+

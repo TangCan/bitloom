@@ -1,0 +1,110 @@
+[
+  {
+    "command": [
+      "rustc",
+      "--version"
+    ],
+    "path": "/home/richard/.cargo/bin/rustc",
+    "resolved_path": "/nvme_data1/richard/.cargo/bin/rustup",
+    "sha256": "dda7234360b7f578ca8b0ddcb80145646fa61a67c1720a5abc7051b35c9fcb71",
+    "exit_code": 0,
+    "elapsed_seconds": 0.07834333891514689,
+    "output": "rustc 1.97.1 (8bab26f4f 2026-07-14)\n"
+  },
+  {
+    "command": [
+      "cargo",
+      "--version"
+    ],
+    "path": "/home/richard/.cargo/bin/cargo",
+    "resolved_path": "/nvme_data1/richard/.cargo/bin/rustup",
+    "sha256": "dda7234360b7f578ca8b0ddcb80145646fa61a67c1720a5abc7051b35c9fcb71",
+    "exit_code": 0,
+    "elapsed_seconds": 0.04513898794539273,
+    "output": "cargo 1.97.1 (c980f4866 2026-06-30)\n"
+  },
+  {
+    "command": [
+      "iverilog",
+      "-V"
+    ],
+    "path": "/tmp/bitloom-maintenance-tools/bin/iverilog",
+    "resolved_path": "/tmp/bitloom-maintenance-tools/bin/iverilog",
+    "sha256": "67e52f7d4be127dbe422f6ced866c10e33df01a1bb90321c8786b40f31f2c490",
+    "exit_code": 0,
+    "elapsed_seconds": 0.0152505689766258,
+    "output": "Icarus Verilog version 12.0 (stable) ()\n\nCopyright (c) 2000-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Preprocessor version 12.0 (stable) ()\n\nCopyright (c) 1999-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Parser/Elaborator version 12.0 (stable) ()\n\nCopyright (c) 1998-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n FLAGS DLL vvp.tgt\nvvp.tgt: Icarus Verilog VVP Code Generator 12.0 (stable) ()\n\nCopyright (c) 2001-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n"
+  },
+  {
+    "command": [
+      "vvp",
+      "-V"
+    ],
+    "path": "/tmp/bitloom-maintenance-tools/bin/vvp",
+    "resolved_path": "/tmp/bitloom-maintenance-tools/iverilog/usr/bin/vvp",
+    "sha256": "a10bd7d4a0850308ac8c2c98115b6a3084f9be978307610f2a521190c28f4023",
+    "exit_code": 0,
+    "elapsed_seconds": 0.011019367026165128,
+    "output": "Icarus Verilog runtime version 12.0 (stable) ()\n\nCopyright (c) 2001-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n"
+  },
+  {
+    "command": [
+      "yosys",
+      "-V"
+    ],
+    "path": "/usr/bin/yosys",
+    "resolved_path": "/usr/bin/yosys",
+    "sha256": "88c0a12bb814a1a8716b1ae10b482e35d3005ed558e1f5f626b3dc983ea3abd0",
+    "exit_code": 0,
+    "elapsed_seconds": 0.019598545972257853,
+    "output": "Yosys 0.33 (git sha1 2584903a060)\n"
+  },
+  {
+    "command": [
+      "sby",
+      "--version"
+    ],
+    "path": "/tmp/bitloom-1263-sby-installed/bin/sby",
+    "resolved_path": "/tmp/bitloom-1263-sby-installed/bin/sby",
+    "sha256": "e4ca0cb2be8b16774b4b52df9c0a740a8c40753fb6c4bdea5174de3c1e7b5915",
+    "exit_code": 0,
+    "elapsed_seconds": 0.0815359289990738,
+    "output": "SBY yosys-0.47\n"
+  },
+  {
+    "command": [
+      "z3",
+      "--version"
+    ],
+    "path": "/usr/bin/z3",
+    "resolved_path": "/usr/bin/z3",
+    "sha256": "c05be002097e2f2106efeeac03e58032e3f5cca10104f95d7a0ddc0bd3f907cb",
+    "exit_code": 0,
+    "elapsed_seconds": 0.04600942297838628,
+    "output": "Z3 version 4.8.12 - 64 bit\n"
+  },
+  {
+    "command": [
+      "cc",
+      "--version"
+    ],
+    "path": "/usr/bin/cc",
+    "resolved_path": "/usr/bin/x86_64-linux-gnu-gcc-13",
+    "sha256": "1b99826121ae6682a634e5efe09bd3e3df58ce58e0b28f849114ab5b89139c26",
+    "exit_code": 0,
+    "elapsed_seconds": 0.005987364100292325,
+    "output": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+  },
+  {
+    "command": [
+      "python3",
+      "--version"
+    ],
+    "path": "/usr/bin/python3",
+    "resolved_path": "/usr/bin/python3.12",
+    "sha256": "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+    "exit_code": 0,
+    "elapsed_seconds": 0.01961216505151242,
+    "output": "Python 3.12.3\n"
+  }
+]

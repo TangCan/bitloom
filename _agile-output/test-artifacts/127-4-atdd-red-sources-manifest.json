@@ -1,0 +1,17 @@
+[
+  {
+    "path": "crates/bitloom/tests/fr196_csr_decoder.rs",
+    "size_bytes": 11469,
+    "sha256": "06eabb7e1c0a11bc3a7c1c27b0ff2904bedca0f3ce081f2e06531ae727bec0ad"
+  },
+  {
+    "path": "crates/bitloom/tests/fr196_csr_decoder_formal.rs",
+    "size_bytes": 5474,
+    "sha256": "c1063a56389320867cc40cb07f5f438d4e5f049fc71657e02d05da9f49d0f6b7"
+  },
+  {
+    "path": "crates/bitloom/tests/fr196_csr_decoder_integration.rs",
+    "size_bytes": 15705,
+    "sha256": "954ed71750aef0f87cc19961b06f9f5fe89d5c58284ce41bd00ec9aaee5ee7e4"
+  }
+]

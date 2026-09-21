@@ -1,0 +1,80 @@
+{
+  "changes_read": [
+    "scoreboard.sv",
+    "stress.sv",
+    "structure.rs",
+    "fr196_csr_decoder_formal.rs",
+    "fr196_csr_decoder_integration.rs"
+  ],
+  "implementation_log_verification": [
+    {
+      "metadata": "127-4-build-review-fix-formal.json",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr196_csr_decoder_formal",
+        "--",
+        "--ignored",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 11.89534360205289,
+      "log_sha256_verified": true
+    },
+    {
+      "metadata": "127-4-build-review-fix-integration.json",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr196_csr_decoder_integration",
+        "--",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 33.81039772101212,
+      "log_sha256_verified": true
+    },
+    {
+      "metadata": "127-4-build-review-fix-markdown.json",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr196_csr_decoder_integration",
+        "p1_four_local",
+        "--",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.100025178049691,
+      "log_sha256_verified": true
+    },
+    {
+      "metadata": "127-4-build-review-fix-structure.json",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr196_csr_decoder_formal",
+        "p1_structural",
+        "--",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.1171987958950922,
+      "log_sha256_verified": true
+    }
+  ],
+  "root_full_spec_verification": "running; not yet complete",
+  "product_source_changed": false
+}

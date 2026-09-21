@@ -1,0 +1,36 @@
+{
+  "evidence": [
+    {
+      "source": "target/fr196-decoder-formal/routing-1902883/prove/status",
+      "saved": "_agile-output/test-artifacts/127-4-root-inductive-prove-status",
+      "sha256": "c64cd1e86b7f62337279d990860d37ca6636f5812efd86b6d24dfd010434d5f0"
+    },
+    {
+      "source": "target/fr196-decoder-formal/routing-1902883/prove/logfile.txt",
+      "saved": "_agile-output/test-artifacts/127-4-root-inductive-prove-logfile.txt",
+      "sha256": "db6c9627a8f0ee6a0830f3ae5cd2ba079a1bc07318c3304c6e09791dbb5cc930"
+    },
+    {
+      "source": "target/fr196-decoder-formal/routing-1902883/cover/status",
+      "saved": "_agile-output/test-artifacts/127-4-root-inductive-cover-status",
+      "sha256": "9768d51e75bbaf455ceae1cb5204dc0141f1d615040e48bd90d44c2613f92e9a"
+    },
+    {
+      "source": "target/fr196-decoder-formal/routing-1902883/cover/logfile.txt",
+      "saved": "_agile-output/test-artifacts/127-4-root-inductive-cover-logfile.txt",
+      "sha256": "a8498aac27a405ab5ec28267e4dbd77ba80733f94e832c7c31d4aeb7c06bd863"
+    },
+    {
+      "source": "target/fr196-decoder-formal/routing-1902883/prove-execution.json",
+      "saved": "_agile-output/test-artifacts/127-4-root-inductive-prove-execution.json",
+      "sha256": "f0833e19ddd1a91fa2f2d5638899bc6aa9297c36dd8abd553901f25d178a7cbe"
+    },
+    {
+      "source": "target/fr196-decoder-formal/routing-1902883/cover-execution.json",
+      "saved": "_agile-output/test-artifacts/127-4-root-inductive-cover-execution.json",
+      "sha256": "39461fa5abaa07894cf717228d6d4bd360d73f87b0cea7eed6e143cffdd29fbe"
+    }
+  ],
+  "result": "prove basecase and induction PASS; seven covers PASS",
+  "scope": "intermediate decoder proof only; mutation sensitivity, full integration and complete seven-step closeout remain pending"
+}

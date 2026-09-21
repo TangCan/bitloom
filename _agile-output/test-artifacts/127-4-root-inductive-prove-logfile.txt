@@ -1,0 +1,46 @@
+SBY 13:05:58 [prove] Removing directory '/nvme_data2/richard/2026/rhdl/target/fr196-decoder-formal/routing-1902883/prove'.
+SBY 13:05:58 [prove] Copy '/nvme_data2/richard/2026/rhdl/target/fr196-decoder-formal/routing-1902883/observed.v' to '/nvme_data2/richard/2026/rhdl/target/fr196-decoder-formal/routing-1902883/prove/src/observed.v'.
+SBY 13:05:58 [prove] engine_0: smtbmc --unroll z3
+SBY 13:05:58 [prove] base: starting process "cd prove/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 13:05:58 [prove] base: finished (returncode=0)
+SBY 13:05:58 [prove] prep: starting process "cd prove/model; yosys -ql design_prep.log design_prep.ys"
+SBY 13:05:58 [prove] prep: finished (returncode=0)
+SBY 13:05:58 [prove] smt2: starting process "cd prove/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 13:05:58 [prove] smt2: finished (returncode=0)
+SBY 13:05:58 [prove] engine_0.basecase: starting process "cd prove; yosys-smtbmc -s z3 --presat --unroll --noprogress -t 8  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY 13:05:58 [prove] engine_0.induction: starting process "cd prove; yosys-smtbmc -s z3 --presat --unroll -i --noprogress -t 8  --append 0 --dump-vcd engine_0/trace_induct.vcd --dump-yw engine_0/trace_induct.yw --dump-vlogtb engine_0/trace_induct_tb.v --dump-smtc engine_0/trace_induct.smtc model/design_smt2.smt2"
+SBY 13:05:58 [prove] engine_0.basecase: ##   0:00:00  Solver: z3
+SBY 13:05:58 [prove] engine_0.induction: ##   0:00:00  Solver: z3
+SBY 13:05:58 [prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 0..
+SBY 13:05:58 [prove] engine_0.induction: ##   0:00:00  Trying induction in step 8..
+SBY 13:05:58 [prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 0..
+SBY 13:05:58 [prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 1..
+SBY 13:05:58 [prove] engine_0.induction: ##   0:00:00  Trying induction in step 7..
+SBY 13:05:58 [prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 1..
+SBY 13:05:58 [prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 2..
+SBY 13:05:58 [prove] engine_0.induction: ##   0:00:00  Trying induction in step 6..
+SBY 13:05:59 [prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 2..
+SBY 13:05:59 [prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 3..
+SBY 13:05:59 [prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 3..
+SBY 13:05:59 [prove] engine_0.induction: ##   0:00:00  Temporal induction successful.
+SBY 13:05:59 [prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 4..
+SBY 13:05:59 [prove] engine_0.induction: ##   0:00:00  Status: passed
+SBY 13:05:59 [prove] engine_0.induction: finished (returncode=0)
+SBY 13:05:59 [prove] engine_0.induction: Status returned by engine for induction: pass
+SBY 13:05:59 [prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 4..
+SBY 13:05:59 [prove] engine_0.basecase: ##   0:00:01  Checking assumptions in step 5..
+SBY 13:05:59 [prove] engine_0.basecase: ##   0:00:01  Checking assertions in step 5..
+SBY 13:06:00 [prove] engine_0.basecase: ##   0:00:01  Checking assumptions in step 6..
+SBY 13:06:00 [prove] engine_0.basecase: ##   0:00:01  Checking assertions in step 6..
+SBY 13:06:00 [prove] engine_0.basecase: ##   0:00:01  Checking assumptions in step 7..
+SBY 13:06:00 [prove] engine_0.basecase: ##   0:00:01  Checking assertions in step 7..
+SBY 13:06:00 [prove] engine_0.basecase: ##   0:00:02  Status: passed
+SBY 13:06:00 [prove] engine_0.basecase: finished (returncode=0)
+SBY 13:06:00 [prove] engine_0.basecase: Status returned by engine for basecase: pass
+SBY 13:06:00 [prove] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:02 (2)
+SBY 13:06:00 [prove] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:03 (3)
+SBY 13:06:00 [prove] summary: engine_0 (smtbmc --unroll z3) returned pass for basecase
+SBY 13:06:00 [prove] summary: engine_0 (smtbmc --unroll z3) returned pass for induction
+SBY 13:06:00 [prove] summary: engine_0 did not produce any traces
+SBY 13:06:00 [prove] summary: successful proof by k-induction.
+SBY 13:06:00 [prove] DONE (PASS, rc=0)

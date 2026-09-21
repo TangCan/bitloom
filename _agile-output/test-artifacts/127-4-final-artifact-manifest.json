@@ -1,0 +1,1198 @@
+{
+  "archive": "127-4-final-artifacts.tar.gz",
+  "archive_sha256": "c130bb76e7fdaff37707fc22e88d5915a1e9061dd395974d98dc7f2bb3069eb5",
+  "members": [
+    {
+      "path": "crates/bitloom/tests/fr196_csr_decoder/common.rs",
+      "bytes": 7521,
+      "sha256": "acb1eb9432b0664e40fe79e086c2ae189c0617f1caa0fb4622592982bdc840ad"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_csr_decoder/scoreboard.sv",
+      "bytes": 14053,
+      "sha256": "214b01a2d948508a23b2df62505e3f8f5054f1a1f3548ad8b60b4665c8c3bab5"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_csr_decoder/standalone.rs",
+      "bytes": 4221,
+      "sha256": "765be2145d73541e90a64e8f93f07855249c36422a01063ab78a6657fd950642"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_csr_decoder/stress.sv",
+      "bytes": 14879,
+      "sha256": "9cedc661153815a757b415cc7b1e41fe813664e0514097eddd2274b6988f9ccf"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_csr_decoder/structure.rs",
+      "bytes": 7037,
+      "sha256": "e0b1e9eff65cfec61ad6f3236f7625ed9816848e1ddbf9594ada7c3c99ad4417"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_csr_decoder.rs",
+      "bytes": 13435,
+      "sha256": "929f27812d211a9ad8da1bbb5782809180508b43e52e53eb50569e927bd7604d"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_csr_decoder_automate.rs",
+      "bytes": 14980,
+      "sha256": "080a9b47c614de9060dbe03aea9fd88f07efdb4960724de7548a863a11c1c03e"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_csr_decoder_formal.rs",
+      "bytes": 16079,
+      "sha256": "37ace89ab2524692d2ab6a3d3a5f3d77a16bc125115a82924834e833b2ca3631"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_csr_decoder_integration.rs",
+      "bytes": 17425,
+      "sha256": "447458346f9f385a38fedf698149c93fa0ebd635ca4d6ddd838982c6fbfb0fc0"
+    },
+    {
+      "path": "crates/bitloom/tests/fr196_csr_decoder_oracle.rs",
+      "bytes": 6582,
+      "sha256": "b3d85d49b9409017d1cefeb8f4ae64e9209f4909f36103d652d102e02eb6b38e"
+    },
+    {
+      "path": "crates/bitloom-prelude/src/ip/csr_decoder.rs",
+      "bytes": 7665,
+      "sha256": "e09713f626e1a29f85b46e471d975df08757f40923233e5c625150be238f92ff"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-0000000012740001-2488724/compile.json",
+      "bytes": 128,
+      "sha256": "3c6ba2d4201877047106355660d73758189fa0308ab02ca24969800a47825ff0"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-0000000012740001-2488724/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-0000000012740001-2488724/coverage.json",
+      "bytes": 349,
+      "sha256": "60d630a7aac063a29f88c264b4304b676a3d0b86f46f708feba313799e0d56a1"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-0000000012740001-2488724/design.v",
+      "bytes": 6665,
+      "sha256": "d8ef16b6aec8ad5f302c0538e44c32440839e156501f8b8ee3b4eeae90f847b2"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-0000000012740001-2488724/run.json",
+      "bytes": 80,
+      "sha256": "24a74e499f55e22e837ab9e1e5340e642703d08cc0701bf21ef0ededfde4fd96"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-0000000012740001-2488724/run.log",
+      "bytes": 60,
+      "sha256": "c0fd9292f2868faa930532506e14d596d8396151542bcbe15c8f8346bcca56c1"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-0000000012740001-2488724/tb.sv",
+      "bytes": 6830,
+      "sha256": "5717cdaaf783a3ee2e72201c882bc4e69d9527f40480e2b7feddd7aa5333c79f"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-0000000012740001-2488724/trace.txt",
+      "bytes": 1394021,
+      "sha256": "829a0ba0ab7edc210129c6d41b8333e8edd8f67a48ec59c7a0d9b215a6aefbd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000a55a1234-2488724/compile.json",
+      "bytes": 128,
+      "sha256": "0b3e8100321e25d89e8db3111028253da53237ab974f7083f9f20bdeeb0bb5ca"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000a55a1234-2488724/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000a55a1234-2488724/coverage.json",
+      "bytes": 349,
+      "sha256": "3e290fd1cb8c126ecf331ec2ce072f95b578bde9f3b90360e0879e23143c9c83"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000a55a1234-2488724/design.v",
+      "bytes": 6665,
+      "sha256": "d8ef16b6aec8ad5f302c0538e44c32440839e156501f8b8ee3b4eeae90f847b2"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000a55a1234-2488724/run.json",
+      "bytes": 80,
+      "sha256": "1614bd016a1d676c45950bea3cc0e21aef232e94963f9e70e26239a95d3ce74a"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000a55a1234-2488724/run.log",
+      "bytes": 60,
+      "sha256": "d5a8c9f878c49a2bb150054b647347ac2a9000fb3a798c054c68aea239e41996"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000a55a1234-2488724/tb.sv",
+      "bytes": 6830,
+      "sha256": "69596e109ddac9457a4c9315566cf2d508348b5e3df355c67d4186d8efd35efe"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000a55a1234-2488724/trace.txt",
+      "bytes": 1403719,
+      "sha256": "a1d9cf9f94696b9fe8bb537f5a8d6eac75d25d06fb3b0d2a3fa50374b75ffd5d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000deadbeef-2488724/compile.json",
+      "bytes": 127,
+      "sha256": "426566a0010e902f234bd4e6b0bed5b454bb71329103ef13cb565925342aae2d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000deadbeef-2488724/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000deadbeef-2488724/coverage.json",
+      "bytes": 349,
+      "sha256": "6590bc48fd673c9762f84d8276c6467561fa4af50b1e6aab06bbafecbe602361"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000deadbeef-2488724/design.v",
+      "bytes": 6665,
+      "sha256": "d8ef16b6aec8ad5f302c0538e44c32440839e156501f8b8ee3b4eeae90f847b2"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000deadbeef-2488724/run.json",
+      "bytes": 79,
+      "sha256": "f825ee282318efbbc03995a1ee722ab52957e3e226dc9cec7508bb5068286780"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000deadbeef-2488724/run.log",
+      "bytes": 60,
+      "sha256": "49edefc158aa56ac797487b82a6aa94c924c915bb45e10273cc35b20f66935b6"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000deadbeef-2488724/tb.sv",
+      "bytes": 6830,
+      "sha256": "6e79402f8e75ba95ceade53ff470a1feeb554363da20f381153db1ab3963d45b"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00000000deadbeef-2488724/trace.txt",
+      "bytes": 1394368,
+      "sha256": "547cef746b2313655df5031552972a9969f2ffccb8611d672e0c3ecc3e06921f"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00005eedcafef00d-2488724/compile.json",
+      "bytes": 128,
+      "sha256": "95c493b7d21b00d86d2e9b903f6365f8e23eaa26384c8df3fbf30a3a3e916c1a"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00005eedcafef00d-2488724/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00005eedcafef00d-2488724/coverage.json",
+      "bytes": 349,
+      "sha256": "ada4fff8ffc32e7455f6e25832f5560238b297bdf65db724ed1dfc74f0be0334"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00005eedcafef00d-2488724/design.v",
+      "bytes": 6665,
+      "sha256": "d8ef16b6aec8ad5f302c0538e44c32440839e156501f8b8ee3b4eeae90f847b2"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00005eedcafef00d-2488724/run.json",
+      "bytes": 80,
+      "sha256": "a419e4b4e253999609c53f2c3bae6b7d09416f943074b6b341204f61e84af35c"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00005eedcafef00d-2488724/run.log",
+      "bytes": 60,
+      "sha256": "fedd83230a6bb09b9b8b453b33a087fcdbb7432df40becf53a2a90856bce361d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00005eedcafef00d-2488724/tb.sv",
+      "bytes": 6830,
+      "sha256": "fed009e6a533b1151cfb0548a22e14cf2625b71d46fcf7db3df7020cc41b567b"
+    },
+    {
+      "path": "target/fr196-decoder-integration/automate-delayed-00005eedcafef00d-2488724/trace.txt",
+      "bytes": 1365378,
+      "sha256": "ae62ba2feea21331bc91791d4a1f9d2644397c9680da99117f3f166e4907976f"
+    },
+    {
+      "path": "target/fr196-decoder-integration/dual-2487993/compile.json",
+      "bytes": 128,
+      "sha256": "685b1813629bff44709c5ab9ece87da072b8ad9e97080c21304fc5a5b17e985e"
+    },
+    {
+      "path": "target/fr196-decoder-integration/dual-2487993/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/dual-2487993/design.v",
+      "bytes": 12654,
+      "sha256": "aaf18b28077a2f321f5bae86aa4e8a6765c222a9d754f8501582a3819cd16622"
+    },
+    {
+      "path": "target/fr196-decoder-integration/dual-2487993/run.json",
+      "bytes": 80,
+      "sha256": "0e7689bb83feeedbe13515266275c743e7f182d634b281af8c9842458989af81"
+    },
+    {
+      "path": "target/fr196-decoder-integration/dual-2487993/run.log",
+      "bytes": 52,
+      "sha256": "f023c77ed3139337e6f1d60914f3f48fe9f625ad0697fa5199e589517a65a612"
+    },
+    {
+      "path": "target/fr196-decoder-integration/dual-2487993/tb.sv",
+      "bytes": 4297,
+      "sha256": "04bcbe077272a894f7297ee797ef557f91bf401610c2e7a2bd37c6e8cfe4815a"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/cc-version.json",
+      "bytes": 78,
+      "sha256": "a6aeb63d421a43e8ae8cd533fe9ad0792259230c0ba3f8e9858acb092a639894"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/cc-version.log",
+      "bytes": 245,
+      "sha256": "3e8cc208c40f60832f67377aa1b03c3e7e858f20cd5d365464944700c0bd7ad1"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/compile.json",
+      "bytes": 134,
+      "sha256": "9c99037649a0210cf9dc40d6306da3ef2256f34a5c8d80dd369bf7f522ecb5c8"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/consume.json",
+      "bytes": 75,
+      "sha256": "e2b34d7783d55f6bceb83ef0216c5007ed62e5c8d92069d1d950b147348ca2ff"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/consume.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/consumer.c",
+      "bytes": 4649,
+      "sha256": "ba4738637346f0489c2954dadeaa7a6e04419227066f37753c3ba8764b8292c8"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/gpio.h",
+      "bytes": 5731,
+      "sha256": "94074631704fdf307aafd24e53ddcc71cc3e1001d763f4fd51a73f47aef9db7d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/gpio.md",
+      "bytes": 1025,
+      "sha256": "b84e927c1b24e609c4afc6ee4a7120f827b80043b5319d3091db4736d3a109d6"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/irq.h",
+      "bytes": 3846,
+      "sha256": "28d51b51411e25af5456fd8366d24a9b192f833d98051c69af457ba01d0e9c65"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/irq.md",
+      "bytes": 776,
+      "sha256": "32a5c32534ec146e439ea60fa43979da257f66be3b014b79ff8dece4554a6aec"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/timer.h",
+      "bytes": 4041,
+      "sha256": "2b8adfe94d15616e8564da71857315b870401754714b7788f6590cc02b984967"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/timer.md",
+      "bytes": 784,
+      "sha256": "df37829fa472ca6ac7f3eafe2e5200bbfb365c4c71bf3ed86a7314d2e2c73269"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/uart.h",
+      "bytes": 5962,
+      "sha256": "eb91307feed83b4bb09482cc429a10f3b9d99dfd4b74bf5e8a732e6c1b48c72b"
+    },
+    {
+      "path": "target/fr196-decoder-integration/headers-2489042/uart.md",
+      "bytes": 1046,
+      "sha256": "96c235b0be310a9086bbe2e9195083f8cfdd952438827d80877773890f089492"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-accept-change-2489042/compile.json",
+      "bytes": 128,
+      "sha256": "10fc5e498fb50f00daa07861d49cea36b4b8e4136b403458cb7dc9925ef7de77"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-accept-change-2489042/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-accept-change-2489042/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-accept-change-2489042/run.json",
+      "bytes": 126,
+      "sha256": "035e4206549de616fceed25d736fe1f1c6cbbd55d1bd8b3d0e71bcd9d2a656f8"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-accept-change-2489042/run.log",
+      "bytes": 63,
+      "sha256": "f135248c447e6045b9b4d1187d7691861db787f6c3de1a1ae0e4e86b113ee890"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-accept-change-2489042/tb.sv",
+      "bytes": 20343,
+      "sha256": "e9c6b286aea3e9a139b1da2b166044e89cf468b8c792fad64ec2bef2cce20659"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-change-2489042/compile.json",
+      "bytes": 128,
+      "sha256": "09369888c2d77166486ddae40955afd1f39199fa9626b1ccb0bfd2ddedc652f5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-change-2489042/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-change-2489042/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-change-2489042/run.json",
+      "bytes": 126,
+      "sha256": "cf8781c8ab4de795d0eb53ab5e7c4764d4488e98de1b0ebaca56c37bc5e630e8"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-change-2489042/run.log",
+      "bytes": 63,
+      "sha256": "f135248c447e6045b9b4d1187d7691861db787f6c3de1a1ae0e4e86b113ee890"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-change-2489042/tb.sv",
+      "bytes": 20321,
+      "sha256": "9ff49ef578840c6a84a22aa76891c6f0a31a853c3e6643e3dd71b4e197cb6535"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-accept-change-2489042/compile.json",
+      "bytes": 128,
+      "sha256": "fa98366aa96572ff3cfbced44afb03ee5c56a51c8896170c14c3f61cddc45f27"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-accept-change-2489042/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-accept-change-2489042/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-accept-change-2489042/run.json",
+      "bytes": 126,
+      "sha256": "5e3cd01e03494ff89e948d1a9d11df2f1af488033fdcaeb0ca36a740968b7eef"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-accept-change-2489042/run.log",
+      "bytes": 63,
+      "sha256": "9bae896d53ed1f6908958f2579ce51680590415024da0d752235debeeb78d3af"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-accept-change-2489042/tb.sv",
+      "bytes": 20343,
+      "sha256": "87d45e5d9b39bd3b982fb12ae8ba2f0c9805d5dde16aeafec593c7143596c98f"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-change-2489042/compile.json",
+      "bytes": 128,
+      "sha256": "f4911daf89c92dfe4579a50d1e8eb5935e93d996ad99511ed1ffd3b525df3881"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-change-2489042/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-change-2489042/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-change-2489042/run.json",
+      "bytes": 126,
+      "sha256": "43a85bd99365c408dd697e2a98d6769d7b2f836e98e72d62eb766aa606abd2a5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-change-2489042/run.log",
+      "bytes": 63,
+      "sha256": "9bae896d53ed1f6908958f2579ce51680590415024da0d752235debeeb78d3af"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-change-2489042/tb.sv",
+      "bytes": 20321,
+      "sha256": "614c6dbfcbb2fc9352e3977f2c25103dd0a842499dcacb011a2718c26fbc9236"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-bubble-2489042/compile.json",
+      "bytes": 127,
+      "sha256": "694b88d08ef20d77acd9828ed104d6e25c072938cfdc1fd6f37caa67ee7d544f"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-bubble-2489042/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-bubble-2489042/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-bubble-2489042/run.json",
+      "bytes": 141,
+      "sha256": "d8a9c62497e0bce7db5e30b558117516411e13acc6fa57dbba5aac3dc62ed547"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-bubble-2489042/run.log",
+      "bytes": 77,
+      "sha256": "fc82d64d687e2ec7587b3e0934b9a3daf7b0a848539ef272cdd6342271f05905"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-bubble-2489042/tb.sv",
+      "bytes": 20330,
+      "sha256": "dd00c5acff9a81cc3e1f9bf31d570e5e14acf4f7103e2dacda3ea9643d3d5699"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-control-2489042/compile.json",
+      "bytes": 128,
+      "sha256": "42c25f99d0b189abaa34b9fa5452134fe787315789d4e26ad7c4f01f6357b7ea"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-control-2489042/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-control-2489042/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-control-2489042/run.json",
+      "bytes": 118,
+      "sha256": "07173c640092569fbec1241639364fed96b4d0ce6af89d9532bc2741ead905b4"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-control-2489042/run.log",
+      "bytes": 100,
+      "sha256": "75274a3e738ea31dc19dc2dd66026c22d8b46f77bf765e0b31ea61f279e4b976"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-control-2489042/tb.sv",
+      "bytes": 20266,
+      "sha256": "4bcb5f32a3a09fe7b1d06f3e5a9d99b9d206f0937bd52a71745395a1799f8c05"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-accept-change-2489042/compile.json",
+      "bytes": 128,
+      "sha256": "783152f73125e2dfe9ad46922c7cdca3fb885fb4bbd22edf31eb2f2e024403d6"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-accept-change-2489042/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-accept-change-2489042/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-accept-change-2489042/run.json",
+      "bytes": 125,
+      "sha256": "aa68a48a8f7f9e4fd6274980f7a699e0f7baebcc9fafdd26dfac9d7d62022dde"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-accept-change-2489042/run.log",
+      "bytes": 62,
+      "sha256": "9db2bf55abb2ded2ab5accd1e00829507bffb949a415289f9f0ffc63309be032"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-accept-change-2489042/tb.sv",
+      "bytes": 20326,
+      "sha256": "395f2531ef479b82225914f8fe20256087e0794c235f344045599ce5f622f614"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-change-2489042/compile.json",
+      "bytes": 127,
+      "sha256": "1545224a75badf836f1b58fa66c2d1bfd5e90d9c63fa0fb5e47646959cf7b478"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-change-2489042/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-change-2489042/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-change-2489042/run.json",
+      "bytes": 125,
+      "sha256": "63c8c1df49cabf4fa03eb8b1169cd118c2654b361cc2cb15de1f213086ae7640"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-change-2489042/run.log",
+      "bytes": 62,
+      "sha256": "9db2bf55abb2ded2ab5accd1e00829507bffb949a415289f9f0ffc63309be032"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-change-2489042/tb.sv",
+      "bytes": 20305,
+      "sha256": "a8ca1153eac19e0f6ee9dbab4ab57bdc4a15cc9419ac9ffee803680339d710ac"
+    },
+    {
+      "path": "target/fr196-decoder-integration/rtl-2489042/compile.json",
+      "bytes": 128,
+      "sha256": "bea8c702ccd89ffef6ff43fa43c5434ff16e6ab82a75ef7fb8788d123b65463b"
+    },
+    {
+      "path": "target/fr196-decoder-integration/rtl-2489042/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/rtl-2489042/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/rtl-2489042/iverilog-version.json",
+      "bytes": 77,
+      "sha256": "4be2111240fae43714c234b8c8d31ab56f9ad9a43e7a45911f41715cda023a2a"
+    },
+    {
+      "path": "target/fr196-decoder-integration/rtl-2489042/iverilog-version.log",
+      "bytes": 3294,
+      "sha256": "f9199cc8658f4afcec3edeb93f29f23bb2aebf66d3eeb217cdc728aaa692f946"
+    },
+    {
+      "path": "target/fr196-decoder-integration/rtl-2489042/run.json",
+      "bytes": 80,
+      "sha256": "cfacec66d5545811044c53a0b11e5b321337fe09051c92b94a4dbe387b5bcba4"
+    },
+    {
+      "path": "target/fr196-decoder-integration/rtl-2489042/run.log",
+      "bytes": 99,
+      "sha256": "d211be402405e8470f01855ceb72c57995adab28b3e06499dcf7879f16ea0ef5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/rtl-2489042/tb.sv",
+      "bytes": 10398,
+      "sha256": "1e24411ff3685417580c55f72794e168a2ecf914754007334e5b0116c5823bf1"
+    },
+    {
+      "path": "target/fr196-decoder-integration/rtl-2489042/vvp-version.json",
+      "bytes": 71,
+      "sha256": "dd60863b7b855a52a61e1fe7cd3e6fdc7e9a64afb6b8c08a47d2e79d3079b97b"
+    },
+    {
+      "path": "target/fr196-decoder-integration/rtl-2489042/vvp-version.log",
+      "bytes": 814,
+      "sha256": "c9010a85df9399c2adb11b59115cdc285ea6f0a399802944367c3813c6772a42"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/compile.json",
+      "bytes": 128,
+      "sha256": "7736ab84e0e4b5ae76e28392220985bb6a7e6ec24f09b092ce6cb09328c93a6a"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-1.json",
+      "bytes": 90,
+      "sha256": "d939e5c027b62c209dd296762a981efa2dd7adaa4ee7c1a6f216597e6a2e8623"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-1.log",
+      "bytes": 47176,
+      "sha256": "a7ea1ccdd75effca21431c2bbc2bf7d225b4cec732c1e6437e46b9e725336776"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-1021.json",
+      "bytes": 93,
+      "sha256": "18c0b3afa09f5a95a6b25d2b43c32d0bd8021228c96714a65e14f559499f47b0"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-1021.log",
+      "bytes": 46189,
+      "sha256": "1778c8006c7a2258e5fcfa37811e75887be7f0eb72ef1483924dc27d8779a370"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-1048573.json",
+      "bytes": 96,
+      "sha256": "d44eb38a87e61653697d9af66857b65f562029180cabe6e49a7da457e2386767"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-1048573.log",
+      "bytes": 45454,
+      "sha256": "0a628d129d54da716822c1aa72d93d88e845abcc3f6cf8a3949e41dd7ac91d5a"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-108567228.json",
+      "bytes": 98,
+      "sha256": "9dd5e2e27d5b80456e69c2b44e773dff35b916ccd2f6a4655bfef0f6b8482a5d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-108567228.log",
+      "bytes": 45664,
+      "sha256": "01915a94da80b873971f023dd00984c41d2e19facc9a705d20bcac08e4cd7e64"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-126462925.json",
+      "bytes": 98,
+      "sha256": "924853979b9e43fe98472d636eb13aeba4b854d54e20b26cd4800e92dddc804e"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-126462925.log",
+      "bytes": 47315,
+      "sha256": "0aacbf4a7626687995d1eaf5130d847ff37a1cba0118ce59f9340c9989ab0b86"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-127.json",
+      "bytes": 92,
+      "sha256": "3a4f01c32c13bb5c465e39fa66326c49a83767d5e60ffb67e1721f12f31a5335"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-127.log",
+      "bytes": 45197,
+      "sha256": "9110660bfd3f0e590d14fdab2ad2bd859ad18cca510d2c4c8e1a91a9874f9b7d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-19088743.json",
+      "bytes": 97,
+      "sha256": "3337bd0c4164af2e97f05d1d84d3952c586e0e6ccf61655e9ab4a68da9c59903"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-19088743.log",
+      "bytes": 45904,
+      "sha256": "79928f34f43e94f780ec0fce8fec13d71acfe11b16ce00a4ae86f595c83f57d8"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-305441741.json",
+      "bytes": 98,
+      "sha256": "3b529ed875b9d3b5ebbe251dc075d84da7e746db41af518d5a1361fa9b73f177"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-305441741.log",
+      "bytes": 45347,
+      "sha256": "d37883fc177d28c015325e25f8fc0eec1af60ad1e235b058d9be02c5cd269bc1"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-31.json",
+      "bytes": 90,
+      "sha256": "0cd0042b48c02c478fb4942e9e1bbaa43777fc5dfc04e36940f81e6cca077830"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-31.log",
+      "bytes": 44148,
+      "sha256": "990339fa303803f6a6a4941c80431e83d9e2e2f197364ce30f726068d8fe99c8"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-36984440.json",
+      "bytes": 97,
+      "sha256": "2712f6f62e65e6bb6a8efcf5361fd15b225a81cebe0d40e65a40c5a706eed2e8"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-36984440.log",
+      "bytes": 45773,
+      "sha256": "00a47968b74222a047868ff1940e649bdec970e36759c91fc82d8fbcd3d6d883"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-4093.json",
+      "bytes": 93,
+      "sha256": "af297be4189313d56e7c189e01e4d9086197fe62b954691c22be5e44efd4f38d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-4093.log",
+      "bytes": 46314,
+      "sha256": "53daa65dd3161f3a13e5b6c5a6c16b07d1fe6ae73facd1353b7bbb075fa709c2"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-54880137.json",
+      "bytes": 97,
+      "sha256": "c50402d717264c589e0eed2374ff5442daa9e416b6da45262aa39c1a8b277511"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-54880137.log",
+      "bytes": 44490,
+      "sha256": "b6745bd540c694f9f3f3864e9296b44e348b8d75bf9c077799423952a24cae1b"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-65521.json",
+      "bytes": 94,
+      "sha256": "c684d7d3d88b565a86bbe02bc28d5f400f523e1aa566569ff8cfb777d4b6c719"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-65521.log",
+      "bytes": 45072,
+      "sha256": "d87e3b76dd25acc7fe83047a2f40a3cb15051bb5bd5fe13e7f962879899b4c4d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-7.json",
+      "bytes": 90,
+      "sha256": "a4b34a82dd806a629ea5d159910e536d6ef19c85bfb0b5b37753a10ef2ec1f1b"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-7.log",
+      "bytes": 44094,
+      "sha256": "dc59d91a9b68809f19874d1407e8e6f8e44e3687197cecd27cd84554bff62884"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-72775834.json",
+      "bytes": 96,
+      "sha256": "a680893d986ad66d2d0896f97cd2c745a9bf39ca14fd856d7af6b22ad3223df6"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-72775834.log",
+      "bytes": 45110,
+      "sha256": "461fd7c146d2518daa329b7771979990a3af9a2bd0bc08c84b99aaf4d29f9594"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-90671531.json",
+      "bytes": 97,
+      "sha256": "0bff674b56cfc4336dd9f27f5806f471536c8dd7147c25851403a7d6c3bc8bee"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/seed-90671531.log",
+      "bytes": 46274,
+      "sha256": "fc5d3e7200756a05beb00d5300a7851434aa0ccc74ed5532d31e2ed8262c7ffc"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-2489042/tb.sv",
+      "bytes": 35041,
+      "sha256": "4d0155c4964175619c66b17398720d71dc87643ead3bdc2e6a6ab9feff8abb7e"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-candidate-2491978/compile.json",
+      "bytes": 128,
+      "sha256": "ff9182bd4e68bb53913e9719b6ce2856544a04775c146ff62e443a77730e20e8"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-candidate-2491978/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-candidate-2491978/design.v",
+      "bytes": 70645,
+      "sha256": "fa41b29fe546703afa5f5149f945fc16bae85ad1ec8b60c12a04a79e6943fb5d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-candidate-2491978/mutation.json",
+      "bytes": 153,
+      "sha256": "9b56d3f1506618898299c019902f26f93d708f859fd4253c7659c15b2bd6eb17"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-candidate-2491978/run.json",
+      "bytes": 201,
+      "sha256": "64761f270d12d84088ff4ab903bac0bcff2cb7ec3b8e00b690f96191251939dc"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-candidate-2491978/run.log",
+      "bytes": 192,
+      "sha256": "57925ad9f17811844fadd7025d6b2c5be7b2fd292a146c994c67fecf2a2c17ed"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-candidate-2491978/tb.sv",
+      "bytes": 20856,
+      "sha256": "6e5db686f14d5dabe3b60283dc4e98dd872a8efc1f2e8e21526c8358391d88d3"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-control-2491978/compile.json",
+      "bytes": 128,
+      "sha256": "50f159efe02ff3dc34a572bb5ff256a77c28740ab97ae17b19c847697bb2dd41"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-control-2491978/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-control-2491978/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-control-2491978/run.json",
+      "bytes": 80,
+      "sha256": "8d97c45dc85f4f130a1a0444a1508e4ebcbc8adc5b7216d2207bc3216ba51fd3"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-control-2491978/run.log",
+      "bytes": 142,
+      "sha256": "affee642faad406b7c6e11b0a9710c6834e752107ccf7a88fde6cf957b640a5b"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-control-2491978/tb.sv",
+      "bytes": 20856,
+      "sha256": "6e5db686f14d5dabe3b60283dc4e98dd872a8efc1f2e8e21526c8358391d88d3"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-write_mask-2491978/compile.json",
+      "bytes": 128,
+      "sha256": "c9270860d0da1efe8d4d79e4a03f70ec6c7b8c403ac688ae10132a7fbde7ad56"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-write_mask-2491978/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-write_mask-2491978/design.v",
+      "bytes": 70645,
+      "sha256": "a6e080c7732b69649a4534b0d2d9a1d25c01f1e158eecc812e2bb21bc1acf272"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-write_mask-2491978/mutation.json",
+      "bytes": 156,
+      "sha256": "05f7a3868f3ca14a5e0ce96bc3ba668113152a134cc267ca3ba9d7ec1790ce67"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-write_mask-2491978/run.json",
+      "bytes": 202,
+      "sha256": "78992cbf77ff6cafc3be67a28c44efe24f1b35f9b528b8a5feda4ab1de300030"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-write_mask-2491978/run.log",
+      "bytes": 192,
+      "sha256": "2ba564651242f81c2d707c2dd1bb32616f873759701093076d601aa8b3c0aeef"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-clear-write_mask-2491978/tb.sv",
+      "bytes": 20856,
+      "sha256": "6e5db686f14d5dabe3b60283dc4e98dd872a8efc1f2e8e21526c8358391d88d3"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-candidate-2491978/compile.json",
+      "bytes": 128,
+      "sha256": "2947127a551727946eb7e14e648bdbf64c8ded01ecb0a3e6959333e1b5bd2754"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-candidate-2491978/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-candidate-2491978/design.v",
+      "bytes": 70645,
+      "sha256": "81c9efd2b11ad23c566eb33bd474ab52b2fc6c18ee4385cc13c8d3f1f5552894"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-candidate-2491978/mutation.json",
+      "bytes": 147,
+      "sha256": "0438f8c976920dc5bcd8a31ecc514c1e6b50038034496863979bb6401c70e763"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-candidate-2491978/run.json",
+      "bytes": 199,
+      "sha256": "8689c9f9805ff443f2bd840abcde65f4e138c7a14faa8057726191fecce9f1f0"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-candidate-2491978/run.log",
+      "bytes": 192,
+      "sha256": "0b5939233a802815cf25ea0a13c9d184ff456075cd9d32f962f50f8de23a9f93"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-candidate-2491978/tb.sv",
+      "bytes": 20854,
+      "sha256": "5a6dddf589ff45627bba344972622f73519664d5b262e6447ab7399c9af58a48"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-control-2491978/compile.json",
+      "bytes": 128,
+      "sha256": "49507d0d8505003bee949d861fccdc3d9dc62cc5c3a94ca1efbc7930831c520c"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-control-2491978/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-control-2491978/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-control-2491978/run.json",
+      "bytes": 79,
+      "sha256": "c9aa1945107a22d147b271d771e27e30d52156d90cc5822545d5cbde2f18e9b0"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-control-2491978/run.log",
+      "bytes": 140,
+      "sha256": "dab97cc2714e92c7a05d25533754325f9c0ab96bc5d946b9e12b0bec3bb5bb78"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-control-2491978/tb.sv",
+      "bytes": 20854,
+      "sha256": "5a6dddf589ff45627bba344972622f73519664d5b262e6447ab7399c9af58a48"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-write_mask-2491978/compile.json",
+      "bytes": 128,
+      "sha256": "603d19ef704159d6cd0cd17fe3abc03d25d205e0095dfd0607a5a27133747e00"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-write_mask-2491978/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-write_mask-2491978/design.v",
+      "bytes": 70646,
+      "sha256": "16ea8254b3b69ae1715d1ed3a40545a449188a5092f9ea8942e4095dc2a712b6"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-write_mask-2491978/mutation.json",
+      "bytes": 149,
+      "sha256": "7cb6c610be9ca34e8e9222f7cbb15882e059c8325fdf391eb903038b75f8cfe0"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-write_mask-2491978/run.json",
+      "bytes": 200,
+      "sha256": "df4415f38bcc560cb5b367db42ab54754cd3df50a137914d34d8ff2f31019fc5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-write_mask-2491978/run.log",
+      "bytes": 192,
+      "sha256": "f580d4ff3a9121ab67138f8f0dbe7f81ddcba5c6186c1e65ced0d6abdbd5b749"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-set-write_mask-2491978/tb.sv",
+      "bytes": 20854,
+      "sha256": "5a6dddf589ff45627bba344972622f73519664d5b262e6447ab7399c9af58a48"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-candidate-2491978/compile.json",
+      "bytes": 128,
+      "sha256": "e8be97018bc84bf55998f08701fbc76b1eb296adbdf5140cca3e8ea3aaeeffe2"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-candidate-2491978/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-candidate-2491978/design.v",
+      "bytes": 70646,
+      "sha256": "3f5d0e3a88e4a9f43cb7e7e38090f0950f38c5ef1f9d67d531955a88388b33da"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-candidate-2491978/mutation.json",
+      "bytes": 149,
+      "sha256": "5ae2f16b3f830fb225adce0e55179249e25424a198ea5d3bf30d8b979641147b"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-candidate-2491978/run.json",
+      "bytes": 199,
+      "sha256": "e05c871ee8a42caa7ab3e9d968683d9d0ef87daf4748fa81af7b26827f47a2d0"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-candidate-2491978/run.log",
+      "bytes": 192,
+      "sha256": "2acd8773a3aa41a300a105433da22d66188f58bea3737e4484539b4dacc2b943"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-candidate-2491978/tb.sv",
+      "bytes": 20855,
+      "sha256": "49b2106d6356b89709c4e985b064584e1688379e073cebcb900e3132f953c38f"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-control-2491978/compile.json",
+      "bytes": 128,
+      "sha256": "c2e557eaab45153ed7b0740201bdd37d6cb224ae8ccaae4e40904564740341a7"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-control-2491978/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-control-2491978/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-control-2491978/run.json",
+      "bytes": 80,
+      "sha256": "c57a9dc9a97025cd4a07d780e2ebc1d143d93e8d2cbb272a783733e9f53d44e8"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-control-2491978/run.log",
+      "bytes": 141,
+      "sha256": "2a4a0ad8c15bba3fcf4342be8aa1849dc06ef10792496ed5f6a0e830760d4b6a"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-control-2491978/tb.sv",
+      "bytes": 20855,
+      "sha256": "49b2106d6356b89709c4e985b064584e1688379e073cebcb900e3132f953c38f"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-write_mask-2491978/compile.json",
+      "bytes": 128,
+      "sha256": "8695b1f23fd2627906612af93c4222cd3e03de21e89437b8e30e659d60cdda78"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-write_mask-2491978/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-write_mask-2491978/design.v",
+      "bytes": 70646,
+      "sha256": "c92e3eff9594a3e3965f56f036293639b93576d3d69320bea8383b4a11b0458d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-write_mask-2491978/mutation.json",
+      "bytes": 152,
+      "sha256": "db3d3bcc38f7687f869cfe803d2f6b2318fd419c128df91780649a1dedef60b4"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-write_mask-2491978/run.json",
+      "bytes": 201,
+      "sha256": "a20cfcf45341de41506d9b012d8fe5b9dc0772045a71c94d31333f7df0e28e19"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-write_mask-2491978/run.log",
+      "bytes": 192,
+      "sha256": "2059188ed0f204c16f31d2ac79de4a0ffd6c2c88b12f48faadec64ff7a24df87"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-test-write_mask-2491978/tb.sv",
+      "bytes": 20855,
+      "sha256": "49b2106d6356b89709c4e985b064584e1688379e073cebcb900e3132f953c38f"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-candidate-2491978/compile.json",
+      "bytes": 128,
+      "sha256": "6979040b94526f88c001b8f7a9f2a3e1093f59214786eb1d7311bd4d117cbc93"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-candidate-2491978/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-candidate-2491978/design.v",
+      "bytes": 70645,
+      "sha256": "79e21d0c3c9512ae743520577db30dec664aec038d73622f715e8d3c4181c06d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-candidate-2491978/mutation.json",
+      "bytes": 159,
+      "sha256": "e38a69bfbab4271b2f838046bdf6721eacff983186dd28b56b987019f05c8a13"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-candidate-2491978/run.json",
+      "bytes": 203,
+      "sha256": "9beccd8983e60de848ec2112b9db24c055056cdda9ba7164664913b88937adfb"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-candidate-2491978/run.log",
+      "bytes": 192,
+      "sha256": "c0bcc0d4604a043b26e44b610d4ba6e8c22f63ea06a3ecf1edabfeaad9bb858e"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-candidate-2491978/tb.sv",
+      "bytes": 20858,
+      "sha256": "63f17ae4264ff4c3e4a8b577d43b30b3a2431fd3fee55d03781c5b43ccb751b8"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-control-2491978/compile.json",
+      "bytes": 128,
+      "sha256": "b8a15afcb68c24c3585f0404a657fd776be32e5692cf24633c35f93ca682e29c"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-control-2491978/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-control-2491978/design.v",
+      "bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-control-2491978/run.json",
+      "bytes": 80,
+      "sha256": "0648ef3e2d4b5f36f4325091a86fede342f3d813f525ab3eb380bb4581b2b234"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-control-2491978/run.log",
+      "bytes": 144,
+      "sha256": "2d453b51a2d0778501a1ccaca8d3b57ad21e9250ca74f1016e4a6b3a9f1aa3df"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-control-2491978/tb.sv",
+      "bytes": 20858,
+      "sha256": "63f17ae4264ff4c3e4a8b577d43b30b3a2431fd3fee55d03781c5b43ccb751b8"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-write_mask-2491978/compile.json",
+      "bytes": 128,
+      "sha256": "b62dd76b11fd20ca1d14e932f189095fe99c3de44f75e5da8ca09a00ae984935"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-write_mask-2491978/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-write_mask-2491978/design.v",
+      "bytes": 70646,
+      "sha256": "f3863c198342303598a222f95ef2393c7316cee6d83a282cc1af992225fad3d5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-write_mask-2491978/mutation.json",
+      "bytes": 161,
+      "sha256": "0d292169833f9cb42627d5f5502cc3dae00264350e06cd09fae3cc2fb894a72f"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-write_mask-2491978/run.json",
+      "bytes": 204,
+      "sha256": "af3dda844867053354de83967d76d2166d15bfb2199a909b04fb1d23bfb0d91d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-write_mask-2491978/run.log",
+      "bytes": 192,
+      "sha256": "5bf652da8d4816165daa71213cbe2d749c4f12f961d8b0f339a34f9ef0035a5f"
+    },
+    {
+      "path": "target/fr196-decoder-integration/wo-oracle-tx_data-write_mask-2491978/tb.sv",
+      "bytes": 20858,
+      "sha256": "63f17ae4264ff4c3e4a8b577d43b30b3a2431fd3fee55d03781c5b43ccb751b8"
+    }
+  ],
+  "readback_verified": true,
+  "scope": "decoder text sources, tool netlists/logs/traces; re-creatable simulation binaries excluded; all retained attempts"
+}

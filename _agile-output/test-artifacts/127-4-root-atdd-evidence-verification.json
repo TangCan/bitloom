@@ -1,0 +1,14 @@
+{
+  "archive_members_verified": 3,
+  "source_drift": [
+    {
+      "path": "crates/bitloom/tests/fr196_csr_decoder_integration.rs",
+      "change": "comment only: accurately describe captured AW cancellation; no late W was driven"
+    }
+  ],
+  "red_exit_code": 101,
+  "failure": "E0432 missing CsrDecoder in all three test targets",
+  "behavior_executed": false,
+  "verification_note": "Initial exact-live-source assertion detected documented comment-only correction; archive hashes and byte counts all valid.",
+  "final_atdd_archive_members_verified": 12
+}

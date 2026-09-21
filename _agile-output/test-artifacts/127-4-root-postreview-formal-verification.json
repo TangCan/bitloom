@@ -1,0 +1,46 @@
+{
+  "cases": [
+    {
+      "case": "control",
+      "status": "PASS",
+      "exit_code": 0,
+      "log_sha256": "697eb46c8bc295a72bfce5448a24260946539df63399e92f5be501219ddcbaa1"
+    },
+    {
+      "case": "cross-owner",
+      "status": "FAIL",
+      "exit_code": 2,
+      "log_sha256": "b338daeec54893f022ca8601147f51c4420cf6de3ccb62076161a5369f9c0db5"
+    },
+    {
+      "case": "dual-select",
+      "status": "FAIL",
+      "exit_code": 2,
+      "log_sha256": "5a2ea67b266ae26df2666acf0f24fdcf6a1e5e84537b33d8002dc4e1ca777942"
+    },
+    {
+      "case": "high-alias",
+      "status": "FAIL",
+      "exit_code": 2,
+      "log_sha256": "aa3a49e56c5a68b11118d44219ebeaec2edc5234deea6c48835335dab6e75557"
+    },
+    {
+      "case": "ready-gated-valid",
+      "status": "FAIL",
+      "exit_code": 2,
+      "log_sha256": "6af602461848e6d62fa2825c2058c7d440030cd211a96510a3f3c421c60b8b66"
+    }
+  ],
+  "routing_directory": "target/fr196-decoder-formal/routing-2082918",
+  "prove_status": "PASS 0 4",
+  "cover_status": "PASS 0 5",
+  "cover_reached_lines": [
+    "SBY 13:46:03 [cover] engine_0: ##   0:00:00  Reached cover statement at observed.v:327.66-327.85 ($cover$observed.v:327$516) in step 2.",
+    "SBY 13:46:03 [cover] engine_0: ##   0:00:00  Reached cover statement at observed.v:327.86-328.54 ($cover$observed.v:327$517) in step 2.",
+    "SBY 13:46:03 [cover] engine_0: ##   0:00:01  Reached cover statement at observed.v:327.26-327.45 ($cover$observed.v:327$514) in step 2.",
+    "SBY 13:46:04 [cover] engine_0: ##   0:00:01  Reached cover statement at observed.v:326.72-327.25 ($cover$observed.v:326$513) in step 2.",
+    "SBY 13:46:04 [cover] engine_0: ##   0:00:01  Reached cover statement at observed.v:327.46-327.65 ($cover$observed.v:327$515) in step 2.",
+    "SBY 13:46:05 [cover] engine_0: ##   0:00:02  Reached cover statement at observed.v:324.108-325.49 ($cover$observed.v:324$511) in step 4.",
+    "SBY 13:46:06 [cover] engine_0: ##   0:00:03  Reached cover statement at observed.v:325.50-326.71 ($cover$observed.v:325$512) in step 4."
+  ]
+}

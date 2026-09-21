@@ -1,0 +1,20 @@
+{
+  "archive_members_verified": 2640,
+  "archive_sha256": "b52f5a1d786cb4361c83da8ef96a95bdd44a47581612a47406477e051cca80ba",
+  "current_non_target_files_match": true,
+  "successful_command_logs_verified": [
+    "127-4-build-compat.json",
+    "127-4-build-formal.json",
+    "127-4-build-compat-example.json",
+    "127-4-build-compat-formal.json",
+    "127-4-build-bridge-example.json",
+    "127-4-build-example.json",
+    "127-4-build-dual-final.json",
+    "127-4-build-integration-final.json",
+    "127-4-build-csr-example.json",
+    "127-4-build-ordinary.json"
+  ],
+  "diff_file": "/tmp/bitloom-1274-build-knm24ikl.diff",
+  "staged_files": 77,
+  "next_step": "Read full unified diff, verify tasks and matrix, then rendered bmad-build step04 review; not yet completed"
+}

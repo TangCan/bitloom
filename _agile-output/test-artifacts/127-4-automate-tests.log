@@ -1,0 +1,22 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.98s
+     Running tests/fr196_csr_decoder_automate.rs (target/debug/deps/fr196_csr_decoder_automate-42a65d2d7c63a541)
+
+running 4 tests
+test p0_delayed_replay_seed_5eedcafef00d ... ok
+test p0_delayed_replay_seed_deadbeef ... ok
+test p0_delayed_replay_seed_12740001 ... ok
+test p0_delayed_replay_seed_a55a1234 ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.24s
+
+     Running tests/fr196_csr_decoder_oracle.rs (target/debug/deps/fr196_csr_decoder_oracle-5fc12ad7df870a13)
+
+running 4 tests
+test p0_gpio_clear_observer_kills_candidate_and_mask_rtl_mutants ... ok
+test p0_gpio_set_observer_kills_candidate_and_mask_rtl_mutants ... ok
+test p0_uart_tx_data_observer_kills_candidate_and_mask_rtl_mutants ... ok
+test p0_irq_test_observer_kills_candidate_and_mask_rtl_mutants ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
+

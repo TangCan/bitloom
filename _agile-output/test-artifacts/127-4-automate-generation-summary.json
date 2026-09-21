@@ -1,0 +1,18 @@
+{
+  "detected_stack": "backend",
+  "api_tests": 4,
+  "backend_tests": 4,
+  "total_tests": 8,
+  "priority_coverage": {
+    "P0": 8
+  },
+  "fixture_needs": [],
+  "fixtures_created": 0,
+  "subagent_execution": "SUBAGENT (parallel subagents)",
+  "performance_gain": "not measured",
+  "files": [
+    "crates/bitloom/tests/fr196_csr_decoder_automate.rs",
+    "crates/bitloom/tests/fr196_csr_decoder_oracle.rs"
+  ],
+  "status": "generated-not-run"
+}

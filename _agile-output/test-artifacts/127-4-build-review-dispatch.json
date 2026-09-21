@@ -1,0 +1,23 @@
+{
+  "reviewed_diff": "/tmp/bitloom-1274-build-knm24ikl.diff",
+  "bytes": 1014610,
+  "sha256": "052e2e2f7079cddc53c5b5423553515639a7b08695e6a695a52cf9b633d45bb8",
+  "baseline_commit": "91828619f66f787c63483dda4b0ee558bb7501e8",
+  "layers": {
+    "blind-hunter": {
+      "agent": "/root/decoder1274_build_blind",
+      "findings": 10
+    },
+    "edge-case-hunter": {
+      "agent": "/root/decoder1274_build_edge",
+      "result": []
+    },
+    "verification-gap": {
+      "agent": "/root/decoder1274_build_verification",
+      "result": "No verification gaps found."
+    }
+  },
+  "capacity_fallback": "第三层首次启动遭thread limit；blind完成后成功启动全新无上下文第三层。全部结果返回后才分诊。",
+  "triage": "spec-127-4-csr-decoder.md Review Triage Log: B1–B10逐项判定；8 patch、2 false",
+  "status": "awaiting implementation patch; not build completion"
+}

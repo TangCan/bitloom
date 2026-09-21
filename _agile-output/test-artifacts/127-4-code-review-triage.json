@@ -1,0 +1,112 @@
+{
+  "review_mode": "full",
+  "diff": "/tmp/bitloom-1274-code-review-1v4qxgnn.diff",
+  "claims": "/tmp/bitloom-1274-code-review-claims-s8lmzyut.md",
+  "baseline": "91828619f66f787c63483dda4b0ee558bb7501e8",
+  "layers": {
+    "blind-hunter": 10,
+    "edge-case-hunter": "valid empty finding list []",
+    "verification-gap": "No verification gaps found.",
+    "acceptance-auditor": "No actionable AC1–7 violation; AC8 appropriately pending."
+  },
+  "capacity": "two initial reviewers; fresh verification and acceptance started as capacity released; all four returned before triage",
+  "findings": [
+    {
+      "id": 1,
+      "source": "blind-hunter",
+      "verdict": "low",
+      "title": "区分归纳证明与port-only BMC",
+      "detail": "证明observer含busy/miss/owner对应assert；名称port-only让维护者误读证明依赖。仅重命名和说明，不删归纳引理。",
+      "location": "crates/bitloom/tests/fr196_csr_decoder_formal.rs:156",
+      "route": "patch"
+    },
+    {
+      "id": 2,
+      "source": "blind-hunter",
+      "verdict": "low",
+      "title": "每个owner完成及停顿恢复cover",
+      "detail": "四leaf cover仅提交；当前停顿恢复可由miss满足，无法防止某leaf响应环境意外不可达。追加逐owner可达目标。",
+      "location": "crates/bitloom/tests/fr196_csr_decoder_formal.rs:133",
+      "route": "patch"
+    },
+    {
+      "id": 3,
+      "source": "blind-hunter",
+      "verdict": "low",
+      "title": "区分owner与miss取消后的完成cover",
+      "detail": "f_reset_cancel仅标记任意pending，原cover终点为新提交；追加两类取消后新响应完成。",
+      "location": "crates/bitloom/tests/fr196_csr_decoder_formal.rs:134",
+      "route": "patch"
+    },
+    {
+      "id": 4,
+      "source": "blind-hunter",
+      "verdict": "low",
+      "title": "明确合法叶响应的因果时序",
+      "detail": "文档只明确保持，formal明确prior-commit。连接自定义leaf的用户需要知道响应仅在请求接受沿后提供并保持至消费/reset。",
+      "location": "docs/ip/csr-decoder.md:32",
+      "route": "patch"
+    },
+    {
+      "id": 5,
+      "source": "blind-hunter",
+      "verdict": "false",
+      "title": "集成CSR响应阻塞监测",
+      "detail": "真实桥预留响应槽且exec期间csr_rsp_ready恒为1（reset除外），真实decoder响应只在提交后出现，此时exec为1；合法非reset层级不存在所称阻塞恢复逃检路径。独立decoder已测试及证明响应保持，不用force不可能状态冒充组合行为。",
+      "location": "crates/bitloom/tests/fr196_csr_decoder/scoreboard.sv:122",
+      "route": "reject"
+    },
+    {
+      "id": 6,
+      "source": "blind-hunter",
+      "verdict": "medium",
+      "title": "真实组合持续竞争下轮转检查",
+      "detail": "有限两类流最终排空不排除固定优先；旧桥测试验证轮转，但新七模块组合仅显式检查reset读优先。追加双类确有资格时的定向grant顺序，不对缺响应容量的类别假设资格。",
+      "location": "crates/bitloom/tests/fr196_csr_decoder/stress.sv:133",
+      "route": "patch"
+    },
+    {
+      "id": 7,
+      "source": "blind-hunter",
+      "verdict": "low",
+      "title": "C消费者独立全局地址字面量",
+      "detail": "现有C全局式右侧由相同base+offset构造，对caller base宏无独立检验；文档Rust基址已有检查，因此非已知产品错误。最小改进为测试消费者定义base宏，手写完整absolute黄金比较，不新增产品API。",
+      "location": "crates/bitloom/tests/fr196_csr_decoder_integration.rs:244",
+      "route": "patch"
+    },
+    {
+      "id": 8,
+      "source": "blind-hunter",
+      "verdict": "low",
+      "title": "Markdown权限reset与owner黄金",
+      "detail": "当前独立文本检查仅name/offset/mask，错误权限/owner描述会误导寄存器集成人员。给同表补独立access/reset/owner预期。",
+      "location": "crates/bitloom/tests/fr196_csr_decoder_integration.rs:209",
+      "route": "patch"
+    },
+    {
+      "id": 9,
+      "source": "blind-hunter",
+      "verdict": "low",
+      "title": "W/AR接受沿monitor反例",
+      "detail": "实际monitor实现覆盖接受沿，但当前只有AW接受沿负例；W/AR仅停顿负例。追加两条最小真实监测器故障刺激。",
+      "location": "crates/bitloom/tests/fr196_csr_decoder_integration.rs:335",
+      "route": "patch"
+    },
+    {
+      "id": 10,
+      "source": "blind-hunter",
+      "verdict": "low",
+      "title": "miss保持与reset状态突变",
+      "detail": "目前实际mutation只选择/地址/数据；补丢失受阻miss与reset残留pending突变，证明observer对新增状态职责敏感。",
+      "location": "crates/bitloom/tests/fr196_csr_decoder_formal.rs:257",
+      "route": "patch"
+    }
+  ],
+  "decision_needed": 0,
+  "patch": 9,
+  "defer": 0,
+  "rejected": 1,
+  "status": "complete",
+  "root_verification": "127-4-root-code-review-results.json",
+  "completion_override": "story/sprint remain review until user-required automate, clean/fmt/workspace, commit"
+}

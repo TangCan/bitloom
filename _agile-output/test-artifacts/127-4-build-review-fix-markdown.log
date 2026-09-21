@@ -1,0 +1,9 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.97s
+     Running tests/fr196_csr_decoder_integration.rs (target/debug/deps/fr196_csr_decoder_integration-f3739376f5761d8b)
+
+running 1 test
+test p1_four_local_headers_repeat_and_compile_with_independent_global_goldens ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.09s
+

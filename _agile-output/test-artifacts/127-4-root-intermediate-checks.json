@@ -1,0 +1,256 @@
+{
+  "members": [
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-1.json",
+      "size_bytes": 90,
+      "sha256": "5734d7172d236f0e7b7987480a8a22180ad829c992b59c435ffdf0c869396c13"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-1.log",
+      "size_bytes": 256,
+      "sha256": "5bf5ad75d02ee8fe3f35b83ae4b42c2cc5445f37d10e4d08c64a6e767d8896ce"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-1021.json",
+      "size_bytes": 100,
+      "sha256": "0ae13ddd3269b007880bc332cc2428e71b05e5ae413833920ba7b68d93f0736e"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-1021.log",
+      "size_bytes": 259,
+      "sha256": "3baca92dd7431eeb334001ad5116d1306ec6028de65bccb8cf307e30a0c7117c"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-1048573.json",
+      "size_bytes": 103,
+      "sha256": "35f2c02af0f2fa796de8dc50fbe588f4ea266624c10c991e48c8339bb1fb44ef"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-1048573.log",
+      "size_bytes": 262,
+      "sha256": "626de9803b7764c04f8f3c95f5f23d105b814fbbd90338dfb4bf05cdaa1a52e0"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-108567228.json",
+      "size_bytes": 98,
+      "sha256": "0c067eb29be637bdd54a6a460e109004caa7850300782d7090f99a148c876f9c"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-108567228.log",
+      "size_bytes": 264,
+      "sha256": "e794744444642adb5998350e94918521a1274562e54facb821ac2b10f8ab8acc"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-126462925.json",
+      "size_bytes": 98,
+      "sha256": "f5a6d1b7f2cf6390546a57aad5daa00ea53ea93ebde97ea9017df91af182db26"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-126462925.log",
+      "size_bytes": 264,
+      "sha256": "bc279a3afb70b3844d86e9b81ed169ecd292df5bdbff478fb15b74c54645b7d4"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-127.json",
+      "size_bytes": 91,
+      "sha256": "769614337b3d6b7301c772fe1894956600932043174722cff2ace23568239a91"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-127.log",
+      "size_bytes": 258,
+      "sha256": "c86ca587edfb62c05bedeee0098ede392bed382b251318709ec7bc21bddbf414"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-19088743.json",
+      "size_bytes": 104,
+      "sha256": "5f9897d2f2bf25350d36a4e16ea73d10d68a2a62439386d0d4806354a3194207"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-19088743.log",
+      "size_bytes": 263,
+      "sha256": "e15672f6c719660a991d31776a432f509f6addc9e6b1eb9de151e873d0846712"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-305441741.json",
+      "size_bytes": 105,
+      "sha256": "a0f0705791416821092cf07c7ccc4892bd323c21fa139212a56acc8aa5d8eef6"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-305441741.log",
+      "size_bytes": 264,
+      "sha256": "3dfe3dcc530a76ab803f0d8fb94fafa2d80b24adf7b551f3618978db927b9dd1"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-31.json",
+      "size_bytes": 91,
+      "sha256": "d2ef167393d4f08e67509222b6e7f0d22fe3ffe4696116bac7a18e00f1594f8d"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-31.log",
+      "size_bytes": 257,
+      "sha256": "754120ac8cc5a541393dd321e40d6c4c93f67f6a510356300e9fdc8c4ec784ff"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-36984440.json",
+      "size_bytes": 97,
+      "sha256": "1c94933088809150aa3b1df24eb6469e06b6f6eb5ada810ae7afe5e55c172f57"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-36984440.log",
+      "size_bytes": 263,
+      "sha256": "4f0e28a18ece2d5780261893f5ee646040db7e94d60fe82a318d4ef58c5e2da0"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-4093.json",
+      "size_bytes": 100,
+      "sha256": "edc11d313e913a89eb821f2dafcba2fe47e1d8984ef4ed8a6e41abee7695fbf0"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-4093.log",
+      "size_bytes": 259,
+      "sha256": "3fff5757ec0feaf89c4aa773307681f927aa3fe619cc7eaecc36dbc1f627b90e"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-54880137.json",
+      "size_bytes": 104,
+      "sha256": "d6ddff231e6260be1124eea870e2726b6aca5e811ac3971e785c557e8b165b75"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-54880137.log",
+      "size_bytes": 263,
+      "sha256": "c076c6ae351446c19d73a0549751c33ff0f13216582bbecf128aae6c59dfa349"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-65521.json",
+      "size_bytes": 94,
+      "sha256": "f0fa41c21a5c2816e439bc1a8a6155e62bf1c4716a8a4b1a5a88c6db575f04f6"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-65521.log",
+      "size_bytes": 260,
+      "sha256": "6d8115afade86e0874f79500b147b2fc0d364d87f1f386cf91adce119594ab9c"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-7.json",
+      "size_bytes": 90,
+      "sha256": "6fdc051fbc9e0b3a645cc74d6d04546517433e56fd82cf1dd4fffc79b097b84f"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-7.log",
+      "size_bytes": 256,
+      "sha256": "c35bba3e0b887b32cbdcbf85ee606e9f38adbf0b59bd33608a13d0e59d0aed26"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-72775834.json",
+      "size_bytes": 97,
+      "sha256": "194637bbc5c47e513252bfea49e329a153993c096beae64b7f371040f0e171b6"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-72775834.log",
+      "size_bytes": 263,
+      "sha256": "58e92acb9cd9b73dbfa511f6e4ae15960fddb8293ed68fa26d27bfac1601e305"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-90671531.json",
+      "size_bytes": 97,
+      "sha256": "f28ff9c8fa9540d6bd5a217077da6252a9a296b8f758bf423d2c7660fd5b0dd6"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/seed-90671531.log",
+      "size_bytes": 263,
+      "sha256": "fd626fb0d85732cf3b9be1d208be8eb06cd4d57711caec36d53665ad5ee3f672"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/tb.sv",
+      "size_bytes": 25296,
+      "sha256": "1e34dff8ae5d1131b2d95c8eae7de5e7dbd19a0f300961dd5b164c21738a1216"
+    },
+    {
+      "path": "target/fr196-decoder-integration/stress-1913628/design.v",
+      "size_bytes": 70642,
+      "sha256": "b41c59995316b375047aba00645e0a38f2182f83d850c1fe284c56f8de95dcd5"
+    },
+    {
+      "path": "target/fr196-decoder-formal/mutations-1922639/control/mutation/status",
+      "size_bytes": 9,
+      "sha256": "9768d51e75bbaf455ceae1cb5204dc0141f1d615040e48bd90d44c2613f92e9a"
+    },
+    {
+      "path": "target/fr196-decoder-formal/mutations-1922639/cross-owner/mutation/status",
+      "size_bytes": 9,
+      "sha256": "e60b8fd829076338003b8fd48a99c9b1190e367b783d7834c357631185325640"
+    },
+    {
+      "path": "target/fr196-decoder-formal/mutations-1922639/dual-select/mutation/status",
+      "size_bytes": 9,
+      "sha256": "e60b8fd829076338003b8fd48a99c9b1190e367b783d7834c357631185325640"
+    },
+    {
+      "path": "target/fr196-decoder-formal/mutations-1922639/high-alias/mutation/status",
+      "size_bytes": 9,
+      "sha256": "e60b8fd829076338003b8fd48a99c9b1190e367b783d7834c357631185325640"
+    },
+    {
+      "path": "target/fr196-decoder-formal/routing-1922639/cover/status",
+      "size_bytes": 9,
+      "sha256": "9768d51e75bbaf455ceae1cb5204dc0141f1d615040e48bd90d44c2613f92e9a"
+    },
+    {
+      "path": "target/fr196-decoder-formal/routing-1922639/prove/status",
+      "size_bytes": 9,
+      "sha256": "c64cd1e86b7f62337279d990860d37ca6636f5812efd86b6d24dfd010434d5f0"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-change-1925020/run.json",
+      "size_bytes": 126,
+      "sha256": "5103b4640ade5fab97e05b8d3cd8604982951e8bcb4e6d8432407ff91430f79a"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-ar-change-1925020/run.log",
+      "size_bytes": 63,
+      "sha256": "5d598922b828e20062db9250fb4c031efb76a6fa7609e2d6f42760cdab7d8ee5"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-change-1925020/run.json",
+      "size_bytes": 126,
+      "sha256": "95fa92b7b83752e01ebdfbe3501ecc16134c0091586bcb1cdb544fa52bdbd474"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-aw-change-1925020/run.log",
+      "size_bytes": 63,
+      "sha256": "363a971a2ba5a9c171b27984976af456f450e67888a2ee00b59a1055e6136d93"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-bubble-1925020/run.json",
+      "size_bytes": 141,
+      "sha256": "2c31720cb48175c0b44c3b9d2ea97713b16ba70b2a7d48b9500c143f879111a9"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-bubble-1925020/run.log",
+      "size_bytes": 77,
+      "sha256": "ea417b755cef99594f4fb557c84211a45eb303bfcf6ec6e28757606903ddb9af"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-control-1925020/run.json",
+      "size_bytes": 118,
+      "sha256": "8cbdae9142851f53960bd66ec2e74caa24754a14ab395ce581eb37f19aed3d40"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-control-1925020/run.log",
+      "size_bytes": 51,
+      "sha256": "670bfbce2d142682689831c8c4d76526825456800c2b7ced37393e4907fb2cee"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-change-1925020/run.json",
+      "size_bytes": 125,
+      "sha256": "b76119e8fa97e40615ed597aba5032dda37355704699a7a4db093242fa5cfb6e"
+    },
+    {
+      "path": "target/fr196-decoder-integration/monitor-w-change-1925020/run.log",
+      "size_bytes": 62,
+      "sha256": "d2c58dc033aef1667cc7a3add538c1aa8f18ba21fa3a62564c2a2b98d0b377bd"
+    }
+  ],
+  "verified": true,
+  "scope": "16 initial stress seeds; 1000 random and 256 concurrent each. Includes F2 bubble check but predates F3 snapshot update; not final source verification. Mutation statuses and monitor results independently inspected; full traces remain implementation archive responsibility."
+}

@@ -69,3 +69,9 @@ Rust 嵌入式 RTL HDL：设计是生成器，冻结 HIR 后再降后端。需�
 ## Phase24 当前交付状态（2026-09-20，Story126.4）
 
 Epic126/M1已关闭：126.1–126.4 done，FR194共享session组合与FR195 RvRegSlice/ParamSyncFifo真实验收；见 `_agile-output/implementation-artifacts/epic-126-closeout.md`。用户全部未完成故事七步连续执行授权仍有效，下一故事127.1；Epic127–130未交付，整个Phase24未完成。FR189/Epic122仍deferred，NFR91与既有明确遗留保持。
+
+## M2 / Epic127 实施关闭（2026-09-21）
+
+Story127.1–127.4随各自单故事提交完成，FR196静态CSR描述/软件地址产物、AXI-Lite桥和固定四窗CsrDecoder交付。127.4实际clean/fmt/justtest为470结果块、1823 passed / 0 failed / 25 ignored，专用decoder/CSR/bridge形式与综合本轮另跑通过，不把ignored计PASS。关闭映射 `_agile-output/implementation-artifacts/epic-127-closeout.md`，完整验收 `_agile-output/test-artifacts/127-4-final-verification.md`。新增API逐符号登记FR142/minor，未改工具钉、包版本或发布。
+
+真实七模块夹具验证总线/CSR语义，不代表Epic128外设算法或Epic129系统；native/generated层级仍unsupported。Epic128–130/FR197–201及整个Phase24未交付；下一故事128.1 NFR14，全部未完成故事七步授权继续有效。FR189/Epic122 deferred和NFR91保持，不push、不publish。此前各时点交付状态保留为历史。

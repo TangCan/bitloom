@@ -1,0 +1,11 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.06s
+     Running tests/fr196_csr_decoder_formal.rs (target/debug/deps/fr196_csr_decoder_formal-43260981e010a796)
+
+running 4 tests
+test p0_original_decoder_synthesis_check ... ok
+test p0_original_hierarchy_synthesis_and_five_registered_boundaries ... ok
+test p0_port_only_owner_response_safety_prove_and_cover ... ok
+test p0_port_only_oracle_kills_cross_owner_dual_select_and_high_alias_mutants ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 9.98s
+

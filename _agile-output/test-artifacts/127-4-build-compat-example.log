@@ -1,0 +1,18 @@
+FR194 docs/ip/module-composition.md prelude-only example: cargo run --offline --manifest-path /tmp/bitloom-fr194-example-tsu_skdk/Cargo.toml
+     Locking 8 packages to latest Rust 1.97.1 compatible versions
+   Compiling fr194-design-example v0.0.0 (/tmp/bitloom-fr194-example-tsu_skdk)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s
+     Running `target/fr194-doc-example/debug/fr194-design-example`
+PASS: FR194 documented prelude-only design compiled and executed
+FR195 docs/ip/rv-reg-slice.md prelude-only example: cargo run --offline --manifest-path /tmp/bitloom-fr195-example-5a9bnqgo/Cargo.toml
+     Locking 8 packages to latest Rust 1.97.1 compatible versions
+   Compiling fr194-design-example v0.0.0 (/tmp/bitloom-fr195-example-5a9bnqgo)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s
+     Running `target/fr194-doc-example/debug/fr194-design-example`
+PASS: FR195 documented prelude-only design compiled and executed
+FR195-FIFO docs/ip/param-sync-fifo.md prelude-only example: cargo run --offline --manifest-path /tmp/bitloom-fr195-fifo-example-wd0vrnoy/Cargo.toml
+     Locking 8 packages to latest Rust 1.97.1 compatible versions
+   Compiling fr194-design-example v0.0.0 (/tmp/bitloom-fr195-fifo-example-wd0vrnoy)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s
+     Running `target/fr194-doc-example/debug/fr194-design-example`
+PASS: FR195-FIFO documented prelude-only design compiled and executed

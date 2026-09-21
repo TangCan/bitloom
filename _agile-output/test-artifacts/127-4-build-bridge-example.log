@@ -1,0 +1,7 @@
+FR196-BRIDGE docs/ip/axi-lite-csr-bridge.md prelude-only example: cargo run --offline --manifest-path /tmp/bitloom-fr196-bridge-example-xmwl39ix/Cargo.toml
+     Locking 8 packages to latest Rust 1.97.1 compatible versions
+   Compiling fr194-design-example v0.0.0 (/tmp/bitloom-fr196-bridge-example-xmwl39ix)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.32s
+     Running `target/fr194-doc-example/debug/fr194-design-example`
+ExampleAxiCsr: 3 modules
+PASS: FR196-BRIDGE documented prelude-only design compiled and executed

@@ -1,0 +1,41 @@
+{
+  "ordinary_passed": 6,
+  "dedicated_passed": 4,
+  "example_exit": 0,
+  "arbitration_decisions": 256,
+  "cover_count": 17,
+  "cover_directory": "target/fr196-decoder-formal/routing-2273314",
+  "mutations_directory": "target/fr196-decoder-formal/mutations-2273314",
+  "mutation_results": {
+    "dual-select": {
+      "status": "FAIL",
+      "exit_code": 2
+    },
+    "ready-gated-valid": {
+      "status": "FAIL",
+      "exit_code": 2
+    },
+    "high-alias": {
+      "status": "FAIL",
+      "exit_code": 2
+    },
+    "miss-drops-under-stall": {
+      "status": "FAIL",
+      "exit_code": 2
+    },
+    "cross-owner": {
+      "status": "FAIL",
+      "exit_code": 2
+    },
+    "control": {
+      "status": "PASS",
+      "exit_code": 0
+    },
+    "reset-retains-pending": {
+      "status": "FAIL",
+      "exit_code": 2
+    }
+  },
+  "review_patch_count": 9,
+  "rejected_count": 1
+}
