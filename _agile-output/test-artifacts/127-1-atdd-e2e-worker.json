@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "subagent": "atdd-e2e-tests",
+  "tests": [],
+  "test_count": 0,
+  "fixture_needs": [],
+  "knowledge_fragments_used": [],
+  "tdd_phase": "RED",
+  "manual_acceptance_file": "_agile-output/test-artifacts/127-1-atdd-manual-acceptance.md",
+  "acceptance_criteria_covered": [
+    "AC1",
+    "AC2",
+    "AC3",
+    "AC4",
+    "AC6"
+  ],
+  "presence_evidence": "_agile-output/test-artifacts/127-1-atdd-gate-presence.log",
+  "initial_observation": {
+    "document_exists": false,
+    "command_exit_code": 1,
+    "observed_at_utc": "2026-09-20T12:55:50.083953+00:00"
+  },
+  "tool_probe_status": "not_run",
+  "e2e_not_applicable_reason": "Story127.1 is a backend risk-gate documentation story with no UI or browser user journey. Manual semantic review and separate state-gate checks apply; no fabricated E2E scaffold.",
+  "playwright_utils_deviations": [],
+  "summary": "Generated independent manual acceptance checklist; preserved actual missing-document evidence; 0 browser E2E tests."
+}

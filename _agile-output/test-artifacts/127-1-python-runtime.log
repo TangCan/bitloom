@@ -1,0 +1,4 @@
+{"utc": "2026-09-21T01:13:25.430988+00:00", "command": ["/tmp/bitloom-phase24-bfm-py312/bin/python", "-c", "import ctypes,sys,find_libpython; print(sys.version); print(find_libpython.find_libpython()); f=ctypes.pythonapi.Py_GetVersion; f.restype=ctypes.c_char_p; print(f().decode())"], "exit": 0}
+3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]
+/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0
+3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]

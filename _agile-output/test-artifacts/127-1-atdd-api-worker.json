@@ -1,0 +1,40 @@
+{
+  "success": true,
+  "subagent": "atdd-api-tests",
+  "files": [
+    "_agile-output/test-artifacts/127-1-atdd-gate.py",
+    "_agile-output/test-artifacts/127-1-atdd-gate.log"
+  ],
+  "tests": [
+    {
+      "file": "_agile-output/test-artifacts/127-1-atdd-gate.py",
+      "content": "#!/usr/bin/env python3\n\"\"\"Replay Story 127.1 AC5 against the real gate using temporary sprint copies.\n\nExisting GREEN behavior, not a RED product test. Cross-story dependency setup\nis explicit here; the gate itself only enforces M0 and per-epic NFR14.\nRun from any directory with Python 3 (standard library only).\n\"\"\"\n\nimport hashlib\nfrom pathlib import Path\nimport re\nimport subprocess\nimport sys\nimport tempfile\n\n\nROOT = Path(__file__).resolve().parents[2]\nSPRINT = ROOT / \"_agile-output/implementation-artifacts/sprint-status.yaml\"\nGATE = ROOT / \"scripts/check_phase24_gate.py\"\nSUCCESS = (\n    \"PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; \"\n    \"FR189/Epic122 deferred\"\n)\n\n\ndef replace_state(text, prefix, state):\n    pattern = rf\"^(  {re.escape(prefix)}[^:\\n]*:\\s*)[\\w-]+(\\s*(?:#.*)?)$\"\n    result, count = re.subn(pattern, lambda m: m[1] + state + m[2], text, flags=re.M)\n    assert count == 1, f\"Expected exactly one status for {prefix!r}, got {count}\"\n    return result\n\n\ndef main():\n    original = SPRINT.read_bytes()\n    digest = hashlib.sha256(original).hexdigest()\n    text = original.decode(\"utf-8\")\n    count = 0\n    print(f\"Source sprint SHA256: {digest}\")\n    print(\"Scope: existing GREEN process gate; no CSR RTL/formal acceptance.\")\n    print(\"Cross-story dependencies are fixture setup, not gate coverage.\")\n    try:\n        with tempfile.TemporaryDirectory(prefix=\"bitloom-127-1-atdd-\") as directory:\n            fixture = Path(directory) / \"sprint-status.yaml\"\n\n            def case(name, content, exit_code, reason=None):\n                nonlocal count\n                fixture.write_text(content, encoding=\"utf-8\")\n                result = subprocess.run(\n                    [sys.executable, str(GATE), str(fixture)],\n                    capture_output=True, text=True, check=False, timeout=30,\n                )\n                assert result.returncode == exit_code, (\n                    name, result.returncode, result.stdout, result.stderr\n                )\n                if exit_code == 0:\n                    assert result.stdout.strip() == SUCCESS, (name, result.stdout)\n                    assert result.stderr == \"\", (name, result.stderr)\n                else:\n                    assert result.stdout == \"\", (name, result.stdout)\n                    assert f\"FAIL: {reason}\" in result.stderr.splitlines(), (\n                        name, reason, result.stderr\n                    )\n                count += 1\n                print(f\"PASS [{count:02d}] {name}: exit={result.returncode}\")\n                for line in (result.stdout + result.stderr).splitlines():\n                    print(f\"  {line}\")\n\n            case(\"current sprint\", text, 0)\n            base = replace_state(text, \"epic-127\", \"in-progress\")\n            for story in range(1, 5):\n                base = replace_state(base, f\"127-{story}-\", \"backlog\")\n            for state in (\n                \"backlog\", \"ready\", \"ready-for-dev\", \"in-progress\", \"review\",\n                \"blocked\", \"deferred\",\n            ):\n                for story in range(2, 5):\n                    candidate = replace_state(base, \"127-1-\", state)\n                    candidate = replace_state(candidate, f\"127-{story}-\", \"ready-for-dev\")\n                    case(\n                        f\"127.1 {state}, 127.{story} ready-for-dev\",\n                        candidate, 1, f\"127.{story} requires 127.1 NFR14 done\",\n                    )\n            for story in range(2, 5):\n                candidate = base\n                # M0/M1 and earlier Epic127 stories satisfy declared dependencies.\n                for epic, total in ((125, 3), (126, 4)):\n                    candidate = replace_state(candidate, f\"epic-{epic}\", \"done\")\n                    for previous in range(1, total + 1):\n                        candidate = replace_state(candidate, f\"{epic}-{previous}-\", \"done\")\n                for previous in range(1, story):\n                    candidate = replace_state(candidate, f\"127-{previous}-\", \"done\")\n                candidate = replace_state(candidate, f\"127-{story}-\", \"ready-for-dev\")\n                case(f\"127.{story} ready with declared predecessors done\", candidate, 0)\n            candidate = replace_state(base, \"epic-125\", \"in-progress\")\n            candidate = replace_state(candidate, \"127-1-\", \"ready-for-dev\")\n            case(\"M0 not closed\", candidate, 1, \"127.1 cannot advance before M0 closes\")\n            candidate = replace_state(base, \"127-1-\", \"done\")\n            candidate = replace_state(candidate, \"epic-127\", \"done\")\n            case(\"Epic127 premature close\", candidate, 1, \"Epic 127 done requires its stories done\")\n    finally:\n        after = SPRINT.read_bytes()\n        assert after == original, \"Original sprint bytes changed during test\"\n        assert hashlib.sha256(after).hexdigest() == digest, \"Original sprint hash changed\"\n        print(f\"PASS original sprint byte/hash preservation: {digest}\")\n    print(f\"RESULT: {count} scenarios passed; existing GREEN gate behavior verified.\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
+      "description": "Story127.1 AC5 real subprocess gate mutation checks",
+      "expected_to_fail": false,
+      "expected_result": "GREEN (existing gate)",
+      "acceptance_criteria_covered": [
+        "AC5"
+      ],
+      "priority_coverage": {
+        "P0": 26,
+        "P1": 1,
+        "P2": 0,
+        "P3": 0
+      }
+    }
+  ],
+  "test_count": 27,
+  "tdd_phase": "existing-GREEN",
+  "fixture_needs": [],
+  "knowledge_fragments_used": [],
+  "provider_scrutiny": "not-applicable: no HTTP provider/client contract",
+  "mandate_applicability": "Playwright/Pact not applicable to standard-library Python process gate.",
+  "authorization_override": "Story AC5/T5 and delegated user authorization require running existing-green gate checks; no synthetic skipped API scaffolds.",
+  "command": "python3 _agile-output/test-artifacts/127-1-atdd-gate.py",
+  "exit_code": 0,
+  "summary": "27 scenarios passed: current sprint; 21 non-done NFR14 rejection cases; 3 dependency-satisfied ready states; M0 and premature Epic127 closure rejection. Original sprint bytes and SHA256 unchanged.",
+  "limitations": [
+    "Gate does not validate risk document or all cross-story dependencies.",
+    "No CSR RTL, formal or product test coverage."
+  ]
+}

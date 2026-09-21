@@ -1,0 +1,6 @@
+observed_at_utc: 2026-09-20T12:55:50.083953+00:00
+command: test -f _agile-output/implementation-artifacts/epic-127-nfr14.md
+exit_code: 1
+stdout: ''
+stderr: ''
+interpretation: document absent at observation; risk-gate acceptance cannot yet be reviewed

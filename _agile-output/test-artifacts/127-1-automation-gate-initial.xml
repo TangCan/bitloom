@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="127.1 process gate" tests="110" failures="1" errors="0" skipped="0"><testcase classname="Story127.1.P1" name="001 current sprint"><system-out>Observed expected gate exit=0; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="002 127.1 backlog, 127.2 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="003 127.1 backlog, 127.3 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="004 127.1 backlog, 127.4 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="005 127.1 ready, 127.2 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="006 127.1 ready, 127.3 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="007 127.1 ready, 127.4 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="008 127.1 ready-for-dev, 127.2 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="009 127.1 ready-for-dev, 127.3 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="010 127.1 ready-for-dev, 127.4 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="011 127.1 in-progress, 127.2 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="012 127.1 in-progress, 127.3 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="013 127.1 in-progress, 127.4 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="014 127.1 review, 127.2 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="015 127.1 review, 127.3 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="016 127.1 review, 127.4 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="017 127.1 blocked, 127.2 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="018 127.1 blocked, 127.3 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="019 127.1 blocked, 127.4 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="020 127.1 deferred, 127.2 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="021 127.1 deferred, 127.3 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="022 127.1 deferred, 127.4 ready-for-dev"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="023 127.1 backlog, 127.2 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="024 127.1 backlog, 127.2 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="025 127.1 backlog, 127.2 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="026 127.1 backlog, 127.2 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="027 127.1 backlog, 127.3 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="028 127.1 backlog, 127.3 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="029 127.1 backlog, 127.3 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="030 127.1 backlog, 127.3 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="031 127.1 backlog, 127.4 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="032 127.1 backlog, 127.4 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="033 127.1 backlog, 127.4 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="034 127.1 backlog, 127.4 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="035 127.1 ready, 127.2 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="036 127.1 ready, 127.2 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="037 127.1 ready, 127.2 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="038 127.1 ready, 127.2 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="039 127.1 ready, 127.3 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="040 127.1 ready, 127.3 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="041 127.1 ready, 127.3 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="042 127.1 ready, 127.3 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="043 127.1 ready, 127.4 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="044 127.1 ready, 127.4 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="045 127.1 ready, 127.4 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="046 127.1 ready, 127.4 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="047 127.1 ready-for-dev, 127.2 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="048 127.1 ready-for-dev, 127.2 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="049 127.1 ready-for-dev, 127.2 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="050 127.1 ready-for-dev, 127.2 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="051 127.1 ready-for-dev, 127.3 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="052 127.1 ready-for-dev, 127.3 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="053 127.1 ready-for-dev, 127.3 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="054 127.1 ready-for-dev, 127.3 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="055 127.1 ready-for-dev, 127.4 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="056 127.1 ready-for-dev, 127.4 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="057 127.1 ready-for-dev, 127.4 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="058 127.1 ready-for-dev, 127.4 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="059 127.1 in-progress, 127.2 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="060 127.1 in-progress, 127.2 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="061 127.1 in-progress, 127.2 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="062 127.1 in-progress, 127.2 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="063 127.1 in-progress, 127.3 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="064 127.1 in-progress, 127.3 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="065 127.1 in-progress, 127.3 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="066 127.1 in-progress, 127.3 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="067 127.1 in-progress, 127.4 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="068 127.1 in-progress, 127.4 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="069 127.1 in-progress, 127.4 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="070 127.1 in-progress, 127.4 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="071 127.1 review, 127.2 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="072 127.1 review, 127.2 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="073 127.1 review, 127.2 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="074 127.1 review, 127.2 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="075 127.1 review, 127.3 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="076 127.1 review, 127.3 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="077 127.1 review, 127.3 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="078 127.1 review, 127.3 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="079 127.1 review, 127.4 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="080 127.1 review, 127.4 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="081 127.1 review, 127.4 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="082 127.1 review, 127.4 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="083 127.1 blocked, 127.2 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="084 127.1 blocked, 127.2 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="085 127.1 blocked, 127.2 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="086 127.1 blocked, 127.2 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="087 127.1 blocked, 127.3 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="088 127.1 blocked, 127.3 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="089 127.1 blocked, 127.3 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="090 127.1 blocked, 127.3 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="091 127.1 blocked, 127.4 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="092 127.1 blocked, 127.4 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="093 127.1 blocked, 127.4 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="094 127.1 blocked, 127.4 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="095 127.1 deferred, 127.2 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="096 127.1 deferred, 127.2 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="097 127.1 deferred, 127.2 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="098 127.1 deferred, 127.2 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="099 127.1 deferred, 127.3 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="100 127.1 deferred, 127.3 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="101 127.1 deferred, 127.3 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="102 127.1 deferred, 127.3 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="103 127.1 deferred, 127.4 ready"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="104 127.1 deferred, 127.4 in-progress"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="105 127.1 deferred, 127.4 review"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="106 127.1 deferred, 127.4 done"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="107 M0 epic done with 125.1 backlog"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="108 M0 epic done with 125.2 backlog"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase classname="Story127.1.P1" name="109 M0 epic done with 125.3 backlog"><system-out>Observed expected gate exit=1; full diagnostics in 127-1-automation-gate.log</system-out></testcase><testcase name="runner completion"><failure>Source sprint SHA256: 03387444a2b9ada7f4e76374abc0ba2c39f5ca7235f4faaa80ea42c59066cf4c
+Scope: existing GREEN process gate; no CSR RTL/formal acceptance.
+Cross-story dependencies are fixture setup, not gate coverage.
+PASS [P1] [001] current sprint: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P1] [002] 127.1 backlog, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [003] 127.1 backlog, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [004] 127.1 backlog, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [005] 127.1 ready, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [006] 127.1 ready, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [007] 127.1 ready, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [008] 127.1 ready-for-dev, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [009] 127.1 ready-for-dev, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [010] 127.1 ready-for-dev, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [011] 127.1 in-progress, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [012] 127.1 in-progress, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [013] 127.1 in-progress, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [014] 127.1 review, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [015] 127.1 review, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [016] 127.1 review, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [017] 127.1 blocked, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [018] 127.1 blocked, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [019] 127.1 blocked, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [020] 127.1 deferred, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [021] 127.1 deferred, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [022] 127.1 deferred, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [023] 127.1 backlog, 127.2 ready: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [024] 127.1 backlog, 127.2 in-progress: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [025] 127.1 backlog, 127.2 review: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [026] 127.1 backlog, 127.2 done: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [027] 127.1 backlog, 127.3 ready: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [028] 127.1 backlog, 127.3 in-progress: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [029] 127.1 backlog, 127.3 review: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [030] 127.1 backlog, 127.3 done: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [031] 127.1 backlog, 127.4 ready: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [032] 127.1 backlog, 127.4 in-progress: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [033] 127.1 backlog, 127.4 review: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [034] 127.1 backlog, 127.4 done: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [035] 127.1 ready, 127.2 ready: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [036] 127.1 ready, 127.2 in-progress: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [037] 127.1 ready, 127.2 review: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [038] 127.1 ready, 127.2 done: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [039] 127.1 ready, 127.3 ready: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [040] 127.1 ready, 127.3 in-progress: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [041] 127.1 ready, 127.3 review: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [042] 127.1 ready, 127.3 done: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [043] 127.1 ready, 127.4 ready: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [044] 127.1 ready, 127.4 in-progress: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [045] 127.1 ready, 127.4 review: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [046] 127.1 ready, 127.4 done: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [047] 127.1 ready-for-dev, 127.2 ready: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [048] 127.1 ready-for-dev, 127.2 in-progress: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [049] 127.1 ready-for-dev, 127.2 review: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [050] 127.1 ready-for-dev, 127.2 done: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [051] 127.1 ready-for-dev, 127.3 ready: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [052] 127.1 ready-for-dev, 127.3 in-progress: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [053] 127.1 ready-for-dev, 127.3 review: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [054] 127.1 ready-for-dev, 127.3 done: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [055] 127.1 ready-for-dev, 127.4 ready: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [056] 127.1 ready-for-dev, 127.4 in-progress: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [057] 127.1 ready-for-dev, 127.4 review: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [058] 127.1 ready-for-dev, 127.4 done: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [059] 127.1 in-progress, 127.2 ready: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [060] 127.1 in-progress, 127.2 in-progress: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [061] 127.1 in-progress, 127.2 review: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [062] 127.1 in-progress, 127.2 done: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [063] 127.1 in-progress, 127.3 ready: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [064] 127.1 in-progress, 127.3 in-progress: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [065] 127.1 in-progress, 127.3 review: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [066] 127.1 in-progress, 127.3 done: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [067] 127.1 in-progress, 127.4 ready: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [068] 127.1 in-progress, 127.4 in-progress: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [069] 127.1 in-progress, 127.4 review: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [070] 127.1 in-progress, 127.4 done: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [071] 127.1 review, 127.2 ready: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [072] 127.1 review, 127.2 in-progress: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [073] 127.1 review, 127.2 review: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [074] 127.1 review, 127.2 done: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [075] 127.1 review, 127.3 ready: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [076] 127.1 review, 127.3 in-progress: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [077] 127.1 review, 127.3 review: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [078] 127.1 review, 127.3 done: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [079] 127.1 review, 127.4 ready: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [080] 127.1 review, 127.4 in-progress: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [081] 127.1 review, 127.4 review: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [082] 127.1 review, 127.4 done: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [083] 127.1 blocked, 127.2 ready: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [084] 127.1 blocked, 127.2 in-progress: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [085] 127.1 blocked, 127.2 review: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [086] 127.1 blocked, 127.2 done: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [087] 127.1 blocked, 127.3 ready: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [088] 127.1 blocked, 127.3 in-progress: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [089] 127.1 blocked, 127.3 review: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [090] 127.1 blocked, 127.3 done: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [091] 127.1 blocked, 127.4 ready: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [092] 127.1 blocked, 127.4 in-progress: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [093] 127.1 blocked, 127.4 review: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [094] 127.1 blocked, 127.4 done: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [095] 127.1 deferred, 127.2 ready: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [096] 127.1 deferred, 127.2 in-progress: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [097] 127.1 deferred, 127.2 review: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [098] 127.1 deferred, 127.2 done: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [P1] [099] 127.1 deferred, 127.3 ready: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [100] 127.1 deferred, 127.3 in-progress: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [101] 127.1 deferred, 127.3 review: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [102] 127.1 deferred, 127.3 done: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [P1] [103] 127.1 deferred, 127.4 ready: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [104] 127.1 deferred, 127.4 in-progress: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [105] 127.1 deferred, 127.4 review: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [106] 127.1 deferred, 127.4 done: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [P1] [107] M0 epic done with 125.1 backlog: exit=1
+  FAIL: Epic 125 done requires all three M0 stories done
+PASS [P1] [108] M0 epic done with 125.2 backlog: exit=1
+  FAIL: Epic 125 done requires all three M0 stories done
+PASS [P1] [109] M0 epic done with 125.3 backlog: exit=1
+  FAIL: Epic 125 done requires all three M0 stories done
+PASS original sprint byte/hash preservation: 03387444a2b9ada7f4e76374abc0ba2c39f5ca7235f4faaa80ea42c59066cf4c
+Traceback (most recent call last):
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/127-1-atdd-gate.py", line 157, in &lt;module&gt;
+    main()
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/127-1-atdd-gate.py", line 126, in main
+    candidate = replace_state(base, prefix, "done")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/127-1-atdd-gate.py", line 34, in replace_state
+    assert count == 1, f"Expected exactly one status for {prefix!r}, got {count}"
+           ^^^^^^^^^^
+AssertionError: Expected exactly one status for 'epic-122', got 2
+</failure></testcase></testsuite>

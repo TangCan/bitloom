@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "subagent": "api-tests",
+  "tests": [],
+  "fixture_needs": [],
+  "knowledge_fragments_used": [],
+  "playwright_utils_deviations": [],
+  "pactjs_utils_deviations": [],
+  "provider_scrutiny": "not-applicable",
+  "provider_files_read": [
+    "scripts/check_phase24_gate.py",
+    "scripts/phase24_axi_bfm_probe.py"
+  ],
+  "scope_files_read": [
+    "_agile-output/implementation-artifacts/spec-127-1-csr-bus-gate.md",
+    "_agile-output/implementation-artifacts/127-1-csr-总线-nfr14.md"
+  ],
+  "test_count": 0,
+  "pact_mcp_reachable": false,
+  "pact_fallback_source": "N/A: no HTTP provider or CDC contract in story scope",
+  "summary": "N/A: Story 127.1 delivers a CSR/bus risk gate only. Source inspection confirms a local Python sprint-status validator and a cocotb AXI-Lite independent-stub tool probe, with no HTTP endpoints, database, authentication service, or consumer-driven contracts. No API test files or fixtures generated; no tests run; repository unchanged. Enabled Playwright/Pact utilities are inapplicable to this Rust/Python scope. Broker reachability is inherited as false from the parent discovery; no repeat probe. Existing gate and BFM behavioral verification remains with the parent workflow; this result does not claim FR196 delivery."
+}

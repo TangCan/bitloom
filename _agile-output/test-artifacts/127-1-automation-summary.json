@@ -1,0 +1,12 @@
+{
+  "total_tests": 117,
+  "new_tests": 90,
+  "existing_tests": 27,
+  "api_tests": 0,
+  "backend_tests": 117,
+  "priority_coverage": {
+    "P1": 117
+  },
+  "execution": "subagent, batched due to thread limit",
+  "fixtures_created": 0
+}

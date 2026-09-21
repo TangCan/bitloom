@@ -1,0 +1,149 @@
+{
+  "name": "bfm",
+  "utc": "2026-09-21T01:00:27.196489+00:00",
+  "command": [
+    "timeout",
+    "--kill-after=10s",
+    "120s",
+    "/tmp/bitloom-phase24-bfm-py312/bin/python",
+    "scripts/phase24_axi_bfm_probe.py"
+  ],
+  "executable": "/usr/bin/timeout",
+  "exit_code": 0,
+  "PATH": "/tmp/bitloom-1263-sby-installed/bin:/tmp/bitloom-maintenance-tools/bin:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.opam/5.1.1/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.codex/tmp/arg0/codex-arg0JQQ9rr:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.local/bin:/home/richard/opt/Isabelle2026-RC0/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-13.2/bin:/nvme_data1/richard/.trae-cn-server/bin/stable-bf463f1c10476ab51d5c25db4513c590c975a76e-debian10/bin/remote-cli:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-11.6/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.cargo/bin:/home/richard/.local/bin:/home/richard/.nvm/versions/node/v24.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+}
+STDOUT
+cocotb==2.0.1
+cocotb-bus==0.3.0
+cocotbext-axi==0.1.28
+find-libpython==0.5.1
+scapy==2.7.0
+Python 3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.12.4 interpreter at /tmp/bitloom-phase24-bfm-py312/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 12.0 (stable)
+     0.00ns INFO     cocotb                             Seeding Python random module with 1789952427
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running phase24_axi_bfm_probe.probe (1/1)
+     0.00ns INFO     cocotb.bfm_probe.s_axi             AXI lite master (write)
+     0.00ns INFO     cocotb.bfm_probe.s_axi             cocotbext-axi version 0.1.28
+     0.00ns INFO     cocotb.bfm_probe.s_axi             Copyright (c) 2020-2025 Alex Forencich
+     0.00ns INFO     cocotb.bfm_probe.s_axi             https://github.com/alexforencich/cocotbext-axi
+     0.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/stream.py:120: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.
+                                                          self.valid.setimmediatevalue(self._valid_init)
+     0.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/stream.py:133: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.
+                                                          s.setimmediatevalue(v)
+     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+     0.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/stream.py:115: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.
+                                                          self.ready.setimmediatevalue(self._ready_init)
+     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+     0.00ns INFO     cocotb.bfm_probe.s_axi             AXI lite master configuration:
+     0.00ns INFO     cocotb.bfm_probe.s_axi               Address width: 8 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               Byte size: 8 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               Data width: 32 bits (4 bytes)
+     0.00ns INFO     cocotb.bfm_probe.s_axi             AXI lite master signals:
+     0.00ns INFO     cocotb.bfm_probe.s_axi               awaddr width: 8 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               awprot: not present
+     0.00ns INFO     cocotb.bfm_probe.s_axi               awready width: 1 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               awvalid width: 1 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               wdata width: 32 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               wready width: 1 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               wstrb width: 4 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               wvalid width: 1 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               bready width: 1 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               bresp width: 2 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               bvalid width: 1 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+     0.00ns INFO     cocotb.bfm_probe.s_axi             AXI lite master (read)
+     0.00ns INFO     cocotb.bfm_probe.s_axi             cocotbext-axi version 0.1.28
+     0.00ns INFO     cocotb.bfm_probe.s_axi             Copyright (c) 2020-2025 Alex Forencich
+     0.00ns INFO     cocotb.bfm_probe.s_axi             https://github.com/alexforencich/cocotbext-axi
+     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+     0.00ns INFO     cocotb.bfm_probe.s_axi             AXI lite master configuration:
+     0.00ns INFO     cocotb.bfm_probe.s_axi               Address width: 8 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               Byte size: 8 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               Data width: 32 bits (4 bytes)
+     0.00ns INFO     cocotb.bfm_probe.s_axi             AXI lite master signals:
+     0.00ns INFO     cocotb.bfm_probe.s_axi               araddr width: 8 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               arprot: not present
+     0.00ns INFO     cocotb.bfm_probe.s_axi               arready width: 1 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               arvalid width: 1 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               rdata width: 32 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               rready width: 1 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               rresp width: 2 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi               rvalid width: 1 bits
+     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+     0.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/reset.py:59: DeprecationWarning: Use `signal.value_change` instead.
+                                                          await Edge(reset_signal)
+     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+     1.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/stream.py:156: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._run_cr.kill()
+     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+     1.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:214: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_write_cr.kill()
+     1.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:217: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_write_resp_cr.kill()
+     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+     1.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:466: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_read_cr.kill()
+     1.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:469: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._process_read_resp_cr.kill()
+    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+    52.00ns INFO     cocotb.bfm_probe.s_axi             Write start addr: 0x00000000 prot: 2 data: 49 50 32 34
+    92.00ns INFO     cocotb.bfm_probe.s_axi             Write complete addr: 0x00000000 prot: 2 resp: 0 length: 4
+    92.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:336: DeprecationWarning: The data field will be removed in a future release.
+                                                          cmd.event.set(write_resp)
+    92.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:205: DeprecationWarning: The data field will be removed in a future release.
+                                                          return event.data
+    92.00ns INFO     cocotb.bfm_probe.s_axi             Read start addr: 0x00000000 prot: 2 length: 4
+   122.00ns INFO     cocotb.bfm_probe.s_axi             Read complete addr: 0x00000000 prot: 2 resp: 0 data: 49 50 32 34
+   122.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:572: DeprecationWarning: The data field will be removed in a future release.
+                                                          cmd.event.set(read_resp)
+   122.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:457: DeprecationWarning: The data field will be removed in a future release.
+                                                          return event.data
+   122.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/stream.py:195: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`
+                                                          self._pause_cr.kill()
+   122.00ns INFO     cocotb.bfm_probe.s_axi             Write start addr: 0x00000000 prot: 2 data: 64 72 6f 70
+   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+   223.00ns WARNING  cocotb.bfm_probe.s_axi             Flushed write operation during reset: AxiLiteWriteRespCmd(address=0, length=4, cycles=1, prot=<AxiProt.NONSECURE: 2>, event=<Event at 0x7c6aca6566f0>)
+   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted
+   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted
+   282.00ns INFO     cocotb.bfm_probe.s_axi             Read start addr: 0x00000000 prot: 2 length: 4
+   312.00ns INFO     cocotb.bfm_probe.s_axi             Read complete addr: 0x00000000 prot: 2 resp: 0 data: 00 00 00 00
+   312.00ns INFO     cocotb.bfm_probe                   BFM_API_PROBE_PASS: five pause APIs, legal write/read, reset cancellation=None
+   312.00ns INFO     cocotb.regression                  phase24_axi_bfm_probe.probe passed
+   312.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        **************************************************************************************
+                                                        ** phase24_axi_bfm_probe.probe    PASS         312.00           0.01      21162.46  **
+                                                        **************************************************************************************
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                312.00           0.02      19006.32  **
+                                                        **************************************************************************************
+BFM probe passed; this is NOT Bitloom product RTL verification.
+
+STDERR

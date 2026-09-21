@@ -1,0 +1,157 @@
+#!/usr/bin/env python3
+"""Replay Story 127.1 AC5 against the real gate using temporary sprint copies.
+
+Existing GREEN behavior, not a RED product test. Cross-story dependency setup
+is explicit here; the gate itself only enforces M0 and per-epic NFR14.
+Run from any directory with Python 3 (standard library only).
+Automate extends the original 27 scenarios to 117 [P1] integration cases.
+"""
+
+import hashlib
+from pathlib import Path
+import re
+import subprocess
+import sys
+import tempfile
+
+
+if not __debug__:
+    raise SystemExit("FAIL: optimized Python disables acceptance assertions; rerun without -O/PYTHONOPTIMIZE")
+
+
+ROOT = Path(__file__).resolve().parents[2]
+SPRINT = ROOT / "_agile-output/implementation-artifacts/sprint-status.yaml"
+GATE = ROOT / "scripts/check_phase24_gate.py"
+SUCCESS = (
+    "PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; "
+    "FR189/Epic122 deferred"
+)
+
+
+def replace_state(text, prefix, state):
+    pattern = rf"^(  {re.escape(prefix)}[^:\n]*:\s*)[\w-]+(\s*(?:#.*)?)$"
+    result, count = re.subn(pattern, lambda m: m[1] + state + m[2], text, flags=re.M)
+    assert count == 1, f"Expected exactly one status for {prefix!r}, got {count}"
+    return result
+
+
+def main():
+    original = SPRINT.read_bytes()
+    digest = hashlib.sha256(original).hexdigest()
+    text = original.decode("utf-8")
+    count = 0
+    print(f"Source sprint SHA256: {digest}")
+    print("Scope: existing GREEN process gate; no CSR RTL/formal acceptance.")
+    print("Cross-story dependencies are fixture setup, not gate coverage.")
+    try:
+        with tempfile.TemporaryDirectory(prefix="bitloom-127-1-atdd-") as directory:
+            fixture = Path(directory) / "sprint-status.yaml"
+
+            def case(name, content, exit_code, reason=None, *, exact_diagnostic=False):
+                nonlocal count
+                fixture.write_text(content, encoding="utf-8")
+                result = subprocess.run(
+                    [sys.executable, str(GATE), str(fixture)],
+                    capture_output=True, text=True, check=False, timeout=30,
+                )
+                assert result.returncode == exit_code, (
+                    name, result.returncode, result.stdout, result.stderr
+                )
+                if exit_code == 0:
+                    assert result.stdout.strip() == SUCCESS, (name, result.stdout)
+                    assert result.stderr == "", (name, result.stderr)
+                else:
+                    assert result.stdout == "", (name, result.stdout)
+                    assert f"FAIL: {reason}" in result.stderr.splitlines(), (
+                        name, reason, result.stderr
+                    )
+                if exact_diagnostic:
+                    assert result.stderr.splitlines() == [f"FAIL: {reason}"], (
+                        name, reason, result.stderr
+                    )
+                count += 1
+                print(f"PASS [P1] [{count:03d}] {name}: exit={result.returncode}")
+                for line in (result.stdout + result.stderr).splitlines():
+                    print(f"  {line}")
+
+            case("current sprint", text, 0)
+            base = replace_state(text, "epic-127", "in-progress")
+            for story in range(1, 5):
+                base = replace_state(base, f"127-{story}-", "backlog")
+            for state in (
+                "backlog", "ready", "ready-for-dev", "in-progress", "review",
+                "blocked", "deferred",
+            ):
+                for story in range(2, 5):
+                    candidate = replace_state(base, "127-1-", state)
+                    candidate = replace_state(candidate, f"127-{story}-", "ready-for-dev")
+                    case(
+                        f"127.1 {state}, 127.{story} ready-for-dev",
+                        candidate, 1, f"127.{story} requires 127.1 NFR14 done",
+                    )
+            # [P1] The original ready-for-dev matrix above remains intact.
+            # Exercise each other advance state exactly once for every non-done
+            # NFR14 state and each of the three downstream stories.
+            for risk_state in (
+                "backlog", "ready", "ready-for-dev", "in-progress", "review",
+                "blocked", "deferred",
+            ):
+                for story in range(2, 5):
+                    for advance_state in ("ready", "in-progress", "review", "done"):
+                        candidate = replace_state(base, "127-1-", risk_state)
+                        candidate = replace_state(candidate, f"127-{story}-", advance_state)
+                        case(
+                            f"127.1 {risk_state}, 127.{story} {advance_state}",
+                            candidate, 1, f"127.{story} requires 127.1 NFR14 done",
+                            exact_diagnostic=True,
+                        )
+            # [P1] A closed epic flag must not hide an incomplete M0 story.
+            for story in range(1, 4):
+                candidate = replace_state(base, "epic-125", "done")
+                for previous in range(1, 4):
+                    candidate = replace_state(candidate, f"125-{previous}-", "done")
+                candidate = replace_state(candidate, f"125-{story}-", "backlog")
+                case(
+                    f"M0 epic done with 125.{story} backlog", candidate, 1,
+                    "Epic 125 done requires all three M0 stories done",
+                    exact_diagnostic=True,
+                )
+            # [P1] Mutate each historical deferral independently: no claim of
+            # FR189 delivery can sneak through while other statuses stay valid.
+            for prefix, reason in (
+                ("epic-122", "Epic 122 must remain deferred"),
+                ("122-2-", "FR189 story 122.2 must remain deferred"),
+                ("122-3-", "FR189 story 122.3 must remain deferred"),
+            ):
+                candidate = replace_state(base, prefix, "done")
+                case(
+                    f"historical {prefix} changed from deferred to done",
+                    candidate, 1, reason, exact_diagnostic=True,
+                )
+            for story in range(2, 5):
+                candidate = base
+                # M0/M1 and earlier Epic127 stories satisfy declared dependencies.
+                for epic, total in ((125, 3), (126, 4)):
+                    candidate = replace_state(candidate, f"epic-{epic}", "done")
+                    for previous in range(1, total + 1):
+                        candidate = replace_state(candidate, f"{epic}-{previous}-", "done")
+                for previous in range(1, story):
+                    candidate = replace_state(candidate, f"127-{previous}-", "done")
+                candidate = replace_state(candidate, f"127-{story}-", "ready-for-dev")
+                case(f"127.{story} ready with declared predecessors done", candidate, 0)
+            candidate = replace_state(base, "epic-125", "in-progress")
+            candidate = replace_state(candidate, "127-1-", "ready-for-dev")
+            case("M0 not closed", candidate, 1, "127.1 cannot advance before M0 closes")
+            candidate = replace_state(base, "127-1-", "done")
+            candidate = replace_state(candidate, "epic-127", "done")
+            case("Epic127 premature close", candidate, 1, "Epic 127 done requires its stories done")
+    finally:
+        after = SPRINT.read_bytes()
+        assert after == original, "Original sprint bytes changed during test"
+        assert hashlib.sha256(after).hexdigest() == digest, "Original sprint hash changed"
+        print(f"PASS original sprint byte/hash preservation: {digest}")
+    print(f"RESULT: {count} scenarios passed; existing GREEN gate behavior verified.")
+
+
+if __name__ == "__main__":
+    main()

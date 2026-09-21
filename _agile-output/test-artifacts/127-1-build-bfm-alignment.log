@@ -1,0 +1,64 @@
+{
+  "utc": "2026-09-21T01:04:50.189874+00:00",
+  "command": [
+    "sed",
+    "-n",
+    "255,308p",
+    "/tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py"
+  ],
+  "exit_code": 0
+}
+
+    async def _process_write(self):
+        while True:
+            cmd = await self.write_command_queue.get()
+            self.current_write_command = cmd
+
+            word_addr = (cmd.address // self.byte_lanes) * self.byte_lanes
+
+            start_offset = cmd.address % self.byte_lanes
+            end_offset = ((cmd.address + len(cmd.data) - 1) % self.byte_lanes) + 1
+
+            strb_start = (self.strb_mask << start_offset) & self.strb_mask
+            strb_end = self.strb_mask >> (self.byte_lanes - end_offset)
+
+            cycles = (len(cmd.data) + (cmd.address % self.byte_lanes) + self.byte_lanes-1) // self.byte_lanes
+
+            resp_cmd = AxiLiteWriteRespCmd(cmd.address, len(cmd.data), cycles, cmd.prot, cmd.event)
+            await self.int_write_resp_command_queue.put(resp_cmd)
+
+            offset = 0
+
+            if self.log.isEnabledFor(logging.INFO):
+                self.log.info("Write start addr: 0x%08x prot: %s data: %s",
+                        cmd.address, cmd.prot, ' '.join((f'{c:02x}' for c in cmd.data)))
+
+            for k in range(cycles):
+                start = 0
+                stop = self.byte_lanes
+                strb = self.strb_mask
+
+                if k == 0:
+                    start = start_offset
+                    strb &= strb_start
+                if k == cycles-1:
+                    stop = end_offset
+                    strb &= strb_end
+
+                val = 0
+                for j in range(start, stop):
+                    val |= cmd.data[offset] << j*8
+                    offset += 1
+
+                aw = self.aw_channel._transaction_obj()
+                if k == 0:
+                    aw.awaddr = cmd.address
+                else:
+                    aw.awaddr = word_addr + k*self.byte_lanes
+                aw.awprot = cmd.prot
+
+                if not self.wstrb_present and strb != self.strb_mask:
+                    self.log.warning("Partial operation requested with wstrb not connected, write will be zero-padded (0x%x != 0x%x)", strb, self.strb_mask)
+
+                w = self.w_channel._transaction_obj()
+                w.wdata = val

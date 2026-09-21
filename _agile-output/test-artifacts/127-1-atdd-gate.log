@@ -1,0 +1,65 @@
+Source sprint SHA256: 13e44d2a95b7b05ee4116c4ef5f029f63eb5a5c75617c19d6af0b582c4618d45
+Scope: existing GREEN process gate; no CSR RTL/formal acceptance.
+Cross-story dependencies are fixture setup, not gate coverage.
+PASS [01] current sprint: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [02] 127.1 backlog, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [03] 127.1 backlog, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [04] 127.1 backlog, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [05] 127.1 ready, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [06] 127.1 ready, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [07] 127.1 ready, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [08] 127.1 ready-for-dev, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [09] 127.1 ready-for-dev, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [10] 127.1 ready-for-dev, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [11] 127.1 in-progress, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [12] 127.1 in-progress, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [13] 127.1 in-progress, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [14] 127.1 review, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [15] 127.1 review, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [16] 127.1 review, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [17] 127.1 blocked, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [18] 127.1 blocked, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [19] 127.1 blocked, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [20] 127.1 deferred, 127.2 ready-for-dev: exit=1
+  FAIL: 127.2 requires 127.1 NFR14 done
+PASS [21] 127.1 deferred, 127.3 ready-for-dev: exit=1
+  FAIL: 127.3 requires 127.1 NFR14 done
+PASS [22] 127.1 deferred, 127.4 ready-for-dev: exit=1
+  FAIL: 127.4 requires 127.1 NFR14 done
+PASS [23] 127.2 ready with declared predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [24] 127.3 ready with declared predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [25] 127.4 ready with declared predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [26] M0 not closed: exit=1
+  FAIL: Epic 126 cannot advance before M0 closes
+  FAIL: 126.1 cannot advance before M0 closes
+  FAIL: 126.2 cannot advance before M0 closes
+  FAIL: 126.3 cannot advance before M0 closes
+  FAIL: 126.4 cannot advance before M0 closes
+  FAIL: Epic 127 cannot advance before M0 closes
+  FAIL: 127.1 cannot advance before M0 closes
+PASS [27] Epic127 premature close: exit=1
+  FAIL: Epic 127 done requires its stories done
+PASS original sprint byte/hash preservation: 13e44d2a95b7b05ee4116c4ef5f029f63eb5a5c75617c19d6af0b582c4618d45
+RESULT: 27 scenarios passed; existing GREEN gate behavior verified.

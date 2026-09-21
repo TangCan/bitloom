@@ -1,0 +1,58 @@
+{
+  "utc": "2026-09-21T01:00:50.531894+00:00",
+  "command": [
+    "/tmp/bitloom-phase24-bfm-py312/bin/python",
+    "-c",
+    "from importlib.metadata import version\nimport inspect,hashlib\nfrom pathlib import Path\nimport cocotbext.axi.axil_master as ax\nimport cocotbext.axi.stream as stream\nimport cocotbext.axi.reset as reset\nfor name in (\"cocotb\",\"cocotb-bus\",\"cocotbext-axi\",\"find-libpython\",\"scapy\"):\n print(name,version(name))\nfor module in (ax,stream,reset):\n p=Path(inspect.getfile(module)); print(\"SOURCE\",p,\"SHA256\",hashlib.sha256(p.read_bytes()).hexdigest())\n lines=p.read_text().splitlines()\n hits=[i for i,l in enumerate(lines) if any(s in l for s in (\"def set_pause_generator\", \"def assert_reset\", \"aligned_addr\", \"cmd.event.set(None)\", \"split and align\"))]\n for i in hits:\n  print(\"\\n\".join(f\"{j+1}: {lines[j]}\" for j in range(max(0,i-2),min(len(lines),i+8))))\n"
+  ],
+  "exit_code": 0
+}
+cocotb 2.0.1
+cocotb-bus 0.3.0
+cocotbext-axi 0.1.28
+find-libpython 0.5.1
+scapy 2.7.0
+SOURCE /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py SHA256 3ba725eb1348cc5ddcd4ae6fa6220efbedcabc19e24ed62ddbd62bc74339d92d
+225:                 self.log.warning("Flushed write operation during reset: %s", cmd)
+226:                 if cmd.event:
+227:                     cmd.event.set(None)
+228: 
+229:             while not self.write_command_queue.empty():
+230:                 cmd = self.write_command_queue.get_nowait()
+231:                 flush_cmd(cmd)
+232: 
+233:             if self.current_write_command:
+234:                 cmd = self.current_write_command
+476:                 self.log.warning("Flushed read operation during reset: %s", cmd)
+477:                 if cmd.event:
+478:                     cmd.event.set(None)
+479: 
+480:             while not self.read_command_queue.empty():
+481:                 cmd = self.read_command_queue.get_nowait()
+482:                 flush_cmd(cmd)
+483: 
+484:             if self.current_read_command:
+485:                 cmd = self.current_read_command
+SOURCE /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/stream.py SHA256 a16395f59888b842b93d8283d9a3f775847488c477e5b582f146cc13938fed23
+191:         self._pause = val
+192: 
+193:     def set_pause_generator(self, generator=None):
+194:         if self._pause_cr is not None:
+195:             self._pause_cr.kill()
+196:             self._pause_cr = None
+197: 
+198:         self._pause_generator = generator
+199: 
+200:         if self._pause_generator is not None:
+SOURCE /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/reset.py SHA256 dd59c32f84d8ecb0bf479a8ede0b717fec04cd7e4512b1d41c97406b7550d726
+38:         self._update_reset()
+39: 
+40:     def assert_reset(self, val=None):
+41:         if val is None:
+42:             self.assert_reset(True)
+43:             self.assert_reset(False)
+44:         else:
+45:             self._local_reset = bool(val)
+46:             self._update_reset()
+47: 
+

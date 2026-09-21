@@ -1,0 +1,16 @@
+{
+  "story": "127.1",
+  "mode": "subagent",
+  "process_scenarios": 27,
+  "process_status": "existing-GREEN",
+  "manual_checks": 14,
+  "browser_e2e": 0,
+  "http_api": 0,
+  "new_product_tests": 0,
+  "red_evidence": "127-1-atdd-gate-presence.log",
+  "tool_probe_status": "not_run",
+  "fixtures": "TemporaryDirectory + independent status copies; auto cleanup",
+  "speedup": "not measured",
+  "all_tests_skipped": false,
+  "skip_override": "Explicit task: real existing-green gate verification, no synthetic product red."
+}

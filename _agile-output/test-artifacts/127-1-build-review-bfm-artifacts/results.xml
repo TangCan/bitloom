@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1789952959" />
+    <testcase name="probe" classname="phase24_axi_bfm_probe" file="/nvme_data2/richard/2026/rhdl/scripts/phase24_axi_bfm_probe.py" lineno="62" time="0.013816118240356445" sim_time_ns="312.0" ratio_time="22582.31976393035" />
+  </testsuite>
+</testsuites>

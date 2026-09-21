@@ -1,0 +1,8 @@
+{
+  "scripts/phase24_axi_bfm_probe.py": "24b437cde30b1cd206db8b91b632f93c976c13b9fb901b023ea392d2e2d769b1",
+  "scripts/phase24-axi-bfm-requirements.txt": "2478ce2e54556c310841f3af5e208a02afdbefd4dda2758b03051a962e15f57c",
+  "scripts/check_phase24_gate.py": "575f8c96cff13ddf828ee79f9263c16c2df2572d1fdcdf40a19400d6db703810",
+  "_agile-output/test-artifacts/127-1-build-bfm-artifacts/stub.sv": "109349eb43c1d61ea9be730b9a5fbb7d7891aa43a6b18e2a7114804c0f796069",
+  "_agile-output/test-artifacts/127-1-build-bfm-artifacts/results.xml": "b3590743285d4c3e9e54f1d0e69613bf67b22e12a49773403034a6cdcfd20b50",
+  "_agile-output/test-artifacts/127-1-atdd-gate-initial.py.txt": "a4782adab4f2698a7a256ed6d04f2b0c8937141bcc2e12367bec588c8b27761b"
+}

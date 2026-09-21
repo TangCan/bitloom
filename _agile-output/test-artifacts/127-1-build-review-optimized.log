@@ -1,0 +1,2 @@
+{"command": ["python3", "-O", "_agile-output/test-artifacts/127-1-atdd-gate.py"], "exit": 1}
+FAIL: optimized Python disables acceptance assertions; rerun without -O/PYTHONOPTIMIZE

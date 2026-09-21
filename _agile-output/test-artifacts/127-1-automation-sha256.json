@@ -1,0 +1,20 @@
+{
+  "_agile-output/test-artifacts/127-1-atdd-gate.py": "4de9b57d8ff267f22458598aae5ada2fe84ed5ba3ed457c63f86c9fbf37c951b",
+  "scripts/check_phase24_gate.py": "575f8c96cff13ddf828ee79f9263c16c2df2572d1fdcdf40a19400d6db703810",
+  "scripts/phase24_axi_bfm_probe.py": "24b437cde30b1cd206db8b91b632f93c976c13b9fb901b023ea392d2e2d769b1",
+  "scripts/phase24-axi-bfm-requirements.txt": "2478ce2e54556c310841f3af5e208a02afdbefd4dda2758b03051a962e15f57c",
+  "_agile-output/test-artifacts/automation-127-1.md": "5298c313fcbf44e0ea6797470f812a889a8df3d16dcc5e821be6d8ce55ff5d22",
+  "_agile-output/test-artifacts/127-1-automation-api-worker.json": "e96a26644bb8d93ada29a238a162b7455e5369dc0f83d6c75c92d79f08f35c94",
+  "_agile-output/test-artifacts/127-1-automation-backend-worker.json": "eb89152a4db8cba9dfccec11c3fa3aa686db15eaf8eb6146839e19071953b4c9",
+  "_agile-output/test-artifacts/127-1-automation-bfm-artifacts/results.xml": "3c38f915b52a2cc7b6cd8c697211224646597f2e815a5b5a845cd0afbfb3e3f2",
+  "_agile-output/test-artifacts/127-1-automation-bfm-artifacts/stub.sv": "109349eb43c1d61ea9be730b9a5fbb7d7891aa43a6b18e2a7114804c0f796069",
+  "_agile-output/test-artifacts/127-1-automation-bfm.log": "812027c33f0f3b4311807e7d3602c618781661451289052cba5ebf5b3d429c8a",
+  "_agile-output/test-artifacts/127-1-automation-gate-initial.log": "477636022487a7a810296ca1479ea35f22224e1b9ab6bfef0961d01a720a9cf4",
+  "_agile-output/test-artifacts/127-1-automation-gate-initial.py.txt": "17618b2dc9301ed2286fd2f03c84b1168e1a4f4946db24e92acfe02869b2cab4",
+  "_agile-output/test-artifacts/127-1-automation-gate-initial.xml": "d26bbd233b3abbea3f77142cc2c80921f758c28a4b4ead701c71fa75f69bd7c9",
+  "_agile-output/test-artifacts/127-1-automation-gate.log": "f754c7f94f43b1e6e8b3cf5923b72b3c872a46bd3257b8ef9aa1b0ff2d389d24",
+  "_agile-output/test-artifacts/127-1-automation-gate.xml": "a2cdc3d0c54df9b0904eb41652c6361953ef2b76c740072de54996ad7ab37123",
+  "_agile-output/test-artifacts/127-1-automation-optimized.log": "111f1be983005ed2322fe266e9d63c01e607ced2101f581a2a45dd735b283c0a",
+  "_agile-output/test-artifacts/127-1-automation-runs.json": "a4030a1d66b0673d375ff77f503b84433cc93f0457b31da1787ccb844a43738b",
+  "_agile-output/test-artifacts/127-1-automation-summary.json": "9e22c058dcee001c7ae6dbfcc23b5922f810f5c7da7bf6589b3ab8953be2014b"
+}
