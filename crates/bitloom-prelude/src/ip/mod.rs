@@ -35,6 +35,7 @@ mod spi;
 mod sync_fifo;
 mod timer;
 mod uart;
+mod uart_csr;
 
 pub use axi::*;
 pub use axi_lite_csr::*;
@@ -51,6 +52,7 @@ pub use spi::*;
 pub use sync_fifo::*;
 pub use timer::*;
 pub use uart::*;
+pub use uart_csr::*;
 
 #[cfg(test)]
 mod tests;

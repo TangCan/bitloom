@@ -1,0 +1,15 @@
+{
+  "stage": "first direct RTL only; implementation still in progress",
+  "path": "target/fr197-uart/direct-1186933-1789995697086215770",
+  "files": {
+    "design.v": "cdeeaecb91be2dbd6ef460f75f9302716692123184ca4ea6ddd49ecedcc3257c",
+    "tb.sv": "1e8afbe70289a3521940dfd105ed9962ee78815c76c70c1e6557d6f26ce3d9de",
+    "accounting.log": "8c5963e8607ab5b01dfd036a0f0e02d25fcfd610e7383462980af1eaa9e77d4d",
+    "simulate.log": "20a1b08915cc51cc97457820c393fbfeea55e8c71ec4ca909c29908190af9617",
+    "simulate.json": "0bb04a7e072b1d41c12a671bb8445208660a08234d934eb1dbca1c25452125ca",
+    "trace.vcd": "e9af9840ffb7eef62a032b6028f07c1abafd4b7db76a014289a4393c0b301be4"
+  },
+  "simulation_exit": 0,
+  "source_complete_audit": false,
+  "scope": "three seeds 72413 cycles, no FIRRTL/Chisel/combined/formal claim"
+}

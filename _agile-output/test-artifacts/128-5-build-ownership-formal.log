@@ -1,0 +1,14 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.00s
+     Running tests/fr197_uart_formal.rs (target/debug/deps/fr197_uart_formal-9d07f18d6e9e5bed)
+
+running 3 tests
+UartCsr original synthesis cells=1427 /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-uart-formal/synthesis-1284588-1789996947183614208
+test p0_uart_original_synthesis ... ok
+UartCsr original PASS and ready fault specified counterexample PASS /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-uart-formal/mutation-1284588-1789996947184314379
+test p0_uart_observer_rejects_ready_driver_fault ... ok
+UartCsr bus/config/event/occupancy/timer safety subset/three covers /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-uart-formal/proof-1284588-1789996947183897489
+test p0_uart_public_bus_safety_and_cover ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 16.68s
+

@@ -1,0 +1,63 @@
+{
+  "scope": "Review reproduction only: unchanged existing three-seed TB, emitted DUT capture source changed by one synchronizer stage; no repository source edit",
+  "source_directory": "/nvme_data2/richard/2026/rhdl/target/fr197-uart/direct-1415809-1789998869715577288",
+  "work_directory": "/tmp/bitloom-1285-rx-capture-ld_jdbiz",
+  "results": [
+    {
+      "case": "control",
+      "capture": "sync2",
+      "exit": 0,
+      "last_lines": [
+        "VCD info: dumpfile trace.vcd opened for output.",
+        "FR197 UART PASS",
+        "tb.sv:834995: $finish called at 724130000 (1ps)"
+      ]
+    },
+    {
+      "case": "one_cycle_newer",
+      "capture": "sync1",
+      "exit": 1,
+      "last_lines": [
+        "VCD info: dumpfile trace.vcd opened for output.",
+        "FATAL: tb.sv:246486: UART cycle=21804 after rdata expected=7 got=0000004c",
+        "       Time: 218050000  Scope: tb"
+      ]
+    },
+    {
+      "case": "one_cycle_older",
+      "capture": "history",
+      "exit": 1,
+      "last_lines": [
+        "VCD info: dumpfile trace.vcd opened for output.",
+        "FATAL: tb.sv:246486: UART cycle=21804 after rdata expected=7 got=0000000c",
+        "       Time: 218050000  Scope: tb"
+      ]
+    }
+  ],
+  "archive": "128-5-code-review-rx-capture-raw.tar.gz",
+  "archive_sha256": "c8c223eb65aaa03fec504a1bbbc539544000865ed1bbdad39e50dc1c01588d96",
+  "members": {
+    "control/design.v": "5ebff374b2d2853a81bef6cb35de823c92309d5c16214bb0dc7e06949f5206dc",
+    "control/tb.sv": "1e8afbe70289a3521940dfd105ed9962ee78815c76c70c1e6557d6f26ce3d9de",
+    "control/simulate.json": "30b7b6200e5a347b583d67ac6847ceed5822d11ee3ba802da0e9e5d972ad42f5",
+    "control/compile.json": "909e7f7c169b2271548f4e4f01f21cb2e89c37e91ce98e3503624f0710b35dcd",
+    "control/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "control/simulate.log": "20a1b08915cc51cc97457820c393fbfeea55e8c71ec4ca909c29908190af9617",
+    "control/trace.vcd": "16e6351e0601d906543860e365773cf0207899d29dc365dfb2e7a4f03e29f542",
+    "one_cycle_newer/design.v": "d792a9ce6055418b6a44ea868e607be81a128df07700c4c9e4e1926b90be4034",
+    "one_cycle_newer/tb.sv": "1e8afbe70289a3521940dfd105ed9962ee78815c76c70c1e6557d6f26ce3d9de",
+    "one_cycle_newer/simulate.json": "38adcd0a991dcc611dbd55a98d7563fecaf58959d46853724005b630c189f44b",
+    "one_cycle_newer/compile.json": "04ad6407ee5ba845dd166e6fbbad2b7bf8229a87fee175112931456d01187750",
+    "one_cycle_newer/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "one_cycle_newer/simulate.log": "5b9e12ce66ba8cc5d05fc4f08fa490d219bb0f3d6469751d233548f92dc0a9c2",
+    "one_cycle_newer/trace.vcd": "daf906bd5fe3535ac6ce3025f6400f1a0bb1312159898a301bcc402adb97b2c3",
+    "one_cycle_older/design.v": "dd462ab4f1d93949d1698643135caefce89f3bb81df45041cac5c97a07da463e",
+    "one_cycle_older/tb.sv": "1e8afbe70289a3521940dfd105ed9962ee78815c76c70c1e6557d6f26ce3d9de",
+    "one_cycle_older/simulate.json": "7a3dc7757876c2c5a5da92f3eaa3d34fdbdabaab97163ade6e9c15b3ea88b990",
+    "one_cycle_older/compile.json": "59355978512df03e66ba79c46b3b3610a9b25306c41fbfc5403efe06ef2979ed",
+    "one_cycle_older/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "one_cycle_older/simulate.log": "b302ca1fb55f58ffaa5182451ee94c6f7ea145c596e7d883d042e0a76925041b",
+    "one_cycle_older/trace.vcd": "65f796880bde7548d5cf0fa6b097656f7490fc7b5f5920504e82134b89e7363f"
+  },
+  "status": "pass"
+}

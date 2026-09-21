@@ -1,0 +1,24 @@
+{
+  "checked_utc": "2026-09-21T14:24:11.768050+00:00",
+  "source": "official llvm/circt releases API",
+  "web_tool": "API open failed; official API fetched directly",
+  "pages": [
+    {
+      "url": "https://api.github.com/repos/llvm/circt/releases?per_page=100&page=1",
+      "count": 100
+    },
+    {
+      "url": "https://api.github.com/repos/llvm/circt/releases?per_page=100&page=2",
+      "count": 100
+    },
+    {
+      "url": "https://api.github.com/repos/llvm/circt/releases?per_page=100&page=3",
+      "count": 23
+    }
+  ],
+  "total": 223,
+  "max_stable": "firtool-1.159.0",
+  "max_url": "https://github.com/llvm/circt/releases/tag/firtool-1.159.0",
+  "strictly_greater_than_1_159_0": [],
+  "decision": "keep deferred if no strict greater release; recheck before final deferred closure"
+}

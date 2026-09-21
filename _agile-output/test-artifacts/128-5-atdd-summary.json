@@ -1,0 +1,24 @@
+{
+  "story": "128.5",
+  "test_count": 14,
+  "all_ignored": true,
+  "files": [
+    {
+      "file": "crates/bitloom/tests/fr197_uart_api.rs",
+      "tests": 9,
+      "sha256": "2ddc7fbe6d500450636e081887516eb13c49f5f525395269e0cf26c2e71adcd9"
+    },
+    {
+      "file": "crates/bitloom/tests/fr197_uart.rs",
+      "tests": 2,
+      "sha256": "19e453b0af6522108e3572ea8daa0cc85c0861fa3c565b48d6e8f13c540f0371"
+    },
+    {
+      "file": "crates/bitloom/tests/fr197_uart_formal.rs",
+      "tests": 3,
+      "sha256": "00c94b40663d4617e3dd75a87576c2d303cd944c2b4f8c691374e5b6fda5dee8"
+    }
+  ],
+  "mode": "subagent",
+  "behavior_executed": false
+}

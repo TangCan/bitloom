@@ -1,0 +1,26 @@
+{
+  "created_utc": "2026-09-21T13:44:31.249000+00:00",
+  "archive": "128-5-build-raw-consolidated.tar.gz",
+  "archive_sha256": "14360ff18ea57e3c1719733d81459f58efc7985064e7590e69ee951bc2bc1cc0",
+  "archive_size_bytes": 187582296,
+  "part_size_limit_bytes": 67108864,
+  "parts": [
+    {
+      "name": "128-5-build-raw-consolidated.tar.gz.part000",
+      "size_bytes": 67108864,
+      "sha256": "1a08e1f82ed1c9f860c215c4d0723a4f42f7302f83c520d9d55af74838c60339"
+    },
+    {
+      "name": "128-5-build-raw-consolidated.tar.gz.part001",
+      "size_bytes": 67108864,
+      "sha256": "45fe1b4eee9ff48b8db3275ca865b696ee7e1d6f17063af665e1ab9d9673fd1f"
+    },
+    {
+      "name": "128-5-build-raw-consolidated.tar.gz.part002",
+      "size_bytes": 53364568,
+      "sha256": "8c4715fde64cec4a15fbda9b4cab144d9344ef8bb557bb02915a6061d3a5d2b4"
+    }
+  ],
+  "reassembled_sha256_verified": true,
+  "storage_only": true
+}

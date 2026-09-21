@@ -1,0 +1,13 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 2.42s
+     Running tests/fr197_uart.rs (target/debug/deps/fr197_uart-27004feda4ef7e1b)
+
+running 2 tests
+UART explicit contract edge matrix PASS frames=3785 coverage={"disabled_queue_access": 1, "each_event_same_other_clear": 8, "enabled_merged_div_legality": 6, "final_busy_edge_reject": 2, "nonzero_partial_div_merge": 16, "reset_beats_stop_and_software": 1, "reset_both_full_and_response": 1, "reset_partial_synchronizer": 2, "rx_only_or_dual_busy_configuration": 2, "stalled_response_serial_and_inactive_noise": 1, "tx_idle_configuration_collision": 5, "tx_nonfull_simultaneous_push_pop": 1} /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-uart/edges-false-1789997454895152397
+test p0_uart_explicit_contract_edges ... ok
+UART vectors FIRRTL and JVM actual RTL PASS /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-uart/edges-true-1789997454895132003
+UART explicit contract edge matrix PASS frames=3785 coverage={"disabled_queue_access": 1, "each_event_same_other_clear": 8, "enabled_merged_div_legality": 6, "final_busy_edge_reject": 2, "nonzero_partial_div_merge": 16, "reset_beats_stop_and_software": 1, "reset_both_full_and_response": 1, "reset_partial_synchronizer": 2, "rx_only_or_dual_busy_configuration": 2, "stalled_response_serial_and_inactive_noise": 1, "tx_idle_configuration_collision": 5, "tx_nonfull_simultaneous_push_pop": 1} /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-uart/edges-true-1789997454895132003
+test p1_uart_contract_edges_backends ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 21.37s
+

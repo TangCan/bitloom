@@ -38,6 +38,8 @@ jobs:
         run: python3 _agile-output/test-artifacts/128-3-build-runner.py --only example --only header
       - name: FR197 documented prelude-only GPIO design and C header
         run: python3 _agile-output/test-artifacts/128-4-build-runner.py --only example --only header
+      - name: FR197 documented prelude-only UART design and C header
+        run: python3 _agile-output/test-artifacts/128-5-build-runner.py --only example --only header
       - name: Preserve Icarus failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
@@ -57,6 +59,10 @@ jobs:
             target/fr197-gpio-api/
             target/fr197-gpio-formal/
             target/fr197-gpio-reruns/
+            target/fr197-uart/
+            target/fr197-uart-api/
+            target/fr197-uart-formal/
+            target/fr197-uart-reruns/
             target/fr197-timer-reruns/
             target/fr196-axi-lite-csr/
             target/fr196-decoder-integration/
@@ -104,6 +110,7 @@ jobs:
           CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test --locked -p bitloom --test fr197_timer_api p1_two_timer_firrtl_chisel_shared_and_renamed_definitions -- --ignored --exact --nocapture
           python3 _agile-output/test-artifacts/128-3-build-runner.py --only backends
           python3 _agile-output/test-artifacts/128-4-build-runner.py --only backends
+          python3 _agile-output/test-artifacts/128-5-build-runner.py --only backends
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
@@ -119,6 +126,10 @@ jobs:
             target/fr197-gpio-api/
             target/fr197-gpio-formal/
             target/fr197-gpio-reruns/
+            target/fr197-uart/
+            target/fr197-uart-api/
+            target/fr197-uart-formal/
+            target/fr197-uart-reruns/
 
   # FR35 / FR50: HLS product-path smoke. Failures are never ignored.
   # Default uses CI stub (wiring + synthesizable .v). Real Bambu 2024.10 via
@@ -192,6 +203,16 @@ jobs:
           export PYTHONDONTWRITEBYTECODE=1
           python3 _agile-output/test-artifacts/128-4-build-harness-tests.py
           python3 -O _agile-output/test-artifacts/128-4-build-harness-tests.py
+      - name: Required UART safety, timing, cover and original synthesis
+        run: |
+          export BITLOOM_SBY_SOURCE="${RUNNER_TEMP:-/tmp}/bitloom-sby-src"
+          python3 _agile-output/test-artifacts/128-5-build-runner.py --only formal
+      - name: Required UART evidence harness regressions
+        run: |
+          export BITLOOM_SBY_SOURCE="${RUNNER_TEMP:-/tmp}/bitloom-sby-src"
+          export PYTHONDONTWRITEBYTECODE=1
+          python3 _agile-output/test-artifacts/128-5-build-harness-tests.py
+          python3 -O _agile-output/test-artifacts/128-5-build-harness-tests.py
       - name: Preserve formal failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
@@ -210,6 +231,10 @@ jobs:
             target/fr197-gpio-api/
             target/fr197-gpio-formal/
             target/fr197-gpio-reruns/
+            target/fr197-uart/
+            target/fr197-uart-api/
+            target/fr197-uart-formal/
+            target/fr197-uart-reruns/
             target/fr197-timer-reruns/
             target/fr196-decoder-integration/
             target/fr119/

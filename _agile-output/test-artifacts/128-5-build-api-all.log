@@ -1,0 +1,44 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.05s
+     Running tests/fr197_uart_api.rs (target/debug/deps/fr197_uart_api-33bcd4236a225b18)
+
+running 9 tests
+test p0_descriptor_exact_addresses_masks_owners_and_dynamic_rejects ... ok
+test p0_two_fifos_reuse_exact_param_sync_fifo_eight_by_four_body ... ok
+test p1_software_products_match_literal_local_address_golden ... ok
+test p0_exact_fifteen_ports_and_shared_standalone_equivalence ... ok
+test p0_invalid_names_and_conflicting_bodies_are_rejected ... ok
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (1285401) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (1285401) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (1285401) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (1285401) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (1285401) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (1285401) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (1285401) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (1285401) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (1285401) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+test p1_hierarchy_native_and_generated_reject_explicitly ... ok
+test p0_shared_and_renamed_definitions_and_wiring_diagnostics ... ok
+test p1_generated_header_is_real_c11_consumer_with_independent_constants ... ok
+test p1_documented_example_compiles_runs_with_only_prelude_and_reproduces_products ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.61s
+

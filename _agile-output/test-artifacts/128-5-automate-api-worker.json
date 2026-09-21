@@ -1,0 +1,86 @@
+{
+  "success": true,
+  "subagent": "api-tests",
+  "tests": [],
+  "fixture_needs": [],
+  "knowledge_fragments_used": [
+    "library-integration-mandate",
+    "test-quality",
+    "selective-testing"
+  ],
+  "playwright_utils_deviations": [],
+  "pactjs_utils_deviations": [],
+  "provider_scrutiny": "completed",
+  "provider_files_read": [
+    "crates/bitloom-prelude/src/ip/uart_csr.rs",
+    "crates/bitloom/tests/fr197_uart_api.rs",
+    "docs/ip/uart-csr.md",
+    "docs/ip/uart-csr-example.rs",
+    "docs/ip/uart-csr-registers.h",
+    "docs/ip/uart-csr-registers.md"
+  ],
+  "test_count": 0,
+  "existing_test_count": 9,
+  "priority_coverage": {
+    "P0": 5,
+    "P1": 4,
+    "P2": 0,
+    "P3": 0
+  },
+  "existing_coverage": [
+    {
+      "test": "p0_exact_fifteen_ports_and_shared_standalone_equivalence",
+      "file": "crates/bitloom/tests/fr197_uart_api.rs",
+      "coverage": "AC1: exact fifteen named typed ports; standalone and reused shared definition FrozenHir equality."
+    },
+    {
+      "test": "p0_descriptor_exact_addresses_masks_owners_and_dynamic_rejects",
+      "file": "crates/bitloom/tests/fr197_uart_api.rs",
+      "coverage": "AC2: literal six-register address/mask/reset/access/owner/event/reject and field contract."
+    },
+    {
+      "test": "p1_software_products_match_literal_local_address_golden",
+      "file": "crates/bitloom/tests/fr197_uart_api.rs",
+      "coverage": "AC2: deterministic generated C/Markdown against literal address golden and checked-in products."
+    },
+    {
+      "test": "p0_invalid_names_and_conflicting_bodies_are_rejected",
+      "file": "crates/bitloom/tests/fr197_uart_api.rs",
+      "coverage": "AC1: invalid identifier and conflicting definition diagnostic code/details; poisoned session cannot freeze."
+    },
+    {
+      "test": "p0_shared_and_renamed_definitions_and_wiring_diagnostics",
+      "file": "crates/bitloom/tests/fr197_uart_api.rs",
+      "coverage": "AC1: shared/renamed definition cardinality and width/clock-type/direction wiring diagnostics."
+    },
+    {
+      "test": "p0_two_fifos_reuse_exact_param_sync_fifo_eight_by_four_body",
+      "file": "crates/bitloom/tests/fr197_uart_api.rs",
+      "coverage": "AC1: exactly two instances of one publicly elaborated ParamSyncFifo<8,4> definition."
+    },
+    {
+      "test": "p1_hierarchy_native_and_generated_reject_explicitly",
+      "file": "crates/bitloom/tests/fr197_uart_api.rs",
+      "coverage": "AC7: explicit hierarchy rejection in Interpreter/Compiled/GeneratedFunctional for standalone and two compositions."
+    },
+    {
+      "test": "p1_generated_header_is_real_c11_consumer_with_independent_constants",
+      "file": "crates/bitloom/tests/fr197_uart_api.rs",
+      "coverage": "AC2: real C11 consumer, independent constants/access strings and double-include safety."
+    },
+    {
+      "test": "p1_documented_example_compiles_runs_with_only_prelude_and_reproduces_products",
+      "file": "crates/bitloom/tests/fr197_uart_api.rs",
+      "coverage": "AC1/2: unmodified documented example in isolated prelude-only Cargo consumer; actual output reproduction."
+    }
+  ],
+  "gaps": [],
+  "summary": "API/static-software coverage audit found no new nonduplicate P0/P1 gap. Retain all nine existing API tests (five P0, four P1); generate zero tests. No tests executed by this worker and no product/existing-test files changed. Real serial, old UART compatibility and backend behavior remain mapped to existing other suites, not replicated as API tests.",
+  "scope_notes": [
+    "Rust/Cargo backend; no HTTP endpoints, authentication provider, JS dependency/runner or Pact consumer-provider boundary exists. Playwright/Pact flags do not make JS mandates applicable here.",
+    "pact_mcp_reachable=false and fallback none are inherited from the one parent probe; no reprobe or broker call.",
+    "No claim that static structure proves serial behavior: state isolation is already exercised by actual shared/renamed dual-instance RTL in the parent coverage plan.",
+    "Potential broader descriptor field-name refactoring is excluded by frozen ATDD API and rejected review finding; repeated generic CSR software-generation checks would duplicate existing golden/real consumer coverage."
+  ],
+  "tests_executed": false
+}

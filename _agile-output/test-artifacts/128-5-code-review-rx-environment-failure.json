@@ -1,0 +1,25 @@
+{
+  "classification": "environment: required Icarus was absent from default PATH; no DUT simulation occurred",
+  "command_record": {
+    "command": [
+      "timeout",
+      "--kill-after=5s",
+      "180s",
+      "iverilog",
+      "-g2012",
+      "-s",
+      "tb",
+      "-o",
+      "sim",
+      "design.v",
+      "tb.sv"
+    ],
+    "exit_code": 127,
+    "start_utc": "2026-09-21T14:09:16.928964+00:00",
+    "end_utc": "2026-09-21T14:09:16.933737+00:00"
+  },
+  "original_log": "timeout: failed to run command \u2018iverilog\u2019: No such file or directory\n",
+  "archive": "128-5-code-review-rx-environment-failure.tar.gz",
+  "archive_sha256": "e0c7cd7e4b9ea91d92596496c5db6feaf7fce853d57cf45e74f1d53e23a99df1",
+  "retry": "restored /tmp/bitloom-maintenance-tools/bin on PATH"
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "bitloom",
+      "--test",
+      "fr197_uart",
+      "--no-run"
+    ],
+    "exit_code": 101,
+    "start_unix": 1789995304.7738738,
+    "end_unix": 1789995305.0854547,
+    "missing_api": true
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "bitloom",
+      "--test",
+      "fr197_uart_formal",
+      "--no-run"
+    ],
+    "exit_code": 101,
+    "start_unix": 1789995305.0854769,
+    "end_unix": 1789995305.3173046,
+    "missing_api": true
+  }
+]

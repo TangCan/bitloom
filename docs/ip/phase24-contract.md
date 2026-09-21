@@ -190,3 +190,9 @@ Timer32固定接口已实现，完整契约和prelude-only原文例见[Timer32](
 独立`ip::GpioCsr`实现固定GPIO32、16端口、六local寄存器，完整签名/原文prelude-only例见[GPIO32 CSR](gpio-csr.md)。OUT唯一wrapper状态，DIR/RISE_EVENT由共享CSR唯一保存；IN来自双级实际针脚，沿前DIR筛新沿，原始事件接IRQ4且不取sticky。旧GPIO8/手写FL保持，新增四符号显式登记FR142/minor，工具钉/包版本/发布不变。
 
 构建验证见`_agile-output/test-artifacts/128-4-build-evidence.md`；七步最终关闭仍以故事独立审查/automate/clean/fmt/完整回归和提交为准。只交付GPIO子集，128.5 UART、FR197整体/M3、Epic129–130及Phase24未由此关闭；FR189 deferred/NFR91保持。历史状态保留。
+
+## M3 / Epic128 实施关闭（2026-09-21）
+
+128.1–128.5七步完成，随Story128.5单独提交关闭Epic128/FR197/M3：Timer32、五源IRQ、GPIO32 CSR及双FIFO UART CSR交付。UART最终实际clean/fmt/just test：482个结果块、1870 passed / 0 failed / 47 ignored；7项新专用backend/formal入口另有实际PASS，未把ignored计PASS。当前39命令完整定向证据、独立原始归档与关闭映射见`_agile-output/test-artifacts/128-5-final-verification.md`及`_agile-output/implementation-artifacts/epic-128-closeout.md`。
+
+新增符号逐项登记FR142/minor，旧UART/GPIO/VIP/手写FL保持。只关闭M3，Epic129/FR198与核心FR201、Epic130/FR199–200及整个Phase24仍开放，下一129.1；native/generated层级与有限形式/物理边界保持。用户全部未完故事七步授权继续有效，FR189 deferred/NFR91保留；未改工具钉/包版本、不push/publish。此前各时点记录保留为历史。

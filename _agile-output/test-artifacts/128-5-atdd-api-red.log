@@ -1,0 +1,9 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+error[E0432]: unresolved import `bitloom_prelude::ip::UartCsr`
+ --> crates/bitloom/tests/fr197_uart_api.rs:5:37
+  |
+5 |     ip::{CsrAccess, CsrOwner, Gpio, UartCsr},
+  |                                     ^^^^^^^ no `UartCsr` in `ip`
+
+For more information about this error, try `rustc --explain E0432`.
+error: could not compile `bitloom` (test "fr197_uart_api") due to 1 previous error

@@ -232,3 +232,14 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 | `Elaboratable for ip::GpioCsr` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立电路/模块名`GpioCsr`，共用定义体 |
 
 上述四符号逐项纳入FR142，私有CSR/helper/状态不自动纳入。端口、时序和原文例见[GPIO32 CSR](ip/gpio-csr.md)。追加属SemVer minor，未改版本或发布；旧GPIO8/FL、prelude-only依赖与native/generated层级unsupported保持。仅GPIO子集，M3/Phase24未关闭；FR189 deferred/NFR91保持。
+
+### `bitloom-prelude` — FR197 / Story128.5 UART显式追加
+
+| 符号 | 契约 |
+|---|---|
+| `ip::UartCsr` | 固定15端口、8N1、全宽DIV、双8×4 FIFO、四原始事件 |
+| `ip::UartCsr::registers` | `() -> CsrBlock`；固定local00/04/08/0c/10/14，六bits字段；修改返回值不改变固定硬件 |
+| `ip::UartCsr::define_module` | `(&mut ElaborateSession, impl Into<String>) -> Result<String, Diagnostics>`；同session共享CSR/FIFO定义，最终一次finish |
+| `Elaboratable for ip::UartCsr` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立UartCsr电路，复用同定义体 |
+
+以上四符号显式纳入FR142，私有状态/模块/helper不纳入。见[UART CSR](ip/uart-csr.md)。SemVer minor追加，未改版本或发布；旧UART8/VIP/FL保持，设计仅依赖prelude。native/generated层级unsupported；M3关闭以最终七步记录为准，Epic129/130、Phase24整体及FR189 deferred/NFR91不由此关闭。

@@ -1,0 +1,9 @@
+{
+  "compile_exit": 0,
+  "compile_stderr": "",
+  "model_only": true,
+  "product_executed": false,
+  "exit": 0,
+  "stdout": "seed=128519705511 frames=24139 accepted=2038 consumed=2029 cancelled=9\nseed=deadbeef1285 frames=24136 accepted=2066 consumed=2057 cancelled=9\nseed=83592501ffff frames=24138 accepted=2051 consumed=2043 cancelled=8\n",
+  "stderr": ""
+}

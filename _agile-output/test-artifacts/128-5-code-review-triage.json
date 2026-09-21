@@ -1,0 +1,118 @@
+{
+  "review_mode": "full",
+  "baseline": "2f52d9969f60d08cc633e30e0c263f05854b39fe",
+  "diff": "/tmp/bitloom-1285-code-review-y41rmaon.diff",
+  "layers": {
+    "blind-hunter": "10 findings, floor N=min(floor(sqrt(2586.932)+1),10)=10",
+    "edge-case-hunter": "[]",
+    "verification-gap": "No verification gaps found.",
+    "acceptance-auditor": "No acceptance violations found; final seven-step closure remains pending."
+  },
+  "failed_layers": [],
+  "findings": [
+    {
+      "id": 1,
+      "source": "blind-hunter",
+      "title": "RX采样时点可观察性",
+      "location": "crates/bitloom/tests/fr197_uart.rs:257–272",
+      "detail": "RX sampling timestamps are recorded only by the oracle, never compared with DUT sampling. Stable values across each bit can conceal an early or late data capture while stop timing remains correct. Add boundary-sensitive RX stimuli or read-only sampling assertions and an RX capture-timing mutation.",
+      "verdict": "false",
+      "evidence": "该前提漏看逐拍随机针脚向量（约745行）。主代理复用未改三seed TB，control PASS；仅将数据capture的sync2分别替成sync1/history，保持state/stop原样，两者均在cycle21804的rdata指定断言exit1，expected07/got4c或0c；均编译成功且有VCD。实际证据证明现有向量能区分前后相差一拍的采样值，无需重复新增测试。",
+      "route": "reject"
+    },
+    {
+      "id": 2,
+      "source": "blind-hunter",
+      "title": "全宽终点的三后端范围",
+      "location": "crates/bitloom/tests/fr197_uart.rs:1577",
+      "detail": "Full-width near-endpoint tests execute only direct Verilog. FIRRTL/Chisel tests exercise wide configuration and launch but do not traverse extreme countdown endpoints. Add equivalent endpoint evidence for both lowering paths.",
+      "verdict": "false",
+      "evidence": "AC3/NFR14明确允许代表分频三后端实跑、极值独立direct近终点/算术/形式补充。文档准确区分，未声称三后端极值终点；没有缺失的承诺或错误PASS。",
+      "route": "reject"
+    },
+    {
+      "id": 3,
+      "source": "blind-hunter",
+      "title": "串行形式cover",
+      "location": "crates/bitloom/tests/fr197_uart_formal.rs:108–110",
+      "detail": "All three covers concern the CSR response channel; none establishes serial reception, transmission completion, overflow, or framing reachability. The 24-cycle cover bound cannot encompass a complete minimum-divider RX frame. Add serial covers with sufficient depth.",
+      "verdict": "false",
+      "evidence": "形式明确仅三短总线cover及有限安全性质，不声称完整串行形式可达性。独立实际RTL向量记录非零RX/TX/overflow/framing和完成/取消账本；不会因这些短cover而将串行到达冒称形式证明。",
+      "route": "reject"
+    },
+    {
+      "id": 4,
+      "source": "blind-hunter",
+      "title": "活动分频形式锁存",
+      "location": "crates/bitloom/tests/fr197_uart_formal.rs:94",
+      "detail": "Timer reload assertions compare against DUT-owned tx_div/rx_div, without independently asserting correct launch capture or stability during a frame. A faulty latched divider can satisfy these properties. Add capture and busy-stability properties.",
+      "verdict": "false",
+      "evidence": "该处只声明local full-width countdown/reload invariant，确实不等价于完整launch capture证明。配置/启动/活动帧锁存由独立绝对deadline三后端向量验证；全宽direct launch/latch另有实际断言。错误锁存不能因此通过完整当前验收，文档没有放大局部proof。",
+      "route": "reject"
+    },
+    {
+      "id": 5,
+      "source": "blind-hunter",
+      "title": "TX解码器启动锚点",
+      "location": "crates/bitloom/tests/fr197_uart.rs:861",
+      "detail": "The second TX decoder starts from the oracle’s predicted launch rather than detecting the actual TX falling edge. It therefore shares launch timing assumptions with the primary comparison. Make the additional serial observer detect start from the physical output and associate decoded frames with expected queued bytes.",
+      "verdict": "false",
+      "evidence": "附加decoder读取真实tx数据中心值，独立重组byte；不是从DUT状态或发送helper生成结果。每周期before/after主比较覆盖实际start/stop/TX波形，任何提前/延后/缺失start均直接失败。合同要求独立解码，并不要求第二个自同步串行接收器；该建议没有揭示可漏过的错误。",
+      "route": "reject"
+    },
+    {
+      "id": 6,
+      "source": "blind-hunter",
+      "title": "并发工件归属",
+      "location": "_agile-output/test-artifacts/128-5-build-runner.py:194–207",
+      "detail": "Artifact ownership is inferred from global directory differences. Concurrent test or runner invocations can be attributed to this run, causing duplicate-class rejection or incorrect evidence association. Allocate an invocation-specific artifact root and pass it to every test.",
+      "verdict": "low",
+      "evidence": "本流程串行，CI隔离workspace；重复class会fail closed而不会认证PASS。罕见同workspace并发运行需新锁/目录参数复杂度，依低影响且非日常场景规则驳回。",
+      "route": "reject"
+    },
+    {
+      "id": 7,
+      "source": "blind-hunter",
+      "title": "外层命令总时限",
+      "location": "_agile-output/test-artifacts/128-5-build-runner.py:215",
+      "detail": "Outer commands have no timeout. Cargo lock waits, dependency resolution, example builds, or SemVer checks can hang indefinitely despite timeouts inside RTL helpers. Add bounded process-group execution and persist timeout termination evidence.",
+      "verdict": "low",
+      "evidence": "内层RTL/消费者有超时，CI还有作业上界，外层attempt在运行前已持久保存。异常锁/依赖网络挂起需新的全门预算及进程组策略，未发生于日常已验证路径，按低影响复杂度规则驳回。",
+      "route": "reject"
+    },
+    {
+      "id": 8,
+      "source": "blind-hunter",
+      "title": "内部launch失败元数据",
+      "location": "crates/bitloom/tests/fr197_uart.rs:894; crates/bitloom/tests/fr197_uart_formal.rs:20",
+      "detail": "Command metadata is written only after successful process creation. A missing timeout executable or another launch failure panics before producing the promised per-command execution record. Persist attempted-command metadata before launch and record launch errors explicitly.",
+      "verdict": "low",
+      "evidence": "缺timeout等安装异常时内层JSON缺失属实，但外层已保存attempt并以失败阻止认证，成功归档又强制内部command/VCD等存在。异常安装路径需新增多处错误包装，依低影响且非日常场景规则驳回，不伪称内层已记录。",
+      "route": "reject"
+    },
+    {
+      "id": 9,
+      "source": "blind-hunter",
+      "title": "冻结账本哈希",
+      "location": "_agile-output/test-artifacts/128-5-build-archive.py:119",
+      "detail": "Coverage validation hashes the complete accounting log, freezing formatting and incidental totals together with required coverage. Legitimately adding vectors or improving diagnostics invalidates certification without explaining which requirement changed. Validate a structured seed/coverage/ledger schema, while retaining hashes for byte-integrity checks.",
+      "verdict": "false",
+      "evidence": "冻结三seed的全部必达计数与账本是明确证据合同；向量/输出变更后拒绝旧认证正是预期。检查器同时明确fixed three seeds/directed coverage/cancellation ledger changed并核账本关系，维护者重新审计更新金样，非静默破坏或错误通过。",
+      "route": "reject"
+    },
+    {
+      "id": 10,
+      "source": "blind-hunter",
+      "title": "增加语义字段名称",
+      "location": "crates/bitloom-prelude/src/ip/uart_csr.rs:50",
+      "detail": "Every register exposes a single field named bits, so generated software products omit named enable, status, and event masks. Users must manually duplicate the bit assignments from prose. Define meaningful fields for CTRL, STATUS, and EVENT and verify their generated constants against independent values.",
+      "verdict": "false",
+      "evidence": "ATDD冻结六寄存器各单一bits字段、mask/reset/access，并已纳入公开描述稳定表面；位意义在主用户文档完整给出。改字段方案须编辑被审spec/固定API，按技能拒绝此类修复，不擅自扩大表面。",
+      "route": "reject"
+    }
+  ],
+  "patch": [],
+  "decision_needed": [],
+  "defer": [],
+  "status": "clean-after-triage"
+}

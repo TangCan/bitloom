@@ -1,0 +1,14 @@
+test_archive_roundtrip_and_no_overwrite (__main__.Harness.test_archive_roundtrip_and_no_overwrite) ... ok
+test_exact_test_skip_zero_and_formal_wrong_name_rejected (__main__.Harness.test_exact_test_skip_zero_and_formal_wrong_name_rejected) ... ok
+test_fingerprint_includes_justfile_and_tool_pins (__main__.Harness.test_fingerprint_includes_justfile_and_tool_pins) ... ok
+test_launch_failure_preserves_attempt (__main__.Harness.test_launch_failure_preserves_attempt) ... ok
+test_missing_each_gate_and_class_rejected (__main__.Harness.test_missing_each_gate_and_class_rejected) ... ok
+test_missing_wrong_exit_marker_wave_cover_and_seed_fail (__main__.Harness.test_missing_wrong_exit_marker_wave_cover_and_seed_fail) ... ok
+test_normal_and_unchecked_hash_cache_use_verified_sources (__main__.Harness.test_normal_and_unchecked_hash_cache_use_verified_sources) ... ok
+test_package_and_legacy_bytecode_shadow_rejected (__main__.Harness.test_package_and_legacy_bytecode_shadow_rejected) ... ok
+test_source_drift_and_software_bytes_rejected (__main__.Harness.test_source_drift_and_software_bytes_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 3.325s
+
+OK

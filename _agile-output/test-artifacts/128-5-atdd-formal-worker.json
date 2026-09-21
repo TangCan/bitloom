@@ -1,0 +1,61 @@
+{
+  "story": "128.5",
+  "stage": "ATDD generation only",
+  "expected_to_fail": true,
+  "expected_failure": "UartCsr API is absent; root must establish compile RED. No test run by this worker.",
+  "files": [
+    "crates/bitloom/tests/fr197_uart_formal.rs"
+  ],
+  "tests": [
+    {
+      "name": "p0_uart_public_bus_safety_and_cover",
+      "ignored": true
+    },
+    {
+      "name": "p0_uart_original_synthesis",
+      "ignored": true
+    },
+    {
+      "name": "p0_uart_observer_rejects_ready_driver_fault",
+      "ignored": true
+    }
+  ],
+  "all_ignored": true,
+  "executed": false,
+  "assertion_scope": [
+    "independent pending recurrence, reset cancellation, no consume-edge refill",
+    "response backpressure stability",
+    "static illegal-access errors, legal non-RX read error=OKAY, writes and illegal responses data=zero",
+    "reset output response zero, TX idle after reset, raw_events zero during reset"
+  ],
+  "covers": [
+    "pending held for at least five stall edges",
+    "reset cancels pending response then later fresh submission",
+    "static illegal access returns SLVERR"
+  ],
+  "formal_modes": {
+    "prove_depth": 16,
+    "cover_depth": 24,
+    "engine": "smtbmc --unroll z3"
+  },
+  "mutation": {
+    "target": "actual top public req_ready driver",
+    "change": "disconnect original internal driver, drive public output low; preserve child port labels",
+    "expected_property": "uart_ready",
+    "requires": [
+      "original prove PASS",
+      "mutant exit code 2",
+      "mutant status FAIL",
+      "basecase log names uart_ready",
+      "nonempty counterexample VCD syntax"
+    ]
+  },
+  "coverage_gaps": [
+    "No independent serial recurrence proof or long serial cover; RTL fixture/build must supply exact RX/TX timeline checks and reachability.",
+    "No FIFO/configuration/event recurrence proof yet; current formal scope is public CSR safety only.",
+    "Ready-driver fault is an extra checker validation; it does not discharge required serial, FIFO/commit and event/configuration representative mutation categories.",
+    "No raw synthesis or proof executed in ATDD generation. Tool identity/source/archive auditing remains root runner responsibility."
+  ],
+  "product_edits": false,
+  "commit": false
+}

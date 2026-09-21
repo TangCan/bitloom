@@ -1,0 +1,30 @@
+{
+  "cargo": "/home/richard/.cargo/bin/cargo",
+  "rustc": {
+    "path": "/home/richard/.cargo/bin/rustc",
+    "exit": 0,
+    "first_line": "rustc 1.97.1 (8bab26f4f 2026-07-14)"
+  },
+  "iverilog": {
+    "path": "/tmp/bitloom-maintenance-tools/bin/iverilog",
+    "exit": 0,
+    "first_line": "Icarus Verilog version 12.0 (stable) ()"
+  },
+  "vvp": "/tmp/bitloom-maintenance-tools/bin/vvp",
+  "yosys": {
+    "path": "/usr/bin/yosys",
+    "exit": 0,
+    "first_line": "Yosys 0.33 (git sha1 2584903a060)"
+  },
+  "sby": "/tmp/bitloom-1263-sby-installed/bin/sby",
+  "z3": {
+    "path": "/usr/bin/z3",
+    "exit": 0,
+    "first_line": "Z3 version 4.8.12 - 64 bit"
+  },
+  "sbt": "/tmp/bitloom-jvm-tools/bin/sbt",
+  "java": "/tmp/bitloom-jvm-tools/bin/java",
+  "just": "/home/richard/.cargo/bin/just",
+  "cc": "/usr/bin/cc",
+  "firtool": "/home/richard/.cache/rhdl/firtool/1.159.0/bin/firtool"
+}

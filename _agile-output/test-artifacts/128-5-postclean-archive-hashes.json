@@ -1,0 +1,38 @@
+{
+  "checked_utc": "2026-09-21T14:16:18.315230+00:00",
+  "scope": "archive storage bytes before final clean; current selected run audit is separate",
+  "archives": [
+    {
+      "file": "_agile-output/test-artifacts/128-5-build-raw-consolidated.tar.gz.part000",
+      "bytes": 67108864,
+      "sha256": "1a08e1f82ed1c9f860c215c4d0723a4f42f7302f83c520d9d55af74838c60339"
+    },
+    {
+      "file": "_agile-output/test-artifacts/128-5-build-raw-consolidated.tar.gz.part001",
+      "bytes": 67108864,
+      "sha256": "45fe1b4eee9ff48b8db3275ca865b696ee7e1d6f17063af665e1ab9d9673fd1f"
+    },
+    {
+      "file": "_agile-output/test-artifacts/128-5-build-raw-consolidated.tar.gz.part002",
+      "bytes": 53364568,
+      "sha256": "8c4715fde64cec4a15fbda9b4cab144d9344ef8bb557bb02915a6061d3a5d2b4"
+    },
+    {
+      "file": "_agile-output/test-artifacts/128-5-build-review-raw.tar.gz",
+      "bytes": 35719173,
+      "sha256": "394efe3aa88688493b26f0581a59d326e5aa66211701e2e3cb56b25d4428813a"
+    },
+    {
+      "file": "_agile-output/test-artifacts/128-5-code-review-rx-capture-raw.tar.gz",
+      "bytes": 7811470,
+      "sha256": "c8c223eb65aaa03fec504a1bbbc539544000865ed1bbdad39e50dc1c01588d96"
+    },
+    {
+      "file": "_agile-output/test-artifacts/128-5-code-review-rx-environment-failure.tar.gz",
+      "bytes": 477,
+      "sha256": "e0c7cd7e4b9ea91d92596496c5db6feaf7fce853d57cf45e74f1d53e23a99df1"
+    }
+  ],
+  "checked_after_clean_utc": "2026-09-21T14:23:32.673808+00:00",
+  "unchanged": true
+}

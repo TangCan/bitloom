@@ -1,0 +1,141 @@
+{
+  "subagentType": "backend",
+  "testsGenerated": [],
+  "coverageSummary": {
+    "totalTests": 0,
+    "testLevels": [
+      "integration",
+      "contract"
+    ],
+    "fixtureNeeds": [],
+    "newPriorityCoverage": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 0,
+      "P3": 0
+    }
+  },
+  "status": "complete",
+  "success": true,
+  "subagent": "backend-tests",
+  "knowledge_fragments_used": [
+    "test-levels-framework",
+    "test-priorities-matrix",
+    "data-factories"
+  ],
+  "summary": "核对冻结合同、产品、三seed/3785拍边界、formal及证据harness后，未发现非重复P0/P1可观察缺口，新增0项。未执行测试或修改产品/既有测试。",
+  "framework": "Rust/Cargo RTL integration; Python unittest evidence harness",
+  "coverageMapping": [
+    {
+      "requirements": "AC1/AC5",
+      "target": "共享/改名双实例、UART→IRQ",
+      "existingTests": [
+        "p0_uart_shared_renamed_pair_and_actual_irq",
+        "p1_uart_pair_irq_firrtl_chisel"
+      ],
+      "evidence": "独立lane输入/分频/背压；IRQ1/2/3映射、IRQ0/4保持；dual_clear/sticky_quiet_clear/subsequent_event非零。API结构归Worker A。",
+      "priority": "P0/P1"
+    },
+    {
+      "requirements": "AC2",
+      "target": "CSR唯一副作用/权限/快照/无refill",
+      "existingTests": [
+        "p0_uart_direct_rtl_independent_serial_csr_fifo_oracle",
+        "p0_uart_explicit_contract_edges",
+        "p0_uart_public_bus_safety_and_cover"
+      ],
+      "evidence": "每seed176 wide_strobes/48 other_strobes/44 permissions；每拍before/after真实DUT输出比较；独立response/FIFO账本；长stall双向串行及32拍valid0 payload变化。",
+      "priority": "P0/P1"
+    },
+    {
+      "requirements": "AC3",
+      "target": "全宽DIV与配置启动竞争",
+      "existingTests": [
+        "p0_uart_explicit_contract_edges",
+        "p0_uart_full_width_near_endpoint_state_injection",
+        "p0_uart_public_bus_safety_and_cover"
+      ],
+      "evidence": "16非零部分合并、6enabled合法性合并、5TX启动竞争、5RX下降竞争、2RX-only/双忙、2final-busy拒绝；80000000/fffffffe/ffffffff实际direct launch/latch/终点注入和formal全宽递减/reload。",
+      "priority": "P0/P1"
+    },
+    {
+      "requirements": "AC4",
+      "target": "RX采样、串行错误、背靠背、TX解码",
+      "existingTests": [
+        "p0_uart_direct_rtl_independent_serial_csr_fifo_oracle",
+        "p1_uart_firrtl_chisel_same_independent_serial_vectors",
+        "p0_uart_actual_loopback",
+        "p1_uart_actual_loopback_backends"
+      ],
+      "evidence": "每seed36相位/分频/byte、6背靠背、9短start、9低stop；u64绝对deadline独立于DUT countdown；实际wire loopback16帧。既有随机pin TB检出sync2→sync1/history，两者cycle21804 rdata指定失败，详128-5-code-review-rx-capture-audit.json，不重复建议。",
+      "priority": "P0/P1"
+    },
+    {
+      "requirements": "AC5",
+      "target": "FIFO前态满空、四事件与W1C",
+      "existingTests": [
+        "p0_uart_direct_rtl_independent_serial_csr_fifo_oracle",
+        "p0_uart_explicit_contract_edges",
+        "p0_uart_public_bus_safety_and_cover"
+      ],
+      "evidence": "RX empty/nonfull/full+arrival/read、TXfull+dequeue拒写及非满同拍push/pop；8四事件same/other clear；满RX+低stop仅framing；VecDeque/实际读回/TX解码核payload顺序。",
+      "priority": "P0/P1"
+    },
+    {
+      "requirements": "AC6",
+      "target": "reset/取消账本/禁用队列/兼容",
+      "existingTests": [
+        "p0_uart_direct_rtl_independent_serial_csr_fifo_oracle",
+        "p0_uart_explicit_contract_edges",
+        "legacy runner gate"
+      ],
+      "evidence": "7阶段串行取消、释放高/低无伪start、2同步传播reset、双FIFO满+pending reset、stop+software reset；tx queued/start/complete/active_cancel与response consumed/cancelled分列；旧FR82/89/98/135/163独立回归。",
+      "priority": "P0/P1"
+    },
+    {
+      "requirements": "AC7",
+      "target": "三后端执行/有限证明/综合/故障",
+      "existingTests": [
+        "p1_uart_firrtl_chisel_same_independent_serial_vectors",
+        "p1_uart_pair_irq_firrtl_chisel",
+        "p1_uart_actual_loopback_backends",
+        "p1_uart_contract_edges_backends",
+        "p0_uart_public_bus_safety_and_cover",
+        "p0_uart_original_synthesis",
+        "p0_uart_observer_rejects_ready_driver_fault",
+        "p0_uart_behavior_mutations_serial_fifo_event"
+      ],
+      "evidence": "四后端入口各自实际运行；三短总线cover VCD、base/induction；原始无observer综合；serial-countdown/fifo-push/raw-event指定断言exit1/VCD，formal uart_ready故障exit2/VCD。",
+      "priority": "P1"
+    },
+    {
+      "requirements": "AC7",
+      "target": "证据不可空过及归档",
+      "existingTests": [
+        "128-5-build-runner.py",
+        "128-5-build-archive.py",
+        "128-5-build-harness-tests.py"
+      ],
+      "evidence": "exact名称/计数/ignored、全部artifact类、三seed/账本、source起终当前SHA、软件字节、缺各gate日志拒绝、归档roundtrip不可覆盖；ordinary/-O各10项先前运行记录由主代理持有。",
+      "priority": "P1"
+    }
+  ],
+  "scopeNotes": [
+    "本worker静态审核，不把零新增当作本worker执行PASS。",
+    "完整formal串行协议证明不在现有声明；仅有限安全性质与三短bus cover。",
+    "极值终点为direct注入加算术/形式，未声称三后端十亿拍仿真。",
+    "native Interpreter/Compiled/generated层级unsupported；物理MTBF/失配及Epic129/130不在范围。",
+    "Rust runner不适用Playwright utils；无HTTP/Pact消费者提供者边界。",
+    "首次写JSON调用python未找到，已使用python3完成；没有执行测试。"
+  ],
+  "pact_mcp_reachable": false,
+  "pact_fallback_source": "none",
+  "brokerCalls": 0,
+  "execution": {
+    "testsRunByWorker": 0,
+    "productFilesChanged": [],
+    "existingTestFilesChanged": [],
+    "fixturesCreated": []
+  },
+  "findings": []
+}

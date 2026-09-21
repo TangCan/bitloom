@@ -1,0 +1,23 @@
+{
+  "story": "128.5",
+  "detected_stack": "backend",
+  "mode": "subagent",
+  "success": true,
+  "new_total_tests": 0,
+  "api_tests": 0,
+  "backend_tests": 0,
+  "fixtures_created": 0,
+  "new_priority_coverage": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0,
+    "P3": 0
+  },
+  "existing_api_tests": 9,
+  "existing_uart_tests": 22,
+  "tests_run_by_workers": 0,
+  "performance_gain": "not measured; no sequential baseline",
+  "gaps": [],
+  "pact_mcp_reachable": false,
+  "pact_fallback_source": "none"
+}

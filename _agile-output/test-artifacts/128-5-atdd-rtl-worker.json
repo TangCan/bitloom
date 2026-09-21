@@ -1,0 +1,72 @@
+{
+  "success": true,
+  "subagent": "atdd-e2e-tests",
+  "adaptation": "Rust hardware RTL integration, no browser or Pact boundary",
+  "tdd_phase": "RED",
+  "exact_tests": [
+    {
+      "name": "p0_uart_direct_rtl_independent_serial_csr_fifo_oracle",
+      "priority": "P0",
+      "backends": [
+        "direct"
+      ]
+    },
+    {
+      "name": "p1_uart_firrtl_chisel_same_independent_serial_vectors",
+      "priority": "P1",
+      "backends": [
+        "FIRRTL",
+        "Chisel"
+      ]
+    }
+  ],
+  "test_count": 2,
+  "execution": {
+    "tests_run": false,
+    "compile_run": false,
+    "format_only": "rustfmt --edition 2024 crates/bitloom/tests/fr197_uart.rs"
+  },
+  "fixture_needs": [
+    "Actual UART serial loopback (current source uses independent external sender and independent TX centre-sample decoder)",
+    "Shared-definition dual UART, renamed dual UART and real UART-to-Irq composition with IRQ clear/new-event/sticky independence",
+    "Near-terminal full-width timer observation or finite arithmetic proof beyond current bounded launch",
+    "Mutation controls on original DUT serial/FIFO/event behavior",
+    "Additional TX/RX simultaneous-busy and cancellation ledger separating active wire frames from queued bytes"
+  ],
+  "directed_coverage_counts_per_seed": {
+    "wide_strobes": 176,
+    "other_strobes": 48,
+    "permissions": 44,
+    "serial_phase_byte": 36,
+    "back_to_back": 6,
+    "short_start": 9,
+    "framing": 9,
+    "reset_release": 2,
+    "tx_decode_busy_configuration": 4,
+    "rx_prestate_collision": 3,
+    "event_set_clear_collision": 3,
+    "reset_cancel": 7,
+    "tx_full_pop_collision": 1,
+    "rx_config_start_collision": 5,
+    "full_width_bounded_launch": 3
+  },
+  "seeds": [
+    "128519705511",
+    "deadbeef1285",
+    "83592501ffff"
+  ],
+  "knowledge_fragments_used": [
+    "fixture-architecture: deterministic isolated artifact directories",
+    "network-first: pin stimuli scheduled independently before observation; no service boundary",
+    "test-quality: independent externally specified goldens and exact behavioral comparisons"
+  ],
+  "playwright_utils_deviations": [
+    {
+      "reason": "No JS/browser/service boundary exists; native Rust integration tests use ignored markers, actual Icarus/FIRRTL/Chisel backends"
+    }
+  ],
+  "summary": "Generated two substantive ignored RTL entrypoints; no test/compile execution or product changes. Coverage gaps are explicit build requirements, not PASS claims.",
+  "files": [
+    "crates/bitloom/tests/fr197_uart.rs"
+  ]
+}
