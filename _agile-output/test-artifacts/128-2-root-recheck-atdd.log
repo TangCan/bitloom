@@ -1,0 +1,47 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.06s
+     Running tests/fr197_timer.rs (target/debug/deps/fr197_timer-a917106ca1243ceb)
+
+running 2 tests
+test p1_timer_firrtl_chisel_same_independent_vectors ... ignored, dedicated pinned firtool/JVM gate; run --ignored with RHDL_FIRTOOL_PATH
+FR197 seed=128219705511 frames=6578 accepted=2740 consumed=2735 cancelled=5 matches=468 suppressed=622 clear_collisions=4 strobes=[44, 130, 54, 41, 44, 47, 40, 38, 37, 47, 43, 46, 40, 51, 46, 340] directed={"all_strobes_high_bits": 1, "compare_below_count_then_wrap": 1, "effective_write_suppression": 1, "full32_wrap_compare0": 1, "long_stall_snapshot_consume_no_refill": 1, "periodic_oneshot_1_2_reenable": 1, "raw_pulse_sticky_and_w1c_set_wins": 1, "reset_match_write_clear_stalled_response": 1, "snapshot_errors_and_no_system_alias": 1, "zero_effective_mask_does_not_suppress": 1}
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-timer/direct-128219705511-3401089
+FR197 seed=deadbeef1282 frames=6578 accepted=2713 consumed=2709 cancelled=4 matches=468 suppressed=626 clear_collisions=4 strobes=[37, 138, 48, 51, 48, 39, 38, 41, 43, 34, 50, 46, 47, 46, 45, 343] directed={"all_strobes_high_bits": 1, "compare_below_count_then_wrap": 1, "effective_write_suppression": 1, "full32_wrap_compare0": 1, "long_stall_snapshot_consume_no_refill": 1, "periodic_oneshot_1_2_reenable": 1, "raw_pulse_sticky_and_w1c_set_wins": 1, "reset_match_write_clear_stalled_response": 1, "snapshot_errors_and_no_system_alias": 1, "zero_effective_mask_does_not_suppress": 1}
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-timer/direct-deadbeef1282-3401089
+FR197 seed=73592401ffff frames=6579 accepted=2725 consumed=2719 cancelled=6 matches=468 suppressed=608 clear_collisions=4 strobes=[46, 133, 50, 47, 47, 35, 53, 42, 46, 39, 35, 34, 35, 51, 44, 337] directed={"all_strobes_high_bits": 1, "compare_below_count_then_wrap": 1, "effective_write_suppression": 1, "full32_wrap_compare0": 1, "long_stall_snapshot_consume_no_refill": 1, "periodic_oneshot_1_2_reenable": 1, "raw_pulse_sticky_and_w1c_set_wins": 1, "reset_match_write_clear_stalled_response": 1, "snapshot_errors_and_no_system_alias": 1, "zero_effective_mask_does_not_suppress": 1}
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-timer/direct-73592401ffff-3401089
+test p0_timer_direct_rtl_independent_full32_directed_and_seeded_oracle ... ok
+
+test result: ok. 1 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 8.49s
+
+     Running tests/fr197_timer_api.rs (target/debug/deps/fr197_timer_api-39751cf05a039f2d)
+
+running 7 tests
+test p0_register_descriptor_has_exact_local_map_masks_and_unique_owners ... ok
+test p1_software_outputs_match_handwritten_local_address_golden ... ok
+test p0_invalid_names_and_conflicting_bodies_are_rejected ... ok
+test p0_exact_thirteen_ports_and_shared_standalone_equivalence ... ok
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (3401911) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (3401911) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (3401911) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (3401911) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (3401911) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (3401911) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+test p1_hierarchy_native_and_generated_reject_explicitly ... ok
+test p0_shared_timer_wiring_rejects_width_clock_type_and_output_target_conflicts ... ok
+test p0_actual_two_timer_rtl_has_independent_state_and_match_events ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+

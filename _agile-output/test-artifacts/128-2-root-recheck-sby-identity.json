@@ -1,0 +1,72 @@
+{
+  "verified_utc": "2026-09-21T08:37:05.213539+00:00",
+  "source": "/tmp/bitloom-1263-sby-src",
+  "tag_object": "bfc1c47eb786496fe794481ff88e75728f0529a6",
+  "commit": "daed0e1544fd96ee7dab843e5a891d92784c6230",
+  "files": [
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_autotune.py",
+      "sha256": "3afaf040a3cafb7b3fc46a50463e923f6dfc87dee66b5b77b7dd3911e0f0f262"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_cmdline.py",
+      "sha256": "dcb9ee484fd899b9adfcbef1238aa68b5dedd2079f4cb0d78faeb677d6a006eb"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_core.py",
+      "sha256": "c6a158448968e46b60cd3e04e5c2c977c1d54ca84512192c04efec65ef40f5c1"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_design.py",
+      "sha256": "9a65c3b0f764b8ede16fd209508b5b58e245d52bfe300eeeb8fc1edadb60ddd6"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_engine_abc.py",
+      "sha256": "0809f86e6d917b6458c03e85eb0e1d5dab95be8210c95cf7421e7a948fe42507"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_engine_aiger.py",
+      "sha256": "fa0df683048f64552a8ee03f9c84bea9f4ea93d305f68efe8ce418b12998a6db"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_engine_btor.py",
+      "sha256": "ba5521b09466ed48cc88cc1be0993a69141523f44937507a8aa403ecc329f2ec"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_engine_smtbmc.py",
+      "sha256": "134a7ec8d014ce3b83253ab45f840a24bcbcaebb393e986fe2ef16389f2a9e32"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_jobserver.py",
+      "sha256": "66ff7b8bac7b5a7d0d43483a1290bd42f6ce92cfd2db9b7283f983ec1d18d79d"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_mode_bmc.py",
+      "sha256": "33af352834579da1ffc8de3184bfc04867d53e6979340f6cf8b59232a68b5ec5"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_mode_cover.py",
+      "sha256": "247b753436a870afa3d24906b897f8a26e3b98c271ac45476b95cc8f2c899218"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_mode_live.py",
+      "sha256": "8e920dcde0f8b4464386c54e45b7e0ded21765b039cfe6c6afe2f61c78bcdcad"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_mode_prove.py",
+      "sha256": "8a0400a1ac447cee92497366f0f788615d6a58b0bda2cf7a5759bb14700954aa"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_sim.py",
+      "sha256": "1d648b84c3afd51acd5d5ae682c89b0537f794750750d68085f9c11765b1f417"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/share/yosys/python3/sby_status.py",
+      "sha256": "83ffe2bd9d1b1e6aab24b1bfcf1d0b70539edc4e4ee72577e07846f6ebd9a384"
+    },
+    {
+      "path": "/tmp/bitloom-1263-sby-installed/bin/sby",
+      "sha256": "e4ca0cb2be8b16774b4b52df9c0a740a8c40753fb6c4bdea5174de3c1e7b5915"
+    }
+  ]
+}

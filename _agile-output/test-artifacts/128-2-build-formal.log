@@ -1,0 +1,12 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.66s
+     Running tests/fr197_timer_formal.rs (target/debug/deps/fr197_timer_formal-51910d2ba9084794)
+
+running 2 tests
+Timer raw synthesis cells=614 /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-timer-formal/synthesis-3273079
+test p0_timer_original_synthesis ... ok
+Timer safety/cover /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-timer-formal/proof-3273079
+test p0_timer_safety_and_cover ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 14.34s
+

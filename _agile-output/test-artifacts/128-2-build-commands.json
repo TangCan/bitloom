@@ -1,0 +1,110 @@
+{
+  "environment": {
+    "PATH": "/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:/tmp/bitloom-jvm-tools/bin:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.opam/5.1.1/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.codex/tmp/arg0/codex-arg0JQQ9rr:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.local/bin:/home/richard/opt/Isabelle2026-RC0/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-13.2/bin:/nvme_data1/richard/.trae-cn-server/bin/stable-bf463f1c10476ab51d5c25db4513c590c975a76e-debian10/bin/remote-cli:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-11.6/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.cargo/bin:/home/richard/.local/bin:/home/richard/.nvm/versions/node/v24.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+    "BITLOOM_REQUIRE_RTL": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "RHDL_FIRTOOL_PATH": "/home/richard/.cache/rhdl/firtool/1.159.0/bin"
+  },
+  "commands": [
+    {
+      "label": "atdd",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr197_timer",
+        "--test",
+        "fr197_timer_api",
+        "--",
+        "--nocapture"
+      ],
+      "start_utc": "2026-09-21T08:17:51.507357+00:00",
+      "end_utc": "2026-09-21T08:18:02.109654+00:00",
+      "seconds": 10.60231801494956,
+      "exit": 0
+    },
+    {
+      "label": "formal",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr197_timer_formal",
+        "--",
+        "--ignored",
+        "--nocapture"
+      ],
+      "start_utc": "2026-09-21T08:18:02.110235+00:00",
+      "end_utc": "2026-09-21T08:18:17.143017+00:00",
+      "seconds": 15.032799524022266,
+      "exit": 0
+    },
+    {
+      "label": "backends",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr197_timer",
+        "--",
+        "--ignored",
+        "--nocapture"
+      ],
+      "start_utc": "2026-09-21T08:18:17.143586+00:00",
+      "end_utc": "2026-09-21T08:18:49.765850+00:00",
+      "seconds": 32.622289289021865,
+      "exit": 0
+    },
+    {
+      "label": "firrtl-regression",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "bitloom-firrtl"
+      ],
+      "start_utc": "2026-09-21T08:18:49.766507+00:00",
+      "end_utc": "2026-09-21T08:18:49.896703+00:00",
+      "seconds": 0.13021178694907576,
+      "exit": 0
+    },
+    {
+      "label": "semver",
+      "command": [
+        "just",
+        "semver-check"
+      ],
+      "start_utc": "2026-09-21T08:18:49.897367+00:00",
+      "end_utc": "2026-09-21T08:18:57.824102+00:00",
+      "seconds": 7.926756242988631,
+      "exit": 0
+    },
+    {
+      "label": "example",
+      "command": [
+        "cargo",
+        "run",
+        "--offline",
+        "--manifest-path",
+        "target/fr197-timer-example/Cargo.toml",
+        "--",
+        "target/fr197-timer-example/software"
+      ],
+      "start_utc": "2026-09-21T08:18:57.824849+00:00",
+      "end_utc": "2026-09-21T08:18:58.391301+00:00",
+      "seconds": 0.5664717209292576,
+      "exit": 0
+    }
+  ]
+}

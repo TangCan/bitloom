@@ -1,0 +1,12 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.06s
+     Running tests/fr197_timer.rs (target/debug/deps/fr197_timer-a917106ca1243ceb)
+
+running 1 test
+FR197 seed=128219705511 frames=6610 accepted=2754 consumed=2749 cancelled=5 matches=470 suppressed=628 clear_collisions=4 strobes=[44, 132, 54, 41, 44, 47, 40, 38, 37, 47, 43, 46, 40, 51, 46, 344] directed={"all_strobes_high_bits": 1, "compare_below_count_then_wrap": 1, "compare_maximum_oneshot_periodic": 1, "effective_write_suppression": 1, "full32_wrap_compare0": 1, "long_stall_snapshot_consume_no_refill": 1, "periodic_oneshot_1_2_reenable": 1, "raw_pulse_sticky_and_w1c_set_wins": 1, "reset_match_write_clear_stalled_response": 1, "snapshot_errors_and_no_system_alias": 1, "zero_effective_mask_does_not_suppress": 1}
+FR197 seed=deadbeef1282 frames=6610 accepted=2727 consumed=2723 cancelled=4 matches=470 suppressed=632 clear_collisions=4 strobes=[37, 140, 48, 51, 48, 39, 38, 41, 43, 34, 50, 46, 47, 46, 45, 347] directed={"all_strobes_high_bits": 1, "compare_below_count_then_wrap": 1, "compare_maximum_oneshot_periodic": 1, "effective_write_suppression": 1, "full32_wrap_compare0": 1, "long_stall_snapshot_consume_no_refill": 1, "periodic_oneshot_1_2_reenable": 1, "raw_pulse_sticky_and_w1c_set_wins": 1, "reset_match_write_clear_stalled_response": 1, "snapshot_errors_and_no_system_alias": 1, "zero_effective_mask_does_not_suppress": 1}
+FR197 seed=73592401ffff frames=6611 accepted=2739 consumed=2733 cancelled=6 matches=470 suppressed=614 clear_collisions=4 strobes=[46, 135, 50, 47, 47, 35, 53, 42, 46, 39, 35, 34, 35, 51, 44, 341] directed={"all_strobes_high_bits": 1, "compare_below_count_then_wrap": 1, "compare_maximum_oneshot_periodic": 1, "effective_write_suppression": 1, "full32_wrap_compare0": 1, "long_stall_snapshot_consume_no_refill": 1, "periodic_oneshot_1_2_reenable": 1, "raw_pulse_sticky_and_w1c_set_wins": 1, "reset_match_write_clear_stalled_response": 1, "snapshot_errors_and_no_system_alias": 1, "zero_effective_mask_does_not_suppress": 1}
+Timer FIRRTL and JVM/Chisel three-seed actual RTL PASS /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-timer-backends/jvm-3490691
+test p1_timer_firrtl_chisel_same_independent_vectors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 32.47s
+

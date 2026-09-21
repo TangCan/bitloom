@@ -199,3 +199,14 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 | `Elaboratable for ip::CsrDecoder` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立电路/模块名`CsrDecoder`，finish一次 |
 
 上述逐符号显式纳入FR142，完整端口/气泡/reset/支持矩阵和prelude-only例见[四窗译码](ip/csr-decoder.md)。追加属SemVer minor；未改版本或发布，不宣称crates.io已包含。私有状态、任意map、多主与native/generated层级未扩承诺；历史段落为当时状态，M2最终状态以故事关闭记录为准。
+
+### `bitloom-prelude` — FR197 / Story128.2 Timer显式追加
+
+| 符号 | 契约 |
+|---|---|
+| `ip::Timer` | 固定32位CSR计时器，13端口，同步reset；原始match与sticky EVENT分离 |
+| `ip::Timer::registers` | `() -> CsrBlock`；固定本地00/04/08/0c描述，CTRL/COUNT External、COMPARE/EVENT Leaf；返回值修改不改变Timer硬件 |
+| `ip::Timer::define_module` | `(&mut ElaborateSession, impl Into<String>) -> Result<String, Diagnostics>`；同session共享CSR与Timer定义，完整HIR复用与既有诊断 |
+| `Elaboratable for ip::Timer` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立电路/模块名`Timer`，finish一次 |
+
+上述符号显式纳入FR142；私有CSR模块名/状态/helper不自动入表面。完整时序、地址、prelude-only例与适用验证见[Timer32](ip/timer.md)。追加属SemVer minor，未改版本或发布，不宣称crates.io已有；native/generated层级仍unsupported。只交付FR197 Timer子集，不关闭M3/Phase24，FR189 deferred/NFR91保持。

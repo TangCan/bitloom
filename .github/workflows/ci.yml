@@ -32,6 +32,8 @@ jobs:
         run: python3 scripts/check_fr196_bridge_example.py
       - name: FR196 documented prelude-only four-window CSR composition
         run: python3 scripts/check_fr196_decoder_example.py
+      - name: FR197 documented prelude-only Timer design and C header
+        run: python3 _agile-output/test-artifacts/128-2-build-runner.py --only example --only header
       - name: Preserve Icarus failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
@@ -42,6 +44,9 @@ jobs:
             target/fr195-fifo/
             target/fr196-csr/
             target/fr196-csr-c/
+            target/fr197-timer/
+            target/fr197-timer-api/
+            target/fr197-timer-reruns/
             target/fr196-axi-lite-csr/
             target/fr196-decoder-integration/
 
@@ -84,11 +89,16 @@ jobs:
           firtool_bin="$(cargo run -q -p bitloom -- firtool ensure | tail -n1)"
           export RHDL_FIRTOOL_PATH="$(dirname "$firtool_bin")"
           bash scripts/chisel-numeric-check.sh
+          CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test --locked -p bitloom --test fr197_timer p1_timer_firrtl_chisel_same_independent_vectors -- --ignored --exact --nocapture
+          CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test --locked -p bitloom --test fr197_timer_api p1_two_timer_firrtl_chisel_shared_and_renamed_definitions -- --ignored --exact --nocapture
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: chisel-numeric-failure
-          path: target/chisel-numeric
+          path: |
+            target/chisel-numeric/
+            target/fr197-timer-backends/
+            target/fr197-timer-api/
 
   # FR35 / FR50: HLS product-path smoke. Failures are never ignored.
   # Default uses CI stub (wiring + synthesizable .v). Real Bambu 2024.10 via
@@ -138,6 +148,10 @@ jobs:
         run: CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr196_axi_lite_csr_formal -- --ignored --nocapture
       - name: Required FR196 decoder owner safety, cover, mutation and hierarchy synthesis
         run: CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr196_csr_decoder_formal -- --ignored --nocapture
+      - name: Required FR197 Timer safety, independent cover and original synthesis
+        run: |
+          export BITLOOM_SBY_SOURCE="${RUNNER_TEMP:-/tmp}/bitloom-sby-src"
+          python3 _agile-output/test-artifacts/128-2-build-runner.py --only formal
       - name: Preserve formal failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
@@ -149,6 +163,8 @@ jobs:
             target/fr196-csr-formal/
             target/fr196-bridge-formal/
             target/fr196-decoder-formal/
+            target/fr197-timer-formal/
+            target/fr197-timer-reruns/
             target/fr196-decoder-integration/
             target/fr119/
             crates/rhdl-formal/fixtures/fr119/fr119_fail/

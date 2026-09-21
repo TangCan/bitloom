@@ -1,0 +1,12 @@
+{
+  "recorded_utc": "2026-09-21T08:21:38.337663+00:00",
+  "commands": [
+    "cc -std=c11 -Wall -Wextra -Werror /tmp/128-2-timer-header.c -o /tmp/128-2-timer-header",
+    "/tmp/128-2-timer-header"
+  ],
+  "exit_codes": [
+    0,
+    0
+  ],
+  "source_sha256": "d47ccb3debae92c5e04bce44b1e8ca5331b458d1451dbd98c7fc064b207f8181"
+}

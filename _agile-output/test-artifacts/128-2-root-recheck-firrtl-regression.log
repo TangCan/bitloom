@@ -1,0 +1,33 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.04s
+     Running unittests src/lib.rs (target/debug/deps/bitloom_firrtl-439ef8e487075274)
+
+running 20 tests
+test chisel::literal_regression::unsigned_literals_cross_scala_int_and_long_boundaries ... ok
+test tests::chisel_fr28_fir_import_then_emit ... ok
+test tests::chisel_fr28_dangling_connect_omitted ... ok
+test tests::chisel_fr28_flat_counter_emits_scala ... ok
+test tests::chisel_fr28_hierarchy_emits_module_new_and_connects ... ok
+test tests::bounded_left_shift_roundtrips_without_modulo_semantics ... ok
+test tests::chisel_fr28_hierarchy_via_wire_parent_net ... ok
+test tests::chisel_fr28_pin_locked ... ok
+test tests::chisel_fr81_e0901_out_of_subset_init_len ... ok
+test tests::chisel_fr81_path_a_lowers_async_mem_and_init ... ok
+test tests::chisel_fr81_path_a_lowers_sync_read_mem ... ok
+test tests::emit_has_version_header ... ok
+test tests::firrtl6_public_top_and_modern_connections ... ok
+test tests::fr46_dangling_connect_roundtrip_predicate_fails_clearly ... ok
+test tests::fr46_external_fir_firtool_style_connects_then_emit ... ok
+test tests::fr46_export_reimport_ports_and_instance_graph ... ok
+test tests::fr46_rejects_unknown_inst_port_le_parent ... ok
+test tests::fr46_import_counter_then_tick ... ok
+test tests::fr46_rejects_unknown_parent_le_inst_port ... ok
+test tests::roundtrip_hierarchy_reg_and_instance ... ok
+
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests bitloom_firrtl
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

@@ -1,0 +1,19 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "-p",
+    "bitloom",
+    "--test",
+    "fr197_timer",
+    "p0_timer_direct_scoreboard_rejects_mask_and_stalled_data_mutations",
+    "--",
+    "--exact",
+    "--nocapture"
+  ],
+  "start_utc": "2026-09-21T08:58:00.061523+00:00",
+  "end_utc": "2026-09-21T08:58:01.566644+00:00",
+  "seconds": 1.5051333400188014,
+  "exit": 0
+}

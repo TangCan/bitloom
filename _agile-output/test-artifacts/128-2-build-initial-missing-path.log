@@ -1,0 +1,26 @@
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 2.17s
+     Running tests/fr197_timer.rs (target/debug/deps/fr197_timer-a917106ca1243ceb)
+
+running 1 test
+test p0_timer_direct_rtl_independent_full32_directed_and_seeded_oracle ... FAILED
+
+failures:
+
+---- p0_timer_direct_rtl_independent_full32_directed_and_seeded_oracle stdout ----
+FR197 seed=128219705511 frames=6578 accepted=2740 consumed=2735 cancelled=5 matches=468 suppressed=622 clear_collisions=4 strobes=[44, 130, 54, 41, 44, 47, 40, 38, 37, 47, 43, 46, 40, 51, 46, 340] directed={"all_strobes_high_bits": 1, "compare_below_count_then_wrap": 1, "effective_write_suppression": 1, "full32_wrap_compare0": 1, "long_stall_snapshot_consume_no_refill": 1, "periodic_oneshot_1_2_reenable": 1, "raw_pulse_sticky_and_w1c_set_wins": 1, "reset_match_write_clear_stalled_response": 1, "snapshot_errors_and_no_system_alias": 1, "zero_effective_mask_does_not_suppress": 1}
+
+thread 'p0_timer_direct_rtl_independent_full32_directed_and_seeded_oracle' (3227262) panicked at crates/bitloom/tests/fr197_timer.rs:544:5:
+iverilog ["-V"] failed (exit status: 127) artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-timer/direct-128219705511-3227261
+timeout: failed to run command ‘iverilog’: No such file or directory
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    p0_timer_direct_rtl_independent_full32_directed_and_seeded_oracle
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+error: test failed, to rerun pass `-p bitloom --test fr197_timer`

@@ -1,0 +1,35 @@
+{
+  "checked_utc": "2026-09-21T09:04:41.271637+00:00",
+  "archives": [
+    {
+      "archive": "_agile-output/test-artifacts/128-2-build-raw.tar.gz",
+      "sha256": "a1da2bd35a47a8a9c15129beca80a21c2939601a1445e054b3f52462c4c05423",
+      "members": 566,
+      "bytes": 7550545
+    },
+    {
+      "archive": "_agile-output/test-artifacts/128-2-review-fix-raw.tar.gz",
+      "sha256": "8bc66e6a24aa046eaf8fb155ee1567627b3a766aff4ae9b81c93b326964813d8",
+      "members": 181,
+      "bytes": 2208709
+    },
+    {
+      "archive": "_agile-output/test-artifacts/128-2-root-recheck-raw.tar.gz",
+      "sha256": "a8d6b4bf063e8078792900cfecf0f71fecc132559204a32eac91fda959042547",
+      "members": 221,
+      "bytes": 8878977
+    },
+    {
+      "archive": "_agile-output/test-artifacts/128-2-code-fix-raw.tar.gz",
+      "sha256": "5bca21a2d040295565e52739b32e571b3d896cdf764f6cb4cc6d2a92b861c6ab",
+      "members": 621,
+      "bytes": 4122805
+    },
+    {
+      "archive": "_agile-output/test-artifacts/128-2-automate-raw.tar.gz",
+      "sha256": "3d61a84a7d6f4d45ef29947227c3c37d469e22be4f99c60cc706c0c98807deca",
+      "members": 25,
+      "bytes": 24717
+    }
+  ]
+}

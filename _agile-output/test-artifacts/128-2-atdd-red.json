@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "cargo",
+    "test",
+    "--locked",
+    "-p",
+    "bitloom",
+    "--test",
+    "fr197_timer",
+    "--test",
+    "fr197_timer_api",
+    "--no-run"
+  ],
+  "utc": "2026-09-21T08:06:27.642002+00:00",
+  "exit_code": 101,
+  "elapsed_seconds": 0.28390327899251133,
+  "log_sha256": "f363c277279a8c9ebd77f8a760b1aa657c016e5222dc96a1f4830d1952138ad1"
+}

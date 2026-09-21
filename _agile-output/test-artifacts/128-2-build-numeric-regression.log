@@ -1,0 +1,122 @@
+LLVM (http://llvm.org/):
+  LLVM version 24.0.0git
+  Optimized build.
+CIRCT firtool-1.159.0
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.89s
+     Running tests/simulator_bit_vectors.rs (target/debug/deps/simulator_bit_vectors-34dd9c5f4862fb97)
+
+running 13 tests
+
+thread 'hierarchy_is_compiled_but_simulation_rejects_every_module_order' (3281210) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'hierarchy_is_compiled_but_simulation_rejects_every_module_order' (3281210) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchy_is_compiled_but_simulation_rejects_every_module_order' (3281210) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+test recursive_hierarchy_without_top_returns_diagnostic ... ok
+tb.v:11: $finish called at 100 (1s)
+test long_reversed_chain_constructs_and_evaluates ... ok
+tb.v:11: $finish called at 100 (1s)
+
+thread 'hierarchy_is_compiled_but_simulation_rejects_every_module_order' (3281210) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchy_is_compiled_but_simulation_rejects_every_module_order' (3281210) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'hierarchy_is_compiled_but_simulation_rejects_every_module_order' (3281210) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+tb.v:11: $finish called at 100 (1s)
+tb.v:11: $finish called at 100 (1s)
+test hierarchy_is_compiled_but_simulation_rejects_every_module_order ... ok
+test bool_enable_uses_declared_one_bit ... ok
+test uint128_passthrough_preserves_low_u64_word ... ok
+tb.v:18: $finish called at 4 (1s)
+tb.v:18: $finish called at 4 (1s)
+tb.v:74: $finish called at 18 (1s)
+tb.v:74: $finish called at 18 (1s)
+tb.v:18: $finish called at 4 (1s)
+tb.v:18: $finish called at 4 (1s)
+tb.v:30: $finish called at 30 (1s)
+tb.v:19: $finish called at 24 (1s)
+tb.v:30: $finish called at 30 (1s)
+test asynchronous_reset_clears_rtl_without_a_clock_edge ... ok
+tb.v:236: $finish called at 200 (1s)
+tb.v:412: $finish called at 400 (1s)
+tb.v:412: $finish called at 400 (1s)
+test reverse_dag_feedback_and_simultaneous_registers ... ok
+tb.v:444: $finish called at 360 (1s)
+tb.v:74: $finish called at 18 (1s)
+tb.v:74: $finish called at 18 (1s)
+test mixed_width_logical_shifts_match_rtl_and_roundtrip ... ok
+tb.v:30: $finish called at 30 (1s)
+tb.v:30: $finish called at 30 (1s)
+test last_effective_net_assignment_precedes_dependency_ordering ... ok
+tb.v:236: $finish called at 200 (1s)
+test repeated_reg_reads_and_memory_overwrites_keep_last_driver_and_all_writes ... ok
+tb.v:444: $finish called at 360 (1s)
+test noncolliding_memory_edges_match_independent_pipeline_and_rtl ... ok
+tb.v:5062: $finish called at 1440 (1s)
+tb.v:5062: $finish called at 1440 (1s)
+test memory_read_before_write_is_order_independent_in_internal_models ... ok
+tb.v:5062: $finish called at 1440 (1s)
+tb.v:5062: $finish called at 1440 (1s)
+tb.v:5062: $finish called at 1440 (1s)
+tb.v:5062: $finish called at 1440 (1s)
+tb.v:5062: $finish called at 1440 (1s)
+tb.v:5062: $finish called at 1440 (1s)
+test bit_vectors_match_reference_and_emitted_rust_and_rtl ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 57.06s
+
+[info] welcome to sbt 1.10.11 (Ubuntu Java 17.0.20)
+[info] loading project definition from /nvme_data2/richard/2026/rhdl/target/fr197-timer-numeric-regression/project
+[info] loading settings for project fr197-timer-numeric-regression from build.sbt...
+[info] set current project to fr197-timer-numeric-regression (in build file:/nvme_data2/richard/2026/rhdl/target/fr197-timer-numeric-regression/)
+[info] compiling 19 Scala sources to /nvme_data2/richard/2026/rhdl/target/fr197-timer-numeric-regression/target/scala-2.13/classes ...
+[warn] 362 feature warnings; re-run with -feature for details
+[warn] one warning found
+[info] done compiling
+[info] running NumericMain 
+[success] Total time: 11 s, completed Sep 21, 2026, 4:20:23 PM
+Chisel numeric RTL: async_reset
+tb.v:19: $finish called at 24 (1s)
+Chisel numeric RTL: dag_seed_91b320d4
+tb.v:412: $finish called at 400 (1s)
+Chisel numeric RTL: hierarchy_0
+tb.v:11: $finish called at 100 (1s)
+Chisel numeric RTL: hierarchy_1
+tb.v:11: $finish called at 100 (1s)
+Chisel numeric RTL: last_net_false
+tb.v:30: $finish called at 30 (1s)
+Chisel numeric RTL: last_net_true
+tb.v:30: $finish called at 30 (1s)
+Chisel numeric RTL: memory_edges_syncfalse
+tb.v:444: $finish called at 360 (1s)
+Chisel numeric RTL: memory_edges_synctrue
+tb.v:444: $finish called at 360 (1s)
+Chisel numeric RTL: memory_last_reg_false
+tb.v:236: $finish called at 200 (1s)
+Chisel numeric RTL: memory_last_reg_true
+tb.v:236: $finish called at 200 (1s)
+Chisel numeric RTL: mixed_16_8_8
+tb.v:74: $finish called at 18 (1s)
+Chisel numeric RTL: mixed_32_1_32
+tb.v:18: $finish called at 4 (1s)
+Chisel numeric RTL: mixed_8_1_16
+tb.v:18: $finish called at 4 (1s)
+Chisel numeric RTL: mixed_8_8_16
+tb.v:74: $finish called at 18 (1s)
+Chisel numeric RTL: same_1
+tb.v:5062: $finish called at 1440 (1s)
+Chisel numeric RTL: same_32
+tb.v:5062: $finish called at 1440 (1s)
+Chisel numeric RTL: same_64
+tb.v:5062: $finish called at 1440 (1s)
+Chisel numeric RTL: same_8
+tb.v:5062: $finish called at 1440 (1s)
+PASS: Chisel 7.15.0 / Scala 2.13.18 / sbt 1.10.11 / firtool 1.159.0 numeric RTL matrix

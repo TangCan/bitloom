@@ -1,0 +1,65 @@
+{
+  "records": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-O",
+        "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/128-2-build-runner.py",
+        "--only",
+        "identity"
+      ],
+      "label": "good-flag",
+      "pythonoptimize": null,
+      "start_utc": "2026-09-21T08:48:41.691367+00:00",
+      "end_utc": "2026-09-21T08:48:41.986295+00:00",
+      "exit": 0,
+      "expected_success": true
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/128-2-build-runner.py",
+        "--only",
+        "identity"
+      ],
+      "label": "good-env",
+      "pythonoptimize": "1",
+      "start_utc": "2026-09-21T08:48:41.986420+00:00",
+      "end_utc": "2026-09-21T08:48:42.278831+00:00",
+      "exit": 0,
+      "expected_success": true
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-O",
+        "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/128-2-build-runner.py",
+        "--only",
+        "identity"
+      ],
+      "label": "bad-flag",
+      "pythonoptimize": null,
+      "start_utc": "2026-09-21T08:48:42.285776+00:00",
+      "end_utc": "2026-09-21T08:48:42.984529+00:00",
+      "exit": 1,
+      "expected_success": false
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/128-2-build-runner.py",
+        "--only",
+        "identity"
+      ],
+      "label": "bad-env",
+      "pythonoptimize": "1",
+      "start_utc": "2026-09-21T08:48:42.984652+00:00",
+      "end_utc": "2026-09-21T08:48:43.666175+00:00",
+      "exit": 1,
+      "expected_success": false
+    }
+  ],
+  "ast_has_no_assert": true,
+  "ci_wiring": true,
+  "historical_archive_unchanged": true
+}

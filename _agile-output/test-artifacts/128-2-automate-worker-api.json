@@ -1,0 +1,34 @@
+{
+  "success": true,
+  "subagent": "api-tests",
+  "tests": [],
+  "fixture_needs": [],
+  "knowledge_fragments_used": [
+    "playwright-utils-mandate",
+    "pactjs-utils-mandate",
+    "library-integration-mandate"
+  ],
+  "playwright_utils_deviations": [],
+  "pactjs_utils_deviations": [],
+  "provider_scrutiny": "not-applicable",
+  "provider_files_read": [],
+  "test_count": 0,
+  "summary": "API scope review complete; zero new tests generated. Story128.2 is Rust/Cargo Timer hardware/backend work with no HTTP endpoint, authentication provider, browser runner, or Pact consumer/provider boundary. Existing fr197_timer_api.rs has seven active tests covering exact thirteen ports and shared/standalone equivalence, descriptor addresses/masks/owners, independent C/Markdown address goldens and checked-in output equality, invalid names/conflicting definitions, width/clock/direction diagnostics, explicit unsupported native/generated hierarchy, and actual two-instance state/event isolation for shared and renamed definitions. One additional dedicated ignored test defines actual FIRRTL/Chisel pair checks; ignored does not mean passed. Existing coverage satisfies this worker scope, so duplicate tests are not added. Both utility flags remain true, but Playwright runner/language and Pact relevance gates do not apply. Contract scaffolding is skipped because no consumer/provider boundary exists; the framework workflow can add it later if one is introduced. Parent probe reported pact_mcp=mcp, pact_mcp_reachable=false, pact_fallback_source=none; no re-probe, broker calls, or invented provider states. No tests were run by this worker; success denotes successful scope review and JSON production only.",
+  "execution_mode": "subagent",
+  "test_framework": "Cargo",
+  "existing_coverage": {
+    "file": "crates/bitloom/tests/fr197_timer_api.rs",
+    "active_tests": 7,
+    "dedicated_ignored_tests": 1,
+    "execution_verified_by_worker": false
+  },
+  "context_files_read": [
+    "_agile-output/test-artifacts/128-2-automation-summary.md",
+    "_agile-output/implementation-artifacts/128-2-timer.md",
+    "_agile-output/test-artifacts/atdd-checklist-128-2-timer.md",
+    "crates/bitloom/tests/fr197_timer_api.rs"
+  ],
+  "pact_mcp": "mcp",
+  "pact_mcp_reachable": false,
+  "pact_fallback_source": "none"
+}

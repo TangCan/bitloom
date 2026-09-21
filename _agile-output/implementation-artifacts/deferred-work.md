@@ -708,3 +708,11 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
 - source_spec: `_agile-output/implementation-artifacts/spec-126-2-module-composition.md`
   summary: 既有Instance.params被接受但后端忽略，需单独定义支持或显式拒绝契约。
   evidence: medium；add_instance保存params，vlog与FIRRTL实例emit不输出覆盖参数。FR194明确采用展开时专门化并记录此限制，未交付实例参数覆盖；后续需兼容评估再增加诊断或实现。
+
+- source_spec: `_agile-output/implementation-artifacts/spec-128-2-timer.md`
+  summary: Chisel 多位 UInt Mux selector 尚未实现 HIR 非零真值语义（本故事之前已存在）。
+  evidence: builder assign_mux 文档定义 sel != 0；HEAD emitter 直接传 UInt，当前转换为 asBool 仅适用于1位，Timer 使用1位。需添加多位 selector 实际 Scala/RTL 回归并使用非零归约转换。
+
+## Deferred from: code review of spec-128-2-timer.md (2026-09-21)
+
+- CR1/CR11：多位UInt Mux的Chisel非零语义为旧HEAD既有缺口，需独立多位实际后端回归与归约转换；当前Timer1位不受影响。

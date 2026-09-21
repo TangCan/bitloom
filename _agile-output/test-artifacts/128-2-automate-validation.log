@@ -1,0 +1,12 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.31s
+     Running tests/fr197_timer.rs (target/debug/deps/fr197_timer-a917106ca1243ceb)
+
+running 1 test
+scoreboard control=original artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-timer/scoreboard-negative-3577947/original
+scoreboard control=wrong-effective-mask artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-timer/scoreboard-negative-3577947/wrong-effective-mask
+scoreboard control=wrong-stalled-data artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-timer/scoreboard-negative-3577947/wrong-stalled-data
+test p0_timer_direct_scoreboard_rejects_mask_and_stalled_data_mutations ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.16s
+

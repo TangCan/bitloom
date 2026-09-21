@@ -1,0 +1,135 @@
+{
+  "environment": {
+    "PATH": "/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:/tmp/bitloom-jvm-tools/bin:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.opam/5.1.1/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.codex/tmp/arg0/codex-arg0JQQ9rr:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.local/bin:/home/richard/opt/Isabelle2026-RC0/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-13.2/bin:/nvme_data1/richard/.trae-cn-server/bin/stable-bf463f1c10476ab51d5c25db4513c590c975a76e-debian10/bin/remote-cli:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-11.6/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.cargo/bin:/home/richard/.local/bin:/home/richard/.nvm/versions/node/v24.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "RHDL_FIRTOOL_PATH": "/home/richard/.cache/rhdl/firtool/1.159.0/bin",
+    "BITLOOM_SBY_SOURCE": "/tmp/bitloom-1263-sby-src"
+  },
+  "commands": [
+    {
+      "label": "atdd",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr197_timer",
+        "--test",
+        "fr197_timer_api",
+        "--",
+        "--nocapture"
+      ],
+      "start_utc": "2026-09-21T08:46:59.308382+00:00",
+      "end_utc": "2026-09-21T08:47:11.220808+00:00",
+      "seconds": 11.912446490023285,
+      "exit": 0
+    },
+    {
+      "label": "formal",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr197_timer_formal",
+        "--",
+        "--ignored",
+        "--nocapture"
+      ],
+      "start_utc": "2026-09-21T08:47:11.221292+00:00",
+      "end_utc": "2026-09-21T08:47:27.396660+00:00",
+      "seconds": 16.17539506801404,
+      "exit": 0
+    },
+    {
+      "label": "backends",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr197_timer",
+        "p1_timer_firrtl_chisel_same_independent_vectors",
+        "--",
+        "--ignored",
+        "--exact",
+        "--nocapture"
+      ],
+      "start_utc": "2026-09-21T08:47:27.397386+00:00",
+      "end_utc": "2026-09-21T08:47:59.957522+00:00",
+      "seconds": 32.56015720393043,
+      "exit": 0
+    },
+    {
+      "label": "pair-backends",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr197_timer_api",
+        "p1_two_timer_firrtl_chisel_shared_and_renamed_definitions",
+        "--",
+        "--ignored",
+        "--exact",
+        "--nocapture"
+      ],
+      "start_utc": "2026-09-21T08:47:59.958159+00:00",
+      "end_utc": "2026-09-21T08:48:35.258132+00:00",
+      "seconds": 35.29999058099929,
+      "exit": 0
+    },
+    {
+      "label": "example",
+      "command": [
+        "cargo",
+        "run",
+        "--offline",
+        "--manifest-path",
+        "/nvme_data2/richard/2026/rhdl/target/128-2-code-fix-main/example/Cargo.toml",
+        "--",
+        "/nvme_data2/richard/2026/rhdl/target/128-2-code-fix-main/example/software"
+      ],
+      "start_utc": "2026-09-21T08:48:35.259295+00:00",
+      "end_utc": "2026-09-21T08:48:39.754494+00:00",
+      "seconds": 4.495222405996174,
+      "exit": 0
+    },
+    {
+      "label": "header-compile",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I",
+        "/nvme_data2/richard/2026/rhdl/docs/ip",
+        "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/128-2-build-header-check.c",
+        "-o",
+        "/nvme_data2/richard/2026/rhdl/target/128-2-code-fix-main/header-check"
+      ],
+      "start_utc": "2026-09-21T08:48:39.755578+00:00",
+      "end_utc": "2026-09-21T08:48:39.817664+00:00",
+      "seconds": 0.06209856097120792,
+      "exit": 0
+    },
+    {
+      "label": "header-execute",
+      "command": [
+        "/nvme_data2/richard/2026/rhdl/target/128-2-code-fix-main/header-check"
+      ],
+      "start_utc": "2026-09-21T08:48:39.818140+00:00",
+      "end_utc": "2026-09-21T08:48:39.819356+00:00",
+      "seconds": 0.0012159199686720967,
+      "exit": 0
+    }
+  ]
+}

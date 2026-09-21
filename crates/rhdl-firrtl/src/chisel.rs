@@ -1037,10 +1037,29 @@ fn emit_logical_shift(m: &Module, a: &str, b: &str, target: &str, left: bool) ->
     }
 }
 
+// Scala decimal Int literals stop at 2^31-1; BigInt also preserves unsigned
+// values above Long::MAX without overflow, for both logic and memory init.
+fn scala_uint_literal(value: u64) -> String {
+    if value <= i32::MAX as u64 {
+        format!("{value}.U")
+    } else {
+        format!("BigInt(\"{value}\").U")
+    }
+}
+
+fn bit_operand(m: &Module, name: &str) -> String {
+    let value = ref_name(m, name);
+    if matches!(signal_ty(m, name), Some(GroundType::Reset)) {
+        format!("{value}.asBool.asUInt")
+    } else {
+        value
+    }
+}
+
 fn emit_expr(m: &Module, expr: &AssignExpr, target: &str) -> String {
     match expr {
         AssignExpr::Ref(n) => ref_name(m, n),
-        AssignExpr::Lit(v) => format!("{v}.U"),
+        AssignExpr::Lit(v) => scala_uint_literal(*v),
         AssignExpr::Inc(n) => {
             let one = if matches!(signal_ty(m, n), Some(GroundType::SInt { .. })) {
                 "1.S"
@@ -1051,9 +1070,9 @@ fn emit_expr(m: &Module, expr: &AssignExpr, target: &str) -> String {
         }
         AssignExpr::Add(a, b) => format!("{} + {}", ref_name(m, a), ref_name(m, b)),
         AssignExpr::Sub(a, b) => format!("{} - {}", ref_name(m, a), ref_name(m, b)),
-        AssignExpr::And(a, b) => format!("{} & {}", ref_name(m, a), ref_name(m, b)),
-        AssignExpr::Or(a, b) => format!("{} | {}", ref_name(m, a), ref_name(m, b)),
-        AssignExpr::Xor(a, b) => format!("{} ^ {}", ref_name(m, a), ref_name(m, b)),
+        AssignExpr::And(a, b) => format!("{} & {}", bit_operand(m, a), bit_operand(m, b)),
+        AssignExpr::Or(a, b) => format!("{} | {}", bit_operand(m, a), bit_operand(m, b)),
+        AssignExpr::Xor(a, b) => format!("{} ^ {}", bit_operand(m, a), bit_operand(m, b)),
         AssignExpr::Shl(a, b) => emit_logical_shift(m, a, b, target, true),
         AssignExpr::Shr(a, b) => emit_logical_shift(m, a, b, target, false),
         AssignExpr::Ult { lhs, rhs, .. } => format!("{} < {}", ref_name(m, lhs), ref_name(m, rhs)),
@@ -1086,7 +1105,11 @@ fn emit_expr(m: &Module, expr: &AssignExpr, target: &str) -> String {
         AssignExpr::Eq(a, b) => format!("{} === {}", ref_name(m, a), ref_name(m, b)),
         AssignExpr::Mux { sel, t, f } => format!(
             "Mux({}, {}, {})",
-            ref_name(m, sel),
+            if matches!(signal_ty(m, sel), Some(GroundType::Bool)) {
+                ref_name(m, sel)
+            } else {
+                format!("{}.asBool", ref_name(m, sel))
+            },
             ref_name(m, t),
             ref_name(m, f)
         ),
@@ -1140,7 +1163,10 @@ fn emit_mem_decl(
     let ctor = if sync_read { "SyncReadMem" } else { "Mem" };
     let mut out = format!("  val {name} = {ctor}({depth}, UInt({width}.W))\n");
     if let Some(words) = init {
-        let lits: Vec<String> = words.iter().map(|w| format!("{w}.U({width}.W)")).collect();
+        let lits: Vec<String> = words
+            .iter()
+            .map(|w| format!("{}({width}.W)", scala_uint_literal(*w)))
+            .collect();
         out.push_str(&format!(
             "  val {name}_init = VecInit({})\n",
             lits.join(", ")
@@ -1407,6 +1433,27 @@ fn emit_module_body_ordered(
             if pred(stmt) {
                 emit_stmt_into(m, modules_by_name, face, body, &mut section, stmt);
             }
+        }
+    }
+}
+
+#[cfg(test)]
+mod literal_regression {
+    use super::*;
+
+    #[test]
+    fn unsigned_literals_cross_scala_int_and_long_boundaries() {
+        for (value, expected) in [
+            (0, "0.U"),
+            (0x7fffffff, "2147483647.U"),
+            (0x80000000, "BigInt(\"2147483648\").U"),
+            (0xffffffff, "BigInt(\"4294967295\").U"),
+            (0x8000000000000000, "BigInt(\"9223372036854775808\").U"),
+            (u64::MAX, "BigInt(\"18446744073709551615\").U"),
+        ] {
+            assert_eq!(scala_uint_literal(value), expected);
+            let memory = emit_mem_decl("rom", 1, 64, false, &Some(vec![value]));
+            assert!(memory.contains(&format!("VecInit({expected}(64.W))")));
         }
     }
 }

@@ -1,0 +1,16 @@
+{
+  "detected_stack": "backend",
+  "total_tests": 1,
+  "api_tests": 0,
+  "backend_tests": 1,
+  "fixtures_created": 0,
+  "priority_coverage": {
+    "P0": 1,
+    "P1": 0,
+    "P2": 0,
+    "P3": 0
+  },
+  "execution_mode": "subagent",
+  "performance_gain": "not measured",
+  "pact_mcp_reachable": false
+}

@@ -1,0 +1,21 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.05s
+     Running tests/fr197_timer.rs (target/debug/deps/fr197_timer-a917106ca1243ceb)
+
+running 1 test
+test p0_timer_direct_rtl_independent_full32_directed_and_seeded_oracle ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.92s
+
+     Running tests/fr197_timer_api.rs (target/debug/deps/fr197_timer_api-39751cf05a039f2d)
+
+running 7 tests
+test p0_register_descriptor_has_exact_local_map_masks_and_unique_owners ... ok
+test p1_software_outputs_match_handwritten_local_address_golden ... ok
+test p0_invalid_names_and_conflicting_bodies_are_rejected ... ok
+test p0_exact_thirteen_ports_and_shared_standalone_equivalence ... ok
+test p1_hierarchy_native_and_generated_reject_explicitly ... ok
+test p0_shared_timer_wiring_rejects_width_clock_type_and_output_target_conflicts ... ok
+test p0_actual_two_timer_rtl_has_independent_state_and_match_events ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+

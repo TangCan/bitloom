@@ -1,0 +1,66 @@
+{
+  "sequence": "cargo clean && cargo fmt --all && just test",
+  "utc_start": "2026-09-21T08:59:27.696294+00:00",
+  "environment": {
+    "PATH": "/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:/tmp/bitloom-jvm-tools/bin:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.opam/5.1.1/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.codex/tmp/arg0/codex-arg0JQQ9rr:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.local/bin:/home/richard/opt/Isabelle2026-RC0/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-13.2/bin:/nvme_data1/richard/.trae-cn-server/bin/stable-bf463f1c10476ab51d5c25db4513c590c975a76e-debian10/bin/remote-cli:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-11.6/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.cargo/bin:/home/richard/.local/bin:/home/richard/.nvm/versions/node/v24.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+    "BITLOOM_REQUIRE_RTL": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "steps": [
+    {
+      "command": [
+        "cargo",
+        "clean"
+      ],
+      "utc_start": "2026-09-21T08:59:27.696735+00:00",
+      "utc_end": "2026-09-21T08:59:33.698633+00:00",
+      "elapsed_seconds": 6.0019314649980515,
+      "exit_code": 0,
+      "log_sha256": "3f0347f0de80c6f09364b92fde5da88a4eb92f7675de9283923462de7a90f120"
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all"
+      ],
+      "utc_start": "2026-09-21T08:59:33.699618+00:00",
+      "utc_end": "2026-09-21T08:59:34.836108+00:00",
+      "elapsed_seconds": 1.1365227289497852,
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "just",
+        "test"
+      ],
+      "utc_start": "2026-09-21T08:59:34.837040+00:00",
+      "utc_end": "2026-09-21T09:14:45.448061+00:00",
+      "elapsed_seconds": 910.6110566180432,
+      "exit_code": 0,
+      "log_sha256": "c7d63f613a29c4c9efc0c7c1166b7a0dce5df17953d2c5a6db31e67a47df804a"
+    }
+  ],
+  "source_sha_before": {
+    "crates/bitloom-prelude/src/ip/timer.rs": "72546bcf70c1b459bde056cdfbfb430c9878aeb4665c962c6db41e6329c63293",
+    "crates/bitloom-prelude/src/ip/mod.rs": "76fa5fd6888ad4930ff5dd525c8fd8cd359cd0b5f7f069b260b903c31b334554",
+    "crates/rhdl-firrtl/src/chisel.rs": "08de222c3ef52ba88fc5441260fd6981faffea2dc52dd912357adc4a14deb7c9",
+    "crates/bitloom/tests/fr197_timer.rs": "a0e9982ec65f1db88f62efe9d5d915ed7d459d90b35e766d827514406a65a9e4",
+    "crates/bitloom/tests/fr197_timer_api.rs": "c1d06ff2ec23147849d0771934ba0c4d6d61c519566079f9bc75f465ce3b885b",
+    "crates/bitloom/tests/fr197_timer_formal.rs": "a1c3b831f4a7f68498e8be36cd678f1ed0a937b6de0d855c2c5436ab21f45eb1",
+    ".github/workflows/ci.yml": "45ada4d8845b2e8965d3594b4165aaaaa18c7d873133dd9b9843cd3de909ca9f"
+  },
+  "elapsed_seconds": 917.7535093070474,
+  "all_commands_passed": true,
+  "source_sha_after": {
+    "crates/bitloom-prelude/src/ip/timer.rs": "72546bcf70c1b459bde056cdfbfb430c9878aeb4665c962c6db41e6329c63293",
+    "crates/bitloom-prelude/src/ip/mod.rs": "76fa5fd6888ad4930ff5dd525c8fd8cd359cd0b5f7f069b260b903c31b334554",
+    "crates/rhdl-firrtl/src/chisel.rs": "08de222c3ef52ba88fc5441260fd6981faffea2dc52dd912357adc4a14deb7c9",
+    "crates/bitloom/tests/fr197_timer.rs": "a0e9982ec65f1db88f62efe9d5d915ed7d459d90b35e766d827514406a65a9e4",
+    "crates/bitloom/tests/fr197_timer_api.rs": "c1d06ff2ec23147849d0771934ba0c4d6d61c519566079f9bc75f465ce3b885b",
+    "crates/bitloom/tests/fr197_timer_formal.rs": "a1c3b831f4a7f68498e8be36cd678f1ed0a937b6de0d855c2c5436ab21f45eb1",
+    ".github/workflows/ci.yml": "45ada4d8845b2e8965d3594b4165aaaaa18c7d873133dd9b9843cd3de909ca9f"
+  }
+}

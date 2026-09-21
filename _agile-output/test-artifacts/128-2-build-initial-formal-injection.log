@@ -1,0 +1,21 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.68s
+     Running tests/fr197_timer_formal.rs (target/debug/deps/fr197_timer_formal-51910d2ba9084794)
+
+running 2 tests
+
+thread 'p0_timer_safety_and_cover' (3236505) panicked at crates/bitloom/tests/fr197_timer_formal.rs:91:44:
+top module
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test p0_timer_safety_and_cover ... FAILED
+Timer raw synthesis cells=614 /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-timer-formal/synthesis-3236503
+test p0_timer_original_synthesis ... ok
+
+failures:
+
+failures:
+    p0_timer_safety_and_cover
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.79s
+
+error: test failed, to rerun pass `-p bitloom --test fr197_timer_formal`

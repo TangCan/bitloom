@@ -32,6 +32,7 @@ mod param_sync_fifo;
 mod rv_reg_slice;
 mod spi;
 mod sync_fifo;
+mod timer;
 mod uart;
 
 pub use axi::*;
@@ -46,6 +47,7 @@ pub use param_sync_fifo::*;
 pub use rv_reg_slice::*;
 pub use spi::*;
 pub use sync_fifo::*;
+pub use timer::*;
 pub use uart::*;
 
 #[cfg(test)]

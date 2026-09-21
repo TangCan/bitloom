@@ -1,0 +1,110 @@
+{
+  "utc": "2026-09-21T08:58:55.676688+00:00",
+  "archive": "128-2-automate-raw.tar.gz",
+  "archive_sha256": "3d61a84a7d6f4d45ef29947227c3c37d469e22be4f99c60cc706c0c98807deca",
+  "source_sha256": {
+    "crates/bitloom/tests/fr197_timer.rs": "a0e9982ec65f1db88f62efe9d5d915ed7d459d90b35e766d827514406a65a9e4"
+  },
+  "files": [
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/mutations.log",
+      "sha256": "8a806afb041f166cb9a2b84b40bde4a531d210642072c4fc1d40ff60e4524523"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/original/commands.log",
+      "sha256": "710a77fca9e71ca2bb37b8ee40a87b462f798c162130fc5ddd46fbf34f3d8aed"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/original/compile.exit",
+      "sha256": "8d6ab5b41004258744c527166d1700780b97756c566eeba9e9c8d67bb43eb66a"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/original/compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/original/design.v",
+      "sha256": "88c4328bcfeca0feebacc0b112fbc1dec4c7a3ad11a357ccd94a6e0885f854bf"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/original/run.exit",
+      "sha256": "8d6ab5b41004258744c527166d1700780b97756c566eeba9e9c8d67bb43eb66a"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/original/run.log",
+      "sha256": "b44b8a1b9c5035d699123b55cebe717fe22d0fe45b75e3b7c58c8a202c5b2b01"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/original/tb.sv",
+      "sha256": "ca45bd7d103b2131a23ae1b3e8c2c457a8fa544e93c77c9cda0b5e8a838f14e2"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/original/trace.vcd",
+      "sha256": "75a6cd8e3f2f9e73c1096ca3b18ccd28a5b10207c6c9b8b443b9b8775885458c"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-effective-mask/commands.log",
+      "sha256": "710a77fca9e71ca2bb37b8ee40a87b462f798c162130fc5ddd46fbf34f3d8aed"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-effective-mask/compile.exit",
+      "sha256": "8d6ab5b41004258744c527166d1700780b97756c566eeba9e9c8d67bb43eb66a"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-effective-mask/compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-effective-mask/design.v",
+      "sha256": "f98af388d101fd4419e39a80d2a11f78f73eb8823bf16cfdb549bc5caf9cecd6"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-effective-mask/run.exit",
+      "sha256": "a9ceafd9a6706b2a15331df4ad70594e82082e308e6dbf7962b372be4cc37a80"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-effective-mask/run.log",
+      "sha256": "f333104d63724ffd6ae933bbc6877e6435d08f09e40c841f6f80ad77b4c01a7f"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-effective-mask/tb.sv",
+      "sha256": "ca45bd7d103b2131a23ae1b3e8c2c457a8fa544e93c77c9cda0b5e8a838f14e2"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-effective-mask/trace.vcd",
+      "sha256": "3d900cdf84624936d6ccd2291064e075365c8d302e1463204bfd3e6963ae8345"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-stalled-data/commands.log",
+      "sha256": "710a77fca9e71ca2bb37b8ee40a87b462f798c162130fc5ddd46fbf34f3d8aed"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-stalled-data/compile.exit",
+      "sha256": "8d6ab5b41004258744c527166d1700780b97756c566eeba9e9c8d67bb43eb66a"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-stalled-data/compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-stalled-data/design.v",
+      "sha256": "d93c423de3fe90459d9a532d95dbf16a08113775a2dbf45417d7572f779f8467"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-stalled-data/run.exit",
+      "sha256": "a9ceafd9a6706b2a15331df4ad70594e82082e308e6dbf7962b372be4cc37a80"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-stalled-data/run.log",
+      "sha256": "01ac5894e6462f2a7bdb2dcabee31f73797a5344bce56b28dace9b23d907166b"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-stalled-data/tb.sv",
+      "sha256": "ca45bd7d103b2131a23ae1b3e8c2c457a8fa544e93c77c9cda0b5e8a838f14e2"
+    },
+    {
+      "path": "target/fr197-timer/scoreboard-negative-3577947/wrong-stalled-data/trace.vcd",
+      "sha256": "196f9695b0a80659ceda6aa8a32a0c51414db9f4e8e828babb05ad853a2958a0"
+    }
+  ]
+}

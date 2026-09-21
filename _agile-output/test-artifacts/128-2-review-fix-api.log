@@ -1,0 +1,34 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.09s
+     Running tests/fr197_timer_api.rs (target/debug/deps/fr197_timer_api-39751cf05a039f2d)
+
+running 7 tests
+test p0_register_descriptor_has_exact_local_map_masks_and_unique_owners ... ok
+test p1_software_outputs_match_handwritten_local_address_golden ... ok
+test p0_exact_thirteen_ports_and_shared_standalone_equivalence ... ok
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (3363257) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (3363257) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (3363257) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (3363257) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (3363257) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_hierarchy_native_and_generated_reject_explicitly' (3363257) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+test p1_hierarchy_native_and_generated_reject_explicitly ... ok
+test p0_invalid_names_and_conflicting_bodies_are_rejected ... ok
+test p0_shared_timer_wiring_rejects_width_clock_type_and_output_target_conflicts ... ok
+test p0_actual_two_timer_rtl_has_independent_state_and_match_events ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+

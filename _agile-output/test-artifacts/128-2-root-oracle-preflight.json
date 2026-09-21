@@ -1,0 +1,26 @@
+{
+  "scope": "oracle internal trace/accounting consistency only, no Timer RTL or behavior claim",
+  "commands": [
+    {
+      "argv": [
+        "rustc",
+        "--edition=2024",
+        "/tmp/128-2-oracle-check-eltx8h9_/oracle.rs",
+        "-o",
+        "/tmp/128-2-oracle-check-eltx8h9_/oracle"
+      ],
+      "exit_code": 0,
+      "output": "warning: field `after` is never read\n  --> /tmp/128-2-oracle-check-eltx8h9_/oracle.rs:36:5\n   |\n33 | struct Frame {\n   |        ----- field in this struct\n...\n36 |     after: Values,\n   |     ^^^^^\n   |\n   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: 1 warning emitted\n\n"
+    },
+    {
+      "argv": [
+        "/tmp/128-2-oracle-check-eltx8h9_/oracle"
+      ],
+      "exit_code": 0,
+      "output": "FR197 seed=128219705511 frames=6578 accepted=2740 consumed=2735 cancelled=5 matches=468 suppressed=622 clear_collisions=4 strobes=[44, 130, 54, 41, 44, 47, 40, 38, 37, 47, 43, 46, 40, 51, 46, 340] directed={\"all_strobes_high_bits\": 1, \"compare_below_count_then_wrap\": 1, \"effective_write_suppression\": 1, \"full32_wrap_compare0\": 1, \"long_stall_snapshot_consume_no_refill\": 1, \"periodic_oneshot_1_2_reenable\": 1, \"raw_pulse_sticky_and_w1c_set_wins\": 1, \"reset_match_write_clear_stalled_response\": 1, \"snapshot_errors_and_no_system_alias\": 1, \"zero_effective_mask_does_not_suppress\": 1}\nFR197 seed=deadbeef1282 frames=6578 accepted=2713 consumed=2709 cancelled=4 matches=468 suppressed=626 clear_collisions=4 strobes=[37, 138, 48, 51, 48, 39, 38, 41, 43, 34, 50, 46, 47, 46, 45, 343] directed={\"all_strobes_high_bits\": 1, \"compare_below_count_then_wrap\": 1, \"effective_write_suppression\": 1, \"full32_wrap_compare0\": 1, \"long_stall_snapshot_consume_no_refill\": 1, \"periodic_oneshot_1_2_reenable\": 1, \"raw_pulse_sticky_and_w1c_set_wins\": 1, \"reset_match_write_clear_stalled_response\": 1, \"snapshot_errors_and_no_system_alias\": 1, \"zero_effective_mask_does_not_suppress\": 1}\nFR197 seed=73592401ffff frames=6579 accepted=2725 consumed=2719 cancelled=6 matches=468 suppressed=608 clear_collisions=4 strobes=[46, 133, 50, 47, 47, 35, 53, 42, 46, 39, 35, 34, 35, 51, 44, 337] directed={\"all_strobes_high_bits\": 1, \"compare_below_count_then_wrap\": 1, \"effective_write_suppression\": 1, \"full32_wrap_compare0\": 1, \"long_stall_snapshot_consume_no_refill\": 1, \"periodic_oneshot_1_2_reenable\": 1, \"raw_pulse_sticky_and_w1c_set_wins\": 1, \"reset_match_write_clear_stalled_response\": 1, \"snapshot_errors_and_no_system_alias\": 1, \"zero_effective_mask_does_not_suppress\": 1}\n"
+    }
+  ],
+  "source_file": "crates/bitloom/tests/fr197_timer.rs",
+  "source_sha256": "34e40108f3f9f27532f5b9848d22e964175ff7a6e3c93d40ac72c45c202f231b",
+  "extraction": "From #[derive(Clone, Copy, Debug, Default)] through before fn check(tb:, prepend BTreeMap import and append main invoking trace for three fixed seeds"
+}

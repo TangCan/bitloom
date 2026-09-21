@@ -1,0 +1,20 @@
+   Compiling bitloom-firrtl v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/rhdl-firrtl)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.73s
+     Running tests/fr197_timer.rs (target/debug/deps/fr197_timer-a917106ca1243ceb)
+
+running 1 test
+
+thread 'p1_timer_firrtl_chisel_same_independent_vectors' (3257450) panicked at crates/bitloom/tests/fr197_timer.rs:616:5:
+JVM failure: /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-timer-backends/jvm-3257449
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test p1_timer_firrtl_chisel_same_independent_vectors ... FAILED
+
+failures:
+
+failures:
+    p1_timer_firrtl_chisel_same_independent_vectors
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 1 filtered out; finished in 11.38s
+
+error: test failed, to rerun pass `-p bitloom --test fr197_timer`
