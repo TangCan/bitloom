@@ -1,0 +1,58 @@
+{
+  "success": true,
+  "subagent": "api-tests",
+  "tests": [],
+  "fixture_needs": [],
+  "knowledge_fragments_used": [
+    "test-quality",
+    "test-levels-framework",
+    "test-priorities-matrix",
+    "evidence-integrity",
+    "selective-testing",
+    "playwright-utils-mandate",
+    "pactjs-utils-mandate"
+  ],
+  "knowledge_context": "Parent supplied the reviewed principles and scope decisions; SHA record inspected at _agile-output/test-artifacts/128-3-automate-knowledge-sha.json.",
+  "playwright_utils_deviations": [],
+  "pactjs_utils_deviations": [],
+  "provider_scrutiny": "not-applicable: Rust in-process elaboration API; no HTTP/message consumer-provider contract",
+  "provider_files_read": [
+    "crates/bitloom-prelude/src/ip/irq.rs",
+    "crates/bitloom/tests/fr197_irq_api.rs"
+  ],
+  "test_count": 0,
+  "existing_api_active_test_count": 8,
+  "existing_api_dedicated_test_count": 1,
+  "coverage_audit": [
+    {
+      "risk": "Public API and exact ports",
+      "evidence": "p0_exact_fourteen_ports_and_shared_standalone_equivalence checks all 14 names, widths and directions, standalone/shared FrozenHir equality and repeated definition reuse."
+    },
+    {
+      "risk": "Descriptor and software artifacts",
+      "evidence": "p0_register_descriptor_has_exact_local_map_masks_and_unique_owners checks four entries, five fields each, reset/access/owner/event/reject flags. p1_software_outputs_match_handwritten_local_address_golden uses independently handwritten local addresses, field masks and access tags, excludes system base alias, and checks generated files against committed artifacts. Existing runner compiles prelude-only source and C header; no duplicate test warranted."
+    },
+    {
+      "risk": "Diagnostics and failed session",
+      "evidence": "p0_invalid_names_and_conflicting_bodies_are_rejected checks invalid/reserved names, public body collision and private CSR collision, with diagnostic codes/details and finish rejection. Wiring test checks addr width, clock type and output direction with both port/net names."
+    },
+    {
+      "risk": "Shared definitions versus independent state",
+      "evidence": "p0_actual_two_irq_rtl_isolation_shared_and_renamed_definitions runs both shared and renamed definitions; simultaneous different requests/events, asymmetric response stall, pending/enable isolation, independent clear and common reset. Dedicated test applies identical three composition testbenches through FIRRTL and Chisel."
+    },
+    {
+      "risk": "Actual Timer raw-event semantics",
+      "evidence": "p0_actual_timer_raw_event_does_not_retrigger_from_local_sticky_event observes Timer sticky EVENT, clears IRQ without retrigger, rearms real Timer without clearing local EVENT, and checks common reset cancellation."
+    },
+    {
+      "risk": "Unsupported native/generated hierarchy honesty",
+      "evidence": "p1_hierarchy_native_and_generated_reject_explicitly checks Interpreter, Compiled and GeneratedFunctional for standalone, both pair forms and Timer composition, requiring specific hierarchy rejection text."
+    }
+  ],
+  "remaining_gaps": [],
+  "execution": "Read-only audit; no tests run, no repository edits. Existing success claims refer to parent run evidence, not fresh worker execution.",
+  "pact_mcp_reachable": false,
+  "pact_fallback_source": "none",
+  "broker_calls": 0,
+  "summary": "No concrete uncovered risk found in assigned public API, diagnostics, software artifacts or shared-instance scope after reading story/spec/ATDD, implementation, API test file and review fixes. Emit no redundant tests or fixtures. Rust/Cargo scope does not meet Playwright or Pact integration applicability gates; no auth provider or service boundary exists. Direct-scoreboard mutation controls remain assigned to worker B. Final regression and closeout remain parent responsibilities."
+}

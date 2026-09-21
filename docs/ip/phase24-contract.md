@@ -178,3 +178,9 @@ Story127.1–127.4随各自单故事提交完成，FR196静态CSR描述/软件�
 Timer32固定接口已实现，完整契约和prelude-only原文例见[Timer32](timer.md)。实际签名为`Timer::define_module(&mut session, name)`，无配置参数；前述研究形状的`timer_config`不是现行API。单session复用CsrBlock，唯一owner、32位模计数、有效写优先、原始事件/W1C和共同reset保持正式合同。新增四项公开符号逐项登记FR142/minor，未改版本或发布。build验证见`_agile-output/test-artifacts/128-2-build-evidence.md`，七步最终状态以故事记录为准。128.3–5、Epic129–130、FR197整体/M3和Phase24未由此关闭，FR189 deferred/NFR91保持；历史时点记录保留。
 
 128.2最终七步关闭：473个workspace结果块、1833 passed/0 failed/30 ignored；新5个专用入口另有实际PASS。完整验收`_agile-output/test-artifacts/128-2-final-verification.md`。Timer子集随独立提交交付，Epic128/M3及FR197整体仍开放，下一128.3；前述build段保留为历史。
+
+## Story128.3 IRQ实现子集（2026-09-21）
+
+固定五路`ip::Irq`已实现，实际接口/原文prelude-only例见[五路事件IRQ](irq.md)。单session共享CSR叶，PENDING/ENABLE唯一owner，TEST commit门控且RAW硬件独占；全部14端口、四local地址和五具名字段保持正式合同。实际Timer→IRQ组合仅接原始match，不接sticky EVENT；不代表GPIO/UART算法或系统交付。四项公开符号逐项登记FR142，属SemVer minor，未改工具钉、包版本或发布。
+
+构建实测和原始证据见`_agile-output/test-artifacts/128-3-build-evidence.md`；故事仍须独立审查、automate、clean/fmt/完整回归与单故事提交闭合。仅IRQ子集；128.4/128.5、Epic129–130、FR197整体/M3及Phase24未交付，FR189 deferred/NFR91保持。此前各时点记录保留为历史。

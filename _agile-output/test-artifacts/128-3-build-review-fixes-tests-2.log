@@ -1,0 +1,11 @@
+test_absent_and_empty_archive_inputs_fail_without_output (__main__.HarnessReview.test_absent_and_empty_archive_inputs_fail_without_output) ... ok
+test_existing_valid_capture_and_missing_evidence_classes (__main__.HarnessReview.test_existing_valid_capture_and_missing_evidence_classes) ... ok
+test_launch_failure_preserves_attempt (__main__.HarnessReview.test_launch_failure_preserves_attempt) ... ok
+test_normal_and_unchecked_hash_cache_use_verified_sources (__main__.HarnessReview.test_normal_and_unchecked_hash_cache_use_verified_sources) ... ok
+test_package_and_legacy_bytecode_shadow_rejected (__main__.HarnessReview.test_package_and_legacy_bytecode_shadow_rejected) ... ok
+test_software_comparison_is_explicit_pass_or_fail_gate (__main__.HarnessReview.test_software_comparison_is_explicit_pass_or_fail_gate) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 6.094s
+
+OK

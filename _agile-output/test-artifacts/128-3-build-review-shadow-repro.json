@@ -1,0 +1,8 @@
+{
+  "utc": "2026-09-21T09:57:38.526129+00:00",
+  "verified_files": 16,
+  "execution_exit": 1,
+  "output": "Traceback (most recent call last):\n  File \"/nvme_data2/richard/2026/rhdl/target/1283-shadow-proof-avtip5u9/install/bin/sby\", line 23, in <module>\n    from sby_core import SbyConfig, SbyTask, SbyAbort, SbyTaskloop, process_filename, dress_message\n  File \"/nvme_data2/richard/2026/rhdl/target/1283-shadow-proof-avtip5u9/install/bin/sby_core/__init__.py\", line 1, in <module>\n    raise RuntimeError('STORY1283_CONTROLLED_SHADOW_PROBE')\nRuntimeError: STORY1283_CONTROLLED_SHADOW_PROBE\n",
+  "copy_only": "/nvme_data2/richard/2026/rhdl/target/1283-shadow-proof-avtip5u9",
+  "result": "identity accepts package shadow; actual executable imports unchecked package"
+}

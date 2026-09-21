@@ -1,0 +1,26 @@
+[
+  {
+    "file": "128-3-automate-raw.tar.gz",
+    "sha256": "a966decc3f856eb8bf2f5d5bf8ddcffe1c257dadc4aa133cfd0dff02f3dec877"
+  },
+  {
+    "file": "128-3-build-raw-20260921T095151.183659Z.tar.gz",
+    "sha256": "1971244fb4145eb40b8e107bde5f2b96644d0456a0a9e3e02a60c9e576656f29"
+  },
+  {
+    "file": "128-3-code-review-raw.tar.gz",
+    "sha256": "7ef194ce9e68a300cd4ad42475f26349a9eeae051a108adbe9761630247ded08"
+  },
+  {
+    "file": "128-3-final-fingerprint-gates-raw.tar.gz",
+    "sha256": "65421eea24ce5b30ceb8ea9e0f3748f25a480be353ca95af7b919694125b63b9"
+  },
+  {
+    "file": "128-3-final-gates-raw.tar.gz",
+    "sha256": "100b1d6c8051d4ee6e74f3a1e78c5daa3b29eae4751c6eaff8b02475b7be0e36"
+  },
+  {
+    "file": "128-3-review-fix-raw.tar.gz",
+    "sha256": "989b72dd2d932ebc0eccce8d69b151d5e71ef1c18a6dd9eb16de90145c419557"
+  }
+]

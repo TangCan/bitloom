@@ -1084,7 +1084,11 @@ fn emit_expr(m: &Module, expr: &AssignExpr, target: &str) -> String {
             format!("{}({}, {lo})", ref_name(m, src), lo + width - 1)
         }
         AssignExpr::Concat { high, low, .. } => {
-            format!("Cat({}, {})", ref_name(m, high), ref_name(m, low))
+            format!(
+                "chisel3.util.Cat({}, {})",
+                ref_name(m, high),
+                ref_name(m, low)
+            )
         }
         AssignExpr::ZeroExtend { src, to_width, .. } => {
             let expr = format!("{}.asUInt.pad({to_width})", ref_name(m, src));
@@ -1455,5 +1459,39 @@ mod literal_regression {
             let memory = emit_mem_decl("rom", 1, 64, false, &Some(vec![value]));
             assert!(memory.contains(&format!("VecInit({expected}(64.W))")));
         }
+    }
+}
+
+#[cfg(test)]
+mod concat_regression {
+    use super::*;
+    use bitloom_builder::ElaborateSession;
+    use bitloom_hir::Span;
+
+    #[test]
+    fn concatenation_resolves_util_cat_for_mechanical_and_style_faces() {
+        let mut s = ElaborateSession::new("Concat");
+        let sp = Span::default();
+        s.begin_module("Concat", sp);
+        s.add_input("clk", GroundType::Clock, sp);
+        s.add_input("rst", GroundType::Reset, sp);
+        s.add_input("high", GroundType::UInt { width: 27 }, sp);
+        s.add_input("low", GroundType::UInt { width: 5 }, sp);
+        s.add_output("joined", GroundType::UInt { width: 32 }, sp);
+        s.begin_combinational(sp);
+        s.assign_concat("joined", "high", "low", sp);
+        s.end_process();
+        s.end_module();
+        let hir = s.finish().unwrap();
+        for emit in [
+            emit_chisel,
+            emit_chisel_idiomatic,
+            emit_chisel_style_guide_pack_fr188,
+        ] {
+            let scala = &emit(&hir).unwrap().files[0].contents;
+            assert!(scala.contains("io.joined := chisel3.util.Cat(io.high, io.low)"));
+        }
+        // This only guards name resolution in all emit faces. The actual JVM
+        // compile and bit order are exercised by the IRQ three-backend gate.
     }
 }

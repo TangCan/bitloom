@@ -1,0 +1,10 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.59s
+     Running tests/fr197_irq.rs (target/debug/deps/fr197_irq-ec30802e0d350683)
+
+running 1 test
+IRQ direct scoreboard original PASS; source and TEST-byte faults detected at prescribed readback assertions: /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-irq/scoreboard-faults-324588-1789987477996925737
+test p0_irq_direct_scoreboard_rejects_source_mapping_and_test_byte_faults ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.35s
+

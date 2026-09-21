@@ -1,0 +1,36 @@
+{
+  "recorded_utc": "2026-09-21T10:06:29.291654+00:00",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "_agile-output/test-artifacts/128-3-build-harness-tests.py"
+      ],
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "BITLOOM_SBY_SOURCE": "/tmp/bitloom-1263-sby-src",
+        "PATH_prefix": "/tmp/bitloom-1263-sby-installed/bin"
+      },
+      "exit": 0,
+      "tests": 6,
+      "log": "128-3-build-review-fixes-tests-2.log"
+    },
+    {
+      "command": [
+        "python3",
+        "-O",
+        "_agile-output/test-artifacts/128-3-build-harness-tests.py"
+      ],
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "BITLOOM_SBY_SOURCE": "/tmp/bitloom-1263-sby-src",
+        "PATH_prefix": "/tmp/bitloom-1263-sby-installed/bin"
+      },
+      "exit": 0,
+      "tests": 6,
+      "log": "128-3-build-review-fixes-tests-optimized.log"
+    }
+  ],
+  "first_failure_log": "128-3-build-review-fixes-tests.log",
+  "real_install_modified": false
+}

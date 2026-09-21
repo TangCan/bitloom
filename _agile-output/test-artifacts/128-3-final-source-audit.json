@@ -1,0 +1,21 @@
+{
+  "utc": "2026-09-21T11:10:50.758057+00:00",
+  "generated_log_delta": {
+    "crates/rhdl-formal/fixtures/fr119/fr119_pass/logfile.txt": {
+      "before": "c1c28fede1d1c8bd98fb266f61bd920b10a3ed7321550ebdc20fdf75246590a1",
+      "after": "f133f27455c8e67cf89e446abf74f413cb45b848620c904af8652f66d91ed1a9"
+    }
+  },
+  "ignored_by_git": ".gitignore line7",
+  "post_regression_script_delta": {
+    "_agile-output/test-artifacts/128-3-build-harness-tests.py": {
+      "test_end": "a489c4b9b148b50e1c205457669b98161f2c3d59a8efd5b3586a3f8624a9f3a5",
+      "current": "48ea4d0f766fca1219cc2272ec9f0ca46a09d3f91b1a24b0a44bffd4737bd3f7"
+    },
+    "_agile-output/test-artifacts/128-3-build-runner.py": {
+      "test_end": "e71728fea9503a0e748acbcf78e52cef860dc828dd07d2f4a9840c7885b5ed3b",
+      "current": "7cfb3e5cdd71fe4f1bdd368355ec8c0c4262be0b54c1282c119c7e9d01f163ed"
+    }
+  },
+  "rust_product_tests_ci_unchanged": true
+}

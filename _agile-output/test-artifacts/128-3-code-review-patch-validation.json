@@ -1,0 +1,27 @@
+{
+  "recorded_utc": "2026-09-21T10:30:52.604872+00:00",
+  "harness": [
+    {
+      "command": [
+        "python3",
+        "_agile-output/test-artifacts/128-3-build-harness-tests.py"
+      ],
+      "exit": 0,
+      "tests": 12,
+      "log": "128-3-code-review-patch-harness-2.log"
+    },
+    {
+      "command": [
+        "python3",
+        "-O",
+        "_agile-output/test-artifacts/128-3-build-harness-tests.py"
+      ],
+      "exit": 0,
+      "tests": 12,
+      "log": "128-3-code-review-patch-harness-optimized.log"
+    }
+  ],
+  "direct": "128-3-code-review-patch-direct-2.json",
+  "initial_direct_failure": "128-3-code-review-patch-direct.json",
+  "full_build_rerun": "delegated to root after final source stabilizes"
+}

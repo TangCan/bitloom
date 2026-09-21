@@ -1,0 +1,35 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+error[E0432]: unresolved import `bitloom_prelude::ip::Irq`
+ --> crates/bitloom/tests/fr197_irq_api.rs:6:31
+  |
+6 |     ip::{CsrAccess, CsrOwner, Irq, Timer},
+  |                               ^^^ no `Irq` in `ip`
+
+warning: unused import: `Elaboratable`
+ --> crates/bitloom/tests/fr197_irq_api.rs:5:5
+  |
+5 |     Elaboratable, ElaborateSession, FrozenHir, GroundType, Span,
+  |     ^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+error[E0432]: unresolved import `bitloom_prelude::ip::Irq`
+ --> crates/bitloom/tests/fr197_irq.rs:3:48
+  |
+3 | use bitloom_prelude::{Elaboratable, FrozenHir, ip::Irq};
+  |                                                ^^^^^^^ no `Irq` in `ip`
+
+warning: unused import: `Elaboratable`
+ --> crates/bitloom/tests/fr197_irq.rs:3:23
+  |
+3 | use bitloom_prelude::{Elaboratable, FrozenHir, ip::Irq};
+  |                       ^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+For more information about this error, try `rustc --explain E0432`.
+warning: `bitloom` (test "fr197_irq_api") generated 1 warning
+error: could not compile `bitloom` (test "fr197_irq_api") due to 1 previous error; 1 warning emitted
+warning: build failed, waiting for other jobs to finish...
+warning: `bitloom` (test "fr197_irq") generated 1 warning
+error: could not compile `bitloom` (test "fr197_irq") due to 1 previous error; 1 warning emitted

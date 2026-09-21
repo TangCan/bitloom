@@ -1,0 +1,17 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "-p",
+    "bitloom",
+    "--test",
+    "fr197_irq",
+    "--test",
+    "fr197_irq_api",
+    "--no-run"
+  ],
+  "start_utc": "2026-09-21T09:32:43.296232+00:00",
+  "exit": 101,
+  "seconds": 0.28315028396900743
+}

@@ -1,0 +1,40 @@
+test_absent_and_empty_archive_inputs_fail_without_output (__main__.HarnessReview.test_absent_and_empty_archive_inputs_fail_without_output) ... ok
+test_existing_valid_capture_and_missing_evidence_classes (__main__.HarnessReview.test_existing_valid_capture_and_missing_evidence_classes) ... ok
+test_launch_failure_preserves_attempt (__main__.HarnessReview.test_launch_failure_preserves_attempt) ... ERROR
+test_normal_and_unchecked_hash_cache_use_verified_sources (__main__.HarnessReview.test_normal_and_unchecked_hash_cache_use_verified_sources) ... ok
+test_package_and_legacy_bytecode_shadow_rejected (__main__.HarnessReview.test_package_and_legacy_bytecode_shadow_rejected) ... ok
+test_software_comparison_is_explicit_pass_or_fail_gate (__main__.HarnessReview.test_software_comparison_is_explicit_pass_or_fail_gate) ... ERROR
+
+======================================================================
+ERROR: test_launch_failure_preserves_attempt (__main__.HarnessReview.test_launch_failure_preserves_attempt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/128-3-build-harness-tests.py", line 82, in test_launch_failure_preserves_attempt
+    record=json.loads((out/'commands.json').read_text())['commands'][-1]
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/irq-review-bkapla5t/launch/commands.json'
+
+======================================================================
+ERROR: test_software_comparison_is_explicit_pass_or_fail_gate (__main__.HarnessReview.test_software_comparison_is_explicit_pass_or_fail_gate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/128-3-build-harness-tests.py", line 104, in test_software_comparison_is_explicit_pass_or_fail_gate
+    else:self.main('example',out)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/128-3-build-harness-tests.py", line 43, in main
+    self.runner.main()
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/128-3-build-runner.py", line 107, in main
+    tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT).decode().split("\0")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'decode'
+
+----------------------------------------------------------------------
+Ran 6 tests in 4.406s
+
+FAILED (errors=2)

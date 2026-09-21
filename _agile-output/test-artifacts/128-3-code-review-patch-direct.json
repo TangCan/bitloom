@@ -1,0 +1,18 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "-p",
+    "bitloom",
+    "--test",
+    "fr197_irq",
+    "p0_irq_direct_rtl_independent_five_source_directed_and_seeded_oracle",
+    "--",
+    "--exact",
+    "--nocapture"
+  ],
+  "start_utc": "2026-09-21T10:27:38.048678+00:00",
+  "end_utc": "2026-09-21T10:27:39.586832+00:00",
+  "exit": 101
+}

@@ -1,0 +1,21 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.30s
+     Running tests/fr197_irq.rs (target/debug/deps/fr197_irq-ec30802e0d350683)
+
+running 1 test
+
+thread 'p0_irq_direct_rtl_independent_five_source_directed_and_seeded_oracle' (210504) panicked at crates/bitloom/tests/fr197_irq.rs:671:5:
+iverilog ["-V"] failed (exit status: 127) artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr197-irq/direct-128319705511-210500-1789986459420113962
+timeout: failed to run command ‘iverilog’: No such file or directory
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test p0_irq_direct_rtl_independent_five_source_directed_and_seeded_oracle ... FAILED
+
+failures:
+
+failures:
+    p0_irq_direct_rtl_independent_five_source_directed_and_seeded_oracle
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.20s
+
+error: test failed, to rerun pass `-p bitloom --test fr197_irq`

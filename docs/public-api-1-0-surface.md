@@ -210,3 +210,14 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 | `Elaboratable for ip::Timer` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立电路/模块名`Timer`，finish一次 |
 
 上述符号显式纳入FR142；私有CSR模块名/状态/helper不自动入表面。完整时序、地址、prelude-only例与适用验证见[Timer32](ip/timer.md)。追加属SemVer minor，未改版本或发布，不宣称crates.io已有；native/generated层级仍unsupported。只交付FR197 Timer子集，不关闭M3/Phase24，FR189 deferred/NFR91保持。
+
+### `bitloom-prelude` — FR197 / Story128.3 IRQ显式追加
+
+| 符号 | 契约 |
+|---|---|
+| `ip::Irq` | 固定五路同步事件，14端口；PENDING/ENABLE由CSR唯一存储，TEST无存储，RAW只硬件 |
+| `ip::Irq::registers` | `() -> CsrBlock`；固定本地00/04/08/0c，五具名字段与mask31；修改返回描述不改变固定硬件 |
+| `ip::Irq::define_module` | `(&mut ElaborateSession, impl Into<String>) -> Result<String, Diagnostics>`；同session共享IRQ/CSR定义，完整身份复用与既有诊断 |
+| `Elaboratable for ip::Irq` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立电路/模块名`Irq`，finish一次 |
+
+以上逐符号显式纳入FR142，私有CSR名字/helper/内部状态不自动纳入。端口/时序、prelude-only原文例与证据见[五路事件IRQ](ip/irq.md)。追加属SemVer minor；未改版本或发布，不宣称crates.io已有。设计依赖仍仅prelude，native/generated层级unsupported；仅FR197 IRQ子集，M3/Phase24及FR189 deferred/NFR91不由此关闭。

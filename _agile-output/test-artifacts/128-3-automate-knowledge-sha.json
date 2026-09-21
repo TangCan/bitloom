@@ -1,0 +1,58 @@
+{
+  "library-integration-mandate": {
+    "sha": "b38d83dff663fe8f5d2fcbd8d7108d316cdacb1c919b47a4b7a5ffee1e7c4c91",
+    "same_as_previously_read": true
+  },
+  "playwright-utils-mandate": {
+    "sha": "d59b1a6e29d6b39dbf0dbf5e7b5f8d007a90cd979d47e437661a6fd85d8a73ed",
+    "same_as_previously_read": true
+  },
+  "pactjs-utils-mandate": {
+    "sha": "74b1dae511c46a2c3255f20b3a7405226ed7eceb47246d809f4388520e7ba529",
+    "same_as_previously_read": true
+  },
+  "data-factories": {
+    "sha": "036572ce6222b98829c681c9c2cebc54fa89d670356e4bc7d50e402af91f587d",
+    "same_as_previously_read": true
+  },
+  "component-tdd": {
+    "sha": "265907160c95c8d7b2e9c05304665b68f3267b817920fff8afb131ec04184edb",
+    "same_as_previously_read": true
+  },
+  "test-quality": {
+    "sha": "de2d9acf85e4d4576faa7e9ce2a582c32f93d041bb1a8b5417f9a710c59089c6",
+    "same_as_previously_read": true
+  },
+  "test-healing-patterns": {
+    "sha": "b44f7db1ebb1c20ca4ef02d12cae95f692876aee02689605d4b15fe728d28fdf",
+    "same_as_previously_read": true
+  },
+  "test-levels-framework": {
+    "sha": "80bbac7959a47a2e7e7de82613296f906954d571d2d64ece13381c1a0b480237",
+    "same_as_previously_read": true
+  },
+  "test-priorities-matrix": {
+    "sha": "69d8a0d4a717077dec08799630dfcd790342c86ff52dc43a31c5cdbcd03099a9",
+    "same_as_previously_read": true
+  },
+  "ci-burn-in": {
+    "sha": "cc9ca53c62b910872e399ec1d378542e211e70563ddbce9aba84af253e0c74ac",
+    "same_as_previously_read": true
+  },
+  "pact-mcp": {
+    "sha": "e84a339df5fdfacafed538fcc2f0f8386a02a135f51f810235a05b0caa184fcb",
+    "same_as_previously_read": true
+  },
+  "confidence-gate": {
+    "sha": "7f1efe0240565332e0c0cecf62e2ef1882ef8d800b9be64a6f622cee9a8fdfab",
+    "same_as_previously_read": true
+  },
+  "evidence-integrity": {
+    "sha": "0fa16d90af59971f9d820b3db9ad8926ef87c70fd7675b365561954c65593633",
+    "same_as_previously_read": true
+  },
+  "selective-testing": {
+    "sha": "060651774648174fdbff0fe7b858bd81d7c3bce8ee5a53ed7c1ba56e4dd4bbe0",
+    "read_this_run": true
+  }
+}

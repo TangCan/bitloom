@@ -1,0 +1,21 @@
+{
+  "utc": "2026-09-21T09:52:24.842711+00:00",
+  "sha256": {
+    ".github/workflows/ci.yml": "30851810c0d9ccf3f81a80d9ef3862b4f845b170efcad59801159baf1fcc0076",
+    "_agile-output/test-artifacts/128-3-build-archive.py": "38811c4808821a100f5d3b44c7ed4dc6aa9690b8d09d7201a7db6ed6619bcd4d",
+    "_agile-output/test-artifacts/128-3-build-header-check.c": "a5e785466b7bca72e551319439cd7ea7f4773fd09348f33798886a27afa1bde5",
+    "_agile-output/test-artifacts/128-3-build-runner.py": "f300eabac486ef013a2479ea8d872e6d1a09709e9cff0e04e53a19b9458c3578",
+    "crates/bitloom-prelude/src/ip/irq.rs": "b5d8787dae548a9b65479c2c43b9e8b1e11f4eabcc6d36a2327922957d4d398b",
+    "crates/bitloom-prelude/src/ip/mod.rs": "d89cf5892fbc5fe643233e62c09f5e7bd412187b0b664ca6b3f779b09d3a3f7a",
+    "crates/bitloom/tests/fr197_irq.rs": "93fad2711787c6b3d90f012b3b9488e7d3b268701f4a9ec95a099d397ab7ac6c",
+    "crates/bitloom/tests/fr197_irq_api.rs": "ed9ea6bbed032ec27f1d5f5480c25a3f34e0cc9186a0bebaf5e4f9b2a77b0911",
+    "crates/bitloom/tests/fr197_irq_formal.rs": "365e5e4faf1828c456c761fc876b354ca42aae00fd17402e0ed0e4ecb926b1e4",
+    "crates/rhdl-firrtl/src/chisel.rs": "afd0d5ca4e13de449d00021a04759af552b11506c55734a1f441be3537160f36",
+    "docs/ip/irq-example.rs": "a5a54514d5439e932cf812a1b844ebdee8afcacca9124a61a4366dd8b036651b",
+    "docs/ip/irq-registers.h": "40a3d699e75b844034a24b99ba1bcfe4f7fa1582b36b5dbb63bdf701f33f7918",
+    "docs/ip/irq-registers.md": "6b949c674466d9a9ebe38b8f899a21475542d2d1e009ae2b15c5a7ed10cd7862",
+    "docs/ip/irq.md": "e8c0d3b7756675a01bd55c036de27db2ce3f1399dcf7059bc31b943b5f7ed9d7",
+    "docs/ip/phase24-contract.md": "e681ccf0565573195d51dc73091dd510ecda97ace2243ee817cae4c086a49240",
+    "docs/public-api-1-0-surface.md": "fd35c0e8c6aaaad50dec9781a00dc79af3f3b59a499002071390f2f50e31c434"
+  }
+}
