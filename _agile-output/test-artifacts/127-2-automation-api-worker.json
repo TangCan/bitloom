@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "subagent": "api-tests",
+  "fixture_needs": [
+    "existing bounded: process-group timeout and version probes",
+    "existing rtl_producer_monitors: actual DUT ready observation",
+    "existing rtl_check: literal golden assertions",
+    "existing full_word_register: static CSR setup",
+    "new run_rtl_source: shared runner returns completed vvp status/log; tools and compilation must succeed",
+    "new automation_tb: declarations, real monitor and deterministic RTL clock task"
+  ],
+  "knowledge_fragments_used": [
+    "playwright-utils-mandate",
+    "pactjs-utils-mandate",
+    "test-quality",
+    "evidence-integrity"
+  ],
+  "playwright_utils_deviations": [],
+  "pactjs_utils_deviations": [],
+  "provider_scrutiny": "completed",
+  "provider_files_read": [
+    "crates/bitloom/tests/fr196_csr.rs",
+    "crates/bitloom-builder/src/lib.rs",
+    "_agile-output/test-artifacts/127-2-atdd-api-contract.md",
+    "target/fr196-csr/multifield-1060736/design.v"
+  ],
+  "test_count": 2,
+  "summary": "Generated 2 P0 Rust tests, not executed by worker. Producer matrix: 3 prefixes x 5 faults (withdraw/write/addr/wdata/wstrb), plus 3 x 2 legal controls (reset cancellation and hold through acceptance): 21 real RTL simulations. Multifield test: unmodified emitted RTL positive control and emitted control_value high-bit masking mutant: 2 simulations. Negative results require vvp exit code 1, FATAL and exact diagnostic, and absence of success marker; missing tools, timeout and compilation errors fail independently. Existing positive run_rtl assertions retained through run_rtl_source. Backend Cargo; no HTTP/browser/auth/Pact; mandates not applicable. Artifacts retained in unique label/PID directories for manager evidence aggregation. No test run, commit or status changes.",
+  "tests": [
+    {
+      "file": "crates/bitloom/tests/fr196_csr.rs",
+      "description": "Cargo public CSR API hardware integration: real Icarus producer monitor negative/positive controls and independent multifield golden mutation sensitivity.",
+      "priority_coverage": {
+        "P0": 2,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0
+      }
+    }
+  ]
+}

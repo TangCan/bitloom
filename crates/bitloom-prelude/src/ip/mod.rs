@@ -23,6 +23,7 @@
 mod axi;
 mod blackbox;
 mod crc;
+mod csr;
 mod gpio;
 mod i2c;
 mod param_sync_fifo;
@@ -34,6 +35,7 @@ mod uart;
 pub use axi::*;
 pub use blackbox::*;
 pub use crc::*;
+pub use csr::*;
 pub use gpio::*;
 pub use i2c::*;
 pub use param_sync_fifo::*;

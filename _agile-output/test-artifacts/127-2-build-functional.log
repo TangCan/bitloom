@@ -1,0 +1,54 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.05s
+     Running tests/fr196_csr.rs (target/debug/deps/fr196_csr-97c0ac838773f183)
+
+running 4 tests
+
+thread 'p1_native_and_generated_hierarchy_are_explicitly_unsupported' (853921) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'p1_native_and_generated_hierarchy_are_explicitly_unsupported' (853921) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_native_and_generated_hierarchy_are_explicitly_unsupported' (853921) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+test p1_native_and_generated_hierarchy_are_explicitly_unsupported ... ok
+FR196 seed=127219605511 peer=false frames=2310 accepted=1015 consumed=1013 cancelled=2 reads=298 writes=249 errors=374 zero_mask=94 strobes=[35, 31, 33, 42, 39, 28, 26, 27, 31, 34, 43, 36, 31, 31, 32, 45] max_stall=31
+peer_rejects=17 peer_partial_writes=83 peer_allowed_high=9
+FR196 seed=12720a11ce55 peer=true frames=2311 accepted=1016 consumed=1013 cancelled=3 reads=283 writes=256 errors=381 zero_mask=96 strobes=[32, 29, 37, 35, 32, 34, 37, 35, 27, 35, 37, 31, 30, 29, 32, 38] max_stall=31
+test p0_external_rw_masks_reserved_peer_bits_before_read_and_merge ... ok
+peer-system: FR196 PASS
+tb.sv:150626: $finish called at 6933 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr/peer-system-853915
+test p0_same_session_real_peer_owns_counter_and_partial_write_wins_increment ... ok
+leaf-127219605511: FR196 PASS
+tb.sv:145945: $finish called at 6930 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr/leaf-127219605511-853915
+FR196 seed=deadbeef1272 peer=false frames=2311 accepted=1013 consumed=1012 cancelled=1 reads=313 writes=253 errors=360 zero_mask=87 strobes=[35, 37, 28, 32, 24, 29, 36, 32, 41, 33, 31, 35, 37, 30, 26, 49] max_stall=31
+leaf-deadbeef1272: FR196 PASS
+tb.sv:145994: $finish called at 6933 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr/leaf-deadbeef1272-853915
+FR196 seed=73592401ffff peer=false frames=2311 accepted=1014 consumed=1012 cancelled=2 reads=301 writes=225 errors=390 zero_mask=98 strobes=[38, 35, 37, 31, 33, 25, 29, 35, 36, 29, 30, 33, 39, 23, 34, 33] max_stall=31
+leaf-73592401ffff: FR196 PASS
+tb.sv:145962: $finish called at 6933 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr/leaf-73592401ffff-853915
+test p0_leaf_directed_and_random_native_and_real_rtl ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 21.17s
+
+     Running tests/fr196_csr_config.rs (target/debug/deps/fr196_csr_config-caa73ce02a677370)
+
+running 6 tests
+test p1_reordering_is_canonical_for_hir_rtl_markdown_header_and_session_reuse ... ok
+test p0_offsets_masks_resets_and_access_are_checked_before_all_emitters ... ok
+test p0_owner_event_and_reject_contract_is_exhaustive ... ok
+test p0_names_and_generated_names_cannot_collide_or_be_silently_renamed ... ok
+test p0_header_has_handwritten_golden_constants_and_compiles_single_and_two_blocks ... ok
+test p0_full_configuration_identity_rejects_same_module_name_and_poisons_session ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+

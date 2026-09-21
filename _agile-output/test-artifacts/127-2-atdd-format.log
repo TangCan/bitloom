@@ -1,0 +1,2 @@
+$ rustfmt --edition 2024 --check crates/bitloom/tests/fr196_csr.rs crates/bitloom/tests/fr196_csr_config.rs crates/bitloom/tests/fr196_csr_formal.rs
+exit=0

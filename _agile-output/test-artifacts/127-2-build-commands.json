@@ -1,0 +1,42 @@
+[
+  {
+    "log": "127-2-build-functional-first-failure.log",
+    "exit": 101,
+    "command": "CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr196_csr_config --test fr196_csr -- --nocapture"
+  },
+  {
+    "log": "127-2-build-functional.log",
+    "exit": 0,
+    "command": "PATH=/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:$PATH CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr196_csr_config --test fr196_csr -- --nocapture"
+  },
+  {
+    "log": "127-2-build-config-final.log",
+    "exit": 0,
+    "command": "PATH=/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:$PATH CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr196_csr_config -- --nocapture"
+  },
+  {
+    "log": "127-2-build-codec.log",
+    "exit": 0,
+    "command": "CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom-prelude csr"
+  },
+  {
+    "log": "127-2-build-example.log",
+    "exit": 0,
+    "command": "python3 scripts/check_fr196_example.py"
+  },
+  {
+    "log": "127-2-build-formal-first-failure.log",
+    "exit": 101,
+    "command": "PATH=/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:$PATH CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr196_csr_formal -- --ignored --nocapture"
+  },
+  {
+    "log": "127-2-build-formal.log",
+    "exit": 0,
+    "command": "PATH=/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:$PATH CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr196_csr_formal -- --ignored --nocapture"
+  },
+  {
+    "log": "127-2-build-regression.log",
+    "exit": 0,
+    "command": "PATH=/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:$PATH CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr193_axi_protocol --test fr98_axi_near_vip --test fr194_module_composition --test fr195_rv_reg_slice --test fr195_param_sync_fifo -- --nocapture"
+  }
+]

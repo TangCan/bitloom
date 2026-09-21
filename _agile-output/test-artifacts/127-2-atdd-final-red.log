@@ -1,0 +1,42 @@
+$ cargo test -p bitloom --test fr196_csr_config --test fr196_csr --test fr196_csr_formal --no-run
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+error[E0432]: unresolved imports `bitloom_prelude::ip::CsrAccess`, `bitloom_prelude::ip::CsrBlock`, `bitloom_prelude::ip::CsrField`, `bitloom_prelude::ip::CsrOwner`, `bitloom_prelude::ip::CsrRegister`
+ --> crates/bitloom/tests/fr196_csr_formal.rs:4:27
+  |
+4 | use bitloom_prelude::ip::{CsrAccess, CsrBlock, CsrField, CsrOwner, CsrRegister};
+  |                           ^^^^^^^^^  ^^^^^^^^  ^^^^^^^^  ^^^^^^^^  ^^^^^^^^^^^ no `CsrRegister` in `ip`
+  |                           |          |         |         |
+  |                           |          |         |         no `CsrOwner` in `ip`
+  |                           |          |         no `CsrField` in `ip`
+  |                           |          no `CsrBlock` in `ip`
+  |                           no `CsrAccess` in `ip`
+
+error[E0432]: unresolved imports `bitloom_prelude::ip::CsrAccess`, `bitloom_prelude::ip::CsrBlock`, `bitloom_prelude::ip::CsrField`, `bitloom_prelude::ip::CsrOwner`, `bitloom_prelude::ip::CsrRegister`
+ --> crates/bitloom/tests/fr196_csr_config.rs:4:10
+  |
+4 |     ip::{CsrAccess, CsrBlock, CsrField, CsrOwner, CsrRegister},
+  |          ^^^^^^^^^  ^^^^^^^^  ^^^^^^^^  ^^^^^^^^  ^^^^^^^^^^^ no `CsrRegister` in `ip`
+  |          |          |         |         |
+  |          |          |         |         no `CsrOwner` in `ip`
+  |          |          |         no `CsrField` in `ip`
+  |          |          no `CsrBlock` in `ip`
+  |          no `CsrAccess` in `ip`
+
+error[E0432]: unresolved imports `bitloom_prelude::ip::CsrAccess`, `bitloom_prelude::ip::CsrBlock`, `bitloom_prelude::ip::CsrField`, `bitloom_prelude::ip::CsrOwner`, `bitloom_prelude::ip::CsrRegister`
+ --> crates/bitloom/tests/fr196_csr.rs:6:10
+  |
+6 |     ip::{CsrAccess, CsrBlock, CsrField, CsrOwner, CsrRegister},
+  |          ^^^^^^^^^  ^^^^^^^^  ^^^^^^^^  ^^^^^^^^  ^^^^^^^^^^^ no `CsrRegister` in `ip`
+  |          |          |         |         |
+  |          |          |         |         no `CsrOwner` in `ip`
+  |          |          |         no `CsrField` in `ip`
+  |          |          no `CsrBlock` in `ip`
+  |          no `CsrAccess` in `ip`
+
+For more information about this error, try `rustc --explain E0432`.
+error: could not compile `bitloom` (test "fr196_csr_formal") due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `bitloom` (test "fr196_csr_config") due to 1 previous error
+error: could not compile `bitloom` (test "fr196_csr") due to 1 previous error
+
+exit=101

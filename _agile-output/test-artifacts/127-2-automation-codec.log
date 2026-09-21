@@ -1,0 +1,13 @@
+command=["cargo", "test", "-p", "bitloom-prelude", "csr"]
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.04s
+     Running unittests src/lib.rs (target/debug/deps/bitloom_prelude-e3c0f4f1c15a9b05)
+
+running 3 tests
+test ip::csr::codec::tests::csr_codec_roundtrip_and_key_order ... ok
+test ip::csr::codec::tests::csr_codec_rejects_every_missing_duplicate_and_extra_key ... ok
+test ip::csr::codec::tests::csr_codec_rejects_malformed_values_and_revalidates ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 17 filtered out; finished in 0.00s
+
+
+exit=0

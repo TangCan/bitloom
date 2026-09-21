@@ -1,0 +1,39 @@
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 2.67s
+     Running tests/fr196_csr.rs (target/debug/deps/fr196_csr-97c0ac838773f183)
+
+running 4 tests
+
+thread 'p1_native_and_generated_hierarchy_are_explicitly_unsupported' (852377) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'p1_native_and_generated_hierarchy_are_explicitly_unsupported' (852377) panicked at crates/bitloom-sim/src/lib.rs:100:46:
+Sim construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+
+thread 'p1_native_and_generated_hierarchy_are_explicitly_unsupported' (852377) panicked at crates/bitloom-sim/src/generate.rs:63:14:
+GeneratedFunctional construction failed: "hierarchical simulation is unsupported: expected one module without instances"
+test p1_native_and_generated_hierarchy_are_explicitly_unsupported ... ok
+FR196 seed=127219605511 peer=false frames=2310 accepted=1015 consumed=1013 cancelled=2 reads=298 writes=249 errors=374 zero_mask=94 strobes=[35, 31, 33, 42, 39, 28, 26, 27, 31, 34, 43, 36, 31, 31, 32, 45] max_stall=31
+peer_rejects=17 peer_partial_writes=83 peer_allowed_high=9
+FR196 seed=12720a11ce55 peer=true frames=2311 accepted=1016 consumed=1013 cancelled=3 reads=283 writes=256 errors=381 zero_mask=96 strobes=[32, 29, 37, 35, 32, 34, 37, 35, 27, 35, 37, 31, 30, 29, 32, 38] max_stall=31
+test p0_external_rw_masks_reserved_peer_bits_before_read_and_merge ... ok
+
+thread 'p0_same_session_real_peer_owns_counter_and_partial_write_wins_increment' (852376) panicked at crates/bitloom/tests/fr196_csr.rs:915:9:
+iverilog version probe failed; /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr/peer-system-852373/iverilog-version.log
+test p0_same_session_real_peer_owns_counter_and_partial_write_wins_increment ... FAILED
+
+thread 'p0_leaf_directed_and_random_native_and_real_rtl' (852375) panicked at crates/bitloom/tests/fr196_csr.rs:915:9:
+iverilog version probe failed; /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr/leaf-127219605511-852373/iverilog-version.log
+test p0_leaf_directed_and_random_native_and_real_rtl ... FAILED
+
+failures:
+
+failures:
+    p0_leaf_directed_and_random_native_and_real_rtl
+    p0_same_session_real_peer_owns_counter_and_partial_write_wins_increment
+
+test result: FAILED. 2 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.26s
+
+error: test failed, to rerun pass `-p bitloom --test fr196_csr`

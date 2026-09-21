@@ -1,0 +1,11 @@
+e778c9aee1384e983423b9aa3fdd856e256e8a519230b2cb6eb7fa90cfdbbf2b  _agile-output/test-artifacts/127-2-independent-fix-codec.log
+aad6ed750f46540f6c367dbcf4186fe313e33b0814fd43ed0a2f389855bdfef5  _agile-output/test-artifacts/127-2-independent-fix-commands.json
+7a5ace258c36cf9cf39d935798c884b6e1d76af74686409c87978807fdca9ced  _agile-output/test-artifacts/127-2-independent-fix-evidence.md
+0b8628ea017f5b4961932dd81b6a525ea5c4acc64677c1fd7850e93e3bf1a4fc  _agile-output/test-artifacts/127-2-independent-fix-example.log
+fb9baa0100afd80d325f6af375e564a30a4f5fa71ed0bc3b970aed00033b11ac  _agile-output/test-artifacts/127-2-independent-fix-formal.log
+9d9aa8d0c52d887874a10e6bc4ec4d33ded1dfc8e5a2a7fa81ad14d9f52d1aa1  _agile-output/test-artifacts/127-2-independent-fix-functional.log
+0dd44ff36af4dc3d5be765e8dfa20d1b8507fda366a536be5ec686e35d5621bb  _agile-output/test-artifacts/127-2-independent-fix-singleton-final.log
+df9b375db6022f2fed16a2ed1d1f895eeeb672f0f7d90db876e61e0ea37be14a  _agile-output/test-artifacts/127-2-independent-fix-source-members.sha256
+89817195d15d803d7f5b661b7393ef238b66c2e4c964737328caada1467313a6  _agile-output/test-artifacts/127-2-independent-fix-source-snapshot.tar.gz
+4ac2a0c384eb073e88318089b6294309f1b9d01bd929e98fa0edf0e860aa5a1b  _agile-output/test-artifacts/127-2-independent-fix-source-verification.log
+bd0c8955e496821aab832977eb117f3e7d9c414e6dde0ad85b90b1237d0fc8f4  _agile-output/test-artifacts/127-2-independent-fix-tool-artifacts.tar.gz

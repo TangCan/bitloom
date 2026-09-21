@@ -1,0 +1,19 @@
+    Blocking waiting for file lock on build directory
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.89s
+     Running tests/fr196_csr_formal.rs (target/debug/deps/fr196_csr_formal-2b2c9d85425627b7)
+
+running 3 tests
+FR196 singleton 0 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-0-1060973
+FR196 singleton 1 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-1-1060973
+FR196 CSR uninstrumented synthesis artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/synthesis-1060973
+test p0_csr_original_rtl_synthesis_check ... ok
+FR196 singleton 2 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-2-1060973
+FR196 singleton 3 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-3-1060973
+FR196 singleton 4 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-4-1060973
+test p0_each_supported_singleton_original_rtl_synthesis ... ok
+FR196 CSR proof/cover artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/proof-1060973
+test p0_csr_real_safety_and_nonvacuous_cover ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 10.62s
+

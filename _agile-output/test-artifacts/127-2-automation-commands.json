@@ -1,0 +1,110 @@
+[
+  {
+    "label": "functional",
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "bitloom",
+      "--test",
+      "fr196_csr",
+      "--test",
+      "fr196_csr_config",
+      "--",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 23.422,
+    "environment_overrides": {
+      "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "path_prefix": [
+      "/tmp/bitloom-maintenance-tools/bin",
+      "/tmp/bitloom-1263-sby-installed/bin"
+    ]
+  },
+  {
+    "label": "formal",
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "bitloom",
+      "--test",
+      "fr196_csr_formal",
+      "--",
+      "--ignored",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 11.731,
+    "environment_overrides": {
+      "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "path_prefix": [
+      "/tmp/bitloom-maintenance-tools/bin",
+      "/tmp/bitloom-1263-sby-installed/bin"
+    ]
+  },
+  {
+    "label": "codec",
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "bitloom-prelude",
+      "csr"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 0.075,
+    "environment_overrides": {
+      "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "path_prefix": [
+      "/tmp/bitloom-maintenance-tools/bin",
+      "/tmp/bitloom-1263-sby-installed/bin"
+    ]
+  },
+  {
+    "label": "format",
+    "command": [
+      "rustfmt",
+      "--edition",
+      "2024",
+      "--check",
+      "crates/bitloom/tests/fr196_csr.rs",
+      "crates/bitloom/tests/fr196_csr_formal.rs"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 0.06,
+    "environment_overrides": {
+      "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "path_prefix": [
+      "/tmp/bitloom-maintenance-tools/bin",
+      "/tmp/bitloom-1263-sby-installed/bin"
+    ]
+  },
+  {
+    "label": "whitespace",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 0.017,
+    "environment_overrides": {
+      "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "path_prefix": [
+      "/tmp/bitloom-maintenance-tools/bin",
+      "/tmp/bitloom-1263-sby-installed/bin"
+    ]
+  }
+]

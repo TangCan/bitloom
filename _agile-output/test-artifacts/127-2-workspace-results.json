@@ -1,0 +1,10 @@
+{
+  "exit_code": 0,
+  "result_blocks": 463,
+  "passed": 1787,
+  "failed": 0,
+  "ignored": 18,
+  "source_format_changed": false,
+  "start_utc": "2026-09-21T02:41:10.135006+00:00",
+  "end_utc": "2026-09-21T02:48:21.728700+00:00"
+}

@@ -87,3 +87,7 @@ AC1对应上游/依赖与M0/M1索引；AC2对应(a)–(d)、适配/维护/停止
 ## 127.1 当前关闭状态（2026-09-21）
 
 风险内容经三路build审查、四层独立review及主代理M01–M14核对；automate117场景/固定BFM通过，完整回归1763 passed、0 failed、14 ignored，退出0。仅127.1 done，127.2–4 backlog，Epic127 in-progress，FR196/M2未交付。七步记录见[最终验证](../test-artifacts/127-1-final-verification.md)，单故事提交由包含本文件的git记录核验。上文待审/未执行叙述为build时点历史。
+
+## 127.2 当前推进状态（2026-09-21）
+
+127.2已按七步完成静态CSR叶与软件产物并随单故事提交关闭，见[最终验证](../test-artifacts/127-2-final-verification.md)。127.3/127.4保持backlog；本风险门与Epic127整体状态不改，FR196/M2仍未整体交付；127.1关闭段的后续backlog为当时历史。

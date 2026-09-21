@@ -1,0 +1,38 @@
+{
+  "command": "cargo clean && cargo fmt --all && just test",
+  "start_utc": "2026-09-21T02:41:10.135006+00:00",
+  "environment": {
+    "PATH": "/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.opam/5.1.1/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.codex/tmp/arg0/codex-arg0JQQ9rr:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.local/bin:/home/richard/opt/Isabelle2026-RC0/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-13.2/bin:/nvme_data1/richard/.trae-cn-server/bin/stable-bf463f1c10476ab51d5c25db4513c590c975a76e-debian10/bin/remote-cli:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-11.6/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.cargo/bin:/home/richard/.local/bin:/home/richard/.nvm/versions/node/v24.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "BITLOOM_REQUIRE_RTL": "1"
+  },
+  "head": "77ea01392e5be74b9f2622009ad146edb2468ea9",
+  "source_before": {
+    ".github/workflows/ci.yml": "093ffd136be92aa338eba96949736f0aab957eea8ed2e3978ff2f6d33091df2f",
+    "crates/bitloom/tests/fr196_csr.rs": "7f326341f794511890ec0cc474e744f32315c278abb74aa9944e3eddd80df41a",
+    "crates/bitloom/tests/fr196_csr_config.rs": "e5344ffef1e9ba1f2ce443799c9c6781c5d712ec4bca3b9ca00042429fd7b8f6",
+    "crates/bitloom/tests/fr196_csr_formal.rs": "a7c132f6b702b00d1d5e3d87c1b53de4cfaeb30a7ac96c97a59f46ecdc6d0896",
+    "crates/bitloom-prelude/src/ip/csr/codec.rs": "48cb8aa04e870d09e2ba713973e75f70c6fd865e6abe2dcfbeed8b975579888c",
+    "crates/bitloom-prelude/src/ip/csr/mod.rs": "c1599056763da4afaa49e1018a7ac1ba9914ef2832e5bafd3bd58c5abe87292f",
+    "crates/bitloom-prelude/src/ip/csr/rtl.rs": "26c311fa11b9f97801bb71bbec86a80278f35691ad54ab94356bd1be67d698a2",
+    "crates/bitloom-prelude/src/ip/mod.rs": "49a518904333045d3c42e5fe815df2528ec40e89b4353f7b8b980c6d5e413c25",
+    "docs/ip/csr.md": "484f011e22fc9c6576c1f4f600684b40397b748cdee0fc3ccdf0f5669339b088",
+    "scripts/check_fr196_example.py": "ad044a0e031e4b966535e2175d3d1191f8aff15dc64109a7279fc2508fe00338"
+  },
+  "exit_code": 0,
+  "end_utc": "2026-09-21T02:48:21.728700+00:00",
+  "source_after": {
+    ".github/workflows/ci.yml": "093ffd136be92aa338eba96949736f0aab957eea8ed2e3978ff2f6d33091df2f",
+    "crates/bitloom/tests/fr196_csr.rs": "7f326341f794511890ec0cc474e744f32315c278abb74aa9944e3eddd80df41a",
+    "crates/bitloom/tests/fr196_csr_config.rs": "e5344ffef1e9ba1f2ce443799c9c6781c5d712ec4bca3b9ca00042429fd7b8f6",
+    "crates/bitloom/tests/fr196_csr_formal.rs": "a7c132f6b702b00d1d5e3d87c1b53de4cfaeb30a7ac96c97a59f46ecdc6d0896",
+    "crates/bitloom-prelude/src/ip/csr/codec.rs": "48cb8aa04e870d09e2ba713973e75f70c6fd865e6abe2dcfbeed8b975579888c",
+    "crates/bitloom-prelude/src/ip/csr/mod.rs": "c1599056763da4afaa49e1018a7ac1ba9914ef2832e5bafd3bd58c5abe87292f",
+    "crates/bitloom-prelude/src/ip/csr/rtl.rs": "26c311fa11b9f97801bb71bbec86a80278f35691ad54ab94356bd1be67d698a2",
+    "crates/bitloom-prelude/src/ip/mod.rs": "49a518904333045d3c42e5fe815df2528ec40e89b4353f7b8b980c6d5e413c25",
+    "docs/ip/csr.md": "484f011e22fc9c6576c1f4f600684b40397b748cdee0fc3ccdf0f5669339b088",
+    "scripts/check_fr196_example.py": "ad044a0e031e4b966535e2175d3d1191f8aff15dc64109a7279fc2508fe00338"
+  },
+  "log_sha256": "cae98eb788e29330ff9da6d083c74fdbb24137677f673c177db8dbec2de05285"
+}

@@ -1,0 +1,21 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.78s
+     Running tests/fr196_csr_formal.rs (target/debug/deps/fr196_csr_formal-2b2c9d85425627b7)
+
+running 2 tests
+
+thread 'p0_csr_real_safety_and_nonvacuous_cover' (854091) panicked at crates/bitloom/tests/fr196_csr_formal.rs:99:5:
+sby ["-f", "csr.sby", "prove"]: exit status: 16; /nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/proof-854089
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test p0_csr_real_safety_and_nonvacuous_cover ... FAILED
+FR196 CSR uninstrumented synthesis artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/synthesis-854089
+test p0_csr_original_rtl_synthesis_check ... ok
+
+failures:
+
+failures:
+    p0_csr_real_safety_and_nonvacuous_cover
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.55s
+
+error: test failed, to rerun pass `-p bitloom --test fr196_csr_formal`

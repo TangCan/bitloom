@@ -162,3 +162,20 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 | `Elaboratable for ip::ParamSyncFifo<WIDTH, DEPTH>` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立 session，仅 finish 一次 |
 
 此处逐符号显式纳入 FR142 文档表面，未列出的内部接口不自动扩大承诺。中文契约与完整 prelude-only 示例见[参数 FIFO](ip/param-sync-fifo.md)。追加属 SemVer minor；本故事不改包版本、不发布，代码合入不代表 crates.io 已包含。保留旧 SyncFifo 行为及设计依赖边界，不承诺 native/generated 层级仿真、异步 FIFO 或 BRAM 推断。
+
+### `bitloom-prelude` — FR196 / Story127.2 显式追加
+
+| 符号 | 契约 |
+|---|---|
+| `ip::CsrAccess::{Rw, Ro, Wo, W1c}` | 寄存器与全部字段一致的访问枚举；Clone/Copy/Debug/PartialEq/Eq |
+| `ip::CsrOwner::{Leaf, External, None}` | 唯一状态owner枚举；Clone/Copy/Debug/PartialEq/Eq |
+| `ip::CsrField` | 公开字段 `name:String`, `mask:u64`, `reset:u32`, `access:CsrAccess`；Clone/Debug/PartialEq/Eq |
+| `ip::CsrRegister` | 公开字段 `name:String`, `offset:u32`, `reset:u32`, `access:CsrAccess`, `owner:CsrOwner`, `event:Option<String>`, `read_reject:bool`, `write_reject:bool`, `fields:Vec<CsrField>`；Clone/Debug/PartialEq/Eq |
+| `ip::CsrBlock` | 公开字段 `name:String`, `registers:Vec<CsrRegister>`；Clone/Debug/PartialEq/Eq |
+| `ip::CsrBlock::validate` | `(&self) -> Result<(), Diagnostics>`；所有输出共同预校验 |
+| `ip::CsrBlock::define_module` | `(&self, &mut ElaborateSession, impl Into<String>) -> Result<String, Diagnostics>`；完整规范参数身份、共享无捕获定义体 |
+| `ip::CsrBlock::elaborate` | `(&self, impl Into<String>) -> Result<FrozenHir, Diagnostics>`；独立session，一次finish |
+| `ip::CsrBlock::emit_markdown` | `(&self) -> Result<String, Diagnostics>`；确定的local地址/字段表 |
+| `ip::CsrBlock::emit_c_header` | `(&self) -> Result<String, Diagnostics>`；确定的namespace/include guard/local offset宏 |
+
+此处明确纳入FR142文档表面，端口/时序/合法配置与prelude-only例见[CSR](ip/csr.md)。这是SemVer minor追加；不改版本、不发布，不宣称crates.io已包含。私有codec/RTL模块不入表面；设计依赖仍仅prelude。FR196整体/M2尚未关闭，桥、四窗译码和外设后续独立验收；FR189 deferred和NFR91保留。Bitloom与samitbasu/rhdl无关。

@@ -162,3 +162,7 @@ FR195 的 RvRegSlice 子集已实现：WIDTH1..64、两槽寄存、无输入组�
 2026-09-20 Story126.4七步完成，随本故事单独提交关闭Epic126/M1：126.1–126.4均done，FR194模块组合与FR195两槽注册切片/参数FIFO交付。clean + fmt + just test退出0，460个实际结果块汇总1763 passed、0 failed、14 ignored；8个专用形式测试另有真实运行证据，6个既有doc-test保持ignored。最终证据 `_agile-output/test-artifacts/126-4-final-verification.md`，关闭映射 `_agile-output/implementation-artifacts/epic-126-closeout.md`。Epic127–130 / FR196–201尚待各自七步与NFR14，整个Phase24未完成；FR189/Epic122 deferred及NFR91保持，不push、不publish。
 
 本节为当前状态，前文M0/126.2/126.3时点的范围记录保留为历史。新增API已逐符号登记FR142，属SemVer minor，未更改包版本或发布。
+
+## Story127.2 CSR叶子集关闭（2026-09-21）
+
+127.1风险门与127.2静态CSR描述/组合RTL/Markdown/C产物七步完成；公开入口与单owner/提交时序见`docs/ip/csr.md`。127.2完整回归1787 passed、0 failed、18 ignored，专用CSR形式/综合4项实际另跑通过，证据`_agile-output/test-artifacts/127-2-final-verification.md`。只交付FR196叶子集，127.3桥/127.4译码及M2仍待验收，Epic127 in-progress；Epic128–130/Phase24整体未交付。新增API逐符号纳入FR142/minor，未发布；FR189/Epic122 deferred及NFR91保持。前述各时点状态保留为历史。

@@ -1,0 +1,71 @@
+{
+  "success": true,
+  "subagent": "atdd-e2e-tests",
+  "tests": [
+    {
+      "file": "crates/bitloom/tests/fr196_csr.rs",
+      "description": "Native/real RTL CSR hardware integration with independent oracle and real owner peer",
+      "expected_to_fail": true,
+      "acceptance_criteria_covered": [
+        "AC3",
+        "AC4",
+        "AC5",
+        "AC7"
+      ],
+      "priority_coverage": {
+        "P0": 3,
+        "P1": 1,
+        "P2": 0,
+        "P3": 0
+      },
+      "sha256": "b1c3c4120cd7f6fe1faf031dac974bf8b83bd3ad1b3f8a6ceb855d94eeef6fc7"
+    }
+  ],
+  "files": [
+    "crates/bitloom/tests/fr196_csr.rs"
+  ],
+  "test_count": 4,
+  "fixture_needs": [],
+  "knowledge_fragments_used": [
+    "test-quality",
+    "data-factories",
+    "evidence-integrity",
+    "test-levels-framework"
+  ],
+  "tdd_phase": "RED",
+  "playwright_utils_deviations": [],
+  "browser_e2e_count": 0,
+  "override": "Rust hardware backend; explicit user real compile RED replaces generic JS skip. Cargo intentionally not run by worker.",
+  "oracle_probe": {
+    "command": "rustc --edition 2024 /tmp/fr196-csr-oracle-probe.rs -o /tmp/fr196-csr-oracle-probe && /tmp/fr196-csr-oracle-probe",
+    "source": "/tmp/fr196-csr-oracle-probe.rs",
+    "log": "/tmp/fr196-csr-oracle-probe.log",
+    "exit_code": 0,
+    "scope": "Standalone vector/oracle coverage only, no product execution",
+    "frames": [
+      2310,
+      2311,
+      2311,
+      2311
+    ],
+    "peer_rejects": 17,
+    "peer_partial_writes": 83,
+    "peer_allowed_high": 9
+  },
+  "coverage": [
+    "All 16 WSTRB for RW/WO/W1C/external RW; zero-value write commits",
+    "RO reserved high inputs and dynamic snapshot; external RW reserved-bit masking separate test",
+    "Unknown/high/unaligned address and permission errors; no alias",
+    "W1C set priority and independent event during error/backpressure",
+    "Pre-edge combinational commits; reset cancellation; 31-cycle stalls",
+    "3 seeds native Interpreter/Compiled and actual Icarus leaf",
+    "Same-session leaf+counter peer+top; peer reject=candidate[31] && current[0]; write wins increment",
+    "Native/generated hierarchical unsupported explicit panic"
+  ],
+  "limitations": [
+    "Native/RTL not run until coordinator captures compile RED; no green product claim",
+    "Formal/synthesis owned by coordinator",
+    "First pre-reset frame not compared; comparisons start after first reset edge",
+    "Leaf error only SLVERR; system DECERR is later story"
+  ]
+}

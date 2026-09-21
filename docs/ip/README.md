@@ -162,3 +162,7 @@ Story126.2已提供Session模块定义复用与首批 `Gpio::define_module`，�
 验证入口：`cargo test -p bitloom --test fr195_param_sync_fifo -- --nocapture`；专用形式/综合须显式执行 `cargo test -p bitloom --test fr195_param_sync_fifo_formal -- --ignored --nocapture`。组合行为由真实RTL验收，native/generated层级仍unsupported；不承诺异步/深RAM FIFO、BRAM推断或PPA。新增API按SemVer minor，未发布；M1须待Story126.4最终七步核验。
 
 Story126.4最终关闭：Epic126/M1与FR194/FR195完成，七步证据见[关闭记录](../../_agile-output/implementation-artifacts/epic-126-closeout.md)。本节取代前文build阶段的待核验状态；后续CSR/外设/外部适配仍未交付。
+
+## FR196 静态 CSR 叶节点（Story127.2）
+
+`CsrBlock`、`CsrRegister`、`CsrField`、`CsrAccess`、`CsrOwner` 提供同源RTL/Markdown/C头生成，包含RW/RO/WO/W1C、动态拒绝与单一外部状态owner。同一session可复用定义；完整prelude-only例、端口、同沿提交脉冲和限制见[CSR叶节点](csr.md)。验证：`cargo test -p bitloom --test fr196_csr_config --test fr196_csr`；专用形式/综合：`cargo test -p bitloom --test fr196_csr_formal -- --ignored`。此为FR196描述/叶子集，桥/译码/外设与M2尚未交付；未发布。

@@ -26,6 +26,8 @@ jobs:
         run: BITLOOM_REQUIRE_RTL=1 CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test --workspace
       - name: FR194 and FR195 documented prelude-only designs
         run: python3 scripts/check_fr194_example.py
+      - name: FR196 documented prelude-only CSR design
+        run: python3 scripts/check_fr196_example.py
       - name: Preserve Icarus failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
@@ -34,6 +36,8 @@ jobs:
           path: |
             target/fr195/
             target/fr195-fifo/
+            target/fr196-csr/
+            target/fr196-csr-c/
 
   # FR71 / NFR34 / FR28: required true Chisel JVM compile (Pattern A — parallel to Rust test).
   # Escape hatch env must never be enabled here. Do not use continue-on-error.
@@ -122,6 +126,8 @@ jobs:
         run: cargo test -p bitloom --test fr195_rv_reg_slice_formal -- --ignored --nocapture
       - name: Required FR195 parameter FIFO safety, cover and original RTL synthesis
         run: CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr195_param_sync_fifo_formal -- --ignored --nocapture
+      - name: Required FR196 CSR safety, cover and original RTL synthesis
+        run: CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test -p bitloom --test fr196_csr_formal -- --ignored --nocapture
       - name: Preserve formal failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
@@ -130,6 +136,7 @@ jobs:
           path: |
             target/fr195-formal/
             target/fr195-fifo-formal/
+            target/fr196-csr-formal/
             target/fr119/
             crates/rhdl-formal/fixtures/fr119/fr119_fail/
 

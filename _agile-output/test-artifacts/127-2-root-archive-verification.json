@@ -1,0 +1,16 @@
+{
+  "source": {
+    "verified_members": 19,
+    "file_members": 19
+  },
+  "tool": {
+    "verified_members": 397,
+    "file_members": 397
+  },
+  "formal_statuses": {
+    "target/fr196-csr-formal/lost-event-mutation-1119505/control/status": "PASS 0 8",
+    "target/fr196-csr-formal/lost-event-mutation-1119505/mutant/status": "FAIL 2 1",
+    "target/fr196-csr-formal/proof-1119505/csr_cover/status": "PASS 0 3",
+    "target/fr196-csr-formal/proof-1119505/csr_prove/status": "PASS 0 8"
+  }
+}

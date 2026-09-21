@@ -1,0 +1,81 @@
+FR196 docs/ip/csr.md prelude-only example: cargo run --offline --manifest-path /tmp/bitloom-fr196-example-pmo405uw/Cargo.toml
+     Locking 8 packages to latest Rust 1.97.1 compatible versions
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling bitloom-hir v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+   Compiling bitloom-builder v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+   Compiling syn v2.0.119
+   Compiling bitloom-macro v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling fr194-design-example v0.0.0 (/tmp/bitloom-fr196-example-pmo405uw)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.49s
+     Running `target/fr194-doc-example/debug/fr194-design-example`
+/* Local byte offsets: caller supplies the base address. */
+#ifndef BITLOOM_EXAMPLE_CSR_H
+#define BITLOOM_EXAMPLE_CSR_H
+#include <stdint.h>
+
+#define EXAMPLE_CONTROL_OFFSET UINT32_C(0x00000000)
+#define EXAMPLE_CONTROL_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_CONTROL_RESET UINT32_C(0x00000000)
+#define EXAMPLE_CONTROL_ACCESS "RW"
+#define EXAMPLE_CONTROL_BITS_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_CONTROL_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_CONTROL_BITS_ACCESS "RW"
+
+#define EXAMPLE_STATUS_OFFSET UINT32_C(0x00000004)
+#define EXAMPLE_STATUS_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_STATUS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_STATUS_ACCESS "RO"
+#define EXAMPLE_STATUS_BITS_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_STATUS_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_STATUS_BITS_ACCESS "RO"
+
+#define EXAMPLE_TX_OFFSET UINT32_C(0x00000008)
+#define EXAMPLE_TX_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_TX_RESET UINT32_C(0x00000000)
+#define EXAMPLE_TX_ACCESS "WO"
+#define EXAMPLE_TX_BITS_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_TX_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_TX_BITS_ACCESS "WO"
+
+#define EXAMPLE_EVENTS_OFFSET UINT32_C(0x0000000c)
+#define EXAMPLE_EVENTS_MASK UINT32_C(0x8000000f)
+#define EXAMPLE_EVENTS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_EVENTS_ACCESS "W1C"
+#define EXAMPLE_EVENTS_BITS_MASK UINT32_C(0x8000000f)
+#define EXAMPLE_EVENTS_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_EVENTS_BITS_ACCESS "W1C"
+
+#define EXAMPLE_COUNTER_OFFSET UINT32_C(0x00000010)
+#define EXAMPLE_COUNTER_MASK UINT32_C(0xffffffff)
+#define EXAMPLE_COUNTER_RESET UINT32_C(0x00000000)
+#define EXAMPLE_COUNTER_ACCESS "RW"
+#define EXAMPLE_COUNTER_BITS_MASK UINT32_C(0xffffffff)
+#define EXAMPLE_COUNTER_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_COUNTER_BITS_ACCESS "RW"
+
+#endif /* BITLOOM_EXAMPLE_CSR_H */
+
+# Example CSR
+
+Local byte offsets; caller supplies the base address.
+
+| Register | Offset | Mask | Reset | Access | Owner | Event |
+|---|---|---|---|---|---|---|
+| control | 0x0000 | 0x000000ff | 0x00000000 | RW | Leaf | — |
+| status | 0x0004 | 0x000000ff | 0x00000000 | RO | External | — |
+| tx | 0x0008 | 0x000000ff | 0x00000000 | WO | None | — |
+| events | 0x000c | 0x8000000f | 0x00000000 | W1C | Leaf | hw_events |
+| counter | 0x0010 | 0xffffffff | 0x00000000 | RW | External | — |
+
+| Register.Field | Mask | Reset | Access |
+|---|---|---|---|
+| control.bits | 0x000000ff | 0x00000000 | RW |
+| status.bits | 0x000000ff | 0x00000000 | RO |
+| tx.bits | 0x000000ff | 0x00000000 | WO |
+| events.bits | 0x8000000f | 0x00000000 | W1C |
+| counter.bits | 0xffffffff | 0x00000000 | RW |
+
+PASS: FR196 documented prelude-only design compiled and executed

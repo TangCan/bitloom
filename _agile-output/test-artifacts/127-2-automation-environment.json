@@ -1,0 +1,58 @@
+[
+  {
+    "command": [
+      "rustc",
+      "--version"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "cargo",
+      "--version"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "iverilog",
+      "-V"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "vvp",
+      "-V"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "yosys",
+      "-V"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "sby",
+      "--version"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "z3",
+      "-version"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "cc",
+      "--version"
+    ],
+    "exit": 0
+  }
+]

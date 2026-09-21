@@ -1,0 +1,13 @@
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.78s
+     Running tests/fr196_csr_formal.rs (target/debug/deps/fr196_csr_formal-2b2c9d85425627b7)
+
+running 2 tests
+FR196 CSR uninstrumented synthesis artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/synthesis-878268
+test p0_csr_original_rtl_synthesis_check ... ok
+FR196 CSR proof/cover artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/proof-878268
+test p0_csr_real_safety_and_nonvacuous_cover ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 8.78s
+

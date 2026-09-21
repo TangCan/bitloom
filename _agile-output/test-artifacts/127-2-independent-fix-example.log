@@ -1,0 +1,179 @@
+FR196 docs/ip/csr.md prelude-only example: cargo run --offline --manifest-path /tmp/bitloom-fr196-example-9x9yqdso/Cargo.toml
+     Locking 8 packages to latest Rust 1.97.1 compatible versions
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling fr194-design-example v0.0.0 (/tmp/bitloom-fr196-example-9x9yqdso)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.65s
+     Running `target/fr194-doc-example/debug/fr194-design-example`
+/* Local byte offsets: caller supplies the base address. */
+#ifndef BITLOOM_EXAMPLE_CSR_H
+#define BITLOOM_EXAMPLE_CSR_H
+#include <stdint.h>
+
+#ifdef EXAMPLE_CONTROL_OFFSET
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_OFFSET"
+#endif
+#ifdef EXAMPLE_CONTROL_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_MASK"
+#endif
+#ifdef EXAMPLE_CONTROL_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_RESET"
+#endif
+#ifdef EXAMPLE_CONTROL_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_ACCESS"
+#endif
+#ifdef EXAMPLE_CONTROL_BITS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_BITS_MASK"
+#endif
+#ifdef EXAMPLE_CONTROL_BITS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_BITS_RESET"
+#endif
+#ifdef EXAMPLE_CONTROL_BITS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_BITS_ACCESS"
+#endif
+#define EXAMPLE_CONTROL_OFFSET UINT32_C(0x00000000)
+#define EXAMPLE_CONTROL_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_CONTROL_RESET UINT32_C(0x00000000)
+#define EXAMPLE_CONTROL_ACCESS "RW"
+#define EXAMPLE_CONTROL_BITS_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_CONTROL_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_CONTROL_BITS_ACCESS "RW"
+
+#ifdef EXAMPLE_STATUS_OFFSET
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_OFFSET"
+#endif
+#ifdef EXAMPLE_STATUS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_MASK"
+#endif
+#ifdef EXAMPLE_STATUS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_RESET"
+#endif
+#ifdef EXAMPLE_STATUS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_ACCESS"
+#endif
+#ifdef EXAMPLE_STATUS_BITS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_BITS_MASK"
+#endif
+#ifdef EXAMPLE_STATUS_BITS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_BITS_RESET"
+#endif
+#ifdef EXAMPLE_STATUS_BITS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_BITS_ACCESS"
+#endif
+#define EXAMPLE_STATUS_OFFSET UINT32_C(0x00000004)
+#define EXAMPLE_STATUS_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_STATUS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_STATUS_ACCESS "RO"
+#define EXAMPLE_STATUS_BITS_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_STATUS_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_STATUS_BITS_ACCESS "RO"
+
+#ifdef EXAMPLE_TX_OFFSET
+#error "Bitloom CSR macro collision: EXAMPLE_TX_OFFSET"
+#endif
+#ifdef EXAMPLE_TX_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_TX_MASK"
+#endif
+#ifdef EXAMPLE_TX_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_TX_RESET"
+#endif
+#ifdef EXAMPLE_TX_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_TX_ACCESS"
+#endif
+#ifdef EXAMPLE_TX_BITS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_TX_BITS_MASK"
+#endif
+#ifdef EXAMPLE_TX_BITS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_TX_BITS_RESET"
+#endif
+#ifdef EXAMPLE_TX_BITS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_TX_BITS_ACCESS"
+#endif
+#define EXAMPLE_TX_OFFSET UINT32_C(0x00000008)
+#define EXAMPLE_TX_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_TX_RESET UINT32_C(0x00000000)
+#define EXAMPLE_TX_ACCESS "WO"
+#define EXAMPLE_TX_BITS_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_TX_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_TX_BITS_ACCESS "WO"
+
+#ifdef EXAMPLE_EVENTS_OFFSET
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_OFFSET"
+#endif
+#ifdef EXAMPLE_EVENTS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_MASK"
+#endif
+#ifdef EXAMPLE_EVENTS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_RESET"
+#endif
+#ifdef EXAMPLE_EVENTS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_ACCESS"
+#endif
+#ifdef EXAMPLE_EVENTS_BITS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_BITS_MASK"
+#endif
+#ifdef EXAMPLE_EVENTS_BITS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_BITS_RESET"
+#endif
+#ifdef EXAMPLE_EVENTS_BITS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_BITS_ACCESS"
+#endif
+#define EXAMPLE_EVENTS_OFFSET UINT32_C(0x0000000c)
+#define EXAMPLE_EVENTS_MASK UINT32_C(0x8000000f)
+#define EXAMPLE_EVENTS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_EVENTS_ACCESS "W1C"
+#define EXAMPLE_EVENTS_BITS_MASK UINT32_C(0x8000000f)
+#define EXAMPLE_EVENTS_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_EVENTS_BITS_ACCESS "W1C"
+
+#ifdef EXAMPLE_COUNTER_OFFSET
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_OFFSET"
+#endif
+#ifdef EXAMPLE_COUNTER_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_MASK"
+#endif
+#ifdef EXAMPLE_COUNTER_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_RESET"
+#endif
+#ifdef EXAMPLE_COUNTER_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_ACCESS"
+#endif
+#ifdef EXAMPLE_COUNTER_BITS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_BITS_MASK"
+#endif
+#ifdef EXAMPLE_COUNTER_BITS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_BITS_RESET"
+#endif
+#ifdef EXAMPLE_COUNTER_BITS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_BITS_ACCESS"
+#endif
+#define EXAMPLE_COUNTER_OFFSET UINT32_C(0x00000010)
+#define EXAMPLE_COUNTER_MASK UINT32_C(0xffffffff)
+#define EXAMPLE_COUNTER_RESET UINT32_C(0x00000000)
+#define EXAMPLE_COUNTER_ACCESS "RW"
+#define EXAMPLE_COUNTER_BITS_MASK UINT32_C(0xffffffff)
+#define EXAMPLE_COUNTER_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_COUNTER_BITS_ACCESS "RW"
+
+#endif /* BITLOOM_EXAMPLE_CSR_H */
+
+# Example CSR
+
+Local byte offsets; caller supplies the base address.
+
+| Register | Offset | Mask | Reset | Access | Owner | Event | Read reject | Write reject |
+|---|---|---|---|---|---|---|---|---|
+| control | 0x0000 | 0x000000ff | 0x00000000 | RW | Leaf | — | false | false |
+| status | 0x0004 | 0x000000ff | 0x00000000 | RO | External | — | true | false |
+| tx | 0x0008 | 0x000000ff | 0x00000000 | WO | None | — | false | true |
+| events | 0x000c | 0x8000000f | 0x00000000 | W1C | Leaf | hw_events | false | false |
+| counter | 0x0010 | 0xffffffff | 0x00000000 | RW | External | — | false | true |
+
+| Register.Field | Mask | Reset | Access |
+|---|---|---|---|
+| control.bits | 0x000000ff | 0x00000000 | RW |
+| status.bits | 0x000000ff | 0x00000000 | RO |
+| tx.bits | 0x000000ff | 0x00000000 | WO |
+| events.bits | 0x8000000f | 0x00000000 | W1C |
+| counter.bits | 0xffffffff | 0x00000000 | RW |
+
+PASS: FR196 documented prelude-only design compiled and executed

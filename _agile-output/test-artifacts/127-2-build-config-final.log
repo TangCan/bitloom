@@ -1,0 +1,15 @@
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.73s
+     Running tests/fr196_csr_config.rs (target/debug/deps/fr196_csr_config-caa73ce02a677370)
+
+running 6 tests
+test p1_reordering_is_canonical_for_hir_rtl_markdown_header_and_session_reuse ... ok
+test p0_offsets_masks_resets_and_access_are_checked_before_all_emitters ... ok
+test p0_owner_event_and_reject_contract_is_exhaustive ... ok
+test p0_header_has_handwritten_golden_constants_and_compiles_single_and_two_blocks ... ok
+test p0_full_configuration_identity_rejects_same_module_name_and_poisons_session ... ok
+test p0_names_and_generated_names_cannot_collide_or_be_silently_renamed ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+

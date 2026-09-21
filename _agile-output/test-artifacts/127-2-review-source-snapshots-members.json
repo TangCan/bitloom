@@ -1,0 +1,19 @@
+{
+  "archive": "_agile-output/test-artifacts/127-2-review-source-snapshots.tar.gz",
+  "sha256": "0595ec74d0e70a65b38a2884feb0655440551dc1c43f80d73049c93efef8adc1",
+  "members": {
+    "_agile-output/test-artifacts/127-2-review-fix-history/fr196_csr-before-protocol-correction.rs": "a9d88ea2d99b225ccc17f951f140f0bffa7ba522cabc8e3c6f9fa85208b25cc2",
+    "_agile-output/test-artifacts/127-2-review-fix-snapshot/.github/workflows/ci.yml": "093ffd136be92aa338eba96949736f0aab957eea8ed2e3978ff2f6d33091df2f",
+    "_agile-output/test-artifacts/127-2-review-fix-snapshot/crates/bitloom/tests/fr196_csr.rs": "a114ff6735a3d113b0e05275721bfeaa24164d5894e30a90665bae252cf4aeff",
+    "_agile-output/test-artifacts/127-2-review-fix-snapshot/crates/bitloom/tests/fr196_csr_config.rs": "decfa030d9f7983ae86709eb6f316fa5dc54dac3ac3de2b5cce9d29b874c24d2",
+    "_agile-output/test-artifacts/127-2-review-fix-snapshot/crates/bitloom/tests/fr196_csr_formal.rs": "bb3ff6a4906d734ff8cf08a525b909456fb1be021987c485583d9cdc93ccb89b",
+    "_agile-output/test-artifacts/127-2-review-fix-snapshot/crates/bitloom-prelude/src/ip/csr/codec.rs": "7a80f81826673e92b84707af3783ef8b241363af808e69086f96e48e0911aa5f",
+    "_agile-output/test-artifacts/127-2-review-fix-snapshot/crates/bitloom-prelude/src/ip/csr/mod.rs": "c1599056763da4afaa49e1018a7ac1ba9914ef2832e5bafd3bd58c5abe87292f",
+    "_agile-output/test-artifacts/127-2-review-fix-snapshot/crates/bitloom-prelude/src/ip/csr/rtl.rs": "26c311fa11b9f97801bb71bbec86a80278f35691ad54ab94356bd1be67d698a2",
+    "_agile-output/test-artifacts/127-2-review-fix-snapshot/crates/bitloom-prelude/src/ip/mod.rs": "49a518904333045d3c42e5fe815df2528ec40e89b4353f7b8b980c6d5e413c25",
+    "_agile-output/test-artifacts/127-2-review-fix-snapshot/docs/ip/README.md": "46f9f8e3c1b9e7033874b90764f436e90345f08e64efd8367ceeacbd2bfd5855",
+    "_agile-output/test-artifacts/127-2-review-fix-snapshot/docs/ip/csr.md": "29d3e8a24bcca8228074a7f3fb9710a102ad0b37f53edc02bfe9a14ecca7c97e",
+    "_agile-output/test-artifacts/127-2-review-fix-snapshot/docs/public-api-1-0-surface.md": "9e0906e6482c05c4013a4ded8518672e0d470c8dc7feb49da6f1e25335190bac",
+    "_agile-output/test-artifacts/127-2-review-fix-snapshot/scripts/check_fr196_example.py": "ad044a0e031e4b966535e2175d3d1191f8aff15dc64109a7279fc2508fe00338"
+  }
+}

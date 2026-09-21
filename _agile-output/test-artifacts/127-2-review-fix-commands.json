@@ -1,0 +1,28 @@
+{
+  "environment": {
+    "PATH_prefix": "/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin",
+    "CARGO_PROFILE_TEST_OPT_LEVEL": "1"
+  },
+  "runs": [
+    {
+      "command": "cargo test -p bitloom --test fr196_csr_config --test fr196_csr -- --nocapture",
+      "exit": 0,
+      "log": "127-2-review-fix-functional.log"
+    },
+    {
+      "command": "cargo test -p bitloom --test fr196_csr_formal -- --ignored --nocapture",
+      "exit": 0,
+      "log": "127-2-review-fix-formal.log"
+    },
+    {
+      "command": "python3 scripts/check_fr196_example.py",
+      "exit": 0,
+      "log": "127-2-review-fix-example.log"
+    },
+    {
+      "command": "cargo test -p bitloom --test fr196_csr p0_leaf_owned_rejection_events_and_candidates_native_and_real_rtl -- --exact --nocapture",
+      "exit": 0,
+      "log": "127-2-review-fix-leaf-protocol-final.log"
+    }
+  ]
+}

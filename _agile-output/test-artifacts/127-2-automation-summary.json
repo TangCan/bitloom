@@ -1,0 +1,15 @@
+{
+  "detected_stack": "backend",
+  "total_tests": 3,
+  "api_tests": 2,
+  "backend_tests": 1,
+  "priority_coverage": {
+    "P0": 3,
+    "P1": 0,
+    "P2": 0,
+    "P3": 0
+  },
+  "subagent_execution": "subagent",
+  "performance_gain": "not measured",
+  "fixture_needs": "existing plus run_rtl_source and automation_tb, integrated into worker A file"
+}

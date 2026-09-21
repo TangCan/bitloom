@@ -1,0 +1,14 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.84s
+     Running tests/fr196_csr_formal.rs (target/debug/deps/fr196_csr_formal-2b2c9d85425627b7)
+
+running 1 test
+FR196 singleton 0 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-0-1066670
+FR196 singleton 1 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-1-1066670
+FR196 singleton 2 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-2-1066670
+FR196 singleton 3 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-3-1066670
+FR196 singleton 4 original RTL synthesis PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr-formal/singleton-4-1066670
+test p0_each_supported_singleton_original_rtl_synthesis ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 1.41s
+

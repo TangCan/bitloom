@@ -1,0 +1,11 @@
+_agile-output/test-artifacts/127-2-independent-fix-codec.log: OK
+_agile-output/test-artifacts/127-2-independent-fix-commands.json: OK
+_agile-output/test-artifacts/127-2-independent-fix-evidence.md: OK
+_agile-output/test-artifacts/127-2-independent-fix-example.log: OK
+_agile-output/test-artifacts/127-2-independent-fix-formal.log: OK
+_agile-output/test-artifacts/127-2-independent-fix-functional.log: OK
+_agile-output/test-artifacts/127-2-independent-fix-singleton-final.log: OK
+_agile-output/test-artifacts/127-2-independent-fix-source-members.sha256: OK
+_agile-output/test-artifacts/127-2-independent-fix-source-snapshot.tar.gz: OK
+_agile-output/test-artifacts/127-2-independent-fix-source-verification.log: OK
+_agile-output/test-artifacts/127-2-independent-fix-tool-artifacts.tar.gz: OK

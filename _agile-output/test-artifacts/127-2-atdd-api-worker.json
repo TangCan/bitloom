@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "subagent": "atdd-api-tests",
+  "tests": [
+    {
+      "file": "crates/bitloom/tests/fr196_csr_config.rs",
+      "description": "Active Rust CSR public API configuration/session/software artifact ATDD",
+      "expected_to_fail": true,
+      "acceptance_criteria_covered": [
+        "AC1 configuration diagnostics",
+        "AC2 canonical parameter identity and prevalidation/poison distinction",
+        "AC6 deterministic RTL/Markdown/header and strict C11 consumers"
+      ],
+      "priority_coverage": {
+        "P0": 5,
+        "P1": 1,
+        "P2": 0,
+        "P3": 0
+      }
+    }
+  ],
+  "test_count": 6,
+  "tdd_phase": "RED",
+  "red_explanation": "CSR public API has not been implemented; expected compile red on missing CsrAccess/CsrOwner/CsrField/CsrRegister/CsrBlock. No cargo/test execution by worker; parent captures authoritative red. Tests active under explicit user instruction overriding skill skip suggestion.",
+  "fixture_needs": [],
+  "knowledge_application": [
+    "Native Rust backend has no HTTP/auth/browser/Pact relevance; no Playwright or Pact dependency introduced.",
+    "Local deterministic bank factory supplies independent per-case configuration clones.",
+    "Negative validation matrix checks all public emit paths and session isolation after host validation failure.",
+    "Handwritten golden constants and C11 consumers avoid generator-derived software oracle.",
+    "External compiler spawn/exit/timeout failures are hard failures with retained logs.",
+    "Markdown register rows independently assert handwritten hexadecimal offset/mask/reset and access, accepting padding/case and table layout differences."
+  ],
+  "provider_scrutiny": "Exact API contract and existing builder diagnostics/emitter types read; product API is new.",
+  "uncovered": [
+    "Private codec malformed schema, duplicate/extra/missing keys, index/count mismatch, invalid enums and bytes >255: build must add module-internal unit tests without public test API.",
+    "RTL/native behavioral, hierarchical peer, formal proof/cover and synthesis assigned to other workers.",
+    "Public documentation, prelude-only example, API surface registration and final regression are build responsibilities."
+  ],
+  "summary": "6 active tests; configuration negative cases, legal end offset and owners, complete identity, canonical emit and single/two-header strict C11 compilation. No product/status/commit mutation and no cargo run.",
+  "static_validation": "rustfmt --edition 2024 succeeded; wildcard enum imports replaced with fully qualified variants; no cargo run."
+}

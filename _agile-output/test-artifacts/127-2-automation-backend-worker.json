@@ -1,0 +1,34 @@
+{
+  "subagentType": "backend",
+  "coverageSummary": {
+    "totalTests": 1,
+    "testLevels": [
+      "integration"
+    ],
+    "fixtureNeeds": []
+  },
+  "status": "complete",
+  "success": true,
+  "subagent": "backend-tests",
+  "knowledge_fragments_used": [
+    "test-quality",
+    "evidence-integrity"
+  ],
+  "summary": "Added one ignored real-tool integration test p0_csr_formal_rejects_lost_event_output_with_counterexample. Uses existing bank/design/run/OBSERVER fixtures; no new shared fixtures. Not executed: manager Step 4 owns execution. Existing three tests retained; final file has four tests.",
+  "executionStatus": "not-run",
+  "fixtureNeeds": [],
+  "test_count": 1,
+  "tests": [
+    {
+      "file": "crates/bitloom/tests/fr196_csr_formal.rs",
+      "description": "[P0] Original generated CSR RTL proves with unchanged port-only oracle; output-loss mutant must produce reachable named assertion failure and solver counterexample.",
+      "test_count": 1,
+      "priority_coverage": {
+        "P0": 1,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0
+      }
+    }
+  ]
+}

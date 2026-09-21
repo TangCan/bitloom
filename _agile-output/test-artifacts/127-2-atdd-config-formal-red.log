@@ -1,0 +1,252 @@
+$ cargo test -p bitloom --test fr196_csr_config --test fr196_csr_formal --no-run
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+error[E0432]: unresolved imports `bitloom_prelude::ip::CsrAccess`, `bitloom_prelude::ip::CsrBlock`, `bitloom_prelude::ip::CsrField`, `bitloom_prelude::ip::CsrOwner`, `bitloom_prelude::ip::CsrRegister`
+ --> crates/bitloom/tests/fr196_csr_formal.rs:3:27
+  |
+3 | use bitloom_prelude::ip::{CsrAccess, CsrBlock, CsrField, CsrOwner, CsrRegister};
+  |                           ^^^^^^^^^  ^^^^^^^^  ^^^^^^^^  ^^^^^^^^  ^^^^^^^^^^^ no `CsrRegister` in `ip`
+  |                           |          |         |         |
+  |                           |          |         |         no `CsrOwner` in `ip`
+  |                           |          |         no `CsrField` in `ip`
+  |                           |          no `CsrBlock` in `ip`
+  |                           no `CsrAccess` in `ip`
+
+error[E0432]: unresolved imports `bitloom_prelude::ip::CsrAccess`, `bitloom_prelude::ip::CsrBlock`, `bitloom_prelude::ip::CsrField`, `bitloom_prelude::ip::CsrOwner`, `bitloom_prelude::ip::CsrRegister`
+ --> crates/bitloom/tests/fr196_csr_config.rs:4:10
+  |
+4 |     ip::{CsrAccess, CsrBlock, CsrField, CsrOwner, CsrRegister},
+  |          ^^^^^^^^^  ^^^^^^^^  ^^^^^^^^  ^^^^^^^^  ^^^^^^^^^^^ no `CsrRegister` in `ip`
+  |          |          |         |         |
+  |          |          |         |         no `CsrOwner` in `ip`
+  |          |          |         no `CsrField` in `ip`
+  |          |          no `CsrBlock` in `ip`
+  |          no `CsrAccess` in `ip`
+
+error[E0408]: variable `External` is not bound in all patterns
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:47
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                               ^^^^   -------- variable not in all patterns
+   |                                               |
+   |                                               pattern doesn't bind `External`
+   |
+help: if you meant to match on a unit struct, unit variant or a `const` item, consider making the path in the pattern qualified: `path::to::ModOrType::External`
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:54
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                                      ^^^^^^^^
+
+error[E0408]: variable `Leaf` is not bound in all patterns
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:54
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                               ----   ^^^^^^^^ pattern doesn't bind `Leaf`
+   |                                               |
+   |                                               variable not in all patterns
+   |
+help: if you meant to match on a unit struct, unit variant or a `const` item, consider making the path in the pattern qualified: `path::to::ModOrType::Leaf`
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:47
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                               ^^^^
+
+For more information about this error, try `rustc --explain E0432`.
+error[E0408]: variable `Ro` is not bound in all patterns
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:42
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                          ^^^^^^^^^^^^^^^^^^^^^    --              ^^^^^^^^^^   ^^^^^^^^^^^ pattern doesn't bind `Ro`
+   |                                          |                        |               |
+   |                                          |                        |               pattern doesn't bind `Ro`
+   |                                          |                        variable not in all patterns
+   |                                          pattern doesn't bind `Ro`
+   |
+help: you might have meant to use the similarly named previously used binding `Rw`
+   |
+71 -             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+71 +             if matches!((access, owner), (Rw, Leaf | External) | (Rw, External) | (Wo, None) | (W1c, Leaf)) {
+   |
+
+error[E0408]: variable `Wo` is not bound in all patterns
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:42
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                          ^^^^^^^^^^^^^^^^^^^^^   ^^^^^^^^^^^^^^    --          ^^^^^^^^^^^ pattern doesn't bind `Wo`
+   |                                          |                       |                 |
+   |                                          |                       |                 variable not in all patterns
+   |                                          |                       pattern doesn't bind `Wo`
+   |                                          pattern doesn't bind `Wo`
+   |
+help: you might have meant to use the similarly named previously used binding `Ro`
+   |
+71 -             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+71 +             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Ro, None) | (W1c, Leaf)) {
+   |
+
+error[E0408]: variable `W1c` is not bound in all patterns
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:42
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                          ^^^^^^^^^^^^^^^^^^^^^   ^^^^^^^^^^^^^^   ^^^^^^^^^^    --- variable not in all patterns
+   |                                          |                       |                |
+   |                                          |                       |                pattern doesn't bind `W1c`
+   |                                          |                       pattern doesn't bind `W1c`
+   |                                          pattern doesn't bind `W1c`
+   |
+help: if you meant to match on a unit struct, unit variant or a `const` item, consider making the path in the pattern qualified: `path::to::ModOrType::W1c`
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:97
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                                                                                 ^^^
+
+error[E0408]: variable `Rw` is not bound in all patterns
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:66
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                           --                     ^^^^^^^^^^^^^^   ^^^^^^^^^^   ^^^^^^^^^^^ pattern doesn't bind `Rw`
+   |                                           |                      |                |
+   |                                           |                      |                pattern doesn't bind `Rw`
+   |                                           |                      pattern doesn't bind `Rw`
+   |                                           variable not in all patterns
+   |
+help: you might have meant to use the similarly named previously used binding `Ro`
+   |
+71 -             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+71 +             if matches!((access, owner), (Ro, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |
+
+error[E0408]: variable `Leaf` is not bound in all patterns
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:66
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                               ----               ^^^^^^^^^^^^^^   ^^^^^^^^^^         ---- variable not in all patterns
+   |                                               |                  |                |
+   |                                               |                  |                pattern doesn't bind `Leaf`
+   |                                               |                  pattern doesn't bind `Leaf`
+   |                                               variable not in all patterns
+   |
+help: if you meant to match on a unit struct, unit variant or a `const` item, consider making the path in the pattern qualified: `path::to::ModOrType::Leaf`
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:47
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                               ^^^^
+
+error[E0408]: variable `External` is not bound in all patterns
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:83
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                                      --------         --------    ^^^^^^^^^^   ^^^^^^^^^^^ pattern doesn't bind `External`
+   |                                                      |                |           |
+   |                                                      |                |           pattern doesn't bind `External`
+   |                                                      |                variable not in all patterns
+   |                                                      variable not in all patterns
+   |
+help: if you meant to match on a unit struct, unit variant or a `const` item, consider making the path in the pattern qualified: `path::to::ModOrType::External`
+  --> crates/bitloom/tests/fr196_csr_config.rs:71:54
+   |
+71 |             if matches!((access, owner), (Rw, Leaf | External) | (Ro, External) | (Wo, None) | (W1c, Leaf)) {
+   |                                                      ^^^^^^^^
+
+error: could not compile `bitloom` (test "fr196_csr_formal") due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error[E0425]: cannot find value `Rw` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:12:24
+   |
+12 |         ("control", 0, Rw, Leaf, 0x80ff00ff, false, false, Option::<&str>::None),
+   |                        ^^ not found in this scope
+
+error[E0425]: cannot find value `Leaf` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:12:28
+   |
+12 |         ("control", 0, Rw, Leaf, 0x80ff00ff, false, false, Option::<&str>::None),
+   |                            ^^^^ not found in this scope
+
+error[E0425]: cannot find value `Ro` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:13:23
+   |
+13 |         ("status", 4, Ro, External, 0xff, true, false, Option::<&str>::None),
+   |                       ^^ not found in this scope
+
+error[E0425]: cannot find value `External` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:13:27
+   |
+13 |         ("status", 4, Ro, External, 0xff, true, false, Option::<&str>::None),
+   |                           ^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find value `Wo` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:14:19
+   |
+14 |         ("tx", 8, Wo, None, 0xff, false, true, Option::<&str>::None),
+   |                   ^^ not found in this scope
+
+error[E0425]: cannot find value `W1c` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:15:24
+   |
+15 |         ("events", 12, W1c, Leaf, 0x8000000f, false, false, Some("hw_events")),
+   |                        ^^^ not found in this scope
+
+error[E0425]: cannot find value `Leaf` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:15:29
+   |
+15 |         ("events", 12, W1c, Leaf, 0x8000000f, false, false, Some("hw_events")),
+   |                             ^^^^ not found in this scope
+
+error[E0425]: cannot find value `Rw` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:16:25
+   |
+16 |         ("counter", 16, Rw, External, 0xffffffff, false, true, Option::<&str>::None),
+   |                         ^^ not found in this scope
+
+error[E0425]: cannot find value `External` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:16:29
+   |
+16 |         ("counter", 16, Rw, External, 0xffffffff, false, true, Option::<&str>::None),
+   |                             ^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find value `Rw` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:66:20
+   |
+66 |     for access in [Rw, Ro, Wo, W1c] {
+   |                    ^^ not found in this scope
+
+error[E0425]: cannot find value `Ro` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:66:24
+   |
+66 |     for access in [Rw, Ro, Wo, W1c] {
+   |                        ^^ not found in this scope
+
+error[E0425]: cannot find value `Wo` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:66:28
+   |
+66 |     for access in [Rw, Ro, Wo, W1c] {
+   |                            ^^ not found in this scope
+
+error[E0425]: cannot find value `W1c` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:66:32
+   |
+66 |     for access in [Rw, Ro, Wo, W1c] {
+   |                                ^^^ not found in this scope
+
+error[E0425]: cannot find value `Leaf` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:67:23
+   |
+67 |         for owner in [Leaf, External, None] {
+   |                       ^^^^ not found in this scope
+
+error[E0425]: cannot find value `External` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:67:29
+   |
+67 |         for owner in [Leaf, External, None] {
+   |                             ^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find value `W1c` in this scope
+  --> crates/bitloom/tests/fr196_csr_config.rs:70:34
+   |
+70 |             r.event = (access == W1c).then(|| "event_source".into());
+   |                                  ^^^ not found in this scope
+
+Some errors have detailed explanations: E0408, E0425, E0432.
+For more information about an error, try `rustc --explain E0408`.
+error: could not compile `bitloom` (test "fr196_csr_config") due to 25 previous errors
+
+exit=101
