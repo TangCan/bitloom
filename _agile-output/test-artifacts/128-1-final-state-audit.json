@@ -1,0 +1,26 @@
+{
+  "utc": "2026-09-21T07:52:22.313574+00:00",
+  "story_counts": {
+    "done": 443,
+    "deferred": 2,
+    "backlog": 10
+  },
+  "changes": {
+    "epic-128": [
+      "backlog",
+      "in-progress"
+    ],
+    "128-1-外设-nfr14": [
+      "backlog",
+      "done"
+    ]
+  },
+  "gate_command": [
+    "python3",
+    "scripts/check_phase24_gate.py"
+  ],
+  "gate_exit_code": 0,
+  "sprint_sha256": "68dcee02512d4db9ae5f30b744259e89b174b6bb03bf92090a6845d64c107cd5",
+  "product_changes": [],
+  "source_manifest_hashes_verified": 9
+}

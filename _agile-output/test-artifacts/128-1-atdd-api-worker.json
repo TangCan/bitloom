@@ -1,0 +1,46 @@
+{
+  "success": true,
+  "subagent": "atdd-api-tests",
+  "tests": [
+    {
+      "file": "_agile-output/test-artifacts/128-1-atdd-gate.py",
+      "content": "#!/usr/bin/env python3\n\"\"\"Story 128.1 AC5: 35 existing-GREEN process gate scenarios.\n\nNo future peripheral/product acceptance is claimed. Cross-story dependencies\nare fixture setup, not coverage provided by check_phase24_gate.py. User AC5\nrequires actual existing checks, so these tests are active with no fabricated\nRED/skip phase. Python standard library only; run from any directory.\n\"\"\"\n\nimport hashlib\nfrom pathlib import Path\nimport re\nimport subprocess\nimport sys\nimport tempfile\n\n\nif not __debug__:\n    raise SystemExit(\"FAIL: optimized Python disables acceptance assertions; rerun without -O/PYTHONOPTIMIZE\")\n\nROOT = Path(__file__).resolve().parents[2]\nSPRINT = ROOT / \"_agile-output/implementation-artifacts/sprint-status.yaml\"\nGATE = ROOT / \"scripts/check_phase24_gate.py\"\nSUCCESS = (\n    \"PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; \"\n    \"FR189/Epic122 deferred\"\n)\n\n\ndef replace_state(text, prefix, state):\n    suffix = r\"[^:\\n]*\" if prefix.endswith(\"-\") else \"\"\n    pattern = rf\"^(  {re.escape(prefix)}{suffix}:[ \\t]*)[\\w-]+([ \\t]*(?:#.*)?)$\"\n    result, count = re.subn(pattern, lambda m: m[1] + state + m[2], text, flags=re.M)\n    assert count == 1, f\"Expected exactly one status for {prefix!r}, got {count}\"\n    return result\n\n\ndef main():\n    original = SPRINT.read_bytes()\n    digest = hashlib.sha256(original).hexdigest()\n    text = original.decode(\"utf-8\")\n    count = 0\n    print(f\"Source sprint SHA256: {digest}\")\n    print(\"Scope: existing GREEN process gate, not FR197 product acceptance.\")\n    print(\"Cross-story dependencies are fixture setup, not gate coverage.\")\n    try:\n        with tempfile.TemporaryDirectory(prefix=\"bitloom-128-1-atdd-\") as directory:\n            fixture = Path(directory) / \"sprint-status.yaml\"\n\n            def case(name, content, exit_code, reasons=()):\n                nonlocal count\n                fixture.write_text(content, encoding=\"utf-8\")\n                result = subprocess.run(\n                    [sys.executable, str(GATE), str(fixture)],\n                    capture_output=True, text=True, check=False, timeout=30,\n                )\n                # Exact status and complete output prevent unrelated crashes or\n                # extra gate failures from masquerading as a passing negative.\n                assert result.returncode == exit_code, (\n                    name, result.returncode, result.stdout, result.stderr\n                )\n                expected_stdout = SUCCESS + \"\\n\" if exit_code == 0 else \"\"\n                expected_stderr = \"\".join(f\"FAIL: {reason}\\n\" for reason in reasons)\n                assert result.stdout == expected_stdout, (name, result.stdout)\n                assert result.stderr == expected_stderr, (name, result.stderr)\n                count += 1\n                print(f\"PASS [P0] [{count:03d}] {name}: exit={result.returncode}\")\n                for line in (result.stdout + result.stderr).splitlines():\n                    print(f\"  {line}\")\n\n            case(\"current sprint\", text, 0)\n            base = replace_state(text, \"epic-128\", \"in-progress\")\n            for story in range(1, 6):\n                base = replace_state(base, f\"128-{story}-\", \"backlog\")\n            for state in (\n                \"backlog\", \"ready\", \"ready-for-dev\", \"in-progress\", \"review\",\n                \"blocked\", \"deferred\",\n            ):\n                for story in range(2, 6):\n                    candidate = replace_state(base, \"128-1-\", state)\n                    candidate = replace_state(candidate, f\"128-{story}-\", \"ready-for-dev\")\n                    case(\n                        f\"128.1 {state}, 128.{story} ready-for-dev\", candidate, 1,\n                        (f\"128.{story} requires 128.1 NFR14 done\",),\n                    )\n            for story in range(2, 6):\n                candidate = base\n                # M0, M1 and M2 are explicit fixture prerequisites. The gate\n                # does not independently validate 127.2/126.2/126.4 edges.\n                for epic, total in ((125, 3), (126, 4), (127, 4)):\n                    candidate = replace_state(candidate, f\"epic-{epic}\", \"done\")\n                    for previous in range(1, total + 1):\n                        candidate = replace_state(candidate, f\"{epic}-{previous}-\", \"done\")\n                candidate = replace_state(candidate, \"128-1-\", \"done\")\n                if story in (4, 5):\n                    candidate = replace_state(candidate, \"128-3-\", \"done\")\n                candidate = replace_state(candidate, f\"128-{story}-\", \"ready-for-dev\")\n                case(f\"128.{story} ready with declared predecessors done\", candidate, 0)\n            # Isolate M0 failure so the exact diagnostic is stable even after\n            # later epics advance; these temporary states never touch sprint.\n            candidate = replace_state(base, \"epic-125\", \"in-progress\")\n            for epic, total in ((126, 4), (127, 4), (128, 5), (129, 3), (130, 3)):\n                candidate = replace_state(candidate, f\"epic-{epic}\", \"backlog\")\n                for story in range(1, total + 1):\n                    candidate = replace_state(candidate, f\"{epic}-{story}-\", \"backlog\")\n            candidate = replace_state(candidate, \"epic-128\", \"in-progress\")\n            candidate = replace_state(candidate, \"128-1-\", \"ready-for-dev\")\n            case(\"M0 not closed\", candidate, 1, (\n                \"Epic 128 cannot advance before M0 closes\",\n                \"128.1 cannot advance before M0 closes\",\n            ))\n            candidate = replace_state(base, \"128-1-\", \"done\")\n            candidate = replace_state(candidate, \"epic-128\", \"done\")\n            case(\"Epic128 premature close\", candidate, 1, (\n                \"Epic 128 done requires its stories done\",\n            ))\n            assert count == 35, f\"Expected 35 scenarios, got {count}\"\n    finally:\n        after = SPRINT.read_bytes()\n        assert after == original, \"Original sprint bytes changed during test\"\n        assert hashlib.sha256(after).hexdigest() == digest, \"Original sprint hash changed\"\n        print(f\"PASS original sprint byte/hash preservation: {digest}\")\n    print(f\"RESULT: {count} scenarios passed; existing GREEN gate behavior verified.\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
+      "description": "35 active existing-GREEN subprocess integration checks for Story128.1 AC5",
+      "expected_to_fail": false,
+      "acceptance_criteria_covered": [
+        "AC5 current state",
+        "AC5 incomplete NFR14 rejection",
+        "AC5 legal ready states",
+        "AC5 M0 prerequisite",
+        "AC5 premature epic close",
+        "AC5 original sprint preservation"
+      ],
+      "priority_coverage": {
+        "P0": 35,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0
+      }
+    }
+  ],
+  "fixture_needs": [
+    "Python3 standard library and actual scripts/check_phase24_gate.py",
+    "Existing sprint-status.yaml copied to TemporaryDirectory; explicit state override helper included"
+  ],
+  "knowledge_fragments_used": [
+    "api-testing-patterns (direct backend checks and exact status/response assertions)",
+    "data-factories (explicit overrides and isolated temporary state)"
+  ],
+  "test_count": 35,
+  "tdd_phase": "EXISTING_GREEN_EXCEPTION",
+  "existing_green_exception": "User Story128.1 AC5 explicitly requires executing the existing gate; no missing product behavior, fabricated RED, skip, HTTP, UI or Pact test. Parent executes tests after aggregation; worker did not execute.",
+  "provider_scrutiny": "not applicable: Python process gate, no provider endpoint",
+  "playwright_utils": "enabled configuration but inapplicable to stdlib process runner",
+  "pactjs_utils": "enabled configuration but relevance gate closed; no HTTP consumer/provider",
+  "pact_mcp_reachable": false,
+  "pact_mcp_probe": "parent already checked tool list once; not repeated",
+  "execution_mode": "auto resolved to subagent",
+  "executed": false,
+  "summary": "Generated 35 P0 checks: current1 + seven nondone states x four downstream ready stories28 + dependency-satisfied legal ready4 + M0notclosed1 + prematureclose1. Cross-story dependency edges remain fixture setup only.",
+  "plan_read": "_agile-output/test-artifacts/atdd-checklist-128-1-外设-nfr14.md (steps01–03 and step04 dispatch)"
+}

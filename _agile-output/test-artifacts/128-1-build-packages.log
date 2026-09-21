@@ -1,0 +1,20 @@
+{
+  "label": "packages",
+  "command": [
+    "/tmp/bitloom-phase24-bfm-py312/bin/python",
+    "-m",
+    "pip",
+    "freeze"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl",
+  "utc_start": "2026-09-21T07:05:44.083088+00:00",
+  "utc_end": "2026-09-21T07:05:44.112352+00:00",
+  "seconds": 0.029277698951773345,
+  "exit_code": 1,
+  "path": "/tmp/bitloom-phase24-bfm-py312/bin/python",
+  "realpath": "/usr/bin/python3.12"
+}
+STDOUT
+
+STDERR
+/tmp/bitloom-phase24-bfm-py312/bin/python: No module named pip

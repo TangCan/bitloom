@@ -1,0 +1,11 @@
+{
+  "timestamp_utc": "2026-09-21T06:53:19.546131+00:00",
+  "cwd": "/nvme_data2/richard/2026/rhdl",
+  "command": "test -f _agile-output/implementation-artifacts/epic-128-nfr14.md",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "",
+  "expected_exit_code": 1,
+  "interpretation": "RED: required risk document absent; not an RTL or product failure",
+  "scope": "single file-presence observation only"
+}

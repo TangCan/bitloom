@@ -1,0 +1,16 @@
+
+running 1 test
+peer_rejects=17 peer_partial_writes=83 peer_allowed_high=9
+FR196 seed=12720a11ce55 peer=true frames=2311 accepted=1016 consumed=1013 cancelled=3 reads=283 writes=256 errors=381 zero_mask=96 strobes=[32, 29, 37, 35, 32, 34, 37, 35, 27, 35, 37, 31, 30, 29, 32, 38] max_stall=31
+peer-system: FR196 PASS
+tb.sv:150637: $finish called at 6933 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr/peer-system-2842561
+test p0_same_session_real_peer_owns_counter_and_partial_write_wins_increment ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 4.98s
+
+
+STDERR
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.07s
+     Running tests/fr196_csr.rs (target/debug/deps/fr196_csr-97c0ac838773f183)

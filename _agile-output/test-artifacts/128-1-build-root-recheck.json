@@ -1,0 +1,70 @@
+{
+  "records": [
+    {
+      "label": "bfm",
+      "command": [
+        "/tmp/bitloom-phase24-bfm-py312/bin/python",
+        "scripts/phase24_axi_bfm_probe.py"
+      ],
+      "utc_start": "2026-09-21T07:21:04.586664+00:00",
+      "seconds": 0.3691301350481808,
+      "exit_code": 0,
+      "log": "_agile-output/test-artifacts/128-1-build-root-recheck-bfm.log",
+      "sha256": "b86fa77b29b55cc5e1a94dffa3e6c4f436bfeca1290ad94d6503257c4fd5f904"
+    },
+    {
+      "label": "csr",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr196_csr",
+        "p0_same_session_real_peer_owns_counter_and_partial_write_wins_increment",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "utc_start": "2026-09-21T07:21:04.956210+00:00",
+      "seconds": 5.088651840109378,
+      "exit_code": 0,
+      "log": "_agile-output/test-artifacts/128-1-build-root-recheck-csr.log",
+      "sha256": "cbdb4ba18557f1d058a49d7992b38866afd4bdecf11a3b5dda84053373701b5b"
+    },
+    {
+      "label": "gate",
+      "command": [
+        "python3",
+        "_agile-output/test-artifacts/128-1-atdd-gate.py"
+      ],
+      "utc_start": "2026-09-21T07:21:10.045207+00:00",
+      "seconds": 1.9168695759726688,
+      "exit_code": 0,
+      "log": "_agile-output/test-artifacts/128-1-build-root-recheck-gate.log",
+      "sha256": "36c95b83df6921371dace3689db9b9665072c8971f35160b431b4de4e0a58475"
+    },
+    {
+      "label": "supplement",
+      "command": [
+        "python3",
+        "_agile-output/test-artifacts/128-1-review-gate.py"
+      ],
+      "utc_start": "2026-09-21T07:21:11.962256+00:00",
+      "seconds": 0.7590526920976117,
+      "exit_code": 0,
+      "log": "_agile-output/test-artifacts/128-1-build-root-recheck-supplement.log",
+      "sha256": "7f56505cc14b560e1bb1b65cf54dfbd60cee08ab57dbc8418b9638b9d5c1a69f"
+    }
+  ],
+  "environment": {
+    "PATH": "/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.opam/5.1.1/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.codex/tmp/arg0/codex-arg0JQQ9rr:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.local/bin:/home/richard/opt/Isabelle2026-RC0/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-13.2/bin:/nvme_data1/richard/.trae-cn-server/bin/stable-bf463f1c10476ab51d5c25db4513c590c975a76e-debian10/bin/remote-cli:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-11.6/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.cargo/bin:/home/richard/.local/bin:/home/richard/.nvm/versions/node/v24.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+    "BITLOOM_REQUIRE_RTL": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "RANDOM_SEED": "1281001"
+  },
+  "manifest_hashes_verified": 9,
+  "archive": "_agile-output/test-artifacts/128-1-build-root-recheck-artifacts.tar.gz",
+  "archive_sha256": "e65ba9e870c109eb8325099524dcc3448f010f13b5220d42ce94f17c96638bd6"
+}

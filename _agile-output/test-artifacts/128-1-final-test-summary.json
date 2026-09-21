@@ -1,0 +1,33 @@
+{
+  "result_blocks": 470,
+  "passed": 1823,
+  "failed": 0,
+  "ignored": 25,
+  "ignored_lines": [
+    "test p0_fifo_width1_depth1_safety_and_nonvacuous_cover ... ignored, real SBY/Yosys/Z3 required; strict dedicated gate runs --ignored",
+    "test p0_fifo_width1_depth2_safety_and_nonvacuous_cover ... ignored, real SBY/Yosys/Z3 required; strict dedicated gate runs --ignored",
+    "test p0_fifo_width1_depth3_safety_and_nonvacuous_cover ... ignored, real SBY/Yosys/Z3 required; strict dedicated gate runs --ignored",
+    "test p0_original_rtl_synthesis_width1_depth1 ... ignored, real Yosys required; strict dedicated gate runs --ignored",
+    "test p0_original_rtl_synthesis_width64_depth16 ... ignored, real Yosys required; strict dedicated gate runs --ignored",
+    "test p0_original_rtl_synthesis_width8_depth3 ... ignored, real Yosys required; strict dedicated gate runs --ignored",
+    "test p0_generated_rtl_width1_safety_induction_cover_and_registered_outputs ... ignored, requires real Yosys/SymbiYosys/Z3; run this dedicated target with --ignored; ordinary workspace tests do not prove FR195",
+    "test p0_generated_rtl_width8_safety_induction_cover_and_registered_outputs ... ignored, requires real Yosys/SymbiYosys/Z3; run this dedicated target with --ignored; ordinary workspace tests do not prove FR195",
+    "test p0_original_rtl_synthesis_check_and_all_five_registered_boundaries ... ignored, requires implemented bridge and real Yosys; CI must explicitly run --ignored",
+    "test p0_port_oracle_kills_pairing_routing_and_offer_hold_rtl_mutants ... ignored, requires real SBY/Yosys/Z3; checks assertion counterexamples, not tool errors",
+    "test p0_port_oracle_safety_induction_and_nonvacuous_covers ... ignored, requires implemented bridge and real SBY/Yosys/Z3; CI must explicitly run --ignored",
+    "test p0_original_decoder_synthesis_check ... ignored, requires real Yosys",
+    "test p0_original_hierarchy_synthesis_and_five_registered_boundaries ... ignored, requires real Yosys",
+    "test p0_owner_response_inductive_safety_with_asserted_lemmas_and_cover ... ignored, requires real SBY/Yosys/Z3",
+    "test p0_port_only_oracle_kills_cross_owner_dual_select_and_high_alias_mutants ... ignored, requires real SBY/Yosys/Z3",
+    "test p0_csr_formal_rejects_lost_event_output_with_counterexample ... ignored, real SBY/Yosys/Z3 required; strict dedicated gate runs --ignored",
+    "test p0_csr_original_rtl_synthesis_check ... ignored, real Yosys required; strict dedicated gate runs --ignored",
+    "test p0_csr_real_safety_and_nonvacuous_cover ... ignored, real SBY/Yosys/Z3 required; strict dedicated gate runs --ignored",
+    "test p0_each_supported_singleton_original_rtl_synthesis ... ignored, real Yosys required; strict dedicated gate runs --ignored",
+    "test crates/bitloom-builder/src/lib.rs - ElaborateSession::generate_instances (line 2158) ... ignored",
+    "test crates/bitloom-builder/src/lib.rs - ElaborateSession::inline_comb_fn (line 1854) ... ignored",
+    "test crates/bitloom-builder/src/lib.rs - ElaborateSession::inline_seq_fn (line 1943) ... ignored",
+    "test crates/bitloom-prelude/src/lib.rs - (line 486) ... ignored",
+    "test crates/bitloom-prelude/src/lib.rs - generate_mem_init (line 486) ... ignored",
+    "test crates/bitloom-prelude/src/lib.rs - mask_mem_word (line 486) ... ignored"
+  ]
+}

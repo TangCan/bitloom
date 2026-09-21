@@ -1,0 +1,230 @@
+{
+  "environment": {
+    "PATH": "/tmp/bitloom-maintenance-tools/bin:/tmp/bitloom-1263-sby-installed/bin:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.opam/5.1.1/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.codex/tmp/arg0/codex-arg0JQQ9rr:/nvme_data2/richard/.codex/packages/standalone/releases/0.155.1-x86_64-unknown-linux-musl/codex-path:/home/richard/.local/bin:/home/richard/opt/Isabelle2026-RC0/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-13.2/bin:/nvme_data1/richard/.trae-cn-server/bin/stable-bf463f1c10476ab51d5c25db4513c590c975a76e-debian10/bin/remote-cli:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.pixi/bin:/home/richard/.opencode/bin:/home/richard/.mimocode/bin:/home/richard/richard/2026/2026/riscv32_vm/opt/riscv32-linux/bin:/home/richard/richard_opt/riscv/bin:/opt/riscv/riscv/bin:/usr/local/cuda-11.6/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.local/bin:/home/richard/.elan/bin:/home/richard/.cargo/bin:/home/richard/.local/bin:/home/richard/.nvm/versions/node/v24.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
+    "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+    "BITLOOM_REQUIRE_RTL": "1",
+    "RANDOM_SEED": "1281001"
+  },
+  "records": [
+    {
+      "label": "rustc",
+      "command": [
+        "rustc",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:05:44.025721+00:00",
+      "utc_end": "2026-09-21T07:05:44.056555+00:00",
+      "seconds": 0.030844740103930235,
+      "exit_code": 0,
+      "path": "/home/richard/.cargo/bin/rustc",
+      "realpath": "/nvme_data1/richard/.cargo/bin/rustup",
+      "stdout": "rustc 1.97.1 (8bab26f4f 2026-07-14)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.1\nLLVM version: 22.1.6\n",
+      "stderr": ""
+    },
+    {
+      "label": "cargo",
+      "command": [
+        "cargo",
+        "--version"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:05:44.057163+00:00",
+      "utc_end": "2026-09-21T07:05:44.078579+00:00",
+      "seconds": 0.021430548978969455,
+      "exit_code": 0,
+      "path": "/home/richard/.cargo/bin/cargo",
+      "realpath": "/nvme_data1/richard/.cargo/bin/rustup",
+      "stdout": "cargo 1.97.1 (c980f4866 2026-06-30)\n",
+      "stderr": ""
+    },
+    {
+      "label": "python",
+      "command": [
+        "/tmp/bitloom-phase24-bfm-py312/bin/python",
+        "--version"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:05:44.079200+00:00",
+      "utc_end": "2026-09-21T07:05:44.081966+00:00",
+      "seconds": 0.0027895530220121145,
+      "exit_code": 0,
+      "path": "/tmp/bitloom-phase24-bfm-py312/bin/python",
+      "realpath": "/usr/bin/python3.12",
+      "stdout": "Python 3.12.3\n",
+      "stderr": ""
+    },
+    {
+      "label": "packages",
+      "command": [
+        "/tmp/bitloom-phase24-bfm-py312/bin/python",
+        "-m",
+        "pip",
+        "freeze"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:05:44.083088+00:00",
+      "utc_end": "2026-09-21T07:05:44.112352+00:00",
+      "seconds": 0.029277698951773345,
+      "exit_code": 1,
+      "path": "/tmp/bitloom-phase24-bfm-py312/bin/python",
+      "realpath": "/usr/bin/python3.12",
+      "stdout": "",
+      "stderr": "/tmp/bitloom-phase24-bfm-py312/bin/python: No module named pip\n"
+    },
+    {
+      "label": "iverilog",
+      "command": [
+        "iverilog",
+        "-V"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:05:44.113446+00:00",
+      "utc_end": "2026-09-21T07:05:44.132342+00:00",
+      "seconds": 0.018917290959507227,
+      "exit_code": 0,
+      "path": "/tmp/bitloom-maintenance-tools/bin/iverilog",
+      "realpath": "/tmp/bitloom-maintenance-tools/bin/iverilog",
+      "stdout": "Icarus Verilog version 12.0 (stable) ()\n\nCopyright (c) 2000-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Preprocessor version 12.0 (stable) ()\n\nCopyright (c) 1999-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Parser/Elaborator version 12.0 (stable) ()\n\nCopyright (c) 1998-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n FLAGS DLL vvp.tgt\nvvp.tgt: Icarus Verilog VVP Code Generator 12.0 (stable) ()\n\nCopyright (c) 2001-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n",
+      "stderr": ""
+    },
+    {
+      "label": "vvp",
+      "command": [
+        "vvp",
+        "-V"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:05:44.133482+00:00",
+      "utc_end": "2026-09-21T07:05:44.138034+00:00",
+      "seconds": 0.004552850034087896,
+      "exit_code": 0,
+      "path": "/tmp/bitloom-maintenance-tools/bin/vvp",
+      "realpath": "/tmp/bitloom-maintenance-tools/iverilog/usr/bin/vvp",
+      "stdout": "",
+      "stderr": "Icarus Verilog runtime version 12.0 (stable) ()\n\nCopyright (c) 2001-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n"
+    },
+    {
+      "label": "yosys",
+      "command": [
+        "yosys",
+        "-V"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:05:44.138925+00:00",
+      "utc_end": "2026-09-21T07:05:44.144503+00:00",
+      "seconds": 0.0055819000117480755,
+      "exit_code": 0,
+      "path": "/usr/bin/yosys",
+      "realpath": "/usr/bin/yosys",
+      "stdout": "Yosys 0.33 (git sha1 2584903a060)\n",
+      "stderr": ""
+    },
+    {
+      "label": "sby",
+      "command": [
+        "sby",
+        "--version"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:05:44.145385+00:00",
+      "utc_end": "2026-09-21T07:05:44.238580+00:00",
+      "seconds": 0.09321399102918804,
+      "exit_code": 0,
+      "path": "/tmp/bitloom-1263-sby-installed/bin/sby",
+      "realpath": "/tmp/bitloom-1263-sby-installed/bin/sby",
+      "stdout": "SBY yosys-0.47\n",
+      "stderr": ""
+    },
+    {
+      "label": "z3",
+      "command": [
+        "z3",
+        "--version"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:05:44.239878+00:00",
+      "utc_end": "2026-09-21T07:05:44.246228+00:00",
+      "seconds": 0.00635309296194464,
+      "exit_code": 0,
+      "path": "/usr/bin/z3",
+      "realpath": "/usr/bin/z3",
+      "stdout": "Z3 version 4.8.12 - 64 bit\n",
+      "stderr": ""
+    },
+    {
+      "label": "bfm",
+      "command": [
+        "/tmp/bitloom-phase24-bfm-py312/bin/python",
+        "scripts/phase24_axi_bfm_probe.py"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:05:44.247389+00:00",
+      "utc_end": "2026-09-21T07:05:44.632408+00:00",
+      "seconds": 0.3850395209155977,
+      "exit_code": 0,
+      "path": "/tmp/bitloom-phase24-bfm-py312/bin/python",
+      "realpath": "/usr/bin/python3.12",
+      "stdout": "cocotb==2.0.1\ncocotb-bus==0.3.0\ncocotbext-axi==0.1.28\nfind-libpython==0.5.1\nscapy==2.7.0\nPython 3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]\n     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.12.4 interpreter at /tmp/bitloom-phase24-bfm-py312/bin/python\n     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered\n     0.00ns INFO     cocotb                             Running on Icarus Verilog version 12.0 (stable)\n     0.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotb/_init.py:210: DeprecationWarning: RANDOM_SEED is deprecated in favor of COCOTB_RANDOM_SEED\n                                                          warnings.warn(\n     0.00ns INFO     cocotb                             Seeding Python random module with supplied seed 1281001\n     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotb\n     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages\n     0.00ns INFO     cocotb                             Running tests\n     0.00ns INFO     cocotb.regression                  running phase24_axi_bfm_probe.probe (1/1)\n     0.00ns INFO     cocotb.bfm_probe.s_axi             AXI lite master (write)\n     0.00ns INFO     cocotb.bfm_probe.s_axi             cocotbext-axi version 0.1.28\n     0.00ns INFO     cocotb.bfm_probe.s_axi             Copyright (c) 2020-2025 Alex Forencich\n     0.00ns INFO     cocotb.bfm_probe.s_axi             https://github.com/alexforencich/cocotbext-axi\n     0.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/stream.py:120: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.\n                                                          self.valid.setimmediatevalue(self._valid_init)\n     0.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/stream.py:133: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.\n                                                          s.setimmediatevalue(v)\n     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n     0.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/stream.py:115: DeprecationWarning: Use `handle.set(Immediate(...))` or `handle.value = Immediate(...)` instead.\n                                                          self.ready.setimmediatevalue(self._ready_init)\n     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n     0.00ns INFO     cocotb.bfm_probe.s_axi             AXI lite master configuration:\n     0.00ns INFO     cocotb.bfm_probe.s_axi               Address width: 8 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               Byte size: 8 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               Data width: 32 bits (4 bytes)\n     0.00ns INFO     cocotb.bfm_probe.s_axi             AXI lite master signals:\n     0.00ns INFO     cocotb.bfm_probe.s_axi               awaddr width: 8 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               awprot: not present\n     0.00ns INFO     cocotb.bfm_probe.s_axi               awready width: 1 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               awvalid width: 1 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               wdata width: 32 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               wready width: 1 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               wstrb width: 4 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               wvalid width: 1 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               bready width: 1 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               bresp width: 2 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               bvalid width: 1 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n     0.00ns INFO     cocotb.bfm_probe.s_axi             AXI lite master (read)\n     0.00ns INFO     cocotb.bfm_probe.s_axi             cocotbext-axi version 0.1.28\n     0.00ns INFO     cocotb.bfm_probe.s_axi             Copyright (c) 2020-2025 Alex Forencich\n     0.00ns INFO     cocotb.bfm_probe.s_axi             https://github.com/alexforencich/cocotbext-axi\n     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n     0.00ns INFO     cocotb.bfm_probe.s_axi             AXI lite master configuration:\n     0.00ns INFO     cocotb.bfm_probe.s_axi               Address width: 8 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               Byte size: 8 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               Data width: 32 bits (4 bytes)\n     0.00ns INFO     cocotb.bfm_probe.s_axi             AXI lite master signals:\n     0.00ns INFO     cocotb.bfm_probe.s_axi               araddr width: 8 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               arprot: not present\n     0.00ns INFO     cocotb.bfm_probe.s_axi               arready width: 1 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               arvalid width: 1 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               rdata width: 32 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               rready width: 1 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               rresp width: 2 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi               rvalid width: 1 bits\n     0.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n     0.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/reset.py:59: DeprecationWarning: Use `signal.value_change` instead.\n                                                          await Edge(reset_signal)\n     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n     1.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/stream.py:156: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`\n                                                          self._run_cr.kill()\n     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n     1.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:214: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`\n                                                          self._process_write_cr.kill()\n     1.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:217: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`\n                                                          self._process_write_resp_cr.kill()\n     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n     1.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n     1.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:466: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`\n                                                          self._process_read_cr.kill()\n     1.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:469: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`\n                                                          self._process_read_resp_cr.kill()\n    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n    23.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n    52.00ns INFO     cocotb.bfm_probe.s_axi             Write start addr: 0x00000000 prot: 2 data: 49 50 32 34\n    92.00ns INFO     cocotb.bfm_probe.s_axi             Write complete addr: 0x00000000 prot: 2 resp: 0 length: 4\n    92.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:336: DeprecationWarning: The data field will be removed in a future release.\n                                                          cmd.event.set(write_resp)\n    92.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:205: DeprecationWarning: The data field will be removed in a future release.\n                                                          return event.data\n    92.00ns INFO     cocotb.bfm_probe.s_axi             Read start addr: 0x00000000 prot: 2 length: 4\n   122.00ns INFO     cocotb.bfm_probe.s_axi             Read complete addr: 0x00000000 prot: 2 resp: 0 data: 49 50 32 34\n   122.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:572: DeprecationWarning: The data field will be removed in a future release.\n                                                          cmd.event.set(read_resp)\n   122.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/axil_master.py:457: DeprecationWarning: The data field will be removed in a future release.\n                                                          return event.data\n   122.00ns WARNING  py.warnings                        /tmp/bitloom-phase24-bfm-py312/lib/python3.12/site-packages/cocotbext/axi/stream.py:195: DeprecationWarning: `task.kill()` is deprecated in favor of `task.cancel()`\n                                                          self._pause_cr.kill()\n   122.00ns INFO     cocotb.bfm_probe.s_axi             Write start addr: 0x00000000 prot: 2 data: 64 72 6f 70\n   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n   223.00ns WARNING  cocotb.bfm_probe.s_axi             Flushed write operation during reset: AxiLiteWriteRespCmd(address=0, length=4, cycles=1, prot=<AxiProt.NONSECURE: 2>, event=<Event at 0x7cf7e28626c0>)\n   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n   223.00ns INFO     cocotb.bfm_probe.s_axi             Reset asserted\n   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n   253.00ns INFO     cocotb.bfm_probe.s_axi             Reset de-asserted\n   282.00ns INFO     cocotb.bfm_probe.s_axi             Read start addr: 0x00000000 prot: 2 length: 4\n   312.00ns INFO     cocotb.bfm_probe.s_axi             Read complete addr: 0x00000000 prot: 2 resp: 0 data: 00 00 00 00\n   312.00ns INFO     cocotb.bfm_probe                   BFM_API_PROBE_PASS: five pause APIs, legal write/read, reset cancellation=None\n   312.00ns INFO     cocotb.regression                  phase24_axi_bfm_probe.probe passed\n   312.00ns INFO     cocotb.regression                  **************************************************************************************\n                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **\n                                                        **************************************************************************************\n                                                        ** phase24_axi_bfm_probe.probe    PASS         312.00           0.01      22407.16  **\n                                                        **************************************************************************************\n                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                312.00           0.02      20079.53  **\n                                                        **************************************************************************************\nBFM probe passed; this is NOT Bitloom product RTL verification.\n",
+      "stderr": ""
+    },
+    {
+      "label": "csr-rtl",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr196_csr",
+        "p0_same_session_real_peer_owns_counter_and_partial_write_wins_increment",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:05:44.633943+00:00",
+      "utc_end": "2026-09-21T07:05:51.741165+00:00",
+      "seconds": 7.107246804982424,
+      "exit_code": 0,
+      "path": "/home/richard/.cargo/bin/cargo",
+      "realpath": "/nvme_data1/richard/.cargo/bin/rustup",
+      "stdout": "\nrunning 1 test\npeer_rejects=17 peer_partial_writes=83 peer_allowed_high=9\nFR196 seed=12720a11ce55 peer=true frames=2311 accepted=1016 consumed=1013 cancelled=3 reads=283 writes=256 errors=381 zero_mask=96 strobes=[32, 29, 37, 35, 32, 34, 37, 35, 27, 35, 37, 31, 30, 29, 32, 38] max_stall=31\npeer-system: FR196 PASS\ntb.sv:150637: $finish called at 6933 (1s)\nstatus=exit status: 0\nartifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr/peer-system-2740363\ntest p0_same_session_real_peer_owns_counter_and_partial_write_wins_increment ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 5.07s\n\n",
+      "stderr": "   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)\n    Finished `test` profile [optimized + debuginfo] target(s) in 1.99s\n     Running tests/fr196_csr.rs (target/debug/deps/fr196_csr-97c0ac838773f183)\n"
+    },
+    {
+      "label": "gate",
+      "command": [
+        "python3",
+        "_agile-output/test-artifacts/128-1-atdd-gate.py"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:05:51.743123+00:00",
+      "utc_end": "2026-09-21T07:05:53.629809+00:00",
+      "seconds": 1.8866881030844525,
+      "exit_code": 0,
+      "path": "/usr/bin/python3",
+      "realpath": "/usr/bin/python3.12",
+      "stdout": "Source sprint SHA256: a08d9f3b572e3931848a1cabd9e2b3347e93bcc171c780917770fd3dae985097\nScope: existing GREEN process gate, not FR197 product acceptance.\nCross-story dependencies are fixture setup, not gate coverage.\nPASS [P0] [001] current sprint: exit=0\n  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred\nPASS [P0] [002] 128.1 backlog, 128.2 ready-for-dev: exit=1\n  FAIL: 128.2 requires 128.1 NFR14 done\nPASS [P0] [003] 128.1 backlog, 128.3 ready-for-dev: exit=1\n  FAIL: 128.3 requires 128.1 NFR14 done\nPASS [P0] [004] 128.1 backlog, 128.4 ready-for-dev: exit=1\n  FAIL: 128.4 requires 128.1 NFR14 done\nPASS [P0] [005] 128.1 backlog, 128.5 ready-for-dev: exit=1\n  FAIL: 128.5 requires 128.1 NFR14 done\nPASS [P0] [006] 128.1 ready, 128.2 ready-for-dev: exit=1\n  FAIL: 128.2 requires 128.1 NFR14 done\nPASS [P0] [007] 128.1 ready, 128.3 ready-for-dev: exit=1\n  FAIL: 128.3 requires 128.1 NFR14 done\nPASS [P0] [008] 128.1 ready, 128.4 ready-for-dev: exit=1\n  FAIL: 128.4 requires 128.1 NFR14 done\nPASS [P0] [009] 128.1 ready, 128.5 ready-for-dev: exit=1\n  FAIL: 128.5 requires 128.1 NFR14 done\nPASS [P0] [010] 128.1 ready-for-dev, 128.2 ready-for-dev: exit=1\n  FAIL: 128.2 requires 128.1 NFR14 done\nPASS [P0] [011] 128.1 ready-for-dev, 128.3 ready-for-dev: exit=1\n  FAIL: 128.3 requires 128.1 NFR14 done\nPASS [P0] [012] 128.1 ready-for-dev, 128.4 ready-for-dev: exit=1\n  FAIL: 128.4 requires 128.1 NFR14 done\nPASS [P0] [013] 128.1 ready-for-dev, 128.5 ready-for-dev: exit=1\n  FAIL: 128.5 requires 128.1 NFR14 done\nPASS [P0] [014] 128.1 in-progress, 128.2 ready-for-dev: exit=1\n  FAIL: 128.2 requires 128.1 NFR14 done\nPASS [P0] [015] 128.1 in-progress, 128.3 ready-for-dev: exit=1\n  FAIL: 128.3 requires 128.1 NFR14 done\nPASS [P0] [016] 128.1 in-progress, 128.4 ready-for-dev: exit=1\n  FAIL: 128.4 requires 128.1 NFR14 done\nPASS [P0] [017] 128.1 in-progress, 128.5 ready-for-dev: exit=1\n  FAIL: 128.5 requires 128.1 NFR14 done\nPASS [P0] [018] 128.1 review, 128.2 ready-for-dev: exit=1\n  FAIL: 128.2 requires 128.1 NFR14 done\nPASS [P0] [019] 128.1 review, 128.3 ready-for-dev: exit=1\n  FAIL: 128.3 requires 128.1 NFR14 done\nPASS [P0] [020] 128.1 review, 128.4 ready-for-dev: exit=1\n  FAIL: 128.4 requires 128.1 NFR14 done\nPASS [P0] [021] 128.1 review, 128.5 ready-for-dev: exit=1\n  FAIL: 128.5 requires 128.1 NFR14 done\nPASS [P0] [022] 128.1 blocked, 128.2 ready-for-dev: exit=1\n  FAIL: 128.2 requires 128.1 NFR14 done\nPASS [P0] [023] 128.1 blocked, 128.3 ready-for-dev: exit=1\n  FAIL: 128.3 requires 128.1 NFR14 done\nPASS [P0] [024] 128.1 blocked, 128.4 ready-for-dev: exit=1\n  FAIL: 128.4 requires 128.1 NFR14 done\nPASS [P0] [025] 128.1 blocked, 128.5 ready-for-dev: exit=1\n  FAIL: 128.5 requires 128.1 NFR14 done\nPASS [P0] [026] 128.1 deferred, 128.2 ready-for-dev: exit=1\n  FAIL: 128.2 requires 128.1 NFR14 done\nPASS [P0] [027] 128.1 deferred, 128.3 ready-for-dev: exit=1\n  FAIL: 128.3 requires 128.1 NFR14 done\nPASS [P0] [028] 128.1 deferred, 128.4 ready-for-dev: exit=1\n  FAIL: 128.4 requires 128.1 NFR14 done\nPASS [P0] [029] 128.1 deferred, 128.5 ready-for-dev: exit=1\n  FAIL: 128.5 requires 128.1 NFR14 done\nPASS [P0] [030] 128.2 ready with declared predecessors done: exit=0\n  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred\nPASS [P0] [031] 128.3 ready with declared predecessors done: exit=0\n  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred\nPASS [P0] [032] 128.4 ready with declared predecessors done: exit=0\n  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred\nPASS [P0] [033] 128.5 ready with declared predecessors done: exit=0\n  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred\nPASS [P0] [034] M0 not closed: exit=1\n  FAIL: Epic 128 cannot advance before M0 closes\n  FAIL: 128.1 cannot advance before M0 closes\nPASS [P0] [035] Epic128 premature close: exit=1\n  FAIL: Epic 128 done requires its stories done\nPASS original sprint byte/hash preservation: a08d9f3b572e3931848a1cabd9e2b3347e93bcc171c780917770fd3dae985097\nRESULT: 35 scenarios passed; existing GREEN gate behavior verified.\n",
+      "stderr": ""
+    },
+    {
+      "label": "packages-metadata",
+      "command": [
+        "/tmp/bitloom-phase24-bfm-py312/bin/python",
+        "-c",
+        "import importlib.metadata as m; print(\"\\n\".join(sorted(d.metadata[\"Name\"]+\"==\"+d.version for d in m.distributions())))"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "utc_start": "2026-09-21T07:06:08.259090+00:00",
+      "utc_end": "2026-09-21T07:06:08.336192+00:00",
+      "seconds": 0.07711845391895622,
+      "exit_code": 0,
+      "path": "/tmp/bitloom-phase24-bfm-py312/bin/python",
+      "realpath": "/usr/bin/python3.12",
+      "stdout": "cocotb-bus==0.3.0\ncocotb==2.0.1\ncocotbext-axi==0.1.28\nfind_libpython==0.5.1\nscapy==2.7.0\n",
+      "stderr": ""
+    }
+  ]
+}

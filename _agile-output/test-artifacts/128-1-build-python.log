@@ -1,0 +1,18 @@
+{
+  "label": "python",
+  "command": [
+    "/tmp/bitloom-phase24-bfm-py312/bin/python",
+    "--version"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl",
+  "utc_start": "2026-09-21T07:05:44.079200+00:00",
+  "utc_end": "2026-09-21T07:05:44.081966+00:00",
+  "seconds": 0.0027895530220121145,
+  "exit_code": 0,
+  "path": "/tmp/bitloom-phase24-bfm-py312/bin/python",
+  "realpath": "/usr/bin/python3.12"
+}
+STDOUT
+Python 3.12.3
+
+STDERR

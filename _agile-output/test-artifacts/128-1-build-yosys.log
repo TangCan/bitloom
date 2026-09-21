@@ -1,0 +1,18 @@
+{
+  "label": "yosys",
+  "command": [
+    "yosys",
+    "-V"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl",
+  "utc_start": "2026-09-21T07:05:44.138925+00:00",
+  "utc_end": "2026-09-21T07:05:44.144503+00:00",
+  "seconds": 0.0055819000117480755,
+  "exit_code": 0,
+  "path": "/usr/bin/yosys",
+  "realpath": "/usr/bin/yosys"
+}
+STDOUT
+Yosys 0.33 (git sha1 2584903a060)
+
+STDERR

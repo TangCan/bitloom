@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python3",
+    "_agile-output/test-artifacts/128-1-review-gate.py"
+  ],
+  "utc_start": "2026-09-21T07:26:56.538958+00:00",
+  "seconds": 1.015451103914529,
+  "exit_code": 0,
+  "script_sha256": "9da231654b0a704df149b09d456f97d583130d433524031af05775fd59268d31"
+}

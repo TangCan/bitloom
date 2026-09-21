@@ -1,0 +1,23 @@
+{
+  "label": "packages-metadata",
+  "command": [
+    "/tmp/bitloom-phase24-bfm-py312/bin/python",
+    "-c",
+    "import importlib.metadata as m; print(\"\\n\".join(sorted(d.metadata[\"Name\"]+\"==\"+d.version for d in m.distributions())))"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl",
+  "utc_start": "2026-09-21T07:06:08.259090+00:00",
+  "utc_end": "2026-09-21T07:06:08.336192+00:00",
+  "seconds": 0.07711845391895622,
+  "exit_code": 0,
+  "path": "/tmp/bitloom-phase24-bfm-py312/bin/python",
+  "realpath": "/usr/bin/python3.12"
+}
+STDOUT
+cocotb-bus==0.3.0
+cocotb==2.0.1
+cocotbext-axi==0.1.28
+find_libpython==0.5.1
+scapy==2.7.0
+
+STDERR

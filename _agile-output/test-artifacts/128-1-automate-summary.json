@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "detected_stack": "backend",
+  "execution": "subagent",
+  "api_process_cases": 33,
+  "backend_runner_cases": 1,
+  "total_tests": 34,
+  "reused_rust_tests": 1,
+  "new_product_tests": 0,
+  "fixtures": [],
+  "performance_gain": "not measured",
+  "status": "complete",
+  "passed": 34,
+  "failed": 0,
+  "skipped": 0,
+  "mutation_runs": 8,
+  "unique_mutated_source_forms": 7,
+  "csr_evidence": "128-1-automate-csr-run-asy52shg/result.json"
+}

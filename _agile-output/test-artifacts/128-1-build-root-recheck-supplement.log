@@ -1,0 +1,18 @@
+PASS 128.2 in-progress without NFR14: exit=1; FAIL: 128.2 requires 128.1 NFR14 done
+PASS 128.3 in-progress without NFR14: exit=1; FAIL: 128.3 requires 128.1 NFR14 done
+PASS 128.4 in-progress without NFR14: exit=1; FAIL: 128.4 requires 128.1 NFR14 done
+PASS 128.5 in-progress without NFR14: exit=1; FAIL: 128.5 requires 128.1 NFR14 done
+PASS 128.2 review without NFR14: exit=1; FAIL: 128.2 requires 128.1 NFR14 done
+PASS 128.3 review without NFR14: exit=1; FAIL: 128.3 requires 128.1 NFR14 done
+PASS 128.4 review without NFR14: exit=1; FAIL: 128.4 requires 128.1 NFR14 done
+PASS 128.5 review without NFR14: exit=1; FAIL: 128.5 requires 128.1 NFR14 done
+PASS 128.2 done without NFR14: exit=1; FAIL: 128.2 requires 128.1 NFR14 done
+PASS 128.3 done without NFR14: exit=1; FAIL: 128.3 requires 128.1 NFR14 done
+PASS 128.4 done without NFR14: exit=1; FAIL: 128.4 requires 128.1 NFR14 done
+PASS 128.5 done without NFR14: exit=1; FAIL: 128.5 requires 128.1 NFR14 done
+PASS epic-122: exit=1; FAIL: Epic 122 must remain deferred
+PASS 122-2-: exit=1; FAIL: FR189 story 122.2 must remain deferred
+PASS 122-3-: exit=1; FAIL: FR189 story 122.3 must remain deferred
+RESULT: 15 supplemental scenarios passed; sprint SHA256=a08d9f3b572e3931848a1cabd9e2b3347e93bcc171c780917770fd3dae985097
+
+STDERR

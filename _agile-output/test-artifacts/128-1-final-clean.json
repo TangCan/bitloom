@@ -1,0 +1,10 @@
+{
+  "command": [
+    "cargo",
+    "clean"
+  ],
+  "utc_start": "2026-09-21T07:34:00.104908+00:00",
+  "elapsed_seconds": 4.127783483010717,
+  "exit_code": 0,
+  "log_sha256": "e22c05d32f0662844452a861fee538743e809b5ddd242e1716d33d18d287c88e"
+}

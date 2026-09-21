@@ -1,0 +1,10 @@
+{
+  "command": [
+    "just",
+    "test"
+  ],
+  "utc_start": "2026-09-21T07:34:05.370263+00:00",
+  "elapsed_seconds": 895.8966065370478,
+  "exit_code": 0,
+  "log_sha256": "95f3a62d1fc93cf8fd071d0c46d876101f30596056349de74731c0e8cb7e981b"
+}

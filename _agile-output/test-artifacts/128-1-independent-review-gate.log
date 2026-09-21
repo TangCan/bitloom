@@ -1,0 +1,23 @@
+PASS 128.2 ready without NFR14: exit=1; FAIL: 128.2 requires 128.1 NFR14 done
+PASS 128.3 ready without NFR14: exit=1; FAIL: 128.3 requires 128.1 NFR14 done
+PASS 128.4 ready without NFR14: exit=1; FAIL: 128.4 requires 128.1 NFR14 done
+PASS 128.5 ready without NFR14: exit=1; FAIL: 128.5 requires 128.1 NFR14 done
+PASS 128.2 in-progress without NFR14: exit=1; FAIL: 128.2 requires 128.1 NFR14 done
+PASS 128.3 in-progress without NFR14: exit=1; FAIL: 128.3 requires 128.1 NFR14 done
+PASS 128.4 in-progress without NFR14: exit=1; FAIL: 128.4 requires 128.1 NFR14 done
+PASS 128.5 in-progress without NFR14: exit=1; FAIL: 128.5 requires 128.1 NFR14 done
+PASS 128.2 review without NFR14: exit=1; FAIL: 128.2 requires 128.1 NFR14 done
+PASS 128.3 review without NFR14: exit=1; FAIL: 128.3 requires 128.1 NFR14 done
+PASS 128.4 review without NFR14: exit=1; FAIL: 128.4 requires 128.1 NFR14 done
+PASS 128.5 review without NFR14: exit=1; FAIL: 128.5 requires 128.1 NFR14 done
+PASS 128.2 done without NFR14: exit=1; FAIL: 128.2 requires 128.1 NFR14 done
+PASS 128.3 done without NFR14: exit=1; FAIL: 128.3 requires 128.1 NFR14 done
+PASS 128.4 done without NFR14: exit=1; FAIL: 128.4 requires 128.1 NFR14 done
+PASS 128.5 done without NFR14: exit=1; FAIL: 128.5 requires 128.1 NFR14 done
+PASS epic-122: exit=1; FAIL: Epic 122 must remain deferred
+PASS 122-2-: exit=1; FAIL: FR189 story 122.2 must remain deferred
+PASS 122-3-: exit=1; FAIL: FR189 story 122.3 must remain deferred
+PASS M0 marker done with unfinished story: exit=1; FAIL: Epic 125 done requires all three M0 stories done
+RESULT: 20 supplemental scenarios passed; sprint SHA256=b2124b9e09785d31952f56d0385af2c8806602cea61c2b843d5bbc4a5d591282
+
+STDERR

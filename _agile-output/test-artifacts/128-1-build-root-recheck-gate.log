@@ -1,0 +1,78 @@
+Source sprint SHA256: a08d9f3b572e3931848a1cabd9e2b3347e93bcc171c780917770fd3dae985097
+Scope: existing GREEN process gate, not FR197 product acceptance.
+Cross-story dependencies are fixture setup, not gate coverage.
+PASS [P0] [001] current sprint: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [002] 128.1 backlog, 128.2 ready-for-dev: exit=1
+  FAIL: 128.2 requires 128.1 NFR14 done
+PASS [P0] [003] 128.1 backlog, 128.3 ready-for-dev: exit=1
+  FAIL: 128.3 requires 128.1 NFR14 done
+PASS [P0] [004] 128.1 backlog, 128.4 ready-for-dev: exit=1
+  FAIL: 128.4 requires 128.1 NFR14 done
+PASS [P0] [005] 128.1 backlog, 128.5 ready-for-dev: exit=1
+  FAIL: 128.5 requires 128.1 NFR14 done
+PASS [P0] [006] 128.1 ready, 128.2 ready-for-dev: exit=1
+  FAIL: 128.2 requires 128.1 NFR14 done
+PASS [P0] [007] 128.1 ready, 128.3 ready-for-dev: exit=1
+  FAIL: 128.3 requires 128.1 NFR14 done
+PASS [P0] [008] 128.1 ready, 128.4 ready-for-dev: exit=1
+  FAIL: 128.4 requires 128.1 NFR14 done
+PASS [P0] [009] 128.1 ready, 128.5 ready-for-dev: exit=1
+  FAIL: 128.5 requires 128.1 NFR14 done
+PASS [P0] [010] 128.1 ready-for-dev, 128.2 ready-for-dev: exit=1
+  FAIL: 128.2 requires 128.1 NFR14 done
+PASS [P0] [011] 128.1 ready-for-dev, 128.3 ready-for-dev: exit=1
+  FAIL: 128.3 requires 128.1 NFR14 done
+PASS [P0] [012] 128.1 ready-for-dev, 128.4 ready-for-dev: exit=1
+  FAIL: 128.4 requires 128.1 NFR14 done
+PASS [P0] [013] 128.1 ready-for-dev, 128.5 ready-for-dev: exit=1
+  FAIL: 128.5 requires 128.1 NFR14 done
+PASS [P0] [014] 128.1 in-progress, 128.2 ready-for-dev: exit=1
+  FAIL: 128.2 requires 128.1 NFR14 done
+PASS [P0] [015] 128.1 in-progress, 128.3 ready-for-dev: exit=1
+  FAIL: 128.3 requires 128.1 NFR14 done
+PASS [P0] [016] 128.1 in-progress, 128.4 ready-for-dev: exit=1
+  FAIL: 128.4 requires 128.1 NFR14 done
+PASS [P0] [017] 128.1 in-progress, 128.5 ready-for-dev: exit=1
+  FAIL: 128.5 requires 128.1 NFR14 done
+PASS [P0] [018] 128.1 review, 128.2 ready-for-dev: exit=1
+  FAIL: 128.2 requires 128.1 NFR14 done
+PASS [P0] [019] 128.1 review, 128.3 ready-for-dev: exit=1
+  FAIL: 128.3 requires 128.1 NFR14 done
+PASS [P0] [020] 128.1 review, 128.4 ready-for-dev: exit=1
+  FAIL: 128.4 requires 128.1 NFR14 done
+PASS [P0] [021] 128.1 review, 128.5 ready-for-dev: exit=1
+  FAIL: 128.5 requires 128.1 NFR14 done
+PASS [P0] [022] 128.1 blocked, 128.2 ready-for-dev: exit=1
+  FAIL: 128.2 requires 128.1 NFR14 done
+PASS [P0] [023] 128.1 blocked, 128.3 ready-for-dev: exit=1
+  FAIL: 128.3 requires 128.1 NFR14 done
+PASS [P0] [024] 128.1 blocked, 128.4 ready-for-dev: exit=1
+  FAIL: 128.4 requires 128.1 NFR14 done
+PASS [P0] [025] 128.1 blocked, 128.5 ready-for-dev: exit=1
+  FAIL: 128.5 requires 128.1 NFR14 done
+PASS [P0] [026] 128.1 deferred, 128.2 ready-for-dev: exit=1
+  FAIL: 128.2 requires 128.1 NFR14 done
+PASS [P0] [027] 128.1 deferred, 128.3 ready-for-dev: exit=1
+  FAIL: 128.3 requires 128.1 NFR14 done
+PASS [P0] [028] 128.1 deferred, 128.4 ready-for-dev: exit=1
+  FAIL: 128.4 requires 128.1 NFR14 done
+PASS [P0] [029] 128.1 deferred, 128.5 ready-for-dev: exit=1
+  FAIL: 128.5 requires 128.1 NFR14 done
+PASS [P0] [030] 128.2 ready with declared predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [031] 128.3 ready with declared predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [032] 128.4 ready with declared predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [033] 128.5 ready with declared predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [034] M0 not closed: exit=1
+  FAIL: Epic 128 cannot advance before M0 closes
+  FAIL: 128.1 cannot advance before M0 closes
+PASS [P0] [035] Epic128 premature close: exit=1
+  FAIL: Epic 128 done requires its stories done
+PASS original sprint byte/hash preservation: a08d9f3b572e3931848a1cabd9e2b3347e93bcc171c780917770fd3dae985097
+RESULT: 35 scenarios passed; existing GREEN gate behavior verified.
+
+STDERR

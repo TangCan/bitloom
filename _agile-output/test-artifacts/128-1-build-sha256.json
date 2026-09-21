@@ -1,0 +1,11 @@
+{
+  "scripts/phase24_axi_bfm_probe.py": "24b437cde30b1cd206db8b91b632f93c976c13b9fb901b023ea392d2e2d769b1",
+  "scripts/phase24-axi-bfm-requirements.txt": "2478ce2e54556c310841f3af5e208a02afdbefd4dda2758b03051a962e15f57c",
+  "scripts/ci-sby-pins.env": "de97a2a8ba8aedb71332c13b3ac92be1f01b1fe43a65b7e9055b6c66c408045b",
+  "crates/bitloom/tests/fr196_csr.rs": "7f326341f794511890ec0cc474e744f32315c278abb74aa9944e3eddd80df41a",
+  "crates/bitloom-prelude/src/ip/csr/rtl.rs": "26c311fa11b9f97801bb71bbec86a80278f35691ad54ab94356bd1be67d698a2",
+  "_agile-output/test-artifacts/128-1-atdd-gate.py": "e237e7f9fcdd3fb86dd270f36f3217d6d6f990471c5d3133b3c9afc138083a9f",
+  "docs/ip/phase24-contract.md": "ee08e537bfb143448eccdaf55479bc26b6665bc961aa6f8db91fe671dcae15c1",
+  "_agile-output/test-artifacts/128-1-build-probe-artifacts.tar.gz": "fdd7df00d4ad530e602eb338fbbc8a0aea21e1dd4fb8b4223cfae0044d2088b4",
+  "scripts/check_phase24_gate.py": "575f8c96cff13ddf828ee79f9263c16c2df2572d1fdcdf40a19400d6db703810"
+}

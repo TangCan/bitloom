@@ -1,0 +1,18 @@
+{
+  "label": "sby",
+  "command": [
+    "sby",
+    "--version"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl",
+  "utc_start": "2026-09-21T07:05:44.145385+00:00",
+  "utc_end": "2026-09-21T07:05:44.238580+00:00",
+  "seconds": 0.09321399102918804,
+  "exit_code": 0,
+  "path": "/tmp/bitloom-1263-sby-installed/bin/sby",
+  "realpath": "/tmp/bitloom-1263-sby-installed/bin/sby"
+}
+STDOUT
+SBY yosys-0.47
+
+STDERR

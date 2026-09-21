@@ -1,0 +1,12 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.06s
+     Running tests/fr196_csr.rs (target/debug/deps/fr196_csr-97c0ac838773f183)
+
+running 1 test
+test p0_leaf_owned_rejection_events_and_candidates_native_and_real_rtl ... leaf-reject: FR196 PASS
+tb.sv:343: $finish called at 48 (1s)
+status=exit status: 0
+artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr196-csr/leaf-reject-2909120
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.08s
+

@@ -1,0 +1,25 @@
+{
+  "label": "rustc",
+  "command": [
+    "rustc",
+    "--version",
+    "--verbose"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl",
+  "utc_start": "2026-09-21T07:05:44.025721+00:00",
+  "utc_end": "2026-09-21T07:05:44.056555+00:00",
+  "seconds": 0.030844740103930235,
+  "exit_code": 0,
+  "path": "/home/richard/.cargo/bin/rustc",
+  "realpath": "/nvme_data1/richard/.cargo/bin/rustup"
+}
+STDOUT
+rustc 1.97.1 (8bab26f4f 2026-07-14)
+binary: rustc
+commit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452
+commit-date: 2026-07-14
+host: x86_64-unknown-linux-gnu
+release: 1.97.1
+LLVM version: 22.1.6
+
+STDERR

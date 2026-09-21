@@ -1,0 +1,18 @@
+{
+  "label": "z3",
+  "command": [
+    "z3",
+    "--version"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl",
+  "utc_start": "2026-09-21T07:05:44.239878+00:00",
+  "utc_end": "2026-09-21T07:05:44.246228+00:00",
+  "seconds": 0.00635309296194464,
+  "exit_code": 0,
+  "path": "/usr/bin/z3",
+  "realpath": "/usr/bin/z3"
+}
+STDOUT
+Z3 version 4.8.12 - 64 bit
+
+STDERR

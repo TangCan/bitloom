@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+"""补充检查越过ready的活动状态与FR189历史deferred保护。"""
+import hashlib
+import importlib.util
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+
+if not __debug__:
+    raise SystemExit("FAIL: assertions require non-optimized Python")
+spec = importlib.util.spec_from_file_location("atdd", Path(__file__).with_name("128-1-atdd-gate.py"))
+atdd = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(atdd)
+original = atdd.SPRINT.read_bytes()
+base = original.decode()
+for story in range(1, 6):
+    base = atdd.replace_state(base, f"128-{story}-", "backlog")
+base = atdd.replace_state(base, "epic-128", "in-progress")
+cases = []
+for state in ("in-progress", "review", "done"):
+    for story in range(2, 6):
+        cases.append((f"128.{story} {state} without NFR14", atdd.replace_state(base, f"128-{story}-", state), f"128.{story} requires 128.1 NFR14 done"))
+for key, reason in (("epic-122", "Epic 122 must remain deferred"), ("122-2-", "FR189 story 122.2 must remain deferred"), ("122-3-", "FR189 story 122.3 must remain deferred")):
+    cases.append((key, atdd.replace_state(base, key, "done"), reason))
+try:
+    with tempfile.TemporaryDirectory(prefix="bitloom-1281-review-") as directory:
+        fixture = Path(directory) / "sprint.yaml"
+        for name, content, reason in cases:
+            fixture.write_text(content)
+            result = subprocess.run([sys.executable, str(atdd.GATE), str(fixture)], capture_output=True, text=True, timeout=30)
+            assert (result.returncode, result.stdout, result.stderr) == (1, "", f"FAIL: {reason}\n"), (name, result.returncode, result.stdout, result.stderr)
+            print(f"PASS {name}: exit=1; {result.stderr.strip()}")
+finally:
+    assert atdd.SPRINT.read_bytes() == original, "real sprint changed"
+print(f"RESULT: {len(cases)} supplemental scenarios passed; sprint SHA256={hashlib.sha256(original).hexdigest()}")

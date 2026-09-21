@@ -1,0 +1,18 @@
+{
+  "label": "cargo",
+  "command": [
+    "cargo",
+    "--version"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl",
+  "utc_start": "2026-09-21T07:05:44.057163+00:00",
+  "utc_end": "2026-09-21T07:05:44.078579+00:00",
+  "seconds": 0.021430548978969455,
+  "exit_code": 0,
+  "path": "/home/richard/.cargo/bin/cargo",
+  "realpath": "/nvme_data1/richard/.cargo/bin/rustup"
+}
+STDOUT
+cargo 1.97.1 (c980f4866 2026-06-30)
+
+STDERR

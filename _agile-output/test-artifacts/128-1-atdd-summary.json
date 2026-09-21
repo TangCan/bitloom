@@ -1,0 +1,22 @@
+{
+  "storyId": "128.1",
+  "tdd_phase": "RED_missing_document + EXISTING_GREEN_process_gate",
+  "automated_scenarios_generated": 35,
+  "e2e_tests": 0,
+  "manual_items": 15,
+  "fixtures_created": 0,
+  "priority_coverage": {
+    "P0": 35
+  },
+  "gate_executed": true,
+  "presence_exit": 1,
+  "subagent_execution": "parallel subagents",
+  "performance_gain": "not measured",
+  "AC5": "35 real subprocess scenarios passed; sprint byte/hash preserved",
+  "AC1_2_3_4_6": "manual unreviewed",
+  "scope_exception": "No test.skip: approved AC5 asks existing gate behavior, no new product tests exist; missing-document RED remains real, never fake a failure.",
+  "gate_passed": 35,
+  "gate_failed": 0,
+  "gate_elapsed_seconds": 1.9713328579673544,
+  "atdd_status": "complete"
+}

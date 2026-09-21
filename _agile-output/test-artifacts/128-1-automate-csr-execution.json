@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python3",
+    "_agile-output/test-artifacts/128-1-automate-csr.py"
+  ],
+  "utc_start": "2026-09-21T07:32:53.674941+00:00",
+  "seconds": 0.40911900100763887,
+  "exit_code": 0,
+  "log_sha256": "bff61e67b98ae213f2007f897ce45b20f5815d5d49ba0de1faa42f227bffca2a"
+}
