@@ -1,0 +1,32 @@
+{
+  "coverageSummary": {
+    "fixtureNeeds": [],
+    "testLevels": [
+      "integration"
+    ],
+    "totalTests": 11
+  },
+  "knowledge_fragments_used": [
+    "test-levels-framework",
+    "test-priorities-matrix",
+    "test-quality",
+    "evidence-integrity"
+  ],
+  "status": "complete-sequential-fallback",
+  "subagent": "backend-tests",
+  "subagentType": "backend",
+  "success": true,
+  "summary": "The parallel worker timed out without output. Deterministic sequential fallback produced one Python evidence validator with two positive baselines and nine falsifiability mutations; no product code or fixtures were generated.",
+  "testsGenerated": [
+    {
+      "description": "Story130.1 archived evidence integrity and negative mutation controls",
+      "file": "_agile-output/test-artifacts/130-1-automate-evidence.py",
+      "priority_coverage": {
+        "P0": 7,
+        "P1": 4,
+        "P2": 0,
+        "P3": 0
+      }
+    }
+  ]
+}

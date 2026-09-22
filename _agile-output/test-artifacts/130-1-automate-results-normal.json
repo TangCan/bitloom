@@ -1,0 +1,64 @@
+{
+  "finished_utc": "2026-09-22T09:20:24.848476+00:00",
+  "python_optimize": 0,
+  "scenarios": [
+    {
+      "expected": "PASS",
+      "name": "normal-baseline",
+      "observed": "PASS"
+    },
+    {
+      "expected": "PASS",
+      "name": "optimized-baseline",
+      "observed": "PASS"
+    },
+    {
+      "expected": "REJECT",
+      "name": "source-digest-drift",
+      "observed": "REJECT"
+    },
+    {
+      "expected": "REJECT",
+      "name": "script-digest-drift",
+      "observed": "REJECT"
+    },
+    {
+      "expected": "REJECT",
+      "name": "empty-command-ledger",
+      "observed": "REJECT"
+    },
+    {
+      "expected": "REJECT",
+      "name": "hidden-command-failure",
+      "observed": "REJECT"
+    },
+    {
+      "expected": "REJECT",
+      "name": "missing-command-log",
+      "observed": "REJECT"
+    },
+    {
+      "expected": "REJECT",
+      "name": "command-log-digest-drift",
+      "observed": "REJECT"
+    },
+    {
+      "expected": "REJECT",
+      "name": "forged-network-isolation",
+      "observed": "REJECT"
+    },
+    {
+      "expected": "REJECT",
+      "name": "empty-blackbox-promotion",
+      "observed": "REJECT"
+    },
+    {
+      "expected": "REJECT",
+      "name": "support-level-promotion",
+      "observed": "REJECT"
+    }
+  ],
+  "started_utc": "2026-09-22T09:20:24.806292+00:00",
+  "story": "130.1",
+  "success": true
+}

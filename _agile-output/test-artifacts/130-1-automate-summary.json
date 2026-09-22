@@ -1,0 +1,30 @@
+{
+  "api_test_files": 0,
+  "api_tests": 0,
+  "backend_test_files": 1,
+  "backend_tests": 11,
+  "detected_stack": "backend",
+  "e2e_test_files": 0,
+  "e2e_tests": 0,
+  "fixtures_created": 0,
+  "knowledge_fragments_used": [
+    "test-levels-framework",
+    "test-priorities-matrix",
+    "data-factories",
+    "selective-testing",
+    "ci-burn-in",
+    "test-quality",
+    "evidence-integrity",
+    "playwright-utils-mandate",
+    "pactjs-utils-mandate"
+  ],
+  "performance_gain": "parallel workers timed out; deterministic sequential fallback used",
+  "priority_coverage": {
+    "P0": 7,
+    "P1": 4,
+    "P2": 0,
+    "P3": 0
+  },
+  "subagent_execution": "SUBAGENT timeout -> SEQUENTIAL fallback",
+  "total_tests": 11
+}

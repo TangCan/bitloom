@@ -1,0 +1,16 @@
+{
+  "fixture_needs": [],
+  "knowledge_fragments_used": [
+    "playwright-utils-mandate",
+    "pactjs-utils-mandate"
+  ],
+  "pactjs_utils_deviations": [],
+  "playwright_utils_deviations": [],
+  "provider_files_read": [],
+  "provider_scrutiny": "not-applicable",
+  "subagent": "api-tests",
+  "success": true,
+  "summary": "N/A: Story130.1 has no HTTP API or consumer/provider contract. The parallel worker timed out without output; deterministic sequential fallback generated no API artifacts.",
+  "test_count": 0,
+  "tests": []
+}

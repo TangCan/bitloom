@@ -1,0 +1,315 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/git",
+        "--version"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-1-build-probe-opt",
+      "duration_seconds": 0.0035408399999141693,
+      "label": "version-git",
+      "log": "version-git.log",
+      "log_sha256": "25f3602b5caaf92437be1e76b53698e8d73f14a6c71c2e91c8d5875f923ab29f",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:10.483434+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/sha256sum",
+        "--version"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-1-build-probe-opt",
+      "duration_seconds": 0.004371677991002798,
+      "label": "version-sha256sum",
+      "log": "version-sha256sum.log",
+      "log_sha256": "8dc478a505fe298766b14d095e5c7f0937c6439b57f8914b196c6409574e8c00",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:10.487345+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/bwrap",
+        "--version"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-1-build-probe-opt",
+      "duration_seconds": 0.002018288942053914,
+      "label": "version-bwrap",
+      "log": "version-bwrap.log",
+      "log_sha256": "3a0618bed56bc5ced74eea5965def37047e2b879a25ceb85bbc964efbe00489e",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:10.492110+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/unshare",
+        "--version"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-1-build-probe-opt",
+      "duration_seconds": 0.0013394259149208665,
+      "label": "version-unshare",
+      "log": "version-unshare.log",
+      "log_sha256": "85b9aead4ac4d08a7d4023aaa2700ca2a14400c4490f12150c8b55d1adf854fc",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:10.494663+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/bitloom-maintenance-tools/bin/iverilog",
+        "-V"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-1-build-probe-opt",
+      "duration_seconds": 0.013865837012417614,
+      "label": "version-iverilog",
+      "log": "version-iverilog.log",
+      "log_sha256": "f9199cc8658f4afcec3edeb93f29f23bb2aebf66d3eeb217cdc728aaa692f946",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:10.496246+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/bitloom-maintenance-tools/iverilog/usr/bin/vvp",
+        "-V"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-1-build-probe-opt",
+      "duration_seconds": 0.0034770050551742315,
+      "label": "version-vvp",
+      "log": "version-vvp.log",
+      "log_sha256": "c9010a85df9399c2adb11b59115cdc285ea6f0a399802944367c3813c6772a42",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:10.512183+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/yosys",
+        "-V"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-1-build-probe-opt",
+      "duration_seconds": 0.0070930649526417255,
+      "label": "version-yosys",
+      "log": "version-yosys.log",
+      "log_sha256": "14022961a7564dcc908f30f8b52cc1289449e8f25a95ed5c2d2afb88c4bde4fa",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:10.529018+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/sha256sum",
+        "/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude/src/ip/blackbox.rs"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "duration_seconds": 0.002999147051014006,
+      "label": "sha256-blackbox",
+      "log": "sha256-blackbox.log",
+      "log_sha256": "f8c7aedc865404006f634490988ebf72ce130dc28c72d5cc58724a5fecc1242d",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:10.536196+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/unshare",
+        "-n",
+        "true"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-1-build-probe-opt",
+      "duration_seconds": 0.0016885659424588084,
+      "label": "network-denial-unshare",
+      "log": "network-denial-unshare.log",
+      "log_sha256": "8f8f94f07ecd0e6152663b425f33f1fe8ce609762b9d02fa570dcb92c42a3150",
+      "returncode": 1,
+      "started_utc": "2026-09-22T08:25:10.539293+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/git",
+        "rev-parse",
+        "HEAD^{commit}"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "duration_seconds": 0.003819091012701392,
+      "label": "git-head",
+      "log": "git-head.log",
+      "log_sha256": "0373188a533883ac3741e8a6d859cc3af60c1c9d5a16e81a9b08d4db3f18e8b8",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:10.541051+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/git",
+        "submodule",
+        "status",
+        "--recursive"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "duration_seconds": 0.05303131300024688,
+      "label": "git-recursive-closure",
+      "log": "git-recursive-closure.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:10.544933+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/git",
+        "archive",
+        "--format=tar",
+        "HEAD"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "duration_seconds": 5.006454105954617,
+      "label": "git-archive",
+      "log": "git-archive.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:10.598022+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/bwrap",
+        "--unshare-net",
+        "--ro-bind",
+        "/",
+        "/",
+        "--dev",
+        "/dev",
+        "--proc",
+        "/proc",
+        "/usr/bin/python3",
+        "-c",
+        "import socket,sys; n=socket.if_nameindex(); print(n); sys.exit(0 if n == [(1, 'lo')] else 9)"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-1-build-probe-opt",
+      "duration_seconds": 0.04265680001117289,
+      "label": "network-denial-bwrap",
+      "log": "network-denial-bwrap.log",
+      "log_sha256": "3a5ab0d44ff9ae366cdfa7f10162b96ce815237fc77075c7ed02762310285ffb",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:17.082373+00:00"
+    },
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "bitloom",
+        "--test",
+        "fr82_fifo_uart_baseline",
+        "fr82_blackbox_boundary_documented",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl",
+      "duration_seconds": 0.09475544700399041,
+      "label": "rust-blackbox-contract",
+      "log": "rust-blackbox-contract.log",
+      "log_sha256": "d80c35105448c45c7a235bd1f4c769b57581153b3eb241612893da935540c39d",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:17.125083+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/bitloom-maintenance-tools/bin/iverilog",
+        "-g2012",
+        "-s",
+        "tb",
+        "-o",
+        "simulation",
+        "vendor_ext_ip.v",
+        "tb.sv"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-1-build-probe-opt",
+      "duration_seconds": 0.010578033048659563,
+      "label": "rtl-compile",
+      "log": "rtl-compile.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:17.220322+00:00"
+    },
+    {
+      "argv": [
+        "/tmp/bitloom-maintenance-tools/iverilog/usr/bin/vvp",
+        "simulation"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-1-build-probe-opt",
+      "duration_seconds": 0.005710126948542893,
+      "label": "rtl-simulate",
+      "log": "rtl-simulate.log",
+      "log_sha256": "8ee8e061be3c8d55ed0643d1a971909bb9af2dbbd4d8058fe60e2be9eb83e419",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:17.230964+00:00"
+    },
+    {
+      "argv": [
+        "/usr/bin/yosys",
+        "-p",
+        "read_verilog vendor_ext_ip.v; hierarchy -check -top vendor_ext_ip; proc; check -assert; stat"
+      ],
+      "cwd": "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-1-build-probe-opt",
+      "duration_seconds": 0.0084721619496122,
+      "label": "rtl-synthesis",
+      "log": "rtl-synthesis.log",
+      "log_sha256": "ab75e868b42215227e5e7b0cb795809980483225a40b52515d54d89c84b6be7e",
+      "returncode": 0,
+      "started_utc": "2026-09-22T08:25:17.236794+00:00"
+    }
+  ],
+  "finished_utc": "2026-09-22T08:25:17.245518+00:00",
+  "limitations": [
+    "The vendor module has no behavioral assignment; output behavior is intentionally not accepted.",
+    "Compilation, simulation launch, and synthesis prove external-file binding mechanics only.",
+    "No upstream source, tag, license, recursive dependency, or offline replay was acquired.",
+    "This result must not promote the Epic130 support-matrix row."
+  ],
+  "optimize": 1,
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "repository_identity": {
+    "archive_sha256": "dfe98c572f51f664da9024dfea9ca285b522964b8fa450e345708e6ea40fcfd3",
+    "commit": "baf07e739af2b36f4e0befddda9826964d16118e"
+  },
+  "rtl_sources": {
+    "tb.sv": "08da95e8532a4275ed4cb266fed88c86b5a14d1ad88f82dabeeabb53934c1509",
+    "vendor_ext_ip.v": "eb2d36f53786cfa3c7d184a5370766a6aaedad358564ed4ff4f3223a8b48e29b"
+  },
+  "scope": "Story130.1 environment and empty black-box binding mechanism; not FR199/FR200",
+  "script_sha256": "666c8833f8193e90256506844493c3025a6c106e12cfba2df58dae18592dbdd3",
+  "source": {
+    "path": "crates/bitloom-prelude/src/ip/blackbox.rs",
+    "sha256": "49a39fbaa113cad65437f99c364ed31fcb955c47e9ea79e4ae62811324b803c6",
+    "vendor_literal_sha256": "eb2d36f53786cfa3c7d184a5370766a6aaedad358564ed4ff4f3223a8b48e29b"
+  },
+  "started_utc": "2026-09-22T08:25:10.476836+00:00",
+  "success": true,
+  "tools": {
+    "bwrap": {
+      "path": "/usr/bin/bwrap",
+      "sha256": "e318903862396f96de3df57264e0158682b952fd3fb53ac23d876413e7b30f71"
+    },
+    "git": {
+      "path": "/usr/bin/git",
+      "sha256": "2a8c18fbf43da9f692d75474c72bea9dfd796c260b0f3dfe456376abc3bbd668"
+    },
+    "iverilog": {
+      "path": "/tmp/bitloom-maintenance-tools/bin/iverilog",
+      "sha256": "67e52f7d4be127dbe422f6ced866c10e33df01a1bb90321c8786b40f31f2c490"
+    },
+    "sha256sum": {
+      "path": "/usr/bin/sha256sum",
+      "sha256": "4d2db56c867e5324e0084c9e897f6360d37517de77ac96f2bd31494223d69a60"
+    },
+    "unshare": {
+      "path": "/usr/bin/unshare",
+      "sha256": "a23c8863860669003dc4660039fe642f5795c8c2195898ebc5d01afa1ac3d11c"
+    },
+    "vvp": {
+      "path": "/tmp/bitloom-maintenance-tools/iverilog/usr/bin/vvp",
+      "sha256": "a10bd7d4a0850308ac8c2c98115b6a3084f9be978307610f2a521190c28f4023"
+    },
+    "yosys": {
+      "path": "/usr/bin/yosys",
+      "sha256": "88c0a12bb814a1a8716b1ae10b482e35d3005ed558e1f5f626b3dc983ea3abd0"
+    }
+  },
+  "unshare_net_supported": false
+}
