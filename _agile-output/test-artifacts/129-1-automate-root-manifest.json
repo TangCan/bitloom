@@ -1,0 +1,31 @@
+{
+  "archive": "129-1-automate-root-evidence.tar.gz",
+  "archive_sha256": "928055df66825e4c3589c48e3478898e3ea2285b24f2bc112e659e950d79e2c1",
+  "members": {
+    "129-1-automate-reset-root/results.json": "533fb1574fa84b378c965230a2225a5e2d9ac4c9b09f5488185becd695d74076",
+    "129-1-automate-reset-root-r2/baseline/boundary.v": "f14f2be28494c1b5ac828730841ee1ccfe7e7acaa5becc05d85514ccdfd031d7",
+    "129-1-automate-reset-root-r2/baseline/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "129-1-automate-reset-root-r2/baseline/direct.v": "aef56962e3d11c349d4e6612ef774f3c96b8f4d458db058d1cb19eab7183a476",
+    "129-1-automate-reset-root-r2/baseline/ports.v": "23cb53030b4b21a770b3566afdf1ae38851599aceec93903b98f744dbe3659d7",
+    "129-1-automate-reset-root-r2/baseline/simulation.log": "339cc9e93e25825ecd0c592e4673033638391f9e594e8cafe7db41e5394005f3",
+    "129-1-automate-reset-root-r2/baseline/tb.sv": "a81428db619073bf57c89ce57c6175eb08509d33fda6fb935314f6a06c0d0f9e",
+    "129-1-automate-reset-root-r2/baseline/trace.vcd": "8410567cbb8e5a42f83fade86a6cf2fbfa39c8cb1696527e4a4afb46e4851747",
+    "129-1-automate-reset-root-r2/iverilog-version.log": "f9199cc8658f4afcec3edeb93f29f23bb2aebf66d3eeb217cdc728aaa692f946",
+    "129-1-automate-reset-root-r2/reset_disconnected/boundary.v": "b89264a082ae3e120c0aa64223f7495f680580326b0bafd8bb4313ced538f8c1",
+    "129-1-automate-reset-root-r2/reset_disconnected/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "129-1-automate-reset-root-r2/reset_disconnected/direct.v": "aef56962e3d11c349d4e6612ef774f3c96b8f4d458db058d1cb19eab7183a476",
+    "129-1-automate-reset-root-r2/reset_disconnected/ports.v": "23cb53030b4b21a770b3566afdf1ae38851599aceec93903b98f744dbe3659d7",
+    "129-1-automate-reset-root-r2/reset_disconnected/simulation.log": "7953fb533fd0c59c874d8af6a4fdfc1bf0d5a05fb0e04a5eb9a219e9b6b5b81c",
+    "129-1-automate-reset-root-r2/reset_disconnected/tb.sv": "a81428db619073bf57c89ce57c6175eb08509d33fda6fb935314f6a06c0d0f9e",
+    "129-1-automate-reset-root-r2/reset_disconnected/trace.vcd": "a8a98413560f52b725c0914d25615c2975fa80e9f256444acceb1c5a7e969c96",
+    "129-1-automate-reset-root-r2/reset_wrong_polarity/boundary.v": "9524310f03b68e62279fbb5b7f048744c0711c8532a0f604275a16be51d968bc",
+    "129-1-automate-reset-root-r2/reset_wrong_polarity/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "129-1-automate-reset-root-r2/reset_wrong_polarity/direct.v": "aef56962e3d11c349d4e6612ef774f3c96b8f4d458db058d1cb19eab7183a476",
+    "129-1-automate-reset-root-r2/reset_wrong_polarity/ports.v": "23cb53030b4b21a770b3566afdf1ae38851599aceec93903b98f744dbe3659d7",
+    "129-1-automate-reset-root-r2/reset_wrong_polarity/simulation.log": "8014a4561362a530e65f2c5b4e256455d25a7c7cc5fc565f708c19c72a391ec4",
+    "129-1-automate-reset-root-r2/reset_wrong_polarity/tb.sv": "a81428db619073bf57c89ce57c6175eb08509d33fda6fb935314f6a06c0d0f9e",
+    "129-1-automate-reset-root-r2/reset_wrong_polarity/trace.vcd": "5fe125615b4fb040fc62e7c89b8661b5bc17a4f9b01e1e11bebfc33a1f5f9326",
+    "129-1-automate-reset-root-r2/results.json": "9267e3c75062b9fc575bdd945ddb76b39a7bfb6754e76214419cffa0fddd18f5",
+    "129-1-automate-reset-root-r2/vvp-version.log": "c9010a85df9399c2adb11b59115cdc285ea6f0a399802944367c3813c6772a42"
+  }
+}

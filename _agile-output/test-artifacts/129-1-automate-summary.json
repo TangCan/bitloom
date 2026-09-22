@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "stack": "backend",
+  "mode": "subagent",
+  "api_tests": 6,
+  "backend_tests": 3,
+  "priority": {
+    "P0": 3,
+    "P1": 6
+  },
+  "scope": "有限复位探针负控制与执行器失败边界；不是FR198",
+  "speedup": "not measured"
+}

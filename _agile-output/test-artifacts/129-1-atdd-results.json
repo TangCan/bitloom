@@ -1,0 +1,36 @@
+[
+  {
+    "label": "presence",
+    "command": [
+      "python3",
+      "_agile-output/test-artifacts/129-1-atdd-presence.py"
+    ],
+    "start_utc": "2026-09-21T14:46:41.409070+00:00",
+    "seconds": 0.040058590937405825,
+    "exit_code": 1,
+    "expected_exit": 1
+  },
+  {
+    "label": "gate",
+    "command": [
+      "python3",
+      "_agile-output/test-artifacts/129-1-atdd-gate.py"
+    ],
+    "start_utc": "2026-09-21T14:46:41.449317+00:00",
+    "seconds": 4.0600509630749,
+    "exit_code": 0,
+    "expected_exit": 0
+  },
+  {
+    "label": "gate-opt",
+    "command": [
+      "python3",
+      "-O",
+      "_agile-output/test-artifacts/129-1-atdd-gate.py"
+    ],
+    "start_utc": "2026-09-21T14:46:45.509729+00:00",
+    "seconds": 4.208516307990067,
+    "exit_code": 0,
+    "expected_exit": 0
+  }
+]

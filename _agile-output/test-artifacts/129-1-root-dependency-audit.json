@@ -1,0 +1,59 @@
+{
+  "utc": "2026-09-21T14:56:26.644759+00:00",
+  "source": "epics.md Story129.1–3 Given逐边人工核对；不是gate自动覆盖",
+  "sprint_sha256": "c4c1e1cbce6f6fe515959d1c8816d9c4e261f03bb74673c93fcc21f72d7c38fa",
+  "edges": [
+    {
+      "target": "129.1",
+      "predecessor": "125-3-axi-修复-双模型与-m0-关闭",
+      "current_status": "done",
+      "satisfied": true
+    },
+    {
+      "target": "129.2",
+      "predecessor": "129-1-组合系统与证据-nfr14",
+      "current_status": "in-progress",
+      "satisfied": false
+    },
+    {
+      "target": "129.2",
+      "predecessor": "127-4-静态译码与-m2-关闭",
+      "current_status": "done",
+      "satisfied": true
+    },
+    {
+      "target": "129.2",
+      "predecessor": "128-2-timer",
+      "current_status": "done",
+      "satisfied": true
+    },
+    {
+      "target": "129.2",
+      "predecessor": "128-4-gpio-csr-wrapper",
+      "current_status": "done",
+      "satisfied": true
+    },
+    {
+      "target": "129.2",
+      "predecessor": "128-5-缓冲-uart-与-m3-关闭",
+      "current_status": "done",
+      "satisfied": true
+    },
+    {
+      "target": "129.3",
+      "predecessor": "129-2-外设子系统与使用配方",
+      "current_status": "backlog",
+      "satisfied": false
+    }
+  ],
+  "downstream": {
+    "129-1-组合系统与证据-nfr14": "in-progress",
+    "129-2-外设子系统与使用配方": "backlog",
+    "129-3-ci-兼容性-贡献模板与核心关闭": "backlog"
+  },
+  "preserved_deferred": {
+    "122-1-epic-122-nfr14-风险记录": "done",
+    "122-2-继续-firtool-产品钉升钉实现与验收-fr189": "deferred",
+    "122-3-fr189-收口与文档指针": "deferred"
+  }
+}

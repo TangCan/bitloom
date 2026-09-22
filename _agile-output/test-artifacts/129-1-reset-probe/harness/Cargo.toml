@@ -1,0 +1,9 @@
+[package]
+name = "reset-probe-emitter"
+version = "0.0.0"
+edition = "2024"
+[dependencies]
+reset-probe-design = { path = "../design" }
+bitloom-vlog = { path = "../../../../crates/bitloom-vlog" }
+bitloom-firrtl = { path = "../../../../crates/rhdl-firrtl" }
+[workspace]

@@ -1,0 +1,48 @@
+{
+  "success": true,
+  "subagent": "atdd-e2e-tests",
+  "tests": [],
+  "test_count": 0,
+  "fixture_needs": [],
+  "priority_coverage": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0,
+    "P3": 0
+  },
+  "tdd_phase": "RED",
+  "knowledge_fragments_used": [
+    "parent-verified 13-fragment cache: 129-1-atdd-knowledge-sha.json; backend applicability only"
+  ],
+  "playwright_utils_deviations": [],
+  "pact_mcp_reachable": false,
+  "pact_fallback_source": "none",
+  "tests_executed": false,
+  "summary": "No browser journeys apply. Generated eight-AC independent manual acceptance checklist and document-presence-only RED script as extra artifacts; parent writes and executes later. All manual items unreviewed.",
+  "artifacts": [
+    {
+      "file": "_agile-output/test-artifacts/129-1-atdd-manual-acceptance.md",
+      "content": "# Story129.1 独立人工验收清单（ATDD）\n\n本清单是风险门内容审查，不是浏览器E2E、FR198系统行为测试或NFR14正文。所有项目初始 **unreviewed**，实际证据均待build；未来计划的完整性与未来产品运行成功分别判定。审阅者须逐读原始证据，填写具体位置、结论、日期和unknown；不能用标题、关键词、文件存在或历史绿色代替内容判断。\n\n输入：Story129.1八项AC、正式phase24-contract、NFR14模板及当前关闭/源码证据。审阅目标为 `_agile-output/implementation-artifacts/epic-129-nfr14.md`。存在性脚本仅检查这个正文路径，缺失exit1；即使存在exit0也不证明质量、FR198行为或FR201完成。ATDD worker未运行脚本或任何工具/产品探针。\n\nRust/Cargo/Python后端，无浏览器、HTTP或移动边界，浏览器E2E与provider states=N/A；Playwright/Pact flags true不构成引入JS的理由。沿用父流程一次Pact探测false/fallback none，本worker未重试。没有生成产品API测试、fixture或文档关键词断言。\n\n|ID / AC / 优先级|独立验收动作及通过条件|状态|实际证据 / 日期 / 审阅人|unknown或失败处理|\n|---|---|---|---|---|\n|M01 / AC1 / P0|核对125.3/M0正式前置及M1/M2/M3关闭提交、当前sprint；只解除129.1风险门，129.2/129.3仍backlog，Epic129 in-progress，FR198和核心FR201未交付，FR189 deferred/NFR91与历史done保留。|unreviewed|待build|状态冲突先查证，不改历史交付事实。|\n|M02 / AC2 / P0|正文(a)上游约束、(b)工期带、(c)禁止静默降级、(d)负责人均有效且相互一致；129.1为0.5–1、129.2/129.3各3–5，共6.5–11有效人日；25%预留若采用另列8.125–13.75，不是日期/墙钟承诺。|unreviewed|待build|字段缺失或套用旧研究6–10阻止关闭。|\n|M03 / AC2 / P0|Richard维护owner、Codex实施证据、主代理七步提交责任明确；每项风险都有owner、失败动作、停止条件，维护叠加覆盖旧API、共享图、三后端、工具身份和CI成本；不将并行代理当免费维护人力。|unreviewed|待build|缺owner/行动方案不可交付风险门。|\n|M04 / AC3 / P0|核源码可行性：一个ElaborateSession一次finish，真实桥→四窗→UART/GPIO/Timer/IRQ；addr16/data32/WSTRB4、单ACLK；0000/0100/0200/0300各256字节，洞/未对齐/访问错误SLVERR、0400–ffff DECERR且不截高位。prelude-only，不重写外设/拼FrozenHir/新增native层级。|unreviewed|待build|不兼容连接或新架构范围先记录解决，不缩小合同。|\n|M05 / AC3,4 / P0|IRQ严格五路：Timer、RX成功到达、TX取队首、overflow或framing、GPIO新沿；原始脉冲接IRQ，不用sticky EVENT，无第六路。验收计划能区分本地EVENT未清时IRQ清除不重触发和后续新事件到达。|unreviewed|待build|用定向时序和外部观察判据，不能只列信号名。|\n|M06 / AC4 / P0|固定两种不同拓扑：完整AXI桥图与直接CSR图，共享四窗/四真实外设和事件helper；两图均计划真实行为测试，不能只改名，旧127.4 peer或128.5 UART→IRQ不能替代FR198。|unreviewed|待build|图未明确或仅旧样例需补充计划，不能宣称系统通过。|\n|M07 / AC4 / P0|独立主端手写关键地址/副作用，配置Timer、GPIO32、UART真实线端收发及清IRQ；AW/W独立、读写并发、各通道背压、全部WSTRB和访问错误/未对齐覆盖，特殊请求用原始通道，不能与BFM同针脚双驱动。|unreviewed|待build|scoreboard不得复用DUT状态转移或生成地址自证。|\n|M08 / AC4 / P0|复位与事务账本区分桥捕获、CSR唯一提交、响应消费和取消；reset共同清bridge/decoder/leaf/FIFO/FSM，已发送物理bit不回滚，BFM None为取消非OKAY；安全性不依赖ready公平，完成上界另列假设。随机预算16固定seed×1000完成事务及必达定向计数，调整须实测理由。|unreviewed|待build|缺取消/守恒或概率当保证需补计划。|\n|M09 / AC5 / P0|真实工具记录命令/UTC/耗时/退出码/解析路径/版本/日志；Rust/Cargo/Python3.12、锁定BFM闭包、iverilog/vvp、firtool、Java/Scala/Chisel、Yosys/sby/z3身份可追溯，SBY tag/commit/安装文件/隔离Python闭包核验；不改工具钉。|unreviewed|待build|缺工具或错误退出不能skip为PASS；保留失败原件。|\n|M10 / AC5 / P0|实际运行固定BFM stub和一个既有真实桥/译码层级RTL入口，精确测试数、版本与原始产物可核；确定性seed=N/A，随机记录实际seed/事务数/必达计数。只说明旧基座可用，不是FR198或形式证明。|unreviewed|待build|历史PASS、仅版本发现或compile-only不足。|\n|M11 / AC3,5 / P0|最小真实父子复位图在direct/FIRRTL/Chisel逐路实际编译执行：先把至少两个子状态置非零，aresetn与Chisel隐式reset独立区分；验证同步断言优先、同沿共同清零、释放后恢复。保留生成源码/TB/命令/波形/失败，不允许TB绑定额外reset掩盖生成连接。|unreviewed|待build|检查HIR Reset类型和Chisel显式child reset路径；UInt1 XOR或emit成功不能作结论。|\n|M12 / AC5,8 / P0|真实探针决定合法复位路线：typed HIR路线须实证；如失败，保留失败并按AD-30核无状态最薄RTL适配，源码随例子交付，三后端共用且实际跑/综合/源绑定，准确称生成core+aresetn适配；不冒称全top HIR或外部IP试点。|unreviewed|待build|路线未解不得下游ready；不可静默修后端或缩为仅高有效rst顶层。外部控制器须同步aresetn断言及释放，反相不是同步器。|\n|M13 / AC6 / P0|实际gate当前合法状态通过；临时状态覆盖129.1未done时129.2/129.3各active状态拒绝、M0未关拒绝、Epic129提前done拒绝、合法未来状态通过。检查确切诊断/退出和真实sprint前后不变。|unreviewed|待build|worker A过程结果单列；不能把既有GREEN伪称产品RED。|\n|M14 / AC6 / P0|人工独立核全部边：129.1需125.3；129.2需129.1/127.4/128.2/128.4/128.5；129.3需129.2；M4需129.1–3全done。gate只覆盖部分关系，不谎称自动脚本覆盖全部边。|unreviewed|待build|逐边引用sprint/合同证据，未满足不得ready。|\n|M15 / AC7 / P1|129.3核心矩阵明确direct/FIRRTL/Chisel各自编译执行相同系统预期；native两引擎/generated层级unsupported。有限formal prove、cover、原始综合、旧API兼容及SemVer分别验收，不将综合当PPA、工具发现当prove。|unreviewed|待build|每条证据必须绑定源码/工具身份，不取历史PASS并集。|\n|M16 / AC7 / P1|责任分配：129.2交付干净checkout一条命令使用配方并真实隔离复现；129.3复核核心CI/矩阵。入口列外部工具，不依赖主target或/tmp生成文件；上手步骤/耗时、手工接线/地址代码量、修改文件数、CI耗时实际测量，贡献模板列owner/独立测试/两组合/支持矩阵/兼容/来源许可/证据。|unreviewed|待build|不可将计划写成完成实测或编造性能收益。|\n|M17 / AC7 / P0|核心与外部分界：Epic130外部试点独立，外部行不能凭核心绿PASS；核心FR201关闭不依赖130.3，但完整Phase24须外部验收，不吞NFR91或FR189 deferred。|unreviewed|待build|矩阵与关闭宣称有越界则修正文案/状态。|\n|M18 / AC8 / P0|正文有效、探针与gate实际证据、独立review、automate、clean→fmt→just test和单故事commit齐备才129.1 done；只解自身NFR14，不新增API/工具pin/包版本，不push/publish。ignored、失败、未执行单列。|unreviewed|待父流程七步完成|有未解工具/架构阻塞保留，不提前标通过。|\n\n验收记录格式：ID、正文位置、实际命令/原始日志位置、通过或失败理由、剩余unknown、审阅人及UTC。对未来系统计划只能标“风险计划有效”，不能标FR198/FR201行为PASS；最终主代理复核另附，不覆盖ATDD初始记录。\n",
+      "description": "18 independent manual checks covering AC1–8, initially unreviewed",
+      "acceptance_criteria_covered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "file": "_agile-output/test-artifacts/129-1-atdd-presence.py",
+      "content": "#!/usr/bin/env python3\n\"\"\"Only check Story129.1 NFR14 document presence; not content or RTL behavior.\"\"\"\nfrom pathlib import Path\nimport sys\n\nroot = Path(__file__).resolve().parents[2]\ntarget = root / \"_agile-output/implementation-artifacts/epic-129-nfr14.md\"\nif not target.is_file():\n    print(f\"RED: missing NFR14 document: {target}\")\n    print(\"Presence only: no content-quality, FR198 behavior or FR201 conclusion.\")\n    sys.exit(1)\nprint(f\"PRESENT: {target}\")\nprint(\"Presence only: manual content review and actual probe evidence remain required.\")\nsys.exit(0)\n",
+      "description": "Missing risk document exits1; existence alone proves neither content quality nor system behavior",
+      "expected_to_fail": true,
+      "acceptance_criteria_covered": [
+        1
+      ]
+    }
+  ]
+}

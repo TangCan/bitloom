@@ -1,0 +1,27 @@
+{
+  "story": "129.1",
+  "execution": {
+    "requested": "auto",
+    "probe": true,
+    "subagent": true,
+    "agent_team": false,
+    "resolved": "subagent"
+  },
+  "generated_process_scenarios": 84,
+  "document_presence_red": 1,
+  "manual_items": 18,
+  "browser_tests": 0,
+  "fixtures_created": 0,
+  "scope": "existing GREEN process checks required by AC6; new document-presence RED only",
+  "tests_executed": true,
+  "performance_gain": "not measured; no sequential baseline",
+  "pact_mcp_reachable": false,
+  "pact_fallback_source": "none",
+  "results": {
+    "presence_exit": 1,
+    "presence_scope": "missing document only",
+    "gate_normal_passed": 84,
+    "gate_optimized_passed": 84,
+    "manual_unreviewed": 18
+  }
+}

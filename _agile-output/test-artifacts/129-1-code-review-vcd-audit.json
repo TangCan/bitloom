@@ -1,0 +1,191 @@
+{
+  "scope": "适配边界三后端双子状态；typed Chisel未执行，不证明隐式连接行为",
+  "results": [
+    {
+      "backend": "direct",
+      "vcd": "/tmp/bitloom 1291 code review spaces 20260922a/adapted/direct-run/trace.vcd",
+      "sha256": "5884dda88fc1e33abb360340f5fe9a8e91f3218c996740ae83f406a096c9d5a7",
+      "checked_samples": [
+        {
+          "time": 6,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 10,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 0,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 12,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 1,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 14,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 0,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 16,
+          "values": {
+            "out0": 25,
+            "out1": 99,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        }
+      ]
+    },
+    {
+      "backend": "firrtl",
+      "vcd": "/tmp/bitloom 1291 code review spaces 20260922a/adapted/firrtl-run/trace.vcd",
+      "sha256": "5884dda88fc1e33abb360340f5fe9a8e91f3218c996740ae83f406a096c9d5a7",
+      "checked_samples": [
+        {
+          "time": 6,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 10,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 0,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 12,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 1,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 14,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 0,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 16,
+          "values": {
+            "out0": 25,
+            "out1": 99,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        }
+      ]
+    },
+    {
+      "backend": "chisel",
+      "vcd": "/tmp/bitloom 1291 code review spaces 20260922a/adapted/chisel/trace.vcd",
+      "sha256": "99301cea62e351bb9116384462094b9b0c2fe6faf802412a3d204459f7eb1144",
+      "checked_samples": [
+        {
+          "time": 6,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 10,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 0,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 12,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 1,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 14,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 0,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 16,
+          "values": {
+            "out0": 25,
+            "out1": 99,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        }
+      ]
+    }
+  ]
+}

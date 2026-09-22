@@ -1,0 +1,58 @@
+{
+  "success": true,
+  "subagent": "atdd-api-tests",
+  "tests": [
+    {
+      "file": "_agile-output/test-artifacts/129-1-atdd-gate.py",
+      "content": "#!/usr/bin/env python3\n\"\"\"Story 129.1 AC6: 84 existing-GREEN process integration scenarios.\n\nUser AC6 explicitly requires real checks of an existing gate, overriding the\nATDD template's RED/skip default for this portion. No FR198/FR201 product\nacceptance is claimed. Cross-story dependencies are fixture setup and need a\nseparate audit; check_phase24_gate.py does not enforce those edges.\nUses explicit requirements so Python -O cannot erase acceptance checks.\n\"\"\"\n\nimport hashlib\nfrom pathlib import Path\nimport re\nimport subprocess\nimport sys\nimport tempfile\n\nROOT = Path(__file__).resolve().parents[2]\nSPRINT = ROOT / \"_agile-output/implementation-artifacts/sprint-status.yaml\"\nGATE = ROOT / \"scripts/check_phase24_gate.py\"\nSUCCESS = (\n    \"PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; \"\n    \"FR189/Epic122 deferred\"\n)\n\n\ndef require(condition, message):\n    if not condition:\n        raise RuntimeError(message)\n\n\ndef replace_state(text, prefix, state):\n    suffix = r\"[^:\\n]*\" if prefix.endswith(\"-\") else \"\"\n    pattern = rf\"^(  {re.escape(prefix)}{suffix}:[ \\t]*)[\\w-]+([ \\t]*(?:#.*)?)$\"\n    result, count = re.subn(pattern, lambda m: m[1] + state + m[2], text, flags=re.M)\n    require(count == 1, f\"Expected exactly one status for {prefix!r}, got {count}\")\n    return result\n\n\ndef main():\n    original = SPRINT.read_bytes()\n    digest = hashlib.sha256(original).hexdigest()\n    text = original.decode(\"utf-8\")\n    count = 0\n    print(f\"Source sprint SHA256: {digest}\")\n    print(\"Scope: existing GREEN process gate; seed=N/A; not FR198/FR201 product acceptance.\")\n    print(\"Cross-story dependencies are fixture setup, not gate coverage.\")\n    try:\n        with tempfile.TemporaryDirectory(prefix=\"bitloom-129-1-atdd-\") as directory:\n            fixture = Path(directory) / \"sprint-status.yaml\"\n\n            def case(name, content, exit_code, reasons=()):\n                nonlocal count\n                fixture.write_text(content, encoding=\"utf-8\")\n                result = subprocess.run(\n                    [sys.executable, str(GATE), str(fixture)],\n                    capture_output=True, text=True, check=False, timeout=30,\n                )\n                # Match the complete CLI contract; unrelated crashes/diagnostics\n                # must not masquerade as an expected negative result.\n                require(result.returncode == exit_code,\n                        f\"{name}: exit={result.returncode}; stdout={result.stdout!r}; stderr={result.stderr!r}\")\n                expected_stdout = SUCCESS + \"\\n\" if exit_code == 0 else \"\"\n                expected_stderr = \"\".join(f\"FAIL: {reason}\\n\" for reason in reasons)\n                require(result.stdout == expected_stdout, f\"{name}: unexpected stdout {result.stdout!r}\")\n                require(result.stderr == expected_stderr, f\"{name}: unexpected stderr {result.stderr!r}\")\n                count += 1\n                print(f\"PASS [P0] [{count:03d}] {name}: exit={result.returncode}\")\n                for line in (result.stdout + result.stderr).splitlines():\n                    print(f\"  {line}\")\n\n            case(\"current sprint\", text, 0)\n            base = replace_state(text, \"epic-129\", \"in-progress\")\n            for story in range(1, 4):\n                base = replace_state(base, f\"129-{story}-\", \"backlog\")\n            # Literal story-contract states, not imported production constants.\n            for gate_state in (\n                \"backlog\", \"ready\", \"ready-for-dev\", \"in-progress\", \"review\",\n                \"blocked\", \"deferred\",\n            ):\n                for story in (2, 3):\n                    for active_state in (\"ready\", \"ready-for-dev\", \"in-progress\", \"review\", \"done\"):\n                        candidate = replace_state(base, \"129-1-\", gate_state)\n                        candidate = replace_state(candidate, f\"129-{story}-\", active_state)\n                        case(\n                            f\"129.1 {gate_state}, 129.{story} {active_state}\", candidate, 1,\n                            (f\"129.{story} requires 129.1 NFR14 done\",),\n                        )\n            # Satisfy declared historical prerequisites in fixtures only. The\n            # gate does not prove the 129.2 -> 127.4/128.2/128.4/128.5 edges,\n            # nor the 129.3 -> 129.2 dependency; those need independent audit.\n            future = base\n            for epic, total in ((125, 3), (126, 4), (127, 4), (128, 5)):\n                future = replace_state(future, f\"epic-{epic}\", \"done\")\n                for previous in range(1, total + 1):\n                    future = replace_state(future, f\"{epic}-{previous}-\", \"done\")\n            future = replace_state(future, \"129-1-\", \"done\")\n            for story in (2, 3):\n                for active_state in (\"ready\", \"ready-for-dev\", \"in-progress\", \"review\", \"done\"):\n                    candidate = future\n                    if story == 3:\n                        candidate = replace_state(candidate, \"129-2-\", \"done\")\n                    candidate = replace_state(candidate, f\"129-{story}-\", active_state)\n                    case(f\"legal future 129.{story} {active_state} with predecessors done\", candidate, 0)\n            # Isolate M0: no unrelated later active state may add diagnostics.\n            candidate = replace_state(base, \"epic-125\", \"in-progress\")\n            for epic, total in ((126, 4), (127, 4), (128, 5), (129, 3), (130, 3)):\n                candidate = replace_state(candidate, f\"epic-{epic}\", \"backlog\")\n                for story in range(1, total + 1):\n                    candidate = replace_state(candidate, f\"{epic}-{story}-\", \"backlog\")\n            candidate = replace_state(candidate, \"epic-129\", \"in-progress\")\n            candidate = replace_state(candidate, \"129-1-\", \"ready-for-dev\")\n            case(\"M0 not closed\", candidate, 1, (\n                \"Epic 129 cannot advance before M0 closes\",\n                \"129.1 cannot advance before M0 closes\",\n            ))\n            candidate = replace_state(future, \"epic-129\", \"done\")\n            case(\"Epic129 premature close\", candidate, 1, (\n                \"Epic 129 done requires its stories done\",\n            ))\n            for story in (2, 3):\n                candidate = replace_state(candidate, f\"129-{story}-\", \"done\")\n            case(\"legal future Epic129 close with all stories done\", candidate, 0)\n            require(count == 84, f\"Expected 84 scenarios, got {count}\")\n    finally:\n        after = SPRINT.read_bytes()\n        require(after == original, \"Original sprint bytes changed during test\")\n        require(hashlib.sha256(after).hexdigest() == digest, \"Original sprint hash changed\")\n        print(f\"PASS original sprint byte/hash preservation: {digest}\")\n    print(f\"RESULT: {count} scenarios passed; existing GREEN gate behavior verified.\")\n\n\nif __name__ == \"__main__\":\n    main()\n",
+      "description": "84 P0 subprocess integration scenarios for existing Phase24 gate; active GREEN per explicit user AC6, not fabricated RED.",
+      "expected_to_fail": false,
+      "acceptance_criteria_covered": [
+        "AC6: current legal sprint succeeds",
+        "AC6: all seven non-done 129.1 states × 129.2/129.3 × five active states reject with exact diagnosis",
+        "AC6: isolated unclosed M0 and premature Epic129 close reject",
+        "AC6: ten legal future active states and complete Epic129 closure succeed",
+        "AC6: original sprint bytes and SHA256 unchanged; cross-story dependency scope stated"
+      ],
+      "priority_coverage": {
+        "P0": 84,
+        "P1": 0,
+        "P2": 0,
+        "P3": 0
+      }
+    }
+  ],
+  "fixture_needs": [],
+  "test_count": 84,
+  "test_file_count": 1,
+  "priority_coverage": {
+    "P0": 84,
+    "P1": 0,
+    "P2": 0,
+    "P3": 0
+  },
+  "tdd_phase": "EXISTING_GREEN_REQUIRED_BY_AC6",
+  "tests_executed": false,
+  "repository_files_written": false,
+  "knowledge_fragments_used": [
+    "test-quality",
+    "test-levels-framework",
+    "test-priorities-matrix",
+    "data-factories",
+    "evidence-integrity"
+  ],
+  "knowledge_context": "Parent supplied 13-fragment verified cached context; worker read hash record and story/checklist, not claiming fresh full fragment reads.",
+  "provider_scrutiny": "not-applicable",
+  "provider_scrutiny_reason": "Rust/Cargo/Python process interface; no HTTP consumer/provider endpoint, installed Pact package or browser runner relevance. Production CLI source read for subprocess contract only.",
+  "pact_mcp_reachable": false,
+  "pact_fallback_source": "none",
+  "pact_probe_repeated": false,
+  "template_override": "Explicit user AC6/parent strategy requires actual existing GREEN gate checks; no mechanical skip or fabricated product RED. Document-existence RED belongs to other worker.",
+  "optimization_safety": "All acceptance checks use explicit require raising RuntimeError; -O cannot erase them.",
+  "scope_limits": [
+    "No FR198/FR201 functional acceptance",
+    "Cross-story dependencies only supplied as fixtures; separate manual audit required",
+    "No test execution, NFR14 body or repository writes; root step04 aggregation owns file creation"
+  ],
+  "summary": "Generated one Python process integration file containing 84 deterministic P0 cases (seed=N/A), no JS or Pact scaffolds; not executed."
+}

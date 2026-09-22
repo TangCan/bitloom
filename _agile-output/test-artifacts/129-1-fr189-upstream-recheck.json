@@ -1,0 +1,22 @@
+{
+  "utc": "2026-09-22T00:43:29.516484+00:00",
+  "source": "official GitHub REST API; web open failed, direct urllib succeeded",
+  "pages": [
+    {
+      "url": "https://api.github.com/repos/llvm/circt/releases?per_page=100&page=1",
+      "count": 100
+    },
+    {
+      "url": "https://api.github.com/repos/llvm/circt/releases?per_page=100&page=2",
+      "count": 100
+    },
+    {
+      "url": "https://api.github.com/repos/llvm/circt/releases?per_page=100&page=3",
+      "count": 23
+    }
+  ],
+  "total": 223,
+  "maximum": "firtool-1.159.0",
+  "strictly_newer": [],
+  "deferred_remains": true
+}

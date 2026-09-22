@@ -1,0 +1,191 @@
+{
+  "scope": "适配边界三后端双子状态；typed Chisel未执行，不证明隐式连接行为",
+  "results": [
+    {
+      "backend": "direct",
+      "vcd": "/tmp/129-1-reset-review-r6/adapted/direct-run/trace.vcd",
+      "sha256": "7d4471bca8ba70b28420858e406406b1918f346612e669f3705a671570039752",
+      "checked_samples": [
+        {
+          "time": 6,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 10,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 0,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 12,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 1,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 14,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 0,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 16,
+          "values": {
+            "out0": 25,
+            "out1": 99,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        }
+      ]
+    },
+    {
+      "backend": "firrtl",
+      "vcd": "/tmp/129-1-reset-review-r6/adapted/firrtl-run/trace.vcd",
+      "sha256": "ea58134ae4195deac4bee8fd328ae951a6c7dc407a6660389231845a24407b99",
+      "checked_samples": [
+        {
+          "time": 6,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 10,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 0,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 12,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 1,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 14,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 0,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 16,
+          "values": {
+            "out0": 25,
+            "out1": 99,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        }
+      ]
+    },
+    {
+      "backend": "chisel",
+      "vcd": "/tmp/129-1-reset-review-r6/adapted/chisel/trace.vcd",
+      "sha256": "fb2398a29c2fc6feb384c7f0d8067be467f6c7dd981ba7dae0cae978f058b062",
+      "checked_samples": [
+        {
+          "time": 6,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 10,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 0,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 12,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 1,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 14,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 0,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 16,
+          "values": {
+            "out0": 25,
+            "out1": 99,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        }
+      ]
+    }
+  ]
+}

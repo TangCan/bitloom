@@ -1,0 +1,303 @@
+{
+  "success": true,
+  "subagent": "api-tests",
+  "tests": [
+    {
+      "file": "_agile-output/test-artifacts/129-1-automate-runner-check.py",
+      "content": "#!/usr/bin/env python3\n\"\"\"P1 runner subprocess failure contracts, never a product/backend PASS.\n\nRun unchanged runner copies in isolated roots with actual failing executables.\nOnly timeout budgets are capped by the harness; Popen, wait, communicate and\nkillpg still operate on real OS processes. No clean/build/test is executed.\n\"\"\"\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport signal\nimport subprocess\nimport sys\nimport tarfile\nimport tempfile\nimport time\n\nOUT = Path(__file__).resolve().parent\nRUNNERS = ['129-1-final-regression.py', '129-1-root-foundation.py']\nHARNESS = '''import runpy, subprocess, sys\noriginal = subprocess.Popen\nclass BoundedPopen(original):\n    def wait(self, timeout=None):\n        return super().wait(timeout=min(timeout, 1.0) if timeout is not None else None)\n    def communicate(self, input=None, timeout=None):\n        return super().communicate(input=input, timeout=min(timeout, 1.0) if timeout is not None else None)\nsubprocess.Popen = BoundedPopen\nsys.argv = sys.argv[1:]\nrunpy.run_path(sys.argv[0], run_name='__main__')\n'''\nFAIL = \"import sys\\nprint('runner-real-stdout', flush=True)\\nprint('runner-real-stderr', file=sys.stderr, flush=True)\\nsys.exit(23)\\n\"\nTIMEOUT = '''import os, pathlib, subprocess, sys, time\nchild = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(90)'])\npathlib.Path(os.environ['PID_RECORD']).write_text(str(os.getpid())+' '+str(child.pid))\nprint('runner-real-stdout', flush=True)\nprint('runner-real-stderr', file=sys.stderr, flush=True)\ntime.sleep(90)\n'''\n\n\ndef require(value, message):\n    if not value:\n        raise AssertionError(message)\n\n\ndef live(pid):\n    stat = Path(f'/proc/{pid}/stat')\n    return stat.exists() and stat.read_text().split(') ', 1)[1].split()[0] != 'Z'\n\n\ndef check(runner, mode):\n    with tempfile.TemporaryDirectory(prefix='bitloom-runner-contract-') as temporary:\n        root = Path(temporary)\n        out = root / '_agile-output/test-artifacts'\n        out.mkdir(parents=True)\n        for name in [runner, '128-5-build-runner.py']:\n            (out / name).write_bytes((OUT / name).read_bytes())\n        binaries = root / 'bin'\n        binaries.mkdir()\n        executable = binaries / ('cargo' if 'regression' in runner else 'rustc')\n        if mode != 'missing':\n            executable.write_text(f'#!{sys.executable}\\n' + (TIMEOUT if mode == 'timeout' else FAIL))\n            executable.chmod(0o755)\n        env = dict(os.environ, PATH=str(binaries), PYTHONDONTWRITEBYTECODE='1',\n                   BITLOOM_FOUNDATION_OUTPUT=str(root / 'foundation-attempt'),\n                   BITLOOM_BFM_PYTHON=sys.executable, RHDL_FIRTOOL_PATH=str(binaries),\n                   PID_RECORD=str(root / 'pids'))\n        command = [sys.executable, '-B', '-c', HARNESS, str(out / runner)]\n        if 'regression' in runner:\n            command += ['--attempt', 'automate-boundary']\n        started = time.monotonic()\n        try:\n            result = subprocess.run(command, env=env, capture_output=True, timeout=15)\n            require(result.returncode != 0, 'failed command must propagate nonzero exit')\n            reports = list(out.glob('*regression.json')) if 'regression' in runner else list(out.glob('*-results.json'))\n            require(len(reports) == 1, 'exactly one failure report must survive')\n            report = json.loads(reports[0].read_text())\n            require(report['status'] == 'failed', 'report must reject pass')\n            require(len(report['commands']) == 1, 'runner must stop after first failing command')\n            record = report['commands'][0]\n            require(report['source_start'] == report['source_end'], 'isolated runner must remain unchanged')\n            if mode == 'missing':\n                require('FileNotFoundError' in (report.get('error', '') + result.stderr.decode()), 'missing executable must be explicit')\n            else:\n                require(record['exit_code'] == (-signal.SIGKILL if mode == 'timeout' else 23), 'preserve actual exit code')\n                logs = ''.join(p.read_text() for p in out.glob('*.log')) if 'regression' in runner else ''.join(p.read_text() for p in (root / 'foundation-attempt').glob('*.std*'))\n                require('runner-real-stdout' in logs and 'runner-real-stderr' in logs, 'stdout/stderr failure evidence missing')\n            if mode == 'timeout':\n                require(record.get('timed_out') is True, 'timeout flag missing')\n                pids = [int(p) for p in (root / 'pids').read_text().split()]\n                # A reparented child can briefly be runnable before SIGKILL delivery.\n                deadline = time.monotonic() + 2\n                while any(live(pid) for pid in pids) and time.monotonic() < deadline:\n                    time.sleep(0.01)\n                require(not any(live(pid) for pid in pids), 'timeout left a live descendant')\n            if 'foundation' in runner:\n                archive = out / Path(report['archive']['path']).name\n                require(hashlib.sha256(archive.read_bytes()).hexdigest() == report['archive']['sha256'], 'failure archive hash mismatch')\n                with tarfile.open(archive) as saved:\n                    archived = json.load(saved.extractfile('run/results.json'))\n                    require(archived['status'] == 'failed', 'archive omitted failed status')\n                    require(archived['commands'] == report['commands'], 'archive lost command evidence')\n            else:\n                before = {p.name: p.read_bytes() for p in out.iterdir() if p.is_file()}\n                retry = subprocess.run(command, env=env, capture_output=True, timeout=15)\n                require(retry.returncode != 0 and b'refusing to overwrite' in retry.stderr, 'same attempt must be rejected')\n                require(before == {p.name: p.read_bytes() for p in out.iterdir() if p.is_file()}, 'retry changed original failure evidence')\n            return {'runner': runner, 'scenario': mode, 'priority': 'P1', 'status': 'pass',\n                    'seconds': round(time.monotonic() - started, 3), 'actual_runner_exit': result.returncode,\n                    'retained_report': report, 'stderr': result.stderr.decode()}\n        finally:\n            if (root / 'pids').exists():\n                for pid in map(int, (root / 'pids').read_text().split()):\n                    if live(pid):\n                        os.kill(pid, signal.SIGKILL)\n\n\ndef main():\n    results = [check(runner, mode) for runner in RUNNERS for mode in ['nonzero', 'missing', 'timeout']]\n    print(json.dumps({'status': 'pass', 'scope': 'runner failure boundaries only; no product acceptance',\n                      'runner_sha256': {name: hashlib.sha256((OUT / name).read_bytes()).hexdigest() for name in RUNNERS},\n                      'test_count': len(results), 'results': results}, indent=2))\n\n\nif __name__ == '__main__':\n    main()\n",
+      "description": "Real subprocess runner failure contract checks: nonzero, missing executable, process-group timeout; regression attempt immutability and foundation failure archives. Not product acceptance.",
+      "priority_coverage": {
+        "P0": 0,
+        "P1": 6,
+        "P2": 0,
+        "P3": 0
+      }
+    }
+  ],
+  "fixture_needs": [],
+  "knowledge_fragments_used": [
+    "Parent Step 2: independent oracle, lowest effective layer, failure honesty; no HTTP/JS/Pact surface"
+  ],
+  "playwright_utils_deviations": [],
+  "pactjs_utils_deviations": [],
+  "provider_scrutiny": "not_applicable",
+  "provider_files_read": [
+    "_agile-output/test-artifacts/129-1-final-regression.py",
+    "_agile-output/test-artifacts/129-1-root-foundation.py",
+    "_agile-output/test-artifacts/128-5-build-runner.py"
+  ],
+  "pact_mcp_reachable": false,
+  "pact_fallback_source": "none",
+  "test_count": 6,
+  "summary": "Six P1 checks passed with real OS subprocesses in temporary roots. Copied runner source is byte-identical. Harness caps timeout budgets only; commands intentionally fail and are never counted as product PASS. Existing evidence survives failures; final repeated attempt is immutable. No runner defect found. Parent explicitly requested actual execution as part of the authorized automate step; HTTP/Pact generation is inapplicable.",
+  "execution": {
+    "status": "pass",
+    "scope": "runner failure boundaries only; no product acceptance",
+    "runner_sha256": {
+      "129-1-final-regression.py": "c2169d67efcc26be856daf6535f1d32636adae8ec1732ad4cd3565bae4b94333",
+      "129-1-root-foundation.py": "9c38d9a67ff4cc9f30c76008c4ccd836bb7bf29caffd9d4688d6bd7d2d637cd8"
+    },
+    "test_count": 6,
+    "results": [
+      {
+        "runner": "129-1-final-regression.py",
+        "scenario": "nonzero",
+        "priority": "P1",
+        "status": "pass",
+        "seconds": 0.447,
+        "actual_runner_exit": 1,
+        "retained_report": {
+          "source_start": {
+            "_agile-output/test-artifacts/128-5-build-runner.py": "f8e60e3c2b888eab002e01da9bb9ad8e4d30e089d5ef9a2f47a0a9438a51343a",
+            "_agile-output/test-artifacts/129-1-final-regression.py": "c2169d67efcc26be856daf6535f1d32636adae8ec1732ad4cd3565bae4b94333"
+          },
+          "archives_start": {},
+          "commands": [
+            {
+              "label": "clean",
+              "command": [
+                "cargo",
+                "clean"
+              ],
+              "start_utc": "2026-09-22T01:14:53.861239+00:00",
+              "status": "fail",
+              "exit_code": 23,
+              "end_utc": "2026-09-22T01:14:53.893879+00:00",
+              "seconds": 0.032422979013063014
+            }
+          ],
+          "status": "failed",
+          "environment": {
+            "PATH": "/tmp/bitloom-runner-contract-t1w9gqvk/bin",
+            "RHDL_FIRTOOL_PATH": "/tmp/bitloom-runner-contract-t1w9gqvk/bin",
+            "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+            "BITLOOM_REQUIRE_RTL": "1"
+          },
+          "error": "RuntimeError('clean exit 23')",
+          "source_end": {
+            "_agile-output/test-artifacts/128-5-build-runner.py": "f8e60e3c2b888eab002e01da9bb9ad8e4d30e089d5ef9a2f47a0a9438a51343a",
+            "_agile-output/test-artifacts/129-1-final-regression.py": "c2169d67efcc26be856daf6535f1d32636adae8ec1732ad4cd3565bae4b94333"
+          },
+          "archives_end": {}
+        },
+        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 10, in <module>\n  File \"<frozen runpy>\", line 286, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/tmp/bitloom-runner-contract-t1w9gqvk/_agile-output/test-artifacts/129-1-final-regression.py\", line 42, in <module>\n    helper.require(code==0,f'{label} exit {code}')\n  File \"/tmp/bitloom-runner-contract-t1w9gqvk/_agile-output/test-artifacts/128-5-build-runner.py\", line 39, in require\n    raise RuntimeError(message)\nRuntimeError: clean exit 23\n"
+      },
+      {
+        "runner": "129-1-final-regression.py",
+        "scenario": "missing",
+        "priority": "P1",
+        "status": "pass",
+        "seconds": 0.196,
+        "actual_runner_exit": 1,
+        "retained_report": {
+          "source_start": {
+            "_agile-output/test-artifacts/128-5-build-runner.py": "f8e60e3c2b888eab002e01da9bb9ad8e4d30e089d5ef9a2f47a0a9438a51343a",
+            "_agile-output/test-artifacts/129-1-final-regression.py": "c2169d67efcc26be856daf6535f1d32636adae8ec1732ad4cd3565bae4b94333"
+          },
+          "archives_start": {},
+          "commands": [
+            {
+              "label": "clean",
+              "command": [
+                "cargo",
+                "clean"
+              ],
+              "start_utc": "2026-09-22T01:14:54.308472+00:00",
+              "status": "attempted",
+              "end_utc": "2026-09-22T01:14:54.309529+00:00",
+              "seconds": 0.0008322549983859062
+            }
+          ],
+          "status": "failed",
+          "environment": {
+            "PATH": "/tmp/bitloom-runner-contract-w86k1_c6/bin",
+            "RHDL_FIRTOOL_PATH": "/tmp/bitloom-runner-contract-w86k1_c6/bin",
+            "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+            "BITLOOM_REQUIRE_RTL": "1"
+          },
+          "error": "FileNotFoundError(2, 'No such file or directory')",
+          "source_end": {
+            "_agile-output/test-artifacts/128-5-build-runner.py": "f8e60e3c2b888eab002e01da9bb9ad8e4d30e089d5ef9a2f47a0a9438a51343a",
+            "_agile-output/test-artifacts/129-1-final-regression.py": "c2169d67efcc26be856daf6535f1d32636adae8ec1732ad4cd3565bae4b94333"
+          },
+          "archives_end": {}
+        },
+        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 10, in <module>\n  File \"<frozen runpy>\", line 286, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/tmp/bitloom-runner-contract-w86k1_c6/_agile-output/test-artifacts/129-1-final-regression.py\", line 34, in <module>\n    proc=subprocess.Popen(cmd,cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 1026, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"/usr/lib/python3.12/subprocess.py\", line 1955, in _execute_child\n    raise child_exception_type(errno_num, err_msg, err_filename)\nFileNotFoundError: [Errno 2] No such file or directory: 'cargo'\n"
+      },
+      {
+        "runner": "129-1-final-regression.py",
+        "scenario": "timeout",
+        "priority": "P1",
+        "status": "pass",
+        "seconds": 1.21,
+        "actual_runner_exit": 1,
+        "retained_report": {
+          "source_start": {
+            "_agile-output/test-artifacts/128-5-build-runner.py": "f8e60e3c2b888eab002e01da9bb9ad8e4d30e089d5ef9a2f47a0a9438a51343a",
+            "_agile-output/test-artifacts/129-1-final-regression.py": "c2169d67efcc26be856daf6535f1d32636adae8ec1732ad4cd3565bae4b94333"
+          },
+          "archives_start": {},
+          "commands": [
+            {
+              "label": "clean",
+              "command": [
+                "cargo",
+                "clean"
+              ],
+              "start_utc": "2026-09-22T01:14:54.508013+00:00",
+              "status": "fail",
+              "exit_code": -9,
+              "timed_out": true,
+              "end_utc": "2026-09-22T01:14:55.511380+00:00",
+              "seconds": 1.0031697138911113
+            }
+          ],
+          "status": "failed",
+          "environment": {
+            "PATH": "/tmp/bitloom-runner-contract-ny1cpvo9/bin",
+            "RHDL_FIRTOOL_PATH": "/tmp/bitloom-runner-contract-ny1cpvo9/bin",
+            "CARGO_PROFILE_TEST_OPT_LEVEL": "1",
+            "BITLOOM_REQUIRE_RTL": "1"
+          },
+          "error": "TimeoutExpired(['cargo', 'clean'], 1.0)",
+          "source_end": {
+            "_agile-output/test-artifacts/128-5-build-runner.py": "f8e60e3c2b888eab002e01da9bb9ad8e4d30e089d5ef9a2f47a0a9438a51343a",
+            "_agile-output/test-artifacts/129-1-final-regression.py": "c2169d67efcc26be856daf6535f1d32636adae8ec1732ad4cd3565bae4b94333"
+          },
+          "archives_end": {}
+        },
+        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 10, in <module>\n  File \"<frozen runpy>\", line 286, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/tmp/bitloom-runner-contract-ny1cpvo9/_agile-output/test-artifacts/129-1-final-regression.py\", line 36, in <module>\n    code=proc.wait(timeout=timeout)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 5, in wait\n  File \"/usr/lib/python3.12/subprocess.py\", line 1264, in wait\n    return self._wait(timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 2045, in _wait\n    raise TimeoutExpired(self.args, timeout)\nsubprocess.TimeoutExpired: Command '['cargo', 'clean']' timed out after 1.0 seconds\n"
+      },
+      {
+        "runner": "129-1-root-foundation.py",
+        "scenario": "nonzero",
+        "priority": "P1",
+        "status": "pass",
+        "seconds": 0.192,
+        "actual_runner_exit": 1,
+        "retained_report": {
+          "scope": "旧BFM stub/真实桥译码基座；不是FR198/形式prove",
+          "seed": "N/A (确定性)",
+          "run": "/tmp/bitloom-runner-contract-ama44iap/foundation-attempt",
+          "commands": [
+            {
+              "label": "rustc",
+              "command": [
+                "rustc",
+                "--version"
+              ],
+              "cwd": "/tmp/bitloom-runner-contract-ama44iap",
+              "utc": "2026-09-22T01:14:55.723084+00:00",
+              "resolved_executable": "/tmp/bitloom-runner-contract-ama44iap/bin/rustc",
+              "exit_code": 23,
+              "seconds": 0.03332416992634535,
+              "end_utc": "2026-09-22T01:14:55.756122+00:00",
+              "error": "rustc failed 23"
+            }
+          ],
+          "source_start": {
+            "_agile-output/test-artifacts/128-5-build-runner.py": "f8e60e3c2b888eab002e01da9bb9ad8e4d30e089d5ef9a2f47a0a9438a51343a",
+            "_agile-output/test-artifacts/129-1-root-foundation.py": "9c38d9a67ff4cc9f30c76008c4ccd836bb7bf29caffd9d4688d6bd7d2d637cd8"
+          },
+          "status": "failed",
+          "source_end": {
+            "_agile-output/test-artifacts/128-5-build-runner.py": "f8e60e3c2b888eab002e01da9bb9ad8e4d30e089d5ef9a2f47a0a9438a51343a",
+            "_agile-output/test-artifacts/129-1-root-foundation.py": "9c38d9a67ff4cc9f30c76008c4ccd836bb7bf29caffd9d4688d6bd7d2d637cd8"
+          },
+          "artifact_scope": "shared target directories may include pre-existing artifacts; only current command logs and exact test result establish this run outcome",
+          "archive": {
+            "path": "_agile-output/test-artifacts/129-1-root-foundation-foundation-attempt.tar.gz",
+            "sha256": "f24b7621205b728552bc98c5e7e30b6f9a19bbd4a52204d7a74be19c5e4ca060"
+          }
+        },
+        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 10, in <module>\n  File \"<frozen runpy>\", line 286, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/tmp/bitloom-runner-contract-ama44iap/_agile-output/test-artifacts/129-1-root-foundation.py\", line 39, in <module>\n    for label,cmd in commands: run(label,cmd)\n                               ^^^^^^^^^^^^^^\n  File \"/tmp/bitloom-runner-contract-ama44iap/_agile-output/test-artifacts/129-1-root-foundation.py\", line 33, in run\n    helper.require(p.returncode==0,f'{label} failed {p.returncode}')\n  File \"/tmp/bitloom-runner-contract-ama44iap/_agile-output/test-artifacts/128-5-build-runner.py\", line 39, in require\n    raise RuntimeError(message)\nRuntimeError: rustc failed 23\n"
+      },
+      {
+        "runner": "129-1-root-foundation.py",
+        "scenario": "missing",
+        "priority": "P1",
+        "status": "pass",
+        "seconds": 0.142,
+        "actual_runner_exit": 1,
+        "retained_report": {
+          "scope": "旧BFM stub/真实桥译码基座；不是FR198/形式prove",
+          "seed": "N/A (确定性)",
+          "run": "/tmp/bitloom-runner-contract-r8bwce4k/foundation-attempt",
+          "commands": [
+            {
+              "label": "rustc",
+              "command": [
+                "rustc",
+                "--version"
+              ],
+              "cwd": "/tmp/bitloom-runner-contract-r8bwce4k",
+              "utc": "2026-09-22T01:14:55.914227+00:00",
+              "resolved_executable": null,
+              "error": "[Errno 2] No such file or directory: 'rustc'",
+              "seconds": 0.0007934920722618699
+            }
+          ],
+          "source_start": {
+            "_agile-output/test-artifacts/128-5-build-runner.py": "f8e60e3c2b888eab002e01da9bb9ad8e4d30e089d5ef9a2f47a0a9438a51343a",
+            "_agile-output/test-artifacts/129-1-root-foundation.py": "9c38d9a67ff4cc9f30c76008c4ccd836bb7bf29caffd9d4688d6bd7d2d637cd8"
+          },
+          "status": "failed",
+          "source_end": {
+            "_agile-output/test-artifacts/128-5-build-runner.py": "f8e60e3c2b888eab002e01da9bb9ad8e4d30e089d5ef9a2f47a0a9438a51343a",
+            "_agile-output/test-artifacts/129-1-root-foundation.py": "9c38d9a67ff4cc9f30c76008c4ccd836bb7bf29caffd9d4688d6bd7d2d637cd8"
+          },
+          "artifact_scope": "shared target directories may include pre-existing artifacts; only current command logs and exact test result establish this run outcome",
+          "archive": {
+            "path": "_agile-output/test-artifacts/129-1-root-foundation-foundation-attempt.tar.gz",
+            "sha256": "22d9f5e0cc6d9f38721c37b418654ba624c93b87d7d665fef40a6bef7e732bde"
+          }
+        },
+        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 10, in <module>\n  File \"<frozen runpy>\", line 286, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/tmp/bitloom-runner-contract-r8bwce4k/_agile-output/test-artifacts/129-1-root-foundation.py\", line 39, in <module>\n    for label,cmd in commands: run(label,cmd)\n                               ^^^^^^^^^^^^^^\n  File \"/tmp/bitloom-runner-contract-r8bwce4k/_agile-output/test-artifacts/129-1-root-foundation.py\", line 22, in run\n    p=subprocess.Popen(cmd,cwd=cwd,env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 1026, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"/usr/lib/python3.12/subprocess.py\", line 1955, in _execute_child\n    raise child_exception_type(errno_num, err_msg, err_filename)\nFileNotFoundError: [Errno 2] No such file or directory: 'rustc'\n"
+      },
+      {
+        "runner": "129-1-root-foundation.py",
+        "scenario": "timeout",
+        "priority": "P1",
+        "status": "pass",
+        "seconds": 1.172,
+        "actual_runner_exit": 1,
+        "retained_report": {
+          "scope": "旧BFM stub/真实桥译码基座；不是FR198/形式prove",
+          "seed": "N/A (确定性)",
+          "run": "/tmp/bitloom-runner-contract-bx3kcy7z/foundation-attempt",
+          "commands": [
+            {
+              "label": "rustc",
+              "command": [
+                "rustc",
+                "--version"
+              ],
+              "cwd": "/tmp/bitloom-runner-contract-bx3kcy7z",
+              "utc": "2026-09-22T01:14:56.061643+00:00",
+              "resolved_executable": "/tmp/bitloom-runner-contract-bx3kcy7z/bin/rustc",
+              "exit_code": -9,
+              "timed_out": true,
+              "error": "Command '['rustc', '--version']' timed out after 1.0 seconds",
+              "seconds": 1.0052269538864493
+            }
+          ],
+          "source_start": {
+            "_agile-output/test-artifacts/128-5-build-runner.py": "f8e60e3c2b888eab002e01da9bb9ad8e4d30e089d5ef9a2f47a0a9438a51343a",
+            "_agile-output/test-artifacts/129-1-root-foundation.py": "9c38d9a67ff4cc9f30c76008c4ccd836bb7bf29caffd9d4688d6bd7d2d637cd8"
+          },
+          "status": "failed",
+          "source_end": {
+            "_agile-output/test-artifacts/128-5-build-runner.py": "f8e60e3c2b888eab002e01da9bb9ad8e4d30e089d5ef9a2f47a0a9438a51343a",
+            "_agile-output/test-artifacts/129-1-root-foundation.py": "9c38d9a67ff4cc9f30c76008c4ccd836bb7bf29caffd9d4688d6bd7d2d637cd8"
+          },
+          "artifact_scope": "shared target directories may include pre-existing artifacts; only current command logs and exact test result establish this run outcome",
+          "archive": {
+            "path": "_agile-output/test-artifacts/129-1-root-foundation-foundation-attempt.tar.gz",
+            "sha256": "ed61b7264d87a35146096ee3779e1dd75ff1ae95a42ac82be41a8354ca668365"
+          }
+        },
+        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 10, in <module>\n  File \"<frozen runpy>\", line 286, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/tmp/bitloom-runner-contract-bx3kcy7z/_agile-output/test-artifacts/129-1-root-foundation.py\", line 39, in <module>\n    for label,cmd in commands: run(label,cmd)\n                               ^^^^^^^^^^^^^^\n  File \"/tmp/bitloom-runner-contract-bx3kcy7z/_agile-output/test-artifacts/129-1-root-foundation.py\", line 24, in run\n    stdout,stderr=p.communicate(timeout=timeout)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 7, in communicate\n  File \"/usr/lib/python3.12/subprocess.py\", line 1209, in communicate\n    stdout, stderr = self._communicate(input, endtime, timeout)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 2116, in _communicate\n    self._check_timeout(endtime, orig_timeout, stdout, stderr)\n  File \"/usr/lib/python3.12/subprocess.py\", line 1253, in _check_timeout\n    raise TimeoutExpired(\nsubprocess.TimeoutExpired: Command '['rustc', '--version']' timed out after 1.0 seconds\n"
+      }
+    ]
+  }
+}

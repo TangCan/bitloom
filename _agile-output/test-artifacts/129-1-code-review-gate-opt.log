@@ -1,0 +1,174 @@
+Source sprint SHA256: c60111fe97eacc2201d22e4efe197040981d4b0935cfc6060a8422545d517c04
+Scope: existing GREEN process gate; seed=N/A; not FR198/FR201 product acceptance.
+Cross-story dependencies are fixture setup, not gate coverage.
+PASS [P0] [001] current sprint: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [002] 129.1 backlog, 129.2 ready: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [003] 129.1 backlog, 129.2 ready-for-dev: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [004] 129.1 backlog, 129.2 in-progress: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [005] 129.1 backlog, 129.2 review: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [006] 129.1 backlog, 129.2 done: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [007] 129.1 backlog, 129.3 ready: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [008] 129.1 backlog, 129.3 ready-for-dev: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [009] 129.1 backlog, 129.3 in-progress: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [010] 129.1 backlog, 129.3 review: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [011] 129.1 backlog, 129.3 done: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [012] 129.1 ready, 129.2 ready: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [013] 129.1 ready, 129.2 ready-for-dev: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [014] 129.1 ready, 129.2 in-progress: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [015] 129.1 ready, 129.2 review: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [016] 129.1 ready, 129.2 done: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [017] 129.1 ready, 129.3 ready: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [018] 129.1 ready, 129.3 ready-for-dev: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [019] 129.1 ready, 129.3 in-progress: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [020] 129.1 ready, 129.3 review: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [021] 129.1 ready, 129.3 done: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [022] 129.1 ready-for-dev, 129.2 ready: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [023] 129.1 ready-for-dev, 129.2 ready-for-dev: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [024] 129.1 ready-for-dev, 129.2 in-progress: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [025] 129.1 ready-for-dev, 129.2 review: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [026] 129.1 ready-for-dev, 129.2 done: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [027] 129.1 ready-for-dev, 129.3 ready: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [028] 129.1 ready-for-dev, 129.3 ready-for-dev: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [029] 129.1 ready-for-dev, 129.3 in-progress: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [030] 129.1 ready-for-dev, 129.3 review: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [031] 129.1 ready-for-dev, 129.3 done: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [032] 129.1 in-progress, 129.2 ready: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [033] 129.1 in-progress, 129.2 ready-for-dev: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [034] 129.1 in-progress, 129.2 in-progress: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [035] 129.1 in-progress, 129.2 review: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [036] 129.1 in-progress, 129.2 done: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [037] 129.1 in-progress, 129.3 ready: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [038] 129.1 in-progress, 129.3 ready-for-dev: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [039] 129.1 in-progress, 129.3 in-progress: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [040] 129.1 in-progress, 129.3 review: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [041] 129.1 in-progress, 129.3 done: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [042] 129.1 review, 129.2 ready: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [043] 129.1 review, 129.2 ready-for-dev: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [044] 129.1 review, 129.2 in-progress: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [045] 129.1 review, 129.2 review: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [046] 129.1 review, 129.2 done: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [047] 129.1 review, 129.3 ready: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [048] 129.1 review, 129.3 ready-for-dev: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [049] 129.1 review, 129.3 in-progress: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [050] 129.1 review, 129.3 review: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [051] 129.1 review, 129.3 done: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [052] 129.1 blocked, 129.2 ready: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [053] 129.1 blocked, 129.2 ready-for-dev: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [054] 129.1 blocked, 129.2 in-progress: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [055] 129.1 blocked, 129.2 review: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [056] 129.1 blocked, 129.2 done: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [057] 129.1 blocked, 129.3 ready: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [058] 129.1 blocked, 129.3 ready-for-dev: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [059] 129.1 blocked, 129.3 in-progress: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [060] 129.1 blocked, 129.3 review: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [061] 129.1 blocked, 129.3 done: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [062] 129.1 deferred, 129.2 ready: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [063] 129.1 deferred, 129.2 ready-for-dev: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [064] 129.1 deferred, 129.2 in-progress: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [065] 129.1 deferred, 129.2 review: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [066] 129.1 deferred, 129.2 done: exit=1
+  FAIL: 129.2 requires 129.1 NFR14 done
+PASS [P0] [067] 129.1 deferred, 129.3 ready: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [068] 129.1 deferred, 129.3 ready-for-dev: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [069] 129.1 deferred, 129.3 in-progress: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [070] 129.1 deferred, 129.3 review: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [071] 129.1 deferred, 129.3 done: exit=1
+  FAIL: 129.3 requires 129.1 NFR14 done
+PASS [P0] [072] legal future 129.2 ready with predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [073] legal future 129.2 ready-for-dev with predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [074] legal future 129.2 in-progress with predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [075] legal future 129.2 review with predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [076] legal future 129.2 done with predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [077] legal future 129.3 ready with predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [078] legal future 129.3 ready-for-dev with predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [079] legal future 129.3 in-progress with predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [080] legal future 129.3 review with predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [081] legal future 129.3 done with predecessors done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS [P0] [082] M0 not closed: exit=1
+  FAIL: Epic 129 cannot advance before M0 closes
+  FAIL: 129.1 cannot advance before M0 closes
+PASS [P0] [083] Epic129 premature close: exit=1
+  FAIL: Epic 129 done requires its stories done
+PASS [P0] [084] legal future Epic129 close with all stories done: exit=0
+  PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred
+PASS original sprint byte/hash preservation: c60111fe97eacc2201d22e4efe197040981d4b0935cfc6060a8422545d517c04
+RESULT: 84 scenarios passed; existing GREEN gate behavior verified.

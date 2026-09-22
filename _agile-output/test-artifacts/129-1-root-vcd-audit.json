@@ -1,0 +1,191 @@
+{
+  "scope": "适配边界三后端双子状态；typed Chisel未执行，不证明隐式连接行为",
+  "results": [
+    {
+      "backend": "direct",
+      "vcd": "_agile-output/test-artifacts/129-1-reset-raw-r3/adapted/direct-run/trace.vcd",
+      "sha256": "287b8eb0473ed873422b4cde5f6df259f8368bde1fb365e09f464aaa570ac504",
+      "checked_samples": [
+        {
+          "time": 6,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 10,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 0,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 12,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 1,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 14,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 0,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 16,
+          "values": {
+            "out0": 25,
+            "out1": 99,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        }
+      ]
+    },
+    {
+      "backend": "firrtl",
+      "vcd": "_agile-output/test-artifacts/129-1-reset-raw-r3/adapted/firrtl-run/trace.vcd",
+      "sha256": "287b8eb0473ed873422b4cde5f6df259f8368bde1fb365e09f464aaa570ac504",
+      "checked_samples": [
+        {
+          "time": 6,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 10,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 0,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 12,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 1,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 14,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 0,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 16,
+          "values": {
+            "out0": 25,
+            "out1": 99,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        }
+      ]
+    },
+    {
+      "backend": "chisel",
+      "vcd": "_agile-output/test-artifacts/129-1-reset-raw-r3/adapted/chisel/trace.vcd",
+      "sha256": "19b1e9fc87f08b167ba31a87a93bfe3efddfe7c3e20f1d7b25fc4011a09d0155",
+      "checked_samples": [
+        {
+          "time": 6,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 10,
+          "values": {
+            "out0": 53,
+            "out1": 167,
+            "clk": 0,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 12,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 1,
+            "aresetn": 0,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 14,
+          "values": {
+            "out0": 0,
+            "out1": 0,
+            "clk": 0,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        },
+        {
+          "time": 16,
+          "values": {
+            "out0": 25,
+            "out1": 99,
+            "clk": 1,
+            "aresetn": 1,
+            "enable": 1,
+            "implicit_reset": 0
+          }
+        }
+      ]
+    }
+  ]
+}

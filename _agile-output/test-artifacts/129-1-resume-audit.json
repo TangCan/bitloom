@@ -1,0 +1,15 @@
+{
+  "utc": "2026-09-22T00:42:39.468208+00:00",
+  "head": "0ab222203916b1b0583c2c673558d5333cb05552",
+  "archive_verified": "_agile-output/test-artifacts/129-1-root-foundation-20260921T145519754208Z.tar.gz",
+  "members_verified": 341,
+  "stories": {
+    "done": 447,
+    "deferred": 2,
+    "in-progress": 1,
+    "backlog": 5
+  },
+  "129.1": "in-progress",
+  "remaining_reset_issue": "adapted Chisel synthesis runner included tb.sv; implementation agent resumed to correct design source list; raw-r2 failures retained",
+  "prior_goal_turn": "no progress (clarified ambiguous s); current resume revalidated authoritative files and archive"
+}

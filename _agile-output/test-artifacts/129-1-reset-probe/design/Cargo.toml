@@ -1,0 +1,7 @@
+[package]
+name = "reset-probe-design"
+version = "0.0.0"
+edition = "2024"
+[dependencies]
+bitloom-prelude = { path = "../../../../crates/bitloom-prelude" }
+[workspace]
