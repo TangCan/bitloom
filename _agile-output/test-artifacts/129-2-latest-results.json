@@ -1,0 +1,172 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "-p",
+    "bitloom",
+    "--test",
+    "fr198_peripheral_system",
+    "--",
+    "--nocapture"
+  ],
+  "cargo_exit_code": 0,
+  "recorded_at": "2026-09-22T04:27:49.750265+00:00",
+  "topologies": {
+    "direct": {
+      "assertions": 60406,
+      "commands": {
+        "compile": [
+          "iverilog",
+          "-g2012",
+          "-s",
+          "tb",
+          "-o",
+          "simulation",
+          "design.v",
+          "tb.sv"
+        ],
+        "simulate": [
+          "timeout",
+          "30s",
+          "vvp",
+          "simulation"
+        ],
+        "structure": [
+          "yosys",
+          "-p",
+          "read_verilog -sv design.v; hierarchy -check -top Fr198Direct; proc; check -assert"
+        ]
+      },
+      "elapsed_ms": 1500,
+      "exit_codes": {
+        "compile": 0,
+        "simulate": 0,
+        "structure": 0
+      },
+      "random_seeds": [
+        "10203040",
+        "89abcdef",
+        "13579bdf",
+        "2468ace1",
+        "deadbeef",
+        "c001d00d",
+        "31415926",
+        "27182818",
+        "0badf00d",
+        "55aaaa55",
+        "76543210",
+        "fedcba98",
+        "11223344",
+        "a5a55a5a",
+        "7f4a7c15",
+        "6d2b79f5"
+      ],
+      "random_transactions": 16000,
+      "sha256": {
+        "design.v": "07a0c2fde8f2eb3cd2f898ddd468191ba74ae6cc2ae46480b5f16f3284cd266b",
+        "tb.sv": "5ee7605df75c6e3190e86bb86e52313b5d4bbb009e45c2150c13e57c324bb868"
+      },
+      "tools": {
+        "iverilog": {
+          "exit_code": 0,
+          "path": "/tmp/bitloom-maintenance-tools/bin/iverilog",
+          "stderr": "",
+          "stdout": "Icarus Verilog version 12.0 (stable) ()\n\nCopyright (c) 2000-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Preprocessor version 12.0 (stable) ()\n\nCopyright (c) 1999-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Parser/Elaborator version 12.0 (stable) ()\n\nCopyright (c) 1998-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n FLAGS DLL vvp.tgt\nvvp.tgt: Icarus Verilog VVP Code Generator 12.0 (stable) ()\n\nCopyright (c) 2001-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n"
+        },
+        "vvp": {
+          "exit_code": 0,
+          "path": "/tmp/bitloom-maintenance-tools/bin/vvp",
+          "stderr": "Icarus Verilog runtime version 12.0 (stable) ()\n\nCopyright (c) 2001-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n",
+          "stdout": ""
+        },
+        "yosys": {
+          "exit_code": 0,
+          "path": "/usr/bin/yosys",
+          "stderr": "",
+          "stdout": "Yosys 0.33 (git sha1 2584903a060)\n"
+        }
+      },
+      "topology": "direct",
+      "transactions": 16098,
+      "vcd_bytes": 418058
+    },
+    "axi": {
+      "assertions": 62416,
+      "commands": {
+        "compile": [
+          "iverilog",
+          "-g2012",
+          "-s",
+          "tb",
+          "-o",
+          "simulation",
+          "design.v",
+          "tb.sv"
+        ],
+        "simulate": [
+          "timeout",
+          "30s",
+          "vvp",
+          "simulation"
+        ],
+        "structure": [
+          "yosys",
+          "-p",
+          "read_verilog -sv design.v; hierarchy -check -top Fr198Axi; proc; check -assert"
+        ]
+      },
+      "elapsed_ms": 2210,
+      "exit_codes": {
+        "compile": 0,
+        "simulate": 0,
+        "structure": 0
+      },
+      "random_seeds": [
+        "10203040",
+        "89abcdef",
+        "13579bdf",
+        "2468ace1",
+        "deadbeef",
+        "c001d00d",
+        "31415926",
+        "27182818",
+        "0badf00d",
+        "55aaaa55",
+        "76543210",
+        "fedcba98",
+        "11223344",
+        "a5a55a5a",
+        "7f4a7c15",
+        "6d2b79f5"
+      ],
+      "random_transactions": 16000,
+      "sha256": {
+        "design.v": "353c9953f68ef93ab3f2088685b3507c7ee02b34bb0693e6f2e406bf473176f9",
+        "tb.sv": "5eb7608e36ab4c4be33e45c35795f3aad0ab8bdd29b72a592ed7016b125287ce"
+      },
+      "tools": {
+        "iverilog": {
+          "exit_code": 0,
+          "path": "/tmp/bitloom-maintenance-tools/bin/iverilog",
+          "stderr": "",
+          "stdout": "Icarus Verilog version 12.0 (stable) ()\n\nCopyright (c) 2000-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Preprocessor version 12.0 (stable) ()\n\nCopyright (c) 1999-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Parser/Elaborator version 12.0 (stable) ()\n\nCopyright (c) 1998-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n FLAGS DLL vvp.tgt\nvvp.tgt: Icarus Verilog VVP Code Generator 12.0 (stable) ()\n\nCopyright (c) 2001-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n"
+        },
+        "vvp": {
+          "exit_code": 0,
+          "path": "/tmp/bitloom-maintenance-tools/bin/vvp",
+          "stderr": "Icarus Verilog runtime version 12.0 (stable) ()\n\nCopyright (c) 2001-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n",
+          "stdout": ""
+        },
+        "yosys": {
+          "exit_code": 0,
+          "path": "/usr/bin/yosys",
+          "stderr": "",
+          "stdout": "Yosys 0.33 (git sha1 2584903a060)\n"
+        }
+      },
+      "topology": "axi",
+      "transactions": 16102,
+      "vcd_bytes": 437509
+    }
+  }
+}

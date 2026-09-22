@@ -1,0 +1,38 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.60s
+     Running tests/fr198_peripheral_system.rs (target/debug/deps/fr198_peripheral_system-92f4dbe0df9160de)
+
+running 1 test
+
+thread 'fr198_direct_csr_four_leaf_hierarchy_emits_and_runs' (3721605) panicked at crates/bitloom/tests/fr198_peripheral_system.rs:335:9:
+required iverilog executable is missing
+stack backtrace:
+   0: __rustc::rust_begin_unwind
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/std/src/panicking.rs:689:5
+   1: core::panicking::panic_fmt
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/panicking.rs:80:14
+   2: fr198_peripheral_system::emit_compile::{closure#2}
+             at ./tests/fr198_peripheral_system.rs:335:9
+   3: fr198_peripheral_system::emit_compile
+             at ./tests/fr198_peripheral_system.rs:356:21
+   4: fr198_peripheral_system::fr198_direct_csr_four_leaf_hierarchy_emits_and_runs
+             at ./tests/fr198_peripheral_system.rs:507:5
+   5: fr198_peripheral_system::fr198_direct_csr_four_leaf_hierarchy_emits_and_runs::{closure#0}
+             at ./tests/fr198_peripheral_system.rs:499:57
+   6: <fr198_peripheral_system::fr198_direct_csr_four_leaf_hierarchy_emits_and_runs::{closure#0} as core::ops::function::FnOnce<()>>::call_once
+             at /nvme_data1/richard/.rustup/toolchains/1.97.1-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:250:5
+   7: <fn() -> core::result::Result<(), alloc::string::String> as core::ops::function::FnOnce<()>>::call_once
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ops/function.rs:250:5
+note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
+test fr198_direct_csr_four_leaf_hierarchy_emits_and_runs ... FAILED
+
+failures:
+
+failures:
+    fr198_direct_csr_four_leaf_hierarchy_emits_and_runs
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.20s
+
+error: test failed, to rerun pass `-p bitloom --test fr198_peripheral_system`
+
+exit_code=101

@@ -1,0 +1,28 @@
+utc_start=2026-09-22T04:27:37Z
+source_root=/nvme_data2/richard/2026/rhdl
+isolated_checkout=/tmp/bitloom-129-2-replay.42VN7S/checkout
+head=46249478384360590e90be59b4709afef967d4ee
+working_tree_patch_sha256=f00b1f074e0ec30c68865a2a76ba5f69d5c8c0cb668224bb3f295a4d997de198
+cargo_target_dir=/tmp/bitloom-129-2-replay.42VN7S/cargo-target
+rtl_artifact_root=/tmp/bitloom-129-2-replay.42VN7S/rtl
+rustc=rustc 1.97.1 (8bab26f4f 2026-07-14)
+cargo=cargo 1.97.1 (c980f4866 2026-06-30)
+python=Python 3.12.3
+iverilog=Icarus Verilog version 12.0 (stable) ()
+vvp=Icarus Verilog runtime version 12.0 (stable) ()
+yosys=Yosys 0.33 (git sha1 2584903a060)
+source_sha256:
+9ce9d65c01eba6c118bbbe344733c9c834dbb5a15e4b588ed2fd4ea33d57382d  /tmp/bitloom-129-2-replay.42VN7S/checkout/Cargo.toml
+bde020800a0e5a81b3737e12fa89dd57379ff9a3d543c08ef2a8c4c39d33af64  /tmp/bitloom-129-2-replay.42VN7S/checkout/_agile-output/test-artifacts/129-2-automate.py
+fa0f087569c37e598c519f7d7e0e762225dd9bb3b41db6861001925a74c6c291  /tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom-prelude/src/ip/axi_lite_csr.rs
+e09713f626e1a29f85b46e471d975df08757f40923233e5c625150be238f92ff  /tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom-prelude/src/ip/csr_decoder.rs
+ca14c3cc06a06685dacfab333957d1beec6178df68186fdfc7791026f4b4dcbd  /tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom-prelude/src/ip/gpio/csr.rs
+b5d8787dae548a9b65479c2c43b9e8b1e11f4eabcc6d36a2327922957d4d398b  /tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom-prelude/src/ip/irq.rs
+72546bcf70c1b459bde056cdfbfb430c9878aeb4665c962c6db41e6329c63293  /tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom-prelude/src/ip/timer.rs
+2ec5789ebd3d9f0ff62ae127c423c2424013132424128e0fb5581a56a3788b14  /tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom-prelude/src/ip/uart_csr.rs
+42b699e0b100d886d93923d8f018c7e55f92ccd2a52db6a6c20f99fad4b2edc0  /tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom/tests/fr198_peripheral_system.rs
+5eb7608e36ab4c4be33e45c35795f3aad0ab8bdd29b72a592ed7016b125287ce  /tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom/tests/fr198_peripheral_system/axi_tb.sv
+5ee7605df75c6e3190e86bb86e52313b5d4bbb009e45c2150c13e57c324bb868  /tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom/tests/fr198_peripheral_system/direct_tb.sv
+5d959dfcc98b53886ee772ba216c4f9a1b31f093b46b5b263c0d084af54e821d  /tmp/bitloom-129-2-replay.42VN7S/checkout/rust-toolchain.toml
+utc_end=2026-09-22T04:27:49Z
+exit_code=0

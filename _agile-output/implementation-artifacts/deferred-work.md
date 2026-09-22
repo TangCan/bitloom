@@ -716,3 +716,7 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
 ## Deferred from: code review of spec-128-2-timer.md (2026-09-21)
 
 - CR1/CR11：多位UInt Mux的Chisel非零语义为旧HEAD既有缺口，需独立多位实际后端回归与归约转换；当前Timer1位不受影响。
+
+## Deferred from: code review of spec-129-2-peripheral-system.md (2026-09-22)
+
+- FIRRTL/Chisel 四外设系统执行归属：Story 129.2 AC7/当前 build evidence 将系统复核交给 129.3，但 Epic129 NFR14 支持矩阵仍列为 129.2 责任。129.3 必须实际执行并关闭 direct/FIRRTL/Chisel 系统矩阵；不得通过修改冻结规格或把 129.1 最小 reset 探针冒充四外设系统 PASS。

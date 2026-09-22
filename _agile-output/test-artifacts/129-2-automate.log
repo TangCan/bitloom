@@ -1,0 +1,7 @@
+command: PATH=/tmp/bitloom-maintenance-tools/bin:$PATH python3 _agile-output/test-artifacts/129-2-automate.py
+cargo: 3 passed; 0 failed; 0 ignored
+direct: assertions=362 transactions=97 vcd=411156
+axi: assertions=403 transactions=101 vcd=430001
+tools: Icarus/VVP 12.0 from disclosed maintenance PATH; Yosys 0.33 from /usr/bin
+exit_codes: compile=0 simulate=0 structure=0 for both topologies
+AUTOMATE PASS: two VVP behavior gates plus strict Yosys structure gates

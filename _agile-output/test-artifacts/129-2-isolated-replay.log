@@ -1,0 +1,65 @@
+
+running 3 tests
+test fr198_both_topologies_have_shared_real_leaf_definitions ... ok
+FR198 direct PASS artifacts=/tmp/bitloom-129-2-replay.42VN7S/rtl/direct-4022412
+test fr198_direct_csr_four_leaf_hierarchy_emits_and_runs ... ok
+FR198 axi PASS artifacts=/tmp/bitloom-129-2-replay.42VN7S/rtl/axi-4022412
+test fr198_axi_four_leaf_hierarchy_emits_and_runs ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.43s
+
+
+    Updating crates.io index
+     Locking 92 packages to latest compatible versions
+      Adding generic-array v0.14.7 (available: v0.14.9)
+      Adding sha2 v0.10.9 (available: v0.11.0)
+      Adding syn v2.0.119 (available: v3.0.6)
+   Compiling unicode-ident v1.0.26
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling version_check v0.9.5
+   Compiling bitloom-hir v1.1.1 (/tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom-hir)
+   Compiling typenum v1.20.1
+   Compiling serde_core v1.0.229
+   Compiling utf8parse v0.2.2
+   Compiling anstyle-query v1.1.5
+   Compiling anstyle v1.0.14
+   Compiling zmij v1.0.23
+   Compiling colorchoice v1.0.5
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling serde_json v1.0.151
+   Compiling clap_lex v1.1.1
+   Compiling serde v1.0.229
+   Compiling strsim v0.11.1
+   Compiling heck v0.5.0
+   Compiling cfg-if v1.0.5
+   Compiling memchr v2.8.3
+   Compiling cpufeatures v0.2.17
+   Compiling itoa v1.0.18
+   Compiling anstyle-parse v1.0.0
+   Compiling anstream v1.0.0
+   Compiling generic-array v0.14.7
+   Compiling bitloom-builder v1.1.1 (/tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom-builder)
+   Compiling bitloom-vlog v1.1.1 (/tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom-vlog)
+   Compiling bitloom-sim v1.1.6 (/tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom-sim)
+   Compiling bitloom-firrtl v1.1.1 (/tmp/bitloom-129-2-replay.42VN7S/checkout/crates/rhdl-firrtl)
+   Compiling bitloom-viz v1.1.1 (/tmp/bitloom-129-2-replay.42VN7S/checkout/crates/rhdl-viz)
+   Compiling clap_builder v4.6.7
+   Compiling syn v3.0.6
+   Compiling syn v2.0.119
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling serde_derive v1.0.229
+   Compiling clap_derive v4.6.7
+   Compiling bitloom-macro v1.1.1 (/tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom-macro)
+   Compiling clap v4.6.7
+   Compiling bitloom-prelude v1.1.1 (/tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/tmp/bitloom-129-2-replay.42VN7S/checkout/crates/bitloom)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.82s
+     Running tests/fr198_peripheral_system.rs (/tmp/bitloom-129-2-replay.42VN7S/cargo-target/debug/deps/fr198_peripheral_system-49d943ea9e3cd8db)
+
+direct: assertions=60406 transactions=16098 random_transactions=16000 vcd=418058
+axi: assertions=62416 transactions=16102 random_transactions=16000 vcd=437509
+AUTOMATE PASS: two VVP behavior gates plus strict Yosys structure gates
