@@ -131,6 +131,45 @@ jobs:
             target/fr197-uart-formal/
             target/fr197-uart-reruns/
 
+  fr198-fr201-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.97.1"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: sbt
+      - uses: sbt/setup-sbt@v1
+        with:
+          sbt-version: "1.10.11"
+      - name: Install Icarus, Yosys and pinned SymbiYosys closure
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y iverilog
+          bash scripts/ci-install-sby.sh
+          cargo install cargo-semver-checks --locked
+      - name: Required FR198 / FR201 core matrix
+        run: |
+          firtool_bin="$(cargo run -q -p bitloom -- firtool ensure | tail -n1)"
+          export RHDL_FIRTOOL_PATH="$(dirname "$firtool_bin")"
+          export BITLOOM_SBY="$(command -v sby)"
+          just fr198-fr201-core-check
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: fr198-fr201-core-failure
+          path: |
+            target/fr198/
+            target/fr201-core/
+            target/fr201-core-formal/
+            target/fr201-runner/
+            _agile-output/test-artifacts/129-3-latest-results.json
+
   # FR35 / FR50: HLS product-path smoke. Failures are never ignored.
   # Default uses CI stub (wiring + synthesizable .v). Real Bambu 2024.10 via
   # BITLOOM_HLS_USE_REAL=1 + cached AppImage (see scripts/hls-smoke.sh / NFR14).

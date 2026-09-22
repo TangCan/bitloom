@@ -107,3 +107,8 @@ semver-check:
 # Behavioral Scala/JVM -> RTL numeric matrix; missing tools fail.
 chisel-numeric-check:
 	bash scripts/chisel-numeric-check.sh
+
+# FR198 / FR201 core: complete AXI system across direct/FIRRTL/Chisel RTL,
+# direct-CSR second composition, bounded formal, synthesis and SemVer.
+fr198-fr201-core-check:
+	python3 _agile-output/test-artifacts/129-3-build-runner.py

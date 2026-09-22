@@ -196,3 +196,9 @@ Timer32固定接口已实现，完整契约和prelude-only原文例见[Timer32](
 128.1–128.5七步完成，随Story128.5单独提交关闭Epic128/FR197/M3：Timer32、五源IRQ、GPIO32 CSR及双FIFO UART CSR交付。UART最终实际clean/fmt/just test：482个结果块、1870 passed / 0 failed / 47 ignored；7项新专用backend/formal入口另有实际PASS，未把ignored计PASS。当前39命令完整定向证据、独立原始归档与关闭映射见`_agile-output/test-artifacts/128-5-final-verification.md`及`_agile-output/implementation-artifacts/epic-128-closeout.md`。
 
 新增符号逐项登记FR142/minor，旧UART/GPIO/VIP/手写FL保持。只关闭M3，Epic129/FR198与核心FR201、Epic130/FR199–200及整个Phase24仍开放，下一129.1；native/generated层级与有限形式/物理边界保持。用户全部未完故事七步授权继续有效，FR189 deferred/NFR91保留；未改工具钉/包版本、不push/publish。此前各时点记录保留为历史。
+
+## Story129.3 / Epic129 核心关闭（2026-09-22）
+
+Story129.1–129.3 已按单 Story 提交完成；129.3 实际通过 direct/FIRRTL/Chisel 完整 AXI 四外设行为、direct CSR 第二组合、有限 formal/负控制、三路线原始综合、SemVer 和隔离重放。机器证据见 `_agile-output/test-artifacts/129-3-latest-results.json`，限制与实测见 `129-3-build-evidence.md`。FIRRTL 实跑修复了系统组合中未驱动的 `i_raw_events` wire，未改变公开 API。最终 clean/fmt/workspace regression 为 484 个结果块、1878 passed / 0 failed / 49 ignored；专用外部门另跑，ignored 未计 PASS。Story129.3 与 Epic129 关闭，只交付 FR198 和 FR201 核心部分。
+
+Code review 四个独立 reviewer 均超时，按技能规则保留“不完整审查”事实，不声称 clean review；用户确认继续后完成 automate、clean/fmt/workspace regression 与单故事提交。Epic130/FR199–200、FR201 外部试点及整个 Phase24 保持开放，外部行 `not delivered`；native/generated 层级 unsupported、FR189 deferred 和 NFR91 保持，不push/publish。

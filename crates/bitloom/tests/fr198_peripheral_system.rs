@@ -7,6 +7,11 @@ use bitloom_prelude::{
 use sha2::{Digest, Sha256};
 use std::{fs, path::PathBuf, process::Command, time::Instant};
 
+#[path = "fr198_peripheral_system/fr201_backend_matrix.rs"]
+mod fr201_backend_matrix;
+#[path = "fr198_peripheral_system/fr201_core_formal.rs"]
+mod fr201_core_formal;
+
 const RANDOM_SEEDS: [u32; 16] = [
     0x1020_3040,
     0x89ab_cdef,
@@ -142,7 +147,7 @@ fn add_shared_io(s: &mut ElaborateSession, sp: Span) {
     s.add_input("clk", GroundType::Clock, sp);
     s.add_input("rst", GroundType::Reset, sp);
 }
-fn system(axi: bool) -> FrozenHir {
+pub(crate) fn system(axi: bool) -> FrozenHir {
     let mut s = ElaborateSession::new(if axi {
         "Fr198AxiCore"
     } else {
@@ -271,6 +276,7 @@ fn system(axi: bool) -> FrozenHir {
     s.assign_concat("irq_mid_b", "u_tx_event", "irq_mid_a", sp);
     s.assign_concat("irq_mid_c", "uart_error_event", "irq_mid_b", sp);
     s.assign_concat("irq_events", "g_raw_event", "irq_mid_c", sp);
+    s.assign_net("i_raw_events", "irq_events", sp);
     for (kind, lc) in &leaf_conns {
         let module = match kind.as_str() {
             "uart" => "Fr198Uart",
@@ -279,15 +285,7 @@ fn system(axi: bool) -> FrozenHir {
             "irq" => "Fr198Irq",
             _ => unreachable!(),
         };
-        let mut c = lc.clone();
-        if kind == "irq" {
-            for x in &mut c {
-                if x.0 == "raw_events" {
-                    x.1 = "irq_events".into();
-                }
-            }
-        }
-        s.add_instance(kind.clone(), module, c, vec![], sp);
+        s.add_instance(kind.clone(), module, lc.clone(), vec![], sp);
     }
     if let Some(c) = bridge {
         s.add_instance("bridge", "Fr198Bridge", c, vec![], sp);
@@ -464,9 +462,9 @@ fn emit_compile(label: &str, hir: &FrozenHir, tb: &str) {
     .unwrap();
     println!("FR198 {label} PASS artifacts={}", dir.display());
 }
-const AXI_TB: &str = include_str!("fr198_peripheral_system/axi_tb.sv");
+pub(crate) const AXI_TB: &str = include_str!("fr198_peripheral_system/axi_tb.sv");
 const CSR_TB: &str = include_str!("fr198_peripheral_system/direct_tb.sv");
-const AXI_RESET_BOUNDARY: &str = r#"
+pub(crate) const AXI_RESET_BOUNDARY: &str = r#"
 module Fr198Axi(
  input clk,input aresetn,
  input [15:0] axi_s_axi_awaddr,input [2:0] axi_s_axi_awprot,input axi_s_axi_awvalid,output axi_s_axi_awready,
