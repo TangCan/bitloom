@@ -81,3 +81,9 @@ Story127.1–127.4随各自单故事提交完成，FR196静态CSR描述/软件�
 128.1–128.5七步完成，随Story128.5单独提交关闭Epic128/FR197/M3：Timer32、五源IRQ、GPIO32 CSR及双FIFO UART CSR交付。UART最终实际clean/fmt/just test：482个结果块、1870 passed / 0 failed / 47 ignored；7项新专用backend/formal入口另有实际PASS，未把ignored计PASS。当前39命令完整定向证据、独立原始归档与关闭映射见`_agile-output/test-artifacts/128-5-final-verification.md`及`_agile-output/implementation-artifacts/epic-128-closeout.md`。
 
 新增符号逐项登记FR142/minor，旧UART/GPIO/VIP/手写FL保持。只关闭M3，Epic129/FR198与核心FR201、Epic130/FR199–200及整个Phase24仍开放，下一129.1；native/generated层级与有限形式/物理边界保持。用户全部未完故事七步授权继续有效，FR189 deferred/NFR91保留；未改工具钉/包版本、不push/publish。此前各时点记录保留为历史。
+
+## M5 / Epic130 外部试点关闭（2026-09-23）
+
+Story130.1–130.3完成；FR199来源锁/只读禁网重放与FR200真实Bitloom父模块/FIFO独立oracle、上游六组各100000比较交付。130.2独立clean/fmt/justtest：1889 passed / 0 failed / 50 ignored；130.3：1893 passed / 0 failed / 55 ignored，专用真实工具门禁另跑，ignored不计PASS。见`_agile-output/implementation-artifacts/epic-130-closeout.md`与两Story最终验证记录。
+
+外部支持行仅固定32-bit/depth8/fall-through0提升maintained；native/generated层级unsupported。CLI新增入口逐项FR142/minor登记，无产品工具钉/包版本/push/publish。FR189/Epic122继续deferred，NFR91保留；本记录不宣称整个Phase24关闭。全部未完成Story七步授权继续有效。

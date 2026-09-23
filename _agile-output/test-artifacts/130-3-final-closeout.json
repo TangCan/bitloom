@@ -1,0 +1,53 @@
+{
+  "story": "130.3",
+  "status": "verified",
+  "prerequisiteCommit": "4152610f29e8bb242bba789e3ba3f53376eb21fc",
+  "canonicalLockSha256": "49b22842deda1d09bb86baaa5c8c3474f013a52c7d587f624f827705b5141d6e",
+  "workspace": {
+    "resultBlocks": 487,
+    "passed": 1893,
+    "failed": 0,
+    "ignored": 55,
+    "workspaceExitCode": 0
+  },
+  "additionalInheritedUnitTests": {
+    "passed": 11,
+    "failed": 0,
+    "ignored": 1
+  },
+  "canonicalConsumer": {
+    "normal": 11,
+    "optimized": 11,
+    "exitCodes": [
+      0,
+      0
+    ]
+  },
+  "upstream": {
+    "cases": 6,
+    "checksPerCase": 100000,
+    "totalComparisons": 600000,
+    "parallelCaseHarnessReviewed": true,
+    "monolithicTraceEquivalent": false
+  },
+  "independentModelCycles": 104,
+  "productNegativeCasesPerPythonMode": 22,
+  "evidenceNegativeCasesPerPythonMode": 18,
+  "reviewFindingsResolved": 23,
+  "remainingStories": {
+    "122.2": "deferred",
+    "122.3": "deferred"
+  },
+  "push": false,
+  "publish": false,
+  "fr189ReleaseObservation": {
+    "checkedDate": "2026-09-23",
+    "source": "https://api.github.com/repos/llvm/circt/releases",
+    "latestPublishedTag": "firtool-1.159.0",
+    "publishedAt": "2026-09-09T20:45:25Z",
+    "url": "https://github.com/llvm/circt/releases/tag/firtool-1.159.0",
+    "responseSha256": "95a81df470175b8e8156315ba0e4790afab25dd6e1c89ef43059fd5f7aba4316",
+    "required": "published firtool > 1.159.0"
+  },
+  "whitespaceReview": "Source and documentation checked; raw *.log output retained verbatim, including tool-emitted whitespace and ANSI sequences."
+}

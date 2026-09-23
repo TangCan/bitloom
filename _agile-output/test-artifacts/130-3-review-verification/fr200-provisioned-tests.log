@@ -1,0 +1,17 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.06s
+     Running tests/fr200_external_ip_behavior.rs (target/debug/deps/fr200_external_ip_behavior-70e935df20faca6f)
+
+running 2 tests
+test locked_fifo_matches_independent_model_for_reset_and_boundaries ... ok
+test offline_pilot_replay_consumes_only_copied_lock_and_cache ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 7.48s
+
+     Running tests/fr200_external_ip_binding.rs (target/debug/deps/fr200_external_ip_binding-fdc8172287340c1e)
+
+running 2 tests
+test binding_rejects_source_parameter_port_and_reset_drift ... ok
+test binding_matches_locked_fifo_module_and_shape ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 2.33s
+

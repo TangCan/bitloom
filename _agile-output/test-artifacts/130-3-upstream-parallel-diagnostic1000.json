@@ -1,0 +1,743 @@
+{
+  "acceptanceEligible": false,
+  "cases": [
+    {
+      "checks": {
+        "i_tb_1": 1000
+      },
+      "dataWidth": 8,
+      "depth": 1,
+      "fallThrough": 0,
+      "harness": "// Test-only scheduling harness; upstream driver/oracle unchanged.\nmodule bitloom_upstream_case;\n  localparam time TCLK = 10ns;\n  localparam time TA = TCLK * 1/4;\n  localparam time TT = TCLK * 3/4;\n  logic clk, rst_n, done;\n  clk_rst_gen #(.ClkPeriod(TCLK), .RstClkCycles(10)) i_clk_rst_gen (\n    .clk_o(clk), .rst_no(rst_n));\n  fifo_inst_tb #(.FALL_THROUGH(1'b0), .DEPTH(1),\n    .DATA_WIDTH(8), .N_CHECKS(1000), .TA(TA), .TT(TT)) i_tb_1 (\n    .clk_i(clk), .rst_ni(rst_n), .done_o(done));\n  initial begin wait(done); $finish; end\nendmodule\n",
+      "harnessSha256": "37c1e499dc4b25b48e0085969b88e4ff4eeff0e2d2f1cdb7e29a8caab1e3324f",
+      "name": "i_tb_1",
+      "requiredChecks": 1000,
+      "seed": 1303,
+      "simulationExecutableSha256": "a65d3d0c7ce15cc763461aa1a266cee7a6cb210252ee8a61ece0235dea65d50e"
+    },
+    {
+      "checks": {
+        "i_tb_8": 1000
+      },
+      "dataWidth": 8,
+      "depth": 8,
+      "fallThrough": 0,
+      "harness": "// Test-only scheduling harness; upstream driver/oracle unchanged.\nmodule bitloom_upstream_case;\n  localparam time TCLK = 10ns;\n  localparam time TA = TCLK * 1/4;\n  localparam time TT = TCLK * 3/4;\n  logic clk, rst_n, done;\n  clk_rst_gen #(.ClkPeriod(TCLK), .RstClkCycles(10)) i_clk_rst_gen (\n    .clk_o(clk), .rst_no(rst_n));\n  fifo_inst_tb #(.FALL_THROUGH(1'b0), .DEPTH(8),\n    .DATA_WIDTH(8), .N_CHECKS(1000), .TA(TA), .TT(TT)) i_tb_8 (\n    .clk_i(clk), .rst_ni(rst_n), .done_o(done));\n  initial begin wait(done); $finish; end\nendmodule\n",
+      "harnessSha256": "9e7378214e5b35c4f015746aa2d3d7ec59ab474af70ecc6ea34d48c36611ad17",
+      "name": "i_tb_8",
+      "requiredChecks": 1000,
+      "seed": 1303,
+      "simulationExecutableSha256": "df5ed0ff3496c82790bfbc58f58e70399ac726dc3a434481c5cccd10f70749f2"
+    },
+    {
+      "checks": {
+        "i_tb_9": 1000
+      },
+      "dataWidth": 8,
+      "depth": 9,
+      "fallThrough": 0,
+      "harness": "// Test-only scheduling harness; upstream driver/oracle unchanged.\nmodule bitloom_upstream_case;\n  localparam time TCLK = 10ns;\n  localparam time TA = TCLK * 1/4;\n  localparam time TT = TCLK * 3/4;\n  logic clk, rst_n, done;\n  clk_rst_gen #(.ClkPeriod(TCLK), .RstClkCycles(10)) i_clk_rst_gen (\n    .clk_o(clk), .rst_no(rst_n));\n  fifo_inst_tb #(.FALL_THROUGH(1'b0), .DEPTH(9),\n    .DATA_WIDTH(8), .N_CHECKS(1000), .TA(TA), .TT(TT)) i_tb_9 (\n    .clk_i(clk), .rst_ni(rst_n), .done_o(done));\n  initial begin wait(done); $finish; end\nendmodule\n",
+      "harnessSha256": "185be309c8413fe3ab6ddfedb1ffdbf5bea651e2cf79fad33a9d5112e8fb0320",
+      "name": "i_tb_9",
+      "requiredChecks": 1000,
+      "seed": 1303,
+      "simulationExecutableSha256": "42e7d908b566446cd96ac194eeac4f225679721bc61bf83e76082a3a6f2d0870"
+    },
+    {
+      "checks": {
+        "i_tb_ft_1": 1000
+      },
+      "dataWidth": 8,
+      "depth": 1,
+      "fallThrough": 1,
+      "harness": "// Test-only scheduling harness; upstream driver/oracle unchanged.\nmodule bitloom_upstream_case;\n  localparam time TCLK = 10ns;\n  localparam time TA = TCLK * 1/4;\n  localparam time TT = TCLK * 3/4;\n  logic clk, rst_n, done;\n  clk_rst_gen #(.ClkPeriod(TCLK), .RstClkCycles(10)) i_clk_rst_gen (\n    .clk_o(clk), .rst_no(rst_n));\n  fifo_inst_tb #(.FALL_THROUGH(1'b1), .DEPTH(1),\n    .DATA_WIDTH(8), .N_CHECKS(1000), .TA(TA), .TT(TT)) i_tb_ft_1 (\n    .clk_i(clk), .rst_ni(rst_n), .done_o(done));\n  initial begin wait(done); $finish; end\nendmodule\n",
+      "harnessSha256": "25add36e9fec2d4040ac2aebb61109befb38c95ad6811ab59dfb42342cc9b5b7",
+      "name": "i_tb_ft_1",
+      "requiredChecks": 1000,
+      "seed": 1303,
+      "simulationExecutableSha256": "e1188489485a6373d40faf6b50f03ecb6992d03c5df695c8f360c79e8539f51a"
+    },
+    {
+      "checks": {
+        "i_tb_ft_8": 1000
+      },
+      "dataWidth": 8,
+      "depth": 8,
+      "fallThrough": 1,
+      "harness": "// Test-only scheduling harness; upstream driver/oracle unchanged.\nmodule bitloom_upstream_case;\n  localparam time TCLK = 10ns;\n  localparam time TA = TCLK * 1/4;\n  localparam time TT = TCLK * 3/4;\n  logic clk, rst_n, done;\n  clk_rst_gen #(.ClkPeriod(TCLK), .RstClkCycles(10)) i_clk_rst_gen (\n    .clk_o(clk), .rst_no(rst_n));\n  fifo_inst_tb #(.FALL_THROUGH(1'b1), .DEPTH(8),\n    .DATA_WIDTH(8), .N_CHECKS(1000), .TA(TA), .TT(TT)) i_tb_ft_8 (\n    .clk_i(clk), .rst_ni(rst_n), .done_o(done));\n  initial begin wait(done); $finish; end\nendmodule\n",
+      "harnessSha256": "cc0e513d21742cc0e88e85b4a7fa926320830ab7d861d9506975fb8b6a78fe0a",
+      "name": "i_tb_ft_8",
+      "requiredChecks": 1000,
+      "seed": 1303,
+      "simulationExecutableSha256": "f886f558e9284de656ccfe15d89ecdee6ac30ae656c1bdb10ce27c0120821302"
+    },
+    {
+      "checks": {
+        "i_tb_ft_9": 1000
+      },
+      "dataWidth": 8,
+      "depth": 9,
+      "fallThrough": 1,
+      "harness": "// Test-only scheduling harness; upstream driver/oracle unchanged.\nmodule bitloom_upstream_case;\n  localparam time TCLK = 10ns;\n  localparam time TA = TCLK * 1/4;\n  localparam time TT = TCLK * 3/4;\n  logic clk, rst_n, done;\n  clk_rst_gen #(.ClkPeriod(TCLK), .RstClkCycles(10)) i_clk_rst_gen (\n    .clk_o(clk), .rst_no(rst_n));\n  fifo_inst_tb #(.FALL_THROUGH(1'b1), .DEPTH(9),\n    .DATA_WIDTH(8), .N_CHECKS(1000), .TA(TA), .TT(TT)) i_tb_ft_9 (\n    .clk_i(clk), .rst_ni(rst_n), .done_o(done));\n  initial begin wait(done); $finish; end\nendmodule\n",
+      "harnessSha256": "4e34c1793271059efffb56ec338439acf8304cf2dcd2f87735bd6457f4a21cc8",
+      "name": "i_tb_ft_9",
+      "requiredChecks": 1000,
+      "seed": 1303,
+      "simulationExecutableSha256": "51cc7739abd11eaa5ca58a064a3798dba325db734f73240f243a6d5ee57768e7"
+    }
+  ],
+  "checks": {
+    "i_tb_1": 1000,
+    "i_tb_8": 1000,
+    "i_tb_9": 1000,
+    "i_tb_ft_1": 1000,
+    "i_tb_ft_8": 1000,
+    "i_tb_ft_9": 1000
+  },
+  "commands": [
+    {
+      "command": [
+        "/verilator/bin/verilator",
+        "--version"
+      ],
+      "durationSeconds": 0.11457692499971017,
+      "exitCode": 0,
+      "label": "version",
+      "stderr": "",
+      "stdout": "Verilator 5.052 2026-09-05 rev v5.052\n"
+    },
+    {
+      "command": [
+        "/verilator/bin/verilator",
+        "--binary",
+        "--timing",
+        "--assert",
+        "-Wno-fatal",
+        "--top-module",
+        "bitloom_upstream_case",
+        "--Mdir",
+        "/scratch/build/i_tb_8/obj_dir",
+        "-j",
+        "2",
+        "+incdir+/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/include",
+        "/scratch/build/upstream.vlt",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/clk_rst_gen.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/src/fifo_v3.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv",
+        "/scratch/build/i_tb_8/case.sv"
+      ],
+      "durationSeconds": 7.082385027000782,
+      "exitCode": 0,
+      "label": "i_tb_8-compile",
+      "stderr": "%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv:22:7: Logical operator ASSERT expects 1 bit on the Property, but Property's VARREF 'rand_success' generates 32 bits.\n                                                                                                                                                                                                                                                                 : ... note: In instance 'bitloom_upstream_case.i_tb_8'\n   22 |       assert (rand_success) else $error(\"Failed to randomize wait cycles!\");\n      |       ^~~~~~\n                     ... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.052\n                     ... Use \"/* verilator lint_off WIDTHTRUNC */\" and lint_on around source to disable this message.\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:98:26: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's METHODCALL 'randomize' generates 32 bits.\n                                                                                                                                                                                                                                                     : ... note: In instance 'bitloom_upstream_case.i_tb_8'\n   98 |             rand_success = rand_act.randomize(); assert(rand_success);\n      |                          ^\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:101:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_8'\n  101 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:105:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_8'\n  105 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:124:21: Operator ASSIGNDLY expects 1 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_8'\n  124 |             try_pop <= #TA $random();\n      |                     ^~\n",
+      "stdout": "make: Entering directory '/scratch/build/i_tb_8/obj_dir'\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated.o /verilator/include/verilated.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_timing.o /verilator/include/verilated_timing.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_random.o /verilator/include/verilated_random.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_threads.o /verilator/include/verilated_threads.cpp\npython3 /verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vbitloom_upstream_case.cpp Vbitloom_upstream_case___024root__0.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__0.cpp Vbitloom_upstream_case_rand_verif_pkg__0.cpp Vbitloom_upstream_case_std__03a__03asemaphore__Vclpkg__0.cpp Vbitloom_upstream_case_std__03a__03aprocess__Vclpkg__0.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__0.cpp Vbitloom_upstream_case__main.cpp Vbitloom_upstream_case___024root__Slow.cpp Vbitloom_upstream_case___024root__0__Slow.cpp Vbitloom_upstream_case_std__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__0__Slow.cpp Vbitloom_upstream_case_rand_verif_pkg__Slow.cpp Vbitloom_upstream_case_rand_verif_pkg__0__Slow.cpp Vbitloom_upstream_case_std__03a__03asemaphore__Vclpkg__Slow.cpp Vbitloom_upstream_case_std__03a__03aprocess__Vclpkg__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__Slow.cpp Vbitloom_upstream_case__Syms__Slow.cpp > Vbitloom_upstream_case__ALL.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o Vbitloom_upstream_case__ALL.o Vbitloom_upstream_case__ALL.cpp\ng++    verilated.o verilated_timing.o verilated_random.o verilated_threads.o Vbitloom_upstream_case__ALL.a    -pthread -lpthread -latomic   -o Vbitloom_upstream_case\nrm Vbitloom_upstream_case__ALL.verilator_deplist.tmp\nmake: Leaving directory '/scratch/build/i_tb_8/obj_dir'\n- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052\n- Verilator: Built from 0.205 MB sources in 12 modules, into 0.144 MB in 19 C++ files needing 0.001 MB\n- Verilator: Walltime 6.987 s (elab=0.006, cvt=0.021, bld=6.940); cpu 0.053 s on 2 threads; allocated 20.898 MB\n"
+    },
+    {
+      "command": [
+        "/verilator/bin/verilator",
+        "--binary",
+        "--timing",
+        "--assert",
+        "-Wno-fatal",
+        "--top-module",
+        "bitloom_upstream_case",
+        "--Mdir",
+        "/scratch/build/i_tb_1/obj_dir",
+        "-j",
+        "2",
+        "+incdir+/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/include",
+        "/scratch/build/upstream.vlt",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/clk_rst_gen.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/src/fifo_v3.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv",
+        "/scratch/build/i_tb_1/case.sv"
+      ],
+      "durationSeconds": 7.084342693999133,
+      "exitCode": 0,
+      "label": "i_tb_1-compile",
+      "stderr": "%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv:22:7: Logical operator ASSERT expects 1 bit on the Property, but Property's VARREF 'rand_success' generates 32 bits.\n                                                                                                                                                                                                                                                                 : ... note: In instance 'bitloom_upstream_case.i_tb_1'\n   22 |       assert (rand_success) else $error(\"Failed to randomize wait cycles!\");\n      |       ^~~~~~\n                     ... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.052\n                     ... Use \"/* verilator lint_off WIDTHTRUNC */\" and lint_on around source to disable this message.\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:98:26: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's METHODCALL 'randomize' generates 32 bits.\n                                                                                                                                                                                                                                                     : ... note: In instance 'bitloom_upstream_case.i_tb_1'\n   98 |             rand_success = rand_act.randomize(); assert(rand_success);\n      |                          ^\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:101:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_1'\n  101 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:105:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_1'\n  105 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:124:21: Operator ASSIGNDLY expects 1 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_1'\n  124 |             try_pop <= #TA $random();\n      |                     ^~\n",
+      "stdout": "make: Entering directory '/scratch/build/i_tb_1/obj_dir'\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated.o /verilator/include/verilated.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_timing.o /verilator/include/verilated_timing.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_random.o /verilator/include/verilated_random.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_threads.o /verilator/include/verilated_threads.cpp\npython3 /verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vbitloom_upstream_case.cpp Vbitloom_upstream_case___024root__0.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__0.cpp Vbitloom_upstream_case_rand_verif_pkg__0.cpp Vbitloom_upstream_case_std__03a__03asemaphore__Vclpkg__0.cpp Vbitloom_upstream_case_std__03a__03aprocess__Vclpkg__0.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__0.cpp Vbitloom_upstream_case__main.cpp Vbitloom_upstream_case___024root__Slow.cpp Vbitloom_upstream_case___024root__0__Slow.cpp Vbitloom_upstream_case_std__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__0__Slow.cpp Vbitloom_upstream_case_rand_verif_pkg__Slow.cpp Vbitloom_upstream_case_rand_verif_pkg__0__Slow.cpp Vbitloom_upstream_case_std__03a__03asemaphore__Vclpkg__Slow.cpp Vbitloom_upstream_case_std__03a__03aprocess__Vclpkg__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__Slow.cpp Vbitloom_upstream_case__Syms__Slow.cpp > Vbitloom_upstream_case__ALL.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o Vbitloom_upstream_case__ALL.o Vbitloom_upstream_case__ALL.cpp\ng++    verilated.o verilated_timing.o verilated_random.o verilated_threads.o Vbitloom_upstream_case__ALL.a    -pthread -lpthread -latomic   -o Vbitloom_upstream_case\nrm Vbitloom_upstream_case__ALL.verilator_deplist.tmp\nmake: Leaving directory '/scratch/build/i_tb_1/obj_dir'\n- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052\n- Verilator: Built from 0.205 MB sources in 12 modules, into 0.144 MB in 19 C++ files needing 0.001 MB\n- Verilator: Walltime 6.968 s (elab=0.006, cvt=0.020, bld=6.927); cpu 0.048 s on 2 threads; allocated 20.984 MB\n"
+    },
+    {
+      "command": [
+        "/verilator/bin/verilator",
+        "--binary",
+        "--timing",
+        "--assert",
+        "-Wno-fatal",
+        "--top-module",
+        "bitloom_upstream_case",
+        "--Mdir",
+        "/scratch/build/i_tb_ft_9/obj_dir",
+        "-j",
+        "2",
+        "+incdir+/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/include",
+        "/scratch/build/upstream.vlt",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/clk_rst_gen.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/src/fifo_v3.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv",
+        "/scratch/build/i_tb_ft_9/case.sv"
+      ],
+      "durationSeconds": 7.0816148789999716,
+      "exitCode": 0,
+      "label": "i_tb_ft_9-compile",
+      "stderr": "%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv:22:7: Logical operator ASSERT expects 1 bit on the Property, but Property's VARREF 'rand_success' generates 32 bits.\n                                                                                                                                                                                                                                                                 : ... note: In instance 'bitloom_upstream_case.i_tb_ft_9'\n   22 |       assert (rand_success) else $error(\"Failed to randomize wait cycles!\");\n      |       ^~~~~~\n                     ... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.052\n                     ... Use \"/* verilator lint_off WIDTHTRUNC */\" and lint_on around source to disable this message.\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:98:26: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's METHODCALL 'randomize' generates 32 bits.\n                                                                                                                                                                                                                                                     : ... note: In instance 'bitloom_upstream_case.i_tb_ft_9'\n   98 |             rand_success = rand_act.randomize(); assert(rand_success);\n      |                          ^\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:101:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_ft_9'\n  101 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:105:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_ft_9'\n  105 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:124:21: Operator ASSIGNDLY expects 1 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_ft_9'\n  124 |             try_pop <= #TA $random();\n      |                     ^~\n",
+      "stdout": "make: Entering directory '/scratch/build/i_tb_ft_9/obj_dir'\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated.o /verilator/include/verilated.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_timing.o /verilator/include/verilated_timing.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_random.o /verilator/include/verilated_random.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_threads.o /verilator/include/verilated_threads.cpp\npython3 /verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vbitloom_upstream_case.cpp Vbitloom_upstream_case___024root__0.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__0.cpp Vbitloom_upstream_case_rand_verif_pkg__0.cpp Vbitloom_upstream_case_std__03a__03asemaphore__Vclpkg__0.cpp Vbitloom_upstream_case_std__03a__03aprocess__Vclpkg__0.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__0.cpp Vbitloom_upstream_case__main.cpp Vbitloom_upstream_case___024root__Slow.cpp Vbitloom_upstream_case___024root__0__Slow.cpp Vbitloom_upstream_case_std__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__0__Slow.cpp Vbitloom_upstream_case_rand_verif_pkg__Slow.cpp Vbitloom_upstream_case_rand_verif_pkg__0__Slow.cpp Vbitloom_upstream_case_std__03a__03asemaphore__Vclpkg__Slow.cpp Vbitloom_upstream_case_std__03a__03aprocess__Vclpkg__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__Slow.cpp Vbitloom_upstream_case__Syms__Slow.cpp > Vbitloom_upstream_case__ALL.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o Vbitloom_upstream_case__ALL.o Vbitloom_upstream_case__ALL.cpp\ng++    verilated.o verilated_timing.o verilated_random.o verilated_threads.o Vbitloom_upstream_case__ALL.a    -pthread -lpthread -latomic   -o Vbitloom_upstream_case\nrm Vbitloom_upstream_case__ALL.verilator_deplist.tmp\nmake: Leaving directory '/scratch/build/i_tb_ft_9/obj_dir'\n- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052\n- Verilator: Built from 0.205 MB sources in 12 modules, into 0.152 MB in 19 C++ files needing 0.001 MB\n- Verilator: Walltime 6.966 s (elab=0.006, cvt=0.025, bld=6.919); cpu 0.049 s on 2 threads; allocated 21.039 MB\n"
+    },
+    {
+      "command": [
+        "/verilator/bin/verilator",
+        "--binary",
+        "--timing",
+        "--assert",
+        "-Wno-fatal",
+        "--top-module",
+        "bitloom_upstream_case",
+        "--Mdir",
+        "/scratch/build/i_tb_9/obj_dir",
+        "-j",
+        "2",
+        "+incdir+/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/include",
+        "/scratch/build/upstream.vlt",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/clk_rst_gen.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/src/fifo_v3.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv",
+        "/scratch/build/i_tb_9/case.sv"
+      ],
+      "durationSeconds": 7.132190688000264,
+      "exitCode": 0,
+      "label": "i_tb_9-compile",
+      "stderr": "%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv:22:7: Logical operator ASSERT expects 1 bit on the Property, but Property's VARREF 'rand_success' generates 32 bits.\n                                                                                                                                                                                                                                                                 : ... note: In instance 'bitloom_upstream_case.i_tb_9'\n   22 |       assert (rand_success) else $error(\"Failed to randomize wait cycles!\");\n      |       ^~~~~~\n                     ... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.052\n                     ... Use \"/* verilator lint_off WIDTHTRUNC */\" and lint_on around source to disable this message.\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:98:26: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's METHODCALL 'randomize' generates 32 bits.\n                                                                                                                                                                                                                                                     : ... note: In instance 'bitloom_upstream_case.i_tb_9'\n   98 |             rand_success = rand_act.randomize(); assert(rand_success);\n      |                          ^\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:101:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_9'\n  101 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:105:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_9'\n  105 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:124:21: Operator ASSIGNDLY expects 1 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_9'\n  124 |             try_pop <= #TA $random();\n      |                     ^~\n",
+      "stdout": "make: Entering directory '/scratch/build/i_tb_9/obj_dir'\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated.o /verilator/include/verilated.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_timing.o /verilator/include/verilated_timing.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_random.o /verilator/include/verilated_random.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_threads.o /verilator/include/verilated_threads.cpp\npython3 /verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vbitloom_upstream_case.cpp Vbitloom_upstream_case___024root__0.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__0.cpp Vbitloom_upstream_case_rand_verif_pkg__0.cpp Vbitloom_upstream_case_std__03a__03asemaphore__Vclpkg__0.cpp Vbitloom_upstream_case_std__03a__03aprocess__Vclpkg__0.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__0.cpp Vbitloom_upstream_case__main.cpp Vbitloom_upstream_case___024root__Slow.cpp Vbitloom_upstream_case___024root__0__Slow.cpp Vbitloom_upstream_case_std__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__0__Slow.cpp Vbitloom_upstream_case_rand_verif_pkg__Slow.cpp Vbitloom_upstream_case_rand_verif_pkg__0__Slow.cpp Vbitloom_upstream_case_std__03a__03asemaphore__Vclpkg__Slow.cpp Vbitloom_upstream_case_std__03a__03aprocess__Vclpkg__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__Slow.cpp Vbitloom_upstream_case__Syms__Slow.cpp > Vbitloom_upstream_case__ALL.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o Vbitloom_upstream_case__ALL.o Vbitloom_upstream_case__ALL.cpp\ng++    verilated.o verilated_timing.o verilated_random.o verilated_threads.o Vbitloom_upstream_case__ALL.a    -pthread -lpthread -latomic   -o Vbitloom_upstream_case\nrm Vbitloom_upstream_case__ALL.verilator_deplist.tmp\nmake: Leaving directory '/scratch/build/i_tb_9/obj_dir'\n- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052\n- Verilator: Built from 0.205 MB sources in 12 modules, into 0.149 MB in 19 C++ files needing 0.001 MB\n- Verilator: Walltime 7.011 s (elab=0.004, cvt=0.019, bld=6.977); cpu 0.037 s on 2 threads; allocated 20.824 MB\n"
+    },
+    {
+      "command": [
+        "/verilator/bin/verilator",
+        "--binary",
+        "--timing",
+        "--assert",
+        "-Wno-fatal",
+        "--top-module",
+        "bitloom_upstream_case",
+        "--Mdir",
+        "/scratch/build/i_tb_ft_1/obj_dir",
+        "-j",
+        "2",
+        "+incdir+/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/include",
+        "/scratch/build/upstream.vlt",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/clk_rst_gen.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/src/fifo_v3.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv",
+        "/scratch/build/i_tb_ft_1/case.sv"
+      ],
+      "durationSeconds": 7.1310116139993625,
+      "exitCode": 0,
+      "label": "i_tb_ft_1-compile",
+      "stderr": "%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv:22:7: Logical operator ASSERT expects 1 bit on the Property, but Property's VARREF 'rand_success' generates 32 bits.\n                                                                                                                                                                                                                                                                 : ... note: In instance 'bitloom_upstream_case.i_tb_ft_1'\n   22 |       assert (rand_success) else $error(\"Failed to randomize wait cycles!\");\n      |       ^~~~~~\n                     ... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.052\n                     ... Use \"/* verilator lint_off WIDTHTRUNC */\" and lint_on around source to disable this message.\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:98:26: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's METHODCALL 'randomize' generates 32 bits.\n                                                                                                                                                                                                                                                     : ... note: In instance 'bitloom_upstream_case.i_tb_ft_1'\n   98 |             rand_success = rand_act.randomize(); assert(rand_success);\n      |                          ^\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:101:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_ft_1'\n  101 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:105:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_ft_1'\n  105 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:124:21: Operator ASSIGNDLY expects 1 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_ft_1'\n  124 |             try_pop <= #TA $random();\n      |                     ^~\n",
+      "stdout": "make: Entering directory '/scratch/build/i_tb_ft_1/obj_dir'\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated.o /verilator/include/verilated.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_timing.o /verilator/include/verilated_timing.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_random.o /verilator/include/verilated_random.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_threads.o /verilator/include/verilated_threads.cpp\npython3 /verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vbitloom_upstream_case.cpp Vbitloom_upstream_case___024root__0.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__0.cpp Vbitloom_upstream_case_rand_verif_pkg__0.cpp Vbitloom_upstream_case_std__03a__03asemaphore__Vclpkg__0.cpp Vbitloom_upstream_case_std__03a__03aprocess__Vclpkg__0.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__0.cpp Vbitloom_upstream_case__main.cpp Vbitloom_upstream_case___024root__Slow.cpp Vbitloom_upstream_case___024root__0__Slow.cpp Vbitloom_upstream_case_std__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__0__Slow.cpp Vbitloom_upstream_case_rand_verif_pkg__Slow.cpp Vbitloom_upstream_case_rand_verif_pkg__0__Slow.cpp Vbitloom_upstream_case_std__03a__03asemaphore__Vclpkg__Slow.cpp Vbitloom_upstream_case_std__03a__03aprocess__Vclpkg__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__Slow.cpp Vbitloom_upstream_case__Syms__Slow.cpp > Vbitloom_upstream_case__ALL.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o Vbitloom_upstream_case__ALL.o Vbitloom_upstream_case__ALL.cpp\ng++    verilated.o verilated_timing.o verilated_random.o verilated_threads.o Vbitloom_upstream_case__ALL.a    -pthread -lpthread -latomic   -o Vbitloom_upstream_case\nrm Vbitloom_upstream_case__ALL.verilator_deplist.tmp\nmake: Leaving directory '/scratch/build/i_tb_ft_1/obj_dir'\n- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052\n- Verilator: Built from 0.205 MB sources in 12 modules, into 0.146 MB in 19 C++ files needing 0.001 MB\n- Verilator: Walltime 6.998 s (elab=0.006, cvt=0.023, bld=6.952); cpu 0.054 s on 2 threads; allocated 20.762 MB\n"
+    },
+    {
+      "command": [
+        "/verilator/bin/verilator",
+        "--binary",
+        "--timing",
+        "--assert",
+        "-Wno-fatal",
+        "--top-module",
+        "bitloom_upstream_case",
+        "--Mdir",
+        "/scratch/build/i_tb_ft_8/obj_dir",
+        "-j",
+        "2",
+        "+incdir+/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/include",
+        "/scratch/build/upstream.vlt",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/clk_rst_gen.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/src/fifo_v3.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv",
+        "/scratch/build/i_tb_ft_8/case.sv"
+      ],
+      "durationSeconds": 7.182151237000653,
+      "exitCode": 0,
+      "label": "i_tb_ft_8-compile",
+      "stderr": "%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv:22:7: Logical operator ASSERT expects 1 bit on the Property, but Property's VARREF 'rand_success' generates 32 bits.\n                                                                                                                                                                                                                                                                 : ... note: In instance 'bitloom_upstream_case.i_tb_ft_8'\n   22 |       assert (rand_success) else $error(\"Failed to randomize wait cycles!\");\n      |       ^~~~~~\n                     ... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.052\n                     ... Use \"/* verilator lint_off WIDTHTRUNC */\" and lint_on around source to disable this message.\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:98:26: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's METHODCALL 'randomize' generates 32 bits.\n                                                                                                                                                                                                                                                     : ... note: In instance 'bitloom_upstream_case.i_tb_ft_8'\n   98 |             rand_success = rand_act.randomize(); assert(rand_success);\n      |                          ^\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:101:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_ft_8'\n  101 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:105:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_ft_8'\n  105 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:124:21: Operator ASSIGNDLY expects 1 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'bitloom_upstream_case.i_tb_ft_8'\n  124 |             try_pop <= #TA $random();\n      |                     ^~\n",
+      "stdout": "make: Entering directory '/scratch/build/i_tb_ft_8/obj_dir'\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated.o /verilator/include/verilated.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_timing.o /verilator/include/verilated_timing.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_random.o /verilator/include/verilated_random.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_threads.o /verilator/include/verilated_threads.cpp\npython3 /verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vbitloom_upstream_case.cpp Vbitloom_upstream_case___024root__0.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__0.cpp Vbitloom_upstream_case_rand_verif_pkg__0.cpp Vbitloom_upstream_case_std__03a__03asemaphore__Vclpkg__0.cpp Vbitloom_upstream_case_std__03a__03aprocess__Vclpkg__0.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__0.cpp Vbitloom_upstream_case__main.cpp Vbitloom_upstream_case___024root__Slow.cpp Vbitloom_upstream_case___024root__0__Slow.cpp Vbitloom_upstream_case_std__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__0__Slow.cpp Vbitloom_upstream_case_rand_verif_pkg__Slow.cpp Vbitloom_upstream_case_rand_verif_pkg__0__Slow.cpp Vbitloom_upstream_case_std__03a__03asemaphore__Vclpkg__Slow.cpp Vbitloom_upstream_case_std__03a__03aprocess__Vclpkg__Slow.cpp Vbitloom_upstream_case_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__Slow.cpp Vbitloom_upstream_case__Syms__Slow.cpp > Vbitloom_upstream_case__ALL.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o Vbitloom_upstream_case__ALL.o Vbitloom_upstream_case__ALL.cpp\ng++    verilated.o verilated_timing.o verilated_random.o verilated_threads.o Vbitloom_upstream_case__ALL.a    -pthread -lpthread -latomic   -o Vbitloom_upstream_case\nrm Vbitloom_upstream_case__ALL.verilator_deplist.tmp\nmake: Leaving directory '/scratch/build/i_tb_ft_8/obj_dir'\n- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052\n- Verilator: Built from 0.205 MB sources in 12 modules, into 0.148 MB in 19 C++ files needing 0.001 MB\n- Verilator: Walltime 7.067 s (elab=0.006, cvt=0.026, bld=7.019); cpu 0.049 s on 2 threads; allocated 20.883 MB\n"
+    },
+    {
+      "command": [
+        "/usr/bin/stdbuf",
+        "-oL",
+        "/scratch/build/i_tb_8/obj_dir/Vbitloom_upstream_case",
+        "+verilator+seed+1303"
+      ],
+      "durationSeconds": 3.272907644000952,
+      "exitCode": 0,
+      "label": "i_tb_8-simulate",
+      "stderr": "",
+      "stdout": "bitloom_upstream_case.i_tb_8: Running test with FALL_THROUGH=0, DEPTH=8\nbitloom_upstream_case.i_tb_8: Checked 1000 stimuli\n- /scratch/build/i_tb_8/case.sv:12: Verilog $finish\n- S i m u l a t i o n   R e p o r t: Verilator 5.052 2026-09-05\n- Verilator: $finish at 25us; walltime 3.222 s; speed 7.678 us/s\n- Verilator: cpu 0.121 s on 1 threads; allocated 5 MB\n"
+    },
+    {
+      "command": [
+        "/usr/bin/stdbuf",
+        "-oL",
+        "/scratch/build/i_tb_ft_9/obj_dir/Vbitloom_upstream_case",
+        "+verilator+seed+1303"
+      ],
+      "durationSeconds": 3.5734458240003732,
+      "exitCode": 0,
+      "label": "i_tb_ft_9-simulate",
+      "stderr": "",
+      "stdout": "bitloom_upstream_case.i_tb_ft_9: Running test with FALL_THROUGH=1, DEPTH=9\nbitloom_upstream_case.i_tb_ft_9: Checked 1000 stimuli\n- /scratch/build/i_tb_ft_9/case.sv:12: Verilog $finish\n- S i m u l a t i o n   R e p o r t: Verilator 5.052 2026-09-05\n- Verilator: $finish at 24us; walltime 3.539 s; speed 6.863 us/s\n- Verilator: cpu 0.119 s on 1 threads; allocated 5 MB\n"
+    },
+    {
+      "command": [
+        "/usr/bin/stdbuf",
+        "-oL",
+        "/scratch/build/i_tb_9/obj_dir/Vbitloom_upstream_case",
+        "+verilator+seed+1303"
+      ],
+      "durationSeconds": 3.575847624999369,
+      "exitCode": 0,
+      "label": "i_tb_9-simulate",
+      "stderr": "",
+      "stdout": "bitloom_upstream_case.i_tb_9: Running test with FALL_THROUGH=0, DEPTH=9\nbitloom_upstream_case.i_tb_9: Checked 1000 stimuli\n- /scratch/build/i_tb_9/case.sv:12: Verilog $finish\n- S i m u l a t i o n   R e p o r t: Verilator 5.052 2026-09-05\n- Verilator: $finish at 25us; walltime 3.535 s; speed 6.933 us/s\n- Verilator: cpu 0.123 s on 1 threads; allocated 5 MB\n"
+    },
+    {
+      "command": [
+        "/usr/bin/stdbuf",
+        "-oL",
+        "/scratch/build/i_tb_ft_8/obj_dir/Vbitloom_upstream_case",
+        "+verilator+seed+1303"
+      ],
+      "durationSeconds": 3.9745680179985357,
+      "exitCode": 0,
+      "label": "i_tb_ft_8-simulate",
+      "stderr": "",
+      "stdout": "bitloom_upstream_case.i_tb_ft_8: Running test with FALL_THROUGH=1, DEPTH=8\nbitloom_upstream_case.i_tb_ft_8: Checked 1000 stimuli\n- /scratch/build/i_tb_ft_8/case.sv:12: Verilog $finish\n- S i m u l a t i o n   R e p o r t: Verilator 5.052 2026-09-05\n- Verilator: $finish at 25us; walltime 3.929 s; speed 6.271 us/s\n- Verilator: cpu 0.129 s on 1 threads; allocated 5 MB\n"
+    },
+    {
+      "command": [
+        "/usr/bin/stdbuf",
+        "-oL",
+        "/scratch/build/i_tb_ft_1/obj_dir/Vbitloom_upstream_case",
+        "+verilator+seed+1303"
+      ],
+      "durationSeconds": 4.527534644001207,
+      "exitCode": 0,
+      "label": "i_tb_ft_1-simulate",
+      "stderr": "",
+      "stdout": "bitloom_upstream_case.i_tb_ft_1: Running test with FALL_THROUGH=1, DEPTH=1\nbitloom_upstream_case.i_tb_ft_1: Checked 1000 stimuli\n- /scratch/build/i_tb_ft_1/case.sv:12: Verilog $finish\n- S i m u l a t i o n   R e p o r t: Verilator 5.052 2026-09-05\n- Verilator: $finish at 34us; walltime 4.502 s; speed 7.636 us/s\n- Verilator: cpu 0.172 s on 1 threads; allocated 6 MB\n"
+    },
+    {
+      "command": [
+        "/usr/bin/stdbuf",
+        "-oL",
+        "/scratch/build/i_tb_1/obj_dir/Vbitloom_upstream_case",
+        "+verilator+seed+1303"
+      ],
+      "durationSeconds": 6.328920289000962,
+      "exitCode": 0,
+      "label": "i_tb_1-simulate",
+      "stderr": "",
+      "stdout": "bitloom_upstream_case.i_tb_1: Running test with FALL_THROUGH=0, DEPTH=1\nbitloom_upstream_case.i_tb_1: Checked 1000 stimuli\n- /scratch/build/i_tb_1/case.sv:12: Verilog $finish\n- S i m u l a t i o n   R e p o r t: Verilator 5.052 2026-09-05\n- Verilator: $finish at 62us; walltime 6.296 s; speed 9.806 us/s\n- Verilator: cpu 0.291 s on 1 threads; allocated 7 MB\n"
+    }
+  ],
+  "diagnosticControl": "`verilator_config\nlint_off -rule CONTASSINIT -file \"*/test/fifo_tb.sv\"\n",
+  "diagnosticOnly": true,
+  "executionMode": "parallel-upstream-instances",
+  "inputs": [
+    {
+      "path": "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv",
+      "sha256": "4ee3b3f8c1d4d4ef5767e004f8e75a0e20033034033e459b1d374f4e89ee954b"
+    },
+    {
+      "path": "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/clk_rst_gen.sv",
+      "sha256": "cd90320bae5a58afdae6a77938139b6733669f56bc5ed035351e769ff8ad02d9"
+    },
+    {
+      "path": "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/src/fifo_v3.sv",
+      "sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc"
+    },
+    {
+      "path": "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv",
+      "sha256": "f26bbf1dcb1547e65b450354b39709b8a72927dcc7e3f24ce6fd3094204b4d94"
+    }
+  ],
+  "limitations": [
+    "Upstream VERILATOR conditional disables fall-through SVA; queue assertions remain enabled.",
+    "Upstream bench uses DATA_WIDTH=8; pilot DATA_WIDTH=32 is covered separately."
+  ],
+  "lockSha256": "49b22842deda1d09bb86baaa5c8c3474f013a52c7d587f624f827705b5141d6e",
+  "passed": true,
+  "rngBoundary": "Each case starts seed independently; not the monolithic interleaved RNG sequence.",
+  "seed": 1303,
+  "sources": [
+    {
+      "commit": "1281545696eb3fcba50ec5b4275993476a3c710e",
+      "name": "common_cells",
+      "treeDigest": "087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6"
+    },
+    {
+      "commit": "6fc76fb013315af9fabbb90b431863d498df2d6d",
+      "name": "common_verification",
+      "treeDigest": "93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171"
+    },
+    {
+      "commit": "a9cae21902e75b1434328ecf36f85327ba5717de",
+      "name": "tech_cells_generic",
+      "treeDigest": "42ebabe1945ab57caf368282d84a6ea6c7c06ea85668067df4511efdb049cd9f"
+    }
+  ],
+  "startedUtc": "2026-09-23T03:34:15Z",
+  "tools": [
+    {
+      "path": "/verilator/bin/verilator",
+      "sha256": "308c54eb0194bb5c95d7cc093e0491922d2455177d401b03a8224ad7efe5cf35"
+    },
+    {
+      "path": "/verilator/bin/verilator_bin",
+      "sha256": "38073bf4af1252bc2606cbab63926c8a798f71cd590895ef9f1e76a46347ea9d"
+    },
+    {
+      "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+      "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+    },
+    {
+      "path": "/usr/bin/make",
+      "sha256": "d78b8f1d099fbcfb6f2f49ab87223b9b68fb3956642f92d6ec6de812e8afa965"
+    },
+    {
+      "path": "/usr/bin/z3",
+      "sha256": "c05be002097e2f2106efeeac03e58032e3f5cca10104f95d7a0ddc0bd3f907cb"
+    },
+    {
+      "path": "/usr/bin/stdbuf",
+      "sha256": "f041fa6f5669a3de64d7d8a0ddd055942aaae69a271aa4d40461aa9102a54268"
+    }
+  ],
+  "upstreamBenchUnmodified": true,
+  "verilatorRuntime": [
+    {
+      "path": "bin/redirect",
+      "sha256": "32f0f8959ea2b5163f5af52b14953152dd46535306c2278f04d25e1e804ac805"
+    },
+    {
+      "path": "bin/verilator",
+      "sha256": "308c54eb0194bb5c95d7cc093e0491922d2455177d401b03a8224ad7efe5cf35"
+    },
+    {
+      "path": "bin/verilator_bin",
+      "sha256": "38073bf4af1252bc2606cbab63926c8a798f71cd590895ef9f1e76a46347ea9d"
+    },
+    {
+      "path": "bin/verilator_ccache_report",
+      "sha256": "1726ff4b5fd6f194bdab3e4c755746a6bc531d8fcca37e13292f37cfc0961efc"
+    },
+    {
+      "path": "bin/verilator_coverage",
+      "sha256": "11d69c7bc1a99027a70fd544a22cb6e5e45caea026a85b5581b6530367fcddd5"
+    },
+    {
+      "path": "bin/verilator_coverage_bin_dbg",
+      "sha256": "89301f52950cda630f5eb6997ec584ecf87267b3344c872b6ed607af99d55044"
+    },
+    {
+      "path": "bin/verilator_difftree",
+      "sha256": "fe6e37b6336ba3189b714645da46993198975a3e245681a6cb7c9e6c441fc531"
+    },
+    {
+      "path": "bin/verilator_gantt",
+      "sha256": "0e674679dcaf2b5cd98547a0ce1d9c7ab937f5d69c2dd31f3ee53958daa69151"
+    },
+    {
+      "path": "bin/verilator_includer",
+      "sha256": "c563ccfa0a90a76d48a05551aaad8ff81875446c41b44bf4f288515accb2ed40"
+    },
+    {
+      "path": "bin/verilator_profcfunc",
+      "sha256": "e073e15f6996e1cef34f270528a90ef4b670903d7d6d42f01b5a24bc7fe16864"
+    },
+    {
+      "path": "include/.gitignore",
+      "sha256": "4d52bf96ce354d5a662cc9443af5e5555cecac61eb15bc521a50a281243a833e"
+    },
+    {
+      "path": "include/AGENTS.md",
+      "sha256": "287727c0283a1fc94829f8610b7e8e68ee4f5ebe82f4cfb972051e23b7ced261"
+    },
+    {
+      "path": "include/fstcpp/.clang-format",
+      "sha256": "19f619b3e647d44fb60c57a8f718035a70449b2248974451685ac9cc5f49e583"
+    },
+    {
+      "path": "include/fstcpp/fstcpp.h",
+      "sha256": "560bcc10d1bb10a65ec447dfa20f8cc616c24b3e9c51525f5d840254713602c0"
+    },
+    {
+      "path": "include/fstcpp/fstcpp_assertion.h",
+      "sha256": "03ab1e94967250083494143dbc733fdb0cc87b5f7a5b324817da439db7cf0c1c"
+    },
+    {
+      "path": "include/fstcpp/fstcpp_file.h",
+      "sha256": "217aae8805405e93df378b2be798ebeb4203bb7cdd0f1cb261e9bcba881cf2da"
+    },
+    {
+      "path": "include/fstcpp/fstcpp_stream_write_helper.h",
+      "sha256": "4172681e2b5b053ab278b14ff591e2f0b0044f0ae9996329ea199007c42f1a8f"
+    },
+    {
+      "path": "include/fstcpp/fstcpp_variable_info.cpp",
+      "sha256": "d09efcbf6b96dc4ae9712de195cd7cd5025711fc93e8f7c771cac7f86cd0e73f"
+    },
+    {
+      "path": "include/fstcpp/fstcpp_variable_info.h",
+      "sha256": "4f17e602f28bcdbf8896105c73a3cb2e03a1d11960f399d9cd4aad43a930b837"
+    },
+    {
+      "path": "include/fstcpp/fstcpp_writer.cpp",
+      "sha256": "670cdc1d9b57021e3ca8bb662d51ac2492d2119ae34a7886f9efc169dd2c6e21"
+    },
+    {
+      "path": "include/fstcpp/fstcpp_writer.h",
+      "sha256": "8e08989ce99e6b4b2f078dd6db18596c83eb9c74ca1210d77efee12169537572"
+    },
+    {
+      "path": "include/verilated.cpp",
+      "sha256": "15f7c3b434f5292ae1339808e2f389651ff9c5e67b837218d85daf3f4e2808cd"
+    },
+    {
+      "path": "include/verilated.h",
+      "sha256": "0c59fdc1e76f63d8f77e92e8d715f582c036d5cf8f7c9653f05893a9ef2224e8"
+    },
+    {
+      "path": "include/verilated.mk",
+      "sha256": "b022990b1b0b9b66d109c610162066cc0372f3b085c5a1e76d5329e30e7a5ba5"
+    },
+    {
+      "path": "include/verilated.mk.in",
+      "sha256": "73c89130b4d7dca9847561c17e7c38655d2df767d7cc0de60496c973d4e4d8f6"
+    },
+    {
+      "path": "include/verilated.v",
+      "sha256": "d1928ff11b2f0dd8fa0fa48259c4de2403cc143e4016de2d41f5b419fb8e2c64"
+    },
+    {
+      "path": "include/verilated_config.h",
+      "sha256": "24d4f0700874a122db6a76e1e7f6e54280c2a3bfa68635062f53617f36ff4c1c"
+    },
+    {
+      "path": "include/verilated_config.h.in",
+      "sha256": "e4ab1d4aefcb97ec463556430e4dccee82b09080793737353385cf0a528f102f"
+    },
+    {
+      "path": "include/verilated_cov.cpp",
+      "sha256": "3e242b630c9e546c875bb845fca8225cdba46b0994a3e882fd2ddb97735b4f39"
+    },
+    {
+      "path": "include/verilated_cov.h",
+      "sha256": "c1b8dd7c8df041b8ef649658e4b56030c48999111febe8f8b5c0978144b6db37"
+    },
+    {
+      "path": "include/verilated_cov_key.h",
+      "sha256": "96948c5c91fa3d69a2c4fd35f327321bf3d45275fa58bfbf3f40a6821d4d275d"
+    },
+    {
+      "path": "include/verilated_cov_model.h",
+      "sha256": "7a01b08c1a4294a2ea1335ad1870554b0d89c79f25003e6e0f07795a36dd23ee"
+    },
+    {
+      "path": "include/verilated_covergroup.cpp",
+      "sha256": "64a0a3a05e39dd009493257fad767b7397b92238a25e9c630c3f668a3bafbf5d"
+    },
+    {
+      "path": "include/verilated_covergroup.h",
+      "sha256": "2aa7d7092afe2eb358c5a878ba2d2b63a2ad08950619a40da725f2c5323bb9e1"
+    },
+    {
+      "path": "include/verilated_dpi.cpp",
+      "sha256": "0d153d1640985d6488b12c516b8a96939b46ddcc080d8efaf12faafe3d26791a"
+    },
+    {
+      "path": "include/verilated_dpi.h",
+      "sha256": "3c9733304bb1336ef7b6f6e85b59cf6d57a195920c04b04227068450172f862f"
+    },
+    {
+      "path": "include/verilated_force.h",
+      "sha256": "bbaa7a04461e183e1311dbe35db680413adc67df761f828bca7af8811af94e85"
+    },
+    {
+      "path": "include/verilated_fst_c.cpp",
+      "sha256": "397c06cefc8eb8dc9fd200a42dcc1f976bd1390d408c7b2f2f7633a71f52f468"
+    },
+    {
+      "path": "include/verilated_fst_c.h",
+      "sha256": "814e06c9605efb0441e015ae90c861f92acfed80b27eb6829c0cef4decf9843d"
+    },
+    {
+      "path": "include/verilated_fst_sc.cpp",
+      "sha256": "66a869c18fd36954bfe26e73679c240604a6c5fa69d816e4e7c244ae3cc365e0"
+    },
+    {
+      "path": "include/verilated_fst_sc.h",
+      "sha256": "6d3371d1a323869842406ce45fddd7308a097a52eb612e2bac25356f27479007"
+    },
+    {
+      "path": "include/verilated_funcs.h",
+      "sha256": "1e0161db6429b95e9797b3eca992a203f07b62ede4658a0e14b8597fb198de52"
+    },
+    {
+      "path": "include/verilated_imp.h",
+      "sha256": "3a46a5c6bec8eb788e0d1f1519a7ee1c4589a65099082cfe615620b5e97cc28c"
+    },
+    {
+      "path": "include/verilated_intrinsics.h",
+      "sha256": "4df9d04963e083074b57503a7af6c952ecfc9a36c43d5136fc924e2fc1e1d6f5"
+    },
+    {
+      "path": "include/verilated_probdist.cpp",
+      "sha256": "6fa46be42d139ca474b4732248028b27bc0ff0238f9b0da26722ecb613fb6ad3"
+    },
+    {
+      "path": "include/verilated_profiler.cpp",
+      "sha256": "e53a3d14f432ccacd0d801b5c4aa7eeba61eee7d400a3caf8921d92ec3c0b906"
+    },
+    {
+      "path": "include/verilated_profiler.h",
+      "sha256": "70d93a0c8d163ec935fb491075ca737feebfb81abd5e1e559b4580f12f852140"
+    },
+    {
+      "path": "include/verilated_random.cpp",
+      "sha256": "a01963f3b22daf644530c5fa2d3a58693161a685dfdf120c928f4a744a6a91f2"
+    },
+    {
+      "path": "include/verilated_random.h",
+      "sha256": "e9673d8d7ad9aaec076fca5ae6f98462b9b79e66fa2632d91be767e026cb1783"
+    },
+    {
+      "path": "include/verilated_saif_c.cpp",
+      "sha256": "5514d403bf4f567a68702670fb24b8a8a5023466f125280790f335aef20ec916"
+    },
+    {
+      "path": "include/verilated_saif_c.h",
+      "sha256": "02f19a8111651f9d40391a5967c61bfe357288774f5358e9f79c72f7bcf8cab9"
+    },
+    {
+      "path": "include/verilated_saif_sc.h",
+      "sha256": "b55b4e61651f6824c1603de5b67267a8c08565f565f9b8ae86959ad5b1c12930"
+    },
+    {
+      "path": "include/verilated_save.cpp",
+      "sha256": "67b32539883ee65f7d27b32e2d1a2ce473894eff6cddfe93cbea2b2f4045d056"
+    },
+    {
+      "path": "include/verilated_save.h",
+      "sha256": "50a590b2649a48890cdbc10aa9f10b834b815f53cffcae5eb00929d3fc04e32f"
+    },
+    {
+      "path": "include/verilated_sc.h",
+      "sha256": "e1d97beb092d94b14a7a8ec9dbf6c7b15bf70b5c080c0036671a2391cde005cf"
+    },
+    {
+      "path": "include/verilated_sc_trace.h",
+      "sha256": "1c0758e33c0cca56339aa3c9a37d85ec25f7b338daa60e3d0ad02d0488b1e0da"
+    },
+    {
+      "path": "include/verilated_std.sv",
+      "sha256": "dab3e589d171737c86730db8b4750dd928c0d85961f0be56dacbdf31eac2c36e"
+    },
+    {
+      "path": "include/verilated_std_waiver.vlt",
+      "sha256": "1f277392ff57efb247d3727265e162eed0459d068757bca49d743105916b7ce8"
+    },
+    {
+      "path": "include/verilated_sym_props.h",
+      "sha256": "0a18ffd1dd35c31357afd88986d46a3aa0b471f6fd175e3f9da5303013552595"
+    },
+    {
+      "path": "include/verilated_syms.h",
+      "sha256": "5d71fa961defff9ff63f495252e9def7b7a20559ceec25d70e6ba1941dc8b710"
+    },
+    {
+      "path": "include/verilated_threads.cpp",
+      "sha256": "fa179d4c223c110f6566837a55a522e7842b4ed68a33fd0bb910fc5be1df2ce3"
+    },
+    {
+      "path": "include/verilated_threads.h",
+      "sha256": "3246dad434cb75c92ac5b311cdb52b7d3314fa3f0ab6f1b3be7df0202ede6049"
+    },
+    {
+      "path": "include/verilated_timing.cpp",
+      "sha256": "a5aab8a27136a867634cdaa84e0dcefe4bb6dd26460720b75a8bf1b45361164d"
+    },
+    {
+      "path": "include/verilated_timing.h",
+      "sha256": "2f3507054c3bcee8951a66e6836b6553f460eb92877d5f1b692dce2386ef35d6"
+    },
+    {
+      "path": "include/verilated_trace.h",
+      "sha256": "0763107ae6bce1e673ddb2dced2d0c86d60a5d5c59839187cfa2e15622d9eb0e"
+    },
+    {
+      "path": "include/verilated_trace_imp.h",
+      "sha256": "8db2c881951035f59f9f128ab520fe1c1da895fea88d75b66b9ba59ba89df733"
+    },
+    {
+      "path": "include/verilated_types.h",
+      "sha256": "d703d71dfc59bc1e547324a437f854e70d8748641fa2c4120a25d317d48fda85"
+    },
+    {
+      "path": "include/verilated_vcd_c.cpp",
+      "sha256": "538dec84ee9a8098dc6578bab709664bdeb2d4eec44cc0e44f8fa42130235fbc"
+    },
+    {
+      "path": "include/verilated_vcd_c.h",
+      "sha256": "de40f8b831545fca80939b944650633ac66e9bad3acb0be85b62076310005693"
+    },
+    {
+      "path": "include/verilated_vcd_sc.cpp",
+      "sha256": "c1b12228ac6713614394f2873d619a8374605b3754116ebb8c6ead26d8de674c"
+    },
+    {
+      "path": "include/verilated_vcd_sc.h",
+      "sha256": "30d8c6b4b5ca676ad6243e0e6043bf23f568ae20bca8abb3fd74965845ce0fc2"
+    },
+    {
+      "path": "include/verilated_vpi.cpp",
+      "sha256": "e1a15ee5715e0ffd8bc7f97f322cac84b24e707a8b69aa984efe927a1e25b264"
+    },
+    {
+      "path": "include/verilated_vpi.h",
+      "sha256": "15121e90189da89effa5d6f876608eea267a4d3be2167ab787f6d00f9ef76f8c"
+    },
+    {
+      "path": "include/verilatedos.h",
+      "sha256": "99f80be9bbd6688e7a36afd117f8abc6d51b66586faeda31af7808a3d22219e6"
+    },
+    {
+      "path": "include/verilatedos_c.h",
+      "sha256": "e54ec58ab846d2afc12dd62f640d1c25bc11bac0a778f67022dc77e99195044b"
+    },
+    {
+      "path": "include/vltstd/sv_vpi_user.h",
+      "sha256": "57e8fbbc5d94c0de1b293d3e1f9cd41fda4acbebd88a564d0e937baa25079306"
+    },
+    {
+      "path": "include/vltstd/svdpi.h",
+      "sha256": "478f1b254420b06f3827df55490a729ec76e106de626d8d0135c35dc37732ff6"
+    },
+    {
+      "path": "include/vltstd/veriuser.h",
+      "sha256": "2a036a4236da5b43ca1ee1250bde113d2f04a83db7078463df621df40475a82e"
+    },
+    {
+      "path": "include/vltstd/vpi_user.h",
+      "sha256": "b9f3fc98128296a9067b0a8b27e50cc0a7270cfa2cef36d92e473e0417aa43c7"
+    }
+  ],
+  "verilatorVersion": "Verilator 5.052 2026-09-05 rev v5.052"
+}

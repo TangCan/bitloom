@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/tmp/bitloom-130-3-review-pilot-final/cargo-bitloom",
+    "external-ip",
+    "binding",
+    "--manifest",
+    "/tmp/bitloom-130-3-review-pilot-final/source.json",
+    "--lock",
+    "/tmp/bitloom-130-3-review-pilot-final/source.lock.json",
+    "--cache",
+    "/tmp/bitloom-130-3-review-pilot-final/cache",
+    "--out",
+    "/tmp/bitloom-130-3-review-pilot-final/rejected.json"
+  ],
+  "exitCode": 1,
+  "stdout": "",
+  "stderr": "error: bitloom.external-ip.compile-contract: pilot parameters differ from the reviewed fifo_v3 parameter set\n",
+  "startedUtc": "2026-09-23T03:27:08Z",
+  "durationSeconds": 2.4434635639190674
+}

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/tmp/bitloom-130-3-review-pilot-final/cargo-bitloom",
+    "external-ip",
+    "lock",
+    "--manifest",
+    "/tmp/bitloom-130-3-review-pilot-final/source.json",
+    "--lock",
+    "/tmp/bitloom-130-3-review-pilot-final/source.lock.json",
+    "--cache",
+    "/tmp/bitloom-130-3-review-pilot-final/cache"
+  ],
+  "exitCode": 0,
+  "stdout": "locked=/tmp/bitloom-130-3-review-pilot-final/source.lock.json sources=3\n",
+  "stderr": "",
+  "startedUtc": "2026-09-23T03:13:22Z",
+  "durationSeconds": 9.099027872085571
+}

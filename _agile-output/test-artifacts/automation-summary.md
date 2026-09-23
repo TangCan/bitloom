@@ -140,6 +140,20 @@ N/A. No consumer/provider boundary or contract artifact exists.
 
 Regenerate the binary-bound canonical lock and online/offline replay evidence, run the dedicated online gate once, then execute the required clean/fmt/workspace regression. Story130.2 remains in progress until those gates and its single commit complete.
 
+## Story130.3 自动化扩展（2026-09-23，执行中）
+
+预检与目标已记录于 `130-3-automation-summary.md`。本轮复用 Rust 单测和真实模拟器 stub-killing gate，新增独立证据消费负测；不重复创建 HTTP/浏览器/Pact 套件。四个 agent slots 全占用，技能按 sequential fallback 执行；截至本记录尚未宣称验证完成。
+
+
+### Story130.3 自动化扩展完成（2026-09-23）
+
+详见 `130-3-automation-summary.md`：sequential fallback API范围分析0文件；backend新增独立证据consumer，normal与-O各1真实正基线+17正确拒绝变异（各18场景）。复用Rust unit 10 passed/1 ignored，单独激活真实模拟器stub-killing测试1 passed（empty与zero-output均产生真实失败诊断）。Legacy FR199 evidence consumer更新只读copied mounts/host probe/cache integrity，11 unittest cases各在normal/-O运行（22次）通过；保留FR199 source-only边界，无强制FR200模拟器依赖。原始日志、JSON与完整命令列于专属summary。未重写canonical证据，未宣称最终clean/regression或Story关闭。前述“执行中”段为历史预检记录。
+
+
+### Story130.3 sentinel修复后复验（2026-09-23）
+
+顺序重跑finalpilot --reuse normal/-O均PASS，未联网；独立sentinel不写原checkout/cache，外层只读输入真实replay亦PASS。更新后的独立consumer各1真实基线（104 cycles）+18负测正确拒绝，共19场景；legacy11cases/22 normal/-O子进程PASS。专属summary及`130-3-review-verification/{normal,optimized}/`为最终原始归档，原首次fetch保持。Just/CI已在pilot后接入两模式consumer。上节17变异是早期结果；本节追加精确host-target负测后的最终结果，不改历史。
+
 ## Story130.2 最终独立复验（2026-09-23）
 
 修正原缓存写探针与旧隔离消费者，来源专属快照实际 clean/fmt/just test：485 结果块，1889 passed / 0 failed / 50 ignored。联网负测门禁 1 passed，ATDD normal/-O 各 3 passed，独立 consumer normal/-O 各 11 passed；只读原输入与复制缓存重放通过，210 文件身份未变。原始证据见 `130-2-final-regression/`，不替代 FR200 行为验收。

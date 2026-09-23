@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/tmp/bitloom-130-3-review-pilot-final/cargo-bitloom",
+    "external-ip",
+    "binding",
+    "--manifest",
+    "/tmp/bitloom-130-3-review-pilot-final/source.json",
+    "--lock",
+    "/tmp/bitloom-130-3-review-pilot-final/source.lock.json",
+    "--cache",
+    "/tmp/bitloom-130-3-review-pilot-final/cache",
+    "--out",
+    "/tmp/bitloom-130-3-review-pilot-final/rejected.json"
+  ],
+  "exitCode": 1,
+  "stdout": "",
+  "stderr": "error: bitloom.external-ip.path: cache symlink is forbidden: /tmp/bitloom-130-3-review-pilot-final/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/src/escape\n",
+  "startedUtc": "2026-09-23T03:25:07Z",
+  "durationSeconds": 2.352893590927124
+}

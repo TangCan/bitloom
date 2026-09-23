@@ -175,7 +175,41 @@ fn p0_bender_dependency_parser_is_exact_and_section_scoped() {
 }
 
 #[test]
-fn p0_compile_contract_rejects_unsupported_shape_parameter_and_reset() {
+fn p0_binding_is_real_frozen_hierarchy_and_preserves_emitted_parent() {
+    let (manifest, _) = closure_fixture();
+    let hir = fifo_wrapper_hir(&manifest.compile).unwrap();
+    assert_eq!(hir.circuit().modules.len(), 2);
+    let emitted = bitloom_vlog::emit(&hir).files.remove(0).contents;
+    let parent = emit_fifo_wrapper(&manifest.compile).unwrap();
+    assert!(emitted.contains(parent.trim()));
+    assert!(parent.contains("module BitloomExternalFifo ("));
+    assert!(parent.contains("  fifo_v3 fifo ("));
+    assert!(!parent.contains("module fifo_v3 ("));
+    assert!(!parent.contains("assign "));
+    for port in &manifest.compile.ports {
+        assert!(parent.contains(&format!(".{}({})", port.name, port.name)));
+    }
+    assert_eq!(
+        parent,
+        link_fifo_wrapper(&hir, &emitted, &manifest.compile).unwrap()
+    );
+    for mutant in [
+        String::new(),
+        emitted.replace(".data_o(data_o)", ".data_o(data_i)"),
+        emitted.replace("fifo_v3 fifo", "empty_stub fifo"),
+        emitted.replace("endmodule", "assign data_o = 0;\nendmodule"),
+        emitted.replace("input [31:0] data_i", "input [30:0] data_i"),
+    ] {
+        assert!(
+            link_fifo_wrapper(&hir, &mutant, &manifest.compile)
+                .unwrap_err()
+                .contains("bitloom.external-ip.binding")
+        );
+    }
+}
+
+#[test]
+fn p0_binding_rejects_unsupported_shape_parameter_and_reset() {
     let (manifest, _) = closure_fixture();
     let original = serde_json::to_value(&manifest.compile).unwrap();
     for (field, value) in [("DEPTH", "9"), ("DATA_WIDTH", "16"), ("FALL_THROUGH", "1")] {
@@ -183,7 +217,7 @@ fn p0_compile_contract_rejects_unsupported_shape_parameter_and_reset() {
         changed["parameters"][field] = value.into();
         let compile = serde_json::from_value(changed).unwrap();
         assert!(
-            validate_pilot_compile(&compile)
+            emit_fifo_wrapper(&compile)
                 .unwrap_err()
                 .contains("compile-contract")
         );
@@ -196,7 +230,7 @@ fn p0_compile_contract_rejects_unsupported_shape_parameter_and_reset() {
         let mut changed = original.clone();
         changed["clockReset"][field] = value.into();
         assert!(
-            validate_pilot_compile(&serde_json::from_value(changed).unwrap())
+            emit_fifo_wrapper(&serde_json::from_value(changed).unwrap())
                 .unwrap_err()
                 .contains("compile-contract")
         );
@@ -205,7 +239,7 @@ fn p0_compile_contract_rejects_unsupported_shape_parameter_and_reset() {
         let mut changed = original.clone();
         changed["ports"][0][field] = "drift".into();
         assert!(
-            validate_pilot_compile(&serde_json::from_value(changed).unwrap())
+            emit_fifo_wrapper(&serde_json::from_value(changed).unwrap())
                 .unwrap_err()
                 .contains("compile-contract")
         );
@@ -239,6 +273,97 @@ fn p0_source_default_guard_rejects_parameter_default_drift() {
     for (from, to) in [("= 1'b0", "= 1'b1"), ("= 32,", "= 16,"), ("= 8,", "= 9,")] {
         assert!(
             verify_pilot_source(&source.replace(from, to))
+                .unwrap_err()
+                .contains("compile-contract")
+        );
+    }
+}
+
+#[test]
+fn p0_binding_output_does_not_overwrite_protected_inputs() {
+    let root = temp_path(&std::env::temp_dir(), "binding-protection");
+    let cache = root.join("cache");
+    fs::create_dir_all(&cache).unwrap();
+    let manifest = root.join("manifest.json");
+    let lock = root.join("lock.json");
+    fs::write(&manifest, "manifest").unwrap();
+    fs::write(&lock, "lock").unwrap();
+    for path in [&manifest, &lock, &cache.join("out.json")] {
+        assert!(
+            guard_binding_output(path, &manifest, &lock, &cache)
+                .unwrap_err()
+                .contains("path")
+        );
+    }
+    guard_binding_output(&root.join("binding.json"), &manifest, &lock, &cache).unwrap();
+    #[cfg(unix)]
+    {
+        let link = root.join("symlink.json");
+        std::os::unix::fs::symlink(&manifest, &link).unwrap();
+        assert!(guard_binding_output(&link, &manifest, &lock, &cache).is_err());
+    }
+    assert_eq!(fs::read_to_string(&manifest).unwrap(), "manifest");
+    assert_eq!(fs::read_to_string(&lock).unwrap(), "lock");
+    fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
+#[ignore = "requires actual iverilog/vvp; run in the dedicated FR200 gate"]
+fn p0_behavior_oracle_kills_empty_and_zero_output_wrappers() {
+    let (manifest, _) = closure_fixture();
+    let good = emit_fifo_wrapper(&manifest.compile).unwrap();
+    let header_end = good.find(");").unwrap() + 2;
+    let empty = format!("{}\nendmodule\n", &good[..header_end]);
+    let zero = format!(
+        "{}\nassign full_o=0; assign empty_o=1; assign usage_o=0; assign data_o=0;\nendmodule\n",
+        &good[..header_end]
+    );
+    let iv = tool_path("iverilog").unwrap();
+    let vvp = tool_path("vvp").unwrap();
+    let (base, runtime) = iverilog_runtime(&iv).unwrap();
+    for name in ["ivl", "ivlpp", "vvp.tgt", "vvp.conf"] {
+        assert!(runtime.contains_key(&Path::new(&base).join(name).to_string_lossy().into_owned()));
+    }
+    for (name, mutant) in [("empty", empty), ("zero-output", zero)] {
+        let error = simulate_fifo("", &mutant, Path::new("."), &iv, &base, &vvp)
+            .expect_err("oracle must kill stub wrapper");
+        assert!(error.contains("simulation failed"), "{error}");
+        println!("wrapper_mutation={name} result=rejected diagnostic={error}");
+    }
+}
+
+#[test]
+fn p0_compile_contract_rejects_unsupported_shape_parameter_and_reset() {
+    let (manifest, _) = closure_fixture();
+    let original = serde_json::to_value(&manifest.compile).unwrap();
+    for (field, value) in [("DEPTH", "9"), ("DATA_WIDTH", "16"), ("FALL_THROUGH", "1")] {
+        let mut changed = original.clone();
+        changed["parameters"][field] = value.into();
+        let compile = serde_json::from_value(changed).unwrap();
+        assert!(
+            validate_pilot_compile(&compile)
+                .unwrap_err()
+                .contains("compile-contract")
+        );
+    }
+    for (field, value) in [
+        ("resetKind", "synchronous"),
+        ("resetPolarity", "active-high"),
+        ("clockPort", "data_i"),
+    ] {
+        let mut changed = original.clone();
+        changed["clockReset"][field] = value.into();
+        assert!(
+            validate_pilot_compile(&serde_json::from_value(changed).unwrap())
+                .unwrap_err()
+                .contains("compile-contract")
+        );
+    }
+    for field in ["name", "direction", "width"] {
+        let mut changed = original.clone();
+        changed["ports"][0][field] = "drift".into();
+        assert!(
+            validate_pilot_compile(&serde_json::from_value(changed).unwrap())
                 .unwrap_err()
                 .contains("compile-contract")
         );

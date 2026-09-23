@@ -112,3 +112,19 @@ chisel-numeric-check:
 # direct-CSR second composition, bounded formal, synthesis and SemVer.
 fr198-fr201-core-check:
 	python3 _agile-output/test-artifacts/129-3-build-runner.py
+
+# FR200: fresh upstream closure, real wrapper/model, allowlisted offline replay,
+# precise P0 mutations in normal and optimized Python; missing tools are fatal.
+fr200-external-ip-pilot-check:
+	#!/usr/bin/env bash
+	set -euo pipefail
+	cargo build -p bitloom
+	cargo test -p bitloom --bin cargo-bitloom p0_behavior_oracle_kills_empty_and_zero_output_wrappers -- --ignored --nocapture
+	: "${BITLOOM_VERILATOR_ROOT:?set to an explicit v5.052 installation; see scripts/provision-phase24-verilator.py}"
+	gate_root=$(mktemp -d /tmp/bitloom-fr200-gate.XXXXXX)
+	python3 scripts/phase24-external-ip-pilot.py --work "$gate_root/pilot"
+	python3 -O scripts/phase24-external-ip-pilot.py --work "$gate_root/pilot" --reuse
+	python3 scripts/phase24-external-ip-automation-test.py --work "$gate_root/pilot" --self-test
+	python3 -O scripts/phase24-external-ip-automation-test.py --work "$gate_root/pilot" --mode optimized --self-test
+	python3 scripts/phase24-external-ip-upstream.py --lock "$gate_root/pilot/source.lock.json" --cache "$gate_root/pilot/cache" --verilator-root "$BITLOOM_VERILATOR_ROOT" --work "$gate_root/upstream" --evidence "$gate_root/upstream.json" --timeout 3600 --parallel-cases
+	BITLOOM_LOCKED_BINARY_PATH=bitloom BITLOOM_EXTERNAL_IP_MANIFEST="$gate_root/pilot/source.json" BITLOOM_EXTERNAL_IP_LOCK="$gate_root/pilot/source.lock.json" BITLOOM_EXTERNAL_IP_CACHE="$gate_root/pilot/cache" cargo test -p bitloom --test fr200_external_ip_binding --test fr200_external_ip_behavior -- --ignored

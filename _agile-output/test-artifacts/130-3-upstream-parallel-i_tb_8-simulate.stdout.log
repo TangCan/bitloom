@@ -1,0 +1,6 @@
+bitloom_upstream_case.i_tb_8: Running test with FALL_THROUGH=0, DEPTH=8
+bitloom_upstream_case.i_tb_8: Checked 100000 stimuli
+- /scratch/build/i_tb_8/case.sv:12: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.052 2026-09-05
+- Verilator: $finish at 3ms; walltime 323.493 s; speed 8.049 us/s
+- Verilator: cpu 12.958 s on 1 threads; allocated 117 MB

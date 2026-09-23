@@ -1,0 +1,103 @@
+{
+  "status": "passed",
+  "pythonOptimize": 1,
+  "evidenceMode": "optimized",
+  "work": "/tmp/bitloom-130-3-review-pilot-final",
+  "modelCycles": 104,
+  "positiveBaselines": 1,
+  "mutationsRejected": 18,
+  "tests": [
+    {
+      "name": "zero-checks",
+      "status": "rejected",
+      "diagnostic": "nonzero complete model checks missing"
+    },
+    {
+      "name": "marker-only",
+      "status": "rejected",
+      "diagnostic": "behavior source/wrapper identity missing"
+    },
+    {
+      "name": "forged-success",
+      "status": "rejected",
+      "diagnostic": "offline-behavior.json: unsuccessful execution"
+    },
+    {
+      "name": "fatal-with-pass",
+      "status": "rejected",
+      "diagnostic": "offline-behavior.json: failure hidden by success marker"
+    },
+    {
+      "name": "missing-simulator",
+      "status": "rejected",
+      "diagnostic": "vvp executable identity missing"
+    },
+    {
+      "name": "missing-helper",
+      "status": "rejected",
+      "diagnostic": "compiler helper identity missing"
+    },
+    {
+      "name": "missing-wrapper",
+      "status": "rejected",
+      "diagnostic": "wrapper content/hash missing or changed"
+    },
+    {
+      "name": "wrapper-hash",
+      "status": "rejected",
+      "diagnostic": "wrapper content/hash missing or changed"
+    },
+    {
+      "name": "source-hash",
+      "status": "rejected",
+      "diagnostic": "bound source identity differs"
+    },
+    {
+      "name": "missing-source",
+      "status": "rejected",
+      "diagnostic": "record source closure differs"
+    },
+    {
+      "name": "missing-identity",
+      "status": "rejected",
+      "diagnostic": "record tool identity differs"
+    },
+    {
+      "name": "missing-isolated-input",
+      "status": "rejected",
+      "diagnostic": "copied inputs/cache must be read-only"
+    },
+    {
+      "name": "host-root-visible",
+      "status": "rejected",
+      "diagnostic": "host root exposed"
+    },
+    {
+      "name": "missing-network-isolation",
+      "status": "rejected",
+      "diagnostic": "network/environment isolation missing"
+    },
+    {
+      "name": "cache-modified",
+      "status": "rejected",
+      "diagnostic": "read-only cache integrity missing"
+    },
+    {
+      "name": "no-probe",
+      "status": "rejected",
+      "diagnostic": "isolation probe result missing"
+    },
+    {
+      "name": "missing-host-targets",
+      "status": "rejected",
+      "diagnostic": "host path probe targets missing"
+    },
+    {
+      "name": "zero-duration",
+      "status": "rejected",
+      "diagnostic": "offline-behavior.json: execution duration missing"
+    }
+  ],
+  "manifestSha256": "5eb5cf32013737fdd0857287ad0f933b0f5e814d40f7c864aba0043065a03356",
+  "lockSha256": "49b22842deda1d09bb86baaa5c8c3474f013a52c7d587f624f827705b5141d6e"
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "startedUtc": "2026-09-23T03:42:48Z",
+    "durationSeconds": 1.2637009620666504,
+    "exitCode": 1,
+    "log": "final-fmt.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--all"
+    ],
+    "startedUtc": "2026-09-23T03:43:22Z",
+    "durationSeconds": 1.234525442123413,
+    "exitCode": 0,
+    "log": "inherited-test-fmt.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "startedUtc": "2026-09-23T03:43:23Z",
+    "durationSeconds": 1.2478883266448975,
+    "exitCode": 0,
+    "log": "final-fmt-retry.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "bitloom",
+      "--bin",
+      "cargo-bitloom",
+      "external_ip::tests",
+      "--",
+      "--nocapture"
+    ],
+    "startedUtc": "2026-09-23T03:43:24Z",
+    "durationSeconds": 0.9401454925537109,
+    "exitCode": 0,
+    "log": "inherited-fr199-units.log"
+  }
+]

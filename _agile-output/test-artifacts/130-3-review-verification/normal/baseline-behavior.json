@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/tmp/bitloom-130-3-review-pilot-final/cargo-bitloom",
+    "external-ip",
+    "behavior",
+    "--manifest",
+    "/tmp/bitloom-130-3-review-pilot-final/source.json",
+    "--lock",
+    "/tmp/bitloom-130-3-review-pilot-final/source.lock.json",
+    "--cache",
+    "/tmp/bitloom-130-3-review-pilot-final/cache"
+  ],
+  "exitCode": 0,
+  "stdout": "behavior=passed rtl_sha256=861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc wrapper_sha256=edfeea555e5ba12411a0761ed62c24ae1bced3f0b0204e1ae0532441f6e001bf simulator=iverilog\nFIFO_MODEL_PASS cycles=104 depth=8 width=32 populated_reset=1 flush=1 wrapper=BitloomExternalFifo\n/tmp/.tmp-behavior-1647415-1790133859004764923/fifo_v3_tb.sv:57: $finish called at 1096 (1s)\n",
+  "stderr": "",
+  "startedUtc": "2026-09-23T03:24:16Z",
+  "durationSeconds": 2.4338455200195312
+}

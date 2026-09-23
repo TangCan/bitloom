@@ -1,0 +1,72 @@
+{
+  "startedUtc": "2026-09-23T03:40:19Z",
+  "supplementalToolIdentity": true,
+  "tools": [
+    {
+      "path": "/tmp/bitloom-verilator-5.052/bin/verilator",
+      "sha256": "308c54eb0194bb5c95d7cc093e0491922d2455177d401b03a8224ad7efe5cf35",
+      "command": [
+        "/tmp/bitloom-verilator-5.052/bin/verilator",
+        "--version"
+      ],
+      "exitCode": 0,
+      "stdout": "Verilator 5.052 2026-09-05 rev v5.052\n",
+      "stderr": ""
+    },
+    {
+      "path": "/tmp/bitloom-verilator-5.052/bin/verilator_bin",
+      "sha256": "38073bf4af1252bc2606cbab63926c8a798f71cd590895ef9f1e76a46347ea9d",
+      "command": [
+        "/tmp/bitloom-verilator-5.052/bin/verilator_bin",
+        "--version"
+      ],
+      "exitCode": 0,
+      "stdout": "Verilator 5.052 2026-09-05 rev v5.052\n",
+      "stderr": ""
+    },
+    {
+      "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+      "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+      "command": [
+        "/usr/bin/x86_64-linux-gnu-g++-13",
+        "--version"
+      ],
+      "exitCode": 0,
+      "stdout": "x86_64-linux-gnu-g++-13 (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "stderr": ""
+    },
+    {
+      "path": "/usr/bin/make",
+      "sha256": "d78b8f1d099fbcfb6f2f49ab87223b9b68fb3956642f92d6ec6de812e8afa965",
+      "command": [
+        "/usr/bin/make",
+        "--version"
+      ],
+      "exitCode": 0,
+      "stdout": "GNU Make 4.3\nBuilt for x86_64-pc-linux-gnu\nCopyright (C) 1988-2020 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n",
+      "stderr": ""
+    },
+    {
+      "path": "/usr/bin/z3",
+      "sha256": "c05be002097e2f2106efeeac03e58032e3f5cca10104f95d7a0ddc0bd3f907cb",
+      "command": [
+        "/usr/bin/z3",
+        "--version"
+      ],
+      "exitCode": 0,
+      "stdout": "Z3 version 4.8.12 - 64 bit\n",
+      "stderr": ""
+    },
+    {
+      "path": "/usr/bin/stdbuf",
+      "sha256": "f041fa6f5669a3de64d7d8a0ddd055942aaae69a271aa4d40461aa9102a54268",
+      "command": [
+        "/usr/bin/stdbuf",
+        "--version"
+      ],
+      "exitCode": 0,
+      "stdout": "stdbuf (GNU coreutils) 9.4\nCopyright (C) 2023 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n\nWritten by P\u00e1draig Brady.\n",
+      "stderr": ""
+    }
+  ]
+}

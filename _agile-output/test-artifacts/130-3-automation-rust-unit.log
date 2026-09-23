@@ -1,0 +1,24 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   Compiling syn v2.0.119
+   Compiling bitloom-macro v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.64s
+     Running unittests src/main.rs (target/debug/deps/cargo_bitloom-5992aee1e571a933)
+
+running 11 tests
+test external_ip::tests::p0_behavior_oracle_kills_empty_and_zero_output_wrappers ... ignored, requires actual iverilog/vvp; run in the dedicated FR200 gate
+test external_ip::tests::p0_adapter_transforms_the_exact_locked_shape ... ok
+test external_ip::tests::p0_adapter_rejects_missing_and_duplicated_fragments ... ok
+test external_ip::tests::p0_bender_dependency_parser_is_exact_and_section_scoped ... ok
+test external_ip::tests::p0_source_default_guard_rejects_parameter_default_drift ... ok
+test external_ip::tests::p0_relative_path_validation_rejects_escape_and_ambiguity ... ok
+test external_ip::tests::p0_yosys_argument_validation_rejects_metacharacters ... ok
+test external_ip::tests::p0_binding_output_does_not_overwrite_protected_inputs ... ok
+test external_ip::tests::p0_binding_rejects_unsupported_shape_parameter_and_reset ... ok
+test external_ip::tests::p0_binding_is_real_frozen_hierarchy_and_preserves_emitted_parent ... ok
+test external_ip::tests::p0_closure_digest_binds_all_identity_dimensions ... ok
+
+test result: ok. 10 passed; 0 failed; 1 ignored; 0 measured; 5 filtered out; finished in 0.01s
+

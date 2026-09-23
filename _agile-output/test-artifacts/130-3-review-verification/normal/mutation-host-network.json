@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/tmp/bitloom-130-3-review-pilot-final/cargo-bitloom",
+    "external-ip",
+    "replay",
+    "--compile",
+    "--manifest",
+    "/tmp/bitloom-130-3-review-pilot-final/source.json",
+    "--lock",
+    "/tmp/bitloom-130-3-review-pilot-final/source.lock.json",
+    "--cache",
+    "/tmp/bitloom-130-3-review-pilot-final/cache"
+  ],
+  "exitCode": 1,
+  "stdout": "",
+  "stderr": "error: bitloom.external-ip.network: replay requires BITLOOM_NETWORK_ISOLATED=1 from the isolation runner\n",
+  "startedUtc": "2026-09-23T03:25:16Z",
+  "durationSeconds": 2.4558303356170654
+}

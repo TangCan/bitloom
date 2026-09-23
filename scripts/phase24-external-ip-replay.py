@@ -201,12 +201,14 @@ else:
         run(prefix + ["/usr/bin/python3", "-c", probe, str(ROOT), str(cache), str(manifest), str(sentinel_directory), str(sentinel)], isolation_evidence)
     finally:
         shutil.rmtree(sentinel_directory)
-    for action in ("replay",):
+    for action in (("replay", "binding", "behavior") if args.pilot else ("replay",)):
         command = prefix + ["/input/cargo-bitloom", "external-ip", action,
                             "--manifest", "/input/source.json", "--lock", "/input/source.lock.json",
                             "--cache", "/cache"]
         if action == "replay":
             command += ["--compile"]
+        if action == "binding":
+            command += ["--out", "/scratch/fifo_v3.binding.json"]
         action_evidence = evidence if action == "replay" else evidence.with_name(f"{evidence.stem}-{action}.json")
         try:
             run(command, action_evidence)
@@ -217,6 +219,8 @@ else:
                 record["transportRoot"] = str(transport)
                 record["isolatedEnvironment"] = environment
                 action_evidence.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n")
+    if args.pilot:
+        shutil.copy2(scratch / "fifo_v3.binding.json", evidence.with_name(evidence.stem + "-binding-output.json"))
     if tree_digest(cache) != original_cache_digest or tree_digest(copied_cache) != original_cache_digest:
         raise SystemExit("offline replay mutated the original or read-only copied cache")
     isolation_record = json.loads(isolation_evidence.read_text())
@@ -246,6 +250,7 @@ def parser() -> argparse.ArgumentParser:
     command.add_argument("--evidence")
     command.add_argument("--require-commit")
     command.add_argument("--compile", action="store_true")
+    command.add_argument("--pilot", action="store_true", help="also execute the FR200 binding and independent wrapper behavior gates")
     return result
 
 

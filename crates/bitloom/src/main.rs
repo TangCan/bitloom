@@ -287,6 +287,26 @@ enum ExternalIpCmd {
         #[arg(long, default_value_t = false)]
         compile: bool,
     },
+    /// Emit the verified, lock-derived fifo_v3 binding descriptor.
+    Binding {
+        #[arg(long)]
+        manifest: PathBuf,
+        #[arg(long)]
+        lock: PathBuf,
+        #[arg(long)]
+        cache: PathBuf,
+        #[arg(long)]
+        out: PathBuf,
+    },
+    /// Drive the locked fifo_v3 RTL against an independent bounded queue model.
+    Behavior {
+        #[arg(long)]
+        manifest: PathBuf,
+        #[arg(long)]
+        lock: PathBuf,
+        #[arg(long)]
+        cache: PathBuf,
+    },
 }
 
 #[derive(Debug, Deserialize)]
@@ -685,6 +705,17 @@ fn main() {
                     cache,
                     compile,
                 } => external_ip::replay(&manifest, &lock, &cache, compile),
+                ExternalIpCmd::Binding {
+                    manifest,
+                    lock,
+                    cache,
+                    out,
+                } => external_ip::binding(&manifest, &lock, &cache, &out),
+                ExternalIpCmd::Behavior {
+                    manifest,
+                    lock,
+                    cache,
+                } => external_ip::behavior(&manifest, &lock, &cache),
             };
             if let Err(error) = result {
                 eprintln!("error: {error}");

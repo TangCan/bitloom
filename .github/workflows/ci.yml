@@ -462,3 +462,38 @@ jobs:
         run: bash scripts/test-semver-check.sh
       - name: Required FR144 semver-check
         run: bash scripts/semver-check.sh
+
+  fr200-external-ip-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.97.1"
+      - name: Install real RTL and isolation tools
+        run: sudo apt-get update && sudo apt-get install -y yosys iverilog bubblewrap z3 g++ make m4 curl
+      - name: Build and run real wrapper mutation oracle
+        run: |
+          cargo build -p bitloom
+          cargo test -p bitloom --bin cargo-bitloom p0_behavior_oracle_kills_empty_and_zero_output_wrappers -- --ignored --nocapture
+      - name: Fresh online closure and isolated P0 pilot, normal and optimized Python
+        run: |
+          python3 scripts/phase24-external-ip-pilot.py --work "$RUNNER_TEMP/fr200-pilot"
+          python3 -O scripts/phase24-external-ip-pilot.py --work "$RUNNER_TEMP/fr200-pilot" --reuse
+          python3 scripts/phase24-external-ip-automation-test.py --work "$RUNNER_TEMP/fr200-pilot" --self-test
+          python3 -O scripts/phase24-external-ip-automation-test.py --work "$RUNNER_TEMP/fr200-pilot" --mode optimized --self-test
+      - name: Provision test-only pinned Verilator and run unchanged upstream FIFO suite
+        run: |
+          python3 scripts/provision-phase24-verilator.py --root "$RUNNER_TEMP/fr200-verilator"
+          python3 scripts/phase24-external-ip-upstream.py --lock "$RUNNER_TEMP/fr200-pilot/source.lock.json" --cache "$RUNNER_TEMP/fr200-pilot/cache" --verilator-root "$RUNNER_TEMP/fr200-verilator" --work "$RUNNER_TEMP/fr200-upstream" --evidence "$RUNNER_TEMP/fr200-upstream.json" --timeout 3600 --parallel-cases
+      - name: Preserve pilot evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fr200-external-ip-pilot
+          path: |
+            ${{ runner.temp }}/fr200-pilot/evidence-normal/
+            ${{ runner.temp }}/fr200-pilot/evidence-optimized/
+            ${{ runner.temp }}/fr200-upstream*.json
+            ${{ runner.temp }}/fr200-upstream*.log

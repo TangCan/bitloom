@@ -1,0 +1,119 @@
+{
+  "commands": [
+    {
+      "command": [
+        "/verilator/bin/verilator",
+        "--version"
+      ],
+      "durationSeconds": 0.07450238599994918,
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Verilator 5.052 2026-09-05 rev v5.052\n"
+    },
+    {
+      "command": [
+        "/verilator/bin/verilator",
+        "--binary",
+        "--timing",
+        "--assert",
+        "-Wno-fatal",
+        "--top-module",
+        "fifo_tb",
+        "--Mdir",
+        "/scratch/build/obj_dir",
+        "-j",
+        "8",
+        "+incdir+/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/include",
+        "/scratch/build/upstream.vlt",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/clk_rst_gen.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/src/fifo_v3.sv",
+        "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv"
+      ],
+      "durationSeconds": 4.77715233500021,
+      "exitCode": 0,
+      "stderr": "%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv:22:7: Logical operator ASSERT expects 1 bit on the Property, but Property's VARREF 'rand_success' generates 32 bits.\n                                                                                                                                                                                                                                                                 : ... note: In instance 'fifo_tb.i_tb_ft_9'\n   22 |       assert (rand_success) else $error(\"Failed to randomize wait cycles!\");\n      |       ^~~~~~\n                     ... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.052\n                     ... Use \"/* verilator lint_off WIDTHTRUNC */\" and lint_on around source to disable this message.\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:98:26: Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's METHODCALL 'randomize' generates 32 bits.\n                                                                                                                                                                                                                                                     : ... note: In instance 'fifo_tb.i_tb_ft_9'\n   98 |             rand_success = rand_act.randomize(); assert(rand_success);\n      |                          ^\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:101:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'fifo_tb.i_tb_ft_9'\n  101 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:105:33: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'fifo_tb.i_tb_ft_9'\n  105 |                     wdata       <= #TA $random();\n      |                                 ^~\n%Warning-WIDTHTRUNC: /cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv:124:21: Operator ASSIGNDLY expects 1 bits on the Assign RHS, but Assign RHS's RAND generates 32 bits.\n                                                                                                                                                                                                                                                      : ... note: In instance 'fifo_tb.i_tb_ft_9'\n  124 |             try_pop <= #TA $random();\n      |                     ^~\n",
+      "stdout": "make: Entering directory '/scratch/build/obj_dir'\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated.o /verilator/include/verilated.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_timing.o /verilator/include/verilated_timing.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_random.o /verilator/include/verilated_random.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_threads.o /verilator/include/verilated_threads.cpp\npython3 /verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vfifo_tb.cpp Vfifo_tb___024root__0.cpp Vfifo_tb_fifo_inst_tb__pi1__0.cpp Vfifo_tb_fifo_inst_tb__pi2__0.cpp Vfifo_tb_fifo_inst_tb__pi3__0.cpp Vfifo_tb_fifo_inst_tb__pi4__0.cpp Vfifo_tb_fifo_inst_tb__pi5__0.cpp Vfifo_tb_fifo_inst_tb__pi6__0.cpp Vfifo_tb_rand_verif_pkg__0.cpp Vfifo_tb_std__03a__03asemaphore__Vclpkg__0.cpp Vfifo_tb_std__03a__03aprocess__Vclpkg__0.cpp Vfifo_tb_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__0.cpp Vfifo_tb_fifo_inst_tb__pi2__03a__03arandom_action_t__Vclpkg__0.cpp Vfifo_tb_fifo_inst_tb__pi3__03a__03arandom_action_t__Vclpkg__0.cpp Vfifo_tb_fifo_inst_tb__pi4__03a__03arandom_action_t__Vclpkg__0.cpp Vfifo_tb_fifo_inst_tb__pi5__03a__03arandom_action_t__Vclpkg__0.cpp Vfifo_tb_fifo_inst_tb__pi6__03a__03arandom_action_t__Vclpkg__0.cpp Vfifo_tb__main.cpp Vfifo_tb___024root__Slow.cpp Vfifo_tb___024root__0__Slow.cpp Vfifo_tb_std__Slow.cpp Vfifo_tb_fifo_inst_tb__pi1__Slow.cpp Vfifo_tb_fifo_inst_tb__pi1__0__Slow.cpp Vfifo_tb_fifo_inst_tb__pi2__Slow.cpp Vfifo_tb_fifo_inst_tb__pi2__0__Slow.cpp Vfifo_tb_fifo_inst_tb__pi3__Slow.cpp Vfifo_tb_fifo_inst_tb__pi3__0__Slow.cpp Vfifo_tb_fifo_inst_tb__pi4__Slow.cpp Vfifo_tb_fifo_inst_tb__pi4__0__Slow.cpp Vfifo_tb_fifo_inst_tb__pi5__Slow.cpp Vfifo_tb_fifo_inst_tb__pi5__0__Slow.cpp Vfifo_tb_fifo_inst_tb__pi6__Slow.cpp Vfifo_tb_fifo_inst_tb__pi6__0__Slow.cpp Vfifo_tb_rand_verif_pkg__Slow.cpp Vfifo_tb_rand_verif_pkg__0__Slow.cpp Vfifo_tb_std__03a__03asemaphore__Vclpkg__Slow.cpp Vfifo_tb_std__03a__03aprocess__Vclpkg__Slow.cpp Vfifo_tb_fifo_inst_tb__pi1__03a__03arandom_action_t__Vclpkg__Slow.cpp Vfifo_tb_fifo_inst_tb__pi2__03a__03arandom_action_t__Vclpkg__Slow.cpp Vfifo_tb_fifo_inst_tb__pi3__03a__03arandom_action_t__Vclpkg__Slow.cpp Vfifo_tb_fifo_inst_tb__pi4__03a__03arandom_action_t__Vclpkg__Slow.cpp Vfifo_tb_fifo_inst_tb__pi5__03a__03arandom_action_t__Vclpkg__Slow.cpp Vfifo_tb_fifo_inst_tb__pi6__03a__03arandom_action_t__Vclpkg__Slow.cpp Vfifo_tb__Syms__Slow.cpp > Vfifo_tb__ALL.cpp\ng++ -Os  -I.  -MMD -I/verilator/include -I/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -DVM_SOLVER_DEFAULT='\"z3\\\\ --in\"' -DVL_TIME_CONTEXT   -fcoroutines -c -o Vfifo_tb__ALL.o Vfifo_tb__ALL.cpp\ng++    verilated.o verilated_timing.o verilated_random.o verilated_threads.o Vfifo_tb__ALL.a    -pthread -lpthread -latomic   -o Vfifo_tb\nrm Vfifo_tb__ALL.verilator_deplist.tmp\nmake: Leaving directory '/scratch/build/obj_dir'\n- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052\n- Verilator: Built from 0.148 MB sources in 11 modules, into 0.456 MB in 44 C++ files needing 0.002 MB\n- Verilator: Walltime 4.698 s (elab=0.008, cvt=0.042, bld=4.631); cpu 0.101 s on 8 threads; allocated 23.902 MB\n"
+    },
+    {
+      "command": [
+        "/scratch/build/obj_dir/Vfifo_tb",
+        "+verilator+seed+1303"
+      ],
+      "durationSeconds": 900.2088966770007,
+      "exitCode": 124,
+      "stderr": "",
+      "stdout": ""
+    }
+  ],
+  "diagnosticControl": "`verilator_config\nlint_off -rule CONTASSINIT -file \"*/test/fifo_tb.sv\"\n",
+  "error": "simulate failed with exit 124",
+  "inputs": [
+    {
+      "path": "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/rand_verif_pkg.sv",
+      "sha256": "4ee3b3f8c1d4d4ef5767e004f8e75a0e20033034033e459b1d374f4e89ee954b"
+    },
+    {
+      "path": "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_verification-6fc76fb013315af9fabbb90b431863d498df2d6d-93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171/src/clk_rst_gen.sv",
+      "sha256": "cd90320bae5a58afdae6a77938139b6733669f56bc5ed035351e769ff8ad02d9"
+    },
+    {
+      "path": "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/src/fifo_v3.sv",
+      "sha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc"
+    },
+    {
+      "path": "/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e/common_cells-1281545696eb3fcba50ec5b4275993476a3c710e-087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6/test/fifo_tb.sv",
+      "sha256": "f26bbf1dcb1547e65b450354b39709b8a72927dcc7e3f24ce6fd3094204b4d94"
+    }
+  ],
+  "limitations": [
+    "Upstream VERILATOR conditional disables fall-through SVA; queue assertions remain enabled.",
+    "Upstream bench uses DATA_WIDTH=8; pilot DATA_WIDTH=32 is covered separately."
+  ],
+  "lockSha256": "eff631f963c80908b112712fd5d387608e57e32e69e7f9637b0e5b25c690fd6f",
+  "passed": false,
+  "seed": 1303,
+  "simulationExecutableSha256": "a0b114f201d9043029e27727ccd6f21f9a179146c8f0b8e45153d5ef312bc832",
+  "sources": [
+    {
+      "commit": "1281545696eb3fcba50ec5b4275993476a3c710e",
+      "name": "common_cells",
+      "treeDigest": "087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6"
+    },
+    {
+      "commit": "6fc76fb013315af9fabbb90b431863d498df2d6d",
+      "name": "common_verification",
+      "treeDigest": "93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171"
+    },
+    {
+      "commit": "a9cae21902e75b1434328ecf36f85327ba5717de",
+      "name": "tech_cells_generic",
+      "treeDigest": "42ebabe1945ab57caf368282d84a6ea6c7c06ea85668067df4511efdb049cd9f"
+    }
+  ],
+  "startedUtc": "2026-09-23T03:09:34Z",
+  "tools": [
+    {
+      "path": "/verilator/bin/verilator",
+      "sha256": "308c54eb0194bb5c95d7cc093e0491922d2455177d401b03a8224ad7efe5cf35"
+    },
+    {
+      "path": "/verilator/bin/verilator_bin",
+      "sha256": "38073bf4af1252bc2606cbab63926c8a798f71cd590895ef9f1e76a46347ea9d"
+    },
+    {
+      "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+      "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+    },
+    {
+      "path": "/usr/bin/make",
+      "sha256": "d78b8f1d099fbcfb6f2f49ab87223b9b68fb3956642f92d6ec6de812e8afa965"
+    },
+    {
+      "path": "/usr/bin/z3",
+      "sha256": "c05be002097e2f2106efeeac03e58032e3f5cca10104f95d7a0ddc0bd3f907cb"
+    }
+  ],
+  "upstreamBenchUnmodified": true,
+  "verilatorVersion": "Verilator 5.052 2026-09-05 rev v5.052"
+}

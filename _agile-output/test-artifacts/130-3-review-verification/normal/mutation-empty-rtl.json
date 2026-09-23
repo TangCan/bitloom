@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/tmp/bitloom-130-3-review-pilot-final/cargo-bitloom",
+    "external-ip",
+    "behavior",
+    "--manifest",
+    "/tmp/bitloom-130-3-review-pilot-final/source.json",
+    "--lock",
+    "/tmp/bitloom-130-3-review-pilot-final/source.lock.json",
+    "--cache",
+    "/tmp/bitloom-130-3-review-pilot-final/cache"
+  ],
+  "exitCode": 1,
+  "stdout": "",
+  "stderr": "error: bitloom.external-ip.content-drift: common_cells:src/fifo_v3.sv hash 7e285212c3f017ab0a0a4077e1923debb1a15340fd6a752c3cb4d4c83cd61823 != 861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc\n",
+  "startedUtc": "2026-09-23T03:24:55Z",
+  "durationSeconds": 2.3410959243774414
+}

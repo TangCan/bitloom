@@ -19,3 +19,7 @@
 canonical lock SHA256：`3c57f91816380e731dbb5882c783dc7737d9359903e9b12b0e22dbf58921d725`。CLI SHA256：`a5ac9eeabcfae5e06c15f49e88621ece7b08abac05de72b388a03c71ca89af54`。源身份与169+13+28文件分配见 `130-2-final-regression/closure-identity.json`；线上/离线原始证据为 `130-2-online-fetch.json`、`130-2-offline-replay.json` 及 `130-2-offline-replay-isolation.json`。只读原输入证明见 `130-2-final-regression/readonly-inputs.json` 与同目录 `readonly-inner-*.json`。
 
 来源登记和锁定事实已验证，但按NFR14更强边界，外部试点支持矩阵仍全部 no / not delivered；真实绑定、行为、维护与整个Epic关闭留给Story130.3。没有修改工具产品pin、包版本、发布状态或既有FR189/NFR91边界，没有push/publish。
+
+## Story130.3 工具身份扩展后的历史快照定位
+
+本 Story 关闭提交为 `4152610f29e8bb242bba789e3ba3f53376eb21fc`。上述 lock `3c57f918…` 和当时线上/离线原始证据已保存在 `130-2-final-regression/accepted-snapshot/`；当前 canonical lock/evidence 由 Story130.3 增加模拟器及 helper 身份后重新绑定，不把新工具快照反写为本 Story 当时的运行。210 来源文件及 compile 意图未改变。

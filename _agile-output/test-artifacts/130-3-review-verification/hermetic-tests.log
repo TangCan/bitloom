@@ -1,0 +1,20 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.61s
+     Running tests/fr200_external_ip_behavior.rs (target/debug/deps/fr200_external_ip_behavior-70e935df20faca6f)
+
+running 3 tests
+test locked_fifo_matches_independent_model_for_reset_and_boundaries ... ignored, explicit provisioned real-tool gate: just fr200-external-ip-pilot-check
+test offline_pilot_replay_consumes_only_copied_lock_and_cache ... ignored, requires bubblewrap network namespace and isolated copied-cache runner
+test behavior_rejects_invalid_manifest_without_external_tools_or_cache ... ok
+
+test result: ok. 1 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr200_external_ip_binding.rs (target/debug/deps/fr200_external_ip_binding-fdc8172287340c1e)
+
+running 3 tests
+test binding_matches_locked_fifo_module_and_shape ... ignored, explicit provisioned real-tool gate: just fr200-external-ip-pilot-check
+test binding_rejects_source_parameter_port_and_reset_drift ... ignored, explicit provisioned real-tool gate: just fr200-external-ip-pilot-check
+test binding_rejects_invalid_manifest_without_external_tools_or_cache ... ok
+
+test result: ok. 1 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

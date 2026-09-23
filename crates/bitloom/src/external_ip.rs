@@ -135,6 +135,22 @@ struct ToolLock {
     timeout: String,
     timeout_path: String,
     timeout_sha256: String,
+    #[serde(default)]
+    iverilog: String,
+    #[serde(default)]
+    iverilog_path: String,
+    #[serde(default)]
+    iverilog_sha256: String,
+    #[serde(default)]
+    iverilog_base: String,
+    #[serde(default)]
+    iverilog_runtime_sha256: BTreeMap<String, String>,
+    #[serde(default)]
+    vvp: String,
+    #[serde(default)]
+    vvp_path: String,
+    #[serde(default)]
+    vvp_sha256: String,
     adapter: String,
     adapter_version: u32,
 }
@@ -411,6 +427,77 @@ fn command_output(command: &mut Command, label: &str) -> Result<Output, String> 
     Ok(output)
 }
 
+fn simulator_identity(name: &str) -> Result<(String, String, String), String> {
+    let path = tool_path(name)?;
+    let output = command_output(Command::new(&path).arg("-V"), name)?;
+    let version = String::from_utf8_lossy(&output.stdout)
+        .lines()
+        .chain(String::from_utf8_lossy(&output.stderr).lines())
+        .find(|line| !line.trim().is_empty())
+        .unwrap_or_default()
+        .trim()
+        .to_owned();
+    if version.is_empty() {
+        return Err(fail("tool", format!("{name} returned an empty version")));
+    }
+    let digest = sha256_file(Path::new(&path))?;
+    Ok((version, path, digest))
+}
+
+// Pin the compiler behind the Icarus driver as well as the driver itself.
+// The selected base is passed explicitly with -B; ambiguous installations
+// fail rather than hashing one installation and executing another.
+fn iverilog_runtime(driver: &str) -> Result<(String, BTreeMap<String, String>), String> {
+    let prefix = Path::new(driver)
+        .parent()
+        .and_then(Path::parent)
+        .ok_or_else(|| fail("tool", "cannot locate Icarus installation prefix"))?;
+    let mut candidates = BTreeSet::new();
+    for library in [prefix.join("lib"), prefix.join("lib64")] {
+        candidates.insert(library.join("ivl"));
+        if let Ok(entries) = fs::read_dir(&library) {
+            for entry in entries {
+                let entry =
+                    entry.map_err(|e| fail("tool", format!("scan Icarus installation: {e}")))?;
+                if entry.file_name().to_string_lossy().contains("linux-gnu") {
+                    candidates.insert(entry.path().join("ivl"));
+                }
+            }
+        }
+    }
+    let required = ["ivl", "ivlpp", "vvp.tgt", "vvp.conf"];
+    let mut bases = BTreeSet::new();
+    for candidate in candidates {
+        if required.iter().all(|file| candidate.join(file).is_file()) {
+            bases.insert(
+                fs::canonicalize(candidate)
+                    .map_err(|e| fail("tool", format!("Icarus base: {e}")))?,
+            );
+        }
+    }
+    if bases.len() != 1 {
+        return Err(fail(
+            "tool",
+            "expected exactly one complete Icarus ivl installation",
+        ));
+    }
+    let base = bases.into_iter().next().unwrap();
+    let mut hashes = BTreeMap::new();
+    for name in required {
+        let file = base.join(name);
+        hashes.insert(file.to_string_lossy().into_owned(), sha256_file(&file)?);
+    }
+    for entry in fs::read_dir(&base).map_err(|e| fail("tool", format!("Icarus runtime: {e}")))? {
+        let file = entry
+            .map_err(|e| fail("tool", format!("Icarus runtime: {e}")))?
+            .path();
+        if file.extension() == Some(OsStr::new("vpi")) {
+            hashes.insert(file.to_string_lossy().into_owned(), sha256_file(&file)?);
+        }
+    }
+    Ok((base.to_string_lossy().into_owned(), hashes))
+}
+
 fn line(output: Output) -> String {
     String::from_utf8_lossy(&output.stdout)
         .lines()
@@ -454,6 +541,9 @@ fn tool_lock() -> Result<ToolLock, String> {
     let git_path = tool_path("git")?;
     let yosys_path = tool_path("yosys")?;
     let timeout_path = tool_path("timeout")?;
+    let (iverilog, iverilog_path, iverilog_sha256) = simulator_identity("iverilog")?;
+    let (vvp, vvp_path, vvp_sha256) = simulator_identity("vvp")?;
+    let (iverilog_base, iverilog_runtime_sha256) = iverilog_runtime(&iverilog_path)?;
     Ok(ToolLock {
         bitloom: format!("bitloom {}", env!("CARGO_PKG_VERSION")),
         bitloom_path,
@@ -467,6 +557,14 @@ fn tool_lock() -> Result<ToolLock, String> {
         timeout,
         timeout_sha256: sha256_file(Path::new(&timeout_path))?,
         timeout_path,
+        iverilog,
+        iverilog_path,
+        iverilog_sha256,
+        iverilog_base,
+        iverilog_runtime_sha256,
+        vvp,
+        vvp_path,
+        vvp_sha256,
         adapter: ADAPTER_NAME.into(),
         adapter_version: ADAPTER_VERSION,
     })
@@ -866,6 +964,10 @@ fn publish_license_archives(
     Ok(())
 }
 
+// Deliberately small, fail-closed parser for the admitted Bender dependency
+// mapping. This is not a general YAML loader: aliases, tags and nested maps
+// are rejected rather than guessed. Both upstream inline maps and block maps
+// are supported; scalar values are compared in full.
 fn dependency_scalar(value: &str) -> Result<String, String> {
     let value = value.trim();
     let scalar = if value.starts_with('"') && value.ends_with('"') && value.len() >= 2 {
@@ -1176,7 +1278,8 @@ fn ensure_lock_compatible(path: &Path, bytes: &[u8]) -> Result<bool, String> {
 fn write_bytes_atomic(path: &Path, bytes: &[u8]) -> Result<(), String> {
     let parent = path
         .parent()
-        .ok_or_else(|| fail("path", "output path has no parent"))?;
+        .filter(|p| !p.as_os_str().is_empty())
+        .unwrap_or(Path::new("."));
     fs::create_dir_all(parent)
         .map_err(|e| fail("io", format!("create {}: {e}", parent.display())))?;
     let temp = temp_path(parent, "lock");
@@ -1521,7 +1624,7 @@ fn load_verified(
     if serde_json::to_value(&tools).ok() != serde_json::to_value(&lock.tools).ok() {
         return Err(fail(
             "tool-drift",
-            "Git, Yosys or adapter identity differs from lock",
+            "Git, Yosys, simulator or adapter identity differs from lock",
         ));
     }
     if lock.sources.len() != manifest.sources.len() {
@@ -1576,6 +1679,420 @@ pub fn verify(
     );
     Ok(())
 }
+
+const FIFO_WRAPPER: &str = "BitloomExternalFifo";
+
+fn pilot_port_type(port: &PortIntent) -> Result<bitloom_hir::GroundType, String> {
+    use bitloom_hir::GroundType;
+    match (port.name.as_str(), port.width.as_str()) {
+        ("clk_i", "1") => Ok(GroundType::Clock),
+        ("rst_ni", "1") => Ok(GroundType::Reset),
+        (_, "1") => Ok(GroundType::UInt { width: 1 }),
+        (_, "DATA_WIDTH") => Ok(GroundType::UInt { width: 32 }),
+        (_, "ADDR_DEPTH") => Ok(GroundType::UInt { width: 3 }),
+        _ => Err(fail("binding", "unsupported pilot port width")),
+    }
+}
+
+fn fifo_wrapper_hir(compile: &CompileIntent) -> Result<bitloom_hir::FrozenHir, String> {
+    use bitloom_builder::{ElaborateSession, Span};
+    validate_pilot_compile(compile)?;
+    let span = Span::default();
+    let mut session = ElaborateSession::new(FIFO_WRAPPER);
+    // Existing port-only external declaration, with no simulated zero body.
+    for name in [compile.top.as_str(), FIFO_WRAPPER] {
+        session.begin_module(name, span);
+        for port in &compile.ports {
+            let ty = pilot_port_type(port)?;
+            if port.direction == "input" {
+                session.add_input(&port.name, ty, span);
+            } else {
+                session.add_output(&port.name, ty, span);
+            }
+        }
+        if name == FIFO_WRAPPER {
+            session.add_instance(
+                "fifo",
+                &compile.top,
+                compile
+                    .ports
+                    .iter()
+                    .map(|p| (p.name.clone(), p.name.clone()))
+                    .collect(),
+                vec![
+                    ("FALL_THROUGH".into(), 0),
+                    ("DATA_WIDTH".into(), 32),
+                    ("DEPTH".into(), 8),
+                ],
+                span,
+            );
+        }
+        session.end_module();
+    }
+    session
+        .finish()
+        .map_err(|e| fail("binding", format!("freeze wrapper: {e}")))
+}
+
+// CLI link boundary only: keep the backend's parent byte-for-byte. The
+// backend presently emits external declarations; remove precisely the one
+// verified port-only declaration that the locked RTL will supply instead.
+fn link_fifo_wrapper(
+    hir: &bitloom_hir::FrozenHir,
+    emitted: &str,
+    compile: &CompileIntent,
+) -> Result<String, String> {
+    use bitloom_hir::{PortDirection, Stmt};
+    validate_pilot_compile(compile)?;
+    let modules = &hir.circuit().modules;
+    let opaque = modules
+        .iter()
+        .find(|m| m.name == compile.top)
+        .ok_or_else(|| fail("binding", "external declaration missing"))?;
+    let parent = modules
+        .iter()
+        .find(|m| m.name == FIFO_WRAPPER)
+        .ok_or_else(|| fail("binding", "parent missing"))?;
+    if modules.len() != 2
+        || !opaque.body.is_empty()
+        || opaque.ports.len() != compile.ports.len()
+        || parent.ports != opaque.ports
+        || parent.body.len() != 1
+    {
+        return Err(fail(
+            "binding",
+            "wrapper or opaque declaration shape/body differs",
+        ));
+    }
+    for (actual, expected) in opaque.ports.iter().zip(&compile.ports) {
+        let direction = if expected.direction == "input" {
+            PortDirection::Input
+        } else {
+            PortDirection::Output
+        };
+        if actual.name != expected.name
+            || actual.direction != direction
+            || actual.ty != pilot_port_type(expected)?
+        {
+            return Err(fail("binding", "opaque declaration port shape differs"));
+        }
+    }
+    let Stmt::Instance(instance) = &parent.body[0] else {
+        return Err(fail("binding", "parent is not a composed instance"));
+    };
+    let expected_params = vec![
+        ("FALL_THROUGH".into(), 0),
+        ("DATA_WIDTH".into(), 32),
+        ("DEPTH".into(), 8),
+    ];
+    if instance.name != "fifo"
+        || instance.module != compile.top
+        || instance.params != expected_params
+        || instance.connects.len() != compile.ports.len()
+        || instance
+            .connects
+            .iter()
+            .zip(&compile.ports)
+            .any(|(c, p)| c.dangling || c.child_port != p.name || c.parent_net != p.name)
+    {
+        return Err(fail("binding", "parent instance mapping differs"));
+    }
+    let regenerated = bitloom_vlog::emit(hir);
+    if regenerated.files.len() != 1 || regenerated.files[0].contents != emitted {
+        return Err(fail(
+            "binding",
+            "emitted wrapper changed after backend generation",
+        ));
+    }
+    let mut declaration = format!("module {} (\n", compile.top);
+    let ports = compile
+        .ports
+        .iter()
+        .map(|p| {
+            let width = match p.width.as_str() {
+                "DATA_WIDTH" => "[31:0] ",
+                "ADDR_DEPTH" => "[2:0] ",
+                _ => "",
+            };
+            format!("  {} {width}{}", p.direction, p.name)
+        })
+        .collect::<Vec<_>>()
+        .join(",\n");
+    declaration.push_str(&ports);
+    declaration.push_str("\n);\nendmodule\n");
+    if emitted.matches(&declaration).count() != 1 {
+        return Err(fail(
+            "binding",
+            "emitted external declaration differs from exact port-only shape",
+        ));
+    }
+    let linked = emitted.replacen(&declaration, "", 1);
+    if linked.matches("endmodule").count() != 1
+        || !linked.contains(&format!("module {FIFO_WRAPPER} ("))
+        || !linked.contains("  fifo_v3 fifo (\n")
+    {
+        return Err(fail(
+            "binding",
+            "composed parent missing after external link",
+        ));
+    }
+    Ok(linked)
+}
+
+fn emit_fifo_wrapper(compile: &CompileIntent) -> Result<String, String> {
+    let hir = fifo_wrapper_hir(compile)?;
+    let artifact = bitloom_vlog::emit(&hir);
+    if artifact.files.len() != 1 {
+        return Err(fail("binding", "unexpected backend artifact count"));
+    }
+    link_fifo_wrapper(&hir, &artifact.files[0].contents, compile)
+}
+
+fn guard_binding_output(
+    output: &Path,
+    manifest: &Path,
+    lock: &Path,
+    cache: &Path,
+) -> Result<(), String> {
+    let parent = output
+        .parent()
+        .filter(|p| !p.as_os_str().is_empty())
+        .unwrap_or(Path::new("."));
+    let destination = fs::canonicalize(parent)
+        .map_err(|e| fail("path", format!("binding output directory: {e}")))?
+        .join(
+            output
+                .file_name()
+                .ok_or_else(|| fail("path", "binding output has no file name"))?,
+        );
+    let cache = fs::canonicalize(cache).map_err(|e| fail("path", format!("cache: {e}")))?;
+    if destination.starts_with(cache)
+        || [manifest, lock]
+            .iter()
+            .any(|p| fs::canonicalize(p).ok().as_ref() == Some(&destination))
+    {
+        return Err(fail(
+            "path",
+            "binding output must not overwrite source inputs or cache",
+        ));
+    }
+    if let Ok(metadata) = fs::symlink_metadata(&destination) {
+        if !metadata.is_file() || metadata.file_type().is_symlink() {
+            return Err(fail("path", "binding output must be a regular file"));
+        }
+    }
+    Ok(())
+}
+
+/// Produce an auditable wrapper binding from the verified manifest and lock.
+/// This intentionally records the upstream identity separately from the
+/// Bitloom adapter version and carries the ordered shape verbatim from lock.
+pub fn binding(
+    manifest_path: &Path,
+    lock_path: &Path,
+    cache: &Path,
+    output: &Path,
+) -> Result<(), String> {
+    let (manifest, lock) = load_verified(manifest_path, lock_path, cache)?;
+    verify_compile_contract(&manifest, &lock.sources, cache)?;
+    let source_path = compile_path(&manifest.compile.files[0], &lock.sources, cache)?;
+    guard_binding_output(output, manifest_path, lock_path, cache)?;
+    let upstream = lock
+        .sources
+        .iter()
+        .find(|source| source.name == "common_cells")
+        .ok_or_else(|| fail("binding", "common_cells source identity missing"))?;
+    let wrapper = emit_fifo_wrapper(&manifest.compile)?;
+    let descriptor = serde_json::json!({
+        "schemaVersion": 1,
+        "upstream": {
+            "name": manifest.name,
+            "url": upstream.url,
+            "ref": upstream.r#ref,
+            "commit": upstream.commit,
+            "sourcePath": manifest.compile.files[0],
+            "sourceSha256": sha256_file(&source_path)?,
+        },
+        "wrapper": { "name": FIFO_WRAPPER, "version": 1, "verilog": wrapper,
+            "sha256": sha256(wrapper.as_bytes()),
+            "parameterBinding": "fixed upstream defaults; no backend parameter overrides" },
+        "adapter": { "name": ADAPTER_NAME, "version": ADAPTER_VERSION },
+        "module": manifest.compile.top,
+        "parameters": manifest.compile.parameters,
+        "ports": manifest.compile.ports.iter().map(|p| serde_json::json!({
+            "name": p.name, "direction": p.direction, "width": p.width
+        })).collect::<Vec<_>>(),
+        "clockReset": manifest.compile.clock_reset,
+        "supportLevel": "locked"
+    });
+    let bytes = serde_json::to_vec_pretty(&descriptor)
+        .map_err(|e| fail("schema", format!("serialize binding: {e}")))?;
+    let mut bytes = bytes;
+    bytes.push(b'\n');
+    write_bytes_atomic(output, &bytes)?;
+    println!(
+        "binding={} module={} source_sha256={}",
+        output.display(),
+        manifest.compile.top,
+        sha256_file(&source_path)?
+    );
+    Ok(())
+}
+
+/// Simulate the actual locked RTL under Icarus and compare every sampled
+/// boundary with a separate software queue embedded in the testbench.
+pub fn behavior(manifest_path: &Path, lock_path: &Path, cache: &Path) -> Result<(), String> {
+    let (manifest, lock) = load_verified(manifest_path, lock_path, cache)?;
+    verify_compile_contract(&manifest, &lock.sources, cache)?;
+    let source_path = compile_path(&manifest.compile.files[0], &lock.sources, cache)?;
+    let source = fs::read_to_string(&source_path)
+        .map_err(|e| fail("behavior", format!("read locked RTL: {e}")))?;
+    let adapted = adapt_fifo_for_yosys(&source)?;
+    let wrapper = emit_fifo_wrapper(&manifest.compile)?;
+    let include = compile_path(&manifest.compile.include_dirs[0], &lock.sources, cache)?;
+    let stdout = simulate_fifo(
+        &adapted,
+        &wrapper,
+        &include,
+        &lock.tools.iverilog_path,
+        &lock.tools.iverilog_base,
+        &lock.tools.vvp_path,
+    )?;
+    println!(
+        "behavior=passed rtl_sha256={} wrapper_sha256={} simulator=iverilog",
+        sha256_file(&source_path)?,
+        sha256(wrapper.as_bytes())
+    );
+    print!("{stdout}");
+    Ok(())
+}
+
+fn simulate_fifo(
+    adapted: &str,
+    wrapper: &str,
+    include: &Path,
+    iverilog: &str,
+    iverilog_base: &str,
+    vvp: &str,
+) -> Result<String, String> {
+    let work = temp_path(&std::env::temp_dir(), "behavior");
+    fs::create_dir_all(&work).map_err(|e| fail("behavior", format!("create work dir: {e}")))?;
+    let result = (|| {
+        let rtl = work.join("fifo_v3.sv");
+        let parent = work.join("BitloomExternalFifo.v");
+        let tb = work.join("fifo_v3_tb.sv");
+        let exe = work.join("fifo_v3.vvp");
+        for (path, contents) in [(&rtl, adapted), (&parent, wrapper), (&tb, FIFO_BEHAVIOR_TB)] {
+            fs::write(path, contents)
+                .map_err(|e| fail("behavior", format!("write {}: {e}", path.display())))?;
+        }
+        let result = bounded_output(
+            Command::new(iverilog)
+                .arg("-B")
+                .arg(iverilog_base)
+                .env("TMPDIR", &work)
+                .args([
+                    "-g2012",
+                    "-DSYNTHESIS",
+                    "-DCOMMON_CELLS_ASSERTS_OFF",
+                    "-s",
+                    "fifo_v3_tb",
+                    "-o",
+                ])
+                .arg(&exe)
+                .arg("-I")
+                .arg(include)
+                .arg(&rtl)
+                .arg(&parent)
+                .arg(&tb),
+            "iverilog behavior",
+        )?;
+        if !result.status.success() {
+            return Err(fail(
+                "behavior",
+                format!(
+                    "iverilog failed: {}",
+                    String::from_utf8_lossy(&result.stderr)
+                ),
+            ));
+        }
+        let result = bounded_output(Command::new(vvp).arg(&exe), "vvp behavior")?;
+        let stdout = String::from_utf8_lossy(&result.stdout);
+        if !result.status.success() || !stdout.contains("FIFO_MODEL_PASS") {
+            return Err(fail(
+                "behavior",
+                format!(
+                    "simulation failed: {stdout}{}",
+                    String::from_utf8_lossy(&result.stderr)
+                ),
+            ));
+        }
+        Ok(stdout.into_owned())
+    })();
+    let _ = fs::remove_dir_all(&work);
+    result
+}
+
+const FIFO_BEHAVIOR_TB: &str = r#"
+module fifo_v3_tb;
+  reg clk_i=0, rst_ni=1, flush_i=0, testmode_i=0, push_i=0, pop_i=0;
+  reg [31:0] data_i=0;
+  wire full_o, empty_o;
+  wire [2:0] usage_o;
+  wire [31:0] data_o;
+  reg [31:0] model [0:7];
+  integer count=0, i, accepted_push, accepted_pop, cycles=0;
+  BitloomExternalFifo dut (.*);
+  always #5 clk_i=~clk_i;
+  task automatic step(input reg p, input reg q, input reg [31:0] d);
+    begin
+      cycles=cycles+1;
+      @(negedge clk_i); push_i=p; pop_i=q; data_i=d; #1;
+      if (full_o !== (count==8) || empty_o !== (count==0) || usage_o !== count[2:0]) $fatal(1,"pre-edge status mismatch count=%0d",count);
+      if (count>0 && data_o !== model[0]) $fatal(1,"head mismatch expected=%h got=%h",model[0],data_o);
+      accepted_push=p && count<8; accepted_pop=q && count>0;
+      @(posedge clk_i);
+      if (accepted_pop) begin for (integer j=0;j<7;j=j+1) model[j]=model[j+1]; count=count-1; end
+      if (accepted_push) begin model[count]=d; count=count+1; end
+      #1;
+      if (full_o !== (count==8) || empty_o !== (count==0) || usage_o !== count[2:0]) $fatal(1,"post-edge status mismatch count=%0d",count);
+      if (count>0 && data_o !== model[0]) $fatal(1,"post-edge head mismatch");
+    end
+  endtask
+  initial begin
+    #1 rst_ni=0; #1;
+    if (empty_o !== 1'b1 || full_o !== 1'b0 || usage_o !== 0) $fatal(1,"async reset mismatch");
+    @(negedge clk_i); rst_ni=1;
+    step(0,0,0);
+    for(i=0;i<8;i=i+1) step(1,0,32'h1000+i);
+    step(1,0,32'hffff); // full rejects a push
+    step(1,1,32'h2000); // full simultaneous push/pop accepts only pop
+    step(0,1,0);
+    step(1,0,32'h3000);
+    step(1,1,32'h4000);
+    step(0,1,0); step(0,1,0); step(0,1,0); step(0,1,0); step(0,1,0); step(0,1,0); step(0,1,0);
+    step(0,0,0);
+    for(i=0;i<64;i=i+1) begin
+      step((i*17+3)%5<3, (i*11+1)%4<2, 32'h5a000000+i);
+    end
+    // Fill with nonzero data, then assert reset between active edges.
+    while(count>0) step(0,1,0);
+    step(1,0,32'hfeed1234); step(1,0,32'hfeed5678);
+    @(negedge clk_i); push_i=0; pop_i=0; #2 rst_ni=0; count=0; #1;
+    if (empty_o !== 1'b1 || full_o !== 1'b0 || usage_o !== 0) $fatal(1,"populated asynchronous reset mismatch");
+    @(negedge clk_i); rst_ni=1;
+    step(0,0,0); step(1,0,32'hdeadcafe); step(0,1,0); step(0,1,0);
+    // Flush is an exposed input and must clear a populated queue.
+    step(1,0,32'habcdef01); step(1,0,32'habcdef02);
+    @(negedge clk_i); push_i=0; pop_i=0; flush_i=1;
+    @(posedge clk_i); count=0; #1;
+    if (empty_o !== 1'b1 || full_o !== 1'b0 || usage_o !== 0) $fatal(1,"flush mismatch");
+    @(negedge clk_i); flush_i=0;
+    step(1,0,32'hffffeeee); step(0,1,0);
+    $display("FIFO_MODEL_PASS cycles=%0d depth=8 width=32 populated_reset=1 flush=1 wrapper=BitloomExternalFifo",cycles); $finish;
+  end
+endmodule
+"#;
 
 fn compile_path<'a>(
     value: &'a str,

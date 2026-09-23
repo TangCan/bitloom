@@ -1,0 +1,6 @@
+{
+  "startedUtc": "2026-09-23T03:47:27Z",
+  "pid": 1651670,
+  "signal": "SIGTERM",
+  "reason": "Reviewed full parallel six x 100000 upstream suite passed; stop supplemental monolithic run, which is incomplete and not PASS."
+}

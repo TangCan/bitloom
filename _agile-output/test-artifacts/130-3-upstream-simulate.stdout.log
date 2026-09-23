@@ -1,0 +1,10 @@
+fifo_tb.i_tb_8: Running test with FALL_THROUGH=0, DEPTH=8
+fifo_tb.i_tb_ft_8: Running test with FALL_THROUGH=1, DEPTH=8
+fifo_tb.i_tb_1: Running test with FALL_THROUGH=0, DEPTH=1
+fifo_tb.i_tb_ft_1: Running test with FALL_THROUGH=1, DEPTH=1
+fifo_tb.i_tb_9: Running test with FALL_THROUGH=0, DEPTH=9
+fifo_tb.i_tb_ft_9: Running test with FALL_THROUGH=1, DEPTH=9
+fifo_tb.i_tb_ft_9: Checked 100000 stimuli
+fifo_tb.i_tb_9: Checked 100000 stimuli
+fifo_tb.i_tb_ft_8: Checked 100000 stimuli
+fifo_tb.i_tb_8: Checked 100000 stimuli

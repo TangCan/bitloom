@@ -1,0 +1,36 @@
+{
+  "url": "https://github.com/verilator/verilator.git",
+  "tag": "v5.052",
+  "commit": "ea338be98e1e838d3518809ce8899f85a009963c",
+  "toolRoot": "/tmp/bitloom-verilator-5.052",
+  "verilatorBinSha256": "38073bf4af1252bc2606cbab63926c8a798f71cd590895ef9f1e76a46347ea9d",
+  "buildDependencies": [
+    {
+      "name": "autoconf_2.71-3_all.deb",
+      "sha256": "cc3f9f7a1e576173fb59c36652c0a67c6426feae752b352404ba92dfcb1b26c9"
+    },
+    {
+      "name": "automake_1%3a1.16.5-1.3ubuntu1_all.deb",
+      "sha256": "5ae9a98e73545002cd891f028859941af2a3c760cb6190e635c7ef36953912de"
+    },
+    {
+      "name": "flex_2.6.4-8.2build1_amd64.deb",
+      "sha256": "c5604f55827b50e3f568b4731b7799f86b147454c867be02bc141d9d8ce561ff"
+    },
+    {
+      "name": "bison_2%3a3.8.2+dfsg-1ubuntu0.24.04.1_amd64.deb",
+      "sha256": "9d75084d1293f68f3c1a2ee677dea5baa4e010bac2d4c455d8e23177e97aa353"
+    },
+    {
+      "name": "libfl-dev.deb",
+      "sha256": "5d3438b7a8bd82c8e5859dbf2fefd7523a204eff8ed5f5736fe732047e938be0"
+    }
+  ],
+  "buildCommand": "make -C src -j16 opt",
+  "includeEnvironment": {
+    "PATH prefix": "/tmp/bitloom-verilator-build-deps/root/usr/bin",
+    "BISON_PKGDATADIR": "/tmp/bitloom-verilator-build-deps/root/usr/share/bison",
+    "CPLUS_INCLUDE_PATH": "/tmp/bitloom-verilator-build-deps/root/usr/include"
+  },
+  "productPinsChanged": false
+}

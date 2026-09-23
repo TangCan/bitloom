@@ -253,3 +253,12 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 | `external-ip replay --manifest --lock --cache --compile` | 要求由隔离编排器提供禁网环境，验证后真实编译冻结 filelist；不构成 FIFO 行为验收 |
 
 以上 CLI 追加按 FR142/FR143/SemVer minor 登记；未改包版本、未发布。来源 schema 是单一冻结试点的私有版本化格式，不承诺任意外部 IP 包管理。真实隔离入口为 `scripts/phase24-external-ip-replay.py replay --compile`，来源验收与 Story130.3 行为验收分别记录。
+
+### `bitloom` CLI — Story130.3 外部 FIFO 绑定追加
+
+| 命令 | 契约 |
+|---|---|
+| `external-ip binding --manifest --lock --cache --out` | 校验固定来源后生成包含 Bitloom 组合父模块内容/hash 的绑定产物；输出不得覆盖输入或缓存 |
+| `external-ip behavior --manifest --lock --cache` | 验证工具/来源身份，再执行真实 Bitloom 组合 RTL 与独立 FIFO oracle；错误和超时非零失败 |
+
+这是 additive CLI surface，按 FR142/FR143/SemVer minor 管理；未修改包版本或发布，不声称 crates.io 已包含。未新增 prelude/hir/builder/vlog 公共符号，私有 pilot schema 不自动提升为通用外部包管理 API。固定参数、来源层与原生 unsupported 边界见 [外部 FIFO 试点](ip/external-fifo-pilot.md)。支持状态仍以 Story130.3 真实验收为准。

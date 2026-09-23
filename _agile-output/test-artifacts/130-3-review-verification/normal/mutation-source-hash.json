@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/tmp/bitloom-130-3-review-pilot-final/cargo-bitloom",
+    "external-ip",
+    "binding",
+    "--manifest",
+    "/tmp/bitloom-130-3-review-pilot-final/source.json",
+    "--lock",
+    "/tmp/bitloom-130-3-review-pilot-final/source.lock.json",
+    "--cache",
+    "/tmp/bitloom-130-3-review-pilot-final/cache",
+    "--out",
+    "/tmp/bitloom-130-3-review-pilot-final/rejected.json"
+  ],
+  "exitCode": 1,
+  "stdout": "",
+  "stderr": "error: bitloom.external-ip.content-drift: common_cells:.github/verible-lint-matcher.json hash 68de9d96bd4ccac2076f61bca0cf147c56876d7b17489fede0ac98cc505912b6 != 0000000000000000000000000000000000000000000000000000000000000000\n",
+  "startedUtc": "2026-09-23T03:25:11Z",
+  "durationSeconds": 2.33941388130188
+}

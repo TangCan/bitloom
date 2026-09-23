@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "/nvme_data2/richard/2026/rhdl/scripts/phase24-external-ip-replay.py",
+    "replay",
+    "--compile",
+    "--pilot",
+    "--manifest",
+    "/tmp/bitloom-130-3-review-pilot-final/source.json",
+    "--lock",
+    "/tmp/bitloom-130-3-review-pilot-final/source.lock.json",
+    "--cache",
+    "/tmp/bitloom-130-3-review-pilot-final/cache",
+    "--evidence",
+    "/tmp/bitloom-130-3-review-pilot-final/evidence-optimized/offline.json"
+  ],
+  "exitCode": 0,
+  "stdout": "ISOLATION_PASS filesystem=denied network=denied\nnetwork=denied\nnetwork_namespace=net:[4026531840]->net:[4026535071]\nhdl_compile=passed\nadapter=bitloom-yosys-sv-compat@1\nadapter_input_sha256=861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc\nadapter_output_sha256=7512ebaf5b925e85d7dd32409eedc4dc02e1813ec5af3ff0cdd98d773af7178d\nbinding=/scratch/fifo_v3.binding.json module=fifo_v3 source_sha256=861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc\nbehavior=passed rtl_sha256=861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc wrapper_sha256=edfeea555e5ba12411a0761ed62c24ae1bced3f0b0204e1ae0532441f6e001bf simulator=iverilog\nFIFO_MODEL_PASS cycles=104 depth=8 width=32 populated_reset=1 flush=1 wrapper=BitloomExternalFifo\n/scratch/.tmp-behavior-2-1790134026193954171/fifo_v3_tb.sv:57: $finish called at 1096 (1s)\n",
+  "stderr": "",
+  "startedUtc": "2026-09-23T03:26:58Z",
+  "durationSeconds": 7.623544216156006
+}

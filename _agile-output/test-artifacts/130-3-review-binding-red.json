@@ -1,0 +1,12 @@
+{
+  "story": "130.3",
+  "phase": "red",
+  "descriptorSha256": "e38673088585838f5f042910a4e49cb1ee42d0b0503c72c438eb56820863dcac",
+  "expectation": "真实 Bitloom 生成父模块、外部模块关联及已消费的 RTL 内容必须可追踪",
+  "observedWrapper": {
+    "name": "bitloom-yosys-sv-compat",
+    "version": 1
+  },
+  "result": "FAIL",
+  "reason": "当前 wrapper 仅 name/version，未携带 Bitloom 生成的组合父模块或其文件 hash；行为 TB 直接实例化 fifo_v3。此前 panic scaffold 不计行为 RED 证据。"
+}
