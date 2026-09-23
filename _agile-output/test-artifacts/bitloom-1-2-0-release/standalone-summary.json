@@ -1,0 +1,146 @@
+{
+  "passed": true,
+  "sandbox": "/tmp/bitloom-1.2.0-candidate-ik04so45",
+  "generated_registry_dependencies": {
+    "func": {
+      "bitloom-hir": "1.2.0"
+    },
+    "cycle": {
+      "bitloom-hir": "1.2.0",
+      "bitloom-sim": "1.2.0",
+      "bitloom-builder": "1.2.0"
+    }
+  },
+  "consumer_packages": [
+    {
+      "name": "bitloom-builder",
+      "version": "1.2.0",
+      "manifest_path": "/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-builder-1.2.0/Cargo.toml"
+    },
+    {
+      "name": "bitloom-hir",
+      "version": "1.2.0",
+      "manifest_path": "/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-hir-1.2.0/Cargo.toml"
+    },
+    {
+      "name": "bitloom-macro",
+      "version": "1.2.0",
+      "manifest_path": "/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-macro-1.2.0/Cargo.toml"
+    },
+    {
+      "name": "bitloom-prelude",
+      "version": "1.2.0",
+      "manifest_path": "/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-prelude-1.2.0/Cargo.toml"
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "install",
+        "--list",
+        "--root",
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/install"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/install/bin/cargo-bitloom",
+        "--help"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/install/bin/cargo-bitloom",
+        "new",
+        "candidate_blink",
+        "--path",
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/consumer-66epgpg9"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/install/bin/cargo-bitloom",
+        "build",
+        "--package",
+        "candidate_blink",
+        "--manifest-dir",
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/consumer-66epgpg9/candidate_blink",
+        "--out-dir",
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/consumer-66epgpg9/verilog"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/install/bin/cargo-bitloom",
+        "gen-func",
+        "--package",
+        "candidate_blink",
+        "--manifest-dir",
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/consumer-66epgpg9/candidate_blink",
+        "--out-dir",
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/consumer-66epgpg9/func"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "run",
+        "--offline",
+        "--manifest-path",
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/consumer-66epgpg9/func/Cargo.toml"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/install/bin/cargo-bitloom",
+        "gen-cycle",
+        "--package",
+        "candidate_blink",
+        "--manifest-dir",
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/consumer-66epgpg9/candidate_blink",
+        "--out-dir",
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/consumer-66epgpg9/cycle"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "run",
+        "--offline",
+        "--manifest-path",
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/consumer-66epgpg9/cycle/Cargo.toml"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "run",
+        "--offline",
+        "--manifest-path",
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/consumer-66epgpg9/csr-example/Cargo.toml"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "metadata",
+        "--offline",
+        "--format-version",
+        "1",
+        "--manifest-path",
+        "/tmp/bitloom-1.2.0-candidate-ik04so45/consumer-66epgpg9/candidate_blink/Cargo.toml"
+      ],
+      "exit": 0
+    }
+  ]
+}

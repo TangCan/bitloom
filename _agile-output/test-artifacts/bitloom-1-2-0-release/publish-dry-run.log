@@ -1,0 +1,88 @@
+    Updating crates.io index
+   Packaging bitloom-hir v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+    Packaged 7 files, 43.7KiB (10.7KiB compressed)
+   Packaging bitloom-builder v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+    Updating crates.io index
+    Packaged 7 files, 140.5KiB (25.5KiB compressed)
+   Packaging bitloom-sim v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+    Updating crates.io index
+    Packaged 18 files, 285.7KiB (65.8KiB compressed)
+   Packaging bitloom-vlog v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-vlog)
+    Updating crates.io index
+    Packaged 5 files, 19.9KiB (4.7KiB compressed)
+   Packaging bitloom-firrtl v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-firrtl)
+    Updating crates.io index
+    Packaged 17 files, 128.9KiB (24.9KiB compressed)
+   Packaging bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+    Updating crates.io index
+    Packaged 5 files, 21.3KiB (5.9KiB compressed)
+   Packaging bitloom-prelude v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+    Updating crates.io index
+    Packaged 30 files, 274.7KiB (53.8KiB compressed)
+   Packaging bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+    Updating crates.io index
+    Packaged 7 files, 44.1KiB (11.9KiB compressed)
+   Packaging bitloom v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Updating crates.io index
+    Packaged 425 files, 2.9MiB (553.3KiB compressed)
+   Packaging bitloom-lsp v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-lsp)
+    Updating crates.io index
+    Packaged 12 files, 76.2KiB (17.3KiB compressed)
+   Verifying bitloom-hir v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+   Compiling bitloom-hir v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-hir-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 20.97s
+   Verifying bitloom-builder v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+    Updating crates.io index
+   Compiling bitloom-builder v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-builder-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 21.45s
+   Verifying bitloom-sim v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+    Updating crates.io index
+   Compiling bitloom-sim v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-sim-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 22.20s
+   Verifying bitloom-vlog v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-vlog)
+    Updating crates.io index
+   Compiling bitloom-vlog v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-vlog-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 22.83s
+   Verifying bitloom-firrtl v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-firrtl)
+    Updating crates.io index
+   Compiling bitloom-firrtl v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-firrtl-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 23.48s
+   Verifying bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+   Compiling bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-macro-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 23.74s
+   Verifying bitloom-prelude v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+    Updating crates.io index
+   Compiling bitloom-prelude v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-prelude-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 25.03s
+   Verifying bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+    Updating crates.io index
+   Compiling bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-viz-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 25.49s
+   Verifying bitloom v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Updating crates.io index
+   Compiling bitloom v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 29.31s
+   Verifying bitloom-lsp v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-lsp)
+    Updating crates.io index
+   Compiling bitloom-lsp v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-lsp-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 33.06s
+   Uploading bitloom-hir v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+warning: aborting upload due to dry run
+   Uploading bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+warning: aborting upload due to dry run
+   Uploading bitloom-builder v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+warning: aborting upload due to dry run
+   Uploading bitloom-lsp v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-lsp)
+warning: aborting upload due to dry run
+   Uploading bitloom-sim v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+warning: aborting upload due to dry run
+   Uploading bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+warning: aborting upload due to dry run
+   Uploading bitloom-vlog v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-vlog)
+warning: aborting upload due to dry run
+   Uploading bitloom-firrtl v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-firrtl)
+warning: aborting upload due to dry run
+   Uploading bitloom-prelude v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+warning: aborting upload due to dry run
+   Uploading bitloom v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+warning: aborting upload due to dry run

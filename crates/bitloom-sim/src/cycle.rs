@@ -123,7 +123,8 @@ fn resolve_dep(crate_name: &str, out_dir: &Path) -> String {
 
 fn published_dependency_version(crate_name: &str) -> &'static str {
     match crate_name {
-        "bitloom-hir" | "bitloom-builder" => "1.1.1",
+        // HIR/builder最低版本独立于sim补丁版本；发布候选检查与实际依赖对齐。
+        "bitloom-hir" | "bitloom-builder" => "1.2.0",
         "bitloom-sim" => env!("CARGO_PKG_VERSION"),
         _ => unreachable!("cycle crate generator requested unknown dependency: {crate_name}"),
     }
@@ -610,8 +611,8 @@ mod tests {
 
     #[test]
     fn generated_crate_registry_dependencies_use_published_versions() {
-        assert_eq!(published_dependency_version("bitloom-hir"), "1.1.1");
-        assert_eq!(published_dependency_version("bitloom-builder"), "1.1.1");
+        assert_eq!(published_dependency_version("bitloom-hir"), "1.2.0");
+        assert_eq!(published_dependency_version("bitloom-builder"), "1.2.0");
         assert_eq!(
             published_dependency_version("bitloom-sim"),
             env!("CARGO_PKG_VERSION")

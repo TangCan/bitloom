@@ -1,0 +1,7 @@
+{
+  "Cargo.toml": "907096620dcad4f02dd535df4ae766d0888abbffe1f8ac660664c944c7ac33fd",
+  "crates/bitloom-sim/Cargo.toml": "03252047328952dd3774b5c0d5db3173f8628b706693ec10e8f383d4ea8d68fd",
+  "crates/bitloom-sim/src/cycle.rs": "90647408102947400b470a2810c2d4c1141576455b68b99daa3b456a581a0b19",
+  "crates/bitloom-sim/src/generate.rs": "ceef9d23ce8da05f717715c9094c214850c27f67ae906984ec8a2e55eb2f21a8",
+  "README.md": "7afd68cc09ad57b89cb41f54b1554b2676a89145f509f78e190389e7190211e5"
+}

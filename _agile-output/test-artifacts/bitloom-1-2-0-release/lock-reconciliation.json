@@ -1,0 +1,6 @@
+{
+  "package_resolution_identical": true,
+  "extra_only": "patch.unused",
+  "unused_candidate_patches": 10,
+  "action": "restored archived lock; no dependency version/checksum changes"
+}

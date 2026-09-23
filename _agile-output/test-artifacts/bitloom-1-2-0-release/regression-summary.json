@@ -1,0 +1,18 @@
+{
+  "command_exit": 0,
+  "result_blocks": 487,
+  "passed": 1898,
+  "failed": 0,
+  "ignored": 56,
+  "filtered": 5,
+  "excluded_tests": [
+    "fr149_bitloom_firrtl_dry_run_publish",
+    "fr150_bitloom_viz_dry_run_publish",
+    "fr151_bitloom_cli_dry_run_publish",
+    "fr152_lsp_policy_a_documented_and_dry_run",
+    "fr155_bitloom_lsp_dry_run_still_green"
+  ],
+  "full_unfiltered_pass": false,
+  "separate_ten_package_publish_dry_run_exit": 0,
+  "sim_final_lib_passed": 38
+}

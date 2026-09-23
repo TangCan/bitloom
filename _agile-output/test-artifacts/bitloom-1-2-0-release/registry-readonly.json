@@ -1,0 +1,55 @@
+{
+  "checked_at": "2026-09-23T11:18:20.542209+00:00",
+  "packages": [
+    {
+      "name": "bitloom",
+      "latest_stable": "1.1.0",
+      "version_1_2_0_exists": false
+    },
+    {
+      "name": "bitloom-prelude",
+      "latest_stable": "1.1.1",
+      "version_1_2_0_exists": false
+    },
+    {
+      "name": "bitloom-sim",
+      "latest_stable": "1.1.6",
+      "version_1_2_0_exists": false
+    },
+    {
+      "name": "bitloom-macro",
+      "latest_stable": "1.1.1",
+      "version_1_2_0_exists": false
+    },
+    {
+      "name": "bitloom-hir",
+      "latest_stable": "1.1.1",
+      "version_1_2_0_exists": false
+    },
+    {
+      "name": "bitloom-builder",
+      "latest_stable": "1.1.1",
+      "version_1_2_0_exists": false
+    },
+    {
+      "name": "bitloom-vlog",
+      "latest_stable": "1.1.1",
+      "version_1_2_0_exists": false
+    },
+    {
+      "name": "bitloom-firrtl",
+      "latest_stable": "1.1.1",
+      "version_1_2_0_exists": false
+    },
+    {
+      "name": "bitloom-viz",
+      "latest_stable": "1.1.0",
+      "version_1_2_0_exists": false
+    },
+    {
+      "name": "bitloom-lsp",
+      "latest_stable": "1.1.0",
+      "version_1_2_0_exists": false
+    }
+  ]
+}

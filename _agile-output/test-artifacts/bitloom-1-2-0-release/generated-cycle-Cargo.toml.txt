@@ -1,0 +1,18 @@
+[package]
+name = "bitloom_cycle_candidateblink"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.97.1"
+publish = false
+description = "Generated Bitloom cycle-accurate tick wrapper (FR47). Not SystemC."
+
+[workspace]
+
+[dependencies]
+bitloom-hir = "1.2.0"
+bitloom-sim = "1.2.0"
+bitloom-builder = "1.2.0"
+
+[[bin]]
+name = "bitloom_cycle_candidateblink"
+path = "src/main.rs"

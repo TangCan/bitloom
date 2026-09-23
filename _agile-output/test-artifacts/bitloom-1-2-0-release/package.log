@@ -1,0 +1,221 @@
+   Packaging bitloom-hir v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+    Packaged 7 files, 43.7KiB (10.7KiB compressed)
+   Packaging bitloom-builder v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+    Packaged 7 files, 140.5KiB (25.5KiB compressed)
+   Packaging bitloom-sim v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+    Packaged 18 files, 285.6KiB (65.7KiB compressed)
+   Packaging bitloom-vlog v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-vlog)
+    Packaged 5 files, 19.9KiB (4.7KiB compressed)
+   Packaging bitloom-firrtl v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-firrtl)
+    Packaged 17 files, 128.9KiB (24.9KiB compressed)
+   Packaging bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+    Packaged 5 files, 21.3KiB (5.9KiB compressed)
+   Packaging bitloom-prelude v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+    Packaged 30 files, 274.7KiB (53.8KiB compressed)
+   Packaging bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+    Packaged 7 files, 44.1KiB (11.9KiB compressed)
+   Packaging bitloom v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Packaged 425 files, 2.9MiB (553.3KiB compressed)
+   Packaging bitloom-lsp v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-lsp)
+    Packaged 12 files, 76.2KiB (17.3KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging bundle_vec_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/bundle_vec_skel)
+    Packaged 13 files, 34.4KiB (7.2KiB compressed)
+warning: manifest has no documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging chisel_mixed v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/chisel_mixed)
+    Packaged 5 files, 7.2KiB (2.7KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging clockdomain_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/clockdomain_skel)
+    Packaged 5 files, 13.0KiB (4.5KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging counter_ports v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/counter_ports)
+    Packaged 9 files, 11.5KiB (4.0KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging doubleflop_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/doubleflop_skel)
+    Packaged 5 files, 7.4KiB (2.9KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging fifo_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/fifo_skel)
+    Packaged 5 files, 6.3KiB (2.4KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging ip_box v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/ip_box)
+    Packaged 5 files, 8.1KiB (2.4KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging mixed_both v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/mixed_both)
+    Packaged 5 files, 7.4KiB (2.7KiB compressed)
+warning: manifest has no documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging rhdl-cabi v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-cabi)
+    Packaged 9 files, 19.1KiB (5.6KiB compressed)
+warning: manifest has no documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging rhdl-float v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-float)
+    Packaged 5 files, 4.2KiB (2.0KiB compressed)
+warning: manifest has no documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging rhdl-formal v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-formal)
+    Packaged 11 files, 8.9KiB (3.6KiB compressed)
+warning: manifest has no documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging rhdl-hls v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-hls)
+    Packaged 5 files, 8.6KiB (3.1KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging rv32_core v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/rv32_core)
+    Packaged 7 files, 38.6KiB (10.5KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging rv32_feasibility v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/rv32_feasibility)
+    Packaged 6 files, 10.3KiB (4.0KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging rv32_pipe v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/rv32_pipe)
+    Packaged 6 files, 48.4KiB (10.8KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging rv32_pipeline_feasibility v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/rv32_pipeline_feasibility)
+    Packaged 6 files, 11.7KiB (4.4KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging rv32_priv v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/rv32_priv)
+    Packaged 6 files, 28.3KiB (6.6KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging syncfifo_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/syncfifo_skel)
+    Packaged 5 files, 7.8KiB (3.0KiB compressed)
+warning: manifest has no description, documentation, homepage or repository
+  |
+  = note: see https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info
+   Packaging wide_adder v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/wide_adder)
+    Packaged 5 files, 4.9KiB (2.1KiB compressed)
+   Verifying bitloom-hir v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+   Compiling bitloom-hir v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-hir-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.24s
+   Verifying bitloom-builder v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+    Blocking waiting for file lock on package cache
+   Unpacking bitloom-hir v1.2.0 (registry `/nvme_data2/richard/2026/rhdl/target/package/tmp-registry`)
+   Compiling bitloom-hir v1.2.0
+   Compiling bitloom-builder v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-builder-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.88s
+   Verifying bitloom-sim v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+   Compiling bitloom-sim v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-sim-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.09s
+   Verifying bitloom-vlog v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-vlog)
+    Blocking waiting for file lock on build directory
+   Compiling bitloom-vlog v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-vlog-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.27s
+   Verifying bitloom-firrtl v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-firrtl)
+   Compiling bitloom-firrtl v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-firrtl-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.92s
+   Verifying bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+   Compiling bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-macro-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 9.49s
+   Verifying bitloom-prelude v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Unpacking bitloom-builder v1.2.0 (registry `/nvme_data2/richard/2026/rhdl/target/package/tmp-registry`)
+   Unpacking bitloom-macro v1.2.0 (registry `/nvme_data2/richard/2026/rhdl/target/package/tmp-registry`)
+   Compiling bitloom-builder v1.2.0
+   Compiling bitloom-macro v1.2.0
+   Compiling bitloom-prelude v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-prelude-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 11.76s
+   Verifying bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+   Compiling bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-viz-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 12.34s
+   Verifying bitloom v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+   Unpacking bitloom-firrtl v1.2.0 (registry `/nvme_data2/richard/2026/rhdl/target/package/tmp-registry`)
+   Unpacking bitloom-sim v1.2.0 (registry `/nvme_data2/richard/2026/rhdl/target/package/tmp-registry`)
+   Unpacking bitloom-viz v1.2.0 (registry `/nvme_data2/richard/2026/rhdl/target/package/tmp-registry`)
+   Unpacking bitloom-vlog v1.2.0 (registry `/nvme_data2/richard/2026/rhdl/target/package/tmp-registry`)
+   Compiling bitloom-sim v1.2.0
+   Compiling bitloom-viz v1.2.0
+   Compiling bitloom-vlog v1.2.0
+   Compiling bitloom-firrtl v1.2.0
+   Compiling bitloom v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 19.14s
+   Verifying bitloom-lsp v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-lsp)
+    Blocking waiting for file lock on build directory
+   Compiling bitloom-lsp v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-lsp-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 33.01s
+   Verifying bundle_vec_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/bundle_vec_skel)
+   Unpacking bitloom-prelude v1.2.0 (registry `/nvme_data2/richard/2026/rhdl/target/package/tmp-registry`)
+   Compiling bitloom-prelude v1.2.0
+   Compiling bundle_vec_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bundle_vec_skel-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 33.88s
+   Verifying chisel_mixed v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/chisel_mixed)
+   Compiling chisel_mixed v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/chisel_mixed-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 33.97s
+   Verifying clockdomain_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/clockdomain_skel)
+   Compiling clockdomain_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/clockdomain_skel-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 34.07s
+   Verifying counter_ports v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/counter_ports)
+   Compiling counter_ports v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/counter_ports-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 34.20s
+   Verifying doubleflop_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/doubleflop_skel)
+   Compiling doubleflop_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/doubleflop_skel-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 34.28s
+   Verifying fifo_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/fifo_skel)
+   Compiling fifo_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/fifo_skel-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 34.37s
+   Verifying ip_box v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/ip_box)
+   Compiling ip_box v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/ip_box-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 34.44s
+   Verifying mixed_both v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/mixed_both)
+   Compiling mixed_both v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/mixed_both-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 34.60s
+   Verifying rhdl-cabi v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-cabi)
+   Compiling rhdl-cabi v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/rhdl-cabi-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 34.93s
+   Verifying rhdl-float v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-float)
+   Compiling rhdl-float v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/rhdl-float-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 35.02s
+   Verifying rhdl-formal v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-formal)
+   Compiling rhdl-formal v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/rhdl-formal-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 35.19s
+   Verifying rhdl-hls v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-hls)
+   Compiling rhdl-hls v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/rhdl-hls-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 35.43s
+   Verifying rv32_core v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/rv32_core)
+   Compiling rv32_core v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/rv32_core-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 35.58s
+   Verifying rv32_feasibility v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/rv32_feasibility)
+   Compiling rv32_feasibility v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/rv32_feasibility-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 35.68s
+   Verifying rv32_pipe v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/rv32_pipe)
+   Compiling rv32_pipe v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/rv32_pipe-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 35.88s
+   Verifying rv32_pipeline_feasibility v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/rv32_pipeline_feasibility)
+   Compiling rv32_pipeline_feasibility v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/rv32_pipeline_feasibility-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 35.98s
+   Verifying rv32_priv v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/rv32_priv)
+   Compiling rv32_priv v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/rv32_priv-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 36.12s
+   Verifying syncfifo_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/syncfifo_skel)
+   Compiling syncfifo_skel v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/syncfifo_skel-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 36.20s
+   Verifying wide_adder v1.2.0 (/nvme_data2/richard/2026/rhdl/examples/wide_adder)
+   Compiling wide_adder v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/wide_adder-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 36.30s

@@ -10,6 +10,26 @@ followed Cargo **0.x** compatibility rules.
 
 ## [Unreleased]
 
+### 1.2.0 发布候选（尚未上传 crates.io）
+
+#### 新增
+
+- Phase24 可组合 IP：共享展开 session、模块实例校验、两槽 ready/valid 注册切片、参数同步 FIFO（FR194–195）。
+- 静态 CSR 描述及软件地址产物、AXI-Lite 桥、四窗译码（FR196）；Timer32、五源 IRQ、GPIO32 CSR、双 FIFO UART CSR（FR197）。
+- 两种外设子系统拓扑、组合与后端验收配方（FR198/FR201）。
+- 外部 IP 来源清单、锁定、离线验证/隔离重放及一个真实外部 FIFO 试点（FR199–200）。
+
+#### 修复与变更
+
+- AXI 独立请求捕获与事务保持；外部缓存重锁失败保留已有闭包，拒绝缓存祖先符号链接越界。
+- 发布家族统一至 **1.2.0**，生成的功能/周期仿真 crate 依赖跟随同版家族。
+- 新增公开接口按 FR142/FR143 登记为 SemVer **minor**；历史 1.1.x 发布保持有效。
+
+#### 范围
+
+- 发布候选验证与最终操作见[1.2.0 发布清单](docs/bitloom-1-2-0-release.md)。此段不表示已发布。
+- FR189/Epic122 仍 deferred，NFR91 保留；层级 native/generated 仿真仍 unsupported，物理签核/上板未完成，不扩展外部 IP 试点支持矩阵。
+
 ## [1.1.0] - 2026-09-14
 
 ### Added

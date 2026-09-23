@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "candidate_version": "1.2.0",
+  "packages": [
+    "bitloom",
+    "bitloom-builder",
+    "bitloom-firrtl",
+    "bitloom-hir",
+    "bitloom-lsp",
+    "bitloom-macro",
+    "bitloom-prelude",
+    "bitloom-sim",
+    "bitloom-viz",
+    "bitloom-vlog"
+  ],
+  "internal_dependency_minimum": "1.2.0",
+  "workspace_lock_sha256": "b8c26593329e021c0b0b83d359a82a62c1d494ee54d673483f6cc1cd80d020b0",
+  "format_and_diff": "pass",
+  "archive_hashes_verified": 10,
+  "published": false
+}

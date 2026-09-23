@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "initialize": {
+    "jsonrpc": "2.0",
+    "result": {
+      "capabilities": {
+        "definitionProvider": true,
+        "documentSymbolProvider": true,
+        "textDocumentSync": {
+          "change": 1,
+          "openClose": true,
+          "save": true
+        }
+      },
+      "serverInfo": {
+        "name": "bitloom-lsp",
+        "version": "1.2.0"
+      }
+    },
+    "id": 1
+  },
+  "shutdown": {
+    "jsonrpc": "2.0",
+    "result": null,
+    "id": 2
+  },
+  "exit": 0
+}

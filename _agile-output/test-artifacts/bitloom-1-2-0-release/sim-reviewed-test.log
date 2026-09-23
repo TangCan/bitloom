@@ -1,0 +1,102 @@
+warning: patch `bitloom v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-1.2.0)` was not used in the crate graph
+  |
+  = help: perhaps you meant one of the following:
+            /nvme_data2/richard/2026/rhdl/crates/bitloom
+warning: patch `bitloom-builder v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-builder-1.2.0)` was not used in the crate graph
+  |
+  = help: perhaps you meant one of the following:
+            /nvme_data2/richard/2026/rhdl/crates/bitloom-builder
+warning: patch `bitloom-firrtl v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-firrtl-1.2.0)` was not used in the crate graph
+  |
+  = help: perhaps you meant one of the following:
+            /nvme_data2/richard/2026/rhdl/crates/rhdl-firrtl
+warning: patch `bitloom-hir v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-hir-1.2.0)` was not used in the crate graph
+  |
+  = help: perhaps you meant one of the following:
+            /nvme_data2/richard/2026/rhdl/crates/bitloom-hir
+warning: patch `bitloom-lsp v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-lsp-1.2.0)` was not used in the crate graph
+  |
+  = help: perhaps you meant one of the following:
+            /nvme_data2/richard/2026/rhdl/crates/bitloom-lsp
+warning: patch `bitloom-macro v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-macro-1.2.0)` was not used in the crate graph
+  |
+  = help: perhaps you meant one of the following:
+            /nvme_data2/richard/2026/rhdl/crates/bitloom-macro
+warning: patch `bitloom-prelude v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-prelude-1.2.0)` was not used in the crate graph
+  |
+  = help: perhaps you meant one of the following:
+            /nvme_data2/richard/2026/rhdl/crates/bitloom-prelude
+warning: patch `bitloom-sim v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-sim-1.2.0)` was not used in the crate graph
+  |
+  = help: perhaps you meant one of the following:
+            /nvme_data2/richard/2026/rhdl/crates/bitloom-sim
+warning: patch `bitloom-viz v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-viz-1.2.0)` was not used in the crate graph
+  |
+  = help: perhaps you meant one of the following:
+            /nvme_data2/richard/2026/rhdl/crates/rhdl-viz
+warning: patch `bitloom-vlog v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-vlog-1.2.0)` was not used in the crate graph
+  |
+  = help: perhaps you meant one of the following:
+            /nvme_data2/richard/2026/rhdl/crates/bitloom-vlog
+   Compiling bitloom-hir v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+   Compiling bitloom-builder v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+   Compiling bitloom-sim v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+    Finished `test` profile [optimized + debuginfo] target(s) in 4.19s
+     Running unittests src/lib.rs (/tmp/bitloom-1.2.0-candidate-ik04so45/sim-tests/debug/deps/bitloom_sim-62bf29299cf7aa1a)
+
+running 38 tests
+test coverage::tests::lcov_and_gui_nonempty ... ok
+test coverage::tests::state_visit_hit_and_miss ... ok
+test cycle::tests::emit_cycle_crate_rebuilds_gpr_style_memory_writes ... ok
+test cycle::tests::bridge_pass_and_mismatch_fail ... ok
+test cycle::tests::generated_crate_registry_dependencies_use_published_versions ... ok
+test formal_equiv::tests::exhaustive_depth_two_bool_has_four_sequences ... ok
+test formal_equiv::tests::alphabet_two_ports_has_four_frames ... ok
+test cycle::tests::emit_cycle_crate_supports_reg_d_mux ... ok
+test formal_equiv::tests::random_stimuli_reproducible ... ok
+test generate::tests::generated_functional_matches_tick_port_values ... ok
+test shared_stimulus::tests::rejects_duplicate_instance_coverage ... ok
+test generate::tests::generated_functional_sync_read_mem_matches_tick ... ok
+test generate::tests::emit_writes_crate_with_gold_test ... ok
+test shared_stimulus::tests::aggregates_state_coverage_without_hit_miss_overlap ... ok
+test tests::async_reset_assert_and_release_tick_golden ... ok
+test systemc_tlm::tests::emit_writes_lt_sources ... ok
+test tests::dual_view_equiv_fail_on_deliberate_mismatch ... ok
+test tests::dual_view_equiv_pass ... ok
+test systemc_tlm_at::tests::emit_writes_at_sources ... ok
+test tests::coverage_has_hit_and_miss ... ok
+test tests::enable_high_matches_ungated_counter ... ok
+test tests::enable_low_holds_value ... ok
+test tests::fst_missing_converter_errors ... ok
+test tests::functional_model_matches_tick_portvalues ... ok
+test tests::fst_off_still_writes_vcd ... ok
+test tests::interpreter_and_compiled_portvalues_match ... ok
+test tests::no_hir_to_tlm_api ... ok
+test tests::mixed_both_portvalues_match ... ok
+test tests::sync_read_mem_read_latency_one ... ok
+test tests::mixed_both_mismatch_fails ... ok
+test tests::tick_counts_after_reset ... ok
+test tests::tick_passthrough_non_counter ... ok
+test tests::tick_same_width_add ... ok
+test tests::vcd_written ... ok
+test tests::fst_via_documented_converter ... ok
+
+running 2 tests
+..
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+test generate::tests::emit_sync_read_mem_not_stubbed_and_cargo_tests ... ok
+test cycle::tests::emitted_cycle_memory_reset_and_write_enable ... ok
+test cycle::tests::emit_cycle_crate_compiles ... ok
+
+test result: ok. 38 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.92s

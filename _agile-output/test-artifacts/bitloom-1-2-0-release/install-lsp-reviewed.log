@@ -1,0 +1,70 @@
+  Installing bitloom-lsp v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-lsp-1.2.0)
+warning: default toolchain implicitly overridden with `1.97.1-x86_64-unknown-linux-gnu` by rustup toolchain file
+  |
+  = help: use `cargo +stable install` if you meant to use the stable toolchain
+  = note: rustup selects the toolchain based on the parent environment and not the environment of the package being installed
+warning: patch `bitloom v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-1.2.0)` was not used in the crate graph
+warning: patch `bitloom-firrtl v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-firrtl-1.2.0)` was not used in the crate graph
+warning: patch `bitloom-macro v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-macro-1.2.0)` was not used in the crate graph
+warning: patch `bitloom-prelude v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-prelude-1.2.0)` was not used in the crate graph
+warning: patch `bitloom-sim v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-sim-1.2.0)` was not used in the crate graph
+warning: patch `bitloom-viz v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-viz-1.2.0)` was not used in the crate graph
+warning: patch `bitloom-vlog v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-vlog-1.2.0)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. If the patch has a different version from
+      what is locked in the Cargo.lock file, run `cargo update` to use the new
+      version. This may also occur with an optional dependency that is not enabled.
+     Locking 56 packages to latest compatible versions
+   Compiling unicode-ident v1.0.26
+   Compiling pin-project-lite v0.2.17
+   Compiling futures-core v0.3.34
+   Compiling memchr v2.8.3
+   Compiling futures-sink v0.3.34
+   Compiling libc v0.2.189
+   Compiling ref-cast v1.0.27
+   Compiling slab v0.4.12
+   Compiling futures-io v0.3.34
+   Compiling futures-task v0.3.34
+   Compiling crossbeam-utils v0.8.23
+   Compiling once_cell v1.21.4
+   Compiling parking_lot_core v0.9.12
+   Compiling httparse v1.10.1
+   Compiling smallvec v1.16.1
+   Compiling borrow-or-share v0.2.4
+   Compiling scopeguard v1.2.0
+   Compiling sync_wrapper v1.0.2
+   Compiling tower-layer v0.3.3
+   Compiling bitflags v2.13.2
+   Compiling tower-service v0.3.3
+   Compiling hashbrown v0.14.5
+   Compiling percent-encoding v2.3.2
+   Compiling bytes v1.12.1
+   Compiling proc-macro2 v1.0.107
+   Compiling lock_api v0.4.14
+   Compiling futures-channel v0.3.34
+   Compiling tracing-core v0.1.36
+   Compiling quote v1.0.47
+   Compiling serde_json v1.0.151
+   Compiling syn v3.0.6
+   Compiling syn v2.0.119
+   Compiling dashmap v6.2.1
+   Compiling futures-macro v0.3.34
+   Compiling ref-cast-impl v1.0.27
+   Compiling serde_derive v1.0.229
+   Compiling tokio-macros v2.7.2
+   Compiling fluent-uri v0.4.1
+   Compiling tokio v1.53.1
+   Compiling futures-util v0.3.34
+   Compiling tracing-attributes v0.1.31
+   Compiling tracing v0.1.44
+   Compiling serde v1.0.229
+   Compiling tokio-util v0.7.19
+   Compiling ls-types v0.0.6
+   Compiling tower v0.5.3
+   Compiling futures v0.3.34
+   Compiling tower-lsp-server v0.23.0
+   Compiling bitloom-lsp v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-lsp-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 16.39s
+  Installing /tmp/bitloom-1.2.0-candidate-ik04so45/install/bin/bitloom-lsp
+   Installed package `bitloom-lsp v1.2.0 (/tmp/bitloom-1.2.0-candidate-ik04so45/sources/bitloom-lsp-1.2.0)` (executable `bitloom-lsp`)
+warning: be sure to add `/tmp/bitloom-1.2.0-candidate-ik04so45/install/bin` to your PATH to be able to run the installed binaries

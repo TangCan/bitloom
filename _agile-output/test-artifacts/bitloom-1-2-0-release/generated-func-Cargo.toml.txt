@@ -1,0 +1,17 @@
+[package]
+name = "bitloom_func_candidateblink"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.97.1"
+publish = false
+description = "Generated Bitloom functional simulator (FR47). Not SystemC."
+
+# Keep generated crate out of the parent workspace.
+[workspace]
+
+[dependencies]
+bitloom-hir = "1.2.0"
+
+[[bin]]
+name = "bitloom_func_candidateblink"
+path = "src/main.rs"

@@ -1,0 +1,39 @@
+bash scripts/semver-check.sh
+semver-check: FR144 Bitloom 1.0 surface gate (cargo-semver-checks)
+semver-check: policy=docs/semver-1-0-policy.md surface=docs/public-api-1-0-surface.md
+semver-check: release-type=minor (tool=cargo-semver-checks)
+semver-check: cargo-semver-checks 0.50.0
+semver-check: checking -p bitloom-prelude --release-type minor
+    Building bitloom-prelude v1.2.0 (current)
+       Built [   0.500s] (current)
+     Parsing bitloom-prelude v1.2.0 (current)
+      Parsed [   0.015s] (current)
+     Parsing bitloom-prelude v1.1.1 (baseline, cached)
+      Parsed [   0.007s] (baseline)
+    Checking bitloom-prelude v1.1.1 -> v1.2.0 (assume minor change)
+     Checked [   0.007s] 196 checks: 196 pass, 58 skip
+     Summary no semver update required
+    Finished [   3.487s] bitloom-prelude
+semver-check: checking -p bitloom-sim --release-type minor
+    Building bitloom-sim v1.2.0 (current)
+       Built [   0.533s] (current)
+     Parsing bitloom-sim v1.2.0 (current)
+      Parsed [   0.012s] (current)
+     Parsing bitloom-sim v1.1.6 (baseline, cached)
+      Parsed [   0.006s] (baseline)
+    Checking bitloom-sim v1.1.6 -> v1.2.0 (assume minor change)
+     Checked [   0.008s] 196 checks: 196 pass, 58 skip
+     Summary no semver update required
+    Finished [   1.506s] bitloom-sim
+semver-check: checking -p bitloom-firrtl --release-type minor
+    Building bitloom-firrtl v1.2.0 (current)
+       Built [   0.461s] (current)
+     Parsing bitloom-firrtl v1.2.0 (current)
+      Parsed [   0.002s] (current)
+     Parsing bitloom-firrtl v1.1.1 (baseline, cached)
+      Parsed [   0.004s] (baseline)
+    Checking bitloom-firrtl v1.1.1 -> v1.2.0 (assume minor change)
+     Checked [   0.005s] 196 checks: 196 pass, 58 skip
+     Summary no semver update required
+    Finished [   1.598s] bitloom-firrtl
+semver-check: OK (FR144)

@@ -490,7 +490,7 @@ fn resolve_hir_dep(out_dir: &Path) -> String {
             return format!("bitloom-hir = {{ path = \"{}\" }}", c.display());
         }
     }
-    "bitloom-hir = \"1.1.0\"".into()
+    "bitloom-hir = \"1.2.0\"".into()
 }
 
 fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
