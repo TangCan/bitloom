@@ -1,0 +1,13 @@
+    Updating crates.io index
+   Packaging bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+    Updating crates.io index
+    Packaged 5 files, 21.3KiB (5.9KiB compressed)
+   Verifying bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.47
+   Compiling syn v2.0.119
+   Compiling bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-macro-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.24s
+   Uploading bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+warning: aborting upload due to dry run

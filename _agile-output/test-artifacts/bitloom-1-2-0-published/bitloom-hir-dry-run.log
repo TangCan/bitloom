@@ -1,0 +1,8 @@
+    Updating crates.io index
+   Packaging bitloom-hir v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+    Packaged 7 files, 43.7KiB (10.7KiB compressed)
+   Verifying bitloom-hir v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+   Compiling bitloom-hir v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-hir-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.23s
+   Uploading bitloom-hir v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+warning: aborting upload due to dry run

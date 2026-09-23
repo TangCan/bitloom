@@ -1,0 +1,9 @@
+    Updating crates.io index
+   Packaging bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+    Updating crates.io index
+    Packaged 7 files, 44.1KiB (11.9KiB compressed)
+   Verifying bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+   Compiling bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-viz-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.98s
+   Uploading bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+warning: aborting upload due to dry run

@@ -1,0 +1,495 @@
+{
+  "checked_at": "2026-09-23T11:41:53.008909+00:00",
+  "passed": true,
+  "source_commit": "e33d12fd747e576a542e24f18be1e3cfea4760d7",
+  "packages": [
+    {
+      "name": "bitloom-macro",
+      "version": "1.2.0",
+      "registry_checksum": "90558283f0e73d9f62793642861e1c562ccf75b6364eebf33ef7a4aad0c99bc5",
+      "local_current_checksum": "3299f73ed78ebfb10b8cb7eb84f72a69aba0132f7ce2f0307a8bf1ad157ca1bb",
+      "local_after_publish_checksum": "3299f73ed78ebfb10b8cb7eb84f72a69aba0132f7ce2f0307a8bf1ad157ca1bb",
+      "yanked": false,
+      "created_at": "2026-09-23T11:36:08.871196Z",
+      "url": "https://crates.io/api/v1/crates/bitloom-macro/1.2.0",
+      "source_and_manifest_members_identical": true,
+      "dependency_versions_identical": true,
+      "metadata_differences": [
+        {
+          "file": "bitloom-macro-1.2.0/.cargo_vcs_info.json",
+          "registry": {
+            "git": {
+              "sha1": "e33d12fd747e576a542e24f18be1e3cfea4760d7"
+            },
+            "path_in_vcs": "crates/bitloom-macro"
+          },
+          "local": {
+            "git": {
+              "sha1": "0638f0b131bb56a3a910b7cb23c3ad43c9b75cea",
+              "dirty": true
+            },
+            "path_in_vcs": "crates/bitloom-macro"
+          },
+          "kind": "candidate versus clean release VCS metadata"
+        }
+      ]
+    },
+    {
+      "name": "bitloom-hir",
+      "version": "1.2.0",
+      "registry_checksum": "0b5a7020ee7eac6d7f1f78485a408af867ba2cf8004ce331e6e1b3da19f2499a",
+      "local_current_checksum": "c53c2f9583ae42cf2226b02ea09d6db102ee318b3295b6dcb41f674c9a798585",
+      "local_after_publish_checksum": "c53c2f9583ae42cf2226b02ea09d6db102ee318b3295b6dcb41f674c9a798585",
+      "yanked": false,
+      "created_at": "2026-09-23T11:36:12.889185Z",
+      "url": "https://crates.io/api/v1/crates/bitloom-hir/1.2.0",
+      "source_and_manifest_members_identical": true,
+      "dependency_versions_identical": true,
+      "metadata_differences": [
+        {
+          "file": "bitloom-hir-1.2.0/.cargo_vcs_info.json",
+          "registry": {
+            "git": {
+              "sha1": "e33d12fd747e576a542e24f18be1e3cfea4760d7"
+            },
+            "path_in_vcs": "crates/bitloom-hir"
+          },
+          "local": {
+            "git": {
+              "sha1": "0638f0b131bb56a3a910b7cb23c3ad43c9b75cea",
+              "dirty": true
+            },
+            "path_in_vcs": "crates/bitloom-hir"
+          },
+          "kind": "candidate versus clean release VCS metadata"
+        }
+      ]
+    },
+    {
+      "name": "bitloom-builder",
+      "version": "1.2.0",
+      "registry_checksum": "0b12ce46fe9b7eaffaaaff37fb72a993df1bf0424e077cdda947cc45ed76e82a",
+      "local_current_checksum": "ee547cecd40c834e03462f50c52fdfd01a5f35742455443ed0604c27c35f3a8e",
+      "local_after_publish_checksum": "ee547cecd40c834e03462f50c52fdfd01a5f35742455443ed0604c27c35f3a8e",
+      "yanked": false,
+      "created_at": "2026-09-23T11:36:21.037492Z",
+      "url": "https://crates.io/api/v1/crates/bitloom-builder/1.2.0",
+      "source_and_manifest_members_identical": true,
+      "dependency_versions_identical": true,
+      "metadata_differences": [
+        {
+          "file": "bitloom-builder-1.2.0/.cargo_vcs_info.json",
+          "registry": {
+            "git": {
+              "sha1": "e33d12fd747e576a542e24f18be1e3cfea4760d7"
+            },
+            "path_in_vcs": "crates/bitloom-builder"
+          },
+          "local": {
+            "git": {
+              "sha1": "0638f0b131bb56a3a910b7cb23c3ad43c9b75cea",
+              "dirty": true
+            },
+            "path_in_vcs": "crates/bitloom-builder"
+          },
+          "kind": "candidate versus clean release VCS metadata"
+        },
+        {
+          "file": "bitloom-builder-1.2.0/Cargo.lock",
+          "kind": "family checksum update from candidate archives to published archives",
+          "verified_registry_dependencies": [
+            {
+              "name": "bitloom-hir",
+              "version": "1.2.0",
+              "registry_checksum": "0b5a7020ee7eac6d7f1f78485a408af867ba2cf8004ce331e6e1b3da19f2499a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bitloom-vlog",
+      "version": "1.2.0",
+      "registry_checksum": "ab7d9f15ca65ed43bbe820c8f97d86452c89dc5d2028fc3911a9d4a68c25b2c9",
+      "local_current_checksum": "81617f862af425d730a73c8173fe3f0679ca77baa56d5c853447c8de642fec19",
+      "local_after_publish_checksum": "81617f862af425d730a73c8173fe3f0679ca77baa56d5c853447c8de642fec19",
+      "yanked": false,
+      "created_at": "2026-09-23T11:36:28.254222Z",
+      "url": "https://crates.io/api/v1/crates/bitloom-vlog/1.2.0",
+      "source_and_manifest_members_identical": true,
+      "dependency_versions_identical": true,
+      "metadata_differences": [
+        {
+          "file": "bitloom-vlog-1.2.0/.cargo_vcs_info.json",
+          "registry": {
+            "git": {
+              "sha1": "e33d12fd747e576a542e24f18be1e3cfea4760d7"
+            },
+            "path_in_vcs": "crates/bitloom-vlog"
+          },
+          "local": {
+            "git": {
+              "sha1": "0638f0b131bb56a3a910b7cb23c3ad43c9b75cea",
+              "dirty": true
+            },
+            "path_in_vcs": "crates/bitloom-vlog"
+          },
+          "kind": "candidate versus clean release VCS metadata"
+        },
+        {
+          "file": "bitloom-vlog-1.2.0/Cargo.lock",
+          "kind": "family checksum update from candidate archives to published archives",
+          "verified_registry_dependencies": [
+            {
+              "name": "bitloom-builder",
+              "version": "1.2.0",
+              "registry_checksum": "0b12ce46fe9b7eaffaaaff37fb72a993df1bf0424e077cdda947cc45ed76e82a"
+            },
+            {
+              "name": "bitloom-hir",
+              "version": "1.2.0",
+              "registry_checksum": "0b5a7020ee7eac6d7f1f78485a408af867ba2cf8004ce331e6e1b3da19f2499a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bitloom-sim",
+      "version": "1.2.0",
+      "registry_checksum": "14b953d93e6a6d096ba9c39a983fb91109c6ea930f778866c0d9cfb0773e3999",
+      "local_current_checksum": "54d558ffc2dc83b2d73ab9ef05d3e89868300949e2759f8c8828d16eda894fd6",
+      "local_after_publish_checksum": "54d558ffc2dc83b2d73ab9ef05d3e89868300949e2759f8c8828d16eda894fd6",
+      "yanked": false,
+      "created_at": "2026-09-23T11:36:36.478019Z",
+      "url": "https://crates.io/api/v1/crates/bitloom-sim/1.2.0",
+      "source_and_manifest_members_identical": true,
+      "dependency_versions_identical": true,
+      "metadata_differences": [
+        {
+          "file": "bitloom-sim-1.2.0/.cargo_vcs_info.json",
+          "registry": {
+            "git": {
+              "sha1": "e33d12fd747e576a542e24f18be1e3cfea4760d7"
+            },
+            "path_in_vcs": "crates/bitloom-sim"
+          },
+          "local": {
+            "git": {
+              "sha1": "0638f0b131bb56a3a910b7cb23c3ad43c9b75cea",
+              "dirty": true
+            },
+            "path_in_vcs": "crates/bitloom-sim"
+          },
+          "kind": "candidate versus clean release VCS metadata"
+        },
+        {
+          "file": "bitloom-sim-1.2.0/Cargo.lock",
+          "kind": "family checksum update from candidate archives to published archives",
+          "verified_registry_dependencies": [
+            {
+              "name": "bitloom-builder",
+              "version": "1.2.0",
+              "registry_checksum": "0b12ce46fe9b7eaffaaaff37fb72a993df1bf0424e077cdda947cc45ed76e82a"
+            },
+            {
+              "name": "bitloom-hir",
+              "version": "1.2.0",
+              "registry_checksum": "0b5a7020ee7eac6d7f1f78485a408af867ba2cf8004ce331e6e1b3da19f2499a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bitloom-prelude",
+      "version": "1.2.0",
+      "registry_checksum": "4fbfc7c64beca8016d60930d5cb2df3776b226aeffc0270605b17b7d19ba1bcc",
+      "local_current_checksum": "a29a714156eb1baa28376b18c587f145abb6aca225d099c23e1a57f6eca02f29",
+      "local_after_publish_checksum": "a29a714156eb1baa28376b18c587f145abb6aca225d099c23e1a57f6eca02f29",
+      "yanked": false,
+      "created_at": "2026-09-23T11:36:50.795620Z",
+      "url": "https://crates.io/api/v1/crates/bitloom-prelude/1.2.0",
+      "source_and_manifest_members_identical": true,
+      "dependency_versions_identical": true,
+      "metadata_differences": [
+        {
+          "file": "bitloom-prelude-1.2.0/.cargo_vcs_info.json",
+          "registry": {
+            "git": {
+              "sha1": "e33d12fd747e576a542e24f18be1e3cfea4760d7"
+            },
+            "path_in_vcs": "crates/bitloom-prelude"
+          },
+          "local": {
+            "git": {
+              "sha1": "0638f0b131bb56a3a910b7cb23c3ad43c9b75cea",
+              "dirty": true
+            },
+            "path_in_vcs": "crates/bitloom-prelude"
+          },
+          "kind": "candidate versus clean release VCS metadata"
+        },
+        {
+          "file": "bitloom-prelude-1.2.0/Cargo.lock",
+          "kind": "family checksum update from candidate archives to published archives",
+          "verified_registry_dependencies": [
+            {
+              "name": "bitloom-builder",
+              "version": "1.2.0",
+              "registry_checksum": "0b12ce46fe9b7eaffaaaff37fb72a993df1bf0424e077cdda947cc45ed76e82a"
+            },
+            {
+              "name": "bitloom-hir",
+              "version": "1.2.0",
+              "registry_checksum": "0b5a7020ee7eac6d7f1f78485a408af867ba2cf8004ce331e6e1b3da19f2499a"
+            },
+            {
+              "name": "bitloom-macro",
+              "version": "1.2.0",
+              "registry_checksum": "90558283f0e73d9f62793642861e1c562ccf75b6364eebf33ef7a4aad0c99bc5"
+            },
+            {
+              "name": "bitloom-sim",
+              "version": "1.2.0",
+              "registry_checksum": "14b953d93e6a6d096ba9c39a983fb91109c6ea930f778866c0d9cfb0773e3999"
+            },
+            {
+              "name": "bitloom-vlog",
+              "version": "1.2.0",
+              "registry_checksum": "ab7d9f15ca65ed43bbe820c8f97d86452c89dc5d2028fc3911a9d4a68c25b2c9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bitloom-firrtl",
+      "version": "1.2.0",
+      "registry_checksum": "a03643869fefc6db93d5ea79bcdb6f823343c07d11d1672304b6a9c3267af932",
+      "local_current_checksum": "e19caeca9b3599906248fd39e58452dcbfc872fd7f754860c26436fc3be9ade1",
+      "local_after_publish_checksum": "e19caeca9b3599906248fd39e58452dcbfc872fd7f754860c26436fc3be9ade1",
+      "yanked": false,
+      "created_at": "2026-09-23T11:36:57.753133Z",
+      "url": "https://crates.io/api/v1/crates/bitloom-firrtl/1.2.0",
+      "source_and_manifest_members_identical": true,
+      "dependency_versions_identical": true,
+      "metadata_differences": [
+        {
+          "file": "bitloom-firrtl-1.2.0/.cargo_vcs_info.json",
+          "registry": {
+            "git": {
+              "sha1": "e33d12fd747e576a542e24f18be1e3cfea4760d7"
+            },
+            "path_in_vcs": "crates/rhdl-firrtl"
+          },
+          "local": {
+            "git": {
+              "sha1": "0638f0b131bb56a3a910b7cb23c3ad43c9b75cea",
+              "dirty": true
+            },
+            "path_in_vcs": "crates/rhdl-firrtl"
+          },
+          "kind": "candidate versus clean release VCS metadata"
+        },
+        {
+          "file": "bitloom-firrtl-1.2.0/Cargo.lock",
+          "kind": "family checksum update from candidate archives to published archives",
+          "verified_registry_dependencies": [
+            {
+              "name": "bitloom-builder",
+              "version": "1.2.0",
+              "registry_checksum": "0b12ce46fe9b7eaffaaaff37fb72a993df1bf0424e077cdda947cc45ed76e82a"
+            },
+            {
+              "name": "bitloom-hir",
+              "version": "1.2.0",
+              "registry_checksum": "0b5a7020ee7eac6d7f1f78485a408af867ba2cf8004ce331e6e1b3da19f2499a"
+            },
+            {
+              "name": "bitloom-sim",
+              "version": "1.2.0",
+              "registry_checksum": "14b953d93e6a6d096ba9c39a983fb91109c6ea930f778866c0d9cfb0773e3999"
+            },
+            {
+              "name": "bitloom-vlog",
+              "version": "1.2.0",
+              "registry_checksum": "ab7d9f15ca65ed43bbe820c8f97d86452c89dc5d2028fc3911a9d4a68c25b2c9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bitloom-viz",
+      "version": "1.2.0",
+      "registry_checksum": "97360939e7245850a7417f1c6ad9b55848c7259c17543578a1d3a3804785c13b",
+      "local_current_checksum": "b9af241926ba14eb8982f071f9c94752484a5f8e9f19e1ea6b6c4378dcb68518",
+      "local_after_publish_checksum": "b9af241926ba14eb8982f071f9c94752484a5f8e9f19e1ea6b6c4378dcb68518",
+      "yanked": false,
+      "created_at": "2026-09-23T11:37:03.460625Z",
+      "url": "https://crates.io/api/v1/crates/bitloom-viz/1.2.0",
+      "source_and_manifest_members_identical": true,
+      "dependency_versions_identical": true,
+      "metadata_differences": [
+        {
+          "file": "bitloom-viz-1.2.0/.cargo_vcs_info.json",
+          "registry": {
+            "git": {
+              "sha1": "e33d12fd747e576a542e24f18be1e3cfea4760d7"
+            },
+            "path_in_vcs": "crates/rhdl-viz"
+          },
+          "local": {
+            "git": {
+              "sha1": "0638f0b131bb56a3a910b7cb23c3ad43c9b75cea",
+              "dirty": true
+            },
+            "path_in_vcs": "crates/rhdl-viz"
+          },
+          "kind": "candidate versus clean release VCS metadata"
+        },
+        {
+          "file": "bitloom-viz-1.2.0/Cargo.lock",
+          "kind": "family checksum update from candidate archives to published archives",
+          "verified_registry_dependencies": [
+            {
+              "name": "bitloom-builder",
+              "version": "1.2.0",
+              "registry_checksum": "0b12ce46fe9b7eaffaaaff37fb72a993df1bf0424e077cdda947cc45ed76e82a"
+            },
+            {
+              "name": "bitloom-hir",
+              "version": "1.2.0",
+              "registry_checksum": "0b5a7020ee7eac6d7f1f78485a408af867ba2cf8004ce331e6e1b3da19f2499a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bitloom",
+      "version": "1.2.0",
+      "registry_checksum": "8ab0e941c7881acc7e9446b5512c30a94efecdd191c3ba9f0ed6dec27c7ad242",
+      "local_current_checksum": "40a12bc8ed0bcc3d754e7b215e094764491cffff0d5d9b2ff9c9e6469990499c",
+      "local_after_publish_checksum": "40a12bc8ed0bcc3d754e7b215e094764491cffff0d5d9b2ff9c9e6469990499c",
+      "yanked": false,
+      "created_at": "2026-09-23T11:37:24.153639Z",
+      "url": "https://crates.io/api/v1/crates/bitloom/1.2.0",
+      "source_and_manifest_members_identical": true,
+      "dependency_versions_identical": true,
+      "metadata_differences": [
+        {
+          "file": "bitloom-1.2.0/.cargo_vcs_info.json",
+          "registry": {
+            "git": {
+              "sha1": "e33d12fd747e576a542e24f18be1e3cfea4760d7"
+            },
+            "path_in_vcs": "crates/bitloom"
+          },
+          "local": {
+            "git": {
+              "sha1": "0638f0b131bb56a3a910b7cb23c3ad43c9b75cea",
+              "dirty": true
+            },
+            "path_in_vcs": "crates/bitloom"
+          },
+          "kind": "candidate versus clean release VCS metadata"
+        },
+        {
+          "file": "bitloom-1.2.0/Cargo.lock",
+          "kind": "family checksum update from candidate archives to published archives",
+          "verified_registry_dependencies": [
+            {
+              "name": "bitloom-builder",
+              "version": "1.2.0",
+              "registry_checksum": "0b12ce46fe9b7eaffaaaff37fb72a993df1bf0424e077cdda947cc45ed76e82a"
+            },
+            {
+              "name": "bitloom-firrtl",
+              "version": "1.2.0",
+              "registry_checksum": "a03643869fefc6db93d5ea79bcdb6f823343c07d11d1672304b6a9c3267af932"
+            },
+            {
+              "name": "bitloom-hir",
+              "version": "1.2.0",
+              "registry_checksum": "0b5a7020ee7eac6d7f1f78485a408af867ba2cf8004ce331e6e1b3da19f2499a"
+            },
+            {
+              "name": "bitloom-macro",
+              "version": "1.2.0",
+              "registry_checksum": "90558283f0e73d9f62793642861e1c562ccf75b6364eebf33ef7a4aad0c99bc5"
+            },
+            {
+              "name": "bitloom-prelude",
+              "version": "1.2.0",
+              "registry_checksum": "4fbfc7c64beca8016d60930d5cb2df3776b226aeffc0270605b17b7d19ba1bcc"
+            },
+            {
+              "name": "bitloom-sim",
+              "version": "1.2.0",
+              "registry_checksum": "14b953d93e6a6d096ba9c39a983fb91109c6ea930f778866c0d9cfb0773e3999"
+            },
+            {
+              "name": "bitloom-viz",
+              "version": "1.2.0",
+              "registry_checksum": "97360939e7245850a7417f1c6ad9b55848c7259c17543578a1d3a3804785c13b"
+            },
+            {
+              "name": "bitloom-vlog",
+              "version": "1.2.0",
+              "registry_checksum": "ab7d9f15ca65ed43bbe820c8f97d86452c89dc5d2028fc3911a9d4a68c25b2c9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bitloom-lsp",
+      "version": "1.2.0",
+      "registry_checksum": "ba8dfcd2b1e99a7b218952a6d365fbb0569bc537619bd6ad6d19a7ea559bb787",
+      "local_current_checksum": "b4b18a7753e6b53c3755969b6a6ceeb7773d11134577c40c059dc4f80f453fac",
+      "local_after_publish_checksum": "b4b18a7753e6b53c3755969b6a6ceeb7773d11134577c40c059dc4f80f453fac",
+      "yanked": false,
+      "created_at": "2026-09-23T11:37:49.712242Z",
+      "url": "https://crates.io/api/v1/crates/bitloom-lsp/1.2.0",
+      "source_and_manifest_members_identical": true,
+      "dependency_versions_identical": true,
+      "metadata_differences": [
+        {
+          "file": "bitloom-lsp-1.2.0/.cargo_vcs_info.json",
+          "registry": {
+            "git": {
+              "sha1": "e33d12fd747e576a542e24f18be1e3cfea4760d7"
+            },
+            "path_in_vcs": "crates/bitloom-lsp"
+          },
+          "local": {
+            "git": {
+              "sha1": "0638f0b131bb56a3a910b7cb23c3ad43c9b75cea",
+              "dirty": true
+            },
+            "path_in_vcs": "crates/bitloom-lsp"
+          },
+          "kind": "candidate versus clean release VCS metadata"
+        },
+        {
+          "file": "bitloom-lsp-1.2.0/Cargo.lock",
+          "kind": "family checksum update from candidate archives to published archives",
+          "verified_registry_dependencies": [
+            {
+              "name": "bitloom-builder",
+              "version": "1.2.0",
+              "registry_checksum": "0b12ce46fe9b7eaffaaaff37fb72a993df1bf0424e077cdda947cc45ed76e82a"
+            },
+            {
+              "name": "bitloom-hir",
+              "version": "1.2.0",
+              "registry_checksum": "0b5a7020ee7eac6d7f1f78485a408af867ba2cf8004ce331e6e1b3da19f2499a"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

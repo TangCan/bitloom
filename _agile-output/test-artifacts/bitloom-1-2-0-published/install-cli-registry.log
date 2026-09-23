@@ -1,0 +1,55 @@
+ Downloading crates ...
+  Downloaded bitloom v1.2.0
+    Updating crates.io index
+  Installing bitloom v1.2.0
+warning: default toolchain implicitly overridden with `1.97.1-x86_64-unknown-linux-gnu` by rustup toolchain file
+  |
+  = help: use `cargo +stable install` if you meant to use the stable toolchain
+  = note: rustup selects the toolchain based on the parent environment and not the environment of the package being installed
+    Updating crates.io index
+    Updating crates.io index
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.24
+   Compiling version_check v0.9.5
+   Compiling quote v1.0.47
+   Compiling bitloom-hir v1.2.0
+   Compiling typenum v1.20.1
+   Compiling serde_core v1.0.229
+   Compiling utf8parse v0.2.2
+   Compiling anstyle v1.0.14
+   Compiling anstyle-query v1.1.5
+   Compiling colorchoice v1.0.5
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling zmij v1.0.23
+   Compiling heck v0.5.0
+   Compiling serde v1.0.229
+   Compiling clap_lex v1.1.0
+   Compiling serde_json v1.0.151
+   Compiling strsim v0.11.1
+   Compiling cfg-if v1.0.4
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+   Compiling cpufeatures v0.2.17
+   Compiling anstyle-parse v1.0.0
+   Compiling anstream v1.0.0
+   Compiling generic-array v0.14.7
+   Compiling bitloom-sim v1.2.0
+   Compiling bitloom-builder v1.2.0
+   Compiling bitloom-vlog v1.2.0
+   Compiling bitloom-viz v1.2.0
+   Compiling bitloom-firrtl v1.2.0
+   Compiling clap_builder v4.6.6
+   Compiling syn v3.0.3
+   Compiling syn v2.0.119
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling clap_derive v4.6.4
+   Compiling serde_derive v1.0.229
+   Compiling clap v4.6.6
+   Compiling bitloom v1.2.0
+    Finished `release` profile [optimized] target(s) in 18.97s
+  Installing /tmp/bitloom-1.2.0-registry-9iztsllr/install/bin/cargo-bitloom
+   Installed package `bitloom v1.2.0` (executable `cargo-bitloom`)
+warning: be sure to add `/tmp/bitloom-1.2.0-registry-9iztsllr/install/bin` to your PATH to be able to run the installed binaries

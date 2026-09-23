@@ -1,0 +1,12 @@
+    Updating crates.io index
+   Packaging bitloom-builder v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+    Updating crates.io index
+    Packaged 7 files, 140.4KiB (25.5KiB compressed)
+   Verifying bitloom-builder v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+ Downloading crates ...
+  Downloaded bitloom-hir v1.2.0
+   Compiling bitloom-hir v1.2.0
+   Compiling bitloom-builder v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-builder-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.52s
+   Uploading bitloom-builder v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+warning: aborting upload due to dry run

@@ -1,0 +1,78 @@
+{
+  "source_commit": "e33d12fd747e576a542e24f18be1e3cfea4760d7",
+  "version": "1.2.0",
+  "started_at": "2026-09-23T11:35:57.642455+00:00",
+  "packages": [
+    {
+      "name": "bitloom-macro",
+      "dry-run_exit": 0,
+      "publish_exit": 0,
+      "archive_sha256": "3299f73ed78ebfb10b8cb7eb84f72a69aba0132f7ce2f0307a8bf1ad157ca1bb",
+      "completed_at": "2026-09-23T11:36:09.852670+00:00"
+    },
+    {
+      "name": "bitloom-hir",
+      "dry-run_exit": 0,
+      "publish_exit": 0,
+      "archive_sha256": "c53c2f9583ae42cf2226b02ea09d6db102ee318b3295b6dcb41f674c9a798585",
+      "completed_at": "2026-09-23T11:36:14.091540+00:00"
+    },
+    {
+      "name": "bitloom-builder",
+      "dry-run_exit": 0,
+      "publish_exit": 0,
+      "archive_sha256": "ee547cecd40c834e03462f50c52fdfd01a5f35742455443ed0604c27c35f3a8e",
+      "completed_at": "2026-09-23T11:36:22.191461+00:00"
+    },
+    {
+      "name": "bitloom-vlog",
+      "dry-run_exit": 0,
+      "publish_exit": 0,
+      "archive_sha256": "81617f862af425d730a73c8173fe3f0679ca77baa56d5c853447c8de642fec19",
+      "completed_at": "2026-09-23T11:36:29.456499+00:00"
+    },
+    {
+      "name": "bitloom-sim",
+      "dry-run_exit": 0,
+      "publish_exit": 0,
+      "archive_sha256": "54d558ffc2dc83b2d73ab9ef05d3e89868300949e2759f8c8828d16eda894fd6",
+      "completed_at": "2026-09-23T11:36:38.897888+00:00"
+    },
+    {
+      "name": "bitloom-prelude",
+      "dry-run_exit": 0,
+      "publish_exit": 0,
+      "archive_sha256": "a29a714156eb1baa28376b18c587f145abb6aca225d099c23e1a57f6eca02f29",
+      "completed_at": "2026-09-23T11:36:51.711950+00:00"
+    },
+    {
+      "name": "bitloom-firrtl",
+      "dry-run_exit": 0,
+      "publish_exit": 0,
+      "archive_sha256": "e19caeca9b3599906248fd39e58452dcbfc872fd7f754860c26436fc3be9ade1",
+      "completed_at": "2026-09-23T11:36:58.811743+00:00"
+    },
+    {
+      "name": "bitloom-viz",
+      "dry-run_exit": 0,
+      "publish_exit": 0,
+      "archive_sha256": "b9af241926ba14eb8982f071f9c94752484a5f8e9f19e1ea6b6c4378dcb68518",
+      "completed_at": "2026-09-23T11:37:04.142784+00:00"
+    },
+    {
+      "name": "bitloom",
+      "dry-run_exit": 0,
+      "publish_exit": 0,
+      "archive_sha256": "40a12bc8ed0bcc3d754e7b215e094764491cffff0d5d9b2ff9c9e6469990499c",
+      "completed_at": "2026-09-23T11:37:25.651716+00:00"
+    },
+    {
+      "name": "bitloom-lsp",
+      "dry-run_exit": 0,
+      "publish_exit": 0,
+      "archive_sha256": "b4b18a7753e6b53c3755969b6a6ceeb7773d11134577c40c059dc4f80f453fac",
+      "completed_at": "2026-09-23T11:37:50.428268+00:00"
+    }
+  ],
+  "complete": true
+}

@@ -1,0 +1,146 @@
+{
+  "passed": true,
+  "sandbox": "/tmp/bitloom-1.2.0-registry-9iztsllr",
+  "generated_registry_dependencies": {
+    "func": {
+      "bitloom-hir": "1.2.0"
+    },
+    "cycle": {
+      "bitloom-hir": "1.2.0",
+      "bitloom-sim": "1.2.0",
+      "bitloom-builder": "1.2.0"
+    }
+  },
+  "consumer_packages": [
+    {
+      "name": "bitloom-builder",
+      "version": "1.2.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "manifest_path": "/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-builder-1.2.0/Cargo.toml"
+    },
+    {
+      "name": "bitloom-hir",
+      "version": "1.2.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "manifest_path": "/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-hir-1.2.0/Cargo.toml"
+    },
+    {
+      "name": "bitloom-macro",
+      "version": "1.2.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "manifest_path": "/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-macro-1.2.0/Cargo.toml"
+    },
+    {
+      "name": "bitloom-prelude",
+      "version": "1.2.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "manifest_path": "/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-prelude-1.2.0/Cargo.toml"
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "cargo",
+        "install",
+        "--list",
+        "--root",
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/install"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/install/bin/cargo-bitloom",
+        "--help"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/install/bin/cargo-bitloom",
+        "new",
+        "candidate_blink",
+        "--path",
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/install/bin/cargo-bitloom",
+        "build",
+        "--package",
+        "candidate_blink",
+        "--manifest-dir",
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink",
+        "--out-dir",
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/verilog"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/install/bin/cargo-bitloom",
+        "gen-func",
+        "--package",
+        "candidate_blink",
+        "--manifest-dir",
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink",
+        "--out-dir",
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/func"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "run",
+        "--manifest-path",
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/func/Cargo.toml"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/install/bin/cargo-bitloom",
+        "gen-cycle",
+        "--package",
+        "candidate_blink",
+        "--manifest-dir",
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink",
+        "--out-dir",
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/cycle"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "run",
+        "--manifest-path",
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/cycle/Cargo.toml"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "run",
+        "--manifest-path",
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/csr-example/Cargo.toml"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "metadata",
+        "--format-version",
+        "1",
+        "--manifest-path",
+        "/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink/Cargo.toml"
+      ],
+      "exit": 0
+    }
+  ]
+}

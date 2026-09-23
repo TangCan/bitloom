@@ -1,0 +1,8 @@
+{
+  "exit": 0,
+  "passed": 5,
+  "failed": 0,
+  "ignored": 0,
+  "filtered": 4,
+  "note": "All five previously filtered publish dry-run tests now passed against published 1.2.0 dependencies."
+}

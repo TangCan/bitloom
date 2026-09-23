@@ -1,0 +1,12 @@
+    Updating crates.io index
+   Packaging bitloom-prelude v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+    Updating crates.io index
+    Packaged 30 files, 274.7KiB (53.8KiB compressed)
+   Verifying bitloom-prelude v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling bitloom-prelude v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-prelude-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.95s
+   Uploading bitloom-prelude v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+    Uploaded bitloom-prelude v1.2.0 to registry `crates-io`
+note: waiting for bitloom-prelude v1.2.0 to be available at registry `crates-io`
+help: you may press ctrl-c to skip waiting; the crate should be available shortly
+   Published bitloom-prelude v1.2.0 at registry `crates-io`

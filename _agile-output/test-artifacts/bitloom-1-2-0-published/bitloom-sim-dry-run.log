@@ -1,0 +1,9 @@
+    Updating crates.io index
+   Packaging bitloom-sim v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+    Updating crates.io index
+    Packaged 18 files, 285.7KiB (65.8KiB compressed)
+   Verifying bitloom-sim v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+   Compiling bitloom-sim v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-sim-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.90s
+   Uploading bitloom-sim v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+warning: aborting upload due to dry run

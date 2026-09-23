@@ -1,0 +1,12 @@
+    Updating crates.io index
+   Packaging bitloom-lsp v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-lsp)
+    Updating crates.io index
+    Packaged 12 files, 76.2KiB (17.3KiB compressed)
+   Verifying bitloom-lsp v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-lsp)
+   Compiling bitloom-lsp v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-lsp-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.95s
+   Uploading bitloom-lsp v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-lsp)
+    Uploaded bitloom-lsp v1.2.0 to registry `crates-io`
+note: waiting for bitloom-lsp v1.2.0 to be available at registry `crates-io`
+help: you may press ctrl-c to skip waiting; the crate should be available shortly
+   Published bitloom-lsp v1.2.0 at registry `crates-io`

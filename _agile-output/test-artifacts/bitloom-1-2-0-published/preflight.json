@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-09-23T11:35:15.064272+00:00",
+  "packages": [
+    {
+      "name": "bitloom-macro",
+      "exists": false
+    },
+    {
+      "name": "bitloom-hir",
+      "exists": false
+    },
+    {
+      "name": "bitloom-builder",
+      "exists": false
+    },
+    {
+      "name": "bitloom-vlog",
+      "exists": false
+    },
+    {
+      "name": "bitloom-sim",
+      "exists": false
+    },
+    {
+      "name": "bitloom-prelude",
+      "exists": false
+    },
+    {
+      "name": "bitloom-firrtl",
+      "exists": false
+    },
+    {
+      "name": "bitloom-viz",
+      "exists": false
+    },
+    {
+      "name": "bitloom",
+      "exists": false
+    },
+    {
+      "name": "bitloom-lsp",
+      "exists": false
+    }
+  ]
+}

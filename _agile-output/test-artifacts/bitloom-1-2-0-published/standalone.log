@@ -1,0 +1,314 @@
+$ cargo install --list --root /tmp/bitloom-1.2.0-registry-9iztsllr/install
+bitloom v1.2.0:
+    cargo-bitloom
+
+exit=0
+$ /tmp/bitloom-1.2.0-registry-9iztsllr/install/bin/cargo-bitloom --help
+Bitloom elaborate and emit tools (crates.io: bitloom). Unrelated to samitbasu/rhdl.
+
+Usage: cargo-bitloom <COMMAND>
+
+Commands:
+  build        Elaborate a design package's `rhdl_elaborate()` and write Yosys-friendly Verilog
+  new          Scaffold a minimal design crate depending only on `bitloom-prelude`
+  firtool      Manage the pinned CIRCT firtool binary (AD-9 / NFR3)
+  external-ip  Lock, verify, and replay an immutable external RTL source closure (FR199)
+  sim-engines  List `bitloom-sim` tick engines (FR32). Simulation itself lives in tests / bitloom-sim
+  hls          Product HLS: external Bambu (FR35) or in-tree schedule MVP (FR95 / AD-25)
+  import       Import FIRRTL 6.0.0 `.fir` (Chisel→firtool output ok) into the same emit path as `build` (FR40 / FR46)
+  gen-func     Generate a Rust functional-sim crate from a design package's FrozenHir (FR47 leg 1)
+  gen-cycle    Generate a cycle-accurate tick-wrapper crate from FrozenHir (FR47 leg 2)
+  gen-tlm      Generate SystemC TLM-2.0 LT C++ fixture from FrozenHir (FR101). Not Rust FL
+  gen-tlm-at   Generate SystemC TLM-2.0 AT-subset C++ fixture from FrozenHir (FR107). Parallel to gen-tlm
+  visualize    Emit module hierarchy HTML from a FIRRTL 6.0.0 `.fir` (FR38 / FR49 / FR40)
+  doc          Alias of `visualize` — hierarchy HTML docs from FrozenHir (FR40 `doc`)
+  wave         Tick a `.fir` design, dump VCD, timing HTML (FR38/49), interactive wave (FR104), typed IDE wave (FR117 subset B), and **by default** FR162 primary Tywaves GUI depth (FR134-level `tywaves.gui.*` + FR125 sidecar). Opt out with `--no-tywaves-gui`
+  coverage     Tick a Mux demo (or `.fir`) and write FR114 `coverage.lcov` + `coverage.html`
+  help         Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help  Print help
+
+exit=0
+$ /tmp/bitloom-1.2.0-registry-9iztsllr/install/bin/cargo-bitloom new candidate_blink --path /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z
+created /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink
+next: cargo bitloom build --package candidate_blink --manifest-dir candidate_blink --out-dir out
+
+exit=0
+$ /tmp/bitloom-1.2.0-registry-9iztsllr/install/bin/cargo-bitloom build --package candidate_blink --manifest-dir /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink --out-dir /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/verilog
+wrote /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/verilog/CandidateBlink.v
+    Updating crates.io index
+     Locking 10 packages to latest Rust 1.97.1 compatible versions
+ Downloading crates ...
+  Downloaded bitloom-prelude v1.2.0
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling bitloom-hir v1.2.0
+   Compiling bitloom-builder v1.2.0
+   Compiling bitloom-vlog v1.2.0
+   Compiling syn v2.0.119
+   Compiling bitloom-macro v1.2.0
+   Compiling bitloom-prelude v1.2.0
+   Compiling candidate_blink v0.1.0 (/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink)
+   Compiling bitloom-host-shim v0.0.0 (/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink/target/rhdl-host/candidate_blink)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.57s
+     Running `/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-target/debug/bitloom-host-shim`
+
+exit=0
+$ /tmp/bitloom-1.2.0-registry-9iztsllr/install/bin/cargo-bitloom gen-func --package candidate_blink --manifest-dir /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink --out-dir /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/func
+wrote functional-sim crate /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/func
+
+exit=0
+$ cargo run --manifest-path /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/func/Cargo.toml
+PortValues { values: {"rst": 0} }
+    Updating crates.io index
+     Locking 1 package to latest Rust 1.97.1 compatible version
+   Compiling bitloom-hir v1.2.0
+   Compiling bitloom_func_candidateblink v0.0.0 (/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/func)
+warning: variable does not need to be mutable
+  --> src/lib.rs:51:13
+   |
+51 |         let mut regs = BTreeMap::new();
+   |             ----^^^^
+   |             |
+   |             help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> src/lib.rs:52:13
+   |
+52 |         let mut mems = BTreeMap::new();
+   |             ----^^^^
+   |             |
+   |             help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> src/lib.rs:96:13
+   |
+96 |         let mut next_pending = BTreeMap::new();
+   |             ----^^^^^^^^^^^^
+   |             |
+   |             help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> src/lib.rs:97:13
+   |
+97 |         let mut writes: Vec<(&str, usize, u64)> = Vec::new();
+   |             ----^^^^^^
+   |             |
+   |             help: remove this `mut`
+
+warning: `bitloom_func_candidateblink` (lib) generated 4 warnings (run `cargo fix --lib -p bitloom_func_candidateblink` to apply 4 suggestions)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.49s
+     Running `/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-target/debug/bitloom_func_candidateblink`
+
+exit=0
+$ /tmp/bitloom-1.2.0-registry-9iztsllr/install/bin/cargo-bitloom gen-cycle --package candidate_blink --manifest-dir /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink --out-dir /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/cycle
+wrote cycle-accurate crate /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/cycle
+
+exit=0
+$ cargo run --manifest-path /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/cycle/Cargo.toml
+PortValues { values: {"rst": 0} }
+    Updating crates.io index
+     Locking 3 packages to latest Rust 1.97.1 compatible versions
+   Compiling bitloom-builder v1.2.0
+   Compiling bitloom-sim v1.2.0
+   Compiling bitloom_cycle_candidateblink v0.0.0 (/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/cycle)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.34s
+     Running `/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-target/debug/bitloom_cycle_candidateblink`
+
+exit=0
+$ cargo run --manifest-path /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/csr-example/Cargo.toml
+/* Local byte offsets: caller supplies the base address. */
+#ifndef BITLOOM_EXAMPLE_CSR_H
+#define BITLOOM_EXAMPLE_CSR_H
+#include <stdint.h>
+
+#ifdef EXAMPLE_CONTROL_OFFSET
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_OFFSET"
+#endif
+#ifdef EXAMPLE_CONTROL_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_MASK"
+#endif
+#ifdef EXAMPLE_CONTROL_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_RESET"
+#endif
+#ifdef EXAMPLE_CONTROL_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_ACCESS"
+#endif
+#ifdef EXAMPLE_CONTROL_BITS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_BITS_MASK"
+#endif
+#ifdef EXAMPLE_CONTROL_BITS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_BITS_RESET"
+#endif
+#ifdef EXAMPLE_CONTROL_BITS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_CONTROL_BITS_ACCESS"
+#endif
+#define EXAMPLE_CONTROL_OFFSET UINT32_C(0x00000000)
+#define EXAMPLE_CONTROL_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_CONTROL_RESET UINT32_C(0x00000000)
+#define EXAMPLE_CONTROL_ACCESS "RW"
+#define EXAMPLE_CONTROL_BITS_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_CONTROL_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_CONTROL_BITS_ACCESS "RW"
+
+#ifdef EXAMPLE_STATUS_OFFSET
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_OFFSET"
+#endif
+#ifdef EXAMPLE_STATUS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_MASK"
+#endif
+#ifdef EXAMPLE_STATUS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_RESET"
+#endif
+#ifdef EXAMPLE_STATUS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_ACCESS"
+#endif
+#ifdef EXAMPLE_STATUS_BITS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_BITS_MASK"
+#endif
+#ifdef EXAMPLE_STATUS_BITS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_BITS_RESET"
+#endif
+#ifdef EXAMPLE_STATUS_BITS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_STATUS_BITS_ACCESS"
+#endif
+#define EXAMPLE_STATUS_OFFSET UINT32_C(0x00000004)
+#define EXAMPLE_STATUS_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_STATUS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_STATUS_ACCESS "RO"
+#define EXAMPLE_STATUS_BITS_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_STATUS_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_STATUS_BITS_ACCESS "RO"
+
+#ifdef EXAMPLE_TX_OFFSET
+#error "Bitloom CSR macro collision: EXAMPLE_TX_OFFSET"
+#endif
+#ifdef EXAMPLE_TX_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_TX_MASK"
+#endif
+#ifdef EXAMPLE_TX_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_TX_RESET"
+#endif
+#ifdef EXAMPLE_TX_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_TX_ACCESS"
+#endif
+#ifdef EXAMPLE_TX_BITS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_TX_BITS_MASK"
+#endif
+#ifdef EXAMPLE_TX_BITS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_TX_BITS_RESET"
+#endif
+#ifdef EXAMPLE_TX_BITS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_TX_BITS_ACCESS"
+#endif
+#define EXAMPLE_TX_OFFSET UINT32_C(0x00000008)
+#define EXAMPLE_TX_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_TX_RESET UINT32_C(0x00000000)
+#define EXAMPLE_TX_ACCESS "WO"
+#define EXAMPLE_TX_BITS_MASK UINT32_C(0x000000ff)
+#define EXAMPLE_TX_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_TX_BITS_ACCESS "WO"
+
+#ifdef EXAMPLE_EVENTS_OFFSET
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_OFFSET"
+#endif
+#ifdef EXAMPLE_EVENTS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_MASK"
+#endif
+#ifdef EXAMPLE_EVENTS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_RESET"
+#endif
+#ifdef EXAMPLE_EVENTS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_ACCESS"
+#endif
+#ifdef EXAMPLE_EVENTS_BITS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_BITS_MASK"
+#endif
+#ifdef EXAMPLE_EVENTS_BITS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_BITS_RESET"
+#endif
+#ifdef EXAMPLE_EVENTS_BITS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_EVENTS_BITS_ACCESS"
+#endif
+#define EXAMPLE_EVENTS_OFFSET UINT32_C(0x0000000c)
+#define EXAMPLE_EVENTS_MASK UINT32_C(0x8000000f)
+#define EXAMPLE_EVENTS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_EVENTS_ACCESS "W1C"
+#define EXAMPLE_EVENTS_BITS_MASK UINT32_C(0x8000000f)
+#define EXAMPLE_EVENTS_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_EVENTS_BITS_ACCESS "W1C"
+
+#ifdef EXAMPLE_COUNTER_OFFSET
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_OFFSET"
+#endif
+#ifdef EXAMPLE_COUNTER_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_MASK"
+#endif
+#ifdef EXAMPLE_COUNTER_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_RESET"
+#endif
+#ifdef EXAMPLE_COUNTER_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_ACCESS"
+#endif
+#ifdef EXAMPLE_COUNTER_BITS_MASK
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_BITS_MASK"
+#endif
+#ifdef EXAMPLE_COUNTER_BITS_RESET
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_BITS_RESET"
+#endif
+#ifdef EXAMPLE_COUNTER_BITS_ACCESS
+#error "Bitloom CSR macro collision: EXAMPLE_COUNTER_BITS_ACCESS"
+#endif
+#define EXAMPLE_COUNTER_OFFSET UINT32_C(0x00000010)
+#define EXAMPLE_COUNTER_MASK UINT32_C(0xffffffff)
+#define EXAMPLE_COUNTER_RESET UINT32_C(0x00000000)
+#define EXAMPLE_COUNTER_ACCESS "RW"
+#define EXAMPLE_COUNTER_BITS_MASK UINT32_C(0xffffffff)
+#define EXAMPLE_COUNTER_BITS_RESET UINT32_C(0x00000000)
+#define EXAMPLE_COUNTER_BITS_ACCESS "RW"
+
+#endif /* BITLOOM_EXAMPLE_CSR_H */
+
+# Example CSR
+
+Local byte offsets; caller supplies the base address.
+
+| Register | Offset | Mask | Reset | Access | Owner | Event | Read reject | Write reject |
+|---|---|---|---|---|---|---|---|---|
+| control | 0x0000 | 0x000000ff | 0x00000000 | RW | Leaf | — | false | false |
+| status | 0x0004 | 0x000000ff | 0x00000000 | RO | External | — | true | false |
+| tx | 0x0008 | 0x000000ff | 0x00000000 | WO | None | — | false | true |
+| events | 0x000c | 0x8000000f | 0x00000000 | W1C | Leaf | hw_events | false | false |
+| counter | 0x0010 | 0xffffffff | 0x00000000 | RW | External | — | false | true |
+
+| Register.Field | Mask | Reset | Access |
+|---|---|---|---|
+| control.bits | 0x000000ff | 0x00000000 | RW |
+| status.bits | 0x000000ff | 0x00000000 | RO |
+| tx.bits | 0x000000ff | 0x00000000 | WO |
+| events.bits | 0x8000000f | 0x00000000 | W1C |
+| counter.bits | 0xffffffff | 0x00000000 | RW |
+
+    Updating crates.io index
+     Locking 8 packages to latest Rust 1.98.1 compatible versions
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling syn v2.0.119
+   Compiling bitloom-macro v1.2.0
+   Compiling bitloom-prelude v1.2.0
+   Compiling candidate_csr v0.0.0 (/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/csr-example)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.89s
+     Running `/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-target/debug/candidate_csr`
+
+exit=0
+$ cargo metadata --format-version 1 --manifest-path /tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink/Cargo.toml
+{"packages":[{"name":"bitloom-builder","version":"1.2.0","id":"registry+https://github.com/rust-lang/crates.io-index#bitloom-builder@1.2.0","license":"MIT OR Apache-2.0","license_file":null,"description":"Runtime elaboration session over Bitloom HIR","source":"registry+https://github.com/rust-lang/crates.io-index","dependencies":[{"name":"bitloom-hir","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.2.0","kind":null,"rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null}],"targets":[{"kind":["lib"],"crate_types":["lib"],"name":"bitloom_builder","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-builder-1.2.0/src/lib.rs","edition":"2024","doc":true,"doctest":true,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"module_composition","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-builder-1.2.0/tests/module_composition.rs","edition":"2024","doc":false,"doctest":false,"test":true}],"features":{},"manifest_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-builder-1.2.0/Cargo.toml","metadata":null,"publish":null,"authors":["Bitloom contributors"],"categories":[],"keywords":[],"readme":null,"repository":"https://github.com/TangCan/bitloom","homepage":"https://github.com/TangCan/bitloom","documentation":"https://docs.rs/bitloom-builder","edition":"2024","links":null,"default_run":null,"rust_version":"1.97.1"},{"name":"bitloom-hir","version":"1.2.0","id":"registry+https://github.com/rust-lang/crates.io-index#bitloom-hir@1.2.0","license":"MIT OR Apache-2.0","license_file":null,"description":"FrozenHir AST and diagnostics for Bitloom","source":"registry+https://github.com/rust-lang/crates.io-index","dependencies":[],"targets":[{"kind":["lib"],"crate_types":["lib"],"name":"bitloom_hir","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-hir-1.2.0/src/lib.rs","edition":"2024","doc":true,"doctest":true,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"module_composition","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-hir-1.2.0/tests/module_composition.rs","edition":"2024","doc":false,"doctest":false,"test":true}],"features":{},"manifest_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-hir-1.2.0/Cargo.toml","metadata":null,"publish":null,"authors":["Bitloom contributors"],"categories":[],"keywords":[],"readme":null,"repository":"https://github.com/TangCan/bitloom","homepage":"https://github.com/TangCan/bitloom","documentation":"https://docs.rs/bitloom-hir","edition":"2024","links":null,"default_run":null,"rust_version":"1.97.1"},{"name":"bitloom-macro","version":"1.2.0","id":"registry+https://github.com/rust-lang/crates.io-index#bitloom-macro@1.2.0","license":"MIT OR Apache-2.0","license_file":null,"description":"Bitloom proc-macro sugar → builder paths; includes #[derive(Bundle)] (FR80)","source":"registry+https://github.com/rust-lang/crates.io-index","dependencies":[{"name":"proc-macro2","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1","kind":null,"rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"quote","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1","kind":null,"rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"syn","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^2","kind":null,"rename":null,"optional":false,"uses_default_features":true,"features":["full"],"target":null,"registry":null}],"targets":[{"kind":["proc-macro"],"crate_types":["proc-macro"],"name":"bitloom_macro","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-macro-1.2.0/src/lib.rs","edition":"2024","doc":true,"doctest":true,"test":true}],"features":{},"manifest_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-macro-1.2.0/Cargo.toml","metadata":null,"publish":null,"authors":["Bitloom contributors"],"categories":[],"keywords":[],"readme":null,"repository":"https://github.com/TangCan/bitloom","homepage":"https://github.com/TangCan/bitloom","documentation":"https://docs.rs/bitloom-macro","edition":"2024","links":null,"default_run":null,"rust_version":"1.97.1"},{"name":"bitloom-prelude","version":"1.2.0","id":"registry+https://github.com/rust-lang/crates.io-index#bitloom-prelude@1.2.0","license":"MIT OR Apache-2.0","license_file":null,"description":"Design-crate surface for Bitloom (AD-2 / AD-6)","source":"registry+https://github.com/rust-lang/crates.io-index","dependencies":[{"name":"bitloom-builder","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.2.0","kind":null,"rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"bitloom-hir","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.2.0","kind":null,"rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"bitloom-macro","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.2.0","kind":null,"rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"bitloom-sim","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.2.0","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"bitloom-vlog","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.2.0","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null}],"targets":[{"kind":["lib"],"crate_types":["lib"],"name":"bitloom_prelude","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-prelude-1.2.0/src/lib.rs","edition":"2024","doc":true,"doctest":true,"test":true}],"features":{},"manifest_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/bitloom-prelude-1.2.0/Cargo.toml","metadata":null,"publish":null,"authors":["Bitloom contributors"],"categories":[],"keywords":[],"readme":null,"repository":"https://github.com/TangCan/bitloom","homepage":"https://github.com/TangCan/bitloom","documentation":"https://docs.rs/bitloom-prelude","edition":"2024","links":null,"default_run":null,"rust_version":"1.97.1"},{"name":"candidate_blink","version":"0.1.0","id":"path+file:///tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink#0.1.0","license":null,"license_file":null,"description":null,"source":null,"dependencies":[{"name":"bitloom-prelude","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.2.0","kind":null,"rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null}],"targets":[{"kind":["lib"],"crate_types":["lib"],"name":"candidate_blink","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink/src/lib.rs","edition":"2024","doc":true,"doctest":true,"test":true}],"features":{},"manifest_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink/Cargo.toml","metadata":null,"publish":[],"authors":[],"categories":[],"keywords":[],"readme":null,"repository":null,"homepage":null,"documentation":null,"edition":"2024","links":null,"default_run":null,"rust_version":"1.97.1"},{"name":"proc-macro2","version":"1.0.107","id":"registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107","license":"MIT OR Apache-2.0","license_file":null,"description":"A substitute implementation of the compiler's `proc_macro` API to decouple token-based libraries from the procedural macro use case.","source":"registry+https://github.com/rust-lang/crates.io-index","dependencies":[{"name":"unicode-ident","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.0","kind":null,"rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"flate2","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.0","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"quote","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.0","kind":"dev","rename":null,"optional":false,"uses_default_features":false,"features":[],"target":null,"registry":null},{"name":"rayon","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.0","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"rustversion","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"tar","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^0.4","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null}],"targets":[{"kind":["lib"],"crate_types":["lib"],"name":"proc_macro2","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/src/lib.rs","edition":"2021","doc":true,"doctest":true,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"comments","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/tests/comments.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"features","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/tests/features.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"marker","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/tests/marker.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/tests/test.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_fmt","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/tests/test_fmt.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_size","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/tests/test_size.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["custom-build"],"crate_types":["bin"],"name":"build-script-build","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/build.rs","edition":"2021","doc":false,"doctest":false,"test":false}],"features":{"default":["proc-macro"],"nightly":[],"proc-macro":[],"span-locations":[]},"manifest_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/Cargo.toml","metadata":{"docs":{"rs":{"rustc-args":["--cfg=procmacro2_semver_exempt"],"targets":["x86_64-unknown-linux-gnu"],"rustdoc-args":["--cfg=procmacro2_semver_exempt","--generate-link-to-definition","--generate-macro-expansion","--extern-html-root-url=core=https://doc.rust-lang.org","--extern-html-root-url=alloc=https://doc.rust-lang.org","--extern-html-root-url=std=https://doc.rust-lang.org","--extern-html-root-url=proc_macro=https://doc.rust-lang.org"]}},"playground":{"features":["span-locations"]}},"publish":null,"authors":["David Tolnay <dtolnay@gmail.com>","Alex Crichton <alex@alexcrichton.com>"],"categories":["development-tools::procedural-macro-helpers"],"keywords":["macros","syn"],"readme":"README.md","repository":"https://github.com/dtolnay/proc-macro2","homepage":null,"documentation":"https://docs.rs/proc-macro2","edition":"2021","links":null,"default_run":null,"rust_version":"1.71"},{"name":"quote","version":"1.0.47","id":"registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47","license":"MIT OR Apache-2.0","license_file":null,"description":"Quasi-quoting macro quote!(...)","source":"registry+https://github.com/rust-lang/crates.io-index","dependencies":[{"name":"proc-macro2","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.0.80","kind":null,"rename":null,"optional":false,"uses_default_features":false,"features":[],"target":null,"registry":null},{"name":"rustversion","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.0","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"trybuild","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.0.108","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":["diff"],"target":null,"registry":null}],"targets":[{"kind":["lib"],"crate_types":["lib"],"name":"quote","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/src/lib.rs","edition":"2021","doc":true,"doctest":true,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"compiletest","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/tests/compiletest.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/tests/test.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["custom-build"],"crate_types":["bin"],"name":"build-script-build","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/build.rs","edition":"2021","doc":false,"doctest":false,"test":false}],"features":{"default":["proc-macro"],"proc-macro":["proc-macro2/proc-macro"]},"manifest_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/Cargo.toml","metadata":{"docs":{"rs":{"targets":["x86_64-unknown-linux-gnu"],"rustdoc-args":["--generate-link-to-definition","--generate-macro-expansion","--extern-html-root-url=core=https://doc.rust-lang.org","--extern-html-root-url=alloc=https://doc.rust-lang.org","--extern-html-root-url=std=https://doc.rust-lang.org"]}}},"publish":null,"authors":["David Tolnay <dtolnay@gmail.com>"],"categories":["development-tools::procedural-macro-helpers"],"keywords":["macros","syn"],"readme":"README.md","repository":"https://github.com/dtolnay/quote","homepage":null,"documentation":"https://docs.rs/quote/","edition":"2021","links":null,"default_run":null,"rust_version":"1.71"},{"name":"syn","version":"2.0.119","id":"registry+https://github.com/rust-lang/crates.io-index#syn@2.0.119","license":"MIT OR Apache-2.0","license_file":null,"description":"Parser for Rust source code","source":"registry+https://github.com/rust-lang/crates.io-index","dependencies":[{"name":"proc-macro2","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.0.91","kind":null,"rename":null,"optional":false,"uses_default_features":false,"features":[],"target":null,"registry":null},{"name":"quote","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1.0.35","kind":null,"rename":null,"optional":true,"uses_default_features":false,"features":[],"target":null,"registry":null},{"name":"unicode-ident","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1","kind":null,"rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"anyhow","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"automod","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"insta","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"ref-cast","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"rustversion","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"syn-test-suite","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^0","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"termcolor","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"flate2","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":"cfg(not(miri))","registry":null},{"name":"rayon","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^1","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":"cfg(not(miri))","registry":null},{"name":"reqwest","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^0.13","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":["blocking"],"target":"cfg(not(miri))","registry":null},{"name":"tar","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^0.4.16","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":"cfg(not(miri))","registry":null},{"name":"walkdir","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^2.3.2","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":"cfg(not(miri))","registry":null}],"targets":[{"kind":["lib"],"crate_types":["lib"],"name":"syn","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/src/lib.rs","edition":"2021","doc":true,"doctest":true,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"regression","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/regression.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_asyncness","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_asyncness.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_attribute","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_attribute.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_derive_input","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_derive_input.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_expr","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_expr.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_generics","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_generics.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_grouping","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_grouping.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_ident","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_ident.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_item","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_item.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_lit","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_lit.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_meta","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_meta.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_parse_buffer","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_parse_buffer.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_parse_quote","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_parse_quote.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_parse_stream","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_parse_stream.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_pat","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_pat.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_path","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_path.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_precedence","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_precedence.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_punctuated","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_punctuated.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_receiver","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_receiver.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_round_trip","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_round_trip.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_shebang","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_shebang.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_size","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_size.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_stmt","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_stmt.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_token_trees","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_token_trees.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_ty","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_ty.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_unparenthesize","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_unparenthesize.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"test_visibility","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/test_visibility.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"zzz_stable","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/tests/zzz_stable.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["bench"],"crate_types":["bin"],"name":"file","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/benches/file.rs","edition":"2021","required-features":["full","parsing"],"doc":false,"doctest":false,"test":false},{"kind":["bench"],"crate_types":["bin"],"name":"rust","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/benches/rust.rs","edition":"2021","required-features":["full","parsing"],"doc":false,"doctest":false,"test":false}],"features":{"clone-impls":[],"default":["derive","parsing","printing","clone-impls","proc-macro"],"derive":[],"extra-traits":[],"fold":[],"full":[],"parsing":[],"printing":["dep:quote"],"proc-macro":["proc-macro2/proc-macro","quote?/proc-macro"],"test":["syn-test-suite/all-features"],"visit":[],"visit-mut":[]},"manifest_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.119/Cargo.toml","metadata":{"docs":{"rs":{"all-features":true,"targets":["x86_64-unknown-linux-gnu"],"rustdoc-args":["--generate-link-to-definition","--generate-macro-expansion","--extend-css=src/gen/token.css","--extern-html-root-url=core=https://doc.rust-lang.org","--extern-html-root-url=alloc=https://doc.rust-lang.org","--extern-html-root-url=std=https://doc.rust-lang.org","--extern-html-root-url=proc_macro=https://doc.rust-lang.org"]}},"playground":{"features":["full","visit","visit-mut","fold","extra-traits"]}},"publish":null,"authors":["David Tolnay <dtolnay@gmail.com>"],"categories":["development-tools::procedural-macro-helpers","parser-implementations"],"keywords":["macros","syn"],"readme":"README.md","repository":"https://github.com/dtolnay/syn","homepage":null,"documentation":"https://docs.rs/syn","edition":"2021","links":null,"default_run":null,"rust_version":"1.71"},{"name":"unicode-ident","version":"1.0.26","id":"registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.26","license":"(MIT OR Apache-2.0) AND Unicode-3.0","license_file":null,"description":"Determine whether characters have the XID_Start or XID_Continue properties according to Unicode Standard Annex #31","source":"registry+https://github.com/rust-lang/crates.io-index","dependencies":[{"name":"fst","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^0.4","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"rand","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^0.10","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"roaring","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^0.11","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"ucd-trie","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^0.1","kind":"dev","rename":null,"optional":false,"uses_default_features":false,"features":[],"target":null,"registry":null},{"name":"unicode-xid","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^0.2.6","kind":"dev","rename":null,"optional":false,"uses_default_features":true,"features":[],"target":null,"registry":null},{"name":"criterion","source":"registry+https://github.com/rust-lang/crates.io-index","req":"^0.8","kind":"dev","rename":null,"optional":false,"uses_default_features":false,"features":[],"target":"cfg(not(miri))","registry":null}],"targets":[{"kind":["lib"],"crate_types":["lib"],"name":"unicode_ident","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.26/src/lib.rs","edition":"2021","doc":true,"doctest":true,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"compare","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.26/tests/compare.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["test"],"crate_types":["bin"],"name":"static_size","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.26/tests/static_size.rs","edition":"2021","doc":false,"doctest":false,"test":true},{"kind":["bench"],"crate_types":["bin"],"name":"xid","src_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.26/benches/xid.rs","edition":"2021","doc":false,"doctest":false,"test":false}],"features":{},"manifest_path":"/tmp/bitloom-1.2.0-registry-9iztsllr/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.26/Cargo.toml","metadata":{"docs":{"rs":{"targets":["x86_64-unknown-linux-gnu"],"rustdoc-args":["--generate-link-to-definition","--generate-macro-expansion","--extern-html-root-url=core=https://doc.rust-lang.org","--extern-html-root-url=alloc=https://doc.rust-lang.org","--extern-html-root-url=std=https://doc.rust-lang.org"]}}},"publish":null,"authors":["David Tolnay <dtolnay@gmail.com>"],"categories":["development-tools::procedural-macro-helpers","no-std","no-std::no-alloc"],"keywords":["unicode","xid"],"readme":"README.md","repository":"https://github.com/dtolnay/unicode-ident","homepage":null,"documentation":"https://docs.rs/unicode-ident","edition":"2021","links":null,"default_run":null,"rust_version":"1.71"}],"workspace_members":["path+file:///tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink#0.1.0"],"workspace_default_members":["path+file:///tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink#0.1.0"],"resolve":{"nodes":[{"id":"registry+https://github.com/rust-lang/crates.io-index#bitloom-builder@1.2.0","dependencies":["registry+https://github.com/rust-lang/crates.io-index#bitloom-hir@1.2.0"],"deps":[{"name":"bitloom_hir","pkg":"registry+https://github.com/rust-lang/crates.io-index#bitloom-hir@1.2.0","dep_kinds":[{"kind":null,"target":null}]}],"features":[]},{"id":"registry+https://github.com/rust-lang/crates.io-index#bitloom-hir@1.2.0","dependencies":[],"deps":[],"features":[]},{"id":"registry+https://github.com/rust-lang/crates.io-index#bitloom-macro@1.2.0","dependencies":["registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107","registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47","registry+https://github.com/rust-lang/crates.io-index#syn@2.0.119"],"deps":[{"name":"proc_macro2","pkg":"registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107","dep_kinds":[{"kind":null,"target":null}]},{"name":"quote","pkg":"registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47","dep_kinds":[{"kind":null,"target":null}]},{"name":"syn","pkg":"registry+https://github.com/rust-lang/crates.io-index#syn@2.0.119","dep_kinds":[{"kind":null,"target":null}]}],"features":[]},{"id":"registry+https://github.com/rust-lang/crates.io-index#bitloom-prelude@1.2.0","dependencies":["registry+https://github.com/rust-lang/crates.io-index#bitloom-builder@1.2.0","registry+https://github.com/rust-lang/crates.io-index#bitloom-hir@1.2.0","registry+https://github.com/rust-lang/crates.io-index#bitloom-macro@1.2.0"],"deps":[{"name":"bitloom_builder","pkg":"registry+https://github.com/rust-lang/crates.io-index#bitloom-builder@1.2.0","dep_kinds":[{"kind":null,"target":null}]},{"name":"bitloom_hir","pkg":"registry+https://github.com/rust-lang/crates.io-index#bitloom-hir@1.2.0","dep_kinds":[{"kind":null,"target":null}]},{"name":"bitloom_macro","pkg":"registry+https://github.com/rust-lang/crates.io-index#bitloom-macro@1.2.0","dep_kinds":[{"kind":null,"target":null}]}],"features":[]},{"id":"path+file:///tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink#0.1.0","dependencies":["registry+https://github.com/rust-lang/crates.io-index#bitloom-prelude@1.2.0"],"deps":[{"name":"bitloom_prelude","pkg":"registry+https://github.com/rust-lang/crates.io-index#bitloom-prelude@1.2.0","dep_kinds":[{"kind":null,"target":null}]}],"features":[]},{"id":"registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107","dependencies":["registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.26"],"deps":[{"name":"unicode_ident","pkg":"registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.26","dep_kinds":[{"kind":null,"target":null}]}],"features":["default","proc-macro"]},{"id":"registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47","dependencies":["registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107"],"deps":[{"name":"proc_macro2","pkg":"registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107","dep_kinds":[{"kind":null,"target":null}]}],"features":["default","proc-macro"]},{"id":"registry+https://github.com/rust-lang/crates.io-index#syn@2.0.119","dependencies":["registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107","registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47","registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.26"],"deps":[{"name":"proc_macro2","pkg":"registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107","dep_kinds":[{"kind":null,"target":null}]},{"name":"quote","pkg":"registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47","dep_kinds":[{"kind":null,"target":null}]},{"name":"unicode_ident","pkg":"registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.26","dep_kinds":[{"kind":null,"target":null}]}],"features":["clone-impls","default","derive","full","parsing","printing","proc-macro"]},{"id":"registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.26","dependencies":[],"deps":[],"features":[]}],"root":"path+file:///tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink#0.1.0"},"target_directory":"/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-target","build_directory":"/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-target","version":1,"workspace_root":"/tmp/bitloom-1.2.0-registry-9iztsllr/consumer-mle333_z/candidate_blink","metadata":null}
+    Updating crates.io index
+     Locking 8 packages to latest Rust 1.97.1 compatible versions
+
+exit=0

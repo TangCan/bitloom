@@ -1,0 +1,12 @@
+    Updating crates.io index
+   Packaging bitloom-vlog v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-vlog)
+    Updating crates.io index
+    Packaged 5 files, 19.9KiB (4.7KiB compressed)
+   Verifying bitloom-vlog v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-vlog)
+   Compiling bitloom-vlog v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-vlog-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.01s
+   Uploading bitloom-vlog v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-vlog)
+    Uploaded bitloom-vlog v1.2.0 to registry `crates-io`
+note: waiting for bitloom-vlog v1.2.0 to be available at registry `crates-io`
+help: you may press ctrl-c to skip waiting; the crate should be available shortly
+   Published bitloom-vlog v1.2.0 at registry `crates-io`

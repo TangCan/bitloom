@@ -1,0 +1,57 @@
+ Downloading crates ...
+  Downloaded bitloom-lsp v1.2.0
+    Updating crates.io index
+  Installing bitloom-lsp v1.2.0
+warning: default toolchain implicitly overridden with `1.97.1-x86_64-unknown-linux-gnu` by rustup toolchain file
+  |
+  = help: use `cargo +stable install` if you meant to use the stable toolchain
+  = note: rustup selects the toolchain based on the parent environment and not the environment of the package being installed
+    Updating crates.io index
+    Updating crates.io index
+   Compiling pin-project-lite v0.2.17
+   Compiling futures-sink v0.3.34
+   Compiling memchr v2.8.3
+   Compiling futures-core v0.3.34
+   Compiling libc v0.2.189
+   Compiling ref-cast v1.0.27
+   Compiling futures-io v0.3.34
+   Compiling crossbeam-utils v0.8.23
+   Compiling futures-task v0.3.34
+   Compiling parking_lot_core v0.9.12
+   Compiling slab v0.4.12
+   Compiling once_cell v1.21.4
+   Compiling smallvec v1.16.0
+   Compiling scopeguard v1.2.0
+   Compiling borrow-or-share v0.2.4
+   Compiling httparse v1.10.1
+   Compiling hashbrown v0.14.5
+   Compiling percent-encoding v2.3.2
+   Compiling bitflags v2.13.1
+   Compiling bytes v1.12.1
+   Compiling tower-service v0.3.3
+   Compiling sync_wrapper v1.0.2
+   Compiling tower-layer v0.3.3
+   Compiling syn v2.0.119
+   Compiling ref-cast-impl v1.0.27
+   Compiling futures-macro v0.3.34
+   Compiling tokio-macros v2.7.2
+   Compiling lock_api v0.4.14
+   Compiling futures-channel v0.3.34
+   Compiling tracing-core v0.1.36
+   Compiling fluent-uri v0.4.1
+   Compiling serde_json v1.0.151
+   Compiling tokio v1.53.1
+   Compiling futures-util v0.3.34
+   Compiling dashmap v6.2.1
+   Compiling ls-types v0.0.6
+   Compiling tokio-util v0.7.19
+   Compiling tracing-attributes v0.1.31
+   Compiling tower v0.5.3
+   Compiling futures v0.3.34
+   Compiling tracing v0.1.44
+   Compiling tower-lsp-server v0.23.0
+   Compiling bitloom-lsp v1.2.0
+    Finished `release` profile [optimized] target(s) in 25.11s
+  Installing /tmp/bitloom-1.2.0-registry-9iztsllr/install/bin/bitloom-lsp
+   Installed package `bitloom-lsp v1.2.0` (executable `bitloom-lsp`)
+warning: be sure to add `/tmp/bitloom-1.2.0-registry-9iztsllr/install/bin` to your PATH to be able to run the installed binaries

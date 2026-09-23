@@ -1,0 +1,12 @@
+    Updating crates.io index
+   Packaging bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+    Updating crates.io index
+    Packaged 5 files, 21.3KiB (5.9KiB compressed)
+   Verifying bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+   Compiling bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-macro-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.20s
+   Uploading bitloom-macro v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+    Uploaded bitloom-macro v1.2.0 to registry `crates-io`
+note: waiting for bitloom-macro v1.2.0 to be available at registry `crates-io`
+help: you may press ctrl-c to skip waiting; the crate should be available shortly
+   Published bitloom-macro v1.2.0 at registry `crates-io`

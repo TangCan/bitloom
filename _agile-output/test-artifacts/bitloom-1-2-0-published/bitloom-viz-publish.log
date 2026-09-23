@@ -1,0 +1,12 @@
+    Updating crates.io index
+   Packaging bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+    Updating crates.io index
+    Packaged 7 files, 44.1KiB (11.9KiB compressed)
+   Verifying bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+   Compiling bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/target/package/bitloom-viz-1.2.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.81s
+   Uploading bitloom-viz v1.2.0 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+    Uploaded bitloom-viz v1.2.0 to registry `crates-io`
+note: waiting for bitloom-viz v1.2.0 to be available at registry `crates-io`
+help: you may press ctrl-c to skip waiting; the crate should be available shortly
+   Published bitloom-viz v1.2.0 at registry `crates-io`
