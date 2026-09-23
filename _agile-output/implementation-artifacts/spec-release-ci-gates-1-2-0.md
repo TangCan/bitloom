@@ -47,3 +47,5 @@ context: []
 - 后续独立审查未发现阻断问题；历史审计正常/-O 各2项测试通过，包括3种范围内越界反例。Icarus12 构建与完整 FR200 仍以新一轮真实远端结果为准；审查提醒的临时 __pycache__ 不提交。
 
 - 首轮工作区 job 运行到 FR198 默认系统测试时因 `required tool missing: yosys` 失败（107178291522）。新增真实层级 direct RTL 测试复用后端矩阵时要求综合器；为 test job 补齐 Yosys 安装，不跳过测试。
+
+- 第三轮 FR200：Icarus12 编译、真实 RTL 行为、隔离 namespace 与宿主路径拒绝全部通过；旧 Yosys0.9 在隔离内解析失败。补齐与原验收一致的 Yosys0.33（上游提交 `2584903a0605cc7ffdfc1996254ccc1f548403f2`）到 `/usr`，仅该试点构建禁用未使用的 ABC；实际试点命令仍完整执行 `read_verilog -sv; hierarchy -check; proc; check -assert`，其他形式/综合门保持原工具配置。没有降低测试谓词。

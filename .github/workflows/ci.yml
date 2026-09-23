@@ -481,7 +481,7 @@ jobs:
         with:
           toolchain: "1.97.1"
       - name: Install real RTL and isolation tools
-        run: sudo apt-get update && sudo apt-get install -y yosys bubblewrap z3 g++ make m4 curl autoconf bison flex gperf libreadline-dev
+        run: sudo apt-get update && sudo apt-get install -y bubblewrap z3 g++ make m4 curl autoconf bison flex gperf libreadline-dev tcl-dev libffi-dev zlib1g-dev pkg-config gawk
       - name: Verify network and PID namespace prerequisites
         run: |
           uname -a
@@ -505,6 +505,17 @@ jobs:
           test "$(command -v vvp)" = /usr/bin/vvp
           /usr/bin/iverilog -V
           /usr/bin/vvp -V
+      - name: Install source-pinned Yosys 0.33 for the pilot parser
+        run: |
+          # 试点仅用 read_verilog/hierarchy/proc/check，不调用 ABC；其余 formal job 配置不变。
+          sudo apt-get remove -y yosys
+          source_dir="$(mktemp -d "$RUNNER_TEMP/bitloom-yosys-XXXXXX")"
+          git clone --depth 1 --branch yosys-0.33 https://github.com/YosysHQ/yosys.git "$source_dir"
+          test "$(git -C "$source_dir" rev-parse HEAD)" = 2584903a0605cc7ffdfc1996254ccc1f548403f2
+          make -C "$source_dir" CONFIG=gcc PREFIX=/usr ENABLE_ABC=0 -j2
+          sudo make -C "$source_dir" CONFIG=gcc PREFIX=/usr ENABLE_ABC=0 install
+          test "$(command -v yosys)" = /usr/bin/yosys
+          /usr/bin/yosys -V
       - name: Build and run real wrapper mutation oracle
         run: |
           cargo build -p bitloom
