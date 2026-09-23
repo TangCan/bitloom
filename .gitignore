@@ -6,3 +6,10 @@ Cargo.lock
 # FR119 SymbiYosys workdirs (sby -f beside fixtures)
 crates/rhdl-formal/fixtures/fr119/fr119_pass/
 crates/rhdl-formal/fixtures/fr119/fr119_fail/
+
+# 原始验收归档保存在仓库外；清单、恢复入口见 docs/evidence/README.md。
+/_agile-output/test-artifacts/**/*.tar.gz
+/_agile-output/test-artifacts/**/*.tar.gz.part*
+/_agile-output/test-artifacts/**/*.tgz
+/_agile-output/test-artifacts/**/*.zip
+/_agile-output/test-artifacts/**/*.tar.zst

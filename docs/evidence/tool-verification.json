@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "checks": [
+    "small checksum manifest allowed",
+    "small raw archive rejected",
+    "large staged blob rejected",
+    "large blob in deleted history rejected",
+    "verify mode does not restore files",
+    "restore verifies content and permissions",
+    "restore is idempotent",
+    "conflicting existing data preserved",
+    "corrupt source refused before writes",
+    "destination symlink refused",
+    "escaping manifest path refused"
+  ],
+  "count": 11,
+  "test_directory": "/tmp/bitloom-archive-tools-p5cd36cq"
+}

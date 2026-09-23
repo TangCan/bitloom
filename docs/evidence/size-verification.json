@@ -1,0 +1,7 @@
+{
+  "original_bundle_bytes": 572927824,
+  "clean_source_bundle_bytes": 6097477,
+  "reduction_percent": 98.94,
+  "measured_clean_head": "3550807add9408be65dc83a32e4fa54bb3bac31e",
+  "scope": "Same 36 commits above remote base; excludes subsequent archive tooling commit."
+}
