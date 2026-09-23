@@ -35,14 +35,18 @@ def main() -> None:
             raise SystemExit(result.stdout)
         return result.stdout
 
-    uris = run(["apt-get", "--print-uris", "download", "autoconf", "automake", "flex", "bison", "libfl-dev"])
+    packages_to_download = ["autoconf", "automake", "flex", "bison", "libfl-dev"]
+    uris = run(["apt-get", "--print-uris", "download", *packages_to_download])
+    # APT 负责 mirror+file 等仓库 transport；curl 无法解析这些 URI。
+    # 下载后仍校验同一已认证索引返回的大小与摘要，不修改宿主安装。
+    run(["apt-get", "download", *packages_to_download], cwd=deps)
     packages = []
     for row in uris.splitlines():
         url, name, size, expected = shlex.split(row)
         archive = deps / name
         # Preserve apt's exact package version and authenticated-index digest.
-        url = url.replace("https://mirrors.ustc.edu.cn/ubuntu", "https://archive.ubuntu.com/ubuntu")
-        run(["curl", "-fL", "--max-time", "120", url, "-o", str(archive)])
+        if not archive.is_file() or archive.stat().st_size != int(size):
+            raise SystemExit(f"package size mismatch: {name}")
         algorithm, checksum = expected.split(":", 1)
         if hashlib.new(algorithm.lower(), archive.read_bytes()).hexdigest() != checksum:
             raise SystemExit(f"package checksum mismatch: {name}")

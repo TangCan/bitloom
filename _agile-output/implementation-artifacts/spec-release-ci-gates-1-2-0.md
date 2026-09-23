@@ -49,3 +49,8 @@ context: []
 - 首轮工作区 job 运行到 FR198 默认系统测试时因 `required tool missing: yosys` 失败（107178291522）。新增真实层级 direct RTL 测试复用后端矩阵时要求综合器；为 test job 补齐 Yosys 安装，不跳过测试。
 
 - 第三轮 FR200：Icarus12 编译、真实 RTL 行为、隔离 namespace 与宿主路径拒绝全部通过；旧 Yosys0.9 在隔离内解析失败。补齐与原验收一致的 Yosys0.33（上游提交 `2584903a0605cc7ffdfc1996254ccc1f548403f2`）到 `/usr`，仅该试点构建禁用未使用的 ABC；实际试点命令仍完整执行 `read_verilog -sv; hierarchy -check; proc; check -assert`，其他形式/综合门保持原工具配置。没有降低测试谓词。
+
+- 第五轮 FR200 全部本地/禁网/正常与优化模式试点通过，进入上游套件准备时暴露 APT `mirror+file` URI 不能交给 curl。调整 `scripts/provision-phase24-verilator.py` 由 APT 自身下载，仍根据同一索引 URI 清单核对大小与摘要，仍只解包测试依赖，不安装宿主包。
+- 第四轮 workspace 的 FR81 回归暴露缺少 `just`；test job 复用已有 setup-just action，与 core job 一致，不跳过脚本合同检查。
+
+- APT transport 与 just 补齐经独立审查无阻断；FR81 本地6 passed / 0 failed（真实 JVM golden 子项按其脚本因本地 sbt 缺失明确 skip，远端专用 job 已另行通过），Python 编译与 diff 检查通过。APT/上游闭包仍以远端真实下载与校验验收。

@@ -12,6 +12,7 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+      - uses: extractions/setup-just@v2
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: "1.97.1"
