@@ -1,0 +1,8 @@
+{
+  "result_blocks": 487,
+  "passed": 1903,
+  "failed": 0,
+  "ignored": 56,
+  "profile": "CARGO_PROFILE_TEST_OPT_LEVEL=1",
+  "exit_code": 0
+}

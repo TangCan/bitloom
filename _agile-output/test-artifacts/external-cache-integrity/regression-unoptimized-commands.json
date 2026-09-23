@@ -1,0 +1,25 @@
+[
+  {
+    "label": "fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.721934159999364
+  },
+  {
+    "label": "workspace",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--workspace"
+    ],
+    "exit_code": 101,
+    "elapsed_seconds": 421.37981779799884
+  }
+]

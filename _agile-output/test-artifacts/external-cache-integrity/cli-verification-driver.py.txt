@@ -1,0 +1,26 @@
+import json,hashlib,shutil,subprocess,tempfile
+from pathlib import Path
+root=Path('/nvme_data2/richard/2026/rhdl');out=root/'_agile-output/test-artifacts/external-cache-integrity'
+src=Path('/tmp/bitloom-130-3-review-pilot-final');work=Path(tempfile.mkdtemp(prefix='bitloom-cache-fixed-'))
+for name in ('source.json','source.lock.json'):shutil.copyfile(src/name,work/name)
+shutil.copytree(src/'licenses',work/'licenses');shutil.copytree(src/'cache',work/'cache')
+binary=root/'target/debug/cargo-bitloom';d=json.loads((work/'source.lock.json').read_text());old=d['tools']['bitloomSha256'];d['tools']['bitloomSha256']=hashlib.sha256(binary.read_bytes()).hexdigest();(work/'source.lock.json').write_text(json.dumps(d,indent=2)+'\n')
+(out/'test-lock-provenance.json').write_text(json.dumps({'original_lock':str(src/'source.lock.json'),'original_lock_sha256':hashlib.sha256((src/'source.lock.json').read_bytes()).hexdigest(),'original_cli_sha256':old,'tested_cli_sha256':d['tools']['bitloomSha256'],'change':'only tools.bitloomSha256 rebound to the locally built fix; source/license identities unchanged; no fetch','work':str(work)},indent=2)+'\n')
+shutil.copyfile(work/'source.lock.json',out/'tested-source.lock.json')
+base=[str(binary),'external-ip','verify','--manifest',str(work/'source.json'),'--lock',str(work/'source.lock.json'),'--cache',str(work/'cache'),'--offline']
+results=[]
+def run(label,cmd,want):
+ r=subprocess.run(cmd,capture_output=True,text=True,timeout=600)
+ results.append({'label':label,'command':cmd,'exit_code':r.returncode,'stdout':r.stdout,'stderr':r.stderr})
+ (out/'cli-results.json').write_text(json.dumps(results,indent=2)+'\n')
+ assert (r.returncode==0)==want,(label,r.stderr)
+ if not want:assert 'bitloom.external-ip.path' in r.stderr,(label,r.stderr)
+run('normal-verify',base,True)
+closure=work/'cache'/Path(d['sources'][0]['cachePath']).parent
+for label,path in [('closures',work/'cache/closures'),('closure-digest',closure)]:
+ moved=work/f'outside-{label}';path.rename(moved);path.symlink_to(moved,target_is_directory=True)
+ run(label+'-rejected',base,False)
+ path.unlink();moved.rename(path)
+run('restored-verify',base,True)
+run('isolated-replay-pilot',['python3',str(root/'scripts/phase24-external-ip-replay.py'),'replay','--manifest',str(work/'source.json'),'--lock',str(work/'source.lock.json'),'--cache',str(work/'cache'),'--compile','--pilot','--evidence',str(out/'offline-replay.json')],True)
+print('CLI and isolated compile/binding/behavior PASS',work)

@@ -1,0 +1,31 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.42s
+     Running unittests src/main.rs (target/debug/deps/cargo_bitloom-5992aee1e571a933)
+
+running 5 tests
+
+thread 'external_ip::tests::cache_integrity_rejects_all_symlink_directory_levels' (88648) panicked at crates/bitloom/src/external_ip_tests.rs:486:32:
+symlinked cache path must be rejected: ()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test external_ip::tests::cache_integrity_rejects_all_symlink_directory_levels ... FAILED
+test external_ip::tests::cache_integrity_valid_publication_and_reuse ... ok
+
+thread 'external_ip::tests::cache_integrity_new_lock_verification_failure_preserves_shared_closure' (88647) panicked at crates/bitloom/src/external_ip_tests.rs:457:32:
+called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "No such file or directory" }
+
+thread 'external_ip::tests::cache_integrity_license_failure_preserves_reused_closure' (88645) panicked at crates/bitloom/src/external_ip_tests.rs:434:90:
+called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "No such file or directory" }
+test external_ip::tests::cache_integrity_license_failure_removes_only_new_closure ... ok
+test external_ip::tests::cache_integrity_new_lock_verification_failure_preserves_shared_closure ... FAILED
+test external_ip::tests::cache_integrity_license_failure_preserves_reused_closure ... FAILED
+
+failures:
+
+failures:
+    external_ip::tests::cache_integrity_license_failure_preserves_reused_closure
+    external_ip::tests::cache_integrity_new_lock_verification_failure_preserves_shared_closure
+    external_ip::tests::cache_integrity_rejects_all_symlink_directory_levels
+
+test result: FAILED. 2 passed; 3 failed; 0 ignored; 0 measured; 17 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `-p bitloom --bin cargo-bitloom`

@@ -1,0 +1,13 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.37s
+     Running unittests src/main.rs (target/debug/deps/cargo_bitloom-5992aee1e571a933)
+
+running 5 tests
+test external_ip::tests::cache_integrity_license_failure_removes_only_new_closure ... ok
+test external_ip::tests::cache_integrity_new_lock_verification_failure_preserves_shared_closure ... ok
+test external_ip::tests::cache_integrity_valid_publication_and_reuse ... ok
+test external_ip::tests::cache_integrity_license_failure_preserves_reused_closure ... ok
+test external_ip::tests::cache_integrity_rejects_all_symlink_directory_levels ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 17 filtered out; finished in 0.01s
+

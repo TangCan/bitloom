@@ -1,0 +1,8 @@
+{
+  "original_lock": "/tmp/bitloom-130-3-review-pilot-final/source.lock.json",
+  "original_lock_sha256": "49b22842deda1d09bb86baaa5c8c3474f013a52c7d587f624f827705b5141d6e",
+  "original_cli_sha256": "c40e36535ba32de8c285161c508aa06d1581809762dd493bcb9a2097acffd0c4",
+  "tested_cli_sha256": "21950bf1abd00274dbe1427220d5044794eeeb9e189e2d68a5073f3d8e2345f9",
+  "change": "only tools.bitloomSha256 rebound to the locally built fix; source/license identities unchanged; no fetch",
+  "work": "/tmp/bitloom-cache-fixed-ee9k9sxq"
+}

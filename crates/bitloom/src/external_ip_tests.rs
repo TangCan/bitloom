@@ -369,3 +369,257 @@ fn p0_compile_contract_rejects_unsupported_shape_parameter_and_reset() {
         );
     }
 }
+
+struct CacheFixture {
+    root: PathBuf,
+    cache: PathBuf,
+    path: PathBuf,
+    lock: LockFile,
+    closure: String,
+    staging: Vec<String>,
+}
+impl CacheFixture {
+    fn new(published: bool) -> Self {
+        let root = temp_path(&std::env::temp_dir(), "cache-integrity");
+        let cache = root.join("cache");
+        let path = root.join("source.lock.json");
+        let mut lock: LockFile = serde_json::from_str(include_str!(
+            "../../../ip/external/pulp-common-cells-fifo-v3.source.lock.json"
+        ))
+        .unwrap();
+        lock.sources.truncate(1);
+        let source = &mut lock.sources[0];
+        source.files = vec![FileLock {
+            path: "LICENSE".into(),
+            sha256: sha256(b"license"),
+        }];
+        source.tree_digest = tree_digest(&source.files);
+        source.license.sha256 = sha256(b"license");
+        source.license.notice_paths.clear();
+        let closure = format!("closures/v1-{}", source.closure_digest);
+        source.cache_path = format!(
+            "{closure}/{}-{}-{}",
+            source.name, source.commit, source.tree_digest
+        );
+        let staging = vec!["staged".into()];
+        let tree = cache.join(if published {
+            &source.cache_path
+        } else {
+            &staging[0]
+        });
+        fs::create_dir_all(&tree).unwrap();
+        fs::write(tree.join("LICENSE"), b"license").unwrap();
+        if published {
+            fs::create_dir_all(cache.join(&staging[0])).unwrap();
+            fs::write(cache.join(&staging[0]).join("LICENSE"), b"license").unwrap();
+        }
+        fs::create_dir_all(cache.join(".staging-licenses")).unwrap();
+        fs::write(
+            cache
+                .join(".staging-licenses")
+                .join(format!("{}-LICENSE", source.name)),
+            b"license",
+        )
+        .unwrap();
+        let archive = root.join(&source.license.archive_path);
+        fs::create_dir_all(archive.parent().unwrap()).unwrap();
+        fs::write(archive, b"license").unwrap();
+        Self {
+            root,
+            cache,
+            path,
+            lock,
+            closure,
+            staging,
+        }
+    }
+    fn publish(&self, already_locked: bool) -> Result<(), String> {
+        finalize_lock(
+            &self.lock,
+            &self.staging,
+            &self.cache,
+            &self.closure,
+            &self.path,
+            &json_bytes(&self.lock).unwrap(),
+            already_locked,
+        )
+    }
+    fn verify(&self) -> Result<(), String> {
+        verify_source(&self.lock.sources[0], &self.cache, &self.path, None)
+    }
+}
+impl Drop for CacheFixture {
+    fn drop(&mut self) {
+        let _ = fs::remove_dir_all(&self.root);
+    }
+}
+
+#[test]
+fn cache_integrity_license_failure_preserves_reused_closure() {
+    for old_lock in [false, true] {
+        let f = CacheFixture::new(true);
+        f.verify().unwrap();
+        let bytes = json_bytes(&f.lock).unwrap();
+        if old_lock {
+            fs::write(&f.path, &bytes).unwrap();
+        }
+        let archive = f.root.join(&f.lock.sources[0].license.archive_path);
+        fs::write(&archive, b"conflicting archive").unwrap();
+        assert!(f.publish(old_lock).unwrap_err().contains("license-drift"));
+        assert_eq!(
+            fs::read(f.cache.join(&f.lock.sources[0].cache_path).join("LICENSE")).unwrap(),
+            b"license"
+        );
+        if old_lock {
+            assert_eq!(fs::read(&f.path).unwrap(), bytes);
+        } else {
+            assert!(!f.path.exists());
+        }
+        fs::write(archive, b"license").unwrap();
+        f.verify().unwrap();
+    }
+}
+
+#[test]
+fn cache_integrity_license_failure_removes_only_new_closure() {
+    let f = CacheFixture::new(false);
+    fs::write(
+        f.root.join(&f.lock.sources[0].license.archive_path),
+        b"conflict",
+    )
+    .unwrap();
+    assert!(f.publish(false).unwrap_err().contains("license-drift"));
+    assert!(!f.cache.join(&f.closure).exists());
+    assert!(!f.path.exists());
+}
+
+#[test]
+fn cache_integrity_new_lock_verification_failure_preserves_shared_closure() {
+    let f = CacheFixture::new(true);
+    let file = f.cache.join(&f.lock.sources[0].cache_path).join("LICENSE");
+    fs::write(&file, b"preexisting drift").unwrap();
+    assert!(f.publish(false).unwrap_err().contains("content-drift"));
+    assert_eq!(fs::read(&file).unwrap(), b"preexisting drift");
+    assert!(!f.path.exists());
+}
+
+#[test]
+fn cache_integrity_valid_publication_and_reuse() {
+    for published in [false, true] {
+        let f = CacheFixture::new(published);
+        f.publish(false).unwrap();
+        f.verify().unwrap();
+        assert_eq!(fs::read(&f.path).unwrap(), json_bytes(&f.lock).unwrap());
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn cache_integrity_rejects_all_symlink_directory_levels() {
+    for level in 0..=3 {
+        let f = CacheFixture::new(true);
+        f.verify().unwrap();
+        let selected = match level {
+            0 => f.cache.clone(),
+            1 => f.cache.join("closures"),
+            2 => f.cache.join(&f.closure),
+            _ => f.cache.join(&f.lock.sources[0].cache_path),
+        };
+        let outside = f.root.join("outside");
+        fs::rename(&selected, &outside).unwrap();
+        std::os::unix::fs::symlink(&outside, &selected).unwrap();
+        let error = f
+            .verify()
+            .expect_err("symlinked cache path must be rejected");
+        assert!(error.contains("bitloom.external-ip.path"), "{error}");
+        assert!(outside.exists());
+    }
+}
+
+#[test]
+fn cache_integrity_lock_write_failure_respects_cache_ownership() {
+    for published in [false, true] {
+        let f = CacheFixture::new(published);
+        fs::create_dir(&f.path).unwrap();
+        fs::write(f.path.join("preserve"), b"existing destination").unwrap();
+        assert!(f.publish(false).unwrap_err().contains("publish"));
+        assert_eq!(f.cache.join(&f.closure).exists(), published);
+        assert_eq!(
+            fs::read(f.path.join("preserve")).unwrap(),
+            b"existing destination"
+        );
+        if published {
+            f.verify().unwrap();
+        }
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn cache_integrity_publication_rejects_static_and_dangling_links() {
+    for level in 0..=2 {
+        for dangling in [false, true] {
+            let f = CacheFixture::new(true);
+            let selected = match level {
+                0 => f.cache.clone(),
+                1 => f.cache.join("closures"),
+                _ => f.cache.join(&f.closure),
+            };
+            let outside = f.root.join("outside");
+            fs::rename(&selected, &outside).unwrap();
+            let target = if dangling {
+                f.root.join("missing")
+            } else {
+                outside.clone()
+            };
+            std::os::unix::fs::symlink(&target, &selected).unwrap();
+            let before = fs::read_dir(&outside).unwrap().count();
+            let error = publish_closure_cache(&f.lock.sources, &f.staging, &f.cache, &f.closure)
+                .unwrap_err();
+            assert!(error.contains("bitloom.external-ip.path"), "{error}");
+            assert_eq!(fs::read_dir(&outside).unwrap().count(), before);
+            assert!(!f.path.exists());
+        }
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn cache_integrity_publication_failure_cleans_owned_staging() {
+    let f = CacheFixture::new(true);
+    let selected = f.cache.join(&f.closure);
+    let outside = f.root.join("outside");
+    fs::rename(&selected, &outside).unwrap();
+    std::os::unix::fs::symlink(&outside, &selected).unwrap();
+    assert!(
+        f.publish(false)
+            .unwrap_err()
+            .contains("bitloom.external-ip.path")
+    );
+    assert!(!f.cache.join(&f.staging[0]).exists());
+    assert!(!f.cache.join(".staging-licenses").exists());
+    assert!(outside.exists());
+    assert!(selected.is_symlink());
+}
+
+#[cfg(unix)]
+#[test]
+fn cache_integrity_lock_rejects_cache_anchor_before_fetch() {
+    let root = temp_path(&std::env::temp_dir(), "cache-anchor");
+    fs::create_dir_all(root.join("outside")).unwrap();
+    let cache = root.join("cache");
+    std::os::unix::fs::symlink(root.join("outside"), &cache).unwrap();
+    let manifest = root.join("manifest.json");
+    fs::write(
+        &manifest,
+        include_bytes!("../../../ip/external/pulp-common-cells-fifo-v3.source.json"),
+    )
+    .unwrap();
+    assert!(
+        lock(&manifest, &root.join("lock.json"), &cache)
+            .unwrap_err()
+            .contains("bitloom.external-ip.path")
+    );
+    assert_eq!(fs::read_dir(root.join("outside")).unwrap().count(), 0);
+    fs::remove_dir_all(root).unwrap();
+}

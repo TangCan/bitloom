@@ -1,0 +1,29 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.06s
+     Running unittests src/main.rs (target/debug/deps/cargo_bitloom-5992aee1e571a933)
+
+running 22 tests
+test external_ip::tests::p0_behavior_oracle_kills_empty_and_zero_output_wrappers ... ignored, requires actual iverilog/vvp; run in the dedicated FR200 gate
+test external_ip::tests::p0_adapter_transforms_the_exact_locked_shape ... ok
+test external_ip::tests::p0_adapter_rejects_missing_and_duplicated_fragments ... ok
+test external_ip::tests::p0_bender_dependency_parser_is_exact_and_section_scoped ... ok
+test external_ip::tests::p0_relative_path_validation_rejects_escape_and_ambiguity ... ok
+test external_ip::tests::p0_yosys_argument_validation_rejects_metacharacters ... ok
+test external_ip::tests::p0_source_default_guard_rejects_parameter_default_drift ... ok
+test firtool::tests::host_asset_resolves_on_linux_x64 ... ok
+test firtool::tests::override_missing_bin_errors ... ok
+test firtool::tests::parse_bare_digest ... ok
+test tests::host_cargo_uses_registry_backends_outside_monorepo ... ok
+test external_ip::tests::p0_binding_output_does_not_overwrite_protected_inputs ... ok
+test firtool::tests::sha256_empty ... ok
+test external_ip::tests::p0_compile_contract_rejects_unsupported_shape_parameter_and_reset ... ok
+test external_ip::tests::p0_binding_rejects_unsupported_shape_parameter_and_reset ... ok
+test external_ip::tests::p0_binding_is_real_frozen_hierarchy_and_preserves_emitted_parent ... ok
+test external_ip::tests::cache_integrity_license_failure_removes_only_new_closure ... ok
+test external_ip::tests::cache_integrity_new_lock_verification_failure_preserves_shared_closure ... ok
+test external_ip::tests::cache_integrity_valid_publication_and_reuse ... ok
+test external_ip::tests::p0_closure_digest_binds_all_identity_dimensions ... ok
+test external_ip::tests::cache_integrity_license_failure_preserves_reused_closure ... ok
+test external_ip::tests::cache_integrity_rejects_all_symlink_directory_levels ... ok
+
+test result: ok. 21 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

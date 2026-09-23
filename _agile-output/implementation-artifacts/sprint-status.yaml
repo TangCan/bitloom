@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: "09-23-2026 18:08"
+last_updated: "09-23-2026 18:40"
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -3557,11 +3557,11 @@ action_items:
     epic: 130
     action: "M1：修复external_ip.rs失败重锁回滚删除已有闭包；记录本次创建所有权，注入许可证发布失败，证明旧锁/旧缓存保持可用；以独立故事修复并验证。"
     owner: "Richard"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-130-retro-2026-09-23.md"
   - id: "phase24-retro-m2-cache-ancestor"
     epic: 130
     action: "M2：修复external_ip.rs缓存祖先符号链接越界；新增closures和闭包目录链接负测，保留正常缓存/离线重放；关闭后复评Epic130，本轮已有CLI实测反例。"
     owner: "Richard"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-130-retro-2026-09-23.md"

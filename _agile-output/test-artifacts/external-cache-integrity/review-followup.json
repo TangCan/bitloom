@@ -1,0 +1,6 @@
+{
+  "reviewer": "cache_fix_review",
+  "result": "all four original findings confirmed resolved by read-only follow-up",
+  "tests_rerun_by_reviewer": false,
+  "verification": "parent ran final 9 deterministic tests and final CLI isolated replay"
+}

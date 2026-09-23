@@ -1,0 +1,5 @@
+{
+  "reason": "matched historical successful closeout profile after slow existing FR193 matrix; deliberate SIGTERM to this run\u2019s test process",
+  "not_pass": true,
+  "replacement": "CARGO_PROFILE_TEST_OPT_LEVEL=1 cargo test --offline --workspace"
+}

@@ -1,0 +1,95 @@
+[
+  {
+    "label": "normal-verify",
+    "command": [
+      "/nvme_data2/richard/2026/rhdl/target/debug/cargo-bitloom",
+      "external-ip",
+      "verify",
+      "--manifest",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/source.json",
+      "--lock",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/source.lock.json",
+      "--cache",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/cache",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "stdout": "verified=/tmp/bitloom-cache-fixed-ee9k9sxq/source.lock.json sources=3\n",
+    "stderr": ""
+  },
+  {
+    "label": "closures-rejected",
+    "command": [
+      "/nvme_data2/richard/2026/rhdl/target/debug/cargo-bitloom",
+      "external-ip",
+      "verify",
+      "--manifest",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/source.json",
+      "--lock",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/source.lock.json",
+      "--cache",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/cache",
+      "--offline"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "error: bitloom.external-ip.path: cache path must contain only real directories: /tmp/bitloom-cache-fixed-ee9k9sxq/cache/closures\n"
+  },
+  {
+    "label": "closure-digest-rejected",
+    "command": [
+      "/nvme_data2/richard/2026/rhdl/target/debug/cargo-bitloom",
+      "external-ip",
+      "verify",
+      "--manifest",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/source.json",
+      "--lock",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/source.lock.json",
+      "--cache",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/cache",
+      "--offline"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "error: bitloom.external-ip.path: cache path must contain only real directories: /tmp/bitloom-cache-fixed-ee9k9sxq/cache/closures/v1-c6776ed391fa8b67a7ab8703e9c360c66cbd973ed35c5522784589ef32902a0e\n"
+  },
+  {
+    "label": "restored-verify",
+    "command": [
+      "/nvme_data2/richard/2026/rhdl/target/debug/cargo-bitloom",
+      "external-ip",
+      "verify",
+      "--manifest",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/source.json",
+      "--lock",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/source.lock.json",
+      "--cache",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/cache",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "stdout": "verified=/tmp/bitloom-cache-fixed-ee9k9sxq/source.lock.json sources=3\n",
+    "stderr": ""
+  },
+  {
+    "label": "isolated-replay-pilot",
+    "command": [
+      "python3",
+      "/nvme_data2/richard/2026/rhdl/scripts/phase24-external-ip-replay.py",
+      "replay",
+      "--manifest",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/source.json",
+      "--lock",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/source.lock.json",
+      "--cache",
+      "/tmp/bitloom-cache-fixed-ee9k9sxq/cache",
+      "--compile",
+      "--pilot",
+      "--evidence",
+      "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/external-cache-integrity/offline-replay.json"
+    ],
+    "exit_code": 0,
+    "stdout": "ISOLATION_PASS filesystem=denied network=denied\nnetwork=denied\nnetwork_namespace=net:[4026531840]->net:[4026535011]\nhdl_compile=passed\nadapter=bitloom-yosys-sv-compat@1\nadapter_input_sha256=861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc\nadapter_output_sha256=7512ebaf5b925e85d7dd32409eedc4dc02e1813ec5af3ff0cdd98d773af7178d\nbinding=/scratch/fifo_v3.binding.json module=fifo_v3 source_sha256=861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc\nbehavior=passed rtl_sha256=861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc wrapper_sha256=edfeea555e5ba12411a0761ed62c24ae1bced3f0b0204e1ae0532441f6e001bf simulator=iverilog\nFIFO_MODEL_PASS cycles=104 depth=8 width=32 populated_reset=1 flush=1 wrapper=BitloomExternalFifo\n/scratch/.tmp-behavior-2-1790158685570940162/fifo_v3_tb.sv:57: $finish called at 1096 (1s)\n",
+    "stderr": ""
+  }
+]

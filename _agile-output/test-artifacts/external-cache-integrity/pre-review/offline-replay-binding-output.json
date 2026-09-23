@@ -1,0 +1,94 @@
+{
+  "adapter": {
+    "name": "bitloom-yosys-sv-compat",
+    "version": 1
+  },
+  "clockReset": {
+    "clockPort": "clk_i",
+    "resetKind": "asynchronous",
+    "resetPolarity": "active-low",
+    "resetPort": "rst_ni"
+  },
+  "module": "fifo_v3",
+  "parameters": {
+    "ADDR_DEPTH": "(DEPTH > 1) ? $clog2(DEPTH) : 1",
+    "DATA_WIDTH": "32",
+    "DEPTH": "8",
+    "FALL_THROUGH": "0",
+    "dtype": "logic [DATA_WIDTH-1:0]"
+  },
+  "ports": [
+    {
+      "direction": "input",
+      "name": "clk_i",
+      "width": "1"
+    },
+    {
+      "direction": "input",
+      "name": "rst_ni",
+      "width": "1"
+    },
+    {
+      "direction": "input",
+      "name": "flush_i",
+      "width": "1"
+    },
+    {
+      "direction": "input",
+      "name": "testmode_i",
+      "width": "1"
+    },
+    {
+      "direction": "output",
+      "name": "full_o",
+      "width": "1"
+    },
+    {
+      "direction": "output",
+      "name": "empty_o",
+      "width": "1"
+    },
+    {
+      "direction": "output",
+      "name": "usage_o",
+      "width": "ADDR_DEPTH"
+    },
+    {
+      "direction": "input",
+      "name": "data_i",
+      "width": "DATA_WIDTH"
+    },
+    {
+      "direction": "input",
+      "name": "push_i",
+      "width": "1"
+    },
+    {
+      "direction": "output",
+      "name": "data_o",
+      "width": "DATA_WIDTH"
+    },
+    {
+      "direction": "input",
+      "name": "pop_i",
+      "width": "1"
+    }
+  ],
+  "schemaVersion": 1,
+  "supportLevel": "locked",
+  "upstream": {
+    "commit": "1281545696eb3fcba50ec5b4275993476a3c710e",
+    "name": "pulp-common-cells-fifo-v3",
+    "ref": "v1.40.0",
+    "sourcePath": "common_cells:src/fifo_v3.sv",
+    "sourceSha256": "861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc",
+    "url": "https://github.com/pulp-platform/common_cells.git"
+  },
+  "wrapper": {
+    "name": "BitloomExternalFifo",
+    "parameterBinding": "fixed upstream defaults; no backend parameter overrides",
+    "sha256": "edfeea555e5ba12411a0761ed62c24ae1bced3f0b0204e1ae0532441f6e001bf",
+    "verilog": "\nmodule BitloomExternalFifo (\n  input clk_i,\n  input rst_ni,\n  input flush_i,\n  input testmode_i,\n  output full_o,\n  output empty_o,\n  output [2:0] usage_o,\n  input [31:0] data_i,\n  input push_i,\n  output [31:0] data_o,\n  input pop_i\n);\n  fifo_v3 fifo (\n    .clk_i(clk_i),\n    .rst_ni(rst_ni),\n    .flush_i(flush_i),\n    .testmode_i(testmode_i),\n    .full_o(full_o),\n    .empty_o(empty_o),\n    .usage_o(usage_o),\n    .data_i(data_i),\n    .push_i(push_i),\n    .data_o(data_o),\n    .pop_i(pop_i)\n  );\nendmodule\n\n",
+    "version": 1
+  }
+}

@@ -692,9 +692,10 @@ fn publish_closure_cache(
     staging_paths: &[String],
     cache: &Path,
     closure_relative: &str,
-) -> Result<(), String> {
-    let final_root = cache.join(&closure_relative);
-    if final_root.exists() {
+) -> Result<bool, String> {
+    let final_root = cache_directory(cache, closure_relative, true)?;
+    let created = !final_root.exists();
+    if !created {
         for staging in staging_paths {
             fs::remove_dir_all(cache.join(staging))
                 .map_err(|e| fail("io", format!("remove redundant source cache: {e}")))?;
@@ -725,7 +726,7 @@ fn publish_closure_cache(
             return Err(error);
         }
     }
-    Ok(())
+    Ok(created)
 }
 
 fn archive_path(lock_path: &Path, source: &str) -> Result<(PathBuf, String), String> {
@@ -1293,6 +1294,8 @@ pub fn lock(manifest_path: &Path, lock_path: &Path, cache: &Path) -> Result<(), 
     let manifest: Manifest = serde_json::from_slice(&manifest_bytes)
         .map_err(|e| fail("schema", format!("invalid manifest: {e}")))?;
     validate_manifest(&manifest)?;
+    // Reject static cache redirects before fetch can write through the anchor.
+    cache_directory(cache, "closures", true)?;
     let mut sources = Vec::new();
     for source in &manifest.sources {
         match fetch_source(source, cache, lock_path) {
@@ -1372,29 +1375,89 @@ pub fn lock(manifest_path: &Path, lock_path: &Path, cache: &Path) -> Result<(), 
             return Err(error);
         }
     };
-    publish_closure_cache(&lock.sources, &staging_paths, cache, &closure_relative)?;
-    if let Err(error) = publish_license_archives(&lock.sources, cache, lock_path) {
-        let _ = fs::remove_dir_all(cache.join(&closure_relative));
-        let _ = fs::remove_dir_all(cache.join(".staging-licenses"));
-        return Err(error);
-    }
-    for source in &lock.sources {
-        if let Err(error) = verify_source(source, cache, lock_path, None) {
-            if !already_locked {
-                let _ = fs::remove_dir_all(cache.join(&closure_relative));
-            }
-            return Err(error);
-        }
-    }
-    if !already_locked {
-        write_bytes_atomic(lock_path, &bytes)?;
-    }
+    finalize_lock(
+        &lock,
+        &staging_paths,
+        cache,
+        &closure_relative,
+        lock_path,
+        &bytes,
+        already_locked,
+    )?;
     println!(
         "locked={} sources={}",
         lock_path.display(),
         lock.sources.len()
     );
     Ok(())
+}
+
+fn finalize_lock(
+    lock: &LockFile,
+    staging_paths: &[String],
+    cache: &Path,
+    closure_relative: &str,
+    lock_path: &Path,
+    bytes: &[u8],
+    already_locked: bool,
+) -> Result<(), String> {
+    let created = match publish_closure_cache(&lock.sources, staging_paths, cache, closure_relative)
+    {
+        Ok(created) => created,
+        Err(error) => {
+            for staging in staging_paths {
+                let _ = fs::remove_dir_all(cache.join(staging));
+            }
+            let _ = fs::remove_dir_all(cache.join(".staging-licenses"));
+            return Err(error);
+        }
+    };
+    let result = (|| {
+        publish_license_archives(&lock.sources, cache, lock_path)?;
+        for source in &lock.sources {
+            verify_source(source, cache, lock_path, None)?;
+        }
+        if !already_locked {
+            write_bytes_atomic(lock_path, bytes)?;
+        }
+        Ok(())
+    })();
+    if result.is_err() {
+        // Lock-file existence says nothing about ownership of a shared cache.
+        if created {
+            let _ = fs::remove_dir_all(cache.join(closure_relative));
+        }
+        let _ = fs::remove_dir_all(cache.join(".staging-licenses"));
+    }
+    result
+}
+
+// Validate every directory below the caller-selected cache anchor, before any
+// traversal or publication. This rejects static symlink escapes; it does not
+// provide a capability-based filesystem transaction against concurrent mutation.
+fn cache_directory(cache: &Path, relative: &str, allow_missing: bool) -> Result<PathBuf, String> {
+    validate_relative(relative, "cache")?;
+    let mut path = cache.to_path_buf();
+    for component in std::iter::once(None).chain(Path::new(relative).components().map(Some)) {
+        if let Some(component) = component {
+            path.push(component.as_os_str());
+        }
+        match fs::symlink_metadata(&path) {
+            Ok(metadata) if metadata.is_dir() && !metadata.file_type().is_symlink() => {}
+            Ok(_) => {
+                return Err(fail(
+                    "path",
+                    format!(
+                        "cache path must contain only real directories: {}",
+                        path.display()
+                    ),
+                ));
+            }
+            Err(error) if allow_missing && error.kind() == std::io::ErrorKind::NotFound => {}
+            Err(error) => return Err(fail("cache", format!("stat {}: {error}", path.display()))),
+        }
+    }
+    Ok(path)
 }
 
 fn collect_files(root: &Path, current: &Path, out: &mut Vec<String>) -> Result<(), String> {
@@ -1460,15 +1523,7 @@ fn verify_source(
             format!("{} tag/commit/cache identity is inconsistent", source.name),
         ));
     }
-    let root = cache.join(staging_path.unwrap_or(&source.cache_path));
-    let root_metadata = fs::symlink_metadata(&root)
-        .map_err(|e| fail("cache", format!("stat {}: {e}", root.display())))?;
-    if !root_metadata.is_dir() || root_metadata.file_type().is_symlink() {
-        return Err(fail(
-            "path",
-            format!("cache root must be a real directory: {}", root.display()),
-        ));
-    }
+    let root = cache_directory(cache, staging_path.unwrap_or(&source.cache_path), false)?;
     let expected: BTreeMap<_, _> = source
         .files
         .iter()
