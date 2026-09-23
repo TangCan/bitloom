@@ -1,6 +1,6 @@
-# Bitloom 1.2.0 发布候选
+# Bitloom 1.2.0 发布记录
 
-状态：本地发布候选准备完成，十包打包、联合publish dry-run、仓库外安装/生成及限定回归已通过；五个旧联网发布测试单列过滤，详见验证记录。尚未上传crates.io、创建正式标签或推送。Bitloom与samitbasu/rhdl无关。
+状态（2026-09-23）：用户已明确授权十包正式上传；候选验证完成，现开始按依赖顺序发布。实际完成情况将在本页更新。此次授权不包含Git推送或GitHub Release；尚未创建正式标签。Bitloom与samitbasu/rhdl无关。
 
 本版本为Phase24与后续缓存修复的SemVer minor增量；接口依据[公开API表面](public-api-1-0-surface.md)，交付范围见[Phase24总验收](ip/phase24-closeout.md)，新增功能与修复见[CHANGELOG](../CHANGELOG.md)。历史1.1.x已发布版本不改写。
 
@@ -35,7 +35,7 @@ sha256sum Cargo.lock
 
 运行结果、候选包SHA256与具体命令记录在[发布候选验证](../_agile-output/test-artifacts/bitloom-1-2-0-release-verification.md)。本轮十包联合`cargo publish --dry-run --locked --allow-dirty`已实际通过，使用Cargo原生未发布依赖闭包检查；日志中的Uploading行均紧随“aborting upload due to dry run”，没有上传。单独执行非叶子包的dry-run仍可能受尚未上架的1.2.0依赖影响；正式上传时仍逐包检查。
 
-## 正式发布操作（本轮不执行）
+## 正式发布操作（2026-09-23已授权上传）
 
 1. 审阅本候选提交、验证记录、包清单与已知限制，明确授权正式上传及是否推送/创建GitHub Release。
 2. 核对crates.io各包1.2.0仍未占用以及发布凭据/权限。将CHANGELOG候选段落转为实际发布日期；若改变包内容，重新打包并更新摘要。
