@@ -29,7 +29,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 # - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-18-2026 18:28
-last_updated: "09-23-2026 18:40"
+last_updated: "09-23-2026 19:01"
 project: rhdl
 project_key: NOKEY
 tracking_system: file-system
@@ -863,30 +863,36 @@ development_status:
   125-1-合同-接口与-nfr14: done
   125-2-axi-真实-rtl-红测: done
   125-3-axi-修复-双模型与-m0-关闭: done
+  epic-125-retrospective: done
   epic-126: done
   126-1-组合基础-nfr14: done
   126-2-共享模块定义与实例校验: done
   126-3-两槽-ready-valid-注册切片: done
   126-4-参数-fifo-与-m1-关闭: done
+  epic-126-retrospective: done
   epic-127: done
   127-1-csr-总线-nfr14: done
   127-2-csr-描述-rtl-与软件地址产物: done
   127-3-axi-lite-csr-桥: done
   127-4-静态译码与-m2-关闭: done
+  epic-127-retrospective: done
   epic-128: done
   128-1-外设-nfr14: done
   128-2-timer: done
   128-3-事件-irq: done
   128-4-gpio-csr-wrapper: done
   128-5-缓冲-uart-与-m3-关闭: done
+  epic-128-retrospective: done
   epic-129: done
   129-1-组合系统与证据-nfr14: done
   129-2-外设子系统与使用配方: done
   129-3-ci-兼容性-贡献模板与核心关闭: done
+  epic-129-retrospective: done
   epic-130: done
   130-1-外部-ip-准入-nfr14: done
   130-2-来源清单-锁定与离线重放: done
   130-3-一个真实外部核适配及试点关闭: done
+  epic-130-retrospective: done
 action_items:
   - id: "epic-1-retro-item-1-补全-rhdl-vlog-表达式降级并增加真实数据通路黄金-v-快照"
     epic: 1
@@ -3545,13 +3551,13 @@ action_items:
     epic: 126
     action: "M3：为docs/ip/module-composition.md与csr.md增加当前状态、历史时点说明及结项/本轮复盘链接；保留历史证据，不掩盖外部缓存待修项。"
     owner: "Richard"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-126-retro-2026-09-23.md"
   - id: "phase24-retro-m4-tracking-keys"
     epic: 129
     action: "M4：通过支持的规划/追踪维护流程补齐Epic125–130缺失的retrospective键，再将已完成复盘标done；不得把done解释为accepted，裁决读取各复盘frontmatter。"
     owner: "Richard"
-    status: open
+    status: done
     ref: "_agile-output/implementation-artifacts/epic-129-retro-2026-09-23.md"
   - id: "phase24-retro-m1-cache-rollback"
     epic: 130

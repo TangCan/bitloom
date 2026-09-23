@@ -1,6 +1,8 @@
 # 静态 CSR 叶节点（FR196 / Story127.2）
 
-Bitloom 与 [samitbasu/rhdl](https://github.com/samitbasu/rhdl) 无关。设计 crate 只依赖 `bitloom-prelude`。一份 `CsrBlock` 静态描述生成同源 RTL、Markdown 地址表与 C 头；配置在 elaboration 时消解，不是 tick 内的 Rust 对象。此入口只包含 CSR 叶节点；AXI 桥、四窗译码与外设产品分别由后续故事验收，FR196/M2 和整个 Phase24 尚未关闭。
+**当前状态（2026-09-23）：** Epic127/M2（FR196）及Phase24批准范围已交付，见[总验收](phase24-closeout.md)和[复盘与维护结论](../../_agile-output/implementation-artifacts/phase24-retro-2026-09-23.md)。本页说明Story127.2的CSR叶节点接口，AXI桥、译码与外设由后续故事完成。外部缓存问题已[修复验证](../../_agile-output/test-artifacts/external-cache-integrity-verification.md)；FR189仍deferred，NFR91保留。结项不代表已发布或完成物理签核。
+
+Bitloom 与 [samitbasu/rhdl](https://github.com/samitbasu/rhdl) 无关。设计 crate 只依赖 `bitloom-prelude`。一份 `CsrBlock` 静态描述生成同源 RTL、Markdown 地址表与 C 头；配置在 elaboration 时消解，不是 tick 内的 Rust 对象。此入口只包含 CSR 叶节点。**历史时点（Story127.2）：** 当时AXI桥、四窗译码及外设尚待后续故事验收，M2和Phase24尚未关闭；后续完成情况见页首当前状态。
 
 ## 完整设计例
 

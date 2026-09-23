@@ -1,5 +1,7 @@
 # 模块组合（FR194 / Story126.2）
 
+**当前状态（2026-09-23）：** Epic126/M1（FR194/FR195）及Phase24批准范围已交付，见[总验收](phase24-closeout.md)和[复盘与维护结论](../../_agile-output/implementation-artifacts/phase24-retro-2026-09-23.md)。下文“本故事”指Story126.2当时的交付范围；后续注册切片、FIFO、CSR和外设交付以总验收为准。复盘发现的外部缓存问题已[修复验证](../../_agile-output/test-artifacts/external-cache-integrity-verification.md)，不是未修复缺陷。FR189仍deferred，NFR91保留；结项不代表已发布或完成物理签核。
+
 设计只依赖 `bitloom-prelude`。在同一个 `ElaborateSession` 中定义顶层与子模块，调用 `add_instance` 连接，最后调用一次 `finish`。不拼接已冻结电路，不引入另一套 IR。首批已有 IP 组合入口为 `Gpio`；其旧 `Elaboratable::elaborate` 与组合入口共用定义体，端口、8位数据宽度及同步复位行为保持。
 
 ## 模块身份与参数
@@ -29,7 +31,7 @@
 
 本地验证需要 `iverilog` 和 `vvp` 位于 PATH。CI使用 `.github/workflows/ci.yml` 的系统包安装步骤；本机临时wrapper路径不是产品依赖。设置 `BITLOOM_REQUIRE_RTL=1` 时缺少工具必须失败。每个工具进程有60秒上限；实际命令、工具版本与结果见本故事证据。
 
-新增设计API属于显式追加的 SemVer minor 表面，见[公开 API 清单](../public-api-1-0-surface.md)。本次不改变 crate 版本，不代表已经发布。FR194完成也不关闭整个 M1：126.3/126.4尚待实现，FR195和Phase24其余交付保持各自状态；FR189仍deferred，NFR91未清空。
+新增设计API属于显式追加的 SemVer minor 表面，见[公开 API 清单](../public-api-1-0-surface.md)。本次不改变 crate 版本，不代表已经发布。**历史时点（Story126.2）：** 当时FR194完成尚未关闭M1，126.3/126.4及FR195还待交付；后续完成情况见页首当前状态。FR189仍deferred，NFR91未清空。
 
 ## API 与完整设计示例
 

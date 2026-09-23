@@ -1,0 +1,30 @@
+{
+  "valid": true,
+  "baseline": "f0b3551",
+  "added_retrospectives": {
+    "epic-125-retrospective": "done",
+    "epic-126-retrospective": "done",
+    "epic-127-retrospective": "done",
+    "epic-128-retrospective": "done",
+    "epic-129-retrospective": "done",
+    "epic-130-retrospective": "done"
+  },
+  "phase24_done_stories": 22,
+  "updated_actions": [
+    "phase24-retro-m3-doc-status",
+    "phase24-retro-m4-tracking-keys"
+  ],
+  "existing_data_preserved": true,
+  "deferred_preserved": {
+    "epic-122": "deferred",
+    "122-2-继续-firtool-产品钉升钉实现与验收-fr189": "deferred",
+    "122-3-fr189-收口与文档指针": "deferred"
+  },
+  "generic_validator_expected_exceptions": [
+    "illegal epic status 'deferred' on 'epic-122'",
+    "illegal story status 'deferred' on '122-2-继续-firtool-产品钉升钉实现与验收-fr189'",
+    "illegal story status 'deferred' on '122-3-fr189-收口与文档指针'"
+  ],
+  "local_links_checked": 35,
+  "git_diff_check": "pass"
+}
