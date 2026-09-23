@@ -159,6 +159,8 @@ jobs:
           cargo install cargo-semver-checks --version 0.50.0 --locked
       - name: Required FR198 / FR201 core matrix
         run: |
+          python3 scripts/tests/test_fr201_audit.py
+          python3 -O scripts/tests/test_fr201_audit.py
           firtool_bin="$(cargo run -q -p bitloom -- firtool ensure | tail -n1)"
           export RHDL_FIRTOOL_PATH="$(dirname "$firtool_bin")"
           export BITLOOM_SBY="$(command -v sby)"
@@ -479,7 +481,7 @@ jobs:
         with:
           toolchain: "1.97.1"
       - name: Install real RTL and isolation tools
-        run: sudo apt-get update && sudo apt-get install -y yosys iverilog bubblewrap z3 g++ make m4 curl
+        run: sudo apt-get update && sudo apt-get install -y yosys bubblewrap z3 g++ make m4 curl autoconf bison flex gperf libreadline-dev
       - name: Verify network and PID namespace prerequisites
         run: |
           uname -a
@@ -487,6 +489,22 @@ jobs:
           host_netns="$(readlink /proc/self/ns/net)"
           bwrap --unshare-net --unshare-pid --die-with-parent --ro-bind / / --proc /proc \
             /usr/bin/python3 -c 'import os,sys; assert os.readlink("/proc/self/ns/net") != sys.argv[1]; assert os.getpid() <= 2; print("namespace preflight passed")' "$host_netns"
+      - name: Install source-pinned Icarus 12 for the pilot RTL
+        run: |
+          # 22.04 的发行版 Icarus 11 不支持试点源码；与已验收 Icarus 12 对齐。
+          sudo apt-get remove -y iverilog
+          source_dir="$(mktemp -d "$RUNNER_TEMP/bitloom-iverilog-XXXXXX")"
+          git clone --depth 1 --branch v12_0 https://github.com/steveicarus/iverilog.git "$source_dir"
+          test "$(git -C "$source_dir" rev-parse HEAD)" = 4fd5291632232fbe1ba49b2c26bb6b2bf1c6c9cf
+          cd "$source_dir"
+          sh autoconf.sh
+          ./configure --prefix=/usr
+          make -j2
+          sudo make install
+          test "$(command -v iverilog)" = /usr/bin/iverilog
+          test "$(command -v vvp)" = /usr/bin/vvp
+          /usr/bin/iverilog -V
+          /usr/bin/vvp -V
       - name: Build and run real wrapper mutation oracle
         run: |
           cargo build -p bitloom

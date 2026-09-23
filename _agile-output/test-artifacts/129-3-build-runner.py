@@ -113,10 +113,22 @@ def negatives(env, paths):
             result[missing] = {'exit_code': process.returncode, 'diagnostic': process.stderr.strip()}
     return result
 
+# 审计历史故事与结项区间；后续获授权的发布不属于这两次审计。
+AUDIT_SCOPES = [
+    ('218f0620e85ab438a3ef1351e253277552c8c410', 'baf07e739af2b36f4e0befddda9826964d16118e'),
+    ('4bdd680e1a6db7e9ca77e6d4fcd7caa4b825d2b1', '4d1b19f7f915d9b533e3634ad3f0530eede7ee0c'),
+]
+
 def audit():
+    mapping = json.loads((ROOT / 'docs/evidence/commit-map.json').read_text())
     scopes = []
-    for base, end in [('218f0620e85ab438a3ef1351e253277552c8c410', 'baf07e739af2b36f4e0befddda9826964d16118e'), ('4bdd680', None)]:
-        args = ['git', 'diff', base] + ([end] if end else [])
+    for original_base, original_end in AUDIT_SCOPES:
+        base, end = (mapping[revision] for revision in (original_base, original_end))
+        for revision in (base, end):
+            if not re.fullmatch(r'[0-9a-f]{40}', revision):
+                raise SystemExit('invalid historical audit revision')
+            subprocess.check_call(['git', 'cat-file', '-e', revision + '^{commit}'], cwd=ROOT)
+        args = ['git', 'diff', base, end]
         diff = subprocess.check_output(args + ['--', 'Cargo.toml', 'crates', 'docs/public-api-1-0-surface.md'], cwd=ROOT, text=True)
         names = subprocess.check_output(args + ['--name-only'], cwd=ROOT, text=True).splitlines()
         current = ''
@@ -131,8 +143,8 @@ def audit():
                 if current == 'docs/public-api-1-0-surface.md':
                     raise SystemExit('public API surface changed in reviewed scope')
         base_sha = subprocess.check_output(['git', 'rev-parse', base], cwd=ROOT, text=True).strip()
-        scopes.append({'base': base_sha, 'end': end or 'working-tree', 'changed_paths': names, 'diff_sha256': hashlib.sha256(diff.encode()).hexdigest()})
-    return {'status': 'PASS', 'method': 'scoped source/public-surface and package-version diff audit; 130.2/130.3 excluded', 'scopes': scopes}
+        scopes.append({'base': base_sha, 'end': end, 'original_base': original_base, 'original_end': original_end, 'changed_paths': names, 'diff_sha256': hashlib.sha256(diff.encode()).hexdigest()})
+    return {'status': 'PASS', 'method': 'historical scoped source/public-surface and package-version diff audit; 130.2/130.3 and later releases excluded', 'scopes': scopes}
 
 def manifest():
     return {os.path.relpath(p, EVIDENCE_ROOT): hashlib.sha256(p.read_bytes()).hexdigest() for p in ARCHIVE.rglob('*') if p.is_file()}
