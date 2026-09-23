@@ -1,0 +1,21 @@
+{
+  "arguments": [
+    "--version"
+  ],
+  "cwd": "/tmp/tmp.xdtbJZgyYH/artifacts/formal/run-2189560-1790137671516021991",
+  "elapsed_ms": 5,
+  "exit_code": 0,
+  "kill_after_seconds": 5,
+  "label": "z3-version",
+  "log": "z3-version.log",
+  "program": "z3",
+  "start_utc_unix_ms": 1790137671760,
+  "stderr": "",
+  "stdout": "Z3 version 4.8.12 - 64 bit\n",
+  "timeout_path": "/usr/bin/timeout",
+  "timeout_seconds": 30,
+  "timeout_sha256": "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52",
+  "tool_canonical_path": "/usr/bin/z3",
+  "tool_path": "/usr/bin/z3",
+  "tool_sha256": "c05be002097e2f2106efeeac03e58032e3f5cca10104f95d7a0ddc0bd3f907cb"
+}

@@ -1,0 +1,11 @@
+{
+  "command": [
+    "bash",
+    "scripts/semver-check.sh"
+  ],
+  "exit_code": 0,
+  "start_utc_unix_ms": 1790137696962,
+  "end_utc_unix_ms": 1790137713862,
+  "timeout_seconds": 1200,
+  "log": "_agile-output/test-artifacts/129-3-raw/1790137570516560772-2173635/semver-registry.log"
+}

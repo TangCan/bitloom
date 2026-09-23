@@ -1,0 +1,2506 @@
+cargo test --workspace
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.47
+   Compiling bitloom-hir v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-hir)
+   Compiling serde_core v1.0.229
+   Compiling memchr v2.8.3
+   Compiling zmij v1.0.23
+   Compiling serde_json v1.0.151
+   Compiling serde v1.0.229
+   Compiling itoa v1.0.18
+   Compiling cfg-if v1.0.4
+   Compiling version_check v0.9.5
+   Compiling typenum v1.20.1
+   Compiling utf8parse v0.2.2
+   Compiling colorchoice v1.0.5
+   Compiling anstyle v1.0.14
+   Compiling anstyle-query v1.1.5
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling heck v0.5.0
+   Compiling strsim v0.11.1
+   Compiling clap_lex v1.1.0
+   Compiling cpufeatures v0.2.17
+   Compiling pin-project-lite v0.2.17
+   Compiling futures-sink v0.3.34
+   Compiling futures-core v0.3.34
+   Compiling libc v0.2.189
+   Compiling ref-cast v1.0.27
+   Compiling crossbeam-utils v0.8.23
+   Compiling parking_lot_core v0.9.12
+   Compiling once_cell v1.21.4
+   Compiling futures-task v0.3.34
+   Compiling futures-io v0.3.34
+   Compiling slab v0.4.12
+   Compiling httparse v1.10.1
+   Compiling smallvec v1.16.0
+   Compiling borrow-or-share v0.2.4
+   Compiling scopeguard v1.2.0
+   Compiling percent-encoding v2.3.2
+   Compiling hashbrown v0.14.5
+   Compiling tower-service v0.3.3
+   Compiling tower-layer v0.3.3
+   Compiling sync_wrapper v1.0.2
+   Compiling bytes v1.12.1
+   Compiling bitflags v2.13.1
+   Compiling target-triple v1.0.1
+   Compiling winnow v1.0.4
+   Compiling toml_writer v1.1.2+spec-1.1.0
+   Compiling termcolor v1.4.1
+   Compiling glob v0.3.4
+   Compiling rhdl-hls v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/rhdl-hls)
+   Compiling rhdl-float v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/rhdl-float)
+   Compiling anstyle-parse v1.0.0
+   Compiling futures-channel v0.3.34
+   Compiling lock_api v0.4.14
+   Compiling generic-array v0.14.7
+   Compiling tracing-core v0.1.36
+   Compiling bitloom-builder v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-builder)
+   Compiling bitloom-sim v1.1.6 (/nvme_data2/richard/2026/rhdl/crates/bitloom-sim)
+   Compiling bitloom-vlog v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-vlog)
+   Compiling bitloom-firrtl v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/rhdl-firrtl)
+   Compiling bitloom-viz v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/rhdl-viz)
+   Compiling rhdl-formal v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/rhdl-formal)
+   Compiling anstream v1.0.0
+   Compiling toml_parser v1.1.3+spec-1.1.0
+   Compiling clap_builder v4.6.6
+   Compiling syn v2.0.119
+   Compiling syn v3.0.3
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling digest v0.10.7
+   Compiling dashmap v6.2.1
+   Compiling sha2 v0.10.9
+   Compiling rhdl-cabi v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/rhdl-cabi)
+   Compiling toml_datetime v1.1.1+spec-1.1.0
+   Compiling serde_spanned v1.1.1
+   Compiling toml v1.1.4+spec-1.1.0
+   Compiling serde_derive v1.0.229
+   Compiling clap_derive v4.6.4
+   Compiling ref-cast-impl v1.0.27
+   Compiling futures-macro v0.3.34
+   Compiling tokio-macros v2.7.2
+   Compiling tokio v1.53.1
+   Compiling fluent-uri v0.4.1
+   Compiling futures-util v0.3.34
+   Compiling bitloom-macro v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-macro)
+   Compiling tracing-attributes v0.1.31
+   Compiling clap v4.6.6
+   Compiling bitloom-prelude v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-prelude)
+   Compiling tracing v0.1.44
+   Compiling syncfifo_skel v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/syncfifo_skel)
+   Compiling mixed_both v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/mixed_both)
+   Compiling fifo_skel v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/fifo_skel)
+   Compiling ip_box v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/ip_box)
+   Compiling counter_ports v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/counter_ports)
+   Compiling rv32_core v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/rv32_core)
+   Compiling bundle_vec_skel v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/bundle_vec_skel)
+   Compiling rv32_pipe v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/rv32_pipe)
+   Compiling doubleflop_skel v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/doubleflop_skel)
+   Compiling chisel_mixed v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/chisel_mixed)
+   Compiling rv32_pipeline_feasibility v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/rv32_pipeline_feasibility)
+   Compiling clockdomain_skel v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/clockdomain_skel)
+   Compiling wide_adder v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/wide_adder)
+   Compiling rv32_priv v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/rv32_priv)
+   Compiling rv32_feasibility v1.1.1 (/nvme_data2/richard/2026/rhdl/examples/rv32_feasibility)
+   Compiling tokio-util v0.7.19
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+   Compiling ls-types v0.0.6
+   Compiling trybuild v1.0.120
+   Compiling tower v0.5.3
+   Compiling futures v0.3.34
+   Compiling tower-lsp-server v0.23.0
+   Compiling bitloom-lsp v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom-lsp)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 22.10s
+     Running unittests src/lib.rs (target/debug/deps/bitloom-796b9b499d41bdac)
+
+running 6 tests
+test hls::tests::dissolve_xor_has_no_fn_residue ... ok
+test hls::tests::capturing_violation_rejects_before_dissolve ... ok
+test hls::tests::emit_only_skips_backend ... ok
+test hls::tests::in_tree_loop_unroll_without_bambu ... ok
+test hls::tests::emit_stub_without_scheduling ... ok
+test hls::tests::missing_bambu_is_readable_error ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/cargo_bitloom-7e1f60fefff5719c)
+
+running 17 tests
+test external_ip::tests::p0_behavior_oracle_kills_empty_and_zero_output_wrappers ... ignored, requires actual iverilog/vvp; run in the dedicated FR200 gate
+test external_ip::tests::p0_adapter_transforms_the_exact_locked_shape ... ok
+test external_ip::tests::p0_adapter_rejects_missing_and_duplicated_fragments ... ok
+test external_ip::tests::p0_bender_dependency_parser_is_exact_and_section_scoped ... ok
+test external_ip::tests::p0_relative_path_validation_rejects_escape_and_ambiguity ... ok
+test external_ip::tests::p0_yosys_argument_validation_rejects_metacharacters ... ok
+test firtool::tests::host_asset_resolves_on_linux_x64 ... ok
+test external_ip::tests::p0_source_default_guard_rejects_parameter_default_drift ... ok
+test firtool::tests::parse_bare_digest ... ok
+test external_ip::tests::p0_binding_output_does_not_overwrite_protected_inputs ... ok
+test firtool::tests::override_missing_bin_errors ... ok
+test tests::host_cargo_uses_registry_backends_outside_monorepo ... ok
+test firtool::tests::sha256_empty ... ok
+test external_ip::tests::p0_binding_rejects_unsupported_shape_parameter_and_reset ... ok
+test external_ip::tests::p0_binding_is_real_frozen_hierarchy_and_preserves_emitted_parent ... ok
+test external_ip::tests::p0_compile_contract_rejects_unsupported_shape_parameter_and_reset ... ok
+test external_ip::tests::p0_closure_digest_binds_all_identity_dimensions ... ok
+
+test result: ok. 16 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/ad18_elaborate_time_closures.rs (target/debug/deps/ad18_elaborate_time_closures-ac8d0b87bf6bbfae)
+
+running 3 tests
+test decision_table_d1_d3_still_align_with_ad18_revision ... ok
+test ad18_keeps_capturing_ban_and_allows_elaborate_time_non_capturing ... ok
+test agents_md_clarifies_ad18_nfr35_capture_vs_elaborate_time ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ad20_bundle_vec_allowed.rs (target/debug/deps/ad20_bundle_vec_allowed-bf6c7468f22508a9)
+
+running 1 test
+test ad20_allows_bundle_vec_cites_fr51_and_fr22_boundary ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ad27_compilable_chisel.rs (target/debug/deps/ad27_compilable_chisel-b8cf40b562d4cfe0)
+
+running 1 test
+test ad27_requires_compilable_chisel_cites_fr28_fr46_overturns_nfr9 ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ad2_design_dep_bitloom_prelude.rs (target/debug/deps/ad2_design_dep_bitloom_prelude-a21e9b64b06975af)
+
+running 1 test
+test ad2_and_ad6_require_bitloom_prelude_not_rhdl_prelude ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ad2_publish_identity.rs (target/debug/deps/ad2_publish_identity-73e360af3125f454)
+
+running 1 test
+test ad2_publish_identity_is_bitloom_not_rhdl_rs ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ad5_rust_functional_sim_allowed.rs (target/debug/deps/ad5_rust_functional_sim_allowed-e33923758589b3d0)
+
+running 1 test
+test ad5_allows_generated_rust_functional_sim_and_cites_fr47 ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/bitloom_1_1_0_release.rs (target/debug/deps/bitloom_1_1_0_release-905f107f92c7444f)
+
+running 3 tests
+test bitloom_1_1_0_changelog_section ... ok
+test bitloom_1_1_0_release_checklist ... ok
+test current_workspace_version_retains_1_1_release_history ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/bitloom_sim_publish.rs (target/debug/deps/bitloom_sim_publish-dab573a887174aa8)
+
+running 2 tests
+test bitloom_sim_package_publishable_name ... ok
+test ad6_allows_bitloom_sim_only_as_dev_dep ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cli_brand_bitloom.rs (target/debug/deps/cli_brand_bitloom-0f8e5c6fc6dc37b0)
+
+running 2 tests
+test package_and_bin_are_bitloom ... ok
+test help_brand_is_bitloom ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/closure_decision_table.rs (target/debug/deps/closure_decision_table-3aab4d8401ad46ba)
+
+running 2 tests
+test closure_decision_table_has_required_rulings ... ok
+test fr72_links_to_closure_decision_table ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr100_formal_equiv_product.rs (target/debug/deps/fr100_formal_equiv_product-6de846b090d3b31c)
+
+running 8 tests
+test fr100_docs_contract_f1_branch_and_completion_surface ... ok
+test fr100_bounded_exhaustive_deliberate_mismatch_readable ... ok
+test fr100_api_beyond_random_scoreboard_alone ... ok
+test fr100_docs_fr92_supporting_not_sufficient ... ok
+test fr100_random_compare_deliberate_mismatch_readable ... ok
+test fr100_bounded_exhaustive_pass ... ok
+test fr100_random_compare_pass_reproducible ... ok
+test fr100_sprint_45_2_done_epic_open ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr101_epic46_closeout.rs (target/debug/deps/fr101_epic46_closeout-a31a9d5f69c92218)
+
+running 4 tests
+test fr101_docs_epic46_closed_lt_only ... ok
+test fr101_nfr14_epic46_close_conditions_checked ... ok
+test fr101_deferred_readme_epic46_closed ... ok
+test fr101_sprint_epic46_done_epic47_gated ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr101_systemc_tlm_product.rs (target/debug/deps/fr101_systemc_tlm_product-5da44068b43baf4c)
+
+running 7 tests
+test fr101_docs_lt_only_ad5_not_rust_fl ... ok
+test fr101_fr47_doc_still_says_not_systemc ... ok
+test fr101_nfr14_gate_still_present_and_46_2_checkable ... ok
+test fr101_emit_d1_d2_sources_are_systemc_tlm_not_rust_fl ... ok
+test fr101_sprint_46_2_done_epic_may_close_after_46_3 ... ok
+test fr101_resolve_systemc_or_readable_error ... ok
+test fr101_lt_smoke_build_and_run_when_systemc_present ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.88s
+
+     Running tests/fr102_multiview_attribute_matrix.rs (target/debug/deps/fr102_multiview_attribute_matrix-a50be6ac873dc019)
+
+running 8 tests
+test fr102_docs_adapters_supporting_not_sufficient ... ok
+test fr102_docs_full_matrix_and_completion_surface ... ok
+test fr102_hostview_matrix_kinds_compile ... ok
+test fr102_docs_functional_state_never_hir ... ok
+test fr102_negative_illegal_leak_guard_in_docs_and_risk ... ok
+test fr102_positive_functional_state_skipped_from_frozen_ports ... ok
+test fr102_cross_docs_and_readme_honest ... ok
+test fr102_sprint_45_3_done_epic_open ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr103_epic45_closeout.rs (target/debug/deps/fr103_epic45_closeout-23debafb8b7e051b)
+
+running 4 tests
+test fr103_docs_ip_and_fr103_cross_links ... ok
+test fr103_nfr14_epic45_close_conditions_checked ... ok
+test fr103_deferred_readme_epic45_closed ... ok
+test fr103_sprint_epic45_done_epic46_gated_epic47_gated ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr103_ip_dual_model.rs (target/debug/deps/fr103_ip_dual_model-46a86feda706957d)
+
+running 8 tests
+test fr103_docs_adapters_supporting_not_sufficient ... ok
+test fr103_docs_completion_surface_and_five_ip_classes ... ok
+test fr103_docs_tlm_product_still_epic46 ... ok
+test fr103_product_api_exported ... ok
+test fr103_sync_fifo_deliberate_mismatch_fails_readable ... ok
+test fifo_independent_read_before_write_and_reset_bank_retention ... ok
+test fr103_sync_fifo_dual_model_pass ... ok
+test fr103_uart_spi_i2c_axi_generated_fl_rst_compare ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/fr104_interactive_wave.rs (target/debug/deps/fr104_interactive_wave-ab6331b182d19d54)
+
+running 7 tests
+test fr104_docs_interactive_contract ... ok
+test fr104_docs_repro_steps ... ok
+test fr104_fr38_cross_links_interactive ... ok
+test fr104_nfr14_47_2_checkable ... ok
+test fr104_sprint_47_2_done_epic47_closed_ok ... ok
+test fr104_vcd_and_timing_still_emitted ... ok
+test fr104_wave_emits_interactive_html_i1_i3 ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr105_epic47_closeout.rs (target/debug/deps/fr105_epic47_closeout-497161418faf0031)
+
+running 3 tests
+test fr105_nfr14_epic47_close_conditions_checked ... ok
+test fr105_sprint_epic47_done_phase12_closed ... ok
+test fr105_deferred_readme_epic47_closed ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr105_sim_coverage_ext.rs (target/debug/deps/fr105_sim_coverage_ext-34d4c7b16fc65734)
+
+running 3 tests
+test fr105_docs_coverage_ext_contract ... ok
+test fr105_docs_c3_fsm_contract ... ok
+test fr105_recorder_mux_branch_and_toggle_fixture ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr106_ad_pointer_epic48_close.rs (target/debug/deps/fr106_ad_pointer_epic48_close-d3f436272f92574c)
+
+running 3 tests
+test fr106_nfr14_epic48_close_conditions_checked ... ok
+test fr106_sprint_epic48_done ... ok
+test fr106_spine_phase13_pointer ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr106_prd_phase13_gate.rs (target/debug/deps/fr106_prd_phase13_gate-0982a96edfddfc60)
+
+running 7 tests
+test fr106_correct_course_approved ... ok
+test fr106_phase12_mvp_remains_valid ... ok
+test fr106_claim_discipline_fr115 ... ok
+test fr106_bitloom_brand_unchanged ... ok
+test fr106_prd_amendment_stamp ... ok
+test fr106_addendum_phase13_commercial_deepen ... ok
+test fr106_deepen_fr_mapping_and_epics_pointer ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr106_readme_deferred_honesty.rs (target/debug/deps/fr106_readme_deferred_honesty-0da2a838e0e988da)
+
+running 4 tests
+test fr106_doc19_cross_link_phase13_without_redefining_mvp ... ok
+test fr106_readme_distinguishes_phase12_mvp_vs_phase13 ... ok
+test fr106_deferred_phase13_pointer_and_optional_upgrade ... ok
+test fr106_readme_lists_deepen_fr_table ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr107_epic49_closeout.rs (target/debug/deps/fr107_epic49_closeout-4e19d7898c297c0d)
+
+running 4 tests
+test fr107_nfr14_epic49_close_conditions_checked ... ok
+test fr107_ad5_and_lt_path_untouched_markers ... ok
+test fr107_docs_readme_deferred_closed ... ok
+test fr107_sprint_epic49_done_lt_still_present ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr107_systemc_tlm_at.rs (target/debug/deps/fr107_systemc_tlm_at-d8d3357bc66b255a)
+
+running 5 tests
+test fr107_docs_at_ad5_not_lt_not_rust_fl ... ok
+test fr107_cli_mentions_gen_tlm_at ... ok
+test fr107_ad5_allows_at ... ok
+test fr107_emit_contains_nb_transport_fw ... ok
+test fr107_smoke_when_systemc_present ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.84s
+
+     Running tests/fr108_epic50_closeout.rs (target/debug/deps/fr108_epic50_closeout-e7df2268b4dcd564)
+
+running 4 tests
+test fr108_nfr14_epic50_close_conditions_checked ... ok
+test fr108_fr98_cross_link_and_mvp_still_valid ... ok
+test fr108_sprint_epic50_done ... ok
+test fr108_docs_readme_deferred_closed ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr108_gpio_near_vip.rs (target/debug/deps/fr108_gpio_near_vip-72ae785eadb1e127)
+
+running 5 tests
+test fr108_gpio_elaborate_emit_ports ... ok
+test fr108_docs_boundaries_honest ... ok
+test fr108_gpio_direction_write_mask_tick ... ok
+test fr108_gpio_negative_mask_zero_keeps_out ... ok
+test fr108_nfr44_fr98_ip_still_reachable ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr109_epic51_closeout.rs (target/debug/deps/fr109_epic51_closeout-17c7843abfd0cbfd)
+
+running 4 tests
+test fr109_nfr14_epic51_close_conditions_checked ... ok
+test fr109_fr105_cross_link_and_mvp_still_valid ... ok
+test fr109_docs_readme_deferred_closed ... ok
+test fr109_sprint_epic51_done ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr109_fsm_state_visit_coverage.rs (target/debug/deps/fr109_fsm_state_visit_coverage-a584e3afebada16a)
+
+running 4 tests
+test fr109_docs_contract ... ok
+test fr109_nfr44_fr105_mux_path_still_green ... ok
+test fr109_does_not_claim_mux_v2_alone_is_c3 ... ok
+test fr109_fsm_state_visit_fixture ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr110_epic52_closeout.rs (target/debug/deps/fr110_epic52_closeout-b1604d1c4b498fb3)
+
+running 4 tests
+test fr110_nfr14_epic52_close_conditions_checked ... ok
+test fr110_fr95_mvp_still_valid ... ok
+test fr110_sprint_epic52_done ... ok
+test fr110_docs_readme_deferred_ad25_closed ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr110_hls_commercial_depth.rs (target/debug/deps/fr110_hls_commercial_depth-26a57bc2f854484f)
+
+running 5 tests
+test fr110_docs_contract ... ok
+test fr110_mvp_loop_unroll_is_not_commercial_depth ... ok
+test fr110_pipeline_meets_q1_q2 ... ok
+test fr110_rejects_shallow_pipeline_not_silent ... ok
+test fr110_nfr44_fr95_docs_still_present ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr111_epic53_closeout.rs (target/debug/deps/fr111_epic53_closeout-66d779a99e3fc202)
+
+running 4 tests
+test fr111_nfr14_epic53_close_conditions_checked ... ok
+test fr111_fr97_mvp_still_valid ... ok
+test fr111_sprint_epic53_done ... ok
+test fr111_docs_readme_deferred_ad27_closed ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr111_idiomatic_chisel_depth.rs (target/debug/deps/fr111_idiomatic_chisel_depth-8b3daba055d280e6)
+
+running 6 tests
+test fr111_docs_contract ... ok
+test fr111_nfr44_fr97_docs_still_present ... ok
+test fr111_d1_fails_when_per_module_marker_stripped ... ok
+test fr111_deepen_emit_passes_on_hierarchy ... ok
+test fr111_rejects_mechanical_emit ... ok
+test fr111_rejects_fr97_mvp_alone_not_silent ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr112_epic54_closeout.rs (target/debug/deps/fr112_epic54_closeout-467414aa1e80186e)
+
+running 4 tests
+test fr112_nfr14_epic54_close_conditions_checked ... ok
+test fr112_fr100_fr103_mvp_still_valid ... ok
+test fr112_sprint_epic54_done ... ok
+test fr112_docs_readme_deferred_closed ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr112_memread_equiv_tick.rs (target/debug/deps/fr112_memread_equiv_tick-f164b8fa8191c813)
+
+running 4 tests
+test fr112_docs_name_branch_b_and_bans ... ok
+test fr112_memread_stub_fails_readable ... ok
+test fr112_generated_functional_bridge_pass ... ok
+test fr112_fr100_bounded_exhaustive_still_green ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr113_epic55_closeout.rs (target/debug/deps/fr113_epic55_closeout-7fc557eb18d76e05)
+
+running 4 tests
+test fr113_nfr14_epic55_close_conditions_checked ... ok
+test fr113_fr99_mvp_still_valid ... ok
+test fr113_sprint_epic55_done ... ok
+test fr113_docs_readme_deferred_closed ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr114_epic56_closeout.rs (target/debug/deps/fr114_epic56_closeout-2a503df46b995e12)
+
+running 4 tests
+test fr114_nfr14_epic56_close_conditions_checked ... ok
+test fr114_fr104_fr105_mvp_still_valid ... ok
+test fr114_docs_readme_deferred_phase13_complete ... ok
+test fr114_sprint_epic56_done_phase13_epics_closed ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr114_lcov_coverage_gui.rs (target/debug/deps/fr114_lcov_coverage_gui-8b9215bffec7dfac)
+
+running 5 tests
+test fr114_docs_subset_b_and_bans ... ok
+test fr114_empty_coverage_fails_readable ... ok
+test fr114_fr104_wave_still_available ... ok
+test fr114_write_lcov_and_gui_from_sim ... ok
+wrote /tmp/bitloom-fr114-cli-2244264/coverage.lcov
+wrote /tmp/bitloom-fr114-cli-2244264/coverage.html
+open /tmp/bitloom-fr114-cli-2244264/coverage.html in a browser for FR114 coverage GUI (LCOV at /tmp/bitloom-fr114-cli-2244264/coverage.lcov; ≠ Tywaves; ≠ FR104 wave)
+test fr114_cli_coverage_emits_artifacts ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 7.46s
+
+     Running tests/fr116_ad_pointer_epic57_close.rs (target/debug/deps/fr116_ad_pointer_epic57_close-087f23cd512e47be)
+
+running 3 tests
+test fr116_nfr14_epic57_close_conditions_checked ... ok
+test fr116_sprint_epic57_done ... ok
+test fr116_spine_phase14_pointer ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr116_prd_phase14_gate.rs (target/debug/deps/fr116_prd_phase14_gate-d791e09aaf6ad55a)
+
+running 7 tests
+test fr116_correct_course_approved ... ok
+test fr116_bitloom_brand_unchanged ... ok
+test fr116_claim_discipline_fr123 ... ok
+test fr116_prd_amendment_stamp ... ok
+test fr116_addendum_phase14_deferred_deepen ... ok
+test fr116_phase12_13_closes_remain_valid ... ok
+test fr116_deepen_fr_mapping_and_epics_pointer ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr116_readme_deferred_honesty.rs (target/debug/deps/fr116_readme_deferred_honesty-311258cbfa117bfe)
+
+running 7 tests
+test fr116_doc19_cross_link_phase14_without_redefining_mvp ... ok
+test fr116_deferred_phase14_pointer_and_upgrade ... ok
+test fr116_readme_distinguishes_phase13_closed_vs_phase14 ... ok
+test fr116_keeps_phase12_phase13_close_evidence ... ok
+test fr116_readme_fr123_claim_discipline ... ok
+test fr116_sprint_epic58_to_63_seeded_after_gate ... ok
+test fr116_readme_lists_phase14_deepen_fr_table ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr117_epic58_closeout.rs (target/debug/deps/fr117_epic58_closeout-67bb10acff9734ff)
+
+running 5 tests
+test fr117_nfr14_epic58_close_conditions_checked ... ok
+test fr117_fr104_fr114_mvp_still_valid ... ok
+test fr117_sprint_epic58_done ... ok
+test fr117_docs_readme_deferred_closed ... ok
+test fr117_tywaves_a_remains_deferred ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/fr117_typed_ide_wave.rs (target/debug/deps/fr117_typed_ide_wave-a9f428299340cbd9)
+
+running 6 tests
+test fr117_missing_typed_meta_fails_readable ... ok
+test fr117_nfr14_gate_selects_b ... ok
+test fr117_docs_subset_b_contract ... ok
+test fr117_nfr48_fr104_and_fr114_paths_still_documented ... ok
+test fr117_sprint_58_2_done_allows_58_3_and_epic58_done ... ok
+test fr117_wave_emits_typed_artifacts_beyond_i1_i3 ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr118_epic59_closeout.rs (target/debug/deps/fr118_epic59_closeout-3fc7041ba90b8664)
+
+running 4 tests
+test fr118_nfr14_epic59_close_conditions_checked ... ok
+test fr118_fr99_fr113_mvp_still_valid ... ok
+test fr118_docs_readme_deferred_closed ... ok
+test fr118_sprint_epic59_done ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/fr119_epic60_closeout.rs (target/debug/deps/fr119_epic60_closeout-983ab8dcc3b04fce)
+
+running 4 tests
+test fr119_nfr14_epic60_close_conditions_checked ... ok
+test fr119_fr100_fr112_mvp_still_valid ... ok
+test fr119_docs_readme_deferred_closed ... ok
+test fr119_sprint_epic60_done ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/fr119_symbiyosys_smt_path.rs (target/debug/deps/fr119_symbiyosys_smt_path-de3e17c512dfe867)
+
+running 8 tests
+test fr119_docs_nail_sby_binding_and_bans ... ok
+test fr119_fixtures_have_assume_assert_pass_and_fail ... ok
+test fr119_fr100_and_fr112_surfaces_still_present ... ok
+test fr119_nfr14_selected_binding_still_gates ... ok
+test fr119_script_and_just_entry_exist ... ok
+test fr119_script_fails_readably_when_sby_missing ... ok
+test fr119_optional_real_sby_fail_fixture_when_installed ... ok
+test fr119_optional_real_sby_pass_when_installed ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.53s
+
+     Running tests/fr120_epic61_closeout.rs (target/debug/deps/fr120_epic61_closeout-6e0e9c54cc504758)
+
+running 4 tests
+test fr120_nfr14_epic61_close_conditions_checked ... ok
+test fr120_fr98_fr108_mvp_still_valid ... ok
+test fr120_docs_readme_deferred_closed ... ok
+test fr120_sprint_epic61_done ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/fr120_gpio_commercial_vip.rs (target/debug/deps/fr120_gpio_commercial_vip-05cc9eb4270b778a)
+
+running 6 tests
+test fr120_docs_name_gpiovip_fr120_honest_non_goals ... ok
+test fr120_gpio_vip_elaborate_emit_ports ... ok
+test fr120_c3_atomic_set_clear_and_p3_mask ... ok
+test fr120_c1_rising_irq_and_negatives ... ok
+test fr120_c2_open_drain_oe ... ok
+test fr120_nfr48_fr98_fr108_no_regression ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr121_epic62_closeout.rs (target/debug/deps/fr121_epic62_closeout-21bb37436e18d70b)
+
+running 4 tests
+test fr121_nfr14_epic62_close_conditions_checked ... ok
+test fr121_fr95_fr110_mvp_still_valid ... ok
+test fr121_docs_readme_deferred_closed ... ok
+test fr121_sprint_epic62_done ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr121_handshake_default.rs (target/debug/deps/fr121_handshake_default-349346fa22bdf4ad)
+
+running 8 tests
+test fr121_capturing_fails_before_schedule ... ok
+test fr121_dissolve_then_handshake_ad18 ... ok
+test fr121_docs_contract ... ok
+test fr121_mvp_and_fr110_still_work_nfr48 ... ok
+test fr121_handshake_schedule_emits_ready_valid ... ok
+test fr121_rejects_zero_channels_not_silent ... ok
+test fr121_nfr14_h_checklist_present ... ok
+test fr121_ad25_revised_allows_handshake_default ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr122_epic63_closeout.rs (target/debug/deps/fr122_epic63_closeout-1e1b68bc180b3045)
+
+running 4 tests
+test fr122_nfr14_epic63_close_conditions_checked ... ok
+test fr122_fr97_fr111_mvp_still_valid ... ok
+test fr122_sprint_epic63_done ... ok
+test fr122_docs_readme_deferred_closed ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr122_official_style_chisel.rs (target/debug/deps/fr122_official_style_chisel-213249e581ba34b2)
+
+running 10 tests
+test fr122_docs_contract ... ok
+test fr122_nfr48_fr97_fr111_docs_still_present ... ok
+test fr122_o1_fails_when_package_stripped ... ok
+test fr122_o2_fails_when_section_order_swapped ... ok
+test fr122_o3_fails_when_per_module_marker_stripped ... ok
+test fr122_ad27_revised_for_fr122 ... ok
+test fr122_rejects_fr111_alone_not_silent ... ok
+test fr122_official_emit_passes_on_hierarchy ... ok
+test fr122_rejects_mechanical_emit ... ok
+test fr122_rejects_fr97_mvp_alone ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr124_ad_pointer_epic64_close.rs (target/debug/deps/fr124_ad_pointer_epic64_close-1239e544361589f6)
+
+running 5 tests
+test fr124_agents_phase15_pointer ... ok
+test fr124_nfr14_epic64_close_conditions_checked ... ok
+test fr124_epics_phase15_epic64_complete ... ok
+test fr124_spine_phase15_pointer_gate_closed ... ok
+test fr124_sprint_epic64_done ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr124_prd_phase15_gate.rs (target/debug/deps/fr124_prd_phase15_gate-7ee08dd5dbf4bbe6)
+
+running 8 tests
+test fr124_correct_course_approved ... ok
+test fr124_bitloom_brand_unchanged ... ok
+test fr124_claim_discipline_fr132 ... ok
+test fr124_prd_amendment_stamp ... ok
+test fr124_phase12_14_closes_remain_valid ... ok
+test fr124_addendum_phase15_leftover_deepen ... ok
+test fr124_nfr14_gate_present ... ok
+test fr124_deepen_fr_mapping_and_epics_pointer ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr124_readme_deferred_honesty.rs (target/debug/deps/fr124_readme_deferred_honesty-9fbdd83896424963)
+
+running 7 tests
+test fr124_doc19_cross_link_phase15_without_redefining_mvp ... ok
+test fr124_deferred_phase15_pointer ... ok
+test fr124_readme_distinguishes_phase14_closed_vs_phase15 ... ok
+test fr124_keeps_phase12_14_close_evidence ... ok
+test fr124_sprint_epic65_to_71_seeded_not_ready_while_gate_open ... ok
+test fr124_readme_lists_phase15_deepen_fr_table ... ok
+test fr124_readme_fr132_claim_discipline ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr125_epic65_closeout.rs (target/debug/deps/fr125_epic65_closeout-f32d4be71c47ec4f)
+
+running 4 tests
+test fr125_nfr14_close_conditions_checked ... ok
+test fr125_fr117_still_valid ... ok
+test fr125_sprint_epic65_done ... ok
+test fr125_docs_readme_deferred_closed ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr125_upstream_tywaves.rs (target/debug/deps/fr125_upstream_tywaves-4febb4424641d0a6)
+
+running 4 tests
+test fr125_docs_and_nfr14_t1_t4 ... ok
+wrote /tmp/bitloom-fr125-no-flag-1790137807873494869/wave.vcd
+wrote /tmp/bitloom-fr125-no-flag-1790137807873494869/timing.html
+wrote /tmp/bitloom-fr125-no-flag-1790137807873494869/interactive.html
+wrote /tmp/bitloom-fr125-no-flag-1790137807873494869/typed-wave.html
+wrote /tmp/bitloom-fr125-no-flag-1790137807873494869/wave.typed.json
+open /tmp/bitloom-fr125-no-flag-1790137807873494869/typed-wave.html in a browser for FR117 typed IDE wave (interactive.html is FR104 I1–I3; GTKWave optional for /tmp/bitloom-fr125-no-flag-1790137807873494869/wave.vcd; pass --tywaves for FR125 upstream Tywaves sidecar; omit --no-tywaves-gui for FR162/FR134 GUI primary depth)
+test fr125_not_satisfied_by_fr117_alone ... ok
+test fr125_force_missing_is_nonzero_readable ... ok
+wrote /tmp/bitloom-fr125-ok-1790137807873608220/wave.vcd
+wrote /tmp/bitloom-fr125-ok-1790137807873608220/timing.html
+wrote /tmp/bitloom-fr125-ok-1790137807873608220/interactive.html
+wrote /tmp/bitloom-fr125-ok-1790137807873608220/typed-wave.html
+wrote /tmp/bitloom-fr125-ok-1790137807873608220/wave.typed.json
+wrote /tmp/bitloom-fr125-ok-1790137807873608220/wave.tywaves.json
+wrote /tmp/bitloom-fr125-ok-1790137807873608220/tywaves.launch.sh
+wrote /tmp/bitloom-fr125-ok-1790137807873608220/tywaves.gui.manifest.json
+wrote /tmp/bitloom-fr125-ok-1790137807873608220/tywaves.gui.install.json
+wrote /tmp/bitloom-fr125-ok-1790137807873608220/tywaves.gui.install.sh
+FR162/FR134: wrote GUI/IDE primary surface /tmp/bitloom-fr125-ok-1790137807873608220/tywaves.gui.manifest.json; set BITLOOM_TYWAVES_GUI_ROOT (or exec /tmp/bitloom-fr125-ok-1790137807873608220/tywaves.gui.install.sh) to validate upstream GUI install; IDE plugin channel in tywaves.gui.install.json (typed-wave.html remains secondary)
+FR125: launched upstream Tywaves via BITLOOM_TYWAVES_BIN (/tmp/bitloom-fr125-ok-1790137807873608220/tywaves-stub.sh)
+test fr125_wave_tywaves_writes_sidecar_and_keeps_fr117 ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.17s
+
+     Running tests/fr126_epic66_closeout.rs (target/debug/deps/fr126_epic66_closeout-fd45f42cd655f414)
+
+running 1 test
+test fr126_closeout ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr126_more_ip_handwritten_fl.rs (target/debug/deps/fr126_more_ip_handwritten_fl-037d1090c9a335af)
+
+running 4 tests
+test fr126_docs_contract ... ok
+test fr126_exports_gpio_functional ... ok
+test fr126_deliberate_mismatch_fails ... ok
+test fr126_gpio_handwritten_pass ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr127_epic67_closeout.rs (target/debug/deps/fr127_epic67_closeout-414624f558c9ed25)
+
+running 1 test
+test fr127_closeout ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr127_forced_sby_ci.rs (target/debug/deps/fr127_forced_sby_ci-541435e79296f244)
+
+running 4 tests
+test fr127_docs_boundary_vs_fr119 ... ok
+test fr127_force_missing_script_contract ... ok
+test fr127_install_script_exists ... ok
+test fr127_ci_job_required_no_continue_on_error ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr128_epic68_closeout.rs (target/debug/deps/fr128_epic68_closeout-02fd0a0f03de5ed7)
+
+running 1 test
+test fr128_closeout ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr128_soc_pad.rs (target/debug/deps/fr128_soc_pad-81589c3546db58cb)
+
+running 6 tests
+test fr128_docs_contract ... ok
+test fr128_elaborate_emit_ports ... ok
+test fr128_regression_gpio_and_vip_still_elaborate ... ok
+test fr128_d1_dual_bank_and_d3_csr ... ok
+test fr128_d2_falling_edge_irq ... ok
+test fr128_d4_scoreboard_expected_vs_observed ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr129_circt_handshake.rs (target/debug/deps/fr129_circt_handshake-740edba9585204bd)
+
+running 5 tests
+test fr129_fr121_docs_boundary ... ok
+test fr129_docs_contract ... ok
+test fr129_rejects_fr121_alone_shape ... ok
+test fr129_schedule_emits_circt_markers ... ok
+test fr129_ad25_revised ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr129_epic69_closeout.rs (target/debug/deps/fr129_epic69_closeout-ee37cdb92b3babb9)
+
+running 1 test
+test fr129_closeout ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr130_epic70_closeout.rs (target/debug/deps/fr130_epic70_closeout-d3ffb510f3cbd2ec)
+
+running 1 test
+test fr130_closeout ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr130_style_guide.rs (target/debug/deps/fr130_style_guide-ca5dea5d16370574)
+
+running 4 tests
+test fr130_docs_contract ... ok
+test fr130_emit_and_check ... ok
+test fr130_fr122_alone_fails_style_guide_check ... ok
+test fr130_ad27_revised ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr131_epic71_closeout.rs (target/debug/deps/fr131_epic71_closeout-4e2b4f1fda02ca72)
+
+running 1 test
+test fr131_closeout ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr131_ip_protocol_split.rs (target/debug/deps/fr131_ip_protocol_split-deb242155beb3d83)
+
+running 4 tests
+test fr131_no_monolith_ip_rs ... ok
+test fr131_protocol_modules_exist ... ok
+test fr131_docs_and_nfr14 ... ok
+test fr131_public_api_stable_elaborate ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr133_ad_pointer_epic72_close.rs (target/debug/deps/fr133_ad_pointer_epic72_close-6ebabbb7f6f1eab6)
+
+running 5 tests
+test fr133_agents_phase16_pointer ... ok
+test fr133_nfr14_epic72_close_conditions_checked ... ok
+test fr133_epics_phase16_epic72_complete ... ok
+test fr133_spine_phase16_pointer_gate_closed ... ok
+test fr133_sprint_epic72_done ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr133_prd_phase16_gate.rs (target/debug/deps/fr133_prd_phase16_gate-d715280f7bce9280)
+
+running 10 tests
+test fr133_correct_course_approved ... ok
+test fr133_claim_discipline_fr140 ... ok
+test fr133_bitloom_brand_unchanged ... ok
+test fr133_phase12_15_closes_remain_valid ... ok
+test fr133_prd_amendment_stamp ... ok
+test fr133_finality_not_v1_or_empty_backlog ... ok
+test fr133_addendum_phase16_final_closeout ... ok
+test fr133_nfr14_gate_present ... ok
+test fr133_correct_course_phase16_approved_stamp ... ok
+test fr133_deepen_fr_mapping_and_epics_pointer ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr133_readme_deferred_honesty.rs (target/debug/deps/fr133_readme_deferred_honesty-311e5ce53cf79e0c)
+
+running 9 tests
+test fr133_doc19_cross_link_phase16_without_redefining_mvp ... ok
+test fr133_readme_bitloom_brand ... ok
+test fr133_deferred_phase16_pointer ... ok
+test fr133_readme_distinguishes_phase15_closed_vs_phase16 ... ok
+test fr133_readme_lists_nfr59_deferred ... ok
+test fr133_readme_lists_phase16_deepen_fr_table ... ok
+test fr133_keeps_phase12_15_close_evidence ... ok
+test fr133_readme_fr140_claim_discipline ... ok
+test fr133_sprint_epic73_to_78_seeded_not_ready_while_gate_open ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr134_epic73_closeout.rs (target/debug/deps/fr134_epic73_closeout-3e1e0682bf640109)
+
+running 1 test
+test fr134_closeout ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr134_tywaves_gui_ide.rs (target/debug/deps/fr134_tywaves_gui_ide-f88e4af394eeba54)
+
+running 6 tests
+test fr134_docs_and_nfr14_g1_g4 ... ok
+test fr134_tywaves_not_in_design_crate_deps ... ok
+wrote /tmp/bitloom-fr134-g1-1790137808167520439/wave.vcd
+wrote /tmp/bitloom-fr134-g1-1790137808167520439/timing.html
+wrote /tmp/bitloom-fr134-g1-1790137808167520439/interactive.html
+wrote /tmp/bitloom-fr134-g1-1790137808167520439/typed-wave.html
+wrote /tmp/bitloom-fr134-g1-1790137808167520439/wave.typed.json
+wrote /tmp/bitloom-fr134-g1-1790137808167520439/wave.tywaves.json
+wrote /tmp/bitloom-fr134-g1-1790137808167520439/tywaves.launch.sh
+wrote /tmp/bitloom-fr134-g1-1790137808167520439/tywaves.gui.manifest.json
+wrote /tmp/bitloom-fr134-g1-1790137808167520439/tywaves.gui.install.json
+wrote /tmp/bitloom-fr134-g1-1790137808167520439/tywaves.gui.install.sh
+FR134: validated upstream Tywaves GUI root via BITLOOM_TYWAVES_GUI_ROOT (/tmp/bitloom-fr134-g1-1790137808167520439/gui-root)
+test fr134_gui_install_descriptor_pins_version_channel ... ok
+wrote /tmp/bitloom-fr134-no-gui-1790137808167689510/wave.vcd
+wrote /tmp/bitloom-fr134-no-gui-1790137808167689510/timing.html
+wrote /tmp/bitloom-fr134-no-gui-1790137808167689510/interactive.html
+wrote /tmp/bitloom-fr134-no-gui-1790137808167689510/typed-wave.html
+wrote /tmp/bitloom-fr134-no-gui-1790137808167689510/wave.typed.json
+wrote /tmp/bitloom-fr134-no-gui-1790137808167689510/wave.tywaves.json
+wrote /tmp/bitloom-fr134-no-gui-1790137808167689510/tywaves.launch.sh
+FR125: launched upstream Tywaves via BITLOOM_TYWAVES_BIN (/tmp/bitloom-fr134-no-gui-1790137808167689510/tywaves-stub.sh)
+test fr134_not_satisfied_by_fr125_alone ... ok
+test fr134_force_missing_is_nonzero_readable ... ok
+wrote /tmp/bitloom-fr134-ok-1790137808167897801/wave.vcd
+wrote /tmp/bitloom-fr134-ok-1790137808167897801/timing.html
+wrote /tmp/bitloom-fr134-ok-1790137808167897801/interactive.html
+wrote /tmp/bitloom-fr134-ok-1790137808167897801/typed-wave.html
+wrote /tmp/bitloom-fr134-ok-1790137808167897801/wave.typed.json
+wrote /tmp/bitloom-fr134-ok-1790137808167897801/wave.tywaves.json
+wrote /tmp/bitloom-fr134-ok-1790137808167897801/tywaves.launch.sh
+wrote /tmp/bitloom-fr134-ok-1790137808167897801/tywaves.gui.manifest.json
+wrote /tmp/bitloom-fr134-ok-1790137808167897801/tywaves.gui.install.json
+wrote /tmp/bitloom-fr134-ok-1790137808167897801/tywaves.gui.install.sh
+FR134: validated upstream Tywaves GUI root via BITLOOM_TYWAVES_GUI_ROOT (/tmp/bitloom-fr134-ok-1790137808167897801/gui-root)
+test fr134_wave_tywaves_gui_writes_manifest ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
+
+     Running tests/fr135_epic74_closeout.rs (target/debug/deps/fr135_epic74_closeout-951907f09d1dbd8b)
+
+running 1 test
+test fr135_closeout ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr135_more_ip_handwritten_fl.rs (target/debug/deps/fr135_more_ip_handwritten_fl-d6f602896ce5e8c3)
+
+running 6 tests
+test fr135_design_crate_prelude_only ... ok
+test fr135_docs_contract ... ok
+test fr135_exports_uart_tx_functional ... ok
+test fr135_not_satisfied_by_gpio_or_generated_alone ... ok
+test fr135_deliberate_mismatch_fails ... ok
+test fr135_uart_tx_handwritten_pass ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr136_epic75_closeout.rs (target/debug/deps/fr136_epic75_closeout-8149d16608ea0797)
+
+running 1 test
+test fr136_closeout ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr136_multi_peripheral_full_chip_pad_ring.rs (target/debug/deps/fr136_multi_peripheral_full_chip_pad_ring-e6150e1850a74e74)
+
+running 8 tests
+test fr136_design_crate_prelude_only ... ok
+test fr136_docs_contract ... ok
+test fr136_fr139_gpio_split_intact ... ok
+test fr136_r2_full_chip_ring_shape ... ok
+test fr136_r1_chip_pad_ring_elaborate_ports ... ok
+test fr136_r3_deliberate_wrong_model_fails ... ok
+test fr136_r4_not_satisfied_by_fr128_or_fr120_or_fr108_alone ... ok
+test fr136_r3_ring_scoreboard_pass ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr137_epic76_closeout.rs (target/debug/deps/fr137_epic76_closeout-747e1de9613cb9cf)
+
+running 1 test
+test fr137_closeout ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr137_external_circt_compile_sim_gate.rs (target/debug/deps/fr137_external_circt_compile_sim_gate-8989d91117cfde3c)
+
+running 7 tests
+test fr137_docs_compile_gate_mvp_contract ... ok
+test fr137_e1_firtool_version_channel_pinned ... ok
+test fr137_e2_ci_required_job_and_just_path ... ok
+test fr137_e4_not_satisfied_by_fr129_or_prior_alone ... ok
+test fr137_script_never_silent_skip ... ok
+test fr137_e3_force_missing_nonzero_readable ... ok
+test fr137_e3_version_mismatch_nonzero ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/fr138_epic77_closeout.rs (target/debug/deps/fr138_epic77_closeout-a6b1302f864eaf26)
+
+running 1 test
+test fr138_closeout ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr138_parser_restore_ad27.rs (target/debug/deps/fr138_parser_restore_ad27-98844bb171d038b2)
+
+running 7 tests
+test fr138_docs_and_just_path ... ok
+test fr138_p1_api_workflow_pairing ... ok
+test fr138_script_never_silent_skip ... ok
+test fr138_p4_not_satisfied_by_fr130_or_prior_alone ... ok
+test fr138_p2_ad27_revised_and_correct_course ... ok
+test fr138_p3_force_missing_nonzero_readable ... ok
+test fr138_p3_version_mismatch_nonzero ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/fr139_epic78_closeout.rs (target/debug/deps/fr139_epic78_closeout-db8e35d93fa759a9)
+
+running 1 test
+test fr139_closeout ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr139_vip_socpad_split.rs (target/debug/deps/fr139_vip_socpad_split-9d2fc036922b4d2c)
+
+running 3 tests
+test fr139_gpio_submodules_exist ... ok
+test fr139_nfr14_and_no_cross_crate ... ok
+test fr139_public_api_stable_elaborate ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr141_ad_pointer_epic79_close.rs (target/debug/deps/fr141_ad_pointer_epic79_close-9b6bbc6627dc3c1e)
+
+running 5 tests
+test fr141_agents_phase17_pointer ... ok
+test fr141_nfr14_epic79_close_conditions_checked ... ok
+test fr141_epics_phase17_epic79_complete ... ok
+test fr141_sprint_epic79_done ... ok
+test fr141_spine_phase17_pointer_gate_closed ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr141_prd_phase17_gate.rs (target/debug/deps/fr141_prd_phase17_gate-3030aa18d813286b)
+
+running 11 tests
+test fr141_correct_course_approved ... ok
+test fr141_claim_discipline_fr147 ... ok
+test fr141_bitloom_brand_unchanged ... ok
+test fr141_prd_amendment_stamp ... ok
+test fr141_one_oh_not_clear_nfr59 ... ok
+test fr141_phase12_16_closes_remain_valid ... ok
+test fr141_addendum_phase17_api_stability ... ok
+test fr141_q1_q5_defaults ... ok
+test fr141_nfr14_gate_present ... ok
+test fr141_correct_course_phase17_approved_stamp ... ok
+test fr141_fr_mapping_and_epics_pointer ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr141_readme_deferred_honesty.rs (target/debug/deps/fr141_readme_deferred_honesty-0b55afa4653485a5)
+
+running 9 tests
+test fr141_doc19_cross_link_phase17_without_redefining_mvp ... ok
+test fr141_deferred_phase17_pointer ... ok
+test fr141_readme_bitloom_brand ... ok
+test fr141_readme_distinguishes_phase16_closed_vs_phase17 ... ok
+test fr141_readme_fr147_claim_discipline ... ok
+test fr141_readme_lists_phase17_stability_fr_table ... ok
+test fr141_readme_lists_nfr59_deferred ... ok
+test fr141_sprint_epic80_to_83_seeded_not_ready_while_gate_open ... ok
+test fr141_keeps_phase12_16_close_evidence ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr142_epic80_close.rs (target/debug/deps/fr142_epic80_close-465b353ca92fa583)
+
+running 3 tests
+test fr142_nfr14_epic80_closed ... ok
+test fr142_sprint_epic80_done ... ok
+test fr142_readme_deferred_pointer ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr142_public_api_1_0_surface.rs (target/debug/deps/fr142_public_api_1_0_surface-1affab4269c2d7a3)
+
+running 5 tests
+test fr142_in_surface_crates ... ok
+test fr142_prelude_design_boundary ... ok
+test fr142_q2_out_of_promise_and_lsp_out ... ok
+test fr142_surface_doc_exists_with_required_sections ... ok
+test fr142_nfr14_gate_and_nfr59 ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr143_fr144_epic81_close.rs (target/debug/deps/fr143_fr144_epic81_close-42628c58ce378271)
+
+running 3 tests
+test fr143_fr144_nfr14_epic81_closed ... ok
+test fr143_fr144_sprint_epic81_done ... ok
+test fr143_fr144_readme_deferred_pointer ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr143_semver_1_0_policy.rs (target/debug/deps/fr143_semver_1_0_policy-a33ff23f170440f1)
+
+running 3 tests
+test fr143_semver_0x_policy_cross_links_1_0 ... ok
+test fr143_semver_1_0_policy_exists_with_required_sections ... ok
+test fr143_surface_doc_points_at_1_0_policy ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr144_semver_ci_gate.rs (target/debug/deps/fr144_semver_ci_gate-76589bcd95c9c939)
+
+running 4 tests
+test fr144_policy_documents_local_repro ... ok
+test fr144_script_and_just_exist ... ok
+test fr144_ci_required_job_no_continue_on_error ... ok
+test fr144_force_missing_tool_exits_nonzero ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr145_epic82_close.rs (target/debug/deps/fr145_epic82_close-55db50bef1d25f5a)
+
+running 3 tests
+test fr145_nfr14_epic82_closed ... ok
+test fr145_sprint_epic82_done ... ok
+test fr145_readme_deferred_pointer ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr145_hygiene_skip.rs (target/debug/deps/fr145_hygiene_skip-c62feca68c083e8a)
+
+running 1 test
+test fr145_skip_doc_exists ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr146_bitloom_1_0_0_release.rs (target/debug/deps/fr146_bitloom_1_0_0_release-0c7822cbae606af9)
+
+running 4 tests
+test fr146_changelog_has_1_0_0_section ... ok
+test fr146_release_checklist_exists ... ok
+test fr146_release_checklist_requires_tag ... ok
+test fr146_workspace_version_was_1_0_0_at_release ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr146_epic83_phase17_close.rs (target/debug/deps/fr146_epic83_phase17_close-8a08297b72560561)
+
+running 4 tests
+test fr146_nfr14_epic83_closed ... ok
+test fr146_readme_deferred_fr147 ... ok
+test fr146_epics_phase17_complete ... ok
+test fr146_sprint_epic83_and_phase17_stories_done ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/fr148_ad_pointer_epic84_close.rs (target/debug/deps/fr148_ad_pointer_epic84_close-6f6231dd0a18b271)
+
+running 5 tests
+test fr148_agents_phase18_pointer ... ok
+test fr148_nfr14_epic84_close_conditions_checked ... ok
+test fr148_epics_phase18_epic84_complete ... ok
+test fr148_spine_phase18_pointer_gate_closed ... ok
+test fr148_sprint_epic84_done ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr148_prd_phase18_gate.rs (target/debug/deps/fr148_prd_phase18_gate-25eb1710ff4d0627)
+
+running 11 tests
+test fr148_correct_course_approved ... ok
+test fr148_cli_publish_not_clear_nfr59 ... ok
+test fr148_bitloom_brand_unchanged ... ok
+test fr148_forbid_cargo_install_before_fr151 ... ok
+test fr148_q_defaults_rename_and_fr152b ... ok
+test fr148_addendum_phase18_cli_publish ... ok
+test fr148_prd_amendment_stamp ... ok
+test fr148_phase17_closes_remain_valid ... ok
+test fr148_nfr14_gate_present ... ok
+test fr148_correct_course_phase18_approved_stamp ... ok
+test fr148_fr_mapping_and_epics_pointer ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr148_readme_deferred_honesty.rs (target/debug/deps/fr148_readme_deferred_honesty-0e2c22deacc3c110)
+
+running 9 tests
+test fr148_doc19_cross_link_phase18_without_redefining_mvp ... ok
+test fr148_readme_bitloom_brand ... ok
+test fr148_deferred_phase18_pointer ... ok
+test fr148_keeps_phase12_17_close_evidence ... ok
+test fr148_readme_distinguishes_phase17_closed_vs_phase18 ... ok
+test fr148_readme_cli_not_installable_until_fr151 ... ok
+test fr148_readme_lists_nfr59_deferred ... ok
+test fr148_readme_lists_phase18_fr_table ... ok
+test fr148_sprint_epic85_to_86_seeded_not_ready_while_gate_open ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr149_152_epic85_close.rs (target/debug/deps/fr149_152_epic85_close-63a8c8494024aca2)
+
+running 4 tests
+test fr149_152_epic85_nfr14_closed ... ok
+test fr149_152_readme_deferred_cli_installable_fr153_pending ... ok
+test fr149_152_sprint_epic85_done_86_1_ready ... ok
+test fr149_152_epics_phase18_epic85_complete ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr149_bitloom_firrtl_publish.rs (target/debug/deps/fr149_bitloom_firrtl_publish-da4e120c25432a87)
+
+running 2 tests
+test fr149_bitloom_firrtl_package_identity ... ok
+test fr149_bitloom_firrtl_dry_run_publish ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.91s
+
+     Running tests/fr150_bitloom_viz_publish.rs (target/debug/deps/fr150_bitloom_viz_publish-21cc4171ea22ab07)
+
+running 2 tests
+test fr150_bitloom_viz_package_identity ... ok
+test fr150_bitloom_viz_dry_run_publish ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.43s
+
+     Running tests/fr151_bitloom_cli_publish.rs (target/debug/deps/fr151_bitloom_cli_publish-070a0f3ea5747a89)
+
+running 2 tests
+test fr151_bitloom_cli_versioned_and_documented ... ok
+test fr151_bitloom_cli_dry_run_publish ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 8.81s
+
+     Running tests/fr152_bitloom_lsp_publish_policy.rs (target/debug/deps/fr152_bitloom_lsp_publish_policy-8bb461e065d0838f)
+
+running 1 test
+test fr152_lsp_policy_a_documented_and_dry_run ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 25.23s
+
+     Running tests/fr153_epic86_phase18_close.rs (target/debug/deps/fr153_epic86_phase18_close-4b32ccd5042cf38d)
+
+running 4 tests
+test fr153_nfr14_epic86_closed ... ok
+test fr153_epics_phase18_complete ... ok
+test fr153_readme_deferred_phase18_complete_nfr59 ... ok
+test fr153_sprint_epic86_and_phase18_stories_done ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr153_semver_honesty.rs (target/debug/deps/fr153_semver_honesty-9dae58b1c75b4b27)
+
+running 4 tests
+test fr153_semver_script_defaults_minor_without_1_0_0_special_case ... ok
+test fr153_docs_honesty_library_and_cli ... ok
+test fr153_sprint_86_2_done_gates_86_3 ... ok
+test fr153_detect_release_type_echoes_minor_for_workspace_1_0_0 ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr154_ad_pointer_epic87_close.rs (target/debug/deps/fr154_ad_pointer_epic87_close-7b73cbc87036d78d)
+
+running 5 tests
+test fr154_agents_phase19_pointer ... ok
+test fr154_nfr14_epic87_close_conditions_checked ... ok
+test fr154_sprint_epic87_done_88_ready ... ok
+test fr154_spine_phase19_pointer_gate_closed ... ok
+test fr154_epics_phase19_epic87_complete ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr154_prd_phase19_gate.rs (target/debug/deps/fr154_prd_phase19_gate-905545a531f65594)
+
+running 11 tests
+test fr154_correct_course_approved ... ok
+test fr154_bitloom_brand_unchanged ... ok
+test fr154_git_push_not_fr ... ok
+test fr154_forbid_instant_cargo_publish_on_approve ... ok
+test fr154_q_defaults_nfr59_full_and_fr152a ... ok
+test fr154_phase12_18_closes_remain_valid ... ok
+test fr154_nfr14_gate_present ... ok
+test fr154_addendum_phase19 ... ok
+test fr154_correct_course_phase19_approved_stamp ... ok
+test fr154_prd_amendment_stamp ... ok
+test fr154_fr_mapping_and_epics_pointer ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr154_readme_deferred_honesty.rs (target/debug/deps/fr154_readme_deferred_honesty-f8da31d1be8d1995)
+
+running 6 tests
+test fr154_readme_bitloom_brand ... ok
+test fr154_readme_distinguishes_phase18_closed_vs_phase19 ... ok
+test fr154_deferred_phase19_pointer ... ok
+test fr154_sprint_gate_87_2_done ... ok
+test fr154_readme_forbids_claim_before_fr_close ... ok
+test fr154_readme_lists_phase19_fr_table ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr155_bitloom_lsp_publish.rs (target/debug/deps/fr155_bitloom_lsp_publish-e1e4fba6cb295486)
+
+running 2 tests
+test fr155_bitloom_lsp_live_publish_documented ... ok
+test fr155_bitloom_lsp_dry_run_still_green ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.39s
+
+     Running tests/fr155_closeout_epic88.rs (target/debug/deps/fr155_closeout_epic88-5838900278e48e19)
+
+running 7 tests
+test fr155_policy_and_publish_docs_present ... ok
+test fr155_nfr14_epic88_close_conditions_checked ... ok
+test fr155_agents_and_spine_fr155_closed ... ok
+test fr155_deferred_marks_epic88_closed ... ok
+test fr155_readme_marks_fr155_closed ... ok
+test fr155_sprint_epic88_done_89_ready ... ok
+test fr155_epics_phase19_epic88_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr156_closeout_epic98.rs (target/debug/deps/fr156_closeout_epic98-969c8da079ac18db)
+
+running 7 tests
+test fr156_product_doc_closed_status ... ok
+test fr156_nfr14_epic98_close_conditions_checked ... ok
+test fr156_agents_and_spine_closed ... ok
+test fr156_deferred_marks_epic98_closed ... ok
+test fr156_readme_marks_fr156_and_phase19_closed ... ok
+test fr156_sprint_epic98_done ... ok
+test fr156_epics_phase19_epic98_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr156_phase19_claim_honesty.rs (target/debug/deps/fr156_phase19_claim_honesty-4f33144b968905a8)
+
+running 4 tests
+test fr156_nfr14_gates_98_2 ... ok
+test fr156_docs_claim_map ... ok
+test fr156_deferred_points_to_honesty_doc ... ok
+test fr156_readme_honesty_pointers ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr157_auto_fsm_labels.rs (target/debug/deps/fr157_auto_fsm_labels-c206437186315edf)
+
+running 5 tests
+test fr157_docs_contract ... ok
+test fr157_compile_time_fsm_labels_feed_fr109 ... ok
+test fr157_offline_extract_default_id_and_rhdl_alias ... ok
+test fr157_offline_extract_failures ... ok
+test fr157_offline_extract_from_source ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr157_closeout_epic89.rs (target/debug/deps/fr157_closeout_epic89-a66995755a89e76e)
+
+running 7 tests
+test fr157_nfr14_epic89_close_conditions_checked ... ok
+test fr157_product_doc_closed_status ... ok
+test fr157_agents_and_spine_closed ... ok
+test fr157_deferred_marks_epic89_closed ... ok
+test fr157_sprint_epic89_done_90_ready ... ok
+test fr157_epics_phase19_epic89_complete ... ok
+test fr157_readme_marks_fr157_closed ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr158_closeout_epic90.rs (target/debug/deps/fr158_closeout_epic90-c1c9fe3f7bc92390)
+
+running 7 tests
+test fr158_product_doc_closed_status ... ok
+test fr158_nfr14_epic90_close_conditions_checked ... ok
+test fr158_agents_and_spine_closed ... ok
+test fr158_deferred_marks_epic90_closed ... ok
+test fr158_epics_phase19_epic90_complete ... ok
+test fr158_sprint_epic90_done_91_ready ... ok
+test fr158_readme_marks_fr158_closed ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr158_third_party_lcov_gui.rs (target/debug/deps/fr158_third_party_lcov_gui-91f7b6533f7f4d02)
+
+running 5 tests
+test fr158_docs_contract ... ok
+test fr158_lcov_missing_errors ... ok
+test fr158_fake_genhtml_produces_html ... ok
+test fr158_missing_genhtml_is_explicit_error ... ok
+test fr158_cli_genhtml_flag_help ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr159_closeout_epic91.rs (target/debug/deps/fr159_closeout_epic91-516fab987f4e0234)
+
+running 7 tests
+test fr159_product_doc_closed_status ... ok
+test fr159_nfr14_epic91_close_conditions_checked ... ok
+test fr159_agents_and_spine_closed ... ok
+test fr159_deferred_marks_epic91_closed ... ok
+test fr159_sprint_epic91_done_92_ready ... ok
+test fr159_epics_phase19_epic91_complete ... ok
+test fr159_readme_marks_fr159_closed ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr159_memread_full_emit.rs (target/debug/deps/fr159_memread_full_emit-43157c613a4ab26c)
+
+running 3 tests
+test fr159_docs_name_emit_and_forbid_stub_alone ... ok
+test fr159_fr112_in_process_still_green ... ok
+
+running 2 tests
+..
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+test fr159_emitted_crate_sync_read_mem_matches_latency1 ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.93s
+
+     Running tests/fr160_closeout_epic92.rs (target/debug/deps/fr160_closeout_epic92-f3f21a01c0e0c957)
+
+running 7 tests
+test fr160_product_doc_closed_status ... ok
+test fr160_agents_and_spine_closed ... ok
+test fr160_nfr14_epic92_close_conditions_checked ... ok
+test fr160_deferred_marks_epic92_closed ... ok
+test fr160_epics_phase19_epic92_complete ... ok
+test fr160_sprint_epic92_done_93_ready ... ok
+test fr160_readme_marks_fr160_closed ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr160_non_cargo_path_scan.rs (target/debug/deps/fr160_non_cargo_path_scan-493d70e04c789f30)
+
+running 2 tests
+test fr160_docs_and_fixture_exist ... ok
+
+running 5 tests
+.....
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+test fr160_bitloom_lsp_integration_tests_pass ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.56s
+
+     Running tests/fr161_closeout_epic93.rs (target/debug/deps/fr161_closeout_epic93-00ad7f08ee0b0317)
+
+running 7 tests
+test fr161_product_doc_closed_status ... ok
+test fr161_nfr14_epic93_close_conditions_checked ... ok
+test fr161_deferred_marks_epic93_closed ... ok
+test fr161_agents_and_spine_closed ... ok
+test fr161_sprint_epic93_done_94_ready ... ok
+test fr161_readme_marks_fr161_closed ... ok
+test fr161_epics_phase19_epic93_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr161_formal_sby_image_hygiene.rs (target/debug/deps/fr161_formal_sby_image_hygiene-d5d49ad3b34ea1bf)
+
+running 6 tests
+test fr161_ci_runs_hygiene_before_install ... ok
+test fr161_docs_contract_and_forbid_fr127_alone ... ok
+test fr161_install_script_obeys_pins ... ok
+test fr161_pins_file_nonempty ... ok
+test fr161_fr127_job_still_present ... ok
+ci-sby-hygiene-check: FR161 formal-sby image/tooling hygiene (Bitloom)
+ci-sby-hygiene-check: ok pin ref=yosys-0.47 sha=bfc1c47eb786496fe794481ff88e75728f0529a6 url=https://github.com/YosysHQ/sby.git
+ci-sby-hygiene-check: install script obeys FR161 pins
+test fr161_hygiene_script_pass_and_force_fail ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/fr162_closeout_epic94.rs (target/debug/deps/fr162_closeout_epic94-e78ac5fa5a0637c5)
+
+running 7 tests
+test fr162_product_doc_closed_status ... ok
+test fr162_nfr14_epic94_close_conditions_checked ... ok
+test fr162_agents_and_spine_closed ... ok
+test fr162_deferred_marks_epic94_closed ... ok
+test fr162_sprint_epic94_done_95_ready ... ok
+test fr162_readme_marks_fr162_closed ... ok
+test fr162_epics_phase19_epic94_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr162_deeper_gui_ide_default_wave.rs (target/debug/deps/fr162_deeper_gui_ide_default_wave-6b86da3c0dabae56)
+
+running 5 tests
+test fr162_docs_contract_forbid_fr134_alone ... ok
+test fr162_cli_help_documents_default_and_optout ... ok
+test fr162_default_force_missing_nonzero_readable ... ok
+wrote /tmp/bitloom-fr162-optout-1790137858154305578/wave.vcd
+wrote /tmp/bitloom-fr162-optout-1790137858154305578/timing.html
+wrote /tmp/bitloom-fr162-optout-1790137858154305578/interactive.html
+wrote /tmp/bitloom-fr162-optout-1790137858154305578/typed-wave.html
+wrote /tmp/bitloom-fr162-optout-1790137858154305578/wave.typed.json
+open /tmp/bitloom-fr162-optout-1790137858154305578/typed-wave.html in a browser for FR117 typed IDE wave (interactive.html is FR104 I1–I3; GTKWave optional for /tmp/bitloom-fr162-optout-1790137858154305578/wave.vcd; pass --tywaves for FR125 upstream Tywaves sidecar; omit --no-tywaves-gui for FR162/FR134 GUI primary depth)
+test fr162_no_tywaves_gui_opts_out_of_primary ... ok
+wrote /tmp/bitloom-fr162-default-1790137858154143477/wave.vcd
+wrote /tmp/bitloom-fr162-default-1790137858154143477/timing.html
+wrote /tmp/bitloom-fr162-default-1790137858154143477/interactive.html
+wrote /tmp/bitloom-fr162-default-1790137858154143477/typed-wave.html
+wrote /tmp/bitloom-fr162-default-1790137858154143477/wave.typed.json
+wrote /tmp/bitloom-fr162-default-1790137858154143477/wave.tywaves.json
+wrote /tmp/bitloom-fr162-default-1790137858154143477/tywaves.launch.sh
+wrote /tmp/bitloom-fr162-default-1790137858154143477/tywaves.gui.manifest.json
+wrote /tmp/bitloom-fr162-default-1790137858154143477/tywaves.gui.install.json
+wrote /tmp/bitloom-fr162-default-1790137858154143477/tywaves.gui.install.sh
+FR162/FR134: wrote GUI/IDE primary surface /tmp/bitloom-fr162-default-1790137858154143477/tywaves.gui.manifest.json; set BITLOOM_TYWAVES_GUI_ROOT (or exec /tmp/bitloom-fr162-default-1790137858154143477/tywaves.gui.install.sh) to validate upstream GUI install; IDE plugin channel in tywaves.gui.install.json (typed-wave.html remains secondary)
+test fr162_default_wave_emits_gui_primary ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests/fr163_closeout_epic95.rs (target/debug/deps/fr163_closeout_epic95-63dd252e10d7cd29)
+
+running 7 tests
+test fr163_nfr14_epic95_close_conditions_checked ... ok
+test fr163_product_doc_and_ip_readme ... ok
+test fr163_agents_and_spine_closed ... ok
+test fr163_deferred_marks_epic95_closed ... ok
+test fr163_sprint_epic95_done_96_ready ... ok
+test fr163_epics_phase19_epic95_complete ... ok
+test fr163_readme_marks_fr163_closed ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr163_unlisted_protocol_handwritten_fl.rs (target/debug/deps/fr163_unlisted_protocol_handwritten_fl-ecf0c75d657738ac)
+
+running 6 tests
+test fr163_design_crate_prelude_only ... ok
+test fr163_docs_contract ... ok
+test fr163_exports_uart_rx_functional ... ok
+test fr163_not_satisfied_by_uart_tx_or_generated_alone ... ok
+test fr163_deliberate_mismatch_fails ... ok
+test fr163_uart_rx_handwritten_pass ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/fr164_circt_external_sim_gate.rs (target/debug/deps/fr164_circt_external_sim_gate-5d92325a06ee384b)
+
+running 6 tests
+test fr164_docs_contract_forbid_fr137_alone ... ok
+test fr164_ci_required_job_no_continue_on_error ... ok
+test fr164_not_satisfied_by_fr137_compile_script_alone ... ok
+test fr164_sim_fixture_and_example_exist ... ok
+test fr164_script_and_just_path ... ok
+test fr164_force_missing_nonzero_readable ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr164_closeout_epic96.rs (target/debug/deps/fr164_closeout_epic96-24d211981e0b092d)
+
+running 7 tests
+test fr164_product_doc_closed_status ... ok
+test fr164_nfr14_epic96_close_conditions_checked ... ok
+test fr164_agents_and_spine_closed ... ok
+test fr164_deferred_marks_epic96_closed ... ok
+test fr164_sprint_epic96_done_97_ready ... ok
+test fr164_readme_marks_fr164_closed ... ok
+test fr164_epics_phase19_epic96_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr165_closeout_epic97.rs (target/debug/deps/fr165_closeout_epic97-91630100026fb72b)
+
+running 7 tests
+test fr165_product_doc_closed_status ... ok
+test fr165_nfr14_epic97_close_conditions_checked ... ok
+test fr165_agents_and_spine_closed ... ok
+test fr165_deferred_marks_epic97_closed ... ok
+test fr165_epics_phase19_epic97_complete ... ok
+test fr165_sprint_epic97_done_98_ready ... ok
+test fr165_readme_marks_fr165_closed ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr165_deeper_chisel_parser_ecosystem.rs (target/debug/deps/fr165_deeper_chisel_parser_ecosystem-8feef445ed0eaae0)
+
+running 6 tests
+test fr165_docs_contract ... ok
+test fr165_just_and_script_exist ... ok
+test fr165_nfr14_gates_implementation ... ok
+test fr165_emit_and_check ... ok
+test fr165_fr130_alone_fails_linter_check ... ok
+test fr165_force_missing_nonzero ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr166_ad_pointer_epic99_close.rs (target/debug/deps/fr166_ad_pointer_epic99_close-f1c895c3b3573588)
+
+running 5 tests
+test fr166_agents_phase20_pointer ... ok
+test fr166_nfr14_epic99_close_conditions_checked ... ok
+test fr166_spine_phase20_pointer_gate_closed ... ok
+test fr166_sprint_epic99_done_100_ready ... ok
+test fr166_epics_phase20_epic99_complete ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr166_prd_phase20_gate.rs (target/debug/deps/fr166_prd_phase20_gate-301cf480f0debf39)
+
+running 11 tests
+test fr166_correct_course_approved ... ok
+test fr166_bitloom_brand_unchanged ... ok
+test fr166_git_push_not_fr ... ok
+test fr166_forbid_instant_publish_or_firtool_bump_on_approve ... ok
+test fr166_prd_amendment_stamp ... ok
+test fr166_q_defaults_four_leftovers ... ok
+test fr166_phase12_19_closes_remain_valid ... ok
+test fr166_nfr14_gate_present ... ok
+test fr166_addendum_phase20 ... ok
+test fr166_correct_course_phase20_approved_stamp ... ok
+test fr166_fr_mapping_and_epics_pointer ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr166_readme_deferred_honesty.rs (target/debug/deps/fr166_readme_deferred_honesty-1e4dd15ead00c875)
+
+running 4 tests
+test fr166_readme_distinguishes_phase19_closed_vs_phase20 ... ok
+test fr166_readme_lists_phase20_fr_tokens ... ok
+test fr166_readme_forbids_claim_before_fr_close ... ok
+test fr166_deferred_phase20_pointer ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr167_chiselsim_ide_stores.rs (target/debug/deps/fr167_chiselsim_ide_stores-e3cadbb109675e0d)
+
+running 7 tests
+test fr167_cli_apis_expose_both_faces ... ok
+test fr167_docs_and_nfr14_require_both_a_and_b ... ok
+bitloom.ide-stores: FR167 tokens present (OVSX_PAT + JETBRAINS_TOKEN)
+bitloom.ide-stores: Open VSX id=surfer-project.surfer
+bitloom.ide-stores: JetBrains id=org.surferproject.surfer
+bitloom.ide-stores: VS Code G1 retained (surfer-project.surfer marketplace) — alone ≠ FR167
+bitloom.ide-stores: dry-run OK (no network publish). Pass 'live' after packaging the extension/plugin.
+test fr167_publish_script_fails_without_tokens ... ok
+wrote /tmp/bitloom-fr167-ide-ok-1790137858406128455/wave.vcd
+wrote /tmp/bitloom-fr167-ide-ok-1790137858406128455/timing.html
+wrote /tmp/bitloom-fr167-ide-ok-1790137858406128455/interactive.html
+wrote /tmp/bitloom-fr167-ide-ok-1790137858406128455/typed-wave.html
+wrote /tmp/bitloom-fr167-ide-ok-1790137858406128455/wave.typed.json
+wrote /tmp/bitloom-fr167-ide-ok-1790137858406128455/wave.tywaves.json
+wrote /tmp/bitloom-fr167-ide-ok-1790137858406128455/tywaves.launch.sh
+wrote /tmp/bitloom-fr167-ide-ok-1790137858406128455/tywaves.gui.manifest.json
+wrote /tmp/bitloom-fr167-ide-ok-1790137858406128455/tywaves.gui.install.json
+wrote /tmp/bitloom-fr167-ide-ok-1790137858406128455/tywaves.gui.install.sh
+FR162/FR134: wrote GUI/IDE primary surface /tmp/bitloom-fr167-ide-ok-1790137858406128455/tywaves.gui.manifest.json; set BITLOOM_TYWAVES_GUI_ROOT (or exec /tmp/bitloom-fr167-ide-ok-1790137858406128455/tywaves.gui.install.sh) to validate upstream GUI install; IDE plugin channel in tywaves.gui.install.json (typed-wave.html remains secondary)
+wrote /tmp/bitloom-fr167-ide-ok-1790137858406128455/tywaves.ide-stores.manifest.json
+wrote /tmp/bitloom-fr167-ide-ok-1790137858406128455/tywaves.ide-stores.install.json
+FR167: IDE store tokens present (OVSX_PAT + JETBRAINS_TOKEN); live publish via scripts/publish-tywaves-ide-stores.sh (NFR75)
+test fr167_ide_stores_writes_manifest_with_tokens ... ok
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/wave.vcd
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/timing.html
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/interactive.html
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/typed-wave.html
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/wave.typed.json
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/wave.tywaves.json
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/tywaves.launch.sh
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/tywaves.gui.manifest.json
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/tywaves.gui.install.json
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/tywaves.gui.install.sh
+FR162/FR134: wrote GUI/IDE primary surface /tmp/bitloom-fr167-cs-ok-1790137858405807393/tywaves.gui.manifest.json; set BITLOOM_TYWAVES_GUI_ROOT (or exec /tmp/bitloom-fr167-cs-ok-1790137858405807393/tywaves.gui.install.sh) to validate upstream GUI install; IDE plugin channel in tywaves.gui.install.json (typed-wave.html remains secondary)
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/chiselsim.manifest.json
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/chiselsim.install.json
+wrote /tmp/bitloom-fr167-cs-ok-1790137858405807393/chiselsim.check.sh
+FR167: validated ChiselSim root via BITLOOM_CHISELSIM_ROOT (/tmp/bitloom-fr167-cs-ok-1790137858405807393/chiselsim-root)
+test fr167_chiselsim_writes_manifest_and_validates_root ... ok
+test fr167_chiselsim_force_missing_is_nonzero ... ok
+test fr167_ide_stores_missing_token_is_nonzero ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s
+
+     Running tests/fr167_closeout_epic100.rs (target/debug/deps/fr167_closeout_epic100-2b4476134782dade)
+
+running 7 tests
+test fr167_product_doc_closed_status ... ok
+test fr167_nfr14_epic100_close_conditions_checked ... ok
+test fr167_agents_and_spine_closed ... ok
+test fr167_deferred_marks_epic100_closed ... ok
+test fr167_sprint_epic100_done ... ok
+test fr167_readme_marks_fr167_closed ... ok
+test fr167_epics_phase20_epic100_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr168_closeout_epic101.rs (target/debug/deps/fr168_closeout_epic101-64a044f5ad8012bb)
+
+running 7 tests
+test fr168_product_doc_and_ip_readme ... ok
+test fr168_nfr14_epic101_close_conditions_checked ... ok
+test fr168_deferred_marks_epic101_closed ... ok
+test fr168_sprint_epic101_done ... ok
+test fr168_agents_and_spine_closed ... ok
+test fr168_readme_marks_fr168_closed ... ok
+test fr168_epics_phase20_epic101_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr168_spi_i2c_axi_handwritten_fl.rs (target/debug/deps/fr168_spi_i2c_axi_handwritten_fl-e43961666b9177ec)
+
+running 10 tests
+test fr168_design_crate_prelude_only ... ok
+test fr168_docs_contract ... ok
+test fr168_not_satisfied_by_uart_rx_or_generated_alone ... ok
+test fr168_exports_all_three_functionals ... ok
+test fr168_deliberate_axi_mismatch_fails ... ok
+test fr168_deliberate_spi_mismatch_fails ... ok
+test fr168_deliberate_i2c_mismatch_fails ... ok
+test fr168_axi4_lite_slave_handwritten_pass ... ok
+test fr168_spi_master_handwritten_pass ... ok
+test fr168_i2c_master_handwritten_pass ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+     Running tests/fr169_circt_mlir_allocation.rs (target/debug/deps/fr169_circt_mlir_allocation-9ceb648c6103e38f)
+
+running 6 tests
+test fr169_ci_required_job_no_continue_on_error ... ok
+test fr169_docs_contract_forbid_fr164_alone ... ok
+test fr169_not_satisfied_by_fr164_or_fr137_alone ... ok
+test fr169_script_and_just_path ... ok
+test fr169_force_missing_nonzero_readable ... ok
+test fr169_live_alloc_check_when_firtool_available ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s
+
+     Running tests/fr169_closeout_epic102.rs (target/debug/deps/fr169_closeout_epic102-20e119aff162543e)
+
+running 7 tests
+test fr169_product_doc_closed ... ok
+test fr169_nfr14_epic102_close_conditions_checked ... ok
+test fr169_readme_marks_fr169_closed ... ok
+test fr169_deferred_marks_epic102_closed ... ok
+test fr169_agents_and_spine_closed ... ok
+test fr169_sprint_epic102_done ... ok
+test fr169_epics_phase20_epic102_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr170_chisel_head_parser.rs (target/debug/deps/fr170_chisel_head_parser-8e50b739c7ebf510)
+
+running 8 tests
+test fr170_ci_required_job_no_continue_on_error ... ok
+test fr170_docs_contract_forbid_fr138_alone ... ok
+test fr170_not_satisfied_by_fr138_or_fr165_alone ... ok
+test fr170_scala_facade_and_fixture ... ok
+test fr170_script_and_just_path ... ok
+test fr170_ad27_revised_for_fr170 ... ok
+test fr170_force_missing_nonzero_readable ... ok
+test fr170_live_migration_check_when_firtool_available ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/fr170_closeout_epic103.rs (target/debug/deps/fr170_closeout_epic103-572892b4decf3d8f)
+
+running 7 tests
+test fr170_product_doc_closed ... ok
+test fr170_nfr14_epic103_close_conditions_checked ... ok
+test fr170_agents_and_spine_closed ... ok
+test fr170_deferred_marks_epic103_closed ... ok
+test fr170_readme_marks_fr170_closed ... ok
+test fr170_epics_phase20_epic103_complete ... ok
+test fr170_sprint_epic103_done ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr171_closeout_epic104.rs (target/debug/deps/fr171_closeout_epic104-b95098085aac0a24)
+
+running 7 tests
+test fr171_product_doc_closed_status ... ok
+test fr171_nfr14_epic104_close_conditions_checked ... ok
+test fr171_agents_and_spine_closed ... ok
+test fr171_readme_marks_fr171_and_phase20_closed ... ok
+test fr171_deferred_marks_epic104_closed ... ok
+test fr171_sprint_epic104_done ... ok
+test fr171_epics_phase20_epic104_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr171_phase20_claim_honesty.rs (target/debug/deps/fr171_phase20_claim_honesty-08b31c78aee24116)
+
+running 5 tests
+test fr171_closed_fr_docs_exist ... ok
+test fr171_nfr14_gates_104_2 ... ok
+test fr171_docs_claim_map ... ok
+test fr171_deferred_points_to_honesty_doc ... ok
+test fr171_readme_honesty_pointers ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr172_ad_pointer_epic105_close.rs (target/debug/deps/fr172_ad_pointer_epic105_close-8a7088867b2368bb)
+
+running 5 tests
+test fr172_agents_phase21_pointer ... ok
+test fr172_spine_phase21_pointer_gate_closed ... ok
+test fr172_nfr14_epic105_close_conditions_checked ... ok
+test fr172_sprint_epic105_done_106_ready ... ok
+test fr172_epics_phase21_epic105_complete ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr172_prd_phase21_gate.rs (target/debug/deps/fr172_prd_phase21_gate-f8189490ff90e6fb)
+
+running 11 tests
+test fr172_correct_course_approved ... ok
+test fr172_git_push_not_fr ... ok
+test fr172_phase12_20_closes_remain_valid ... ok
+test fr172_forbid_instant_firtool_or_head_on_approve ... ok
+test fr172_prd_amendment_stamp ... ok
+test fr172_bitloom_brand_unchanged ... ok
+test fr172_q_defaults_four_leftovers ... ok
+test fr172_nfr14_gate_present ... ok
+test fr172_addendum_phase21 ... ok
+test fr172_correct_course_phase21_approved_stamp ... ok
+test fr172_fr_mapping_and_epics_pointer ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr172_readme_deferred_honesty.rs (target/debug/deps/fr172_readme_deferred_honesty-4ff12d686fc60b03)
+
+running 4 tests
+test fr172_readme_distinguishes_phase20_closed_vs_phase21 ... ok
+test fr172_readme_forbids_claim_before_fr_close ... ok
+test fr172_deferred_phase21_pointer ... ok
+test fr172_readme_lists_phase21_fr_tokens ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr173_closeout_epic106.rs (target/debug/deps/fr173_closeout_epic106-c6dabd9d20a65f57)
+
+running 7 tests
+test fr173_nfr14_epic106_close_conditions_checked ... ok
+test fr173_product_doc_closed ... ok
+test fr173_agents_and_spine_closed ... ok
+test fr173_readme_marks_fr173_closed ... ok
+test fr173_deferred_marks_epic106_closed ... ok
+test fr173_sprint_epic106_done ... ok
+test fr173_epics_phase21_epic106_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr173_firtool_bump_ad9.rs (target/debug/deps/fr173_firtool_bump_ad9-04bed065b36e301b)
+
+running 3 tests
+test fr173_close_docs_not_rewritten_by_fr182 ... ok
+test fr173_nfr78_prior_closes_still_documented ... ok
+test fr173_docs_and_ad9_pin_chisel_715_firtool_1158 ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr174_closeout_epic107.rs (target/debug/deps/fr174_closeout_epic107-4dda45e3c1c271b4)
+
+running 7 tests
+test fr174_product_doc_closed ... ok
+test fr174_nfr14_epic107_close_conditions_checked ... ok
+test fr174_agents_and_spine_closed ... ok
+test fr174_readme_marks_fr174_closed ... ok
+test fr174_deferred_marks_epic107_closed ... ok
+test fr174_sprint_epic107_done ... ok
+test fr174_epics_phase21_epic107_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr174_unpaired_head.rs (target/debug/deps/fr174_unpaired_head-64096b044c10c3ef)
+
+running 5 tests
+test fr174_docs_contract_forbid_fr170_alone ... ok
+test fr174_script_and_just_and_ci ... ok
+test fr174_spine_ad9_ad27_revised ... ok
+test fr174_force_missing_nonzero ... ok
+test fr174_live_unpaired_check ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/fr175_broader_circt_mlir_sim.rs (target/debug/deps/fr175_broader_circt_mlir_sim-953a188f1eb7b4e3)
+
+running 4 tests
+test fr175_docs_contract_forbid_fr169_alone ... ok
+test fr175_script_just_ci ... ok
+test fr175_force_missing_nonzero ... ok
+test fr175_live_sv_check ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests/fr175_closeout_epic108.rs (target/debug/deps/fr175_closeout_epic108-9d9a8401d7bfda12)
+
+running 7 tests
+test fr175_product_doc_closed ... ok
+test fr175_deferred_marks_epic108_closed ... ok
+test fr175_nfr14_epic108_close_conditions_checked ... ok
+test fr175_sprint_epic108_done ... ok
+test fr175_readme_marks_fr175_closed ... ok
+test fr175_agents_and_spine_closed ... ok
+test fr175_epics_phase21_epic108_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr176_closeout_epic109.rs (target/debug/deps/fr176_closeout_epic109-e7ee987cb476d156)
+
+running 7 tests
+test fr176_product_doc_closed ... ok
+test fr176_nfr14_epic109_close_conditions_checked ... ok
+test fr176_deferred_marks_epic109_closed ... ok
+test fr176_agents_and_spine_closed ... ok
+test fr176_sprint_epic109_done ... ok
+test fr176_readme_marks_fr176_closed ... ok
+test fr176_epics_phase21_epic109_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr176_cpu_bitvector_hir.rs (target/debug/deps/fr176_cpu_bitvector_hir-5833c050b22bb53b)
+
+running 2 tests
+test invalid_bitvectors_and_sync_memory_reads_are_diagnosed ... ok
+warning: variable does not need to be mutable
+  --> src/lib.rs:51:13
+   |
+51 |         let mut regs = BTreeMap::new();
+   |             ----^^^^
+   |             |
+   |             help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+   --> src/lib.rs:108:13
+    |
+108 |         let mut next_pending = BTreeMap::new();
+    |             ----^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> src/lib.rs:109:13
+    |
+109 |         let mut writes: Vec<(&str, usize, u64)> = Vec::new();
+    |             ----^^^^^^
+    |             |
+    |             help: remove this `mut`
+
+
+running 2 tests
+..
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+warning: variable does not need to be mutable
+  --> src/lib.rs:74:13
+   |
+74 |         let mut pv = PortValues::default();
+   |             ----^^
+   |             |
+   |             help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+test rv32_decode_bitvectors_and_async_gpr_are_consistent ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.92s
+
+     Running tests/fr176_deeper_parser_chisel_ecosystem.rs (target/debug/deps/fr176_deeper_parser_chisel_ecosystem-808b85fa4180b670)
+
+running 6 tests
+test fr176_docs_contract ... ok
+test fr176_just_script_and_ci ... ok
+test fr176_nfr14_and_ad27_revised ... ok
+test fr176_emit_and_check ... ok
+test fr176_fr165_alone_fails_ecosystem_check ... ok
+test fr176_force_missing_nonzero ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr177_closeout_epic110.rs (target/debug/deps/fr177_closeout_epic110-06a92356bf2e2981)
+
+running 7 tests
+test fr177_product_doc_closed ... ok
+test fr177_nfr14_epic110_close_conditions_checked ... ok
+test fr177_agents_and_spine_closed ... ok
+test fr177_deferred_marks_epic110_closed ... ok
+test fr177_readme_marks_fr177_and_phase21_closed ... ok
+test fr177_sprint_epic110_done ... ok
+test fr177_epics_phase21_epic110_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr177_cpu_arithmetic_hir.rs (target/debug/deps/fr177_cpu_arithmetic_hir-43111ec3faaf02b4)
+
+running 2 tests
+test invalid_signedness_and_destinations_are_diagnosed ... ok
+warning: variable does not need to be mutable
+  --> src/lib.rs:51:13
+   |
+51 |         let mut regs = BTreeMap::new();
+   |             ----^^^^
+   |             |
+   |             help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> src/lib.rs:52:13
+   |
+52 |         let mut mems = BTreeMap::new();
+   |             ----^^^^
+   |             |
+   |             help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> src/lib.rs:103:13
+    |
+103 |         let mut next_pending = BTreeMap::new();
+    |             ----^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> src/lib.rs:104:13
+    |
+104 |         let mut writes: Vec<(&str, usize, u64)> = Vec::new();
+    |             ----^^^^^^
+    |             |
+    |             help: remove this `mut`
+
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+warning: variable does not need to be mutable
+  --> src/lib.rs:64:13
+   |
+64 |         let mut pv = PortValues::default();
+   |             ----^^
+   |             |
+   |             help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+test rv32_signed_arithmetic_is_consistent_across_consumers ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.84s
+
+     Running tests/fr177_phase21_claim_honesty.rs (target/debug/deps/fr177_phase21_claim_honesty-2301e7e08c6d8bea)
+
+running 5 tests
+test fr177_closed_fr_docs_exist ... ok
+test fr177_nfr14_gates_110_2 ... ok
+test fr177_docs_claim_map ... ok
+test fr177_deferred_points_to_honesty_doc ... ok
+test fr177_readme_honesty_pointers ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr178_ad_pointer_epic111_close.rs (target/debug/deps/fr178_ad_pointer_epic111_close-641f6fd6384e6f77)
+
+running 5 tests
+test fr178_agents_phase22_pointer ... ok
+test fr178_nfr14_epic111_close_conditions_checked ... ok
+test fr178_spine_phase22_pointer_gate_closed ... ok
+test fr178_epics_phase22_epic111_complete ... ok
+test fr178_sprint_epic111_done_112_ready ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr178_prd_phase22_gate.rs (target/debug/deps/fr178_prd_phase22_gate-a17dd7d5eb50892d)
+
+running 11 tests
+test fr178_correct_course_approved ... ok
+test fr178_bitloom_brand_unchanged ... ok
+test fr178_forbid_instant_head_or_unpaired_pin_on_approve ... ok
+test fr178_git_push_not_fr ... ok
+test fr178_prd_amendment_stamp ... ok
+test fr178_phase12_21_closes_remain_valid ... ok
+test fr178_q_defaults_five_leftovers ... ok
+test fr178_addendum_phase22 ... ok
+test fr178_nfr14_gate_present ... ok
+test fr178_correct_course_phase22_approved_stamp ... ok
+test fr178_fr_mapping_and_epics_pointer ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr178_readme_deferred_honesty.rs (target/debug/deps/fr178_readme_deferred_honesty-f6b19b64b2db1c08)
+
+running 4 tests
+test fr178_readme_distinguishes_phase21_closed_vs_phase22 ... ok
+test fr178_readme_forbids_claim_before_fr_close ... ok
+test fr178_readme_lists_phase22_fr_tokens ... ok
+test fr178_deferred_phase22_pointer ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr179_closeout_epic112.rs (target/debug/deps/fr179_closeout_epic112-13b2ed18a9635bbc)
+
+running 7 tests
+test fr179_product_doc_closed ... ok
+test fr179_nfr14_epic112_close_conditions_checked ... ok
+test fr179_agents_and_spine_closed ... ok
+test fr179_deferred_marks_epic112_closed ... ok
+test fr179_readme_marks_fr179_closed ... ok
+test fr179_sprint_epic112_done ... ok
+test fr179_epics_phase22_epic112_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr179_floating_circt_git_head.rs (target/debug/deps/fr179_floating_circt_git_head-4929e0359fdddf6b)
+
+running 5 tests
+test fr179_docs_contract_forbid_fr174_alone ... ok
+test fr179_spine_ad9_revised ... ok
+test fr179_script_and_just_and_ci ... ok
+test fr179_force_missing_nonzero ... ok
+test fr179_live_floating_check ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/fr180_closeout_epic113.rs (target/debug/deps/fr180_closeout_epic113-e7afc9aea08730a8)
+
+running 7 tests
+test fr180_product_doc_closed ... ok
+test fr180_nfr14_epic113_close_conditions_checked ... ok
+test fr180_agents_and_spine_closed ... ok
+test fr180_deferred_marks_epic113_closed ... ok
+test fr180_sprint_epic113_done ... ok
+test fr180_readme_marks_fr180_closed ... ok
+test fr180_epics_phase22_epic113_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr180_handshake_dialect_deepen.rs (target/debug/deps/fr180_handshake_dialect_deepen-bd85cc1224d5af57)
+
+running 7 tests
+test fr180_docs_contract_forbid_fr129_alone ... ok
+test fr180_cli_flag_present ... ok
+test fr180_rejects_fr129_alone_shape ... ok
+test fr180_schedule_emits_fork_join ... ok
+test fr180_spine_ad25_revised ... ok
+test fr180_cli_smoke_optional ... ok
+test fr180_force_missing_nonzero ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr181_closeout_epic114.rs (target/debug/deps/fr181_closeout_epic114-1b555e8dde2d14d9)
+
+running 7 tests
+test fr181_product_doc_closed ... ok
+test fr181_nfr14_epic114_close_conditions_checked ... ok
+test fr181_agents_and_spine_closed ... ok
+test fr181_deferred_marks_epic114_closed ... ok
+test fr181_sprint_epic114_done ... ok
+test fr181_readme_marks_fr181_closed ... ok
+test fr181_epics_phase22_epic114_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr181_deeper_style_guide_linter.rs (target/debug/deps/fr181_deeper_style_guide_linter-33c134cc9bc6a797)
+
+running 7 tests
+test fr181_docs_contract ... ok
+test fr181_script_just_ci ... ok
+test fr181_spine_ad27_revised ... ok
+test fr181_fr176_alone_fails_style_linter_check ... ok
+test fr181_emit_and_check ... ok
+test fr181_force_missing_nonzero ... ok
+test fr181_live_gate ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.88s
+
+     Running tests/fr182_closeout_epic115.rs (target/debug/deps/fr182_closeout_epic115-f633b89a82613be7)
+
+running 7 tests
+test fr182_product_doc_closed ... ok
+test fr182_nfr14_epic115_close_conditions_checked ... ok
+test fr182_readme_marks_fr182_closed ... ok
+test fr182_agents_and_spine_closed ... ok
+test fr182_sprint_epic115_done ... ok
+test fr182_deferred_marks_epic115_closed ... ok
+test fr182_epics_phase22_epic115_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr182_unpaired_firtool_product_pin.rs (target/debug/deps/fr182_unpaired_firtool_product_pin-d4c07f9daf34c80c)
+
+running 7 tests
+test fr182_docs_contract_forbid_prior_alone ... ok
+test fr182_cli_and_chisel_constants ... ok
+test fr182_nfr83_prior_closes_still_documented ... ok
+test fr182_scripts_pin_new_version ... ok
+test fr182_spine_ad9_unpaired_exception ... ok
+test fr182_live_ensure_downloads_when_needed ... ok
+test fr182_live_firtool_info_reports_1159 ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+     Running tests/fr183_closeout_epic116.rs (target/debug/deps/fr183_closeout_epic116-4709d20b1bf71525)
+
+running 7 tests
+test fr183_product_doc_closed ... ok
+test fr183_nfr14_epic116_close_conditions_checked ... ok
+test fr183_agents_and_spine_closed ... ok
+test fr183_readme_marks_fr183_closed ... ok
+test fr183_deferred_marks_epic116_closed ... ok
+test fr183_sprint_epic116_done ... ok
+test fr183_epics_phase22_epic116_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr183_explicit_fr142_api_expand.rs (target/debug/deps/fr183_explicit_fr142_api_expand-dc04f372b0f8a32a)
+
+running 5 tests
+test fr183_ad6_prelude_does_not_depend_on_firrtl ... ok
+test fr183_nfr14_selected_entries_still_documented ... ok
+test fr183_docs_contract_forbid_silent_expand ... ok
+test fr183_spine_or_semver_policy_honesty ... ok
+test fr183_surface_doc_lists_expand ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr184_closeout_epic117.rs (target/debug/deps/fr184_closeout_epic117-c40d98b59807cdcd)
+
+running 7 tests
+test fr184_nfr14_epic117_close_conditions_checked ... ok
+test fr184_product_doc_closed ... ok
+test fr184_deferred_marks_epic117_closed ... ok
+test fr184_sprint_epic117_done ... ok
+test fr184_agents_and_spine_closed ... ok
+test fr184_readme_marks_fr184_and_phase22_closed ... ok
+test fr184_epics_phase22_epic117_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr184_phase22_claim_honesty.rs (target/debug/deps/fr184_phase22_claim_honesty-675b1c8f1a49076c)
+
+running 5 tests
+test fr184_closed_fr_docs_exist ... ok
+test fr184_docs_claim_map ... ok
+test fr184_nfr14_gates_117_2 ... ok
+test fr184_deferred_points_to_honesty_doc ... ok
+test fr184_readme_honesty_pointers ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr185_ad_pointer_epic118_close.rs (target/debug/deps/fr185_ad_pointer_epic118_close-991542927e0e0261)
+
+running 5 tests
+test fr185_agents_phase23_pointer ... ok
+test fr185_nfr14_epic118_close_conditions_checked ... ok
+test fr185_spine_phase23_pointer_gate_closed ... ok
+test fr185_epics_phase23_epic118_complete ... ok
+test fr185_sprint_epic118_done_119_ready ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr185_prd_phase23_gate.rs (target/debug/deps/fr185_prd_phase23_gate-80255c2e558ee2f9)
+
+running 11 tests
+test fr185_correct_course_approved ... ok
+test fr185_forbid_instant_deepen_on_approve ... ok
+test fr185_git_push_not_fr ... ok
+test fr185_prd_amendment_stamp ... ok
+test fr185_phase12_22_closeout_remain_valid ... ok
+test fr185_bitloom_brand_unchanged ... ok
+test fr185_addendum_phase23 ... ok
+test fr185_nfr14_gate_present ... ok
+test fr185_q_defaults_five_leftovers ... ok
+test fr185_correct_course_phase23_approved_stamp ... ok
+test fr185_fr_mapping_and_epics_pointer ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr185_readme_deferred_honesty.rs (target/debug/deps/fr185_readme_deferred_honesty-2e20d1a3cc3885d8)
+
+running 4 tests
+test fr185_readme_forbids_claim_before_fr_close ... ok
+test fr185_readme_distinguishes_closeout_vs_phase23 ... ok
+test fr185_readme_lists_phase23_fr_tokens ... ok
+test fr185_deferred_phase23_pointer ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr186_closeout_epic119.rs (target/debug/deps/fr186_closeout_epic119-89af443a4423d4d3)
+
+running 7 tests
+test fr186_product_doc_closed ... ok
+test fr186_nfr14_epic119_close_conditions_checked ... ok
+test fr186_deferred_marks_epic119_closed ... ok
+test fr186_agents_and_spine_closed ... ok
+test fr186_readme_marks_fr186_closed ... ok
+test fr186_sprint_epic119_done ... ok
+test fr186_epics_phase23_epic119_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr186_unbounded_circt_tip.rs (target/debug/deps/fr186_unbounded_circt_tip-f982737cca903f30)
+
+running 5 tests
+test fr186_docs_contract_forbid_fr179_alone ... ok
+test fr186_script_and_just_and_ci ... ok
+test fr186_spine_ad9_revised ... ok
+test fr186_force_missing_nonzero ... ok
+test fr186_live_tip_check ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/fr187_closeout_epic120.rs (target/debug/deps/fr187_closeout_epic120-dcf2df83c2c2e0cb)
+
+running 7 tests
+test fr187_nfr14_epic120_close_conditions_checked ... ok
+test fr187_product_doc_closed ... ok
+test fr187_agents_and_spine_closed ... ok
+test fr187_deferred_marks_epic120_closed ... ok
+test fr187_readme_marks_fr187_closed ... ok
+test fr187_sprint_epic120_done ... ok
+test fr187_epics_phase23_epic120_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr187_handshake_lower_deepen.rs (target/debug/deps/fr187_handshake_lower_deepen-0bbbe066d86aea7e)
+
+running 7 tests
+test fr187_docs_contract_forbid_fr180_alone ... ok
+test fr187_cli_flag_present ... ok
+test fr187_rejects_fr180_alone_shape ... ok
+test fr187_schedule_emits_branch_merge ... ok
+test fr187_spine_ad25_revised ... ok
+test fr187_cli_smoke_optional ... ok
+test fr187_force_missing_nonzero ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr188_closeout_epic121.rs (target/debug/deps/fr188_closeout_epic121-2e801276be28f722)
+
+running 7 tests
+test fr188_nfr14_epic121_close_conditions_checked ... ok
+test fr188_product_doc_closed ... ok
+test fr188_agents_and_spine_closed ... ok
+test fr188_deferred_marks_epic121_closed ... ok
+test fr188_sprint_epic121_done ... ok
+test fr188_readme_marks_fr188_closed ... ok
+test fr188_epics_phase23_epic121_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr188_community_style_guide_pack.rs (target/debug/deps/fr188_community_style_guide_pack-3f1eb342e1aa4b8e)
+
+running 7 tests
+test fr188_docs_contract ... ok
+test fr188_script_just_ci ... ok
+test fr188_fr181_alone_fails_pack_check ... ok
+test fr188_emit_and_check ... ok
+test fr188_spine_ad27_revised ... ok
+test fr188_force_missing_nonzero ... ok
+test fr188_live_gate ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.70s
+
+     Running tests/fr190_closeout_epic123.rs (target/debug/deps/fr190_closeout_epic123-2e12de37b28e188f)
+
+running 7 tests
+test fr190_product_doc_closed ... ok
+test fr190_nfr14_epic123_close_conditions_checked ... ok
+test fr190_agents_and_spine_closed ... ok
+test fr190_deferred_marks_epic123_closed ... ok
+test fr190_readme_marks_fr190_closed ... ok
+test fr190_epics_phase23_epic123_complete ... ok
+test fr190_sprint_epic123_done ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr190_further_fr142_api_expand.rs (target/debug/deps/fr190_further_fr142_api_expand-50dbc321d63b5936)
+
+running 5 tests
+test fr190_ad6_prelude_does_not_depend_on_firrtl ... ok
+test fr190_docs_contract_forbid_fr183_alone ... ok
+test fr190_fr183_alone_not_sufficient ... ok
+test fr190_nfr14_selected_entries_still_documented ... ok
+test fr190_surface_doc_lists_expand ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fr191_closeout_epic124.rs (target/debug/deps/fr191_closeout_epic124-095fa9fe2e8998cb)
+
+running 7 tests
+test fr191_product_doc_closed ... ok
+test fr191_nfr14_epic124_close_conditions_checked ... ok
+test fr191_sprint_epic124_done ... ok
+test fr191_deferred_marks_epic124_closed ... ok
+test fr191_agents_and_spine_closed ... ok
+test fr191_readme_marks_fr191_and_phase23_planning_closed ... ok
+test fr191_epics_phase23_epic124_complete ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr191_phase23_claim_honesty.rs (target/debug/deps/fr191_phase23_claim_honesty-962d8c94cfde1950)
+
+running 5 tests
+test fr191_closed_and_blocked_fr_docs_exist ... ok
+test fr191_nfr14_gates_124_2 ... ok
+test fr191_docs_claim_map ... ok
+test fr191_deferred_points_to_honesty_doc ... ok
+test fr191_readme_honesty_pointers ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fr193_axi_protocol.rs (target/debug/deps/fr193_axi_protocol-8bd1a183c75c7b7a)
+
+running 12 tests
+test legacy_axi_emits_protocol_fixture ... ok
+test aw_first_interpreter ... ok
+test aw_first_compiled ... ok
+test w_first_compiled ... ok
+test concurrent_compiled ... ok
+test concurrent_interpreter ... ok
+test w_first_rtl ... ok
+test w_first_interpreter ... ok
+test aw_first_rtl ... ok
+test concurrent_rtl ... ok
+test required_directed_protocol_matrix ... ok
+test required_random_protocol_matrix_16_seeds_1000_transactions has been running for over 60 seconds
+error: recipe `test` was terminated on line 2 by signal 15

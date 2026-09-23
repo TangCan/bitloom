@@ -1,5 +1,7 @@
 # Phase 24 正式接口合同
 
+**当前交付状态（2026-09-23）：Phase24已按批准范围结项。** [总验收](phase24-closeout.md)为现行交付索引；下文逐日期的授权与进度描述保留历史，接口和明确排除项不因此扩大。
+
 批准：2026-09-20；Story125.1 / FR192；FR192–201、NFR93–99。本文固化计划中的行为与范围，不代表产品已交付。仅 M0 / Epic125 获准执行，126–130 backlog。研究保持历史原文；本合同的 GPIO32 位、IRQ5 有效位取代历史草案的 GPIO8/最多8路。
 
 2026-09-20 M0关闭后续授权：用户要求继续，当前执行范围为 Story126.1 NFR14 → 126.2 模块组合基础；126.3/126.4及Epic127–130仍backlog，未授权自动执行。不宣称M1或Phase24已交付；上述M0批准记录保留为历史。
@@ -202,3 +204,10 @@ Timer32固定接口已实现，完整契约和prelude-only原文例见[Timer32](
 Story129.1–129.3 已按单 Story 提交完成；129.3 实际通过 direct/FIRRTL/Chisel 完整 AXI 四外设行为、direct CSR 第二组合、有限 formal/负控制、三路线原始综合、SemVer 和隔离重放。机器证据见 `_agile-output/test-artifacts/129-3-latest-results.json`，限制与实测见 `129-3-build-evidence.md`。FIRRTL 实跑修复了系统组合中未驱动的 `i_raw_events` wire，未改变公开 API。最终 clean/fmt/workspace regression 为 484 个结果块、1878 passed / 0 failed / 49 ignored；专用外部门另跑，ignored 未计 PASS。Story129.3 与 Epic129 关闭，只交付 FR198 和 FR201 核心部分。
 
 Code review 四个独立 reviewer 均超时，按技能规则保留“不完整审查”事实，不声称 clean review；用户确认继续后完成 automate、clean/fmt/workspace regression 与单故事提交。Epic130/FR199–200、FR201 外部试点及整个 Phase24 保持开放，外部行 `not delivered`；native/generated 层级 unsupported、FR189 deferred 和 NFR91 保持，不push/publish。
+
+
+## Phase24 最终范围结项（2026-09-23）
+
+2026-09-23：Phase24 已批准范围 FR192–FR201 / NFR93–NFR99 完成交付与结项，Epic125–130 共22故事done。129.3四层独立补审及修复、两拓扑六路线实际RTL/原始综合、有限请求/复位形式、耐清理的主/隔离原始证据和新鲜证据校验已完成；FR199/FR200外部试点按130.2/130.3最终记录交付。FR189/Epic122/122.2/122.3继续deferred、未交付；NFR91及既有明确遗留保留。无产品工具钉/包版本变更，不push、不publish，不声称远端CI已执行或物理签核。
+
+[总验收与FR/NFR映射](phase24-closeout.md)。先前M0-only、126.1/126.2-only、Epic130开放或Phase24未完成的分日期段落保留为历史，本条为当前状态。

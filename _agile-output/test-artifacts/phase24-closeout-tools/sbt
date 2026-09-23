@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+[[ "${1:-}" != '-batch' ]] || shift
+exec /usr/lib/jvm/java-17-openjdk-amd64/bin/java -XX:ActiveProcessorCount=4 -Xmx2G -Dsbt.server.autostart=false -Dsbt.supershell=false -Dsbt.log.noformat=true -jar /tmp/phase24-closeout-tools/sbt-launch-1.10.11.jar "$@"

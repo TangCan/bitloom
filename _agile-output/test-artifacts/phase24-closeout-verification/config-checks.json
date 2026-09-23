@@ -1,0 +1,11 @@
+{
+  "workflow_yaml_parse": "PASS",
+  "just_setup": true,
+  "success_and_failure_archive_upload": true,
+  "prospective_sprint_gate": {
+    "exit_code": 0,
+    "stdout": "PASS: Phase 24 6 epics / 22 stories; M0 and NFR14 gates; FR189/Epic122 deferred\n",
+    "stderr": ""
+  },
+  "remote_ci_executed": false
+}

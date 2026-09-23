@@ -1,0 +1,222 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `design_smt2.ys' --
+
+1. Executing RTLIL frontend.
+Input filename: design_prep.il
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \Fr198AxiCore
+Used module:     \Fr198Uart
+Used module:     \Fr198Timer
+Used module:     \Fr198Irq
+Used module:     \Fr198Gpio
+Used module:     \Fr198Decoder
+Used module:     \Fr198Bridge
+
+2.2. Analyzing design hierarchy..
+Top module:  \Fr198AxiCore
+Used module:     \Fr198Uart
+Used module:     \Fr198Timer
+Used module:     \Fr198Irq
+Used module:     \Fr198Gpio
+Used module:     \Fr198Decoder
+Used module:     \Fr198Bridge
+Removed 0 unused modules.
+Module Fr198AxiCore directly or indirectly contains formal properties -> setting "keep" attribute.
+
+3. Executing FORMALFF pass.
+
+4. Executing DFFUNMAP pass (unmap clock enable and synchronous reset from FFs).
+
+5. Printing statistics.
+
+=== Fr198Uart ===
+
+   Number of wires:                 15
+   Number of wire bits:             99
+   Number of public wires:          15
+   Number of public wire bits:      99
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  7
+     $anyseq                         7
+
+=== Fr198Timer ===
+
+   Number of wires:                 13
+   Number of wire bits:             94
+   Number of public wires:          13
+   Number of public wire bits:      94
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  6
+     $anyseq                         6
+
+=== Fr198Irq ===
+
+   Number of wires:                 14
+   Number of wire bits:             99
+   Number of public wires:          14
+   Number of public wire bits:      99
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  7
+     $anyseq                         7
+
+=== Fr198Gpio ===
+
+   Number of wires:                 16
+   Number of wire bits:            190
+   Number of public wires:          16
+   Number of public wire bits:     190
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 17
+     $anyseq                        17
+
+=== Fr198Decoder ===
+
+   Number of wires:                130
+   Number of wire bits:            831
+   Number of public wires:         124
+   Number of public wire bits:     823
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 67
+     $and                           20
+     $anyinit                        3
+     $assume                         1
+     $eq                             6
+     $logic_not                      2
+     $mux                           23
+     $not                            5
+     $or                             4
+     $sub                            3
+
+=== Fr198Bridge ===
+
+   Number of wires:                125
+   Number of wire bits:            700
+   Number of public wires:          93
+   Number of public wire bits:     406
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 99
+     $and                           19
+     $anyinit                       19
+     $assume                         1
+     $mux                           46
+     $not                           12
+     $or                             2
+
+=== Fr198AxiCore ===
+
+   Number of wires:                443
+   Number of wire bits:           1917
+   Number of public wires:         238
+   Number of public wire bits:    1712
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                345
+     $anyinit                       59
+     $anyseq                        34
+     $assert                        27
+     $assume                         7
+     $eq                            18
+     $ff                            18
+     $logic_and                     76
+     $logic_not                     26
+     $logic_or                       2
+     $mux                           69
+     $not                            1
+     $or                             1
+     $xor                            1
+     Fr198Bridge                     1
+     Fr198Decoder                    1
+     Fr198Gpio                       1
+     Fr198Irq                        1
+     Fr198Timer                      1
+     Fr198Uart                       1
+
+=== design hierarchy ===
+
+   Fr198AxiCore                      1
+     Fr198Bridge                     1
+     Fr198Decoder                    1
+     Fr198Gpio                       1
+     Fr198Irq                        1
+     Fr198Timer                      1
+     Fr198Uart                       1
+
+   Number of wires:                756
+   Number of wire bits:           3930
+   Number of public wires:         513
+   Number of public wire bits:    3423
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                542
+     $and                           39
+     $anyinit                       81
+     $anyseq                        71
+     $assert                        27
+     $assume                         9
+     $eq                            24
+     $ff                            18
+     $logic_and                     76
+     $logic_not                     28
+     $logic_or                       2
+     $mux                          138
+     $not                           18
+     $or                             7
+     $sub                            3
+     $xor                            1
+
+6. Executing SMT2 backend.
+
+6.1. Executing BMUXMAP pass.
+
+6.2. Executing DEMUXMAP pass.
+Creating SMT-LIBv2 representation of module Fr198Bridge.
+Creating SMT-LIBv2 representation of module Fr198Decoder.
+Creating SMT-LIBv2 representation of module Fr198Gpio.
+Creating SMT-LIBv2 representation of module Fr198Irq.
+Creating SMT-LIBv2 representation of module Fr198Timer.
+Creating SMT-LIBv2 representation of module Fr198Uart.
+Creating SMT-LIBv2 representation of module Fr198AxiCore.
+
+End of script. Logfile hash: bb49732201, CPU: user 0.05s system 0.01s, MEM: 14.83 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 54% 2x write_smt2 (0 sec), 39% 2x read_ilang (0 sec), ...

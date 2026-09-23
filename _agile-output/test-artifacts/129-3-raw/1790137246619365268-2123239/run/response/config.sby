@@ -1,0 +1,17 @@
+[options]
+mode bmc
+depth 8
+
+[engines]
+smtbmc --unroll z3
+
+[script]
+read -formal -D FR201_RESPONSE_FORMAL design.v
+hierarchy -top Fr198AxiCore
+select -clear
+blackbox Fr198Uart Fr198Gpio Fr198Timer Fr198Irq
+setattr -mod -unset blackbox =A:blackbox=1
+prep -top Fr198AxiCore
+
+[files]
+design.v

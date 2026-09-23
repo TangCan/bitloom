@@ -1,0 +1,11 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/test_fr201_evidence.py"
+  ],
+  "exit_code": 0,
+  "start_utc_unix_ms": 1790137561920,
+  "end_utc_unix_ms": 1790137562937,
+  "timeout_seconds": 60,
+  "log": "_agile-output/test-artifacts/129-3-raw/1790137443475049031-2153715/validator-tests.log"
+}

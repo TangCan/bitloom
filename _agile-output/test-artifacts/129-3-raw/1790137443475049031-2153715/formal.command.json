@@ -1,0 +1,20 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "-p",
+    "bitloom",
+    "--test",
+    "fr198_peripheral_system",
+    "fr201_core_formal::fr201_complete_system_formal_and_negative_control",
+    "--",
+    "--ignored",
+    "--exact",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "start_utc_unix_ms": 1790137532262,
+  "end_utc_unix_ms": 1790137554823,
+  "timeout_seconds": 1200,
+  "log": "_agile-output/test-artifacts/129-3-raw/1790137443475049031-2153715/formal.log"
+}

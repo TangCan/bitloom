@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/129-3-build-runner.py", line 208, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/129-3-build-runner.py", line 192, in main
+    validate(result, EVIDENCE_ROOT, complete=False)
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/fr201_evidence.py", line 44, in validate
+    require(row.get('topology') == topology, f'{section}/{backend}: topology')
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/fr201_evidence.py", line 11, in require
+    raise ValueError(message)
+ValueError: backends/direct: topology

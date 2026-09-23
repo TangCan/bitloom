@@ -1,0 +1,11 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.06s
+     Running tests/fr198_peripheral_system.rs (target/debug/deps/fr198_peripheral_system-33063e05b4360161)
+
+running 1 test
+FR201 backend=direct PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr201-core/direct-2123259-1790137246741981760
+FR201 backend=firrtl PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr201-core/firrtl-2123259-1790137253204210149
+FR201 backend=chisel PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr201-core/chisel-2123259-1790137259872415732
+test fr201_backend_matrix::fr201_axi_complete_system_three_backend_matrix ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 45.00s
+

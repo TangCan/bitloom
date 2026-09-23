@@ -1,0 +1,1572 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index bf96ce2..bd98df3 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -136,6 +136,9 @@ jobs:
+     timeout-minutes: 35
+     steps:
+       - uses: actions/checkout@v4
++        with:
++          fetch-depth: 0
++      - uses: extractions/setup-just@v2
+       - uses: dtolnay/rust-toolchain@master
+         with:
+           toolchain: "1.97.1"
+@@ -152,7 +155,7 @@ jobs:
+           sudo apt-get update
+           sudo apt-get install -y iverilog
+           bash scripts/ci-install-sby.sh
+-          cargo install cargo-semver-checks --locked
++          cargo install cargo-semver-checks --version 0.50.0 --locked
+       - name: Required FR198 / FR201 core matrix
+         run: |
+           firtool_bin="$(cargo run -q -p bitloom -- firtool ensure | tail -n1)"
+@@ -160,14 +163,16 @@ jobs:
+           export BITLOOM_SBY="$(command -v sby)"
+           just fr198-fr201-core-check
+       - uses: actions/upload-artifact@v4
+-        if: failure()
++        if: always()
+         with:
+-          name: fr198-fr201-core-failure
++          name: fr198-fr201-core-evidence
+           path: |
+             target/fr198/
+             target/fr201-core/
+             target/fr201-core-formal/
+             target/fr201-runner/
++            target/fr201-isolated-failure/
++            _agile-output/test-artifacts/129-3-raw/
+             _agile-output/test-artifacts/129-3-latest-results.json
+ 
+   # FR35 / FR50: HLS product-path smoke. Failures are never ignored.
+diff --git "a/_agile-output/implementation-artifacts/129-3-ci-\345\205\274\345\256\271\346\200\247-\350\264\241\347\214\256\346\250\241\346\235\277\344\270\216\346\240\270\345\277\203\345\205\263\351\227\255.md" "b/_agile-output/implementation-artifacts/129-3-ci-\345\205\274\345\256\271\346\200\247-\350\264\241\347\214\256\346\250\241\346\235\277\344\270\216\346\240\270\345\277\203\345\205\263\351\227\255.md"
+index 28af049..ff41a5a 100644
+--- "a/_agile-output/implementation-artifacts/129-3-ci-\345\205\274\345\256\271\346\200\247-\350\264\241\347\214\256\346\250\241\346\235\277\344\270\216\346\240\270\345\277\203\345\205\263\351\227\255.md"
++++ "b/_agile-output/implementation-artifacts/129-3-ci-\345\205\274\345\256\271\346\200\247-\350\264\241\347\214\256\346\250\241\346\235\277\344\270\216\346\240\270\345\277\203\345\205\263\351\227\255.md"
+@@ -125,3 +125,7 @@ OpenAI Codex
+ - `docs/ip/contribution-template.md`
+ - `docs/ip/phase24-support-matrix.md`
+ - `_agile-output/implementation-artifacts/epic-129-closeout.md`
++
++## 2026-09-23 结项补审（历史记录保留）
++
++此前独立审查超时事实不变。用户批准Phase24收尾后完成四层独立补审，20项候选逐项核实并归为12个修复组，详见[补审裁定](../test-artifacts/phase24-closeout-review.md)。原story提交不重写；补审修复与新验收随独立维护提交记录。最终范围与剩余边界以[Phase24总验收](../../docs/ip/phase24-closeout.md)为准。
+diff --git a/_agile-output/test-artifacts/129-3-atdd-gate.py b/_agile-output/test-artifacts/129-3-atdd-gate.py
+index 7243d9f..a3b2557 100644
+--- a/_agile-output/test-artifacts/129-3-atdd-gate.py
++++ b/_agile-output/test-artifacts/129-3-atdd-gate.py
+@@ -3,6 +3,7 @@ from pathlib import Path
+ import json
+ import re
+ import sys
++from fr201_evidence import validate
+ 
+ ROOT = Path(__file__).resolve().parents[2]
+ FAILURES = []
+@@ -48,9 +49,6 @@ require(
+     "build runner does not execute isolated replay by default",
+ )
+ 
+-tool_versions = str(evidence.get("tool_versions", {}))
+-for pin in ("1.97.1", "1.159.0", "7.15.0", "2.13.18", "1.10.11"):
+-    require(pin in ci or pin in tool_versions, f"missing exact tool pin {pin}")
+ 
+ for field in (
+     "owner",
+@@ -77,10 +75,11 @@ for field in (
+ 
+ for state in ("catalogued", "locked", "compiled", "behavior-tested", "maintained"):
+     require(state in support, f"support matrix missing state: {state}")
+-require(
+-    "Epic130" in support and "not delivered" in support,
+-    "external IP row must remain not delivered",
+-)
++require("Epic130" in support and "maintained" in support, "external pilot current support state missing")
++try:
++    validate(evidence, ROOT, complete=True)
++except (ValueError, KeyError, TypeError, OSError) as error:
++    require(False, f"independent evidence validation: {error}")
+ 
+ for backend in ("direct", "firrtl", "chisel"):
+     row = evidence.get("backends", {}).get(backend, {})
+@@ -98,14 +97,6 @@ for section in (
+ ):
+     require(section in evidence, f"evidence missing section: {section}")
+ 
+-require(
+-    evidence.get("provenance", {}).get("source_paths_validated") is True,
+-    "producer did not validate source-evidence ownership",
+-)
+-require(
+-    evidence.get("provenance", {}).get("rtl_sha256_recomputed") is True,
+-    "producer did not recompute executed-RTL SHA256",
+-)
+ 
+ for tool, row in evidence.get("missing_tool_negative", {}).items():
+     require(row.get("exit_code") == 4, f"{tool} missing-tool exit code is not 4")
+@@ -122,17 +113,8 @@ require(
+     "formal mutation lacks a counterexample VCD",
+ )
+ 
+-require(evidence.get("public_api_added") == [], "Story129.3 silently adds public API")
+-require(
+-    evidence.get("package_versions_changed") is False,
+-    "Story129.3 changes package versions",
+-)
++require(evidence.get("compatibility_audit", {}).get("status") == "PASS", "scoped compatibility audit missing")
+ require("FR201 **核心部分**" in story, "story must preserve core-only claim")
+-require(
+-    re.search(r"Epic130.*(?:开放|backlog|not delivered)", support, re.IGNORECASE)
+-    is not None,
+-    "support matrix must preserve the open Epic130 boundary",
+-)
+ 
+ if FAILURES:
+     print("ATDD RED: Story129.3 requirements not implemented:")
+diff --git a/_agile-output/test-artifacts/129-3-build-runner.py b/_agile-output/test-artifacts/129-3-build-runner.py
+index 8d660b6..8fe1637 100755
+--- a/_agile-output/test-artifacts/129-3-build-runner.py
++++ b/_agile-output/test-artifacts/129-3-build-runner.py
+@@ -1,203 +1,210 @@
+ #!/usr/bin/env python3
+-"""Run and aggregate the Story129.3 FR198/FR201 core evidence."""
+-
++"""Execute, archive and independently validate the FR201 core matrix."""
+ from __future__ import annotations
+-
+ import argparse
+ import hashlib
+ import json
+ import os
+ from pathlib import Path
++import re
+ import shutil
++import signal
+ import subprocess
+ import sys
++import tempfile
+ import time
++from fr201_evidence import BACKENDS, TOOLS, validate
+ 
+ ROOT = Path(__file__).resolve().parents[2]
+-DEFAULT_EVIDENCE = ROOT / "_agile-output/test-artifacts/129-3-latest-results.json"
+-
+-
+-def run(command: list[str], label: str, env: dict[str, str]) -> dict:
++DEFAULT_EVIDENCE = ROOT / '_agile-output/test-artifacts/129-3-latest-results.json'
++EVIDENCE_ROOT = Path(os.environ.get('BITLOOM_FR201_EVIDENCE_ROOT', ROOT)).resolve()
++ARCHIVE = EVIDENCE_ROOT / '_agile-output/test-artifacts/129-3-raw' / f'{time.time_ns()}-{os.getpid()}'
++
++def executable(name, env):
++    if name == 'firtool':
++        candidate = str(Path(env.get('RHDL_FIRTOOL_PATH', '/nonexistent')) / 'firtool')
++    elif name == 'sby' and env.get('BITLOOM_SBY'):
++        candidate = env['BITLOOM_SBY']
++    else:
++        candidate = 'z3' if name == 'solver' else name
++    return shutil.which(candidate, path=env.get('PATH'))
++
++def preflight(env):
++    paths = {}
++    for tool in TOOLS:
++        path = executable(tool, env)
++        if not path:
++            print(f'required tool is missing: {tool}', file=sys.stderr)
++            raise SystemExit(4)
++        paths[tool] = str(Path(path).resolve())
++    return paths
++
++def run(command, label, env, seconds=1200):
++    ARCHIVE.mkdir(parents=True, exist_ok=True)
++    log = ARCHIVE / f'{label}.log'
+     started = time.time_ns() // 1_000_000
+-    result = subprocess.run(command, cwd=ROOT, env=env, text=True, capture_output=True)
+-    log_dir = ROOT / "target/fr201-runner"
+-    log_dir.mkdir(parents=True, exist_ok=True)
+-    (log_dir / f"{label}.log").write_text(result.stdout + result.stderr)
+-    if result.returncode != 0:
+-        raise SystemExit(f"{label} failed ({result.returncode}); see {log_dir / f'{label}.log'}")
+-    return {
+-        "command": command,
+-        "exit_code": result.returncode,
+-        "start_utc_unix_ms": started,
+-        "end_utc_unix_ms": time.time_ns() // 1_000_000,
+-        "log": str((log_dir / f"{label}.log").relative_to(ROOT)),
+-    }
+-
+-
+-def latest(root: Path, prefix: str, min_mtime_ms: int) -> tuple[Path, dict]:
+-    candidates = sorted(
+-        (
+-            path
+-            for path in root.glob(f"{prefix}-*/evidence.json")
+-            if path.stat().st_mtime_ns // 1_000_000 >= min_mtime_ms
+-        ),
+-        key=lambda path: path.stat().st_mtime_ns,
+-    )
++    with log.open('wb') as stream:
++        process = subprocess.Popen(command, cwd=ROOT, env=env, stdout=stream, stderr=subprocess.STDOUT, start_new_session=True)
++        previous_term = signal.getsignal(signal.SIGTERM)
++        def terminate(signum, frame):
++            try:
++                os.killpg(process.pid, signal.SIGKILL)
++            except ProcessLookupError:
++                pass
++            process.wait()
++            raise SystemExit(128 + signum)
++        signal.signal(signal.SIGTERM, terminate)
++        try:
++            code = process.wait(timeout=seconds)
++        except subprocess.TimeoutExpired:
++            os.killpg(process.pid, signal.SIGTERM)
++            try:
++                process.wait(timeout=5)
++            except subprocess.TimeoutExpired:
++                pass
++            try:
++                os.killpg(process.pid, signal.SIGKILL)
++            except ProcessLookupError:
++                pass
++            process.wait()
++            code = 124
++        finally:
++            signal.signal(signal.SIGTERM, previous_term)
++    row = dict(command=command, exit_code=code, start_utc_unix_ms=started,
++               end_utc_unix_ms=time.time_ns() // 1_000_000, timeout_seconds=seconds,
++               log=os.path.relpath(log, EVIDENCE_ROOT))
++    (ARCHIVE / f'{label}.command.json').write_text(json.dumps(row, indent=2))
++    if code:
++        raise SystemExit(f'{label} failed ({code}); see {log}')
++    return row
++
++def latest(root, prefix, since):
++    candidates = []
++    for path in root.glob(f'{prefix}-*/evidence.json'):
++        if path.stat().st_mtime_ns // 1_000_000 >= since:
++            row = json.loads(path.read_text())
++            expected_topology = 'direct-csr' if prefix.startswith('direct-csr-') else 'axi'
++            expected_backend = prefix.removeprefix('direct-csr-')
++            if prefix == 'run' or (row.get('backend') == expected_backend and row.get('topology') == expected_topology):
++                candidates.append(path)
+     if not candidates:
+-        raise SystemExit(f"missing {prefix} evidence below {root}")
+-    path = candidates[-1]
+-    return path, json.loads(path.read_text())
+-
+-
+-def require_tool(name: str) -> int:
+-    executable = "z3" if name == "solver" else name
+-    if name == "firtool":
+-        candidate = Path(os.environ.get("RHDL_FIRTOOL_PATH", "")) / "firtool"
+-        return 0 if candidate.is_file() and os.access(candidate, os.X_OK) else 4
+-    return 0 if shutil.which(executable) else 4
+-
+-
+-def missing_tool_negative(name: str) -> dict:
+-    env = os.environ.copy()
+-    env["PATH"] = str(ROOT / "target/fr201-empty-path")
+-    env["RHDL_FIRTOOL_PATH"] = str(ROOT / "target/fr201-no-firtool")
+-    result = subprocess.run(
+-        [sys.executable, __file__, "--require-tool", name], cwd=ROOT, env=env
+-    )
+-    if result.returncode == 0:
+-        raise SystemExit(f"missing-tool negative control unexpectedly passed for {name}")
+-    return {"exit_code": result.returncode}
+-
+-
+-def main() -> int:
++        raise SystemExit(f'missing fresh {prefix} evidence below {root}')
++    path = max(candidates, key=lambda p: p.stat().st_mtime_ns)
++    if not path.resolve().is_relative_to(root.resolve()):
++        raise SystemExit('evidence escaped artifact root')
++    destination = ARCHIVE / prefix
++    shutil.copytree(path.parent, destination, ignore=shutil.ignore_patterns('target', '.bloop', '.bsp', 'simulation', '*.o', '*.class', '*.jar'))
++    saved = destination / 'evidence.json'
++    return os.path.relpath(saved, EVIDENCE_ROOT), json.loads(saved.read_text())
++
++def negatives(env, paths):
++    result = {}
++    for missing in TOOLS:
++        with tempfile.TemporaryDirectory() as temporary:
++            directory = Path(temporary)
++            for name, path in paths.items():
++                if name != missing:
++                    (directory / ('z3' if name == 'solver' else name)).symlink_to(path)
++            test_env = env | {'PATH': temporary, 'RHDL_FIRTOOL_PATH': temporary, 'BITLOOM_SBY': str(directory / 'sby')}
++            process = subprocess.run([sys.executable, __file__, '--preflight-only'], env=test_env, cwd=ROOT, capture_output=True, text=True, timeout=30)
++            expected = f'required tool is missing: {missing}'
++            if process.returncode != 4 or process.stderr.strip() != expected:
++                raise SystemExit(f'missing-tool control failed: {missing}: {process.returncode}: {process.stderr}')
++            result[missing] = {'exit_code': process.returncode, 'diagnostic': process.stderr.strip()}
++    return result
++
++def audit():
++    scopes = []
++    for base, end in [('218f0620e85ab438a3ef1351e253277552c8c410', 'baf07e739af2b36f4e0befddda9826964d16118e'), ('4bdd680', None)]:
++        args = ['git', 'diff', base] + ([end] if end else [])
++        diff = subprocess.check_output(args + ['--', 'Cargo.toml', 'crates', 'docs/public-api-1-0-surface.md'], cwd=ROOT, text=True)
++        names = subprocess.check_output(args + ['--name-only'], cwd=ROOT, text=True).splitlines()
++        current = ''
++        for line in diff.splitlines():
++            if line.startswith('+++ b/'):
++                current = line[6:]
++            if line.startswith(('+', '-')) and not line.startswith(('+++', '---')):
++                if current.endswith('Cargo.toml') and re.match(r'[+-]\s*version\s*=', line):
++                    raise SystemExit('scoped package-version change: ' + current)
++                if '/src/' in current and re.match(r'\+\s*pub(?:\([^)]*\))?\s+', line):
++                    raise SystemExit('public Rust addition requires explicit scoped review: ' + current)
++                if current == 'docs/public-api-1-0-surface.md':
++                    raise SystemExit('public API surface changed in reviewed scope')
++        base_sha = subprocess.check_output(['git', 'rev-parse', base], cwd=ROOT, text=True).strip()
++        scopes.append({'base': base_sha, 'end': end or 'working-tree', 'changed_paths': names, 'diff_sha256': hashlib.sha256(diff.encode()).hexdigest()})
++    return {'status': 'PASS', 'method': 'scoped source/public-surface and package-version diff audit; 130.2/130.3 excluded', 'scopes': scopes}
++
++def manifest():
++    return {os.path.relpath(p, EVIDENCE_ROOT): hashlib.sha256(p.read_bytes()).hexdigest() for p in ARCHIVE.rglob('*') if p.is_file()}
++
++def main():
+     parser = argparse.ArgumentParser()
+-    parser.add_argument("--require-tool")
+-    parser.add_argument("--skip-isolated", action="store_true")
+-    parser.add_argument("--evidence", type=Path, default=DEFAULT_EVIDENCE)
++    parser.add_argument('--preflight-only', action='store_true')
++    parser.add_argument('--skip-isolated', action='store_true')
++    parser.add_argument('--isolated-child', type=Path)
++    parser.add_argument('--evidence', type=Path, default=DEFAULT_EVIDENCE)
+     args = parser.parse_args()
+-    if args.require_tool:
+-        return require_tool(args.require_tool)
+-
+     env = os.environ.copy()
+-    for tool in ("cargo", "iverilog", "vvp", "yosys", "java", "sbt", "z3"):
+-        if not shutil.which(tool, path=env.get("PATH")):
+-            raise SystemExit(f"required tool is missing: {tool}")
+-    firtool = Path(env.get("RHDL_FIRTOOL_PATH", "")) / "firtool"
+-    if not firtool.is_file():
+-        raise SystemExit("RHDL_FIRTOOL_PATH/firtool is required")
+-    sby = env.get("BITLOOM_SBY") or shutil.which("sby", path=env.get("PATH"))
+-    if not sby:
+-        raise SystemExit("BITLOOM_SBY or sby on PATH is required")
+-    env["BITLOOM_SBY"] = sby
+-    env.pop("BITLOOM_FR201_BACKENDS", None)
+-    env["CARGO_PROFILE_TEST_OPT_LEVEL"] = "1"
+-    env["YOSYS_HISTORY_FILE"] = "/dev/null"
+-    backend_root = Path(env.get("BITLOOM_FR201_ARTIFACT_ROOT", ROOT / "target/fr201-core"))
+-    formal_root = Path(env.get("BITLOOM_FR201_FORMAL_ROOT", ROOT / "target/fr201-core-formal"))
+-
++    paths = preflight(env)
++    if args.preflight_only:
++        return 0
++    child = args.isolated_child is not None
++    if child and (not args.isolated_child.is_file() or args.isolated_child.read_text().strip() != str(ROOT) or not env.get('CARGO_TARGET_DIR') or Path(env['CARGO_TARGET_DIR']).resolve().is_relative_to(EVIDENCE_ROOT / 'target')):
++        raise SystemExit('invalid isolated child invocation')
++    ARCHIVE.mkdir(parents=True, exist_ok=True)
++    if DEFAULT_EVIDENCE.exists():
++        historical = EVIDENCE_ROOT / '_agile-output/test-artifacts/129-3-historical-results.json'
++        if not historical.exists():
++            shutil.copy2(DEFAULT_EVIDENCE, historical)
++    env.pop('BITLOOM_FR201_BACKENDS', None)
++    env.update(CARGO_PROFILE_TEST_OPT_LEVEL='1', YOSYS_HISTORY_FILE='/dev/null', BITLOOM_SBY=paths['sby'])
+     commands = []
+-    commands.append(
+-        run(
+-            [
+-                "cargo", "test", "-p", "bitloom", "--test",
+-                "fr198_peripheral_system",
+-                "fr201_backend_matrix::fr201_axi_complete_system_three_backend_matrix",
+-                "--", "--ignored", "--exact", "--nocapture",
+-            ],
+-            "backend-matrix",
+-            env,
+-        )
+-    )
+-    commands.append(
+-        run(
+-            [
+-                "cargo", "test", "-p", "bitloom", "--test",
+-                "fr198_peripheral_system", "fr198_direct_csr_four_leaf_hierarchy_emits_and_runs",
+-                "--", "--exact", "--nocapture",
+-            ],
+-            "direct-csr-composition",
+-            env,
+-        )
+-    )
+-    commands.append(
+-        run(
+-            [
+-                "cargo", "test", "-p", "bitloom", "--test",
+-                "fr198_peripheral_system",
+-                "fr201_core_formal::fr201_complete_system_formal_and_negative_control",
+-                "--", "--ignored", "--exact", "--nocapture",
+-            ],
+-            "formal",
+-            env,
+-        )
+-    )
+-    commands.append(run(["bash", "scripts/test-semver-check.sh"], "semver-harness", env))
+-    commands.append(run(["bash", "scripts/semver-check.sh"], "semver-registry", env))
+-
+-    backends: dict[str, dict] = {}
+-    synthesis: dict[str, dict] = {}
+-    source_evidence: dict[str, str] = {}
+-    for backend in ("direct", "firrtl", "chisel"):
+-        path, row = latest(backend_root, backend, commands[0]["start_utc_unix_ms"])
+-        if not path.resolve().is_relative_to(backend_root.resolve()):
+-            raise SystemExit(f"{backend} evidence escaped its artifact root: {path}")
+-        design = path.parent / "design.v"
+-        actual_sha256 = hashlib.sha256(design.read_bytes()).hexdigest()
+-        if actual_sha256 != row.get("sha256"):
+-            raise SystemExit(f"{backend} evidence does not hash its executed RTL")
+-        backends[backend] = {key: value for key, value in row.items() if key != "synthesis"}
+-        synthesis[backend] = row["synthesis"]
+-        source_evidence[backend] = os.path.relpath(path, ROOT)
+-    formal_path, formal = latest(formal_root, "run", commands[2]["start_utc_unix_ms"])
+-    if not formal_path.resolve().is_relative_to(formal_root.resolve()):
+-        raise SystemExit(f"formal evidence escaped its artifact root: {formal_path}")
+-    source_evidence["formal"] = os.path.relpath(formal_path, ROOT)
+-
+-    result = {
+-        "story": "129.3",
+-        "tool_versions": {
+-            "rust": "1.97.1",
+-            "firtool": "1.159.0",
+-            "chisel": "7.15.0",
+-            "scala": "2.13.18",
+-            "sbt": "1.10.11",
+-        },
+-        "backends": backends,
+-        "direct_csr_composition": {"exit_code": 0, "topology": "direct-csr"},
+-        "formal": formal,
+-        "synthesis": synthesis,
+-        "semver": {"harness": "PASS", "registry": "PASS", "packages": ["bitloom-prelude", "bitloom-sim", "bitloom-firrtl"]},
+-        "public_api_added": [],
+-        "package_versions_changed": False,
+-        "missing_tool_negative": {
+-            tool: missing_tool_negative(tool)
+-            for tool in ("iverilog", "vvp", "yosys", "firtool", "java", "sbt", "sby", "solver")
+-        },
+-        "isolated_replay": {
+-            "exit_code": 0 if os.environ.get("BITLOOM_FR201_ISOLATED") == "1" else None,
+-            "used_main_target": False,
+-            "used_hidden_tmp_rtl": False,
+-        },
+-        "commands": commands,
+-        "source_evidence": source_evidence,
+-        "provenance": {"source_paths_validated": True, "rtl_sha256_recomputed": True},
+-    }
++    for label, test in [('backend-matrix', 'fr201_backend_matrix::fr201_axi_complete_system_three_backend_matrix'), ('direct-csr-matrix', 'fr201_backend_matrix::fr201_direct_csr_complete_system_three_backend_matrix'), ('formal', 'fr201_core_formal::fr201_complete_system_formal_and_negative_control')]:
++        commands.append(run(['cargo', 'test', '-p', 'bitloom', '--test', 'fr198_peripheral_system', test, '--', '--ignored', '--exact', '--nocapture'], label, env))
++    for label, script in [('semver-harness', 'scripts/test-semver-check.sh'), ('semver-registry', 'scripts/semver-check.sh')]:
++        commands.append(run(['bash', script], label, env))
++    for label, flags in [('validator-tests', []), ('validator-tests-optimized', ['-O'])]:
++        commands.append(run([sys.executable, *flags, str(ROOT / '_agile-output/test-artifacts/test_fr201_evidence.py')], label, env, seconds=60))
++    backend_root = Path(env.get('BITLOOM_FR201_ARTIFACT_ROOT', ROOT / 'target/fr201-core'))
++    formal_root = Path(env.get('BITLOOM_FR201_FORMAL_ROOT', ROOT / 'target/fr201-core-formal'))
++    sources, backends, csr = {}, {}, {}
++    for section, prefix, index in [(backends, '', 0), (csr, 'direct-csr-', 1)]:
++        for backend in BACKENDS:
++            key = prefix + backend
++            sources[key], section[backend] = latest(backend_root, key, commands[index]['start_utc_unix_ms'])
++    sources['formal'], formal = latest(formal_root, 'run', commands[2]['start_utc_unix_ms'])
++    source_dir = ARCHIVE / 'source'
++    source_dir.mkdir()
++    (source_dir / 'git-head.txt').write_bytes(subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT))
++    (source_dir / 'git-working-tree.patch').write_bytes(subprocess.check_output(['git', 'diff', '--binary', 'HEAD'], cwd=ROOT))
++    run(['rustc', '--version'], 'rustc-identity', env, seconds=30)
++    if not (ARCHIVE / 'rustc-identity.log').read_text().startswith('rustc 1.97.1 '):
++        raise SystemExit('required Rust version is 1.97.1')
++    for path in [ROOT / 'Cargo.lock', ROOT / 'rust-toolchain.toml', *ROOT.glob('crates/bitloom/tests/fr198_peripheral_system*'), *ROOT.glob('_agile-output/test-artifacts/*129-3*.py'), ROOT / '_agile-output/test-artifacts/fr201_evidence.py', ROOT / '_agile-output/test-artifacts/test_fr201_evidence.py', ROOT / '_agile-output/test-artifacts/129-3-isolated-replay.sh', ROOT / 'scripts/test-semver-check.sh', ROOT / 'scripts/semver-check.sh']:
++        if path.is_dir():
++            shutil.copytree(path, source_dir / path.name)
++        else:
++            shutil.copy2(path, source_dir / path.name)
++    result = {'story': '129.3', 'schema': 2, 'status': 'PARTIAL', 'backends': backends, 'direct_csr_backends': csr,
++              'formal': formal, 'synthesis': {name: row['synthesis'] for name, row in backends.items()},
++              'semver': {'harness': 'PASS', 'registry': 'PASS', 'packages': ['bitloom-prelude', 'bitloom-sim', 'bitloom-firrtl']},
++              'compatibility_audit': audit(), 'missing_tool_negative': negatives(env, paths),
++              'tool_identity': {name: {'path': path, 'sha256': hashlib.sha256(Path(path).read_bytes()).hexdigest()} for name, path in paths.items()},
++              'commands': commands, 'source_evidence': sources, 'isolated_replay': {'exit_code': None}, 'archive_manifest': manifest()}
++    validate(result, EVIDENCE_ROOT, complete=False)
++    args.evidence = args.evidence.resolve()
+     args.evidence.parent.mkdir(parents=True, exist_ok=True)
+-    args.evidence.write_text(json.dumps(result, indent=2) + "\n")
+-    if not args.skip_isolated and os.environ.get("BITLOOM_FR201_ISOLATED") != "1":
+-        replay = subprocess.run(
+-            [str(ROOT / "_agile-output/test-artifacts/129-3-isolated-replay.sh")],
+-            cwd=ROOT,
+-            env=env,
+-        )
+-        if replay.returncode != 0:
+-            raise SystemExit(f"isolated replay failed ({replay.returncode})")
+-        merged = json.loads(args.evidence.read_text())
+-        if merged.get("isolated_replay", {}).get("exit_code") != 0:
+-            raise SystemExit("isolated replay did not record a successful result")
+-    print(f"Story129.3 core runner PASS evidence={args.evidence}")
++    args.evidence.write_text(json.dumps(result, indent=2) + '\n')
++    if not child and not args.skip_isolated:
++        replay_command = run(['bash', str(ROOT / '_agile-output/test-artifacts/129-3-isolated-replay.sh'), str(args.evidence)], 'isolated-replay', env, seconds=2400)
++        result = json.loads(args.evidence.read_text())
++        result['commands'].append(replay_command)
++        result['archive_manifest'] = manifest()
++        validate(result, EVIDENCE_ROOT, complete=True)
++        result['status'] = 'PASS'
++        args.evidence.write_text(json.dumps(result, indent=2) + '\n')
++    print(f'Story129.3 core runner {result["status"]} evidence={args.evidence}')
+     return 0
+ 
+-
+-if __name__ == "__main__":
++if __name__ == '__main__':
+     raise SystemExit(main())
+diff --git a/_agile-output/test-artifacts/129-3-isolated-replay.sh b/_agile-output/test-artifacts/129-3-isolated-replay.sh
+index 648f005..b1e5345 100755
+--- a/_agile-output/test-artifacts/129-3-isolated-replay.sh
++++ b/_agile-output/test-artifacts/129-3-isolated-replay.sh
+@@ -1,15 +1,18 @@
+ #!/usr/bin/env bash
+ set -euo pipefail
+-
+ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
++MAIN_RESULTS="${1:-$ROOT/_agile-output/test-artifacts/129-3-latest-results.json}"
+ TMP="$(mktemp -d)"
+ cleanup() {
+   rc=$?
+-  if [[ $rc -ne 0 && -d "$TMP/checkout/target/fr201-runner" ]]; then
+-    rm -rf "$ROOT/target/fr201-isolated-failure"
+-    mkdir -p "$ROOT/target/fr201-isolated-failure"
+-    cp -a "$TMP/checkout/target/fr201-runner" "$ROOT/target/fr201-isolated-failure/runner"
+-    [[ ! -d "$TMP/artifacts" ]] || cp -a "$TMP/artifacts" "$ROOT/target/fr201-isolated-failure/"
++  if [[ $rc -ne 0 ]]; then
++    failure="$ROOT/_agile-output/test-artifacts/129-3-raw/failure-$(date +%s)-$$"
++    mkdir -p "$failure"
++    if [[ -d "$TMP/artifacts" ]]; then
++      tar -C "$TMP" --exclude=target --exclude='*.class' --exclude='*.jar' --exclude=simulation -cf "$failure/artifacts.tar" artifacts
++    fi
++    [[ ! -f "$TMP/change.patch" ]] || cp "$TMP/change.patch" "$failure/checkout.patch"
++    [[ ! -f "$TMP/isolated-results.json" ]] || cp "$TMP/isolated-results.json" "$failure/"
+   fi
+   git -C "$ROOT" worktree remove --force "$TMP/checkout" >/dev/null 2>&1 || true
+   rm -rf "$TMP"
+@@ -19,23 +22,35 @@ trap cleanup EXIT
+ 
+ git -C "$ROOT" worktree add --detach "$TMP/checkout" HEAD >/dev/null
+ git -C "$ROOT" diff --binary HEAD > "$TMP/change.patch"
+-git -C "$TMP/checkout" apply "$TMP/change.patch"
+-git -C "$ROOT" ls-files --others --exclude-standard -z |
++if [[ -s "$TMP/change.patch" ]]; then
++  git -C "$TMP/checkout" apply "$TMP/change.patch"
++fi
++git -C "$ROOT" ls-files --others --exclude-standard -z -- . ':(exclude)_agile-output/test-artifacts/129-3-raw/**' |
+   tar -C "$ROOT" --null -T - -cf "$TMP/untracked.tar"
+ tar -C "$TMP/checkout" -xf "$TMP/untracked.tar"
+ 
+ export CARGO_TARGET_DIR="$TMP/cargo-target"
+ export BITLOOM_FR201_ARTIFACT_ROOT="$TMP/artifacts/backends"
+ export BITLOOM_FR201_FORMAL_ROOT="$TMP/artifacts/formal"
+-export BITLOOM_FR201_ISOLATED=1
++export BITLOOM_FR201_EVIDENCE_ROOT="$ROOT"
++printf '%s\n' "$TMP/checkout" > "$TMP/child-token"
++ISOLATED_RESULTS="$ROOT/_agile-output/test-artifacts/129-3-raw/isolated-$(date +%s)-$$.json"
+ cd "$TMP/checkout"
+ python3 _agile-output/test-artifacts/129-3-build-runner.py \
+-  --skip-isolated \
+-  --evidence "$TMP/isolated-results.json"
+-MAIN_RESULTS="$ROOT/_agile-output/test-artifacts/129-3-latest-results.json"
+-MERGED_RESULTS="$TMP/merged-results.json"
+-jq --slurpfile isolated "$TMP/isolated-results.json" \
+-  '.isolated_replay = $isolated[0].isolated_replay' \
+-  "$MAIN_RESULTS" > "$MERGED_RESULTS"
+-mv "$MERGED_RESULTS" "$MAIN_RESULTS"
+-echo "Story129.3 isolated replay PASS target=$CARGO_TARGET_DIR"
++  --isolated-child "$TMP/child-token" --evidence "$ISOLATED_RESULTS"
++python3 - "$ROOT" "$MAIN_RESULTS" "$ISOLATED_RESULTS" <<'PY'
++import json
++import os
++from pathlib import Path
++import sys
++root, main, child = map(Path, sys.argv[1:])
++sys.path.insert(0, str(root / '_agile-output/test-artifacts'))
++from fr201_evidence import validate
++value = json.loads(main.read_text())
++validate(json.loads(child.read_text()), root, complete=False)
++value['isolated_replay'] = {'exit_code': 0, 'used_main_target': False,
++                            'used_hidden_tmp_rtl': False, 'evidence': os.path.relpath(child, root)}
++validate(value, root, complete=True)
++main.write_text(json.dumps(value, indent=2) + '\n')
++PY
++echo "Story129.3 isolated replay PASS evidence=$ISOLATED_RESULTS"
+diff --git a/crates/bitloom/tests/fr198_peripheral_system.rs b/crates/bitloom/tests/fr198_peripheral_system.rs
+index abf08c9..d3e4405 100644
+--- a/crates/bitloom/tests/fr198_peripheral_system.rs
++++ b/crates/bitloom/tests/fr198_peripheral_system.rs
+@@ -5,7 +5,7 @@ use bitloom_prelude::{
+     ip::{AxiLiteCsrBridge, CsrDecoder, GpioCsr, Irq, Timer, UartCsr},
+ };
+ use sha2::{Digest, Sha256};
+-use std::{fs, path::PathBuf, process::Command, time::Instant};
++use std::{fs, path::PathBuf, time::Instant};
+ 
+ #[path = "fr198_peripheral_system/fr201_backend_matrix.rs"]
+ mod fr201_backend_matrix;
+@@ -326,29 +326,7 @@ fn emit_compile(label: &str, hir: &FrozenHir, tb: &str) {
+         "Fr198Direct"
+     };
+     let tool_identity = |tool: &str, version_arg: &str| {
+-        let path = Command::new("which")
+-            .arg(tool)
+-            .output()
+-            .unwrap_or_else(|_| panic!("required which executable is missing"));
+-        assert!(
+-            path.status.success(),
+-            "required {tool} executable is missing"
+-        );
+-        let version = Command::new(tool)
+-            .arg(version_arg)
+-            .output()
+-            .unwrap_or_else(|_| panic!("required {tool} executable is missing"));
+-        assert!(
+-            version.status.success(),
+-            "{tool} identity failed: {}",
+-            String::from_utf8_lossy(&version.stderr)
+-        );
+-        serde_json::json!({
+-            "path": String::from_utf8_lossy(&path.stdout).trim(),
+-            "stdout": String::from_utf8_lossy(&version.stdout),
+-            "stderr": String::from_utf8_lossy(&version.stderr),
+-            "exit_code": version.status.code(),
+-        })
++        fr201_backend_matrix::identity(&dir, tool, version_arg, &format!("{tool}-version"))
+     };
+     let tools = serde_json::json!({
+         "iverilog": tool_identity("iverilog", "-V"),
+@@ -356,8 +334,10 @@ fn emit_compile(label: &str, hir: &FrozenHir, tb: &str) {
+         "yosys": tool_identity("yosys", "-V"),
+     });
+     let started = Instant::now();
+-    let v = Command::new("iverilog")
+-        .args([
++    let v = fr201_backend_matrix::run_tool(
++        &dir,
++        "iverilog",
++        &[
+             "-g2012",
+             "-s",
+             "tb",
+@@ -365,10 +345,10 @@ fn emit_compile(label: &str, hir: &FrozenHir, tb: &str) {
+             "simulation",
+             "design.v",
+             "tb.sv",
+-        ])
+-        .current_dir(&dir)
+-        .output()
+-        .expect("required iverilog executable is missing");
++        ],
++        "compile",
++        60,
++    );
+     assert!(
+         v.status.success(),
+         "{label} iverilog failed: {}",
+@@ -379,11 +359,7 @@ fn emit_compile(label: &str, hir: &FrozenHir, tb: &str) {
+         [&v.stdout[..], &v.stderr[..]].concat(),
+     )
+     .unwrap();
+-    let r = Command::new("timeout")
+-        .args(["30s", "vvp", "simulation"])
+-        .current_dir(&dir)
+-        .output()
+-        .expect("required timeout executable is missing");
++    let r = fr201_backend_matrix::run_tool(&dir, "vvp", &["simulation"], "simulate", 30);
+     let stdout = String::from_utf8_lossy(&r.stdout);
+     let expected_marker = format!("FR198 PASS topology={label}");
+     let assertions = stdout
+@@ -417,14 +393,16 @@ fn emit_compile(label: &str, hir: &FrozenHir, tb: &str) {
+         "{label} simulation did not produce a non-empty VCD"
+     );
+     fs::write(dir.join("run.log"), [&r.stdout[..], &r.stderr[..]].concat()).unwrap();
+-    let y = Command::new("yosys")
+-        .args([
++    let y = fr201_backend_matrix::run_tool(
++        &dir,
++        "yosys",
++        &[
+             "-p",
+             &format!("read_verilog -sv design.v; hierarchy -check -top {top}; proc; check -assert"),
+-        ])
+-        .current_dir(&dir)
+-        .output()
+-        .expect("yosys required");
++        ],
++        "structure",
++        180,
++    );
+     assert!(
+         y.status.success(),
+         "{label} yosys failed: {}",
+@@ -440,6 +418,8 @@ fn emit_compile(label: &str, hir: &FrozenHir, tb: &str) {
+         dir.join("evidence.json"),
+         serde_json::to_vec_pretty(&serde_json::json!({
+             "topology": label,
++            "executed_commands": fr201_backend_matrix::commands(&dir),
++            "source_sha256": fr201_backend_matrix::source_hashes(&dir),
+             "commands": {
+                 "compile": ["iverilog", "-g2012", "-s", "tb", "-o", "simulation", "design.v", "tb.sv"],
+                 "simulate": ["timeout", "30s", "vvp", "simulation"],
+diff --git a/crates/bitloom/tests/fr198_peripheral_system/fr201_backend_matrix.rs b/crates/bitloom/tests/fr198_peripheral_system/fr201_backend_matrix.rs
+index 60a0ffe..b157219 100644
+--- a/crates/bitloom/tests/fr198_peripheral_system/fr201_backend_matrix.rs
++++ b/crates/bitloom/tests/fr198_peripheral_system/fr201_backend_matrix.rs
+@@ -1,11 +1,11 @@
+-use super::{AXI_RESET_BOUNDARY, AXI_TB, system};
++use super::{AXI_RESET_BOUNDARY, AXI_TB, CSR_TB, DIRECT_RESET_BOUNDARY, RANDOM_SEEDS, system};
+ use bitloom_prelude::FrozenHir;
+ use serde_json::{Value, json};
+ use sha2::{Digest, Sha256};
+ use std::{
+     fs,
+     path::{Path, PathBuf},
+-    process::{Command, Output, Stdio},
++    process::{Command, Output},
+     time::{Instant, SystemTime, UNIX_EPOCH},
+ };
+ 
+@@ -26,17 +26,92 @@ fn artifact_dir(backend: &str) -> PathBuf {
+     root.join(format!("{backend}-{}-{nonce}", std::process::id()))
+ }
+ 
+-fn output(dir: &Path, program: &str, args: &[&str], label: &str) -> Output {
+-    let out = Command::new(program)
+-        .args(args)
++pub(super) fn file_sha(path: &Path) -> String {
++    format!("{:x}", Sha256::digest(fs::read(path).unwrap()))
++}
++
++fn executable(program: &str) -> PathBuf {
++    let candidate = if program.contains('/') {
++        PathBuf::from(program)
++    } else {
++        std::env::split_paths(&std::env::var_os("PATH").unwrap_or_default())
++            .map(|dir| dir.join(program))
++            .find(|path| path.is_file())
++            .unwrap_or_else(|| panic!("required tool missing: {program}"))
++    };
++    // Keep argv[0] for dispatchers such as the rustc -> rustup proxy.
++    if candidate.is_absolute() {
++        candidate
++    } else {
++        std::env::current_dir().unwrap().join(candidate)
++    }
++}
++
++pub(super) fn run_tool(
++    dir: &Path,
++    program: &str,
++    args: &[&str],
++    label: &str,
++    seconds: u64,
++) -> Output {
++    let tool = executable(program);
++    let tool_sha = file_sha(&tool);
++    let timeout = executable("timeout");
++    let started = SystemTime::now()
++        .duration_since(UNIX_EPOCH)
++        .unwrap()
++        .as_millis();
++    let timer = Instant::now();
++    let mut command = Command::new(&timeout);
++    command
++        .args(["--kill-after=5s", &format!("{seconds}s")])
++        .arg(&tool)
++        .args(args);
++    if program == "sbt" {
++        let tools = std::env::var("RHDL_FIRTOOL_PATH").expect("RHDL_FIRTOOL_PATH required");
++        let runtime = std::env::temp_dir().join(format!("fr201-sbt-{}", std::process::id()));
++        fs::create_dir_all(&runtime).unwrap();
++        command
++            .env("CHISEL_FIRTOOL_PATH", tools)
++            .env(
++                "SBT_OPTS",
++                "-Dsbt.server.autostart=false -Dsbt.supershell=false",
++            )
++            .env("XDG_RUNTIME_DIR", runtime);
++    }
++    let out = command
+         .current_dir(dir)
+         .output()
+-        .unwrap_or_else(|e| panic!("required {program} failed to start for {label}: {e}"));
++        .unwrap_or_else(|e| panic!("start {program}: {e}"));
+     fs::write(
+         dir.join(format!("{label}.log")),
+         [&out.stdout[..], &out.stderr[..]].concat(),
+     )
+     .unwrap();
++    let record = json!({
++        "label": label, "program": program, "arguments": args, "cwd": dir,
++        "tool_path": tool, "tool_canonical_path": fs::canonicalize(&tool).unwrap(), "tool_sha256": tool_sha,
++        "timeout_path": timeout, "timeout_sha256": file_sha(&timeout),
++        "timeout_seconds": seconds, "kill_after_seconds": 5,
++        "start_utc_unix_ms": started, "elapsed_ms": timer.elapsed().as_millis(),
++        "exit_code": out.status.code(), "log": format!("{label}.log"),
++        "stdout": String::from_utf8_lossy(&out.stdout), "stderr": String::from_utf8_lossy(&out.stderr),
++    });
++    fs::write(
++        dir.join(format!("{label}.command.json")),
++        serde_json::to_vec_pretty(&record).unwrap(),
++    )
++    .unwrap();
++    assert_eq!(
++        tool_sha,
++        file_sha(&tool),
++        "{program} changed during execution"
++    );
++    out
++}
++
++fn output(dir: &Path, program: &str, args: &[&str], label: &str) -> Output {
++    let out = run_tool(dir, program, args, label, 300);
+     assert!(
+         out.status.success(),
+         "{label} failed: {}{}",
+@@ -46,23 +121,78 @@ fn output(dir: &Path, program: &str, args: &[&str], label: &str) -> Output {
+     out
+ }
+ 
+-fn version(program: &str, arg: &str) -> Value {
+-    let path = Command::new("which")
+-        .arg(program)
+-        .output()
+-        .unwrap_or_else(|e| panic!("required which failed for {program}: {e}"));
+-    assert!(path.status.success(), "required {program} is missing");
+-    let result = Command::new(program)
+-        .arg(arg)
+-        .output()
+-        .unwrap_or_else(|e| panic!("required {program} missing: {e}"));
+-    assert!(result.status.success(), "{program} version command failed");
+-    json!({
+-        "path": String::from_utf8_lossy(&path.stdout).trim(),
+-        "stdout": String::from_utf8_lossy(&result.stdout),
+-        "stderr": String::from_utf8_lossy(&result.stderr),
+-        "exit_code": result.status.code()
+-    })
++pub(super) fn identity(dir: &Path, program: &str, arg: &str, label: &str) -> Value {
++    let out = run_tool(
++        dir,
++        program,
++        &[arg],
++        label,
++        if program == "sbt" { 300 } else { 30 },
++    );
++    assert!(out.status.success(), "required {program} identity failed");
++    let path = executable(program);
++    json!({"path": path, "sha256": file_sha(&path), "stdout": String::from_utf8_lossy(&out.stdout),
++        "stderr": String::from_utf8_lossy(&out.stderr), "exit_code": out.status.code()})
++}
++
++pub(super) fn commands(dir: &Path) -> Vec<Value> {
++    let mut paths = fs::read_dir(dir)
++        .unwrap()
++        .map(|p| p.unwrap().path())
++        .filter(|p| p.to_string_lossy().ends_with(".command.json"))
++        .collect::<Vec<_>>();
++    paths.sort();
++    paths
++        .iter()
++        .map(|p| serde_json::from_slice(&fs::read(p).unwrap()).unwrap())
++        .collect()
++}
++
++pub(super) fn source_hashes(dir: &Path) -> Value {
++    fn walk(base: &Path, dir: &Path, entries: &mut serde_json::Map<String, Value>) {
++        for entry in fs::read_dir(dir).unwrap() {
++            let path = entry.unwrap().path();
++            if path.is_dir() {
++                if path
++                    .file_name()
++                    .is_some_and(|n| n == "target" || n == "sbt-runtime")
++                {
++                    continue;
++                }
++                walk(base, &path, entries);
++            } else if path.extension().is_some_and(|e| {
++                ["v", "sv", "fir", "scala", "sbt", "properties", "f", "sby"]
++                    .iter()
++                    .any(|x| e == *x)
++            }) {
++                entries.insert(
++                    path.strip_prefix(base).unwrap().to_string_lossy().into(),
++                    json!(file_sha(&path)),
++                );
++            }
++        }
++    }
++    let mut entries = serde_json::Map::new();
++    walk(dir, dir, &mut entries);
++    Value::Object(entries)
++}
++
++fn core(axi: bool) -> &'static str {
++    if axi {
++        "Fr198AxiCore"
++    } else {
++        "Fr198DirectCore"
++    }
++}
++fn top(axi: bool) -> &'static str {
++    if axi { "Fr198Axi" } else { "Fr198Direct" }
++}
++fn boundary(axi: bool) -> &'static str {
++    if axi {
++        AXI_RESET_BOUNDARY
++    } else {
++        DIRECT_RESET_BOUNDARY
++    }
+ }
+ 
+ fn parse_count(stdout: &str, field: &str) -> u64 {
+@@ -73,12 +203,12 @@ fn parse_count(stdout: &str, field: &str) -> u64 {
+         .unwrap_or(0)
+ }
+ 
+-fn chisel_wrapper(hir: &FrozenHir) -> String {
++fn chisel_wrapper(hir: &FrozenHir, axi: bool) -> String {
+     let top = hir
+         .circuit()
+         .modules
+         .iter()
+-        .find(|module| module.name == "Fr198AxiCore")
++        .find(|module| module.name == core(axi))
+         .unwrap();
+     let connections = top
+         .ports
+@@ -90,20 +220,24 @@ fn chisel_wrapper(hir: &FrozenHir) -> String {
+         })
+         .collect::<Vec<_>>()
+         .join(",");
+-    AXI_RESET_BOUNDARY.replace(
+-        "Fr198AxiCore core(.clk(clk),.rst(core_reset),.*);",
+-        &format!("Fr198AxiCore core({connections});"),
++    boundary(axi).replace(
++        &format!("{} core(.clk(clk),.rst(core_reset),.*);", core(axi)),
++        &format!("{} core({connections});", core(axi)),
+     )
+ }
+ 
+ pub(super) fn emit_direct(hir: &FrozenHir, dir: &Path) -> PathBuf {
++    emit_direct_topology(hir, dir, true)
++}
++
++fn emit_direct_topology(hir: &FrozenHir, dir: &Path, axi: bool) -> PathBuf {
+     let mut source = bitloom_vlog::emit(hir)
+         .files
+         .into_iter()
+         .map(|file| file.contents)
+         .collect::<Vec<_>>()
+         .join("\n");
+-    source.push_str(AXI_RESET_BOUNDARY);
++    source.push_str(boundary(axi));
+     let path = dir.join("design.v");
+     fs::write(&path, source).unwrap();
+     path
+@@ -115,7 +249,7 @@ fn firtool() -> String {
+     format!("{root}/firtool")
+ }
+ 
+-fn emit_firrtl(hir: &FrozenHir, dir: &Path) -> PathBuf {
++fn emit_firrtl(hir: &FrozenHir, dir: &Path, axi: bool) -> PathBuf {
+     let firtool = firtool();
+     let identity = output(dir, &firtool, &["--version"], "firtool-version");
+     assert!(String::from_utf8_lossy(&identity.stdout).contains("firtool-1.159.0"));
+@@ -138,14 +272,13 @@ fn emit_firrtl(hir: &FrozenHir, dir: &Path) -> PathBuf {
+         "firrtl-lower",
+     );
+     let mut source = fs::read_to_string(dir.join("core.v")).unwrap();
+-    source.push_str(AXI_RESET_BOUNDARY);
++    source.push_str(boundary(axi));
+     let path = dir.join("design.v");
+     fs::write(&path, source).unwrap();
+     path
+ }
+ 
+-fn emit_chisel(hir: &FrozenHir, dir: &Path) -> PathBuf {
+-    let tools = std::env::var("RHDL_FIRTOOL_PATH").expect("RHDL_FIRTOOL_PATH is required");
++fn emit_chisel(hir: &FrozenHir, dir: &Path, axi: bool) -> PathBuf {
+     fs::create_dir_all(dir.join("src/main/scala")).unwrap();
+     fs::create_dir_all(dir.join("project")).unwrap();
+     fs::write(
+@@ -155,7 +288,7 @@ fn emit_chisel(hir: &FrozenHir, dir: &Path) -> PathBuf {
+     .unwrap();
+     fs::write(
+         dir.join("src/main/scala/Main.scala"),
+-        "object Fr201Main extends App { circt.stage.ChiselStage.emitSystemVerilogFile(new Fr198AxiCore, args=Array(\"--target-dir\",\"chisel\"), firtoolOpts=Array(\"--disable-all-randomization\",\"--lowering-options=disallowLocalVariables\")) }\n",
++        format!("object Fr201Main extends App {{ circt.stage.ChiselStage.emitSystemVerilogFile(new {}, args=Array(\"--target-dir\",\"chisel\"), firtoolOpts=Array(\"--disable-all-randomization\",\"--lowering-options=disallowLocalVariables\")) }}\n", core(axi)),
+     )
+     .unwrap();
+     fs::write(
+@@ -168,33 +301,7 @@ fn emit_chisel(hir: &FrozenHir, dir: &Path) -> PathBuf {
+         "sbt.version=1.10.11\n",
+     )
+     .unwrap();
+-    let runtime = std::env::temp_dir().join(format!("bitloom-sbt-{}", std::process::id()));
+-    fs::create_dir_all(&runtime).unwrap();
+-    let log = fs::File::create(dir.join("sbt.log")).unwrap();
+-    let status = Command::new("timeout")
+-        .args([
+-            "--kill-after=5s",
+-            "300s",
+-            "sbt",
+-            "-batch",
+-            "runMain Fr201Main",
+-        ])
+-        .env("CHISEL_FIRTOOL_PATH", &tools)
+-        .env(
+-            "SBT_OPTS",
+-            "-Dsbt.server.autostart=false -Dsbt.supershell=false",
+-        )
+-        .env("XDG_RUNTIME_DIR", runtime)
+-        .current_dir(dir)
+-        .stdout(Stdio::from(log.try_clone().unwrap()))
+-        .stderr(Stdio::from(log))
+-        .status()
+-        .expect("required timeout/sbt executable missing");
+-    assert!(
+-        status.success(),
+-        "Chisel JVM generation failed: {}",
+-        dir.display()
+-    );
++    output(dir, "sbt", &["-batch", "runMain Fr201Main"], "sbt");
+     let chisel = dir.join("chisel");
+     let filelist = fs::read_to_string(chisel.join("filelist.f")).unwrap();
+     let mut source = filelist
+@@ -203,21 +310,33 @@ fn emit_chisel(hir: &FrozenHir, dir: &Path) -> PathBuf {
+         .map(|line| fs::read_to_string(chisel.join(line.trim())).unwrap())
+         .collect::<Vec<_>>()
+         .join("\n");
+-    source.push_str(&chisel_wrapper(hir));
++    source.push_str(&chisel_wrapper(hir, axi));
+     let path = dir.join("design.v");
+     fs::write(&path, source).unwrap();
+     path
+ }
+ 
+-fn run_backend(backend: &str, hir: &FrozenHir) {
+-    let dir = artifact_dir(backend);
++fn run_backend(backend: &str, hir: &FrozenHir, axi: bool) {
++    let prefix = if axi {
++        backend.to_string()
++    } else {
++        format!("direct-csr-{backend}")
++    };
++    let dir = artifact_dir(&prefix);
+     fs::create_dir_all(&dir).unwrap();
+-    fs::write(dir.join("tb.sv"), AXI_TB).unwrap();
++    let tb = if axi { AXI_TB } else { CSR_TB };
++    fs::write(dir.join("tb.sv"), tb).unwrap();
++    for seed in RANDOM_SEEDS {
++        assert!(
++            tb.contains(&format!("32'h{seed:08x}")),
++            "missing frozen seed"
++        );
++    }
+     let started = Instant::now();
+     let design = match backend {
+-        "direct" => emit_direct(hir, &dir),
+-        "firrtl" => emit_firrtl(hir, &dir),
+-        "chisel" => emit_chisel(hir, &dir),
++        "direct" => emit_direct_topology(hir, &dir, axi),
++        "firrtl" => emit_firrtl(hir, &dir, axi),
++        "chisel" => emit_chisel(hir, &dir, axi),
+         _ => unreachable!(),
+     };
+     assert_eq!(design, dir.join("design.v"));
+@@ -235,16 +354,25 @@ fn run_backend(backend: &str, hir: &FrozenHir) {
+         ],
+         "compile",
+     );
+-    let simulation = output(&dir, "timeout", &["60s", "vvp", "simulation"], "simulate");
++    let simulation = run_tool(&dir, "vvp", &["simulation"], "simulate", 60);
++    assert!(
++        simulation.status.success(),
++        "simulation failed: {}",
++        String::from_utf8_lossy(&simulation.stderr)
++    );
+     let stdout = String::from_utf8_lossy(&simulation.stdout);
+     let assertions = parse_count(&stdout, "assertions");
+     let transactions = parse_count(&stdout, "transactions");
+     let random_transactions = parse_count(&stdout, "random_transactions");
+-    assert!(stdout.contains("FR198 PASS topology=axi"));
++    assert!(stdout.contains(if axi {
++        "FR198 PASS topology=axi"
++    } else {
++        "FR198 PASS topology=direct"
++    }));
+     assert!(assertions >= ASSERTIONS_MIN);
+     assert!(transactions >= TRANSACTIONS_MIN);
+     assert_eq!(random_transactions, RANDOM_TRANSACTIONS);
+-    let vcd = dir.join("axi.vcd");
++    let vcd = dir.join(if axi { "axi.vcd" } else { "direct.vcd" });
+     let vcd_bytes = fs::metadata(&vcd).expect("AXI VCD missing").len();
+     assert!(vcd_bytes > 1024);
+     let synthesis = output(
+@@ -252,7 +380,11 @@ fn run_backend(backend: &str, hir: &FrozenHir) {
+         "yosys",
+         &[
+             "-p",
+-            "read_verilog -sv design.v; hierarchy -check -top Fr198Axi; proc; check -assert; synth -top Fr198Axi -flatten; check -assert; stat",
++            &format!(
++                "read_verilog -sv design.v; hierarchy -check -top {}; proc; check -assert; synth -top {} -flatten; check -assert; stat",
++                top(axi),
++                top(axi)
++            ),
+         ],
+         "synthesis",
+     );
+@@ -264,11 +396,28 @@ fn run_backend(backend: &str, hir: &FrozenHir) {
+         .last()
+         .unwrap_or(0);
+     assert!(cells > 0, "Yosys did not report synthesized cells");
++    let mut tools = json!({
++        "iverilog": identity(&dir, "iverilog", "-V", "iverilog-version"),
++        "vvp": identity(&dir, "vvp", "-V", "vvp-version"),
++        "yosys": identity(&dir, "yosys", "-V", "yosys-version"),
++        "rustc": identity(&dir, "rustc", "--version", "rustc-version"),
++    });
++    if backend != "direct" {
++        tools["firtool"] = identity(&dir, &firtool(), "--version", "firtool-identity");
++    }
++    if backend == "chisel" {
++        tools["java"] = identity(&dir, "java", "-version", "java-version");
++        tools["sbt"] = identity(&dir, "sbt", "show sbtVersion", "sbt-version");
++    }
+     let bytes = fs::read(&design).unwrap();
+     fs::write(
+         dir.join("evidence.json"),
+         serde_json::to_vec_pretty(&json!({
+             "backend": backend,
++            "topology": if axi { "axi" } else { "direct-csr" },
++            "random_seeds": RANDOM_SEEDS.iter().map(|seed| format!("{seed:08x}")).collect::<Vec<_>>(),
++            "source_sha256": source_hashes(&dir),
++            "commands": commands(&dir),
+             "exit_code": simulation.status.code(),
+             "transactions": random_transactions,
+             "directed_transactions": transactions,
+@@ -282,11 +431,7 @@ fn run_backend(backend: &str, hir: &FrozenHir) {
+             "synthesis": {"check_assert": true, "cells": cells},
+             "sha256": format!("{:x}", Sha256::digest(&bytes)),
+             "elapsed_ms": started.elapsed().as_millis(),
+-            "tools": {
+-                "iverilog": version("iverilog", "-V"),
+-                "vvp": version("vvp", "-V"),
+-                "yosys": version("yosys", "-V")
+-            }
++            "tools": tools
+         }))
+         .unwrap(),
+     )
+@@ -306,6 +451,15 @@ fn fr201_axi_complete_system_three_backend_matrix() {
+         {
+             continue;
+         }
+-        run_backend(backend, &hir);
++        run_backend(backend, &hir, true);
++    }
++}
++
++#[test]
++#[ignore = "dedicated pinned direct-CSR direct/FIRRTL/Chisel complete-system matrix"]
++fn fr201_direct_csr_complete_system_three_backend_matrix() {
++    let hir = system(false);
++    for backend in ["direct", "firrtl", "chisel"] {
++        run_backend(backend, &hir, false);
+     }
+ }
+diff --git a/crates/bitloom/tests/fr198_peripheral_system/fr201_core_formal.rs b/crates/bitloom/tests/fr198_peripheral_system/fr201_core_formal.rs
+index d247b77..60237e6 100644
+--- a/crates/bitloom/tests/fr198_peripheral_system/fr201_core_formal.rs
++++ b/crates/bitloom/tests/fr198_peripheral_system/fr201_core_formal.rs
+@@ -1,9 +1,12 @@
+-use super::{fr201_backend_matrix::emit_direct, system};
++use super::{
++    fr201_backend_matrix::{commands, emit_direct, file_sha, identity, run_tool, source_hashes},
++    system,
++};
+ use serde_json::json;
+ use std::{
+     fs,
+     path::{Path, PathBuf},
+-    process::{Command, Output},
++    process::Output,
+     time::{SystemTime, UNIX_EPOCH},
+ };
+ 
+@@ -63,6 +66,75 @@ const OBSERVER: &str = r#"
+ `else
+   always @(posedge clk) cover(!rst && irq_events != 0);
+ `endif
++`ifdef FR201_REQUEST_FORMAL
++  // Independent accepted-channel credits, scoped to the current reset epoch.
++  reg fr201_aw_credit = 0, fr201_w_credit = 0, fr201_ar_credit = 0;
++  reg fr201_epoch_accept = 0;
++  reg fr201_cancelled_pending = 0;
++  always @(posedge clk) begin
++    if (rst) begin
++      fr201_aw_credit <= 0;
++      fr201_w_credit <= 0;
++      fr201_ar_credit <= 0;
++      fr201_epoch_accept <= 0;
++      fr201_cancelled_pending <= fr201_past_valid && $past(csr_req_valid && !csr_req_ready && !rst);
++    end else begin
++      if (axi_s_axi_awvalid && axi_s_axi_awready) fr201_aw_credit <= 1;
++      if (axi_s_axi_wvalid && axi_s_axi_wready) fr201_w_credit <= 1;
++      if (axi_s_axi_arvalid && axi_s_axi_arready) fr201_ar_credit <= 1;
++      if ((axi_s_axi_awvalid && axi_s_axi_awready) ||
++          (axi_s_axi_wvalid && axi_s_axi_wready) ||
++          (axi_s_axi_arvalid && axi_s_axi_arready)) fr201_epoch_accept <= 1;
++      if (csr_req_valid && csr_req_ready) begin
++        if (csr_write) begin fr201_aw_credit <= 0; fr201_w_credit <= 0; end
++        else fr201_ar_credit <= 0;
++      end
++    end
++    if (fr201_past_valid && !rst && csr_req_valid) begin
++      if (csr_write) assert(fr201_aw_credit && fr201_w_credit);
++      else assert(fr201_ar_credit);
++    end
++    if (fr201_past_valid && $past(csr_req_valid && !csr_req_ready && !rst) && !rst) begin
++      assert(csr_req_valid);
++      assert({csr_write,csr_addr,csr_wdata,csr_wstrb} == $past({csr_write,csr_addr,csr_wdata,csr_wstrb}));
++    end
++    if (fr201_past_valid && $past(rst)) begin
++      assert(!csr_req_valid);
++      assert(!u_req_valid && !g_req_valid && !t_req_valid && !i_req_valid);
++    end
++    if (fr201_past_valid && !rst && !fr201_epoch_accept) begin
++      assert(!csr_req_valid && !csr_rsp_valid && !axi_s_axi_bvalid && !axi_s_axi_rvalid);
++    end
++    cover(fr201_past_valid && $past(csr_req_valid && !csr_req_ready && !rst) && csr_req_valid && !csr_req_ready && !rst);
++    cover(fr201_past_valid && $past(csr_req_valid && !csr_req_ready && !rst) && csr_req_valid && csr_req_ready && !rst);
++    cover(fr201_cancelled_pending && !rst && !fr201_epoch_accept && !csr_req_valid && !csr_rsp_valid);
++  end
++  always @(posedge clk) begin
++    if (fr201_past_valid && $past(u_req_valid && !u_req_ready && !rst) && !rst) begin
++      assert(u_req_valid);
++      assert({u_write,u_addr,u_wdata,u_wstrb} == $past({u_write,u_addr,u_wdata,u_wstrb}));
++    end
++  end
++  always @(posedge clk) begin
++    if (fr201_past_valid && $past(g_req_valid && !g_req_ready && !rst) && !rst) begin
++      assert(g_req_valid);
++      assert({g_write,g_addr,g_wdata,g_wstrb} == $past({g_write,g_addr,g_wdata,g_wstrb}));
++    end
++  end
++  always @(posedge clk) begin
++    if (fr201_past_valid && $past(t_req_valid && !t_req_ready && !rst) && !rst) begin
++      assert(t_req_valid);
++      assert({t_write,t_addr,t_wdata,t_wstrb} == $past({t_write,t_addr,t_wdata,t_wstrb}));
++    end
++  end
++  always @(posedge clk) begin
++    if (fr201_past_valid && $past(i_req_valid && !i_req_ready && !rst) && !rst) begin
++      assert(i_req_valid);
++      assert({i_write,i_addr,i_wdata,i_wstrb} == $past({i_write,i_addr,i_wdata,i_wstrb}));
++    end
++  end
++`endif
++
+ "#;
+ 
+ fn root() -> PathBuf {
+@@ -82,18 +154,7 @@ fn root() -> PathBuf {
+ }
+ 
+ fn run(dir: &Path, program: &str, args: &[&str], label: &str) -> Output {
+-    let result = Command::new("timeout")
+-        .args(["--kill-after=5s", "180s", program])
+-        .args(args)
+-        .current_dir(dir)
+-        .output()
+-        .unwrap_or_else(|e| panic!("required {program} failed to start: {e}"));
+-    fs::write(
+-        dir.join(format!("{label}.log")),
+-        [&result.stdout[..], &result.stderr[..]].concat(),
+-    )
+-    .unwrap();
+-    result
++    run_tool(dir, program, args, label, 180)
+ }
+ 
+ fn instrument(source: &str) -> String {
+@@ -179,6 +240,37 @@ design.v
+ "#,
+     )
+     .unwrap();
++    for (name, mode, source) in [
++        ("request", "bmc", "design.v"),
++        ("request_cover", "cover", "design.v"),
++        ("negative_request", "bmc", "mutant_request.v"),
++        ("negative_reset", "bmc", "mutant_reset.v"),
++    ] {
++        fs::write(
++            dir.join(format!("{name}.sby")),
++            format!(
++                r#"[options]
++mode {mode}
++depth 8
++
++[engines]
++smtbmc --unroll z3
++
++[script]
++read -formal -D FR201_RESPONSE_FORMAL -D FR201_REQUEST_FORMAL {source}
++hierarchy -top Fr198AxiCore
++select -clear
++blackbox Fr198Uart Fr198Gpio Fr198Timer Fr198Irq
++setattr -mod -unset blackbox =A:blackbox=1
++prep -top Fr198AxiCore
++
++[files]
++{source}
++"#
++            ),
++        )
++        .unwrap();
++    }
+ }
+ 
+ #[test]
+@@ -198,8 +290,39 @@ fn fr201_complete_system_formal_and_negative_control() {
+         observed.replacen(assignment, "assign i_raw_events = ~irq_events;", 1),
+     )
+     .unwrap();
++    let data_assignment = "assign csr_wdata = axi_csr_wdata;";
++    assert_eq!(
++        observed.matches(data_assignment).count(),
++        1,
++        "request mutation site"
++    );
++    fs::write(
++        dir.join("mutant_request.v"),
++        observed.replacen(
++            data_assignment,
++            "assign csr_wdata = axi_csr_wdata ^ {32{u_rx}};",
++            1,
++        ),
++    )
++    .unwrap();
++    let valid_assignment = "assign csr_req_valid = axi_csr_req_valid;";
++    assert_eq!(
++        observed.matches(valid_assignment).count(),
++        1,
++        "reset mutation site"
++    );
++    fs::write(dir.join("mutant_reset.v"), observed.replacen(valid_assignment, r#"
++reg fr201_mutant_replay = 0;
++always @(posedge clk) fr201_mutant_replay <= rst && fr201_past_valid && $past(csr_req_valid && !csr_req_ready && !rst);
++assign csr_req_valid = axi_csr_req_valid | fr201_mutant_replay;
++"#, 1)).unwrap();
+     write_sby(&dir);
+     let sby = std::env::var("BITLOOM_SBY").unwrap_or_else(|_| "sby".into());
++    let tools = json!({
++        "sby": identity(&dir, &sby, "--version", "sby-version"),
++        "yosys": identity(&dir, "yosys", "-V", "yosys-version"),
++        "z3": identity(&dir, "z3", "--version", "z3-version"),
++    });
+     let prove = run(&dir, &sby, &["-f", "core.sby", "prove"], "prove");
+     assert!(
+         prove.status.success(),
+@@ -230,6 +353,59 @@ fn fr201_complete_system_formal_and_negative_control() {
+             && dir.join("negative/engine_0/trace.vcd").is_file(),
+         "negative control did not produce an assertion counterexample and VCD"
+     );
++    let request = run(&dir, &sby, &["-f", "request.sby"], "request");
++    assert!(
++        request.status.success(),
++        "request/reset BMC failed: {}",
++        String::from_utf8_lossy(&request.stdout)
++    );
++    let request_cover = run(&dir, &sby, &["-f", "request_cover.sby"], "request-cover");
++    assert!(
++        request_cover.status.success(),
++        "request/reset cover failed: {}",
++        String::from_utf8_lossy(&request_cover.stdout)
++    );
++    let mut request_witnesses = serde_json::Map::new();
++    for entry in fs::read_dir(dir.join("request_cover/engine_0")).unwrap() {
++        let path = entry.unwrap().path();
++        if path.extension().is_some_and(|extension| extension == "vcd") {
++            assert!(
++                fs::metadata(&path).unwrap().len() > 0,
++                "empty request/reset cover witness"
++            );
++            request_witnesses.insert(
++                path.strip_prefix(&dir).unwrap().to_string_lossy().into(),
++                json!(file_sha(&path)),
++            );
++        }
++    }
++    assert!(
++        request_witnesses.len() >= 5,
++        "all five response/IRQ/request/reset covers must have actual VCD witnesses"
++    );
++    let mut controls = serde_json::Map::new();
++    controls.insert("irq_wiring".into(), json!({"status":"EXPECTED_FAIL", "exit_code":negative.status.code(), "counterexample_vcd":true}));
++    for (name, task) in [
++        ("request_hold", "negative_request"),
++        ("reset_cancel", "negative_reset"),
++    ] {
++        let result = run(&dir, &sby, &["-f", &format!("{task}.sby")], task);
++        let text = String::from_utf8_lossy(&result.stdout).to_string()
++            + &String::from_utf8_lossy(&result.stderr);
++        let trace = dir.join(format!("{task}/engine_0/trace.vcd"));
++        assert!(
++            !result.status.success()
++                && text.contains("Assert failed in Fr198AxiCore")
++                && text.contains("DONE (FAIL")
++                && fs::metadata(&trace).is_ok_and(|m| m.len() > 0),
++            "{name} must fail a real assertion with counterexample: {text}"
++        );
++        controls.insert(
++            name.into(),
++            json!({"status":"EXPECTED_FAIL", "exit_code":result.status.code(),
++            "counterexample_vcd":true, "trace_sha256":file_sha(&trace)}),
++        );
++    }
+     fs::write(
+         dir.join("evidence.json"),
+         serde_json::to_vec_pretty(&json!({
+@@ -237,8 +413,14 @@ fn fr201_complete_system_formal_and_negative_control() {
+             "response_reset_bmc": {"status": "PASS", "depth": 8, "exit_code": response.status.code()},
+             "cover": {"status": "PASS", "depth": 2, "exit_code": cover.status.code()},
+             "negative_control": {"status": "EXPECTED_FAIL", "exit_code": negative.status.code(), "counterexample_vcd": true},
++            "request_reset_bmc": {"status":"PASS", "depth":8, "exit_code":request.status.code()},
++            "request_reset_cover": {"status":"PASS", "depth":8, "exit_code":request_cover.status.code(), "witnesses":"blocked request, held-to-commit request, reset cancellation after blocked request", "witness_vcd":request_witnesses},
++            "negative_controls": controls,
++            "source_sha256": source_hashes(&dir),
++            "commands": commands(&dir),
++            "tools": tools,
+             "assumptions": "blackboxed CSR leaves clear rsp_valid after reset and hold rsp_valid/rdata/error while blocked",
+-            "limits": "bounded complete-system reset/response/IRQ integration with four peripheral leaves blackboxed; not a full AXI or UART proof"
++            "limits": "depth-8 bounded complete-system request hold/accepted-channel credits/reset cancellation/response and IRQ integration; four peripheral leaves blackboxed; cancellation checked until fresh epoch inputs, not full AXI/UART liveness"
+         }))
+         .unwrap(),
+     )
+diff --git a/crates/bitloom/tests/fr201_core_matrix.rs b/crates/bitloom/tests/fr201_core_matrix.rs
+index 8cb8007..ec5bc12 100644
+--- a/crates/bitloom/tests/fr201_core_matrix.rs
++++ b/crates/bitloom/tests/fr201_core_matrix.rs
+@@ -15,38 +15,40 @@ fn evidence() -> Value {
+ #[test]
+ fn p0_three_backends_execute_the_complete_four_peripheral_system() {
+     let value = evidence();
+-    for backend in ["direct", "firrtl", "chisel"] {
+-        let row = &value["backends"][backend];
+-        assert_eq!(row["exit_code"].as_i64(), Some(0), "{backend} must execute");
+-        assert!(
+-            row["transactions"].as_u64().unwrap_or(0) >= 16_000,
+-            "{backend} frozen transaction budget"
+-        );
+-        assert!(
+-            row["assertions"].as_u64().unwrap_or(0) > 0,
+-            "{backend} assertions"
+-        );
+-        assert!(
+-            row["vcd_bytes"].as_u64().unwrap_or(0) > 0,
+-            "{backend} non-empty VCD"
+-        );
+-        for feature in [
+-            "slverr",
+-            "decerr",
+-            "wstrb",
+-            "backpressure",
+-            "reset_cancel",
+-            "timer",
+-            "gpio",
+-            "uart_tx",
+-            "uart_rx",
+-            "irq_0_4",
+-        ] {
+-            assert_eq!(
+-                row["coverage"][feature].as_bool(),
+-                Some(true),
+-                "{backend} missing {feature}"
++    for section in ["backends", "direct_csr_backends"] {
++        for backend in ["direct", "firrtl", "chisel"] {
++            let row = &value[section][backend];
++            assert_eq!(row["exit_code"].as_i64(), Some(0), "{backend} must execute");
++            assert!(
++                row["transactions"].as_u64().unwrap_or(0) >= 16_000,
++                "{backend} frozen transaction budget"
++            );
++            assert!(
++                row["assertions"].as_u64().unwrap_or(0) > 0,
++                "{backend} assertions"
++            );
++            assert!(
++                row["vcd_bytes"].as_u64().unwrap_or(0) > 0,
++                "{backend} non-empty VCD"
+             );
++            for feature in [
++                "slverr",
++                "decerr",
++                "wstrb",
++                "backpressure",
++                "reset_cancel",
++                "timer",
++                "gpio",
++                "uart_tx",
++                "uart_rx",
++                "irq_0_4",
++            ] {
++                assert_eq!(
++                    row["coverage"][feature].as_bool(),
++                    Some(true),
++                    "{backend} missing {feature}"
++                );
++            }
+         }
+     }
+ }
+@@ -102,15 +104,29 @@ fn p0_missing_tools_fail_and_isolated_checkout_replays() {
+ }
+ 
+ #[test]
+-fn p0_evidence_producer_validated_owned_paths_and_rtl_hashes() {
++fn p0_evidence_records_six_archived_sources_and_scoped_audit() {
+     let value = evidence();
++    assert_eq!(value["schema"].as_u64(), Some(2));
++    assert_eq!(value["status"], "PASS");
++    for key in [
++        "direct",
++        "firrtl",
++        "chisel",
++        "direct-csr-direct",
++        "direct-csr-firrtl",
++        "direct-csr-chisel",
++        "formal",
++    ] {
++        assert!(value["source_evidence"][key].as_str().is_some());
++    }
++    assert!(!value["archive_manifest"].as_object().unwrap().is_empty());
++    assert_eq!(value["compatibility_audit"]["status"], "PASS");
+     assert_eq!(
+-        value["provenance"]["source_paths_validated"].as_bool(),
+-        Some(true)
+-    );
+-    assert_eq!(
+-        value["provenance"]["rtl_sha256_recomputed"].as_bool(),
+-        Some(true)
++        value["compatibility_audit"]["scopes"]
++            .as_array()
++            .unwrap()
++            .len(),
++        2
+     );
+ }
+ 
+@@ -123,6 +139,5 @@ fn p1_semver_and_public_surface_claims_are_explicit() {
+         value["semver"]["packages"],
+         serde_json::json!(["bitloom-prelude", "bitloom-sim", "bitloom-firrtl"])
+     );
+-    assert_eq!(value["public_api_added"], serde_json::json!([]));
+-    assert_eq!(value["package_versions_changed"].as_bool(), Some(false));
++    assert_eq!(value["compatibility_audit"]["status"], "PASS");
+ }

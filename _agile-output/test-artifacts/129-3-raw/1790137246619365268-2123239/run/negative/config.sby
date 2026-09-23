@@ -1,0 +1,17 @@
+[options]
+mode prove
+depth 2
+
+[engines]
+smtbmc z3
+
+[script]
+read -formal mutant.v
+hierarchy -top Fr198AxiCore
+select -clear
+blackbox Fr198Uart Fr198Gpio Fr198Timer Fr198Irq
+setattr -mod -unset blackbox =A:blackbox=1
+prep -top Fr198AxiCore
+
+[files]
+mutant.v

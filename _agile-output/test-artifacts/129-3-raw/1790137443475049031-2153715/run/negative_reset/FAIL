@@ -1,0 +1,8 @@
+Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)
+Elapsed process time [H:MM:SS (secs)]: 0:00:02 (2)
+engine_0 (smtbmc --unroll z3) returned FAIL
+counterexample trace: engine_0/trace.vcd
+  failed assertion Fr198AxiCore.$assert$mutant_reset.v:3237$447 at mutant_reset.v:3237.11-3237.35 in step 6
+  failed assertion Fr198AxiCore.$assert$mutant_reset.v:3243$450 at mutant_reset.v:3243.46-3244.29 in step 6
+  failed assertion Fr198AxiCore.$assert$mutant_reset.v:3244$451 at mutant_reset.v:3244.30-3245.75 in step 6
+  failed assertion Fr198AxiCore.$assert$mutant_reset.v:3247$452 at mutant_reset.v:3247.63-3248.89 in step 6

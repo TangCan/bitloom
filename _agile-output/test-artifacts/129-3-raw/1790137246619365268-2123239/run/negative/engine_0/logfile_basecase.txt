@@ -1,0 +1,10 @@
+##   0:00:00  Solver: z3
+##   0:00:00  Checking assumptions in step 0..
+##   0:00:03  Checking assertions in step 0..
+##   0:00:03  BMC failed!
+##   0:00:03  Assert failed in Fr198AxiCore: mutant.v:3155.20-3156.39 ($assert$mutant.v:3155$36)
+##   0:00:03  Writing trace to VCD file: engine_0/trace.vcd
+##   0:00:03  Writing trace to Verilog testbench: engine_0/trace_tb.v
+##   0:00:03  Writing trace to constraints file: engine_0/trace.smtc
+##   0:00:03  Writing trace to Yosys witness file: engine_0/trace.yw
+##   0:00:03  Status: failed

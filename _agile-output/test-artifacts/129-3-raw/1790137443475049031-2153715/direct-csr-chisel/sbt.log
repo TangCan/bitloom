@@ -1,0 +1,10 @@
+[info] welcome to sbt 1.10.11 (Ubuntu Java 17.0.20.1)
+[info] loading project definition from /nvme_data2/richard/2026/rhdl/target/fr201-core/direct-csr-chisel-2161001-1790137499983063776/project
+[info] loading settings for project direct-csr-chisel-2161001-1790137499983063776 from build.sbt...
+[info] set current project to direct-csr-chisel-2161001-1790137499983063776 (in build file:/nvme_data2/richard/2026/rhdl/target/fr201-core/direct-csr-chisel-2161001-1790137499983063776/)
+[info] compiling 2 Scala sources to /nvme_data2/richard/2026/rhdl/target/fr201-core/direct-csr-chisel-2161001-1790137499983063776/target/scala-2.13/classes ...
+[warn] 623 feature warnings; re-run with -feature for details
+[warn] one warning found
+[info] done compiling
+[info] running Fr201Main 
+[success] Total time: 16 s, completed Sep 23, 2026, 12:25:22 PM

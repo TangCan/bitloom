@@ -685,8 +685,11 @@ phase13InputDocuments:
 uxDesignPhase13: none
 phase24ProposalApproved: 2026-09-20
 phase24PlanningStatus: complete
-phase24ImplementationStatus: in-progress
-phase24ImplementationAuthorized: M0-complete-and-126.1-126.2
+phase24ImplementationStatus: complete
+phase24CloseoutApproved: 2026-09-23
+phase24CloseoutStatus: complete
+phase24CloseoutEvidence: docs/ip/phase24-closeout.md
+phase24ImplementationAuthorized: all-remaining-stories-seven-step-goal
 phase24M0ImplementationAuthorized: M0-only
 phase24M0Status: complete
 phase24M0Closed: 2026-09-20
@@ -9918,6 +9921,8 @@ So that 规划 complete 可宣称（NFR89）。
 
 ## Phase 24 Inventory — 可组合 IP 与可验证生态
 
+**当前状态：** 已结项，见`docs/ip/phase24-closeout.md`。以下分日期授权/关闭记录为历史；最新状态取代其当时的backlog/未交付描述。
+
 批准日期：2026-09-20。FR192–201 / NFR93–99 正式登记，6 Epic / 22 故事。仅 M0 / Epic 125 获准执行，其余 backlog。规划登记不代表产品交付。历史关闭及 Epic 122 / FR189 deferred 不变。接口见 `docs/ip/phase24-contract.md`。
 
 | FR | 能力 | 验收摘要 | Epic |
@@ -10149,3 +10154,10 @@ Story125.1–125.3 / Epic125 已完成，FR192/FR193按M0合同关闭；真实�
 128.1–128.5七步完成，随Story128.5单独提交关闭Epic128/FR197/M3：Timer32、五源IRQ、GPIO32 CSR及双FIFO UART CSR交付。UART最终实际clean/fmt/just test：482个结果块、1870 passed / 0 failed / 47 ignored；7项新专用backend/formal入口另有实际PASS，未把ignored计PASS。当前39命令完整定向证据、独立原始归档与关闭映射见`_agile-output/test-artifacts/128-5-final-verification.md`及`_agile-output/implementation-artifacts/epic-128-closeout.md`。
 
 新增符号逐项登记FR142/minor，旧UART/GPIO/VIP/手写FL保持。只关闭M3，Epic129/FR198与核心FR201、Epic130/FR199–200及整个Phase24仍开放，下一129.1；native/generated层级与有限形式/物理边界保持。用户全部未完故事七步授权继续有效，FR189 deferred/NFR91保留；未改工具钉/包版本、不push/publish。此前各时点记录保留为历史。
+
+
+### Phase24 范围结项（2026-09-23）
+
+2026-09-23：Phase24 已批准范围 FR192–FR201 / NFR93–NFR99 完成交付与结项，Epic125–130 共22故事done。129.3四层独立补审及修复、两拓扑六路线实际RTL/原始综合、有限请求/复位形式、耐清理的主/隔离原始证据和新鲜证据校验已完成；FR199/FR200外部试点按130.2/130.3最终记录交付。FR189/Epic122/122.2/122.3继续deferred、未交付；NFR91及既有明确遗留保留。无产品工具钉/包版本变更，不push、不publish，不声称远端CI已执行或物理签核。
+
+总验收：`docs/ip/phase24-closeout.md`；本次修补不改写原22个单故事提交。

@@ -1,0 +1,20 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "-p",
+    "bitloom",
+    "--test",
+    "fr198_peripheral_system",
+    "fr201_backend_matrix::fr201_direct_csr_complete_system_three_backend_matrix",
+    "--",
+    "--ignored",
+    "--exact",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "start_utc_unix_ms": 1790137630943,
+  "end_utc_unix_ms": 1790137671409,
+  "timeout_seconds": 1200,
+  "log": "_agile-output/test-artifacts/129-3-raw/1790137570516560772-2173635/direct-csr-matrix.log"
+}

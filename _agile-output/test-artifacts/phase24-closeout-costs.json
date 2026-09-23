@@ -1,0 +1,192 @@
+{
+  "delivery_head": "4bdd680e1a6db7e9ca77e6d4fcd7caa4b825d2b1",
+  "measurement_head": "4bdd680e1a6db7e9ca77e6d4fcd7caa4b825d2b1",
+  "scope": "counts only; no before/after baseline or human-time measurement",
+  "stories": [
+    {
+      "story": "125.1",
+      "commit": "0e2a873961988f3c76222d193c402017ec4d8253",
+      "subject": "docs: Story 125.1 establish Phase 24 contract and M0 gate",
+      "changed_files": 42,
+      "product_rust_files": 0
+    },
+    {
+      "story": "125.2",
+      "commit": "ac6e4804578b6c53a4eddbd164f54fad57554766",
+      "subject": "test: Story 125.2 reproduce AXI transaction loss in real RTL",
+      "changed_files": 8,
+      "product_rust_files": 0
+    },
+    {
+      "story": "125.3",
+      "commit": "f00a6ca2074848e0cd8890f69712dd5ec1e46154",
+      "subject": "fix: Story 125.3 preserve independent AXI transactions and close M0",
+      "changed_files": 20,
+      "product_rust_files": 2
+    },
+    {
+      "story": "126.1",
+      "commit": "706632a304bf7bd21df4d8ef6ea29c85525d6fe5",
+      "subject": "docs: Story 126.1 establish module composition risk gate",
+      "changed_files": 8,
+      "product_rust_files": 0
+    },
+    {
+      "story": "126.2",
+      "commit": "62832eab1915faf46a1050e44120f44f100b33db",
+      "subject": "feat: Story 126.2 add shared module definitions and hierarchy validation",
+      "changed_files": 30,
+      "product_rust_files": 4
+    },
+    {
+      "story": "126.3",
+      "commit": "b248dd48a948a303de9aa6aebf656a5c356b52f2",
+      "subject": "feat(ip): add two-slot ready-valid register slice (Story 126.3)",
+      "changed_files": 235,
+      "product_rust_files": 2
+    },
+    {
+      "story": "126.4",
+      "commit": "e88a22bef266b52174be51f831d7ef510b65f108",
+      "subject": "feat(ip): add parameterized register FIFO and close M1 (Story 126.4)",
+      "changed_files": 82,
+      "product_rust_files": 2
+    },
+    {
+      "story": "127.1",
+      "commit": "77ea01392e5be74b9f2622009ad146edb2468ea9",
+      "subject": "docs(ip): establish CSR and bus risk gate (Story 127.1)",
+      "changed_files": 63,
+      "product_rust_files": 0
+    },
+    {
+      "story": "127.2",
+      "commit": "9393c261cdfb2ca3699edb959efd1986bbe5275e",
+      "subject": "feat(ip): add composable CSR blocks and software artifacts (Story 127.2)",
+      "changed_files": 106,
+      "product_rust_files": 4
+    },
+    {
+      "story": "127.3",
+      "commit": "91828619f66f787c63483dda4b0ee558bb7501e8",
+      "subject": "feat(ip): add AXI-Lite to CSR bridge (Story 127.3)",
+      "changed_files": 124,
+      "product_rust_files": 2
+    },
+    {
+      "story": "127.4",
+      "commit": "b926629e93b0ad5e09d795b59ec2f1bdb47010b6",
+      "subject": "feat(ip): add static CSR decoder and close M2 (Story 127.4)",
+      "changed_files": 155,
+      "product_rust_files": 2
+    },
+    {
+      "story": "128.1",
+      "commit": "1c4cf20c4f8e8fdcb038d57a7b3f03f9f80b5c00",
+      "subject": "docs(ip): establish peripheral NFR14 gate (Story 128.1)",
+      "changed_files": 84,
+      "product_rust_files": 0
+    },
+    {
+      "story": "128.2",
+      "commit": "9d2aff720025d5b084ca746de4b1c9938757b350",
+      "subject": "feat(ip): add composable 32-bit timer (Story 128.2)",
+      "changed_files": 110,
+      "product_rust_files": 3
+    },
+    {
+      "story": "128.3",
+      "commit": "433771cdf62fba13870ed79b22880c23e5211e59",
+      "subject": "feat(ip): implement five-source IRQ (Story 128.3)",
+      "changed_files": 87,
+      "product_rust_files": 3
+    },
+    {
+      "story": "128.4",
+      "commit": "2f52d9969f60d08cc633e30e0c263f05854b39fe",
+      "subject": "feat(ip): add GPIO32 CSR wrapper (Story 128.4)",
+      "changed_files": 86,
+      "product_rust_files": 2
+    },
+    {
+      "story": "128.5",
+      "commit": "0ab222203916b1b0583c2c673558d5333cb05552",
+      "subject": "feat(ip): add buffered UART CSR and close M3 (Story 128.5)",
+      "changed_files": 93,
+      "product_rust_files": 2
+    },
+    {
+      "story": "129.1",
+      "commit": "46249478384360590e90be59b4709afef967d4ee",
+      "subject": "docs: close story 129.1 NFR14 risk gate",
+      "changed_files": 84,
+      "product_rust_files": 2
+    },
+    {
+      "story": "129.2",
+      "commit": "218f0620e85ab438a3ef1351e253277552c8c410",
+      "subject": "feat(ip): add FR198 peripheral subsystem recipes (Story 129.2)",
+      "changed_files": 22,
+      "product_rust_files": 0
+    },
+    {
+      "story": "129.3",
+      "commit": "baf07e739af2b36f4e0befddda9826964d16118e",
+      "subject": "feat(phase24): close core integration matrix",
+      "changed_files": 20,
+      "product_rust_files": 0
+    },
+    {
+      "story": "130.1",
+      "commit": "3e7fb44b4500e3cdd2f75198780d440f375d6ebd",
+      "subject": "docs: close story 130.1 external IP admission gate",
+      "changed_files": 65,
+      "product_rust_files": 0
+    },
+    {
+      "story": "130.2",
+      "commit": "4152610f29e8bb242bba789e3ba3f53376eb21fc",
+      "subject": "feat(ip): complete Story 130.2 source lock and isolated replay",
+      "changed_files": 55,
+      "product_rust_files": 3
+    },
+    {
+      "story": "130.3",
+      "commit": "4bdd680e1a6db7e9ca77e6d4fcd7caa4b825d2b1",
+      "subject": "feat(ip): complete Story 130.3 real external FIFO pilot",
+      "changed_files": 259,
+      "product_rust_files": 3
+    }
+  ],
+  "composition": {
+    "path": "crates/bitloom/tests/fr198_peripheral_system.rs",
+    "sha256": "7c5b609e6a93a277e3cc62f1b9bee60ac13bbf3775463ed7d2739c0ce639b3c0",
+    "shared_composition_lines": 264,
+    "system_function_lines": 148,
+    "topologies": [
+      "axi",
+      "direct-csr"
+    ],
+    "shared_leaf_types": [
+      "UartCsr",
+      "GpioCsr",
+      "Timer",
+      "Irq"
+    ],
+    "shared_decoder": "CsrDecoder",
+    "axi_only_bridge": "AxiLiteCsrBridge",
+    "method": "physical source lines from fn standalone through before fn emit_compile; not RTL LOC or human effort"
+  },
+  "independent_bench_maintenance": {
+    "axi_tb.sv": {
+      "physical_lines": 307,
+      "address_literal_lines": 48,
+      "sha256": "5eb7608e36ab4c4be33e45c35795f3aad0ab8bdd29b72a592ed7016b125287ce"
+    },
+    "direct_tb.sv": {
+      "physical_lines": 270,
+      "address_literal_lines": 42,
+      "sha256": "5ee7605df75c6e3190e86bb86e52313b5d4bbb009e45c2150c13e57c324bb868"
+    }
+  }
+}

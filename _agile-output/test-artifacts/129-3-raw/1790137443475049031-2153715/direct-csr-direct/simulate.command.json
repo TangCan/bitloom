@@ -1,0 +1,21 @@
+{
+  "arguments": [
+    "simulation"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr201-core/direct-csr-direct-2161001-1790137489963168821",
+  "elapsed_ms": 1187,
+  "exit_code": 0,
+  "kill_after_seconds": 5,
+  "label": "simulate",
+  "log": "simulate.log",
+  "program": "vvp",
+  "start_utc_unix_ms": 1790137490013,
+  "stderr": "",
+  "stdout": "VCD info: dumpfile direct.vcd opened for output.\nFR198 PASS topology=direct assertions=60406 transactions=16098 random_transactions=16000\ntb.sv:266: $finish called at 487210000 (1ps)\n",
+  "timeout_path": "/usr/bin/timeout",
+  "timeout_seconds": 60,
+  "timeout_sha256": "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52",
+  "tool_canonical_path": "/usr/bin/vvp",
+  "tool_path": "/usr/bin/vvp",
+  "tool_sha256": "a10bd7d4a0850308ac8c2c98115b6a3084f9be978307610f2a521190c28f4023"
+}

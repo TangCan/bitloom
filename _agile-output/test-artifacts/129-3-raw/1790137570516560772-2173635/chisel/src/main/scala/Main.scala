@@ -1,0 +1,1 @@
+object Fr201Main extends App { circt.stage.ChiselStage.emitSystemVerilogFile(new Fr198AxiCore, args=Array("--target-dir","chisel"), firtoolOpts=Array("--disable-all-randomization","--lowering-options=disallowLocalVariables")) }

@@ -683,3 +683,10 @@ Story127.1–127.4随各自单故事提交完成，FR196静态CSR描述/软件�
 128.1–128.5七步完成，随Story128.5单独提交关闭Epic128/FR197/M3：Timer32、五源IRQ、GPIO32 CSR及双FIFO UART CSR交付。UART最终实际clean/fmt/just test：482个结果块、1870 passed / 0 failed / 47 ignored；7项新专用backend/formal入口另有实际PASS，未把ignored计PASS。当前39命令完整定向证据、独立原始归档与关闭映射见`_agile-output/test-artifacts/128-5-final-verification.md`及`_agile-output/implementation-artifacts/epic-128-closeout.md`。
 
 新增符号逐项登记FR142/minor，旧UART/GPIO/VIP/手写FL保持。只关闭M3，Epic129/FR198与核心FR201、Epic130/FR199–200及整个Phase24仍开放，下一129.1；native/generated层级与有限形式/物理边界保持。用户全部未完故事七步授权继续有效，FR189 deferred/NFR91保留；未改工具钉/包版本、不push/publish。此前各时点记录保留为历史。
+
+
+## 2026-09-23 Update — Phase24 范围结项
+
+2026-09-23：Phase24 已批准范围 FR192–FR201 / NFR93–NFR99 完成交付与结项，Epic125–130 共22故事done。129.3四层独立补审及修复、两拓扑六路线实际RTL/原始综合、有限请求/复位形式、耐清理的主/隔离原始证据和新鲜证据校验已完成；FR199/FR200外部试点按130.2/130.3最终记录交付。FR189/Epic122/122.2/122.3继续deferred、未交付；NFR91及既有明确遗留保留。无产品工具钉/包版本变更，不push、不publish，不声称远端CI已执行或物理签核。
+
+[总验收与FR/NFR映射](../../../../docs/ip/phase24-closeout.md)。先前M0-only、126.1/126.2-only、Epic130开放或Phase24未完成的分日期段落保留为历史，本条为当前状态。

@@ -1,0 +1,458 @@
+SBY 12:22:19 [core_cover] Removing directory '/nvme_data2/richard/2026/rhdl/target/fr201-core-formal/run-2135326-1790137334222346900/core_cover'.
+SBY 12:22:19 [core_cover] Copy '/nvme_data2/richard/2026/rhdl/target/fr201-core-formal/run-2135326-1790137334222346900/design.v' to '/nvme_data2/richard/2026/rhdl/target/fr201-core-formal/run-2135326-1790137334222346900/core_cover/src/design.v'.
+SBY 12:22:19 [core_cover] engine_0: smtbmc z3
+SBY 12:22:19 [core_cover] base: starting process "cd core_cover/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rsp_valid is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\req_ready is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [31] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [30] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [29] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [28] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [27] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [26] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [25] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [24] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [23] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [22] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [21] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [20] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [19] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [18] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [17] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [16] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [15] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [14] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [13] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [12] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [11] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [10] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [9] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [8] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [7] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [6] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [5] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [4] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [3] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [2] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [1] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\rdata [0] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\raw_event is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [31] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [30] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [29] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [28] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [27] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [26] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [25] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [24] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [23] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [22] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [21] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [20] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [19] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [18] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [17] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [16] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [15] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [14] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [13] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [12] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [11] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [10] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [9] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [8] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [7] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [6] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [5] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [4] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [3] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [2] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [1] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_out [0] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [31] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [30] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [29] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [28] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [27] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [26] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [25] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [24] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [23] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [22] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [21] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [20] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [19] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [18] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [17] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [16] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [15] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [14] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [13] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [12] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [11] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [10] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [9] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [8] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [7] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [6] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [5] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [4] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [3] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [2] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [1] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\pad_oe [0] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\error [1] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Gpio.\error [0] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rsp_valid is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\req_ready is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [31] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [30] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [29] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [28] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [27] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [26] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [25] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [24] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [23] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [22] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [21] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [20] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [19] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [18] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [17] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [16] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [15] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [14] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [13] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [12] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [11] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [10] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [9] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [8] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [7] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [6] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [5] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [4] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [3] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [2] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [1] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\rdata [0] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\irq is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\error [1] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Irq.\error [0] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rsp_valid is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\req_ready is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [31] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [30] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [29] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [28] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [27] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [26] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [25] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [24] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [23] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [22] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [21] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [20] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [19] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [18] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [17] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [16] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [15] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [14] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [13] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [12] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [11] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [10] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [9] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [8] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [7] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [6] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [5] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [4] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [3] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [2] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [1] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\rdata [0] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\match_event is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\error [1] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Timer.\error [0] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\tx is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rsp_valid is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\req_ready is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [31] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [30] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [29] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [28] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [27] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [26] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [25] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [24] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [23] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [22] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [21] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [20] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [19] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [18] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [17] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [16] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [15] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [14] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [13] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [12] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [11] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [10] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [9] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [8] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [7] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [6] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [5] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [4] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [3] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [2] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [1] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\rdata [0] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\raw_events [3] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\raw_events [2] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\raw_events [1] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\raw_events [0] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\error [1] is used but has no driver.
+SBY 12:22:19 [core_cover] base: Warning: Wire Fr198Uart.\error [0] is used but has no driver.
+SBY 12:22:19 [core_cover] base: finished (returncode=0)
+SBY 12:22:19 [core_cover] prep: starting process "cd core_cover/model; yosys -ql design_prep.log design_prep.ys"
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rsp_valid is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\req_ready is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [31] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [30] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [29] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [28] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [27] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [26] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [25] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [24] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [23] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [22] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [21] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [20] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [19] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [18] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [17] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [16] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [15] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [14] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [13] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [12] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [11] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [10] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [9] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [8] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [7] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [6] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [5] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [4] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [3] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [2] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [1] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\rdata [0] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\raw_event is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [31] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [30] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [29] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [28] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [27] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [26] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [25] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [24] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [23] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [22] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [21] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [20] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [19] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [18] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [17] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [16] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [15] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [14] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [13] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [12] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [11] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [10] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [9] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [8] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [7] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [6] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [5] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [4] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [3] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [2] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [1] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_out [0] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [31] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [30] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [29] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [28] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [27] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [26] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [25] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [24] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [23] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [22] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [21] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [20] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [19] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [18] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [17] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [16] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [15] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [14] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [13] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [12] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [11] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [10] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [9] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [8] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [7] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [6] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [5] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [4] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [3] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [2] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [1] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\pad_oe [0] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\error [1] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Gpio.\error [0] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rsp_valid is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\req_ready is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [31] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [30] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [29] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [28] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [27] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [26] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [25] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [24] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [23] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [22] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [21] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [20] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [19] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [18] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [17] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [16] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [15] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [14] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [13] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [12] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [11] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [10] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [9] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [8] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [7] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [6] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [5] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [4] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [3] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [2] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [1] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\rdata [0] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\irq is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\error [1] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Irq.\error [0] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rsp_valid is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\req_ready is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [31] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [30] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [29] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [28] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [27] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [26] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [25] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [24] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [23] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [22] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [21] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [20] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [19] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [18] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [17] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [16] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [15] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [14] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [13] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [12] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [11] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [10] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [9] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [8] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [7] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [6] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [5] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [4] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [3] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [2] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [1] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\rdata [0] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\match_event is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\error [1] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Timer.\error [0] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\tx is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rsp_valid is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\req_ready is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [31] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [30] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [29] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [28] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [27] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [26] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [25] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [24] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [23] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [22] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [21] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [20] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [19] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [18] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [17] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [16] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [15] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [14] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [13] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [12] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [11] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [10] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [9] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [8] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [7] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [6] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [5] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [4] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [3] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [2] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [1] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\rdata [0] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\raw_events [3] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\raw_events [2] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\raw_events [1] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\raw_events [0] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\error [1] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: Warning: Wire Fr198Uart.\error [0] is used but has no driver.
+SBY 12:22:19 [core_cover] prep: finished (returncode=0)
+SBY 12:22:19 [core_cover] smt2: starting process "cd core_cover/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 12:22:19 [core_cover] smt2: finished (returncode=0)
+SBY 12:22:19 [core_cover] engine_0: starting process "cd core_cover; yosys-smtbmc -s z3 --presat -c --noprogress -t 2  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
+SBY 12:22:19 [core_cover] engine_0: ##   0:00:00  Solver: z3
+SBY 12:22:20 [core_cover] engine_0: ##   0:00:00  Checking cover reachability in step 0..
+SBY 12:22:22 [core_cover] engine_0: ##   0:00:02  Checking cover reachability in step 1..
+SBY 12:22:22 [core_cover] engine_0: ##   0:00:02  Reached cover statement at design.v:3205.24-3205.55 ($cover$design.v:3205$41) in step 1.
+SBY 12:22:22 [core_cover] engine_0: ##   0:00:02  Writing trace to VCD file: engine_0/trace0.vcd
+SBY 12:22:23 [core_cover] engine_0: ##   0:00:03  Writing trace to Verilog testbench: engine_0/trace0_tb.v
+SBY 12:22:23 [core_cover] engine_0: ##   0:00:03  Writing trace to constraints file: engine_0/trace0.smtc
+SBY 12:22:23 [core_cover] engine_0: ##   0:00:03  Writing trace to Yosys witness file: engine_0/trace0.yw
+SBY 12:22:23 [core_cover] engine_0: ##   0:00:03  Status: passed
+SBY 12:22:23 [core_cover] engine_0: finished (returncode=0)
+SBY 12:22:23 [core_cover] engine_0: Status returned by engine: pass
+SBY 12:22:23 [core_cover] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:03 (3)
+SBY 12:22:23 [core_cover] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:03 (3)
+SBY 12:22:23 [core_cover] summary: engine_0 (smtbmc z3) returned pass
+SBY 12:22:23 [core_cover] summary: trace: core_cover/engine_0/trace0.vcd
+SBY 12:22:23 [core_cover] DONE (PASS, rc=0)

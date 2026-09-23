@@ -1,0 +1,6 @@
+Elapsed clock time [H:MM:SS (secs)]: 0:00:03 (3)
+Elapsed process time [H:MM:SS (secs)]: 0:00:06 (6)
+engine_0 (smtbmc z3) returned FAIL for basecase
+engine_0 (smtbmc z3) returned pass for induction
+counterexample trace [basecase]: engine_0/trace.vcd
+  failed assertion Fr198AxiCore.$assert$mutant.v:3155$36 at mutant.v:3155.20-3156.39 in step 0

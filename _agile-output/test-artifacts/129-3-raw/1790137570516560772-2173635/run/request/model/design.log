@@ -1,0 +1,1720 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `../model/design.ys' --
+
+1. Executing Verilog-2005 frontend: design.v
+Parsing formal SystemVerilog input from `design.v' to AST representation.
+Storing AST representation for module `$abstract\Fr198Bridge'.
+Storing AST representation for module `$abstract\Fr198Decoder'.
+Storing AST representation for module `$abstract\BitloomUartCsrRegisters'.
+Storing AST representation for module `$abstract\BitloomUartCsrFifo8x4'.
+Storing AST representation for module `$abstract\Fr198Uart'.
+Storing AST representation for module `$abstract\BitloomGpioCsrRegisters'.
+Storing AST representation for module `$abstract\Fr198Gpio'.
+Storing AST representation for module `$abstract\BitloomTimerCsr'.
+Storing AST representation for module `$abstract\Fr198Timer'.
+Storing AST representation for module `$abstract\BitloomIrqCsr'.
+Storing AST representation for module `$abstract\Fr198Irq'.
+Storing AST representation for module `$abstract\Fr198AxiCore'.
+Storing AST representation for module `$abstract\Fr198Axi'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+3. Executing AST frontend in derive mode using pre-parsed AST for module `\Fr198AxiCore'.
+Generating RTLIL representation for module `\Fr198AxiCore'.
+
+3.1. Analyzing design hierarchy..
+Top module:  \Fr198AxiCore
+
+3.2. Executing AST frontend in derive mode using pre-parsed AST for module `\Fr198Decoder'.
+Generating RTLIL representation for module `\Fr198Decoder'.
+
+3.3. Executing AST frontend in derive mode using pre-parsed AST for module `\Fr198Bridge'.
+Generating RTLIL representation for module `\Fr198Bridge'.
+
+3.4. Executing AST frontend in derive mode using pre-parsed AST for module `\Fr198Irq'.
+Generating RTLIL representation for module `\Fr198Irq'.
+
+3.5. Executing AST frontend in derive mode using pre-parsed AST for module `\Fr198Timer'.
+Generating RTLIL representation for module `\Fr198Timer'.
+
+3.6. Executing AST frontend in derive mode using pre-parsed AST for module `\Fr198Gpio'.
+Generating RTLIL representation for module `\Fr198Gpio'.
+
+3.7. Executing AST frontend in derive mode using pre-parsed AST for module `\Fr198Uart'.
+Generating RTLIL representation for module `\Fr198Uart'.
+
+3.8. Analyzing design hierarchy..
+Top module:  \Fr198AxiCore
+Used module:     \Fr198Decoder
+Used module:     \Fr198Bridge
+Used module:     \Fr198Irq
+Used module:     \Fr198Timer
+Used module:     \Fr198Gpio
+Used module:     \Fr198Uart
+
+3.9. Executing AST frontend in derive mode using pre-parsed AST for module `\BitloomUartCsrFifo8x4'.
+Generating RTLIL representation for module `\BitloomUartCsrFifo8x4'.
+
+3.10. Executing AST frontend in derive mode using pre-parsed AST for module `\BitloomUartCsrRegisters'.
+Generating RTLIL representation for module `\BitloomUartCsrRegisters'.
+
+3.11. Executing AST frontend in derive mode using pre-parsed AST for module `\BitloomGpioCsrRegisters'.
+Generating RTLIL representation for module `\BitloomGpioCsrRegisters'.
+
+3.12. Executing AST frontend in derive mode using pre-parsed AST for module `\BitloomTimerCsr'.
+Generating RTLIL representation for module `\BitloomTimerCsr'.
+
+3.13. Executing AST frontend in derive mode using pre-parsed AST for module `\BitloomIrqCsr'.
+Generating RTLIL representation for module `\BitloomIrqCsr'.
+
+3.14. Analyzing design hierarchy..
+Top module:  \Fr198AxiCore
+Used module:     \Fr198Decoder
+Used module:     \Fr198Bridge
+Used module:     \Fr198Irq
+Used module:         \BitloomIrqCsr
+Used module:     \Fr198Timer
+Used module:         \BitloomTimerCsr
+Used module:     \Fr198Gpio
+Used module:         \BitloomGpioCsrRegisters
+Used module:     \Fr198Uart
+Used module:         \BitloomUartCsrFifo8x4
+Used module:         \BitloomUartCsrRegisters
+
+3.15. Analyzing design hierarchy..
+Top module:  \Fr198AxiCore
+Used module:     \Fr198Decoder
+Used module:     \Fr198Bridge
+Used module:     \Fr198Irq
+Used module:         \BitloomIrqCsr
+Used module:     \Fr198Timer
+Used module:         \BitloomTimerCsr
+Used module:     \Fr198Gpio
+Used module:         \BitloomGpioCsrRegisters
+Used module:     \Fr198Uart
+Used module:         \BitloomUartCsrFifo8x4
+Used module:         \BitloomUartCsrRegisters
+Removing unused module `$abstract\Fr198Axi'.
+Removing unused module `$abstract\Fr198AxiCore'.
+Removing unused module `$abstract\Fr198Irq'.
+Removing unused module `$abstract\BitloomIrqCsr'.
+Removing unused module `$abstract\Fr198Timer'.
+Removing unused module `$abstract\BitloomTimerCsr'.
+Removing unused module `$abstract\Fr198Gpio'.
+Removing unused module `$abstract\BitloomGpioCsrRegisters'.
+Removing unused module `$abstract\Fr198Uart'.
+Removing unused module `$abstract\BitloomUartCsrFifo8x4'.
+Removing unused module `$abstract\BitloomUartCsrRegisters'.
+Removing unused module `$abstract\Fr198Decoder'.
+Removing unused module `$abstract\Fr198Bridge'.
+Removed 13 unused modules.
+Module Fr198AxiCore directly or indirectly contains formal properties -> setting "keep" attribute.
+
+4. Executing PREP pass.
+
+4.1. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1.1. Analyzing design hierarchy..
+Top module:  \Fr198AxiCore
+Used module:     \Fr198Decoder
+Used module:     \Fr198Bridge
+Used module:     \Fr198Irq
+Used module:     \Fr198Timer
+Used module:     \Fr198Gpio
+Used module:     \Fr198Uart
+
+4.1.2. Analyzing design hierarchy..
+Top module:  \Fr198AxiCore
+Used module:     \Fr198Decoder
+Used module:     \Fr198Bridge
+Used module:     \Fr198Irq
+Used module:     \Fr198Timer
+Used module:     \Fr198Gpio
+Used module:     \Fr198Uart
+Removing unused module `\BitloomTimerCsr'.
+Removing unused module `\BitloomGpioCsrRegisters'.
+Removing unused module `\BitloomUartCsrRegisters'.
+Removing unused module `\BitloomUartCsrFifo8x4'.
+Removing unused module `\BitloomIrqCsr'.
+Removed 5 unused modules.
+Module Fr198AxiCore directly or indirectly contains formal properties -> setting "keep" attribute.
+
+4.2. Executing PROC pass (convert processes to netlists).
+
+4.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$design.v:153$643 in module Fr198Bridge.
+Marked 1 switch rules as full_case in process $proc$design.v:421$593 in module Fr198Decoder.
+Marked 3 switch rules as full_case in process $proc$design.v:3212$251 in module Fr198AxiCore.
+Removed a total of 0 dead cases.
+
+4.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 22 redundant assignments.
+Promoted 102 assignments to connections.
+
+4.2.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$532'.
+  Set init value: $formal$design.v:3270$79_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$530'.
+  Set init value: $formal$design.v:3269$78_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$528'.
+  Set init value: $formal$design.v:3264$77_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$526'.
+  Set init value: $formal$design.v:3263$76_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$524'.
+  Set init value: $formal$design.v:3258$75_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$522'.
+  Set init value: $formal$design.v:3257$74_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$520'.
+  Set init value: $formal$design.v:3252$73_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$518'.
+  Set init value: $formal$design.v:3251$72_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$516'.
+  Set init value: $formal$design.v:3247$71_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$514'.
+  Set init value: $formal$design.v:3246$70_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$512'.
+  Set init value: $formal$design.v:3245$69_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$510'.
+  Set init value: $formal$design.v:3243$68_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$508'.
+  Set init value: $formal$design.v:3240$67_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$506'.
+  Set init value: $formal$design.v:3239$66_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$504'.
+  Set init value: $formal$design.v:3236$65_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$502'.
+  Set init value: $formal$design.v:3235$64_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$500'.
+  Set init value: $formal$design.v:3233$63_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$498'.
+  Set init value: $formal$design.v:3232$62_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$496'.
+  Set init value: $formal$design.v:3201$61_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$494'.
+  Set init value: $formal$design.v:3200$60_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$492'.
+  Set init value: $formal$design.v:3198$59_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$490'.
+  Set init value: $formal$design.v:3197$58_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$488'.
+  Set init value: $formal$design.v:3196$57_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$486'.
+  Set init value: $formal$design.v:3193$56_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$484'.
+  Set init value: $formal$design.v:3192$55_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$482'.
+  Set init value: $formal$design.v:3191$54_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$480'.
+  Set init value: $formal$design.v:3188$53_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$478'.
+  Set init value: $formal$design.v:3187$52_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$476'.
+  Set init value: $formal$design.v:3184$51_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$474'.
+  Set init value: $formal$design.v:3183$50_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$472'.
+  Set init value: $formal$design.v:3182$49_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$470'.
+  Set init value: $formal$design.v:3179$48_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$468'.
+  Set init value: $formal$design.v:3176$47_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$466'.
+  Set init value: $formal$design.v:3173$46_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$464'.
+  Set init value: $formal$design.v:3170$45_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$462'.
+  Set init value: $formal$design.v:3167$44_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:0$460'.
+  Set init value: $formal$design.v:3166$43_EN = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:3211$459'.
+  Set init value: \fr201_cancelled_pending = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:3210$458'.
+  Set init value: \fr201_epoch_accept = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:3209$457'.
+  Set init value: \fr201_ar_credit = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:3209$456'.
+  Set init value: \fr201_w_credit = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:3209$455'.
+  Set init value: \fr201_aw_credit = 1'0
+Found init rule in `\Fr198AxiCore.$proc$design.v:3153$454'.
+  Set init value: \fr201_past_valid = 1'0
+
+4.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~28 debug messages>
+
+4.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\Fr198Bridge.$proc$design.v:153$643'.
+     1/19: $0\r_data[31:0]
+     2/19: $0\r_error[1:0]
+     3/19: $0\b_error[1:0]
+     4/19: $0\prefer_write[0:0]
+     5/19: $0\owner[0:0]
+     6/19: $0\offer_strb[3:0]
+     7/19: $0\offer_data[31:0]
+     8/19: $0\offer_write[0:0]
+     9/19: $0\ar_addr[15:0]
+    10/19: $0\w_strb[3:0]
+    11/19: $0\w_data[31:0]
+    12/19: $0\aw_addr[15:0]
+    13/19: $0\r_full[0:0]
+    14/19: $0\b_full[0:0]
+    15/19: $0\exec[0:0]
+    16/19: $0\offer[0:0]
+    17/19: $0\ar_full[0:0]
+    18/19: $0\w_full[0:0]
+    19/19: $0\aw_full[0:0]
+Creating decoders for process `\Fr198Decoder.$proc$design.v:421$593'.
+     1/3: $0\owner[1:0]
+     2/3: $0\miss[0:0]
+     3/3: $0\busy[0:0]
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$532'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$530'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$528'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$526'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$524'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$522'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$520'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$518'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$516'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$514'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$512'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$510'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$508'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$506'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$504'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$502'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$500'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$498'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$496'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$494'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$492'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$490'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$488'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$486'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$484'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$482'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$480'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$478'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$476'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$474'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$472'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$470'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$468'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$466'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$464'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$462'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:0$460'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3211$459'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3210$458'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3209$457'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3209$456'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3209$455'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3153$454'.
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3268$396'.
+     1/4: $0$formal$design.v:3269$78_EN[0:0]$400
+     2/4: $0$formal$design.v:3269$78_CHECK[0:0]$399
+     3/4: $0$formal$design.v:3270$79_EN[0:0]$402
+     4/4: $0$formal$design.v:3270$79_CHECK[0:0]$401
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3262$381'.
+     1/4: $0$formal$design.v:3263$76_EN[0:0]$385
+     2/4: $0$formal$design.v:3263$76_CHECK[0:0]$384
+     3/4: $0$formal$design.v:3264$77_EN[0:0]$387
+     4/4: $0$formal$design.v:3264$77_CHECK[0:0]$386
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3256$366'.
+     1/4: $0$formal$design.v:3257$74_EN[0:0]$370
+     2/4: $0$formal$design.v:3257$74_CHECK[0:0]$369
+     3/4: $0$formal$design.v:3258$75_EN[0:0]$372
+     4/4: $0$formal$design.v:3258$75_CHECK[0:0]$371
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3250$351'.
+     1/4: $0$formal$design.v:3251$72_EN[0:0]$355
+     2/4: $0$formal$design.v:3251$72_CHECK[0:0]$354
+     3/4: $0$formal$design.v:3252$73_EN[0:0]$357
+     4/4: $0$formal$design.v:3252$73_CHECK[0:0]$356
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3212$251'.
+     1/19: $0$formal$design.v:3232$62_EN[0:0]$259
+     2/19: $0$formal$design.v:3232$62_CHECK[0:0]$258
+     3/19: $0$formal$design.v:3233$63_EN[0:0]$261
+     4/19: $0$formal$design.v:3233$63_CHECK[0:0]$260
+     5/19: $0$formal$design.v:3235$64_EN[0:0]$263
+     6/19: $0$formal$design.v:3235$64_CHECK[0:0]$262
+     7/19: $0$formal$design.v:3236$65_EN[0:0]$265
+     8/19: $0$formal$design.v:3236$65_CHECK[0:0]$264
+     9/19: $0$formal$design.v:3239$66_EN[0:0]$267
+    10/19: $0$formal$design.v:3239$66_CHECK[0:0]$266
+    11/19: $0$formal$design.v:3240$67_EN[0:0]$269
+    12/19: $0$formal$design.v:3240$67_CHECK[0:0]$268
+    13/19: $0$formal$design.v:3243$68_EN[0:0]$271
+    14/19: $0$formal$design.v:3243$68_CHECK[0:0]$270
+    15/19: $0\fr201_cancelled_pending[0:0]
+    16/19: $0\fr201_epoch_accept[0:0]
+    17/19: $0\fr201_ar_credit[0:0]
+    18/19: $0\fr201_w_credit[0:0]
+    19/19: $0\fr201_aw_credit[0:0]
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3164$101'.
+     1/34: $0$formal$design.v:3166$43_EN[0:0]$125
+     2/34: $0$formal$design.v:3166$43_CHECK[0:0]$124
+     3/34: $0$formal$design.v:3167$44_EN[0:0]$127
+     4/34: $0$formal$design.v:3167$44_CHECK[0:0]$126
+     5/34: $0$formal$design.v:3170$45_EN[0:0]$129
+     6/34: $0$formal$design.v:3170$45_CHECK[0:0]$128
+     7/34: $0$formal$design.v:3173$46_EN[0:0]$131
+     8/34: $0$formal$design.v:3173$46_CHECK[0:0]$130
+     9/34: $0$formal$design.v:3176$47_EN[0:0]$133
+    10/34: $0$formal$design.v:3176$47_CHECK[0:0]$132
+    11/34: $0$formal$design.v:3179$48_EN[0:0]$135
+    12/34: $0$formal$design.v:3179$48_CHECK[0:0]$134
+    13/34: $0$formal$design.v:3182$49_EN[0:0]$137
+    14/34: $0$formal$design.v:3182$49_CHECK[0:0]$136
+    15/34: $0$formal$design.v:3183$50_EN[0:0]$139
+    16/34: $0$formal$design.v:3183$50_CHECK[0:0]$138
+    17/34: $0$formal$design.v:3184$51_EN[0:0]$141
+    18/34: $0$formal$design.v:3184$51_CHECK[0:0]$140
+    19/34: $0$formal$design.v:3187$52_EN[0:0]$143
+    20/34: $0$formal$design.v:3187$52_CHECK[0:0]$142
+    21/34: $0$formal$design.v:3188$53_EN[0:0]$145
+    22/34: $0$formal$design.v:3188$53_CHECK[0:0]$144
+    23/34: $0$formal$design.v:3191$54_EN[0:0]$147
+    24/34: $0$formal$design.v:3191$54_CHECK[0:0]$146
+    25/34: $0$formal$design.v:3192$55_EN[0:0]$149
+    26/34: $0$formal$design.v:3192$55_CHECK[0:0]$148
+    27/34: $0$formal$design.v:3193$56_EN[0:0]$151
+    28/34: $0$formal$design.v:3193$56_CHECK[0:0]$150
+    29/34: $0$formal$design.v:3196$57_EN[0:0]$153
+    30/34: $0$formal$design.v:3196$57_CHECK[0:0]$152
+    31/34: $0$formal$design.v:3197$58_EN[0:0]$155
+    32/34: $0$formal$design.v:3197$58_CHECK[0:0]$154
+    33/34: $0$formal$design.v:3198$59_EN[0:0]$157
+    34/34: $0$formal$design.v:3198$59_CHECK[0:0]$156
+Creating decoders for process `\Fr198AxiCore.$proc$design.v:3155$81'.
+
+4.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\Fr198AxiCore.$formal$design.v:3155$37_CHECK' from process `\Fr198AxiCore.$proc$design.v:3155$81'.
+No latch inferred for signal `\Fr198AxiCore.$formal$design.v:3155$37_EN' from process `\Fr198AxiCore.$proc$design.v:3155$81'.
+No latch inferred for signal `\Fr198AxiCore.$formal$design.v:3156$38_CHECK' from process `\Fr198AxiCore.$proc$design.v:3155$81'.
+No latch inferred for signal `\Fr198AxiCore.$formal$design.v:3156$38_EN' from process `\Fr198AxiCore.$proc$design.v:3155$81'.
+No latch inferred for signal `\Fr198AxiCore.$formal$design.v:3157$39_CHECK' from process `\Fr198AxiCore.$proc$design.v:3155$81'.
+No latch inferred for signal `\Fr198AxiCore.$formal$design.v:3157$39_EN' from process `\Fr198AxiCore.$proc$design.v:3155$81'.
+No latch inferred for signal `\Fr198AxiCore.$formal$design.v:3158$40_CHECK' from process `\Fr198AxiCore.$proc$design.v:3155$81'.
+No latch inferred for signal `\Fr198AxiCore.$formal$design.v:3158$40_EN' from process `\Fr198AxiCore.$proc$design.v:3155$81'.
+No latch inferred for signal `\Fr198AxiCore.$formal$design.v:3159$41_CHECK' from process `\Fr198AxiCore.$proc$design.v:3155$81'.
+No latch inferred for signal `\Fr198AxiCore.$formal$design.v:3159$41_EN' from process `\Fr198AxiCore.$proc$design.v:3155$81'.
+No latch inferred for signal `\Fr198AxiCore.$formal$design.v:3160$42_CHECK' from process `\Fr198AxiCore.$proc$design.v:3155$81'.
+No latch inferred for signal `\Fr198AxiCore.$formal$design.v:3160$42_EN' from process `\Fr198AxiCore.$proc$design.v:3155$81'.
+
+4.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\Fr198Bridge.\owner' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1483' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\aw_full' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1484' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\w_full' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1485' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\ar_full' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1486' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\aw_addr' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1487' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\w_data' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1488' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\w_strb' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1489' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\ar_addr' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1490' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\offer' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1491' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\offer_write' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1492' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\exec' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1493' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\prefer_write' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1494' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\b_full' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1495' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\r_full' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1496' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\b_error' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1497' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\r_error' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1498' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\r_data' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1499' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\offer_data' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1500' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\offer_strb' using process `\Fr198Bridge.$proc$design.v:153$643'.
+  created $dff cell `$procdff$1501' with positive edge clock.
+Creating register for signal `\Fr198Decoder.\busy' using process `\Fr198Decoder.$proc$design.v:421$593'.
+  created $dff cell `$procdff$1502' with positive edge clock.
+Creating register for signal `\Fr198Decoder.\miss' using process `\Fr198Decoder.$proc$design.v:421$593'.
+  created $dff cell `$procdff$1503' with positive edge clock.
+Creating register for signal `\Fr198Decoder.\owner' using process `\Fr198Decoder.$proc$design.v:421$593'.
+  created $dff cell `$procdff$1504' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3269$35$0' using process `\Fr198AxiCore.$proc$design.v:3268$396'.
+  created $dff cell `$procdff$1505' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3271$36$0' using process `\Fr198AxiCore.$proc$design.v:3268$396'.
+  created $dff cell `$procdff$1506' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3269$78_CHECK' using process `\Fr198AxiCore.$proc$design.v:3268$396'.
+  created $dff cell `$procdff$1507' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3269$78_EN' using process `\Fr198AxiCore.$proc$design.v:3268$396'.
+  created $dff cell `$procdff$1508' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3270$79_CHECK' using process `\Fr198AxiCore.$proc$design.v:3268$396'.
+  created $dff cell `$procdff$1509' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3270$79_EN' using process `\Fr198AxiCore.$proc$design.v:3268$396'.
+  created $dff cell `$procdff$1510' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3263$33$0' using process `\Fr198AxiCore.$proc$design.v:3262$381'.
+  created $dff cell `$procdff$1511' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3265$34$0' using process `\Fr198AxiCore.$proc$design.v:3262$381'.
+  created $dff cell `$procdff$1512' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3263$76_CHECK' using process `\Fr198AxiCore.$proc$design.v:3262$381'.
+  created $dff cell `$procdff$1513' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3263$76_EN' using process `\Fr198AxiCore.$proc$design.v:3262$381'.
+  created $dff cell `$procdff$1514' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3264$77_CHECK' using process `\Fr198AxiCore.$proc$design.v:3262$381'.
+  created $dff cell `$procdff$1515' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3264$77_EN' using process `\Fr198AxiCore.$proc$design.v:3262$381'.
+  created $dff cell `$procdff$1516' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3257$31$0' using process `\Fr198AxiCore.$proc$design.v:3256$366'.
+  created $dff cell `$procdff$1517' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3259$32$0' using process `\Fr198AxiCore.$proc$design.v:3256$366'.
+  created $dff cell `$procdff$1518' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3257$74_CHECK' using process `\Fr198AxiCore.$proc$design.v:3256$366'.
+  created $dff cell `$procdff$1519' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3257$74_EN' using process `\Fr198AxiCore.$proc$design.v:3256$366'.
+  created $dff cell `$procdff$1520' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3258$75_CHECK' using process `\Fr198AxiCore.$proc$design.v:3256$366'.
+  created $dff cell `$procdff$1521' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3258$75_EN' using process `\Fr198AxiCore.$proc$design.v:3256$366'.
+  created $dff cell `$procdff$1522' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3251$29$0' using process `\Fr198AxiCore.$proc$design.v:3250$351'.
+  created $dff cell `$procdff$1523' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3253$30$0' using process `\Fr198AxiCore.$proc$design.v:3250$351'.
+  created $dff cell `$procdff$1524' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3251$72_CHECK' using process `\Fr198AxiCore.$proc$design.v:3250$351'.
+  created $dff cell `$procdff$1525' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3251$72_EN' using process `\Fr198AxiCore.$proc$design.v:3250$351'.
+  created $dff cell `$procdff$1526' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3252$73_CHECK' using process `\Fr198AxiCore.$proc$design.v:3250$351'.
+  created $dff cell `$procdff$1527' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3252$73_EN' using process `\Fr198AxiCore.$proc$design.v:3250$351'.
+  created $dff cell `$procdff$1528' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.\fr201_aw_credit' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1529' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.\fr201_w_credit' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1530' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.\fr201_ar_credit' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1531' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.\fr201_epoch_accept' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1532' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.\fr201_cancelled_pending' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1533' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3218$23$0' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1534' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3235$24$0' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1535' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3237$25$0' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1536' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3239$26$0' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1537' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3246$27$0' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1538' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3247$28$0' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1539' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3232$62_CHECK' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1540' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3232$62_EN' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1541' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3233$63_CHECK' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1542' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3233$63_EN' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1543' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3235$64_CHECK' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1544' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3235$64_EN' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1545' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3236$65_CHECK' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1546' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3236$65_EN' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1547' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3239$66_CHECK' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1548' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3239$66_EN' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1549' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3240$67_CHECK' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1550' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3240$67_EN' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1551' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3243$68_CHECK' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1552' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3243$68_EN' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1553' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3245$69_CHECK' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1554' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3245$69_EN' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1555' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3246$70_CHECK' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1556' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3246$70_EN' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1557' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3247$71_CHECK' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1558' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3247$71_EN' using process `\Fr198AxiCore.$proc$design.v:3212$251'.
+  created $dff cell `$procdff$1559' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.\fr201_past_valid' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1560' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3167$1$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1561' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3170$2$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1562' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3171$3$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1563' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3171$4$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1564' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3173$5$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1565' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3174$6$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1566' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3174$7$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1567' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3176$8$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1568' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3177$9$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1569' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3177$10$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1570' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3179$11$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1571' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3180$12$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1572' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3180$13$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1573' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3182$14$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1574' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3187$15$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1575' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3189$16$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1576' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3191$17$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1577' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3193$18$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1578' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3194$19$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1579' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3196$20$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1580' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3198$21$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1581' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$past$design.v:3199$22$0' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1582' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3166$43_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1583' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3166$43_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1584' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3167$44_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1585' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3167$44_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1586' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3170$45_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1587' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3170$45_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1588' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3173$46_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1589' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3173$46_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1590' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3176$47_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1591' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3176$47_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1592' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3179$48_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1593' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3179$48_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1594' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3182$49_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1595' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3182$49_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1596' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3183$50_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1597' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3183$50_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1598' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3184$51_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1599' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3184$51_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1600' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3187$52_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1601' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3187$52_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1602' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3188$53_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1603' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3188$53_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1604' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3191$54_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1605' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3191$54_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1606' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3192$55_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1607' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3192$55_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1608' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3193$56_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1609' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3193$56_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1610' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3196$57_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1611' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3196$57_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1612' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3197$58_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1613' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3197$58_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1614' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3198$59_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1615' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3198$59_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1616' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3200$60_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1617' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3200$60_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1618' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3201$61_CHECK' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1619' with positive edge clock.
+Creating register for signal `\Fr198AxiCore.$formal$design.v:3201$61_EN' using process `\Fr198AxiCore.$proc$design.v:3164$101'.
+  created $dff cell `$procdff$1620' with positive edge clock.
+
+4.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\Fr198Bridge.$proc$design.v:153$643'.
+Removing empty process `Fr198Bridge.$proc$design.v:153$643'.
+Found and cleaned up 1 empty switch in `\Fr198Decoder.$proc$design.v:421$593'.
+Removing empty process `Fr198Decoder.$proc$design.v:421$593'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$532'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$530'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$528'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$526'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$524'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$522'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$520'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$518'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$516'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$514'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$512'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$510'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$508'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$506'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$504'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$502'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$500'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$498'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$496'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$494'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$492'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$490'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$488'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$486'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$484'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$482'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$480'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$478'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$476'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$474'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$472'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$470'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$468'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$466'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$464'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$462'.
+Removing empty process `Fr198AxiCore.$proc$design.v:0$460'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3211$459'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3210$458'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3209$457'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3209$456'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3209$455'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3153$454'.
+Found and cleaned up 1 empty switch in `\Fr198AxiCore.$proc$design.v:3268$396'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3268$396'.
+Found and cleaned up 1 empty switch in `\Fr198AxiCore.$proc$design.v:3262$381'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3262$381'.
+Found and cleaned up 1 empty switch in `\Fr198AxiCore.$proc$design.v:3256$366'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3256$366'.
+Found and cleaned up 1 empty switch in `\Fr198AxiCore.$proc$design.v:3250$351'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3250$351'.
+Found and cleaned up 12 empty switches in `\Fr198AxiCore.$proc$design.v:3212$251'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3212$251'.
+Found and cleaned up 10 empty switches in `\Fr198AxiCore.$proc$design.v:3164$101'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3164$101'.
+Removing empty process `Fr198AxiCore.$proc$design.v:3155$81'.
+Cleaned up 28 empty switches.
+
+4.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Gpio.
+Optimizing module Fr198Timer.
+Optimizing module Fr198Irq.
+Optimizing module Fr198Bridge.
+<suppressed ~11 debug messages>
+Optimizing module Fr198Decoder.
+<suppressed ~7 debug messages>
+Optimizing module Fr198AxiCore.
+<suppressed ~3 debug messages>
+Optimizing module Fr198Uart.
+
+4.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Gpio.
+Optimizing module Fr198Timer.
+Optimizing module Fr198Irq.
+Optimizing module Fr198Bridge.
+Optimizing module Fr198Decoder.
+Optimizing module Fr198AxiCore.
+Optimizing module Fr198Uart.
+
+4.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Gpio..
+Finding unused cells or wires in module \Fr198Timer..
+Finding unused cells or wires in module \Fr198Irq..
+Finding unused cells or wires in module \Fr198Bridge..
+Finding unused cells or wires in module \Fr198Decoder..
+Finding unused cells or wires in module \Fr198AxiCore..
+Finding unused cells or wires in module \Fr198Uart..
+Removed 1 unused cells and 433 unused wires.
+<suppressed ~4 debug messages>
+
+4.5. Executing CHECK pass (checking for obvious problems).
+Checking module Fr198AxiCore...
+Checking module Fr198Bridge...
+Checking module Fr198Decoder...
+Checking module Fr198Gpio...
+Warning: Wire Fr198Gpio.\rsp_valid is used but has no driver.
+Warning: Wire Fr198Gpio.\req_ready is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [31] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [30] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [29] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [28] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [27] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [26] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [25] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [24] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [23] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [22] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [21] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [20] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [19] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [18] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [17] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [16] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [15] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [14] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [13] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [12] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [11] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [10] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [9] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [8] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [7] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [6] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [5] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [4] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [3] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [2] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [1] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [0] is used but has no driver.
+Warning: Wire Fr198Gpio.\raw_event is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [31] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [30] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [29] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [28] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [27] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [26] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [25] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [24] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [23] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [22] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [21] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [20] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [19] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [18] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [17] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [16] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [15] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [14] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [13] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [12] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [11] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [10] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [9] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [8] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [7] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [6] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [5] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [4] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [3] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [2] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [1] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [0] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [31] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [30] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [29] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [28] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [27] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [26] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [25] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [24] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [23] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [22] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [21] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [20] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [19] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [18] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [17] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [16] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [15] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [14] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [13] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [12] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [11] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [10] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [9] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [8] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [7] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [6] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [5] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [4] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [3] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [2] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [1] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [0] is used but has no driver.
+Warning: Wire Fr198Gpio.\error [1] is used but has no driver.
+Warning: Wire Fr198Gpio.\error [0] is used but has no driver.
+Checking module Fr198Irq...
+Warning: Wire Fr198Irq.\rsp_valid is used but has no driver.
+Warning: Wire Fr198Irq.\req_ready is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [31] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [30] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [29] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [28] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [27] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [26] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [25] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [24] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [23] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [22] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [21] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [20] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [19] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [18] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [17] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [16] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [15] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [14] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [13] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [12] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [11] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [10] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [9] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [8] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [7] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [6] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [5] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [4] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [3] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [2] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [1] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [0] is used but has no driver.
+Warning: Wire Fr198Irq.\irq is used but has no driver.
+Warning: Wire Fr198Irq.\error [1] is used but has no driver.
+Warning: Wire Fr198Irq.\error [0] is used but has no driver.
+Checking module Fr198Timer...
+Warning: Wire Fr198Timer.\rsp_valid is used but has no driver.
+Warning: Wire Fr198Timer.\req_ready is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [31] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [30] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [29] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [28] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [27] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [26] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [25] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [24] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [23] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [22] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [21] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [20] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [19] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [18] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [17] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [16] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [15] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [14] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [13] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [12] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [11] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [10] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [9] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [8] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [7] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [6] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [5] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [4] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [3] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [2] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [1] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [0] is used but has no driver.
+Warning: Wire Fr198Timer.\match_event is used but has no driver.
+Warning: Wire Fr198Timer.\error [1] is used but has no driver.
+Warning: Wire Fr198Timer.\error [0] is used but has no driver.
+Checking module Fr198Uart...
+Warning: Wire Fr198Uart.\tx is used but has no driver.
+Warning: Wire Fr198Uart.\rsp_valid is used but has no driver.
+Warning: Wire Fr198Uart.\req_ready is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [31] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [30] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [29] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [28] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [27] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [26] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [25] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [24] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [23] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [22] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [21] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [20] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [19] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [18] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [17] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [16] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [15] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [14] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [13] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [12] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [11] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [10] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [9] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [8] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [7] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [6] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [5] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [4] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [3] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [2] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [1] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [0] is used but has no driver.
+Warning: Wire Fr198Uart.\raw_events [3] is used but has no driver.
+Warning: Wire Fr198Uart.\raw_events [2] is used but has no driver.
+Warning: Wire Fr198Uart.\raw_events [1] is used but has no driver.
+Warning: Wire Fr198Uart.\raw_events [0] is used but has no driver.
+Warning: Wire Fr198Uart.\error [1] is used but has no driver.
+Warning: Wire Fr198Uart.\error [0] is used but has no driver.
+Found and reported 216 problems.
+
+4.6. Executing OPT pass (performing simple optimizations).
+
+4.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198AxiCore.
+<suppressed ~5 debug messages>
+Optimizing module Fr198Bridge.
+Optimizing module Fr198Decoder.
+Optimizing module Fr198Gpio.
+Optimizing module Fr198Irq.
+Optimizing module Fr198Timer.
+Optimizing module Fr198Uart.
+
+4.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198AxiCore'.
+<suppressed ~191 debug messages>
+Finding identical cells in module `\Fr198Bridge'.
+Finding identical cells in module `\Fr198Decoder'.
+Finding identical cells in module `\Fr198Gpio'.
+Finding identical cells in module `\Fr198Irq'.
+Finding identical cells in module `\Fr198Timer'.
+Finding identical cells in module `\Fr198Uart'.
+Removed a total of 65 cells.
+
+4.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198AxiCore..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Fr198Bridge..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Fr198Decoder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Fr198Gpio..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \Fr198Irq..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \Fr198Timer..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \Fr198Uart..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~99 debug messages>
+
+4.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198AxiCore.
+  Optimizing cells in module \Fr198Bridge.
+  Optimizing cells in module \Fr198Decoder.
+  Optimizing cells in module \Fr198Gpio.
+  Optimizing cells in module \Fr198Irq.
+  Optimizing cells in module \Fr198Timer.
+  Optimizing cells in module \Fr198Uart.
+Performed a total of 0 changes.
+
+4.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198AxiCore'.
+<suppressed ~78 debug messages>
+Finding identical cells in module `\Fr198Bridge'.
+Finding identical cells in module `\Fr198Decoder'.
+Finding identical cells in module `\Fr198Gpio'.
+Finding identical cells in module `\Fr198Irq'.
+Finding identical cells in module `\Fr198Timer'.
+Finding identical cells in module `\Fr198Uart'.
+Removed a total of 26 cells.
+
+4.6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198AxiCore..
+Finding unused cells or wires in module \Fr198Bridge..
+Finding unused cells or wires in module \Fr198Decoder..
+Finding unused cells or wires in module \Fr198Gpio..
+Finding unused cells or wires in module \Fr198Irq..
+Finding unused cells or wires in module \Fr198Timer..
+Finding unused cells or wires in module \Fr198Uart..
+Removed 0 unused cells and 92 unused wires.
+<suppressed ~1 debug messages>
+
+4.6.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198AxiCore.
+<suppressed ~1 debug messages>
+Optimizing module Fr198Bridge.
+Optimizing module Fr198Decoder.
+Optimizing module Fr198Gpio.
+Optimizing module Fr198Irq.
+Optimizing module Fr198Timer.
+Optimizing module Fr198Uart.
+
+4.6.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.6.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198AxiCore..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Fr198Bridge..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Fr198Decoder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Fr198Gpio..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \Fr198Irq..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \Fr198Timer..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \Fr198Uart..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~86 debug messages>
+
+4.6.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198AxiCore.
+  Optimizing cells in module \Fr198Bridge.
+  Optimizing cells in module \Fr198Decoder.
+  Optimizing cells in module \Fr198Gpio.
+  Optimizing cells in module \Fr198Irq.
+  Optimizing cells in module \Fr198Timer.
+  Optimizing cells in module \Fr198Uart.
+Performed a total of 0 changes.
+
+4.6.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198AxiCore'.
+<suppressed ~2 debug messages>
+Finding identical cells in module `\Fr198Bridge'.
+Finding identical cells in module `\Fr198Decoder'.
+Finding identical cells in module `\Fr198Gpio'.
+Finding identical cells in module `\Fr198Irq'.
+Finding identical cells in module `\Fr198Timer'.
+Finding identical cells in module `\Fr198Uart'.
+Removed a total of 1 cells.
+
+4.6.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198AxiCore..
+Finding unused cells or wires in module \Fr198Bridge..
+Finding unused cells or wires in module \Fr198Decoder..
+Finding unused cells or wires in module \Fr198Gpio..
+Finding unused cells or wires in module \Fr198Irq..
+Finding unused cells or wires in module \Fr198Timer..
+Finding unused cells or wires in module \Fr198Uart..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+4.6.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198AxiCore.
+Optimizing module Fr198Bridge.
+Optimizing module Fr198Decoder.
+Optimizing module Fr198Gpio.
+Optimizing module Fr198Irq.
+Optimizing module Fr198Timer.
+Optimizing module Fr198Uart.
+
+4.6.14. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.6.15. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198AxiCore..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Fr198Bridge..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Fr198Decoder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Fr198Gpio..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \Fr198Irq..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \Fr198Timer..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \Fr198Uart..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~86 debug messages>
+
+4.6.16. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198AxiCore.
+  Optimizing cells in module \Fr198Bridge.
+  Optimizing cells in module \Fr198Decoder.
+  Optimizing cells in module \Fr198Gpio.
+  Optimizing cells in module \Fr198Irq.
+  Optimizing cells in module \Fr198Timer.
+  Optimizing cells in module \Fr198Uart.
+Performed a total of 0 changes.
+
+4.6.17. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198AxiCore'.
+Finding identical cells in module `\Fr198Bridge'.
+Finding identical cells in module `\Fr198Decoder'.
+Finding identical cells in module `\Fr198Gpio'.
+Finding identical cells in module `\Fr198Irq'.
+Finding identical cells in module `\Fr198Timer'.
+Finding identical cells in module `\Fr198Uart'.
+Removed a total of 0 cells.
+
+4.6.18. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198AxiCore..
+Finding unused cells or wires in module \Fr198Bridge..
+Finding unused cells or wires in module \Fr198Decoder..
+Finding unused cells or wires in module \Fr198Gpio..
+Finding unused cells or wires in module \Fr198Irq..
+Finding unused cells or wires in module \Fr198Timer..
+Finding unused cells or wires in module \Fr198Uart..
+
+4.6.19. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198AxiCore.
+Optimizing module Fr198Bridge.
+Optimizing module Fr198Decoder.
+Optimizing module Fr198Gpio.
+Optimizing module Fr198Irq.
+Optimizing module Fr198Timer.
+Optimizing module Fr198Uart.
+
+4.6.20. Finished OPT passes. (There is nothing left to do.)
+
+4.7. Executing WREDUCE pass (reducing word size of cells).
+Removed top 15 bits (of 16) from port B of cell Fr198Decoder.$sub$design.v:351$547 ($sub).
+Removed top 7 bits (of 8) from port B of cell Fr198Decoder.$eq$design.v:364$554 ($eq).
+Removed top 7 bits (of 16) from port B of cell Fr198Decoder.$sub$design.v:368$558 ($sub).
+Removed top 1 bits (of 2) from port B of cell Fr198Decoder.$eq$design.v:372$559 ($eq).
+Removed top 6 bits (of 8) from port B of cell Fr198Decoder.$eq$design.v:381$565 ($eq).
+Removed top 6 bits (of 16) from port B of cell Fr198Decoder.$sub$design.v:385$569 ($sub).
+Removed top 6 bits (of 8) from port B of cell Fr198Decoder.$eq$design.v:398$576 ($eq).
+Removed top 6 bits (of 16) from port B of cell Fr198Decoder.$sub$design.v:402$580 ($sub).
+
+4.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198AxiCore..
+Finding unused cells or wires in module \Fr198Bridge..
+Finding unused cells or wires in module \Fr198Decoder..
+Finding unused cells or wires in module \Fr198Gpio..
+Finding unused cells or wires in module \Fr198Irq..
+Finding unused cells or wires in module \Fr198Timer..
+Finding unused cells or wires in module \Fr198Uart..
+
+4.9. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+4.10. Executing OPT pass (performing simple optimizations).
+
+4.10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198AxiCore.
+Optimizing module Fr198Bridge.
+Optimizing module Fr198Decoder.
+Optimizing module Fr198Gpio.
+Optimizing module Fr198Irq.
+Optimizing module Fr198Timer.
+Optimizing module Fr198Uart.
+
+4.10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198AxiCore'.
+Finding identical cells in module `\Fr198Bridge'.
+Finding identical cells in module `\Fr198Decoder'.
+Finding identical cells in module `\Fr198Gpio'.
+Finding identical cells in module `\Fr198Irq'.
+Finding identical cells in module `\Fr198Timer'.
+Finding identical cells in module `\Fr198Uart'.
+Removed a total of 0 cells.
+
+4.10.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198AxiCore..
+Finding unused cells or wires in module \Fr198Bridge..
+Finding unused cells or wires in module \Fr198Decoder..
+Finding unused cells or wires in module \Fr198Gpio..
+Finding unused cells or wires in module \Fr198Irq..
+Finding unused cells or wires in module \Fr198Timer..
+Finding unused cells or wires in module \Fr198Uart..
+
+4.10.4. Finished fast OPT passes.
+
+4.11. Printing statistics.
+
+=== Fr198AxiCore ===
+
+   Number of wires:                446
+   Number of wire bits:           1920
+   Number of public wires:         146
+   Number of public wire bits:    1167
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                351
+     $assert                        27
+     $assume                         6
+     $cover                          5
+     $dff                           98
+     $eq                            18
+     $logic_and                     91
+     $logic_not                     26
+     $logic_or                       2
+     $mux                           70
+     $or                             1
+     $reduce_bool                    1
+     Fr198Bridge                     1
+     Fr198Decoder                    1
+     Fr198Gpio                       1
+     Fr198Irq                        1
+     Fr198Timer                      1
+     Fr198Uart                       1
+
+=== Fr198Bridge ===
+
+   Number of wires:                124
+   Number of wire bits:            699
+   Number of public wires:          93
+   Number of public wire bits:     406
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 97
+     $and                           19
+     $dff                           19
+     $mux                           46
+     $not                           11
+     $or                             2
+
+=== Fr198Decoder ===
+
+   Number of wires:                129
+   Number of wire bits:            830
+   Number of public wires:         124
+   Number of public wire bits:     823
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 66
+     $and                           20
+     $dff                            3
+     $eq                             6
+     $logic_not                      2
+     $mux                           23
+     $not                            4
+     $or                             4
+     $sub                            4
+
+=== Fr198Gpio ===
+
+   Number of wires:                 16
+   Number of wire bits:            190
+   Number of public wires:          16
+   Number of public wire bits:     190
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  0
+
+=== Fr198Irq ===
+
+   Number of wires:                 14
+   Number of wire bits:             99
+   Number of public wires:          14
+   Number of public wire bits:      99
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  0
+
+=== Fr198Timer ===
+
+   Number of wires:                 13
+   Number of wire bits:             94
+   Number of public wires:          13
+   Number of public wire bits:      94
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  0
+
+=== Fr198Uart ===
+
+   Number of wires:                 15
+   Number of wire bits:             99
+   Number of public wires:          15
+   Number of public wire bits:      99
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  0
+
+=== design hierarchy ===
+
+   Fr198AxiCore                      1
+     Fr198Bridge                     1
+     Fr198Decoder                    1
+     Fr198Gpio                       1
+     Fr198Irq                        1
+     Fr198Timer                      1
+     Fr198Uart                       1
+
+   Number of wires:                757
+   Number of wire bits:           3931
+   Number of public wires:         421
+   Number of public wire bits:    2878
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                508
+     $and                           39
+     $assert                        27
+     $assume                         6
+     $cover                          5
+     $dff                          120
+     $eq                            24
+     $logic_and                     91
+     $logic_not                     28
+     $logic_or                       2
+     $mux                          139
+     $not                           15
+     $or                             7
+     $reduce_bool                    1
+     $sub                            4
+
+4.12. Executing CHECK pass (checking for obvious problems).
+Checking module Fr198AxiCore...
+Checking module Fr198Bridge...
+Checking module Fr198Decoder...
+Checking module Fr198Gpio...
+Warning: Wire Fr198Gpio.\rsp_valid is used but has no driver.
+Warning: Wire Fr198Gpio.\req_ready is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [31] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [30] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [29] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [28] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [27] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [26] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [25] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [24] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [23] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [22] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [21] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [20] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [19] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [18] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [17] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [16] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [15] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [14] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [13] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [12] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [11] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [10] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [9] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [8] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [7] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [6] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [5] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [4] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [3] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [2] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [1] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [0] is used but has no driver.
+Warning: Wire Fr198Gpio.\raw_event is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [31] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [30] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [29] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [28] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [27] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [26] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [25] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [24] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [23] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [22] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [21] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [20] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [19] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [18] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [17] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [16] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [15] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [14] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [13] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [12] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [11] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [10] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [9] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [8] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [7] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [6] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [5] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [4] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [3] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [2] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [1] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [0] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [31] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [30] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [29] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [28] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [27] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [26] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [25] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [24] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [23] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [22] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [21] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [20] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [19] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [18] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [17] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [16] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [15] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [14] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [13] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [12] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [11] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [10] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [9] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [8] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [7] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [6] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [5] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [4] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [3] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [2] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [1] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [0] is used but has no driver.
+Warning: Wire Fr198Gpio.\error [1] is used but has no driver.
+Warning: Wire Fr198Gpio.\error [0] is used but has no driver.
+Checking module Fr198Irq...
+Warning: Wire Fr198Irq.\rsp_valid is used but has no driver.
+Warning: Wire Fr198Irq.\req_ready is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [31] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [30] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [29] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [28] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [27] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [26] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [25] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [24] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [23] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [22] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [21] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [20] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [19] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [18] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [17] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [16] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [15] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [14] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [13] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [12] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [11] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [10] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [9] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [8] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [7] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [6] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [5] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [4] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [3] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [2] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [1] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [0] is used but has no driver.
+Warning: Wire Fr198Irq.\irq is used but has no driver.
+Warning: Wire Fr198Irq.\error [1] is used but has no driver.
+Warning: Wire Fr198Irq.\error [0] is used but has no driver.
+Checking module Fr198Timer...
+Warning: Wire Fr198Timer.\rsp_valid is used but has no driver.
+Warning: Wire Fr198Timer.\req_ready is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [31] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [30] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [29] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [28] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [27] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [26] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [25] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [24] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [23] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [22] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [21] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [20] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [19] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [18] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [17] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [16] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [15] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [14] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [13] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [12] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [11] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [10] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [9] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [8] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [7] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [6] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [5] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [4] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [3] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [2] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [1] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [0] is used but has no driver.
+Warning: Wire Fr198Timer.\match_event is used but has no driver.
+Warning: Wire Fr198Timer.\error [1] is used but has no driver.
+Warning: Wire Fr198Timer.\error [0] is used but has no driver.
+Checking module Fr198Uart...
+Warning: Wire Fr198Uart.\tx is used but has no driver.
+Warning: Wire Fr198Uart.\rsp_valid is used but has no driver.
+Warning: Wire Fr198Uart.\req_ready is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [31] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [30] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [29] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [28] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [27] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [26] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [25] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [24] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [23] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [22] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [21] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [20] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [19] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [18] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [17] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [16] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [15] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [14] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [13] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [12] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [11] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [10] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [9] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [8] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [7] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [6] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [5] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [4] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [3] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [2] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [1] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [0] is used but has no driver.
+Warning: Wire Fr198Uart.\raw_events [3] is used but has no driver.
+Warning: Wire Fr198Uart.\raw_events [2] is used but has no driver.
+Warning: Wire Fr198Uart.\raw_events [1] is used but has no driver.
+Warning: Wire Fr198Uart.\raw_events [0] is used but has no driver.
+Warning: Wire Fr198Uart.\error [1] is used but has no driver.
+Warning: Wire Fr198Uart.\error [0] is used but has no driver.
+Found and reported 216 problems.
+
+5. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1. Analyzing design hierarchy..
+Top module:  \Fr198AxiCore
+Used module:     \Fr198Bridge
+Used module:     \Fr198Decoder
+Used module:     \Fr198Gpio
+Used module:     \Fr198Irq
+Used module:     \Fr198Timer
+Used module:     \Fr198Uart
+
+5.2. Analyzing design hierarchy..
+Top module:  \Fr198AxiCore
+Used module:     \Fr198Bridge
+Used module:     \Fr198Decoder
+Used module:     \Fr198Gpio
+Used module:     \Fr198Irq
+Used module:     \Fr198Timer
+Used module:     \Fr198Uart
+Removed 0 unused modules.
+Module Fr198AxiCore directly or indirectly contains formal properties -> setting "keep" attribute.
+
+6. Executing jny backend.
+
+7. Executing RTLIL backend.
+Output filename: ../model/design.il
+
+Warnings: 216 unique messages, 432 total
+End of script. Logfile hash: 4ebe65da65, CPU: user 0.39s system 0.01s, MEM: 21.50 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 22% 3x hierarchy (0 sec), 20% 6x opt_clean (0 sec), ...

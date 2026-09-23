@@ -1,0 +1,27 @@
+{
+  "arguments": [
+    "-g2012",
+    "-s",
+    "tb",
+    "-o",
+    "simulation",
+    "design.v",
+    "tb.sv"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr201-core/chisel-2153728-1790137457503788432",
+  "elapsed_ms": 38,
+  "exit_code": 0,
+  "kill_after_seconds": 5,
+  "label": "compile",
+  "log": "compile.log",
+  "program": "iverilog",
+  "start_utc_unix_ms": 1790137479884,
+  "stderr": "",
+  "stdout": "",
+  "timeout_path": "/usr/bin/timeout",
+  "timeout_seconds": 300,
+  "timeout_sha256": "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52",
+  "tool_canonical_path": "/usr/bin/iverilog",
+  "tool_path": "/usr/bin/iverilog",
+  "tool_sha256": "a6071e4b4a68feafca0c8ee0e6aa275eee9a43a108c62801cfd1eca6eab6d8a3"
+}

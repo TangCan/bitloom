@@ -1,0 +1,21 @@
+{
+  "arguments": [
+    "-V"
+  ],
+  "cwd": "/tmp/tmp.xdtbJZgyYH/artifacts/backends/direct-csr-chisel-2184011-1790137641100750673",
+  "elapsed_ms": 10,
+  "exit_code": 0,
+  "kill_after_seconds": 5,
+  "label": "yosys-version",
+  "log": "yosys-version.log",
+  "program": "yosys",
+  "start_utc_unix_ms": 1790137666921,
+  "stderr": "",
+  "stdout": "Yosys 0.33 (git sha1 2584903a060)\n",
+  "timeout_path": "/usr/bin/timeout",
+  "timeout_seconds": 30,
+  "timeout_sha256": "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52",
+  "tool_canonical_path": "/usr/bin/yosys",
+  "tool_path": "/usr/bin/yosys",
+  "tool_sha256": "88c0a12bb814a1a8716b1ae10b482e35d3005ed558e1f5f626b3dc983ea3abd0"
+}

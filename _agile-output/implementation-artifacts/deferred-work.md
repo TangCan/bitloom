@@ -720,3 +720,10 @@ PRD 指针：`planning-artifacts/prds/prd-rhdl-2026-08-19/addendum.md`（Phase 1
 ## Deferred from: code review of spec-129-2-peripheral-system.md (2026-09-22)
 
 - FIRRTL/Chisel 四外设系统执行归属：Story 129.2 AC7/当前 build evidence 将系统复核交给 129.3，但 Epic129 NFR14 支持矩阵仍列为 129.2 责任。129.3 必须实际执行并关闭 direct/FIRRTL/Chisel 系统矩阵；不得通过修改冻结规格或把 129.1 最小 reset 探针冒充四外设系统 PASS。
+
+
+## 2026-09-23 Phase24 范围结项交接
+
+129.2审查所登记的FIRRTL/Chisel四外设矩阵归属项，现经129.3补审修复完成：AXI与direct CSR两种完整系统均实际执行direct/FIRRTL/Chisel三路线，原oracle及16seed×1000预算保持，原始资料与隔离重放归档。仅该矩阵项resolved；见`docs/ip/phase24-closeout.md`与本次补验记录。
+
+FR189/Epic122/122.2/122.3仍deferred，owner Richard；恢复需实时核验已发布firtool>1.159.0并按既有NFR91/AD-9/NFR14升级合同完成实际验收。不因本次结项清空NFR91或此前明确登记的实例名/参数覆盖/其他数值与后端子集遗留。无自动push/publish授权。

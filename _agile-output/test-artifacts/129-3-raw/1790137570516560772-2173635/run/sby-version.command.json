@@ -1,0 +1,21 @@
+{
+  "arguments": [
+    "--version"
+  ],
+  "cwd": "/tmp/tmp.xdtbJZgyYH/artifacts/formal/run-2189560-1790137671516021991",
+  "elapsed_ms": 122,
+  "exit_code": 0,
+  "kill_after_seconds": 5,
+  "label": "sby-version",
+  "log": "sby-version.log",
+  "program": "/tmp/phase24-closeout-tools/installed/bin/sby",
+  "start_utc_unix_ms": 1790137671564,
+  "stderr": "",
+  "stdout": "SBY yosys-0.47\n",
+  "timeout_path": "/usr/bin/timeout",
+  "timeout_seconds": 30,
+  "timeout_sha256": "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52",
+  "tool_canonical_path": "/tmp/phase24-closeout-tools/installed/bin/sby",
+  "tool_path": "/tmp/phase24-closeout-tools/installed/bin/sby",
+  "tool_sha256": "e4ca0cb2be8b16774b4b52df9c0a740a8c40753fb6c4bdea5174de3c1e7b5915"
+}

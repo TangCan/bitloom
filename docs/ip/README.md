@@ -1,5 +1,7 @@
 # Bitloom 一级 IP 索引（FR37 / FR48 / FR82）
 
+**Phase24 当前状态（2026-09-23）：已按批准范围结项。** 共享模块、流/FIFO、CSR桥/译码、Timer/IRQ/GPIO/UART系统及一个固定外部FIFO试点均已交付；[总验收](phase24-closeout.md)与[支持矩阵](phase24-support-matrix.md)给出证据和限制。下文各故事时点的“未来/尚未完成”只保留历史进度，不代表当前状态。FR189 deferred / NFR91保留。
+
 公开产品名 **Bitloom**（crates.io / CLI：`bitloom`）。与 [samitbasu/rhdl](https://github.com/samitbasu/rhdl) **无关**。
 
 设计 crate **只依赖 [`bitloom-prelude`](../../crates/bitloom-prelude)**。五类一级 IP 与黑盒均通过：

@@ -1,0 +1,9 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.05s
+     Running tests/fr198_peripheral_system.rs (target/debug/deps/fr198_peripheral_system-33063e05b4360161)
+
+running 1 test
+FR201 formal PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr201-core-formal/run-2167557-1790137532342267641
+test fr201_core_formal::fr201_complete_system_formal_and_negative_control ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 22.45s
+

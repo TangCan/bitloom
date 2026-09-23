@@ -1,0 +1,12 @@
+Hit:1 https://mirrors.ustc.edu.cn/ubuntu noble InRelease
+Get:2 https://mirrors.ustc.edu.cn/ubuntu noble-updates InRelease [126 kB]
+Hit:3 https://mirrors.ustc.edu.cn/ubuntu noble-backports InRelease
+Hit:4 https://mirrors.ustc.edu.cn/ubuntu noble-security InRelease
+Get:5 https://mirrors.ustc.edu.cn/ubuntu noble-updates/main amd64 Packages [1308 kB]
+Get:6 https://mirrors.ustc.edu.cn/ubuntu noble-updates/main Translation-en [298 kB]
+Get:7 https://mirrors.ustc.edu.cn/ubuntu noble-updates/restricted amd64 Packages [1635 kB]
+Get:8 https://mirrors.ustc.edu.cn/ubuntu noble-updates/restricted Translation-en [372 kB]
+Get:9 https://mirrors.ustc.edu.cn/ubuntu noble-updates/universe amd64 Packages [1697 kB]
+Get:10 https://cli.github.com/packages stable InRelease [3917 B]
+Fetched 5439 kB in 1s (3669 kB/s)
+Reading package lists...

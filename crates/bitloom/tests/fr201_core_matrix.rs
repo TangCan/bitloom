@@ -15,38 +15,40 @@ fn evidence() -> Value {
 #[test]
 fn p0_three_backends_execute_the_complete_four_peripheral_system() {
     let value = evidence();
-    for backend in ["direct", "firrtl", "chisel"] {
-        let row = &value["backends"][backend];
-        assert_eq!(row["exit_code"].as_i64(), Some(0), "{backend} must execute");
-        assert!(
-            row["transactions"].as_u64().unwrap_or(0) >= 16_000,
-            "{backend} frozen transaction budget"
-        );
-        assert!(
-            row["assertions"].as_u64().unwrap_or(0) > 0,
-            "{backend} assertions"
-        );
-        assert!(
-            row["vcd_bytes"].as_u64().unwrap_or(0) > 0,
-            "{backend} non-empty VCD"
-        );
-        for feature in [
-            "slverr",
-            "decerr",
-            "wstrb",
-            "backpressure",
-            "reset_cancel",
-            "timer",
-            "gpio",
-            "uart_tx",
-            "uart_rx",
-            "irq_0_4",
-        ] {
-            assert_eq!(
-                row["coverage"][feature].as_bool(),
-                Some(true),
-                "{backend} missing {feature}"
+    for section in ["backends", "direct_csr_backends"] {
+        for backend in ["direct", "firrtl", "chisel"] {
+            let row = &value[section][backend];
+            assert_eq!(row["exit_code"].as_i64(), Some(0), "{backend} must execute");
+            assert!(
+                row["transactions"].as_u64().unwrap_or(0) >= 16_000,
+                "{backend} frozen transaction budget"
             );
+            assert!(
+                row["assertions"].as_u64().unwrap_or(0) > 0,
+                "{backend} assertions"
+            );
+            assert!(
+                row["vcd_bytes"].as_u64().unwrap_or(0) > 0,
+                "{backend} non-empty VCD"
+            );
+            for feature in [
+                "slverr",
+                "decerr",
+                "wstrb",
+                "backpressure",
+                "reset_cancel",
+                "timer",
+                "gpio",
+                "uart_tx",
+                "uart_rx",
+                "irq_0_4",
+            ] {
+                assert_eq!(
+                    row["coverage"][feature].as_bool(),
+                    Some(true),
+                    "{backend} missing {feature}"
+                );
+            }
         }
     }
 }
@@ -102,15 +104,29 @@ fn p0_missing_tools_fail_and_isolated_checkout_replays() {
 }
 
 #[test]
-fn p0_evidence_producer_validated_owned_paths_and_rtl_hashes() {
+fn p0_evidence_records_six_archived_sources_and_scoped_audit() {
     let value = evidence();
+    assert_eq!(value["schema"].as_u64(), Some(2));
+    assert_eq!(value["status"], "PASS");
+    for key in [
+        "direct",
+        "firrtl",
+        "chisel",
+        "direct-csr-direct",
+        "direct-csr-firrtl",
+        "direct-csr-chisel",
+        "formal",
+    ] {
+        assert!(value["source_evidence"][key].as_str().is_some());
+    }
+    assert!(!value["archive_manifest"].as_object().unwrap().is_empty());
+    assert_eq!(value["compatibility_audit"]["status"], "PASS");
     assert_eq!(
-        value["provenance"]["source_paths_validated"].as_bool(),
-        Some(true)
-    );
-    assert_eq!(
-        value["provenance"]["rtl_sha256_recomputed"].as_bool(),
-        Some(true)
+        value["compatibility_audit"]["scopes"]
+            .as_array()
+            .unwrap()
+            .len(),
+        2
     );
 }
 
@@ -123,6 +139,5 @@ fn p1_semver_and_public_surface_claims_are_explicit() {
         value["semver"]["packages"],
         serde_json::json!(["bitloom-prelude", "bitloom-sim", "bitloom-firrtl"])
     );
-    assert_eq!(value["public_api_added"], serde_json::json!([]));
-    assert_eq!(value["package_versions_changed"].as_bool(), Some(false));
+    assert_eq!(value["compatibility_audit"]["status"], "PASS");
 }

@@ -1,0 +1,10 @@
+[info] welcome to sbt 1.10.11 (Ubuntu Java 17.0.20.1)
+[info] loading project definition from /nvme_data2/richard/2026/rhdl/target/fr201-core/chisel-2123259-1790137259872415732/project
+[info] loading settings for project chisel-2123259-1790137259872415732 from build.sbt...
+[info] set current project to chisel-2123259-1790137259872415732 (in build file:/nvme_data2/richard/2026/rhdl/target/fr201-core/chisel-2123259-1790137259872415732/)
+[info] compiling 2 Scala sources to /nvme_data2/richard/2026/rhdl/target/fr201-core/chisel-2123259-1790137259872415732/target/scala-2.13/classes ...
+[warn] 661 feature warnings; re-run with -feature for details
+[warn] one warning found
+[info] done compiling
+[info] running Fr201Main 
+[success] Total time: 16 s, completed Sep 23, 2026, 12:21:21 PM

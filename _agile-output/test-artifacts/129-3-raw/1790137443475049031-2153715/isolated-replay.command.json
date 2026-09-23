@@ -1,0 +1,12 @@
+{
+  "command": [
+    "bash",
+    "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/129-3-isolated-replay.sh",
+    "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/phase24-closeout-core.json"
+  ],
+  "exit_code": 0,
+  "start_utc_unix_ms": 1790137565272,
+  "end_utc_unix_ms": 1790137718987,
+  "timeout_seconds": 2400,
+  "log": "_agile-output/test-artifacts/129-3-raw/1790137443475049031-2153715/isolated-replay.log"
+}

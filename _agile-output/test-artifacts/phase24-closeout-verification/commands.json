@@ -1,0 +1,183 @@
+[
+  {
+    "label": "core-custom-output",
+    "command": [
+      "python3",
+      "_agile-output/test-artifacts/129-3-build-runner.py",
+      "--evidence",
+      "_agile-output/test-artifacts/phase24-closeout-core.json"
+    ],
+    "utc": "2026-09-23T04:20:46.576310+00:00",
+    "duration_seconds": 134.3181607723236,
+    "exit_code": 1,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/core-custom-output.log",
+    "log_sha256": "b5dd4daa3dbd0a9d707b6acd322428e638b57130c0e914b6a5cb42bb28d7d30e"
+  },
+  {
+    "label": "core-custom-output-fixed",
+    "command": [
+      "python3",
+      "_agile-output/test-artifacts/129-3-build-runner.py",
+      "--evidence",
+      "_agile-output/test-artifacts/phase24-closeout-core.json"
+    ],
+    "utc": "2026-09-23T04:24:03.425626+00:00",
+    "duration_seconds": 275.94728326797485,
+    "exit_code": 0,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/core-custom-output-fixed.log",
+    "log_sha256": "f1f476b08e6f929048673664b12c368eb2eae03443dd0a535dc3a5ff78d3eb4e"
+  },
+  {
+    "label": "clean",
+    "command": [
+      "cargo",
+      "clean"
+    ],
+    "utc": "2026-09-23T04:29:22.673491+00:00",
+    "duration_seconds": 6.329474925994873,
+    "exit_code": 0,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/clean.log",
+    "log_sha256": "1046bde8f7c7a001be60312ea63055304ee8c769342bc740160e433e820d86bb"
+  },
+  {
+    "label": "fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all"
+    ],
+    "utc": "2026-09-23T04:29:29.068177+00:00",
+    "duration_seconds": 1.2675588130950928,
+    "exit_code": 0,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/fmt.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "evidence-after-clean",
+    "command": [
+      "python3",
+      "_agile-output/test-artifacts/129-3-atdd-gate.py"
+    ],
+    "utc": "2026-09-23T04:29:49.543930+00:00",
+    "duration_seconds": 0.3152947425842285,
+    "exit_code": 0,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/evidence-after-clean.log",
+    "log_sha256": "66f88adb7731f3c905c0f4d3b4a7bcb027ebcaff8f147087343016a7f6a4135e"
+  },
+  {
+    "label": "evidence-after-clean-optimized",
+    "command": [
+      "python3",
+      "-O",
+      "_agile-output/test-artifacts/129-3-atdd-gate.py"
+    ],
+    "utc": "2026-09-23T04:29:49.906787+00:00",
+    "duration_seconds": 0.41564178466796875,
+    "exit_code": 0,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/evidence-after-clean-optimized.log",
+    "log_sha256": "66f88adb7731f3c905c0f4d3b4a7bcb027ebcaff8f147087343016a7f6a4135e"
+  },
+  {
+    "label": "workspace",
+    "command": [
+      "just",
+      "test"
+    ],
+    "utc": "2026-09-23T04:29:31.286030+00:00",
+    "duration_seconds": 220.21290922164917,
+    "exit_code": 143,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/workspace.log",
+    "log_sha256": "f158781be3fed768129b39c44359f224fa689e7cc139c59f5a67ffbce11135db"
+  },
+  {
+    "label": "clean-optimized",
+    "command": [
+      "cargo",
+      "clean"
+    ],
+    "utc": "2026-09-23T04:33:11.617534+00:00",
+    "duration_seconds": 3.8734536170959473,
+    "exit_code": 0,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/clean-optimized.log",
+    "log_sha256": "4564a5a8b718e1bb6234f989155589ee4105f1568c05b0a6669bc29642f98892"
+  },
+  {
+    "label": "fmt-optimized",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all"
+    ],
+    "utc": "2026-09-23T04:33:15.545184+00:00",
+    "duration_seconds": 1.267047643661499,
+    "exit_code": 0,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/fmt-optimized.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "workspace-optimized",
+    "command": [
+      "env",
+      "CARGO_PROFILE_TEST_OPT_LEVEL=1",
+      "just",
+      "test"
+    ],
+    "utc": "2026-09-23T04:33:16.877292+00:00",
+    "duration_seconds": 1021.0464837551117,
+    "exit_code": 0,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/workspace-optimized.log",
+    "log_sha256": "c8db0af2c86dc1ed55834b2bb2becd7420bc07d2bbc01bc081724f4628a6afd1"
+  },
+  {
+    "label": "final-phase24-gate",
+    "command": [
+      "python3",
+      "scripts/check_phase24_gate.py"
+    ],
+    "utc": "2026-09-23T04:51:03.120301+00:00",
+    "duration_seconds": 0.06459641456604004,
+    "exit_code": 0,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/final-phase24-gate.log",
+    "log_sha256": "ebedb13e2410f706b8ae70ac515faefcc6b98ca6e8a47a934138f0fb3900ebfd"
+  },
+  {
+    "label": "final-evidence",
+    "command": [
+      "python3",
+      "_agile-output/test-artifacts/129-3-atdd-gate.py"
+    ],
+    "utc": "2026-09-23T04:51:03.235517+00:00",
+    "duration_seconds": 0.31519508361816406,
+    "exit_code": 0,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/final-evidence.log",
+    "log_sha256": "66f88adb7731f3c905c0f4d3b4a7bcb027ebcaff8f147087343016a7f6a4135e"
+  },
+  {
+    "label": "final-evidence-optimized",
+    "command": [
+      "python3",
+      "-O",
+      "_agile-output/test-artifacts/129-3-atdd-gate.py"
+    ],
+    "utc": "2026-09-23T04:51:03.604189+00:00",
+    "duration_seconds": 0.41573262214660645,
+    "exit_code": 0,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/final-evidence-optimized.log",
+    "log_sha256": "66f88adb7731f3c905c0f4d3b4a7bcb027ebcaff8f147087343016a7f6a4135e"
+  },
+  {
+    "label": "final-format",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "utc": "2026-09-23T04:51:04.098824+00:00",
+    "duration_seconds": 1.2675426006317139,
+    "exit_code": 0,
+    "log": "_agile-output/test-artifacts/phase24-closeout-verification/final-format.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

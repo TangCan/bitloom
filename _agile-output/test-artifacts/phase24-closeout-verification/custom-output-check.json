@@ -1,0 +1,6 @@
+{
+  "default_unchanged_until_explicit_promotion": true,
+  "old_sha256": "a242ed33abe2b505768bcecd6d80d2c6515b9b775a63f0d029ad18fd53651d3e",
+  "new_sha256": "1de20d46f7f3184c1f736d9491951b87cd829f288cd251340085d9ac66cc6b03",
+  "action": "explicitly promote fully validated custom output to canonical after completed main and isolated replay"
+}

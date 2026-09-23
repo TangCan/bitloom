@@ -1,0 +1,11 @@
+{
+  "command": [
+    "rustc",
+    "--version"
+  ],
+  "exit_code": 0,
+  "start_utc_unix_ms": 1790137564291,
+  "end_utc_unix_ms": 1790137564324,
+  "timeout_seconds": 30,
+  "log": "_agile-output/test-artifacts/129-3-raw/1790137443475049031-2153715/rustc-identity.log"
+}

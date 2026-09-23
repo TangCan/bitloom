@@ -1,0 +1,12 @@
+# running in request_cover/src/
+read -formal -D FR201_RESPONSE_FORMAL -D FR201_REQUEST_FORMAL design.v
+hierarchy -top Fr198AxiCore
+select -clear
+blackbox Fr198Uart Fr198Gpio Fr198Timer Fr198Irq
+setattr -mod -unset blackbox =A:blackbox=1
+prep -top Fr198AxiCore
+
+hierarchy -smtcheck
+rename -witness
+write_jny -no-connections ../model/design.json
+write_rtlil ../model/design.il

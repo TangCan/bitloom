@@ -491,10 +491,10 @@ Phase 11 曾将下列五项公开锁定为**永久非目标**，并写「须新 
 
 详见 [`docs/semver-0x-policy.md`](docs/semver-0x-policy.md) 与 [`docs/crates-io-publish-bitloom.md`](docs/crates-io-publish-bitloom.md)。
 
-### Phase 24：可组合 IP（计划中）
+### Phase 24：可组合 IP（已按批准范围结项）
 
-2026-09-20 已批准可组合模块、流/FIFO、CSR/AXI-Lite、UART/GPIO/Timer/IRQ 系统与一个外部小核的规划（FR192–201 / Epic125–130）。M0 合同及既有 AXI 正确性工作已完成（FR192/FR193）；模块组合基础126.1/126.2（FR194）也已完成，126.3/126.4及Epic127–130仍为 backlog，尚不代表新系统交付。参见 [正式接口合同](docs/ip/phase24-contract.md) 和 [故事清单](_agile-output/planning-artifacts/epics.md#phase-24-inventory--可组合-ip-与可验证生态)。历史能力及 FR189 deferred 保留；支持矩阵、维护人和贡献模板在129.3/130.3按实测补齐。
+Epic125–130 的22个故事及 FR192–FR201 / NFR93–NFR99 已完成：共享模块组合、流/FIFO、CSR/AXI-Lite、UART/GPIO/Timer/IRQ 两种系统组合，以及固定参数的 PULP `fifo_v3` 外部试点。见[总验收与保留事项](docs/ip/phase24-closeout.md)、[正式接口合同](docs/ip/phase24-contract.md)和[支持矩阵](docs/ip/phase24-support-matrix.md)。FR189继续未交付/deferred，NFR91保留；本次未推送或发布。
 
-既有 `Axi4LiteSlave`（FR193 / Story125.3）保留8-bit地址、32-bit数据和四寄存器映射：AW/W各一槽独立捕获，同拍AW/W仍一tick产生B；独立读可与写并发或在B受阻时接受，同址并发读返回旧值。WSTRB按字节合并，未映射/未对齐读0写忽略并OKAY；B/R受阻保持，同步reset清bank和在途状态。手写FL同步修正，验证范围见[AXI修复证据](docs/ip/phase24-axi-green-evidence.md)。这不交付未来16-bit CSR桥或Epic126–130，也不扩大FR142稳定API。
+原 `Axi4LiteSlave`（FR193）保留8-bit地址和四寄存器映射、独立AW/W捕获和并发读响应，见[原AXI修复证据](docs/ip/phase24-axi-green-evidence.md)。新增系统使用独立的16-bit CSR桥与四窗译码，不改变旧接口。
 
-**FR194 / Story126.2：** 新增同一session模块定义复用与首批 `Gpio::define_module`，补齐实例图、端口连接和多驱动诊断。可运行[prelude-only组合示例](docs/ip/module-composition.md)及[真实RTL验收](docs/ip/module-composition-evidence.md)；M1与FR195尚未关闭，原生层级仿真和实例参数覆盖仍未支持。
+设计仍只依赖`bitloom-prelude`，共享session只freeze一次。可运行[组合示例](docs/ip/module-composition.md)、[CSR桥](docs/ip/axi-lite-csr-bridge.md)、[参数FIFO](docs/ip/param-sync-fifo.md)和[外部试点](docs/ip/external-fifo-pilot.md)。新增API已显式登记FR142/minor；native/generated层级仿真和通用实例参数覆盖仍不支持。结项不等于全协议形式证明、PPA、时序或物理签核，也不代表远端CI本轮已执行。

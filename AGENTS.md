@@ -87,3 +87,10 @@ Story127.1–127.4随各自单故事提交完成，FR196静态CSR描述/软件�
 Story130.1–130.3完成；FR199来源锁/只读禁网重放与FR200真实Bitloom父模块/FIFO独立oracle、上游六组各100000比较交付。130.2独立clean/fmt/justtest：1889 passed / 0 failed / 50 ignored；130.3：1893 passed / 0 failed / 55 ignored，专用真实工具门禁另跑，ignored不计PASS。见`_agile-output/implementation-artifacts/epic-130-closeout.md`与两Story最终验证记录。
 
 外部支持行仅固定32-bit/depth8/fall-through0提升maintained；native/generated层级unsupported。CLI新增入口逐项FR142/minor登记，无产品工具钉/包版本/push/publish。FR189/Epic122继续deferred，NFR91保留；本记录不宣称整个Phase24关闭。全部未完成Story七步授权继续有效。
+
+
+## Phase24 当前结项状态（2026-09-23）
+
+2026-09-23：Phase24 已批准范围 FR192–FR201 / NFR93–NFR99 完成交付与结项，Epic125–130 共22故事done。129.3四层独立补审及修复、两拓扑六路线实际RTL/原始综合、有限请求/复位形式、耐清理的主/隔离原始证据和新鲜证据校验已完成；FR199/FR200外部试点按130.2/130.3最终记录交付。FR189/Epic122/122.2/122.3继续deferred、未交付；NFR91及既有明确遗留保留。无产品工具钉/包版本变更，不push、不publish，不声称远端CI已执行或物理签核。
+
+[总验收与FR/NFR映射](docs/ip/phase24-closeout.md)。先前M0-only、126.1/126.2-only、Epic130开放或Phase24未完成的分日期段落保留为历史，本条为当前状态。

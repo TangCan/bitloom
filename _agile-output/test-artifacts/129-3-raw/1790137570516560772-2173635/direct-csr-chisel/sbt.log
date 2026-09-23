@@ -1,0 +1,10 @@
+[info] welcome to sbt 1.10.11 (Ubuntu Java 17.0.20.1)
+[info] loading project definition from /tmp/tmp.xdtbJZgyYH/artifacts/backends/direct-csr-chisel-2184011-1790137641100750673/project
+[info] loading settings for project direct-csr-chisel-2184011-1790137641100750673 from build.sbt...
+[info] set current project to direct-csr-chisel-2184011-1790137641100750673 (in build file:/tmp/tmp.xdtbJZgyYH/artifacts/backends/direct-csr-chisel-2184011-1790137641100750673/)
+[info] compiling 2 Scala sources to /tmp/tmp.xdtbJZgyYH/artifacts/backends/direct-csr-chisel-2184011-1790137641100750673/target/scala-2.13/classes ...
+[warn] 623 feature warnings; re-run with -feature for details
+[warn] one warning found
+[info] done compiling
+[info] running Fr201Main 
+[success] Total time: 15 s, completed Sep 23, 2026, 12:27:42 PM

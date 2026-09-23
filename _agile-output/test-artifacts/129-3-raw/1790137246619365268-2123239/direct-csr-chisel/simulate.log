@@ -1,0 +1,3 @@
+VCD info: dumpfile direct.vcd opened for output.
+FR198 PASS topology=direct assertions=60406 transactions=16098 random_transactions=16000
+tb.sv:266: $finish called at 487210000 (1ps)

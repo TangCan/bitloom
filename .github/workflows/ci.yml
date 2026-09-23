@@ -136,6 +136,9 @@ jobs:
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: extractions/setup-just@v2
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: "1.97.1"
@@ -152,7 +155,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y iverilog
           bash scripts/ci-install-sby.sh
-          cargo install cargo-semver-checks --locked
+          cargo install cargo-semver-checks --version 0.50.0 --locked
       - name: Required FR198 / FR201 core matrix
         run: |
           firtool_bin="$(cargo run -q -p bitloom -- firtool ensure | tail -n1)"
@@ -160,14 +163,16 @@ jobs:
           export BITLOOM_SBY="$(command -v sby)"
           just fr198-fr201-core-check
       - uses: actions/upload-artifact@v4
-        if: failure()
+        if: always()
         with:
-          name: fr198-fr201-core-failure
+          name: fr198-fr201-core-evidence
           path: |
             target/fr198/
             target/fr201-core/
             target/fr201-core-formal/
             target/fr201-runner/
+            target/fr201-isolated-failure/
+            _agile-output/test-artifacts/129-3-raw/
             _agile-output/test-artifacts/129-3-latest-results.json
 
   # FR35 / FR50: HLS product-path smoke. Failures are never ignored.

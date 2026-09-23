@@ -1,0 +1,9 @@
+make: Entering directory '/tmp/phase24-closeout-tools/sby-src'
+mkdir -p /tmp/phase24-closeout-tools/installed/bin
+mkdir -p /tmp/phase24-closeout-tools/installed/share/yosys/python3
+cp sbysrc/sby_*.py /tmp/phase24-closeout-tools/installed/share/yosys/python3/
+sed -e 's|##yosys-program-prefix##|"''"|' < sbysrc/sby_core.py > /tmp/phase24-closeout-tools/installed/share/yosys/python3/sby_core.py
+sed -e 's|##yosys-sys-path##|sys.path += [os.path.dirname(__file__) + p for p in ["/share/python3", "/../share/yosys/python3"]]|;' \
+	-e "s|##yosys-release-version##|release_version = 'SBY yosys-0.47'|;" < sbysrc/sby.py > /tmp/phase24-closeout-tools/installed/bin/sby
+chmod +x /tmp/phase24-closeout-tools/installed/bin/sby
+make: Leaving directory '/tmp/phase24-closeout-tools/sby-src'

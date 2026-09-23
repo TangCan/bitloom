@@ -1,0 +1,3 @@
+VCD info: dumpfile axi.vcd opened for output.
+FR198 PASS topology=axi assertions=62416 transactions=16102 random_transactions=16000
+tb.sv:303: $finish called at 1025680000 (1ps)

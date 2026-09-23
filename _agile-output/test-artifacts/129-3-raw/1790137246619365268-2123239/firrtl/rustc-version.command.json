@@ -1,0 +1,21 @@
+{
+  "arguments": [
+    "--version"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr201-core/firrtl-2123259-1790137253204210149",
+  "elapsed_ms": 23,
+  "exit_code": 0,
+  "kill_after_seconds": 5,
+  "label": "rustc-version",
+  "log": "rustc-version.log",
+  "program": "rustc",
+  "start_utc_unix_ms": 1790137259553,
+  "stderr": "",
+  "stdout": "rustc 1.97.1 (8bab26f4f 2026-07-14)\n",
+  "timeout_path": "/usr/bin/timeout",
+  "timeout_seconds": 30,
+  "timeout_sha256": "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52",
+  "tool_canonical_path": "/nvme_data1/richard/.cargo/bin/rustup",
+  "tool_path": "/home/richard/.cargo/bin/rustc",
+  "tool_sha256": "dda7234360b7f578ca8b0ddcb80145646fa61a67c1720a5abc7051b35c9fcb71"
+}

@@ -1,0 +1,59 @@
+{
+  "apt_update": {
+    "exit_code": 0,
+    "duration_seconds": 4.876680135726929
+  },
+  "apt_install": {
+    "exit_code": 0,
+    "duration_seconds": 17.50143337249756
+  },
+  "tool-0": {
+    "command": [
+      "git",
+      "clone",
+      "--depth",
+      "1",
+      "--branch",
+      "yosys-0.47",
+      "https://github.com/YosysHQ/sby.git",
+      "/tmp/phase24-closeout-tools/sby-src"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 2.093400478363037
+  },
+  "tool-1": {
+    "command": [
+      "git",
+      "-C",
+      "/tmp/phase24-closeout-tools/sby-src",
+      "rev-parse",
+      "yosys-0.47"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 0.0033729076385498047
+  },
+  "tool-2": {
+    "command": [
+      "make",
+      "-C",
+      "/tmp/phase24-closeout-tools/sby-src",
+      "install",
+      "PREFIX=/tmp/phase24-closeout-tools/installed"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 0.030207157135009766
+  },
+  "tool-3": {
+    "command": [
+      "curl",
+      "-fL",
+      "--retry",
+      "3",
+      "https://repo.maven.apache.org/maven2/org/scala-sbt/sbt-launch/1.10.11/sbt-launch-1.10.11.jar",
+      "-o",
+      "/tmp/phase24-closeout-tools/sbt-launch-1.10.11.jar"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 2.960031032562256
+  }
+}

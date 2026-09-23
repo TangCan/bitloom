@@ -1,0 +1,21 @@
+{
+  "arguments": [
+    "-version"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr201-core/direct-csr-chisel-2161001-1790137499983063776",
+  "elapsed_ms": 67,
+  "exit_code": 0,
+  "kill_after_seconds": 5,
+  "label": "java-version",
+  "log": "java-version.log",
+  "program": "java",
+  "start_utc_unix_ms": 1790137528191,
+  "stderr": "openjdk version \"17.0.20.1\" 2026-08-18\nOpenJDK Runtime Environment (build 17.0.20.1+1-1-24.04-Ubuntu)\nOpenJDK 64-Bit Server VM (build 17.0.20.1+1-1-24.04-Ubuntu, mixed mode, sharing)\n",
+  "stdout": "",
+  "timeout_path": "/usr/bin/timeout",
+  "timeout_seconds": 30,
+  "timeout_sha256": "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52",
+  "tool_canonical_path": "/usr/lib/jvm/java-17-openjdk-amd64/bin/java",
+  "tool_path": "/usr/lib/jvm/java-17-openjdk-amd64/bin/java",
+  "tool_sha256": "e363cce82477c5f19cab72d432defe96fa1c69503353c3e5e9660243e2030883"
+}

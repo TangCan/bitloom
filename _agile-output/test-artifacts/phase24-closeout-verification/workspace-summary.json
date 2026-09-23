@@ -1,0 +1,17 @@
+{
+  "result_blocks": 487,
+  "passed": 1894,
+  "failed": 0,
+  "ignored": 56,
+  "command": [
+    "env",
+    "CARGO_PROFILE_TEST_OPT_LEVEL=1",
+    "just",
+    "test"
+  ],
+  "duration_seconds": 1021.0464837551117,
+  "exit_code": 0,
+  "log": "_agile-output/test-artifacts/phase24-closeout-verification/workspace-optimized.log",
+  "log_sha256": "c8db0af2c86dc1ed55834b2bb2becd7420bc07d2bbc01bc081724f4628a6afd1",
+  "counting": "Completed test-result blocks from this single final run only; ignored are not passes."
+}

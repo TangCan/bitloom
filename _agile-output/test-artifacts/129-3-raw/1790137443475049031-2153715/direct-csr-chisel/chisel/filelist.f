@@ -1,0 +1,11 @@
+BitloomUartCsrRegisters.sv
+BitloomUartCsrFifo8x4.sv
+Fr198Uart.sv
+BitloomGpioCsrRegisters.sv
+Fr198Gpio.sv
+BitloomTimerCsr.sv
+Fr198Timer.sv
+BitloomIrqCsr.sv
+Fr198Irq.sv
+Fr198Decoder.sv
+Fr198DirectCore.sv

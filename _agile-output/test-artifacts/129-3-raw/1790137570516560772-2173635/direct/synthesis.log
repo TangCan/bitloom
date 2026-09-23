@@ -1,0 +1,1629 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Running command `read_verilog -sv design.v; hierarchy -check -top Fr198Axi; proc; check -assert; synth -top Fr198Axi -flatten; check -assert; stat' --
+
+1. Executing Verilog-2005 frontend: design.v
+Parsing SystemVerilog input from `design.v' to AST representation.
+Generating RTLIL representation for module `\Fr198Bridge'.
+Generating RTLIL representation for module `\Fr198Decoder'.
+Generating RTLIL representation for module `\BitloomUartCsrRegisters'.
+Generating RTLIL representation for module `\BitloomUartCsrFifo8x4'.
+Generating RTLIL representation for module `\Fr198Uart'.
+Generating RTLIL representation for module `\BitloomGpioCsrRegisters'.
+Generating RTLIL representation for module `\Fr198Gpio'.
+Generating RTLIL representation for module `\BitloomTimerCsr'.
+Generating RTLIL representation for module `\Fr198Timer'.
+Generating RTLIL representation for module `\BitloomIrqCsr'.
+Generating RTLIL representation for module `\Fr198Irq'.
+Generating RTLIL representation for module `\Fr198AxiCore'.
+Generating RTLIL representation for module `\Fr198Axi'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \Fr198Axi
+Used module:     \Fr198AxiCore
+Used module:         \Fr198Decoder
+Used module:         \Fr198Bridge
+Used module:         \Fr198Irq
+Used module:             \BitloomIrqCsr
+Used module:         \Fr198Timer
+Used module:             \BitloomTimerCsr
+Used module:         \Fr198Gpio
+Used module:             \BitloomGpioCsrRegisters
+Used module:         \Fr198Uart
+Used module:             \BitloomUartCsrFifo8x4
+Used module:             \BitloomUartCsrRegisters
+
+2.2. Analyzing design hierarchy..
+Top module:  \Fr198Axi
+Used module:     \Fr198AxiCore
+Used module:         \Fr198Decoder
+Used module:         \Fr198Bridge
+Used module:         \Fr198Irq
+Used module:             \BitloomIrqCsr
+Used module:         \Fr198Timer
+Used module:             \BitloomTimerCsr
+Used module:         \Fr198Gpio
+Used module:             \BitloomGpioCsrRegisters
+Used module:         \Fr198Uart
+Used module:             \BitloomUartCsrFifo8x4
+Used module:             \BitloomUartCsrRegisters
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$design.v:2696$700 in module BitloomIrqCsr.
+Marked 1 switch rules as full_case in process $proc$design.v:2398$613 in module Fr198Timer.
+Marked 1 switch rules as full_case in process $proc$design.v:2262$593 in module BitloomTimerCsr.
+Marked 1 switch rules as full_case in process $proc$design.v:1921$492 in module Fr198Gpio.
+Marked 1 switch rules as full_case in process $proc$design.v:1778$476 in module BitloomGpioCsrRegisters.
+Marked 1 switch rules as full_case in process $proc$design.v:1355$353 in module Fr198Uart.
+Marked 1 switch rules as full_case in process $proc$design.v:941$275 in module BitloomUartCsrFifo8x4.
+Marked 1 switch rules as full_case in process $proc$design.v:837$247 in module BitloomUartCsrRegisters.
+Marked 1 switch rules as full_case in process $proc$design.v:421$120 in module Fr198Decoder.
+Marked 1 switch rules as full_case in process $proc$design.v:153$48 in module Fr198Bridge.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 67 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~10 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\BitloomIrqCsr.$proc$design.v:2696$700'.
+     1/5: $0\_csr_value1[31:0]
+     2/5: $0\_csr_value0[31:0]
+     3/5: $0\_csr_error[1:0]
+     4/5: $0\_csr_data[31:0]
+     5/5: $0\_csr_pending[0:0]
+Creating decoders for process `\Fr198Timer.$proc$design.v:2398$613'.
+     1/2: $0\count_value[31:0]
+     2/2: $0\ctrl_value[31:0]
+Creating decoders for process `\BitloomTimerCsr.$proc$design.v:2262$593'.
+     1/5: $0\_csr_value3[31:0]
+     2/5: $0\_csr_value2[31:0]
+     3/5: $0\_csr_error[1:0]
+     4/5: $0\_csr_data[31:0]
+     5/5: $0\_csr_pending[0:0]
+Creating decoders for process `\Fr198Gpio.$proc$design.v:1921$492'.
+     1/4: $0\history[31:0]
+     2/4: $0\sync2[31:0]
+     3/4: $0\sync1[31:0]
+     4/4: $0\out_r[31:0]
+Creating decoders for process `\BitloomGpioCsrRegisters.$proc$design.v:1778$476'.
+     1/5: $0\_csr_value5[31:0]
+     2/5: $0\_csr_value0[31:0]
+     3/5: $0\_csr_error[1:0]
+     4/5: $0\_csr_data[31:0]
+     5/5: $0\_csr_pending[0:0]
+Creating decoders for process `\Fr198Uart.$proc$design.v:1355$353'.
+     1/13: $0\rx_shift[7:0]
+     2/13: $0\rx_div[31:0]
+     3/13: $0\rx_timer[31:0]
+     4/13: $0\rx_state[3:0]
+     5/13: $0\tx_line[0:0]
+     6/13: $0\tx_shift[7:0]
+     7/13: $0\tx_div[31:0]
+     8/13: $0\tx_timer[31:0]
+     9/13: $0\tx_index[3:0]
+    10/13: $0\tx_busy[0:0]
+    11/13: $0\history[0:0]
+    12/13: $0\sync2[0:0]
+    13/13: $0\sync1[0:0]
+Creating decoders for process `\BitloomUartCsrFifo8x4.$proc$design.v:941$275'.
+     1/5: $0\slot_3[7:0]
+     2/5: $0\slot_2[7:0]
+     3/5: $0\slot_1[7:0]
+     4/5: $0\slot_0[7:0]
+     5/5: $0\count[2:0]
+Creating decoders for process `\BitloomUartCsrRegisters.$proc$design.v:837$247'.
+     1/6: $0\_csr_value5[31:0]
+     2/6: $0\_csr_value1[31:0]
+     3/6: $0\_csr_value0[31:0]
+     4/6: $0\_csr_error[1:0]
+     5/6: $0\_csr_data[31:0]
+     6/6: $0\_csr_pending[0:0]
+Creating decoders for process `\Fr198Decoder.$proc$design.v:421$120'.
+     1/3: $0\owner[1:0]
+     2/3: $0\miss[0:0]
+     3/3: $0\busy[0:0]
+Creating decoders for process `\Fr198Bridge.$proc$design.v:153$48'.
+     1/19: $0\r_data[31:0]
+     2/19: $0\r_error[1:0]
+     3/19: $0\b_error[1:0]
+     4/19: $0\prefer_write[0:0]
+     5/19: $0\owner[0:0]
+     6/19: $0\offer_strb[3:0]
+     7/19: $0\offer_data[31:0]
+     8/19: $0\offer_write[0:0]
+     9/19: $0\ar_addr[15:0]
+    10/19: $0\w_strb[3:0]
+    11/19: $0\w_data[31:0]
+    12/19: $0\aw_addr[15:0]
+    13/19: $0\r_full[0:0]
+    14/19: $0\b_full[0:0]
+    15/19: $0\exec[0:0]
+    16/19: $0\offer[0:0]
+    17/19: $0\ar_full[0:0]
+    18/19: $0\w_full[0:0]
+    19/19: $0\aw_full[0:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\BitloomIrqCsr.\_csr_pending' using process `\BitloomIrqCsr.$proc$design.v:2696$700'.
+  created $dff cell `$procdff$909' with positive edge clock.
+Creating register for signal `\BitloomIrqCsr.\_csr_data' using process `\BitloomIrqCsr.$proc$design.v:2696$700'.
+  created $dff cell `$procdff$910' with positive edge clock.
+Creating register for signal `\BitloomIrqCsr.\_csr_error' using process `\BitloomIrqCsr.$proc$design.v:2696$700'.
+  created $dff cell `$procdff$911' with positive edge clock.
+Creating register for signal `\BitloomIrqCsr.\_csr_value0' using process `\BitloomIrqCsr.$proc$design.v:2696$700'.
+  created $dff cell `$procdff$912' with positive edge clock.
+Creating register for signal `\BitloomIrqCsr.\_csr_value1' using process `\BitloomIrqCsr.$proc$design.v:2696$700'.
+  created $dff cell `$procdff$913' with positive edge clock.
+Creating register for signal `\Fr198Timer.\ctrl_value' using process `\Fr198Timer.$proc$design.v:2398$613'.
+  created $dff cell `$procdff$914' with positive edge clock.
+Creating register for signal `\Fr198Timer.\count_value' using process `\Fr198Timer.$proc$design.v:2398$613'.
+  created $dff cell `$procdff$915' with positive edge clock.
+Creating register for signal `\BitloomTimerCsr.\_csr_pending' using process `\BitloomTimerCsr.$proc$design.v:2262$593'.
+  created $dff cell `$procdff$916' with positive edge clock.
+Creating register for signal `\BitloomTimerCsr.\_csr_data' using process `\BitloomTimerCsr.$proc$design.v:2262$593'.
+  created $dff cell `$procdff$917' with positive edge clock.
+Creating register for signal `\BitloomTimerCsr.\_csr_error' using process `\BitloomTimerCsr.$proc$design.v:2262$593'.
+  created $dff cell `$procdff$918' with positive edge clock.
+Creating register for signal `\BitloomTimerCsr.\_csr_value2' using process `\BitloomTimerCsr.$proc$design.v:2262$593'.
+  created $dff cell `$procdff$919' with positive edge clock.
+Creating register for signal `\BitloomTimerCsr.\_csr_value3' using process `\BitloomTimerCsr.$proc$design.v:2262$593'.
+  created $dff cell `$procdff$920' with positive edge clock.
+Creating register for signal `\Fr198Gpio.\sync1' using process `\Fr198Gpio.$proc$design.v:1921$492'.
+  created $dff cell `$procdff$921' with positive edge clock.
+Creating register for signal `\Fr198Gpio.\sync2' using process `\Fr198Gpio.$proc$design.v:1921$492'.
+  created $dff cell `$procdff$922' with positive edge clock.
+Creating register for signal `\Fr198Gpio.\history' using process `\Fr198Gpio.$proc$design.v:1921$492'.
+  created $dff cell `$procdff$923' with positive edge clock.
+Creating register for signal `\Fr198Gpio.\out_r' using process `\Fr198Gpio.$proc$design.v:1921$492'.
+  created $dff cell `$procdff$924' with positive edge clock.
+Creating register for signal `\BitloomGpioCsrRegisters.\_csr_pending' using process `\BitloomGpioCsrRegisters.$proc$design.v:1778$476'.
+  created $dff cell `$procdff$925' with positive edge clock.
+Creating register for signal `\BitloomGpioCsrRegisters.\_csr_data' using process `\BitloomGpioCsrRegisters.$proc$design.v:1778$476'.
+  created $dff cell `$procdff$926' with positive edge clock.
+Creating register for signal `\BitloomGpioCsrRegisters.\_csr_error' using process `\BitloomGpioCsrRegisters.$proc$design.v:1778$476'.
+  created $dff cell `$procdff$927' with positive edge clock.
+Creating register for signal `\BitloomGpioCsrRegisters.\_csr_value0' using process `\BitloomGpioCsrRegisters.$proc$design.v:1778$476'.
+  created $dff cell `$procdff$928' with positive edge clock.
+Creating register for signal `\BitloomGpioCsrRegisters.\_csr_value5' using process `\BitloomGpioCsrRegisters.$proc$design.v:1778$476'.
+  created $dff cell `$procdff$929' with positive edge clock.
+Creating register for signal `\Fr198Uart.\sync1' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$930' with positive edge clock.
+Creating register for signal `\Fr198Uart.\sync2' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$931' with positive edge clock.
+Creating register for signal `\Fr198Uart.\history' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$932' with positive edge clock.
+Creating register for signal `\Fr198Uart.\tx_busy' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$933' with positive edge clock.
+Creating register for signal `\Fr198Uart.\tx_line' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$934' with positive edge clock.
+Creating register for signal `\Fr198Uart.\tx_index' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$935' with positive edge clock.
+Creating register for signal `\Fr198Uart.\tx_shift' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$936' with positive edge clock.
+Creating register for signal `\Fr198Uart.\tx_timer' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$937' with positive edge clock.
+Creating register for signal `\Fr198Uart.\tx_div' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$938' with positive edge clock.
+Creating register for signal `\Fr198Uart.\rx_state' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$939' with positive edge clock.
+Creating register for signal `\Fr198Uart.\rx_shift' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$940' with positive edge clock.
+Creating register for signal `\Fr198Uart.\rx_timer' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$941' with positive edge clock.
+Creating register for signal `\Fr198Uart.\rx_div' using process `\Fr198Uart.$proc$design.v:1355$353'.
+  created $dff cell `$procdff$942' with positive edge clock.
+Creating register for signal `\BitloomUartCsrFifo8x4.\count' using process `\BitloomUartCsrFifo8x4.$proc$design.v:941$275'.
+  created $dff cell `$procdff$943' with positive edge clock.
+Creating register for signal `\BitloomUartCsrFifo8x4.\slot_0' using process `\BitloomUartCsrFifo8x4.$proc$design.v:941$275'.
+  created $dff cell `$procdff$944' with positive edge clock.
+Creating register for signal `\BitloomUartCsrFifo8x4.\slot_1' using process `\BitloomUartCsrFifo8x4.$proc$design.v:941$275'.
+  created $dff cell `$procdff$945' with positive edge clock.
+Creating register for signal `\BitloomUartCsrFifo8x4.\slot_2' using process `\BitloomUartCsrFifo8x4.$proc$design.v:941$275'.
+  created $dff cell `$procdff$946' with positive edge clock.
+Creating register for signal `\BitloomUartCsrFifo8x4.\slot_3' using process `\BitloomUartCsrFifo8x4.$proc$design.v:941$275'.
+  created $dff cell `$procdff$947' with positive edge clock.
+Creating register for signal `\BitloomUartCsrRegisters.\_csr_pending' using process `\BitloomUartCsrRegisters.$proc$design.v:837$247'.
+  created $dff cell `$procdff$948' with positive edge clock.
+Creating register for signal `\BitloomUartCsrRegisters.\_csr_data' using process `\BitloomUartCsrRegisters.$proc$design.v:837$247'.
+  created $dff cell `$procdff$949' with positive edge clock.
+Creating register for signal `\BitloomUartCsrRegisters.\_csr_error' using process `\BitloomUartCsrRegisters.$proc$design.v:837$247'.
+  created $dff cell `$procdff$950' with positive edge clock.
+Creating register for signal `\BitloomUartCsrRegisters.\_csr_value0' using process `\BitloomUartCsrRegisters.$proc$design.v:837$247'.
+  created $dff cell `$procdff$951' with positive edge clock.
+Creating register for signal `\BitloomUartCsrRegisters.\_csr_value1' using process `\BitloomUartCsrRegisters.$proc$design.v:837$247'.
+  created $dff cell `$procdff$952' with positive edge clock.
+Creating register for signal `\BitloomUartCsrRegisters.\_csr_value5' using process `\BitloomUartCsrRegisters.$proc$design.v:837$247'.
+  created $dff cell `$procdff$953' with positive edge clock.
+Creating register for signal `\Fr198Decoder.\owner' using process `\Fr198Decoder.$proc$design.v:421$120'.
+  created $dff cell `$procdff$954' with positive edge clock.
+Creating register for signal `\Fr198Decoder.\busy' using process `\Fr198Decoder.$proc$design.v:421$120'.
+  created $dff cell `$procdff$955' with positive edge clock.
+Creating register for signal `\Fr198Decoder.\miss' using process `\Fr198Decoder.$proc$design.v:421$120'.
+  created $dff cell `$procdff$956' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\aw_full' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$957' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\w_full' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$958' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\ar_full' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$959' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\aw_addr' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$960' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\w_data' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$961' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\w_strb' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$962' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\ar_addr' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$963' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\offer' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$964' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\offer_write' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$965' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\exec' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$966' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\owner' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$967' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\prefer_write' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$968' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\b_full' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$969' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\r_full' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$970' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\b_error' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$971' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\r_error' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$972' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\r_data' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$973' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\offer_data' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$974' with positive edge clock.
+Creating register for signal `\Fr198Bridge.\offer_strb' using process `\Fr198Bridge.$proc$design.v:153$48'.
+  created $dff cell `$procdff$975' with positive edge clock.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\BitloomIrqCsr.$proc$design.v:2696$700'.
+Removing empty process `BitloomIrqCsr.$proc$design.v:2696$700'.
+Found and cleaned up 1 empty switch in `\Fr198Timer.$proc$design.v:2398$613'.
+Removing empty process `Fr198Timer.$proc$design.v:2398$613'.
+Found and cleaned up 1 empty switch in `\BitloomTimerCsr.$proc$design.v:2262$593'.
+Removing empty process `BitloomTimerCsr.$proc$design.v:2262$593'.
+Found and cleaned up 1 empty switch in `\Fr198Gpio.$proc$design.v:1921$492'.
+Removing empty process `Fr198Gpio.$proc$design.v:1921$492'.
+Found and cleaned up 1 empty switch in `\BitloomGpioCsrRegisters.$proc$design.v:1778$476'.
+Removing empty process `BitloomGpioCsrRegisters.$proc$design.v:1778$476'.
+Found and cleaned up 1 empty switch in `\Fr198Uart.$proc$design.v:1355$353'.
+Removing empty process `Fr198Uart.$proc$design.v:1355$353'.
+Found and cleaned up 1 empty switch in `\BitloomUartCsrFifo8x4.$proc$design.v:941$275'.
+Removing empty process `BitloomUartCsrFifo8x4.$proc$design.v:941$275'.
+Found and cleaned up 1 empty switch in `\BitloomUartCsrRegisters.$proc$design.v:837$247'.
+Removing empty process `BitloomUartCsrRegisters.$proc$design.v:837$247'.
+Found and cleaned up 1 empty switch in `\Fr198Decoder.$proc$design.v:421$120'.
+Removing empty process `Fr198Decoder.$proc$design.v:421$120'.
+Found and cleaned up 1 empty switch in `\Fr198Bridge.$proc$design.v:153$48'.
+Removing empty process `Fr198Bridge.$proc$design.v:153$48'.
+Cleaned up 10 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+Optimizing module Fr198AxiCore.
+Optimizing module Fr198Irq.
+<suppressed ~2 debug messages>
+Optimizing module BitloomIrqCsr.
+<suppressed ~39 debug messages>
+Optimizing module Fr198Timer.
+<suppressed ~4 debug messages>
+Optimizing module BitloomTimerCsr.
+<suppressed ~46 debug messages>
+Optimizing module Fr198Gpio.
+<suppressed ~6 debug messages>
+Optimizing module BitloomGpioCsrRegisters.
+<suppressed ~57 debug messages>
+Optimizing module Fr198Uart.
+<suppressed ~14 debug messages>
+Optimizing module BitloomUartCsrFifo8x4.
+<suppressed ~5 debug messages>
+Optimizing module BitloomUartCsrRegisters.
+<suppressed ~48 debug messages>
+Optimizing module Fr198Decoder.
+<suppressed ~7 debug messages>
+Optimizing module Fr198Bridge.
+<suppressed ~11 debug messages>
+
+4. Executing CHECK pass (checking for obvious problems).
+Checking module Fr198Axi...
+Checking module Fr198AxiCore...
+Checking module Fr198Irq...
+Checking module BitloomIrqCsr...
+Checking module Fr198Timer...
+Checking module BitloomTimerCsr...
+Checking module Fr198Gpio...
+Checking module BitloomGpioCsrRegisters...
+Checking module Fr198Uart...
+Checking module BitloomUartCsrFifo8x4...
+Checking module BitloomUartCsrRegisters...
+Checking module Fr198Decoder...
+Checking module Fr198Bridge...
+Found and reported 0 problems.
+
+5. Executing SYNTH pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1.1. Analyzing design hierarchy..
+Top module:  \Fr198Axi
+Used module:     \Fr198AxiCore
+Used module:         \Fr198Decoder
+Used module:         \Fr198Bridge
+Used module:         \Fr198Irq
+Used module:             \BitloomIrqCsr
+Used module:         \Fr198Timer
+Used module:             \BitloomTimerCsr
+Used module:         \Fr198Gpio
+Used module:             \BitloomGpioCsrRegisters
+Used module:         \Fr198Uart
+Used module:             \BitloomUartCsrFifo8x4
+Used module:             \BitloomUartCsrRegisters
+
+5.1.2. Analyzing design hierarchy..
+Top module:  \Fr198Axi
+Used module:     \Fr198AxiCore
+Used module:         \Fr198Decoder
+Used module:         \Fr198Bridge
+Used module:         \Fr198Irq
+Used module:             \BitloomIrqCsr
+Used module:         \Fr198Timer
+Used module:             \BitloomTimerCsr
+Used module:         \Fr198Gpio
+Used module:             \BitloomGpioCsrRegisters
+Used module:         \Fr198Uart
+Used module:             \BitloomUartCsrFifo8x4
+Used module:             \BitloomUartCsrRegisters
+Removed 0 unused modules.
+
+5.2. Executing PROC pass (convert processes to netlists).
+
+5.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+5.2.4. Executing PROC_INIT pass (extract init attributes).
+
+5.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+5.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+Optimizing module Fr198AxiCore.
+Optimizing module Fr198Irq.
+Optimizing module BitloomIrqCsr.
+Optimizing module Fr198Timer.
+Optimizing module BitloomTimerCsr.
+Optimizing module Fr198Gpio.
+Optimizing module BitloomGpioCsrRegisters.
+Optimizing module Fr198Uart.
+Optimizing module BitloomUartCsrFifo8x4.
+Optimizing module BitloomUartCsrRegisters.
+Optimizing module Fr198Decoder.
+Optimizing module Fr198Bridge.
+
+5.3. Executing FLATTEN pass (flatten design).
+Deleting now unused module Fr198AxiCore.
+Deleting now unused module Fr198Irq.
+Deleting now unused module BitloomIrqCsr.
+Deleting now unused module Fr198Timer.
+Deleting now unused module BitloomTimerCsr.
+Deleting now unused module Fr198Gpio.
+Deleting now unused module BitloomGpioCsrRegisters.
+Deleting now unused module Fr198Uart.
+Deleting now unused module BitloomUartCsrFifo8x4.
+Deleting now unused module BitloomUartCsrRegisters.
+Deleting now unused module Fr198Decoder.
+Deleting now unused module Fr198Bridge.
+<suppressed ~13 debug messages>
+
+5.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+<suppressed ~87 debug messages>
+
+5.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+Removed 22 unused cells and 951 unused wires.
+<suppressed ~39 debug messages>
+
+5.6. Executing CHECK pass (checking for obvious problems).
+Checking module Fr198Axi...
+Found and reported 0 problems.
+
+5.7. Executing OPT pass (performing simple optimizations).
+
+5.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+
+5.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+<suppressed ~102 debug messages>
+Removed a total of 34 cells.
+
+5.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198Axi..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~103 debug messages>
+
+5.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198Axi.
+Performed a total of 0 changes.
+
+5.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+<suppressed ~114 debug messages>
+Removed a total of 38 cells.
+
+5.7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+Removed 0 unused cells and 63 unused wires.
+<suppressed ~63 debug messages>
+
+5.7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+
+5.7.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.7.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198Axi..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~93 debug messages>
+
+5.7.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198Axi.
+Performed a total of 0 changes.
+
+5.7.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+Removed a total of 0 cells.
+
+5.7.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.7.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+
+5.7.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+
+5.7.16. Finished OPT passes. (There is nothing left to do.)
+
+5.8. Executing FSM pass (extract and optimize FSM).
+
+5.8.1. Executing FSM_DETECT pass (finding FSMs in design).
+Not marking Fr198Axi.core.gpio.csr._csr_error as FSM state register:
+    Users of register don't seem to benefit from recoding.
+Not marking Fr198Axi.core.irq.csr._csr_error as FSM state register:
+    Users of register don't seem to benefit from recoding.
+Not marking Fr198Axi.core.timer.csr._csr_error as FSM state register:
+    Users of register don't seem to benefit from recoding.
+Not marking Fr198Axi.core.uart.csr._csr_error as FSM state register:
+    Users of register don't seem to benefit from recoding.
+
+5.8.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.8.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+
+5.8.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.8.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.8.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.8.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+5.9. Executing OPT pass (performing simple optimizations).
+
+5.9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+
+5.9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+Removed a total of 0 cells.
+
+5.9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198Axi..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~93 debug messages>
+
+5.9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198Axi.
+Performed a total of 0 changes.
+
+5.9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+Removed a total of 0 cells.
+
+5.9.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $flatten\core.\uart.\txq.$procdff$947 ($dff) from module Fr198Axi (D = \core.uart.txq.next_3, Q = \core.uart.txq.slot_3, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:266:slice$1136 ($sdff) from module Fr198Axi (D = \core.uart.csr._csr_n109 [7:0], Q = \core.uart.txq.slot_3).
+Adding SRST signal on $flatten\core.\uart.\txq.$procdff$946 ($dff) from module Fr198Axi (D = \core.uart.txq.next_2, Q = \core.uart.txq.slot_2, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:266:slice$1138 ($sdff) from module Fr198Axi (D = \core.uart.txq.next_2, Q = \core.uart.txq.slot_2).
+Adding SRST signal on $flatten\core.\uart.\txq.$procdff$945 ($dff) from module Fr198Axi (D = \core.uart.txq.next_1, Q = \core.uart.txq.slot_1, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:266:slice$1142 ($sdff) from module Fr198Axi (D = \core.uart.txq.next_1, Q = \core.uart.txq.slot_1).
+Adding SRST signal on $flatten\core.\uart.\txq.$procdff$944 ($dff) from module Fr198Axi (D = \core.uart.txq.next_0, Q = \core.uart.txq.slot_0, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:266:slice$1146 ($sdff) from module Fr198Axi (D = \core.uart.txq.next_0, Q = \core.uart.txq.slot_0).
+Adding SRST signal on $flatten\core.\uart.\txq.$procdff$943 ($dff) from module Fr198Axi (D = \core.uart.txq.next_count, Q = \core.uart.txq.count, rval = 3'000).
+Adding SRST signal on $flatten\core.\uart.\rxq.$procdff$947 ($dff) from module Fr198Axi (D = \core.uart.rxq.next_3, Q = \core.uart.rxq.slot_3, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:266:slice$1151 ($sdff) from module Fr198Axi (D = \core.uart.rx_shift, Q = \core.uart.rxq.slot_3).
+Adding SRST signal on $flatten\core.\uart.\rxq.$procdff$946 ($dff) from module Fr198Axi (D = \core.uart.rxq.next_2, Q = \core.uart.rxq.slot_2, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:266:slice$1153 ($sdff) from module Fr198Axi (D = \core.uart.rxq.next_2, Q = \core.uart.rxq.slot_2).
+Adding SRST signal on $flatten\core.\uart.\rxq.$procdff$945 ($dff) from module Fr198Axi (D = \core.uart.rxq.next_1, Q = \core.uart.rxq.slot_1, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:266:slice$1157 ($sdff) from module Fr198Axi (D = \core.uart.rxq.next_1, Q = \core.uart.rxq.slot_1).
+Adding SRST signal on $flatten\core.\uart.\rxq.$procdff$944 ($dff) from module Fr198Axi (D = \core.uart.rxq.next_0, Q = \core.uart.rxq.slot_0, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:266:slice$1161 ($sdff) from module Fr198Axi (D = \core.uart.rxq.next_0, Q = \core.uart.rxq.slot_0).
+Adding SRST signal on $flatten\core.\uart.\rxq.$procdff$943 ($dff) from module Fr198Axi (D = \core.uart.rxq.next_count, Q = \core.uart.rxq.count, rval = 3'000).
+Adding SRST signal on $flatten\core.\uart.\csr.$procdff$953 ($dff) from module Fr198Axi (D = \core.uart.csr._csr_n160, Q = \core.uart.csr._csr_value5, rval = 0).
+Adding SRST signal on $flatten\core.\uart.\csr.$procdff$952 ($dff) from module Fr198Axi (D = \core.uart._uart_n30, Q = \core.uart.csr._csr_value1, rval = 0).
+Adding SRST signal on $flatten\core.\uart.\csr.$procdff$951 ($dff) from module Fr198Axi (D = \core.uart.csr._csr_n58 [0], Q = \core.uart.csr._csr_value0 [0], rval = 1'0).
+Adding SRST signal on $flatten\core.\uart.\csr.$procdff$951 ($dff) from module Fr198Axi (D = \core.uart.csr._csr_n46 [31:1], Q = \core.uart.csr._csr_value0 [31:1], rval = 31'0000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$1168 ($sdff) from module Fr198Axi (D = \core.uart.csr._csr_n46 [0], Q = \core.uart.csr._csr_value0 [0]).
+Adding SRST signal on $flatten\core.\uart.\csr.$procdff$950 ($dff) from module Fr198Axi (D = \core.uart.csr._csr_n162, Q = \core.uart.csr._csr_error, rval = 2'00).
+Adding EN signal on $auto$ff.cc:266:slice$1173 ($sdff) from module Fr198Axi (D = \core.uart.csr._csr_n152, Q = \core.uart.csr._csr_error).
+Adding SRST signal on $flatten\core.\uart.\csr.$procdff$949 ($dff) from module Fr198Axi (D = \core.uart.csr._csr_n161, Q = \core.uart.csr._csr_data, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1175 ($sdff) from module Fr198Axi (D = \core.uart.csr._csr_n154, Q = \core.uart.csr._csr_data).
+Adding SRST signal on $flatten\core.\uart.\csr.$procdff$948 ($dff) from module Fr198Axi (D = \core.uart.csr._csr_n14, Q = \core.uart.csr._csr_pending, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1177 ($sdff) from module Fr198Axi (D = \core.uart.csr._csr_n14, Q = \core.uart.csr._csr_pending).
+Adding SRST signal on $flatten\core.\uart.$procdff$942 ($dff) from module Fr198Axi (D = \core.uart._uart_n99, Q = \core.uart.rx_div, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1181 ($sdff) from module Fr198Axi (D = \core.uart._uart_n30, Q = \core.uart.rx_div).
+Adding SRST signal on $flatten\core.\uart.$procdff$941 ($dff) from module Fr198Axi (D = \core.uart._uart_n98, Q = \core.uart.rx_timer, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1183 ($sdff) from module Fr198Axi (D = \core.uart._uart_n98, Q = \core.uart.rx_timer).
+Adding SRST signal on $flatten\core.\uart.$procdff$940 ($dff) from module Fr198Axi (D = \core.uart._uart_n108, Q = \core.uart.rx_shift, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:266:slice$1187 ($sdff) from module Fr198Axi (D = { \core.uart.sync2 \core.uart.rx_shift [7:1] }, Q = \core.uart.rx_shift).
+Adding SRST signal on $flatten\core.\uart.$procdff$939 ($dff) from module Fr198Axi (D = \core.uart._uart_n94 [0], Q = \core.uart.rx_state [0], rval = 1'0).
+Adding SRST signal on $flatten\core.\uart.$procdff$939 ($dff) from module Fr198Axi (D = \core.uart._uart_n92 [3:1], Q = \core.uart.rx_state [3:1], rval = 3'000).
+Adding EN signal on $auto$ff.cc:266:slice$1190 ($sdff) from module Fr198Axi (D = \core.uart._uart_n91 [3:1], Q = \core.uart.rx_state [3:1]).
+Adding EN signal on $auto$ff.cc:266:slice$1189 ($sdff) from module Fr198Axi (D = \core.uart._uart_n94 [0], Q = \core.uart.rx_state [0]).
+Adding SRST signal on $flatten\core.\uart.$procdff$938 ($dff) from module Fr198Axi (D = \core.uart._uart_n58, Q = \core.uart.tx_div, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1199 ($sdff) from module Fr198Axi (D = \core.uart._uart_n30, Q = \core.uart.tx_div).
+Adding SRST signal on $flatten\core.\uart.$procdff$937 ($dff) from module Fr198Axi (D = \core.uart._uart_n57, Q = \core.uart.tx_timer, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1201 ($sdff) from module Fr198Axi (D = \core.uart._uart_n57, Q = \core.uart.tx_timer).
+Adding SRST signal on $flatten\core.\uart.$procdff$936 ($dff) from module Fr198Axi (D = \core.uart._uart_n62, Q = \core.uart.tx_shift, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:266:slice$1205 ($sdff) from module Fr198Axi (D = \core.uart._uart_n62, Q = \core.uart.tx_shift).
+Adding SRST signal on $flatten\core.\uart.$procdff$935 ($dff) from module Fr198Axi (D = \core.uart._uart_n52, Q = \core.uart.tx_index, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:266:slice$1209 ($sdff) from module Fr198Axi (D = \core.uart._uart_n51, Q = \core.uart.tx_index).
+Adding SRST signal on $flatten\core.\uart.$procdff$934 ($dff) from module Fr198Axi (D = \core.uart._uart_n67, Q = \core.uart.tx_line, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1215 ($sdff) from module Fr198Axi (D = \core.uart._uart_n66, Q = \core.uart.tx_line).
+Adding SRST signal on $flatten\core.\uart.$procdff$933 ($dff) from module Fr198Axi (D = \core.uart._uart_n50, Q = \core.uart.tx_busy, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1221 ($sdff) from module Fr198Axi (D = \core.uart._uart_n50, Q = \core.uart.tx_busy).
+Adding SRST signal on $flatten\core.\uart.$procdff$932 ($dff) from module Fr198Axi (D = \core.uart.sync2, Q = \core.uart.history, rval = 1'0).
+Adding SRST signal on $flatten\core.\uart.$procdff$931 ($dff) from module Fr198Axi (D = \core.uart.sync1, Q = \core.uart.sync2, rval = 1'0).
+Adding SRST signal on $flatten\core.\uart.$procdff$930 ($dff) from module Fr198Axi (D = \u_rx, Q = \core.uart.sync1, rval = 1'0).
+Adding SRST signal on $flatten\core.\timer.\csr.$procdff$920 ($dff) from module Fr198Axi (D = \core.timer.csr._csr_n129, Q = \core.timer.csr._csr_value3, rval = 0).
+Adding SRST signal on $flatten\core.\timer.\csr.$procdff$919 ($dff) from module Fr198Axi (D = \core.timer.csr._csr_n103, Q = \core.timer.csr._csr_value2, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1229 ($sdff) from module Fr198Axi (D = \core.timer.csr._csr_n94, Q = \core.timer.csr._csr_value2).
+Adding SRST signal on $flatten\core.\timer.\csr.$procdff$918 ($dff) from module Fr198Axi (D = \core.timer.csr._csr_n131, Q = \core.timer.csr._csr_error, rval = 2'00).
+Adding EN signal on $auto$ff.cc:266:slice$1231 ($sdff) from module Fr198Axi (D = \core.timer.csr._csr_n121, Q = \core.timer.csr._csr_error).
+Adding SRST signal on $flatten\core.\timer.\csr.$procdff$917 ($dff) from module Fr198Axi (D = \core.timer.csr._csr_n130, Q = \core.timer.csr._csr_data, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1233 ($sdff) from module Fr198Axi (D = \core.timer.csr._csr_n123, Q = \core.timer.csr._csr_data).
+Adding SRST signal on $flatten\core.\timer.\csr.$procdff$916 ($dff) from module Fr198Axi (D = \core.timer.csr._csr_n14, Q = \core.timer.csr._csr_pending, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1235 ($sdff) from module Fr198Axi (D = \core.timer.csr._csr_n14, Q = \core.timer.csr._csr_pending).
+Adding SRST signal on $flatten\core.\timer.$procdff$915 ($dff) from module Fr198Axi (D = \core.timer.count_next, Q = \core.timer.count_value, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1239 ($sdff) from module Fr198Axi (D = \core.timer.count_next, Q = \core.timer.count_value).
+Adding SRST signal on $flatten\core.\timer.$procdff$914 ($dff) from module Fr198Axi (D = \core.timer.ctrl_next, Q = \core.timer.ctrl_value, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1243 ($sdff) from module Fr198Axi (D = { \core.timer.ctrl_next [31:2] \core.timer.ctrl_next [0] }, Q = { \core.timer.ctrl_value [31:2] \core.timer.ctrl_value [0] }).
+Adding EN signal on $auto$ff.cc:266:slice$1243 ($sdff) from module Fr198Axi (D = \core.timer.ctrl_next [1], Q = \core.timer.ctrl_value [1]).
+Adding SRST signal on $flatten\core.\irq.\csr.$procdff$913 ($dff) from module Fr198Axi (D = \core.irq.csr._csr_n81 [4:0], Q = \core.irq.csr._csr_value1 [4:0], rval = 5'00000).
+Adding SRST signal on $flatten\core.\irq.\csr.$procdff$913 ($dff) from module Fr198Axi (D = \core.irq.csr._csr_n72 [31:5], Q = \core.irq.csr._csr_value1 [31:5], rval = 27'000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$1254 ($sdff) from module Fr198Axi (D = \core.irq.csr._csr_n72 [4:0], Q = \core.irq.csr._csr_value1 [4:0]).
+Adding SRST signal on $flatten\core.\irq.\csr.$procdff$912 ($dff) from module Fr198Axi (D = \core.irq.csr._csr_n56, Q = \core.irq.csr._csr_value0, rval = 0).
+Adding SRST signal on $flatten\core.\irq.\csr.$procdff$911 ($dff) from module Fr198Axi (D = \core.irq.csr._csr_n114, Q = \core.irq.csr._csr_error, rval = 2'00).
+Adding EN signal on $auto$ff.cc:266:slice$1260 ($sdff) from module Fr198Axi (D = \core.irq.csr._csr_n110, Q = \core.irq.csr._csr_error).
+Adding SRST signal on $flatten\core.\irq.\csr.$procdff$910 ($dff) from module Fr198Axi (D = \core.irq.csr._csr_n113, Q = \core.irq.csr._csr_data, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1262 ($sdff) from module Fr198Axi (D = \core.irq.csr._csr_n112, Q = \core.irq.csr._csr_data).
+Adding SRST signal on $flatten\core.\irq.\csr.$procdff$909 ($dff) from module Fr198Axi (D = \core.irq.csr._csr_n14, Q = \core.irq.csr._csr_pending, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1264 ($sdff) from module Fr198Axi (D = \core.irq.csr._csr_n14, Q = \core.irq.csr._csr_pending).
+Adding SRST signal on $flatten\core.\gpio.\csr.$procdff$929 ($dff) from module Fr198Axi (D = \core.gpio.csr._csr_n155, Q = \core.gpio.csr._csr_value5, rval = 0).
+Adding SRST signal on $flatten\core.\gpio.\csr.$procdff$928 ($dff) from module Fr198Axi (D = \core.gpio.csr._csr_n55, Q = \core.gpio.csr._csr_value0, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1269 ($sdff) from module Fr198Axi (D = \core.gpio.csr._csr_n46, Q = \core.gpio.csr._csr_value0).
+Adding SRST signal on $flatten\core.\gpio.\csr.$procdff$927 ($dff) from module Fr198Axi (D = \core.gpio.csr._csr_n157, Q = \core.gpio.csr._csr_error, rval = 2'00).
+Adding EN signal on $auto$ff.cc:266:slice$1271 ($sdff) from module Fr198Axi (D = \core.gpio.csr._csr_n147, Q = \core.gpio.csr._csr_error).
+Adding SRST signal on $flatten\core.\gpio.\csr.$procdff$926 ($dff) from module Fr198Axi (D = \core.gpio.csr._csr_n156, Q = \core.gpio.csr._csr_data, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1273 ($sdff) from module Fr198Axi (D = \core.gpio.csr._csr_n149, Q = \core.gpio.csr._csr_data).
+Adding SRST signal on $flatten\core.\gpio.\csr.$procdff$925 ($dff) from module Fr198Axi (D = \core.gpio.csr._csr_n14, Q = \core.gpio.csr._csr_pending, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1275 ($sdff) from module Fr198Axi (D = \core.gpio.csr._csr_n14, Q = \core.gpio.csr._csr_pending).
+Adding SRST signal on $flatten\core.\gpio.$procdff$924 ($dff) from module Fr198Axi (D = \core.gpio.out_next, Q = \core.gpio.out_r, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1279 ($sdff) from module Fr198Axi (D = \core.gpio.out_next, Q = \core.gpio.out_r).
+Adding SRST signal on $flatten\core.\gpio.$procdff$923 ($dff) from module Fr198Axi (D = \core.gpio.sync2, Q = \core.gpio.history, rval = 0).
+Adding SRST signal on $flatten\core.\gpio.$procdff$922 ($dff) from module Fr198Axi (D = \core.gpio.sync1, Q = \core.gpio.sync2, rval = 0).
+Adding SRST signal on $flatten\core.\gpio.$procdff$921 ($dff) from module Fr198Axi (D = \g_pad_in, Q = \core.gpio.sync1, rval = 0).
+Adding SRST signal on $flatten\core.\decoder.$procdff$956 ($dff) from module Fr198Axi (D = $flatten\core.\decoder.$ternary$design.v:428$121_Y, Q = \core.decoder.miss, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1286 ($sdff) from module Fr198Axi (D = \core.decoder.no_hit, Q = \core.decoder.miss).
+Adding SRST signal on $flatten\core.\decoder.$procdff$955 ($dff) from module Fr198Axi (D = \core.decoder.busy_started, Q = \core.decoder.busy, rval = 1'0).
+Adding SRST signal on $flatten\core.\decoder.$procdff$954 ($dff) from module Fr198Axi (D = $flatten\core.\decoder.$ternary$design.v:429$122_Y, Q = \core.decoder.owner, rval = 2'00).
+Adding EN signal on $auto$ff.cc:266:slice$1293 ($sdff) from module Fr198Axi (D = \core.decoder.addr [9:8], Q = \core.decoder.owner).
+Adding SRST signal on $flatten\core.\bridge.$procdff$975 ($dff) from module Fr198Axi (D = $flatten\core.\bridge.$ternary$design.v:188$55_Y, Q = \core.bridge.offer_strb, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:266:slice$1295 ($sdff) from module Fr198Axi (D = \core.bridge.w_strb, Q = \core.bridge.offer_strb).
+Adding SRST signal on $flatten\core.\bridge.$procdff$974 ($dff) from module Fr198Axi (D = $flatten\core.\bridge.$ternary$design.v:187$54_Y, Q = \core.bridge.offer_data, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1297 ($sdff) from module Fr198Axi (D = \core.bridge.w_data, Q = \core.bridge.offer_data).
+Adding SRST signal on $flatten\core.\bridge.$procdff$973 ($dff) from module Fr198Axi (D = $flatten\core.\bridge.$ternary$design.v:193$60_Y, Q = \core.bridge.r_data, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1299 ($sdff) from module Fr198Axi (D = \core.bridge.csr_rdata, Q = \core.bridge.r_data).
+Adding SRST signal on $flatten\core.\bridge.$procdff$972 ($dff) from module Fr198Axi (D = $flatten\core.\bridge.$ternary$design.v:192$59_Y, Q = \core.bridge.r_error, rval = 2'00).
+Adding EN signal on $auto$ff.cc:266:slice$1301 ($sdff) from module Fr198Axi (D = \core.bridge.csr_error, Q = \core.bridge.r_error).
+Adding SRST signal on $flatten\core.\bridge.$procdff$971 ($dff) from module Fr198Axi (D = $flatten\core.\bridge.$ternary$design.v:191$58_Y, Q = \core.bridge.b_error, rval = 2'00).
+Adding EN signal on $auto$ff.cc:266:slice$1303 ($sdff) from module Fr198Axi (D = \core.bridge.csr_error, Q = \core.bridge.b_error).
+Adding SRST signal on $flatten\core.\bridge.$procdff$970 ($dff) from module Fr198Axi (D = \core.bridge.r_next, Q = \core.bridge.r_full, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1305 ($sdff) from module Fr198Axi (D = \core.bridge.r_next, Q = \core.bridge.r_full).
+Adding SRST signal on $flatten\core.\bridge.$procdff$969 ($dff) from module Fr198Axi (D = \core.bridge.b_next, Q = \core.bridge.b_full, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1309 ($sdff) from module Fr198Axi (D = \core.bridge.b_next, Q = \core.bridge.b_full).
+Adding SRST signal on $flatten\core.\bridge.$procdff$968 ($dff) from module Fr198Axi (D = $flatten\core.\bridge.$ternary$design.v:190$57_Y, Q = \core.bridge.prefer_write, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1313 ($sdff) from module Fr198Axi (D = \core.bridge.read_offer, Q = \core.bridge.prefer_write).
+Adding SRST signal on $flatten\core.\bridge.$procdff$967 ($dff) from module Fr198Axi (D = $flatten\core.\bridge.$ternary$design.v:189$56_Y, Q = \core.bridge.owner, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1315 ($sdff) from module Fr198Axi (D = \core.bridge.offer_write, Q = \core.bridge.owner).
+Adding SRST signal on $flatten\core.\bridge.$procdff$966 ($dff) from module Fr198Axi (D = \core.bridge.exec_started, Q = \core.bridge.exec, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1317 ($sdff) from module Fr198Axi (D = 1'1, Q = \core.bridge.exec).
+Adding SRST signal on $flatten\core.\bridge.$procdff$965 ($dff) from module Fr198Axi (D = $flatten\core.\bridge.$ternary$design.v:186$53_Y, Q = \core.bridge.offer_write, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1323 ($sdff) from module Fr198Axi (D = \core.bridge.choose_write, Q = \core.bridge.offer_write).
+Adding SRST signal on $flatten\core.\bridge.$procdff$964 ($dff) from module Fr198Axi (D = \core.bridge.offer_started, Q = \core.bridge.offer, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1325 ($sdff) from module Fr198Axi (D = 1'1, Q = \core.bridge.offer).
+Adding SRST signal on $flatten\core.\bridge.$procdff$963 ($dff) from module Fr198Axi (D = $flatten\core.\bridge.$ternary$design.v:185$52_Y, Q = \core.bridge.ar_addr, rval = 16'0000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$1331 ($sdff) from module Fr198Axi (D = \axi_s_axi_araddr, Q = \core.bridge.ar_addr).
+Adding SRST signal on $flatten\core.\bridge.$procdff$962 ($dff) from module Fr198Axi (D = $flatten\core.\bridge.$ternary$design.v:184$51_Y, Q = \core.bridge.w_strb, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:266:slice$1333 ($sdff) from module Fr198Axi (D = \axi_s_axi_wstrb, Q = \core.bridge.w_strb).
+Adding SRST signal on $flatten\core.\bridge.$procdff$961 ($dff) from module Fr198Axi (D = $flatten\core.\bridge.$ternary$design.v:183$50_Y, Q = \core.bridge.w_data, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$1335 ($sdff) from module Fr198Axi (D = \axi_s_axi_wdata, Q = \core.bridge.w_data).
+Adding SRST signal on $flatten\core.\bridge.$procdff$960 ($dff) from module Fr198Axi (D = $flatten\core.\bridge.$ternary$design.v:182$49_Y, Q = \core.bridge.aw_addr, rval = 16'0000000000000000).
+Adding EN signal on $auto$ff.cc:266:slice$1337 ($sdff) from module Fr198Axi (D = \axi_s_axi_awaddr, Q = \core.bridge.aw_addr).
+Adding SRST signal on $flatten\core.\bridge.$procdff$959 ($dff) from module Fr198Axi (D = \core.bridge.ar_captured, Q = \core.bridge.ar_full, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1339 ($sdff) from module Fr198Axi (D = 1'1, Q = \core.bridge.ar_full).
+Adding SRST signal on $flatten\core.\bridge.$procdff$958 ($dff) from module Fr198Axi (D = \core.bridge.w_captured, Q = \core.bridge.w_full, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1345 ($sdff) from module Fr198Axi (D = 1'1, Q = \core.bridge.w_full).
+Adding SRST signal on $flatten\core.\bridge.$procdff$957 ($dff) from module Fr198Axi (D = \core.bridge.aw_captured, Q = \core.bridge.aw_full, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$1351 ($sdff) from module Fr198Axi (D = 1'1, Q = \core.bridge.aw_full).
+
+5.9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+Removed 122 unused cells and 120 unused wires.
+<suppressed ~155 debug messages>
+
+5.9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+<suppressed ~20 debug messages>
+
+5.9.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.9.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198Axi..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~53 debug messages>
+
+5.9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198Axi.
+Performed a total of 0 changes.
+
+5.9.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+<suppressed ~33 debug messages>
+Removed a total of 11 cells.
+
+5.9.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+Removed 0 unused cells and 11 unused wires.
+<suppressed ~1 debug messages>
+
+5.9.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+
+5.9.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.9.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198Axi..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~53 debug messages>
+
+5.9.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198Axi.
+Performed a total of 0 changes.
+
+5.9.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+Removed a total of 0 cells.
+
+5.9.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.9.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+
+5.9.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+
+5.9.23. Finished OPT passes. (There is nothing left to do.)
+
+5.10. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 2) from port B of cell Fr198Axi.$auto$opt_dff.cc:195:make_patterns_logic$1186 ($ne).
+Removed top 7 bits (of 8) from port B of cell Fr198Axi.$flatten\core.\decoder.$eq$design.v:364$81 ($eq).
+Removed top 7 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\decoder.$sub$design.v:368$85 ($sub).
+Removed top 1 bits (of 2) from port B of cell Fr198Axi.$flatten\core.\decoder.$eq$design.v:372$86 ($eq).
+Removed top 6 bits (of 8) from port B of cell Fr198Axi.$flatten\core.\decoder.$eq$design.v:381$92 ($eq).
+Removed top 6 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\decoder.$sub$design.v:385$96 ($sub).
+Removed top 6 bits (of 8) from port B of cell Fr198Axi.$flatten\core.\decoder.$eq$design.v:398$103 ($eq).
+Removed top 6 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\decoder.$sub$design.v:402$107 ($sub).
+Removed top 27 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\irq.$or$design.v:2790$702 ($or).
+Removed top 27 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\irq.$or$design.v:2790$702 ($or).
+Removed top 27 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\irq.$or$design.v:2790$702 ($or).
+Removed top 27 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\irq.$and$design.v:2791$703 ($and).
+Removed top 27 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\irq.$and$design.v:2791$703 ($and).
+Removed top 27 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\irq.$and$design.v:2791$703 ($and).
+Removed top 27 bits (of 32) from mux cell Fr198Axi.$flatten\core.\irq.\csr.$ternary$design.v:2692$696 ($mux).
+Removed top 12 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\irq.\csr.$eq$design.v:2659$672 ($eq).
+Removed top 27 bits (of 32) from mux cell Fr198Axi.$flatten\core.\irq.\csr.$ternary$design.v:2654$669 ($mux).
+Removed top 27 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\irq.\csr.$or$design.v:2644$662 ($or).
+Removed top 27 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\irq.\csr.$or$design.v:2644$662 ($or).
+Removed top 27 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\irq.\csr.$or$design.v:2644$662 ($or).
+Removed top 27 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\irq.\csr.$and$design.v:2643$661 ($and).
+Removed top 27 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\irq.\csr.$and$design.v:2643$661 ($and).
+Removed top 27 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\irq.\csr.$and$design.v:2643$661 ($and).
+Removed top 27 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\irq.\csr.$auto$opt_expr.cc:706:replace_const_cells$990 ($not).
+Removed top 27 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\irq.\csr.$auto$opt_expr.cc:706:replace_const_cells$990 ($not).
+Removed top 13 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\irq.\csr.$eq$design.v:2631$652 ($eq).
+Removed top 27 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\irq.\csr.$or$design.v:2626$650 ($or).
+Removed top 27 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\irq.\csr.$and$design.v:2624$648 ($and).
+Removed top 27 bits (of 32) from mux cell Fr198Axi.$flatten\core.\irq.\csr.$ternary$design.v:2619$644 ($mux).
+Removed top 12 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\irq.\csr.$eq$design.v:2683$689 ($eq).
+Removed top 27 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\irq.\csr.$and$design.v:2609$637 ($and).
+Removed top 31 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\timer.$add$design.v:2386$601 ($add).
+Removed top 31 bits (of 32) from mux cell Fr198Axi.$flatten\core.\timer.$ternary$design.v:2389$604 ($mux).
+Removed top 30 bits (of 31) from FF cell Fr198Axi.$auto$ff.cc:266:slice$1244 ($sdffe).
+Removed top 31 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\timer.\csr.$and$design.v:2257$588 ($and).
+Removed top 12 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\timer.\csr.$eq$design.v:2233$570 ($eq).
+Removed top 31 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\timer.\csr.$or$design.v:2259$590 ($or).
+Removed top 12 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\timer.\csr.$eq$design.v:2203$549 ($eq).
+Removed top 31 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\timer.\csr.$and$design.v:2242$577 ($and).
+Removed top 13 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\timer.\csr.$eq$design.v:2174$529 ($eq).
+Removed top 30 bits (of 32) from mux cell Fr198Axi.$flatten\core.\timer.\csr.$ternary$design.v:2169$526 ($mux).
+Removed top 31 bits (of 32) from mux cell Fr198Axi.$flatten\core.\timer.\csr.$ternary$design.v:2252$584 ($mux).
+Removed top 30 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\timer.\csr.$and$design.v:2158$518 ($and).
+Removed top 30 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\timer.\csr.$auto$opt_expr.cc:706:replace_const_cells$1008 ($not).
+Removed top 30 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\timer.\csr.$and$design.v:2155$516 ($and).
+Removed top 27 bits (of 32) from FF cell Fr198Axi.$auto$ff.cc:266:slice$1259 ($sdff).
+Removed top 11 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\gpio.\csr.$eq$design.v:1724$436 ($eq).
+Removed top 12 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\gpio.\csr.$eq$design.v:1701$420 ($eq).
+Removed top 12 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\gpio.\csr.$eq$design.v:1688$411 ($eq).
+Removed top 11 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\gpio.\csr.$eq$design.v:1749$453 ($eq).
+Removed top 13 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\gpio.\csr.$eq$design.v:1660$391 ($eq).
+Removed top 8 bits (of 32) from mux cell Fr198Axi.$flatten\core.\gpio.\csr.$ternary$design.v:1621$365 ($mux).
+Removed top 16 bits (of 32) from mux cell Fr198Axi.$flatten\core.\gpio.\csr.$ternary$design.v:1617$363 ($mux).
+Removed top 24 bits (of 32) from mux cell Fr198Axi.$flatten\core.\gpio.\csr.$ternary$design.v:1613$361 ($mux).
+Removed top 30 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\uart.$lt$design.v:1238$283 ($lt).
+Removed top 30 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\uart.$lt$design.v:1242$286 ($lt).
+Removed top 3 bits (of 4) from port B of cell Fr198Axi.$flatten\core.\uart.$add$design.v:1281$303 ($add).
+Removed top 31 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\uart.$sub$design.v:1284$306 ($sub).
+Removed top 1 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\uart.$add$design.v:1312$323 ($add).
+Removed top 31 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\uart.$add$design.v:1312$323 ($add).
+Removed top 31 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\uart.$sub$design.v:1313$324 ($sub).
+Removed top 3 bits (of 4) from port B of cell Fr198Axi.$flatten\core.\uart.$eq$design.v:1316$327 ($eq).
+Removed top 3 bits (of 4) from port B of cell Fr198Axi.$flatten\core.\uart.$add$design.v:1322$332 ($add).
+Removed top 3 bits (of 4) from mux cell Fr198Axi.$flatten\core.\uart.$ternary$design.v:1325$335 ($mux).
+Removed top 31 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\uart.$sub$design.v:1326$336 ($sub).
+Removed top 31 bits (of 32) from FF cell Fr198Axi.$auto$ff.cc:266:slice$1228 ($sdff).
+Removed top 28 bits (of 32) from mux cell Fr198Axi.$flatten\core.\uart.\csr.$ternary$design.v:827$238 ($mux).
+Removed top 28 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\uart.\csr.$and$design.v:817$231 ($and).
+Removed top 11 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\uart.\csr.$eq$design.v:808$224 ($eq).
+Removed top 24 bits (of 32) from mux cell Fr198Axi.$flatten\core.\uart.\csr.$ternary$design.v:802$221 ($mux).
+Removed top 28 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\uart.\csr.$and$design.v:832$242 ($and).
+Removed top 11 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\uart.\csr.$eq$design.v:791$213 ($eq).
+Removed top 28 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\uart.\csr.$or$design.v:834$244 ($or).
+Removed top 24 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\uart.\csr.$and$design.v:773$201 ($and).
+Removed top 24 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\uart.\csr.$and$design.v:773$201 ($and).
+Removed top 24 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\uart.\csr.$and$design.v:773$201 ($and).
+Removed top 12 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\uart.\csr.$eq$design.v:764$194 ($eq).
+Removed top 28 bits (of 32) from mux cell Fr198Axi.$flatten\core.\uart.\csr.$ternary$design.v:760$192 ($mux).
+Removed top 12 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\uart.\csr.$eq$design.v:751$185 ($eq).
+Removed top 13 bits (of 16) from port B of cell Fr198Axi.$flatten\core.\uart.\csr.$eq$design.v:719$162 ($eq).
+Removed top 31 bits (of 32) from mux cell Fr198Axi.$flatten\core.\uart.\csr.$ternary$design.v:712$158 ($mux).
+Removed top 31 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\uart.\csr.$or$design.v:699$149 ($or).
+Removed top 31 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\uart.\csr.$or$design.v:699$149 ($or).
+Removed top 31 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\uart.\csr.$or$design.v:699$149 ($or).
+Removed top 31 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\uart.\csr.$and$design.v:698$148 ($and).
+Removed top 31 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\uart.\csr.$and$design.v:698$148 ($and).
+Removed top 31 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\uart.\csr.$and$design.v:698$148 ($and).
+Removed top 31 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\uart.\csr.$auto$opt_expr.cc:706:replace_const_cells$1086 ($not).
+Removed top 31 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\uart.\csr.$auto$opt_expr.cc:706:replace_const_cells$1086 ($not).
+Removed top 1 bits (of 3) from port B of cell Fr198Axi.$flatten\core.\uart.\txq.$eq$design.v:937$271 ($eq).
+Removed top 1 bits (of 3) from port B of cell Fr198Axi.$flatten\core.\uart.\txq.$eq$design.v:932$267 ($eq).
+Removed top 2 bits (of 3) from port B of cell Fr198Axi.$flatten\core.\uart.\txq.$eq$design.v:927$263 ($eq).
+Removed top 2 bits (of 3) from port B of cell Fr198Axi.$flatten\core.\uart.\txq.$add$design.v:918$256 ($add).
+Removed top 2 bits (of 3) from port B of cell Fr198Axi.$flatten\core.\uart.\txq.$sub$design.v:916$254 ($sub).
+Removed top 28 bits (of 32) from FF cell Fr198Axi.$auto$ff.cc:266:slice$1166 ($sdff).
+Removed top 1 bits (of 3) from port B of cell Fr198Axi.$flatten\core.\uart.\rxq.$eq$design.v:937$271 ($eq).
+Removed top 1 bits (of 3) from port B of cell Fr198Axi.$flatten\core.\uart.\rxq.$eq$design.v:932$267 ($eq).
+Removed top 2 bits (of 3) from port B of cell Fr198Axi.$flatten\core.\uart.\rxq.$eq$design.v:927$263 ($eq).
+Removed top 2 bits (of 3) from port B of cell Fr198Axi.$flatten\core.\uart.\rxq.$add$design.v:918$256 ($add).
+Removed top 2 bits (of 3) from port B of cell Fr198Axi.$flatten\core.\uart.\rxq.$sub$design.v:916$254 ($sub).
+Removed top 27 bits (of 32) from mux cell Fr198Axi.$flatten\core.\irq.$ternary$design.v:2789$701 ($mux).
+Removed top 27 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\irq.\csr.$or$design.v:2626$650 ($or).
+Removed top 27 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\irq.\csr.$or$design.v:2626$650 ($or).
+Removed top 27 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\irq.\csr.$and$design.v:2624$648 ($and).
+Removed top 27 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\irq.\csr.$and$design.v:2624$648 ($and).
+Removed top 30 bits (of 32) from mux cell Fr198Axi.$flatten\core.\timer.$ternary$design.v:2394$609 ($mux).
+Removed top 31 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\timer.\csr.$or$design.v:2259$590 ($or).
+Removed top 31 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\timer.\csr.$or$design.v:2259$590 ($or).
+Removed top 3 bits (of 4) from mux cell Fr198Axi.$flatten\core.\uart.$ternary$design.v:1324$334 ($mux).
+Removed top 28 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\uart.\csr.$or$design.v:834$244 ($or).
+Removed top 28 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\uart.\csr.$or$design.v:834$244 ($or).
+Removed top 27 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\irq.\csr.$auto$opt_expr.cc:706:replace_const_cells$986 ($not).
+Removed top 27 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\irq.\csr.$auto$opt_expr.cc:706:replace_const_cells$986 ($not).
+Removed top 27 bits (of 32) from mux cell Fr198Axi.$flatten\core.\irq.\csr.$ternary$design.v:2621$646 ($mux).
+Removed top 27 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\irq.\csr.$and$design.v:2609$637 ($and).
+Removed top 27 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\irq.\csr.$and$design.v:2609$637 ($and).
+Removed top 31 bits (of 32) from mux cell Fr198Axi.$flatten\core.\timer.$ternary$design.v:2393$608 ($mux).
+Removed top 31 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\timer.\csr.$and$design.v:2257$588 ($and).
+Removed top 31 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\timer.\csr.$and$design.v:2257$588 ($and).
+Removed top 30 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\timer.\csr.$or$design.v:2159$519 ($or).
+Removed top 30 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\timer.\csr.$or$design.v:2159$519 ($or).
+Removed top 30 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\timer.\csr.$or$design.v:2159$519 ($or).
+Removed top 3 bits (of 4) from mux cell Fr198Axi.$flatten\core.\uart.$ternary$design.v:1323$333 ($mux).
+Removed top 28 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\uart.\csr.$and$design.v:832$242 ($and).
+Removed top 28 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\uart.\csr.$and$design.v:832$242 ($and).
+Removed top 31 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\timer.\csr.$auto$opt_expr.cc:706:replace_const_cells$1020 ($not).
+Removed top 31 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\timer.\csr.$auto$opt_expr.cc:706:replace_const_cells$1020 ($not).
+Removed top 30 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\timer.\csr.$and$design.v:2158$518 ($and).
+Removed top 30 bits (of 32) from port B of cell Fr198Axi.$flatten\core.\timer.\csr.$and$design.v:2158$518 ($and).
+Removed top 30 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\timer.\csr.$and$design.v:2155$516 ($and).
+Removed top 30 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\timer.\csr.$and$design.v:2155$516 ($and).
+Removed top 28 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\uart.\csr.$auto$opt_expr.cc:706:replace_const_cells$1104 ($not).
+Removed top 28 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\uart.\csr.$auto$opt_expr.cc:706:replace_const_cells$1104 ($not).
+Removed top 31 bits (of 32) from mux cell Fr198Axi.$flatten\core.\timer.\csr.$ternary$design.v:2254$586 ($mux).
+Removed top 31 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\timer.\csr.$and$design.v:2242$577 ($and).
+Removed top 31 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\timer.\csr.$and$design.v:2242$577 ($and).
+Removed top 30 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\timer.\csr.$auto$opt_expr.cc:706:replace_const_cells$1008 ($not).
+Removed top 28 bits (of 32) from mux cell Fr198Axi.$flatten\core.\uart.\csr.$ternary$design.v:829$240 ($mux).
+Removed top 28 bits (of 32) from port Y of cell Fr198Axi.$flatten\core.\uart.\csr.$and$design.v:817$231 ($and).
+Removed top 28 bits (of 32) from port A of cell Fr198Axi.$flatten\core.\uart.\csr.$and$design.v:817$231 ($and).
+
+5.11. Executing PEEPOPT pass (run peephole optimizers).
+
+5.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+
+5.13. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module Fr198Axi:
+  creating $macc model for $flatten\core.\decoder.$sub$design.v:368$85 ($sub).
+  creating $macc model for $flatten\core.\decoder.$sub$design.v:385$96 ($sub).
+  creating $macc model for $flatten\core.\decoder.$sub$design.v:402$107 ($sub).
+  creating $macc model for $flatten\core.\timer.$add$design.v:2386$601 ($add).
+  creating $macc model for $flatten\core.\uart.$add$design.v:1281$303 ($add).
+  creating $macc model for $flatten\core.\uart.$add$design.v:1312$323 ($add).
+  creating $macc model for $flatten\core.\uart.$add$design.v:1322$332 ($add).
+  creating $macc model for $flatten\core.\uart.$sub$design.v:1284$306 ($sub).
+  creating $macc model for $flatten\core.\uart.$sub$design.v:1313$324 ($sub).
+  creating $macc model for $flatten\core.\uart.$sub$design.v:1326$336 ($sub).
+  creating $macc model for $flatten\core.\uart.\rxq.$add$design.v:918$256 ($add).
+  creating $macc model for $flatten\core.\uart.\rxq.$sub$design.v:916$254 ($sub).
+  creating $macc model for $flatten\core.\uart.\txq.$add$design.v:918$256 ($add).
+  creating $macc model for $flatten\core.\uart.\txq.$sub$design.v:916$254 ($sub).
+  merging $macc model for $flatten\core.\uart.$add$design.v:1312$323 into $flatten\core.\uart.$sub$design.v:1313$324.
+  creating $alu model for $macc $flatten\core.\uart.\txq.$add$design.v:918$256.
+  creating $alu model for $macc $flatten\core.\uart.\rxq.$sub$design.v:916$254.
+  creating $alu model for $macc $flatten\core.\uart.\rxq.$add$design.v:918$256.
+  creating $alu model for $macc $flatten\core.\uart.$sub$design.v:1326$336.
+  creating $alu model for $macc $flatten\core.\uart.$sub$design.v:1284$306.
+  creating $alu model for $macc $flatten\core.\uart.$add$design.v:1322$332.
+  creating $alu model for $macc $flatten\core.\uart.\txq.$sub$design.v:916$254.
+  creating $alu model for $macc $flatten\core.\uart.$add$design.v:1281$303.
+  creating $alu model for $macc $flatten\core.\timer.$add$design.v:2386$601.
+  creating $alu model for $macc $flatten\core.\decoder.$sub$design.v:402$107.
+  creating $alu model for $macc $flatten\core.\decoder.$sub$design.v:385$96.
+  creating $alu model for $macc $flatten\core.\decoder.$sub$design.v:368$85.
+  creating $macc cell for $flatten\core.\uart.$sub$design.v:1313$324: $auto$alumacc.cc:365:replace_macc$1357
+  creating $alu model for $flatten\core.\uart.$lt$design.v:1238$283 ($lt): new $alu
+  creating $alu model for $flatten\core.\uart.$lt$design.v:1242$286 ($lt): new $alu
+  creating $alu cell for $flatten\core.\uart.$lt$design.v:1242$286: $auto$alumacc.cc:485:replace_alu$1360
+  creating $alu cell for $flatten\core.\uart.$lt$design.v:1238$283: $auto$alumacc.cc:485:replace_alu$1371
+  creating $alu cell for $flatten\core.\decoder.$sub$design.v:368$85: $auto$alumacc.cc:485:replace_alu$1382
+  creating $alu cell for $flatten\core.\decoder.$sub$design.v:385$96: $auto$alumacc.cc:485:replace_alu$1385
+  creating $alu cell for $flatten\core.\decoder.$sub$design.v:402$107: $auto$alumacc.cc:485:replace_alu$1388
+  creating $alu cell for $flatten\core.\timer.$add$design.v:2386$601: $auto$alumacc.cc:485:replace_alu$1391
+  creating $alu cell for $flatten\core.\uart.$add$design.v:1281$303: $auto$alumacc.cc:485:replace_alu$1394
+  creating $alu cell for $flatten\core.\uart.\txq.$sub$design.v:916$254: $auto$alumacc.cc:485:replace_alu$1397
+  creating $alu cell for $flatten\core.\uart.$add$design.v:1322$332: $auto$alumacc.cc:485:replace_alu$1400
+  creating $alu cell for $flatten\core.\uart.$sub$design.v:1284$306: $auto$alumacc.cc:485:replace_alu$1403
+  creating $alu cell for $flatten\core.\uart.$sub$design.v:1326$336: $auto$alumacc.cc:485:replace_alu$1406
+  creating $alu cell for $flatten\core.\uart.\rxq.$add$design.v:918$256: $auto$alumacc.cc:485:replace_alu$1409
+  creating $alu cell for $flatten\core.\uart.\rxq.$sub$design.v:916$254: $auto$alumacc.cc:485:replace_alu$1412
+  creating $alu cell for $flatten\core.\uart.\txq.$add$design.v:918$256: $auto$alumacc.cc:485:replace_alu$1415
+  created 14 $alu and 1 $macc cells.
+
+5.14. Executing SHARE pass (SAT-based resource sharing).
+
+5.15. Executing OPT pass (performing simple optimizations).
+
+5.15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+
+5.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+Removed a total of 0 cells.
+
+5.15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198Axi..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~53 debug messages>
+
+5.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198Axi.
+Performed a total of 0 changes.
+
+5.15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+Removed a total of 0 cells.
+
+5.15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+Removed 1 unused cells and 3 unused wires.
+<suppressed ~3 debug messages>
+
+5.15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+
+5.15.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.15.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198Axi..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~53 debug messages>
+
+5.15.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198Axi.
+Performed a total of 0 changes.
+
+5.15.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+Removed a total of 0 cells.
+
+5.15.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.15.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+
+5.15.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+
+5.15.16. Finished OPT passes. (There is nothing left to do.)
+
+5.16. Executing MEMORY pass.
+
+5.16.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+5.16.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+5.16.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+5.16.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.16.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+5.16.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+
+5.16.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+5.16.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.16.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+
+5.16.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+
+5.18. Executing OPT pass (performing simple optimizations).
+
+5.18.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+<suppressed ~445 debug messages>
+
+5.18.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+<suppressed ~48 debug messages>
+Removed a total of 16 cells.
+
+5.18.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.18.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+Removed 13 unused cells and 38 unused wires.
+<suppressed ~14 debug messages>
+
+5.18.5. Finished fast OPT passes.
+
+5.19. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+5.20. Executing OPT pass (performing simple optimizations).
+
+5.20.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+
+5.20.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+Removed a total of 0 cells.
+
+5.20.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198Axi..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~43 debug messages>
+
+5.20.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198Axi.
+    Consolidated identical input bits for $mux cell $flatten\core.\decoder.$ternary$design.v:343$69:
+      Old ports: A=2'00, B=2'11, Y=\core.decoder.error_0
+      New ports: A=1'0, B=1'1, Y=\core.decoder.error_0 [0]
+      New connections: \core.decoder.error_0 [1] = \core.decoder.error_0 [0]
+    Consolidated identical input bits for $mux cell $flatten\core.\gpio.\csr.$ternary$design.v:1613$361:
+      Old ports: A=8'00000000, B=8'11111111, Y=\core.gpio.csr._csr_n18 [7:0]
+      New ports: A=1'0, B=1'1, Y=\core.gpio.csr._csr_n18 [0]
+      New connections: \core.gpio.csr._csr_n18 [7:1] = { \core.gpio.csr._csr_n18 [0] \core.gpio.csr._csr_n18 [0] \core.gpio.csr._csr_n18 [0] \core.gpio.csr._csr_n18 [0] \core.gpio.csr._csr_n18 [0] \core.gpio.csr._csr_n18 [0] \core.gpio.csr._csr_n18 [0] }
+    Consolidated identical input bits for $mux cell $flatten\core.\gpio.\csr.$ternary$design.v:1617$363:
+      Old ports: A=16'0000000000000000, B=16'1111111100000000, Y=\core.gpio.csr._csr_n21 [15:0]
+      New ports: A=1'0, B=1'1, Y=\core.gpio.csr._csr_n21 [8]
+      New connections: { \core.gpio.csr._csr_n21 [15:9] \core.gpio.csr._csr_n21 [7:0] } = { \core.gpio.csr._csr_n21 [8] \core.gpio.csr._csr_n21 [8] \core.gpio.csr._csr_n21 [8] \core.gpio.csr._csr_n21 [8] \core.gpio.csr._csr_n21 [8] \core.gpio.csr._csr_n21 [8] \core.gpio.csr._csr_n21 [8] 8'00000000 }
+    Consolidated identical input bits for $mux cell $flatten\core.\gpio.\csr.$ternary$design.v:1621$365:
+      Old ports: A=24'000000000000000000000000, B=24'111111110000000000000000, Y=\core.gpio.csr._csr_n25 [23:0]
+      New ports: A=1'0, B=1'1, Y=\core.gpio.csr._csr_n25 [16]
+      New connections: { \core.gpio.csr._csr_n25 [23:17] \core.gpio.csr._csr_n25 [15:0] } = { \core.gpio.csr._csr_n25 [16] \core.gpio.csr._csr_n25 [16] \core.gpio.csr._csr_n25 [16] \core.gpio.csr._csr_n25 [16] \core.gpio.csr._csr_n25 [16] \core.gpio.csr._csr_n25 [16] \core.gpio.csr._csr_n25 [16] 16'0000000000000000 }
+    Consolidated identical input bits for $mux cell $flatten\core.\gpio.\csr.$ternary$design.v:1625$367:
+      Old ports: A=0, B=32'11111111000000000000000000000000, Y=\core.gpio.csr._csr_n29
+      New ports: A=1'0, B=1'1, Y=\core.gpio.csr._csr_n29 [24]
+      New connections: { \core.gpio.csr._csr_n29 [31:25] \core.gpio.csr._csr_n29 [23:0] } = { \core.gpio.csr._csr_n29 [24] \core.gpio.csr._csr_n29 [24] \core.gpio.csr._csr_n29 [24] \core.gpio.csr._csr_n29 [24] \core.gpio.csr._csr_n29 [24] \core.gpio.csr._csr_n29 [24] \core.gpio.csr._csr_n29 [24] 24'000000000000000000000000 }
+    Consolidated identical input bits for $mux cell $flatten\core.\gpio.\csr.$ternary$design.v:1653$386:
+      Old ports: A=2'10, B=2'00, Y=\core.gpio.csr._csr_n52
+      New ports: A=1'1, B=1'0, Y=\core.gpio.csr._csr_n52 [1]
+      New connections: \core.gpio.csr._csr_n52 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\gpio.\csr.$ternary$design.v:1695$416:
+      Old ports: A=2'00, B=2'10, Y=\core.gpio.csr._csr_n88
+      New ports: A=1'0, B=1'1, Y=\core.gpio.csr._csr_n88 [1]
+      New connections: \core.gpio.csr._csr_n88 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\gpio.\csr.$ternary$design.v:1718$432:
+      Old ports: A=2'10, B=2'00, Y=\core.gpio.csr._csr_n107
+      New ports: A=1'1, B=1'0, Y=\core.gpio.csr._csr_n107 [1]
+      New connections: \core.gpio.csr._csr_n107 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\irq.\csr.$ternary$design.v:2618$643:
+      Old ports: A=2'10, B=2'00, Y=\core.irq.csr._csr_n48
+      New ports: A=1'1, B=1'0, Y=\core.irq.csr._csr_n48 [1]
+      New connections: \core.irq.csr._csr_n48 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\irq.\csr.$ternary$design.v:2620$645:
+      Old ports: A=0, B={ 27'000000000000000000000000000 \core.irq.csr._csr_n49 [4:0] }, Y=\core.irq.csr._csr_n50
+      New ports: A=5'00000, B=\core.irq.csr._csr_n49 [4:0], Y=\core.irq.csr._csr_n50 [4:0]
+      New connections: \core.irq.csr._csr_n50 [31:5] = 27'000000000000000000000000000
+    Consolidated identical input bits for $mux cell $flatten\core.\timer.\csr.$ternary$design.v:2168$525:
+      Old ports: A=2'10, B=2'00, Y=\core.timer.csr._csr_n52
+      New ports: A=1'1, B=1'0, Y=\core.timer.csr._csr_n52 [1]
+      New connections: \core.timer.csr._csr_n52 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\timer.\csr.$ternary$design.v:2170$527:
+      Old ports: A=0, B={ 30'000000000000000000000000000000 \core.timer.csr._csr_n53 [1:0] }, Y=\core.timer.csr._csr_n54
+      New ports: A=2'00, B=\core.timer.csr._csr_n53 [1:0], Y=\core.timer.csr._csr_n54 [1:0]
+      New connections: \core.timer.csr._csr_n54 [31:2] = 30'000000000000000000000000000000
+    Consolidated identical input bits for $mux cell $flatten\core.\uart.\csr.$ternary$design.v:710$156:
+      Old ports: A=2'10, B=2'00, Y=\core.uart.csr._csr_n54
+      New ports: A=1'1, B=1'0, Y=\core.uart.csr._csr_n54 [1]
+      New connections: \core.uart.csr._csr_n54 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\uart.\csr.$ternary$design.v:713$159:
+      Old ports: A=0, B={ 31'0000000000000000000000000000000 \core.uart.csr._csr_n56 [0] }, Y=\core.uart.csr._csr_n57
+      New ports: A=1'0, B=\core.uart.csr._csr_n56 [0], Y=\core.uart.csr._csr_n57 [0]
+      New connections: \core.uart.csr._csr_n57 [31:1] = 31'0000000000000000000000000000000
+    Consolidated identical input bits for $mux cell $flatten\core.\uart.\csr.$ternary$design.v:743$179:
+      Old ports: A=2'10, B=2'00, Y=\core.uart.csr._csr_n82
+      New ports: A=1'1, B=1'0, Y=\core.uart.csr._csr_n82 [1]
+      New connections: \core.uart.csr._csr_n82 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\uart.\csr.$ternary$design.v:784$208:
+      Old ports: A=2'10, B=2'00, Y=\core.uart.csr._csr_n117
+      New ports: A=1'1, B=1'0, Y=\core.uart.csr._csr_n117 [1]
+      New connections: \core.uart.csr._csr_n117 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\uart.\csr.$ternary$design.v:800$219:
+      Old ports: A=2'10, B=2'00, Y=\core.uart.csr._csr_n131
+      New ports: A=1'1, B=1'0, Y=\core.uart.csr._csr_n131 [1]
+      New connections: \core.uart.csr._csr_n131 [0] = 1'0
+  Optimizing cells in module \Fr198Axi.
+    Consolidated identical input bits for $mux cell $flatten\core.\gpio.\csr.$ternary$design.v:1682$407:
+      Old ports: A=\core.gpio.csr._csr_n52, B=2'00, Y=\core.gpio.csr._csr_n77
+      New ports: A=\core.gpio.csr._csr_n52 [1], B=1'0, Y=\core.gpio.csr._csr_n77 [1]
+      New connections: \core.gpio.csr._csr_n77 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\irq.\csr.$ternary$design.v:2653$668:
+      Old ports: A=\core.irq.csr._csr_n48, B=2'00, Y=\core.irq.csr._csr_n78
+      New ports: A=\core.irq.csr._csr_n48 [1], B=1'0, Y=\core.irq.csr._csr_n78 [1]
+      New connections: \core.irq.csr._csr_n78 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\irq.\csr.$ternary$design.v:2655$670:
+      Old ports: A=\core.irq.csr._csr_n50, B={ 27'000000000000000000000000000 \core.irq.csr._csr_n79 [4:0] }, Y=\core.irq.csr._csr_n80
+      New ports: A=\core.irq.csr._csr_n50 [4:0], B=\core.irq.csr._csr_n79 [4:0], Y=\core.irq.csr._csr_n80 [4:0]
+      New connections: \core.irq.csr._csr_n80 [31:5] = 27'000000000000000000000000000
+    Consolidated identical input bits for $mux cell $flatten\core.\timer.\csr.$ternary$design.v:2196$545:
+      Old ports: A=\core.timer.csr._csr_n52, B=2'00, Y=\core.timer.csr._csr_n76
+      New ports: A=\core.timer.csr._csr_n52 [1], B=1'0, Y=\core.timer.csr._csr_n76 [1]
+      New connections: \core.timer.csr._csr_n76 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\uart.\csr.$ternary$design.v:711$157:
+      Old ports: A=2'10, B=\core.uart.csr._csr_n54, Y=\core.uart.csr._csr_n55
+      New ports: A=1'1, B=\core.uart.csr._csr_n54 [1], Y=\core.uart.csr._csr_n55 [1]
+      New connections: \core.uart.csr._csr_n55 [0] = 1'0
+  Optimizing cells in module \Fr198Axi.
+    Consolidated identical input bits for $mux cell $flatten\core.\gpio.\csr.$ternary$design.v:1696$417:
+      Old ports: A=\core.gpio.csr._csr_n77, B=\core.gpio.csr._csr_n88, Y=\core.gpio.csr._csr_n89
+      New ports: A=\core.gpio.csr._csr_n77 [1], B=\core.gpio.csr._csr_n88 [1], Y=\core.gpio.csr._csr_n89 [1]
+      New connections: \core.gpio.csr._csr_n89 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\irq.\csr.$ternary$design.v:2677$685:
+      Old ports: A=\core.irq.csr._csr_n78, B=\core.gpio.csr._csr_n107, Y=\core.irq.csr._csr_n98
+      New ports: A=\core.irq.csr._csr_n78 [1], B=\core.gpio.csr._csr_n107 [1], Y=\core.irq.csr._csr_n98 [1]
+      New connections: \core.irq.csr._csr_n98 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\irq.\csr.$ternary$design.v:2679$687:
+      Old ports: A=\core.irq.csr._csr_n80, B=0, Y=\core.irq.csr._csr_n100
+      New ports: A=\core.irq.csr._csr_n80 [4:0], B=5'00000, Y=\core.irq.csr._csr_n100 [4:0]
+      New connections: \core.irq.csr._csr_n100 [31:5] = 27'000000000000000000000000000
+    Consolidated identical input bits for $mux cell $flatten\core.\timer.\csr.$ternary$design.v:2225$565:
+      Old ports: A=\core.timer.csr._csr_n76, B=2'00, Y=\core.timer.csr._csr_n100
+      New ports: A=\core.timer.csr._csr_n76 [1], B=1'0, Y=\core.timer.csr._csr_n100 [1]
+      New connections: \core.timer.csr._csr_n100 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\uart.\csr.$ternary$design.v:744$180:
+      Old ports: A=\core.uart.csr._csr_n55, B=\core.uart.csr._csr_n82, Y=\core.uart.csr._csr_n83
+      New ports: A=\core.uart.csr._csr_n55 [1], B=\core.uart.csr._csr_n82 [1], Y=\core.uart.csr._csr_n83 [1]
+      New connections: \core.uart.csr._csr_n83 [0] = 1'0
+  Optimizing cells in module \Fr198Axi.
+    Consolidated identical input bits for $mux cell $flatten\core.\gpio.\csr.$ternary$design.v:1719$433:
+      Old ports: A=\core.gpio.csr._csr_n89, B=\core.gpio.csr._csr_n107, Y=\core.gpio.csr._csr_n108
+      New ports: A=\core.gpio.csr._csr_n89 [1], B=\core.gpio.csr._csr_n107 [1], Y=\core.gpio.csr._csr_n108 [1]
+      New connections: \core.gpio.csr._csr_n108 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\irq.\csr.$ternary$design.v:2691$695:
+      Old ports: A=\core.irq.csr._csr_n98, B=\core.gpio.csr._csr_n88, Y=\core.irq.csr._csr_n110
+      New ports: A=\core.irq.csr._csr_n98 [1], B=\core.gpio.csr._csr_n88 [1], Y=\core.irq.csr._csr_n110 [1]
+      New connections: \core.irq.csr._csr_n110 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\irq.\csr.$ternary$design.v:2693$697:
+      Old ports: A=\core.irq.csr._csr_n100, B={ 27'000000000000000000000000000 \core.irq.csr._csr_n111 [4:0] }, Y=\core.irq.csr._csr_n112
+      New ports: A=\core.irq.csr._csr_n100 [4:0], B=\core.irq.csr._csr_n111 [4:0], Y=\core.irq.csr._csr_n112 [4:0]
+      New connections: \core.irq.csr._csr_n112 [31:5] = 27'000000000000000000000000000
+    Consolidated identical input bits for $mux cell $flatten\core.\timer.\csr.$ternary$design.v:2251$583:
+      Old ports: A=\core.timer.csr._csr_n100, B=2'00, Y=\core.timer.csr._csr_n121
+      New ports: A=\core.timer.csr._csr_n100 [1], B=1'0, Y=\core.timer.csr._csr_n121 [1]
+      New connections: \core.timer.csr._csr_n121 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\uart.\csr.$ternary$design.v:759$191:
+      Old ports: A=\core.uart.csr._csr_n83, B=\core.gpio.csr._csr_n88, Y=\core.uart.csr._csr_n96
+      New ports: A=\core.uart.csr._csr_n83 [1], B=\core.gpio.csr._csr_n88 [1], Y=\core.uart.csr._csr_n96 [1]
+      New connections: \core.uart.csr._csr_n96 [0] = 1'0
+  Optimizing cells in module \Fr198Axi.
+    Consolidated identical input bits for $mux cell $flatten\core.\gpio.\csr.$ternary$design.v:1742$449:
+      Old ports: A=\core.gpio.csr._csr_n108, B=\core.gpio.csr._csr_n107, Y=\core.gpio.csr._csr_n127
+      New ports: A=\core.gpio.csr._csr_n108 [1], B=\core.gpio.csr._csr_n107 [1], Y=\core.gpio.csr._csr_n127 [1]
+      New connections: \core.gpio.csr._csr_n127 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\uart.\csr.$ternary$design.v:785$209:
+      Old ports: A=\core.uart.csr._csr_n96, B=\core.uart.csr._csr_n117, Y=\core.uart.csr._csr_n118
+      New ports: A=\core.uart.csr._csr_n96 [1], B=\core.uart.csr._csr_n117 [1], Y=\core.uart.csr._csr_n118 [1]
+      New connections: \core.uart.csr._csr_n118 [0] = 1'0
+  Optimizing cells in module \Fr198Axi.
+    Consolidated identical input bits for $mux cell $flatten\core.\gpio.\csr.$ternary$design.v:1767$466:
+      Old ports: A=\core.gpio.csr._csr_n127, B=2'00, Y=\core.gpio.csr._csr_n147
+      New ports: A=\core.gpio.csr._csr_n127 [1], B=1'0, Y=\core.gpio.csr._csr_n147 [1]
+      New connections: \core.gpio.csr._csr_n147 [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\core.\uart.\csr.$ternary$design.v:801$220:
+      Old ports: A=\core.uart.csr._csr_n118, B=\core.uart.csr._csr_n131, Y=\core.uart.csr._csr_n132
+      New ports: A=\core.uart.csr._csr_n118 [1], B=\core.uart.csr._csr_n131 [1], Y=\core.uart.csr._csr_n132 [1]
+      New connections: \core.uart.csr._csr_n132 [0] = 1'0
+  Optimizing cells in module \Fr198Axi.
+    Consolidated identical input bits for $mux cell $flatten\core.\uart.\csr.$ternary$design.v:826$237:
+      Old ports: A=\core.uart.csr._csr_n132, B=2'00, Y=\core.uart.csr._csr_n152
+      New ports: A=\core.uart.csr._csr_n132 [1], B=1'0, Y=\core.uart.csr._csr_n152 [1]
+      New connections: \core.uart.csr._csr_n152 [0] = 1'0
+  Optimizing cells in module \Fr198Axi.
+Performed a total of 37 changes.
+
+5.20.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+Removed a total of 0 cells.
+
+5.20.6. Executing OPT_SHARE pass.
+
+5.20.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.20.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+
+5.20.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+<suppressed ~27 debug messages>
+
+5.20.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.20.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198Axi..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~38 debug messages>
+
+5.20.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198Axi.
+Performed a total of 0 changes.
+
+5.20.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+5.20.14. Executing OPT_SHARE pass.
+
+5.20.15. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$1174 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$1232 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$1261 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 5 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 6 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 7 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 8 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 9 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 10 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 11 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 12 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 13 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 14 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 15 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 16 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 17 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 18 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 19 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 20 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 21 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 22 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 23 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 24 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 25 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 26 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 27 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 28 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 29 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 30 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 31 on $auto$ff.cc:266:slice$1263 ($sdffe) from module Fr198Axi.
+Setting constant 0-bit at position 0 on $auto$ff.cc:266:slice$1272 ($sdffe) from module Fr198Axi.
+
+5.20.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
+
+5.20.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+
+5.20.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.20.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Fr198Axi..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~38 debug messages>
+
+5.20.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Fr198Axi.
+Performed a total of 0 changes.
+
+5.20.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+Removed a total of 0 cells.
+
+5.20.22. Executing OPT_SHARE pass.
+
+5.20.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.20.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+
+5.20.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+
+5.20.26. Finished OPT passes. (There is nothing left to do.)
+
+5.21. Executing TECHMAP pass (map to technology primitives).
+
+5.21.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+5.21.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $sdff.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $or.
+Using extmapper maccmap for cells of type $macc.
+  add \core.uart._uart_n30 [31:1] (31 bits, unsigned)
+  add 32'11111111111111111111111111111111 (32 bits, unsigned)
+  add bits \core.uart._uart_n30 [0] (1 bits)
+  packed 1 (1) bits / 1 words into adder tree
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$10ed987432f06055e5279101f9ec60a49861b43c\_90_alu for cells of type $alu.
+Using template $paramod$65af072f6065f0ed27ad80c8089003dcba6e1c40\_90_alu for cells of type $alu.
+Using template $paramod$6a42b6fefed750f8a1c58eab59479d960557103c\_90_alu for cells of type $alu.
+Using template $paramod$32a7b7b86c07519b7537abc18e96f0331f97914d\_90_alu for cells of type $alu.
+Using template $paramod$403a3c2fa431a154c52a6a5429d7a6260b5d144f\_90_alu for cells of type $alu.
+Using template $paramod$a5a8ebb2cfc80f0cacfac1e42aa531c9aa5fbb36\_90_alu for cells of type $alu.
+Using template $paramod$b8c0a997bce700f23568a5ada79cc6781d1f5ca0\_90_alu for cells of type $alu.
+Using template $paramod$c04af8dbf0e5d1d69bbccb2c7bd8a93fc9ef54dc\_90_alu for cells of type $alu.
+Using template $paramod$3ef7d3dd227da7627a99c5e5a6a4deb817573e39\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000011110 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000111 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~2567 debug messages>
+
+5.22. Executing OPT pass (performing simple optimizations).
+
+5.22.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+<suppressed ~2042 debug messages>
+
+5.22.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+<suppressed ~1287 debug messages>
+Removed a total of 429 cells.
+
+5.22.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.22.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+Removed 212 unused cells and 1101 unused wires.
+<suppressed ~224 debug messages>
+
+5.22.5. Finished fast OPT passes.
+
+5.23. Executing ABC pass (technology mapping using ABC).
+
+5.23.1. Extracting gate netlist of module `\Fr198Axi' to `<abc-temp-dir>/input.blif'..
+Extracted 3528 gates and 4228 wires to a netlist network with 697 inputs and 585 outputs.
+
+5.23.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+5.23.1.2. Re-integrating ABC results.
+ABC RESULTS:              XNOR cells:       67
+ABC RESULTS:               NOT cells:       49
+ABC RESULTS:              NAND cells:       54
+ABC RESULTS:               MUX cells:      751
+ABC RESULTS:               NOR cells:      163
+ABC RESULTS:                OR cells:      558
+ABC RESULTS:            ANDNOT cells:      586
+ABC RESULTS:             ORNOT cells:      246
+ABC RESULTS:               AND cells:      180
+ABC RESULTS:               XOR cells:      123
+ABC RESULTS:        internal signals:     2946
+ABC RESULTS:           input signals:      697
+ABC RESULTS:          output signals:      585
+Removing temp directory.
+
+5.24. Executing OPT pass (performing simple optimizations).
+
+5.24.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198Axi.
+<suppressed ~68 debug messages>
+
+5.24.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198Axi'.
+<suppressed ~153 debug messages>
+Removed a total of 51 cells.
+
+5.24.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.24.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Axi..
+Removed 2 unused cells and 2248 unused wires.
+<suppressed ~416 debug messages>
+
+5.24.5. Finished fast OPT passes.
+
+5.25. Executing HIERARCHY pass (managing design hierarchy).
+
+5.25.1. Analyzing design hierarchy..
+Top module:  \Fr198Axi
+
+5.25.2. Analyzing design hierarchy..
+Top module:  \Fr198Axi
+Removed 0 unused modules.
+
+5.26. Printing statistics.
+
+=== Fr198Axi ===
+
+   Number of wires:               3193
+   Number of wire bits:          17083
+   Number of public wires:        1026
+   Number of public wire bits:   14916
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3520
+     $_ANDNOT_                     583
+     $_AND_                        179
+     $_MUX_                        751
+     $_NAND_                        54
+     $_NOR_                        130
+     $_NOT_                         47
+     $_ORNOT_                      246
+     $_OR_                         544
+     $_SDFFE_PN0P_                 603
+     $_SDFFE_PP0P_                  13
+     $_SDFF_PN0_                   179
+     $_SDFF_PP0_                     1
+     $_XNOR_                        67
+     $_XOR_                        123
+
+5.27. Executing CHECK pass (checking for obvious problems).
+Checking module Fr198Axi...
+Found and reported 0 problems.
+
+6. Executing CHECK pass (checking for obvious problems).
+Checking module Fr198Axi...
+Found and reported 0 problems.
+
+7. Printing statistics.
+
+=== Fr198Axi ===
+
+   Number of wires:               3193
+   Number of wire bits:          17083
+   Number of public wires:        1026
+   Number of public wire bits:   14916
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3520
+     $_ANDNOT_                     583
+     $_AND_                        179
+     $_MUX_                        751
+     $_NAND_                        54
+     $_NOR_                        130
+     $_NOT_                         47
+     $_ORNOT_                      246
+     $_OR_                         544
+     $_SDFFE_PN0P_                 603
+     $_SDFFE_PP0P_                  13
+     $_SDFF_PN0_                   179
+     $_SDFF_PP0_                     1
+     $_XNOR_                        67
+     $_XOR_                        123
+
+End of script. Logfile hash: 0ffc5e9a94, CPU: user 3.61s system 0.03s, MEM: 42.99 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 25% 25x opt_clean (0 sec), 23% 32x opt_expr (0 sec), ...

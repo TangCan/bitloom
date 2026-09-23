@@ -1,0 +1,21 @@
+{
+  "arguments": [
+    "show sbtVersion"
+  ],
+  "cwd": "/tmp/tmp.xdtbJZgyYH/artifacts/backends/direct-csr-chisel-2184011-1790137641100750673",
+  "elapsed_ms": 3957,
+  "exit_code": 0,
+  "kill_after_seconds": 5,
+  "label": "sbt-version",
+  "log": "sbt-version.log",
+  "program": "sbt",
+  "start_utc_unix_ms": 1790137667395,
+  "stderr": "",
+  "stdout": "[info] welcome to sbt 1.10.11 (Ubuntu Java 17.0.20.1)\n[info] loading project definition from /tmp/tmp.xdtbJZgyYH/artifacts/backends/direct-csr-chisel-2184011-1790137641100750673/project\n[info] loading settings for project direct-csr-chisel-2184011-1790137641100750673 from build.sbt...\n[info] set current project to direct-csr-chisel-2184011-1790137641100750673 (in build file:/tmp/tmp.xdtbJZgyYH/artifacts/backends/direct-csr-chisel-2184011-1790137641100750673/)\n[info] 1.10.11\n",
+  "timeout_path": "/usr/bin/timeout",
+  "timeout_seconds": 300,
+  "timeout_sha256": "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52",
+  "tool_canonical_path": "/tmp/phase24-closeout-tools/bin/sbt",
+  "tool_path": "/tmp/phase24-closeout-tools/bin/sbt",
+  "tool_sha256": "be433c00ccd46ab95c421428e32af3d2d6694f805d75462add25a8c496ba324b"
+}

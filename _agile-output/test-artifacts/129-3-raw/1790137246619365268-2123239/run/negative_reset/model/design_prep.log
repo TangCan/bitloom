@@ -1,0 +1,352 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `design_prep.ys' --
+
+1. Executing RTLIL frontend.
+Input filename: design.il
+
+2. Executing SCC pass (detecting logic loops).
+Found 0 SCCs in module Fr198Uart.
+Found 0 SCCs in module Fr198Timer.
+Found 0 SCCs in module Fr198Irq.
+Found 0 SCCs in module Fr198Gpio.
+Found 0 SCCs in module Fr198Decoder.
+Found 0 SCCs in module Fr198Bridge.
+Found 0 SCCs in module Fr198AxiCore.
+Found 0 SCCs.
+
+3. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+4. Executing MEMORY_NORDFF pass (extracting $dff cells from memories).
+
+5. Executing ASYNC2SYNC pass.
+
+6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198Uart..
+Finding unused cells or wires in module \Fr198Timer..
+Finding unused cells or wires in module \Fr198Irq..
+Finding unused cells or wires in module \Fr198Gpio..
+Finding unused cells or wires in module \Fr198Decoder..
+Finding unused cells or wires in module \Fr198Bridge..
+Finding unused cells or wires in module \Fr198AxiCore..
+Removed 12 unused cells and 12 unused wires.
+<suppressed ~13 debug messages>
+
+7. Executing FORMALFF pass.
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198AxiCore..
+Finding unused cells or wires in module \Fr198Bridge..
+Finding unused cells or wires in module \Fr198Decoder..
+Finding unused cells or wires in module \Fr198Gpio..
+Finding unused cells or wires in module \Fr198Irq..
+Finding unused cells or wires in module \Fr198Timer..
+Finding unused cells or wires in module \Fr198Uart..
+Removed 29 unused cells and 29 unused wires.
+<suppressed ~33 debug messages>
+
+9. Executing CHECK pass (checking for obvious problems).
+Checking module Fr198AxiCore...
+Checking module Fr198Bridge...
+Checking module Fr198Decoder...
+Checking module Fr198Gpio...
+Warning: Wire Fr198Gpio.\rsp_valid is used but has no driver.
+Warning: Wire Fr198Gpio.\req_ready is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [31] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [30] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [29] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [28] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [27] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [26] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [25] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [24] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [23] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [22] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [21] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [20] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [19] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [18] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [17] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [16] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [15] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [14] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [13] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [12] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [11] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [10] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [9] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [8] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [7] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [6] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [5] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [4] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [3] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [2] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [1] is used but has no driver.
+Warning: Wire Fr198Gpio.\rdata [0] is used but has no driver.
+Warning: Wire Fr198Gpio.\raw_event is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [31] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [30] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [29] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [28] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [27] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [26] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [25] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [24] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [23] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [22] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [21] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [20] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [19] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [18] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [17] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [16] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [15] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [14] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [13] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [12] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [11] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [10] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [9] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [8] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [7] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [6] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [5] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [4] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [3] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [2] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [1] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_out [0] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [31] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [30] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [29] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [28] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [27] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [26] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [25] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [24] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [23] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [22] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [21] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [20] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [19] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [18] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [17] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [16] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [15] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [14] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [13] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [12] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [11] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [10] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [9] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [8] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [7] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [6] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [5] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [4] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [3] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [2] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [1] is used but has no driver.
+Warning: Wire Fr198Gpio.\pad_oe [0] is used but has no driver.
+Warning: Wire Fr198Gpio.\error [1] is used but has no driver.
+Warning: Wire Fr198Gpio.\error [0] is used but has no driver.
+Checking module Fr198Irq...
+Warning: Wire Fr198Irq.\rsp_valid is used but has no driver.
+Warning: Wire Fr198Irq.\req_ready is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [31] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [30] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [29] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [28] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [27] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [26] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [25] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [24] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [23] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [22] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [21] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [20] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [19] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [18] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [17] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [16] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [15] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [14] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [13] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [12] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [11] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [10] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [9] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [8] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [7] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [6] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [5] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [4] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [3] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [2] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [1] is used but has no driver.
+Warning: Wire Fr198Irq.\rdata [0] is used but has no driver.
+Warning: Wire Fr198Irq.\irq is used but has no driver.
+Warning: Wire Fr198Irq.\error [1] is used but has no driver.
+Warning: Wire Fr198Irq.\error [0] is used but has no driver.
+Checking module Fr198Timer...
+Warning: Wire Fr198Timer.\rsp_valid is used but has no driver.
+Warning: Wire Fr198Timer.\req_ready is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [31] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [30] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [29] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [28] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [27] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [26] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [25] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [24] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [23] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [22] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [21] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [20] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [19] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [18] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [17] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [16] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [15] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [14] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [13] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [12] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [11] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [10] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [9] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [8] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [7] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [6] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [5] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [4] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [3] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [2] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [1] is used but has no driver.
+Warning: Wire Fr198Timer.\rdata [0] is used but has no driver.
+Warning: Wire Fr198Timer.\match_event is used but has no driver.
+Warning: Wire Fr198Timer.\error [1] is used but has no driver.
+Warning: Wire Fr198Timer.\error [0] is used but has no driver.
+Checking module Fr198Uart...
+Warning: Wire Fr198Uart.\tx is used but has no driver.
+Warning: Wire Fr198Uart.\rsp_valid is used but has no driver.
+Warning: Wire Fr198Uart.\req_ready is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [31] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [30] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [29] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [28] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [27] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [26] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [25] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [24] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [23] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [22] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [21] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [20] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [19] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [18] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [17] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [16] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [15] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [14] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [13] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [12] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [11] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [10] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [9] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [8] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [7] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [6] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [5] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [4] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [3] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [2] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [1] is used but has no driver.
+Warning: Wire Fr198Uart.\rdata [0] is used but has no driver.
+Warning: Wire Fr198Uart.\raw_events [3] is used but has no driver.
+Warning: Wire Fr198Uart.\raw_events [2] is used but has no driver.
+Warning: Wire Fr198Uart.\raw_events [1] is used but has no driver.
+Warning: Wire Fr198Uart.\raw_events [0] is used but has no driver.
+Warning: Wire Fr198Uart.\error [1] is used but has no driver.
+Warning: Wire Fr198Uart.\error [0] is used but has no driver.
+Found and reported 216 problems.
+
+10. Executing SETUNDEF pass (replace undef values with defined constants).
+
+11. Executing OPT pass (performing simple optimizations).
+
+11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Fr198AxiCore.
+Optimizing module Fr198Bridge.
+Optimizing module Fr198Decoder.
+<suppressed ~1 debug messages>
+Optimizing module Fr198Gpio.
+Optimizing module Fr198Irq.
+Optimizing module Fr198Timer.
+Optimizing module Fr198Uart.
+
+11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Fr198AxiCore'.
+Finding identical cells in module `\Fr198Bridge'.
+Finding identical cells in module `\Fr198Decoder'.
+Finding identical cells in module `\Fr198Gpio'.
+Finding identical cells in module `\Fr198Irq'.
+Finding identical cells in module `\Fr198Timer'.
+Finding identical cells in module `\Fr198Uart'.
+Removed a total of 0 cells.
+
+11.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198AxiCore..
+Finding unused cells or wires in module \Fr198Bridge..
+Finding unused cells or wires in module \Fr198Decoder..
+Finding unused cells or wires in module \Fr198Gpio..
+Finding unused cells or wires in module \Fr198Irq..
+Finding unused cells or wires in module \Fr198Timer..
+Finding unused cells or wires in module \Fr198Uart..
+Removed 0 unused cells and 37 unused wires.
+<suppressed ~5 debug messages>
+
+11.5. Finished fast OPT passes.
+
+12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Fr198AxiCore..
+Finding unused cells or wires in module \Fr198Bridge..
+Finding unused cells or wires in module \Fr198Decoder..
+Finding unused cells or wires in module \Fr198Gpio..
+Finding unused cells or wires in module \Fr198Irq..
+Finding unused cells or wires in module \Fr198Timer..
+Finding unused cells or wires in module \Fr198Uart..
+Removed 0 unused cells and 94 unused wires.
+<suppressed ~1 debug messages>
+
+13. Executing RTLIL backend.
+Output filename: ../model/design_prep.il
+
+Warnings: 216 unique messages, 216 total
+End of script. Logfile hash: 847e402b08, CPU: user 0.15s system 0.01s, MEM: 14.34 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 39% 4x opt_clean (0 sec), 10% 1x opt_expr (0 sec), ...
