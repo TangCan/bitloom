@@ -1,0 +1,12 @@
+{
+  "epic": 130,
+  "story_count": 3,
+  "done_stories": [
+    "130-1-外部-ip-准入-nfr14",
+    "130-2-来源清单-锁定与离线重放",
+    "130-3-一个真实外部核适配及试点关闭"
+  ],
+  "pending_stories": [],
+  "retro_key": "epic-130-retrospective",
+  "retro_status": null
+}

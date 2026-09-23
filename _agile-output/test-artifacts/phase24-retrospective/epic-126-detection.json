@@ -1,0 +1,13 @@
+{
+  "epic": 126,
+  "story_count": 4,
+  "done_stories": [
+    "126-1-组合基础-nfr14",
+    "126-2-共享模块定义与实例校验",
+    "126-3-两槽-ready-valid-注册切片",
+    "126-4-参数-fifo-与-m1-关闭"
+  ],
+  "pending_stories": [],
+  "retro_key": "epic-126-retrospective",
+  "retro_status": null
+}

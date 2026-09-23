@@ -1,0 +1,21 @@
+{
+  "arguments": [
+    "simulation"
+  ],
+  "cwd": "/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr198/axi-18795",
+  "elapsed_ms": 1897,
+  "exit_code": 0,
+  "kill_after_seconds": 5,
+  "label": "simulate",
+  "log": "simulate.log",
+  "program": "vvp",
+  "start_utc_unix_ms": 1790157787910,
+  "stderr": "",
+  "stdout": "VCD info: dumpfile axi.vcd opened for output.\nFR198 PASS topology=axi assertions=62416 transactions=16102 random_transactions=16000\ntb.sv:303: $finish called at 1025680000 (1ps)\n",
+  "timeout_path": "/usr/bin/timeout",
+  "timeout_seconds": 30,
+  "timeout_sha256": "12690a043dfd555a6c14ccc1564f5649c18f1762c0d6ff66729948130898ec52",
+  "tool_canonical_path": "/usr/bin/vvp",
+  "tool_path": "/usr/bin/vvp",
+  "tool_sha256": "a10bd7d4a0850308ac8c2c98115b6a3084f9be978307610f2a521190c28f4023"
+}

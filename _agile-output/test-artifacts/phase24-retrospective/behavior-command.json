@@ -1,0 +1,15 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "-p",
+    "bitloom",
+    "--test",
+    "fr198_peripheral_system",
+    "--",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 5.176165062999644,
+  "scope": "actual generated direct-Verilog AXI + direct CSR system and structural checks; not all backend/formal gates"
+}

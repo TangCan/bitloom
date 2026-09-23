@@ -1,0 +1,13 @@
+{
+  "epic": 127,
+  "story_count": 4,
+  "done_stories": [
+    "127-1-csr-总线-nfr14",
+    "127-2-csr-描述-rtl-与软件地址产物",
+    "127-3-axi-lite-csr-桥",
+    "127-4-静态译码与-m2-关闭"
+  ],
+  "pending_stories": [],
+  "retro_key": "epic-127-retrospective",
+  "retro_status": null
+}

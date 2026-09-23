@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/nvme_data2/richard/2026/rhdl/target/debug/cargo-bitloom",
+    "external-ip",
+    "verify",
+    "--manifest",
+    "/tmp/bitloom-retro-symlink-aanbclmw/source.json",
+    "--lock",
+    "/tmp/bitloom-retro-symlink-aanbclmw/source.lock.json",
+    "--cache",
+    "/tmp/bitloom-retro-symlink-aanbclmw/cache",
+    "--offline"
+  ],
+  "exit_code": 0,
+  "stdout": "verified=/tmp/bitloom-retro-symlink-aanbclmw/source.lock.json sources=3\n",
+  "stderr": "",
+  "cache": "/tmp/bitloom-retro-symlink-aanbclmw/cache",
+  "ancestor_symlink": "/tmp/bitloom-retro-symlink-aanbclmw/cache/closures",
+  "target": "/tmp/bitloom-retro-symlink-aanbclmw/outside-cache/closures",
+  "scope": "copy of original evidence cache; original untouched; no network",
+  "binary_sha256": "c40e36535ba32de8c285161c508aa06d1581809762dd493bcb9a2097acffd0c4",
+  "build_confirmation": "cargo build --offline -p bitloom --bin cargo-bitloom; exit 0, current HEAD 4d1b19f"
+}

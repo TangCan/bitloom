@@ -1,0 +1,14 @@
+{
+  "epic": 128,
+  "story_count": 5,
+  "done_stories": [
+    "128-1-外设-nfr14",
+    "128-2-timer",
+    "128-3-事件-irq",
+    "128-4-gpio-csr-wrapper",
+    "128-5-缓冲-uart-与-m3-关闭"
+  ],
+  "pending_stories": [],
+  "retro_key": "epic-128-retrospective",
+  "retro_status": null
+}

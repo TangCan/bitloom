@@ -1,0 +1,209 @@
+[
+  {
+    "path": "crates/bitloom/src/external_ip.rs",
+    "added": 2263,
+    "deleted": 2,
+    "net": 2261,
+    "commit_count": 2,
+    "binary_revisions": 0,
+    "current_lines": 2261
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/uart_csr.rs",
+    "added": 396,
+    "deleted": 0,
+    "net": 396,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 396
+  },
+  {
+    "path": "crates/bitloom/src/external_ip_tests.rs",
+    "added": 375,
+    "deleted": 4,
+    "net": 371,
+    "commit_count": 2,
+    "binary_revisions": 0,
+    "current_lines": 371
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/csr/mod.rs",
+    "added": 344,
+    "deleted": 0,
+    "net": 344,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 344
+  },
+  {
+    "path": "crates/bitloom-hir/src/composition.rs",
+    "added": 320,
+    "deleted": 0,
+    "net": 320,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 320
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/csr/rtl.rs",
+    "added": 249,
+    "deleted": 0,
+    "net": 249,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 249
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/csr/codec.rs",
+    "added": 247,
+    "deleted": 0,
+    "net": 247,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 247
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/axi_lite_csr.rs",
+    "added": 226,
+    "deleted": 0,
+    "net": 226,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 226
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/csr_decoder.rs",
+    "added": 198,
+    "deleted": 0,
+    "net": 198,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 198
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/gpio/csr.rs",
+    "added": 187,
+    "deleted": 0,
+    "net": 187,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 187
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/timer.rs",
+    "added": 187,
+    "deleted": 0,
+    "net": 187,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 187
+  },
+  {
+    "path": "crates/bitloom-builder/src/lib.rs",
+    "added": 171,
+    "deleted": 1,
+    "net": 170,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 3197
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/irq.rs",
+    "added": 144,
+    "deleted": 0,
+    "net": 144,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 144
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/param_sync_fifo.rs",
+    "added": 135,
+    "deleted": 0,
+    "net": 135,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 135
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/rv_reg_slice.rs",
+    "added": 114,
+    "deleted": 0,
+    "net": 114,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 114
+  },
+  {
+    "path": "crates/bitloom/src/main.rs",
+    "added": 98,
+    "deleted": 0,
+    "net": 98,
+    "commit_count": 2,
+    "binary_revisions": 0,
+    "current_lines": 1720
+  },
+  {
+    "path": "crates/rhdl-firrtl/src/chisel.rs",
+    "added": 92,
+    "deleted": 7,
+    "net": 85,
+    "commit_count": 2,
+    "binary_revisions": 0,
+    "current_lines": 1497
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/axi.rs",
+    "added": 87,
+    "deleted": 24,
+    "net": 63,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 414
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/mod.rs",
+    "added": 16,
+    "deleted": 0,
+    "net": 16,
+    "commit_count": 8,
+    "binary_revisions": 0,
+    "current_lines": 58
+  },
+  {
+    "path": "crates/bitloom-sim/src/ip_dual.rs",
+    "added": 34,
+    "deleted": 19,
+    "net": 15,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 1414
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/gpio/base.rs",
+    "added": 16,
+    "deleted": 3,
+    "net": 13,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 69
+  },
+  {
+    "path": "crates/bitloom-prelude/src/ip/gpio/mod.rs",
+    "added": 2,
+    "deleted": 0,
+    "net": 2,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 21
+  },
+  {
+    "path": "crates/bitloom-hir/src/lib.rs",
+    "added": 23,
+    "deleted": 133,
+    "net": -110,
+    "commit_count": 1,
+    "binary_revisions": 0,
+    "current_lines": 677
+  }
+]

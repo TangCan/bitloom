@@ -1,0 +1,12 @@
+{
+  "epic": 129,
+  "story_count": 3,
+  "done_stories": [
+    "129-1-组合系统与证据-nfr14",
+    "129-2-外设子系统与使用配方",
+    "129-3-ci-兼容性-贡献模板与核心关闭"
+  ],
+  "pending_stories": [],
+  "retro_key": "epic-129-retrospective",
+  "retro_status": null
+}

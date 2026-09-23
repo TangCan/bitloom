@@ -1,0 +1,31 @@
+{
+  "125": [],
+  "126": [
+    {
+      "id": "phase24-retro-m3-doc-status",
+      "action": "M3：为docs/ip/module-composition.md与csr.md增加当前状态、历史时点说明及结项/本轮复盘链接；保留历史证据，不掩盖外部缓存待修项。",
+      "owner": "Richard"
+    }
+  ],
+  "127": [],
+  "128": [],
+  "129": [
+    {
+      "id": "phase24-retro-m4-tracking-keys",
+      "action": "M4：通过支持的规划/追踪维护流程补齐Epic125–130缺失的retrospective键，再将已完成复盘标done；不得把done解释为accepted，裁决读取各复盘frontmatter。",
+      "owner": "Richard"
+    }
+  ],
+  "130": [
+    {
+      "id": "phase24-retro-m1-cache-rollback",
+      "action": "M1：修复external_ip.rs失败重锁回滚删除已有闭包；记录本次创建所有权，注入许可证发布失败，证明旧锁/旧缓存保持可用；以独立故事修复并验证。",
+      "owner": "Richard"
+    },
+    {
+      "id": "phase24-retro-m2-cache-ancestor",
+      "action": "M2：修复external_ip.rs缓存祖先符号链接越界；新增closures和闭包目录链接负测，保留正常缓存/离线重放；关闭后复评Epic130，本轮已有CLI实测反例。",
+      "owner": "Richard"
+    }
+  ]
+}

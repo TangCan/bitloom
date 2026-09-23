@@ -1,0 +1,122 @@
+[
+  {
+    "id": "A1",
+    "lens": "adversarial",
+    "location": "crates/bitloom-hir/src/composition.rs:219",
+    "trigger_condition": "子输入连接已声明但无驱动父wire",
+    "guard_snippet": "补驱动来源诊断及反例",
+    "potential_consequence": "freeze名称/类型校验无法发现缺失驱动",
+    "disposition": "accept as-is",
+    "triage": "代码已核对；当前合同区分未连接输入和一般父网驱动完整性。历史i_raw_events已修复；作为未来诊断加深，不据此宣称现有系统失败。"
+  },
+  {
+    "id": "A2",
+    "lens": "adversarial",
+    "location": "crates/bitloom-hir/src/composition.rs:56",
+    "trigger_condition": "兄弟实例形成信号组合反馈",
+    "guard_snippet": "另行定义跨实例组合依赖检查",
+    "potential_consequence": "实例图无环不等于信号图无环",
+    "disposition": "accept as-is",
+    "triage": "当前合同只承诺实例图循环检查，未在已交付系统证实反馈；不扩大范围。"
+  },
+  {
+    "id": "A3",
+    "lens": "adversarial",
+    "location": "docs/ip/csr.md:3; docs/ip/module-composition.md:32",
+    "trigger_condition": "直接访问叶文档",
+    "guard_snippet": "添加当前状态及总验收/本轮复盘入口，保留历史段落",
+    "potential_consequence": "读者把历史未完成文字误作当前状态",
+    "disposition": "fix now",
+    "triage": "两处原文已核实，索引状态横幅不能覆盖直链阅读；行动M3。"
+  },
+  {
+    "id": "A4",
+    "lens": "adversarial",
+    "location": "crates/bitloom-prelude/src/ip/timer.rs:45; uart_csr.rs:50",
+    "trigger_condition": "软件按子字段使用生成头",
+    "guard_snippet": "单独规划语义字段名和API影响",
+    "potential_consequence": "调用者需自行组合子字段位号",
+    "disposition": "accept as-is",
+    "triage": "bits聚合mask正确；是新增便利表面，不是已证实行为缺陷。"
+  },
+  {
+    "id": "A5",
+    "lens": "adversarial",
+    "location": "crates/bitloom-prelude/src/ip/csr/mod.rs:83; ip/gpio/csr.rs:98; ip/irq.rs:94; ip/uart_csr.rs:105",
+    "trigger_condition": "将来CSR端口规则变更",
+    "guard_snippet": "考虑私有统一端口枚举",
+    "potential_consequence": "重复规则可能漂移",
+    "disposition": "accept as-is",
+    "triage": "对比确认端口枚举有重复，但未发现当前不一致；保持独立oracle，实际改规则时再评估。"
+  },
+  {
+    "id": "A6",
+    "lens": "adversarial",
+    "location": "crates/bitloom/tests/fr198_peripheral_system.rs:76",
+    "trigger_condition": "将来fixture加入有符号端口",
+    "guard_snippet": "保留完整类型或拒绝不支持类型",
+    "potential_consequence": "测试连线丢失符号信息",
+    "disposition": "accept as-is",
+    "triage": "当前实际数据端口为UInt，扩展假设不属当前缺陷。"
+  },
+  {
+    "id": "A7",
+    "lens": "adversarial",
+    "location": "crates/bitloom/tests/fr198_peripheral_system.rs:46",
+    "trigger_condition": "将来模块名称变更",
+    "guard_snippet": "减少重复名称表，移除无用参数",
+    "potential_consequence": "维护重复名称知识",
+    "disposition": "accept as-is",
+    "triage": "_module忽略和独立elaborate已核实；当前映射正确，未测出性能问题。"
+  },
+  {
+    "id": "A8",
+    "lens": "adversarial",
+    "location": "crates/bitloom-prelude/src/ip/timer.rs:12; ip/uart_csr.rs:15",
+    "trigger_condition": "调用者名称与内部定义冲突",
+    "guard_snippet": "补内部保留名称说明或另设命名方案",
+    "potential_consequence": "发生明确Diagnostics而非用户期望定义",
+    "disposition": "accept as-is",
+    "triage": "固定内部名可见，冲突检查是既定同名定义规则；无静默错误，不自动引入命名API。"
+  },
+  {
+    "id": "A9",
+    "lens": "adversarial",
+    "location": "crates/bitloom/src/external_ip.rs:226,739,1009,1290,1697",
+    "trigger_condition": "未来多职责独立变化",
+    "guard_snippet": "评估私有模块拆分",
+    "potential_consequence": "审查维护范围扩大",
+    "disposition": "accept as-is",
+    "triage": "2261行和多职责是实测结构，不是缺陷证据；优先修复具体事务/路径问题。"
+  },
+  {
+    "id": "A10",
+    "lens": "adversarial",
+    "location": "_agile-output/test-artifacts/phase24-closeout-review.md:A1/A2/A3",
+    "trigger_condition": "未来依靠单故事done提前结项",
+    "guard_snippet": "将真实拓扑×后端矩阵和证据消费检查前移",
+    "potential_consequence": "再次积累验收缺口",
+    "disposition": "accept as-is",
+    "triage": "原漏项已由4d1b19f修复；记录过程经验，不再次列作未修缺陷。"
+  },
+  {
+    "id": "E1",
+    "lens": "edge-case-hunter",
+    "location": "crates/bitloom/src/external_ip.rs:1375-1379",
+    "trigger_condition": "已有闭包被复用后许可证发布失败",
+    "guard_snippet": "只回滚本次事务创建的目录，并测试旧锁仍可使用",
+    "potential_consequence": "失败重锁删除已有缓存",
+    "disposition": "fix now",
+    "triage": "690处已有目录分支复用，932处许可证漂移会失败，1377无条件删除。父代理逐段核对；未联网重跑lock，不称为完整实测。行动M1。"
+  },
+  {
+    "id": "E2",
+    "lens": "edge-case-hunter",
+    "location": "crates/bitloom/src/external_ip.rs:1462-1472",
+    "trigger_condition": "cache/closures祖先符号链接指向缓存外",
+    "guard_snippet": "逐层检查路径，验证规范化边界，回归中间目录链接",
+    "potential_consequence": "离线verify接受缓存外输入",
+    "disposition": "fix now",
+    "triage": "当前CLI复制原始闭包后实测exit0，sources=3；symlink-probe.json保存命令/二进制hash和结果。行动M2。"
+  }
+]

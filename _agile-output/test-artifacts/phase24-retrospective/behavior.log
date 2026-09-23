@@ -1,0 +1,16 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.96s
+     Running tests/fr198_peripheral_system.rs (target/debug/deps/fr198_peripheral_system-92f4dbe0df9160de)
+
+running 6 tests
+test fr201_backend_matrix::fr201_axi_complete_system_three_backend_matrix ... ignored, dedicated pinned direct/FIRRTL/Chisel complete-system matrix
+test fr201_backend_matrix::fr201_direct_csr_complete_system_three_backend_matrix ... ignored, dedicated pinned direct-CSR direct/FIRRTL/Chisel complete-system matrix
+test fr201_core_formal::fr201_complete_system_formal_and_negative_control ... ignored, dedicated system-level SymbiYosys prove/cover/negative-control gate
+test fr198_both_topologies_have_shared_real_leaf_definitions ... ok
+FR198 direct PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr198/direct-18795
+test fr198_direct_csr_four_leaf_hierarchy_emits_and_runs ... ok
+FR198 axi PASS artifacts=/nvme_data2/richard/2026/rhdl/crates/bitloom/../../target/fr198/axi-18795
+test fr198_axi_four_leaf_hierarchy_emits_and_runs ... ok
+
+test result: ok. 3 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 4.14s
+
