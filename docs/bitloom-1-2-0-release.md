@@ -1,6 +1,6 @@
 # Bitloom 1.2.0 发布记录
 
-状态（2026-09-23）：**十个Bitloom包均已正式发布到crates.io，版本1.2.0**。逐包dry-run/上传、registry校验和、真实安装与仓库外使用验收通过。未执行Git推送、创建GitHub Release或正式标签。Bitloom与samitbasu/rhdl无关。
+状态（2026-09-23）：**十个Bitloom包均已正式发布到crates.io，版本1.2.0**。逐包dry-run/上传、registry校验和、真实安装与仓库外使用验收通过。整理后的主线已于2026-09-23推送（`f450afb`）；正式标签与GitHub Release正在收尾。Bitloom与samitbasu/rhdl无关。
 
 本版本为Phase24与后续缓存修复的SemVer minor增量；接口依据[公开API表面](public-api-1-0-surface.md)，交付范围见[Phase24总验收](ip/phase24-closeout.md)，新增功能与修复见[CHANGELOG](../CHANGELOG.md)。历史1.1.x已发布版本不改写。
 
@@ -61,7 +61,7 @@ sha256sum Cargo.lock
 
 运行结果、候选包SHA256与具体命令记录在[发布候选验证](../_agile-output/test-artifacts/bitloom-1-2-0-release-verification.md)。本轮十包联合`cargo publish --dry-run --locked --allow-dirty`已实际通过，使用Cargo原生未发布依赖闭包检查；日志中的Uploading行均紧随“aborting upload due to dry run”，没有上传。单独执行非叶子包的dry-run仍可能受尚未上架的1.2.0依赖影响；正式上传时仍逐包检查。
 
-## 正式发布操作记录（1–4已完成；5仅完成结果归档）
+## 正式发布操作记录（1–4已完成；5主线已推送，标签与公告收尾中）
 
 1. 审阅本候选提交、验证记录、包清单与已知限制，明确授权正式上传及是否推送/创建GitHub Release。
 2. 核对crates.io各包1.2.0仍未占用以及发布凭据/权限。将CHANGELOG候选段落转为实际发布日期；若改变包内容，重新打包并更新摘要。
@@ -71,8 +71,12 @@ sha256sum Cargo.lock
 
 ## 保留边界
 
-FR189/Epic122仍deferred、未交付，NFR91保持。新增层级组合的native/generated仿真仍unsupported；功能/周期生成验收使用其已支持的叶节点设计。外部IP只承诺已验收试点及明确支持矩阵，不宣称任意IP包管理。没有板卡、物理签核或新版远端CI结果；本地软件包发布准备不替代这些验证。
+FR189/Epic122仍deferred、未交付，NFR91保持。新增层级组合的native/generated仿真仍unsupported；功能/周期生成验收使用其已支持的叶节点设计。外部IP只承诺已验收试点及明确支持矩阵，不宣称任意IP包管理。没有板卡、物理签核；`f450afb`的GitHub Actions运行与check-runs查询均为0，未取得新版远端CI通过证据；本地软件包发布准备不替代这些验证。
 
 ## 本地历史归档整理（2026-09-23）
 
 原始验收归档移至仓库外，恢复步骤与提交映射见 [证据归档说明](evidence/README.md)。本文上传源码 SHA 保留真实发布时的值；整理历史不改变已发布包。本次整理没有恢复推送。
+
+## 推送后的发布收尾
+
+归档整理后的 `main` 已正常快进推送至 `f450afb0551c8664c08dd50a398129e71e7d6785`，备份分支未推送。CI工作流已启用，但该提交没有生成运行记录；增加 `workflow_dispatch` 入口以执行真实远端验证，现有门禁保持不变。正式 `v1.2.0` 标签计划指向 `2cda375fbd5b8f1f33c6c3eb6abd93b73eda9e83`，它对应真实上传源码 `e33d12fd747e576a542e24f18be1e3cfea4760d7`，映射已逐提交验证。
