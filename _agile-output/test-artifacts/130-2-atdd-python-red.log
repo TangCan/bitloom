@@ -1,0 +1,32 @@
+test_p0_archive_traversal_and_undeclared_members_fail_atomically (__main__.ReplayAcceptance.test_p0_archive_traversal_and_undeclared_members_fail_atomically) ... FAIL
+test_p0_empty_cache_fetch_then_movable_network_isolated_replay (__main__.ReplayAcceptance.test_p0_empty_cache_fetch_then_movable_network_isolated_replay) ... FAIL
+test_p0_network_and_host_cache_fallback_are_rejected (__main__.ReplayAcceptance.test_p0_network_and_host_cache_fallback_are_rejected) ... FAIL
+
+======================================================================
+FAIL: test_p0_archive_traversal_and_undeclared_members_fail_atomically (__main__.ReplayAcceptance.test_p0_archive_traversal_and_undeclared_members_fail_atomically)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-2-atdd-replay.py", line 51, in setUp
+    self.assertTrue(self.runner.is_file(), f"missing FR199 runner: {self.runner}")
+AssertionError: False is not true : missing FR199 runner: /nvme_data2/richard/2026/rhdl/scripts/phase24-external-ip-replay.py
+
+======================================================================
+FAIL: test_p0_empty_cache_fetch_then_movable_network_isolated_replay (__main__.ReplayAcceptance.test_p0_empty_cache_fetch_then_movable_network_isolated_replay)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-2-atdd-replay.py", line 51, in setUp
+    self.assertTrue(self.runner.is_file(), f"missing FR199 runner: {self.runner}")
+AssertionError: False is not true : missing FR199 runner: /nvme_data2/richard/2026/rhdl/scripts/phase24-external-ip-replay.py
+
+======================================================================
+FAIL: test_p0_network_and_host_cache_fallback_are_rejected (__main__.ReplayAcceptance.test_p0_network_and_host_cache_fallback_are_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/nvme_data2/richard/2026/rhdl/_agile-output/test-artifacts/130-2-atdd-replay.py", line 51, in setUp
+    self.assertTrue(self.runner.is_file(), f"missing FR199 runner: {self.runner}")
+AssertionError: False is not true : missing FR199 runner: /nvme_data2/richard/2026/rhdl/scripts/phase24-external-ip-replay.py
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+FAILED (failures=3)

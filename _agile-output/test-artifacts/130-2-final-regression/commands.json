@@ -1,0 +1,172 @@
+[
+  {
+    "command": [
+      "cargo",
+      "clean"
+    ],
+    "cwd": "/tmp/bitloom-130-2-closeout",
+    "startedUtc": "2026-09-23T03:20:24Z",
+    "durationSeconds": 0.3647646903991699,
+    "exitCode": 0,
+    "log": "_agile-output/test-artifacts/130-2-final-regression/clean.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--all"
+    ],
+    "cwd": "/tmp/bitloom-130-2-closeout",
+    "startedUtc": "2026-09-23T03:20:24Z",
+    "durationSeconds": 1.2671551704406738,
+    "exitCode": 0,
+    "log": "_agile-output/test-artifacts/130-2-final-regression/fmt.log"
+  },
+  {
+    "command": [
+      "just",
+      "test"
+    ],
+    "cwd": "/tmp/bitloom-130-2-closeout",
+    "startedUtc": "2026-09-23T03:20:25Z",
+    "durationSeconds": 1475.8440556526184,
+    "exitCode": 0,
+    "log": "_agile-output/test-artifacts/130-2-final-regression/just-test.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "build",
+      "-p",
+      "bitloom"
+    ],
+    "cwd": "/tmp/bitloom-130-2-closeout",
+    "startedUtc": "2026-09-23T03:45:01Z",
+    "durationSeconds": 0.11479878425598145,
+    "exitCode": 0,
+    "log": "_agile-output/test-artifacts/130-2-final-regression/build-cli.log"
+  },
+  {
+    "command": [
+      "python3",
+      "/tmp/bitloom-130-2-closeout/scripts/phase24-external-ip-replay.py",
+      "fetch",
+      "--manifest",
+      "/tmp/bitloom-fr199-closeout-final-vsmmgakr/source.json",
+      "--lock",
+      "/tmp/bitloom-fr199-closeout-final-vsmmgakr/source.lock.json",
+      "--cache",
+      "/tmp/bitloom-fr199-closeout-final-vsmmgakr/cache",
+      "--evidence",
+      "/tmp/bitloom-130-2-closeout/_agile-output/test-artifacts/130-2-online-fetch.json"
+    ],
+    "cwd": "/tmp/bitloom-130-2-closeout",
+    "startedUtc": "2026-09-23T03:45:07Z",
+    "durationSeconds": 9.785736322402954,
+    "exitCode": 0,
+    "log": "_agile-output/test-artifacts/130-2-final-regression/fresh-online-fetch.log"
+  },
+  {
+    "command": [
+      "python3",
+      "/tmp/bitloom-130-2-closeout/scripts/phase24-external-ip-replay.py",
+      "replay",
+      "--compile",
+      "--manifest",
+      "/tmp/bitloom-fr199-closeout-final-vsmmgakr/source.json",
+      "--lock",
+      "/tmp/bitloom-fr199-closeout-final-vsmmgakr/source.lock.json",
+      "--cache",
+      "/tmp/bitloom-fr199-closeout-final-vsmmgakr/cache",
+      "--evidence",
+      "/tmp/bitloom-130-2-closeout/_agile-output/test-artifacts/130-2-offline-replay.json"
+    ],
+    "cwd": "/tmp/bitloom-130-2-closeout",
+    "startedUtc": "2026-09-23T03:45:16Z",
+    "durationSeconds": 2.5206665992736816,
+    "exitCode": 0,
+    "log": "_agile-output/test-artifacts/130-2-final-regression/offline-replay.log"
+  },
+  {
+    "command": [
+      "python3",
+      "_agile-output/test-artifacts/130-2-readonly-replay.py",
+      "--root",
+      "/tmp/bitloom-130-2-closeout",
+      "--fixture",
+      "/tmp/bitloom-fr199-closeout-final-vsmmgakr",
+      "--evidence",
+      "/tmp/bitloom-130-2-closeout/_agile-output/test-artifacts/130-2-final-regression/readonly-inputs.json"
+    ],
+    "cwd": "/tmp/bitloom-130-2-closeout",
+    "startedUtc": "2026-09-23T03:45:19Z",
+    "durationSeconds": 2.5698482990264893,
+    "exitCode": 0,
+    "log": "_agile-output/test-artifacts/130-2-final-regression/read-only-replay.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "bitloom",
+      "--test",
+      "fr199_external_ip_lock",
+      "p0_online",
+      "--",
+      "--ignored",
+      "--nocapture"
+    ],
+    "cwd": "/tmp/bitloom-130-2-closeout",
+    "startedUtc": "2026-09-23T03:45:21Z",
+    "durationSeconds": 42.40904903411865,
+    "exitCode": 0,
+    "log": "_agile-output/test-artifacts/130-2-final-regression/ignored-network-gate.log"
+  },
+  {
+    "command": [
+      "python3",
+      "_agile-output/test-artifacts/130-2-atdd-replay.py"
+    ],
+    "cwd": "/tmp/bitloom-130-2-closeout",
+    "startedUtc": "2026-09-23T03:46:04Z",
+    "durationSeconds": 40.59917879104614,
+    "exitCode": 0,
+    "log": "_agile-output/test-artifacts/130-2-final-regression/atdd-normal.log"
+  },
+  {
+    "command": [
+      "python3",
+      "_agile-output/test-artifacts/130-2-evidence-consumer.py"
+    ],
+    "cwd": "/tmp/bitloom-130-2-closeout",
+    "startedUtc": "2026-09-23T03:46:44Z",
+    "durationSeconds": 4.523938894271851,
+    "exitCode": 0,
+    "log": "_agile-output/test-artifacts/130-2-final-regression/consumer-normal.log"
+  },
+  {
+    "command": [
+      "python3",
+      "-O",
+      "_agile-output/test-artifacts/130-2-atdd-replay.py"
+    ],
+    "cwd": "/tmp/bitloom-130-2-closeout",
+    "startedUtc": "2026-09-23T03:46:49Z",
+    "durationSeconds": 38.09329652786255,
+    "exitCode": 0,
+    "log": "_agile-output/test-artifacts/130-2-final-regression/atdd-optimized.log"
+  },
+  {
+    "command": [
+      "python3",
+      "-O",
+      "_agile-output/test-artifacts/130-2-evidence-consumer.py"
+    ],
+    "cwd": "/tmp/bitloom-130-2-closeout",
+    "startedUtc": "2026-09-23T03:47:27Z",
+    "durationSeconds": 4.9256837368011475,
+    "exitCode": 0,
+    "log": "_agile-output/test-artifacts/130-2-final-regression/consumer-optimized.log"
+  }
+]

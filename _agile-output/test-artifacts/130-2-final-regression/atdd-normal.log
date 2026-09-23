@@ -1,0 +1,8 @@
+test_p0_empty_cache_fetch_then_movable_network_isolated_replay (__main__.ReplayAcceptance.test_p0_empty_cache_fetch_then_movable_network_isolated_replay) ... ok
+test_p0_network_and_host_cache_fallback_are_rejected (__main__.ReplayAcceptance.test_p0_network_and_host_cache_fallback_are_rejected) ... ok
+test_p0_path_escape_links_and_undeclared_members_fail_closed (__main__.ReplayAcceptance.test_p0_path_escape_links_and_undeclared_members_fail_closed) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 40.491s
+
+OK

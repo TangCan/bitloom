@@ -1,5 +1,6 @@
 //! `cargo bitloom` CLI — published as crate `bitloom` (AD-2). Never publish as `rhdl` / `rhdl-bits`.
 
+mod external_ip;
 mod firtool;
 
 use std::fs;
@@ -47,6 +48,11 @@ enum Commands {
     Firtool {
         #[command(subcommand)]
         cmd: FirtoolCmd,
+    },
+    /// Lock, verify, and replay an immutable external RTL source closure (FR199).
+    ExternalIp {
+        #[command(subcommand)]
+        cmd: ExternalIpCmd,
     },
     /// List `bitloom-sim` tick engines (FR32). Simulation itself lives in tests / bitloom-sim.
     SimEngines,
@@ -245,6 +251,42 @@ enum FirtoolCmd {
     Ensure,
     /// Print configured version and asset names (no download).
     Info,
+}
+
+#[derive(Subcommand)]
+enum ExternalIpCmd {
+    /// Resolve exact Git identities and atomically populate a content-addressed cache.
+    Lock {
+        #[arg(long)]
+        manifest: PathBuf,
+        #[arg(long)]
+        lock: PathBuf,
+        #[arg(long)]
+        cache: PathBuf,
+    },
+    /// Verify manifest, lock, license archive, tools, and every cached tracked file.
+    Verify {
+        #[arg(long)]
+        manifest: PathBuf,
+        #[arg(long)]
+        lock: PathBuf,
+        #[arg(long)]
+        cache: PathBuf,
+        /// Assert that verification must remain read-only and network-free.
+        #[arg(long, default_value_t = false)]
+        offline: bool,
+    },
+    /// Verify then compile the locked source in an isolation runner's network namespace.
+    Replay {
+        #[arg(long)]
+        manifest: PathBuf,
+        #[arg(long)]
+        lock: PathBuf,
+        #[arg(long)]
+        cache: PathBuf,
+        #[arg(long, default_value_t = false)]
+        compile: bool,
+    },
 }
 
 #[derive(Debug, Deserialize)]
@@ -624,6 +666,31 @@ fn main() {
                 }
             },
         },
+        Commands::ExternalIp { cmd } => {
+            let result = match cmd {
+                ExternalIpCmd::Lock {
+                    manifest,
+                    lock,
+                    cache,
+                } => external_ip::lock(&manifest, &lock, &cache),
+                ExternalIpCmd::Verify {
+                    manifest,
+                    lock,
+                    cache,
+                    offline,
+                } => external_ip::verify(&manifest, &lock, &cache, offline),
+                ExternalIpCmd::Replay {
+                    manifest,
+                    lock,
+                    cache,
+                    compile,
+                } => external_ip::replay(&manifest, &lock, &cache, compile),
+            };
+            if let Err(error) = result {
+                eprintln!("error: {error}");
+                std::process::exit(1);
+            }
+        }
         Commands::SimEngines => {
             println!("interpreter  # default: walk FrozenHir AST each tick");
             println!("compiled     # linearized assign schedule compiled at Sim construction");

@@ -1,0 +1,25 @@
+{
+  "sourceRecordsUnchanged": true,
+  "fileCount": 210,
+  "sources": [
+    {
+      "name": "common_cells",
+      "commit": "1281545696eb3fcba50ec5b4275993476a3c710e",
+      "fileCount": 169,
+      "treeDigest": "087d0177e8997494190315dbc9008800517c524c076a5b4ae525cf632a5705d6"
+    },
+    {
+      "name": "common_verification",
+      "commit": "6fc76fb013315af9fabbb90b431863d498df2d6d",
+      "fileCount": 13,
+      "treeDigest": "93f46d03a1ea9f0e221f3a620b253718b0cad3a9019a59c365de58902027c171"
+    },
+    {
+      "name": "tech_cells_generic",
+      "commit": "a9cae21902e75b1434328ecf36f85327ba5717de",
+      "fileCount": 28,
+      "treeDigest": "42ebabe1945ab57caf368282d84a6ea6c7c06ea85668067df4511efdb049cd9f"
+    }
+  ],
+  "workRoot": "/tmp/bitloom-fr199-closeout-final-vsmmgakr"
+}

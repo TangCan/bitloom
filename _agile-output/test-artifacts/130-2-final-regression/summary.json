@@ -1,0 +1,30 @@
+{
+  "status": "verification-passed-parent-reviewed",
+  "scope": "FR199 source-only snapshot; no FR200 delivery",
+  "workspace": {
+    "resultBlocks": 485,
+    "passed": 1889,
+    "failed": 0,
+    "ignored": 50
+  },
+  "sourceFiles": 210,
+  "sourceRecordsUnchanged": true,
+  "lockSha256": "3c57f91816380e731dbb5882c783dc7737d9359903e9b12b0e22dbf58921d725",
+  "bitloomSha256": "a5ac9eeabcfae5e06c15f49e88621ece7b08abac05de72b388a03c71ca89af54",
+  "dedicatedNetwork": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0
+  },
+  "atdd": {
+    "normal": 3,
+    "optimized": 3
+  },
+  "evidenceConsumer": {
+    "normal": 11,
+    "optimized": 11
+  },
+  "allCommandExitCodesZero": true,
+  "storyStatus": "done",
+  "commitEvidence": "Containing Story130.2 commit"
+}

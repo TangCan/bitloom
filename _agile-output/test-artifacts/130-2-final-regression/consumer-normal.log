@@ -1,0 +1,16 @@
+test_p0_adapter_marker_mutation_fails_in_both_modes (__main__.EvidenceConsumerTests.test_p0_adapter_marker_mutation_fails_in_both_modes) ... ok
+test_p0_cache_integrity_drift_fails_in_both_modes (__main__.EvidenceConsumerTests.test_p0_cache_integrity_drift_fails_in_both_modes) ... ok
+test_p0_canonical_evidence_validates_in_normal_and_optimized_modes (__main__.EvidenceConsumerTests.test_p0_canonical_evidence_validates_in_normal_and_optimized_modes) ... ok
+test_p0_generator_mutation_fails_in_both_modes (__main__.EvidenceConsumerTests.test_p0_generator_mutation_fails_in_both_modes) ... ok
+test_p0_host_root_mount_fails_in_both_modes (__main__.EvidenceConsumerTests.test_p0_host_root_mount_fails_in_both_modes) ... ok
+test_p0_manifest_mutation_fails_in_both_modes (__main__.EvidenceConsumerTests.test_p0_manifest_mutation_fails_in_both_modes) ... ok
+test_p0_missing_host_probe_fails_in_both_modes (__main__.EvidenceConsumerTests.test_p0_missing_host_probe_fails_in_both_modes) ... ok
+test_p0_network_namespace_mutation_fails_in_both_modes (__main__.EvidenceConsumerTests.test_p0_network_namespace_mutation_fails_in_both_modes) ... ok
+test_p0_source_lock_mutation_fails_in_both_modes (__main__.EvidenceConsumerTests.test_p0_source_lock_mutation_fails_in_both_modes) ... ok
+test_p0_tool_mutation_fails_in_both_modes (__main__.EvidenceConsumerTests.test_p0_tool_mutation_fails_in_both_modes) ... ok
+test_p0_writable_cache_mount_fails_in_both_modes (__main__.EvidenceConsumerTests.test_p0_writable_cache_mount_fails_in_both_modes) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 4.401s
+
+OK

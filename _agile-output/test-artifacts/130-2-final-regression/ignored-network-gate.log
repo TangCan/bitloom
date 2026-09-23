@@ -1,0 +1,9 @@
+   Compiling bitloom v1.1.1 (/tmp/bitloom-130-2-closeout/crates/bitloom)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.41s
+     Running tests/fr199_external_ip_lock.rs (target/debug/deps/fr199_external_ip_lock-e8b66776c96bd53a)
+
+running 1 test
+test p0_online_lock_verify_is_deterministic_and_mutations_fail_closed ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 41.95s
+

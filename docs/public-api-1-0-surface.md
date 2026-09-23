@@ -243,3 +243,13 @@ At FR142 lock time, **no blocking breaking items** are listed against the in-sur
 | `Elaboratable for ip::UartCsr` | `elaborate() -> Result<FrozenHir, Diagnostics>`；独立UartCsr电路，复用同定义体 |
 
 以上四符号显式纳入FR142，私有状态/模块/helper不纳入。见[UART CSR](ip/uart-csr.md)。SemVer minor追加，未改版本或发布；旧UART8/VIP/FL保持，设计仅依赖prelude。native/generated层级unsupported；M3关闭以最终七步记录为准，Epic129/130、Phase24整体及FR189 deferred/NFR91不由此关闭。
+
+### `bitloom` CLI — FR199 / Story130.2 来源重放追加
+
+| 命令 | 契约 |
+|---|---|
+| `external-ip lock --manifest --lock --cache` | 显式联网解析固定来源，生成完整内容锁及许可证归档；既有锁不兼容时失败，不自动重锁 |
+| `external-ip verify --manifest --lock --cache --offline` | 只读核验 manifest、来源闭包、许可证和工具身份；缺失或漂移非零失败 |
+| `external-ip replay --manifest --lock --cache --compile` | 要求由隔离编排器提供禁网环境，验证后真实编译冻结 filelist；不构成 FIFO 行为验收 |
+
+以上 CLI 追加按 FR142/FR143/SemVer minor 登记；未改包版本、未发布。来源 schema 是单一冻结试点的私有版本化格式，不承诺任意外部 IP 包管理。真实隔离入口为 `scripts/phase24-external-ip-replay.py replay --compile`，来源验收与 Story130.3 行为验收分别记录。

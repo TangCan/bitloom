@@ -1,0 +1,8 @@
+test_p0_archive_traversal_and_undeclared_members_fail_atomically (__main__.ReplayAcceptance.test_p0_archive_traversal_and_undeclared_members_fail_atomically) ... skipped 'ATDD RED: activate with --run-red'
+test_p0_empty_cache_fetch_then_movable_network_isolated_replay (__main__.ReplayAcceptance.test_p0_empty_cache_fetch_then_movable_network_isolated_replay) ... skipped 'ATDD RED: activate with --run-red'
+test_p0_network_and_host_cache_fallback_are_rejected (__main__.ReplayAcceptance.test_p0_network_and_host_cache_fallback_are_rejected) ... skipped 'ATDD RED: activate with --run-red'
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK (skipped=3)

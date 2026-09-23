@@ -1,0 +1,122 @@
+   Compiling bitloom v1.1.1 (/nvme_data2/richard/2026/rhdl/crates/bitloom)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.34s
+     Running tests/fr199_external_ip_lock.rs (target/debug/deps/fr199_external_ip_lock-1c1698419814559c)
+
+running 4 tests
+test p0_floating_ref_fails_closed ... FAILED
+test p0_lock_resolves_stable_identity_and_is_deterministic ... FAILED
+test p0_verify_rejects_identity_content_license_and_tool_drift_without_relocking ... FAILED
+test p1_cli_exposes_separate_read_only_verify_command ... FAILED
+
+failures:
+
+---- p0_floating_ref_fails_closed stdout ----
+
+thread 'p0_floating_ref_fails_closed' (1802125) panicked at crates/bitloom/tests/fr199_external_ip_lock.rs:156:5:
+stdout= stderr=error: unrecognized subcommand 'external-ip'
+
+Usage: cargo-bitloom <COMMAND>
+
+For more information, try '--help'.
+
+stack backtrace:
+   0: __rustc::rust_begin_unwind
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/std/src/panicking.rs:689:5
+   1: core::panicking::panic_fmt
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/panicking.rs:80:14
+   2: fr199_external_ip_lock::p0_floating_ref_fails_closed
+             at ./tests/fr199_external_ip_lock.rs:156:5
+   3: fr199_external_ip_lock::p0_floating_ref_fails_closed::{closure#0}
+             at ./tests/fr199_external_ip_lock.rs:136:34
+   4: <fr199_external_ip_lock::p0_floating_ref_fails_closed::{closure#0} as core::ops::function::FnOnce<()>>::call_once
+             at /nvme_data1/richard/.rustup/toolchains/1.97.1-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:250:5
+   5: <fn() -> core::result::Result<(), alloc::string::String> as core::ops::function::FnOnce<()>>::call_once
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ops/function.rs:250:5
+note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
+
+---- p0_lock_resolves_stable_identity_and_is_deterministic stdout ----
+
+thread 'p0_lock_resolves_stable_identity_and_is_deterministic' (1802126) panicked at crates/bitloom/tests/fr199_external_ip_lock.rs:70:5:
+stdout= stderr=error: unrecognized subcommand 'external-ip'
+
+Usage: cargo-bitloom <COMMAND>
+
+For more information, try '--help'.
+
+stack backtrace:
+   0: __rustc::rust_begin_unwind
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/std/src/panicking.rs:689:5
+   1: core::panicking::panic_fmt
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/panicking.rs:80:14
+   2: core::panicking::panic_display::<alloc::string::String>
+             at /nvme_data1/richard/.rustup/toolchains/1.97.1-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panicking.rs:259:5
+   3: fr199_external_ip_lock::p0_lock_resolves_stable_identity_and_is_deterministic
+             at ./tests/fr199_external_ip_lock.rs:70:5
+   4: fr199_external_ip_lock::p0_lock_resolves_stable_identity_and_is_deterministic::{closure#0}
+             at ./tests/fr199_external_ip_lock.rs:53:59
+   5: <fr199_external_ip_lock::p0_lock_resolves_stable_identity_and_is_deterministic::{closure#0} as core::ops::function::FnOnce<()>>::call_once
+             at /nvme_data1/richard/.rustup/toolchains/1.97.1-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:250:5
+   6: <fn() -> core::result::Result<(), alloc::string::String> as core::ops::function::FnOnce<()>>::call_once
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ops/function.rs:250:5
+note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
+
+---- p0_verify_rejects_identity_content_license_and_tool_drift_without_relocking stdout ----
+
+thread 'p0_verify_rejects_identity_content_license_and_tool_drift_without_relocking' (1802127) panicked at crates/bitloom/tests/fr199_external_ip_lock.rs:121:5:
+stdout= stderr=error: unrecognized subcommand 'external-ip'
+
+Usage: cargo-bitloom <COMMAND>
+
+For more information, try '--help'.
+
+stack backtrace:
+   0: __rustc::rust_begin_unwind
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/std/src/panicking.rs:689:5
+   1: core::panicking::panic_fmt
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/panicking.rs:80:14
+   2: fr199_external_ip_lock::p0_verify_rejects_identity_content_license_and_tool_drift_without_relocking
+             at ./tests/fr199_external_ip_lock.rs:121:5
+   3: fr199_external_ip_lock::p0_verify_rejects_identity_content_license_and_tool_drift_without_relocking::{closure#0}
+             at ./tests/fr199_external_ip_lock.rs:98:81
+   4: <fr199_external_ip_lock::p0_verify_rejects_identity_content_license_and_tool_drift_without_relocking::{closure#0} as core::ops::function::FnOnce<()>>::call_once
+             at /nvme_data1/richard/.rustup/toolchains/1.97.1-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:250:5
+   5: <fn() -> core::result::Result<(), alloc::string::String> as core::ops::function::FnOnce<()>>::call_once
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ops/function.rs:250:5
+note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
+
+---- p1_cli_exposes_separate_read_only_verify_command stdout ----
+
+thread 'p1_cli_exposes_separate_read_only_verify_command' (1802128) panicked at crates/bitloom/tests/fr199_external_ip_lock.rs:166:5:
+stdout= stderr=error: unrecognized subcommand 'external-ip'
+
+Usage: cargo-bitloom <COMMAND>
+
+For more information, try '--help'.
+
+stack backtrace:
+   0: __rustc::rust_begin_unwind
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/std/src/panicking.rs:689:5
+   1: core::panicking::panic_fmt
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/panicking.rs:80:14
+   2: core::panicking::panic_display::<alloc::string::String>
+             at /nvme_data1/richard/.rustup/toolchains/1.97.1-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panicking.rs:259:5
+   3: fr199_external_ip_lock::p1_cli_exposes_separate_read_only_verify_command
+             at ./tests/fr199_external_ip_lock.rs:166:5
+   4: fr199_external_ip_lock::p1_cli_exposes_separate_read_only_verify_command::{closure#0}
+             at ./tests/fr199_external_ip_lock.rs:164:54
+   5: <fr199_external_ip_lock::p1_cli_exposes_separate_read_only_verify_command::{closure#0} as core::ops::function::FnOnce<()>>::call_once
+             at /nvme_data1/richard/.rustup/toolchains/1.97.1-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:250:5
+   6: <fn() -> core::result::Result<(), alloc::string::String> as core::ops::function::FnOnce<()>>::call_once
+             at /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/ops/function.rs:250:5
+note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
+
+
+failures:
+    p0_floating_ref_fails_closed
+    p0_lock_resolves_stable_identity_and_is_deterministic
+    p0_verify_rejects_identity_content_license_and_tool_drift_without_relocking
+    p1_cli_exposes_separate_read_only_verify_command
+
+test result: FAILED. 0 passed; 4 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+error: test failed, to rerun pass `-p bitloom --test fr199_external_ip_lock`

@@ -1,0 +1,7 @@
+ISOLATION_PASS filesystem=denied network=denied
+network=denied
+network_namespace=net:[4026531840]->net:[4026535121]
+hdl_compile=passed
+adapter=bitloom-yosys-sv-compat@1
+adapter_input_sha256=861ea44cbd3129731b77977da36fb0dac1a1350d7df664a1b4310423e7d272bc
+adapter_output_sha256=7512ebaf5b925e85d7dd32409eedc4dc02e1813ec5af3ff0cdd98d773af7178d

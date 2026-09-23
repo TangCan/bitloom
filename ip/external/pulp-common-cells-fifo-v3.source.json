@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "name": "pulp-common-cells-fifo-v3",
+  "owner": "Richard",
+  "supportLevel": "catalogued",
+  "sources": [
+    {
+      "name": "common_cells",
+      "sourceType": "git",
+      "url": "https://github.com/pulp-platform/common_cells.git",
+      "ref": "v1.40.0"
+    },
+    {
+      "name": "common_verification",
+      "sourceType": "git",
+      "url": "https://github.com/pulp-platform/common_verification.git",
+      "ref": "v0.2.0"
+    },
+    {
+      "name": "tech_cells_generic",
+      "sourceType": "git",
+      "url": "https://github.com/pulp-platform/tech_cells_generic.git",
+      "ref": "v0.2.11"
+    }
+  ],
+  "dependencies": [
+    {
+      "parent": "common_cells",
+      "name": "common_verification",
+      "declaredVersion": "0.2.0"
+    },
+    {
+      "parent": "common_cells",
+      "name": "tech_cells_generic",
+      "declaredVersion": "0.2.11"
+    },
+    {
+      "parent": "tech_cells_generic",
+      "name": "common_verification",
+      "declaredVersion": "0.2.0"
+    }
+  ],
+  "compile": {
+    "top": "fifo_v3",
+    "files": [
+      "common_cells:src/fifo_v3.sv"
+    ],
+    "includeDirs": [
+      "common_cells:include"
+    ],
+    "defines": [
+      "SYNTHESIS"
+    ],
+    "parameters": {
+      "ADDR_DEPTH": "(DEPTH > 1) ? $clog2(DEPTH) : 1",
+      "DATA_WIDTH": "32",
+      "DEPTH": "8",
+      "FALL_THROUGH": "0",
+      "dtype": "logic [DATA_WIDTH-1:0]"
+    },
+    "ports": [
+      { "name": "clk_i", "direction": "input", "width": "1" },
+      { "name": "rst_ni", "direction": "input", "width": "1" },
+      { "name": "flush_i", "direction": "input", "width": "1" },
+      { "name": "testmode_i", "direction": "input", "width": "1" },
+      { "name": "full_o", "direction": "output", "width": "1" },
+      { "name": "empty_o", "direction": "output", "width": "1" },
+      { "name": "usage_o", "direction": "output", "width": "ADDR_DEPTH" },
+      { "name": "data_i", "direction": "input", "width": "DATA_WIDTH" },
+      { "name": "push_i", "direction": "input", "width": "1" },
+      { "name": "data_o", "direction": "output", "width": "DATA_WIDTH" },
+      { "name": "pop_i", "direction": "input", "width": "1" }
+    ],
+    "clockReset": {
+      "clockPort": "clk_i",
+      "resetPort": "rst_ni",
+      "resetPolarity": "active-low",
+      "resetKind": "asynchronous"
+    }
+  },
+  "maintenance": {
+    "upgradePolicy": "Explicit manifest edit, fresh immutable lock, license review, and isolated replay; never follow a moved tag automatically.",
+    "deprecationPolicy": "Owner approval and replacement evidence are required before removing this locked source entry."
+  }
+}
