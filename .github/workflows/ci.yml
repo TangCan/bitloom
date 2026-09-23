@@ -470,7 +470,8 @@ jobs:
         run: bash scripts/semver-check.sh
 
   fr200-external-ip-pilot:
-    runs-on: ubuntu-latest
+    # 保留真实 namespace 隔离；使用 22.04 并由下方探针验证，避免修改宿主 AppArmor 策略。
+    runs-on: ubuntu-22.04
     timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
@@ -479,6 +480,13 @@ jobs:
           toolchain: "1.97.1"
       - name: Install real RTL and isolation tools
         run: sudo apt-get update && sudo apt-get install -y yosys iverilog bubblewrap z3 g++ make m4 curl
+      - name: Verify network and PID namespace prerequisites
+        run: |
+          uname -a
+          bwrap --version
+          host_netns="$(readlink /proc/self/ns/net)"
+          bwrap --unshare-net --unshare-pid --die-with-parent --ro-bind / / --proc /proc \
+            /usr/bin/python3 -c 'import os,sys; assert os.readlink("/proc/self/ns/net") != sys.argv[1]; assert os.getpid() <= 2; print("namespace preflight passed")' "$host_netns"
       - name: Build and run real wrapper mutation oracle
         run: |
           cargo build -p bitloom

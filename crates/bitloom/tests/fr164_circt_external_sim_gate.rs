@@ -145,3 +145,56 @@ fn fr164_sim_fixture_and_example_exist() {
     );
     assert!(nfr.contains("仿真") || nfr.contains("sim"));
 }
+
+fn execute_sim_fixture(text: &str) -> std::process::Output {
+    let unique = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_nanos();
+    let path =
+        std::env::temp_dir().join(format!("bitloom-fr164-{}-{unique}.fir", std::process::id()));
+    fs::write(&path, text).expect("写入夹具");
+    let result = Command::new(std::env::var_os("CARGO").unwrap_or_else(|| "cargo".into()))
+        .args([
+            "run",
+            "--offline",
+            "--quiet",
+            "-p",
+            "bitloom",
+            "--example",
+            "fr164_circt_sim_gate",
+            "--",
+        ])
+        .arg(&path)
+        .current_dir(root())
+        .output();
+    fs::remove_file(path).expect("清理夹具");
+    result.expect("执行真实仿真门禁示例")
+}
+
+#[test]
+fn fr164_default_fixture_executes_and_constant_outputs_are_detected() {
+    let text = read("crates/rhdl-firrtl/fixtures/fr164_external_circt_sim_gate.fir");
+    let good = execute_sim_fixture(&text);
+    assert!(
+        good.status.success(),
+        "{}",
+        String::from_utf8_lossy(&good.stderr)
+    );
+    assert!(String::from_utf8_lossy(&good.stdout).contains("sequence=00,a5,5a,ff,00"));
+    for value in [0, 165] {
+        let wrong = text.replace("y <= x", &format!("y <= UInt<8>({value})"));
+        assert_ne!(wrong, text, "故障注入必须命中");
+        let output = execute_sim_fixture(&wrong);
+        assert!(!output.status.success(), "恒定输出必须使真实门禁失败");
+        assert!(String::from_utf8_lossy(&output.stderr).contains("FR164 sim gate: expected y="));
+    }
+}
+
+#[test]
+#[should_panic(expected = "hierarchical simulation is unsupported")]
+fn fr164_does_not_relax_hierarchy_rejection() {
+    let text = "FIRRTL version 6.0.0\ncircuit Top :\n  module Child :\n    input clk: Clock\n    input rst: Reset\n    input x: UInt<8>\n    output y: UInt<8>\n    y <= x\n  module Top :\n    input clk: Clock\n    input rst: Reset\n    input x: UInt<8>\n    output y: UInt<8>\n    inst u0 of Child\n    u0.clk <= clk\n    u0.rst <= rst\n    u0.x <= x\n    y <= u0.y\n";
+    let hir = bitloom_firrtl::import(text).expect("合法层级 HIR");
+    let _ = bitloom_sim::Sim::new(hir);
+}

@@ -46,3 +46,7 @@ cargo test -p bitloom --test fr164_circt_external_sim_gate
 | [`fr137-external-circt-gate.md`](fr137-external-circt-gate.md) | FR137 compile MVP (still closed; ≠ FR164 alone) |
 | [`fr129-circt-handshake.md`](fr129-circt-handshake.md) | in-tree Handshake (≠ external gate) |
 | NFR14 | `_agile-output/implementation-artifacts/nfr14-risk-epic96-broader-circt-mlir-sim-gate-fr164.md` |
+
+## 当前仿真子集与 CI 回归（2026-09-23）
+
+仿真夹具使用单模块 `Fr164SimGate` 的 `y <= x`，保持旧 Child/u0 的传值关系，适配明确支持的单模块 native tick 子集。层级输入仍被拒绝，不声明层级仿真已交付。此门禁组合外部 firtool 编译与另一份 FIRRTL 6 夹具的原生执行谓词，**不是**对 firtool 生成 RTL 的仿真。默认测试实际执行夹具，并用零输出变体和层级输入检验错误输出与边界；原有缺工具非零行为保持。

@@ -40,20 +40,21 @@ fn main() -> ExitCode {
     sim.tick();
 
     pv.set("rst", 0);
-    pv.set("x", 0xa5);
-    sim.set_inputs(pv);
-    sim.settle();
-    sim.tick();
-
-    let y = sim.ports().get("y");
-    if y != Some(0xa5) {
-        eprintln!(
-            "error: FR164 sim gate: expected y=0xa5 after tick, got {y:?} (≠ FR137 compile alone)"
-        );
-        return ExitCode::FAILURE;
+    for x in [0, 0xa5, 0x5a, 0xff, 0] {
+        pv.set("x", x);
+        sim.set_inputs(pv.clone());
+        sim.settle();
+        sim.tick();
+        let y = sim.ports().get("y");
+        if y != Some(x) {
+            eprintln!(
+                "error: FR164 sim gate: expected y={x:#x} after tick, got {y:?} (≠ FR137 compile alone)"
+            );
+            return ExitCode::FAILURE;
+        }
     }
     println!(
-        "fr164_circt_sim_gate: OK cycle-sim y=0xa5 fixture={}",
+        "fr164_circt_sim_gate: OK cycle-sim sequence=00,a5,5a,ff,00 fixture={}",
         fir_path.display()
     );
     ExitCode::SUCCESS
