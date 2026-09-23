@@ -16,8 +16,8 @@ jobs:
         with:
           toolchain: "1.97.1"
           components: rustfmt
-      - name: Install SystemC (FR101 LT smoke)
-        run: sudo apt-get update && sudo apt-get install -y libsystemc-dev pkg-config g++ iverilog
+      - name: Install SystemC and RTL tools (FR101 / FR198)
+        run: sudo apt-get update && sudo apt-get install -y libsystemc-dev pkg-config g++ iverilog yosys
       - name: fmt check
         run: cargo fmt --all -- --check
       - name: Phase 24 scope and dependency gate
