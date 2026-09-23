@@ -1,6 +1,6 @@
 # 原始验收证据归档（2026-09-23）
 
-推送已中止；本次只整理本地尚未推送的历史，不更改已发布的 Bitloom 1.2.0 包。
+本文记录先中止推送、再整理本地历史的归档操作；已发布的 Bitloom 1.2.0 包不变。整理后的主线随后已正常推送，发布收尾状态见 [发布记录](../bitloom-1-2-0-release.md)。
 
 68 个原始归档移出 Git 历史，校验清单、报告和代码保留。36 个原提交全部保留，其中 23 个 SHA 因树或父提交改变而改变。逐提交核对：除归档删除外，文件内容和模式一致，见 [验证记录](rewrite-verification.json)。原始 SHA 到整理后 SHA 的映射见 [commit-map.json](commit-map.json)。
 
@@ -26,7 +26,7 @@ crates.io 1.2.0 的真实上传源码提交仍为 `e33d12fd747e576a542e24f18be1e
 
 原本地 HEAD 为 `956851d487a68cf6585113e8ec067cb5dedcf0ef`，由本地分支 `backup/pre-archive-cleanup-20260923-k8emktf7` 和 `unpublished-history.bundle` 保留。bundle 需要仓库已有基线 `f37a9ea4cd41ac73649a1e9ea15f6e34240f059e`，SHA256 为 `ef3b600f36954c7b5631dcd100d0bf95f2a05558e42ddb3f7a19d6f93bbdae3f`。可用 `git bundle verify <路径>/unpublished-history.bundle` 检查；恢复历史时在另一个有该基线的仓库中 fetch bundle 所列分支。
 
-整理后主线仍继承远端基线，后续可正常快进推送，无需强推。不要推送备份分支，也不要使用 `--all` 或 `--mirror`，否则会重新引入归档历史。本次不执行推送。
+整理后主线仍继承远端基线，已正常快进推送，无需强推。不要推送备份分支，也不要使用 `--all` 或 `--mirror`，否则会重新引入归档历史。原归档操作结束时未推送；后续只推送整理后的主线及正式版本标签，未上传备份分支。
 
 ## 防止再次膨胀
 

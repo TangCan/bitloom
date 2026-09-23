@@ -1,6 +1,6 @@
 # Bitloom 1.2.0 发布记录
 
-状态（2026-09-23）：**十个Bitloom包均已正式发布到crates.io，版本1.2.0**。逐包dry-run/上传、registry校验和、真实安装与仓库外使用验收通过。整理后的主线已于2026-09-23推送（`f450afb`）；正式标签与GitHub Release正在收尾。Bitloom与samitbasu/rhdl无关。
+状态（2026-09-23）：**十个Bitloom包均已正式发布到crates.io，版本1.2.0**。逐包dry-run/上传、registry校验和、真实安装与仓库外使用验收通过。整理后的主线已于2026-09-23推送（`f450afb`）；`v1.2.0`正式标签已推送，[GitHub Release](https://github.com/TangCan/bitloom/releases/tag/v1.2.0)已发布；后续维护提交的远端CI 19/19通过。Bitloom与samitbasu/rhdl无关。
 
 本版本为Phase24与后续缓存修复的SemVer minor增量；接口依据[公开API表面](public-api-1-0-surface.md)，交付范围见[Phase24总验收](ip/phase24-closeout.md)，新增功能与修复见[CHANGELOG](../CHANGELOG.md)。历史1.1.x已发布版本不改写。
 
@@ -61,7 +61,7 @@ sha256sum Cargo.lock
 
 运行结果、候选包SHA256与具体命令记录在[发布候选验证](../_agile-output/test-artifacts/bitloom-1-2-0-release-verification.md)。本轮十包联合`cargo publish --dry-run --locked --allow-dirty`已实际通过，使用Cargo原生未发布依赖闭包检查；日志中的Uploading行均紧随“aborting upload due to dry run”，没有上传。单独执行非叶子包的dry-run仍可能受尚未上架的1.2.0依赖影响；正式上传时仍逐包检查。
 
-## 正式发布操作记录（1–4已完成；5主线已推送，标签与公告收尾中）
+## 正式发布操作记录（1–5已完成）
 
 1. 审阅本候选提交、验证记录、包清单与已知限制，明确授权正式上传及是否推送/创建GitHub Release。
 2. 核对crates.io各包1.2.0仍未占用以及发布凭据/权限。将CHANGELOG候选段落转为实际发布日期；若改变包内容，重新打包并更新摘要。
@@ -71,12 +71,29 @@ sha256sum Cargo.lock
 
 ## 保留边界
 
-FR189/Epic122仍deferred、未交付，NFR91保持。新增层级组合的native/generated仿真仍unsupported；功能/周期生成验收使用其已支持的叶节点设计。外部IP只承诺已验收试点及明确支持矩阵，不宣称任意IP包管理。没有板卡、物理签核；`f450afb`的GitHub Actions运行与check-runs查询均为0，未取得新版远端CI通过证据；本地软件包发布准备不替代这些验证。
+FR189/Epic122仍deferred、未交付，NFR91保持。新增层级组合的native/generated仿真仍unsupported；功能/周期生成验收使用其已支持的叶节点设计。外部IP只承诺已验收试点及明确支持矩阵，不宣称任意IP包管理。没有板卡、物理签核；最初`f450afb`未生成GitHub Actions记录，后续维护提交的远端CI已实际通过（见下方记录）；本地软件包发布准备不替代这些验证。
 
 ## 本地历史归档整理（2026-09-23）
 
-原始验收归档移至仓库外，恢复步骤与提交映射见 [证据归档说明](evidence/README.md)。本文上传源码 SHA 保留真实发布时的值；整理历史不改变已发布包。本次整理没有恢复推送。
+原始验收归档移至仓库外，恢复步骤与提交映射见 [证据归档说明](evidence/README.md)。本文上传源码 SHA 保留真实发布时的值；整理历史不改变已发布包。整理阶段未恢复推送；随后主线与正式标签已推送，见下方收尾记录。
 
 ## 推送后的发布收尾
 
-归档整理后的 `main` 已正常快进推送至 `f450afb0551c8664c08dd50a398129e71e7d6785`，备份分支未推送。CI工作流已启用，但该提交没有生成运行记录；增加 `workflow_dispatch` 入口以执行真实远端验证，现有门禁保持不变。正式 `v1.2.0` 标签计划指向 `2cda375fbd5b8f1f33c6c3eb6abd93b73eda9e83`，它对应真实上传源码 `e33d12fd747e576a542e24f18be1e3cfea4760d7`，映射已逐提交验证。
+归档整理后的 `main` 已正常快进推送至 `f450afb0551c8664c08dd50a398129e71e7d6785`，备份分支未推送。CI工作流已启用，但该提交没有生成运行记录；增加 `workflow_dispatch` 入口以执行真实远端验证，现有门禁保持不变。正式 `v1.2.0` 标签已指向 `2cda375fbd5b8f1f33c6c3eb6abd93b73eda9e83`，它对应真实上传源码 `e33d12fd747e576a542e24f18be1e3cfea4760d7`，映射已逐提交验证。
+
+### 远端 CI 跟进
+
+- 首次手动运行 [35860205600](https://github.com/TangCan/bitloom/actions/runs/35860205600) 发现 FR164 旧层级夹具、FR200 runner 隔离及 FR201 审计旧 SHA 问题。不得将其宣称为通过。
+- [35861060548](https://github.com/TangCan/bitloom/actions/runs/35861060548)：FR164 修复通过；Ubuntu22 namespace 探针通过，但 Icarus11 无法编译试点 RTL。
+- 修复提交 `40ed90c` / `07f11b2` 保留仿真边界、真实隔离及原历史审计内容，追加 Icarus12 源码钉死配置。[35861844189](https://github.com/TangCan/bitloom/actions/runs/35861844189) 后续因旧Yosys解析限制失败，并取消已被新一轮替代的剩余任务。
+- 上述修改属于上传之后的门禁维护，未重传包、未移动标签，不宣称这些后续修改已包含在 crates.io 1.2.0 中。
+
+原始验收归档仍只有本地外部备份；异地备份位置待用户提供，未上传到公共 Release。
+
+### 最终结果（2026-09-23）
+
+- 维护提交 `b24652cbb43d51d992efead3acfdb53ceeaae088` 的 [CI 35864105067](https://github.com/TangCan/bitloom/actions/runs/35864105067) **19/19 job success**。工作区 487 个结果块、**1905 passed / 0 failed / 56 ignored**；ignored 不计 PASS。文档示例、数值后端、形式、核心集成、SemVer 与外部 IP 专用 job 均通过。
+- 试点保留完整 namespace/宿主文件拒绝、工具身份、正常及优化 Python 负向验证；未修改的上游 FIFO 套件六组各 100000 次，合计 **600000** 次检查通过。分进程执行与原顶层不宣称逐刺激轨迹等价，原有限验收边界保持。
+- 补齐的 CI 环境项包括 test job 的 Yosys/just、试点 runner 的 Icarus12/Yosys0.33，以及 APT mirror transport。历史审计使用提交映射和已完成的固定历史区间；真实版本/API 越界反例仍拒绝。
+- [正式 Release](https://github.com/TangCan/bitloom/releases/tag/v1.2.0) 于 `2026-09-23T13:28:40Z` 发布，非 draft、非 prerelease。标签仍指向实际上传源码的整理后等价提交，不移动标签、不重传包。上述 CI 结果针对维护提交，不能冒充原标签的全绿 CI。
+- 结构化结果、任务链接与证据摘要见 [最终验证](evidence/release-ci-verification.json)。原始远端日志及上游结果保存在仓库外证据库，未重新塞入 Git 历史。异地备份仍待存储位置。

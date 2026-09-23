@@ -2,7 +2,7 @@
 title: '1.2.0 发布收尾 CI 门禁修复'
 type: 'bugfix'
 created: '2026-09-23'
-status: 'in-review'
+status: 'done'
 route: 'oneshot'
 review_loop_iteration: 0
 context: []
@@ -54,3 +54,11 @@ context: []
 - 第四轮 workspace 的 FR81 回归暴露缺少 `just`；test job 复用已有 setup-just action，与 core job 一致，不跳过脚本合同检查。
 
 - APT transport 与 just 补齐经独立审查无阻断；FR81 本地6 passed / 0 failed（真实 JVM golden 子项按其脚本因本地 sbt 缺失明确 skip，远端专用 job 已另行通过），Python 编译与 diff 检查通过。APT/上游闭包仍以远端真实下载与校验验收。
+
+## 最终验证与收尾
+
+- 最新完整 CI：`b24652cbb43d51d992efead3acfdb53ceeaae088` / https://github.com/TangCan/bitloom/actions/runs/35864105067，19/19 job success。
+- 工作区 1905 passed / 0 failed / 56 ignored；上游六组各100000次、总600000次真实检查通过。
+- FR164、namespace、原始/优化模式负向、历史范围审计、完整核心矩阵、上游套件全部通过；独立审查发现均修复，没有新延后项。
+- 标签保持真实原发布来源，GitHub Release 已公开；发布后门禁维护未重传为 1.2.0 包。结构化证据 `docs/evidence/release-ci-verification.json`。
+- 异地证据备份缺目标位置，属于原发布收尾的待提供信息项，不属于门禁代码完成声明。

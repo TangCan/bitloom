@@ -1,0 +1,155 @@
+{
+  "conclusion": "success",
+  "createdAt": "2026-09-23T13:00:17Z",
+  "event": "workflow_dispatch",
+  "headSha": "b24652cbb43d51d992efead3acfdb53ceeaae088",
+  "jobs": [
+    {
+      "conclusion": "success",
+      "name": "hls-smoke",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256369"
+    },
+    {
+      "conclusion": "success",
+      "name": "circt-external",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256567"
+    },
+    {
+      "conclusion": "success",
+      "name": "chisel-ecosystem-deepen",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256645"
+    },
+    {
+      "conclusion": "success",
+      "name": "circt-external-sim",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256666"
+    },
+    {
+      "conclusion": "success",
+      "name": "fr200-external-ip-pilot",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256688"
+    },
+    {
+      "conclusion": "success",
+      "name": "fr28-chisel-jvm",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256715"
+    },
+    {
+      "conclusion": "success",
+      "name": "formal-sby",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256741"
+    },
+    {
+      "conclusion": "success",
+      "name": "chisel-numeric",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256796"
+    },
+    {
+      "conclusion": "success",
+      "name": "test",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256808"
+    },
+    {
+      "conclusion": "success",
+      "name": "circt-unpaired-head",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256812"
+    },
+    {
+      "conclusion": "success",
+      "name": "circt-external-sv",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256846"
+    },
+    {
+      "conclusion": "success",
+      "name": "chisel-style-guide-pack",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256847"
+    },
+    {
+      "conclusion": "success",
+      "name": "circt-live-tip",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256860"
+    },
+    {
+      "conclusion": "success",
+      "name": "chisel-style-linter-deepen",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256898"
+    },
+    {
+      "conclusion": "success",
+      "name": "circt-external-alloc",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256935"
+    },
+    {
+      "conclusion": "success",
+      "name": "fr198-fr201-core",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256937"
+    },
+    {
+      "conclusion": "success",
+      "name": "semver-check",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191256984"
+    },
+    {
+      "conclusion": "success",
+      "name": "parser-head-migration",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191257017"
+    },
+    {
+      "conclusion": "success",
+      "name": "circt-floating-git-head",
+      "status": "completed",
+      "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067/job/107191257459"
+    }
+  ],
+  "status": "completed",
+  "updatedAt": "2026-09-23T13:26:52Z",
+  "url": "https://github.com/TangCan/bitloom/actions/runs/35864105067",
+  "workspace_results": {
+    "result_blocks": 487,
+    "passed": 1905,
+    "failed": 0,
+    "ignored": 56,
+    "ignored_counted_as_pass": false
+  },
+  "upstream_fifo": {
+    "passed": true,
+    "acceptanceEligible": true,
+    "upstreamBenchUnmodified": true,
+    "checks": {
+      "i_tb_1": 100000,
+      "i_tb_8": 100000,
+      "i_tb_9": 100000,
+      "i_tb_ft_1": 100000,
+      "i_tb_ft_8": 100000,
+      "i_tb_ft_9": 100000
+    },
+    "executionMode": "parallel-upstream-instances",
+    "evidence_sha256": "de6a3d05756a09caa84a7a2699ebb928459d84a0eaf84283a3b89500b737cb9f",
+    "local_evidence": "/nvme_data2/richard/2026/rhdl-evidence/archive-cleanup-20260923-k8emktf7/ci-35864105067-pilot/fr200-upstream.json"
+  },
+  "release": {
+    "isDraft": false,
+    "isPrerelease": false,
+    "publishedAt": "2026-09-23T13:28:40Z",
+    "tagName": "v1.2.0",
+    "url": "https://github.com/TangCan/bitloom/releases/tag/v1.2.0"
+  }
+}
