@@ -15,6 +15,7 @@ followed Cargo **0.x** compatibility rules.
 ### 性能改进
 
 - 优化 `bitloom-sim` 的覆盖率采样与 Mux 分支记录热点；保持模拟结果、周期与覆盖率语义不变。
+- 十个 Bitloom crate 已发布至 crates.io；候选、校验和与安装验收见[1.2.1 发布记录](docs/bitloom-1-2-1-release.md)。
 
 ## [1.2.0] - 2026-09-23
 
