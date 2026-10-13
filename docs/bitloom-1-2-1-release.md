@@ -1,6 +1,6 @@
 # Bitloom 1.2.1 发布记录
 
-状态（2026-10-13）：**十个 Bitloom 包均已发布到 crates.io，版本 1.2.1**。上传源码提交为 `7fecc30`（`chore(release): prepare Bitloom 1.2.1`）。该提交尚未推送；本轮明确授权为 crates.io 上传，没有创建 Git 标签或 GitHub Release。
+状态（2026-10-13）：**十个 Bitloom 包均已发布到 crates.io，版本 1.2.1**。上传源码提交为 `7fecc30`（`chore(release): prepare Bitloom 1.2.1`）。`v1.2.1` annotated tag 指向该提交；发布记录提交 `c96e767` 已推送到 `main`。 [GitHub Release](https://github.com/TangCan/bitloom/releases/tag/v1.2.1) 已发布。
 
 本补丁版优化 `bitloom-sim` 覆盖率采样和 Mux 分支记录热点，保持模拟结果、周期及覆盖率语义不变。公开 API SemVer 检查没有要求版本升级，补丁号适用。
 
@@ -31,4 +31,4 @@
 
 功能仿真生成器当前声明的 `bitloom-hir` 最低版本仍为 1.2.0；隔离注册表验收解析到已发布的 1.2.1 并成功运行。功能生成 crate 的编译输出有既存 `unused_mut` 警告，不影响生成与运行。
 
-本次发布未推送版本提交、未创建标签或 GitHub Release；这些操作需单独授权。不得据此改变 FR189/Epic122 deferred 或 NFR91 的状态。
+发布候选与发布记录均已推送；`v1.2.1` 标签及 GitHub Release 已创建。不得据此改变 FR189/Epic122 deferred 或 NFR91 的状态。
