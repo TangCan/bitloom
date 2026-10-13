@@ -10,6 +10,12 @@ followed Cargo **0.x** compatibility rules.
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-10-13
+
+### 性能改进
+
+- 优化 `bitloom-sim` 的覆盖率采样与 Mux 分支记录热点；保持模拟结果、周期与覆盖率语义不变。
+
 ## [1.2.0] - 2026-09-23
 
 ### 新增
