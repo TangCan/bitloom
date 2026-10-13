@@ -22,6 +22,8 @@ story_key: ''
 - 此上游 Compiled 与 Interpreter 共用 `Sim::eval`，Mux 以构造期缓存标签表接入，AST 不变。
 - 信号槽记录先前值，并只在首次采样和首次命中时插入有序集合，避免稳态 tick 重复克隆名称。
 - 两种 TickEngine 均使用同一覆盖槽同步路径；增加相应覆盖回归测试。
+- Mux coverage ID 直接存入 CompiledKernel 的顺序/组合赋值；Interpreter 顺序赋值使用构造期并行 ID 表，`eval` 不再按 selector 名称查表。
+- 新增组合与顺序 Mux 在两种 TickEngine 下的分支命中测试。
 
 ## Review Triage Log
 

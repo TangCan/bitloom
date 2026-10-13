@@ -80,7 +80,7 @@ pub struct Sim {
     coverage: Coverage,
     coverage_values: Vec<u64>,
     coverage_signal_ids: HashMap<String, usize>,
-    mux_coverage_ids: HashMap<String, usize>,
+    coverage_seq_mux_slots: Vec<Option<usize>>,
 }
 
 struct FstPlan {
@@ -127,10 +127,10 @@ impl Sim {
                 }
             }
         }
-        let kernel = engine::compile(&hir);
         let mut coverage = Coverage::default();
         let mut coverage_signal_ids = HashMap::new();
         let mut mux_coverage_ids = HashMap::new();
+        let mut coverage_seq_mux_slots = Vec::new();
         if let Some(m) = hir.circuit().modules.first() {
             for p in &m.ports {
                 let id = coverage.register_signal_slot(&p.name);
@@ -143,15 +143,23 @@ impl Sim {
                 }
                 if let Stmt::Process(process) = stmt {
                     for assign in &process.assigns {
-                        if let AssignExpr::Mux { sel, .. } = &assign.expr {
-                            let id = coverage.register_mux_slot(sel);
-                            mux_coverage_ids.insert(sel.clone(), id);
+                        let mux_id = if let AssignExpr::Mux { sel, .. } = &assign.expr {
+                            let id = *mux_coverage_ids
+                                .entry(sel.clone())
+                                .or_insert_with(|| coverage.register_mux_slot(sel));
+                            Some(id)
+                        } else {
+                            None
+                        };
+                        if process.kind == ProcessKind::Sequential {
+                            coverage_seq_mux_slots.push(mux_id);
                         }
                     }
                 }
             }
         }
         let coverage_values = vec![0; coverage_signal_ids.len()];
+        let kernel = engine::compile(&hir, &mux_coverage_ids);
         Self {
             widths: signal_widths(&hir),
             hir,
@@ -167,7 +175,7 @@ impl Sim {
             coverage,
             coverage_values,
             coverage_signal_ids,
-            mux_coverage_ids,
+            coverage_seq_mux_slots,
         }
     }
 
@@ -286,7 +294,7 @@ impl Sim {
         mask_width(value, self.widths.get(name).copied().unwrap_or(64))
     }
 
-    fn eval(&mut self, expr: &AssignExpr) -> u64 {
+    fn eval(&mut self, expr: &AssignExpr, mux_coverage_id: Option<usize>) -> u64 {
         match expr {
             AssignExpr::Ref(n) => self.lookup(n),
             AssignExpr::Lit(v) => *v,
@@ -357,7 +365,7 @@ impl Sim {
             AssignExpr::Eq(a, b) => u64::from(self.lookup(a) == self.lookup(b)),
             AssignExpr::Mux { sel, t, f } => {
                 let took_true = self.lookup(sel) != 0;
-                if let Some(&id) = self.mux_coverage_ids.get(sel) {
+                if let Some(id) = mux_coverage_id {
                     self.coverage.sample_mux_slot(id, took_true);
                 } else {
                     self.coverage.sample_mux_branch(sel, took_true);
@@ -519,16 +527,20 @@ impl Sim {
             let comb = self.kernel.comb.clone();
             // NBA: evaluate all next values before committing register updates.
             let mut next_regs: BTreeMap<String, u64> = BTreeMap::new();
-            for (name, expr) in seq {
-                let next = if reset { 0 } else { self.eval(&expr) };
+            for (name, expr, mux_coverage_id) in seq {
+                let next = if reset {
+                    0
+                } else {
+                    self.eval(&expr, mux_coverage_id)
+                };
                 next_regs.insert(name.clone(), self.truncate(&name, next));
             }
             for (name, val) in next_regs {
                 self.regs.insert(name.clone(), val);
                 self.update_coverage_value(&name, val);
             }
-            for (name, expr) in comb {
-                let val = self.eval(&expr);
+            for (name, expr, mux_coverage_id) in comb {
+                let val = self.eval(&expr, mux_coverage_id);
                 let val = self.truncate(&name, val);
                 self.ports.set(name.clone(), val);
                 self.update_coverage_value(&name, val);
@@ -555,12 +567,19 @@ impl Sim {
         }
         let mut next_pending = BTreeMap::new();
         let mut writes = Vec::new();
+        let mut seq_assign_index = 0;
         for stmt in &m.body {
             if let Stmt::Process(p) = stmt {
                 if p.kind != ProcessKind::Sequential {
                     continue;
                 }
                 for a in &p.assigns {
+                    let mux_coverage_id = self
+                        .coverage_seq_mux_slots
+                        .get(seq_assign_index)
+                        .copied()
+                        .flatten();
+                    seq_assign_index += 1;
                     match &a.target {
                         AssignTarget::RegD(name) => {
                             let (_async_rst, has_en) = self.reg_meta(name);
@@ -568,10 +587,13 @@ impl Sim {
                                 if self.mem_is_sync(mem) {
                                     // The memory read stage samples every edge; the
                                     // destination register gates retirement at this edge.
-                                    let value = self.eval(&AssignExpr::MemRead {
-                                        mem: mem.clone(),
-                                        addr: addr.clone(),
-                                    });
+                                    let value = self.eval(
+                                        &AssignExpr::MemRead {
+                                            mem: mem.clone(),
+                                            addr: addr.clone(),
+                                        },
+                                        None,
+                                    );
                                     next_pending.insert(name.clone(), self.truncate(name, value));
                                     if reset {
                                         next_regs.insert(name.clone(), 0);
@@ -588,7 +610,7 @@ impl Sim {
                             if has_en && !enable {
                                 continue;
                             }
-                            let next = self.eval(&a.expr);
+                            let next = self.eval(&a.expr, mux_coverage_id);
                             next_regs.insert(name.clone(), self.truncate(name, next));
                         }
                         AssignTarget::MemWrite { mem, addr, we } => {
@@ -601,7 +623,7 @@ impl Sim {
                                 }
                             }
                             let a_idx = self.lookup(addr) as usize;
-                            let data = self.eval(&a.expr);
+                            let data = self.eval(&a.expr, mux_coverage_id);
                             let data = self.truncate(mem, data);
                             writes.push((mem.clone(), a_idx, data));
                         }
@@ -627,8 +649,8 @@ impl Sim {
     }
 
     fn tick_combinational(&mut self) {
-        for (name, expr) in self.kernel.comb.clone() {
-            let value = self.eval(&expr);
+        for (name, expr, mux_coverage_id) in self.kernel.comb.clone() {
+            let value = self.eval(&expr, mux_coverage_id);
             let value = self.truncate(&name, value);
             self.ports.set(name.clone(), value);
             self.update_coverage_value(&name, value);
@@ -1123,8 +1145,7 @@ mod tests {
         }
     }
 
-    #[test]
-    fn registering_mux_slots_does_not_create_branch_misses() {
+    fn mux_hir() -> FrozenHir {
         let mut s = ElaborateSession::new("t");
         s.begin_module("MuxOnly", Span::default());
         s.add_input("clk", GroundType::Clock, Span::default());
@@ -1137,9 +1158,79 @@ mod tests {
         s.assign_mux("y", "sel", "a", "b", Span::default());
         s.end_process();
         s.end_module();
-        let sim = Sim::new(s.finish().unwrap());
+        s.finish().unwrap()
+    }
+
+    fn sequential_mux_hir() -> FrozenHir {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("SeqMux", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("sel", GroundType::Bool, Span::default());
+        s.add_input("a", GroundType::Bool, Span::default());
+        s.add_input("b", GroundType::Bool, Span::default());
+        s.add_output("y", GroundType::Bool, Span::default());
+        s.declare_reg("q", GroundType::Bool, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("y", "q", Span::default());
+        s.end_process();
+        s.begin_sequential(Span::default());
+        s.assign_reg_d_mux("q", "sel", "a", "b", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish().unwrap()
+    }
+
+    #[test]
+    fn registering_mux_slots_does_not_create_branch_misses() {
+        let sim = Sim::new(mux_hir());
         assert!(sim.coverage().is_empty());
         assert!(!sim.coverage_report().contains("branch_"));
+    }
+
+    #[test]
+    fn resolved_mux_coverage_ids_match_for_both_tick_engines() {
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(mux_hir(), engine);
+            let mut inputs = PortValues::default();
+            inputs.set("sel", 1);
+            sim.set_inputs(inputs.clone());
+            sim.tick();
+            let (hits, misses) = parse_branch_report(&sim.coverage_report());
+            assert!(hits.contains(&"mux:sel:t".to_owned()));
+            assert!(misses.contains(&"mux:sel:f".to_owned()));
+
+            inputs.set("sel", 0);
+            sim.set_inputs(inputs);
+            sim.tick();
+            let (hits, misses) = parse_branch_report(&sim.coverage_report());
+            assert!(hits.contains(&"mux:sel:t".to_owned()));
+            assert!(hits.contains(&"mux:sel:f".to_owned()));
+            assert!(misses.is_empty());
+        }
+    }
+
+    #[test]
+    fn sequential_mux_coverage_ids_match_for_both_tick_engines() {
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(sequential_mux_hir(), engine);
+            let mut inputs = PortValues::default();
+            inputs.set("sel", 1);
+            inputs.set("a", 1);
+            sim.set_inputs(inputs.clone());
+            sim.tick();
+            let (hits, misses) = parse_branch_report(&sim.coverage_report());
+            assert!(hits.contains(&"mux:sel:t".to_owned()));
+            assert!(misses.contains(&"mux:sel:f".to_owned()));
+
+            inputs.set("sel", 0);
+            sim.set_inputs(inputs);
+            sim.tick();
+            let (hits, misses) = parse_branch_report(&sim.coverage_report());
+            assert!(hits.contains(&"mux:sel:t".to_owned()));
+            assert!(hits.contains(&"mux:sel:f".to_owned()));
+            assert!(misses.is_empty());
+        }
     }
 
     fn sync_read_mem_hir() -> FrozenHir {

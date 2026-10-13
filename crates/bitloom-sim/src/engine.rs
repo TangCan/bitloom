@@ -31,11 +31,14 @@ impl TickEngine {
 }
 
 pub(crate) struct CompiledKernel {
-    pub seq: Vec<(String, AssignExpr)>,
-    pub comb: Vec<(String, AssignExpr)>,
+    pub seq: Vec<(String, AssignExpr, Option<usize>)>,
+    pub comb: Vec<(String, AssignExpr, Option<usize>)>,
 }
 
-pub(crate) fn compile(hir: &FrozenHir) -> CompiledKernel {
+pub(crate) fn compile(
+    hir: &FrozenHir,
+    mux_coverage_ids: &std::collections::HashMap<String, usize>,
+) -> CompiledKernel {
     let mut seq = Vec::new();
     let mut comb = Vec::new();
     if let Some(m) = hir.circuit().modules.first() {
@@ -56,7 +59,29 @@ pub(crate) fn compile(hir: &FrozenHir) -> CompiledKernel {
         }
     }
     order_comb(&mut comb);
+    let seq = seq
+        .into_iter()
+        .map(|(name, expr)| {
+            let mux_id = mux_selector(&expr).and_then(|sel| mux_coverage_ids.get(sel).copied());
+            (name, expr, mux_id)
+        })
+        .collect();
+    let comb = comb
+        .into_iter()
+        .map(|(name, expr)| {
+            let mux_id = mux_selector(&expr).and_then(|sel| mux_coverage_ids.get(sel).copied());
+            (name, expr, mux_id)
+        })
+        .collect();
     CompiledKernel { seq, comb }
+}
+
+fn mux_selector(expr: &AssignExpr) -> Option<&str> {
+    if let AssignExpr::Mux { sel, .. } = expr {
+        Some(sel)
+    } else {
+        None
+    }
 }
 
 pub(crate) fn validate_single_module(hir: &FrozenHir) -> Result<(), &'static str> {
