@@ -1,6 +1,6 @@
 //! Stable, parseable simulation coverage (FR34 toggle + FR105 branch + FR109 FSM).
 
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::{BTreeMap, BTreeSet, HashMap};
 
 /// Toggle + Mux branch + FSM state-visit coverage over named signals / labels.
 #[derive(Debug, Clone, Default)]
@@ -16,9 +16,83 @@ pub struct Coverage {
     state_hits: BTreeSet<String>,
     /// FSM states registered for visit tracking.
     state_seen: BTreeSet<String>,
+    signal_slots: Vec<SignalSlot>,
+    signal_slot_ids: HashMap<String, usize>,
+    mux_slots: Vec<MuxSlot>,
+    mux_slot_ids: HashMap<String, usize>,
+}
+
+#[derive(Debug, Clone, Default)]
+struct SignalSlot {
+    name: String,
+    previous: Option<u64>,
+    sampled: bool,
+}
+
+#[derive(Debug, Clone)]
+struct MuxSlot {
+    true_label: String,
+    false_label: String,
 }
 
 impl Coverage {
+    pub(crate) fn register_signal_slot(&mut self, name: &str) -> usize {
+        if let Some(&id) = self.signal_slot_ids.get(name) {
+            return id;
+        }
+        let id = self.signal_slots.len();
+        self.signal_slots.push(SignalSlot {
+            name: name.to_owned(),
+            previous: None,
+            sampled: false,
+        });
+        self.signal_slot_ids.insert(name.to_owned(), id);
+        id
+    }
+
+    pub(crate) fn sample_signal_slot(&mut self, id: usize, value: u64) {
+        let slot = &mut self.signal_slots[id];
+        if !slot.sampled {
+            self.seen.insert(slot.name.clone());
+            slot.sampled = true;
+        }
+        if slot.previous.is_some_and(|old| old != value) && !self.toggled.contains(&slot.name) {
+            self.toggled.insert(slot.name.clone());
+        }
+        slot.previous = Some(value);
+    }
+
+    pub(crate) fn register_mux_slot(&mut self, sel: &str) -> usize {
+        if let Some(&id) = self.mux_slot_ids.get(sel) {
+            return id;
+        }
+        let id = self.mux_slots.len();
+        self.mux_slots.push(MuxSlot {
+            true_label: format!("mux:{sel}:t"),
+            false_label: format!("mux:{sel}:f"),
+        });
+        self.mux_slot_ids.insert(sel.to_owned(), id);
+        id
+    }
+
+    pub(crate) fn sample_mux_slot(&mut self, id: usize, took_true: bool) {
+        let slot = &self.mux_slots[id];
+        if !self.branch_seen.contains(slot.true_label.as_str()) {
+            self.branch_seen.insert(slot.true_label.clone());
+        }
+        if !self.branch_seen.contains(slot.false_label.as_str()) {
+            self.branch_seen.insert(slot.false_label.clone());
+        }
+        let hit = if took_true {
+            &slot.true_label
+        } else {
+            &slot.false_label
+        };
+        if !self.branch_hits.contains(hit.as_str()) {
+            self.branch_hits.insert(hit.clone());
+        }
+    }
+
     pub fn sample(&mut self, name: impl Into<String>, value: u64) {
         let name = name.into();
         self.seen.insert(name.clone());
@@ -32,15 +106,8 @@ impl Coverage {
 
     /// Register both arms of a Mux and record which arm was taken this eval.
     pub fn sample_mux_branch(&mut self, sel: &str, took_true: bool) {
-        let t = format!("mux:{sel}:t");
-        let f = format!("mux:{sel}:f");
-        self.branch_seen.insert(t.clone());
-        self.branch_seen.insert(f.clone());
-        if took_true {
-            self.branch_hits.insert(t);
-        } else {
-            self.branch_hits.insert(f);
-        }
+        let id = self.register_mux_slot(sel);
+        self.sample_mux_slot(id, took_true);
     }
 
     /// Register an explicit FSM state enum (or label set) for state-visit (FR109 / C3).
@@ -340,5 +407,27 @@ mod tests {
         assert!(lcov.contains("end_of_record") && lcov.contains("DA:"));
         let html = c.coverage_gui_html("t");
         assert!(html.contains("data-bitloom-coverage-gui"));
+    }
+
+    #[test]
+    fn indexed_signal_and_mux_paths_match_named_api() {
+        let mut indexed = Coverage::default();
+        let signal = indexed.register_signal_slot("count");
+        let mux = indexed.register_mux_slot("sel");
+        assert!(indexed.is_empty());
+        indexed.sample_signal_slot(signal, 0);
+        indexed.sample_signal_slot(signal, 1);
+        indexed.sample_mux_slot(mux, true);
+
+        let mut named = Coverage::default();
+        named.sample("count", 0);
+        named.sample("count", 1);
+        named.sample_mux_branch("sel", true);
+        assert_eq!(indexed.report(), named.report());
+        assert_eq!(indexed.to_lcov("same"), named.to_lcov("same"));
+        assert_eq!(
+            indexed.coverage_gui_html("same"),
+            named.coverage_gui_html("same")
+        );
     }
 }

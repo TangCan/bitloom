@@ -1,6 +1,6 @@
 //! Cycle-accurate simulation over FrozenHir (AD-5, AD-15, AD-17).
 
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, HashMap};
 use std::fs::File;
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
@@ -78,6 +78,9 @@ pub struct Sim {
     engine: TickEngine,
     kernel: engine::CompiledKernel,
     coverage: Coverage,
+    coverage_values: Vec<u64>,
+    coverage_signal_ids: HashMap<String, usize>,
+    mux_coverage_ids: HashMap<String, usize>,
 }
 
 struct FstPlan {
@@ -125,6 +128,30 @@ impl Sim {
             }
         }
         let kernel = engine::compile(&hir);
+        let mut coverage = Coverage::default();
+        let mut coverage_signal_ids = HashMap::new();
+        let mut mux_coverage_ids = HashMap::new();
+        if let Some(m) = hir.circuit().modules.first() {
+            for p in &m.ports {
+                let id = coverage.register_signal_slot(&p.name);
+                coverage_signal_ids.insert(p.name.clone(), id);
+            }
+            for stmt in &m.body {
+                if let Stmt::RegDecl { name, .. } = stmt {
+                    let id = coverage.register_signal_slot(name);
+                    coverage_signal_ids.insert(name.clone(), id);
+                }
+                if let Stmt::Process(process) = stmt {
+                    for assign in &process.assigns {
+                        if let AssignExpr::Mux { sel, .. } = &assign.expr {
+                            let id = coverage.register_mux_slot(sel);
+                            mux_coverage_ids.insert(sel.clone(), id);
+                        }
+                    }
+                }
+            }
+        }
+        let coverage_values = vec![0; coverage_signal_ids.len()];
         Self {
             widths: signal_widths(&hir),
             hir,
@@ -137,7 +164,10 @@ impl Sim {
             fst: None,
             engine,
             kernel,
-            coverage: Coverage::default(),
+            coverage,
+            coverage_values,
+            coverage_signal_ids,
+            mux_coverage_ids,
         }
     }
 
@@ -229,7 +259,15 @@ impl Sim {
 
     pub fn set_inputs(&mut self, inputs: PortValues) {
         for (k, v) in inputs.values {
-            self.ports.set(k.clone(), self.truncate(&k, v));
+            let value = self.truncate(&k, v);
+            self.ports.set(k.clone(), value);
+            self.update_coverage_value(&k, value);
+        }
+    }
+
+    fn update_coverage_value(&mut self, name: &str, value: u64) {
+        if let Some(&id) = self.coverage_signal_ids.get(name) {
+            self.coverage_values[id] = value;
         }
     }
 
@@ -319,7 +357,11 @@ impl Sim {
             AssignExpr::Eq(a, b) => u64::from(self.lookup(a) == self.lookup(b)),
             AssignExpr::Mux { sel, t, f } => {
                 let took_true = self.lookup(sel) != 0;
-                self.coverage.sample_mux_branch(sel, took_true);
+                if let Some(&id) = self.mux_coverage_ids.get(sel) {
+                    self.coverage.sample_mux_slot(id, took_true);
+                } else {
+                    self.coverage.sample_mux_branch(sel, took_true);
+                }
                 if took_true {
                     self.lookup(t)
                 } else {
@@ -408,23 +450,8 @@ impl Sim {
     }
 
     fn sample_coverage(&mut self) {
-        let names: Vec<String> = {
-            let mut n = Vec::new();
-            if let Some(m) = self.hir.circuit().modules.first() {
-                for p in &m.ports {
-                    n.push(p.name.clone());
-                }
-                for stmt in &m.body {
-                    if let Stmt::RegDecl { name, .. } = stmt {
-                        n.push(name.clone());
-                    }
-                }
-            }
-            n
-        };
-        for name in names {
-            let val = self.lookup(&name);
-            self.coverage.sample(name, val);
+        for (id, value) in self.coverage_values.iter().copied().enumerate() {
+            self.coverage.sample_signal_slot(id, value);
         }
     }
 
@@ -497,11 +524,14 @@ impl Sim {
                 next_regs.insert(name.clone(), self.truncate(&name, next));
             }
             for (name, val) in next_regs {
-                self.regs.insert(name, val);
+                self.regs.insert(name.clone(), val);
+                self.update_coverage_value(&name, val);
             }
             for (name, expr) in comb {
                 let val = self.eval(&expr);
-                self.ports.set(name.clone(), self.truncate(&name, val));
+                let val = self.truncate(&name, val);
+                self.ports.set(name.clone(), val);
+                self.update_coverage_value(&name, val);
             }
             return;
         }
@@ -590,7 +620,8 @@ impl Sim {
             }
         }
         for (name, val) in next_regs {
-            self.regs.insert(name, val);
+            self.regs.insert(name.clone(), val);
+            self.update_coverage_value(&name, val);
         }
         self.pending_mem_reads = next_pending;
     }
@@ -598,7 +629,9 @@ impl Sim {
     fn tick_combinational(&mut self) {
         for (name, expr) in self.kernel.comb.clone() {
             let value = self.eval(&expr);
-            self.ports.set(name.clone(), self.truncate(&name, value));
+            let value = self.truncate(&name, value);
+            self.ports.set(name.clone(), value);
+            self.update_coverage_value(&name, value);
         }
     }
 }
@@ -1044,6 +1077,10 @@ mod tests {
     #[test]
     fn coverage_has_hit_and_miss() {
         let mut sim = Sim::new(counter_hir());
+        assert!(
+            sim.coverage().is_empty(),
+            "registration alone is not a sample"
+        );
         let mut pv = PortValues::default();
         pv.set("rst", 0);
         sim.set_inputs(pv);
@@ -1064,6 +1101,45 @@ mod tests {
             misses.iter().any(|m| m == "data_in" || m == "clk"),
             "misses={misses:?}"
         );
+    }
+
+    #[test]
+    fn coverage_slots_are_updated_by_inputs_and_tick_writes() {
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(passthrough_hir(), engine);
+            assert!(sim.coverage().is_empty());
+            let mut inputs = PortValues::default();
+            inputs.set("data_in", 7);
+            sim.set_inputs(inputs);
+            sim.tick();
+            let mut inputs = PortValues::default();
+            inputs.set("data_in", 8);
+            sim.set_inputs(inputs);
+            sim.tick();
+            let (hits, misses) = parse_report(&sim.coverage_report());
+            assert!(hits.contains(&"data_out".to_owned()));
+            assert!(hits.contains(&"data_in".to_owned()));
+            assert!(misses.contains(&"clk".to_owned()));
+        }
+    }
+
+    #[test]
+    fn registering_mux_slots_does_not_create_branch_misses() {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("MuxOnly", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("sel", GroundType::Bool, Span::default());
+        s.add_input("a", GroundType::Bool, Span::default());
+        s.add_input("b", GroundType::Bool, Span::default());
+        s.add_output("y", GroundType::Bool, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_mux("y", "sel", "a", "b", Span::default());
+        s.end_process();
+        s.end_module();
+        let sim = Sim::new(s.finish().unwrap());
+        assert!(sim.coverage().is_empty());
+        assert!(!sim.coverage_report().contains("branch_"));
     }
 
     fn sync_read_mem_hir() -> FrozenHir {
