@@ -10,6 +10,13 @@ followed Cargo **0.x** compatibility rules.
 
 ## [Unreleased]
 
+## [1.2.2] - 2026-10-14
+
+### 性能改进
+
+- 优化 `bitloom-sim` 的热点求值路径，保持模拟行为不变。
+- 十个 Bitloom crate 已发布至 crates.io；包版本、校验和与发布验收见[1.2.2 发布记录](docs/bitloom-1-2-2-release.md)。
+
 ## [1.2.1] - 2026-10-13
 
 ### 性能改进
