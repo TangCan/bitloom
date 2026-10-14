@@ -81,27 +81,27 @@ fn fr152_lsp_policy_a_documented_and_dry_run() {
         "bitloom must not declare bitloom-lsp path dep:\n{cli}"
     );
 
-    let lsp_dry = Command::new("cargo")
-        .args(["publish", "-p", "bitloom-lsp", "--dry-run", "--allow-dirty"])
+    let lsp_files = Command::new("cargo")
+        // The FR149 workspace publish dry run covers dependency resolution
+        // and compilation for every publishable package in the workspace.
+        .args(["package", "-p", "bitloom-lsp", "--list", "--allow-dirty"])
         .current_dir(&root)
         .output()
-        .expect("spawn lsp dry-run");
-    let lsp_err = String::from_utf8_lossy(&lsp_dry.stderr);
-    let lsp_out = String::from_utf8_lossy(&lsp_dry.stdout);
+        .expect("spawn lsp cargo package --list");
+    let lsp_out = String::from_utf8_lossy(&lsp_files.stdout);
     assert!(
-        lsp_dry.status.success(),
-        "cargo publish -p bitloom-lsp --dry-run must succeed\nstdout={lsp_out}\nstderr={lsp_err}"
+        lsp_files.status.success() && lsp_out.contains("Cargo.toml"),
+        "cargo package -p bitloom-lsp --list must include the manifest\nstdout={lsp_out}"
     );
 
-    let cli_dry = Command::new("cargo")
-        .args(["publish", "-p", "bitloom", "--dry-run", "--allow-dirty"])
+    let cli_files = Command::new("cargo")
+        .args(["package", "-p", "bitloom", "--list", "--allow-dirty"])
         .current_dir(&root)
         .output()
-        .expect("spawn bitloom dry-run");
-    let cli_err = String::from_utf8_lossy(&cli_dry.stderr);
-    let cli_out = String::from_utf8_lossy(&cli_dry.stdout);
+        .expect("spawn bitloom cargo package --list");
+    let cli_out = String::from_utf8_lossy(&cli_files.stdout);
     assert!(
-        cli_dry.status.success(),
-        "cargo publish -p bitloom --dry-run must remain green (FR151)\nstdout={cli_out}\nstderr={cli_err}"
+        cli_files.status.success() && cli_out.contains("Cargo.toml"),
+        "cargo package -p bitloom --list must include the manifest\nstdout={cli_out}"
     );
 }
