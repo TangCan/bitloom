@@ -4,6 +4,7 @@ use std::collections::{BTreeMap, HashMap};
 use std::fs::File;
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
+use std::sync::Arc;
 
 use bitloom_hir::{AssignExpr, AssignTarget, FrozenHir, GroundType, PortValues, ProcessKind, Stmt};
 
@@ -14,6 +15,7 @@ pub use coverage::{
     Coverage, parse_branch_report, parse_report, parse_state_report, write_coverage_artifacts,
 };
 mod engine;
+use engine::ResolvedExpr;
 pub use engine::TickEngine;
 mod equiv;
 pub use equiv::{
@@ -65,10 +67,13 @@ pub use systemc_tlm_at::{
 /// Values use `u64` storage. Wider HIR signals retain their low 64 bits on
 /// passthrough and writeback; this is not arbitrary-width integer simulation.
 pub struct Sim {
-    hir: FrozenHir,
+    hir: Arc<FrozenHir>,
     widths: BTreeMap<String, u32>,
+    signal_ids: HashMap<String, usize>,
+    signal_values: Vec<u64>,
     regs: BTreeMap<String, u64>,
-    mems: BTreeMap<String, Vec<u64>>,
+    mems: Vec<Vec<u64>>,
+    memory_ids: HashMap<String, usize>,
     /// SyncReadMem: data captured last cycle, applied this cycle (latency 1).
     pending_mem_reads: BTreeMap<String, u64>,
     ports: PortValues,
@@ -102,7 +107,8 @@ impl Sim {
     pub fn with_engine(hir: FrozenHir, engine: TickEngine) -> Self {
         engine::validate_single_module(&hir).expect("Sim construction failed");
         let mut regs = BTreeMap::new();
-        let mut mems = BTreeMap::new();
+        let mut mems = Vec::new();
+        let mut memory_ids = HashMap::new();
         for m in &hir.circuit().modules {
             for stmt in &m.body {
                 match stmt {
@@ -121,7 +127,9 @@ impl Sim {
                             Some(v) => v.clone(),
                             None => vec![0; *depth as usize],
                         };
-                        mems.insert(name.clone(), words);
+                        let id = mems.len();
+                        memory_ids.insert(name.clone(), id);
+                        mems.push(words);
                     }
                     _ => {}
                 }
@@ -159,12 +167,30 @@ impl Sim {
             }
         }
         let coverage_values = vec![0; coverage_signal_ids.len()];
-        let kernel = engine::compile(&hir, &mux_coverage_ids);
+        let mut signal_ids = HashMap::new();
+        if let Some(module) = hir.circuit().modules.first() {
+            for port in &module.ports {
+                let id = signal_ids.len();
+                signal_ids.entry(port.name.clone()).or_insert(id);
+            }
+            for stmt in &module.body {
+                if let Stmt::RegDecl { name, .. } | Stmt::WireDecl { name, .. } = stmt {
+                    let id = signal_ids.len();
+                    signal_ids.entry(name.clone()).or_insert(id);
+                }
+            }
+        }
+        let signal_values = vec![0; signal_ids.len()];
+        let widths = signal_widths(&hir);
+        let kernel = engine::compile(&hir, &mux_coverage_ids, &signal_ids, &memory_ids, &widths);
         Self {
-            widths: signal_widths(&hir),
-            hir,
+            widths,
+            signal_ids,
+            signal_values,
+            hir: Arc::new(hir),
             regs,
             mems,
+            memory_ids,
             pending_mem_reads: BTreeMap::new(),
             ports: PortValues::default(),
             time: 0,
@@ -268,7 +294,8 @@ impl Sim {
     pub fn set_inputs(&mut self, inputs: PortValues) {
         for (k, v) in inputs.values {
             let value = self.truncate(&k, v);
-            self.ports.set(k.clone(), value);
+            self.set_signal_value(&k, value);
+            self.publish_port_value(&k, value);
             self.update_coverage_value(&k, value);
         }
     }
@@ -284,10 +311,34 @@ impl Sim {
     }
 
     fn lookup(&self, name: &str) -> u64 {
-        self.ports
+        self.signal_ids
             .get(name)
+            .and_then(|&id| self.signal_values.get(id).copied())
+            .or_else(|| self.ports.get(name))
             .or_else(|| self.regs.get(name).copied())
             .unwrap_or(0)
+    }
+
+    fn set_signal_value(&mut self, name: &str, value: u64) {
+        if let Some(&id) = self.signal_ids.get(name) {
+            self.set_signal_value_id(id, value);
+        }
+    }
+
+    fn set_signal_value_id(&mut self, id: usize, value: u64) {
+        if let Some(slot) = self.signal_values.get_mut(id) {
+            *slot = value;
+        }
+    }
+
+    fn publish_port_value(&mut self, name: &str, value: u64) {
+        if let Some(current) = self.ports.values.get_mut(name) {
+            if *current != value {
+                *current = value;
+            }
+        } else {
+            self.ports.values.insert(name.to_owned(), value);
+        }
     }
 
     fn truncate(&self, name: &str, value: u64) -> u64 {
@@ -379,10 +430,95 @@ impl Sim {
             AssignExpr::MemRead { mem, addr } => {
                 let a = self.lookup(addr) as usize;
                 self.mems
-                    .get(mem)
+                    .get(self.memory_ids.get(mem).copied().unwrap_or(usize::MAX))
                     .and_then(|m| m.get(a).copied())
                     .unwrap_or(0)
             }
+        }
+    }
+
+    fn eval_resolved(&mut self, expr: &ResolvedExpr, mux_coverage_id: Option<usize>) -> u64 {
+        let read = |id: usize, values: &[u64]| values.get(id).copied().unwrap_or(0);
+        match expr {
+            ResolvedExpr::Ref(id) => read(*id, &self.signal_values),
+            ResolvedExpr::Lit(v) => *v,
+            ResolvedExpr::Inc(id) => read(*id, &self.signal_values).wrapping_add(1),
+            ResolvedExpr::Add(a, b) => {
+                read(*a, &self.signal_values).wrapping_add(read(*b, &self.signal_values))
+            }
+            ResolvedExpr::Sub(a, b) => {
+                read(*a, &self.signal_values).wrapping_sub(read(*b, &self.signal_values))
+            }
+            ResolvedExpr::And(a, b) => {
+                read(*a, &self.signal_values) & read(*b, &self.signal_values)
+            }
+            ResolvedExpr::Or(a, b) => read(*a, &self.signal_values) | read(*b, &self.signal_values),
+            ResolvedExpr::Xor(a, b) => {
+                read(*a, &self.signal_values) ^ read(*b, &self.signal_values)
+            }
+            ResolvedExpr::Shl(a, b) => read(*a, &self.signal_values)
+                .checked_shl(read(*b, &self.signal_values).min(64) as u32)
+                .unwrap_or(0),
+            ResolvedExpr::Shr(a, b) => read(*a, &self.signal_values)
+                .checked_shr(read(*b, &self.signal_values).min(64) as u32)
+                .unwrap_or(0),
+            ResolvedExpr::Ult { lhs, rhs, width } => u64::from(
+                mask_width(read(*lhs, &self.signal_values), *width)
+                    < mask_width(read(*rhs, &self.signal_values), *width),
+            ),
+            ResolvedExpr::Slt { lhs, rhs, width } => u64::from(signed_less(
+                read(*lhs, &self.signal_values),
+                read(*rhs, &self.signal_values),
+                *width,
+            )),
+            ResolvedExpr::Sar {
+                value,
+                shamt,
+                width,
+            } => arithmetic_right_shift(
+                read(*value, &self.signal_values),
+                read(*shamt, &self.signal_values),
+                *width,
+            ),
+            ResolvedExpr::Slice { src, lo, width } => {
+                mask_width(read(*src, &self.signal_values) >> lo, *width)
+            }
+            ResolvedExpr::Concat {
+                high,
+                low,
+                low_width,
+            } => (read(*high, &self.signal_values) << low_width) | read(*low, &self.signal_values),
+            ResolvedExpr::ZeroExtend { src, to_width } => {
+                mask_width(read(*src, &self.signal_values), *to_width)
+            }
+            ResolvedExpr::SignExtend {
+                src,
+                from_width,
+                to_width,
+            } => {
+                let value = read(*src, &self.signal_values);
+                let ext = if *from_width < 64 && value & (1u64 << (*from_width - 1)) != 0 {
+                    value | (!0u64 << *from_width)
+                } else {
+                    value
+                };
+                mask_width(ext, *to_width)
+            }
+            ResolvedExpr::Eq(a, b) => {
+                u64::from(read(*a, &self.signal_values) == read(*b, &self.signal_values))
+            }
+            ResolvedExpr::Mux { sel, t, f } => {
+                let took_true = read(*sel, &self.signal_values) != 0;
+                if let Some(id) = mux_coverage_id {
+                    self.coverage.sample_mux_slot(id, took_true);
+                }
+                read(if took_true { *t } else { *f }, &self.signal_values)
+            }
+            ResolvedExpr::MemRead { mem, addr } => self
+                .mems
+                .get(*mem)
+                .and_then(|bank| bank.get(read(*addr, &self.signal_values) as usize).copied())
+                .unwrap_or(0),
         }
     }
 
@@ -519,39 +655,47 @@ impl Sim {
                 })
             })
         {
-            let Some(m) = self.hir.circuit().modules.first().cloned() else {
+            let hir = Arc::clone(&self.hir);
+            let Some(m) = hir.circuit().modules.first() else {
                 return;
             };
             let reset = self.reset_active(&m);
-            let seq = self.kernel.seq.clone();
-            let comb = self.kernel.comb.clone();
+            let seq = std::mem::take(&mut self.kernel.seq);
+            let comb = std::mem::take(&mut self.kernel.fast_comb);
             // NBA: evaluate all next values before committing register updates.
             let mut next_regs: BTreeMap<String, u64> = BTreeMap::new();
-            for (name, expr, mux_coverage_id) in seq {
+            for (name, expr, mux_coverage_id) in &seq {
                 let next = if reset {
                     0
                 } else {
-                    self.eval(&expr, mux_coverage_id)
+                    self.eval(expr, *mux_coverage_id)
                 };
-                next_regs.insert(name.clone(), self.truncate(&name, next));
+                next_regs.insert(name.clone(), self.truncate(name, next));
             }
             for (name, val) in next_regs {
+                self.set_signal_value(&name, val);
                 self.regs.insert(name.clone(), val);
                 self.update_coverage_value(&name, val);
             }
-            for (name, expr, mux_coverage_id) in comb {
-                let val = self.eval(&expr, mux_coverage_id);
-                let val = self.truncate(&name, val);
-                self.ports.set(name.clone(), val);
-                self.update_coverage_value(&name, val);
+            for assign in &comb {
+                let val = mask_width(
+                    self.eval_resolved(&assign.expr, assign.mux_coverage_id),
+                    assign.target_width,
+                );
+                self.set_signal_value_id(assign.target_id, val);
+                self.publish_port_value(&assign.target_name, val);
+                self.update_coverage_value(&assign.target_name, val);
             }
+            self.kernel.seq = seq;
+            self.kernel.fast_comb = comb;
             return;
         }
         self.tick_interpreter();
     }
 
     fn tick_sequential(&mut self) {
-        let Some(m) = self.hir.circuit().modules.first().cloned() else {
+        let hir = Arc::clone(&self.hir);
+        let Some(m) = hir.circuit().modules.first() else {
             return;
         };
         let reset = self.reset_active(&m);
@@ -625,7 +769,11 @@ impl Sim {
                             let a_idx = self.lookup(addr) as usize;
                             let data = self.eval(&a.expr, mux_coverage_id);
                             let data = self.truncate(mem, data);
-                            writes.push((mem.clone(), a_idx, data));
+                            writes.push((
+                                self.memory_ids.get(mem).copied().unwrap_or(usize::MAX),
+                                a_idx,
+                                data,
+                            ));
                         }
                         _ => {}
                     }
@@ -635,13 +783,14 @@ impl Sim {
         // Internal collision convention is read-before-write, independent of
         // statement order. FIRRTL collision results remain undefined.
         for (mem, index, value) in writes {
-            if let Some(bank) = self.mems.get_mut(&mem) {
+            if let Some(bank) = self.mems.get_mut(mem) {
                 if let Some(word) = bank.get_mut(index) {
                     *word = value;
                 }
             }
         }
         for (name, val) in next_regs {
+            self.set_signal_value(&name, val);
             self.regs.insert(name.clone(), val);
             self.update_coverage_value(&name, val);
         }
@@ -649,12 +798,17 @@ impl Sim {
     }
 
     fn tick_combinational(&mut self) {
-        for (name, expr, mux_coverage_id) in self.kernel.comb.clone() {
-            let value = self.eval(&expr, mux_coverage_id);
-            let value = self.truncate(&name, value);
-            self.ports.set(name.clone(), value);
-            self.update_coverage_value(&name, value);
+        let comb = std::mem::take(&mut self.kernel.fast_comb);
+        for assign in &comb {
+            let value = mask_width(
+                self.eval_resolved(&assign.expr, assign.mux_coverage_id),
+                assign.target_width,
+            );
+            self.set_signal_value_id(assign.target_id, value);
+            self.publish_port_value(&assign.target_name, value);
+            self.update_coverage_value(&assign.target_name, value);
         }
+        self.kernel.fast_comb = comb;
     }
 }
 
@@ -813,17 +967,19 @@ mod tests {
 
     #[test]
     fn tick_counts_after_reset() {
-        let mut sim = Sim::new(counter_hir());
-        let mut pv = PortValues::default();
-        pv.set("rst", 1);
-        sim.set_inputs(pv.clone());
-        sim.tick();
-        pv.set("rst", 0);
-        sim.set_inputs(pv);
-        sim.tick();
-        sim.tick();
-        sim.tick();
-        assert_eq!(sim.ports().get("data_out"), Some(3));
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(counter_hir(), engine);
+            let mut pv = PortValues::default();
+            pv.set("rst", 1);
+            sim.set_inputs(pv.clone());
+            sim.tick();
+            pv.set("rst", 0);
+            sim.set_inputs(pv);
+            sim.tick();
+            sim.tick();
+            sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(3));
+        }
     }
 
     #[test]
@@ -852,6 +1008,65 @@ mod tests {
         s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
         s.begin_combinational(Span::default());
         s.assign_add("y", "a", "b", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish().unwrap()
+    }
+
+    fn resolved_chain_hir() -> FrozenHir {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("ResolvedChain", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("a", GroundType::UInt { width: 3 }, Span::default());
+        s.add_input("b", GroundType::UInt { width: 3 }, Span::default());
+        s.add_input("sel", GroundType::Bool, Span::default());
+        s.add_output("out", GroundType::UInt { width: 3 }, Span::default());
+        s.add_output("lt", GroundType::Bool, Span::default());
+        s.declare_wire("sum", GroundType::UInt { width: 3 }, Span::default());
+        s.declare_wire("picked", GroundType::UInt { width: 3 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_add("sum", "a", "b", Span::default());
+        s.assign_mux("picked", "sel", "sum", "a", Span::default());
+        s.assign_net("out", "picked", Span::default());
+        s.assign_ult("lt", "a", "b", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish().unwrap()
+    }
+
+    fn multi_bank_mem_hir() -> FrozenHir {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("MemBanks", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("addr", GroundType::UInt { width: 2 }, Span::default());
+        s.add_output("a", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("b", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_mem_with_init("mem_a", 3, 8, vec![0x12, 0x34, 0x9a], Span::default());
+        s.declare_mem_with_init("mem_b", 3, 8, vec![0x56, 0x78, 0xbc], Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_mem_read("a", "mem_a", "addr", Span::default());
+        s.assign_mem_read("b", "mem_b", "addr", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish().unwrap()
+    }
+
+    fn expression_eval_hir() -> FrozenHir {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("ExpressionEval", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("a", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("b", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("shamt", GroundType::UInt { width: 8 }, Span::default());
+        s.add_input("sel", GroundType::Bool, Span::default());
+        s.add_input("addr", GroundType::UInt { width: 2 }, Span::default());
+        s.add_output("y", GroundType::UInt { width: 8 }, Span::default());
+        s.declare_mem_with_init("mem_a", 3, 8, vec![0x11, 0x22, 0x33], Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("y", "a", Span::default());
         s.end_process();
         s.end_module();
         s.finish().unwrap()
@@ -1097,6 +1312,275 @@ mod tests {
     }
 
     #[test]
+    fn resolved_expression_chains_keep_widths_and_comparisons() {
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(resolved_chain_hir(), engine);
+            let mut inputs = PortValues::default();
+            inputs.set("a", 7);
+            inputs.set("b", 3);
+            inputs.set("sel", 1);
+            sim.set_inputs(inputs);
+            sim.settle();
+            assert_eq!(sim.ports().get("sum"), Some(2));
+            assert_eq!(sim.ports().get("out"), Some(2));
+            assert_eq!(sim.ports().get("lt"), Some(0));
+        }
+    }
+
+    #[test]
+    fn resolved_evaluator_matches_ast_for_every_expression_variant() {
+        let mut sim = Sim::new(expression_eval_hir());
+        let mut inputs = PortValues::default();
+        inputs.set("a", 0x91);
+        inputs.set("b", 5);
+        inputs.set("shamt", 2);
+        inputs.set("sel", 1);
+        inputs.set("addr", 2);
+        sim.set_inputs(inputs);
+        let signal_ids = sim.signal_ids.clone();
+        let id = |name: &str| signal_ids[name];
+        let mem = sim.memory_ids["mem_a"];
+        let expressions = vec![
+            (AssignExpr::Ref("a".into()), ResolvedExpr::Ref(id("a"))),
+            (AssignExpr::Lit(13), ResolvedExpr::Lit(13)),
+            (AssignExpr::Inc("a".into()), ResolvedExpr::Inc(id("a"))),
+            (
+                AssignExpr::Add("a".into(), "b".into()),
+                ResolvedExpr::Add(id("a"), id("b")),
+            ),
+            (
+                AssignExpr::Sub("a".into(), "b".into()),
+                ResolvedExpr::Sub(id("a"), id("b")),
+            ),
+            (
+                AssignExpr::And("a".into(), "b".into()),
+                ResolvedExpr::And(id("a"), id("b")),
+            ),
+            (
+                AssignExpr::Or("a".into(), "b".into()),
+                ResolvedExpr::Or(id("a"), id("b")),
+            ),
+            (
+                AssignExpr::Xor("a".into(), "b".into()),
+                ResolvedExpr::Xor(id("a"), id("b")),
+            ),
+            (
+                AssignExpr::Shl("a".into(), "shamt".into()),
+                ResolvedExpr::Shl(id("a"), id("shamt")),
+            ),
+            (
+                AssignExpr::Shr("a".into(), "shamt".into()),
+                ResolvedExpr::Shr(id("a"), id("shamt")),
+            ),
+            (
+                AssignExpr::Ult {
+                    lhs: "a".into(),
+                    rhs: "b".into(),
+                    width: 8,
+                },
+                ResolvedExpr::Ult {
+                    lhs: id("a"),
+                    rhs: id("b"),
+                    width: 8,
+                },
+            ),
+            (
+                AssignExpr::Slt {
+                    lhs: "a".into(),
+                    rhs: "b".into(),
+                    width: 8,
+                },
+                ResolvedExpr::Slt {
+                    lhs: id("a"),
+                    rhs: id("b"),
+                    width: 8,
+                },
+            ),
+            (
+                AssignExpr::Sar {
+                    value: "a".into(),
+                    shamt: "shamt".into(),
+                    width: 8,
+                },
+                ResolvedExpr::Sar {
+                    value: id("a"),
+                    shamt: id("shamt"),
+                    width: 8,
+                },
+            ),
+            (
+                AssignExpr::Slice {
+                    src: "a".into(),
+                    lo: 2,
+                    width: 3,
+                },
+                ResolvedExpr::Slice {
+                    src: id("a"),
+                    lo: 2,
+                    width: 3,
+                },
+            ),
+            (
+                AssignExpr::Concat {
+                    high: "a".into(),
+                    low: "b".into(),
+                    low_width: 8,
+                },
+                ResolvedExpr::Concat {
+                    high: id("a"),
+                    low: id("b"),
+                    low_width: 8,
+                },
+            ),
+            (
+                AssignExpr::ZeroExtend {
+                    src: "a".into(),
+                    from_width: 8,
+                    to_width: 12,
+                },
+                ResolvedExpr::ZeroExtend {
+                    src: id("a"),
+                    to_width: 12,
+                },
+            ),
+            (
+                AssignExpr::SignExtend {
+                    src: "a".into(),
+                    from_width: 8,
+                    to_width: 12,
+                },
+                ResolvedExpr::SignExtend {
+                    src: id("a"),
+                    from_width: 8,
+                    to_width: 12,
+                },
+            ),
+            (
+                AssignExpr::Eq("a".into(), "b".into()),
+                ResolvedExpr::Eq(id("a"), id("b")),
+            ),
+            (
+                AssignExpr::Mux {
+                    sel: "sel".into(),
+                    t: "a".into(),
+                    f: "b".into(),
+                },
+                ResolvedExpr::Mux {
+                    sel: id("sel"),
+                    t: id("a"),
+                    f: id("b"),
+                },
+            ),
+            (
+                AssignExpr::MemRead {
+                    mem: "mem_a".into(),
+                    addr: "addr".into(),
+                },
+                ResolvedExpr::MemRead {
+                    mem,
+                    addr: id("addr"),
+                },
+            ),
+        ];
+        for (ast, resolved) in expressions {
+            let expected = sim.eval(&ast, None);
+            let actual = sim.eval_resolved(&resolved, None);
+            assert_eq!(actual, expected, "expression {ast:?}");
+        }
+        sim.set_inputs({
+            let mut values = PortValues::default();
+            values.set("addr", 3);
+            values
+        });
+        let ast = AssignExpr::MemRead {
+            mem: "mem_a".into(),
+            addr: "addr".into(),
+        };
+        let resolved = ResolvedExpr::MemRead {
+            mem,
+            addr: id("addr"),
+        };
+        assert_eq!(sim.eval_resolved(&resolved, None), sim.eval(&ast, None));
+    }
+
+    #[test]
+    fn resolved_memory_slots_keep_banks_and_zero_on_oob() {
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(multi_bank_mem_hir(), engine);
+            let mut inputs = PortValues::default();
+            inputs.set("addr", 1);
+            sim.set_inputs(inputs);
+            sim.settle();
+            assert_eq!(sim.ports().get("a"), Some(0x34));
+            assert_eq!(sim.ports().get("b"), Some(0x78));
+            let mut inputs = PortValues::default();
+            inputs.set("addr", 3);
+            sim.set_inputs(inputs);
+            sim.settle();
+            assert_eq!(sim.ports().get("a"), Some(0));
+            assert_eq!(sim.ports().get("b"), Some(0));
+        }
+    }
+
+    #[test]
+    fn unresolved_fast_slots_keep_zero_fallback_without_panicking() {
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(passthrough_hir(), engine);
+            assert_eq!(
+                sim.eval_resolved(&ResolvedExpr::Ref(usize::MAX), None),
+                0,
+                "unresolved signal reads retain the zero fallback"
+            );
+            assert_eq!(
+                sim.eval_resolved(
+                    &ResolvedExpr::MemRead {
+                        mem: usize::MAX,
+                        addr: sim.signal_ids["data_in"],
+                    },
+                    None,
+                ),
+                0,
+                "unresolved memory reads retain the zero fallback"
+            );
+            sim.kernel.fast_comb.push(engine::ResolvedAssign {
+                target_name: "unknown_target".into(),
+                target_id: usize::MAX,
+                target_width: 64,
+                mux_coverage_id: None,
+                expr: ResolvedExpr::Ref(usize::MAX),
+            });
+            sim.tick_combinational();
+            assert_eq!(sim.ports().get("unknown_target"), Some(0));
+        }
+    }
+
+    #[test]
+    fn portvalues_writeback_preserves_existing_keys_and_values() {
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(passthrough_hir(), engine);
+            assert!(!sim.ports().values.contains_key("data_out"));
+            sim.settle();
+            assert_eq!(sim.ports().get("data_out"), Some(0));
+            let mut inputs = PortValues::default();
+            inputs.set("data_in", 0);
+            inputs.set("extra_input", 17);
+            sim.set_inputs(inputs);
+            assert_eq!(sim.ports().get("extra_input"), Some(17));
+            sim.settle();
+            let keys_and_values = sim.ports().values.clone();
+            sim.settle();
+            assert_eq!(sim.ports().values, keys_and_values);
+            let mut changed = PortValues::default();
+            changed.set("data_in", 9);
+            changed.set("extra_input", 23);
+            sim.set_inputs(changed);
+            sim.settle();
+            assert_eq!(sim.ports().get("data_out"), Some(9));
+            assert_eq!(sim.ports().get("extra_input"), Some(23));
+        }
+    }
+
+    #[test]
     fn coverage_has_hit_and_miss() {
         let mut sim = Sim::new(counter_hir());
         assert!(
@@ -1258,19 +1742,21 @@ mod tests {
 
     #[test]
     fn sync_read_mem_read_latency_one() {
-        let mut sim = Sim::new(sync_read_mem_hir());
-        let mut pv = PortValues::default();
-        pv.set("rst", 0);
-        pv.set("addr", 3);
-        pv.set("wdata", 0xAB);
-        pv.set("we", 1);
-        sim.set_inputs(pv.clone());
-        sim.tick(); // write + schedule read of old (0)
-        assert_eq!(sim.ports().get("rdata"), Some(0));
-        sim.tick(); // retires the pre-write read; the new read sees 0xAB
-        assert_eq!(sim.ports().get("rdata"), Some(0));
-        sim.tick();
-        assert_eq!(sim.ports().get("rdata"), Some(0xAB));
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(sync_read_mem_hir(), engine);
+            let mut pv = PortValues::default();
+            pv.set("rst", 0);
+            pv.set("addr", 3);
+            pv.set("wdata", 0xAB);
+            pv.set("we", 1);
+            sim.set_inputs(pv);
+            sim.tick(); // write + schedule read of old (0)
+            assert_eq!(sim.ports().get("rdata"), Some(0));
+            sim.tick(); // retires the pre-write read; the new read sees 0xAB
+            assert_eq!(sim.ports().get("rdata"), Some(0));
+            sim.tick();
+            assert_eq!(sim.ports().get("rdata"), Some(0xAB));
+        }
     }
 
     fn async_reset_hir() -> FrozenHir {
@@ -1298,22 +1784,24 @@ mod tests {
 
     #[test]
     fn async_reset_assert_and_release_tick_golden() {
-        let mut sim = Sim::new(async_reset_hir());
-        let mut pv = PortValues::default();
-        pv.set("rst", 0);
-        sim.set_inputs(pv.clone());
-        sim.tick();
-        sim.tick();
-        assert_eq!(sim.ports().get("data_out"), Some(2));
-        pv.set("rst", 1);
-        sim.set_inputs(pv.clone());
-        sim.tick();
-        assert_eq!(sim.ports().get("data_out"), Some(0));
-        pv.set("rst", 0);
-        sim.set_inputs(pv);
-        sim.tick();
-        sim.tick();
-        assert_eq!(sim.ports().get("data_out"), Some(2));
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(async_reset_hir(), engine);
+            let mut pv = PortValues::default();
+            pv.set("rst", 0);
+            sim.set_inputs(pv.clone());
+            sim.tick();
+            sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(2));
+            pv.set("rst", 1);
+            sim.set_inputs(pv.clone());
+            sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(0));
+            pv.set("rst", 0);
+            sim.set_inputs(pv);
+            sim.tick();
+            sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(2));
+        }
     }
 
     fn enable_hir(has_enable: bool) -> FrozenHir {
@@ -1342,34 +1830,69 @@ mod tests {
 
     #[test]
     fn enable_high_matches_ungated_counter() {
-        let mut gated = Sim::new(enable_hir(true));
-        let mut plain = Sim::new(enable_hir(false));
-        let mut pv = PortValues::default();
-        pv.set("rst", 0);
-        pv.set("en", 1);
-        for _ in 0..4 {
-            gated.set_inputs(pv.clone());
-            plain.set_inputs(pv.clone());
-            gated.tick();
-            plain.tick();
-            assert_eq!(gated.ports().get("data_out"), plain.ports().get("data_out"));
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut gated = Sim::with_engine(enable_hir(true), engine);
+            let mut plain = Sim::with_engine(enable_hir(false), engine);
+            let mut pv = PortValues::default();
+            pv.set("rst", 0);
+            pv.set("en", 1);
+            for _ in 0..4 {
+                gated.set_inputs(pv.clone());
+                plain.set_inputs(pv.clone());
+                gated.tick();
+                plain.tick();
+                assert_eq!(gated.ports().get("data_out"), plain.ports().get("data_out"));
+            }
         }
     }
 
     #[test]
     fn enable_low_holds_value() {
-        let mut sim = Sim::new(enable_hir(true));
-        let mut pv = PortValues::default();
-        pv.set("rst", 0);
-        pv.set("en", 1);
-        sim.set_inputs(pv.clone());
-        sim.tick();
-        sim.tick();
-        assert_eq!(sim.ports().get("data_out"), Some(2));
-        pv.set("en", 0);
-        sim.set_inputs(pv);
-        sim.tick();
-        sim.tick();
-        assert_eq!(sim.ports().get("data_out"), Some(2));
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(enable_hir(true), engine);
+            let mut pv = PortValues::default();
+            pv.set("rst", 0);
+            pv.set("en", 1);
+            sim.set_inputs(pv.clone());
+            sim.tick();
+            sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(2));
+            pv.set("en", 0);
+            sim.set_inputs(pv);
+            sim.tick();
+            sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(2));
+        }
+    }
+
+    #[test]
+    fn reset_overrides_disabled_enable_and_disabled_enable_holds_register() {
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(enable_hir(true), engine);
+            let mut inputs = PortValues::default();
+            inputs.set("rst", 0);
+            inputs.set("en", 1);
+            sim.set_inputs(inputs.clone());
+            sim.tick();
+            sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(2));
+
+            inputs.set("rst", 1);
+            inputs.set("en", 0);
+            sim.set_inputs(inputs.clone());
+            sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(0));
+
+            inputs.set("rst", 0);
+            inputs.set("en", 1);
+            sim.set_inputs(inputs.clone());
+            sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(1));
+            inputs.set("en", 0);
+            sim.set_inputs(inputs);
+            sim.tick();
+            sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(1));
+        }
     }
 }
