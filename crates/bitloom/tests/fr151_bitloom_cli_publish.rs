@@ -44,17 +44,22 @@ fn fr151_bitloom_cli_versioned_and_documented() {
 }
 
 #[test]
-fn fr151_bitloom_cli_dry_run_publish() {
+fn fr151_bitloom_cli_package_file_list_is_available() {
     let root = workspace_root();
     let out = Command::new("cargo")
-        .args(["publish", "-p", "bitloom", "--dry-run", "--allow-dirty"])
+        // The FR149 workspace publish dry run covers dependency resolution and
+        // compilation for every publishable package in the workspace.
+        .args(["package", "-p", "bitloom", "--list", "--allow-dirty"])
         .current_dir(&root)
         .output()
-        .expect("spawn dry-run");
-    let stderr = String::from_utf8_lossy(&out.stderr);
+        .expect("spawn cargo package --list");
     let stdout = String::from_utf8_lossy(&out.stdout);
     assert!(
         out.status.success(),
-        "cargo publish -p bitloom --dry-run must succeed\nstdout={stdout}\nstderr={stderr}"
+        "cargo package -p bitloom --list must succeed\nstdout={stdout}"
+    );
+    assert!(
+        stdout.contains("Cargo.toml"),
+        "package listing must include the manifest: {stdout}"
     );
 }

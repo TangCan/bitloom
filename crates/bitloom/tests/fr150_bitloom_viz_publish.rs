@@ -96,17 +96,22 @@ fn fr150_bitloom_viz_package_identity() {
 }
 
 #[test]
-fn fr150_bitloom_viz_dry_run_publish() {
+fn fr150_bitloom_viz_package_file_list_is_available() {
     let root = workspace_root();
     let out = Command::new("cargo")
-        .args(["publish", "-p", "bitloom-viz", "--dry-run", "--allow-dirty"])
+        // The FR149 workspace publish dry run covers dependency resolution and
+        // compilation for every publishable package in the workspace.
+        .args(["package", "-p", "bitloom-viz", "--list", "--allow-dirty"])
         .current_dir(&root)
         .output()
-        .expect("spawn cargo publish dry-run");
-    let stderr = String::from_utf8_lossy(&out.stderr);
+        .expect("spawn cargo package --list");
     let stdout = String::from_utf8_lossy(&out.stdout);
     assert!(
         out.status.success(),
-        "cargo publish -p bitloom-viz --dry-run must succeed\nstdout={stdout}\nstderr={stderr}"
+        "cargo package -p bitloom-viz --list must succeed\nstdout={stdout}"
+    );
+    assert!(
+        stdout.contains("Cargo.toml"),
+        "package listing must include the manifest: {stdout}"
     );
 }

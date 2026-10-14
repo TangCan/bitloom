@@ -102,23 +102,20 @@ fn fr149_bitloom_firrtl_package_identity() {
 }
 
 #[test]
-fn fr149_bitloom_firrtl_dry_run_publish() {
+fn fr149_workspace_dry_run_publish_checks_unpublished_dependency_closure() {
     let root = workspace_root();
     let out = Command::new("cargo")
-        .args([
-            "publish",
-            "-p",
-            "bitloom-firrtl",
-            "--dry-run",
-            "--allow-dirty",
-        ])
+        // `--workspace` creates Cargo's temporary registry for unpublished
+        // workspace dependencies. A package-only dry run incorrectly requires
+        // the candidate versions to have already reached crates.io.
+        .args(["publish", "--workspace", "--dry-run", "--allow-dirty"])
         .current_dir(&root)
         .output()
-        .expect("spawn cargo publish dry-run");
+        .expect("spawn cargo workspace publish dry-run");
     let stderr = String::from_utf8_lossy(&out.stderr);
     let stdout = String::from_utf8_lossy(&out.stdout);
     assert!(
         out.status.success(),
-        "cargo publish -p bitloom-firrtl --dry-run must succeed\nstdout={stdout}\nstderr={stderr}"
+        "cargo publish --workspace --dry-run must succeed\nstdout={stdout}\nstderr={stderr}"
     );
 }

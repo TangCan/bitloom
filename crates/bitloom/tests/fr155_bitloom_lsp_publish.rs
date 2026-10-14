@@ -65,17 +65,22 @@ fn fr155_bitloom_lsp_live_publish_documented() {
 }
 
 #[test]
-fn fr155_bitloom_lsp_dry_run_still_green() {
+fn fr155_bitloom_lsp_package_file_list_is_available() {
     let root = workspace_root();
     let out = Command::new("cargo")
-        .args(["publish", "-p", "bitloom-lsp", "--dry-run", "--allow-dirty"])
+        // The FR149 workspace publish dry run covers dependency resolution and
+        // compilation for every publishable package in the workspace.
+        .args(["package", "-p", "bitloom-lsp", "--list", "--allow-dirty"])
         .current_dir(&root)
         .output()
-        .expect("spawn dry-run");
-    let stderr = String::from_utf8_lossy(&out.stderr);
+        .expect("spawn cargo package --list");
     let stdout = String::from_utf8_lossy(&out.stdout);
     assert!(
         out.status.success(),
-        "cargo publish -p bitloom-lsp --dry-run must succeed\nstdout={stdout}\nstderr={stderr}"
+        "cargo package -p bitloom-lsp --list must succeed\nstdout={stdout}"
+    );
+    assert!(
+        stdout.contains("Cargo.toml"),
+        "package listing must include the manifest: {stdout}"
     );
 }
