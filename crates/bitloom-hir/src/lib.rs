@@ -355,6 +355,7 @@ pub(crate) fn freeze(mut hir: Hir) -> Result<FrozenHir, Diagnostics> {
     let mut diags = Diagnostics::default();
     let top = composition::validate_hierarchy(&hir.circuit, &mut diags);
     for m in &hir.circuit.modules {
+        validate_signal_widths(m, &mut diags);
         validate_clock_reset(m, &mut diags);
         validate_unique_drivers(m, &mut diags);
         if let Some(top) = &top {
@@ -394,6 +395,34 @@ pub(crate) fn freeze(mut hir: Hir) -> Result<FrozenHir, Diagnostics> {
         circuit: hir.circuit,
         abi_name: top,
     })
+}
+
+fn validate_signal_widths(m: &Module, diags: &mut Diagnostics) {
+    let mut check = |name: &str, ty: &GroundType, span| {
+        if matches!(
+            ty,
+            GroundType::UInt { width: 0 } | GroundType::SInt { width: 0 }
+        ) {
+            diags.push(Diagnostic {
+                span,
+                code: "rhdl::E0271".into(),
+                en: format!("signal '{name}' must have a positive bit width"),
+                zh: format!("信号 '{name}' 的位宽必须大于零"),
+            });
+        }
+    };
+
+    for port in &m.ports {
+        check(&port.name, &port.ty, port.span);
+    }
+    for stmt in &m.body {
+        match stmt {
+            Stmt::WireDecl { name, ty, span } | Stmt::RegDecl { name, ty, span, .. } => {
+                check(name, ty, *span);
+            }
+            _ => {}
+        }
+    }
 }
 
 fn validate_special_io(top: &str, m: &Module, diags: &mut Diagnostics) {
@@ -673,5 +702,69 @@ mod tests {
         hir.add_module(top);
         let err = seal_from_builder(hir).unwrap_err();
         assert!(err.0.iter().any(|d| d.code == "rhdl::E0270"));
+    }
+
+    #[test]
+    fn freeze_rejects_zero_width_signal_types_with_source_spans() {
+        let mut hir = BuilderOwnedHir::new("Top");
+        hir.add_module(Module {
+            name: "Top".into(),
+            ports: vec![
+                Port {
+                    name: "clk".into(),
+                    direction: PortDirection::Input,
+                    ty: GroundType::Clock,
+                    span: Span::default(),
+                },
+                Port {
+                    name: "rst".into(),
+                    direction: PortDirection::Input,
+                    ty: GroundType::Reset,
+                    span: Span::default(),
+                },
+                Port {
+                    name: "zero_input".into(),
+                    direction: PortDirection::Input,
+                    ty: GroundType::SInt { width: 0 },
+                    span: Span { start: 1, end: 2 },
+                },
+                Port {
+                    name: "zero_output".into(),
+                    direction: PortDirection::Output,
+                    ty: GroundType::UInt { width: 0 },
+                    span: Span { start: 3, end: 4 },
+                },
+            ],
+            body: vec![
+                Stmt::WireDecl {
+                    name: "zero_wire".into(),
+                    ty: GroundType::UInt { width: 0 },
+                    span: Span { start: 5, end: 6 },
+                },
+                Stmt::RegDecl {
+                    name: "zero_reg".into(),
+                    ty: GroundType::SInt { width: 0 },
+                    clock: "clk".into(),
+                    reset: "rst".into(),
+                    async_reset: false,
+                    has_enable: false,
+                    span: Span { start: 7, end: 8 },
+                },
+            ],
+            span: Span::default(),
+        });
+
+        let err = seal_from_builder(hir).unwrap_err();
+        assert_eq!(err.0.len(), 4);
+        for (diagnostic, (name, start)) in err.0.iter().zip([
+            ("zero_input", 1),
+            ("zero_output", 3),
+            ("zero_wire", 5),
+            ("zero_reg", 7),
+        ]) {
+            assert_eq!(diagnostic.code, "rhdl::E0271");
+            assert!(diagnostic.en.contains(name));
+            assert_eq!(diagnostic.span.start, start);
+        }
     }
 }

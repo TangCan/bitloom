@@ -786,6 +786,15 @@ mod tests {
     use super::*;
 
     #[test]
+    fn import_rejects_zero_width_signal_types_at_shared_freeze() {
+        let fir = "FIRRTL version 6.0.0\ncircuit Top :\n  module Top :\n    input zero: UInt<0>\n";
+        let errors = import(fir).unwrap_err();
+        assert!(errors.0.iter().any(|diagnostic| {
+            diagnostic.code == "rhdl::E0271" && diagnostic.en.contains("zero")
+        }));
+    }
+
+    #[test]
     fn firrtl6_public_top_and_modern_connections() {
         let hir = hierarchical_sample();
         let text = emit(&hir).files.remove(0).contents;
