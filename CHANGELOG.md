@@ -10,6 +10,12 @@ followed Cargo **0.x** compatibility rules.
 
 ## [Unreleased]
 
+## [1.2.3] - 2026-10-14
+
+### 发布
+
+- 十个 Bitloom workspace crate 均已发布至 crates.io；安装与 standalone 生成验收见[1.2.3 发布记录](docs/bitloom-1-2-3-release.md)。
+
 ## [1.2.2] - 2026-10-14
 
 ### 性能改进
