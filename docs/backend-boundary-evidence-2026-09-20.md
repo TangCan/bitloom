@@ -14,7 +14,7 @@ Chisel 仍为 **7.15.0**，firtool 仍为 **1.159.0**（既有 unpaired product 
 
 真实层级编译额外发现并修复：freeze 用第一模块充当顶层导致父模块被丢弃；FIRRTL 将父网连接到 child output 作为错误 sink。现在优先电路名指定的模块，否则推断未被实例化的根；无法找到根返回 `E0002`。不支持的 `Sim`/`GeneratedFunctional` 构造明确 panic，生成 crate 入口返回错误；CLI wave/coverage 返回可读 unsupported，不能产生貌似有效的首模块波形。已有 waveform 正向夹具改为单模块计数器，层级可视化仍保留层级夹具。
 
-审阅补充覆盖了同一 process 的最后赋值优先级（含重复内存读及内存/非内存驱动覆盖）、4,096节点反向组合链、有符号计数回绕，以及保持时钟低电平时断言异步复位。freeze 统一消除已覆盖的 Net/RegD 驱动，保留全部 MemWrite；组合排序使用缓存依赖及就绪集合。异步复位的无边沿行为只由直接 Verilog/Chisel RTL 证明，native/generated Rust 仍是周期模型，FIRRTL 异步元数据保留不在本轮证明内。
+审阅补充覆盖了同一 process 的最后赋值优先级（含重复内存读及内存/非内存驱动覆盖）、4,096节点反向组合链、有符号计数回绕，以及保持时钟低电平时断言异步复位。freeze 统一消除已覆盖的 Net/RegD 驱动，保留全部 MemWrite；组合排序使用缓存依赖及就绪集合。当前无边沿异步复位由直接 Verilog/Chisel RTL 和 native `Sim::set_inputs` 事件路径验证；`GeneratedFunctional` 与 standalone generated Rust 仍只提供周期接口，不能观察两次 cycle 间的复位事件。FIRRTL 异步元数据保留，但无边沿行为未验证。
 
 审阅另登记4项既有缺口：显式顶层的递归实例图、多个候选根的歧义、fallback 顶层特殊 IO 校验，以及 Chisel SAR 使用 SInt 移位量。这些没有纳入已通过能力，见[deferred ledger](../_agile-output/implementation-artifacts/deferred-work.md)。
 

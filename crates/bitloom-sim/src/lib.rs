@@ -72,6 +72,7 @@ pub struct Sim {
     signal_ids: HashMap<String, usize>,
     signal_values: Vec<u64>,
     regs: BTreeMap<String, u64>,
+    async_reset_regs: Vec<(String, String)>,
     mems: Vec<Vec<u64>>,
     memory_ids: HashMap<String, usize>,
     /// SyncReadMem: data captured last cycle, applied this cycle (latency 1).
@@ -107,13 +108,22 @@ impl Sim {
     pub fn with_engine(hir: FrozenHir, engine: TickEngine) -> Self {
         engine::validate_single_module(&hir).expect("Sim construction failed");
         let mut regs = BTreeMap::new();
+        let mut async_reset_regs = Vec::new();
         let mut mems = Vec::new();
         let mut memory_ids = HashMap::new();
         for m in &hir.circuit().modules {
             for stmt in &m.body {
                 match stmt {
-                    Stmt::RegDecl { name, .. } => {
+                    Stmt::RegDecl {
+                        name,
+                        reset,
+                        async_reset,
+                        ..
+                    } => {
                         regs.insert(name.clone(), 0);
+                        if *async_reset {
+                            async_reset_regs.push((name.clone(), reset.clone()));
+                        }
                     }
                     Stmt::MemDecl {
                         name,
@@ -189,6 +199,7 @@ impl Sim {
             signal_values,
             hir: Arc::new(hir),
             regs,
+            async_reset_regs,
             mems,
             memory_ids,
             pending_mem_reads: BTreeMap::new(),
@@ -291,12 +302,32 @@ impl Sim {
         Ok(())
     }
 
+    /// Drive inputs; a rising async reset immediately clears its registers and settles outputs.
     pub fn set_inputs(&mut self, inputs: PortValues) {
+        let regs_to_reset: Vec<String> = self
+            .async_reset_regs
+            .iter()
+            .filter_map(|(name, reset)| {
+                let rising = self.lookup(reset) == 0
+                    && inputs
+                        .get(reset)
+                        .is_some_and(|value| self.truncate(reset, value) != 0);
+                rising.then(|| name.clone())
+            })
+            .collect();
         for (k, v) in inputs.values {
             let value = self.truncate(&k, v);
             self.set_signal_value(&k, value);
             self.publish_port_value(&k, value);
             self.update_coverage_value(&k, value);
+        }
+        if !regs_to_reset.is_empty() {
+            for name in regs_to_reset {
+                self.regs.insert(name.clone(), 0);
+                self.set_signal_value(&name, 0);
+                self.update_coverage_value(&name, 0);
+            }
+            self.tick_combinational();
         }
     }
 
@@ -1759,17 +1790,20 @@ mod tests {
         }
     }
 
-    fn async_reset_hir() -> FrozenHir {
+    fn reset_hir(async_reset: bool, has_enable: bool) -> FrozenHir {
         let mut s = ElaborateSession::new("t");
         s.begin_module("AsyncCnt", Span::default());
         s.add_input("clk", GroundType::Clock, Span::default());
         s.add_input("rst", GroundType::Reset, Span::default());
+        if has_enable {
+            s.add_input("en", GroundType::Bool, Span::default());
+        }
         s.add_output("data_out", GroundType::UInt { width: 8 }, Span::default());
         s.declare_reg_ex(
             "count",
             GroundType::UInt { width: 8 },
-            true,
-            false,
+            async_reset,
+            has_enable,
             Span::default(),
         );
         s.begin_combinational(Span::default());
@@ -1783,24 +1817,60 @@ mod tests {
     }
 
     #[test]
-    fn async_reset_assert_and_release_tick_golden() {
+    fn async_reset_asserts_without_tick_and_release_waits_for_tick() {
         for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
-            let mut sim = Sim::with_engine(async_reset_hir(), engine);
+            let mut sim = Sim::with_engine(reset_hir(true, true), engine);
             let mut pv = PortValues::default();
             pv.set("rst", 0);
+            pv.set("en", 1);
             sim.set_inputs(pv.clone());
             sim.tick();
             sim.tick();
             assert_eq!(sim.ports().get("data_out"), Some(2));
+            pv.set("en", 0);
             pv.set("rst", 1);
             sim.set_inputs(pv.clone());
+            assert_eq!(sim.ports().get("data_out"), Some(0));
+            pv.set("rst", 0);
+            sim.set_inputs(pv);
+            assert_eq!(sim.ports().get("data_out"), Some(0));
+            let mut pv = PortValues::default();
+            pv.set("rst", 0);
+            pv.set("en", 1);
+            sim.set_inputs(pv);
+            sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(1));
+        }
+    }
+
+    #[test]
+    fn sync_reset_remains_edge_triggered() {
+        for engine in [TickEngine::Interpreter, TickEngine::Compiled] {
+            let mut sim = Sim::with_engine(reset_hir(false, true), engine);
+            let mut pv = PortValues::default();
+            pv.set("rst", 0);
+            pv.set("en", 1);
+            sim.set_inputs(pv.clone());
+            sim.tick();
+            sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(2));
+            pv.set("en", 0);
+            pv.set("rst", 1);
+            sim.set_inputs(pv.clone());
+            assert_eq!(sim.ports().get("data_out"), Some(2));
             sim.tick();
             assert_eq!(sim.ports().get("data_out"), Some(0));
             pv.set("rst", 0);
             sim.set_inputs(pv);
+            assert_eq!(sim.ports().get("data_out"), Some(0));
             sim.tick();
+            assert_eq!(sim.ports().get("data_out"), Some(0));
+            let mut pv = PortValues::default();
+            pv.set("rst", 0);
+            pv.set("en", 1);
+            sim.set_inputs(pv);
             sim.tick();
-            assert_eq!(sim.ports().get("data_out"), Some(2));
+            assert_eq!(sim.ports().get("data_out"), Some(1));
         }
     }
 
