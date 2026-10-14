@@ -7,6 +7,15 @@ name: release-plz
 
 on:
   workflow_dispatch:
+    inputs:
+      command:
+        description: "选择仅准备发布 PR 或实际发布 crates.io 版本"
+        type: choice
+        required: true
+        default: release-pr
+        options:
+          - release-pr
+          - release
   push:
     branches: [main, master]
 
@@ -41,7 +50,7 @@ jobs:
       - name: Run release-plz
         uses: MarcoIeni/release-plz-action@v0.5
         with:
-          command: release-pr
+          command: ${{ github.event_name == 'workflow_dispatch' && inputs.command || 'release-pr' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Trusted Publishing: omit CARGO_REGISTRY_TOKEN; use `release` command
