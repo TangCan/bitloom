@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.4](https://github.com/TangCan/bitloom/compare/bitloom-sim-v1.2.3...bitloom-sim-v1.2.4) - 2026-10-15
+
+### Fixed
+
+- *(sim)* apply async reset on input events
+
 ## [1.2.3](https://github.com/TangCan/bitloom/compare/bitloom-sim-v1.2.2...bitloom-sim-v1.2.3) - 2026-10-14
 
 ### Other
