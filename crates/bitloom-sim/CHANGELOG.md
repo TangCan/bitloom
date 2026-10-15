@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.5](https://github.com/TangCan/bitloom/compare/bitloom-sim-v1.2.4...bitloom-sim-v1.2.5) - 2026-10-15
+
+### Fixed
+
+- *(sim)* scope generated counter gold test
+- *(sim)* stream exhaustive equivalence sequences
+
 ## [1.2.4](https://github.com/TangCan/bitloom/compare/bitloom-sim-v1.2.3...bitloom-sim-v1.2.4) - 2026-10-15
 
 ### Fixed
