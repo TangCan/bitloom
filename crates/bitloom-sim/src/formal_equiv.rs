@@ -54,6 +54,7 @@ impl FormalEquivProduct {
     }
 
     /// Set bounded-exhaustive sequence depth (F1-(i) / F4 fixture scale).
+    /// Check methods stream sequences, but total runtime remains exponential.
     pub fn with_exhaustive_depth(mut self, depth: usize) -> Self {
         self.exhaustive_depth = depth;
         self
@@ -118,12 +119,11 @@ impl FormalEquivProduct {
     /// F1-(i) product entry: exhaustive FL≡tick over all alphabet^depth sequences.
     ///
     /// Beyond random scoreboard sampling: every sequence of length
-    /// `exhaustive_depth` drawn from the pinned alphabet is checked. First
-    /// failing sequence returns `Fail` with readable `PortMismatch`s.
+    /// `exhaustive_depth` drawn from the pinned alphabet is checked one at a
+    /// time. First failing sequence returns `Fail` with readable `PortMismatch`s.
     pub fn check_bounded_exhaustive(&self, hir: FrozenHir) -> EquivStatus {
-        let sequences = self.exhaustive_sequences();
         let mut total_cycles = 0usize;
-        for seq in sequences {
+        for seq in self.exhaustive_sequence_iter() {
             match check_functional_equiv_generated(hir.clone(), seq) {
                 EquivStatus::Pass { cycles } => total_cycles = total_cycles.saturating_add(cycles),
                 fail @ EquivStatus::Fail { .. } => return fail,
@@ -140,9 +140,8 @@ impl FormalEquivProduct {
         hir: FrozenHir,
         abs: &mut A,
     ) -> EquivStatus {
-        let sequences = self.exhaustive_sequences();
         let mut total_cycles = 0usize;
-        for seq in sequences {
+        for seq in self.exhaustive_sequence_iter() {
             match check_functional_equiv(hir.clone(), abs, seq) {
                 EquivStatus::Pass { cycles } => total_cycles = total_cycles.saturating_add(cycles),
                 fail @ EquivStatus::Fail { .. } => return fail,
@@ -155,24 +154,53 @@ impl FormalEquivProduct {
 
     /// All sequences of length `exhaustive_depth` over [`Self::alphabet`].
     pub fn exhaustive_sequences(&self) -> Vec<Vec<PortValues>> {
-        let alphabet = self.alphabet();
-        let depth = self.exhaustive_depth;
-        if depth == 0 {
-            return vec![Vec::new()];
+        self.exhaustive_sequence_iter().collect()
+    }
+
+    fn exhaustive_sequence_iter(&self) -> ExhaustiveSequenceIter {
+        ExhaustiveSequenceIter {
+            alphabet: self.alphabet(),
+            depth: self.exhaustive_depth,
+            indices: vec![0; self.exhaustive_depth],
+            done: false,
         }
-        let mut sequences: Vec<Vec<PortValues>> = vec![Vec::new()];
-        for _ in 0..depth {
-            let mut next = Vec::with_capacity(sequences.len() * alphabet.len());
-            for prefix in &sequences {
-                for frame in &alphabet {
-                    let mut seq = prefix.clone();
-                    seq.push(frame.clone());
-                    next.push(seq);
-                }
+    }
+}
+
+struct ExhaustiveSequenceIter {
+    alphabet: Vec<PortValues>,
+    depth: usize,
+    indices: Vec<usize>,
+    done: bool,
+}
+
+impl Iterator for ExhaustiveSequenceIter {
+    type Item = Vec<PortValues>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.done {
+            return None;
+        }
+
+        let sequence = self
+            .indices
+            .iter()
+            .map(|index| self.alphabet[*index].clone())
+            .collect();
+        if self.depth == 0 {
+            self.done = true;
+            return Some(sequence);
+        }
+
+        for index in (0..self.depth).rev() {
+            if self.indices[index] + 1 < self.alphabet.len() {
+                self.indices[index] += 1;
+                self.indices[index + 1..].fill(0);
+                return Some(sequence);
             }
-            sequences = next;
         }
-        sequences
+        self.done = true;
+        Some(sequence)
     }
 }
 
@@ -192,6 +220,42 @@ mod tests {
             .with_boolean_ports(&["rst"])
             .with_exhaustive_depth(2);
         assert_eq!(p.exhaustive_sequences().len(), 4);
+    }
+
+    #[test]
+    fn exhaustive_sequence_iter_is_lazy_and_preserves_order() {
+        let p = FormalEquivProduct::new(0, 0)
+            .with_boolean_ports(&["rst"])
+            .with_exhaustive_depth(100);
+        let mut sequences = p.exhaustive_sequence_iter();
+        let first = sequences.next().unwrap();
+        assert_eq!(first.len(), 100);
+        assert!(first.iter().all(|frame| frame.get("rst") == Some(0)));
+
+        let second = sequences.next().unwrap();
+        assert!(second[..99].iter().all(|frame| frame.get("rst") == Some(0)));
+        assert_eq!(second[99].get("rst"), Some(1));
+
+        let small = FormalEquivProduct::new(0, 0)
+            .with_boolean_ports(&["rst"])
+            .with_exhaustive_depth(2);
+        let sequences = small.exhaustive_sequence_iter().collect::<Vec<_>>();
+        let values = sequences
+            .iter()
+            .map(|seq| {
+                seq.iter()
+                    .map(|frame| frame.get("rst").unwrap())
+                    .collect::<Vec<_>>()
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(values, [vec![0, 0], vec![0, 1], vec![1, 0], vec![1, 1]]);
+        assert_eq!(small.exhaustive_sequences(), sequences);
+
+        let zero = FormalEquivProduct::new(0, 0).with_exhaustive_depth(0);
+        let zero_sequences = zero.exhaustive_sequence_iter().collect::<Vec<_>>();
+        assert_eq!(zero_sequences.len(), 1);
+        assert!(zero_sequences[0].is_empty());
+        assert_eq!(zero.exhaustive_sequences(), zero_sequences);
     }
 
     #[test]
