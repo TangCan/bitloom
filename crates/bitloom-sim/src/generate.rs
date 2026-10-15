@@ -493,6 +493,23 @@ fn resolve_hir_dep(out_dir: &Path) -> String {
     "bitloom-hir = \"1.2.0\"".into()
 }
 
+fn has_three_cycle_counter_gold(model: &GeneratedFunctional) -> bool {
+    let Some((_, AssignExpr::Ref(reg))) = model.comb.iter().find(|(name, _)| name == "data_out")
+    else {
+        return false;
+    };
+    if model.enable_port.is_some()
+        || [reg.as_str(), "data_out"]
+            .iter()
+            .any(|name| model.widths.get(*name).copied().unwrap_or(64) < 2)
+    {
+        return false;
+    }
+    model.seq.iter().any(|op| {
+        matches!(op, SeqOp::RegD { name, expr: AssignExpr::Inc(src), has_en: false } if name == reg && src == reg)
+    })
+}
+
 fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
     let _ = pkg;
     let reg_inits: String = model
@@ -621,6 +638,32 @@ fn render_lib_rs(pkg: &str, model: &GeneratedFunctional) -> String {
 "#
         )
     };
+    let counter_gold = if has_three_cycle_counter_gold(model) {
+        format!(
+            r#"
+    #[test]
+    fn gold_port_values_after_reset_and_three_cycles() {{
+        let mut sim = FunctionalSim::new();
+        let mut pv = PortValues::default();
+        pv.set({reset:?}, 1);
+        let _ = sim.cycle(&pv);
+        pv.set({reset:?}, 0);
+        let mut last = PortValues::default();
+        for _ in 0..3 {{
+            last = sim.cycle(&pv);
+        }}
+        assert_eq!(last.get("data_out"), Some(3));
+    }}
+"#
+        )
+    } else {
+        String::new()
+    };
+    let gold_tests = if counter_gold.is_empty() && mem_gold.is_empty() {
+        String::new()
+    } else {
+        format!("#[cfg(test)]\nmod tests {{\n    use super::*;\n{counter_gold}{mem_gold}}}\n")
+    };
 
     format!(
         r#"//! Generated Bitloom functional simulator (FR47 / FR159 / AD-5).
@@ -735,27 +778,7 @@ impl FunctionalSim {{
     }}
 }}
 
-#[cfg(test)]
-mod tests {{
-    use super::*;
-
-    #[test]
-    fn gold_port_values_after_reset_and_three_cycles() {{
-        let mut sim = FunctionalSim::new();
-        let mut pv = PortValues::default();
-        pv.set({reset:?}, 1);
-        let _ = sim.cycle(&pv);
-        pv.set({reset:?}, 0);
-        let mut last = PortValues::default();
-        for _ in 0..3 {{
-            last = sim.cycle(&pv);
-        }}
-        // Counter-style gold: data_out == 3 when HIR has count++ / data_out=count.
-        if last.values.contains_key("data_out") {{
-            assert_eq!(last.get("data_out"), Some(3));
-        }}
-    }}
-{mem_gold}}}
+{gold_tests}
 "#
     )
 }
@@ -978,6 +1001,60 @@ mod tests {
         let cargo = fs::read_to_string(out.join("Cargo.toml")).unwrap();
         assert!(cargo.contains("bitloom-hir"));
         assert!(out.join("src/main.rs").is_file());
+    }
+
+    fn pass_through_hir() -> FrozenHir {
+        let mut s = ElaborateSession::new("t");
+        s.begin_module("PassThrough", Span::default());
+        s.add_input("clk", GroundType::Clock, Span::default());
+        s.add_input("rst", GroundType::Reset, Span::default());
+        s.add_input("data_in", GroundType::UInt { width: 8 }, Span::default());
+        s.add_output("data_out", GroundType::UInt { width: 8 }, Span::default());
+        s.begin_combinational(Span::default());
+        s.assign_net("data_out", "data_in", Span::default());
+        s.end_process();
+        s.end_module();
+        s.finish().unwrap()
+    }
+
+    #[test]
+    fn emitted_pass_through_named_data_out_has_no_counter_gold() {
+        let dir = std::env::temp_dir().join(format!("bitloom-func-pass-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&dir);
+        let out = generate_functional_sim(&pass_through_hir(), &dir).unwrap();
+        let lib = fs::read_to_string(out.join("src/lib.rs")).unwrap();
+        assert!(!lib.contains("gold_port_values_after_reset_and_three_cycles"));
+        let tests = out.join("tests");
+        fs::create_dir_all(&tests).unwrap();
+        fs::write(
+            tests.join("pass_through.rs"),
+            r#"
+use bitloom_func_passthrough::FunctionalSim;
+use bitloom_hir::PortValues;
+
+#[test]
+fn data_out_forwards_data_in() {
+    let mut sim = FunctionalSim::new();
+    let mut inputs = PortValues::default();
+    inputs.set("data_in", 42);
+    assert_eq!(sim.cycle(&inputs).get("data_out"), Some(42));
+}
+"#,
+        )
+        .unwrap();
+        let status = std::process::Command::new("cargo")
+            .arg("+1.97.1")
+            .arg("test")
+            .arg("--manifest-path")
+            .arg(out.join("Cargo.toml"))
+            .arg("--quiet")
+            .status()
+            .expect("spawn cargo test");
+        assert!(
+            status.success(),
+            "emitted pass-through crate must cargo test"
+        );
+        fs::remove_dir_all(&dir).unwrap();
     }
 
     #[test]
